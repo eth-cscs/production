@@ -1,1 +1,1 @@
-setup.sh-2.8.1
+setup.sh-stable
