@@ -9,11 +9,9 @@
    * [Procedure for accepting pull requests](https:///production/wikis/home) 
 
 ## Link to EB file lists 
-* [6.0.UP01-2016.06] (https:///production/blob/master/6.0.UP01-2016.06-brisi)
-  * Will be installed by Jenkins on Brisi
-
-* [6.0.UP02-2016.11] (https:///production/blob/master/6.0.UP01-2016.11) (TODO)
-  * Will be installed by Jenkins on Daint+ (haswell and broadwell versions)
+* [6.0.UP02-2016.11-gpu] (https:///production/blob/master/6.0.UP01-2016.11-gpu)
+* [6.0.UP02-2016.11-mc] (https:///production/blob/master/6.0.UP01-2016.11-mc)
+  * Will be installed by Jenkins on Daint+ (GPU/haswell and broadwell versions)
 
 * [monch-RH6.7-15.12](https:///production/blob/master/monch-RH6.7-15.12)
   * Will be installed on  Monch
@@ -21,6 +19,9 @@
 * [MCH-RH6.7-15.11](https:///scs/production/blob/master/MCH-RH6.7-15.11)
   * Will be installed on Escha/Kesch 
 
+* [6.0.UP01-2016.06] (https:///production/blob/master/6.0.UP01-2016.06-brisi)
+  * Will be installed by Jenkins on Brisi
+  
 * [common-SLES12-2016.10](https:///scs/production/blob/master/common-RH6.7-2016.10)
   * Generic builds based on RH6.7 system gcc ( Kesch / module purge)
   * Will be installed by jenkins in /apps/common/UES/jenkins/RH6.7
