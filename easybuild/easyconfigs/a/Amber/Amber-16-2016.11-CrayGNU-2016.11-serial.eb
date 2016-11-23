@@ -33,6 +33,13 @@ configopts = 'gnu'
 
 prebuildopts = 'cd .. && mv amber%s/* . && ' % amberversion
 prebuildopts += 'export AMBERHOME=%(builddir)s;'
+# Patching from David Case should be applied after updating
+# updating
+#prebuildopts += './update_amber --update && '
+# applying patch to Amber
+#prebuildopts += 'patch -p0 < update.6 && '
+# applying patch to AmberTools
+#prebuildopts += 'patch -p0 < update.20 && '
 prebuildopts += './configure -noX11 -crayxt5 --with-netcdf $EBROOTNETCDF gnu;'
 
 buildopts = 'install'
