@@ -1,5 +1,5 @@
- Amber-14-CrayGNU-2016.11-serial.eb
- Amber-14-CrayGNU-2016.11-parallel.eb
+ Amber-16-2016.11-CrayGNU-2016.11-serial.eb
+ Amber-16-2016.11-CrayGNU-2016.11-cuda-8.0.eb
  Boost-1.61.0-CrayGNU-2016.11-Python-2.7.12.eb
  CDO-1.7.2-CrayGNU-2016.11.eb
  CMake-3.6.0.eb
