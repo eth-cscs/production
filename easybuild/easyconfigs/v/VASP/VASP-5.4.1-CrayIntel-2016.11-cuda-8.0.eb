@@ -1,0 +1,44 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'VASP'
+version = "5.4.1"
+
+homepage = 'http://www.vasp.at'
+description = """The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. """
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = { 'usempi': True }
+
+sources = [SOURCELOWER_TAR_BZ2]
+
+cudaversion = '8.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+builddependencies = [
+    ('cudatoolkit/%s.44_GA_2.2.7_g4a6c213-2.1' %cudaversion, EXTERNAL_MODULE),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('gcc/4.9.3', EXTERNAL_MODULE),
+]
+
+# adapt ./arch/makefile.include.linux_intel_cuda and copy to ./makefile.include 
+prebuildopts = ' sed -e "s/mpif90/ftn/g" -e "s/-mkl//" -e "/mkl/Id" -e "/FFT_ROOT/d" -e "/OBJECTS /a FFT_LIB=-L\$(FFTW_DIR) -lfftw3 \\nINCS=-I\$(FFTW_INC)" -e "s#/opt/cuda/#\$(CUDATOOLKIT_HOME)#" -e "/GENCODE_ARCH/d" -e "/MAGMA_ROOT/d" -e "s#/opt/openmpi/include#\$(MPICH_DIR)/include#" ./arch/makefile.include.linux_intel_cuda > ./makefile.include && '
+# correct common.mk for Intel compiler
+prebuildopts += ' sed -i -e "s/gcc/icc/" -e "s/g++/icpc/g" src/CUDA/common.mk && '
+# correct kernels.h for CUDA 8.0
+prebuildopts += ' sed -i -e "/double atomicAdd/i #if (__CUDACC_VER_MAJOR__<8) || ( defined(__CUDA_ARCH__) && (__CUDA_ARCH__<600) )" -e "/<int is_partial>/i #endif" ./src/CUDA/kernels.h && '
+
+# don't use parallel make, results in compilation failure
+parallel = 1
+
+# build type
+buildopts = ' gpu gpu_ncl '
+ 
+files_to_copy = [(['./bin/vasp_*'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/vasp_gpu','bin/vasp_gpu_ncl'],
+    'dirs': [],
+}
+
+moduleclass = 'phys'

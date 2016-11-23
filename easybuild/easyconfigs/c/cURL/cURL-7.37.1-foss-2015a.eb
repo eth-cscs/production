@@ -1,0 +1,53 @@
+# Built with EasyBuild version 2.1.1 on 2015-05-27_16-39-02
+easyblock = 'ConfigureMake'
+
+name = 'cURL'
+version = '7.37.1'
+
+homepage = 'http://curl.haxx.se'
+description = """libcurl is a free and easy-to-use client-side URL transfer library,
+ supporting DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS,
+ POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, Telnet and TFTP. libcurl supports
+ SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload,
+ proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate,
+ Kerberos), file transfer resume, http proxy tunneling and more."""
+
+toolchain = {'name': 'foss', 'version': '2015a'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://curl.haxx.se/download/']
+
+#dependencies = [('OpenSSL', '1.0.1i')] # OS dependency should be preferred for security reasons
+osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
+
+sanity_check_paths = {
+    'files': ['bin/curl', 'lib/libcurl.a', 'lib/libcurl.so'],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'tools'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.1.1",
+    "easybuild-easyblocks_version": "2.1.1",
+    "timestamp": 1432737542,
+    "build_time": 77.71,
+    "install_size": 3486351,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--installpath=/apps/pilatus/easybuild', '--modules-tool=EnvironmentModulesTcl', '--prefix=/apps/pilatus/easybuild', '--repositorypath=/apps/pilatus/easybuild/ebfiles_repo', '--robot=/apps/common/easybuild/cscs_easyconfigs:/apps/pilatus/easybuild/software/EasyBuild/2.1.1/lib64/python2.6/site-packages/easybuild_easyconfigs-2.1.1-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs:', '--sourcepath=/apps/pilatus/easybuild/sources', 'netCDF-4.3.2-foss-2015a.eb'],
+    "modules_tool": ('EnvironmentModulesTcl', '/usr/share/Modules/tcl/modulecmd.tcl', '1.146'),
+    "core_count": 32,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/pilatus/easybuild/software/GCC/4.9.2/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/pilatus/easybuild/software/GCC/4.9.2 --with-local-prefix=/apps/pilatus/easybuild/software/GCC/4.9.2; Thread model: posix; gcc version 4.9.2 (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "pilatus02",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP2",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, May 27 2015, 15:23:24) ; [GCC 4.9.2]",
+    "system_gcc_path": "/apps/pilatus/easybuild/software/GCC/4.9.2/bin/gcc",
+    "system_python_path": "/apps/pilatus/easybuild/software/Python/2.7.9-foss-2015a/bin/python",
+}]

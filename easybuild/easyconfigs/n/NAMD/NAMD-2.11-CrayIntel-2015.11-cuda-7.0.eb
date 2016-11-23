@@ -1,0 +1,41 @@
+# Contributed by Luca Marsella and Christopher Bignamini (CSCS)
+easyblock = 'MakeCp'
+
+name = 'NAMD'
+version = '2.11'
+
+homepage = 'http://www.ks.uiuc.edu/Research/namd/'
+description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2015.11'}
+
+sources = ['NAMD_%(version)s_Source.tar.gz']
+
+cudaversion = '7.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+maxparallel = 1
+prebuildopts = ' tar -xvf charm-6.7.0.tar && '
+prebuildopts += ' cd charm-6.7.0/ && '
+prebuildopts += ' ./build charm++ gni-crayxc smp --with-production && '
+prebuildopts += ' cd .. && '
+prebuildopts += ' wget http://www.ks.uiuc.edu/Research/namd/libraries/tcl8.5.9-crayxe-threaded.tar.gz && '
+prebuildopts += ' tar xzf tcl8.5.9-crayxe-threaded.tar.gz && '
+prebuildopts += ' unset CXX; unset CC && '
+prebuildopts += ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-fftw3 --tcl-prefix ./tcl8.5.9-crayxe-threaded --charm-base ./charm-6.7.0 --charm-arch gni-crayxc-smp && '
+prebuildopts += ' cd CRAY-XC-intel.cuda && '
+
+builddependencies = [
+    ('cudatoolkit/7.0.28-1.0502.10742.5.1', EXTERNAL_MODULE),
+    ('fftw/3.3.4.3', EXTERNAL_MODULE),
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+]
+
+files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/namd2'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

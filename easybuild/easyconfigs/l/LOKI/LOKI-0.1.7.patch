@@ -1,0 +1,10 @@
+diff -Nru loki-0.1.7.orig/Makefile.common loki-0.1.7/Makefile.common
+--- loki-0.1.7.orig/Makefile.common	2016-04-13 10:34:30.257492000 +0200
++++ loki-0.1.7/Makefile.common	2016-04-13 10:35:19.205319688 +0200
+@@ -4,4 +4,5 @@
+ CXXWARNFLAGS := -Wall -Wold-style-cast -Wundef -Wsign-compare -Wconversion -Wpointer-arith -pedantic
+ CXXFLAGS := $(CXXWARNFLAGS) -g -O2
+ 
+-prefix := /usr
++prefix := $(EBINSTALLPREFIX)
++

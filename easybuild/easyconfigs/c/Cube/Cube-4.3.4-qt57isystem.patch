@@ -1,0 +1,11 @@
+--- build-config.ori/m4/autotroll.m4	2016-04-03 01:05:38.130064565 +0200
++++ build-config/m4/autotroll.m4	2016-08-03 14:23:25.250011705 +0200
+@@ -616,7 +616,7 @@
+ 
+   # Find the INCPATH of Qt.
+   AC_CACHE_CHECK([for the INCPATH to use with Qt], [at_cv_env_QT_INCPATH],
+-  [at_cv_env_QT_INCPATH=`sed "/^INCPATH@<:@^A-Z=@:>@*=/!d;$qt_sed_filter" $at_mfile`])
++  [at_cv_env_QT_INCPATH=`sed "/^INCPATH@<:@^A-Z=@:>@*=/!d;$qt_sed_filter;s/isystem /I/g" $at_mfile`])
+   AC_SUBST([QT_INCPATH], [$at_cv_env_QT_INCPATH])
+ 
+   AC_SUBST([QT_CPPFLAGS], ["$at_cv_env_QT_DEFINES $at_cv_env_QT_INCPATH"])

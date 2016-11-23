@@ -1,0 +1,87 @@
+# Built with EasyBuild version 2.3.0 on 2015-11-05_10-18-50
+# Built with EasyBuild version 2.3.0 on 2015-11-05_10-02-45
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = "OTF2"
+version = "1.5.1"
+
+homepage = 'http://www.score-p.org'
+description = """The Open Trace Format 2 is a highly scalable, memory efficient event
+ trace data format plus support library. It will become the new standard trace format
+ for Scalasca, Vampir, and Tau and is open for other tools."""
+
+toolchain = {'name': 'gmvapich2', 'version': '15.11_cuda_7.0_gdr'}
+configopts = '--enable-shared'
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
+
+checksums = [
+    '16a9df46e0da78e374f5d12c8cdc1109',     # otf2-1.5.1.tar.gz
+]
+
+sanity_check_paths = {
+    # note by Bernd Mohr: on some systems libraries end up in lib/
+    'files': ["bin/otf2-config", "include/otf2/otf2.h", ("lib64/libotf2.a", "lib/libotf2.a")],
+    'dirs': [],
+}
+
+moduleclass = 'perf'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1446714165,
+    "build_time": 23.54,
+    "install_size": 22309520,
+    "command_line": ['--buildpath=/dev/shm/piccinal', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons', '--installpath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild', '--packagepath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild/packages', '--prefix=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild', '--recursive-module-unload', '--repositorypath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'gmvapich2\', \'15.11_cuda_7.0_gdr\']"', '--umask=002', 'Score-P-1.4.2-gmvapich2-15.11.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25 --with-local-prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25; Thread model: posix; gcc version 4.9.3 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0001",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]
+
+buildstats.append({
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1446715130,
+    "build_time": 23.77,
+    "install_size": 22294151,
+    "command_line": ['--buildpath=/dev/shm/piccinal', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons', '--installpath=/apps/escha/UES/RH6.6_PE15.09/easybuild', '--packagepath=/apps/escha/UES/RH6.6_PE15.09/easybuild/packages', '--prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild', '--recursive-module-unload', '--repositorypath=/apps/escha/UES/RH6.6_PE15.09/easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', '/apps/escha/UES/RH6.6_PE15.09/sandbox/easybuild/ebfiles_repo/Cube/Cube-4.3.2-gmvapich2-15.11_cuda_7.0_gdr.eb', '/apps/escha/UES/RH6.6_PE15.09/sandbox/easybuild/ebfiles_repo/OPARI2/OPARI2-1.1.4-gmvapich2-15.11_cuda_7.0_gdr.eb', '/apps/escha/UES/RH6.6_PE15.09/sandbox/easybuild/ebfiles_repo/OTF2/OTF2-1.5.1-gmvapich2-15.11_cuda_7.0_gdr.eb', '/apps/escha/UES/RH6.6_PE15.09/sandbox/easybuild/ebfiles_repo/Scalasca/Scalasca-2.2.2-gmvapich2-15.11_cuda_7.0_gdr.eb', '/apps/escha/UES/RH6.6_PE15.09/sandbox/easybuild/ebfiles_repo/Score-P/Score-P-1.4.2-gmvapich2-15.11_cuda_7.0_gdr.eb', './Score-P-1.4.2-gmvapich2-15.11_cuda_7.0_gdr.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25 --with-local-prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25; Thread model: posix; gcc version 4.9.3 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0002",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+})

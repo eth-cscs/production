@@ -1,0 +1,33 @@
+# contributed by Andreas Jocksch (CSCS), Luca Marsella and gppezzi
+easyblock = 'MakeCp'
+
+name = 'CPMD'
+version = '4.1'
+
+homepage = 'http://www.cpmd.org/'
+description = """CPMD The CPMD code is a parallelized plane wave / pseudopotential
+implementation of Density Functional Theory, particularly designed for ab-initio molecular dynamics. """
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.06'}
+toolchainopts = {'usempi': True}
+
+sources = ['cpmd-v%s.tar.gz' %version]
+
+skipsteps = ['configure']
+
+common_prebuildopts = 'sed -i \'s#/usr/bin/cpp -P -C -traditional#cpp -P -traditional#\' ./configure/CRAY-XE6-INTEL && '
+common_prebuildopts += './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL &&'
+
+prebuildopts = [
+                         common_prebuildopts,
+     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
+]
+
+files_to_copy = [(['bin/cpmd*.x'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/cpmd.x', 'bin/cpmd_omp.x'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

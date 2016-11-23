@@ -1,0 +1,32 @@
+# @author: gppezzi
+
+easyblock = 'PythonPackage'
+
+name = 'slycot'
+version = '0.2.0'
+versionsuffix = '-Python-%(pyver)s'
+
+
+homepage = 'https://github.com/jgoppert/Slycot'
+description = """Python wrapper for selected SLICOT routines, notably including solvers for Riccati, Lyapunov and Sylvester equations."""
+
+toolchain = {'name': 'gmvolf', 'version': '15.12'}
+toolchainopts = {'pic': True}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.10'),
+]
+
+# fix linker flags and reference to scalapack and openblas
+prebuildopts = 'export LDFLAGS="$LDFLAGS -shared" && '
+prebuildopts += 'sed -i "s#lapack\']#scalapack\', \'openblas\']#" slycot/setup.py && ' 
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'lib'

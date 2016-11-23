@@ -1,0 +1,19 @@
+easyblock = 'ConfigureMake'
+
+name = 'make'
+version = '4.1'
+
+homepage = 'http://www.gnu.org/software/make/make.html'
+description = "GNU version of make utility"
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_BZ2]
+
+sanity_check_paths = {
+    'files': ['bin/make'],
+    'dirs': []
+}
+
+moduleclass = 'devel'

@@ -1,0 +1,36 @@
+# jgp@cscs 
+# mll libreadline ncurses; export HAS_HELP2MAN=yes
+
+easyblock = 'ConfigureMake'
+
+name = 'cgdb'
+version = '0.6.8'
+
+homepage = 'http://cgdb.sourceforge.net/'
+description = """cgdb: Curses-based interface to the GNU Debugger GDB """
+
+source_urls = ['http://cgdb.me/files/']
+sources = ["cgdb-%(version)s.tar.gz"]
+# sources = [SOURCE_TAR_GZ]
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+checksums = [ '7bd38c79bf4d794d239928fef401fca3' ] 
+
+#ko preconfigopts = 'module load libreadline/.6.3'
+# module load libreadline/.6.3
+builddependencies = [ 
+        ('ncurses', '6.0'), 
+        ('libreadline', '6.3'),
+        ('help2man', '1.47.3'),
+]
+# dependencies = [ ('ncurses', '6.0'), ('libreadline', '6.3') ]
+
+configopts  = ' --with-readline=$EBROOTLIBREADLINE'
+configopts += ' --with-ncurses=$EBROOTNCURSES'
+configopts += ' HAS_HELP2MAN=yes'
+
+sanity_check_paths = {
+                      'files': ['bin/cgdb'],
+                      'dirs': []
+                     }
+
+moduleclass = 'debugger'

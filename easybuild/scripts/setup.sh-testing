@@ -1,0 +1,16 @@
+#!/usr/local/bin/bash
+
+source /apps/common/tools/easybuild/setup.sh $1
+module unload 2.5.0
+echo "Re-Loading EasyBuild... (testing)"
+module load /apps/common/UES/easybuild/modules/all/EasyBuild/2.6.0
+# HPCUGENT
+#export PYTHONPATH=/apps/common/UES/easybuild/testing/hpcugent/easybuild/easybuild-easyconfigs/:/apps/common/UES/easybuild/testing/hpcugent/easybuild/easybuild-easyblocks/:/apps/common/UES/easybuild/testing/hpcugent/easybuild/easybuild-framework/:/apps/common/UES/easybuild/testing/hpcugent/easybuild/vsc-base/lib/:/apps/common:/apps/common/gitpython/lib/python2.7/site-packages/
+
+## hpcugent + boegel easyblocks
+#export PYTHONPATH=/apps/common/UES/easybuild/testing/boegel/easybuild/easybuild-easyblocks/:/apps/common/UES/easybuild/testing/hpcugent/easybuild/easybuild-framework/:/apps/common/UES/easybuild/testing/hpcugent/easybuild/vsc-base/lib/:/apps/common:/apps/common/gitpython/lib/python2.7/site-packages/
+
+#export PATH=/apps/common/UES/easybuild/testing/hpcugent/easybuild/easybuild-framework/:$PATH
+
+#export PATH=/apps/common/UES/easybuild/testing/boegel/easybuild/easybuild-framework/:$PATH
+

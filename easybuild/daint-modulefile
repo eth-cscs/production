@@ -1,0 +1,35 @@
+#%Module
+proc ModulesHelp { } {
+    puts stderr { EasyBuild is a software build and installation framework
+written in Python that allows you to install software in a structured,
+repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/
+    }
+}
+
+module-whatis {Description: EasyBuild is a software build and installation framework
+written in Python that allows you to install software in a structured,
+repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/}
+
+set root /apps/common/UES/easybuild/software/EasyBuild/latest
+
+conflict EasyBuild-cscs
+
+module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
+
+# System dependent settings: 
+#  Daint
+setenv EASYBUILD_PREFIX                     $::env(HOME)/easybuild/daint
+setenv EASYBUILD_EXTERNAL_MODULES_METADATA  /apps/common/easybuild/cray_external_modules_metadata.cfg
+setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
+
+setenv MODULEPATH                           $::env(EASYBUILD_PREFIX)/modules/all:$::env(MODULEPATH)
+setenv EASYBUILD_BUILDPATH                  /dev/shm/$::env(USER)
+setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
+setenv EASYBUILD_GROUP_WRITABLE_INSTALLDIR  1
+setenv EASYBUILD_UMASK                      002
+setenv EASYBUILD_SET_GID_BIT                1
+setenv EASYBUILD_IGNORE_OSDEPS              0
+setenv EASYBUILD_HIDE_DEPS         "Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF" 
+setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/easybuild/sources/
+setenv EASYBUILD_ROBOT_PATHS                /apps/common/easybuild/cscs_easyconfigs/:
+setenv EASYBUILD_INCLUDE_EASYBLOCKS         /apps/common/easybuild/easyblocks/*.py

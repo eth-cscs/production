@@ -1,0 +1,41 @@
+# Built with EasyBuild version 2.3.0 on 2015-09-14_18-09-38
+name = 'ncurses'
+version = '5.9'
+
+homepage = 'http://www.gnu.org/software/ncurses/'
+description = """The Ncurses (new curses) library is a free software emulation of curses in System V Release 4.0,
+ and more. It uses Terminfo format, supports pads and color and multiple highlights and forms characters and
+ function-key mapping, and has all the other SYSV-curses enhancements over BSD Curses."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015b'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+moduleclass = 'devel'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1442246974,
+    "build_time": 113.19,
+    "install_size": 21324590,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--group-writable-installdir', '--installpath=/apps/escha/easybuild', '--packagepath=/apps/escha/easybuild/packages', '--prefix=/apps/escha/easybuild', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'gmvolf\', \'2015b\']"', '--umask=002', '/apps/common/tools/easybuild/ebfiles_repo/keschln-/netCDF/netCDF-4.3.3.1-gmvolf-2015a.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/easybuild/software/GCC/4.8.2-EB/libexec/gcc/x86_64-unknown-linux-gnu/4.8.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB --with-local-prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0002",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/easybuild/software/GCC/4.8.2-EB/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

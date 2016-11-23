@@ -1,0 +1,74 @@
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# make sure we don't fall back to the ConfigureMake easyblock
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = 'Score-P'
+version = '2.0-beta1'
+
+homepage = 'http://www.score-p.org'
+description = """The Score-P measurement infrastructure is a highly scalable and
+ easy-to-use tool suite for profiling, event tracing, and online analysis of HPC
+ applications."""
+
+toolchain = {'version': '15.11_cuda_7.0_gdr', 'name': 'gmvapich2'}
+toolchainopts = {"usempi": True}
+
+sources = ["scorep-%(version)s.tar.gz"]
+source_urls = ['http://www.vi-hps.org/upload/packages/scorep/']
+
+checksums = [
+'ddf425d5c7de428e7fe547c6a8d53ccf', # scorep-2.0-beta1.tar.gz
+]
+
+# TODO: STATISTICS
+# TODO: patches = ['scorep-1.4.2.patch']
+
+dependencies = [
+    #('zlib', '1.2.8'), # already loaded by PrgEnv-gnu/15.11_cuda_7.0_gdr
+    # ('binutils', '2.25'), # already loaded by PrgEnv-gnu/15.11_cuda_7.0_gdr
+    ('Cube', '4.3.3'),
+    ('OTF2', '2.0-beta1'),
+    ('OPARI2', '2.0-beta1'),
+#+ tard:    ('Scalasca', '2.2.2'),
+    
+]
+configopts  = ' --with-machine-name=kescha'
+configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
+configopts += ' --with-libbfd-include=$EBROOTBINUTILS/include'
+configopts += ' --with-libbfd-lib=$EBROOTBINUTILS/lib'
+configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
+configopts += ' --with-cube=$EBROOTCUBE/bin'
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-papi=/opt/cray/papi/default'
+configopts += ' --with-papi-header=/opt/cray/papi/default/include'
+configopts += ' --with-papi-lib=/opt/cray/papi/default/lib'
+configopts += ' --enable-shared'
+configopts += ' --enable-cuda'
+#configopts += ' --enable-debug'
+#no configopts += ' --with-libcuda=/global/opt/nvidia/cudatoolkit/6.5.14'
+configopts += ' --with-libcuda-lib=/global/opt/nvidia/cudatoolkit/7.0.28/lib64/stubs'
+configopts += ' --with-libcuda-include=/global/opt/nvidia/cudatoolkit/7.0.28/include'
+configopts += ' --with-libcudart=/global/opt/nvidia/cudatoolkit/7.0.28'
+configopts += ' --with-cupti=/global/opt/nvidia/cudatoolkit/7.0.28/extras/CUPTI'
+# EBROOTSCALASCA
+# /global/opt/nvidia/cudatoolkit/7.0.28/lib64/libcudart.so
+# /global/opt/nvidia/cudatoolkit/7.0.28/lib64/stubs/libcuda.so
+
+sanity_check_paths = {
+    'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
+              ("lib64/libscorep_adapter_mpi_event.a", "lib/libscorep_adapter_mpi_event.a"),
+              ("lib/libscorep_mpp_mpi.so.0"),
+],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

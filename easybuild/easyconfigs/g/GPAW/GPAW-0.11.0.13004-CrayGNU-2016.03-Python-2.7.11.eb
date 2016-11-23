@@ -1,0 +1,45 @@
+# contributed by Luca Marsella (CSCS)
+#
+# This easyconfig is not working correctly: there is a newer version of GPAW to be tested (1.0.0)
+# install fails die to known issue with Python-2.7.11 built with Easybuild (step skipped and completed within a SLURM allocation)
+# sanity_check fails due to "TypeError: expected a string or other character buffer object". Needs to be checked further...
+#
+easyblock = "PythonPackage"
+
+name = 'GPAW'
+version = '0.11.0.13004'
+
+homepage = 'https://wiki.fysik.dtu.dk/gpaw/'
+description = """GPAW is a density-functional theory (DFT) Python code based on the projector-augmented wave (PAW)
+ method and the atomic simulation environment (ASE). It uses real-space uniform grids and multigrid methods or 
+ atom-centered basis-functions."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.03'}
+
+source_urls = ['https://wiki.fysik.dtu.dk/gpaw-files']
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = ['GPAW-0.11.0.13004-cray.patch']
+
+python = 'Python'
+pythonver = '2.7.11'
+pythonshortver = '.'.join(pythonver.split('.')[0:2])
+versionsuffix = '-%s-%s' % (python, pythonver)
+
+prebuildopts = ' export GPAW_MPI=True && export GPAW_MPI_IMPLEMENTATION=cray && GPAW_MPI_COMMAND=aprun && '
+skipsteps = ['configure','build','install']
+
+dependencies = [
+                (python, pythonver),
+                ('ASE', '3.10.0', versionsuffix),
+                ('libxc','2.2.2')
+               ]
+
+#options = {'modulename': 'os'}
+
+sanity_check_paths = {
+                      'files': ['bin/gpaw%s' % x for x in ['', '-basis', '-mpisim', '-python', '-setup', '-test']],
+                      'dirs': ['lib/python%s/site-packages/%s' % (pythonshortver, name.lower())]
+                     }
+
+moduleclass = 'chem'

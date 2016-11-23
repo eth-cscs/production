@@ -1,0 +1,24 @@
+name = 'MVAPICH2'
+version = '2.1'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = "This is an MPI 3.0 implementation.  It is based on MPICH2 and MVICH."
+
+toolchain = {'name': 'GCC', 'version': '4.9.2'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [('Bison', '3.0.4')]
+
+configopts = [
+    "--enable-static --enable-threads=default --enable-shared --enable-sharedlibs=gcc --enable-fc --with-mpe --enable-rsh --enable-rdma-cm --enable-fast --enable-smpcoll --with-hwloc --with-device=ch3:mrail --with-rdma=gen2 --enable-g=dbg --enable-debuginfo --with-limic2 CC=gcc CXX=g++ FC=gfortran F77=gfortran --with-pmi=slurm --with-pm=mpirun --with-slurm=/opt/local/slurm/default/ CPPFLAGS=-I/opt/local/slurm/default/include LDFLAGS=-L/opt/local/slurm/default/lib64",
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpicxx', 'mpif77', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['fmpich', 'mpichcxx', 'mpichf90', 'mpich',  'mpl', 'opa'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+moduleclass = 'mpi'

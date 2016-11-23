@@ -1,0 +1,30 @@
+# @author: gppezzi
+
+easyblock = 'MakeCp'
+
+name = 'magma'
+version = '2.0.0'
+versionsuffix = '-cuda-8.0'
+
+homepage = 'http://icl.cs.utk.edu/magma/'
+description = """The MAGMA project aims to develop a dense linear algebra library similar to 
+LAPACK but for heterogeneous/hybrid architectures, starting with current Multicore+GPU systems."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.06'}
+toolchainopts = {'pic': True, 'openmp': True}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
+
+patches = [('magma-2.0.0.patch')]
+
+dependencies = [ ('cuda/8.0.27-0001.kleinm', EXTERNAL_MODULE) ]
+
+files_to_copy = ["lib", "include", "testing", "docs", "README"]
+
+sanity_check_paths={
+    'files': ['lib/libmagma.so', 'lib/libmagma.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'math'

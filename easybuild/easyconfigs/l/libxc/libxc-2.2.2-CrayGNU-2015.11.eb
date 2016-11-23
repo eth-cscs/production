@@ -1,0 +1,59 @@
+# Built with EasyBuild version 2.7.0.dev0-r0dfc64e099929811d322eb721da6d46f923a7e01 on 2016-03-14_18-07-11
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libxc'
+version = '2.2.2'
+
+homepage = 'http://www.tddft.org/programs/octopus/wiki/index.php/Libxc'
+description = """Libxc is a library of exchange-correlation functionals for density-functional theory.
+ The aim is to provide a portable, well tested and reliable set of exchange and correlation functionals."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2015.11'}
+toolchainopts = {'opt': True}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = ['http://www.tddft.org/programs/octopus/down.php?file=libxc/']
+
+configopts = 'FC="$F77" FCFLAGS="$FFLAGS" --enable-shared'
+
+# From the libxc mailing list
+# To summarize: expect less tests to fail in libxc 2.0.2, but don't expect
+# a fully working testsuite soon (unless someone wants to volunteer to do
+# it, of course  ) In the meantime, unless the majority of the tests
+# fail, your build should be fine.
+#runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libxc.a', 'lib/libxc.so'],
+    'dirs': ['include'],
+}
+
+parallel = 1
+
+moduleclass = 'chem'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.7.0.dev0-r0dfc64e099929811d322eb721da6d46f923a7e01",
+    "easybuild-easyblocks_version": "2.7.0.dev0-r561dc925c3f546e5f44515b49d82a6b0d95d8deb",
+    "timestamp": 1457975231,
+    "build_time": 75.8,
+    "install_size": 4372145,
+    "command_line": ['--buildpath=/dev/shm/lucamar', '--experimental', '--external-modules-metadata=/apps/common/easybuild/cray_external_modules_metadata.cfg', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS', '--installpath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild', '--optarch=sandybridge', '--packagepath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild/packages', '--prefix=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild', '--repositorypath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/daint:/apps/common/UES/easybuild/testing/hpcugent/easybuild-easyconfigs/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/daint:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', 'ebfiles_repo/libxc/libxc-2.2.2-CrayGNU-2015.11.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/opt/modules/3.2.10.3/bin/modulecmd', '3.2.10'),
+    "core_count": 16,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz",
+    "cpu_speed": 2600.037,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.9.3/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/4.9.3/snos/libexec/gcc/x86_64-suse-linux/4.9.3/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-4.9.3/configure --prefix=/opt/gcc/4.9.3/snos --disable-nls --libdir=/opt/gcc/4.9.3/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.9.3/snos/include/g++ --with-slibdir=/opt/gcc/4.9.3/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 4.9.3 20150626 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "daint101",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP3",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Apr  7 2015, 08:28:12) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/opt/gcc/4.9.3/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

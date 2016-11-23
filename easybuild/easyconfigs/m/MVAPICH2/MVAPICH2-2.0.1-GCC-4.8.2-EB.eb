@@ -1,0 +1,30 @@
+name = 'MVAPICH2'
+version = '2.0.1'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = "This is an MPI 3.0 implementation.  It is based on MPICH2 and MVICH."
+
+toolchain = {'name': 'GCC', 'version': '4.8.2-EB'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [
+	"--with-pm=no --with-pmi=slurm --with-slurm=/opt/local/slurm/default/ --cache-file=/dev/null --enable-cuda=basic --with-cuda=/global/opt/nvidia/cudatoolkit/6.5.14"
+]
+
+# Let's store the checksum in order to be sure it doesn't suddenly change
+checksums = ['77bba29442f81e196155e87869cdceda']
+
+dependencies = [ ('cudatoolkit/6.5.14', EXTERNAL_MODULE) ]
+
+builddependencies = [('Bison', '3.0.4')]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpicxx', 'mpif77', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['fmpich', 'mpichcxx', 'mpichf90', 'mpich',  'mpl', 'opa'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+
+moduleclass = 'mpi'

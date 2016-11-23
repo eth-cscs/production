@@ -1,0 +1,12 @@
+easyblock = 'Bundle'
+name = 'MVAPICH2'
+version = '2.1_cuda_7.0_gdr'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = "This is an MPI 3.0 implementation.  It is based on MPICH2 and MVICH."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [ ('mvapich2gdr_gnu/2.1_cuda_7.0', EXTERNAL_MODULE) ]
+
+moduleclass = 'mpi'

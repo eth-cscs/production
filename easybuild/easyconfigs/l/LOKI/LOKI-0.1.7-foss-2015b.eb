@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'LOKI'
+version = '0.1.7'
+
+homepage = 'http://loki-lib.sourceforge.net/index.php?n=Main.HomePage'
+description = "Loki is a C++ library of designs, containing flexible implementations of common design patterns and idioms."
+
+toolchain = {'name': 'foss', 'version': '2015b'}
+
+preinstallopts = "export EBINSTALLPREFIX=%(installdir)s && "
+
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://sourceforge.net/projects/loki-lib/files/Loki/Loki %(version)/']
+
+skipsteps = ['configure']
+
+sanity_check_paths={
+    'files': ['lib/libloki.a', 'lib/libloki.so', 'lib/libloki.so.0.1.7'],
+    'dirs': ['include/loki'],
+}
+
+patches = [('LOKI-0.1.7.patch')]

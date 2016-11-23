@@ -1,0 +1,66 @@
+# Built with EasyBuild version 2.3.0 on 2015-10-28_17-01-03
+easyblock = 'ConfigureMake'
+
+name = 'binutils'
+version = '2.24'
+
+homepage = 'http://directory.fsf.org/project/binutils/'
+description = "binutils: GNU binary utilities"
+
+toolchain = {'name': 'GCC', 'version': '4.8.2-binutils-2.24'}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = [GNU_SOURCE]
+
+builddependencies = [
+    ('flex', '2.5.39'),
+    ('Bison', '3.0.4'),
+    # zlib required, but being linked instatically, so not a runtime dep
+    ('zlib', '1.2.8'),
+    # use same binutils version that was used when building GCC toolchain, to 'bootstrap' this binutils
+    ('binutils', version, '', True)
+]
+
+# statically link with zlib, to avoid runtime dependency on zlib
+preconfigopts = 'LIBS="$EBROOTZLIB/lib/libz.a"'
+prebuildopts = 'LIBS="$EBROOTZLIB/lib/libz.a"'
+
+# make sure that system libraries are also considered by ld and ld.gold is also built
+# --enable-plugins should be used whenever --enable-gold is used, see http://llvm.org/docs/GoldPlugin.html
+configopts = '--with-sysroot=/ --enable-gold --enable-ld=default --enable-plugins'
+
+binlist = ['addr2line', 'ar', 'as', 'c++filt', 'elfedit', 'gprof', 'ld', 'ld.bfd', 'ld.gold', 'nm',
+           'objcopy', 'objdump', 'ranlib', 'readelf', 'size', 'strings', 'strip' ]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in binlist] + ['lib/libbfd.a', 'lib/libopcodes.a'] +
+             ['include/%s' % x for x in ['ansidecl.h', 'bfd.h', 'bfdlink.h', 'dis-asm.h', 'symcat.h']],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1446048063,
+    "build_time": 64.95,
+    "install_size": 74748103,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--force', '--group-writable-installdir', '--installpath=/scratch/perettig/easybuild', '--packagepath=/scratch/perettig/easybuild/packages', '--prefix=/scratch/perettig/easybuild', '--repositorypath=/scratch/perettig/easybuild/ebfiles_repo/', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', '/tmp/eb-AvHIns/tweaked_easyconfigs/binutils-2.25-GCC-4.8.2-binutils-2.24.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/scratch-shared/mch/scratch/perettig/easybuild/software/GCC/4.8.2-binutils-2.24/bin/../libexec/gcc/x86_64-unknown-linux-gnu/4.8.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/scratch/perettig/easybuild/software/GCC/4.8.2-binutils-2.24 --with-local-prefix=/scratch/perettig/easybuild/software/GCC/4.8.2-binutils-2.24; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0002",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/scratch/perettig/easybuild/software/GCC/4.8.2-binutils-2.24/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

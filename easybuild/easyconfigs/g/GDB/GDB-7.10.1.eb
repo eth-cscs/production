@@ -1,0 +1,27 @@
+# jgp@cscs
+easyblock = 'ConfigureMake'
+
+name = 'GDB'
+version = '7.10.1'
+
+homepage = 'http://www.gnu.org/software/gdb/gdb.html'
+description = "The GNU Project Debugger"
+
+# http://mirror.switch.ch/ftp/mirror/gnu/gdb/gdb-7.10.1.tar.gz
+source_urls = ['http://mirror.switch.ch/ftp/mirror/gnu/gdb/']
+sources = [SOURCELOWER_TAR_XZ]
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [('ncurses', '6.0')]
+
+patches = ['GDB-%(version)s-missing-makeinfo.patch']
+
+parallel = 1
+
+sanity_check_paths = {
+    'files': ['bin/gdb', 'bin/gdbserver'],
+    'dirs': [],
+}
+
+moduleclass = 'debugger'

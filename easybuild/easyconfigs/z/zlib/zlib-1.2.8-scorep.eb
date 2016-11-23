@@ -1,0 +1,25 @@
+easyblock = 'ConfigureMake'
+
+name = 'zlib'
+version = '1.2.8'
+versionsuffix = '-scorep'
+
+homepage = 'http://www.zlib.net/'
+description = """zlib is designed to be a free, general-purpose, legally unencumbered -- that is,
+ not covered by any patents -- lossless data-compression library for use on virtually any
+ computer hardware and operating system."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = [('http://sourceforge.net/projects/libpng/files/zlib/%(version)s', 'download')]
+sources = [SOURCELOWER_TAR_GZ]
+
+# builddependencies = [ ('binutils', '2.26-libiberty') ]
+# dependencies = [ ('binutils', '2.26-libiberty' ) ]
+
+sanity_check_paths = {
+    'files': ['include/zconf.h', 'include/zlib.h', 'lib/libz.a', 'lib/libz.so'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

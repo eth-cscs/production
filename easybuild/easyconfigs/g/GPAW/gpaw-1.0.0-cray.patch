@@ -1,0 +1,66 @@
+diff -Nru gpaw-1.0.0.orig//config.py gpaw-1.0.0/config.py
+--- gpaw-1.0.0.orig//config.py	2016-03-14 15:21:06.000000000 +0100
++++ gpaw-1.0.0/config.py	2016-10-13 19:17:45.502770085 +0200
+@@ -141,6 +141,17 @@
+             if openblas:  # prefer openblas
+                 libraries += ['openblas']
+                 library_dirs += [libdir]
++# Cray systems: check if cray-libsci is available
++            craylibsci = False
++            for dir in ['/opt/cray']:
++                if glob(join(dir, 'libsci')) != []:
++                    craylibsci = True
++                if craylibsci:
++                    os.environ["GPAW_MPI"] = "True"
++                    os.environ["GPAW_MPI_IMPLEMENTATION"] = "cray" 
++                    os.environ["GPAW_MPI_COMMAND"] = "sprun"
++                    libraries += ['readline', 'ncurses']
++                    break
+             else:
+                 if atlas:  # then atlas
+                     # http://math-atlas.sourceforge.net/errata.html#LINK
+@@ -347,6 +358,9 @@
+     elif mpi == 'poe':
+         mpicompiler = 'mpcc_r'
+ 
++    elif mpi == 'cray':
++        mpicompiler = 'cc'
++
+     else:
+         # Try to use mpicc
+         mpicompiler = 'mpicc'
+diff -Nru gpaw-1.0.0.orig//customize.py gpaw-1.0.0/customize.py
+--- gpaw-1.0.0.orig//customize.py	2016-02-17 08:10:53.000000000 +0100
++++ gpaw-1.0.0/customize.py	2016-10-13 19:16:43.209414422 +0200
+@@ -28,6 +28,7 @@
+     libraries += ['somelib', 'otherlib']
+ """
+ 
++import os
+ # compiler = 'gcc'
+ # mpicompiler = 'mpicc'  # use None if you don't want to build a gpaw-python
+ # mpilinker = 'mpicc'
+@@ -65,7 +66,6 @@
+     if 'xc' not in libraries:
+         libraries.append('xc')
+ 
+-
+ # libvdwxc:
+ if 0:
+     libvdwxc = True
+@@ -77,7 +77,14 @@
+ 
+ 
+ # Build MPI-interface into _gpaw.so:
+-if 0:
++if os.environ["GPAW_MPI"] == "True" and os.environ["GPAW_MPI_IMPLEMENTATION"] == "cray":
++    print "\n Cray Libraries found on the system: cray wrappers will use cray-libsci and cray-mpich \n"
++    os.environ["CRAYPE_LINK_TYPE"] = "dynamic"
++    compiler = 'cc'
++    mpicompiler = 'cc'
++    mpilinker = 'cc'
++    define_macros += [('PARALLEL', '1')]
++else:
+     compiler = 'mpicc'
+     define_macros += [('PARALLEL', '1')]
+     mpicompiler = None

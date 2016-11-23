@@ -1,0 +1,16 @@
+--- srcold/GUI-qt/display/TreeView.cpp	2016-04-03 01:05:37.942066948 +0200
++++ src/GUI-qt/display/TreeView.cpp	2016-08-03 13:45:23.035567286 +0200
+@@ -142,6 +142,13 @@
+ {
+     START_TRANSITION();
+ 
++// -------------- cube/4.3.4 + qt/5.7.0
++if ( iselected.size() == 0 && ideselected.size() == 0 )
++{
++return; // With Qt 5.7, the parameters are empty lists for the first call ( => nothing has changed)
++}
++// -------------- cube/4.3.4 + qt/5.7.0
++
+     QTreeView::selectionChanged( iselected, ideselected );
+     QModelIndexList allSelected = this->selectedIndexes(); // all selected items
+     QModelIndexList selected    = iselected.indexes();     // recently selected items

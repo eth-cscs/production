@@ -1,0 +1,62 @@
+# Built with EasyBuild version 2.3.0 on 2015-10-23_09-45-31
+easyblock = 'ConfigureMake'
+
+name = 'ncurses'
+version = '5.9'
+
+homepage = 'http://www.gnu.org/software/ncurses/'
+description = """The Ncurses (new curses) library is a free software emulation of curses in System V Release 4.0,
+and more. It uses Terminfo format, supports pads and color and multiple highlights and forms characters and
+function-key mapping, and has all the other SYSV-curses enhancements over BSD Curses."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2015.06'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+patches = ['ncurses-%(version)s_configure_darwin.patch']
+
+configopts = [
+    # default build
+    '--with-shared --enable-overwrite',
+    # the UTF-8 enabled version (ncursesw)
+    '--with-shared --enable-overwrite --enable-ext-colors --enable-widec --includedir=%(installdir)s/include/ncursesw/'
+]
+
+libs = ["form", "menu", "ncurses", "panel"]
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ["captoinfo", "clear", "infocmp", "infotocap", "ncurses5-config",
+                                     "reset", "tabs", "tic", "toe", "tput", "tset"]] +
+             ['lib/lib%s%s.a' % (x, y) for x in libs for y in ['', '_g', 'w', 'w_g']] +
+             ['lib/lib%s%s.so' % (x, y) for x in libs for y in ['', 'w']] +
+             ['lib/libncurses++%s.a' % x for x in ['', 'w']],
+    'dirs': ['include', 'include/ncursesw'],
+}
+
+moduleclass = 'devel'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1445586330,
+    "build_time": 114.65,
+    "install_size": 25078137,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--experimental', '--external-modules-metadata=cray-netcdf/4.3.2,cray-hdf5/1.8.13,cray-hdf5-parallel/1.8.13,cudatoolkit/6.5.14-1.0502.9613.6.1,cray-petsc-complex-64/3.5.3.1,cray-petsc-64/3.5.3.1', '--group-writable-installdir', '--installpath=/users/perettig/easybuild', '--optarch=haswell', '--packagepath=/users/perettig/easybuild/packages', '--prefix=/users/perettig/easybuild', '--repositorypath=/users/perettig/easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/ebfiles_repo/dora:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/dora:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'CrayGNU\', \'5.2.40\']"', '--umask=002', 'libmatheval-1.1.8-goolf-1.4.10.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/opt/modules/3.2.10.3/bin/modulecmd', '3.2.10'),
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 2299.957,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.9.2/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/4.9.2/snos/libexec/gcc/x86_64-suse-linux/4.9.2/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-4.9.2/configure --prefix=/opt/gcc/4.9.2/snos --disable-nls --libdir=/opt/gcc/4.9.2/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.9.2/snos/include/g++ --with-slibdir=/opt/gcc/4.9.2/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 4.9.2 20141030 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "dora103",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP2",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Jul 28 2014, 08:24:16) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/opt/gcc/4.9.2/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

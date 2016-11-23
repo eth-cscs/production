@@ -1,0 +1,51 @@
+# @author: karakasv gppezzi
+# @author: victor holanda rusu
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+version = '16'
+versionsuffix = '-serial'
+amber_version='%(version)s'
+
+homepage = 'http://ambermd.org/'
+description = 'Assisted Model Building with Energy Refinement'
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = { 'verbose' : False }
+sources = ['Amber%(version)s.tar.bz2', 'AmberTools%(version)s.tar.bz2']
+
+dependencies = [ ('bzip2', '1.0.6'),
+                 ('zlib', '1.2.8'),
+                 ('Python', '2.7.12') ]
+
+builddependencies = [
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1', EXTERNAL_MODULE),
+    ('Python', '2.7.12'),
+    ('flex', '2.6.0'),
+]
+
+buildininstalldir = True
+
+configopts = 'gnu'
+
+prebuildopts = 'cd .. && mv amber%(version)s/* . && '
+prebuildopts += 'export AMBERHOME=%(builddir)s;'
+prebuildopts += './update_amber --update && '
+prebuildopts += './configure -noX11 -crayxt5 --with-netcdf $EBROOTNETCDF gnu;'
+
+buildopts = 'install'
+
+files_to_copy = []
+
+sanity_check_paths = {
+    'files' : [ 'bin/pmemd' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s',
+}
+
+moduleclass = 'bio'

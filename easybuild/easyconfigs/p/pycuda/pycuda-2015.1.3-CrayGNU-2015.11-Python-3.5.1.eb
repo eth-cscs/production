@@ -1,0 +1,32 @@
+#easyblock = "PythonPackage"
+easyblock = "pycuda"
+
+name = 'pycuda'
+version = '2015.1.3'
+
+homepage = 'https://pypi.python.org/pypi/pycuda'
+description = """Python wrapper for Nvidia CUDA. PyCUDA lets you access Nvidia CUDA parallel computation API from Python."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2015.11'}
+toolchainopts = {'usempi': True}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+python = 'Python'
+pyver = '3.5.1'
+pyshortver = '.'.join(pyver.split('.')[0:2])
+versionsuffix = '-%s-%s' % (python, pyver)
+
+dependencies = [
+    (python, pyver),
+    ('cudatoolkit/6.5.14-1.0502.9613.6.1', EXTERNAL_MODULE),
+]
+
+#sanity_check_paths = {
+#    'files': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
+#    'dirs': [],
+#}
+
+moduleclass = 'data'
+

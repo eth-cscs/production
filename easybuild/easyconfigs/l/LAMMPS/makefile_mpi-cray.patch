@@ -1,0 +1,67 @@
+diff -Nru lammps.orig/src/MAKE/Makefile.mpi lammps/src/MAKE/Makefile.mpi
+--- lammps.orig/src/MAKE/Makefile.mpi	2016-07-21 11:50:55.608461000 +0200
++++ lammps/src/MAKE/Makefile.mpi	2016-07-26 09:29:28.513919000 +0200
+@@ -6,13 +6,13 @@
+ # compiler/linker settings
+ # specify flags and libraries needed for your compiler
+ 
+-CC =		mpicxx
+-CCFLAGS =	-g -O3 
++CC =		CC     
++CCFLAGS =	-O3 
+ SHFLAGS =	-fPIC
+ DEPFLAGS =	-M
+ 
+-LINK =		mpicxx
+-LINKFLAGS =	-g -O
++LINK =		CC      
++LINKFLAGS =	-O
+ LIB = 
+ SIZE =		size
+ 
+@@ -28,7 +28,7 @@
+ # LAMMPS ifdef settings
+ # see possible settings in Section 2.2 (step 4) of manual
+ 
+-LMP_INC =	-DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64
++LMP_INC =	-DLAMMPS_GZIP
+ 
+ # MPI library
+ # see discussion in Section 2.2 (step 5) of manual
+@@ -50,9 +50,9 @@
+ # PATH = path for FFT library
+ # LIB = name of FFT library
+ 
+-FFT_INC =    	
+-FFT_PATH = 
+-FFT_LIB =	
++FFT_INC =
++FFT_PATH =
++FFT_LIB =
+ 
+ # JPEG and/or PNG library
+ # see discussion in Section 2.2 (step 7) of manual
+@@ -100,15 +100,16 @@
+ 
+ # Compilation rules
+ 
+-%.o:%.cpp
++%.o:%.cpp $(EXTRA_CPP_DEPENDS)
+ 	$(CC) $(CCFLAGS) $(SHFLAGS) $(EXTRA_INC) -c $<
+ 
+-# Individual dependencies
++%.d:%.cpp $(EXTRA_CPP_DEPENDS)
++	$(CC) $(CCFLAGS) $(EXTRA_INC) $(DEPFLAGS) $< > $@
+ 
+-depend : fastdep.exe $(SRC)
+-	@./fastdep.exe $(EXTRA_INC) -- $^ > .depend || exit 1
++%.o:%.cu $(EXTRA_CPP_DEPENDS)
++	$(CC) $(CCFLAGS) $(SHFLAGS) $(EXTRA_INC) -c $<
+ 
+-fastdep.exe: ../DEPEND/fastdep.c
+-	cc -O -o $@ $<
++# Individual dependencies
+ 
+-sinclude .depend
++DEPENDS = $(OBJ:.o=.d)
++sinclude $(DEPENDS)

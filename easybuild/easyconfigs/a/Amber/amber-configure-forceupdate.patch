@@ -1,0 +1,26 @@
+diff -urN amber14.orig//configure amber14//configure
+--- amber14.orig//configure	2016-03-24 16:37:02.223977050 +0100
++++ amber14//configure	2016-03-24 16:37:31.616586625 +0100
+@@ -8,6 +8,7 @@
+ # Check for --no-updates in any position
+ updates="yes"
+ requested_help="no"
++force_updates="yes"
+ for var in "$@"; do
+     case "$var" in
+         --no-updates)
+@@ -41,8 +42,12 @@
+    if [ $ret_code -eq 2 ]; then
+       printf "There are patches available. Do you want to apply them now? [y/N]"
+       echo " (Recommended Y) "
+-      read answer
+-      ans=`echo $answer | awk '{print substr($1,1,1)}'`
++      if [ "$force_updates" = "yes" ]; then
++          ans="y"
++      else
++          read answer
++          ans=`echo $answer | awk '{print substr($1,1,1)}'`
++      fi
+ 
+       if [ "$ans" = "y" -o "$ans" = "Y" ]; then
+          # Since patch_amber may patch itself and quit before applying all patches,

@@ -1,0 +1,26 @@
+name = 'MVAPICH2'
+version = '2.1'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = "This is an MPI 3.0 implementation.  It is based on MPICH2 and MVICH."
+
+toolchain = {'name': 'GCC', 'version': '4.9.3-binutils-2.25'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [
+"--build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-redhat-linux-gnu --localstatedir=/var --sharedstatedir=/var/lib --disable-rpath --enable-shared --disable-rdma-cm --disable-mcast --without-hydra-ckpointlib --enable-cuda CPPFLAGS=-I/opt/cuda/7.0/include LDFLAGS='-L/opt/cuda/7.0/lib64 -Wl,-rpath,/opt/cuda/7.0/lib64 -Wl,-rpath,XORIGIN/placeholder'"
+]
+
+dependencies = [ ('cudatoolkit/7.0.28', EXTERNAL_MODULE) ]
+
+builddependencies = [('Bison', '3.0.4')]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpicxx', 'mpif77', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+moduleclass = 'mpi'

@@ -1,0 +1,11 @@
+name = 'MVAPICH2'
+version = '2.0.1_gnu48'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = "This is an MPI 3.0 implementation.  It is based on MPICH2 and MVICH."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [('mvapich2_gnu/2.0.1_gnu48', EXTERNAL_MODULE)]
+
+moduleclass = 'mpi'

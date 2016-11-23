@@ -1,0 +1,22 @@
+# Prefix where installing the packages and module files
+export EASYBUILD_PREFIX=/lus/scratch/$USER/easybuild
+
+# Use shm for speeding up the build process
+export EASYBUILD_BUILDPATH=/dev/shm/$USER
+
+# Set up the target architecture 
+export EASYBUILD_OPTARCH=sandybridge
+module switch craype-broadwell craype-sandybridge
+
+# Tell EasyBuild where to look for custom build recipes
+export EASYBUILD_ROBOT_PATHS=/lus/scratch/$USER/tools/easybuild/easyconfigs/:
+export EASYBUILD_INCLUDE_EASYBLOCKS="/lus/scratch/$USER/tools/easybuild/easyblocks/*.py"
+
+export EASYBUILD_MODULES_TOOL=EnvironmentModulesC
+
+# Update module path so that modules built with EasyBuild are visible
+export MODULEPATH=$MODULEPATH:$EASYBUILD_PREFIX/modules/all
+
+export EASYBUILD_IGNORE_OSDEPS=1
+module load EasyBuild
+export EASYBUILD_EXTERNAL_MODULES_METADATA=/lus/scratch/$USER/tools/easybuild/cray_external_modules_metadata.cfg

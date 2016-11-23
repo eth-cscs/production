@@ -1,0 +1,131 @@
+# Built with EasyBuild version 2.3.0 on 2015-10-29_16-53-35
+# Built with EasyBuild version 2.3.0 on 2015-09-30_15-07-00
+# Built with EasyBuild version 2.3.0 on 2015-09-14_18-30-52
+# Built with EasyBuild version 2.1.1 on 2015-07-29_16-59-33
+##
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2014 Uni.Lu/LCSB, NTUA
+# Authors::   Fotis Georgatos <fotis@cern.ch>
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-90.html
+##
+easyblock = 'ConfigureMake'
+
+name = 'NASM'
+version = '2.11.06'
+
+homepage = 'http://www.nasm.us/'
+description = """NASM: General-purpose x86 assembler"""
+
+toolchain = {'name': 'gmvolf', 'version': '15.11'}
+
+sources = [SOURCELOWER_TAR_BZ2]
+source_urls = ['http://www.nasm.us/pub/nasm/releasebuilds/%(version)s']
+
+sanity_check_paths = {
+    'files': ['bin/nasm'],
+    'dirs': [],
+}
+
+moduleclass = 'lang'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.1.1",
+    "easybuild-easyblocks_version": "2.1.1",
+    "timestamp": 1438181968,
+    "build_time": 5.35,
+    "install_size": 1991835,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--installpath=/apps/escha/easybuild', '--prefix=/apps/escha/easybuild', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.1.1/lib64/python2.6/site-packages/easybuild_easyconfigs-2.1.1-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', 'R-3.2.0-gmvolf-2015a-bare.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.8.2/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/global/opt/gcc/4.8.2/snos/bin/../libexec/gcc/x86_64-suse-linux/4.8.2/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../gcc-4.8.2/configure --prefix=/opt/gcc/4.8.2/snos --disable-nls --libdir=/opt/gcc/4.8.2/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.8.2/snos/include/g++ --with-slibdir=/opt/gcc/4.8.2/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-mpc=/opt/gcc/mpc/0.8.1 --with-mpfr=/opt/gcc/mpfr/2.4.2 --with-gmp=/opt/gcc/gmp/4.3.2 --disable-multilib; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0001",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/opt/gcc/4.8.2/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]
+
+buildstats.append({
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1442248247,
+    "build_time": 10.54,
+    "install_size": 1996061,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--group-writable-installdir', '--installpath=/apps/escha/easybuild', '--packagepath=/apps/escha/easybuild/packages', '--prefix=/apps/escha/easybuild', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'gmvolf\', \'2015b\']"', '--umask=002', '/apps/common/tools/easybuild/ebfiles_repo/keschln-/NASM/NASM-2.11.06-gmvolf-2015a.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/easybuild/software/GCC/4.8.2-EB/libexec/gcc/x86_64-unknown-linux-gnu/4.8.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB --with-local-prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0002",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/easybuild/software/GCC/4.8.2-EB/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+})
+
+buildstats.append({
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1443618415,
+    "build_time": 0.68,
+    "install_size": 2120133,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--force', '--group-writable-installdir', '--installpath=/apps/escha/easybuild', '--module-only', '--packagepath=/apps/escha/easybuild/packages', '--prefix=/apps/escha/easybuild', '--recursive-module-unload', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', '/apps/common/tools/easybuild/ebfiles_repo/keschln-/NASM/NASM-2.11.06-gmvolf-2015b.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/easybuild/software/GCC/4.8.2-EB/libexec/gcc/x86_64-unknown-linux-gnu/4.8.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB --with-local-prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0003",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/easybuild/software/GCC/4.8.2-EB/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+})
+
+buildstats.append({
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1446134015,
+    "build_time": 11.67,
+    "install_size": 2037093,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--group-writable-installdir', '--installpath=/apps/kesch/sandbox/easybuild', '--packagepath=/apps/kesch/sandbox/easybuild/packages', '--prefix=/apps/kesch/sandbox/easybuild', '--repositorypath=/apps/kesch/sandbox/easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'gmvolf\', \'15.11\']"', '--umask=002', '/apps/common/tools/easybuild/ebfiles_repo/eschaln-/NASM/NASM-2.11.06-gmvolf-2015b.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/kesch/sandbox/easybuild/software/GCC/4.9.3-binutils-2.25/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/kesch/sandbox/easybuild/software/GCC/4.9.3-binutils-2.25 --with-local-prefix=/apps/kesch/sandbox/easybuild/software/GCC/4.9.3-binutils-2.25; Thread model: posix; gcc version 4.9.3 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0003",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/kesch/sandbox/easybuild/software/GCC/4.9.3-binutils-2.25/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+})

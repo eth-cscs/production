@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'byacc'
+version = '20160606'
+
+homepage = 'http://invisible-island.net/byacc/byacc.html'
+description = """Berkeley Yacc (byacc) is generally conceded to be the best yacc variant available.
+In contrast to bison, it is written to avoid dependencies upon a particular compiler."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.03'}
+
+sources = [SOURCELOWER_TGZ]
+source_urls = ['ftp://invisible-island.net/byacc']
+
+sanity_check_paths = {
+                      'files': ["bin/yacc"],
+                      'dirs': []
+                     }
+
+moduleclass = 'lang'

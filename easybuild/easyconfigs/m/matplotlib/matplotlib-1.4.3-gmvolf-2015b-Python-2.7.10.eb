@@ -1,0 +1,63 @@
+# Built with EasyBuild version 2.3.0 on 2015-09-15_11-58-18
+# Built with EasyBuild version 2.1.0 on 2015-05-11_16-51-37
+easyblock = "PythonPackage"
+
+name = 'matplotlib'
+version = '1.4.3'
+
+homepage = 'http://matplotlib.org'
+description = """matplotlib is a python 2D plotting library which produces publication quality figures in a variety of
+ hardcopy formats and interactive environments across platforms. matplotlib can be used in python scripts, the python
+ and ipython shell, web application servers, and six graphical user interface toolkits."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015b'}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+python = "Python"
+pythonversion = '2.7.10'
+pyshortver = ".".join(pythonversion.split(".")[:-1])
+
+versionsuffix = "-%s-%s" % (python, pythonversion)
+
+dependencies = [
+    (python, pythonversion),
+    ('freetype', '2.5.5'),
+    ('libpng', '1.6.16'),
+]
+
+# is this actually needed? the PythonPackage will check if import matplotlib succeeds, which is as good as this?
+pyprefix = 'lib/python%s/site-packages' % pyshortver
+eggname = 'matplotlib-%%(version)s-py%s-linux-x86_64.egg' % pyshortver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [('%s/%%(name)s' % pyprefix, '%s/%s' % (pyprefix, eggname))],
+}
+
+moduleclass = 'vis'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1442311093,
+    "build_time": 73.65,
+    "install_size": 88628875,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--group-writable-installdir', '--installpath=/apps/escha/easybuild', '--packagepath=/apps/escha/easybuild/packages', '--prefix=/apps/escha/easybuild', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain-version=2015b', '--umask=002', 'matplotlib-1.4.3-gmvolf-2015a-Python-2.7.10.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/easybuild/software/GCC/4.8.2-EB/libexec/gcc/x86_64-unknown-linux-gnu/4.8.2/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB --with-local-prefix=/apps/escha/easybuild/software/GCC/4.8.2-EB; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0001",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/easybuild/software/GCC/4.8.2-EB/bin/gcc",
+    "system_python_path": "/apps/escha/easybuild/software/Python/2.7.10-gmvolf-2015b/bin/python",
+}]

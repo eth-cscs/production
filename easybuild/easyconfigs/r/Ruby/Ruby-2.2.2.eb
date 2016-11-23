@@ -1,0 +1,59 @@
+# Built with EasyBuild version 2.1.1 on 2015-06-15_11-16-46
+#    With <3 for EasyBuild
+#    
+#    EasyConfig for Ruby 2.1:
+#    ----------------------------------------------------------------------------
+#    Copyright: 2014 - Gregor Mendel Institute of Molecular Plant Biology GmBH
+#    License: MIT
+#    Authors: Aaron <aaron.zauner@gmi.oeaw.ac.at> Zauner
+#    ----------------------------------------------------------------------------
+easyblock = 'ConfigureMake'
+
+name = 'Ruby'
+version = '2.2.2'
+
+homepage = 'https://www.ruby-lang.org'
+description = """Ruby is a dynamic, open source programming language with 
+ a focus on simplicity and productivity. It has an elegant syntax that is 
+ natural to read and easy to write."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://cache.ruby-lang.org/pub/ruby/']
+
+sanity_check_paths = {
+    'files': ['bin/ruby', 'bin/rake', 'bin/gem', 'bin/erb',
+              'bin/ri', 'bin/irb', 'bin/rdoc', 'lib/libruby.so.2.2.0',
+              'lib/libruby-static.a', 'lib/libruby.so'],
+    'dirs': ['lib/ruby/2.2.0', 'lib/ruby/gems', 'lib/pkgconfig', 'include/ruby-2.2.0']
+}
+
+configopts = "--disable-install-doc --enable-shared"
+
+moduleclass = 'lang'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.1.1",
+    "easybuild-easyblocks_version": "2.1.1",
+    "timestamp": 1434359806,
+    "build_time": 76.02,
+    "install_size": 134850211,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--installpath=/apps/ela/easybuild', '--modules-tool=EnvironmentModulesTcl', '--prefix=/apps/ela/easybuild', '--repositorypath=/apps/ela/easybuild/ebfiles_repo', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs:', '--sourcepath=/apps/ela/easybuild/sources', 'Ruby-2.1.5-dummy.eb'],
+    "modules_tool": ('EnvironmentModulesTcl', '/usr/share/Modules/tcl/modulecmd.tcl', '1.146'),
+    "core_count": 32,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.3 --enable-ssp --disable-libssp --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --program-suffix=-4.3 --enable-linux-futex --without-system-libunwind --with-cpu=generic --build=x86_64-suse-linux; Thread model: posix; gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "ela1",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP2",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Apr  7 2015, 08:28:12) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

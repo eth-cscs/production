@@ -1,0 +1,63 @@
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# make sure we don't fall back to the ConfigureMake easyblock
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = 'Score-P'
+version = '1.4.2'
+
+homepage = 'http://www.score-p.org'
+description = """The Score-P measurement infrastructure is a highly scalable and
+ easy-to-use tool suite for profiling, event tracing, and online analysis of HPC
+ applications."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015a'}
+toolchainopts = {"usempi": True}
+
+sources = ["scorep-%(version)s.tar.gz"]
+source_urls = ['http://www.vi-hps.org/upload/packages/scorep/']
+
+checksums = [
+    '3b9a042b13bdd5836452354e6567f71e', 
+]
+
+dependencies = [
+    ('Cube', '4.3.2'),
+    ('OTF2', '1.5.1'),
+    ('OPARI2', '1.1.4'),
+    ('binutils', '2.25'),
+]
+# /global/opt/nvidia/cudatoolkit/6.5.14/lib64/libcudart.so
+# /global/opt/nvidia/cudatoolkit/6.5.14/lib64/stubs/libcuda.so
+configopts  = ' --with-machine-name=kesch'
+configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
+configopts += ' --with-libbfd-include=$EBROOTBINUTILS/include'
+configopts += ' --with-libbfd-lib=$EBROOTBINUTILS/lib'
+configopts += ' --with-cube=$EBROOTCUBE/bin'
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-papi=/opt/cray/papi/default'
+configopts += ' --with-papi-header=/opt/cray/papi/default/include'
+configopts += ' --with-papi-lib=/opt/cray/papi/default/lib'
+configopts += ' --enable-shared'
+configopts += ' --enable-cuda'
+#no configopts += ' --with-libcuda=/global/opt/nvidia/cudatoolkit/6.5.14'
+configopts += ' --with-libcuda-lib=/global/opt/nvidia/cudatoolkit/6.5.14/lib64/stubs'
+configopts += ' --with-libcuda-include=/global/opt/nvidia/cudatoolkit/6.5.14/include'
+configopts += ' --with-libcudart=/global/opt/nvidia/cudatoolkit/6.5.14'
+configopts += ' --with-cupti=/global/opt/nvidia/cudatoolkit/6.5.14/extras/CUPTI'
+
+sanity_check_paths = {
+    'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
+              ("lib64/libscorep_adapter_mpi_event.a", "lib/libscorep_adapter_mpi_event.a")],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

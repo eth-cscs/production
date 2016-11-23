@@ -1,0 +1,64 @@
+##
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2014 Uni.Lu/LCSB, NTUA
+# Authors::   Fotis Georgatos <fotis@cern.ch>
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-97.html
+##
+
+# CrayGNU version by Jean Favre (CSCS) and gppezzi (CSCS)
+# REMARK: VTK on Cray Fails to build on /dev/shm
+
+easyblock = 'CMakeMake'
+
+name = 'VTK'
+version = '7.0.0'
+
+homepage = 'http://www.vtk.org'
+description = """The Visualization Toolkit (VTK) is an open-source, freely available software system for
+ 3D computer graphics, image processing and visualization. VTK consists of a C++ class library and several
+ interpreted interface layers including Tcl/Tk, Java, and Python. VTK supports a wide variety of visualization
+ algorithms including: scalar, vector, tensor, texture, and volumetric methods; and advanced modeling techniques
+ such as: implicit modeling, polygon reduction, mesh smoothing, cutting, contouring, and Delaunay triangulation."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.03'}
+toolchainopts = {'verbose': False}
+#toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['http://www.vtk.org/files/release/%(version_major_minor)s']
+sources = [
+    SOURCE_TAR_GZ,
+    '%(name)sData-%(version)s.tar.gz',
+]
+
+builddependencies = [('CMake', '3.5.0')]
+
+pyver = '3.5.1'
+pyshortver = '.'.join(pyver.split('.')[:2])
+versionsuffix = '-Python-%s' % pyver
+
+preconfigopts = 'export CC=gcc && export CXX=g++ &&'
+
+dependencies = [
+    ('Python', pyver),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DBUILD_SHARED_LIBS=ON -DBUILD_TETSING=ON "
+configopts += "-DVTK_WRAP_PYTHON=ON -DPYTHON_LIBRARY=${EBROOTPYTHON}/lib/libpython3.5m.so.1.0 -DPYTHON_INCLUDE_DIR=${EBROOTPYTHON}/include/python3.5m "
+configopts += "-DCMAKE_C_COMPILER:PATH=gcc -DCMAKE_CXX_COMPILER:PATH=g++ "
+configopts += "-DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so -DOPENGL_glu_LIBRARY=/apps/daint/Viz/libglu/9.0.0/gcc-4.3.4/lib/libGLU.so "
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+
+sanity_check_paths = {
+    'files': ['bin/vtk%s-%%(version_major_minor)s' % x for x in ['EncodeString', 'HashSource', 'mkg3states']],
+    'dirs': ['lib/python%s/site-packages/' % pyshortver, 'include/vtk-%(version_major_minor)s'],
+}
+
+sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
+
+moduleclass = 'vis'

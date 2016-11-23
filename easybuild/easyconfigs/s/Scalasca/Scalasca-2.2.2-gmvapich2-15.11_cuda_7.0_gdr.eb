@@ -1,0 +1,79 @@
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = "Scalasca"
+version = "2.2.2"
+
+homepage = 'http://www.scalasca.org/'
+description = """Scalasca is a software tool that supports the performance optimization of
+ parallel programs by measuring and analyzing their runtime behavior. The analysis identifies
+ potential performance bottlenecks -- in particular those concerning communication and
+ synchronization -- and offers guidance in exploring their causes."""
+
+toolchain = {'name': 'gmvapich2', 'version': '15.11_cuda_7.0_gdr'}
+toolchainopts = {"usempi": True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/scalasca/%(version_major_minor)s/dist']
+
+checksums = [
+    '2bafce988b0522d18072f7771e491ab9',  # 2.2.2
+]
+
+dependencies = [
+    ('PAPI',   '5.4.1', '', True),
+    ('OTF2',   '1.5.1', '', True),
+    ('OPARI2', '1.1.4', '', True),
+    ('Cube',   '4.3.3', '', True),
+    #('binutils', '2.25'), # gmvapich2/15.11 loads cudatoolkit/7.0.28 + GCC/4.9.3-binutils-2.25
+]
+
+configopts  = ' --with-machine-name=kescha'
+configopts  = ' --with-binutils=$EBROOTBINUTILS/bin'
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-cube=$EBROOTCUBE/bin' 
+configopts += ' --with-papi=$EBROOTPAPI'
+configopts += ' --disable-gui'
+
+#no configopts += ' --with-qt=/apps/ela/qt/4.8.4/gnu_434'
+# configopts += ' --with-papi=/opt/cray/papi/default'
+# configopts += ' --with-papi-header=/opt/cray/papi/default/include'
+# configopts += ' --with-papi-lib=/opt/cray/papi/default/lib'
+# configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
+# configopts += ' --with-libbfd-include=$EBROOTBINUTILS/include'
+# configopts += ' --with-libbfd-lib=$EBROOTBINUTILS/lib'
+# configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
+# configopts += ' --with-cube=$EBROOTCUBE/bin'
+# configopts += ' --with-otf2=$EBROOTOTF2/bin'
+# configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+# configopts += ' --with-libpmi-include=/opt/cray/pmi/default/include'
+# configopts += ' --with-libpmi-lib=/opt/cray/pmi/default/lib64'
+# configopts += ' --with-librca-include=/opt/cray/rca/default/include'
+# configopts += ' --with-librca-lib=/opt/cray/rca/default/lib64'
+# configopts += ' CC=cc CFLAGS=-O2'       # !needed for build-score
+# configopts += ' CXX=CC CXXFLAGS=-O2'    # !needed for build-score
+# configopts += ' --enable-shared'
+# configopts += ' --enable-cuda'
+# configopts += ' --with-libcuda=/opt/cray/nvidia/default'
+# configopts += ' --with-libcudart=/opt/nvidia/cudatoolkit7.0/default'
+# configopts += ' --with-cupti=/opt/nvidia/cudatoolkit7.0/default/extras/CUPTI'
+# configopts += '--with-libbfd='
+# configopts += ''
+# configopts += ''
+# 'PAPI': ['--with-papi-header=%s/include', '--with-papi-lib=%%s/%s' % get_software_libdir('PAPI')],
+
+sanity_check_paths = {
+    'files': ["bin/scalasca", ("lib64/libpearl.replay.a", "lib/libpearl.replay.a")],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

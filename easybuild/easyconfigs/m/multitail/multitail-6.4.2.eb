@@ -1,0 +1,29 @@
+easyblock = 'MakeCp'
+
+name = 'multitail'
+version = '6.4.2'
+
+homepage = 'http://www.vanheusden.com/multitail/'
+description = """MultiTail allows you to monitor logfiles and command
+output in multiple windows in a terminal, colorize, filter and merge."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['http://www.vanheusden.com/multitail/']
+sources = [SOURCE_TGZ]
+
+files_to_copy = [
+    (['multitail'], 'bin'),
+    (['multitail.conf'], 'etc'),
+]
+
+dependencies = [("ncurses", "6.0")]
+
+prebuildopts = 'DESTDIR=%(installdir)s '
+
+sanity_check_paths = {
+    'files': ['bin/multitail'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

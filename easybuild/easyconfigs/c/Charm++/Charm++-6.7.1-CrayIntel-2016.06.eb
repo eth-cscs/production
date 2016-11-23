@@ -1,0 +1,28 @@
+# Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.7.1'
+
+homepage = 'http://charm.cs.illinois.edu/research/charm/'
+description = """Charm++ is a machine independent parallel programming system. Programs written using this system will run unchanged on MIMD machines with or without a shared memory."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.06'}
+toolchainopts = {'dynamic': False}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib/']
+
+sources = ['charm-%(version)s.tar.gz']
+
+cmds_map = [('charm-%(version)s.tar.gz', './build charm++ gni-crayxc smp --with-production -j12')]
+
+builddependencies = [('craype-hugepages8M', EXTERNAL_MODULE)]
+
+files_to_copy = ['gni-crayxc-smp'] 
+
+sanity_check_paths = {
+    'files': ['gni-crayxc-smp/bin/charmc'],
+    'dirs': ['gni-crayxc-smp/bin', 'gni-crayxc-smp/lib', 'gni-crayxc-smp/include'],
+}
+
+moduleclass = 'chem'

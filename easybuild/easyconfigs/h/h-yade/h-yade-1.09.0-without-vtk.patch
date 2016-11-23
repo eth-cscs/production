@@ -1,0 +1,12 @@
+diff -ru trunk-1.09.0.orig/CMakeLists.txt trunk-1.09.0/CMakeLists.txt
+--- trunk-1.09.0.orig/CMakeLists.txt	2014-05-18 17:33:35.000000000 +0200
++++ trunk-1.09.0/CMakeLists.txt	2016-04-15 11:05:50.180013000 +0200
+@@ -30,7 +30,7 @@
+ INCLUDE(FindPythonInterp)
+ INCLUDE(FindOpenMP)
+ INCLUDE(FindQt4)
+-INCLUDE(FindVTK)
++#INCLUDE(FindVTK)
+ INCLUDE(FindPkgConfig)
+ INCLUDE(GetVersion)
+ INCLUDE(FindOpenGL)
