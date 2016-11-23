@@ -1,19 +1,17 @@
 easyblock = "Tarball"
 
 name = 'PyRegression'
-version = '2.0a'
+version = '2.0'
 
 homepage = 'https://madra.cscs.ch/scs/PyRegression/'
 description = "Awesome regression suite for CSCS systems."
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-sources = [ ('archive.tar.gz?ref=v2.0a', "cp %s .; cat archive.tar.gz* | tar xfz -" )]
+sources = [ ('archive.tar.gz?ref=v2.0', "tar xfz %s" )]
 source_urls = ['https://madra.cscs.ch/scs/PyRegression/repository/']
 
 dependencies = [('Python', '3.5.2')]
-
-postinstallcmds = ['mv %(installdir)s/PyRegression-v2.0a-4279dedce0686a6cbbbfcb761c40e42f3dd8e295/* %(installdir)s/']
 
 modextrapaths = {'PATH': ['']}
 
