@@ -26,10 +26,10 @@ esac
 
 # If argument is given, use it as path for easybuild and else use default (/scratch for jenkins or $APPS for the rest)
 if [[ -z "$1" ]]; then
-    echo "Usage: source setup.sh <prefix> <tools>"
+    echo "Usage: source setup.sh <prefix> <production>"
     echo " where "
     echo "   <prefix> is where EasyBuild will install the software and module files"
-    echo "   <tools> is the path to your tools repository (if not specified, it will be cloned from github)"
+    echo "   <production> is the path to your production repository (if not specified, it will be cloned from github)"
     return
 else
     export PROJ=${1}
@@ -38,17 +38,17 @@ else
 fi
 
 if [[ -z "$2" ]]; then
-    TOOLS="~/tools"
-    if [[ -a "$TOOLS" ]]; then
-        echo "found local ~/tools directory, make sure it is updated and run:"
-        echo "source setup.sh <prefix> ~/tools" 
+    PROD_DIR="~/production"
+    if [[ -a "$PROD_DIR" ]]; then
+        echo "found local ~/production directory, make sure it is updated and run:"
+        echo "source setup.sh <prefix> ~/production" 
         return
     else
-        echo "Cloning tools repo to $TOOLS"
-        git clone https://github.com/eth-cscs/tools.git $TOOLS
+        echo "Cloning production repo to $PROD_DIR"
+        git clone https://github.com/eth-cscs/production.git $PROD_DIR
     fi
 else
-    TOOLS=$2
+    PROD_DIR=$2
 fi
 
 # Switch environment modules (set PATH varible)
@@ -83,13 +83,9 @@ fi
 
 export EASYBUILD_PREFIX=${PROJ}/easybuild
 export EASYBUILD_TMPDIR=$EASYBUILD_PREFIX/tmp
-#export EASYBUILD_SET_GID_BIT=1
-#export EASYBUILD_GROUP_WRITABLE_INSTALLDIR=1
-#export EASYBUILD_STICKY_BIT=1
-#export EASYBUILD_UMASK=002
 export EASYBUILD_BUILDPATH=/dev/shm/$USER
-export EASYBUILD_ROBOT_PATHS=$TOOLS/easybuild/easyconfigs/:
-export EASYBUILD_INCLUDE_EASYBLOCKS="$TOOLS/easybuild/easyblocks/*.py"
+export EASYBUILD_ROBOT_PATHS=$PROD_DIR/easybuild/easyconfigs/:
+export EASYBUILD_INCLUDE_EASYBLOCKS="$PROD_DIR/easybuild/easyblocks/*.py"
 export EASYBUILD_IGNORE_OSDEPS=0
 export EASYBUILD_HIDE_DEPS=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent
 export EASYBUILD_RECURSIVE_MODULE_UNLOAD=1
@@ -110,17 +106,12 @@ else # non CSCS users
 fi
 
 if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" || "$hostName" =~ "dom" ]] ; then
-    export EASYBUILD_EXTERNAL_MODULES_METADATA=$TOOLS/easybuild/cray_external_modules_metadata.cfg
+    export EASYBUILD_EXTERNAL_MODULES_METADATA=$PROD_DIR/easybuild/cray_external_modules_metadata.cfg
     export EASYBUILD_OPTARCH=$CRAY_CPU_TARGET
     export EASYBUILD_RECURSIVE_MODULE_UNLOAD=0 #recursive unload currently not working on Cray* toolchains
 fi
 
-#env | grep EASYBUILD
-echo PYTHONPATH=$PYTHONPATH
-#echo PATH=$PATH
-
 echo "Updating \$MODULEPATH..."
-#module use $EASYBUILD_PREFIX/modules/all
 export MODULEPATH=$EASYBUILD_PREFIX/modules/all:$MODULEPATH
 echo MODULEPATH=$MODULEPATH
 
