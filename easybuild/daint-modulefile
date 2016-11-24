@@ -20,7 +20,7 @@ module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
 # System dependent settings: 
 #  Daint
 setenv EASYBUILD_PREFIX                     $::env(HOME)/easybuild/daint
-setenv EASYBUILD_EXTERNAL_MODULES_METADATA  /apps/common/easybuild/cray_external_modules_metadata.cfg
+setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $ebroot/cray_external_modules_metadata.cfg
 setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
 setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 setenv EASYBUILD_IGNORE_OSDEPS              0
