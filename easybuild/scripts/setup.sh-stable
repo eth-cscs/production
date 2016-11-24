@@ -38,10 +38,10 @@ else
 fi
 
 if [[ -z "$2" ]]; then
-    PROD_DIR="~/production"
+    PROD_DIR="$HOME/production"
     if [[ -a "$PROD_DIR" ]]; then
-        echo "found local ~/production directory, make sure it is updated and run:"
-        echo "source setup.sh <prefix> ~/production" 
+        echo "found local $HOME/production directory, make sure it is updated and run:"
+        echo "source setup.sh <prefix> $HOME/production" 
         return
     else
         echo "Cloning production repo to $PROD_DIR"
