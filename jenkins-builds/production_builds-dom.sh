@@ -15,7 +15,7 @@ echo -e "\n Production file is $1: \n - OS VERSION is $OS \n - ARCH is $ARCH"
 
 # list of builds
 list=$(cat $1 | grep -v ^#)
-echo -e "\n List of production builds: \n $list"
+echo -e "\n List of production builds: \n$list"
 
 # cscs ARCH setup
 module load daint-$ARCH
