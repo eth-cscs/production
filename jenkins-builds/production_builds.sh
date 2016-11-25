@@ -4,20 +4,22 @@
 if [ -z "$1" ]; then
  echo -e "\n Error! Please insert production file on command line! \n"
  exit 1
+else
+ filename=$(basename $1)
 fi
 
-# defines OS VERSION and ARCH according to the selected production file
-OS=${1%-[0-9]*.[0-9]*-[a-z]*}
-ARCH=${1#$CLE-[0-9]*.[0-9]*-}
+# defines OS VERSION and ARCH parsing the selected production filename
+OS=${filename%-[0-9]*.[0-9]*-[a-z]*}
+ARCH=${filename#$OS-[0-9]*.[0-9]*-}
 echo -e "\n Production file is $1: \n - OS VERSION is $OS \n - ARCH is $ARCH"
 
 # list of builds
 list=$(cat $1 | grep -v ^#)
-echo -e "\n List of production builds: \n $list"
+echo -e "\n List of production builds: \n$list"
 
 # cscs ARCH setup
-module load cscs-$ARCH
-echo -e "\n Loading modules: \n - module load cscs-$ARCH"
+module load daint-$ARCH
+echo -e "\n Loading modules: \n - module load daint-$ARCH"
 
 # EasyBuild setup
 echo -e "\n EasyBuild setup: \n source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD"
