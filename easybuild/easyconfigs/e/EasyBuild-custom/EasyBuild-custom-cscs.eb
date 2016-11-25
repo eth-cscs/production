@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
-name = 'EasyBuild-cscs'
-version = 'default'
+name = 'EasyBuild-custom'
+version = 'cscs'
 
 homepage = 'https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild'
 description = """Production EasyBuild @ CSCS """
