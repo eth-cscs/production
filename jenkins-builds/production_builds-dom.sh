@@ -10,7 +10,7 @@ fi
 
 # defines OS VERSION and ARCH parsing the selected production filename
 OS=${filename%-[0-9]*.[0-9]*-[a-z]*}
-ARCH=${filename#$CLE-[0-9]*.[0-9]*-}
+ARCH=${filename#$OS-[0-9]*.[0-9]*-}
 echo -e "\n Production file is $1: \n - OS VERSION is $OS \n - ARCH is $ARCH"
 
 # list of builds
