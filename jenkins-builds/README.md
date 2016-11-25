@@ -10,21 +10,21 @@
 
 ## Link to EB file lists 
 * Piz Daint
-  * [6.0.UP02-2016.11-gpu] (https:///production/blob/master/6.0.UP01-2016.11-gpu): CUDA/haswell software stack
-  * [6.0.UP02-2016.11-mc] (https:///production/blob/master/6.0.UP01-2016.11-mc): Multicore/broadwell software stack
+  * [6.0.UP02-2016.11-gpu] (https://github.com/eth-cscs/production/blob/master/jenkins-builds/6.0.UP02-2016.11-gpu): CUDA/haswell software stack
+  * [6.0.UP02-2016.11-mc] (https://github.com/eth-cscs/production/blob/master/jenkins-builds/6.0.UP02-2016.11-mc): Multicore/broadwell software stack
 * Mönch
-  * [monch-RH6.7-15.12](https:///production/blob/master/monch-RH6.7-15.12)
+  * [monch-RH6.7-15.12](https://github.com/eth-cscs/production/blob/master/jenkins-builds/monch-RH6.7-15.12)
 * Piz Escha/Kesch
-  * [MCH-RH6.7-15.11](https:///scs/production/blob/master/MCH-RH6.7-15.11)
+  * [MCH-RH6.7-15.11](https://github.com/eth-cscs/production/blob/master/jenkins-builds/MCH-RH6.7-15.11)
 * Brisi
-  * [6.0.UP01-2016.06] (https:///production/blob/master/6.0.UP01-2016.06-brisi)
+  * [6.0.UP01-2016.06] (https://github.com/eth-cscs/production/blob/master/jenkins-builds/6.0.UP01-2016.06-brisi)
 * Generic RH6.7 builds (Kesch)
-  * [common-SLES12-2016.10](https:///scs/production/blob/master/common-RH6.7-2016.10)
+  * [common-RH6.7-2016.10](https://github.com/eth-cscs/production/blob/master/jenkins-builds/common-RH6.7-2016.10)
   * builds based on RH6.7 system gcc ( Kesch / module purge)
     * Usable on kesch  
       * ```module use /apps/common/UES/jenkins/RH6.7/easybuild/modules/all```
 * Generic SLES12 builds (Daint, santis, brisi, dom)
-  * [common-SLES12-2016.10](https:///scs/production/blob/master/common-SLES12-2016.10)
+  * [common-SLES12-2016.10](https://github.com/eth-cscs/production/blob/master/jenkins-builds/common-SLES12-2016.10)
     * Generic builds based on SLES12 system gcc ( = gcc/4.8.5 brisi101, unset EASYBUILD_OPTARCH)
     *  Usable on santis, brisi, dom, daint
       * ```module use /apps/common/UES/jenkins/SLES12/easybuild/modules/all```
