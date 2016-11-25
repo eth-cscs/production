@@ -1,21 +1,14 @@
-#%Module
-proc ModulesHelp { } {
-    puts stderr { EasyBuild is a software build and installation framework
-written in Python that allows you to install software in a structured,
-repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/
-    }
-}
+easyblock = 'Bundle'
 
-module-whatis {Description: EasyBuild is a software build and installation framework
-written in Python that allows you to install software in a structured,
-repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/}
+name = 'EasyBuild-cscs'
+version = 'default'
 
+homepage = 'https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild'
+description = """Production EasyBuild @ CSCS """
 
-#
-# Conflicts
-#
-conflict EasyBuild-cscs
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
+modtclfooter = """
 ###############################
 # SYSTEM INDEPENDENT SETTINGS #
 ###############################
@@ -107,3 +100,8 @@ prepend-path MODULEPATH                     $::env(EB_CUSTOM_PREFIX)/modules/all
 
 # Loading easybuild module
 module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
+"""
+
+moduleclass = 'devel'
+
+
