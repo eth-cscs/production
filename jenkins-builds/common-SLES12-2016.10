@@ -15,7 +15,6 @@ HDFView-2.13.0.eb
 ctags-5.8.eb
 lynx-2.8.8rel.2.eb
 tmux-2.3.eb
-# --- scorep
 zlib-1.2.8-scorep.eb
 libiberty-5.3.0-scorep.eb
 libunwind-1.1-scorep.eb
@@ -23,4 +22,3 @@ OPARI2-2.0.eb
 PDT-3.22.eb
 SIONlib-1.7.1.eb
 Qt-5.7.0-debug.eb
-# --- scorep
