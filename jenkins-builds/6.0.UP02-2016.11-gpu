@@ -8,35 +8,24 @@
  EasyBuild-custom-cscs.eb 
  GROMACS-5.1.4-CrayGNU-2016.11-cuda-8.0.eb
  GSL-2.1-CrayGNU-2016.11.eb
- LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.eb
- NAMD-2.11-CrayIntel-2016.11-cuda-8.0.eb
- NCL-6.3.0.eb
- NCO-4.6.0-CrayGNU-2016.11.eb
- QuantumESPRESSO-5.4.0-CrayIntel-2016.11-cuda-8.0.eb
- R-3.3.1-CrayGNU-2016.11.eb
- VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-parallel.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-parallel.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-serial.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-serial.eb
+ LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.eb
  magma-2.0.0-CrayGNU-2016.11-cuda-8.0.eb
+ NAMD-2.11-CrayIntel-2016.11-cuda-8.0.eb
+ NCL-6.3.0.eb
+ NCO-4.6.0-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
  netcdf-python-1.2.4-CrayGNU-2016.11-Python-2.7.12.eb
  netcdf-python-1.2.4-CrayGNU-2016.11-Python-3.5.2.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.eb
-zlib-1.2.8-scorep.eb
-libiberty-5.3.0-scorep.eb
-libunwind-1.1-scorep.eb
-OPARI2-2.0.1.eb
-PDT-3.23.eb
-SIONlib-1.7.1.eb
-Qt-5.7.0-debug.eb
-Cube-4.3.4-CrayCCE-2016.11.eb
-Cube-4.3.4-CrayGNU-2016.11.eb
-Cube-4.3.4-CrayIntel-2016.11.eb
-Cube-4.3.4-CrayPGI-2016.11.eb
-Score-P-3.0-CrayCCE-2016.11.eb
-Score-P-3.0-CrayGNU-2016.11.eb
-Score-P-3.0-CrayIntel-2016.11.eb
-Score-P-3.0-CrayPGI-2016.11.eb
+ QuantumESPRESSO-5.4.0-CrayIntel-2016.11-cuda-8.0.eb
+ R-3.3.1-CrayGNU-2016.11.eb
+ Score-P-3.0-CrayCCE-2016.11.eb
+ Score-P-3.0-CrayGNU-2016.11.eb
+ Score-P-3.0-CrayIntel-2016.11.eb
+ Score-P-3.0-CrayPGI-2016.11.eb
+ VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.eb
