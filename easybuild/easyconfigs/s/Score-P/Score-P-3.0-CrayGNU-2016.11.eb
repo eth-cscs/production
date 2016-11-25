@@ -12,28 +12,29 @@
 easyblock = 'EB_Score_minus_P'
 
 name = 'Score-P'
-version = '3.0-rc1'
+version = '3.0'
+# versionsuffix = '-debug'
 
 homepage = 'http://www.score-p.org'
 description = """The Score-P measurement infrastructure is a highly scalable and
  easy-to-use tool suite for profiling, event tracing, and online analysis of HPC
  applications."""
 
-toolchain = {'name': 'CrayCCE', 'version': '2016.06'}
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
 source_urls = ['http://www.vi-hps.org/upload/packages/scorep/']
 sources = ['scorep-%(version)s.tar.gz']
-checksums = [ '097f26b7d23609e1c2666384c0683485' ]
+checksums = [ '44da8beaa3f71436a5f6fe51938aab2f' ]
 
 dependencies = [
     ('libiberty', '5.3.0-scorep', '', True),
     ('libunwind', '1.1-scorep', '', True),
-    ('Cube', '4.3.4-debug', '', True),
-    ('OPARI2', '2.0', '', True),
+    ('Cube', '4.3.4'),
+    ('OPARI2', '2.0.1', '', True),
 #PR3501    ('OTF2', '2.0', '', True),
-    ('SIONlib', '1.6.2-tools', '', True),
-    ('PDT', '3.22', '', True),
-    ('papi/5.4.3.2', EXTERNAL_MODULE),
+    ('SIONlib', '1.7.1', '', True),
+    ('PDT', '3.23', '', True),
+    ('papi/5.5.0.1', EXTERNAL_MODULE),
     ('vampir/9.1', EXTERNAL_MODULE),
 ]
 
@@ -45,7 +46,7 @@ configopts += ' --with-librca-lib=/opt/cray/rca/default/lib64'
 
 sanity_check_paths = {
     'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
-              ("lib/backend/libscorep_adapter_mpi_event.a",
+             ("lib/backend/libscorep_adapter_mpi_event.a",
               "lib/libscorep_adapter_mpi_event.%s" % SHLIB_EXT) ],
     'dirs': [],
 }
