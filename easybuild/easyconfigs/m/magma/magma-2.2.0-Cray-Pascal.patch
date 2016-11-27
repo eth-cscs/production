@@ -1,6 +1,6 @@
 diff -Nru magma-2.2.0.orig/Makefile magma-2.2.0/Makefile
 --- magma-2.2.0.orig/Makefile	2016-11-21 02:21:13.000000000 +0100
-+++ magma-2.2.0/Makefile	2016-11-27 13:49:44.860337537 +0100
++++ magma-2.2.0/Makefile	2016-11-27 20:15:38.323164287 +0100
 @@ -4,7 +4,7 @@
  # Users should make all changes in make.inc
  # It should not be necesary to change anything in here.
@@ -10,9 +10,18 @@ diff -Nru magma-2.2.0.orig/Makefile magma-2.2.0/Makefile
  
  # defaults if nothing else is given in make.inc
  CC         ?= cc
+@@ -79,7 +79,7 @@
+     GPU_TARGET += sm50 sm52
+ endif
+ ifneq ($(findstring Pascal, $(GPU_TARGET)),)
+-    GPU_TARGET += sm60 sm61
++    GPU_TARGET += sm60
+ endif
+ 
+ # Next, add compile options for specific smXX
 diff -Nru magma-2.2.0.orig/make.inc-examples/make.inc.openblas magma-2.2.0/make.inc-examples/make.inc.openblas
 --- magma-2.2.0.orig/make.inc-examples/make.inc.openblas	2016-11-21 02:20:04.000000000 +0100
-+++ magma-2.2.0/make.inc-examples/make.inc.openblas	2016-11-27 13:50:00.952444931 +0100
++++ magma-2.2.0/make.inc-examples/make.inc.openblas	2016-11-27 20:11:35.849534285 +0100
 @@ -15,15 +15,15 @@
  # Note that NVIDIA no longer supports 1.x cards, as of CUDA 6.5.
  # See http://developer.nvidia.com/cuda-gpus
