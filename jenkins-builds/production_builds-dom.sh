@@ -48,8 +48,8 @@ EOF
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
  if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
   echo -e "\n Changing permissions (umask 750) for ${name} folders:\n - ${EASYBUILD_PREFIX}/modules/all/${name} \n - ${EASYBUILD_PREFIX}/software/${name}"
-  chmod 750 -R ${EASYBUILD_PREFIX}/modules/all/${name}/* ${EASYBUILD_PREFIX}/software/${name}/*
   chgrp ${name,,} -R ${EASYBUILD_PREFIX}/modules/all/${name} ${EASYBUILD_PREFIX}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_PREFIX}/modules/all/${name}/* ${EASYBUILD_PREFIX}/software/${name}/*
  fi
 done 
 
