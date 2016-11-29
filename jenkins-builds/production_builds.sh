@@ -47,7 +47,7 @@ if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
  puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
 }
 EOF
-  echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
   eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
   echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
@@ -55,7 +55,7 @@ EOF
   chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
 # standard build without need to add a module footer or adjusting ownership and permissions
  else 
-  echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
   eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
  fi
 
