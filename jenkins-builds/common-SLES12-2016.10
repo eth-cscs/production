@@ -1,5 +1,5 @@
-Python-2.7.12.eb
-Python-3.5.2.eb
+
+PyRegression-dev.eb
 Vim-8.0.eb
 git-2.10.1.eb
 nano-2.7.0.eb
