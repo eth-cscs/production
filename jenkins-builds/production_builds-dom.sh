@@ -27,6 +27,7 @@ source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD
 
 # start time
 echo -e "\n Builds started on $(date)"
+starttime=$(date +%s)
 
 # loop over list 
 for build in $list; do
@@ -51,9 +52,16 @@ EOF
   chgrp ${name,,} -R ${EASYBUILD_PREFIX}/software/${name}
   chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
   echo -e "\n Appending warning to ${name} modulefile for users not belonging to ${name,,} group:\n - ${EASYBUILD_PREFIX}/modules/all/${name}/${version}"
-  echo -e "if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {\n puts stderr \"Access to ${name} executables and library files is only allowed to users with a valid ${name} license\"\n}" >> ${EASYBUILD_PREFIX}/modules/all/${name}/${version}
+  echo -e "if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {\n puts stderr \"WARNING: Only users with a valid ${name} license are allowed to access ${name} executables and library files\"\n}" >> ${EASYBUILD_PREFIX}/modules/all/${name}/${version}
  fi
 done 
 
 # end time
-echo -e "\n Builds ended on $(date)"
+endtime=$(date +%s)
+# time difference
+difftime=$(($endtime-$starttime))
+# convert seconds
+ ((h=${difftime}/3600))
+ ((m=(${difftime}%3600)/60))
+ ((s=${difftime}%60))
+echo -e "\n Builds ended on $(date): elapsed time is $difftime s (${h}h ${m}m ${s}s) \n"
