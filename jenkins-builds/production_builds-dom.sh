@@ -47,9 +47,11 @@ set ModulesVersion "${version}"
 EOF
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
  if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
-  echo -e "\n Changing permissions (umask 750) for ${name} folders:\n - ${EASYBUILD_PREFIX}/modules/all/${name} \n - ${EASYBUILD_PREFIX}/software/${name}"
-  chgrp ${name,,} -R ${EASYBUILD_PREFIX}/modules/all/${name} ${EASYBUILD_PREFIX}/software/${name}
-  chmod -R o-rwx ${EASYBUILD_PREFIX}/modules/all/${name}/* ${EASYBUILD_PREFIX}/software/${name}/*
+  echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
+  chgrp ${name,,} -R ${EASYBUILD_PREFIX}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
+  echo -e "\n Appending warning to ${name} modulefile for users not belonging to ${name,,} group:\n - ${EASYBUILD_PREFIX}/modules/all/${name}/${version}"
+  echo -e "if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {\n puts stderr \"Access to ${name} executables and library files is only allowed to users with a valid ${name} license\"\n}" >> ${EASYBUILD_PREFIX}/modules/all/${name}/${version}
  fi
 done 
 
