@@ -49,7 +49,8 @@ for build in $list; do
   echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
   cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
- puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"}
+ puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
+}
 EOF
   echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
   eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
