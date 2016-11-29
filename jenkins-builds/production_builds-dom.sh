@@ -31,37 +31,49 @@ starttime=$(date +%s)
 
 # loop over list 
 for build in $list; do
-# build
- fullpath=$(eb --search $build | grep -v = | awk '{print $2}');
- sed "s/44_GA_2.2.7_g4a6c213-2.1/34_2.2.5_g8ce7a9a-2.1/" $fullpath > ./$build
- echo -e "\n eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h \n"
- eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
- rm -f ./$build
 # define name and version of the current build
  version=$(basename ${build#[aA-z-Z]*-} .eb)
  name=${build%-${version}.eb}
+ echo -e "\n==============================================================="
+# build
+### START workaround for Dom
+ fullpath=$(eb --search $build | grep -v = | awk '{print $2}');
+ sed "s/44_GA_2.2.7_g4a6c213-2.1/34_2.2.5_g8ce7a9a-2.1/" $fullpath > ./$build
+### END workaround for Dom
+# use module footer and adjust ownership and permissions for selected builds
+ if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
+  echo -e "\n Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
+  cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
+if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
+ puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"}
+EOF
+  echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+  eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
+# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
+  echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
+  chgrp ${name,,} -R ${EASYBUILD_PREFIX}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
+ else 
+  echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+  eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
+ fi
 # create default
  echo -e "\n Creating file ${EASYBUILD_PREFIX}/modules/all/${name}/.version to set ${version} as default for ${name}"
  cat > ${EASYBUILD_PREFIX}/modules/all/${name}/.version<<EOF 
 #%Module
 set ModulesVersion "${version}"
 EOF
-# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
- if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
-  echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-  chgrp ${name,,} -R ${EASYBUILD_PREFIX}/software/${name}
-  chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
-  echo -e "\n Appending warning to ${name} modulefile for users not belonging to ${name,,} group:\n - ${EASYBUILD_PREFIX}/modules/all/${name}/${version}"
-  echo -e "if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {\n puts stderr \"WARNING: Only users with a valid ${name} license are allowed to access ${name} executables and library files\"\n}" >> ${EASYBUILD_PREFIX}/modules/all/${name}/${version}
- fi
+### START workaround for Dom
+ rm -f ./$build
+### END workaround for Dom
 done 
 
 # end time
 endtime=$(date +%s)
 # time difference
 difftime=$(($endtime-$starttime))
-# convert seconds
+# convert seconds to hours minutes seconds format
  ((h=${difftime}/3600))
  ((m=(${difftime}%3600)/60))
  ((s=${difftime}%60))
-echo -e "\n Builds ended on $(date): elapsed time is $difftime s (${h}h ${m}m ${s}s) \n"
+echo -e "\n Builds ended on $(date) (elapsed time is $difftime s : ${h}h ${m}m ${s}s) \n"
