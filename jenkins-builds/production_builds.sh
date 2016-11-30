@@ -25,7 +25,7 @@ echo -e "\n Loading modules: \n - module load daint-$ARCH"
 export EB_CUSTOM_PREFIX=$APPS/UES/jenkins/$OS/$ARCH
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 module use $PWD/easybuild/module
-module load EasyBuild
+module load Easybuild
 echo -e "\n Easybuild setup:"
 echo -e " - EB_CUSTOM_PREFIX=$EB_CUSTOM_PREFIX"
 echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
