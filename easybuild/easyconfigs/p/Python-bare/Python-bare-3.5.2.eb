@@ -13,7 +13,7 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 toolchainopts = {'pic': True, 'opt': True}
 
 source_urls = ['http://www.python.org/ftp/python/%(version)s/']
-sources = ['Python-%(version)s.tar.gz']
+sources = ['Python-%(version)s.tgz']
 
 # python needs bzip2 to build the bz2 package
 dependencies = [
