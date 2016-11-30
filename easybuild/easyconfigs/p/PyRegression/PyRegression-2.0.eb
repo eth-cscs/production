@@ -1,0 +1,25 @@
+# @author: gppezzi
+
+easyblock = "Tarball"
+
+name = 'PyRegression'
+version = '2.0'
+
+homepage = 'https://madra.cscs.ch/scs/PyRegression/'
+description = "Awesome regression suite for CSCS systems."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+sources = [ ('archive.tar.gz?ref=v2.0', "tar xfz %s" )]
+source_urls = ['https://madra.cscs.ch/scs/PyRegression/repository/']
+
+dependencies = [('Python-bare', '3.5.2')]
+
+modextrapaths = {'PATH': ['']}
+
+sanity_check_paths={
+    'files': ['run_regression.py', ],
+    'dirs': ['checks', 'unittests'],
+}
+
+moduleclass = 'devel'
