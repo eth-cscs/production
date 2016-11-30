@@ -1,6 +1,8 @@
 # @author: gppezzi 
 # This version should be used only for replacing the system python, not for building scientific apps
 
+easyblock = 'EB_Python'
+
 name = 'Python-bare'
 version = "3.5.2"
 
