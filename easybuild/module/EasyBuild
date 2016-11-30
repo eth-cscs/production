@@ -41,7 +41,7 @@ setenv EASYBUILD_ROBOT_PATHS                $::env(EB_CUSTOM_REPOSITORY)/easycon
 setenv EASYBUILD_INCLUDE_EASYBLOCKS         $::env(EB_CUSTOM_REPOSITORY)/easyblocks/*.py
 
 # Specific cray configurations
-if { [info exists ::env(CRAYPE_VERSION) ] } {
+if { [info exists ::env(CRAY_CPU_TARGET) ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD 0
