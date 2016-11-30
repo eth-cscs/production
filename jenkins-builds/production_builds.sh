@@ -22,8 +22,18 @@ module load daint-$ARCH
 echo -e "\n Loading modules: \n - module load daint-$ARCH"
 
 # EasyBuild setup
-echo -e "\n EasyBuild setup: \n source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD"
-source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD
+export EB_CUSTOM_PREFIX=$APPS/UES/jenkins/$OS/$ARCH
+export EB_CUSTOM_REPOSITORY=$PWD/easybuild
+module use easybuild/module
+module load EasyBuild
+echo -e "\n Easybuild setup:"
+echo -e " - EB_CUSTOM_PREFIX=$EB_CUSTOM_PREFIX"
+echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
+echo -e " - module load EasyBuild-custom/cscs"
+
+echo -e "\n Easybuild configuration:"
+echo -e " - eb --show-config"
+eb --show-config
 
 # start time
 echo -e "\n Builds started on $(date)"

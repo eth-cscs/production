@@ -75,17 +75,23 @@ set host_machine [regsub -all {[-]$} $host_machine ""]
 # EASYBUILD_PREFIX    
 # EASYBUILD_BUILDPATH 
 # EASYBUILD_TMPDIR    
-# EASYBUILD_TMP_LOGDIR
 # EASYBUILD_INSTALLPATH
 #
 if { ! [info exists ::env(EB_CUSTOM_PREFIX) ] } {
-    setenv EB_CUSTOM_PREFIX $::env(HOME)/easybuild/$host_machine
+    setenv EB_CUSTOM_PREFIX $::env(HOME)/easybuild/$host_machine/$::env(CRAY_CPU_TARGET)
+    setenv EASYBUILD_INSTALLPATH       $::env(EB_CUSTOM_PREFIX)
+} else {
+    setenv EASYBUILD_INSTALLPATH       $::env(EB_CUSTOM_PREFIX)/easybuild
 }
 setenv EASYBUILD_PREFIX            $::env(EB_CUSTOM_PREFIX)
-setenv EASYBUILD_BUILDPATH         $::env(EB_CUSTOM_PREFIX)/build
-setenv EASYBUILD_TMPDIR            $::env(EB_CUSTOM_PREFIX)/tmp
-setenv EASYBUILD_TMP_LOGDIR        $::env(EB_CUSTOM_PREFIX)/log
-setenv EASYBUILD_INSTALLPATH       $::env(EB_CUSTOM_PREFIX)
+
+#
+# These variables are set to /dev/shm/$USER/easbuild/stage
+#
+# EASYBUILD_BUILDPATH 
+# EASYBUILD_TMPDIR    
+setenv EASYBUILD_TMPDIR            /dev/shm/$::env(USER)/easybuild/stage/tmp
+setenv EASYBUILD_BUILDPATH         /dev/shm/$::env(USER)/easybuild/stage/build
 
 ###############
 # FINAL TOUCH #
@@ -103,7 +109,7 @@ if { [file writable "/apps/common/easybuild/sources" ] } {
 }
 
 # Adding easybuild installed softwares to the list of modules
-prepend-path MODULEPATH                     $::env(EB_CUSTOM_PREFIX)/modules/all
+prepend-path MODULEPATH                     $::env(EASYBUILD_INSTALLPATH)/modules/all
 
 # Loading easybuild module
 module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
