@@ -28,14 +28,13 @@ checksums = [ 'a83ced912b9d2330004cb6b9cefa7585' ]
 
 dependencies = [
     ('libunwind',   '1.1-scorep', '', True),
-    ('Cube',        '4.3.4'),
+    ('Cube',        '4.3.4', '', True), # Qt/4.8.6 (sles12)
     ('OPARI2',      '2.0.1', '', True),
     ('OTF2',        '2.0', '', True),
     ('SIONlib',     '1.7.1', '', True),
     ('PDT',         '3.23', '', True),
     ('papi/5.5.0.1', EXTERNAL_MODULE),
     ('vampir/9.1',   EXTERNAL_MODULE),
-# eb --optarch=broadwell ./Scalasca-2.3.1-CrayGNU-2016.11.eb 
 ]
 
 configopts  = ' --with-machine-name=pizdaint'
@@ -43,9 +42,6 @@ configopts += ' --with-otf2=$EBROOTOTF2/bin'
 configopts += ' --with-opari2=$EBROOTOPARI2/bin'
 configopts += ' --with-cube=$EBROOTCUBE/bin' 
 configopts += ' --disable-gui'
-# configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
-# configopts += ' --with-papi=$EBROOTPAPI'
-
 
 sanity_check_paths = {
     'files': ["bin/scalasca", "lib/backend/libpearl.replay.a"],
@@ -54,5 +50,6 @@ sanity_check_paths = {
 
 # Ensure that local metric documentation is found by Cube GUI
 modextrapaths = {'CUBE_DOCPATH': 'share/doc/scalasca/patterns'}
+modextrapaths = {'PATH': 'bin/backend'}
 
 moduleclass = 'perf'

@@ -9,11 +9,12 @@
 # This work is based on experiences from the UNITE project
 # http://apps.fz-juelich.de/unite/
 ##
-
-easyblock = 'EB_Score_minus_P'
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
 
 name = 'Cube'
 version = '4.3.4'
+# versionsuffix = '-debug'
 
 homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
 description = """Cube, which is used as performance report explorer for Scalasca and
@@ -23,22 +24,21 @@ description = """Cube, which is used as performance report explorer for Scalasca
  can be collapsed or expanded to achieve the desired level of granularity."""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
+# !--- mandatory if dummy toolchain:  module load Qt/5.7.0-debug
 
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
+checksums = [ '50f73060f55311cb12c5b3cb354d59fa' ]
+modextrapaths = { 'LD_LIBRARY_PATH': '../../../../../../../../../../../../../../../../../../usr/lib64' } # prevents conflict with DDT's Qt
+#qt5: patches = [ 'Cube-4.3.4-qt57.patch', 'Cube-4.3.4-qt57isystem.patch' ]
+#qt5: dependencies = [ ('Qt', '5.7.0-debug', '', True), ]
 
-checksums = [
-    '50f73060f55311cb12c5b3cb354d59fa',     # cube-4.3.4.tar.gz
-]
-
-# builddependencies = [ ('Qt', '4.8.6'), ]
-dependencies = [ ('Qt', '4.8.6'), ]
-preconfigopts = 'export PATH=$EBROOTQT/bin:$PATH && '
-# configopts = ' QT_PATH=$EBROOTQT/bin' # '--build=x86_64-pc-linux-gnu' # ' --with-gui --with-qt'
+# configopts  = " FC_FOR_BUILD=gfortran-4.8 F77_FOR_BUILD=gfortran-4.8 CC_FOR_BUILD=gcc CXX_FOR_BUILD=g++"
+# configopts += " FC=gfortran-4.8 F77=gfortran-4.8 CC=gcc CXX=g++"
 
 sanity_check_paths = {
-    'files': ["bin/cube", ("lib/libcube4.a", "lib64/libcube4.a"),
-              ("lib/libcube4.%s" % SHLIB_EXT, "lib64/libcube4.%s" % SHLIB_EXT)],
+    'files': ["bin/cube", ("lib/libcube4.a", "lib64/libcube4.a"), 
+                          ("lib/libcube4.so", "lib64/libcube4.so")],
     'dirs': ["include/cube", "include/cubew"],
 }
 
