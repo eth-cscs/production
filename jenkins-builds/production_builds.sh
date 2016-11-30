@@ -61,8 +61,8 @@ EOF
   eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
   echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-  chgrp ${name,,} -R ${EASYBUILD_PREFIX}/software/${name}
-  chmod -R o-rwx ${EASYBUILD_PREFIX}/software/${name}/*
+  chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 # standard build without need to add a module footer or adjusting ownership and permissions
  else 
   echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
@@ -70,8 +70,8 @@ EOF
  fi
 
 # create default
- echo -e "\n Creating file ${EASYBUILD_PREFIX}/modules/all/${name}/.version to set ${version} as default for ${name}"
- cat > ${EASYBUILD_PREFIX}/modules/all/${name}/.version<<EOF 
+ echo -e "\n Creating file ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version to set ${version} as default for ${name}"
+ cat > ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version<<EOF 
 #%Module
 set ModulesVersion "${version}"
 EOF
