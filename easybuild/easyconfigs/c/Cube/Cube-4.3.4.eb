@@ -27,13 +27,10 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
 
-checksums = [
-    '50f73060f55311cb12c5b3cb354d59fa',     # cube-4.3.4.tar.gz
-]
-
+checksums = [ '50f73060f55311cb12c5b3cb354d59fa', ]    # cube-4.3.4.tar.gz
 # builddependencies = [ ('Qt', '4.8.6'), ]
-dependencies = [ ('Qt', '4.8.6'), ]
-preconfigopts = 'export PATH=$EBROOTQT/bin:$PATH && '
+# dependencies = [ ('Qt', '4.8.6'), ]
+# preconfigopts = 'export PATH=$EBROOTQT/bin:$PATH && '
 # configopts = ' QT_PATH=$EBROOTQT/bin' # '--build=x86_64-pc-linux-gnu' # ' --with-gui --with-qt'
 
 sanity_check_paths = {
