@@ -12,7 +12,7 @@ description = "Python is a programming language that lets you work more quickly 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 toolchainopts = {'pic': True, 'opt': True}
 
-source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
+source_urls = ['http://www.python.org/ftp/python/%(version)s/']
 sources = ['Python-%(version)s.tar.gz']
 
 # python needs bzip2 to build the bz2 package
