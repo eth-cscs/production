@@ -48,6 +48,7 @@ for build in $list; do
 
  echo -e "\n===============================================================\n"
 # build
+eb -f EasyBuild-custom-cscs.eb
 
 # use module footer and adjust ownership and permissions for selected builds
  if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then

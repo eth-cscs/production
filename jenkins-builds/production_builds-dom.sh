@@ -48,6 +48,7 @@ for build in $list; do
 
  echo -e "\n===============================================================\n"
 # build
+eb -f EasyBuild-custom-cscs.eb
 
 ### START workaround for Dom
  fullpath=$(eb --search $build | grep -v = | awk '{print $2}');
