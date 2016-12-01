@@ -22,12 +22,12 @@ module load daint-$ARCH
 echo -e "\n Loading modules: \n - module load daint-$ARCH"
 
 # EasyBuild setup
-export EB_CUSTOM_PREFIX=$APPS/UES/jenkins/$OS/$ARCH
+export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 module use $PWD/easybuild/module
 module load Easybuild
 echo -e "\n Easybuild setup:"
-echo -e " - EB_CUSTOM_PREFIX=$EB_CUSTOM_PREFIX"
+echo -e " - EASYBUILD_PREFIX=$EASYBUILD_PREFIX"
 echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
 echo -e " - module load EasyBuild-custom/cscs"
 
@@ -39,7 +39,7 @@ eb --show-config
 echo -e "\n Builds started on $(date)"
 starttime=$(date +%s)
 
-# loop over list 
+# loop over list
 for build in $list; do
 
 # define name and version of the current build
@@ -69,21 +69,21 @@ EOF
   chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
   chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 # standard build without need to add a module footer or adjusting ownership and permissions
- else 
+ else
   echo -e "eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
   eb ./$build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
  fi
 
 # create default
  echo -e "\n Creating file ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version to set ${version} as default for ${name}"
- cat > ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version<<EOF 
+ cat > ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version<<EOF
 #%Module
 set ModulesVersion "${version}"
 EOF
 ### START workaround for Dom
  rm -f ./$build
 ### END workaround for Dom
-done 
+done
 
 # end time
 endtime=$(date +%s)
