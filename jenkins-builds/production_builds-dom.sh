@@ -39,6 +39,9 @@ eb --show-config
 echo -e "\n Builds started on $(date)"
 starttime=$(date +%s)
 
+# Installing the EasyBuild-custom/cscs module
+eb -f EasyBuild-custom-cscs.eb
+
 # loop over list
 for build in $list; do
 
@@ -48,7 +51,7 @@ for build in $list; do
 
  echo -e "\n===============================================================\n"
 # build
-eb -f EasyBuild-custom-cscs.eb
+
 
 ### START workaround for Dom
  fullpath=$(eb --search $build | grep -v = | awk '{print $2}');
