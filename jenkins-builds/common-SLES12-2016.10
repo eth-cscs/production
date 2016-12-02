@@ -14,4 +14,5 @@
  numactl-2.0.11.eb
  PyRegression-dev.eb
  tmux-2.3.eb
+ vampir-9.1.eb
  Vim-8.0.eb
