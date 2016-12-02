@@ -1,6 +1,7 @@
 var header='<h1>CSCS Production</h1>'
         + '<p>General repository for CSCS users</p>'
-        + '<p class="view"><a href="https://github.com/eth-cscs/production">View the Project on GitHub <small>eth-cscs/production</small></a></p>'
+        // + '<p class="view"><a href="https://eth-cscs.github.io/production">View the Project on GitHub.io <small>eth-cscs/production</small></a></p>'
+        + '<p class="view"><a href="https://github.com/eth-cscs/production">View the Project Source on GitHub <small>eth-cscs/production</small></a></p>'
         + '<ul>'
         + '  <li style="list-style:none"><strong>Usefull links</strong></li>'
         + '  <li><a href="https://github.com/eth-cscs/production/wiki">CSCS Production Wiki</a></li>'

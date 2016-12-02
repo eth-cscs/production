@@ -1,3 +1,6 @@
-# Access these web page in github.io format at
+# User Information for Production Systems
 
-[Github.io](https://eth-cscs.github.io/production)
+* [Python Installation](https://eth-cscs.github.io/production/python_installation)
+* [Python Installation with virtualenv](https://eth-cscs.github.io/production/python_modules_with_virtualenv)
+* [User Instructions for EasyBuild](https://eth-cscs.github.io/production/user_instructions_for_easybuild)
+* [Creating and Applying Patches with EasyBuild](https://eth-cscs.github.io/production/creating_and_applying_patches_with_easyBuild)
