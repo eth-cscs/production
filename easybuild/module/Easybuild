@@ -48,6 +48,9 @@ if { $status == 0 } {
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
 } else {
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesTcl
+    if { [ file readable "/usr/share/Modules/tcl" ] } {
+        prepend-path PATH                           /usr/share/Modules/tcl
+    }
 }
 
 #############################
