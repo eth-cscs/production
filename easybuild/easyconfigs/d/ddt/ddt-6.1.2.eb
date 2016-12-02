@@ -24,21 +24,6 @@ if { [ info exists env(XT_SYSTEM_NAME) ] } {
 set hostname "[string tolower $host]"
 set flags      ""
 
-# puts stderr $host
-# if { [info exists ::env(APPS)] } {
-#    set flags      ""
-# } else {
-#
-#    if  { $hostname == "dain" } {
-#            setenv APPS     "/apps/daint/5.2.UP02"
-#    }
-#    if  { $hostname == "monc" } {
-#            setenv  APPS     "/apps/monch"
-#            setenv  HOST     "monch"
-#    }
-#
-# }
-
 # ============================================================================
 # Configure some environment variables, the following are required :
 #       url / url2 / modulename / version / packageroot
@@ -52,20 +37,20 @@ set     url2                       "http://user.cscs.ch"
 set     modulename                 "ddt"
 # ============================================================================
 if  { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" ||$hostname=="cast" } {
-        set     os      "RHAT6"
-        set     version "6.1.2"
+          set     os      "RHAT6"
+          set     version "6.1.2"
 }
-
-if  { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" ||$hostname=="dora" ||$hostname=="dain" ||$hostname=="albi" ||$hostname=="lema" ||$hostname=="pila" } {
-        set     os      "SLES11"
-        set     version "6.1.2"
+  
+if  { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" ||$hostname=="albi" ||$hostname=="lema" ||$hostname=="pila" } {
+          set     os      "SLES11"
+          set     version "6.1.2"
 }
-
-if  { $hostname=="bris" ||$hostname=="sant" ||$hostname=="domg" ||$hostname=="dom1" ||$hostname=="nid0" } {
-        set     os      "SLES12"
-        set     version "6.1.2"
+  
+if  { $hostname=="bris" ||$hostname=="sant" ||$hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
+          set     os      "SLES12"
+          set     version "6.1.2"
 }
-
+  
 if { "$os"=="" } {
         puts stderr "L60: host=$host"
         set     os      "SLES12"
@@ -115,49 +100,17 @@ proc ModulesHelp {} {
 
         \tSee : $packageroot
         \t \033\[01;32m ${packageroot}/doc/ \033\[0m
-        \t \033\[01;32m https://hpcforge.org/plugins/mediawiki/wiki/codes/index.php/Main_Page : Getting the best out of multi-core \033\[0m
 
         \tLicensing : \033\[01;32m http://velan:4241/status.html\033\[0m
         \tUsage :
         \t module load $modulename will automatically set the PATH to the $modulename executable
         \t \033\[01;31mddt --connect\033\[0m srun ... &
 
-        \t \033\[01;32mMPI support\033\[0m
-        \t According to the latest RELEASE NOTES of DDT (2014-08-08):
-        \t MPICH/3.0.x do not work with the Allinea tools due to an MPICH defect,
-        \t MPICH/3.1 (i.e cray-mpich>=7.x) addresses this and is fully supported.
-
-        \t \033\[01;32mMemory debugging\033\[0m with DDT should work fine on all cscs systems, if that's not the case, please contact help@cscs.ch.
-        \t More details about memory debugging static executables :
-        \t svn co svn://scm.hpcforge.org/var/lib/gforge/chroot/scmrepos/svn/codes/trunk/2013/debug/memory
-
-        \t \033\[01;32mOPENACC debugging\033\[0m
-        \t Cray CCE <= 8.1.2 will fail to generate local variables in OpenACC accelerated regions. Please use CCE >= 8.1.3.
-
         \t \033\[01;32mCUDA debugging\033\[0m
         \t Non-MPI codes may need to add a dummy MPI_Init() call
-        \t Multiple contexts support through CUDA proxy : export CRAY_CUDA_MPS=0
+        \t Multiple contexts support through CUDA proxy : export CRAY_CUDA_MPS=0"
 
-        \t \033\[01;32mAttach to a running program\033\[0m
-        \t sbatch your job, then
-        \t scontrol show nodes | grep BatchHost=
-        \t start ddt and scan node(s) using the result above, then
-        \t attach to your executable
-
-        \t \033\[01;32mSpecial features\033\[0m
-        \t on eiger: ddt -noqueue ./myexe \# then choose SLURM as MPI implementation
-        \t mch: see /scratch/piccinal/14739/src/ljg.sh
-
-        \t on pilatus : salloc -N x ; module load ddt  ; module help ddt ; rm -fr ~/.ddt ; ddt -noqueue ./myexe
-        \t ==> choose SLURM as MPI
-        \t ==> memory debugging : export MV2_ON_DEMAND_THRESHOLD=#_of_processes
-        \t MVAPICH takes over memory allocation to handle on demand connections, once a threshold number of processes is reached.
-        \t However, DDT also takes over memory allocation when memory debugging is turned on : DDT's malloc overrules the malloc in the MVAPICH2 library.
-        \t This threshold default value is 64. If you set MV2_ON_DEMAND_THRESHOLD to the maximum job size you expect, DDT will work.
-        \t Downside of this is a longer job start time (ftp://www.cse.ohio-state.edu/pub/tech-report/2002/TR11.pdf paper)
-        \t and the memory usage will be increased."
-
-        #It is known that memory debugging can fail with the error message "A tree node closed prematurely. One or more proceses may be unusable.", especially with MPI_Bcast. A workaround is to disable 'store stack backtraces for memory allocations' option in the 'Enable Memory Debugging' setting. This problem will be fixed in the next release.
+       
   return 0
 }
 #}
