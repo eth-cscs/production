@@ -1,7 +1,17 @@
 var header='<h1>CSCS Production</h1>'
         + '<p>General repository for CSCS users</p>'
-        // + '<p class="view"><a href="https://eth-cscs.github.io/production">View the Project on GitHub.io <small>eth-cscs/production</small></a></p>'
         + '<p class="view"><a href="https://github.com/eth-cscs/production">View the Project Source on GitHub <small>eth-cscs/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production">Home<small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_installation">Python Installation<small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_modules_with_virtualenv">Python Installation with virtualenv<small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/user_instructions_for_easybuild">User Instructions for EasyBuild<small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/creating_and_applying_patches_with_easyBuild">Creating and Applying Patches with EasyBuild<small>eth-cscs.github.io/production</small></a></p>'
+// 
+// * [Python Installation]()
+// * []()
+// * []()
+// * []()
+// 
         + '<ul>'
         + '  <li style="list-style:none"><strong>Usefull links</strong></li>'
         + '  <li><a href="https://github.com/eth-cscs/production/wiki">CSCS Production Wiki</a></li>'

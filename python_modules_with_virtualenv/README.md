@@ -1,4 +1,4 @@
-### Setup Python
+# Setup Python
 
 For example, with Python 2.7
 
@@ -6,7 +6,7 @@ For example, with Python 2.7
 $ module load Python/2.7.12-CrayGNU-2016.11
 </pre>
 
-### Setup your virtual environment
+## Setup your virtual environment
 To create a virtual environment into which your modules will be installed,
 you should use the provided `virtualenv` tool:
 
