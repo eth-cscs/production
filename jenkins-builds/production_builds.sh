@@ -22,33 +22,70 @@ module load daint-$ARCH
 echo -e "\n Loading modules: \n - module load daint-$ARCH"
 
 # EasyBuild setup
-echo -e "\n EasyBuild setup: \n source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD"
-source $PWD/easybuild/setup.sh $APPS/UES/jenkins/$OS/$ARCH $PWD
+export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
+export EB_CUSTOM_REPOSITORY=$PWD/easybuild
+module use $PWD/easybuild/module
+module load Easybuild
+echo -e "\n Easybuild setup:"
+echo -e " - EASYBUILD_PREFIX=$EASYBUILD_PREFIX"
+echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
+echo -e " - module load EasyBuild-custom/cscs"
+
+echo -e "\n Easybuild configuration:"
+echo -e " - eb --show-config"
+eb --show-config
 
 # start time
 echo -e "\n Builds started on $(date)"
+starttime=$(date +%s)
 
-# loop over list 
+# Installing the EasyBuild-custom/cscs module
+eb -f EasyBuild-custom-cscs.eb
+
+# loop over list
 for build in $list; do
-# build
- echo -e "\n eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h \n"
- eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h 
+
 # define name and version of the current build
  version=$(basename ${build#[aA-z-Z]*-} .eb)
  name=${build%-${version}.eb}
+
+ echo -e "\n===============================================================\n"
+# build
+
+# use module footer and adjust ownership and permissions for selected builds
+ if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
+  echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
+  cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
+if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
+ puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
+}
+EOF
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+  eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
+# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
+  echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
+  chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
+# standard build without need to add a module footer or adjusting ownership and permissions
+ else
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+  eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
+ fi
+
 # create default
- echo -e "\n Creating file ${EASYBUILD_PREFIX}/modules/all/${name}/.version to set ${version} as default for ${name}"
- cat > ${EASYBUILD_PREFIX}/modules/all/${name}/.version<<EOF 
+ echo -e "\n Creating file ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version to set ${version} as default for ${name}"
+ cat > ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version<<EOF
 #%Module
 set ModulesVersion "${version}"
 EOF
-# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
- if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
-  echo -e "\n Changing permissions (umask 750) for ${name} folders:\n - ${EASYBUILD_PREFIX}/modules/all/${name} \n - ${EASYBUILD_PREFIX}/software/${name}"
-  chmod 750 ${EASYBUILD_PREFIX}/modules/all/${name} ${EASYBUILD_PREFIX}/software/${name}/*
-  chgrp ${name,,} ${EASYBUILD_PREFIX}/modules/all/${name} ${EASYBUILD_PREFIX}/software/${name}
- fi
-done 
+done
 
 # end time
-echo -e "\n Builds ended on $(date)"
+endtime=$(date +%s)
+# time difference
+difftime=$(($endtime-$starttime))
+# convert seconds to hours minutes seconds format
+ ((h=${difftime}/3600))
+ ((m=(${difftime}%3600)/60))
+ ((s=${difftime}%60))
+echo -e "\n Builds ended on $(date) (elapsed time is $difftime s : ${h}h ${m}m ${s}s) \n"

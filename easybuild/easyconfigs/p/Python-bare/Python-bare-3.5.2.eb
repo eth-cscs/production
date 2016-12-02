@@ -1,7 +1,9 @@
 # @author: gppezzi 
 # This version should be used only for replacing the system python, not for building scientific apps
 
-name = 'Python'
+easyblock = 'EB_Python'
+
+name = 'Python-bare'
 version = "3.5.2"
 
 homepage = 'http://python.org/'
@@ -10,8 +12,8 @@ description = "Python is a programming language that lets you work more quickly 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 toolchainopts = {'pic': True, 'opt': True}
 
-source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
-sources = [SOURCE_TGZ]
+source_urls = ['http://www.python.org/ftp/python/%(version)s/']
+sources = ['Python-%(version)s.tgz']
 
 # python needs bzip2 to build the bz2 package
 dependencies = [
