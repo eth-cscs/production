@@ -1,3 +1,3 @@
 # CSCS Production
 
-* [Production page on Github.io](https://eth-cscs.github.io/production/python_installation)
+* [Production page on Github.io](https://eth-cscs.github.io/production/)
