@@ -2,7 +2,6 @@ easyblock = 'ConfigureMake'
 
 name = "Lua"
 version = "5.1.4.8"
-# versionsuffix = '-xalt'
 checksums = ['c7f2818c309f052c190906576fd9dbdb']
 
 homepage = "http://www.lua.org/"
