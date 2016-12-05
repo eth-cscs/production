@@ -37,11 +37,11 @@ patches = ['relative_path/patch_file.patch']
 Run EasyBuild module installation
 
 <pre>
-$ eb < options > patch_easyconf.eb
+$ eb &ltoptions&gt patch_easyconf.eb
 </pre>
 
 If the patch is applied on an already installed module, the above command must be modified in order to force the installation of the patched module. In this case the command is 
 
 <pre>
-$ eb < options > patch_easyconf.eb -f
+$ eb &ltoptions&gt patch_easyconf.eb -f
 </pre>

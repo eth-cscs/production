@@ -1,17 +1,12 @@
 var header='<h1>CSCS Production</h1>'
         + '<p>General repository for CSCS users</p>'
-        + '<p class="view"><a href="https://github.com/eth-cscs/production">View the Project Source on GitHub <small>eth-cscs/production</small></a></p>'
-        + '<p class="view"><a href="https://eth-cscs.github.io/production">Home<small>eth-cscs.github.io/production</small></a></p>'
-        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_installation">Python Installation<small>eth-cscs.github.io/production</small></a></p>'
-        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_modules_with_virtualenv">Python Installation with virtualenv<small>eth-cscs.github.io/production</small></a></p>'
-        + '<p class="view"><a href="https://eth-cscs.github.io/production/user_instructions_for_easybuild">User Instructions for EasyBuild<small>eth-cscs.github.io/production</small></a></p>'
-        + '<p class="view"><a href="https://eth-cscs.github.io/production/creating_and_applying_patches_with_easyBuild">Creating and Applying Patches with EasyBuild<small>eth-cscs.github.io/production</small></a></p>'
-// 
-// * [Python Installation]()
-// * []()
-// * []()
-// * []()
-// 
+        + '<p class="view"><a href="https://github.com/eth-cscs/production">View the Repository on GitHub <small>eth-cscs/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production">Home <small>eth-cscs.github.io/production </small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_installation">Python Installation <small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/python_modules_with_virtualenv">Python Installation with virtualenv <small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/user_instructions_for_easybuild">User Instructions for EasyBuild <small>eth-cscs.github.io/production</small></a></p>'
+        + '<p class="view"><a href="https://eth-cscs.github.io/production/creating_and_applying_patches_with_easyBuild">Creating and Applying Patches with EasyBuild <small>eth-cscs.github.io/production</small></a></p>'
+//
         + '<ul>'
         + '  <li style="list-style:none"><strong>Usefull links</strong></li>'
         + '  <li><a href="https://github.com/eth-cscs/production/wiki">CSCS Production Wiki</a></li>'
@@ -20,7 +15,7 @@ var header='<h1>CSCS Production</h1>'
         + '  <li><a target=_blank" href="https://user.cscs.ch/getting_started/compute_budget/index.html">CSCS User Portal</a></li>'
         + '  <li><a target=_blank" href="http://www.cscs.ch/index.html">CSCS web site</a></li>'
         + '</ul>'
-        + '<p class="view" id="cscs-presenter-mode"><a href="#">View in presenter mode <small>refresh the browser to quit presenter mode</small></a></p>'
+        + '<p class="view" id="cscs-presenter-mode"><a href="#">View in Presentation mode <small>Press "Esc" or refresh page to exit slides mode</small></a></p>'
 
 var footer ='<p>Project maintained by <a href="https://github.com/eth-cscs">eth-cscs</a></p>'
         + '<p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>'
@@ -138,15 +133,17 @@ function showCSCSPresenterMode() {
     
     var slideshow = remark.create({sourceUrl: 'README.md'});
 
-    document.addEventListener("keydown", keyDownTextField, false);
-    function keyDownTextField(e) {
-    var keyCode = e.keyCode;
-      if(keyCode==27) {
+    document.addEventListener("keydown", keyDownEscapePresenterMode, false);
+    function keyDownEscapePresenterMode(e) {
+      var keyCode = e.keyCode;
+      if(keyCode == 27) {
         if ( $('html').hasClass('remark-container') ) {
             $('html').removeClass('remark-container');
             if ( $('body').hasClass('remark-container') ) {
                 $('body').removeClass('remark-container');
-                // $('body').addClass('cscs-body-container');
+            }
+            if ( $('body').hasClass('remark-presenter-mode') ) {
+                $('body').removeClass('remark-presenter-mode');
             }
             if ($(".remark-notes-area").length > 0) {
                 $(".remark-notes-area").remove();

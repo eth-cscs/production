@@ -2,37 +2,37 @@
 
 On CSCS systems, EasyBuild is available through the module `EasyBuild-custom`. This module defines the location of EasyBuild configuration files, recipes and installation directories. 
 
-```
+<pre>
 $ module load EasyBuild-custom
-```
+</pre>
 
 On Piz Daint, which is a heterogeneous system, you need to select which architecture should be targeted when building software. 
 
 For example: targeting **haswell** and accessing the **gpu** software stack 
 
-```
+<pre>
 $ module load daint-gpu EasyBuild-custom
-```
+</pre>
 
 or: for targeting **broadwell** and accessing the **mc** (multicore) software stack 
 
-```
+<pre>
 $ module load daint-mc EasyBuild-custom
-```
+</pre>
 
 ---
 
 On Piz Daint, the EasyBuild software and modules will be installed by default at 
 
-```
-$HOME/easybuild/<system-name>/<architecture>
-``` 
+<pre>
+$HOME/easybuild/&ltsystem-name&gt/&ltarchitecture&gt
+</pre>
 
 and for other systems
 
-```
-$HOME/easybuild/<system-name>
-``` 
+<pre>
+$HOME/easybuild/&ltsystem-name&gt
+</pre>
 
 where:
 `system-name` is the name of the cluster, e. g., `daint`, `leone`, `monch`. And `architecture` is either `haswell` or `broadwell`.
@@ -49,9 +49,9 @@ $ module load EasyBuild-custom
 ---
 
 ## Building a program
-```
+<pre>
 $ eb Program-xxxxxxx.eb -r
-```
+</pre>
 
 ## Using the new modules on a clean shell
 
@@ -78,5 +78,5 @@ $ module load ProgramModuleName/version
 
 ## Sharing modules with your group
 
-By default the `EASYBUILD_PREFIX` is set to a folder inside your $HOME. But the $HOME folder is not readable by other users. Therefore you need to allow read-only access 
-to others `$ chmod g+rx $HOME` or you need to change the `EASYBUILD_PREFIX` variable to point to a folder inside $SCRATCH and re-compile the software.
+By default the `EASYBUILD_PREFIX` is set to a folder inside your `$HOME`. But the `$HOME` folder is not readable by other users. Therefore you need to allow read-only access 
+to others `$ chmod g+rx $HOME` or you need to change the `EASYBUILD_PREFIX` variable to point to a folder inside `$SCRATCH` and re-compile the software.
