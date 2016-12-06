@@ -1,7 +1,7 @@
 easyblock = 'PythonPackage'
 
 name = 'PyFR'
-version = '200875a1'
+version = '1.5.0'
 versionsuffix = '-Python-%(pyver)s'
 
 homepage = 'http://http://www.pyfr.org'
@@ -10,18 +10,18 @@ description = """PyFR is an open-source Python based framework for solving advec
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
 source_urls = [PYPI_SOURCE]
-sources = [SOURCE_TAR_GZ]
+sources = [SOURCE_ZIP]
 
-dependencies = [('Python', '3.5.2')]
-
-( 'Python', '3.5.2' )
-( 'pycuda', '2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.34' )
-( 'h5py', '2.6.0-CrayGNU-2016.11-Python-3.5.2-serial' )
-( 'Mako', '1.0.4-CrayGNU-2016.11-Python-3.5.2' )
+dependencies = [
+    ( 'Python', '3.5.2' ),
+    ( 'pycuda', '2016.1.2', '-Python-3.5.2-cuda-8.0' ),
+    ( 'h5py', '2.6.0', '-Python-3.5.2-serial' ),
+    ( 'Mako', '1.0.4', '-Python-3.5.2' ),
+]
 
 sanity_check_paths = {
-    'files': ['bin/mako-render'],
-    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s.egg'],
+    'files': ['bin/pyfr'],
+    'dirs': ['lib'], 
 }
 
 moduleclass = 'devel'
