@@ -11,17 +11,21 @@ toolchainopts = {'dynamic': False}
 
 # source_urls = ['http://charm.cs.illinois.edu/distrib/']
 sources = ['charm-%(version)s.tar.gz']
-cmds_map = [('charm-%(version)s.tar.gz', './build charm++ gni-crayxc cuda hugepages smp --with-production -j12')]
+cmds_map = [('charm-%(version)s.tar.gz', './build ChaNGa gni-crayxc cuda hugepages --enable-lbuserdata --with-production -j12')]
 patches = [ 'Charm++-gerrit1886-CrayGNU-2016.11.patch' ]
 
 builddependencies = [('craype-hugepages2M', EXTERNAL_MODULE), ('craype-accel-nvidia60', EXTERNAL_MODULE)]
+dependencies = [
+('craype-accel-nvidia60', EXTERNAL_MODULE),
+('craype-hugepages2M', EXTERNAL_MODULE),
+]
 
 # files_to_copy = ['gni-crayxc-smp'] 
-files_to_copy = ['gni-crayxc-cuda-hugepages-smp'] 
+files_to_copy = ['gni-crayxc-cuda-hugepages'] 
 
 sanity_check_paths = {
-    'files': ['gni-crayxc-cuda-hugepages-smp/bin/charmc'],
-    'dirs': ['gni-crayxc-cuda-hugepages-smp/bin', 'gni-crayxc-cuda-hugepages-smp/lib', 'gni-crayxc-cuda-hugepages-smp/include'],
+    'files': ['gni-crayxc-cuda-hugepages/bin/charmc'],
+    'dirs': ['gni-crayxc-cuda-hugepages/bin', 'gni-crayxc-cuda-hugepages/lib', 'gni-crayxc-cuda-hugepages/include'],
 }
 
 moduleclass = 'chem'
