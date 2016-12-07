@@ -1,0 +1,19 @@
+diff -Naur old/src/util/CrayNid.c new/src/util/CrayNid.c
+--- old/src/util/CrayNid.c	2016-12-07 13:31:44.000000000 +0100
++++ new/src/util/CrayNid.c	2016-12-07 13:52:56.807355927 +0100
+@@ -26,11 +26,11 @@
+ int getXTNodeID(int mpirank, int nummpiranks) {
+   int nid = -1;
+ 
+-#if CMK_HAS_PMI_GET_NID	/* if it is a XT4/5 or XE */
++//cscs #if CMK_HAS_PMI_GET_NID	/* if it is a XT4/5 or XE */
+   PMI_Get_nid(mpirank, &nid);
+-#else
+-#error "Cannot get network topology information on a Cray build. Swap current module xt-mpt with xt-mpt/5.0.0 or higher and xt-asyncpe with xt-asyncpe/4.0 or higher and then rebuild"
+-#endif
++//cscs #else
++//cscs #error "Cannot get network topology information on a Cray build. Swap current module xt-mpt with xt-mpt/5.0.0 or higher and xt-asyncpe with xt-asyncpe/4.0 or higher and then rebuild"
++//cscs #endif
+ 
+   return nid;
+ }
