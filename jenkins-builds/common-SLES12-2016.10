@@ -13,6 +13,7 @@
  M4-1.4.17.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
+ PyRegression-2.0.eb
  PyRegression-dev.eb
  tmux-2.3.eb
  vampir-9.1.eb
