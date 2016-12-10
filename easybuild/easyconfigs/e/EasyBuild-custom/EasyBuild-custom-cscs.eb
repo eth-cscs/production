@@ -55,19 +55,15 @@ set host_machine [regsub -all {[0-9]} $::env(HOSTNAME) ""]
 # removing any possible '-' at the end of the $host_machine
 set host_machine [regsub -all {[-]$} $host_machine ""]
 
-# CRAY specific configurations
-if { [ info exists ::env(CRAYPE_VERSION) ] } {
-    if { [ info exists ::env(CRAY_CPU_TARGET) ] } {
-        setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
-    }
+# Specific cray configurations
+if { [ info exists ::env(CRAY_CPU_TARGET) ] } {
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
+    setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
 
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
 }
-
-# Map to system modules
-setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
 
 #
 # EASYBUILD_PREFIX
