@@ -20,6 +20,7 @@ echo -e "\n List of production builds: \n$list"
 # cscs ARCH setup
 module load daint-$ARCH
 echo -e "\n Loading modules: \n - module load daint-$ARCH"
+module rm xalt
 
 # EasyBuild setup
 export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
