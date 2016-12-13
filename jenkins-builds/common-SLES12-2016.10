@@ -2,7 +2,7 @@
  Automake-1.15.eb
  CMake-3.6.2.eb
  ctags-5.8.eb
- ddt-6.1.2.eb
+ ddt-6.1.2-1.eb
  git-2.10.1.eb
  HDFView-2.13.0.eb
  hwloc-1.11.4.eb
