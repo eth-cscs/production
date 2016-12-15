@@ -1,0 +1,17 @@
+easyblock = 'Bundle'
+
+name = 'VMD'
+version = '1.9.3'
+
+homepage = 'https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild'
+description = """Production EasyBuild @ CSCS """
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+append-path     PATH   /apps/daint/UES/VMD/1.9.3/bin 
+prepend-path    LD_LIBRARY_PATH /opt/cray/nvidia/default/lib64
+"""
+
+moduleclass = 'devel'
+
