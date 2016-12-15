@@ -20,13 +20,13 @@ common_prebuildopts += './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL &&'
 
 prebuildopts = [
                          common_prebuildopts,
-     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
+     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#test-cpmd_omp\.x#\' Makefile &&',
 ]
 
 files_to_copy = [(['bin/cpmd*.x'],'bin')]
 
 sanity_check_paths = {
-    'files': ['bin/cpmd.x', 'bin/cpmd_omp.x'],
+    'files': ['bin/cpmd.x', 'bin/test-cpmd_omp.x'],
     'dirs': [],
 }
 
