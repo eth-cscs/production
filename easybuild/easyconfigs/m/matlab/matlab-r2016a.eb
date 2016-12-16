@@ -1,0 +1,14 @@
+easyblock = 'Bundle'
+
+name = 'matlab'
+version = 'r2016a'
+
+homepage = 'https://www.mathworks.com/products/matlab.html'
+description = """Matlab"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+set     MATLABVersion r2016a
+append-path     PATH            /apps/common/matlab/r2016a/bin/
+"""
