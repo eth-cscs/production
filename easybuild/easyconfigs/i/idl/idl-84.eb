@@ -13,3 +13,6 @@ set             IDLROOT         "/apps/common/itt/idl/idl84/inst/idl84"
 append-path     PATH            "$IDLROOT/bin" 
 setenv          LM_LICENSE_FILE "/apps/common/itt/license/license.dat"
 """
+
+moduleclass = 'vis'
+
