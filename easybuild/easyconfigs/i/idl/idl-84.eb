@@ -4,7 +4,9 @@ name = 'idl'
 version = '84'
 
 homepage = 'http://www.exelisvis.co.uk/ProductsServices/IDL.aspx'
-description = """IDL"""
+description = """IDL
+http://user.cscs.ch/scientific_computing/data_analysis_and_visualization/visualization_resources/index.html
+"""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 

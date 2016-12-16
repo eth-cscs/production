@@ -6,6 +6,7 @@
  git-2.10.1.eb
  HDFView-2.13.0.eb
  hwloc-1.11.4.eb
+ idl-84.eb
  libtool-2.4.6.eb
  likwid-4.1.2.eb
  Lmod-7.1.eb
