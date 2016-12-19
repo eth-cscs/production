@@ -33,6 +33,7 @@ dependencies = [
     ('zlib', '1.2.8'),
     ('Qt', '5.7.0-debug', '', True),
     ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('gnuplot', '5.0.5'),
 ]
 
 configopts = 'MOC=$EBROOTQT/bin/moc '
