@@ -1,0 +1,29 @@
+#
+easyblock = "CmdCp"
+
+
+name = 'TensorFlow'
+version = '0.12'
+
+homepage = 'https://www.tensorflow.org/'
+description = "TensorFlow is an open source software library for numerical computation using data flow graphs"
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+sources = ['v0.12.0.tar.gz']
+source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
+
+build_str = "./configure < ../TensorFlow/build-0.9.0/config.input &&"
+# mkdir -p /dev/shm/$USER/bazelout/ # create a output directory for bazel on /dev/shm so that we don't get limited by $HOME quota
+build_str += "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ &&"
+build_str += "bazel build --config=cuda --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package &&"
+build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(installdir)s"
+
+cmds_map = [('BUILD', cmds_str)]
+
+sanity_check_paths={
+    'files': ['', ],
+    'dirs': ['.', ],
+}
+
+moduleclass = 'devel'
