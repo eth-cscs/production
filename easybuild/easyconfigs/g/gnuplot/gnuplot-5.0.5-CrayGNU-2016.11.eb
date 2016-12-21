@@ -30,9 +30,13 @@ dependencies = [
 #    ('Pango', '1.40.3'),
     ('libcerf', '1.5'),
 #    ('Qt', '4.8.7'),
+    ('Qt', '5.7.0-debug', '', True),    
 ]
 
-configopts = '--with-qt=qt4 '
+preconfigopts = 'export CXXFLAGS="-std=c++11 $CXXFLAGS" && '
+
+configopts = '--without-lua'
+#--with-qt=qt5 '
 
 sanity_check_paths = {
     'files': ['bin/gnuplot'],
