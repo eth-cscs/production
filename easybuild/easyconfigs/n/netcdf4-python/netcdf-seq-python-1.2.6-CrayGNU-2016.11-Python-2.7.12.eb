@@ -1,5 +1,5 @@
 # @author: gppezzi
-name = 'netcdf-python'
+name = 'netcdf-seq-python'
 version = '1.2.6'
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
@@ -14,7 +14,7 @@ sources = ['netCDF4-%(version)s.tar.gz']
 python = 'Python'
 pythonver = '2.7.12'
 pythonshortver = '.'.join(pythonver.split('.')[0:2])
-versionsuffix = '-%s-%s-hdf5-1.8' % (python, pythonver)
+versionsuffix = '-%s-%s' % (python, pythonver)
 
 dependencies = [
     (python, pythonver),
