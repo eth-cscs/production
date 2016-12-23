@@ -1,5 +1,5 @@
 #
-easyblock = 'ConfigureMake'
+easyblock = 'PythonPackage'
 
 name = 'netcdf-seq-python'
 version = '1.2.6'
