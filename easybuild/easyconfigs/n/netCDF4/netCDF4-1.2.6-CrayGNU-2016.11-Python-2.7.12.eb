@@ -1,7 +1,7 @@
 # @author: gppezzi
 easyblock = 'PythonPackage'
 
-name = 'netcdf4-python'
+name = 'netCDF4'
 version = '1.2.6'
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
@@ -26,10 +26,10 @@ dependencies = [
 ]
 
 sanity_check_paths = {
-    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 
-    # 'lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pythonshortver}
-    ],
-    'dirs': [],
+   'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 
+             'lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pythonshortver}
+   ],
+   'dirs': [],
 }
 
 moduleclass = 'data'
