@@ -21,7 +21,7 @@ dependencies = [
     # No MPI support
 ]
 
-configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$NETCDF_DIR"
+configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
 
 sanity_check_paths = {
     'files': ["bin/cdo"],
