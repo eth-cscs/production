@@ -1,0 +1,48 @@
+# Built with EasyBuild version 3.0.1 on 2017-01-03_09-19-43
+easyblock = 'ConfigureMake'
+
+name = 'protobuf-core'
+version = '3.0.2'
+
+homepage = 'https://github.com/google/protobuf/'
+description = """Google Protocol Buffers"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://github.com/google/protobuf/archive/v%(version)s/']
+sources = [SOURCE_TAR_GZ]
+
+preconfigopts = "./autogen.sh &&"
+
+sanity_check_paths = {
+    'files': ['bin/protoc','lib/libprotobuf.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'devel'
+
+# Build statistics
+buildstats = [{
+    "build_time": 180.74,
+    "command_line": ["--buildpath='/dev/shm/marcelsc/easybuild/stage/build'", "--external-modules-metadata='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/cray_external_modules_metadata.cfg'", '--hide-deps=\'"Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube,Python-bare,"\'', "--include-easyblocks='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyblocks/*.py'", "--installpath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/packages'", "--prefix='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--repositorypath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/ebfiles_repo'", "--robot-paths='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/marcelsc/easybuild/stage/tmp'", 'easybuild/daint/haswell/software/protobuf/3.0.2-CrayGNU-2016.11/easybuild/protobuf-3.0.2-CrayGNU-2016.11.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.0.1",
+    "easybuild-framework_version": "3.0.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/5.3.0/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/5.3.0/snos/libexec/gcc/x86_64-suse-linux/5.3.0/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-5.3.0/configure --prefix=/opt/gcc/5.3.0/snos --disable-nls --libdir=/opt/gcc/5.3.0/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/5.3.0/snos/include/g++ --with-slibdir=/opt/gcc/5.3.0/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 5.3.0 20151204 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.19",
+    "hostname": "daint101",
+    "install_size": 33662666,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.5/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, Dec 21 2014, 11:02:59) [GCC]",
+    "system_gcc_path": "/opt/gcc/5.3.0/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1483431583,
+    "total_memory": 258113,
+}]

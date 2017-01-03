@@ -1,0 +1,102 @@
+# Built with EasyBuild version 3.0.1 on 2017-01-02_15-16-04
+# Built with EasyBuild version 2.8.1 on 2016-07-07_13-03-36
+name = 'SWIG'
+version = '3.0.10'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://www.swig.org/'
+description = """SWIG is a software development tool that connects programs written in C and C++ with
+ a variety of high-level programming languages."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'pic': True, 'opt': True, 'optarch': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.5.2'),
+    ('PCRE', '8.38'),
+]
+
+configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"'
+
+moduleclass = 'devel'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.8.1",
+    "easybuild-easyblocks_version": "2.8.1",
+    "timestamp": 1467889416,
+    "build_time": 58.46,
+    "install_size": 4965536,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--external-modules-metadata=/apps/common/easybuild/cray_external_modules_metadata.cfg', '--force', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring', '--include-easyblocks=/apps/common/easybuild/easyblocks/*.py', '--installpath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild', '--optarch=sandybridge', '--packagepath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/packages', '--prefix=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild', '--repositorypath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/ebfiles_repo/', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/daint:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', 'SWIG-3.0.10-CrayGNU-2016.03-Python-3.5.1.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/opt/modules/3.2.10.3/bin/modulecmd', '3.2.10'),
+    "core_count": 16,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz",
+    "cpu_speed": 2599.944,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.9.3/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/4.9.3/snos/libexec/gcc/x86_64-suse-linux/4.9.3/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-4.9.3/configure --prefix=/opt/gcc/4.9.3/snos --disable-nls --libdir=/opt/gcc/4.9.3/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.9.3/snos/include/g++ --with-slibdir=/opt/gcc/4.9.3/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 4.9.3 20150626 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "daint105",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP3",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Apr  7 2015, 08:28:12) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/opt/gcc/4.9.3/bin/gcc",
+    "system_python_path": "/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/software/Python/3.5.1-CrayGNU-2016.03-rpath/bin/python",
+    "total_memory": 258400,
+}]
+
+# Build statistics
+buildstats = [
+{
+    "build_time": 58.46,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--external-modules-metadata=/apps/common/easybuild/cray_external_modules_metadata.cfg', '--force', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring', '--include-easyblocks=/apps/common/easybuild/easyblocks/*.py', '--installpath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild', '--optarch=sandybridge', '--packagepath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/packages', '--prefix=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild', '--repositorypath=/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/ebfiles_repo/', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/daint:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', 'SWIG-3.0.10-CrayGNU-2016.03-Python-3.5.1.eb'],
+    "core_count": 16,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz",
+    "cpu_speed": 2599.944,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "2.8.1",
+    "easybuild-framework_version": "2.8.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.9.3/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/4.9.3/snos/libexec/gcc/x86_64-suse-linux/4.9.3/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-4.9.3/configure --prefix=/opt/gcc/4.9.3/snos --disable-nls --libdir=/opt/gcc/4.9.3/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.9.3/snos/include/g++ --with-slibdir=/opt/gcc/4.9.3/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 4.9.3 20150626 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "daint105",
+    "install_size": 4965536,
+    "modules_tool": ('EnvironmentModulesC', '/opt/modules/3.2.10.3/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP3",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Apr  7 2015, 08:28:12) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/opt/gcc/4.9.3/bin/gcc",
+    "system_python_path": "/apps/daint/UES/5.2.UP04/sandbox-ds/easybuild/software/Python/3.5.1-CrayGNU-2016.03-rpath/bin/python",
+    "timestamp": 1467889416,
+    "total_memory": 258400,
+},
+{
+    "build_time": 71.58,
+    "command_line": ["--buildpath='/dev/shm/marcelsc/easybuild/stage/build'", "--external-modules-metadata='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/cray_external_modules_metadata.cfg'", '--hide-deps=\'"Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube,Python-bare,"\'', "--include-easyblocks='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyblocks/*.py'", "--installpath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/packages'", "--prefix='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--repositorypath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/ebfiles_repo'", "--robot-paths='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/marcelsc/easybuild/stage/tmp'", 'easybuild/daint/haswell/software/SWIG/3.0.10-CrayGNU-2016.11-Python-3.5.2/easybuild/SWIG-3.0.10-CrayGNU-2016.11-Python-3.5.2.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.0.1",
+    "easybuild-framework_version": "3.0.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/5.3.0/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/5.3.0/snos/libexec/gcc/x86_64-suse-linux/5.3.0/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-5.3.0/configure --prefix=/opt/gcc/5.3.0/snos --disable-nls --libdir=/opt/gcc/5.3.0/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/5.3.0/snos/include/g++ --with-slibdir=/opt/gcc/5.3.0/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 5.3.0 20151204 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.19",
+    "hostname": "daint101",
+    "install_size": 4951892,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.5/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, Dec 21 2014, 11:02:59) [GCC]",
+    "system_gcc_path": "/opt/gcc/5.3.0/bin/gcc",
+    "system_python_path": "/apps/daint/UES/jenkins/6.0.UP02/gpu/easybuild/software/Python/3.5.2-CrayGNU-2016.11/bin/python",
+    "timestamp": 1483366564,
+    "total_memory": 258113,
+},
+]

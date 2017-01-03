@@ -1,0 +1,59 @@
+# Built with EasyBuild version 3.0.1 on 2017-01-02_15-19-02
+# Built with EasyBuild version 2.8.1 on 2016-07-07_11-38-38
+# @author: gppezzi, marcelsc
+
+easyblock = "CmdCp"
+
+name = 'Bazel'
+version = '0.4.0'
+
+homepage = 'http://baze.io/'
+description = """Correct, reproducible, fast builds for everyone"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('SWIG', '3.0.10', '-Python-3.5.2'),
+    ('java/jdk1.8.0_51', EXTERNAL_MODULE),
+]
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/bazelbuild/bazel/archive/']
+
+cmds_map = [('.*', "JAVA_VERSION=1.8 CC=gcc CXX=g++ ./compile.sh")]
+
+files_to_copy = [(['output/bazel'], 'bin')]
+
+sanity_check_paths={
+    'files': ['bin/bazel'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'
+
+
+# Build statistics
+buildstats = [{
+    "build_time": 108.3,
+    "command_line": ["--buildpath='/dev/shm/marcelsc/easybuild/stage/build'", "--external-modules-metadata='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/cray_external_modules_metadata.cfg'", '--hide-deps=\'"Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube,Python-bare,"\'', "--include-easyblocks='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyblocks/*.py'", "--installpath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/packages'", "--prefix='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--repositorypath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/ebfiles_repo'", "--robot-paths='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/marcelsc/easybuild/stage/tmp'", 'easybuild/daint/haswell/software/Bazel/0.4.0-CrayGNU-2016.11/easybuild/Bazel-0.4.0-CrayGNU-2016.11.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.0.1",
+    "easybuild-framework_version": "3.0.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/5.3.0/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/5.3.0/snos/libexec/gcc/x86_64-suse-linux/5.3.0/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-5.3.0/configure --prefix=/opt/gcc/5.3.0/snos --disable-nls --libdir=/opt/gcc/5.3.0/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/5.3.0/snos/include/g++ --with-slibdir=/opt/gcc/5.3.0/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 5.3.0 20151204 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.19",
+    "hostname": "daint101",
+    "install_size": 101086241,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.5/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, Dec 21 2014, 11:02:59) [GCC]",
+    "system_gcc_path": "/opt/gcc/5.3.0/bin/gcc",
+    "system_python_path": "/apps/daint/UES/jenkins/6.0.UP02/gpu/easybuild/software/Python/3.5.2-CrayGNU-2016.11/bin/python",
+    "timestamp": 1483366742,
+    "total_memory": 258113,
+}]

@@ -1,0 +1,53 @@
+# Built with EasyBuild version 3.0.1 on 2017-01-02_15-22-14
+easyblock = 'Tarball'
+
+name = 'cuDNN'
+version = '5.1'
+
+homepage = 'https://developer.nvidia.com/cudnn'
+description = """Nvidias deep neural network library."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    ('cudatoolkit/8.0.44_GA_2.2.7_g4a6c213-2.1', EXTERNAL_MODULE),
+]
+
+sources = ['/apps/daint/UES/6.0.UP02/sandbox-ds/soures/cudnn-8.0-linux-x64-v5.1.tgz']
+
+checksums = [
+    '099ca6a9b21b35e32f3408eff2a1c06d',
+]
+
+sanity_check_paths = {
+    'files': ['include/cudnn.h', 'lib64/libcudnn_static.a'],
+    'dirs': ['include', 'lib64'],
+}
+
+#moduleclass = 'numlib'
+
+# Build statistics
+buildstats = [{
+    "build_time": 2.98,
+    "command_line": ["--buildpath='/dev/shm/marcelsc/easybuild/stage/build'", "--external-modules-metadata='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/cray_external_modules_metadata.cfg'", '--hide-deps=\'"Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube,Python-bare,"\'', "--include-easyblocks='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyblocks/*.py'", "--installpath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/packages'", "--prefix='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/'", "--repositorypath='/apps/daint/UES/6.0.UP02/sandbox-ds/easybuild/haswell/ebfiles_repo'", "--robot-paths='/apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/marcelsc/easybuild/stage/tmp'", 'easybuild/daint/haswell/software/cuDNN/5.1/easybuild/cuDNN-5.1.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.0.1",
+    "easybuild-framework_version": "3.0.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 4.8.5 (SUSE Linux) ; ",
+    "glibc_version": "2.19",
+    "hostname": "daint101",
+    "install_size": 307875215,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.5/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, Dec 21 2014, 11:02:59) [GCC]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1483366934,
+    "total_memory": 258113,
+}]
