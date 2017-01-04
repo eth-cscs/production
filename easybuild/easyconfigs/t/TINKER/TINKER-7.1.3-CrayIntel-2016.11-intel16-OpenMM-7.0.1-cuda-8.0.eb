@@ -1,0 +1,24 @@
+name = 'TINKER'
+version = '7.1.3'
+versionsuffix = '-OpenMM-7.0.1-cuda-8.0'
+
+homepage = 'http://dasher.wustl.edu/tinker'
+description = """The TINKER molecular modeling software is a complete and general package for molecular mechanics
+ and dynamics, with some special features for biopolymers."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11-intel16'}
+
+source_urls = ['http://dasher.wustl.edu/tinker/downloads/']
+sources = [SOURCELOWER_TAR_GZ]
+
+openmm = True
+buildopts='OPENMMDIR=$EBROOTOPENMM CC=cc CXX=CC F77=ftn CFLAGS=-c F77FLAGS=-c OPTFLAGS="-O3 -no-ipo -no-prec-div -qopenmp" LINKFLAGS="-O3 -no-ipo -no-prec-div -qopenmp" LIBS="-lstdc++ -L. -L$EBROOTFFTW/lib -lfftw3_threads -lfftw3"'
+
+parallel=1
+
+dependencies = [('fftw/3.3.4.10', EXTERNAL_MODULE),
+                ('OpenMM', '7.0.1', '-cuda-8.0')]
+
+runtest = True
+
+moduleclass = 'chem'
