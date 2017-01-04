@@ -1,0 +1,55 @@
+# @author: marcelsc
+
+easyblock = "CmdCp"
+
+name = 'TensorFlow'
+version = '0.11.0'
+versionsuffix = '-Python-3.5'
+
+homepage = 'https://www.tensorflow.org/'
+description = """An open-source software library for Machine Intelligence."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('cuDNN', '5.1', '', True),
+    ('SWIG', '3.0.10', '-Python-3.5.2'),
+    ('Bazel', '0.4.0'),
+    ('protobuf', '3.0.2', '-Python-3.5.2'),
+]
+
+sources = ['v%(version)s.tar.gz']
+source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
+
+patches = [('tensorflow-v0.11.0-cscs.patch')]
+
+with_configure = False
+
+build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
+build_str += "chmod +x configure-cscs.sh && "
+build_str += "./configure-cscs.sh && "
+build_str += "bazel build --config=cuda --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package && "
+build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
+build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/tensorflow-0.11.0-py3-none-any.whl"
+
+cmds_map = [
+    ('v%(version)s.tar.gz', build_str),
+]
+
+files_to_copy = [
+	      (['%(builddir)s/tensorflow-0.11.0-py3-none-any.whl'], '%(installdir)s'),
+	      (['%(builddir)s/bin'], '%(installdir)s'),
+	      (['%(builddir)s/lib'], '%(installdir)s'),
+]
+
+sanity_check_paths={
+    'files': ['%(builddir)s/tensorflow-0.11.0-py3-none-any.whl'],
+    'dirs': ['%(installdir)s/lib/python3.5/site-packages'],
+}
+
+modextrapaths = {                                                                  
+    'PYTHONPATH' : 'lib/python3.5/site-packages',
+}
+
+moduleclass = 'devel'
+
