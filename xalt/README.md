@@ -56,4 +56,3 @@ selected project id
     * as confirmed by `sbucheck`:
 <img src="img/xalt_cscs_pi+usage_gids663_zero.png" alt="gids663_zero" >
 
-
