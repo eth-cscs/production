@@ -1,0 +1,16 @@
+easyblock = "Toolchain"
+
+name = 'gompi'
+version = '2017.01'
+
+homepage = '(none)'
+description = """IBM GNU Compiler Collection (GCC) toolchain for Linux on Power, including OpenMPI for MPI support."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # ('at/10.0', EXTERNAL_MODULE),
+    ('openmpi_gnu/1.10.5a1', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
