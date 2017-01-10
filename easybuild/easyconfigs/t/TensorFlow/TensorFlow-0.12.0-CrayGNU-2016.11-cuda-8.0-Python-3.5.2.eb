@@ -5,7 +5,8 @@ easyblock = "CmdCp"
 name = 'TensorFlow'
 version = '0.12.0'
 pyver = '3.5.2'
-versionsuffix = '-Python-%s' % pyver
+cudaversion = '8.0'
+versionsuffix = '-cuda-%s-Python-%s' % (cudaversion, pyver)
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -14,6 +15,7 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
 dependencies = [
     ('Python','3.5.2'),
+    ('cuDNN', '5.1', '', True),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
     ('Bazel', '0.4.0'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
@@ -22,14 +24,14 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('/apps/daint/UES/6.0.UP02/sandbox-ds/soures/tensorflow-v%(version)s-cscs.patch')]
+patches = [('/apps/daint/UES/6.0.UP02/sandbox-ds/soures/tensorflow-v%(version)s-gpu-cscs.patch')]
 
 with_configure = False
 
 build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
-build_str += "bazel build --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package &&"
+build_str += "bazel build --config=cuda --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package && "
 build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
 build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/tensorflow-%(version)s-cp35-cp35m-linux_x86_64.whl"
 
