@@ -9,10 +9,11 @@ description = """IBM GNU Compiler Collection (GCC) toolchain for Linux on Power,
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 dependencies = [
-    # ('at/10.0', EXTERNAL_MODULE),
-    # ('openmpi_gnu/1.10.5a1', EXTERNAL_MODULE),
-    ('GCC/10.0', EXTERNAL_MODULE),
+    #no ('at/10.0', EXTERNAL_MODULE),
+    #no ('GCC/10.0', EXTERNAL_MODULE),
+    ('GCC/4.8.5', EXTERNAL_MODULE),
     ('OpenMPI/1.10.5a1', EXTERNAL_MODULE),
+    # ('openmpi_gnu/1.10.5a1', EXTERNAL_MODULE),
 ]
 
 moduleclass = 'toolchain'
