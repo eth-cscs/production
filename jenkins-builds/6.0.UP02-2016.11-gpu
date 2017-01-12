@@ -1,4 +1,5 @@
  Amber-16-2016.11-CrayGNU-2016.11-serial.eb
+ Amber-16-2016.11-CrayGNU-2016.11-parallel.eb
  Amber-16-2016.11-CrayGNU-2016.11-cuda-8.0.eb
  Boost-1.61.0-CrayGNU-2016.11-Python-2.7.12.eb
  CDO-1.7.2-CrayGNU-2016.11.eb
@@ -22,13 +23,17 @@
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.eb
  PyFR-1.5.0-CrayGNU-2016.11-Python-3.5.2.eb
+ QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11-cuda-8.0.eb
  R-3.3.2-CrayGNU-2016.11.eb
  Score-P-3.0-CrayCCE-2016.11.eb
  Score-P-3.0-CrayGNU-2016.11.eb
  Score-P-3.0-CrayIntel-2016.11.eb
  Score-P-3.0-CrayPGI-2016.11.eb
+ VASP-5.4.1-CrayIntel-2016.11.eb
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.eb
+ Visit-2.12.0-CrayGNU-2016.11.eb
+ VMD-1.9.3.eb
  Scalasca-2.3.1-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayIntel-2016.11.eb
  Scalasca-2.3.1-CrayPGI-2016.11.eb

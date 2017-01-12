@@ -18,7 +18,7 @@ source_urls = [SOURCEFORGE_SOURCE]
 
 dependencies = [
     ('Libint', '1.1.4'),
-    ('libxc', '2.2.2'),
+    ('libxc', '3.0.0'),
 ]
 
 builddependencies = [
@@ -34,11 +34,9 @@ prebuildopts = " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__GF
 prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran.psmp && "
 # add libraries 
 prebuildopts += " sed -i -e '/LIBS    +=/a LIBS    += $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc' ./arch/CRAY-XC30-gfortran.psmp && "
+# correct link to libsmm to match Intel Haswell architecture (no Broadwell architecture available right now)
+prebuildopts += " sed -i -e 's/sandybridge_gcc_4.9.0/haswell/' ./arch/CRAY-XC30-gfortran.psmp && "
 prebuildopts += " pushd makefiles && "
-
-# don't use parallel make, results in compilation failure
-# because Fortran module files aren't created before they are needed
-parallel = 1
 
 # build type
 buildopts = 'ARCH=CRAY-XC30-gfortran VERSION=psmp'

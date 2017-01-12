@@ -34,7 +34,7 @@ dependencies = [
     ('SIONlib',     '1.6.2-tools', '', True),
     ('PDT',         '3.22', '', True),
     ('papi/5.4.3.2', EXTERNAL_MODULE),
-    ('vampir/9.1',   EXTERNAL_MODULE),
+    ('vampir/9.2.0',   EXTERNAL_MODULE),
 # eb --optarch=broadwell ./Scalasca-2.3.1-CrayGNU-2016.06.eb 
 ]
 

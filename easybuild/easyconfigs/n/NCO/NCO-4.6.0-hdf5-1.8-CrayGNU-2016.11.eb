@@ -1,0 +1,31 @@
+# 
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = '4.6.2'
+versionsuffix = '-hdf5-1.8'
+
+homepage = 'http://nco.sourceforge.net/'
+description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'opt': True, 'pic': True, 'usempi': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://nco.sourceforge.net/src/']
+
+dependencies = [
+    ('netCDF-Fortran', '4.4.4'),
+    ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
+    ('JasPer', '1.900.1'),
+    ('UDUNITS', '2.1.24'),
+]
+
+configopts = "--with-hdf5=$HDF5_ROOT --with-netcdf=$EBROOTNETCDF"
+
+sanity_check_paths = {
+    'files': ["bin/ncbo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'
