@@ -5,7 +5,7 @@
  ddt-6.1.2.eb
  git-2.10.1.eb
  HDFView-2.13.0.eb
- hwloc-1.11.4.eb
+ hwloc-1.11.5.eb
  idl-84.eb
  libtool-2.4.6.eb
  likwid-4.1.2.eb
