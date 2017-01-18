@@ -1,8 +1,8 @@
-#    ----------------------------------------------------------------------------
-#    Copyright: 2014 - Gregor Mendel Institute of Molecular Plant Biology GmBH
-#    License: MIT
-#    Authors: Aaron <aaron.zauner@gmi.oeaw.ac.at> Zauner
-#    ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# Copyright: 2014 - Gregor Mendel Institute of Molecular Plant Biology GmBH
+# License: MIT
+# Authors: Aaron <aaron.zauner@gmi.oeaw.ac.at> Zauner
+# ----------------------------------------------------------------------------
 easyblock = 'ConfigureMake'
 
 name = 'Ruby'
