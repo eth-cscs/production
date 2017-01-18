@@ -1,4 +1,4 @@
-# Updated by @gppezzi
+# Updated by @gppezzi @jgphpc
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
