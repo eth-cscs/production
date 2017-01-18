@@ -1,3 +1,4 @@
+# @jgphpc
 easyblock = 'ConfigureMake'
 
 name = 'mc'
