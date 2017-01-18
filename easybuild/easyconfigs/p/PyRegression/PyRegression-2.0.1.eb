@@ -9,9 +9,8 @@ homepage = 'https://madra.cscs.ch/scs/PyRegression/'
 description = "Awesome regression suite for CSCS systems."
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
-
-sources = [ ('archive.tar.gz?ref=v2.0.1', "tar xfz %s" )]
 source_urls = ['https://madra.cscs.ch/scs/PyRegression/repository/']
+sources = [ ('archive.tar.gz?ref=v2.0.1', "tar xfz %s" )]
 
 dependencies = [('Python-bare', '3.5.2')]
 
