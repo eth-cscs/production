@@ -26,6 +26,8 @@ dependencies = [
     ('Python', pyver),
 ]
 
+patches = [ 'ParaView-5-2-0.patch' ]
+
 builddependencies = [('CMake', '3.6.0')]
 
 separate_build_dir = True
