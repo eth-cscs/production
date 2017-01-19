@@ -35,7 +35,7 @@ dependencies = [
     ('SIONlib', '1.7.1', '', True),
     ('PDT', '3.23', '', True),
     ('papi/5.5.0.1', EXTERNAL_MODULE),
-    ('vampir/9.1', EXTERNAL_MODULE),
+    ('vampir/9.2.0', EXTERNAL_MODULE),
 ]
 
 configopts  = ' --enable-shared'
