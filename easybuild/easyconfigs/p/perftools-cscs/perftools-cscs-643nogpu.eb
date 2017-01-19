@@ -7,6 +7,8 @@ homepage = 'http://user.cscs.ch/compiling_and_optimizing/performance_tools/crayp
 description = """CrayPat gives performance details of application code running on Cray systems."""
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
+dependencies = [ ( 'perftools-base-cscs', '643nogpu' ), ]
+
 modtclfooter = """
 # HOSTNAME ------------------------------------------------------
 set H        "[exec uname -n]"
@@ -34,8 +36,8 @@ proc PrintPerftoolsError { } {
     puts stderr "--------------------------------------------------------------------------------"
 }
 
-module use /apps/common/UES/proposals/pug.git/perftools-lite/6.4.3/modulefiles
-module load perftools-base-cscs/643nogpu
+# module use /apps/common/UES/proposals/pug.git/perftools-lite/6.4.3/modulefiles
+# module load perftools-base-cscs/643nogpu
 module load perftools-lite
 
 proc ModulesHelp { } {
