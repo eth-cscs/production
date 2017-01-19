@@ -13,8 +13,7 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://www.unidata.ucar.edu/downloads/netcdf/ftp/']
 
 dependencies = [
-# ('HDF5', '1.8.15'),
-('cray-hdf5/1.8.16', EXTERNAL_MODULE),
+    ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
 ]
 
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
