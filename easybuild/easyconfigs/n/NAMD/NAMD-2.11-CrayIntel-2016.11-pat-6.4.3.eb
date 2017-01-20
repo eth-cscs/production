@@ -23,7 +23,7 @@ builddependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('Charm++', '6.7.1'), 
     ('Tcl', '8.5.9', '-namd',  True),
-    ('perftools-cscs/%snogpu' %patversion, EXTERNAL_MODULE),
+    ('perftools-cscs', '%snogpu' %patversion),
 ]
 
 files_to_copy = [(['./CRAY-XC-intel/namd2'], 'bin')]
