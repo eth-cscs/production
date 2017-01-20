@@ -38,6 +38,7 @@
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
  Visit-2.12.0-CrayGNU-2016.11.eb
  VMD-1.9.3.eb
+ VTK-7.1.0-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayIntel-2016.11.eb
  Scalasca-2.3.1-CrayPGI-2016.11.eb
