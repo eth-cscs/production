@@ -4,8 +4,8 @@
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
-version = '5.2.0-RC1'
-# versionsuffix = '-mpi'
+version = '5.2.0'
+# versionsuffix='-mpi'
 
 homepage = "http://www.paraview.org"
 description = "ParaView is a scientific parallel visualizer."
@@ -26,26 +26,25 @@ dependencies = [
     ('Python', pyver),
 ]
 
+patches = [ 'ParaView-5-2-0.patch' ]
+
 builddependencies = [('CMake', '3.6.0')]
 
 separate_build_dir = True
 
 maxparallel = 12
 
-configopts = '-DMPI_C_INCLUDE_PATH=${CRAY_MPICH_DIR}/include -DMPI_C_LIBRARIES=${CRAY_MPICH_DIR}/lib/libmpich.so '
+configopts = '-DVTK_Group_MPI:BOOL=ON -DMPI_C_INCLUDE_PATH=${CRAY_MPICH_DIR}/include -DMPI_C_LIBRARIES=${CRAY_MPICH_DIR}/lib/libmpich.so '
 configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
-configopts += '-DBUILD_TESTING=OFF -DPARAVIEW_ENABLE_CATALYST=ON -DPARAVIEW_BUILD_PLUGIN_SierraPlotTools=OFF '
+configopts += '-DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DPARAVIEW_ENABLE_CATALYST:BOOL=ON -DPARAVIEW_BUILD_PLUGIN_SierraPlotTools=OFF '
 configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
-configopts += '-DPARAVIEW_ENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python -DPARAVIEW_USE_MPI=ON '
-configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON -DVTK_USE_SYSTEM_HDF5=OFF '
-configopts += '-DVTK_RENDERING_BACKEND:STRING=OpenGL2 '
-configopts += '-DVTK_USE_X=OFF   -DVTK_USE_OFFSCREEN_EGL=ON -DEGL_INCLUDE_DIR:PATH=/users/jfavre/Projects/EGL/code-samples/posts/egl_OpenGl_without_Xserver '
-configopts += '-DEGL_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libEGL.so.1 '
-configopts += '-DEGL_opengl_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libOpenGL.so '
-configopts += '-DEGL_gldispatch_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libGLdispatch.so.0 '
-configopts += '-DPARAVIEW_BUILD_QT_GUI=OFF -DPARAVIEW_ENABLE_WEB=OFF -DVTK_Group_MPI=ON -DModule_vtkGeovisCore=ON -DModule_vtklibproj4=ON '
+configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python -DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_USE_CXX11_FEATURES:BOOL=ON '
+configopts += '-DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so '
+configopts += '-DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include '
+configopts += '-DPARAVIEW_BUILD_QT_GUI:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF -DModule_vtkGeovisCore=ON -DModule_vtklibproj4=ON '
 # CSCS specific plugins for Users Projects
-configopts += '-DPARAVIEW_EXTERNAL_PLUGIN_DIRS="/users/jfavre/Projects/BioMedical2;/users/jfavre/Projects/Jackson/src" '
+configopts += '-DPARAVIEW_EXTERNAL_PLUGIN_DIRS:STRING="/users/jfavre/Projects/BioMedical2;/users/jfavre/Projects/Jackson/src;/users/jfavre/Projects/Tipsy" '
 
 # Or consult https://gitlab.kitware.com/vtk/vtk/blob/master/Documentation/dev/git/data.md
 # and download ExternalData to $EASYBUILD_SOURCEPATH and adjust -DExternalData_OBJECT_STORES accordingly
