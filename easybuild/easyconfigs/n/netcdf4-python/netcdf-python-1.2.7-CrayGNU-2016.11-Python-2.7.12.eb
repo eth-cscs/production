@@ -1,0 +1,36 @@
+# @author: gppezzi
+#easyblock = 'PythonPackage'
+
+name = 'netcdf-python'
+version = '1.2.7'
+
+homepage = 'http://unidata.github.io/netcdf4-python/'
+description = """Python/numpy interface to netCDF."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+# toolchainopts = {'usempi': True}
+
+source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
+sources = ['netCDF4-%(version)s.tar.gz']
+
+python = 'Python'
+pythonver = '2.7.12'
+pythonshortver = '.'.join(pythonver.split('.')[0:2])
+versionsuffix = '-%s-%s' % (python, pythonver)
+
+dependencies = [
+    (python, pythonver),
+    ('netCDF-Fortran', '4.4.4'),
+    ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
+    # ('Cython', '0.19.2', versionsuffix), # Already installed by default on CSCS python 
+]
+
+sanity_check_paths = {
+   'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 
+             'lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pythonshortver}
+   ],
+   'dirs': [],
+}
+
+moduleclass = 'data'
+
