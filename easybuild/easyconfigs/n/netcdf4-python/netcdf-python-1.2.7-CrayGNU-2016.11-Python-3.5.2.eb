@@ -1,8 +1,7 @@
-# @author: gppezzi
-easyblock = 'PythonPackage'
+#
 
-name = 'netCDF4'
-version = '1.2.6'
+name = 'netcdf-python'
+version = '1.2.7'
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
 description = """Python/numpy interface to netCDF."""
@@ -14,7 +13,7 @@ source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
 sources = ['netCDF4-%(version)s.tar.gz']
 
 python = 'Python'
-pythonver = '2.7.12'
+pythonver = '3.5.2'
 pythonshortver = '.'.join(pythonver.split('.')[0:2])
 versionsuffix = '-%s-%s' % (python, pythonver)
 
@@ -26,10 +25,8 @@ dependencies = [
 ]
 
 sanity_check_paths = {
-   'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 
-             'lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pythonshortver}
-   ],
-   'dirs': [],
+    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
+    'dirs': ['lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pythonshortver}],
 }
 
 moduleclass = 'data'
