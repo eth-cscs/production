@@ -59,7 +59,7 @@ configopts += "-DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so -DOPE
 modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
 
 sanity_check_paths = {
-    'files': ['bin/vtk%s-%%(version_major_minor)s' % x for x in ['EncodeString', 'HashSource', 'mkg3states']],
+    'files': ['bin/vtkpython'],
     'dirs': ['lib/python%s/site-packages/' % pyshortver, 'include/vtk-%(version_major_minor)s'],
 }
 
