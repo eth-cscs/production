@@ -1,0 +1,51 @@
+# Built with EasyBuild version 3.0.1 on 2017-01-20_18-49-28
+easyblock = 'ConfigureMake'
+
+name = 'GSL'
+version = "2.2.1"
+
+homepage = 'http://www.gnu.org/software/gsl/'
+description = """The GNU Scientific Library (GSL) is a numerical library for C and C++ programmers.
+ The library provides a wide range of mathematical routines such as random number generators, special functions
+ and least-squares fitting."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = {'opt': True, 'optarch': True, 'unroll': True, 'pic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = "--with-pic"
+
+sanity_check_paths={
+    'files': ['lib/libgsl.so', 'lib/libgsl.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'numlib'
+
+# Build statistics
+buildstats = [{
+    "build_time": 230.45,
+    "command_line": ["--buildpath='/dev/shm/lucamar/easybuild/stage/build'", "--external-modules-metadata='/users/lucamar/production/easybuild/cray_external_modules_metadata.cfg'", '--hide-deps=\'"Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube,Python-bare,fontconfig,arpack-ng,gperf,libgd,libcerf,gnuplot,GraphicsMagick,qrupdate,Mesa,LLVM,nettle,libGLU,libdrm,Mako,GLPK,FLTK,"\'', "--include-easyblocks='/users/lucamar/production/easybuild/easyblocks/*.py'", "--installpath='/apps/daint/UES/6.0.UP02/sandbox-lm/easybuild'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/daint/UES/6.0.UP02/sandbox-lm/easybuild/packages'", "--prefix='/apps/daint/UES/6.0.UP02/sandbox-lm/easybuild'", "--repositorypath='/apps/daint/UES/6.0.UP02/sandbox-lm/easybuild/ebfiles_repo'", "--robot='/users/lucamar/production/easybuild/easyconfigs:/apps/common/UES/easybuild/software/EasyBuild/3.0.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.0.1-py2.7.egg/easybuild/easyconfigs'", "--robot-paths='/users/lucamar/production/easybuild/easyconfigs:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/lucamar/easybuild/stage/tmp'", "--try-toolchain='CrayIntel,2016.11'", 'PLUMED-2.3.0-CrayGNU-2016.11.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.0.1",
+    "easybuild-framework_version": "3.0.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 4.8.5 (SUSE Linux) ; ",
+    "glibc_version": "2.19",
+    "hostname": "daint101",
+    "install_size": 23579339,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.5/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.9 (default, Dec 21 2014, 11:02:59) [GCC]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1484934568,
+    "total_memory": 258113,
+}]
