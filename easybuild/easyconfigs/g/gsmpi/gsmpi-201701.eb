@@ -1,0 +1,17 @@
+easyblock = "Toolchain"
+
+name = 'gsmpi'
+version = '2017.01'
+
+homepage = '(none)'
+description = """IBM GNU Compiler Collection (GCC) toolchain for Linux on Power, including IBM Spectrum MPI for MPI support."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    #no ('at/10.0', EXTERNAL_MODULE),
+    ('GCC/4.8.5', EXTERNAL_MODULE),
+    ('ibm_smpi/10.1_gnu', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
