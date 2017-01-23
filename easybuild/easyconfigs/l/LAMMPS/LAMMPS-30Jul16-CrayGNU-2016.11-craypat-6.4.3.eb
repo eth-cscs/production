@@ -6,7 +6,7 @@ easyblock = 'MakeCp'
 name = 'LAMMPS'
 version = "30Jul16"
 release = 'r15407'
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = "-craypat-%s" % craypatversion
 
 homepage = 'http://lammps.sandia.gov/'
@@ -28,7 +28,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('perftools-cscs', '643nogpu'),
+    ('perftools-cscs', '%snogpu' %craypatversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Python', '2.7.12'),
 ]

@@ -15,7 +15,7 @@
 #
 name = 'GROMACS'
 version = "5.1.4"
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = "-craypat-%s" % craypatversion
 
 homepage = 'http://www.gromacs.org'
@@ -35,7 +35,7 @@ skipsteps = ['test']
 # CMake and libxml2 dependencies with dummy toolchain
 builddependencies = [
     ('CMake', '3.6.0'),
-    ('perftools-cscs','643nogpu'),
+    ('perftools-cscs', '%snogpu' %craypatversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Boost', '1.61.0', '-Python-2.7.12'),
     ('libxml2', '2.9.3'),

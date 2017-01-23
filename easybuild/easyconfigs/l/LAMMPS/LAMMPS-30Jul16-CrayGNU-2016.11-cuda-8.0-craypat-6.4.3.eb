@@ -7,7 +7,7 @@ name = 'LAMMPS'
 version = '30Jul16'
 release = 'r15407'
 cudaversion =  '8.0'
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = '-cuda-%s-craypat-%s' % (cudaversion, craypatversion)
 
 homepage = 'http://lammps.sandia.gov/'
@@ -34,7 +34,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('perftools-cscs', '643cuda'),
+    ('perftools-cscs', '%scuda' %craypatversion, '', True),
     ('cudatoolkit/%s.44_GA_2.2.7_g4a6c213-2.1' %cudaversion, EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Python', '2.7.12'),

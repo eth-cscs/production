@@ -8,7 +8,7 @@ easyblock = 'MakeCp'
 
 name = 'Amber'
 version = '16-2016.11'
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = '-parallel-craypat-%s' % craypatversion
 amberversion = '16'
 
@@ -24,7 +24,7 @@ dependencies = [ ('bzip2', '1.0.6'),
                  ('zlib', '1.2.8') ]
 
 builddependencies = [
-    ('perftools-cscs', '643nogpu'),
+    ('perftools-cscs', '%snogpu' %craypatversion, '', True),
     ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
     ('cray-netcdf/4.4.1', EXTERNAL_MODULE),
     ('flex', '2.6.0'),

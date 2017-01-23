@@ -9,7 +9,7 @@ easyblock = 'MakeCp'
 name = 'Amber'
 version = '16-2016.11'
 cudaversion = '8.0'
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = '-cuda-%s-craypat-%s' % (cudaversion, craypatversion)
 amberversion = '16'
 
@@ -25,7 +25,7 @@ dependencies = [ ('bzip2', '1.0.6'),
                  ('zlib', '1.2.8') ]
 
 builddependencies = [
-    ('perftools-cscs', '643cuda'),
+    ('perftools-cscs', '%scuda' %craypatversion, '', True),
     ('cudatoolkit/8.0.44_GA_2.2.7_g4a6c213-2.1', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
     ('cray-netcdf/4.4.1', EXTERNAL_MODULE),

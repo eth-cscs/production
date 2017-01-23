@@ -15,7 +15,7 @@
 name = 'GROMACS'
 version = "5.1.4"
 cudaversion = '8.0'
-craypatversion = '6.4.3'
+craypatversion = '643'
 versionsuffix = '-cuda-%s-craypat-%s' % (cudaversion, craypatversion)
 
 homepage = 'http://www.gromacs.org'
@@ -29,7 +29,7 @@ source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('perftools-cscs', '643cuda'),
+    ('perftools-cscs', '%scuda' %craypatversion, '', True),
     ('CMake', '3.6.0'),
     ('cudatoolkit/%s.44_GA_2.2.7_g4a6c213-2.1' %cudaversion, EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
