@@ -38,6 +38,8 @@ builddependencies = [
 
 files_to_copy = [(['src/lmp*'], "bin")]
 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
 sanity_check_paths = {
     'files': ['bin/lmp_mpi','bin/lmp_omp'],
     'dirs': [],
