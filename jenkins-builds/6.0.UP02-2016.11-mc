@@ -17,8 +17,8 @@
  NCL-6.3.0.eb
  NCO-4.6.2-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
- netcdf-python-1.2.4-CrayGNU-2016.11-Python-2.7.12.eb
- netcdf-python-1.2.4-CrayGNU-2016.11-Python-3.5.2.eb
+ netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
+ netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
  Octave-4.2.0-CrayGNU-2016.11.eb
  perftools-base-cscs-643nogpu.eb
  perftools-cscs-643nogpu.eb
