@@ -111,7 +111,8 @@ if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
     }
 }
 # --- cscs:ok ---
-module use "$PERFTOOLS_CURPATH/modulefiles"
+#jenkinsko module use "$PERFTOOLS_CURPATH/modulefiles"
+prepend-path    MODULEPATH  "$PERFTOOLS_CURPATH/modulefiles"
 # --- cscs:ok ---
 if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
     if {[info exists env(LOADEDMODULES)]} {
