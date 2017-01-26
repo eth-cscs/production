@@ -54,6 +54,7 @@ sanity_check_paths = {
 
 modextravars = {
     'AMBERHOME' : '%(builddir)s',
+    'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)',
 }
 
 moduleclass = 'bio'

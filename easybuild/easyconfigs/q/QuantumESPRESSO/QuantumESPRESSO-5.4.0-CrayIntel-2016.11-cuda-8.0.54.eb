@@ -49,6 +49,8 @@ maxparallel = 1
 # set PREFIX for make install, since configure option --prefix does not set the PREFIX variable
 preinstallopts = ' PREFIX=%(installdir)s/bin '
 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
 sanity_check_paths = {
       'files': ['bin/cp-gpu.x', 'bin/neb-gpu.x', 'bin/ph-gpu.x', 'bin/pw-gpu.x'],
       'dirs': ['bin']
