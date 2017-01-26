@@ -67,19 +67,19 @@ conflict cudatools
 proc modules_compat {} {
   global env
   if {[info exists env(MODULESHOME)] } {
-    if { [info exists env(MODULE_VERSION)] } {
+#    if { [info exists env(MODULE_VERSION)] } {
     set MODULES_VERSION $env(MODULE_VERSION)
-    } else {
-      set rc [catch { exec modulecmd bash --version 2>@1 } cmd_output ]
-      foreach i $cmd_output {
-        set key [ lindex [ split $i '=' ]  0 ]
-        set value [ lindex [ split $i '=' ]  1 ]
-        if { $key == "VERSION" } {
-          set MODULES_VERSION [ string trim $value '"' ]
-          break
-        }
-      }
-    }
+#    } else {
+#      set rc [catch { exec modulecmd bash --version 2>@1 } cmd_output ]
+#      foreach i $cmd_output {
+#        set key [ lindex [ split $i '=' ]  0 ]
+#        set value [ lindex [ split $i '=' ]  1 ]
+#        if { $key == "VERSION" } {
+#          set MODULES_VERSION [ string trim $value '"' ]
+#          break
+#        }
+#      }
+#    }
     if {[expr [llength [split $MODULES_VERSION .]] > 3]} {
       set needed_ver {3 2 10 2}
       set module_ver $MODULES_VERSION
@@ -110,9 +110,12 @@ if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
         }
     }
 }
+
 # --- cscs:ok ---
 module use "$PERFTOOLS_CURPATH/modulefiles"
+# Will fail if perftools release is not installed.
 # --- cscs:ok ---
+
 if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
     if {[info exists env(LOADEDMODULES)]} {
         if {[modules_compat]} {
