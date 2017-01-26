@@ -71,7 +71,7 @@ proc modules_compat {} {
     set MODULES_VERSION $env(MODULE_VERSION)
     } else {
       set rc [catch { exec modulecmd bash --version 2>@1 } cmd_output ]
-      foreach i $cmd_output {
+      foreach i ${cmd_output} {
         set key [ lindex [ split $i '=' ]  0 ]
         set value [ lindex [ split $i '=' ]  1 ]
         if { $key == "VERSION" } {
@@ -82,7 +82,7 @@ proc modules_compat {} {
     }
     if {[expr [llength [split $MODULES_VERSION .]] > 3]} {
       set needed_ver {3 2 10 2}
-      set module_ver $MODULES_VERSION
+      set module_ver "$MODULES_VERSION"
       set module_ver [split $module_ver .]
       for {set i 0} {$i < 4} {incr i} {
         if {[expr [lindex $module_ver $i] > [lindex $needed_ver $i]]} {
@@ -111,7 +111,7 @@ if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
     }
 }
 # --- cscs:ok ---
-module use $PERFTOOLS_CURPATH/modulefiles
+module use "$PERFTOOLS_CURPATH/modulefiles"
 # --- cscs:ok ---
 if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
     if {[info exists env(LOADEDMODULES)]} {
