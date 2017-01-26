@@ -2,7 +2,7 @@
 easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
-version = '5.4.0'
+version = '5.0.3'
 plumedversion = '2.3.0'
 versionsuffix = '-PLUMED-%s' % plumedversion
 
@@ -16,11 +16,11 @@ toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
 sources = [
-    'espresso-%(version)s.tar.gz',
+    'espresso%2BPHonon-%(version)s.tar.gz',
 ]
 
 source_urls = [
-    'http://www.qe-forge.org/gf/download/frsrelease/211/968/', # espresso-5.4.0.tar.gz
+    'http://www.qe-forge.org/gf/download/frsrelease/128/530/', # espresso-5.0.3.tar.gz
 ]
 
 builddependencies = [ 
@@ -37,7 +37,7 @@ buildopts = 'all'
 maxparallel = 1
 
 postinstallcmds = [
-    'mkdir %(installdir)s/bin && mv %(installdir)s/*.x %(installdir)s/bin'
+    'mkdir %(installdir)s/bin && cp %(builddir)s/espresso-%(version)s/bin/*.x %(installdir)s/bin'
 ]
 
 sanity_check_paths = {
