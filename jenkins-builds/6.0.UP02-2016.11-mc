@@ -3,6 +3,7 @@
  Boost-1.62.0-CrayGNU-2016.11-Python-3.5.2.eb
  Boost-1.61.0-CrayGNU-2016.11-Python-2.7.12.eb
  CDO-1.7.2-CrayGNU-2016.11.eb
+ CDO-1.8.0rc6-CrayGNU-2016.11.eb
  CMake-3.6.0.eb
  CP2K-4.1-CrayGNU-2016.11.eb
  CPMD-4.1-CrayIntel-2016.11.eb
