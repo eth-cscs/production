@@ -37,6 +37,8 @@ function cscs_setup_site_content(navbarfile, containerfile) {
   var presenterMode = document.getElementById('start-cscs-presenter-mode');
   presenterMode.click(function(e){e.preventDefault();});
   presenterMode.onclick = __cscs_show_in_presenter_mode;
+
+  __cscs_email_protector();
 }
       
 function cscs_setup_markdown_page_content(markdownFile)
@@ -44,10 +46,42 @@ function cscs_setup_markdown_page_content(markdownFile)
   __cscsMarkDown = markdownFile;
 
   cscs_read_file_contents(markdownFile, function __populate_site_content(argument) {
-    // converting markdown to html
-    var converter = new Markdown.Converter();
-    document.getElementById("cscs-markdown-content").innerHTML = converter.makeHtml(argument);
+
+  // var marked = require('marked');
+  marked.setOptions({
+    gfm: true,
+    tables: true,
+    breaks: false,
+
+    // Without this set to true, converting something like
+    // <p>*</p><p>*</p> will become <p><em></p><p></em></p>
+    pedantic: true,
+
+    sanitize: false,
+    smartLists: true,
+    langPrefix: '',
+    // highlight: function (code) {
+    //   return hljs.highlightAuto(code).value;
+    // }    
   });
+
+    // converting markdown to html
+    // var converter = new Markdown.Converter();
+    // document.getElementById("cscs-markdown-content").innerHTML = converter.makeHtml(argument);
+    // document.getElementById("cscs-markdown-content").innerHTML = marked(argument);
+    marked(argument, function (err, content) {
+      if (err) throw err;
+      document.getElementById("cscs-markdown-content").innerHTML = content;
+    });
+
+  });
+  $(document).ready(function () 
+  {
+      $.get("../*", function(data) 
+      {
+          $("#fileNames").append(data);
+      });
+  })
 }      
 
 function cscs_setup_index_page_content(newsfile)
@@ -127,4 +161,8 @@ function __cscs_exit_presentation_mode() {
       cscs_setup_site_content(__cscsSiteNavBar, __cscsSiteContainter);
       cscs_setup_markdown_page_content(__cscsMarkDown);      
   }
+}
+
+function __cscs_email_protector() {
+  $("#cscs-email-protector").prepend('<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%69%6E%66%6F%40%63%73%63%73%2E%63%68">Contact us</a>');
 }
