@@ -23,7 +23,10 @@ dependencies = [
     # No MPI support
 ]
 
-patches = [ 'CDO-1.8.0rc6-nc_config.patch' ]
+#preconfigopts = 'export NC_CONFIG=`which nc-config` && '
+
+preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
+
 configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
 
 sanity_check_paths = {
