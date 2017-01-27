@@ -75,13 +75,6 @@ function cscs_setup_markdown_page_content(markdownFile)
     });
 
   });
-  $(document).ready(function () 
-  {
-      $.get("../*", function(data) 
-      {
-          $("#fileNames").append(data);
-      });
-  })
 }      
 
 function cscs_setup_index_page_content(newsfile)
