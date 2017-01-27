@@ -81,16 +81,20 @@ function cscs_setup_index_page_content(newsfile)
 {
   cscs_read_file_contents(newsfile, function __populate_site_content(argument) {
     // converting markdown to html
-    var converter = new Markdown.Converter();
-    document.getElementById("cscs-markdown-content").innerHTML = converter.makeHtml(argument);
+    // var converter = new Markdown.Converter();
+    // document.getElementById("cscs-markdown-content").innerHTML = converter.makeHtml(argument);
+    marked(argument, function (err, content) {
+      if (err) throw err;
+      document.getElementById("cscs-markdown-content").innerHTML = content;
+    });    
   });
 
   cscs_read_file_contents("https://raw.githubusercontent.com/eth-cscs/production/master/jenkins-builds/6.0.UP02-2016.11-gpu", function __populate_site_content(argument) {
-    document.getElementById("cscs-markdown-content").innerHTML += '<h2>List of Installed EasyBuild on Daint GPU partition</h2><pre>' + argument + '</pre>';
+    document.getElementById("cscs-markdown-content").innerHTML += '<h2>Daint GPU partition</h2><pre>' + argument + '</pre>';
   });
 
   cscs_read_file_contents("https://raw.githubusercontent.com/eth-cscs/production/master/jenkins-builds/6.0.UP02-2016.11-mc", function __populate_site_content(argument) {
-    document.getElementById("cscs-markdown-content").innerHTML += '<h2>List of Installed EasyBuild on Daint MC partition</h2><pre>' + argument + '</pre>';
+    document.getElementById("cscs-markdown-content").innerHTML += '<h2>Daint MC partition</h2><pre>' + argument + '</pre>';
   });
 }      
 
