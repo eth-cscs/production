@@ -1,5 +1,20 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<div class="cscs-nav-logo">
+    <div class="container">
+      <div class="col-md-5">
+      <center>
+        <img id="cscs-cscs-logo" src="/img/logo_cscs.png">
+      </center>
+      </div>
+      <div class="col-md-6 .col-md-offset-1">
+      <center>
+      <img id="cscs-eth-logo" class="navbar-nav navbar-right" src="/img/logo_ethz.png">
+      </center>
+      </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -8,10 +23,53 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://eth-cscs.github.io/production">CSCS Production</a>
+      <a class="navbar-brand" href="https://eth-cscs.github.io/production">CSCS User Guide</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Getting Started <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Get an account</a></li>
+            <li><a href="#">Compute budget</a></li>
+            <li><a href="#">Running jobs</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Storage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">File systems</a></li>
+            <li><a href="#">Data Recovery</a></li>
+            <li><a href="#">Data Transfer</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Scientific Computing <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Supported Applications</a></li>
+            <li><a href="#">Data Analysis and Visualisation</a></li>
+<!--             <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">Scientific Computing</li>
+            <li><a href="#">Separated link</a></li>
+            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">GROMACS</a></li>
+ -->          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compiling and Optimizing <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Compiling your code</a></li>
+            <li><a href="#">Debugging tools</a></li>
+            <li><a href="#">Performance tools</a></li>
+            <li><a href="https://eth-cscs.github.io/production/compiling_and_optimizing/easybuild_framework">EasyBuild framework</a></li>
+          </ul>
+        </li>
+      </ul>    
+      <ul class="nav navbar-nav navbar-right">
         <li><a id="start-cscs-presenter-mode" href="#" style="display: none;">Presentation Mode</a></li>
         <li><a id="exit-cscs-presenter-mode" href="#" style="display: none;">Exit Presentation</a></li>
       </ul>

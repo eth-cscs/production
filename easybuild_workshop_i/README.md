@@ -39,9 +39,9 @@
 ### To create your own software stack
   * Can be tested on Daint, Dora, Santis, Brisi, Pilatus, Castor, Monch
 
-<pre>
+```
 source  /apps/common/easybuild/setup.sh  $SCRATCH 
-</pre>
+```
 
   * This will install your software under $SCRATCH/easybuild (you can choose another prefix and use as argument instead of $SCRATCH
 
@@ -50,9 +50,9 @@ source  /apps/common/easybuild/setup.sh  $SCRATCH
 ## Build your first app
    * HPL on Daint using CrayGNU toolchain
 
-<pre>
+```
 eb HPL-2.1-CrayGNU-5.2.40.eb -r
-</pre>
+```
 
 This will (1) install the toolchain CrayGNU/5.2.40 (that wraps the PrgEnv) and (2) compile HPL/2.1.
   * Check the logs and try to understand the compilation steps 
@@ -65,16 +65,16 @@ This will (1) install the toolchain CrayGNU/5.2.40 (that wraps the PrgEnv) and (
 ## Find an existing easyconfig file and build
   * List all easyconfig files available for the toolchain CrayGNU version 5.2.40
 
-<pre>
+```
 eb -S CrayGNU-5.2.40
-</pre>
+```
 
   * Choose one file and build (with automatic dependency installation '-r')
     * Full path can be omitted
 
-<pre>
+```
 eb YourApp-Cray-5.2.40.eb -r
-</pre>
+```
 
 or see the easyconfigs repository @ https://github.com/hpcugent/easybuild-easyconfigs
 
@@ -84,37 +84,37 @@ or see the easyconfigs repository @ https://github.com/hpcugent/easybuild-easyco
 
   * Disable Cray experimental support on Daint/Dora
 
-<pre>
+```
 unset EASYBUILD_EXPERIMENTAL
 unset EASYBUILD_OPTARCH
-</pre>
+```
 
 ---
 
 ## Setup foss/2015b toolchain
 
 ### Build complete toolchain (will take a while)
-<pre>
+```
 eb foss-2015b.eb -r
-</pre>
+```
 
 ### Use pre-built foss/2015b (DORA only)
-<pre>
+```
 module use $APPS/sandbox/eb_workshop
-</pre>
+```
 
 ---
 
 ## Build app available from foss/2015b toolchain
   * Find one and build
 
-<pre>
+```
 eb -S foss-2015b
 eb app.eb -r
-</pre>
+```
   
   * Or, for example, you can just try HPL
 
-<pre>
+```
 eb HPL-2.1-foss-2015b.eb -r
-</pre>
+```
