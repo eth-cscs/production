@@ -24,7 +24,7 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('/apps/daint/UES/6.0.UP02/sandbox-ds/soures/tensorflow-v%(version)s-cscs.patch')]
+patches = [('tensorflow-v%(version)s-cuda-cscs.patch')]
 
 with_configure = False
 
