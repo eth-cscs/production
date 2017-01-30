@@ -14,6 +14,7 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['https://code.zmaw.de/attachments/download/12760/']
 
 dependencies = [
+    ('netCDF', '4.4.1.1'),
     ('netCDF-Fortran', '4.4.4'),
     ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
     # do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
@@ -21,6 +22,7 @@ dependencies = [
     # No MPI support
 ]
 
+preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
 configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
 
 sanity_check_paths = {
