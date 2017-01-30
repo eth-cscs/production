@@ -1,4 +1,5 @@
 <!-- Fixed navbar -->
+<div class="cscs-global-nav">
 <div class="cscs-nav-logo">
     <div class="container">
       <div class="col-md-5">
@@ -30,12 +31,12 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Getting Started <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Get an account</a></li>
-            <li><a href="#">Compute budget</a></li>
-            <li><a href="#">Running jobs</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Contact us</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/get_an_account">Get an account</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/compute_budget">Compute budget</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/running_jobs">Running jobs</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/faq">FAQ</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/tutorials">Tutorials</a></li>
+            <li><a href="https://eth-cscs.github.io/production/getting_started/contact_us">Contact us</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -62,13 +63,13 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compiling and Optimizing <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Compiling your code</a></li>
-            <li><a href="#">Debugging tools</a></li>
-            <li><a href="#">Performance tools</a></li>
+            <li><a href="https://eth-cscs.github.io/production/compiling_and_optimizing/compiling_your_code">Compiling your code</a></li>
+            <li><a href="https://eth-cscs.github.io/production/compiling_and_optimizing/debugging_tools">Debugging tools</a></li>
+            <li><a href="https://eth-cscs.github.io/production/compiling_and_optimizing/performance_tools">Performance tools</a></li>
             <li><a href="https://eth-cscs.github.io/production/compiling_and_optimizing/easybuild_framework">EasyBuild framework</a></li>
           </ul>
         </li>
-      </ul>    
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a id="start-cscs-presenter-mode" href="#">Presentation Mode</a></li>
         <li><a id="exit-cscs-presenter-mode" href="#" style="display: none;">Exit Presentation</a></li>
@@ -76,3 +77,50 @@
     </div>
   </div>
 </nav>
+</div>
+
+<div id="cscs-body-container">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-3" id="cscs-header-content">
+        <div class="cscs-leftbar">
+          <div id="cscs-leftbar-markdown" class="cscs-leftbar-markdown dropdown open">
+          </div>
+        </div>
+        <div class="cscs-leftbar">
+          <p>Useful links</p>
+          <hr>
+          <h3><a target=_blank href="http://www.cscs.ch/index.html">CSCS WEBSITE</a></h3>
+          <h3><a target=_blank href="https://github.com/eth-cscs/production">CSCS Production Repository</a></h3>
+          <h3><a target=_blank href="https://github.com/eth-cscs/production/wiki">CSCS Production Wiki</a></h3>
+          <h3><a target=_blank href="https://github.com/eth-cscs/production/tree/master/easybuild">EasyBuild recipes</a></h3>
+          <h3><a target=_blank href="https://github.com/eth-cscs/production/tree/master/jenkins-builds">Jenkins production lists</a></h3>
+          <h3><a target=_blank href="https://user.cscs.ch/getting_started/compute_budget/index.html">CSCS User Portal</a></h3>
+        </div>
+      </div>
+      <div class="col-md-7" id="cscs-markdown-content">
+      </div>
+
+      <div class="col-md-2">
+        <nav id="toc" data-toggle="toc" class="cscs-sidebar hidden-xs hidden-sm"></nav>
+      </div>
+
+    </div>
+  </div> <!-- /container -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>CSCS</strong><br />
+          <strong>Swiss National Supercomputing Centre</strong><br />
+          Via Trevano 131<br />
+          6900 Lugano<br />
+          Switzerland</p>
+          <p id="cscs-email-protector"><br />+41 91 610 82 11</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

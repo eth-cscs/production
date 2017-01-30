@@ -27,9 +27,6 @@ body > .container {
   padding-right: 15px;
   padding-left: 15px;
 }
-/*code {
-  font-size: 80%;
-}*/
 
 .cscs-nav-logo {
   background-color: #fff;
@@ -40,7 +37,7 @@ body > .container {
 
 #cscs-cscs-logo {
   width: auto;
-  height: 63px;  
+  height: 63px;
 }
 
 #cscs-eth-logo {
@@ -51,3 +48,173 @@ body > .container {
 .navbar {
   margin-bottom: 0px;
 }
+
+/* modified from https://github.com/twbs/bootstrap/blob/94b4076dd2efba9af71f0b18d4ee4b163aa9e0dd/docs/assets/css/src/docs.css#L548-L601 */
+.cscs-sidebar.affix-top {
+  margin-top: 20px;
+}
+
+.cscs-sidebar.affix {
+  margin-top: -140px;
+}
+
+.cscs-sidebar {
+  margin-top: 20px;
+  position: fixed;
+}
+
+.cscs-leftbar {
+  background-color: #5286BF;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 0;
+  padding: 0;
+  padding-bottom: 5px;
+}
+
+.cscs-leftbar hr {
+  margin: 10px;
+}
+
+.cscs-leftbar p {
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cscs-leftbar a {
+  color: #fff;
+  padding: 5px;
+}
+
+.cscs-leftbar a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #e5293a;
+  padding: 5px;
+}
+
+.cscs-leftbar h3 {
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  padding-left: 5px;
+}
+
+.cscs-leftbar h4 {
+  clear: both;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  font-weight: normal;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+  /* override the Affix plugin so that the navigation isn't sticky */
+  nav.affix[data-toggle='toc'] {
+    position: static;
+  }
+
+  /* don't expand nested items, which pushes down the rest of the page when navigating */
+  nav[data-toggle='toc'] .nav .active .nav {
+    display: none;
+  }
+  /* alternatively, if you *do* want the second-level navigation to be shown (as seen on this page on mobile), use this */
+  nav[data-toggle='toc'] .nav .nav {
+    display: block;
+  }
+}
+
+/* All levels of nav */
+nav[data-toggle='toc'] .nav > li > a {
+  display: block;
+  padding: 4px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #767676;
+}
+nav[data-toggle='toc'] .nav > li > a:hover,
+nav[data-toggle='toc'] .nav > li > a:focus {
+  padding-left: 19px;
+  color: #106ba1;
+  text-decoration: none;
+  background-color: transparent;
+  border-left: 1px solid #106ba1;
+}
+nav[data-toggle='toc'] .nav > .active > a,
+nav[data-toggle='toc'] .nav > .active:hover > a,
+nav[data-toggle='toc'] .nav > .active:focus > a {
+  padding-left: 18px;
+  font-weight: bold;
+  color: #106ba1;
+  background-color: transparent;
+  border-left: 2px solid #106ba1;
+}
+
+/* Nav: second level (shown on .active) */
+nav[data-toggle='toc'] .nav .nav {
+  display: none; /* Hide by default, but at >768px, show it */
+  padding-bottom: 10px;
+}
+nav[data-toggle='toc'] .nav .nav > li > a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 30px;
+  font-size: 12px;
+  font-weight: normal;
+}
+nav[data-toggle='toc'] .nav .nav > li > a:hover,
+nav[data-toggle='toc'] .nav .nav > li > a:focus {
+  padding-left: 29px;
+}
+nav[data-toggle='toc'] .nav .nav > .active > a,
+nav[data-toggle='toc'] .nav .nav > .active:hover > a,
+nav[data-toggle='toc'] .nav .nav > .active:focus > a {
+  padding-left: 28px;
+  font-weight: 500;
+}
+
+/* from https://github.com/twbs/bootstrap/blob/e38f066d8c203c3e032da0ff23cd2d6098ee2dd6/docs/assets/css/src/docs.css#L631-L634 */
+nav[data-toggle='toc'] .nav > .active > ul {
+  display: block;
+}
+
+.back-to-top {
+  padding: 4px 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+}
+.back-to-top:hover {
+  color: #106ba1;
+  text-decoration: none;
+}
+
+h1 {
+    font-size: 24px;
+}
+h2 {
+    font-size: 20px;
+}
+h3 {
+    font-size: 16px;
+}
+blockquote {
+ font-size: 14px;
+}
+

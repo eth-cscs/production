@@ -1,18 +1,18 @@
-<!-- # News
+# Latest News
 
-<br />
-#### PIZ DAINT Scheduled Maintenance – Today January 10th, 2017 at 7:30 AM
-Today January 10th, 2017 Piz Diant will be down for HW maintenance from 7:30 AM until 8 PM
+## Site-wide maintenance
 
-**Users will be informed as soon as the intervention is complete.**
+The asjdfasdfkla
 
 ---
 
-#### Happy Holidays
-Merry Christmas and Happy New Year from all CSCS staff!
+## Course “Introduction to Programming Pascal (P100) with CUDA 8” at CSCS
 
-**CSCS is closed from December 24th, 2016 until January 2nd, 2017.**
+The Swiss National Supercomputing Centre (CSCS) is pleased to announce its 3-day workshop “Introduction to Programming Pascal (P100) with CUDA 8” to be held from Monday, February 27 to Wednesday, March 1, 2017 at CSCS in Lugano, Switzerland.
 
---- -->
+Please visit [the course webpage](http://www.cscs.ch/events/event_detail/index.html?tx_seminars_pi1%5BshowUid%5D=155) for further information.
 
-# Installed EasyBuild packages
+---
+
+# List of Installed EasyBuild packages
+
