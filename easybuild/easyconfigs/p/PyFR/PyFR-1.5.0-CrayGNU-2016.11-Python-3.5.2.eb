@@ -1,0 +1,33 @@
+easyblock = 'PythonPackage'
+
+name = 'PyFR'
+version = '1.5.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://http://www.pyfr.org' 
+
+description = """PyFR is an open-source Python based framework for solving
+advection-diffusion type problems on streaming architectures using the Flux
+Reconstruction approach of Huynh. The framework is designed to solve a range of
+governing systems on mixed unstructured grids containing various element types.
+It is also designed to target a range of hardware platforms via use of an
+in-built domain specific language derived from the Mako templating engine."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_ZIP]
+
+dependencies = [
+    ( 'Python', '3.5.2' ),
+    ( 'pycuda', '2016.1.2', '-Python-3.5.2-cuda-8.0' ),
+    ( 'h5py', '2.6.0', '-Python-3.5.2-serial' ),
+    ( 'Mako', '1.0.4', '-Python-3.5.2' ),
+]
+
+sanity_check_paths = {
+    'files': ['bin/pyfr'],
+    'dirs': ['lib'], 
+}
+
+moduleclass = 'devel'
