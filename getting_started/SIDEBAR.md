@@ -10,7 +10,7 @@ Getting Started
 ### [FAQ](https://eth-cscs.github.io/production/getting_started/faq)
 #### [Queue System](https://eth-cscs.github.io/production/getting_started/faq/#queue-system)
 #### [Accounting](https://eth-cscs.github.io/production/getting_started/faq/#accounting)
-#### [Login](https://eth-cscs.github.io/production/getting_started/faq/faq/#login)
+#### [Login](https://eth-cscs.github.io/production/getting_started/faq/#login)
 #### [Storage and Data Transfer](https://eth-cscs.github.io/production/getting_started/faq/faq/#storage-and-data-transfer)
 #### [Compilation and Optimization](https://eth-cscs.github.io/production/getting_started/faq/#compilation-and-optimization)
 #### [Computing systems](https://eth-cscs.github.io/production/getting_started/faq/#computing-systems)

@@ -1,11 +1,5 @@
 # Latest News
 
-## Site-wide maintenance
-
-The asjdfasdfkla
-
----
-
 ## Course “Introduction to Programming Pascal (P100) with CUDA 8” at CSCS
 
 The Swiss National Supercomputing Centre (CSCS) is pleased to announce its 3-day workshop “Introduction to Programming Pascal (P100) with CUDA 8” to be held from Monday, February 27 to Wednesday, March 1, 2017 at CSCS in Lugano, Switzerland.
