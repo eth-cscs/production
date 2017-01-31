@@ -1,4 +1,4 @@
-# @author gppezzi, lucamar (CSCS)
+# @author Contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
 easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
