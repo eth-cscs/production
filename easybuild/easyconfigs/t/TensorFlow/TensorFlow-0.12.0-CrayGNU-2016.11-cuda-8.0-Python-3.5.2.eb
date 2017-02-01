@@ -15,7 +15,7 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
 
 builddependencies = [
-    ('wheel', '0.29.0', '-Python-%(pyver)s'),
+    ('wheel', '0.30.0', '-Python-%(pyver)s'),
     ('Bazel', '0.4.0'),
 ]
 
