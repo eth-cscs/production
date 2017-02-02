@@ -4,6 +4,7 @@ easyblock = 'Tarball'
 
 name = 'cuDNN'
 version = '5.1'
+versionsuffix = '-cuda-8.0'
 
 homepage = 'https://developer.nvidia.com/cudnn'
 description = """Nvidias deep neural network library."""
@@ -11,7 +12,7 @@ description = """Nvidias deep neural network library."""
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 dependencies = [
-    ('cudatoolkit/8.0.44_GA_2.2.7_g4a6c213-2.1', EXTERNAL_MODULE),
+    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
 ]
 
 sources = ['/apps/daint/UES/6.0.UP02/sandbox-ds/soures/cudnn-8.0-linux-x64-v5.1.tgz']

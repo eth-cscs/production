@@ -5,8 +5,8 @@ easyblock = "CmdCp"
 name = 'TensorFlow'
 version = '0.12.0'
 pyver = '3.5.2'
-cudaversion = '8.0'
-versionsuffix = '-cuda-%s-Python-%s' % (cudaversion, pyver)
+cudaver = '8.0'
+versionsuffix = '-cuda-%s-Python-%s' % (cudaver, pyver)
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -15,7 +15,7 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
 dependencies = [
     ('Python','3.5.2'),
-    ('cuDNN', '5.1', '', True),
+    ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
     ('Bazel', '0.4.0'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
