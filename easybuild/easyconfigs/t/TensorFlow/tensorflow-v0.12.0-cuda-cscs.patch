@@ -48,7 +48,7 @@ index 3ce6b74..fc965c9 100644
    tool_path { name: "ar" path: "/usr/bin/ar" }
    tool_path { name: "compat-ld" path: "/usr/bin/ld" }
 -  tool_path { name: "cpp" path: "/usr/bin/cpp" }
-+  tool_path { name: "cpp" path: "$GCC_PATH/snos/bin/cpp" }
++  tool_path { name: "cpp" path: "/opt/gcc/5.3.0/snos/bin/cpp" }
    tool_path { name: "dwp" path: "/usr/bin/dwp" }
    # As part of the TensorFlow release, we place some cuda-related compilation
    # files in @local_config_cuda//crosstool/clang/bin, and this relative
@@ -57,12 +57,12 @@ index 3ce6b74..fc965c9 100644
  
  %{gcc_host_compiler_includes}
 -  tool_path { name: "gcov" path: "/usr/bin/gcov" }
-+  tool_path { name: "gcov" path: "$GCC_PATH/snos/bin/gcov" }
++  tool_path { name: "gcov" path: "/opt/gcc/5.3.0/snos/bin/gcov" }
 +
-+  cxx_builtin_include_directory: "$GCC_PATH/snos/include"
-+  cxx_builtin_include_directory: "$GCC_PATH/snos/lib/gcc/x86_64-suse-linux/default/include-fixed/"
-+  cxx_builtin_include_directory: "$GCC_PATH/snos/lib/gcc/x86_64-suse-linux/default/include/"
-+  cxx_builtin_include_directory: "$CRAY_CUDATOOLKIT_DIR/include/"
++  cxx_builtin_include_directory: "/opt/gcc/5.3.0/snos/include"
++  cxx_builtin_include_directory: "/opt/gcc/5.3.0/snos/lib/gcc/x86_64-suse-linux/default/include-fixed/"
++  cxx_builtin_include_directory: "/opt/gcc/5.3.0/snos/lib/gcc/x86_64-suse-linux/default/include/"
++  cxx_builtin_include_directory: "/opt/nvidia/cudatoolkit8.0/default/include/"
  
    # C(++) compiles invoke the compiler (as that is the one knowing where
    # to find libraries), but we provide LD so other rules can invoke the linker.
@@ -70,7 +70,7 @@ index 3ce6b74..fc965c9 100644
    # Gold linker only? Can we enable this by default?
    # linker_flag: "-Wl,--warn-execstack"
    # linker_flag: "-Wl,--detect-odr-violations"
-+  linker_flag: "-Wl,-rpath,$GCC_PATH/snos/lib64/"
++  linker_flag: "-Wl,-rpath,/opt/gcc/5.3.0/snos/lib64/"
  
    # Include directory for cuda headers.
 -  cxx_builtin_include_directory: "%{cuda_include_path}"
@@ -91,8 +91,8 @@ index d3bb93c..6a210e5 100755
 +#CPU_COMPILER = ('%{cpu_compiler}')
 +#GCC_HOST_COMPILER_PATH = ('%{gcc_host_compiler_path}')
 +
-+CPU_COMPILER = ('$GCC_PATH/snos/bin/gcc')
-+GCC_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
++CPU_COMPILER = ('/opt/gcc/5.3.0/snos/bin/gcc')
++GCC_HOST_COMPILER_PATH = ('/opt/gcc/5.3.0/snos/bin/gcc')
 +
  
  CURRENT_DIR = os.path.dirname(sys.argv[0])
@@ -104,8 +104,8 @@ index d3bb93c..6a210e5 100755
 +#PREFIX_DIR = os.path.dirname(GCC_HOST_COMPILER_PATH)
 +
 +
-+NVCC_PATH = ('$CRAY_CUDATOOLKIT_DIR/bin/nvcc')
-+LLVM_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
++NVCC_PATH = ('/opt/nvidia/cudatoolkit8.0/default/bin/nvcc')
++LLVM_HOST_COMPILER_PATH = ('/opt/gcc/5.3.0/snos/bin/gcc')
 +AS_PATH = ('/usr/bin/as')
 +PREFIX_DIR = os.path.dirname(AS_PATH)
 +#PREFIX_DIR = os.path.dirname(GCC_HOST_COMPILER_PATH)
