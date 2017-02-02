@@ -12,10 +12,14 @@ description = """An open-source software library for Machine Intelligence."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
+builddependencies = [
+    ('wheel', '0.30.0a0', '-Python-%(pyver)s'),
+    ('Bazel', '0.4.0'),
+]
+
 dependencies = [
     ('Python','3.5.2'),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
-    ('Bazel', '0.4.0'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
 ]
 
