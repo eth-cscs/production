@@ -98,7 +98,7 @@ body > .container {
   padding: 5px;
 }
 
-.cscs-leftbar h3 {
+.cscs-leftbar h1 {
   font-weight: normal;
   text-decoration: none;
   font-size: 14px;
@@ -109,7 +109,7 @@ body > .container {
   padding-left: 5px;
 }
 
-.cscs-leftbar h4 {
+.cscs-leftbar h2 {
   clear: both;
   text-decoration: none;
   font-size: 14px;
@@ -118,6 +118,54 @@ body > .container {
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 20px;
+  font-weight: normal;
+}
+
+.cscs-leftbar h3 {
+  clear: both;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-weight: normal;
+}
+
+.cscs-leftbar h4 {
+  clear: both;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  font-weight: normal;
+}
+
+.cscs-leftbar h5 {
+  clear: both;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  font-weight: normal;
+}
+
+.cscs-leftbar h6 {
+  clear: both;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 60px;
   font-weight: normal;
 }
 
@@ -204,17 +252,3 @@ nav[data-toggle='toc'] .nav > .active > ul {
   color: #106ba1;
   text-decoration: none;
 }
-
-h1 {
-    font-size: 24px;
-}
-h2 {
-    font-size: 20px;
-}
-h3 {
-    font-size: 16px;
-}
-blockquote {
- font-size: 14px;
-}
-

@@ -17,7 +17,7 @@ Please have a look at the CSCS User Portal for more details on how to check your
 
 If you are a member of the group `gid`, you can use the following directive:
 ```
-#SBATCH --account=gidwea
+#SBATCH --account=gid
 ```
 
 This will tell SLURM to charge the compute budget of the selected group for the current job.

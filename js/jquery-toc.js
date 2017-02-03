@@ -17,7 +17,7 @@ $.TOC = function(el, scope, options){
         }
         toc.options = $.extend({},$.TOC.defaultOptions, options);
 
-        if(typeof(scope) == "undefined" || scope == null){ scope = document.body; }
+        if(typeof(toc.options.scope) == "undefined" || toc.options.scope == null){ toc.options.scope = document.body; }
         if(typeof(options) == "undefined" || options == null){ options = ''; }
 
         toc.options.nested = (options.headings) ? false : toc.options.nested; // Can only be nested if headings are default h1-h6
@@ -26,7 +26,8 @@ $.TOC = function(el, scope, options){
         var filtered_tags = (toc.options.nested) ? toc.options.headings.splice(toc.options.startLevel - 1, toc.options.depth) : toc.options.headings; // If nested get only the tags starting with startLevel, and counting to depth
 
         // Cache all the headings and strip those to be ignored
-        toc.$headings = $(scope).find(filtered_tags.join(', ')).filter(function(){
+        scope = toc.options.scope;
+        toc.$headings = $(scope).children(filtered_tags.join(', ')).filter(function(){
             if ($(this).closest(toc.options.ignoreContainers).length === 0){
                 return true;
             }
@@ -129,6 +130,7 @@ $.TOC = function(el, scope, options){
 };
 
 $.TOC.defaultOptions = {
+    scope: "#cscs-markdown-content",
     headings: ["h1","h2"],
     startLevel: 1,
     depth: 3,
