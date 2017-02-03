@@ -24,6 +24,7 @@ pyver = '2.7.12'
 pysuff = '-%s-%s' % (python, pyver)
 dependencies = [
     ('Boost', '1.61.0', pysuff),
+    ('h5py', '2.6.0', pysuff + '-serial'),
 ]
 
 patches = [ 'ParaView-5-2-0.patch' ]
