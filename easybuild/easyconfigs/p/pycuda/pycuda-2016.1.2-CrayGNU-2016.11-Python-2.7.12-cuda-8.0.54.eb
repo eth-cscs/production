@@ -1,4 +1,4 @@
-#easyblock = "PythonPackage"
+# @author: gppezzi
 easyblock = "pycuda"
 
 name = 'pycuda'
@@ -23,9 +23,11 @@ dependencies = [
     ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
 ]
 
-#sanity_check_paths = {
-#    'files': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
-#    'dirs': [],
-#}
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
+}
 
 moduleclass = 'data'
