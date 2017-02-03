@@ -17,10 +17,14 @@ pythonver = '3.5.2'
 pythonshortver = '.'.join(pythonver.split('.')[0:2])
 versionsuffix = '-%s-%s' % (python, pythonver)
 
+cudamajor = '8.0'
+cudaminor = '54'
+cudabuild = '_2.2.8_ga620558-2.1'
+
 dependencies = [
 	     (python, pythonver),
-	     ('cuDNN', '5.1', '', True),
-	     ('pycuda', '2016.1.2', '-Python-%s-cuda-8.0' % pythonver),
+	     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
+	     ('pycuda', '2016.1.2', '-Python-%s-cuda-%s.%s' % (pythonver, cudamajor, cudaminor)),
 	     ('nose-parameterized', '0.5.0', '-Python-%s' % pythonver),
 ]
 
