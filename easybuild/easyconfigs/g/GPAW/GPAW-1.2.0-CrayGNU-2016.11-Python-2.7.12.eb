@@ -17,6 +17,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 patches = ['gpaw-1.2.0-cray.patch']
 
+# Workaround for sanity check (which fails on login nodes)
 options = {'modulename': 'os'}
 
 python = 'Python'
@@ -25,14 +26,14 @@ pythonshortver = '.'.join(pythonver.split('.')[0:2])
 versionsuffix = '-%s-%s' % (python, pythonver)
 
 dependencies = [
-                (python, pythonver),
-                ('ASE', '3.13.0', versionsuffix),
-                ('libxc','3.0.0')
-               ]
+    (python, pythonver),
+    ('ASE', '3.13.0', versionsuffix),
+    ('libxc','3.0.0')
+]
 
 sanity_check_paths = {
-                      'files': ['bin/gpaw%s' % x for x in ['', '-basis', '-mpisim', '-python', '-setup']],
-                      'dirs': ['lib/python%s/site-packages/%s' % (pythonshortver, name.lower())]
-                     }
+    'files': ['bin/gpaw%s' % x for x in ['', '-basis', '-mpisim', '-python', '-setup']],
+    'dirs': ['lib/python%s/site-packages/%s' % (pythonshortver, name.lower())]
+}
 
 moduleclass = 'chem'
