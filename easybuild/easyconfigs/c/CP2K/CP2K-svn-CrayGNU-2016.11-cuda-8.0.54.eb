@@ -13,7 +13,7 @@ description = """CP2K is a freely available (GPL) program, written in Fortran 95
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchainopts = { 'usempi': True, 'openmp': True }
 
-# source file packaged from CP2K SVN trunk
+# source file packaged from: CP2K SVN trunk of Feb 09 2017
 sources = [SOURCELOWER_TAR_BZ2]
 
 cudaversion = '8.0.54'
