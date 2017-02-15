@@ -50,6 +50,11 @@ if  { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
           set     os      "SLES12"
           set     version "7.0"
 }
+
+if  { $hostname=="tave" } {
+          set     os      "SLES12"
+          set     version "7.0"
+}
   
 if { "$os"=="" } {
         puts stderr "L60: host=$host"
