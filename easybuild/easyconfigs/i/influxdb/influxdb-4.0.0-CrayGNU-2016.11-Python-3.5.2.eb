@@ -23,6 +23,7 @@ exts_list = [
     ('inflow', '0.2.0', {
     'source_urls': ['https://pypi.python.org/packages/source/i/inflow'],
     'patches': ['inflow-0.2.0.patch'],
+    # patch needed to workaround the non-ascii character in README.rst
     }),
 ]
 
