@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=f216ca6505038c8f4f6c0dcfb8f9086e)
- * Config saved to config.json and https://gist.github.com/f216ca6505038c8f4f6c0dcfb8f9086e
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=79b4b2bc3a198e308a41fadf731c0f18)
+ * Config saved to config.json and https://gist.github.com/79b4b2bc3a198e308a41fadf731c0f18
  */
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -1109,7 +1109,7 @@ a {
 a:hover,
 a:focus {
   color: #2a6496;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -1270,19 +1270,19 @@ h6 .small,
 }
 h1,
 .h1 {
-  font-size: 30px;
+  font-size: 23px;
 }
 h2,
 .h2 {
-  font-size: 25px;
+  font-size: 19px;
 }
 h3,
 .h3 {
-  font-size: 24px;
+  font-size: 16px;
 }
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 16px;
 }
 h5,
 .h5 {
@@ -1483,7 +1483,7 @@ abbr[data-original-title] {
 blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
-  font-size: 17.5px;
+  font-size: 14px;
   border-left: 5px solid #eeeeee;
 }
 blockquote p:last-child,
@@ -3427,7 +3427,7 @@ fieldset[disabled] .btn-link {
 .btn-link:hover,
 .btn-link:focus {
   color: #2a6496;
-  text-decoration: underline;
+  text-decoration: none;
   background-color: transparent;
 }
 .btn-link[disabled]:hover,
@@ -4177,7 +4177,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 992px) {
   .navbar {
-    border-radius: 4px;
+    border-radius: 0;
   }
 }
 @media (min-width: 992px) {
@@ -4458,8 +4458,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
   margin-bottom: 0;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }

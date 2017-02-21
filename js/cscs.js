@@ -3,8 +3,8 @@
  *
  */
 
-var __cscsSiteNavBar = "";
-var __cscsSiteContainter = "";
+// var __cscsSiteNavBar = "";
+// var __cscsSiteContainter = "";
 var __cscsMarkDown = "";
 
 function cscs_read_file_contents(filename, callback)
@@ -27,15 +27,15 @@ function cscs_read_file_contents(filename, callback)
   rawFile.send(null);
 }
 
-function cscs_setup_site_content(navbarfile, containerfile) {
-  __cscsSiteNavBar = navbarfile;
-  __cscsSiteContainter = containerfile;
+function cscs_setup_site_content(navbarfile, sidebarfile) {
+  // __cscsSiteNavBar = navbarfile;
+  // __cscsSiteSidebar = sidebarfile;
 
   cscs_read_file_contents(navbarfile, function __populate_site_content(argument) {
     document.getElementById("cscs-site-content").innerHTML = argument;
   });
 
-  cscs_read_file_contents(containerfile, function cscs_populate_site_content(argument) {
+  cscs_read_file_contents(sidebarfile, function cscs_populate_site_content(argument) {
 
     marked.setOptions({
       gfm: true,
@@ -90,8 +90,6 @@ function cscs_setup_index_page_content(newsfile)
 {
   cscs_read_file_contents(newsfile, function __populate_site_content(argument) {
     // converting markdown to html
-    // var converter = new Markdown.Converter();
-    // document.getElementById("cscs-markdown-content").innerHTML = converter.makeHtml(argument);
     marked(argument, function (err, content) {
       if (err) throw err;
       document.getElementById("cscs-markdown-content").innerHTML = content;
@@ -117,13 +115,14 @@ function __cscs_show_in_presenter_mode() {
 
   var slideshow = remark.create({sourceUrl: __cscsMarkDown});
 
-  document.addEventListener("keydown", keyDownEscapePresenterMode, false);
-  function keyDownEscapePresenterMode(e) {
-    var keyCode = e.keyCode;
-    if(keyCode == 27) {
-      __cscs_exit_presentation_mode();
-    }
-  }
+  // document.addEventListener("keydown", keyDownEscapePresenterMode, false);
+  // function keyDownEscapePresenterMode(e) {
+  //   var keyCode = e.keyCode;
+  //   if(keyCode == 27) {
+  //     __cscs_exit_presentation_mode();
+  //   }
+  // }
+
   // the click blocks, so forcing full page reload for the click
   var presenterMode = document.getElementById('start-cscs-presenter-mode');
   presenterMode.style.display = 'none';
@@ -145,7 +144,8 @@ function __cscs_email_protector() {
 }
 
 function __cscs_mouseover_link() {
-  $("h1, h2").each(function(index, element) {
+  
+  $('#cscs-markdown-content').children("h1, h2").each(function(index, element) {
     $(element).hover(
         function() {
             $(this).wrap(function() {
@@ -193,40 +193,44 @@ function __cscs_create_toc() {
 
 // This function destroys the remark presentation and restores the CSCS website
 function __cscs_exit_presentation_mode() {
-  // if ( $('html').hasClass('remark-container') ) {
-  //     $('html').removeClass('remark-container');
-  //     if ( $('body').hasClass('remark-container') ) {
-  //         $('body').removeClass('remark-container');
-  //     }
-  //     if ( $('body').hasClass('remark-presenter-mode') ) {
-  //         $('body').removeClass('remark-presenter-mode');
-  //     }
-  //     if ($(".remark-notes-area").length > 0) {
-  //         $(".remark-notes-area").remove();
-  //     }
-  //     if ($(".remark-slides-area").length > 0) {
-  //         $(".remark-slides-area").remove();
-  //     }
-  //     if ($(".remark-preview-area").length > 0) {
-  //         $(".remark-preview-area").remove();
-  //     }
-  //     if ($(".remark-backdrop").length > 0) {
-  //         $(".remark-backdrop").remove();
-  //     }
-  //     if ($(".remark-help").length > 0) {
-  //         $(".remark-help").remove();
-  //     }
-  //     if ($(".remark-pause").length > 0) {
-  //         $(".remark-pause").remove();
-  //     }
-  //     document.getElementById("cscs-site-content").innerHTML = null;
-  //     cscs_setup_site_content(__cscsSiteNavBar, __cscsSiteContainter);
-  //     cscs_setup_markdown_page_content(__cscsMarkDown);
-  //     __cscs_create_toc();
+  // if ($.browser.mozilla) {
+  //   if ( $('html').hasClass('remark-container') ) {
+  //       $('html').removeClass('remark-container');
+  //       if ( $('body').hasClass('remark-container') ) {
+  //           $('body').removeClass('remark-container');
+  //       }
+  //       if ( $('body').hasClass('remark-presenter-mode') ) {
+  //           $('body').removeClass('remark-presenter-mode');
+  //       }
+  //       if ($(".remark-notes-area").length > 0) {
+  //           $(".remark-notes-area").remove();
+  //       }
+  //       if ($(".remark-slides-area").length > 0) {
+  //           $(".remark-slides-area").remove();
+  //       }
+  //       if ($(".remark-preview-area").length > 0) {
+  //           $(".remark-preview-area").remove();
+  //       }
+  //       if ($(".remark-backdrop").length > 0) {
+  //           $(".remark-backdrop").remove();
+  //       }
+  //       if ($(".remark-help").length > 0) {
+  //           $(".remark-help").remove();
+  //       }
+  //       if ($(".remark-pause").length > 0) {
+  //           $(".remark-pause").remove();
+  //       }
+  //       document.getElementById("cscs-site-content").innerHTML = null;
+  //       cscs_setup_site_content(__cscsSiteNavBar, __cscsSiteSidebar);
+  //       cscs_setup_markdown_page_content(__cscsMarkDown);
+  //       __cscs_create_toc();
+  //       console.log('ciao');
+  //   }    
+  // } else {
+    if(document.location.domain == null)
+      window.location.assign(document.location.pathname);
+    else
+      window.location.assign(document.location = document.location.domain+document.location.pathname);
   // }
-  if(document.location.domain == null)
-    document.location = document.location.pathname;
-  else
-    document.location = document.location.domain+document.location.pathname;
 }
 
