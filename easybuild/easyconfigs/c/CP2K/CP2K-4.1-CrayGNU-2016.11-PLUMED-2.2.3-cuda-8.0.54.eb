@@ -1,4 +1,6 @@
 # contributed by Luca Marsella (CSCS)
+# I had to shorten the BUILDPATH to build successfully:
+# export EASYBUILD_BUILDPATH=/dev/shm/lucamar
 easyblock = 'MakeCp'
 
 name = 'CP2K'
