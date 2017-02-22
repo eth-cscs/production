@@ -1,0 +1,12 @@
+diff -Naur inflow-0.2.0.ori/README.rst inflow-0.2.0/README.rst
+--- inflow-0.2.0.ori/README.rst	2016-10-11 17:05:51.000000000 +0200
++++ inflow-0.2.0/README.rst	2017-02-17 17:18:20.878840550 +0100
+@@ -48,7 +48,7 @@
+ License
+ -------
+ 
+-Inflow is licensed under `Mozilla Public License`_. © 2016 `Advanced Climate
++Inflow is licensed under `Mozilla Public License`_. 2016 `Advanced Climate
+ Systems`_.
+ 
+ .. External References:
