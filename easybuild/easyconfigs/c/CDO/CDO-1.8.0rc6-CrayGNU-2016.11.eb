@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
-version = '1.7.2'
+version = '1.8.0rc6' # = '13660'
 
 homepage = 'https://code.zmaw.de/projects/cdo'
 description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
@@ -10,8 +10,9 @@ description = """CDO is a collection of command line Operators to manipulate and
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchainopts = {'opt': True, 'pic': True}
 
-sources = [SOURCELOWER_TAR_GZ]
-source_urls = ['https://code.zmaw.de/attachments/download/12760/']
+sources = ['cdo-current.tar.gz']
+source_urls = ['https://code.zmaw.de/attachments/download/13660/']
+checksums = [ '12fce267c5fe7ad7317c1cfbf0b72877' ]
 
 dependencies = [
     ('netCDF', '4.4.1.1'),
@@ -22,7 +23,10 @@ dependencies = [
     # No MPI support
 ]
 
+#preconfigopts = 'export NC_CONFIG=`which nc-config` && '
+
 preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
+
 configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
 
 sanity_check_paths = {

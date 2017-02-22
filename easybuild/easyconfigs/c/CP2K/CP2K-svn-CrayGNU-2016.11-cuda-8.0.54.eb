@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-version = "4.1"
+version = "svn"
 
 homepage = 'http://www.cp2k.org/'
 description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
@@ -13,8 +13,8 @@ description = """CP2K is a freely available (GPL) program, written in Fortran 95
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchainopts = { 'usempi': True, 'openmp': True }
 
+# source file packaged from: CP2K SVN trunk of Feb 09 2017
 sources = [SOURCELOWER_TAR_BZ2]
-source_urls = [SOURCEFORGE_SOURCE]
 
 cudaversion = '8.0.54'
 versionsuffix = '-cuda-%s' % cudaversion
@@ -32,10 +32,8 @@ builddependencies = [
     ('Bison', '3.0.4'),
 ]
 
-# patch to ./src/dbcsr/libsmm_acc/libcusmm/kernels/cusmm_common.h needed with CUDA 8
-prebuildopts = " sed -i -e '/static/i #if (__CUDACC_VER_MAJOR__<8) || ( defined(__CUDA_ARCH__) && (__CUDA_ARCH__<600) )' -e '/#if defined/i #endif' ./src/dbcsr/libsmm_acc/libcusmm/kernels/cusmm_common.h && "
 # add define flags
-prebuildopts += " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+prebuildopts = " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 # add includes
 prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 # add libraries 
@@ -44,7 +42,7 @@ prebuildopts += " sed -i -e '/LIBS     +=/a LIBS     += -lcudart -lcublas -lcuff
 prebuildopts += " sed -i -e 's/-arch sm_35/-arch sm_60/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 # correct link to libsmm to match Intel Haswell architecture
 prebuildopts += " sed -i -e 's/sandybridge_gcc_4.9.0/haswell/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
-prebuildopts += " pushd makefiles && "
+prebuildopts += " cat ./arch/CRAY-XC30-gfortran-cuda.psmp && pushd makefiles && "
 
 # build type
 buildopts = 'ARCH=CRAY-XC30-gfortran-cuda VERSION=psmp'

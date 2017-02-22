@@ -1,0 +1,46 @@
+easyblock = 'CMakePythonPackage'
+
+name = 'libgpuarray'
+version = '0.6.0'
+
+homepage = 'https://github.com/Theano/libgpuarray'
+description = """Libgpuarray: Make a common GPU ndarray(n dimensions array) that can be reused by all
+projects that is as future proof as possible, while keeping it easy to use for
+simple need/quick test."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://github.com/Theano/libgpuarray/archive/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('Python','3.5.2'),
+]
+
+builddependencies = [
+    ('CMake', '3.6.0'),
+    ('Cython', '0.25.2','-Python-%(pyver)s')
+]
+
+runtest = False
+configopts = "-DCMAKE_BUILD_TYPE=Release"
+
+postinstallcmds = [
+    'export CPATH=$CPATH:%(installdir)s/include && export LIBRARY_PATH=$LIBRARY_PATH:%(installdir)s/lib && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%(installdir)s/lib && python setup.py build',
+    'PYTHONUSERBASE=%(installdir)s; python setup.py install --user'
+]
+
+exts_filter = ('python -c "import pygpu"', "")
+
+sanity_check_paths={
+    'files' : ['include/gpuarray/array.h'],
+    'dirs': ['lib', 'include'],
+}
+
+modextrapaths = {
+    'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
+}
+
+skipsteps = ['test']
+
+moduleclass = 'lib'
