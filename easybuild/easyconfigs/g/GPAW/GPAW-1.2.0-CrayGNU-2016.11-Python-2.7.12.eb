@@ -1,0 +1,39 @@
+# contributed by Luca Marsella (CSCS) and GPPezzi (CSCS)
+#
+easyblock = "PythonPackage"
+
+name = 'GPAW'
+version = '1.2.0'
+
+homepage = 'https://wiki.fysik.dtu.dk/gpaw/'
+description = """GPAW is a density-functional theory (DFT) Python code based on the projector-augmented wave (PAW)
+ method and the atomic simulation environment (ASE). It uses real-space uniform grids and multigrid methods or 
+ atom-centered basis-functions."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://pypi.python.org/packages/source/g/gpaw/']
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = ['gpaw-1.2.0-cray.patch']
+
+# Workaround for sanity check (which fails on login nodes)
+options = {'modulename': 'os'}
+
+python = 'Python'
+pythonver = '2.7.12'
+pythonshortver = '.'.join(pythonver.split('.')[0:2])
+versionsuffix = '-%s-%s' % (python, pythonver)
+
+dependencies = [
+    (python, pythonver),
+    ('ASE', '3.13.0', versionsuffix),
+    ('libxc','3.0.0')
+]
+
+sanity_check_paths = {
+    'files': ['bin/gpaw%s' % x for x in ['', '-basis', '-mpisim', '-python', '-setup']],
+    'dirs': ['lib/python%s/site-packages/%s' % (pythonshortver, name.lower())]
+}
+
+moduleclass = 'chem'

@@ -1,13 +1,13 @@
 easyblock = 'Bundle'
 
 name = 'perftools-cscs'
-version = '643openacc'
+version = '643-openacc'
 
 homepage = 'http://user.cscs.ch/compiling_and_optimizing/performance_tools/craypat/'
 description = """CrayPat gives performance details of application code running on Cray systems."""
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-dependencies = [ ( 'perftools-base-cscs', '643openacc' ), ]
+dependencies = [ ( 'perftools-base-cscs', '643-openacc' ), ]
 
 modtclfooter = """
 # HOSTNAME ------------------------------------------------------
