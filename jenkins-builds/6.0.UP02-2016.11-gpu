@@ -28,6 +28,12 @@
  Octave-4.2.0-CrayGNU-2016.11.eb
  perftools-base-cscs-643nogpu.eb
  perftools-cscs-643nogpu.eb
+ perftools-base-cscs-645nogpu.eb
+ perftools-cscs-645nogpu.eb
+ perftools-base-cscs-645cuda.eb
+ perftools-cscs-645cuda.eb
+ perftools-base-cscs-645openacc.eb
+ perftools-cscs-645openacc.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
