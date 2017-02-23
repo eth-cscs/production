@@ -25,8 +25,6 @@
  Octave-4.2.0-CrayGNU-2016.11.eb
  perftools-base-cscs-643nogpu.eb
  perftools-cscs-643nogpu.eb
- perftools-base-cscs-645nogpu.eb
- perftools-cscs-645nogpu.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
  R-3.3.2-CrayGNU-2016.11.eb
  Score-P-3.0-CrayCCE-2016.11.eb
