@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'perftools-base-cscs'
-version = '643openacc'
+version = '643-nogpu'
 
 homepage = 'http://user.cscs.ch/compiling_and_optimizing/performance_tools/craypat/'
 description = """CrayPat gives performance details of application code running on Cray systems."""
@@ -16,7 +16,7 @@ modtclfooter = """#%Module##############################################
 
 set    PERFTOOLS_LEVEL		"6.4.3"
 set    PERFTOOLS_PREFIX     "/opt/cray/pe"
-set    PERFTOOLS_CURPATH	"/apps/common/UES/proposals/pug.git/perftools-lite/6.4.3/openacc"
+set    PERFTOOLS_CURPATH	"/apps/common/UES/proposals/pug.git/perftools-lite/6.4.3/nogpu"
 #ORI: ${PERFTOOLS_PREFIX}/perftools/${PERFTOOLS_LEVEL}
 set    LICENSE_PATH 		${PERFTOOLS_PREFIX}/perftools
 setenv PERFTOOLS_VERSION	${PERFTOOLS_LEVEL}
