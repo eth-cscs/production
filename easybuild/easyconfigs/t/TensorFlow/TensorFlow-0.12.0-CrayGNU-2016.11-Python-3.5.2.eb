@@ -31,6 +31,8 @@ patches = [('tensorflow-v%(version)s-cscs.patch')]
 with_configure = False
 
 build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
+# Exporting CC breaks this build on Cray
+build_str += "unset CC && "
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
 build_str += "bazel build --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package &&"
