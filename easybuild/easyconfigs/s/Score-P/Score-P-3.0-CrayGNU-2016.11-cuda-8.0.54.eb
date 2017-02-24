@@ -63,6 +63,5 @@ sanity_check_paths = {
 
 # Ensure that local metric documentation is found by Cube GUI
 modextrapaths = { 'CUBE_DOCPATH': 'share/doc/scorep/profile' }
-modextravars = { 'CRAYPE_LINK_TYPE' : 'dynamic' }
 
 moduleclass = 'perf'
