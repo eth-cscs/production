@@ -51,6 +51,8 @@ buildopts = 'ARCH=CRAY-XC30-gfortran-cuda VERSION=psmp'
  
 files_to_copy = [(['./exe/CRAY-XC30-gfortran-cuda/cp2k.psmp'],'bin')]
 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
 sanity_check_paths = {
     'files': ['bin/cp2k.psmp'],
     'dirs': [],
