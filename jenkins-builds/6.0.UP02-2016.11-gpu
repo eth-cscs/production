@@ -1,9 +1,12 @@
  Amber-16-2016.11-CrayGNU-2016.11-serial.eb
  Amber-16-2016.11-CrayGNU-2016.11-parallel.eb
  Amber-16-2016.11-CrayGNU-2016.11-cuda-8.0.54.eb
+ Boost-1.63.0-CrayGNU-2016.11-Python-3.5.2.eb
  Boost-1.62.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Boost-1.63.0-CrayGNU-2016.11-Python-2.7.12.eb
  Boost-1.61.0-CrayGNU-2016.11-Python-2.7.12.eb
  CDO-1.7.2-CrayGNU-2016.11.eb
+ CDO-1.8.0rc6-CrayGNU-2016.11.eb
  CMake-3.6.0.eb
  CP2K-4.1-CrayGNU-2016.11-cuda-8.0.54.eb
  CPMD-4.1-CrayIntel-2016.11.eb
@@ -23,8 +26,14 @@
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
  ParaView-5.2.0-CrayGNU-2016.11.eb
  Octave-4.2.0-CrayGNU-2016.11.eb
- perftools-base-cscs-643nogpu.eb
- perftools-cscs-643nogpu.eb
+ perftools-base-cscs-643-nogpu.eb
+ perftools-cscs-643-nogpu.eb
+ perftools-base-cscs-645-nogpu.eb
+ perftools-cscs-645-nogpu.eb
+ perftools-base-cscs-645-cuda.eb
+ perftools-cscs-645-cuda.eb
+ perftools-base-cscs-645-openacc.eb
+ perftools-cscs-645-openacc.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
@@ -34,6 +43,7 @@
  Score-P-3.0-CrayGNU-2016.11.eb
  Score-P-3.0-CrayIntel-2016.11.eb
  Score-P-3.0-CrayPGI-2016.11.eb
+ Score-P-3.0-CrayGNU-2016.11-cuda-8.0.54.eb
  VASP-5.4.1-CrayIntel-2016.11.eb
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
  Visit-2.12.0-CrayGNU-2016.11.eb
