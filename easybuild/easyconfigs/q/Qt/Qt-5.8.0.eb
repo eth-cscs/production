@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 name = 'Qt'
 version = '5.8.0'
 
@@ -9,7 +10,7 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 source_urls = [ 'http://master.qt-project.org/archive/qt/%(version_major_minor)s/%(version)s/' ]
 sources = [ '%(namelower)s-everywhere-opensource-src-%(version)s.tar.gz' ]
 
-prefix_opt = ' -prefix '
+#prefix_opt = ' -prefix '
 configopts  = ' -opensource -nomake tests -nomake examples -confirm-license'
 configopts += ' -shared -no-accessibility -no-sql-mysql -no-sql-sqlite'
 configopts += ' -no-pulseaudio -no-alsa -no-cups'
