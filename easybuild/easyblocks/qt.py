@@ -26,6 +26,7 @@
 EasyBuild support for building and installing Qt, implemented as an easyblock
 
 @author: Kenneth Hoste (Ghent University)
+@author: Luca Marsella (CSCS)
 """
 import os
 from distutils.version import LooseVersion
