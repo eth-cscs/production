@@ -80,6 +80,8 @@ class EB_Qt(ConfigureMake):
 
         if self.cfg['prefix_opt']:
            cmd = "%s ./configure %s%s %s" % (self.cfg['preconfigopts'], self.cfg['prefix_opt'], self.installdir, self.cfg['configopts'])
+        elif LooseVersion(self.version) >= LooseVersion('5.8'):
+           cmd = "%s ./configure -prefix %s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
         else:
            cmd = "%s ./configure --prefix=%s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
 
