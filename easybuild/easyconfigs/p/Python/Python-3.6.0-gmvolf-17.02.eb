@@ -1,5 +1,5 @@
 name = 'Python'
-version = "2.7.13"
+version = "3.6.0"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
@@ -10,7 +10,7 @@ toolchainopts = {'pic': True}
 source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 
-patches = ['unixccompiler-Python-2.7.9.patch']
+#patches = ['unixccompiler-Python-2.7.9.patch']
 
 # python needs bzip2 to build the bz2 package
 dependencies = [
