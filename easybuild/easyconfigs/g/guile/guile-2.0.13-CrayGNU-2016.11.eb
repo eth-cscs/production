@@ -13,20 +13,20 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = [GNU_SOURCE]
 
 dependencies = [
-                ('GMP', '6.1.2'),
-                ('gc', '7.6.0'),
-                ('libunistring', '0.9.7'),
-                ('libffi', '3.2.1'),
-                ('libreadline', '7.0'),
-                ('libtool', '2.4.6'),
-               ]
+    ('GMP', '6.1.2'),
+    ('gc', '7.6.0'),
+    ('libunistring', '0.9.7'),
+    ('libffi', '3.2.1'),
+    ('libreadline', '7.0'),
+    ('libtool', '2.4.6'),
+]
 
 configopts = " --enable-error-on-warning=no"
 preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
 
 sanity_check_paths = {
-                      'files': ["bin/%s" % x for x in ["guile", 'guile-config', 'guile-snarf', 'guile-tools']] + ["lib/libguile-2.0.a", "include/guile/2.0/libguile.h"],
-                      'dirs': []
-                     }
+    'files': ["bin/%s" % x for x in ["guile", 'guile-config', 'guile-snarf', 'guile-tools']] + ["lib/libguile-2.0.a", "include/guile/2.0/libguile.h"],
+    'dirs': []
+}
 
 moduleclass = 'devel'
