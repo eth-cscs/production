@@ -1,53 +1,30 @@
 diff --git a/configure-cscs.sh b/configure-cscs.sh
-new file mode 100755
-index 0000000..dfb5e71
+new file mode 100644
+index 0000000..799fdbf
 --- /dev/null
 +++ b/configure-cscs.sh
-@@ -0,0 +1,26 @@
+@@ -0,0 +1,16 @@
 +#!/bin/bash
-+
-+sed -i s\@'$GCC_PATH'@"$GCC_PATH"@g third_party/gpus/crosstool/CROSSTOOL.tpl
-+sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@"$CRAY_CUDATOOLKIT_DIR"@g third_party/gpus/crosstool/CROSSTOOL.tpl
-+
-+sed -i s\@'$GCC_PATH'@"$GCC_PATH"@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
-+sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@"$CRAY_CUDATOOLKIT_DIR"@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
 +
 +CONF_IN="configure.in"
 +
 +echo $EBROOTPYTHON"/bin/python" > $CONF_IN
-+echo "n
-+n" >> $CONF_IN
++echo "n" >> $CONF_IN
++echo "n" >> $CONF_IN
 +echo $EBROOTPYTHON"/lib/python3.5/site-packages" >> $CONF_IN
-+echo "y" >> $CONF_IN
-+echo $GCC_PATH"/bin/gcc" >> $CONF_IN
-+echo "8.0" >> $CONF_IN
-+echo $CRAY_CUDATOOLKIT_DIR >> $CONF_IN
-+echo "5" >> $CONF_IN
-+echo $EBROOTCUDNN >> $CONF_IN
++echo "n" >> $CONF_IN
++echo "n" >> $CONF_IN
 +
 +cat $CONF_IN
 +echo "---"
 +./configure < $CONF_IN
 +
 +exit
-diff --git a/tensorflow/python/BUILD b/tensorflow/python/BUILD
-index 34f583f..a13b9af 100644
---- a/tensorflow/python/BUILD
-+++ b/tensorflow/python/BUILD
-@@ -1841,7 +1841,7 @@ py_library(
- # Just used by tests.
- tf_cuda_library(
-     name = "construction_fails_op",
--    testonly = 1,
-+    testonly = 0,
-     srcs = ["client/test_construction_fails_op.cc"],
-     deps = [
-         "//tensorflow/core",
 diff --git a/tensorflow/workspace.bzl b/tensorflow/workspace.bzl
-index 4850741..e624875 100644
+index 06e16cd..d1ac054 100644
 --- a/tensorflow/workspace.bzl
 +++ b/tensorflow/workspace.bzl
-@@ -225,7 +225,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
+@@ -228,7 +228,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
  
    native.new_http_archive(
      name = "zlib_archive",
@@ -57,7 +34,7 @@ index 4850741..e624875 100644
      strip_prefix = "zlib-1.2.8",
      build_file = str(Label("//:zlib.BUILD")),
 diff --git a/third_party/gpus/crosstool/CROSSTOOL.tpl b/third_party/gpus/crosstool/CROSSTOOL.tpl
-index 3ce6b74..9a2bd38 100644
+index 3ce6b74..fc965c9 100644
 --- a/third_party/gpus/crosstool/CROSSTOOL.tpl
 +++ b/third_party/gpus/crosstool/CROSSTOOL.tpl
 @@ -44,7 +44,7 @@ toolchain {
@@ -96,7 +73,7 @@ index 3ce6b74..9a2bd38 100644
    compilation_mode_flags {
      mode: DBG
 diff --git a/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl b/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
-index d3bb93c..b172072 100755
+index d3bb93c..6a210e5 100755
 --- a/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
 +++ b/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
 @@ -46,13 +46,25 @@ import sys
