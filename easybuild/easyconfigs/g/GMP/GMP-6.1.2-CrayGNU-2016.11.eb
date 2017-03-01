@@ -16,10 +16,8 @@ source_urls = [GNU_SOURCE]
 
 preconfigopts = 'export CFLAGS="$CFLAGS -mcmodel=large" && '
 
-# configopts = '--host=broadwell-pc-linux-gnu --build=sandybridge-pc-linux-gnu'
-configopts = ' --build=sandybridge-pc-linux-gnu'
-
-#runtest = 'check'
+# the output of config.guess is used by default and can be changed with --build
+# configopts = ' --build=haswell-pc-linux-gnu'
 
 sanity_check_paths = {
     'files': ['lib/libgmp.%s' % SHLIB_EXT, 'include/gmp.h'],
