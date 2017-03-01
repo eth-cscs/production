@@ -16,7 +16,7 @@ dependencies = [
     ('netCDF', '4.4.1.1'),
     ('HDF5', '1.8.18'),
     ('UDUNITS', '2.2.24', '', True),
-    ('libpng', '1.6.21'), 
+    ('libpng', '1.6.28'), 
     ('zlib', '1.2.8'),
 ]
 
