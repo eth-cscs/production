@@ -6,7 +6,7 @@ homepage = 'http://serf.apache.org/'
 description = """The serf library is a high performance C-based HTTP client library
  built upon the Apache Portable Runtime (APR) library"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 source_urls = ['https://archive.apache.org/dist/%(namelower)s']
 sources = [SOURCELOWER_TAR_BZ2]
@@ -16,7 +16,7 @@ sources = [SOURCELOWER_TAR_BZ2]
 #    ('%(name)s-%(version)s_SCons_ld_lib.patch'),
 #]
 
-builddependencies = [('SCons', '2.5.1', '-Python-2.7.12')]
+builddependencies = [('SCons', '2.5.1', '-Python-bare-2.7.13')]
 
 osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
