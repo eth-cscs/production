@@ -15,7 +15,7 @@ sources = ['sqlite-autoconf-%s.tar.gz' % version_str]
 
 dependencies = [
     ('libreadline', '7.0'),
-    ('Tcl', '8.6.4'),
+    ('Tcl', '8.6.6'),
 ]
 
 parallel = 1

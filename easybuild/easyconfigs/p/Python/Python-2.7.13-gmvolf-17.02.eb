@@ -1,5 +1,5 @@
 name = 'Python'
-version = "2.7.12"
+version = "2.7.13"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
@@ -18,28 +18,28 @@ dependencies = [
     ('zlib', '1.2.8'),
     ('libreadline', '7.0'),
     ('ncurses', '6.0'),
-    ('libpng', '1.6.21'),
+    ('libpng', '1.6.28'),
     ('freetype', '2.7.1'),
     ('SQLite', '3.9.2'),
-    ('Tk', '8.6.4', '-no-X11' ),
-    ('GMP', '6.1.0'),
+    ('Tk', '8.6.6', '-no-X11' ),
+    ('GMP', '6.1.1'),
 ]
 
 # enviroment variable to use package repository with pip
-modextravars = {
-    'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
-    'SSL_CERT_FILE':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
-}
+#modextravars = {
+#    'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
+#    'SSL_CERT_FILE':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
+#}
 
 # rpath is needed for buiding TensorFlow
 configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
 
-osdependencies = [('openssl-devel')]
+#osdependencies = [('openssl-devel')]
 
 # order is important!
-# package versions updated Oct 8th 2016
+# package versions updated Mar 1st 2017
 exts_list = [
-    ('setuptools', '28.3.0', {
+    ('setuptools', '34.3.0', {
         'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
     }),
     ('pip', '9.0.1', {
@@ -48,7 +48,7 @@ exts_list = [
     ('nose', '1.3.7', {
         'source_urls': ['http://pypi.python.org/packages/source/n/nose/'],
     }),
-    ('numpy', '1.11.2', {
+    ('numpy', '1.12.0', {
         'source_urls': ['http://pypi.python.org/packages/source/n/numpy/'],
 #         'patches': [ 'numpy-1.8.0-mkl.patch', ],
     }),
