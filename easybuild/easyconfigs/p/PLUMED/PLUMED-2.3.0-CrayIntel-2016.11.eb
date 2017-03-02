@@ -22,9 +22,10 @@ sources = ['v%(version)s.tar.gz']
 dependencies = [
     ('zlib', '1.2.11'),
     ('GSL', '2.3'),
+    ('libmatheval','1.1.11')
 ]
 
-configopts = ' --exec-prefix=%(installdir)s --enable-gsl --enable-modules=all'
+configopts = ' --exec-prefix=%(installdir)s --enable-gsl --enable-matheval --enable-modules=all'
 prebuildopts = 'source sourceme.sh && '
 
 sanity_check_paths = {
