@@ -13,7 +13,7 @@ toolchainopts = {'opt': True, 'pic': True}
 
 dependencies = [
     ('flex', '2.5.39'),
-    ('Bison', '3.0.4'),
+    ('Bison', '3.0.4', '', True),
     ('Szip', '2.1'),
     ('JasPer', '1.900.1'),
 ]
