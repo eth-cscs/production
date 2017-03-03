@@ -25,16 +25,8 @@ dependencies = [
     ('GMP', '6.1.1'),
 ]
 
-# enviroment variable to use package repository with pip
-#modextravars = {
-#    'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
-#    'SSL_CERT_FILE':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
-#}
-
 # rpath is needed for buiding TensorFlow
 configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
-
-#osdependencies = [('openssl-devel')]
 
 # order is important!
 # package versions updated Mar 1st 2017

@@ -15,7 +15,6 @@ toolchain = {'name': 'dummy', 'version': ''}
 # --- compiler:
 comp_name = 'GCC'
 comp_version = '5.4.0-binutils-2.27-libiberty'
-# comp = (comp_name, comp_version)
 # --- gmvapich2
 comp_mpi_tc_name = 'gmvapich2'
 comp_mpi_tc_ver = "%s" % version
@@ -30,8 +29,8 @@ blassuff = '-LAPACK-3.6.1'
 # we need GCC and MVAPICH2 as explicit dependencies instead of gmvapich2 toolchain
 # because of toolchain preparation functions (?)
 dependencies = [
-    ('GCC', '5.4.0-binutils-2.27-libiberty'),
-    # (comp_name, comp_version),
+#    ('GCC', '5.4.0-binutils-2.27-libiberty'),
+    (comp_name, comp_version),
     ('MVAPICH2', '2.2-GCC-5.4.0-binutils-2.27-libiberty'),
     (blaslib, blasver, blassuff, (comp_name, comp_version) ),
     ('FFTW', '3.3.6-pl1', '', comp_mpi_tc),
