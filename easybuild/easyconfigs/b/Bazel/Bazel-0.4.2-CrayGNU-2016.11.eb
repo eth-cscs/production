@@ -1,6 +1,6 @@
 # @author: gppezzi, marcelsc
 
-easyblock = "CmdCp"
+easyblock = "Binary"
 
 name = 'Bazel'
 version = '0.4.2'
@@ -10,19 +10,15 @@ description = """Correct, reproducible, fast builds for everyone"""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
-builddependencies = [
-    ('Bazel', '0.4.0'),
-]
-
 dependencies = [
     ('SWIG', '3.0.10', '-Python-3.5.2'),
     ('java/jdk1.8.0_51', EXTERNAL_MODULE),
 ]
 
-sources = ['%(version)s.tar.gz']
-source_urls = ['https://github.com/bazelbuild/bazel/archive/']
+sources = ['bazel-%(version)s-installer-linux-x86_64.sh']
+source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
 
-cmds_map = [('.*', "bazel build //src:bazel")]
+install_cmd = 'chmod +x bazel-0.4.2-installer-linux-x86_64.sh && ./bazel-0.4.2-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s --bazelrc=%(installdir)s/bazelrc'
 
 files_to_copy = [(['output/bazel'], 'bin')]
 
