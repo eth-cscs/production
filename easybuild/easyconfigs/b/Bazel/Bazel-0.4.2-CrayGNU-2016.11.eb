@@ -18,7 +18,7 @@ dependencies = [
 sources = ['bazel-%(version)s-installer-linux-x86_64.sh']
 source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
 
-install_cmd = 'chmod +x bazel-0.4.2-installer-linux-x86_64.sh && ./bazel-0.4.2-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s --bazelrc=%(installdir)s/bazelrc'
+install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s --bazelrc=%(installdir)s/bazelrc'
 
 files_to_copy = [(['output/bazel'], 'bin')]
 
