@@ -29,7 +29,7 @@ dependencies = [
 ]
 
 buildcmd =  "export CRAY_ADD_RPATH=yes && "
-buildcmd += "mv ../libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ &&"
+buildcmd += "cp -ra ../libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ &&"
 buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 && "
 buildcmd += "cd framework && "
 buildcmd += "METHOD='opt' make -j 16 && "
@@ -40,14 +40,16 @@ buildcmd += "METHOD='opt' make -j 16 && "
 buildcmd += "METHOD='dbg' make -j 16 && "
 buildcmd += "METHOD='oprof' make -j 16"
 
-cmds_map = [
-    ('.*', buildcmd),
-]
+keepsymlinks = True
 
-files_to_copy = [('*')]
+cmds_map = [('.*', buildcmd)]
+
+files_to_copy = [
+    'COPYING', 'COPYRIGHT', 'LICENSE', 'README.md', 'docs', 'examples', 'framework', 'gui', 
+    'libmesh', 'modules', 'python', 'scripts', 'test', 'tutorials', 'unit']
 
 sanity_check_paths={
-    'files': [''],
+    'files': ['modules/run_tests'],
     'dirs': ['modules'],
 }
 
