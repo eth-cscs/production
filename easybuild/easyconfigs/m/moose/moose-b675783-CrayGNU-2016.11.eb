@@ -1,4 +1,4 @@
-# contributed by wsayer and gppezzi (CSCS)
+# contributed by @wsawyer and @gppezzi (CSCS)
 easyblock = "CmdCp"
 
 name = 'moose'
@@ -19,12 +19,11 @@ sources = [
     'cc49a536e66ef481f6229805656987cb87db6465.zip', 
 ]
 
-builddependencies = [
+dependencies = [
     ('CMake', '3.6.0'),
     ('cray-tpsl/16.07.1', EXTERNAL_MODULE),
     ('cray-petsc/3.7.2.1', EXTERNAL_MODULE),
     ('cray-hdf5-parallel/1.8.16', EXTERNAL_MODULE), # should not be necessary for --disable-hdf5 but seems to be
-#    ('cray-netcdf/4.4.1', EXTERNAL_MODULE),
     ('Boost', '1.61.0', '-Python-2.7.12'),
     ('GSL', '2.1'),
 ]
@@ -36,7 +35,7 @@ buildcmd += "cd framework && "
 buildcmd += "METHOD='opt' make -j 16 && "
 buildcmd += "METHOD='dbg' make -j 16 && "
 buildcmd += "METHOD='oprof' make -j 16 && "
-buildcmd += "cd modules && "
+buildcmd += "cd ../modules && "
 buildcmd += "METHOD='opt' make -j 16 && "
 buildcmd += "METHOD='dbg' make -j 16 && "
 buildcmd += "METHOD='oprof' make -j 16"
