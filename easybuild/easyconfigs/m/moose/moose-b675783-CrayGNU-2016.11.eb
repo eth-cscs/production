@@ -28,31 +28,31 @@ dependencies = [
     ('GSL', '2.1'),
 ]
 
-buildcmd =  "cd %(installdir)s && "
-buildcmd += "export CRAY_ADD_RPATH=yes && "
+buildcmd =  "export CRAY_ADD_RPATH=yes && "
+buildcmd += "cp -ra ../libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ &&"
 buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 && "
 buildcmd += "cd framework && "
-buildcmd += "METHOD='opt' make -j 16 && "
-buildcmd += "METHOD='dbg' make -j 16 && "
-buildcmd += "METHOD='oprof' make -j 16 && "
+buildcmd += "METHOD='opt' make -j 20 && "
+buildcmd += "METHOD='dbg' make -j 20 && "
+buildcmd += "METHOD='oprof' make -j 20 && "
 buildcmd += "cd ../modules && "
-buildcmd += "METHOD='opt' make -j 16 && "
-buildcmd += "METHOD='dbg' make -j 16 && "
-buildcmd += "METHOD='oprof' make -j 16"
+buildcmd += "METHOD='opt' make -j 20 && "
+buildcmd += "METHOD='dbg' make -j 20 && "
+buildcmd += "METHOD='oprof' make -j 02 "
 
 keepsymlinks = True
+buildininstalldir = True
 
-cmds_map = [('.*', "cp -ra ../libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/")]
+cmds_map = [('.*', buildcmd)]
 
-postinstallcmds = [ buildcmd ]
+postinstallcmds = ["rm -rf %(installdir)s/libmesh-cc49a536e66ef481f6229805656987cb87db6465",
+                   "rm -rf %(installdir)s/moose-b675783dd357b6dafc17c9e24f3a98bd4eee01bd/*"]
 
-files_to_copy = [
-    'COPYING', 'COPYRIGHT', 'LICENSE', 'README.md', 'docs', 'examples', 'framework', 'gui', 
-    'libmesh', 'modules', 'python', 'scripts', 'test', 'tutorials', 'unit']
+files_to_copy = [] 
 
 sanity_check_paths={
     'files': ['modules/run_tests'],
-    'dirs': ['modules'],
+    'dirs': ['framework'],
 }
 
 moduleclass = 'lib'
