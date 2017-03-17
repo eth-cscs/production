@@ -20,7 +20,7 @@ index 0000000..11f0357
 +echo "n" >> $CONF_IN
 +echo "n" >> $CONF_IN
 +echo "n" >> $CONF_IN
-+echo $EBROOTPYTHON"/lib/python2.7/site-packages" >> $CONF_IN
++echo $EBROOTPYTHON"/lib/python3.5/site-packages" >> $CONF_IN
 +echo "n" >> $CONF_IN
 +echo "y" >> $CONF_IN
 +echo $GCC_PATH"/bin/gcc" >> $CONF_IN
