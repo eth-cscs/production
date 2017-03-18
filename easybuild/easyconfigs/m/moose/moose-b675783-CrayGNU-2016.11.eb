@@ -28,17 +28,18 @@ dependencies = [
     ('GSL', '2.1'),
 ]
 
-buildcmd =  "export CRAY_ADD_RPATH=yes && "
-buildcmd += "cp -ra ../libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ &&"
+buildcmd =  "cd %(installdir)s && export CRAY_ADD_RPATH=yes && "
+buildcmd += "cp -ra ./moose-b675783dd357b6dafc17c9e24f3a98bd4eee01bd/* . && "
+buildcmd += "cp -ra ./libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ && "
 buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 && "
 buildcmd += "cd framework && "
-buildcmd += "METHOD='opt' make -j 20 && "
-buildcmd += "METHOD='dbg' make -j 20 && "
-buildcmd += "METHOD='oprof' make -j 20 && "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 && "
 buildcmd += "cd ../modules && "
-buildcmd += "METHOD='opt' make -j 20 && "
-buildcmd += "METHOD='dbg' make -j 20 && "
-buildcmd += "METHOD='oprof' make -j 02 "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 "
 
 keepsymlinks = True
 buildininstalldir = True
