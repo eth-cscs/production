@@ -46,6 +46,7 @@
  Score-P-3.0-CrayGNU-2016.11-cuda-8.0.54.eb
  TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-2.7.12.eb
  TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-3.5.2.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-Python-3.5.2.eb
  Theano-0.8.2-CrayGNU-2016.11-Python-3.5.2.eb
  VASP-5.4.1-CrayIntel-2016.11.eb
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
