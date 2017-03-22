@@ -18,7 +18,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('Python','3.5.2'),
+    ('Python', pyver),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
 ]
