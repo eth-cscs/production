@@ -37,7 +37,8 @@ whl_file = "tensorflow-%(version)s-cp27-cp27mu-linux_x86_64.whl"
 build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
-build_str += "bazel build --config=cuda --verbose_failures -c opt //tensorflow/tools/pip_package:build_pip_package && "
+build_str += "bazel build --config=cuda --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
+build_str += " -c opt //tensorflow/tools/pip_package:build_pip_package && "
 build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
 build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/" + whl_file
 
