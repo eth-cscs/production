@@ -24,8 +24,9 @@
  ncview-2.1.7-CrayGNU-2016.11.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
- ParaView-5.3.0-CrayGNU-2016.11.eb
  Octave-4.2.0-CrayGNU-2016.11.eb
+ ParaView-5.3.0-CrayGNU-2016.11.eb
+ ParaView-5.3.0-EGL-CrayGNU-2016.11.eb
  perftools-base-cscs-643-nogpu.eb
  perftools-cscs-643-nogpu.eb
  perftools-base-cscs-645-nogpu.eb
