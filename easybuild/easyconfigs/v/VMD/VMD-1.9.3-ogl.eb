@@ -1,6 +1,6 @@
 easyblock = 'Bundle'
 
-name = 'VMD'
+name = 'VMD-ogl'
 version = '1.9.3'
 
 homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
@@ -8,12 +8,8 @@ description = """VMD is a molecular visualization program for displaying, animat
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-dependencies = [
-    ('eglibs/361.93.03', EXTERNAL_MODULE),
-]
-
 modtclfooter = """
-append-path     PATH   /apps/daint/UES/VMD/1.9.3/bin 
+append-path     PATH   /apps/daint/UES/VMD/1.9.3/OpenGL/bin 
 prepend-path    LD_LIBRARY_PATH /opt/cray/nvidia/default/lib64
 """
 
