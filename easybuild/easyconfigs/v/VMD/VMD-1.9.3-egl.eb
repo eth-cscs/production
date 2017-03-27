@@ -1,17 +1,19 @@
-easyblock = 'Bundle'
+# @author: jfavre, gppezzi
 
-name = 'VMD-egl'
+easyblock = "Tarball"
+
+name = 'VMD'
 version = '1.9.3'
+versionsuffix = '-egl'
 
 homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
-description = """VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting"""
+description = """VMD is a molecular visualization program for displaying, animating, and 
+analyzing large biomolecular systems using 3-D graphics and built-in scripting."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
-modtclfooter = """
-append-path     PATH   /apps/daint/UES/VMD/1.9.3/EGL/bin 
-prepend-path    LD_LIBRARY_PATH /opt/cray/nvidia/default/lib64
-"""
+sources = ['/apps/daint/UES/VMD/vmd-1.9.3.bin.LINUXAMD64-CUDA75-OptiX390-OSPRay111p1.text-egl.tar.gz']
 
-moduleclass = 'devel'
+keepsymlinks = True
 
+moduleclass = 'bio'
