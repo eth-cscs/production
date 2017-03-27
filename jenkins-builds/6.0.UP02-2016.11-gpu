@@ -24,8 +24,9 @@
  ncview-2.1.7-CrayGNU-2016.11.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
- ParaView-5.3.0-CrayGNU-2016.11.eb
  Octave-4.2.0-CrayGNU-2016.11.eb
+ ParaView-5.3.0-CrayGNU-2016.11.eb
+ ParaView-5.3.0-EGL-CrayGNU-2016.11.eb
  perftools-base-cscs-643-nogpu.eb
  perftools-cscs-643-nogpu.eb
  perftools-base-cscs-645-nogpu.eb
@@ -44,10 +45,15 @@
  Score-P-3.0-CrayIntel-2016.11.eb
  Score-P-3.0-CrayPGI-2016.11.eb
  Score-P-3.0-CrayGNU-2016.11-cuda-8.0.54.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-2.7.12.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-3.5.2.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Theano-0.8.2-CrayGNU-2016.11-Python-3.5.2.eb
  VASP-5.4.1-CrayIntel-2016.11.eb
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
  Visit-2.12.0-CrayGNU-2016.11.eb
- VMD-1.9.3.eb
+ VMD-1.9.3-egl.eb
+ VMD-1.9.3-ogl.eb
  VTK-7.1.0-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayIntel-2016.11.eb
