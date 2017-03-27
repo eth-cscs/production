@@ -1,17 +1,35 @@
-easyblock = 'Bundle'
+# @author: jfavre, gppezzi
 
-name = 'VMD-ogl'
+easyblock = "CmdCp"
+
+name = 'VMD'
 version = '1.9.3'
+versionsuffix = '-ogl'
 
 homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
-description = """VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting"""
+description = """VMD is a molecular visualization program for displaying, animating, and 
+analyzing large biomolecular systems using 3-D graphics and built-in scripting."""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-modtclfooter = """
-append-path     PATH   /apps/daint/UES/VMD/1.9.3/OpenGL/bin 
-prepend-path    LD_LIBRARY_PATH /opt/cray/nvidia/default/lib64
-"""
+sources = ['/apps/daint/UES/VMD/OpenGL/vmd-1.9.3.bin.LINUXAMD64-CUDA8-OptiX4-OSPRay111p1.opengl.tar.gz']
 
-moduleclass = 'devel'
+buildcmd = ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir="%(installdir)s/bin"#g\' configure && '
+buildcmd += ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir="%(installdir)s/lib/#g\' configure && '
+buildcmd += ' ./configure && '
+buildcmd += ' cd src && make install '
 
+buildininstalldir = True
+
+cmds_map = [('.*', buildcmd)]
+
+files_to_copy = [] 
+
+unpack_options = '--strip 1'
+
+sanity_check_paths={
+    'files': ['lib/vmd/vmd_LINUXAMD64'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'vis'
