@@ -17,7 +17,7 @@ download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
 sources = ["ParaView-v%(version)s.tar.gz"]
 
-#patches = ['%(name)s-%(version)s_missingheader.patch']
+patches = ['ParaView-5.3.0-calculator-patch']
 
 python = 'Python'
 pyver = '3.5.2'
