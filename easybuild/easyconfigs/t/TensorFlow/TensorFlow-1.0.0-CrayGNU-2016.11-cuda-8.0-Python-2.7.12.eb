@@ -23,6 +23,7 @@ dependencies = [
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
+    ('mock', '2.0.0', '-Python-%(pyver)s'),
 ]
 
 sources = ['v%(version)s.tar.gz']
