@@ -17,9 +17,7 @@
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- PyRegression-2.0.1.eb
- PyRegression-dev.eb
- PyRegression-2.0.2.eb
+ PyRegression-2.1.eb
  Ruby-2.3.3.eb
  tmux-2.3.eb
  vampir-9.2.0.eb

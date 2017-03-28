@@ -20,11 +20,12 @@ source_urls = ['https://github.com/plumed/plumed2/archive/']
 sources = ['v%(version)s.tar.gz']
 
 dependencies = [
-    ('zlib', '1.2.8'),
-    ('GSL', '2.2.1'),
+    ('zlib', '1.2.11'),
+    ('GSL', '2.3'),
+    ('libmatheval','1.1.11')
 ]
 
-configopts = ' --exec-prefix=%(installdir)s --enable-gsl --enable-modules=crystallization'
+configopts = ' --exec-prefix=%(installdir)s --enable-gsl --enable-matheval --enable-modules=all'
 prebuildopts = 'source sourceme.sh && '
 
 sanity_check_paths = {
