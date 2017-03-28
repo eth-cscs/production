@@ -1,5 +1,14 @@
 #!/bin/bash -l
 
+# NEW: new modulefiles/software will automatically be added to xalt list of modulefiles (reversemap) at the end of this script.
+# Hence one should not use it as CI.
+# The xalt list of modulefiles will be updated only by user jenkins. So this script should only be used by jenkins.
+
+# Retrieve host name (excluding node number)
+if [[ -z $hostName ]] ; then
+    hostName=`uname -n | cut -c1-5`
+fi
+
 # expects production file as command line argument
 if [ -z "$1" ]; then
  echo -e "\n Error! Please insert production file on command line! \n"
@@ -81,6 +90,21 @@ EOF
 set ModulesVersion "${version}"
 EOF
 done
+
+# update xalt table of modulefiles
+userid=`id -u`
+if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
+  module purge
+  module load Lmod
+  export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+  export XALT_DIR=/apps/daint/UES/xalt/git
+  export XALT_ETC_DIR=$XALT_DIR/etc
+  export XALT_GIT=/apps/daint/UES/xalt/JENSCSCS
+  cd $XALT_GIT/
+  rm -rf reverseMapD
+  ./cray_build_rmapT.sh .
+  cp ./reverseMapD/*    $XALT_ETC_DIR/reverseMapD
+fi
 
 # end time
 endtime=$(date +%s)
