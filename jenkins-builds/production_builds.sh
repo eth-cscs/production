@@ -94,16 +94,16 @@ done
 # update xalt table of modulefiles
 userid=`id -u`
 if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
-  module purge
-  module load Lmod
-  export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
-  export XALT_DIR=/apps/daint/UES/xalt/git
-  export XALT_ETC_DIR=$XALT_DIR/etc
-  export XALT_GIT=/apps/daint/UES/xalt/JENSCSCS
-  cd $XALT_GIT/
-  rm -rf reverseMapD
-  ./cray_build_rmapT.sh .
-  cp ./reverseMapD/*    $XALT_ETC_DIR/reverseMapD
+	module purge
+	module load Lmod
+	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+	export XALTPROD=/apps/daint/UES/xalt/git
+	cd $XALTJENKINS/
+	rm -rf $XALTJENKINS/reverseMapD
+	./cray_build_rmapT.sh .
+	cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+	cd -
 fi
 
 # end time
