@@ -1,3 +1,4 @@
+# debug version: -debug in configopts
 name = 'Qt'
 version = '5.7.0'
 versionsuffix = '-debug'

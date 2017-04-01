@@ -20,12 +20,14 @@ echo -e "\n List of production builds: \n$list"
 # cscs ARCH setup
 module load daint-$ARCH
 echo -e "\n Loading modules: \n - module load daint-$ARCH"
+module rm xalt
 
 # EasyBuild setup
 export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 module use $PWD/easybuild/module
 module load Easybuild
+export EASYBUILD_BUILDPATH=/dev/shm/jenscscs/easybuild/stage-$ARCH
 echo -e "\n Easybuild setup:"
 echo -e " - EASYBUILD_PREFIX=$EASYBUILD_PREFIX"
 echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
