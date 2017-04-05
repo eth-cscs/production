@@ -7,8 +7,8 @@ name = 'LAMMPS'
 version = '30Jul16'
 release = 'r15407'
 cudaversion =  '8.0'
-craypatversion = '6.4.5'
-versionsuffix = '-cuda-%s-pat-%s' % (cudaversion, craypatversion)
+patversion = '645-cuda'
+versionsuffix = '-cuda-%s-pat-%s' % (cudaversion, patversion)
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -34,7 +34,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('perftools-cscs', '645-cuda', '', True),
+    ('perftools-cscs', '%s' % patversion, '', True),
     ('cudatoolkit/%s.44_GA_2.2.7_g4a6c213-2.1' %cudaversion, EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Python', '2.7.12'),

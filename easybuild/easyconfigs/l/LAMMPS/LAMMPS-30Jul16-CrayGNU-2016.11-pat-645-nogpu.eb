@@ -6,8 +6,8 @@ easyblock = 'MakeCp'
 name = 'LAMMPS'
 version = "30Jul16"
 release = 'r15407'
-craypatversion = '6.4.5'
-versionsuffix = "-pat-%s" % craypatversion
+patversion = '645-nogpu'
+versionsuffix = "-pat-%s" % patversion
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -28,7 +28,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('perftools-cscs', '645-nogpu', '', True),
+    ('perftools-cscs', '%s' % patversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Python', '2.7.12'),
 ]
