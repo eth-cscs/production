@@ -7,7 +7,7 @@ name = 'LAMMPS'
 version = "30Jul16"
 release = 'r15407'
 craypatversion = '6.4.5'
-versionsuffix = "-craypat-%s" % craypatversion
+versionsuffix = "-pat-%s" % craypatversion
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
