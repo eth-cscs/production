@@ -2,8 +2,7 @@
  Automake-1.15.eb
  CMake-3.6.2.eb
  ctags-5.8.eb
- ddt-6.1.2.eb
- ddt-7.0.eb
+ ddt-7.0.1.eb
  git-2.11.0.eb
  HDFView-2.13.0.eb
  hwloc-1.11.5.eb
@@ -17,9 +16,7 @@
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- PyRegression-2.0.1.eb
- PyRegression-dev.eb
- PyRegression-2.0.2.eb
+ PyRegression-2.1.eb
  Ruby-2.3.3.eb
  tmux-2.3.eb
  vampir-9.2.0.eb
