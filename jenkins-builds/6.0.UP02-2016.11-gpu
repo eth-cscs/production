@@ -19,6 +19,7 @@
  LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.54.eb
  magma-2.2.0-CrayGNU-2016.11-cuda-8.0.54.eb
  NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
+ NCL-6.4.0.eb
  NCL-6.3.0.eb
  NCO-4.6.2-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
