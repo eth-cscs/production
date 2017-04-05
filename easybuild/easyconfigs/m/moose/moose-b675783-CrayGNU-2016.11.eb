@@ -1,0 +1,59 @@
+# contributed by @wsawyer and @gppezzi (CSCS)
+easyblock = "CmdCp"
+
+name = 'moose'
+version = 'b675783'
+
+homepage = 'http://www.mooseframework.org/'
+description = """Framework for Multiphysics Object Oriented Simulation Environment.""" 
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [
+    'https://github.com/idaholab/moose/archive/',
+    'https://github.com/libMesh/libmesh/archive/',
+]
+
+sources = [
+    'b675783dd357b6dafc17c9e24f3a98bd4eee01bd.zip', 
+    'cc49a536e66ef481f6229805656987cb87db6465.zip', 
+]
+
+dependencies = [
+    ('CMake', '3.6.0'),
+    ('cray-tpsl/16.07.1', EXTERNAL_MODULE),
+    ('cray-petsc/3.7.2.1', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel/1.8.16', EXTERNAL_MODULE), # should not be necessary for --disable-hdf5 but seems to be
+    ('Boost', '1.61.0', '-Python-2.7.12'),
+    ('GSL', '2.1'),
+]
+
+buildcmd =  "cd %(installdir)s && export CRAY_ADD_RPATH=yes && "
+buildcmd += "cp -ra ./moose-b675783dd357b6dafc17c9e24f3a98bd4eee01bd/* . && "
+buildcmd += "cp -ra ./libmesh-cc49a536e66ef481f6229805656987cb87db6465/* libmesh/ && "
+buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 && "
+buildcmd += "cd framework && "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 && "
+buildcmd += "cd ../modules && "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 "
+
+keepsymlinks = True
+buildininstalldir = True
+
+cmds_map = [('.*', buildcmd)]
+
+postinstallcmds = ["rm -rf %(installdir)s/libmesh-cc49a536e66ef481f6229805656987cb87db6465",
+                   "rm -rf %(installdir)s/moose-b675783dd357b6dafc17c9e24f3a98bd4eee01bd/*"]
+
+files_to_copy = [] 
+
+sanity_check_paths={
+    'files': ['modules/run_tests'],
+    'dirs': ['framework'],
+}
+
+moduleclass = 'lib'

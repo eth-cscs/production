@@ -1,3 +1,3 @@
 # CSCS Production
 
-* [Production page on Github.io](https://eth-cscs.github.io/production/)
+* [User portal on Github.io](https://eth-cscs.github.io/)

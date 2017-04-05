@@ -1,0 +1,136 @@
+easyblock = 'Bundle'
+
+name = 'ddt'
+version = '7.0.1'
+
+homepage = 'https://www.allinea.com/products/forge/download'
+description = """Allinea DDT: The debugger for C, C++, Fortran threaded and parallel codes"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+# This module cannot be loaded if another modulefile was previously loaded
+conflict darshan
+conflict Cube
+# =============================================================================
+# Now, we are going to attempt to correctly set some variables for each system
+# =============================================================================
+if { [ info exists env(XT_SYSTEM_NAME) ] } {
+       set host $env(XT_SYSTEM_NAME)
+} else {
+       set host [string range $env(HOSTNAME) 0 3]
+}
+#puts stderr "host=$host"
+set hostname "[string tolower $host]"
+set flags      ""
+
+# ============================================================================
+# Configure some environment variables, the following are required :
+#       url / url2 / modulename / version / packageroot
+#       to be checked : CSCS_MODULENAME_LIB / CSCS_MODULENAME_INCLUDE / PATH / MANPATH / PE_PRODUCT_LIST
+#       optional : LD_LIBRARY_PATH
+# set    --> will set the variable for the script, nothing more
+# setenv --> will export the variable to the user environment
+# ============================================================================
+set     url                        "http://www.allinea.com"
+set     url2                       "http://user.cscs.ch"
+set     modulename                 "ddt"
+# ============================================================================
+if  { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" } {
+          set     os      "RHAT6"
+          set     version "7.0.1"
+}
+  
+if  { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" } {
+          set     os      "SLES11"
+          set     version "7.0.1"
+}
+  
+if  { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
+          set     os      "SLES12"
+          set     version "7.0.1"
+}
+
+if  { $hostname=="tave" } {
+          set     os      "SLES12"
+          set     version "7.0.1"
+}
+  
+if { "$os"=="" } {
+        puts stderr "L60: host=$host"
+        set     os      "SLES12"
+        set     version "7.0.1"
+}
+
+        set     packageroot             "/apps/common/UES/${os}/${modulename}/${version}"
+
+# ============================================================================
+# module-info mode ==> load, remove, display, help, whatis, switch, switch1, switch2, or switch3.
+# load
+# ============================================================================
+#if { [ module-info mode load ] } {
+
+        setenv          DDT_DIR               "$packageroot"
+        prepend-path    PATH                  "$packageroot/bin"
+        prepend-path    PATH                  "$packageroot/libexec"
+        prepend-path    LD_LIBRARY_PATH       "$packageroot/lib"
+        prepend-path    LD_LIBRARY_PATH       "$packageroot/lib/64"
+        prepend-path    MANPATH               "$packageroot/man"
+        setenv          DDT_MEM               "-L$packageroot/lib/64"
+        setenv          DDT_LICENCE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
+        setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
+        #setenv          DDT_LICENCE_FILE      "$packageroot/licenses/Licence"
+        #setenv          DDT_LICENSE_FILE      "$packageroot/licenses/Licence"
+        append-path     PE_PRODUCT_LIST       "DDT"
+        #setenv          DDT_LICENCE_FILE      "$packageroot/../licenses/Licence"
+        #setenv          DDT_LICENSE_FILE      "$packageroot/../licenses/Licence"
+        #setenv          DDT_LICENCE_FILE      "/users/piccinal/modulefiles/ddtjg/Licence.txt"
+# The address should be "00:e0:81:32:26:f6"
+# "00:60:dd:46:31:4b" (on interface eth0)
+
+#}
+
+# ============================================================================
+# Help message called by : module help ...
+# ============================================================================
+#if { [ module-info mode help ] } {
+proc ModulesHelp {} {
+  global url url2 flags modulename version packageroot
+  puts stderr "
+        \tmodulefile : [module-info name] [module-info mode]
+        \t$modulename Version $version :
+        \tCSCS Users Documentation : $url
+        \tYoutube channel: https://www.youtube.com/playlist?list=PL1tk5lGm7zvR1CPR9KYZZEyRlCYQYY-Xp
+        \t$url2
+
+        \tSee : $packageroot
+        \t \033\[01;32m ${packageroot}/doc/ \033\[0m
+
+        \tLicensing : \033\[01;32m http://velan:4241/status.html\033\[0m
+        \tUsage :
+        \t module load $modulename will automatically set the PATH to the $modulename executable
+        \t \033\[01;31mddt --connect\033\[0m srun ... &
+
+        \t \033\[01;32mCUDA debugging\033\[0m
+        \t Non-MPI codes may need to add a dummy MPI_Init() call
+        \t Multiple contexts support through CUDA proxy : export CRAY_CUDA_MPS=0"
+
+       
+  return 0
+}
+#}
+# ============================================================================
+# Short help message called by : module whatis ...
+# ============================================================================
+if { [ module-info mode whatis ] } {
+module-whatis "Set environment variables to enable the usage of the $modulename $version debugger."
+}
+# ============================================================================
+# Help message called by : module display ...
+# ============================================================================
+# module display "[module-info name]"
+"""
+
+moduleclass = 'devel'
+
+
