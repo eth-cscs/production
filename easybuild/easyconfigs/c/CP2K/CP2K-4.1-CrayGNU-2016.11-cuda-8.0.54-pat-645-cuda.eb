@@ -2,9 +2,9 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-version = "4.1"
+version = '4.1'
 cudaversion = '8.0.54'
-patversion = "645-cuda"
+patversion = '645-cuda'
 versionsuffix = '-cuda-%s-pat-%s' %(cudaversion, patversion)
 
 homepage = 'http://www.cp2k.org/'
@@ -25,7 +25,7 @@ dependencies = [
 ]
 
 builddependencies = [
-    ('perftools-cscs/%s' %patversion, EXTERNAL_MODULE),
+    ('perftools-cscs', '%s' %patversion, '', True),
     ('cudatoolkit/%s_2.2.8_ga620558-2.1' %cudaversion, EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('Python', '2.7.12'),
