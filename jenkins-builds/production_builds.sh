@@ -91,25 +91,26 @@ set ModulesVersion "${version}"
 EOF
 done
 
-# disabling the xalt reverseMap for now, until we understand the issue 
-# https://jenkins.cscs.ch/job/ProductionEBDaint-mc/label=daint/152/console
-#//opt/cray/pe/modules/default/init/bash: line 7: unalias: sd_log: not found
-#//opt/cray/pe/modules/default/init/bash: line 7: unalias: sc_log: not found
-
 # update xalt table of modulefiles
-#userid=`id -u`
-#if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
-#	module purge
-#	module load Lmod
-#	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
-#	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
-#	export XALTPROD=/apps/daint/UES/xalt/git
-#	cd $XALTJENKINS/
-#	rm -rf $XALTJENKINS/reverseMapD
-#	./cray_build_rmapT.sh .
-#	cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
-#	cd -
-#fi
+echo "loading PrgEnv-cray"
+module load PrgEnv-cray/6.0.3
+
+echo "module use craypat apps"
+module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
+
+echo "running reverseMapD"
+userid=`id -u`
+if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
+	module load Lmod
+	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+	export XALTPROD=/apps/daint/UES/xalt/git
+	cd $XALTJENKINS/
+	rm -rf $XALTJENKINS/reverseMapD
+	./cray_build_rmapT.sh .
+	cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+	cd -
+fi
 
 # end time
 endtime=$(date +%s)
