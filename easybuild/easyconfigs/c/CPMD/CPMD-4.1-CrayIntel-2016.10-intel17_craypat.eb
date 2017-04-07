@@ -22,8 +22,7 @@ dependencies = [('fftw/3.3.4.10', EXTERNAL_MODULE)]
 
 skipsteps = ['configure']
 
-common_prebuildopts = ''
-common_prebuildopts += './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
+common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
 
 builddependencies = [
     ('perftools-cscs', '%s' %patversion, '', True),
