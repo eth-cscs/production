@@ -1,0 +1,76 @@
+easyblock = 'Bundle'
+
+name = 'Spark'
+version = '1.6.0'
+
+homepage = 'http://spark.apache.org'
+description = """Spark is Hadoop MapReduce done in memory"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+moduleclass = 'devel'
+
+modtclfooter = """
+## Required internal variables
+set name     spark
+set version  1.6.0
+set root      /apps/daint/UES/$name/$version
+set sparkbin  /apps/daint/UES/$name/sbin
+
+## List conflicting modules here
+conflict $name
+
+## List prerequisite modules here
+
+# prereq
+
+## Required for SVN hook to generate SWDB entry
+set     fullname    Spark
+set     externalurl http://spark.apache.org
+set     nerscurl    http://spark.apache.org
+set     maincategory    applications
+set     subcategory debugging
+set     description "Spark data analytic framework"
+
+## Required for "module help ..."
+proc ModulesHelp { } {
+  global description nerscurl externalurl
+  puts stderr "Description - $description"
+  puts stderr "CSCS Docs  - $nerscurl"
+  puts stderr "Other Docs  - $externalurl"
+}
+
+## Required for "module display ..." and SWDB
+module-whatis "$description"
+
+module load java/jdk1.8.0_51
+
+prepend-path PATH $sparkbin:$root:$root/bin:$root/sbin
+if {! [info exists env(SLURM_JOBID) ] } {
+  puts stderr "SLURM_JOBID not set, please run this module inside of a batch job"
+  exit
+}
+
+set workerdir $env(PWD)/sparkjob.$env(SLURM_JOBID)
+set nodefile $env(SLURM_JOB_NODELIST)
+
+setenv SPARK_WORKER_DIR $workerdir
+setenv SPARK_SLAVES $workerdir/slaves
+setenv SPARK_LOG_DIR $workerdir/sparklogs
+setenv SPARK_LOCAL_DIRS "/tmp"
+setenv SPARK_PREFIX $root
+setenv SPARK_CONF_DIR $workerdir/conf
+
+if { [ module-info mode load ] } {
+    puts stderr "Creating Directory SPARK_WORKER_DIR $env(SPARK_WORKER_DIR)"
+    puts stderr "Creating $env(SPARK_WORKER_DIR)/slaves file"
+    puts stderr "Determining the master node name..."
+    set master [exec $sparkbin/getmaster.sh]
+    puts stderr "Master node is $master"
+
+    exec /bin/mkdir -p $env(SPARK_WORKER_DIR)
+    exec  $sparkbin/getslaves.sh $env(SPARK_WORKER_DIR)/slaves
+    setenv SPARKURL spark://$master:7077
+    setenv SPARKMASTER $master
+}
+"""
