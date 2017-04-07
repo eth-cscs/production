@@ -92,9 +92,15 @@ EOF
 done
 
 # update xalt table of modulefiles
+echo "loading PrgEnv-cray"
+module load PrgEnv-cray/6.0.3
+
+echo "module use craypat apps"
+module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
+
+echo "running reverseMapD"
 userid=`id -u`
 if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
-	module purge
 	module load Lmod
 	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
 	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
