@@ -1,4 +1,4 @@
-# @author gppezzi, lucamar (CSCS)
+# @author Guilherme Peretti Pezzi, Luca Marsella (CSCS)
 easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
@@ -30,11 +30,8 @@ preconfigopts = ' export LDFLAGS="$LDFLAGS -openmp " && '
 configopts = 'ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack'
 
 buildopts = 'all'
+# parallel builds do not succeed
 maxparallel = 1
-
-#postinstallcmds = [
-#    'mkdir %(installdir)s/bin && mv %(installdir)s/*.x %(installdir)s/bin'
-#]
 
 sanity_check_paths = {
       'files': ['bin/pw.x', 'bin/cp.x'],
