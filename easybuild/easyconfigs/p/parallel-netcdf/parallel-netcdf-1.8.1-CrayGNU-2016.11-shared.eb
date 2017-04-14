@@ -1,0 +1,34 @@
+# @author: maximem
+
+easyblock = "MakeCp"
+
+name = 'parallel-netcdf'
+version = '1.8.1'
+versionsuffix = '-shared'
+
+homepage = 'http://cucis.ece.northwestern.edu/projects/PnetCDF/index.html'
+description = """A parallel I/O library for accessing NetCDF files in CDF-1, 2, and 5 formats"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+sources = ['parallel-netcdf-1.8.1.tar.gz']
+source_urls = ['http://cucis.ece.northwestern.edu/projects/PnetCDF/Release/']
+
+patches = [ 'parallel-netcdf-1.8.1.patch' ]
+
+with_configure = True
+
+preconfigopts = "CFLAGS=\"-g -O2 -fPIC\" CPPFLAGS=\"-g -O2 -fPIC\" CXXFLAGS=\"-g -O2 -fPIC\" FFLAGS=\"-O2 -fPIC\" FCFLAGS=\"-O2 -fPIC\""
+configopts = "--disable-cxx --disable-fortran"
+buildopts = 'all shared_library'
+
+maxparallel=1
+
+files_to_copy = [ (['src/lib/libpnetcdf.so'], 'lib') ]
+
+sanity_check_paths={
+    'files': ['lib/libpnetcdf.so'],
+    'dirs': ['lib']
+}
+
+moduleclass = 'devel'
