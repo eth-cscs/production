@@ -4,6 +4,8 @@ easyblock = "ConfigureMake"
 name = 'QuantumESPRESSO'
 version = '6.1.0'
 shortversion = '6.1'
+patversion = '645-nogpu'
+versionsuffix = '-pat-%s' %patversion
 
 homepage = 'http://www.quantum-espresso.org/'
 description = """Quantum ESPRESSO  is an integrated suite of computer codes
@@ -23,14 +25,20 @@ source_urls = [
 ]
 
 builddependencies = [
+    ('perftools-cscs', '%s' %patversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
 ]
 
-preconfigopts = ' export LDFLAGS="$LDFLAGS -qopenmp " && '
+preconfigopts = ' module unload perftools-cscs/%s && ' % patversion
 configopts = 'ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack'
 
-buildopts = 'all'
-# parallel builds do not succeed
+prebuildopts = ' sed -i -e "s/-D__FFTW.//" -e "s/cc/icc/" -e "s/CPPFLAGS       =/CPPFLAGS       = -P -traditional/" make.inc && '
+prebuildopts += ' sed -i -e "s/-O2 -ftz -fp-speculation=safe -fp-model source -fopenmp -craype-verbose//" make.inc && '
+prebuildopts += ' sed -i -e "s/F90FLAGS       = /F90FLAGS       = \$(FFLAGS) -nomodule /" make.inc && '
+prebuildopts += ' sed -i -e "s/FFLAGS         = /FFLAGS         = -O2 -assume byterecl -g -traceback -qopenmp -craype-verbose /" make.inc && '
+prebuildopts += ' sed -i -e "s/LDFLAGS        =.*/& -qopenmp/" make.inc && '
+buildopts = 'cp pw'
+# parallel builds fail for target 'all'
 maxparallel = 1
 
 sanity_check_paths = {
