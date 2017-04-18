@@ -10,7 +10,6 @@ description = """Computational Network Toolkit Custom MKL Package."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
-
 sources = ['CNTKCustomMKL-Linux-%(version)s.tgz']
 source_urls = ['https://www.cntk.ai/mkl/']
 

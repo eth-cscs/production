@@ -10,11 +10,8 @@ description = """libzip is C library for reading, creating, and modifying zip ar
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
-
-#sources = ['%(version)s.tar.gz']
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://nih.at/libzip/']
-
 
 sanity_check_paths = {
     'files': ['lib/libzip.so'],

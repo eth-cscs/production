@@ -10,13 +10,10 @@ description = """CUB is a flexible library of cooperative threadblock primitives
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
-
 sources = ['%(version)s.tar.gz']
 source_urls = ['https://github.com/NVlabs/cub/archive/']
 
 unpack_options = '--strip 1'
-
-
 
 sanity_check_paths = {
     'files': ['cub/cub.cuh'],
