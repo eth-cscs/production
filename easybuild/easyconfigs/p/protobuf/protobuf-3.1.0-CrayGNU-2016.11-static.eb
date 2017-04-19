@@ -1,3 +1,5 @@
+# @author: gppezzi
+
 easyblock = 'ConfigureMake'
 
 name = 'protobuf'
@@ -20,13 +22,10 @@ preconfigopts = './autogen.sh && '
 
 configopts = 'CFLAGS=-fPIC CXXFLAGS=-fPIC --disable-shared'
 
-
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib'],
 }
-
-#options = {'modulename': 'google.protobuf' }
 
 moduleclass = 'devel'
 
