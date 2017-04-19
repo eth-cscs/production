@@ -30,7 +30,6 @@ dependencies = [
     ('libjpeg-turbo', '1.5.0'),
     ('libpng', '1.6.23'),
     ('JasPer', '1.900.1'),
-#    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
 ]
 
 configopts = '-DCMAKE_BUILD_TYPE=RELEASE '  
