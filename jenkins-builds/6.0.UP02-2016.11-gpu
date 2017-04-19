@@ -36,6 +36,8 @@
  perftools-cscs-645-cuda.eb
  perftools-base-cscs-645-openacc.eb
  perftools-cscs-645-openacc.eb
+ perftools-base-cscs-645-loops.eb
+ perftools-cscs-645-loops.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
