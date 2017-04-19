@@ -13,8 +13,6 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 sources = ['CNTKCustomMKL-Linux-%(version)s.tgz']
 source_urls = ['https://www.cntk.ai/mkl/']
 
-unpack_options = '--strip 1'
-
 sanity_check_paths = {
     'files': ['x64/parallel/libmkl_cntk_p.so'],
     'dirs': ['include']
