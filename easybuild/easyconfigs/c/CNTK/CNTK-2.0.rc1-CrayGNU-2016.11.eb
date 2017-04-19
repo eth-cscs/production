@@ -23,8 +23,6 @@ sources = [
     '143187575d1cfa410100037b8aea2e767e0af637.tar.gz',
 ]
 
-#unpack_options = '--strip 1'
-
 dependencies = [
     ('Python', pyver),
     ('CNTKCustomMKL', '3'),
@@ -39,16 +37,20 @@ dependencies = [
 
 buildcmd = 'cd %(builddir)s && rm -rf CNTK-2.0.rc1/Source/Multiverso/ CNTK-2.0.rc1/build && '
 buildcmd += 'cp -ra %(builddir)s/Multiverso-143187575d1cfa410100037b8aea2e767e0af637/ CNTK-2.0.rc1/Source/Multiverso && '
+# commenting out unit tests that are failing for Multiverso
 buildcmd += 'sed -i "s@ADD_SUBDIRECTORY(Test)@#ADD_SUBDIRECTORY(Test)@g" CNTK-2.0.rc1/Source/Multiverso/CMakeLists.txt && '
 buildcmd += 'sed -i "s@ADD_SUBDIRECTORY(Test/unittests)@#ADD_SUBDIRECTORY(Test/unittests)@g" CNTK-2.0.rc1/Source/Multiverso/CMakeLists.txt && '
+# fixing cudnn prefix 
 buildcmd += 'sed -i "s#cuda/include/cudnn.h#include/cudnn.h#g" %(builddir)s/CNTK-2.0.rc1/configure && '
 buildcmd += 'mkdir CNTK-2.0.rc1/build && cd CNTK-2.0.rc1/build && '
 buildcmd += '../configure --cuda=yes --mpi=yes --with-cuda=$CUDATOOLKIT_HOME --with-mpi=$MPICH_DIR --with-mkl=$EBROOTCNTKCUSTOMMKL '
 buildcmd += '--with-cub=$EBROOTCUB --with-cudnn=$EBROOTCUDNN --with-opencv=$EBROOTOPENCV --with-libzip=$EBROOTLIBZIP '
 buildcmd += '--with-boost=$EBROOTBOOST --with-protobuf=$EBROOTPROTOBUF '
 buildcmd += '--with-gdk-include=$CUDATOOLKIT_HOME/include --with-gdk-nvml-lib=/opt/cray/nvidia/default/lib64/ && '
+# Using cray wrapper instead of mpic++
 buildcmd += 'sed -i "s#CXX = \$(MPI_PATH)/bin/mpic++#CXX = \$(CRAYPE_DIR)/bin/CC#g" ../Makefile && '
 buildcmd += 'sed -i "s#-DCMAKE_CXX_COMPILER=\$(CXX)#-DCMAKE_CXX_COMPILER=\$($CXX) -DMPI_LIBRARY=\$(CRAY_MPICH_DIR)/lib/libmpich.so#g" ../Makefile && '
+# -Werror causes Multiverso build to fail
 buildcmd += 'sed -i "s#-Werror -fcheck-new#-fcheck-new#g" ../Makefile &&'
 buildcmd += 'make -j 16' 
 
