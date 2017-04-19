@@ -13,9 +13,13 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 sources = ['CNTKCustomMKL-Linux-%(version)s.tgz']
 source_urls = ['https://www.cntk.ai/mkl/']
 
+postinstallcmds = [
+    'mkdir %(installdir)s/3 && mv %(installdir)s/x64 %(installdir)s/include %(installdir)s/3'
+]
+
 sanity_check_paths = {
-    'files': ['x64/parallel/libmkl_cntk_p.so'],
-    'dirs': ['include']
+    'files': ['3/x64/parallel/libmkl_cntk_p.so'],
+    'dirs': ['3/include']
 }
 
 moduleclass = 'devel'
