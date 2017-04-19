@@ -52,12 +52,15 @@ buildcmd += 'sed -i "s#-DCMAKE_CXX_COMPILER=\$(CXX)#-DCMAKE_CXX_COMPILER=\$($CXX
 buildcmd += 'sed -i "s#-Werror -fcheck-new#-fcheck-new#g" ../Makefile &&'
 buildcmd += 'make -j 16' 
 
-#keepsymlinks = True
 buildininstalldir = True
+
+postinstallcmds = ["rm -rf %(installdir)s/Multiverso-143187575d1cfa410100037b8aea2e767e0af637/"]
 
 cmds_map = [('.*', buildcmd)]
 
-files_to_copy = [  ] 
+files_to_copy = [] 
+
+modextrapaths = {'PATH': 'CNTK-2.0.rc1/build/bin'}
 
 sanity_check_paths = {
     'files': [],
