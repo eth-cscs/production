@@ -1,0 +1,30 @@
+# @author: gppezzi
+
+easyblock = 'ConfigureMake'
+
+name = 'protobuf'
+version = '3.1.0'
+versionsuffix= '-static'
+
+homepage = 'https://github.com/google/protobuf/'
+description = """Python Protocol Buffers runtime library."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://github.com/google/protobuf/archive/v%(version)s']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('protobuf-core', version)
+]
+
+preconfigopts = './autogen.sh && '
+
+configopts = 'CFLAGS=-fPIC CXXFLAGS=-fPIC --disable-shared'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'devel'
