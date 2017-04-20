@@ -8,7 +8,7 @@ version = '2.0.rc1'
 pyver = '3.5.2'
 cudaver = '8.0'
 
-homepage = 'http://nvlabs.github.com/cub/'
+homepage = 'https://www.microsoft.com/en-us/research/product/cognitive-toolkit/'
 description = """The Microsoft Cognitive Toolkit."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
@@ -65,8 +65,8 @@ files_to_copy = []
 modextrapaths = {'PATH': 'CNTK-2.0.rc1/build/bin'}
 
 sanity_check_paths = {
-    'files': [],
-    'dirs': ['CNTK-2.0.rc1']
+    'files': ['CNTK-2.0.rc1/build/bin/cntk'],
+    'dirs': ['']
 }
 
 moduleclass = 'devel'
