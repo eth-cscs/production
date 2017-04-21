@@ -48,7 +48,8 @@ buildininstalldir = True
 
 configopts = '-DBLAS=libsci '
 configopts += '-DBOOST_ROOT=$EBROOTBOOST '
-configopts += '-DProtobuf_INCLUDE_DIR=$EBROOTPROTOBUFMINCORE/include  -DProtobuf_LIBRARY=$EBROOTPROTOBUFMINCORE/lib/libprotobuf.so '
+configopts += '-DProtobuf_INCLUDE_DIR=$EBROOTPROTOBUFMINCORE/include  '
+configopts += '-DProtobuf_LIBRARY=$EBROOTPROTOBUFMINCORE/lib/libprotobuf.so '
 configopts += '-DCUDA_ARCH_NAME=Pascal -DCUDA_TOOLKIT_ROOT_DIR=$CUDATOOLKIT_HOME '
 
 modextrapaths = {'PYTHONPATH': ['python']}
