@@ -4,9 +4,7 @@ name = 'LMDB'
 version = '0.9.18'
 
 homepage = 'https://github.com/LMDB/lmdb'
-description = """
-OpenLDAP's Lightning Memory-Mapped Database (LMDB) library.
-"""
+description = """OpenLDAP's Lightning Memory-Mapped Database (LMDB) library."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 
