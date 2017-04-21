@@ -44,6 +44,7 @@ dependencies = [
     ('scikit-image', '0.13.0', '-Python-%(pyver)s')
 ]
 
+buildininstalldir = True
 
 configopts = '-DBLAS=libsci '
 configopts += '-DBOOST_ROOT=$EBROOTBOOST '
