@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'vsc-install'
+version = '0.10.25'
+pyver = '2.7.12'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/vsc-install'
+description = """vsc-install provides shared setuptools functions and
+classes for Python libraries developed by UGent's HPC group"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = [PYPI_SOURCE]
+
+dependencies = [
+    ('Python', pyver),
+]
+
+options = {'modulename': 'vsc.install'}
+
+pyshortver = '.'.join(SYS_PYTHON_VERSION.split('.')[:2])
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'tools'
