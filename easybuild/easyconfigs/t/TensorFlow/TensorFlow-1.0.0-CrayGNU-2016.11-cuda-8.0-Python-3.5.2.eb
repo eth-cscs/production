@@ -57,6 +57,8 @@ sanity_check_paths={
     'dirs': ['%(installdir)s/lib/python%(pyshortver)s/site-packages'],
 }
 
+postinstallcmds = [ 'rm -rf $TEST_TMPDIR' ]
+
 modextrapaths = {                                                                  
     'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
 }
