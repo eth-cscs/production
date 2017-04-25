@@ -16,7 +16,7 @@ toolchainopts = { 'usempi': True }
 sources = [SOURCELOWER_TAR_BZ2]
 
 builddependencies = [
-    ('perftools-cscs/%s' %patversion, EXTERNAL_MODULE),
+    ('perftools-cscs', '%s' %patversion, '', True),
     ('cudatoolkit/%s_2.2.8_ga620558-2.1' %cudaversion, EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('gcc/4.9.3', EXTERNAL_MODULE),
