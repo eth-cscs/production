@@ -3,7 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'NAMD'
 version = '2.11'
-patversion = "645"
+patversion = "645-nogpu"
 versionsuffix = '-pat-%s' %(patversion)
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
@@ -18,16 +18,13 @@ prebuildopts = ' ./config CRAY-XC-intel Eos --with-fftw3 --tcl-prefix $EBROOTTCL
 prebuildopts += ' cd CRAY-XC-intel && '
 
 builddependencies = [
+    ('perftools-cscs','%s' %patversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('rca', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('Charm++', '6.7.1'), 
     ('Tcl', '8.5.9', '-namd',  True),
 ]
-
-dependencies = [
-    ('perftools-cscs/%s-nogpu' %patversion, EXTERNAL_MODULE)
- ]
 
 files_to_copy = [(['./CRAY-XC-intel/namd2'], 'bin')]
 
