@@ -98,6 +98,10 @@ module load PrgEnv-cray/6.0.3
 echo "module use craypat apps"
 module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
 
+# Removing Easybuild module before the reverseMapD operation
+# because spider the mapping the programs to Easybuild
+module unload Easybuild
+
 echo "running reverseMapD"
 userid=`id -u`
 if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
