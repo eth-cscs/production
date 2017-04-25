@@ -15,7 +15,7 @@ toolchainopts = { 'usempi': True }
 sources = [SOURCELOWER_TAR_BZ2]
 
 builddependencies = [
-    ('perftools-cscs/%s' %patversion, EXTERNAL_MODULE),
+    ('perftools-cscs', '%s' %patversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
 ]
 
