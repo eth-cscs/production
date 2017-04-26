@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'Pillow'
+version = '3.2.0'
+versionsuffix = '-Python-%(pyver)s'
+freetype_ver = '2.6.3'
+versionsuffix += '-freetype-%s' % freetype_ver
+
+homepage = 'http://pillow.readthedocs.org/'
+description = """Pillow is the 'friendly PIL fork' by Alex Clark and Contributors.
+ PIL is the Python Imaging Library by Fredrik Lundh and Contributors."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.12'),
+    ('libjpeg-turbo', '1.5.0'),
+    ('libpng', '1.6.23'),
+    ('zlib', '1.2.8'),
+    ('LibTIFF', '4.0.6'),
+    ('freetype', freetype_ver),
+]
+
+options = {'modulename': 'PIL'}
+
+moduleclass = 'vis'

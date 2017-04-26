@@ -1,5 +1,14 @@
 #!/bin/bash -l
 
+# NEW: new modulefiles/software will automatically be added to xalt list of modulefiles (reversemap) at the end of this script.
+# Hence one should not use it as CI.
+# The xalt list of modulefiles will be updated only by user jenkins. So this script should only be used by jenkins.
+
+# Retrieve host name (excluding node number)
+if [[ -z $hostName ]] ; then
+    hostName=`uname -n | cut -c1-5`
+fi
+
 # expects production file as command line argument
 if [ -z "$1" ]; then
  echo -e "\n Error! Please insert production file on command line! \n"
@@ -81,6 +90,31 @@ EOF
 set ModulesVersion "${version}"
 EOF
 done
+
+# update xalt table of modulefiles
+echo "loading PrgEnv-cray"
+module load PrgEnv-cray/6.0.3
+
+echo "module use craypat apps"
+module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
+
+# Removing Easybuild module before the reverseMapD operation
+# because spider the mapping the programs to Easybuild
+module unload Easybuild
+
+echo "running reverseMapD"
+userid=`id -u`
+if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
+	module load Lmod
+	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+	export XALTPROD=/apps/daint/UES/xalt/git
+	cd $XALTJENKINS/
+	rm -rf $XALTJENKINS/reverseMapD
+	./cray_build_rmapT.sh .
+	cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+	cd -
+fi
 
 # end time
 endtime=$(date +%s)

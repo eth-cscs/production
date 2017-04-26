@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'NAMD'
-patversion = "645"
+patversion = "645-cuda"
 version = '2.11'
 versionsuffix = '-cuda-8.0.54-pat-%s' %(patversion)
 
@@ -18,16 +18,13 @@ prebuildopts = ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-fftw3 --tcl-
 prebuildopts += ' cd CRAY-XC-intel.cuda && '
 
 builddependencies = [
+    ('perftools-cscs','%s' %patversion, '', True),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('rca', EXTERNAL_MODULE),
     ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE), 
     ('Charm++', '6.7.1'), 
     ('Tcl', '8.5.9', '-namd',  True),
-]
-
-dependencies = [
-    ('perftools-cscs/%s-cuda' %patversion, EXTERNAL_MODULE)
 ]
 
 files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]

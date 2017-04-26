@@ -3,6 +3,8 @@ easyblock = 'MakeCp'
 
 name = 'CPMD'
 version = '4.1'
+patversion = '645-nogpu'
+versionsuffix = '-pat-%s' %(patversion)
 
 homepage = 'http://www.cpmd.org/'
 description = """CPMD The CPMD code is a parallelized plane wave / pseudopotential
@@ -20,6 +22,10 @@ dependencies = [('fftw/3.3.4.10', EXTERNAL_MODULE)]
 skipsteps = ['configure']
 
 common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
+
+builddependencies = [
+    ('perftools-cscs', '%s' %patversion, '', True),
+]
 
 prebuildopts = [
                          common_prebuildopts,
