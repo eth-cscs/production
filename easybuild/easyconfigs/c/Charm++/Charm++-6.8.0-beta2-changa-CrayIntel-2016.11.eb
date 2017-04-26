@@ -1,0 +1,30 @@
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.8.0-beta2'
+versionsuffix = '-changa'
+
+homepage = 'https://charm.cs.illinois.edu/software'
+description = """Charm++ is a machine independent parallel programming system.
+Programs written using this system will run unchanged on MIMD machines with or
+without a shared memory."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = {'dynamic': False}
+
+# source_urls = ['http://charm.cs.illinois.edu/distrib/']
+sources = ['charm-%(version)s.tar.gz']
+cmds_map = [('charm-%(version)s.tar.gz', './build ChaNGa gni-crayxc hugepages --enable-lbuserdata --with-production -j12')]
+
+dependencies = [
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+]
+
+files_to_copy = ['gni-crayxc-hugepages'] 
+
+sanity_check_paths = {
+    'files': ['gni-crayxc-hugepages/bin/charmc'],
+    'dirs': ['gni-crayxc-hugepages/bin', 'gni-crayxc-hugepages/lib', 'gni-crayxc-hugepages/include'],
+}
+
+moduleclass = 'chem'
