@@ -1,0 +1,29 @@
+easyblock = "PythonPackage"
+
+name = 'Keras'
+version = '2.0.3'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://keras.io/'
+description = """Keras is a minimalist, highly modular neural networks library, written in Python and
+capable of running on top of either TensorFlow or Theano."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.5.2'),
+    ('Theano', '0.8.2', versionsuffix),
+    ('TensorFlow', '1.0.0', '-cuda-8.0%(versionsuffix)s'),
+    ('h5py', '2.6.0', '%(versionsuffix)s-serial'),
+    ('PyYAML', '3.12', versionsuffix),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'math'
