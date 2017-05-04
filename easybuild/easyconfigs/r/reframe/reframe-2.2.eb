@@ -15,7 +15,6 @@ source_urls = ['https://madra.cscs.ch/scs/reframe/repository/']
 
 dependencies = [('Python-bare', '3.5.2')]
 
-modextrapaths = {'PATH': ['bin']}
 keepsymlinks = True
 
 sanity_check_paths={
