@@ -40,8 +40,8 @@
  perftools-cscs-645-loops.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
+ QuantumESPRESSO-6.1.0-CrayIntel-2016.11.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
- QuantumESPRESSO-5.4.0-CrayIntel-2016.11-cuda-8.0.54.eb
  R-3.3.2-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayGNU-2016.11.eb
  Scalasca-2.3.1-CrayIntel-2016.11.eb
