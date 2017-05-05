@@ -16,13 +16,9 @@ description = """Quantum ESPRESSO  is an integrated suite of computer codes
 toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
-sources = [
-    'qe-%s.tar.gz' % shortversion
-]
+sources = ['qe-%s.tar.gz' % shortversion]
 
-source_urls = [
-    'http://qe-forge.org/gf/download/frsrelease/240/1075/'
-]
+source_urls = ['http://qe-forge.org/gf/download/frsrelease/240/1075/']
 
 builddependencies = [
     ('perftools-cscs', '%s' %patversion, '', True),
@@ -38,6 +34,7 @@ prebuildopts += ' sed -i -e "s/F90FLAGS       = /F90FLAGS       = \$(FFLAGS) -no
 prebuildopts += ' sed -i -e "s/FFLAGS         = /FFLAGS         = -O2 -assume byterecl -g -traceback -qopenmp -craype-verbose /" make.inc && '
 prebuildopts += ' sed -i -e "s/LDFLAGS        =.*/& -qopenmp/" make.inc && '
 buildopts = 'cp pw'
+
 # parallel builds fail for target 'all'
 maxparallel = 1
 
