@@ -31,6 +31,7 @@ EasyBuild support for building and installing the Rmpi R library, implemented as
 @author: Jens Timmerman (Ghent University)
 @author: Toon Willems (Ghent University)
 @author: Balazs Hajgato (Vrije Universiteit Brussel)
+@author: Guilherme Peretti-Pezzi (CSCS)
 """
 import easybuild.tools.toolchain as toolchain
 from distutils.version import LooseVersion
