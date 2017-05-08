@@ -2,7 +2,6 @@
 
 name = 'R'
 version = '3.4.0'
-versionsuffix = '-mpi'
 
 homepage = 'http://www.r-project.org/'
 description = """R is a free software environment for statistical computing and graphics."""
