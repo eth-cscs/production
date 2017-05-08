@@ -1,6 +1,6 @@
 # contributed by Luca Marsella (CSCS)
 #
-# reduce the lenght of the BUILDPATH. E.g.:
+# You should reduce the lenght of the BUILDPATH. E.g.:
 # export EASYBUILD_BUILDPATH=/dev/shm/$USER
 
 easyblock = 'MakeCp'
