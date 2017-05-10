@@ -14,17 +14,16 @@ sources = ['cdo-%(version)s.tar.gz']
 source_urls = ['https://code.zmaw.de/attachments/download/14271/']
 checksums = [ '54498438de788f245d47499efad7966c' ]
 
+# do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
+# CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
+# No MPI support
 dependencies = [
     ('netCDF', '4.4.1.1'),
     ('netCDF-Fortran', '4.4.4'),
     ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
-    # do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
-    # CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
-    # No MPI support
 ]
 
 #preconfigopts = 'export NC_CONFIG=`which nc-config` && '
-
 preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
 
 configopts = "--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDFMINFORTRAN "
