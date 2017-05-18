@@ -4,7 +4,7 @@ easyblock = "ConfigureMake"
 name = 'QuantumESPRESSO'
 version = '5.4.0'
 patversion = '645-nogpu'
-versionsuffix = 'pat-%s' %patversion
+versionsuffix = '-pat-%s' %patversion
 
 homepage = 'http://www.quantum-espresso.org/'
 description = """Quantum ESPRESSO  is an integrated suite of computer codes
