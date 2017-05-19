@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-version = "svn"
+version = "5.0r17753"
 
 homepage = 'http://www.cp2k.org/'
 description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
