@@ -10,14 +10,18 @@ Programs written using this system will run unchanged on MIMD machines with or
 without a shared memory."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
-toolchainopts = {'dynamic': False}
+# toolchainopts = {'dynamic': False}
 
 # source_urls = ['http://charm.cs.illinois.edu/distrib/']
 sources = ['/apps/common/UES/easybuild/sources/c/Charm++/charm-%(version)s.tar.gz']
-cmds_map = [('charm-%(version)s.tar.gz', './build ChaNGa gni-crayxc hugepages smp --enable-lbuserdata --with-production -j12')]
+cmds_str = './build ChaNGa gni-crayxc hugepages smp --enable-lbuserdata --with-production -j8'
+cmds_map = [('charm-%(version)s.tar.gz', cmds_str)]
 
+# pmi-lib supported only with pmi>=5.0.11
 dependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('pmi/5.0.11', EXTERNAL_MODULE),
+    ('pmi-lib/5.0.11', EXTERNAL_MODULE)
 ]
 
 files_to_copy = ['gni-crayxc-hugepages-smp'] 
@@ -27,4 +31,8 @@ sanity_check_paths = {
     'dirs': ['gni-crayxc-hugepages-smp/lib', 'gni-crayxc-hugepages-smp/include'],
 }
 
+modextrapaths = { 'PATH': 'gni-crayxc-hugepages-smp/bin' } 
+modextravars = { 'EBTYPECHARMPLUSPLUS': 'gni-crayxc-hugepages-smp' }
+
 moduleclass = 'chem'
+
