@@ -17,16 +17,11 @@ download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
 sources = ["ParaView-v%(version)s.tar.gz"]
 
-#patches = ['%(name)s-%(version)s_missingheader.patch']
-
 python = 'Python'
 pyver = '2.7.12'
 pysuff = '-%s-%s' % (python, pyver)
 dependencies = [
     (python, pyver),
-#    ('h5py', '2.6.0', pysuff + '-serial'),
-#    ('ospray', '1.2.0'),
-#    ('embree', '2.14.0'),
 ]
 
 builddependencies = [('CMake', '3.4.1', '', True)]
@@ -56,6 +51,7 @@ configopts += '-DQT_QMAKE_EXECUTABLE:FILEPATH=/apps/leone/UES/RH6.7_PE15.12/qt/4
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
 
+modextravars = {'PV_DEBUG_SKIP_OPENGL_VERSION_CHECK': '1'}
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
     'dirs': [],
