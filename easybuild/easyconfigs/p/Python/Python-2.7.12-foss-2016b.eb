@@ -30,7 +30,7 @@ dependencies = [
 osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
 # order is important!
-# package versions updated Oct 8th 2016
+# package versions updated June 2017
 exts_list = [
     ('setuptools', '33.1.1', {
         'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
