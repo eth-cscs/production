@@ -2,7 +2,8 @@
 
 name = 'SWIG'
 version = '3.0.10'
-versionsuffix = '-Python-%(pyver)s'
+pyver = '3.5.2'
+versionsuffix= '-Python-%(pyver)s'
 
 homepage = 'http://www.swig.org/'
 description = """SWIG is a software development tool that connects programs written in C and C++ with

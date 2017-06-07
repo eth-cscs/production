@@ -1,0 +1,68 @@
+# @author: marcelsc, victorusu, gppezzi
+
+easyblock = "CmdCp"
+
+name = 'TensorFlow'
+version = '1.0.0'
+pyver = '2.7.12'
+cudaver = '8.0'
+versionsuffix = '-cuda-%s-Python-%s' % (cudaver, pyver)
+
+homepage = 'https://www.tensorflow.org/'
+description = """An open-source software library for Machine Intelligence."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+builddependencies = [
+    ('wheel', '0.30.0a0', '-Python-%(pyver)s'),
+    ('Bazel', '0.4.5', '-Python-%(pyver)s'),
+]
+
+dependencies = [
+    ('Python', pyver),
+    ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
+    ('SWIG', '3.0.10', '-Python-%(pyver)s'),
+    ('protobuf', '3.1.0', '-Python-%(pyver)s'),
+    ('mock', '2.0.0', '-Python-%(pyver)s'),
+]
+
+sources = ['v%(version)s.tar.gz']
+source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
+
+patches = [('tensorflow-v%(version)s-cuda-Python-%(pyver)s-cscs.patch')]
+
+with_configure = False
+
+whl_file = "tensorflow-%(version)s-cp27-cp27mu-linux_x86_64.whl"
+
+build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
+build_str += "chmod +x configure-cscs.sh && "
+build_str += "./configure-cscs.sh && "
+build_str += "bazel build --config=cuda --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
+build_str += " -c opt //tensorflow/tools/pip_package:build_pip_package && "
+build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
+build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/" + whl_file
+
+cmds_map = [
+    ('v%(version)s.tar.gz', build_str),
+]
+
+files_to_copy = [
+	      (['%(builddir)s/' +  whl_file], '%(installdir)s'),
+	      (['%(builddir)s/bin'], '%(installdir)s'),
+	      (['%(builddir)s/lib'], '%(installdir)s'),
+]
+
+sanity_check_paths={
+    'files': ['%(builddir)s/' + whl_file],
+    'dirs': ['%(installdir)s/lib/python%(pyshortver)s/site-packages'],
+}
+
+postinstallcmds = [ 'rm -rf /dev/shm/$USER/bazelout/' ]
+
+modextrapaths = {                                                                  
+    'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
+}
+
+moduleclass = 'devel'
+
