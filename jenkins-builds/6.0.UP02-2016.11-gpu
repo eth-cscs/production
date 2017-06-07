@@ -19,6 +19,7 @@
  LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.54.eb
  magma-2.2.0-CrayGNU-2016.11-cuda-8.0.54.eb
  NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
+ NCL-6.4.0.eb
  NCL-6.3.0.eb
  NCO-4.6.2-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
@@ -35,16 +36,22 @@
  perftools-cscs-645-cuda.eb
  perftools-base-cscs-645-openacc.eb
  perftools-cscs-645-openacc.eb
+ perftools-base-cscs-645-loops.eb
+ perftools-cscs-645-loops.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
  pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
+ QuantumESPRESSO-6.1.0-CrayIntel-2016.11.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
- QuantumESPRESSO-5.4.0-CrayIntel-2016.11-cuda-8.0.54.eb
  R-3.3.2-CrayGNU-2016.11.eb
+ Scalasca-2.3.1-CrayGNU-2016.11.eb
+ Scalasca-2.3.1-CrayIntel-2016.11.eb
+ Scalasca-2.3.1-CrayPGI-2016.11.eb
  Score-P-3.0-CrayCCE-2016.11.eb
  Score-P-3.0-CrayGNU-2016.11.eb
  Score-P-3.0-CrayIntel-2016.11.eb
  Score-P-3.0-CrayPGI-2016.11.eb
  Score-P-3.0-CrayGNU-2016.11-cuda-8.0.54.eb
+ Spark-1.6.0.eb
  TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-2.7.12.eb
  TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-3.5.2.eb
  TensorFlow-1.0.0-CrayGNU-2016.11-Python-3.5.2.eb
@@ -55,6 +62,4 @@
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VTK-7.1.0-CrayGNU-2016.11.eb
- Scalasca-2.3.1-CrayGNU-2016.11.eb
- Scalasca-2.3.1-CrayIntel-2016.11.eb
- Scalasca-2.3.1-CrayPGI-2016.11.eb
+

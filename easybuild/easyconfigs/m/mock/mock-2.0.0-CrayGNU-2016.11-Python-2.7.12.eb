@@ -1,0 +1,29 @@
+# @author: marcelsc
+
+easyblock = 'PythonPackage'
+
+name = 'mock'
+version = '2.0.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/mock/'
+description = """A rolling backport of unittest.mock for all Python versions < 3.3."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.12'),
+    ('pbr', '2.0.0', '-Python-%(pyver)s'),
+    ('funcsigs', '1.0.2', '-Python-%(pyver)s'),
+]
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'

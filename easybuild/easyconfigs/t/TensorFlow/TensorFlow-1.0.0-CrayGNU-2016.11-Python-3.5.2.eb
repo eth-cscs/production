@@ -55,6 +55,8 @@ sanity_check_paths={
     'dirs': ['%(installdir)s/lib/python%(pyshortver)s/site-packages'],
 }
 
+postinstallcmds = [ 'rm -rf /dev/shm/$USER/bazelout/' ]
+
 modextrapaths = {                                                                  
     'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
 }

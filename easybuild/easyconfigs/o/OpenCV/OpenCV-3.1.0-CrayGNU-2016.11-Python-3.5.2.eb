@@ -3,7 +3,9 @@
 easyblock = 'CMakeMake'
 
 name = 'OpenCV'
-version = '3.2.0'
+version = '3.1.0'
+versionsuffix = '-Python-%(pyver)s'
+pyver = '3.5.2'
 
 homepage = 'http://opencv.org/'
 description = """OpenCV (Open Source Computer Vision Library) is an open source computer vision
@@ -22,20 +24,25 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('Python', '2.7.12'),
+    ('Python', pyver),
     ('zlib', '1.2.8'),
     ('FFmpeg', '2.8.7'),
     ('libjpeg-turbo', '1.5.0'),
     ('libpng', '1.6.23'),
     ('JasPer', '1.900.1'),
-    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
 ]
 
 configopts = '-DCMAKE_BUILD_TYPE=RELEASE '  
 configopts = '-DCMAKE_CXX_COMPILER="g++" -DCMAKE_C_COMPILER="gcc" ' 
 configopts += '-DBUILD_SHARED_LIBS=ON '
 configopts += '-DBUILD_PYTHON_SUPPORT=ON '
-configopts += '-DPYTHON_PACKAGES_PATH=%(installdir)s/lib/python%(pyshortver)s/site-packages '
+configopts += '-DBUILD_opencv_python2=OFF '
+configopts += '-DBUILD_opencv_python3=ON '
+configopts += '-DPYTHON3_PACKAGES_PATH=%(installdir)s/lib/python%(pyshortver)s/site-packages '
+configopts += '-DPYTHON3_EXECUTABLE=$EBROOTPYTHON/bin/python3 '
+configopts += '-DPYTHON3_LIBRARY=$EBROOTPYTHON/lib/ '
+configopts += '-DPYTHON3_INCLUDE_DIR=$EBROOTPYTHON/include/python3.5m '
+configopts += '-DPYTHON3_NUMPY_INCLUDE_DIR=$EBROOTPYTHON/lib/python3.5/site-packages/numpy-1.11.2-py%(pyshortver)s-linux-x86_64.egg/numpy/core/include/ '
 configopts += '-DBUILD_NEW_PYTHON_SUPPORT=ON '
 configopts += '-DZLIB_LIBRARY=$EBROOTZLIB/lib/libz.so '
 configopts += '-DZLIB_INCLUDE_DIR=$EBROOTZLIB/include '
@@ -49,7 +56,7 @@ configopts += '-DENABLE_SSE=ON -DENABLE_SSE2=ON -DENABLE_SSE3=ON '
 configopts += '-DWITH_CUDA=OFF '
 
 sanity_check_paths = {
-    'files': ['lib/libopencv_core.%s' % SHLIB_EXT, 'lib/python%(pyshortver)s/site-packages/cv2.so'] +
+    'files': ['lib/libopencv_core.%s' % SHLIB_EXT, 'lib/python%(pyshortver)s/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so'] +
              ['bin/opencv_%s' % x for x in ['createsamples', 'traincascade']],
     'dirs': ['include']
 }
