@@ -22,7 +22,7 @@ conflict EasyBuild-cscs
 
 # Local variables
 set ebmodule               /apps/common/UES/easybuild/software/EasyBuild/latest
-set eb_config_dir          /apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild
+set eb_config_dir          /apps/daint/UES/jenkins/production/easybuild
 
 #
 # EB_CUSTOM_REPOSITORY
