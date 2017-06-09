@@ -1,3 +1,4 @@
+# contributed by Victor Holanda Rusu, Luca Marsella and Guilherme Peretti Pezzi (CSCS)
 easyblock = 'Bundle'
 
 name = 'EasyBuild-custom'
@@ -15,7 +16,7 @@ modtclfooter = """
 
 # Local variables
 set ebmodule               /apps/common/UES/easybuild/software/EasyBuild/latest
-set eb_config_dir          /apps/daint/UES/jenkins/daint101/workspace/ProductionEBDaint-gpu/label/daint/easybuild
+set eb_config_dir          /apps/daint/UES/jenkins/production/easybuild
 
 #
 # EB_CUSTOM_REPOSITORY
@@ -116,5 +117,3 @@ module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
 """
 
 moduleclass = 'devel'
-
-
