@@ -3,14 +3,14 @@
 easyblock = "Tarball"
 
 name = 'reframe'
-version = '2.2'
+version = '2.3'
 
 homepage = 'https://madra.cscs.ch/scs/reframe/'
 description = "A regression framework for writing portable tests for HPC systems."
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-sources = [ ('archive.tar.gz?ref=v2.2', "tar xfz %s" )]
+sources = [ ('archive.tar.gz?ref=v%(version)s', "tar xfz %s" )]
 source_urls = ['https://madra.cscs.ch/scs/reframe/repository/']
 
 dependencies = [('Python-bare', '3.5.2')]
