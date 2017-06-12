@@ -1,7 +1,6 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'MakeCp'
 
-
 name = 'VASP'
 version = "5.4.1"
 
