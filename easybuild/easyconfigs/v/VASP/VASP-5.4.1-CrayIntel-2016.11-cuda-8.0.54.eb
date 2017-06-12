@@ -24,7 +24,7 @@ builddependencies = [
 # adapt ./arch/makefile.include.linux_intel_cuda and copy to ./makefile.include 
 prebuildopts = ' sed -e "s/mpif90/ftn/g" -e "s/-mkl//" -e "/mkl/Id" -e "/FFT_ROOT/d" -e "/OBJECTS /a FFT_LIB=-L\$(FFTW_DIR) -lfftw3 \\nINCS=-I\$(FFTW_INC)" -e "s#/opt/cuda/#\$(CUDATOOLKIT_HOME)#" -e "/GENCODE_ARCH/d" -e "/MAGMA_ROOT/d" -e "s#/opt/openmpi/include#\$(MPICH_DIR)/include#" ./arch/makefile.include.linux_intel_cuda > ./makefile.include && '
 # correct common.mk for Intel compiler
-prebuildopts += ' sed -i -e "s/gcc/icc/" -e "s/g++/icpc/g" src/CUDA/common.mk && '
+prebuildopts += ' sed -i -e "s/gcc/icc/" -e "s/g++/icpc/g" -e "s/-openmp/-qopenmp/g" src/CUDA/common.mk && '
 # correct kernels.h for CUDA 8.0
 prebuildopts += ' sed -i -e "/double atomicAdd/i #if (__CUDACC_VER_MAJOR__<8) || ( defined(__CUDA_ARCH__) && (__CUDA_ARCH__<600) )" -e "/<int is_partial>/i #endif" ./src/CUDA/kernels.h && '
 
