@@ -12,7 +12,7 @@ Computing"""
 
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchainopts = {'verbose': False}
-# https://github.com/hpcugent/easybuild-easyconfigs/pull/2928#issuecomment-216220341
+# verbose=False avoids the configure step to fail (-craype-verbose error)
 
 source_urls = ['https://github.com/nerscadmin/IPM/archive']
 sources = ['%(version)s.tar.gz']
