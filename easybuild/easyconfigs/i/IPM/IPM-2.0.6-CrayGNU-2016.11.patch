@@ -20,7 +20,7 @@ diff -Naur IPM-2.0.6.ori/src/ipm_env.c IPM-2.0.6/src/ipm_env.c
    }
 -  
 + 
-+  // cscs --- force IPM_LOGDIR=$SCRATCH/../piccinal/ipm/%Y/%m/%d/
++  // cscs --- force IPM_LOGDIR=$SCRATCH/../piccinal/%Y/%m/%d/
 +  char *scratchpath = getenv("SCRATCH");                
 +  // char *username = getenv("USER");                   
 +  const char slash[2] = "/";                            
