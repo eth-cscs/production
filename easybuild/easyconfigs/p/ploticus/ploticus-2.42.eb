@@ -3,7 +3,8 @@ easyblock = 'MakeCp'
 name = 'ploticus'
 version = '2.42'
 versiontrim = '242'
-# versionsuffix = '-ipm'
+versionsuffix = '-ipm'
+# to avoid using /apps/common/system/modulefiles/ploticus/
 
 homepage = 'http://ploticus.sourceforge.net/doc/welcome.html'
 description = """Ploticus is a free GPL software utility that can produce
