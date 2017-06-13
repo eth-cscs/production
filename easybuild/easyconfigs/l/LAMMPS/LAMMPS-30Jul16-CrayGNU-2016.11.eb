@@ -15,7 +15,7 @@ source_urls = ['https://github.com/lammps/lammps/archive']
 sources = ['%s.tar.gz' % (release)]
 
 prebuildopts = ' cd ./src && ' 
-prebuildopts += ' make yes-standard yes-user-reaxc yes-user-omp yes-kspace yes-misc yes-molecule yes-rigid yes-user-misc && '
+prebuildopts += ' make yes-standard yes-user-reaxc yes-user-omp yes-kspace yes-misc yes-molecule yes-rigid yes-user-misc yes-user-cgsdk && '
 prebuildopts += ' make no-voronoi no-poems no-meam no-kim no-gpu && '
 prebuildopts += ' make package-update && '
 prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
