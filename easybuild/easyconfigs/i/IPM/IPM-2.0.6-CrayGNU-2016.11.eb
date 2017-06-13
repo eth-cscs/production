@@ -25,13 +25,13 @@ dependencies = [
     ('ploticus', '2.42-ipm', '', True),
     ('mxml', '2.10', '', True),
     ('libunwind', '1.2', '', True),
-    ('papi/5.5.0.1', EXTERNAL_MODULE),
+    ('papi/5.5.0.2', EXTERNAL_MODULE),
 ]
 
 preconfigopts  = ' ./bootstrap.sh && '
 preconfigopts += ' sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
 buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
-configopts  = ' --with-papi=$EBROOTPAPI'
+configopts  = " --with-papi=$EBROOTPAPI"
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
 configopts += ' CPPFLAGS="-I$EBROOTMXML/include "'
 configopts += ' LIBS="-L$EBROOTMXML/lib "'
