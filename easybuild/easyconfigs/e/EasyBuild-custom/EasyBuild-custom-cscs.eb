@@ -74,7 +74,7 @@ if { [ info exists ::env(CRAY_CPU_TARGET) ] } {
 #
 if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
     # cray systems directory change
-    if { [ info exists ::env(CRAY_CPU_TARGET) ] } {
+    if { [ info exists ::env(PE_ENV) ] } {
         setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$host_machine/$::env(CRAY_CPU_TARGET)
     } else {
         setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$host_machine
