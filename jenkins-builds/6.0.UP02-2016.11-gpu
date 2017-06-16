@@ -16,6 +16,10 @@
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-parallel.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-serial.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-serial.eb
+ IPM-2.0.6-CrayGNU-2016.11.eb
+ IPM-2.0.6-CrayCCE-2016.11.eb
+ IPM-2.0.6-CrayIntel-2016.11.eb
+ IPM-2.0.6-CrayPGI-2016.11.eb
  LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.54.eb
  magma-2.2.0-CrayGNU-2016.11-cuda-8.0.54.eb
  NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
