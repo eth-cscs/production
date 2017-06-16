@@ -18,7 +18,8 @@ checksums = [ 'c01207ca942bef74c7d48df965fca99f' ]
 patches = [ 'IPM-2.0.6-CrayGNU-2016.11.patch' ]
 
 # ploticus+mxml required for parser
-# ploticus is in /apps/common/system/ => using ploticus-ipm
+# Installing ploticus-ipm to avoid conflict with the version installed under
+# /apps/common/system/modulefiles/ploticus/'
 dependencies = [
     ('libunwind', '1.2', '', True),
     ('mxml', '2.10', '', True),
