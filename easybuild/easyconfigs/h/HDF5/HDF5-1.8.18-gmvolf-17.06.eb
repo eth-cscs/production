@@ -15,7 +15,7 @@ sources = [SOURCELOWER_TAR_GZ]
 buildopts = 'CXXFLAGS="$CXXFLAGS -DMPICH_IGNORE_CXX_SEEK"'
 
 dependencies = [
-    ('zlib', '1.2.8'),
+    ('zlib', '1.2.11'),
     ('Szip', '2.1'),
 ]
 
