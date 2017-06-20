@@ -13,9 +13,7 @@
  PROJ-4.9.2-gmvolf-15.11.eb
  Python-3.4.3-gmvolf-15.11.eb
  Python-3.5.0-gmvolf-15.11.eb
- R-2.15.3-gmvolf-15.11-libX11-1.6.3.eb
- R-3.0.2-gmvolf-15.11-libX11-1.6.3.eb 
- R-3.2.4-gmvolf-15.11-libX11-1.6.3.eb
+ R-3.3.2-gmvolf-15.11-libX11-1.6.3.eb
  Ruby-2.2.2-gmvolf-15.11.eb
  Scalasca-2.2.2-gmvapich2-15.11.eb
  Scalasca-2.2.2-gmvapich2-15.11_cuda_7.0_gdr.eb
