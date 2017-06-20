@@ -14,7 +14,7 @@ description = """Quantum ESPRESSO  is an integrated suite of computer codes
   (both norm-conserving and ultrasoft)."""
 
 toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
-toolchainopts = {'usempi': True, 'openmp': True}
+toolchainopts = {'usempi': True, 'openmp': True, 'dynamic': False}
 
 sources = ['qe-%s.tar.gz' % shortversion]
 
