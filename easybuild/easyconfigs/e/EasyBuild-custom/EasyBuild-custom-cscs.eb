@@ -16,7 +16,7 @@ modtclfooter = """
 
 # Local variables
 set ebmodule               /apps/common/UES/easybuild/software/EasyBuild/latest
-set eb_config_dir          /apps/common/UES/jenkins/easybuild
+set eb_config_dir          /apps/common/UES/jenkins/production/easybuild
 
 #
 # EB_CUSTOM_REPOSITORY
