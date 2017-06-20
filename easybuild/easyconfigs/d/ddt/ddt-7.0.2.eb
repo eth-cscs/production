@@ -36,28 +36,20 @@ set     url                        "http://www.allinea.com"
 set     url2                       "http://user.cscs.ch"
 set     modulename                 "ddt"
 # ============================================================================
-if  { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" } {
+if { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" } {
           set     os      "RHAT6"
           set     version "7.0.2"
-}
-  
-if  { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" } {
+} elseif { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" } {
           set     os      "SLES11"
           set     version "7.0.2"
-}
-  
-if  { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
+} elseif { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
           set     os      "SLES12"
           set     version "7.0.2"
-}
-
-if  { $hostname=="tave" } {
+} elseif { $hostname=="tave" } {
           set     os      "SLES12"
           set     version "7.0.2"
-}
-  
-if { "$os"=="" } {
-        puts stderr "L60: host=$host"
+} else {
+        # 60: host=$host"
         set     os      "SLES12"
         set     version "7.0.2"
 }
