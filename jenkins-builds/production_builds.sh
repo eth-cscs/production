@@ -1,114 +1,38 @@
 #!/bin/bash -l
 
-# New modulefiles/software will automatically be added to xalt list of modulefiles (reversemap) at the end of this script.
+# NEW: new modulefiles/software will automatically be added to xalt list of modulefiles (reversemap) at the end of this script.
 # Hence one should not use it as CI.
 # The xalt list of modulefiles will be updated only by user jenkins. So this script should only be used by jenkins.
-
-scriptname=`basename $0`
-
-usage() {
-    echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -p installation prefix folder (required)
-    -a architecture (used and required only on daint)
-    -l production list (contains list of eb files)
-    -f force the build for a given package
-    -h help
-    "
-    exit 1;
-}
-
-shortopts="h,p:,a:,l:,f:"
-eval set -- $(getopt -o ${shortopts} -n ${scriptname} -- "$@" 2> /dev/null)
-
-eb_files=()
-production_files=()
-while [ $# -ne 0 ]; do
-    case $1 in
-        -h | --help)
-            usage
-            exit 0 ;;
-        -p)
-            shift
-            PREFIX="$1" ;;
-        -a)
-            shift
-            ARCH="$1" ;;
-        -f)
-            shift
-            eb_files+=("$1 -f")
-            ;;
-        -l)
-            shift
-            mapfile -t list < $1
-            for ((i = 0; i < ${#list[@]}; i++)); do
-                eb_files+=("${list[$i]}")
-            done
-            production_files+=($1)
-            ;;
-        --)
-            ;;
-        *)
-            eb_files+=($1)
-            ;;
-    esac
-    shift
-done
 
 # Retrieve host name (excluding node number)
 if [[ -z $hostName ]] ; then
     hostName=`uname -n | cut -c1-5`
 fi
 
-if [ "X$PREFIX" == "X" ]; then
-    echo
-    echo "Prefix folder not defined. Please use the option -p to define the prefix folder"
-    echo
-    usage
-    exit 1
+# expects production file as command line argument
+if [ -z "$1" ]; then
+ echo -e "\n Error! Please insert production file on command line! \n"
+ exit 1
+else
+ filename=$(basename $1)
 fi
-
-if [ "X$ARCH" == "X" ] && [ "Xdaint" == "X$hostName" ]; then
-    echo
-    echo "No architecture defined. Please use the option -a to define the architecture"
-    echo
-    usage
-    exit 1
-fi
-
-#
-# These are additional args to be used based on the system
-#
-eb_args=""
 
 # defines OS VERSION and ARCH parsing the selected production filename
-echo
-echo " - PREFIX FOLDER: '$PREFIX'"
-if [ "X$ARCH" != "X" ]; then
-    echo " - ARCH: '$ARCH'"
-fi
-echo
-if [ ${#production_files[@]} -eq 1 ]; then
-    echo " Production file is: ${production_files[@]}"
-elif [ ${#production_files[@]} -gt 1 ]; then
-    echo " Production files are: ${production_files[@]}"
-fi
+OS=${filename%-[0-9]*.[0-9]*-[a-z]*}
+ARCH=${filename#$OS-[0-9]*.[0-9]*-}
+echo -e "\n Production file is $1: \n - OS VERSION is $OS \n - ARCH is $ARCH"
 
 # list of builds
-echo -e "\n List of production builds with additional options: \n"
-for ((i = 0; i < ${#eb_files[@]}; i++)); do
-    echo ${eb_files[$i]}
-done
+list=$(cat $1 | grep -v ^#)
+echo -e "\n List of production builds: \n$list"
 
 # cscs ARCH setup
-if [ "Xdaint" == "X$hostName" ]; then
-    module load daint-$ARCH
-    echo -e "\n Loading modules: \n - module load daint-$ARCH"
-    module rm xalt
-    eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
-fi
+module load daint-$ARCH
+echo -e "\n Loading modules: \n - module load daint-$ARCH"
+module rm xalt
 
 # EasyBuild setup
-export EASYBUILD_PREFIX=$PREFIX/easybuild
+export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 module use $PWD/easybuild/module
 module load Easybuild
@@ -117,6 +41,7 @@ echo -e "\n Easybuild setup:"
 echo -e " - EASYBUILD_PREFIX=$EASYBUILD_PREFIX"
 echo -e " - EB_CUSTOM_REPOSITORY=$EB_CUSTOM_REPOSITORY"
 echo -e " - module load EasyBuild-custom/cscs"
+
 echo -e "\n Easybuild configuration:"
 echo -e " - eb --show-config"
 eb --show-config
@@ -125,75 +50,71 @@ eb --show-config
 echo -e "\n Builds started on $(date)"
 starttime=$(date +%s)
 
-# loop over list
-for ((i = 0; i < ${#eb_files[@]}; i++)); do
-    build=${eb_files[$i]}
+# Installing the EasyBuild-custom/cscs module
+eb -f EasyBuild-custom-cscs.eb
 
-    echo -e "\n===============================================================\n"
+# loop over list
+for build in $list; do
 
 # define name and version of the current build
-    name=`echo ${build} | cut -d'-' -f 1`
+ version=$(basename ${build#[aA-z-Z]*-} .eb)
+ name=${build%-${version}.eb}
 
-    #
-    # VASP and CPMD builds
-    #
-    if [[ $build == *"VASP"* || $build == *"CPMD"* ]]; then
+ echo -e "\n===============================================================\n"
+# build
 
-        #echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
-        tmp_footer=""
-        if [ "Xdaint" == "X$hostName" ]; then
-           tmp_footer="--modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
-           cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
+# use module footer and adjust ownership and permissions for selected builds
+ if [[ ${name} =~ "CPMD" || ${name} =~ "VASP" ]]; then
+  echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
+  cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
  puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
 }
 EOF
-        fi
-        echo -e "eb $build -r ${eb_args} ${tmp_footer}\n"
-        eb $build -r ${eb_args} ${tmp_footer}
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+  eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
+# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
+  echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
+  chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+  chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
+# standard build without need to add a module footer or adjusting ownership and permissions
+ else
+  echo -e "eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+  eb $build -r --modules-header=$APPS/UES/login/daint-${ARCH}.h
+ fi
 
-        # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
-        echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-        chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
-        chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
-
-        #
-        # The other builds
-        #
-    else
-        echo -e "eb $build -r ${eb_args}"
-        eb $build -r ${eb_args}
-    fi
-
+# create default
+ echo -e "\n Creating file ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version to set ${version} as default for ${name}"
+ cat > ${EASYBUILD_INSTALLPATH}/modules/all/${name}/.version<<EOF
+#%Module
+set ModulesVersion "${version}"
+EOF
 done
 
+# update xalt table of modulefiles
+echo "loading PrgEnv-cray"
+module load PrgEnv-cray/6.0.3
 
-if [ "Xdaint" == "X$hostName" ]; then
-    # update xalt table of modulefiles
-    echo "loading PrgEnv-cray"
-    module load PrgEnv-cray/6.0.3
-    echo "module use craypat apps"
-    module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
-    # Removing Easybuild module before the reverseMapD operation
-    # because spider the mapping the programs to Easybuild
-    module unload Easybuild
-    echo "running reverseMapD"
-    userid=`id -u`
-    # run only for jenscscs user
-    if [ "X$userid" == "X23395" ]; then
-        module load Lmod
-        export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
-        export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
-        export XALTPROD=/apps/daint/UES/xalt/git
-        cd $XALTJENKINS/
-        rm -rf $XALTJENKINS/reverseMapD
-        ./cray_build_rmapT.sh .
-        cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
-        cd -
-    fi
+echo "module use craypat apps"
+module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
+
+# Removing Easybuild module before the reverseMapD operation
+# because spider the mapping the programs to Easybuild
+module unload Easybuild
+
+echo "running reverseMapD"
+userid=`id -u`
+if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
+	module load Lmod
+	export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+	export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+	export XALTPROD=/apps/daint/UES/xalt/git
+	cd $XALTJENKINS/
+	rm -rf $XALTJENKINS/reverseMapD
+	./cray_build_rmapT.sh .
+	cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+	cd -
 fi
-
-
 
 # end time
 endtime=$(date +%s)
