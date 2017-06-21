@@ -8,8 +8,8 @@ scriptname=`basename $0`
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -o OS (required)
-    -a archtecture (required only on daint)
+    -p installation prefix folder (required)
+    -a architecture (used and required only on daint)
     -l production list (contains list of eb files)
     -f force the build for a given package
     -h help
@@ -17,18 +17,19 @@ usage() {
     exit 1;
 }
 
-shortopts="h,o:,a:,l:,f:"
+shortopts="h,p:,a:,l:,f:"
 eval set -- $(getopt -o ${shortopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
+production_files=()
 while [ $# -ne 0 ]; do
     case $1 in
         -h | --help)
             usage
             exit 0 ;;
-        -o)
+        -p)
             shift
-            OS="$1" ;;
+            PREFIX="$1" ;;
         -a)
             shift
             ARCH="$1" ;;
@@ -42,7 +43,7 @@ while [ $# -ne 0 ]; do
             for ((i = 0; i < ${#list[@]}; i++)); do
                 eb_files+=("${list[$i]}")
             done
-            production_file=$1
+            production_files+=($1)
             ;;
         --)
             ;;
@@ -58,13 +59,19 @@ if [[ -z $hostName ]] ; then
     hostName=`uname -n | cut -c1-5`
 fi
 
-if [ "X$OS" == "X" ]; then
-    echo "No OS defined. Please use the option -o to define the OS"
+if [ "X$PREFIX" == "X" ]; then
+    echo
+    echo "Prefix folder not defined. Please use the option -p to define the prefix folder"
+    echo
+    usage
     exit 1
 fi
 
 if [ "X$ARCH" == "X" ] && [ "Xdaint" == "X$hostName" ]; then
+    echo
     echo "No architecture defined. Please use the option -a to define the architecture"
+    echo
+    usage
     exit 1
 fi
 
@@ -74,7 +81,17 @@ fi
 eb_args=""
 
 # defines OS VERSION and ARCH parsing the selected production filename
-echo -e "\n Production file is: $production_file \n - OS VERSION is '$OS' \n - ARCH is '$ARCH'"
+echo
+echo " - PREFIX FOLDER: '$PREFIX'"
+if [ "X$ARCH" != "X" ]; then
+    echo " - ARCH: '$ARCH'"
+fi
+echo
+if [ ${#production_files[@]} -eq 1 ]; then
+    echo " Production file is: ${production_files[@]}"
+elif [ ${#production_files[@]} -gt 1 ]; then
+    echo " Production files are: ${production_files[@]}"
+fi
 
 # list of builds
 echo -e "\n List of production builds with additional options: \n"
@@ -91,7 +108,7 @@ if [ "Xdaint" == "X$hostName" ]; then
 fi
 
 # EasyBuild setup
-export EASYBUILD_PREFIX=$APPS/UES/jenkins/$OS/$ARCH/easybuild
+export EASYBUILD_PREFIX=$PREFIX/easybuild
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 module use $PWD/easybuild/module
 module load Easybuild
@@ -112,41 +129,41 @@ starttime=$(date +%s)
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     build=${eb_files[$i]}
 
-  echo -e "\n===============================================================\n"
+    echo -e "\n===============================================================\n"
 
 # define name and version of the current build
-  name=`echo ${build} | cut -d'-' -f 1`
+    name=`echo ${build} | cut -d'-' -f 1`
 
-  #
-  # VASP and CPMD builds
-  #
-  if [[ $build == *"VASP"* || $build == *"CPMD"* ]]; then
+    #
+    # VASP and CPMD builds
+    #
+    if [[ $build == *"VASP"* || $build == *"CPMD"* ]]; then
 
-    #echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
-    tmp_footer=""
-    if [ "Xdaint" == "X$hostName" ]; then
-       tmp_footer="--modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
-       cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
+        #echo -e "Creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}\n"
+        tmp_footer=""
+        if [ "Xdaint" == "X$hostName" ]; then
+           tmp_footer="--modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
+           cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
  puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
 }
 EOF
-   fi
-    echo -e "eb $build -r ${eb_args} ${tmp_footer}\n"
-    eb $build -r ${eb_args} ${tmp_footer}
+        fi
+        echo -e "eb $build -r ${eb_args} ${tmp_footer}\n"
+        eb $build -r ${eb_args} ${tmp_footer}
 
-    # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
-    echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-    chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
-    chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
+        # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
+        echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
+        chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+        chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 
-  #
-  # The other builds
-  #
-  else
-    echo -e "eb $build -r ${eb_args}"
-    eb $build -r ${eb_args}
-  fi
+        #
+        # The other builds
+        #
+    else
+        echo -e "eb $build -r ${eb_args}"
+        eb $build -r ${eb_args}
+    fi
 
 done
 
@@ -162,7 +179,8 @@ if [ "Xdaint" == "X$hostName" ]; then
     module unload Easybuild
     echo "running reverseMapD"
     userid=`id -u`
-    if [ "X$userid" == "X23395" ] && [ "X$hostName" == "Xdaint" ]; then
+    # run only for jenscscs user
+    if [ "X$userid" == "X23395" ]; then
         module load Lmod
         export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
         export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
