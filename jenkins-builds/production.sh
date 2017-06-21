@@ -77,15 +77,15 @@ fi
 # optional EasyBuild arguments
 eb_args=""
 
-# prints PREFIX, ARCH and the list of EasyBuild files from the production list
-echo -e "\n - PREFIX FOLDER: '$PREFIX'"
+# prints production file(s), PREFIX, ARCH
+echo -e "\n - Production file(s): ${production_files[@]}"
+echo -e " - PREFIX FOLDER: '$PREFIX'"
 if [ -n "$ARCH" ]; then
     echo -e " - ARCH: '$ARCH' \n"
 fi
-echo -e " Production files: ${production_files[@]}"
 
 # list of builds
-echo -e "\n List of production builds (including options): \n"
+echo -e "\n List of builds (including options): \n"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
@@ -130,7 +130,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     if [[ $name =~ "VASP" || $name =~ "CPMD" ]]; then
 # creating a footer for ${name} modulefile to warn users not belonging to group ${name,,}
         tmp_footer=""
-        if [[ system =~ "daint" ]; then
+        if [[ system =~ "daint" ]]; then
             tmp_footer="--modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
             cat > ${EASYBUILD_TMPDIR}/${name}.footer<<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
@@ -139,7 +139,8 @@ if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
 EOF
         fi
         echo -e "eb ${eb_files[$i]} -r ${eb_args} ${tmp_footer}\n"
-        status=$[status+$(eb ${eb_files[$i]} -r ${eb_args} ${tmp_footer})]
+        eb ${eb_files[$i]} -r ${eb_args} ${tmp_footer}
+        status=$[status+$?]
 
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
@@ -149,7 +150,8 @@ EOF
 # build other software
     else
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
-        status=$[status+$(eb ${eb_files[$i]} -r ${eb_args})]
+        eb ${eb_files[$i]} -r ${eb_args}
+        status=$[status+$?]
     fi
 done
 
