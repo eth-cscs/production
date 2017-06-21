@@ -4,14 +4,14 @@
 # Hence one should not use it as CI.
 # The xalt list of modulefiles will be updated only by user jenkins. So this script should only be used by jenkins.
 
-scriptname=`basename $0`
+scriptname=$(basename $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -p installation prefix folder (mandatory)
-    -a architecture (Piz Daint only)
-    -l production list (contains list of eb files)
-    -f force the build for a given package (optional)
+    -p installation prefix folder               (mandatory)
+    -a architecture                             (mandatory on Piz Daint only)
+    -l production list                          (mandatory: contains the list of EasyBuild files with extension '.eb')
+    -f force the build for a given package      (optional)
     -h help
     "
     exit 1;
@@ -61,12 +61,14 @@ else
  system=$(hostname | sed 's/[0-9]*//g');
 fi
 
+# define prefix folder
 if [ -z "$PREFIX" ]; then
     echo -e "\n Prefix folder not defined. Please use the option -p to define the prefix folder \n"
     usage
     exit 1
 fi
 
+# define architecture (Piz Daint only)
 if [ -z "$ARCH" ] && [[ $system =~ "daint" ]]; then
     echo -e "\n No architecture defined. Please use the option -a to define the architecture \n"
     usage
@@ -83,14 +85,10 @@ echo -e "\n - PREFIX FOLDER: '$PREFIX'"
 if [ -n "$ARCH" ]; then
     echo -e " - ARCH: '$ARCH' \n"
 fi
-if [ ${#production_files[@]} -eq 1 ]; then
-    echo -e " Production file is: ${production_files[@]}"
-elif [ ${#production_files[@]} -gt 1 ]; then
-    echo -e " Production files are: ${production_files[@]}"
-fi
+echo -e " Production files: ${production_files[@]}"
 
 # list of builds
-echo -e "\n List of production builds with additional options: \n"
+echo -e "\n List of production builds (including options): \n"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
