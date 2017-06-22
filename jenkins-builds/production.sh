@@ -8,16 +8,17 @@ scriptname=$(basename $0)
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
     -a, --arch     Architecture (gpu or mc)     (mandatory: Piz Daint only)
+    -f, --force    Force build of given package (optional: double quotes for a list)
     -h, --help     Help message
     -l, --list     Production list file         (mandatory: EasyBuild production list)
-    -f, --force    Force build of given package (optional: double quotes for a list)
     -p, --prefix   EasyBuild prefix folder      (mandatory: installation folder)
     "
     exit 1;
 }
 
+longopts="arch:,force:,help,list:,prefix:"
 shortopts="a:,f:,h,l:,p:"
-eval set -- $(getopt -o ${shortopts} -n ${scriptname} -- "$@" 2> /dev/null)
+eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
 production_files=()
