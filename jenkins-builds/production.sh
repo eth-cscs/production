@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 
 # New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI.
 # The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins.
