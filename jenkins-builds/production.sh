@@ -76,7 +76,7 @@ if [[ $system =~ "daint" ]]; then
         module rm xalt
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
-        module load daint-$ARCH
+        module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
     fi
 fi
@@ -91,22 +91,19 @@ export EB_CUSTOM_REPOSITORY=$PWD/easybuild
 export EASYBUILD_PREFIX=$PREFIX
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
-export EASYBUILD_TMPDIR=${EASYBUILD_PREFIX}/tmp
-export EASYBUILD_BUILDPATH=/dev/shm/$USER/easybuild/stage
-
 # print EasyBuild configuration, module list, production file(s), list of builds
-echo -e " EasyBuild configuration ('eb --show-config'): "
+echo -e " EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
-echo -e " $(module list -t) \n"
-echo -e " Production file(s): ${production_files[@]}"
+echo -e " $(module list -t)"
+echo -e " Production file(s): ${production_files[@]} \n"
 echo -e " List of builds (including options):"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
 
 # start time
-echo -e "\n Builds started on $(date)"
+echo -e "\n Starting ${system} builds on $(date)"
 starttime=$(date +%s)
 
 # cumulative exit status of EasyBuild commands in the loop
