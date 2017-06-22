@@ -37,9 +37,9 @@ while [ $# -ne 0 ]; do
             ;;
         -l | --list)
             shift
-            mapfile -t list < $1
-            for ((i = 0; i < ${#list[@]}; i++)); do
-                eb_files+=("${list[$i]}")
+            mapfile < $1
+            for ((i = 0; i < ${#MAPFILE[@]}; i++)); do
+                eb_files+=("${MAPFILE[$i]}")
             done
             production_files+=($1)
             ;;
