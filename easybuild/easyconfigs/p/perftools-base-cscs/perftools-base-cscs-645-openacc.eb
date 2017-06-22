@@ -82,7 +82,7 @@ proc modules_compat {} {
     }
     if {[expr [llength [split $MODULES_VERSION .]] > 3]} {
       set needed_ver {3 2 10 2}
-      set module_ver $MODULES_VERSION
+      set module_ver "$MODULES_VERSION"
       set module_ver [split $module_ver .]
       for {set i 0} {$i < 4} {incr i} {
         if {[expr [lindex $module_ver $i] > [lindex $needed_ver $i]]} {
@@ -203,7 +203,7 @@ prepend-path MANPATH $PAT_BUILD_PAPI_BASEDIR/share/pdoc/man
 
 prepend-path PATH $PAT_BUILD_PAPI_BASEDIR/bin
 
-# Save this line, it's the test for running on Cray hardware
+# Save this line, it is the test for running on Cray hardware
 # if { [ file exists /proc/cray_xt/nid ] } {
 
 #  Direct Chapel compiler to include line directives
@@ -291,7 +291,7 @@ set     pat_opts                   {$CRAYPAT_ROOT/sbin/pat-opts}
 setenv APP2_STATE "${PERFTOOLS_LEVEL}"
 #setenv APP2_JMAN_PATH $PERFTOOLS_CURPATH/libexec64
 
-#Don't set PERFTOOLS_UTILS_VERSION stuff on centos7 or envoy
+#Do not set PERFTOOLS_UTILS_VERSION stuff on centos7 or envoy
 set ENVOY [ file exist /scratch/pe-compute-image/lib/ld-linux-aarch64.so.1 ]
 set CS7 0
 if  { $OS_ID == "centos" || $OS_ID == "rhel" && $VERSION_ID_MAJOR >= 7 } {
@@ -306,7 +306,7 @@ if { $ENVOY == 0 && $CS7 == 0 } {
 
 prepend-path  CRAY_LD_LIBRARY_PATH $PERFTOOLS_CURPATH/lib64
 
-# Put all the append-path's at the end of the modulefile
+# Put all the append-path at the end of the modulefile
 append-path   PE_PRODUCT_LIST   PERFTOOLS
 append-path   PE_PRODUCT_LIST   CRAYPAT"""
 

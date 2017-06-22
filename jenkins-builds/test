@@ -1,0 +1,1 @@
+CMake-3.6.0.eb --try-software-version=3.9.0-rc3 --set-default-module

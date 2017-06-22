@@ -1,4 +1,4 @@
-# contributed by Andreas Jocksch (CSCS), Luca Marsella and gppezzi
+# contributed by Andreas Jocksch, Luca Marsella and Guilherme Peretti Pezzi (CSCS)
 easyblock = 'MakeCp'
 
 name = 'CPMD'
@@ -13,22 +13,24 @@ toolchainopts = {'usempi': True}
 
 sources = ['cpmd-v%s.tar.gz' %version]
 
+patches = [('CRAY-XE6-INTEL-MKL', 'CPMD/configure')]
+
+dependencies = [('fftw/3.3.4.10', EXTERNAL_MODULE)]
+
 skipsteps = ['configure']
 
-common_prebuildopts = 'sed -i \'s#/usr/bin/cpp -P -C -traditional#cpp -P -traditional#\' ./configure/CRAY-XE6-INTEL && '
-common_prebuildopts += './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL &&'
+common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
 
-prebuildopts = [ common_prebuildopts ]
+prebuildopts = [
+                         common_prebuildopts,
+#     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
+]
 
-#prebuildopts = [
-#                         common_prebuildopts,
-#     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#test-cpmd_omp\.x#\' Makefile &&',
-#]
-
-files_to_copy = [(['bin/cpmd.x'],'bin')]
+files_to_copy = [(['bin/cpmd*.x'],'bin')]
 
 sanity_check_paths = {
     'files': ['bin/cpmd.x'],
+#    'files': ['bin/cpmd.x', 'bin/cpmd_omp.x'],
     'dirs': [],
 }
 
