@@ -100,7 +100,7 @@ echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
 echo -e " $(module list -t) \n"
 echo -e " Production file(s): ${production_files[@]}"
-echo -e " List of builds (including options): \n"
+echo -e " List of builds (including options):"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
