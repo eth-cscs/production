@@ -88,7 +88,7 @@ fi
 
 # --- COMMON SETUP ---
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
-export EASYBUILD_PREFIX=$PREFIX/easybuild
+export EASYBUILD_PREFIX=$PREFIX
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
 export EASYBUILD_TMPDIR=${EASYBUILD_PREFIX}/tmp
