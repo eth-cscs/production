@@ -114,19 +114,16 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build VASP and CPMD
-    if [[ $name =~ "VASP" || $name =~ "CPMD" ]]; then
+# build licensed software (CPMD and VASP)
+    if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
 # add a footer for ${name} modulefile to warn users not belonging to group ${name,,}
-        if [[ system =~ "daint" || "$system" =~ "dom" ]]; then
-            eb_args="${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
-            cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
+        cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
  puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
 }
 EOF
-        fi
-        echo -e "eb ${eb_files[$i]} -r ${eb_args}\n"
-        eb ${eb_files[$i]} -r ${eb_args}
+        echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+        eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
