@@ -67,8 +67,8 @@ else
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
-if [[ $system =~ "daint" ]]; then
-# architecture (Piz Daint only)
+if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# architecture (Dom and Piz Daint only)
     if [ -z "$ARCH" ]; then
         echo -e "\n No architecture defined. Please use the option -a to define the architecture \n"
         usage
@@ -117,7 +117,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
 # build VASP and CPMD
     if [[ $name =~ "VASP" || $name =~ "CPMD" ]]; then
 # add a footer for ${name} modulefile to warn users not belonging to group ${name,,}
-        if [[ system =~ "daint" ]]; then
+        if [[ system =~ "daint" || "$system" =~ "dom" ]]; then
             eb_args="${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
             cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
