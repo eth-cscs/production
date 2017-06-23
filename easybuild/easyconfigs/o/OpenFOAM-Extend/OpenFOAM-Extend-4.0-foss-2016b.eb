@@ -24,7 +24,6 @@ patches = [
 
 dependencies = [
     ('hwloc', '1.11.3'),
-    ('ParMETIS', '4.0.3'),
     ('METIS', '5.1.0'),  # order matters, METIS need to be listed after ParMETIS to get $CPATH right
     ('SCOTCH', '6.0.4'),
 #    ('Mesquite', '2.3.0'),
@@ -43,5 +42,29 @@ prebuildopts = "(wcleanAll || echo 'all is fine') && "  # clean up everything fi
 
 # too many builds in parallel actually slows down the build
 maxparallel = 12
+
+sanity_check_paths = {
+    'files': ['foam-extend-4.0/etc/bashrc', 
+              'foam-extend-4.0/etc/cshrc', 
+              'foam-extend-4.0/bin/foamExec', 
+              'foam-extend-4.0/bin/paraFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/buoyantSimpleFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/buoyantBoussinesqSimpleFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/boundaryFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/engineFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/sonicFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceAdd',
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceFind', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceSmooth', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/deformedGeom', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/engineSwirl', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/modifyMesh', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/refineMesh', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/wdot', 
+              'foam-extend-4.0/lib/linux64GccDPOpt/libscotchDecomp.so',
+              'foam-extend-4.0/lib/linux64GccDPOpt/libmetisDecomp.so', 
+    ],
+    'dirs': ['foam-extend-4.0/applications/bin/linux64GccDPOpt', 'foam-extend-4.0/lib/linux64GccDPOpt']
+}
 
 moduleclass = 'cae'
