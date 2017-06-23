@@ -93,7 +93,7 @@ export EASYBUILD_PREFIX=$PREFIX
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
 # print EasyBuild configuration, module list, production file(s), list of builds
-echo -e " EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
+echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
 echo -e " $(module list -t)"
