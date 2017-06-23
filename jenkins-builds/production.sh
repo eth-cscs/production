@@ -7,11 +7,11 @@ scriptname=$(basename $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -a, --arch     Architecture (gpu or mc)     (mandatory: Piz Daint only)
-    -f, --force    Force build of given package (optional: double quotes for a list)
-    -h, --help     Help message
-    -l, --list     Production list file         (mandatory: EasyBuild production list)
-    -p, --prefix   EasyBuild prefix folder      (mandatory: installation folder)
+    -a,--arch     Architecture (gpu or mc)     (mandatory: Dom and Piz Daint only)
+    -f,--force    Force build of given package (optional: double quotes for a list)
+    -h,--help     Help message
+    -l,--list     Production list file         (mandatory: EasyBuild production list)
+    -p,--prefix   EasyBuild prefix folder      (mandatory: installation folder)
     "
     exit 1;
 }
@@ -70,7 +70,7 @@ fi
 if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 # architecture (Dom and Piz Daint only)
     if [ -z "$ARCH" ]; then
-        echo -e "\n No architecture defined. Please use the option -a to define the architecture \n"
+        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
         usage
     else
         module rm ddt
@@ -83,7 +83,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p to define the prefix folder \n"
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
     usage
 fi
 
