@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 
 # New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI.
 # The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins.
@@ -7,17 +7,18 @@ scriptname=$(basename $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -a, --arch     Architecture (gpu or mc)     (mandatory: Piz Daint only)
-    -h, --help     Help message
-    -l, --list     Production list file         (mandatory: EasyBuild production list)
-    -f, --force    Force build of given package (optional: double quotes for a list)
-    -p, --prefix   EasyBuild prefix folder      (mandatory: installation folder)
+    -a,--arch     Architecture (gpu or mc)     (mandatory: Dom and Piz Daint only)
+    -f,--force    Force build of given package (optional: double quotes for a list)
+    -h,--help     Help message
+    -l,--list     Production list file         (mandatory: EasyBuild production list)
+    -p,--prefix   EasyBuild prefix folder      (mandatory: installation folder)
     "
     exit 1;
 }
 
+longopts="arch:,force:,help,list:,prefix:"
 shortopts="a:,f:,h,l:,p:"
-eval set -- $(getopt -o ${shortopts} -n ${scriptname} -- "$@" 2> /dev/null)
+eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
 production_files=()
@@ -36,9 +37,9 @@ while [ $# -ne 0 ]; do
             ;;
         -l | --list)
             shift
-            mapfile -t list < $1
-            for ((i = 0; i < ${#list[@]}; i++)); do
-                eb_files+=("${list[$i]}")
+            mapfile -t < $1
+            for ((i = 0; i < ${#MAPFILE[@]}; i++)); do
+                eb_files+=("${MAPFILE[$i]}")
             done
             production_files+=($1)
             ;;
@@ -66,47 +67,44 @@ else
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
-if [[ $system =~ "daint" ]]; then
-# architecture (Piz Daint only)
+if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# architecture (Dom and Piz Daint only)
     if [ -z "$ARCH" ]; then
-        echo -e "\n No architecture defined. Please use the option -a to define the architecture \n"
+        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
         usage
     else
         module rm ddt
         module rm xalt
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
-        module load daint-$ARCH
+        module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
     fi
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p to define the prefix folder \n"
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
     usage
 fi
 
 # --- COMMON SETUP ---
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
-export EASYBUILD_PREFIX=$PREFIX/easybuild
+export EASYBUILD_PREFIX=$PREFIX
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
-export EASYBUILD_TMPDIR=${EASYBUILD_PREFIX}/tmp
-export EASYBUILD_BUILDPATH=/dev/shm/$USER/easybuild/stage
-
 # print EasyBuild configuration, module list, production file(s), list of builds
-echo -e " EasyBuild configuration ('eb --show-config'): "
+echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
-echo -e " $(module list -t) \n"
-echo -e " Production file(s): ${production_files[@]}"
+echo -e " $(module list -t)"
+echo -e " Production file(s): ${production_files[@]} \n"
 echo -e " List of builds (including options):"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
 
 # start time
-echo -e "\n Builds started on $(date)"
+echo -e "\n Starting ${system} builds on $(date)"
 starttime=$(date +%s)
 
 # cumulative exit status of EasyBuild commands in the loop
@@ -116,19 +114,16 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build VASP and CPMD
-    if [[ $name =~ "VASP" || $name =~ "CPMD" ]]; then
+# build licensed software (CPMD and VASP)
+    if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
 # add a footer for ${name} modulefile to warn users not belonging to group ${name,,}
-        if [[ system =~ "daint" ]]; then
-            eb_args="${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer"
-            cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
+        cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
 if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
  puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
 }
 EOF
-        fi
-        echo -e "eb ${eb_files[$i]} -r ${eb_args}\n"
-        eb ${eb_files[$i]} -r ${eb_args}
+        echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
+        eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
