@@ -9,9 +9,7 @@
  NCO-4.6.2-gmvolf-17.02.eb
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.0-gmvolf-17.02.eb
- R-2.15.3-gmvolf-17.02-libX11-1.6.3.eb
- R-3.0.2-gmvolf-17.02-libX11-1.6.3.eb 
- R-3.2.4-gmvolf-17.02-libX11-1.6.3.eb 
+ R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
  Ruby-2.4.0-gmvolf-17.02.eb
  Subversion-1.9.5.eb
  ncview-2.1.7-gmvolf-17.02.eb

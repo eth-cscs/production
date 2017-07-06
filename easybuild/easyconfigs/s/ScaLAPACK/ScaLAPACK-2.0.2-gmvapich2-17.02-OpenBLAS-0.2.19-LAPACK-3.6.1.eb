@@ -19,7 +19,7 @@ sources = [SOURCELOWER_TGZ]
 
 configopts = 'LDFLAGS=-L/opt/local/slurm/default/lib64 '
 
-dependencies = [ (blaslib, blasver, blassuff, ('GCC', '5.4.0-binutils-2.27-libiberty')) ]
+dependencies = [ (blaslib, blasver, blassuff, ('GCC', '5.4.0-2.26')) ]
 
 ## parallel build tends to fail, so disabling it
 parallel = 1

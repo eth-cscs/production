@@ -10,13 +10,13 @@ description = """GNU Compiler Collection (GCC) based compiler toolchain,
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 compname = 'GCC'
-compver = '5.4.0-binutils-2.27-libiberty'
+compver = '5.4.0-2.26'
 comp = (compname, compver)
 
 # compiler toolchain dependencies
 dependencies = [
     comp,
-    ('MVAPICH2', '2.2', '', ('GCC', '5.4.0-binutils-2.27-libiberty') ),
+    ('MVAPICH2', '2.2', '', ('GCC', '5.4.0-2.26') ),
 ]
 
 moduleclass = 'toolchain'
