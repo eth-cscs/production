@@ -4,8 +4,6 @@ import re
 from easybuild.tools.module_naming_scheme import ModuleNamingScheme
 from easybuild.tools.module_naming_scheme.utilities import det_full_ec_version
 
-
-
 class LowercaseModuleNamingScheme(ModuleNamingScheme):
     """Class implementing an example module naming scheme."""
 
@@ -17,7 +15,6 @@ class LowercaseModuleNamingScheme(ModuleNamingScheme):
         :param ec: dict-like object with easyconfig parameter values (e.g. 'name', 'version', etc.)
         :return: string with full module name <name>/<installversion>, e.g.: 'gzip/1.5-goolf-1.4.10'
         """
-#        return os.path.join(ec['name'], det_full_ec_version(ec))
         return os.path.join(ec['name'], det_full_ec_version(ec)).lower()
 
     def is_short_modname_for(self, short_modname, name):
