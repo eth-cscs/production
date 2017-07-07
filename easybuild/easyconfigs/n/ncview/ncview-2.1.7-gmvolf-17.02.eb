@@ -18,6 +18,7 @@ dependencies = [
     ('UDUNITS', '2.2.24', '', True),
     ('libpng', '1.6.28'), 
     ('zlib', '1.2.8'),
+    ('cURL', '7.52.1'),
 ]
 
 configopts = 'CC=`which mpicc`'
