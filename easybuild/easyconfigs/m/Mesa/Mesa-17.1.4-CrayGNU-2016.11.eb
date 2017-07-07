@@ -49,7 +49,7 @@ configopts += " --enable-glx=dri --enable-llvm --enable-texture-float "
 sanity_check_paths = {
     'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/gl_mangle.h', 
               'include/GL/glx.h', 'include/GL/glx_mangle.h', 'include/GL/osmesa.h', 
-              'include/GLES/gl.h', 'include/GLES2/gl2.h', 'include/GLES3/gl3.h'
+              'include/GLES/gl.h', 'include/GLES2/gl2.h', 'include/GLES3/gl3.h',
               'lib/libGL.%s' % SHLIB_EXT, 'lib/libOSMesa.%s' % SHLIB_EXT, 
               'lib/libGLESv1_CM.%s' % SHLIB_EXT, 'lib/libGLESv2.%s' %SHLIB_EXT ],
     'dirs': ['include/GL','lib/dri']
