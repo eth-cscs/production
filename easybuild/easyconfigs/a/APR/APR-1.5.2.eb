@@ -6,7 +6,7 @@ version = '1.5.2'
 homepage = 'http://apr.apache.org/'
 description = "Apache Portable Runtime (APR) libraries."
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 source_urls = ['http://archive.apache.org/dist/apr/']
 sources = [SOURCELOWER_TAR_GZ]
