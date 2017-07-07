@@ -5,7 +5,7 @@ from easybuild.tools.module_naming_scheme import ModuleNamingScheme
 from easybuild.tools.module_naming_scheme.utilities import det_full_ec_version
 
 class LowercaseModuleNamingScheme(ModuleNamingScheme):
-    """Class implementing an example module naming scheme."""
+    """Class implementing a lowercase module naming scheme."""
 
     REQUIRED_KEYS = ['name', 'version', 'versionsuffix', 'toolchain']
 
