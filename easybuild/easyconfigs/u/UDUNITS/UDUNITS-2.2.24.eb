@@ -8,12 +8,13 @@ homepage = 'http://www.unidata.ucar.edu/software/udunits/'
 description = """UDUNITS supports conversion of unit specifications between formatted and binary forms,
  arithmetic manipulation of units, and conversion of values between compatible scales of measurement."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'opt': True, 'pic': True}
+
 source_urls = ['ftp://ftp.unidata.ucar.edu/pub/udunits']
 sources = [SOURCELOWER_TAR_GZ]
 
-# dependencies = [('expat', '2.1.0')]
+dependencies = [('expat', '2.1.0')]
 
 sanity_check_paths = {
     'files': ['bin/udunits2', 'include/converter.h', 'include/udunits2.h', 'include/udunits.h',
