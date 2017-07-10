@@ -4,7 +4,7 @@
  CMake-3.7.2.eb
  GDAL-2.1.3-gmvolf-17.02.eb
  GSL-2.3-gmvolf-17.02.eb
- HDF-4.2.8-gmvolf-17.02.eb
+ HDF-4.2.13-gmvolf-17.02.eb
  NCL-6.4.0.eb
  NCO-4.6.2-gmvolf-17.02.eb
  Python-2.7.13-gmvolf-17.02.eb

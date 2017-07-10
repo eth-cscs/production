@@ -1,8 +1,8 @@
-# Built with EasyBuild version 2.3.0 on 2015-10-29_17-15-29
+# @author: gppezzi
 easyblock = 'ConfigureMake'
 
 name = 'HDF'
-version = '4.2.8'
+version = "4.2.13"
 
 homepage = 'http://www.hdfgroup.org/products/hdf4/'
 description = """HDF (also known as HDF4) is a library and multi-object file format for storing
@@ -16,6 +16,7 @@ dependencies = [
     ('Bison', '3.0.4', '', True),
     ('Szip', '2.1'),
     ('JasPer', '1.900.1'),
+    ('libjpeg-turbo', '1.5.1'),
 ]
 
 sources = [SOURCELOWER_TAR_GZ]
