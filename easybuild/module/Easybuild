@@ -64,7 +64,7 @@ set host_machine [regsub -all {[0-9]} $::env(HOSTNAME) ""]
 set host_machine [regsub -all {[-]$} $host_machine ""]
 
 # Specific cray configurations
-if { [ info exists ::env(CRAYPE_NETWORK_TARGET) ] } {
+if { [ info exists ::env(PE_ENV) ] } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
 
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
