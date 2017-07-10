@@ -71,6 +71,10 @@ else
  system=$(hostname | sed 's/[0-9]*//g');
 fi
 
+if [ -z "$update_xalt_table" ]; then
+    update_xalt_table=yes
+fi
+
 # --- SYSTEM SPECIFIC SETUP ---
 if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 # architecture (Dom and Piz Daint only)
