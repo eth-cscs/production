@@ -48,7 +48,7 @@ while [ $# -ne 0 ]; do
             shift
             PREFIX="$1"
             ;;
-        -x | --noxalt)
+        -x | --xalt)
             shift
             update_xalt_table={$1,,}
             ;;
