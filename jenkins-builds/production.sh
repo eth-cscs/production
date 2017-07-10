@@ -7,21 +7,23 @@ scriptname=$(basename $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -a,--arch     Architecture (gpu or mc)     (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of given package (optional: double quotes for a list)
+    -a,--arch     Architecture (gpu or mc)      (mandatory: Dom and Piz Daint only)
+    -f,--force    Force build of given package  (optional: double quotes for a list)
     -h,--help     Help message
-    -l,--list     Production list file         (mandatory: EasyBuild production list)
-    -p,--prefix   EasyBuild prefix folder      (mandatory: installation folder)
+    -l,--list     Production list file          (mandatory: EasyBuild production list)
+    -p,--prefix   EasyBuild prefix folder       (mandatory: installation folder)
+    -x,--noxalt  Disables XALT database update (optional)
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:"
-shortopts="a:,f:,h,l:,p:"
+longopts="arch:,force:,help,list:,prefix:,noxalt"
+shortopts="a:,f:,h,l:,p:,x"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
 production_files=()
+XALT=1
 while [ $# -ne 0 ]; do
     case $1 in
         -a | --arch)
@@ -46,6 +48,9 @@ while [ $# -ne 0 ]; do
         -p | --prefix)
             shift
             PREFIX="$1"
+            ;;
+        -x | --noxalt)
+            XALT=0
             ;;
         --)
             ;;
@@ -138,7 +143,7 @@ EOF
 done
 
 # --- SYSTEM SPECIFIC POST-PROCESSING ---
-if [[ $system =~ "daint" ]]; then
+if [[ $system =~ "daint" && $XALT -eq 1 ]]; then
 # update xalt table of modulefiles
     echo "loading PrgEnv-cray"
     module load PrgEnv-cray/6.0.3
