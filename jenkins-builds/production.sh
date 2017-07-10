@@ -12,18 +12,17 @@ usage() {
     -h,--help     Help message
     -l,--list     Production list file          (mandatory: EasyBuild production list)
     -p,--prefix   EasyBuild prefix folder       (mandatory: installation folder)
-    -x,--noxalt  Disables XALT database update (optional)
+    -x,--xalt.    [yes|no] update XALT database (optional, default is yes)
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:,noxalt"
-shortopts="a:,f:,h,l:,p:,x"
+longopts="arch:,force:,help,list:,prefix:,xalt:"
+shortopts="a:,f:,h,l:,p:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
 production_files=()
-XALT=1
 while [ $# -ne 0 ]; do
     case $1 in
         -a | --arch)
@@ -50,7 +49,8 @@ while [ $# -ne 0 ]; do
             PREFIX="$1"
             ;;
         -x | --noxalt)
-            XALT=0
+            shift
+            update_xalt_table={$1,,}
             ;;
         --)
             ;;
@@ -143,7 +143,7 @@ EOF
 done
 
 # --- SYSTEM SPECIFIC POST-PROCESSING ---
-if [[ $system =~ "daint" && $XALT -eq 1 ]]; then
+if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
 # update xalt table of modulefiles
     echo "loading PrgEnv-cray"
     module load PrgEnv-cray/6.0.3
