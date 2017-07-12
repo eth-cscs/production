@@ -1,0 +1,19 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '17.06'
+
+homepage = 'https://ditaweb.com/cray.deliver/browse/xc/article/released-cray-xc-programming-environments-1706---june-29-2017'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module (PE release: 17.06).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-cray', EXTERNAL_MODULE),
+    ('cce/8.6.0', EXTERNAL_MODULE),
+    ('cray-libsci/17.06.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.6.0', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
