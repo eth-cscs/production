@@ -56,7 +56,7 @@ if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
 # system specific setup
-if { [ string match *daint* $system ] || string match *dom* $system } {
+if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
@@ -71,7 +71,7 @@ if { [ string match *daint* $system ] || string match *dom* $system } {
 # EASYBUILD_INSTALLPATH
 #
 if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
-    if { [ string match *daint* $system ] || string match *dom* $system } {
+    if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
         setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$system/$::env(CRAY_CPU_TARGET)
     } else {
         setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$system
