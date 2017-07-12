@@ -61,9 +61,9 @@ eb_args=""
 
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
- system=$(hostname | sed 's/ln-[0-9]*//g');
+ system=${HOSTNAME%%[cl]n-[0-9]*}
 else
- system=$(hostname | sed 's/[0-9]*//g');
+ system=${HOSTNAME%%[0-9]*}
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---

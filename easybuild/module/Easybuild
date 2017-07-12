@@ -15,15 +15,13 @@ repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/}
 # Conflicts
 #
 conflict EasyBuild-cscs
-
-###############################
-# SYSTEM INDEPENDENT SETTINGS #
-###############################
-
+# the part below comes from easybuild/easyconfigs/e/EasyBuild-custom.eb
+################
+# COMMON SETUP #
+################
 # Local variables
 set ebmodule               /apps/common/UES/easybuild/software/EasyBuild/latest
 set eb_config_dir          /apps/common/UES/jenkins/production/easybuild
-
 #
 # EB_CUSTOM_REPOSITORY
 # the following variables should depend on it
@@ -40,10 +38,11 @@ setenv XDG_CONFIG_DIRS                          $::env(EB_CUSTOM_REPOSITORY)
 setenv EASYBUILD_ROBOT_PATHS                    $::env(EB_CUSTOM_REPOSITORY)/easyconfigs/:
 setenv EASYBUILD_INCLUDE_EASYBLOCKS             $::env(EB_CUSTOM_REPOSITORY)/easyblocks/*.py
 setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
-
+#
 # Checking if we have the command modulecmd
 # If so, then module is a c version
 # if not then module is a tcl version
+#
 set status [catch {exec which modulecmd} [list result]]
 if { $status == 0 } {
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
@@ -53,25 +52,25 @@ if { $status == 0 } {
         prepend-path PATH                           /usr/share/Modules/tcl
     }
 }
-
-#############################
-# SYSTEM DEPENDENT SETTINGS #
-#############################
-
-# hostname
-set host_machine [regsub -all {[0-9]} $::env(HOSTNAME) ""]
-# removing any possible '-' at the end of the $host_machine
-set host_machine [regsub -all {[-]$} $host_machine ""]
-
-# Specific cray configurations
-if { [ info exists ::env(PE_ENV) ] } {
-    setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
-
-    setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
+#########################
+# SYSTEM SPECIFIC SETUP #
+#########################
+# current system name
+if { [ string match *esch* $::env(HOSTNAME) ] } {
+ set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
 } else {
+ set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
+}
+# system specific setup
+if { [ string match *daint* $system ] || string match *dom* $system } {
+    setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
+    setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
+} elseif { [ string match *esch* $system ] } {
+    setenv PYTHONPATH                           $::env(PYTHONPATH):$::env(EB_CUSTOM_REPOSITORY)/..
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
+ }else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
 }
-
 #
 # EASYBUILD_PREFIX
 # the following variables should depend on it
@@ -79,31 +78,25 @@ if { [ info exists ::env(PE_ENV) ] } {
 # EASYBUILD_INSTALLPATH
 #
 if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
-    # cray systems directory change
-    if { [ info exists ::env(PE_ENV) ] } {
-        setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$host_machine/$::env(CRAY_CPU_TARGET)
+    if { [ string match *daint* $system ] || string match *dom* $system } {
+        setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$system/$::env(CRAY_CPU_TARGET)
     } else {
-        setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$host_machine
+        setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$system
     }
 } else {
     setenv EASYBUILD_PREFIX                     $::env(EASYBUILD_PREFIX)
 }
 setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
-
-#
 #
 # These variables are set to /dev/shm/$USER/easbuild/stage
-#
 # EASYBUILD_BUILDPATH
 # EASYBUILD_TMPDIR
 #
 setenv EASYBUILD_TMPDIR                         /dev/shm/$::env(USER)/easybuild/stage/tmp
 setenv EASYBUILD_BUILDPATH                      /dev/shm/$::env(USER)/easybuild/stage/build
-
 ###############
 # FINAL TOUCH #
 ###############
-
 #
 # the following variables should depend on $HOME
 #
