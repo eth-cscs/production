@@ -60,7 +60,6 @@ if { [ string match *daint* $system ] || string match *dom* $system } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
-    setenv PYTHONPATH                           $::env(PYTHONPATH):$::env(EB_CUSTOM_REPOSITORY)/..
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme   
  }else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
