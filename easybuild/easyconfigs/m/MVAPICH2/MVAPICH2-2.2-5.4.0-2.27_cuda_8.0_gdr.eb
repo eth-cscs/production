@@ -1,0 +1,13 @@
+easyblock = 'Bundle'
+name = 'MVAPICH2'
+version = '2.2-5.4.0-2.27_cuda_8.0_gdr'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+
+description = """OSU MVAPICH2-GDR 2.2 (10/25/2016)"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [ ('mvapich2gdr_gnu/2.2_cuda_8.0', EXTERNAL_MODULE) ]
+
+moduleclass = 'mpi'
