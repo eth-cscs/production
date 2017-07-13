@@ -1,0 +1,20 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libxshmfence'
+version = '1.2'
+
+homepage = 'https://www.x.org'
+description = """A library that exposes a event API on top of Linux futexes"""
+
+source_urls = ['https://www.x.org/releases/individual/lib/']
+sources = [SOURCELOWER_TAR_GZ]
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+sanity_check_paths = {
+    'files': ['include/X11/xshmfence.h', 'lib/%s.%s' % (name, SHLIB_EXT)],
+    'dirs': ['include/X11', 'lib/pkgconfig'],
+}
+
+moduleclass = 'lib'
