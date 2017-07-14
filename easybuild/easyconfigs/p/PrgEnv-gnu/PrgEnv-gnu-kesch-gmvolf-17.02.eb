@@ -3,11 +3,15 @@
 easyblock = 'Bundle'
 
 name = 'PrgEnv-gnu'
-version = 'kesch'
+version = '17.02'
 
 homepage = 'http://user.cscs.ch'
 description = """This bundle provides a meta module for the Programming Environment on kesch/escha"""
 
-toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchain = {'name': 'dummy', 'version': ''}
+
+modtclfooter = """
+module load gmvolf/.17.02
+"""
 
 moduleclass = 'devel'
