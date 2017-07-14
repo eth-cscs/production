@@ -1,3 +1,4 @@
  OpenFOAM-4.1-foss-2016b.eb
  OpenFOAM-Extend-4.0-foss-2016b.eb
  ParaView-5.4.0-foss-2016b.eb
+ PrgEnv-gnu-16.06-foss.eb
