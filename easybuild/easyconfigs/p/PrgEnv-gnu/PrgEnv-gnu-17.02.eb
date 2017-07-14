@@ -10,8 +10,4 @@ description = """This bundle provides a meta module for the Programming Environm
 
 toolchain = {'name': 'gmvolf', 'version': '17.02'}
 
-#dependencies = [
-#    ('gmvolf', '17.02'),
-#]
-
 moduleclass = 'devel'
