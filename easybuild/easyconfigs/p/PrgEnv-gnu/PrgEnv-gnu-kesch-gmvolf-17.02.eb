@@ -3,7 +3,7 @@
 easyblock = 'Bundle'
 
 name = 'PrgEnv-gnu'
-version = '17.02'
+version = 'kesch'
 
 homepage = 'http://user.cscs.ch'
 description = """This bundle provides a meta module for the Programming Environment on kesch/escha"""
