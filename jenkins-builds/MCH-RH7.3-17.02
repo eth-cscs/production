@@ -8,7 +8,7 @@
  HDF-4.2.13-gmvolf-17.02.eb
  NCL-6.4.0.eb
  NCO-4.6.2-gmvolf-17.02.eb
- PrgEnv-gnu-17.02.eb
+ PrgEnv-gnu-kesch-gmvolf-17.02.eb --module-naming-scheme=EasyBuildMNS
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.0-gmvolf-17.02.eb
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
