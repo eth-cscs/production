@@ -1,0 +1,17 @@
+# @author: gppezzi
+
+easyblock = 'Bundle'
+
+name = 'PrgEnv-gnu'
+version = '17.02'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides a meta module for the Programming Environment on kesch/escha"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+modtclfooter = """
+module load gmvolf/.17.02
+"""
+
+moduleclass = 'devel'

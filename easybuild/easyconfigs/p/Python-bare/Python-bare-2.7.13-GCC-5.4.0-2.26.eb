@@ -1,19 +1,19 @@
-# @author: gppezzi
+# @author: gppezzi 
 # This version should be used only for replacing the system python, not for building scientific apps
 
-name = 'Python'
-version = "2.7.12"
+easyblock = 'EB_Python'
+
+name = 'Python-bare'
+version = "2.7.13"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 toolchainopts = {'pic': True, 'opt': True}
 
-source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
-sources = [SOURCE_TGZ]
-
-#patches = ['unixccompiler-Python-2.7.9.patch']
+source_urls = ['http://www.python.org/ftp/python/%(version)s/']
+sources = ['Python-%(version)s.tgz']
 
 # python needs bzip2 to build the bz2 package
 dependencies = [
@@ -23,13 +23,11 @@ dependencies = [
     ('ncurses', '6.0'),
 ]
 
-# enviroment variable to use package repository with pip
-modextravars = {'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem'}
-
-osdependencies = [('libopenssl-devel')]
+# workaround for being able to change name to Python-bare
+modextravars = {'EBROOTPYTHON': '%(installdir)s'}
 
 # order is important!
-# package versions updated Oct 2016
+# package versions updated October 2016
 exts_list = [
     ('setuptools', '28.3.0', {
         'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
@@ -42,9 +40,6 @@ exts_list = [
     }),
     ('virtualenv', '15.0.3', {
         'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
-    }),
-    ('readline', '6.2.4.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/r/readline'],
     }),
 ]
 
