@@ -6,7 +6,7 @@ name = 'TensorFlow'
 version = '1.2.1'
 pyver = '3.5.2'
 cudaver = '8.0'
-versionsuffix = '-cuda-%s-Python-%s' % (cudaver, pyver)
+versionsuffix = '-cuda-%s.54-Python-%s' % (cudaver, pyver)
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
