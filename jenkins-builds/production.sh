@@ -12,7 +12,7 @@ usage() {
     -h,--help     Help message
     -l,--list     Production list file          (mandatory: EasyBuild production list)
     -p,--prefix   EasyBuild prefix folder       (mandatory: installation folder)
-    -x,--xalt.    [yes|no] update XALT database (optional, default is yes)
+    -x,--xalt     [yes|no] update XALT database (optional, default is yes)
     "
     exit 1;
 }
