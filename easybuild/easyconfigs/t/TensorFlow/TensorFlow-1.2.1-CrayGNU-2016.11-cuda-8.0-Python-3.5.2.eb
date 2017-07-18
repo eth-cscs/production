@@ -23,6 +23,7 @@ dependencies = [
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', '-Python-%(pyver)s'),
     ('protobuf', '3.1.0', '-Python-%(pyver)s'),
+    ('backports.weakref', '1.0rc1', '-Python-%(pyver)s'),
 ]
 
 sources = ['v%(version)s.tar.gz']
