@@ -7,18 +7,19 @@ scriptname=$(basename $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -a,--arch     Architecture (gpu or mc)      (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of given package  (optional: double quotes for a list)
+    -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
+    -f,--force    Force build of given package       (optional: double quotes for a list)
     -h,--help     Help message
-    -l,--list     Production list file          (mandatory: EasyBuild production list)
-    -p,--prefix   EasyBuild prefix folder       (mandatory: installation folder)
-    -x,--xalt     [yes|no] update XALT database (optional, default is yes)
+    -l,--list     Production list file               (mandatory: EasyBuild production list)
+    -p,--prefix   EasyBuild prefix folder            (mandatory: installation folder)
+    -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
+    -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:,xalt:"
-shortopts="a:,f:,h,l:,p:,x:"
+longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:"
+shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
@@ -48,6 +49,10 @@ while [ $# -ne 0 ]; do
             shift
             PREFIX="$1"
             ;;
+        -u | --unuse)
+            shift
+            unuse_path="$1"
+            ;;
         -x | --xalt)
             shift
             update_xalt_table={$1,,}
@@ -63,6 +68,12 @@ done
 
 # optional EasyBuild arguments
 eb_args=""
+
+# check prefix folder
+if [ -z "$PREFIX" ]; then
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
+    usage
+fi
 
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
@@ -90,11 +101,6 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
     fi
 fi
-# check prefix folder
-if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
-    usage
-fi
 
 # --- COMMON SETUP ---
 export EB_CUSTOM_REPOSITORY=$PWD/easybuild
@@ -111,6 +117,10 @@ echo -e " List of builds (including options):"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
+# module unuse PATH before building
+if [ -n "$unuse_path" ]; then
+ module unuse $unuse_path
+fi
 
 # start time
 echo -e "\n Starting ${system} builds on $(date)"
