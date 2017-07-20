@@ -3,7 +3,16 @@
 # New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI.
 # The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins.
 
+# name of the script withouth the path
 scriptname=$(basename $0)
+# path to the folder containing the script
+scriptdir=$(dirname $0)
+# path of the top level folder (production directory)
+production_dir=${scriptdir%/*}
+
+echo $scriptname
+echo $scriptdir
+echo $production_dir
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
@@ -98,7 +107,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=./login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=${production_dir}/login/daint-${ARCH}.h"
     fi
 fi
 
