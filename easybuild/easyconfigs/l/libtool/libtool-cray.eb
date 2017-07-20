@@ -17,7 +17,7 @@ sources = ['%s.tar.gz' % commit]
 unpack_options = '--strip 1'
 
 dependencies = [ 
-    ('autotools', '201602'), 
+    ('Autotools', '201602'), 
     ('help2man', '1.47.4'),  
 ] 
 
