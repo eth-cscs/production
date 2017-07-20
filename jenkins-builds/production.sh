@@ -10,10 +10,6 @@ scriptdir=$(dirname $0)
 # path of the top level folder (production directory)
 production_dir=${scriptdir%/*}
 
-echo $scriptname
-echo $scriptdir
-echo $production_dir
-
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
