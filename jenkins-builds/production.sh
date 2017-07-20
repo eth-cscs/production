@@ -7,8 +7,6 @@
 scriptname=$(basename $0)
 # path to the folder containing the script
 scriptdir=$(dirname $0)
-# path of the top level folder (production directory)
-production_dir=${scriptdir%/*}
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
@@ -103,7 +101,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=${production_dir}/login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
     fi
 fi
 
