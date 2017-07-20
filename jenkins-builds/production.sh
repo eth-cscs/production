@@ -98,7 +98,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=../login/daint-${ARCH}.h"
     fi
 fi
 
