@@ -3,21 +3,26 @@
 # New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI.
 # The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins.
 
+# name of the script withouth the path
 scriptname=$(basename $0)
+# path to the folder containing the script
+scriptdir=$(dirname $0)
 
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
-    -a,--arch     Architecture (gpu or mc)     (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of given package (optional: double quotes for a list)
+    -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
+    -f,--force    Force build of given package       (optional: double quotes for a list)
     -h,--help     Help message
-    -l,--list     Production list file         (mandatory: EasyBuild production list)
-    -p,--prefix   EasyBuild prefix folder      (mandatory: installation folder)
+    -l,--list     Production list file               (mandatory: EasyBuild production list)
+    -p,--prefix   EasyBuild prefix folder            (mandatory: installation folder)
+    -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
+    -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:"
-shortopts="a:,f:,h,l:,p:"
+longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:"
+shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
@@ -47,6 +52,14 @@ while [ $# -ne 0 ]; do
             shift
             PREFIX="$1"
             ;;
+        -u | --unuse)
+            shift
+            unuse_path="$1"
+            ;;
+        -x | --xalt)
+            shift
+            update_xalt_table={$1,,}
+            ;;
         --)
             ;;
         *)
@@ -59,11 +72,21 @@ done
 # optional EasyBuild arguments
 eb_args=""
 
+# check prefix folder
+if [ -z "$PREFIX" ]; then
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
+    usage
+fi
+
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
- system=$(hostname | sed 's/ln-[0-9]*//g');
+ system=${HOSTNAME%%[cl]n-[0-9]*}
 else
- system=$(hostname | sed 's/[0-9]*//g');
+ system=${HOSTNAME%%[0-9]*}
+fi
+
+if [ -z "$update_xalt_table" ]; then
+    update_xalt_table=yes
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -78,13 +101,8 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module rm PrgEnv-cray
         module use /opt/cray/pe/craype/2.5.8/modulefiles
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=$APPS/UES/login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
     fi
-fi
-# check prefix folder
-if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
-    usage
 fi
 
 # --- COMMON SETUP ---
@@ -102,6 +120,10 @@ echo -e " List of builds (including options):"
 for ((i = 0; i < ${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
+# module unuse PATH before building
+if [ -n "$unuse_path" ]; then
+ module unuse $unuse_path
+fi
 
 # start time
 echo -e "\n Starting ${system} builds on $(date)"
@@ -138,7 +160,7 @@ EOF
 done
 
 # --- SYSTEM SPECIFIC POST-PROCESSING ---
-if [[ $system =~ "daint" ]]; then
+if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
 # update xalt table of modulefiles
     echo "loading PrgEnv-cray"
     module load PrgEnv-cray/6.0.3
