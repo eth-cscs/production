@@ -40,11 +40,11 @@ prebuildopts += " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__G
 # add includes
 prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 # add libraries 
-prebuildopts += " sed -i -e '/LIBS     +=/a LIBS     += -lcudart -lcublas -lcufft -lrt $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc ' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+prebuildopts += " sed -i -e '/LIBS     +=/a LIBS     += -lcudart -lcublas -lcufft -lrt $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a ' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 # correct reference to specific GPU architecture (sm_60)
 prebuildopts += " sed -i -e 's/-arch sm_35/-arch sm_60/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
-# correct link to libsmm to match Intel Haswell architecture
-prebuildopts += " sed -i -e 's/sandybridge_gcc_4.9.0/haswell/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# removes wrong link to libsmm
+prebuildopts += " sed -i -e '/alazzaro/d' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
 prebuildopts += " cat ./arch/CRAY-XC30-gfortran-cuda.psmp && pushd makefiles && "
 
 # build type
