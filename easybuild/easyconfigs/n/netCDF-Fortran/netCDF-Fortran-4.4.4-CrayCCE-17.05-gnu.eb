@@ -1,0 +1,25 @@
+name = 'netCDF-Fortran'
+version = "4.4.4"
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'CrayCCE', 'version': '17.05-gnu'}
+toolchainopts = {'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = [
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/',
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
+]
+
+dependencies = [('netCDF', '4.4.1.1')]
+
+builddependencies = [('libtool', 'cray', '', True)]
+
+prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
+
+moduleclass = 'data'
+
