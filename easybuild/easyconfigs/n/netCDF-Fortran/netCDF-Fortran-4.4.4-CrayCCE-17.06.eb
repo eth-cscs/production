@@ -1,3 +1,5 @@
+# @author: gppezzi
+
 easyblock = 'ConfigureMake'
 
 name = 'netCDF-Fortran'
