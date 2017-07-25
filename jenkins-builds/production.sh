@@ -13,8 +13,8 @@ usage() {
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
     -f,--force    Force build of given package       (optional: double quotes for a list)
     -h,--help     Help message
-    -l,--list     Production list file               (mandatory: EasyBuild production list)
-    -p,--prefix   EasyBuild prefix folder            (mandatory: installation folder)
+    -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
+    -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
     -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
     -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
     "
@@ -96,17 +96,15 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
         usage
     else
-        module rm ddt
-        module rm xalt
-        module rm PrgEnv-cray
-        module use /opt/cray/pe/craype/2.5.8/modulefiles
+        module purge
+        module load craype craype-network-aries modules
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
     fi
 fi
 
 # --- COMMON SETUP ---
-export EB_CUSTOM_REPOSITORY=$PWD/easybuild
+export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
 export EASYBUILD_PREFIX=$PREFIX
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
