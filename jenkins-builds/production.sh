@@ -72,21 +72,11 @@ done
 # optional EasyBuild arguments
 eb_args=""
 
-# check prefix folder
-if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
-    usage
-fi
-
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
  system=${HOSTNAME%%[cl]n-[0-9]*}
 else
  system=${HOSTNAME%%[0-9]*}
-fi
-
-if [ -z "$update_xalt_table" ]; then
-    update_xalt_table=yes
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -104,8 +94,21 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 fi
 
 # --- COMMON SETUP ---
-export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
-export EASYBUILD_PREFIX=$PREFIX
+# xalt table update for Piz Daint
+if [ -z "$update_xalt_table" ]; then
+    update_xalt_table=yes
+fi
+# check prefix folder
+if [ -z "$PREFIX" ]; then
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
+    usage
+else
+ export EASYBUILD_PREFIX=$PREFIX
+fi
+# set production repository folder
+if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+fi
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
 # print EasyBuild configuration, module list, production file(s), list of builds
