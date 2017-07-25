@@ -1,3 +1,5 @@
+easyblock = 'ConfigureMake'
+
 name = 'netCDF-Fortran'
 version = "4.4.4"
 
@@ -18,6 +20,10 @@ source_urls = [
 dependencies = [('netCDF', '4.4.1.1')]
 
 builddependencies = [('libtool', 'cray', '', True)]
+
+preconfigopts = " export FCFLAGS='$(FCFLAGS) -e m'"
+
+#'CC='cc -h noomp' FC='ftn -J. -e m -h noomp' CXX='CC -h noomp'"
 
 prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
 
