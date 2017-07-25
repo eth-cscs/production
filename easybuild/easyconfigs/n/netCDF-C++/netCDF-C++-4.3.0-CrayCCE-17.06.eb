@@ -1,0 +1,58 @@
+# Built with EasyBuild version 3.3.1 on 2017-07-24_18-53-38
+easyblock = 'ConfigureMake'
+
+name = 'netCDF-C++'
+version = '4.3.0'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'CrayCCE', 'version': '17.06'}
+toolchainopts = {'pic': True, 'usempi': True}
+
+source_urls = [ 'https://github.com/Unidata/netcdf-cxx4/archive/' ]
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [('netCDF', '4.4.1.1')]
+
+builddependencies = [('libtool', 'cray', '', True)]
+
+prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
+
+sanity_check_paths = {
+    'files': ['include/netcdf', 'include/ncDouble.h',
+              'bin/ncxx4-config',
+              'lib/pkgconfig/netcdf-cxx4.pc',
+              'lib/libnetcdf_c++4.a', 'lib/libnetcdf_c++4.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'data'
+
+# Build statistics
+buildstats = [{
+    "build_time": 42.24,
+    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild'", "--buildpath='/dev/shm/perettig/easybuild/stage/build'", "--external-modules-metadata='/users/perettig/production/easybuild/cray_external_modules_metadata.cfg'", "--hide-deps='APR,APR-util,Autoconf,Automake,Autotools,Bazel,Bison,CMake,Coreutils,Cube,Doxygen,Eigen,FLTK,GCCcore,GL2PS,GLPK,GLib,GTS,GraphicsMagick,IPython,JasPer,LLVM,LOKI,LibTIFF,M4,Mako,Mesa,NASM,NASM,OPARI2,OTF2,OpenPGM,PCRE,PDT,PIL,PROJ,PyGTS,PyQt,Python-Xlib,Python-bare,Qt,SCOTCH,SCons,SIONlib,SIP,SQLite,SWIG,Serf,Szip,Tcl,Tk,UDUNITS,X11,XZ,ZeroMQ,arpack-ng,backports.weakref,binutils,byacc,bzip2,cURL,cuDNN,expat,flex,fontconfig,freetype,funcsigs,gc,gettext,gnuplot,gperf,guile,hwloc,inputproto,kbproto,libGLU,libQGLViewer,libX11,libXau,libXdmcp,libcerf,libdrm,libevent,libffi,libgd,libiberty,libjpeg-turbo,libjpeg-turbo,libpng,libpthread-stubs,libreadline,libsodium,libtool,libunistring,libunwind,libutempter,libxcb,libxml2,libxshmfence,make,mock,mxml,ncurses,nettle,nose-parameterized,numactl,pkg-config,ploticus,protobuf,protobuf-core,qrupdate,util-linux,wheel,xcb-proto,xextproto,xproto,xtrans,zlib'", "--hide-toolchains='GCCcore,gmvapich2,gmvolf,foss,gompi'", "--include-easyblocks='/users/perettig/production/easybuild/easyblocks/*.py'", "--installpath='/apps/escha/UES/RH7.3_PE17.02/sandbox-hdf5-17.06'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/escha/UES/RH7.3_PE17.02/sandbox-hdf5-17.06/packages'", "--prefix='/apps/escha/UES/RH7.3_PE17.02/sandbox-hdf5-17.06'", "--repositorypath='/apps/escha/UES/RH7.3_PE17.02/sandbox-hdf5-17.06/ebfiles_repo'", "--robot-paths='/users/perettig/production/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/perettig/easybuild/stage/tmp'", "--try-toolchain-version='17.06'", 'netCDF-C++-4.3.0-CrayCCE-17.05-gnu.eb'],
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 3500.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.3.1",
+    "easybuild-framework_version": "3.3.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/lto-wrapper; Target: x86_64-redhat-linux; Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux; Thread model: posix; gcc version 4.8.5 20150623 (Red Hat 4.8.5-11) (GCC) ; ",
+    "glibc_version": "2.17",
+    "hostname": "keschcn-0001",
+    "install_size": 3973839,
+    "modules_tool": ('EnvironmentModulesC', '/cm/local/apps/environment-modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "7.3",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.5 (default, Aug  2 2016, 04:20:16) ; [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1500915217,
+    "total_memory": 257856,
+}]
