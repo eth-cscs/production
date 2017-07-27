@@ -25,7 +25,8 @@
  NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
  NCL-6.4.0.eb
  NCL-6.3.0.eb
- NCO-4.6.2-CrayGNU-2016.11.eb
+ NCO-4.6.2-CrayGNU-2016.11.eb --set-default-module
+ NCO-4.6.7-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
