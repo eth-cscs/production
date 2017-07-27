@@ -1,4 +1,4 @@
-# @author: gppezzi
+# @author: gppezzi, omlins (CSCS)
 
 easyblock = 'ConfigureMake'
 
@@ -21,8 +21,13 @@ source_urls = [
 
 dependencies = [('netCDF', '4.4.1.1')]
 
-builddependencies = [('libtool', 'cray', '', True)]
+# Copies uppercase mod files to lowercase in order to avoid failure of 'make install'
+preinstallopts = 'cd %(builddir)s/netcdf-fortran-%(version)s/fortran && '
+preinstallopts += 'for i in *.mod; do cp $i ${i,,}; done && cd .. && '
 
-preconfigopts = 'export FC="ftn -J. -ef" &&'
+# Create symlinks of lowercase modfiles to uppercase (CrayCCE default).
+postinstallcmds =  [ 
+    'cd %(installdir)s/include && for i in *.mod; do ln -s $i $(echo $i | awk \'{ sub(/.mod$/,""); print toupper($0) ".mod" }\') ; done',
+]
 
 moduleclass = 'data'
