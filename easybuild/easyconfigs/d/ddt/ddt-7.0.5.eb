@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
 name = 'ddt'
-version = '7.0'
+version = '7.0.5'
 
 homepage = 'https://www.allinea.com/products/forge/download'
 description = """Allinea DDT: The debugger for C, C++, Fortran threaded and parallel codes"""
@@ -25,10 +25,6 @@ set hostname "[string tolower $host]"
 set flags      ""
 
 # ============================================================================
-# Configure some environment variables, the following are required :
-#       url / url2 / modulename / version / packageroot
-#       to be checked : CSCS_MODULENAME_LIB / CSCS_MODULENAME_INCLUDE / PATH / MANPATH / PE_PRODUCT_LIST
-#       optional : LD_LIBRARY_PATH
 # set    --> will set the variable for the script, nothing more
 # setenv --> will export the variable to the user environment
 # ============================================================================
@@ -36,30 +32,22 @@ set     url                        "http://www.allinea.com"
 set     url2                       "http://user.cscs.ch"
 set     modulename                 "ddt"
 # ============================================================================
-if  { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" } {
+if { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="monc" } {
           set     os      "RHAT6"
-          set     version "7.0"
-}
-  
-if  { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" } {
+          set     version "7.0.5"
+} elseif { $hostname=="ela1" ||$hostname=="ela2" ||$hostname=="ela3" } {
           set     os      "SLES11"
-          set     version "7.0"
-}
-  
-if  { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
+          set     version "7.0.5"
+} elseif { $hostname=="dain" ||$hostname=="dom1" ||$hostname=="nid0" } {
           set     os      "SLES12"
-          set     version "7.0"
-}
-
-if  { $hostname=="tave" } {
+          set     version "7.0.5"
+} elseif { $hostname=="tave" } {
           set     os      "SLES12"
-          set     version "7.0"
-}
-  
-if { "$os"=="" } {
-        puts stderr "L60: host=$host"
+          set     version "7.0.5"
+} else {
+        # 60: host=$host"
         set     os      "SLES12"
-        set     version "7.0"
+        set     version "7.0.5"
 }
 
         set     packageroot             "/apps/common/UES/${os}/${modulename}/${version}"
@@ -77,11 +65,11 @@ if { "$os"=="" } {
         prepend-path    LD_LIBRARY_PATH       "$packageroot/lib/64"
         prepend-path    MANPATH               "$packageroot/man"
         setenv          DDT_MEM               "-L$packageroot/lib/64"
+        append-path     PE_PRODUCT_LIST       "DDT"
         setenv          DDT_LICENCE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
         setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
         #setenv          DDT_LICENCE_FILE      "$packageroot/licenses/Licence"
         #setenv          DDT_LICENSE_FILE      "$packageroot/licenses/Licence"
-        append-path     PE_PRODUCT_LIST       "DDT"
         #setenv          DDT_LICENCE_FILE      "$packageroot/../licenses/Licence"
         #setenv          DDT_LICENSE_FILE      "$packageroot/../licenses/Licence"
         #setenv          DDT_LICENCE_FILE      "/users/piccinal/modulefiles/ddtjg/Licence.txt"
