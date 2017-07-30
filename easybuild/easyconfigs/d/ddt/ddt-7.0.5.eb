@@ -65,6 +65,7 @@ if { $hostname=="esch" ||$hostname=="kesc" ||$hostname=="leon" ||$hostname=="mon
         prepend-path    LD_LIBRARY_PATH       "$packageroot/lib/64"
         prepend-path    MANPATH               "$packageroot/man"
         setenv          DDT_MEM               "-L$packageroot/lib/64"
+        setenv          CRAY_ACC_NO_EARLY_INIT "1"
         append-path     PE_PRODUCT_LIST       "DDT"
         setenv          DDT_LICENCE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
         setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
