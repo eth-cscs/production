@@ -44,9 +44,9 @@ if { [ file exist /etc/os-release ] } {
     }
 }
 
-puts stderr "OS_ID=${OS_ID}"
-puts stderr "VERSION_ID=$VERSION_ID"
-puts stderr "VERSION_ID_MAJOR=$VERSION_ID_MAJOR"
+#puts stderr "OS_ID=${OS_ID}"
+#puts stderr "VERSION_ID=$VERSION_ID"
+#puts stderr "VERSION_ID_MAJOR=$VERSION_ID_MAJOR"
 
 if { ${OS_ID}=="sles" } {
     set ost "SLES"
