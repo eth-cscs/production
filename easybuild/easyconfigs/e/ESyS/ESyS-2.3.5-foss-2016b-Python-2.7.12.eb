@@ -9,13 +9,9 @@ description = """ESyS-Particle is Open Source software for particle-based
 numerical modelling."""
 
 toolchain = {'name': 'foss', 'version': '2016b'}
-# toolchainopts = { 'verbose' : False }
 
 source_urls = ['https://launchpad.net/esys-particle/trunk/%(version)s/+download/']
 sources = ['ESyS-Particle-%(version)s.tar.gz']
-# patches = ['.patch']
-# Boost/1.58.0-foss-2015b-Python-2.7.10
-# dependencies = [ ('Boost', '1.61.0', '-Python-2.7.10'), ]
 dependencies = [ 
     ('Boost', '1.61.0', '-Python-2.7.12'), 
 ]
@@ -32,9 +28,5 @@ sanity_check_paths = {
     'files': [],
     'dirs': ['bin'],
 }
-
-### modextravars = {
-###     'PATH' : 'x-%(version)s/bin',
-### }
 
 moduleclass = 'devel'
