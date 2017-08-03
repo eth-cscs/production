@@ -1,0 +1,198 @@
+name = 'Python'
+version = "3.6.1"
+
+homepage = 'http://python.org/'
+description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
+
+toolchain = {'name':'gmvolf', 'version':'17.02' }
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
+sources = [SOURCE_TGZ]
+
+#patches = ['unixccompiler-Python-2.7.9.patch']
+
+# python needs bzip2 to build the bz2 package
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.8'),
+    ('libreadline', '7.0'),
+    ('ncurses', '6.0'),
+    ('libpng', '1.6.28'),
+    ('freetype', '2.7.1'),
+    ('SQLite', '3.9.2'),
+    ('Tk', '8.6.6', '-no-X11' ),
+    ('GMP', '6.1.1'),
+]
+
+# rpath is needed for buiding TensorFlow
+configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
+
+# order is important!
+# package versions updated Mar 1st 2017
+exts_list = [
+    ('setuptools', '32.3.1', {
+        'source_tmpl': '%(name)s-%(version)s.zip',
+        'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
+    }),
+    ('pip', '9.0.1', {
+        'source_urls': ['http://pypi.python.org/packages/source/p/pip/'],
+    }),
+    ('nose', '1.3.7', {
+        'source_urls': ['http://pypi.python.org/packages/source/n/nose/'],
+    }),
+    ('numpy', '1.12.0', {
+        'source_tmpl': '%(name)s-%(version)s.zip',
+        'source_urls': ['http://pypi.python.org/packages/source/n/numpy/'],
+#         'patches': [ 'numpy-1.8.0-mkl.patch', ],
+    }),
+    ('scipy', '0.18.1', {
+        'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
+    }),
+    ('mpi4py', '2.0.0', {
+        'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
+    }),
+    ('Cython', '0.25.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+    }),
+    ('six', '1.10.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+    }),
+    ('virtualenv', '15.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+    }),
+    ('matplotlib', '2.0.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+    }),
+    ('pandas', '0.19.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+    }),
+    ('datashape', '0.5.2', {
+        'source_urls': ['https://pypi.python.org/packages/a6/5b/95b2ed56b6'    \
+                        '1e649b69c9a5b1ecb32ff0a5cd68b9f69f5aa7774540e6b444/'],
+    }),
+    ('Glymur', '0.8.10', {
+        'source_urls': ['https://pypi.python.org/packages/77/7c/90272815ce'    \
+                        '390d456bc0d52c74cd8f1719f37ef116fb289b5029754d64cc/'],
+    }),
+    ('Jasper', '0.1', {
+        'source_urls': ['https://pypi.python.org/packages/46/e4/10df228762'    \
+                        '1ab9a9ad06d4d2b9a1cd1de186b2c88b4d3db91ad51e726fc7'],
+    }),
+#    ('PyYAML', '3.12', {
+#        'source_urls': ['https://pypi.python.org/packages/4a/85/db5a2df477'    \
+#                        '072b2902b0eb892feb37d88ac635d36245a72a6a69b23b383a/']
+#    }),
+#    ('olefile', '0.44', {
+#        'source_tmpl': '%(name)s-%(version)s.zip',
+#        'source_urls': ['https://pypi.python.org/packages/35/17/c15d41d5a8'    \
+#                        'f8b98cc3df25eb00c5cee76193114c78e5674df6ef4ac92647/'],
+#    }),
+#    ('Pillow', '4.2.1', {
+#        'source_urls': ['https://pypi.python.org/packages/55/aa/f7f983fb72'    \
+#                        '710a9daa4b3374b7c160091d3f94f5c09221f9336ade9027f3/'],
+#    }),
+    ('XlsxWriter', '0.9.8', {
+        'source_urls': ['https://pypi.python.org/packages/1c/1a/350a5fbee0'    \
+                        'ab3f54006004fe1b86d1f7df3556203417125435b7c6e57bf2/'],
+    }),
+#    ('aggdraw', '1.1-20051010', {
+#        'source_tmpl': '%(name)s-%(version)s.zip',
+#        'source_urls': ['http://effbot.org/media/downloads/'],
+#    }),
+    ('xarray', '0.9.6', {
+        'source_urls': ['https://pypi.python.org/packages/87/d3/9d777006cc'    \
+                        '34c5d628cb83e07d1e534865f6fc31e3c7ee0989478924f4d7/']
+    }),
+    ('watchdog', '0.8.3', {
+        'source_urls': ['https://pypi.python.org/packages/54/7d/c7c0ad1e32'    \
+                        'b9f132075967fc353a244eb2b375a3d2f5b0ce612fd96e107e/']
+    }),
+    ('toolz', '0.8.2', {
+        'source_urls': ['https://pypi.python.org/packages/75/9c/a26de5efd5'    \
+                        '6009e15af607bff6d2a395631e3c20e7c64b861c9bc4b34288/']
+    }),
+    ('sympy', '1.1', {
+        'source_urls': ['https://pypi.python.org/packages/d5/40/153799104c'    \
+                        'a0d644f539ef8212f83fe67f67f57324d4ef51a16f85141915/']
+    }),
+    ('spyder', '3.1.4', {
+        'source_urls': ['https://pypi.python.org/packages/26/8d/110cdf96a6'    \
+                        'ed0d1bc38e9dc15fa7263a5b601f27951bb09cc080f11024f1/']
+    }),
+#    ('sklearn-pandas', '1.5.0', {
+#        'source_urls': ['https://pypi.python.org/packages/62/21/9847922a9e'    \
+#                        'f01e845300436a5e5b8673b28c7d266e577e7bf8b2599161e9/']
+#    }),
+    ('seaborn', '0.8', {
+        'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
+                        '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
+    }),
+    ('pyproj', '1.9.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
+                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/']
+    }),
+    ('pykdtree', '1.2.2', {
+        'source_urls': ['https://pypi.python.org/packages/65/4d/29a5f9c3ec'    \
+                        'f5ce9ccfda5975d6503e9111a73364a3cef61720ad60740449/']
+    }),
+#    ('pygrib', '2.0.2', {
+#        'source_urls': ['https://pypi.python.org/packages/3c/16/d128a64f2f'    \
+#                        '5e9f776d6e080ba62551b5d103a4c0acb283204135bd23f14e/']
+#    }),
+#    ('pycairo', '1.15.0', {
+#        'source_urls': ['https://github.com/pygobject/pycairo/releases/'       \
+#                        'download/v1.15.0/']
+#    }),
+#    ('pyOpenSSL', '17.2.0', {
+#        'source_urls': ['https://pypi.python.org/packages/b0/9e/7088f6165c'    \
+#                        '40c46416aff434eb806c1d64ad6ec6dbc201f5ad4d0484704e/']
+#    }),
+#    ('basemap', '1.0.7', {
+#        'source_urls': ['https://downloads.sourceforge.net/project/matplotlib' \
+#                        '/matplotlib-toolkits/basemap-1.0.7/']
+#    }),
+#    ('projmap', '0.7.2', {
+#        'source_urls': ['https://pypi.python.org/packages/6f/ec/0098ddfc5a'    \
+#                        'be5cc28ebbd14a78e016becfa0e5403564f39630fc7fa0784e/']
+#    }),
+#    ('jupyter', '1.0.0', {
+#        'source_urls': ['https://pypi.python.org/packages/c9/a9/371d0b8fe3'    \
+#                        '7dd231cf4b2cff0a9f0f25e98f3a73c3771742444be27f2944/']
+#    }),
+#    ('jupyter-core', '4.3.0', {
+#        'source_urls': ['https://pypi.python.org/packages/2f/39/5138f97510'    \
+#                        '0ce14d150938df48a83cd852a3fd8e24b1244f4113848e69e2/']
+#    }),
+#    ('jupyter-client', '5.1.0', {
+#        'source_urls': ['https://pypi.python.org/packages/d4/51/09da9a18cd'    \
+#                        '858b28cee596a628660a8cbf9830bdd89fe94361bfe18a0bb4/']
+#    }),
+#    ('blaze', '0.10.1', {
+#        'source_urls': ['https://pypi.python.org/packages/a1/99/ec4fc29409'    \
+#                        'd68d83a2138b190722f74d15ca1ca303b5c055171b22baa4c0/']
+#    }),
+#    ('blaze', '0.10.1', {
+#        'source_urls': ['https://pypi.python.org/packages/a1/99/ec4fc29409'    \
+#                        'd68d83a2138b190722f74d15ca1ca303b5c055171b22baa4c0/']
+#    }),
+#    ('bokeh', '0.12.6', {
+#        'source_urls': ['https://pypi.python.org/packages/45/6c/6d1ad9da2e'    \
+#                        '713f69d3df6e4e5eb3e8f971db03e66f3154c9e5ab142a6bd8/']
+#    }),
+#    ('geos', '0.2.1', {
+#        'source_urls': ['https://pypi.python.org/packages/46/52/ef047a04ce'    \
+#                        '59fc95cae1338b3cac5f50cf74849d3dd51c8a3a50fad50229/']
+#    }),
+    ('graphviz', '0.8', {
+        'source_tmpl': '%(name)s-%(version)s.zip',
+        'source_urls': ['https://pypi.python.org/packages/da/84/0e99752032'    \
+                        '3d6b01124eb01c68d5c101814d0aab53083cd62bd75a90f70b/']
+    }),
+    ('inotify', '0.2.8', {
+        'source_urls': ['https://pypi.python.org/packages/ab/3b/ad48cb45af'    \
+                        '4af32341fc6bf28497081a885d1e23777d2827f3c61d734f02/']
+    }),
+]
+
+moduleclass = 'lang'
