@@ -11,7 +11,7 @@ scriptdir=$(dirname $0)
 usage() {
     echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of given package       (optional: double quotes for a list)
+    -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
     -h,--help     Help message
     -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
     -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
@@ -35,7 +35,7 @@ while [ $# -ne 0 ]; do
             ;;
         -f | --force)
             shift
-            eb_files+=("$1 -f")
+            forcelist="$1"
             ;;
         -h | --help)
             usage
@@ -69,6 +69,13 @@ while [ $# -ne 0 ]; do
     shift
 done
 
+# match forcelist items with production list
+nindex=0; 
+for item in ${forcelist}; do 
+ index[$nindex]=$(grep -n $item  | awk -F ":" '{print $1}') 
+ ((nindex++)) 
+done
+
 # optional EasyBuild arguments
 eb_args=""
 
@@ -89,7 +96,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module purge
         module load craype craype-network-aries modules
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
     fi
 fi
 
@@ -139,12 +146,15 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
 # build licensed software (CPMD and VASP)
     if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
-# add a footer for ${name} modulefile to warn users not belonging to group ${name,,}
-        cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
-if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
- puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
-}
-EOF
+# custom footer for ${name} modulefile with a warning for users not belonging to group ${name,,}
+        footer="if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {
+ puts stderr \"WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files\"
+}"
+        if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+            (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
+        else
+            echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
+        fi
         echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
         eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
