@@ -10,12 +10,15 @@
  CMake-3.6.0.eb
  CP2K-4.1-CrayGNU-2016.11-cuda-8.0.54.eb
  CPMD-4.1-CrayIntel-2016.11.eb
+ ddt-7.0.5.eb --set-default-module
  GROMACS-5.1.4-CrayGNU-2016.11-cuda-8.0.54.eb
  GSL-2.1-CrayGNU-2016.11.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-parallel.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-parallel.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-serial.eb
  h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-serial.eb
+ influxdb-4.1.1-CrayGNU-2016.11-Python-2.7.12.eb --hidden
+ influxdb-4.1.1-CrayGNU-2016.11-Python-3.5.2.eb --hidden
  IPM-2.0.6-CrayGNU-2016.11.eb
  IPM-2.0.6-CrayCCE-2016.11.eb
  IPM-2.0.6-CrayIntel-2016.11.eb
@@ -25,7 +28,8 @@
  NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
  NCL-6.4.0.eb
  NCL-6.3.0.eb
- NCO-4.6.2-CrayGNU-2016.11.eb
+ NCO-4.6.2-CrayGNU-2016.11.eb --set-default-module
+ NCO-4.6.7-CrayGNU-2016.11.eb
  ncview-2.1.7-CrayGNU-2016.11.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
  netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
@@ -65,4 +69,3 @@
  Visit-2.12.0-CrayGNU-2016.11.eb
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
- VTK-7.1.0-CrayGNU-2016.11.eb

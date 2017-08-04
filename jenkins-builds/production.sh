@@ -13,8 +13,8 @@ usage() {
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
     -f,--force    Force build of given package       (optional: double quotes for a list)
     -h,--help     Help message
-    -l,--list     Production list file               (mandatory: EasyBuild production list)
-    -p,--prefix   EasyBuild prefix folder            (mandatory: installation folder)
+    -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
+    -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
     -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
     -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
     "
@@ -72,21 +72,11 @@ done
 # optional EasyBuild arguments
 eb_args=""
 
-# check prefix folder
-if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
-    usage
-fi
-
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
  system=${HOSTNAME%%[cl]n-[0-9]*}
 else
  system=${HOSTNAME%%[0-9]*}
-fi
-
-if [ -z "$update_xalt_table" ]; then
-    update_xalt_table=yes
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -96,18 +86,29 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
         usage
     else
-        module rm ddt
-        module rm xalt
-        module rm PrgEnv-cray
-        module use /opt/cray/pe/craype/2.5.8/modulefiles
+        module purge
+        module load craype craype-network-aries modules
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
     fi
 fi
 
 # --- COMMON SETUP ---
-export EB_CUSTOM_REPOSITORY=$PWD/easybuild
-export EASYBUILD_PREFIX=$PREFIX
+# xalt table update for Piz Daint
+if [ -z "$update_xalt_table" ]; then
+    update_xalt_table=yes
+fi
+# check prefix folder
+if [ -z "$PREFIX" ]; then
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
+    usage
+else
+ export EASYBUILD_PREFIX=$PREFIX
+fi
+# set production repository folder
+if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+fi
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
 # print EasyBuild configuration, module list, production file(s), list of builds
