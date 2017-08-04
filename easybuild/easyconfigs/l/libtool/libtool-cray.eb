@@ -7,7 +7,7 @@ version = 'cray'
 commit = 'a1cb49a1dbec3f308ce18413d26b94735a379692'
 
 homepage = 'https://github.com/Cray/libtool'
-description = """Mirror of http://git.savannah.gnu.org/cgit/libtool.git with support for the Cray Compiling Environment (CCE)""" 
+description = """Mirror of http://git.savannah.gnu.org/cgit/libtool.git with support for the Cray Compiling Environment (CCE)"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
@@ -16,12 +16,12 @@ sources = ['%s.tar.gz' % commit]
 
 unpack_options = '--strip 1'
 
-dependencies = [ 
-    ('Autotools', '201602'), 
-    ('help2man', '1.47.4'),  
-] 
+dependencies = [
+    ('Autotools', '201602'),
+    ('help2man', '1.47.4'),
+]
 
-preconfigopts =  'find . -mindepth 1 -delete && git clone https://github.com/Cray/libtool.git . && '
+preconfigopts  =  'find . -mindepth 1 -delete && git clone https://github.com/Cray/libtool.git .  && git checkout a1cb49a1dbec3f308ce18413d26b94735a379692 && '
 preconfigopts += './bootstrap && '
 
 sanity_check_paths={
