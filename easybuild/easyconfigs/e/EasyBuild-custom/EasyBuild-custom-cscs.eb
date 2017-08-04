@@ -83,11 +83,15 @@ setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 #
 # If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to /dev/shm/$USER/easbuild/stage
 #
-if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
-    setenv EASYBUILD_TMPDIR                         /dev/shm/$::env(USER)/easybuild/stage/tmp
+if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
+    setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
+} else {
+    setenv EASYBUILD_TMPDIR                     /dev/shm/$::env(USER)/easybuild/stage/tmp
 }
-if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
-    setenv EASYBUILD_BUILDPATH                      /dev/shm/$::env(USER)/easybuild/stage/build
+if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
+    setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
+} else {
+    setenv EASYBUILD_BUILDPATH                  /dev/shm/$::env(USER)/easybuild/stage/build
 }
 ###############
 # FINAL TOUCH #
