@@ -19,8 +19,6 @@ checksums = ['43a2f9466702fb1db31df98ae6677f15']
 
 preconfigopts = 'unset CFLAGS && unset FCFLAGS && unset CPPFLAGS && unset LDFLAGS && unset CXXFLAGS && '
 
-#prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
-
 configopts =  '--disable-silent-rules --disable-sharedlib-rpath --enable-parallel --enable-fortran --enable-static --with-pic --enable-shared '
 configopts += '--with-zlib=/usr/include,/usr/lib64 --enable-cxx --enable-unsupported CC=cc CXX=CC FC=ftn'
 
