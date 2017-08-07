@@ -77,7 +77,7 @@ for item in ${forcelist}; do
 done
 # append force flag '-f' to matching items in production list
 for ((i=0; i<$nindex; i++)); do
-    eb_files[${index[$i]}]="${eb_files[${index[$i]} -f"
+    eb_files[${index[$i]}]+=" -f"
 done
 
 # optional EasyBuild arguments
