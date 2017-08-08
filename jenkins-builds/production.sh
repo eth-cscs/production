@@ -9,7 +9,8 @@ scriptname=$(basename $0)
 scriptdir=$(dirname $0)
 
 usage() {
-    echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
+    echo -e "\n Usage: $0 [OPTIONS] -l <list> -p <prefix>
+    
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
     -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
     -h,--help     Help message
@@ -26,7 +27,7 @@ shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
-production_files=()
+eb_lists=()
 while [ $# -ne 0 ]; do
     case $1 in
         -a | --arch)
@@ -42,11 +43,8 @@ while [ $# -ne 0 ]; do
             ;;
         -l | --list)
             shift
-            mapfile -t < $1
-            for ((i = 0; i < ${#MAPFILE[@]}; i++)); do
-                eb_files+=("${MAPFILE[$i]}")
-            done
-            production_files+=($1)
+            mapfile -O ${#eb_files[@]} -t eb_files < $1
+            eb_lists+=($1)
             ;;
         -p | --prefix)
             shift
@@ -63,21 +61,22 @@ while [ $# -ne 0 ]; do
         --)
             ;;
         *)
-            eb_files+=($1)
+            usage
             ;;
     esac
     shift
 done
 
-# match forcelist items with production list
-nindex=0; 
+# match forcelist items with production lists: 
+# 'grep -n' returns the 1-based line number of the matching pattern within its file
+nidx=0; 
 for item in ${forcelist}; do 
- index[$nindex]=$(grep -n $item  | awk -F ":" '{print $1}') 
- ((nindex++)) 
+    idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+    ((nidx++)) 
 done
-# append force flag '-f' to matching items in production list
-for ((i=0; i<$nindex; i++)); do
-    eb_files[${index[$i]}]+=" -f"
+# append force flag '-f' to matching items in production lists
+for ((i=0; i<$nidx; i++)); do
+    eb_files[${idx[$i]}]+=" -f"
 done
 
 # optional EasyBuild arguments
@@ -127,9 +126,9 @@ echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-c
 echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
 echo -e " $(module list -t)"
-echo -e " Production file(s): ${production_files[@]} \n"
+echo -e " Production file(s): ${eb_lists[@]} \n"
 echo -e " List of builds (including options):"
-for ((i = 0; i < ${#eb_files[@]}; i++)); do
+for ((i=0; i<${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
 # module unuse PATH before building
