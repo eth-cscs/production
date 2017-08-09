@@ -9,9 +9,10 @@ scriptname=$(basename $0)
 scriptdir=$(dirname $0)
 
 usage() {
-    echo "Usage: $0 [OPTIONS] <list-of-ebfiles>
+    echo -e "\n Usage: $0 [OPTIONS] -l <list> -p <prefix>
+    
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of given package       (optional: double quotes for a list)
+    -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
     -h,--help     Help message
     -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
     -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
@@ -26,7 +27,7 @@ shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
 eb_files=()
-production_files=()
+eb_lists=()
 while [ $# -ne 0 ]; do
     case $1 in
         -a | --arch)
@@ -35,18 +36,15 @@ while [ $# -ne 0 ]; do
             ;;
         -f | --force)
             shift
-            eb_files+=("$1 -f")
+            forcelist="$1"
             ;;
         -h | --help)
             usage
             ;;
         -l | --list)
             shift
-            mapfile -t < $1
-            for ((i = 0; i < ${#MAPFILE[@]}; i++)); do
-                eb_files+=("${MAPFILE[$i]}")
-            done
-            production_files+=($1)
+            mapfile -O ${#eb_files[@]} -t eb_files < $1
+            eb_lists+=($1)
             ;;
         -p | --prefix)
             shift
@@ -63,10 +61,22 @@ while [ $# -ne 0 ]; do
         --)
             ;;
         *)
-            eb_files+=($1)
+            usage
             ;;
     esac
     shift
+done
+
+# match forcelist items with production lists: 
+# 'grep -n' returns the 1-based line number of the matching pattern within its file
+nidx=0; 
+for item in ${forcelist}; do 
+    idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+    ((nidx++)) 
+done
+# append force flag '-f' to matching items in production lists
+for ((i=0; i<$nidx; i++)); do
+    eb_files[${idx[$i]}]+=" -f"
 done
 
 # optional EasyBuild arguments
@@ -89,7 +99,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module purge
         module load craype craype-network-aries modules
         module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h"
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
     fi
 fi
 
@@ -116,9 +126,9 @@ echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-c
 echo -e " $(eb --version) \n $(eb --show-config) \n"
 echo -e " Modules loaded ('module list -t'): "
 echo -e " $(module list -t)"
-echo -e " Production file(s): ${production_files[@]} \n"
+echo -e " Production file(s): ${eb_lists[@]} \n"
 echo -e " List of builds (including options):"
-for ((i = 0; i < ${#eb_files[@]}; i++)); do
+for ((i=0; i<${#eb_files[@]}; i++)); do
     echo ${eb_files[$i]}
 done
 # module unuse PATH before building
@@ -139,12 +149,15 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
 # build licensed software (CPMD and VASP)
     if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
-# add a footer for ${name} modulefile to warn users not belonging to group ${name,,}
-        cat > ${EASYBUILD_TMPDIR}/${name}.footer <<EOF
-if { [lsearch [exec groups] "${name,,}"]==-1 && [module-info mode load] } {
- puts stderr "WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files"
-}
-EOF
+# custom footer for ${name} modulefile with a warning for users not belonging to group ${name,,}
+        footer="if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {
+ puts stderr \"WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files\"
+}"
+        if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+            (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
+        else
+            echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
+        fi
         echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
         eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
