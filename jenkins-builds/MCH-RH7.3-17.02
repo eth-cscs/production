@@ -1,13 +1,13 @@
- Anaconda3-4.4.0.eb
- Autotools-201602.eb
+ Anaconda3-4.4.0.eb --prefix=$APPS/UES/RH7.3_generic/easybuild
+ Autotools-201602.eb --prefix=$APPS/UES/RH7.3_generic/easybuild
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
  CDO-1.8.2-gmvolf-17.02.eb
- CMake-3.7.2.eb
- ddt-7.0.5.eb --set-default-module
+ CMake-3.7.2.eb --prefix=$APPS/UES/RH7.3_generic/easybuild
+ ddt-7.0.5.eb --set-default-module --prefix=$APPS/UES/RH7.3_generic/easybuild
  GDAL-2.1.3-gmvolf-17.02.eb
  GSL-2.3-gmvolf-17.02.eb
  HDF-4.2.13-gmvolf-17.02.eb
- NCL-6.4.0.eb
+ NCL-6.4.0.eb --prefix=$APPS/UES/RH7.3_generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  PrgEnv-gnu-kesch-gmvolf-17.02.eb --module-naming-scheme=EasyBuildMNS
  Python-2.7.13-gmvolf-17.02.eb
@@ -19,4 +19,4 @@
  netCDF-Fortran-4.4.4-gmvolf-17.02.eb
  netcdf4-python-1.2.9-gmvolf-17.02-Python-2.7.13.eb
  netcdf4-python-1.2.9-gmvolf-17.02-Python-3.6.0.eb
- rstudio-1.0.143.eb
+ rstudio-1.0.143.eb --prefix=$APPS/UES/RH7.3_generic/easybuild
