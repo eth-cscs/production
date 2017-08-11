@@ -1,4 +1,4 @@
-# File generated for Python 3.6.1 extensions by MK - August 2017
+# File generated for Python 3.6.1 extensions by MaKra - August 2017
 easyblock = 'ConfigureMake'
 
 name = 'gettext'
