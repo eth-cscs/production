@@ -22,7 +22,7 @@ patches = [
     'Qhull_pkgconfig.patch',
 ]
 
-builddependencies = [('CMake', '3.8.1')]
+builddependencies = [('CMake', '3.7.2', '', True)]
 
 sanity_check_paths = {
     'files': ['bin/qhull', 'lib/libqhull.%s' % SHLIB_EXT, 'lib/pkgconfig/qhull.pc'],
