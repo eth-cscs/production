@@ -47,5 +47,6 @@
  Score-P-3.0-CrayIntel-2016.11.eb
  Score-P-3.0-CrayPGI-2016.11.eb
  Spark-1.6.0.eb
+ vampir-9.2.0.eb --set-default-module
  VASP-5.4.1-CrayIntel-2016.11.eb
  Visit-2.12.0-CrayGNU-2016.11.eb

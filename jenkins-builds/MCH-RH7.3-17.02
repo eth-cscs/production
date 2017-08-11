@@ -20,3 +20,4 @@
  netcdf4-python-1.2.9-gmvolf-17.02-Python-2.7.13.eb
  netcdf4-python-1.2.9-gmvolf-17.02-Python-3.6.0.eb
  rstudio-1.0.143.eb
+ vampir-9.2.0.eb --set-default-module
