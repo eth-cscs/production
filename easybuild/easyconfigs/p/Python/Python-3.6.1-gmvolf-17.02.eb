@@ -136,8 +136,9 @@ exts_list = [
                         '52aabebbadecc9381d11dea0fa34e4759b4071244fa094804c/'],
     }),
     ('scikit-learn', '0.18.2', {
-        'source_urls' : [PYPI_SOURCE],
-        'sources' : [SOURCE_TAR_GZ],
+        'source_urls': ['https://pypi.python.org/packages/26/c2/21c612f3a1b1ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
+        #'source_urls' : [PYPI_SOURCE],
+        #'sources' : [SOURCE_TAR_GZ],
         'modulename' : 'sklearn',
     }),
     ('blaze', '0.10.1', {
