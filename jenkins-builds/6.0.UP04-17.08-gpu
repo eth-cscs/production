@@ -2,6 +2,7 @@
  CrayGNU-17.08.eb
  CrayIntel-17.08.eb
  CrayPGI-17.08.eb
+ CMake-3.9.1.eb
  Cube-4.3.5-CrayGNU-17.08.eb
  Cube-4.3.5.eb
  IPM-2.0.6-CrayCCE-17.08.eb
