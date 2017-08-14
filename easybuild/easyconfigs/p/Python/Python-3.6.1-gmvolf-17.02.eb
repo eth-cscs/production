@@ -34,7 +34,7 @@ configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
 # order is important!
 # package versions updated Mar 1st 2017
 exts_list = [
-    ('setuptools', '36.2.0', {
+    ('setuptools', '32.3.1', {
         'source_tmpl': '%(name)s-%(version)s.zip',
         'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
     }),
@@ -44,26 +44,18 @@ exts_list = [
     ('nose', '1.3.7', {
         'source_urls': ['http://pypi.python.org/packages/source/n/nose/'],
     }),
-    ('numpy', '1.13.1', {
+    ('numpy', '1.12.0', {
         'source_tmpl': '%(name)s-%(version)s.zip',
         'source_urls': ['http://pypi.python.org/packages/source/n/numpy/'],
 #         'patches': [ 'numpy-1.8.0-mkl.patch', ],
     }),
-    ('pyproj', '1.9.5.1', {
-        'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
-                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/']
-    }),
-    ('pygrib', '2.0.2', {
-        'source_urls': ['https://pypi.python.org/packages/3c/16/d128a64f2f'    \
-                        '5e9f776d6e080ba62551b5d103a4c0acb283204135bd23f14e/']
-    }),
-    ('scipy', '0.19.1', {
+    ('scipy', '0.18.1', {
         'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
     }),
     ('mpi4py', '2.0.0', {
         'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
     }),
-    ('Cython', '0.26', {
+    ('Cython', '0.25.2', {
         'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
     }),
     ('six', '1.10.0', {
@@ -77,6 +69,10 @@ exts_list = [
     }),
     ('pandas', '0.20.3', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+    }),
+    ('pygrib', '2.0.2', {
+        'source_urls': ['https://pypi.python.org/packages/3c/16/d128a64f2f'    \
+                        '5e9f776d6e080ba62551b5d103a4c0acb283204135bd23f14e/']
     }),
     ('datashape', '0.5.2', {
         'source_urls': ['https://pypi.python.org/packages/a6/5b/95b2ed56b6'    \
@@ -153,6 +149,10 @@ exts_list = [
     ('cryptography', '2.0.3', {
         'source_urls': ['https://pypi.python.org/packages/9c/1a/0fc8cffb04582' \
                         'f9ffca61b15b0681cf2e8588438e55f61403eb9880bd8e0/'],
+    }),
+    ('pyproj', '1.9.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
+                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/']
     }),
 ]
 
