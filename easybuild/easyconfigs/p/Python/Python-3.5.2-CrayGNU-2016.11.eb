@@ -19,7 +19,6 @@ patches = ['unixccompiler-Python-3.4.3.patch']
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.8'),
-    ('libreadline', '6.3'),
     ('ncurses', '6.0'),
     ('freetype', '2.6.3'),
     ('libpng', '1.6.23'),
