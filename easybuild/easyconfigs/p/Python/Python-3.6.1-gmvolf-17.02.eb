@@ -1,5 +1,5 @@
 name = 'Python'
-version = "3.6.0"
+version = "3.6.1"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
@@ -51,6 +51,7 @@ exts_list = [
     }),
     ('mpi4py', '2.0.0', {
         'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
+        'use_pip': True,
     }),
     ('Cython', '0.25.2', {
         'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
