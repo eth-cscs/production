@@ -16,7 +16,6 @@ prebuildopts += ' cd CRAY-XC-intel && '
 
 builddependencies = [
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
-    ('rca', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('Charm++', '6.7.1'), 
     ('Tcl', '8.5.9', '-namd',  True),
