@@ -11,6 +11,7 @@
  git-2.14.1.eb                      --set-default-module
  HDFView-2.14.eb                    --set-default-module
  hwloc-1.11.7.eb                    --set-default-module --hidden
+ idl-84.eb                          --set-default-module
  IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb
  IPM-2.0.6-CrayIntel-17.08.eb       --set-default-module
