@@ -1,10 +1,10 @@
 easyblock = 'ConfigureMake'
 
 name = 'lynx'
-version = '2.8.8rel.2'
+version = '2.8.9dev.16'
 
-description = "lynx is an alphanumeric display oriented World-Wide Web Client"
-homepage = 'http://lynx.isc.org/'
+homepage = 'http://lynx.browser.org/'
+description = "lynx is a text browser for the World Wide Web."
 
 toolchain = {'name': 'dummy', 'version': ''}
 
