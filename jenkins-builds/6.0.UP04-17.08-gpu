@@ -8,6 +8,7 @@
  Cube-4.3.5-CrayGNU-17.08.eb        --hidden
  Cube-4.3.5.eb                      --hidden
  ddt-7.0.5.eb                       --set-default-module
+ embree-2.16.5-CrayGNU-17.08.eb     --hidden
  git-2.14.1.eb                      --set-default-module
  HDFView-2.14.eb                    --set-default-module
  hwloc-1.11.7.eb                    --set-default-module --hidden
@@ -24,9 +25,11 @@
  nano-2.8.6.eb                      --set-default-module
  NAMD-2.12-CrayIntel-17.08-cuda-8.0.61.eb   --set-default-module
  OPARI2-2.0.2.eb                    --hidden
+ ospray-1.3.1-CrayGNU-17.08.eb      --hidden
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayGNU-17.08.eb     --set-default-module
  papi-wrap-1.0-CrayIntel-17.08.eb
+ ParaView-5.4.1-EGL-CrayGNU-17.08.eb --set-default-module
  PDT-3.24.eb                        --hidden
  Python-bare-3.6.2.eb               --set-default-module --hidden
  Python-2.7.13-CrayGNU-17.08.eb
