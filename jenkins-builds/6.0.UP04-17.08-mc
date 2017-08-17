@@ -13,8 +13,8 @@
  hwloc-1.11.7.eb                    --set-default-module --hidden
  idl-84.eb                          --set-default-module
  IPM-2.0.6-CrayCCE-17.08.eb
- IPM-2.0.6-CrayGNU-17.08.eb
- IPM-2.0.6-CrayIntel-17.08.eb       --set-default-module
+ IPM-2.0.6-CrayGNU-17.08.eb         --set-default-module
+ IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
  libunwind-1.2.1.eb                 --hidden
  likwid-4.3.0.eb                    --set-default-module
@@ -30,6 +30,7 @@
  Python-2.7.13-CrayGNU-17.08.eb
  Python-3.6.2-CrayGNU-17.08.eb
  Ruby-2.4.1.eb                      --set-default-module
+ Score-P-3.1-CrayGNU-17.08.eb       --set-default-module
  Score-P-3.1-CrayIntel-17.08.eb
  Score-P-3.1-CrayPGI-17.08.eb
  Spark-1.6.0.eb                     --set-default-module
