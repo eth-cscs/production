@@ -15,7 +15,7 @@ sources = ['cpmd-v%s.tar.gz' %version]
 
 patches = [('CRAY-XE6-INTEL-MKL', 'CPMD/configure')]
 
-dependencies = [('fftw/3.3.4.10', EXTERNAL_MODULE)]
+dependencies = [('cray-fftw/3.3.6.2', EXTERNAL_MODULE)]
 
 skipsteps = ['configure']
 
@@ -23,8 +23,8 @@ common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &
 
 prebuildopts = [
                          common_prebuildopts,
-#     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
 ]
+#     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
 
 files_to_copy = [(['bin/cpmd*.x'],'bin')]
 
