@@ -43,3 +43,5 @@
  tmux-2.5.eb                        --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
+ CPMD-4.1-CrayIntel-17.08.eb        --set-default-module
+ CPMD-4.1-CrayIntel-17.08-pat-645-nogpu.eb
