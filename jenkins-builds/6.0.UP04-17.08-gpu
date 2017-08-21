@@ -2,6 +2,9 @@
  CrayGNU-17.08.eb
  CrayIntel-17.08.eb
  CrayPGI-17.08.eb
+ Amber-16-2017.08-CrayGNU-17.08-cuda-8.0.61.eb --set-default-module
+ Amber-16-2017.08-CrayGNU-17.08-parallel.eb
+ Amber-16-2017.08-CrayGNU-17.08-serial.eb
  Boost-1.63.0-CrayGNU-17.08-Python-2.7.13.eb    --set-default-module
  Boost-1.63.0-CrayGNU-17.08-Python-3.6.2.eb     --set-default-module
  CMake-3.9.1.eb                     --set-default-module
@@ -15,7 +18,7 @@
  htop-2.0.1.eb                      --set-default-module
  hwloc-1.11.7.eb                    --set-default-module --hidden
  idl-84.eb                          --set-default-module
- IPM-2.0.6-CrayCCE-17.08.eb         
+ IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
