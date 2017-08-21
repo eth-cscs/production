@@ -4,7 +4,7 @@
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
-version = '5.4.1-RC4'
+version = '5.4.1'
 versionsuffix='-EGL'
 
 homepage = "http://www.paraview.org"
