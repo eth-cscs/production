@@ -14,6 +14,7 @@
  ddt-7.0.5.eb                       --set-default-module
  embree-2.16.5-CrayGNU-17.08.eb     --hidden
  git-2.14.1.eb                      --set-default-module
+ GROMACS-2016.3-CrayGNU-17.08-cuda-8.0.eb --set-default-module
  HDFView-2.14.eb                    --set-default-module
  htop-2.0.1.eb                      --set-default-module
  hwloc-1.11.7.eb                    --set-default-module --hidden
