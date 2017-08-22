@@ -21,7 +21,7 @@ dependencies = [
     ('libpng', '1.6.30'),
     ('SQLite', '3.9.2'),
     ('freetype', '2.7.1'),
-    ('Tk', '8.6.6'),
+#    ('Tk', '8.6.6'),
     ('GMP', '6.1.2'),
 ]
 
@@ -57,9 +57,9 @@ exts_list = [
 #    ('scipy', '0.19.1', {
 #        'source_urls': ['https://pypi.python.org/packages/source/s/scipy/'],
 #    }),
-#    ('mpi4py', '2.0.0', {
-#        'source_urls': ['https://bitbucket.org/mpi4py/mpi4py/downloads/'],
-#    }),
+    ('mpi4py', '2.0.0', {
+        'source_urls': ['https://bitbucket.org/mpi4py/mpi4py/downloads/'],
+    }),
 #    ('Cython', '0.25.2', {
 #        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
 #    }),
