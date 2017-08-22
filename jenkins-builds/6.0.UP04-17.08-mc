@@ -26,6 +26,7 @@
  likwid-4.3.0.eb                    --set-default-module
  lynx-2.8.9dev.16.eb                --set-default-module
  nano-2.8.6.eb                      --set-default-module
+ NCL-6.4.0.eb                       --set-default-module
  Ruby-2.4.1.eb                      --set-default-module
  tmux-2.5.eb                        --set-default-module
  Cube-4.3.5-CrayGNU-17.08.eb        --hidden
