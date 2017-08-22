@@ -6,7 +6,7 @@
  Amber-16-2017.08-CrayGNU-17.08-serial.eb
  CPMD-4.1-CrayIntel-17.08.eb        --set-default-module
  GROMACS-2016.3-CrayGNU-17.08.eb    --set-default-module
- LAMMPS-11Aug17-CrayGNU-17.08.eb           --set-default-module
+ LAMMPS-11Aug2017-CrayGNU-17.08.eb           --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb       --set-default-module
  Spark-1.6.0.eb                     --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb      --set-default-module
