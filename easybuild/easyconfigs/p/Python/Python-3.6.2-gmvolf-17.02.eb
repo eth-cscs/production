@@ -18,9 +18,9 @@ dependencies = [
     ('zlib', '1.2.11'),
     ('libreadline', '7.0'),
     ('ncurses', '6.0'),
-    ('freetype', '2.7.1'),
     ('libpng', '1.6.30'),
     ('SQLite', '3.9.2'),
+    ('freetype', '2.7.1'),
     ('Tk', '8.6.6'),
     ('GMP', '6.1.2'),
 ]
@@ -39,7 +39,7 @@ configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
 # order is important!
 # package versions updated Mar 1st 2017
 exts_list = [
-    ('setuptools', '36.2.0', {
+    ('setuptools', '33.1.1', {
         'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
         'source_tmpl': '%(name)s-%(version)s.zip',
     }),
@@ -72,7 +72,7 @@ exts_list = [
     ('matplotlib', '2.0.2', {
         'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
     }),
-    ('pandas', '0.20.3', {
+    ('pandas', '0.19.2', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
     }),
 ]
