@@ -20,7 +20,7 @@ dependencies = [
     ('ncurses', '6.0'),
     ('SQLite', '3.19.3'),
     ('XZ', '5.2.3'),
-    ('Tk', '8.6.5'),  # this requires a full X11 stack
+#    ('Tk', '8.6.5'),  # this requires a full X11 stack
     ('GMP', '6.1.2'),
     ('libffi', '3.2.1'),
     # OS dependency should be preferred if the os version is more recent then this version,
