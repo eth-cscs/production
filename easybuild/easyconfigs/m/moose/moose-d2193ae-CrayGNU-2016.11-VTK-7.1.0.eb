@@ -4,6 +4,7 @@ easyblock = "CmdCp"
 name = 'moose'
 version = 'd2193ae'
 vtkversion = '7.1.0'
+vtkshortversion = '7.1'
 versionsuffix = '-VTK-%s' % vtkversion
 
 homepage = 'http://www.mooseframework.org/'
@@ -26,15 +27,15 @@ dependencies = [
     ('cray-tpsl/16.07.1', EXTERNAL_MODULE),
     ('cray-petsc/3.7.2.1', EXTERNAL_MODULE),
     ('cray-hdf5-parallel/1.8.16', EXTERNAL_MODULE), # should not be necessary for --disable-hdf5 but seems to be
-    ('Boost', '1.63.0', '-Python-3.5.2'),
-    ('VTK', '7.1.0', '-Python-3.5.2'),
+    ('Boost', '1.63.0', '-Python-2.7.12'),
+    ('VTK', '7.1.0', '-Python-2.7.12'),
     ('GSL', '2.1'),
 ]
 
 buildcmd =  "cd %(installdir)s && export CRAY_ADD_RPATH=yes && "
 buildcmd += "cp -ra ./moose-d2193aefff5d289a10c6b4f9c99e63705eee05b2/* . && "
 buildcmd += "cp -ra ./libmesh-9a3100a84c2d5f16126c6d8df57d068c19f15e45/* libmesh/ && "
-buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 --with-vtk-include=$EBROOTVTK/include --with-vtk-lib=$EBROOTVTK/lib64  && "
+buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 --with-vtk-include=$EBROOTVTK/include/vtk-%s --with-vtk-lib=$EBROOTVTK/lib  && " % vtkshortversion
 buildcmd += "cd framework && "
 buildcmd += "METHOD='opt' make -j 16 && "
 buildcmd += "METHOD='dbg' make -j 16 && "
