@@ -39,6 +39,7 @@ configopts += ' --with-libpmi-include=/opt/cray/pe/pmi/default/include'
 configopts += ' --with-libpmi-lib=/opt/cray/pe/pmi/default/lib64'
 configopts += ' --with-librca-include=/opt/cray/rca/default/include'
 configopts += ' --with-librca-lib=/opt/cray/rca/default/lib64'
+configopts += ' --with-papi-lib=`pkg-config --variable=papi_libdir papi`'
 # --- cuda
 configopts += ' --enable-cuda'
 configopts += ' --with-libcuda-lib=$CRAY_CUDATOOLKIT_DIR/lib64/stubs'
