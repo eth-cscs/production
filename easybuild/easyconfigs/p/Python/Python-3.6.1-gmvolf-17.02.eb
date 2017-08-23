@@ -154,7 +154,7 @@ exts_list = [
     }),
     ('pyproj', '1.9.5.1', {
         'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
-                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/']
+                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/'],
         'modulename' : 'pyproj',
     }),
 ]
