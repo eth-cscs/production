@@ -35,6 +35,7 @@
  NCL-6.4.0.eb                       --set-default-module
  NCO-4.6.8-CrayGNU-17.08.eb         --set-default-module
  ospray-1.3.1-CrayGNU-17.08.eb      --hidden
+ pygelf-0.3.1-CrayGNU-17.08-Python-2.7.13.eb --set-default-module --hidden
  Ruby-2.4.1.eb                      --set-default-module
  tmux-2.5.eb                        --set-default-module
  Cube-4.3.5-CrayGNU-17.08.eb        --hidden
