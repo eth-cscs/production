@@ -29,6 +29,7 @@ toolchainopts = {'pic': True}
 sources = ['sionlib-%(version)sl.tar.gz']
 source_urls = ['http://apps.fz-juelich.de/jsc/sionlib/download.php?version=%(version)s']
 checksums = [ '9d613055896af2792518d6e0cda02588' ]
+patches = [ 'SIONlib-%(version)s.patch' ]
 
 configopts = '--disable-cxx --disable-fortran --disable-ompi --disable-mic'
 buildopts = ' SION_PLATFORM=" -D_SION_XT -fPIC"'
