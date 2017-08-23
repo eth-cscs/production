@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'libpng'
-version = '1.6.28'
+version = '1.6.30'
 
 homepage = 'http://www.libpng.org/pub/png/libpng.html'
 description = "libpng is the official PNG reference library"
@@ -13,7 +13,7 @@ toolchainopts = {'pic': True}
 source_urls = [SOURCEFORGE_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
-dependencies = [('zlib', '1.2.8')]
+dependencies = [('zlib', '1.2.11')]
 
 configopts = "--with-pic"
 
