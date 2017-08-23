@@ -95,22 +95,20 @@ if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
 if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
     setenv EASYBUILD_BUILDPATH                      /dev/shm/$::env(USER)/easybuild/stage/build
 }
+#
+# If not set, define EASYBUILD_SOURCEPATH
+#
+if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
+    if { [ file writable "/apps/common/easybuild/sources" ] } {
+        setenv EASYBUILD_SOURCEPATH                 /apps/common/easybuild/sources
+    } else {
+        setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
+    }
+}
 ###############
 # FINAL TOUCH #
 ###############
-#
-# the following variables should depend on $HOME
-#
-# EASYBUILD_SOURCEPATH
-#
-if { [ file writable "/apps/common/easybuild/sources" ] } {
-    setenv EASYBUILD_SOURCEPATH                 /apps/common/easybuild/sources
-} else {
-    setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
-}
-
-# Adding easybuild installed softwares to the list of modules
+# Adding easybuild installed software to the list of modules
 prepend-path MODULEPATH                         $::env(EASYBUILD_INSTALLPATH)/modules/all
-
 # Loading easybuild module
 module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
