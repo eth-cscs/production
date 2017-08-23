@@ -5,6 +5,7 @@
  Amber-16-2017.08-CrayGNU-17.08-parallel.eb --set-default-module
  Amber-16-2017.08-CrayGNU-17.08-serial.eb
  CPMD-4.1-CrayIntel-17.08.eb        --set-default-module
+ CP2K-4.1-CrayGNU-17.08.eb --set-default-module
  GROMACS-2016.3-CrayGNU-17.08.eb    --set-default-module
  LAMMPS-11Aug2017-CrayGNU-17.08.eb           --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb       --set-default-module
@@ -28,6 +29,7 @@
  nano-2.8.6.eb                      --set-default-module
  NCL-6.4.0.eb                       --set-default-module
  NCO-4.6.8-CrayGNU-17.08.eb         --set-default-module
+ pygelf-0.3.1-CrayGNU-17.08-Python-2.7.13.eb --set-default-module --hidden
  Ruby-2.4.1.eb                      --set-default-module
  tmux-2.5.eb                        --set-default-module
  Cube-4.3.5-CrayGNU-17.08.eb        --hidden
