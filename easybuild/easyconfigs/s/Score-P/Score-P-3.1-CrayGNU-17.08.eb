@@ -24,7 +24,7 @@ dependencies = [
     ('OPARI2', '2.0.2', '', True),
     #PR3501 ('OTF2', '2.0', '', True),
     ('papi/5.5.1.2', EXTERNAL_MODULE),
-    ('SIONlib', '1.7.1', '', True),
+    ('SIONlib', '1.7.1'),
     ('PDT', '3.24', '', True),
     ('vampir','9.2.0', '', True),
 

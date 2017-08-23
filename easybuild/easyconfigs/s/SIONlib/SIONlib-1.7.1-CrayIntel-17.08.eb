@@ -23,7 +23,7 @@ description = """SIONlib is a scalable I/O library for parallel access to task-l
  to avoid conflicts when an application using SIONlib itself is linked against a tool requiring
  a different SIONlib version."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 toolchainopts = {'pic': True}
 
 sources = ['sionlib-%(version)sl.tar.gz']
