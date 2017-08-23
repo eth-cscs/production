@@ -1,7 +1,7 @@
 diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
 --- sionlib.ori/config/determine-cc.sh	2016-11-23 14:11:31.000000000 +0100
-+++ sionlib/config/determine-cc.sh	2017-08-23 11:04:47.361917000 +0200
-@@ -9,7 +9,7 @@
++++ sionlib/config/determine-cc.sh	2017-08-23 13:13:59.463471000 +0200
+@@ -9,33 +9,41 @@
  fi
  
  case "$CC" in
@@ -10,7 +10,10 @@ diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
        echo "$CC is probably a Cray XT compiler wrapper" ;;
    *)
        echo "Warning: $CC doesn't seem to be a Cray XT compiler wrapper!" ;;
-@@ -19,23 +19,28 @@
+ esac
+ 
++set -x
+ if [ `$CC -V 2>&1 | grep -c ^Cray` -gt 0 ]; then
    COMP=cce
    COMPVER=`$CC -V 2>&1 | grep ^Cray | cut -d\  -f 5`
    echo "Got CCE ${COMPVER} compiler"
@@ -39,3 +42,5 @@ diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
  else
    echo "'$CC' compiler not identified!"
  fi
++
++set +x
