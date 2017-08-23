@@ -5,6 +5,7 @@
  Amber-16-2017.08-CrayGNU-17.08-parallel.eb --set-default-module
  Amber-16-2017.08-CrayGNU-17.08-serial.eb
  CPMD-4.1-CrayIntel-17.08.eb        --set-default-module
+ CP2K-4.1-CrayGNU-17.08.eb --set-default-module
  GROMACS-2016.3-CrayGNU-17.08.eb    --set-default-module
  LAMMPS-11Aug2017-CrayGNU-17.08.eb           --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb       --set-default-module
