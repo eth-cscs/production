@@ -99,11 +99,11 @@ if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
 # If not set, define EASYBUILD_SOURCEPATH
 #
 if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
- if { [ file writable "/apps/common/easybuild/sources" ] } {
-     setenv EASYBUILD_SOURCEPATH                 /apps/common/easybuild/sources
- } else {
-     setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
- }
+    if { [ file writable "/apps/common/easybuild/sources" ] } {
+        setenv EASYBUILD_SOURCEPATH                 /apps/common/easybuild/sources
+    } else {
+        setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
+    }
 }
 ###############
 # FINAL TOUCH #
