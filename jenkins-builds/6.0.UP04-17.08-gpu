@@ -21,7 +21,6 @@
  Boost-1.63.0-CrayGNU-17.08-Python-3.6.2.eb     --set-default-module
  CMake-3.9.1.eb                     --set-default-module
  CDO-1.9.0-CrayGNU-17.08.eb         --set-default-module
- embree-2.16.5-CrayGNU-17.08.eb     --hidden
  git-2.14.1.eb                      --set-default-module
  HDFView-2.14.eb                    --set-default-module
  htop-2.0.1.eb                      --set-default-module
