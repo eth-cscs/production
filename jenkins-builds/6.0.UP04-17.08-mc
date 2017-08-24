@@ -10,6 +10,7 @@
  LAMMPS-11Aug2017-CrayGNU-17.08.eb           --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb       --set-default-module
  Spark-1.6.0.eb                     --set-default-module
+ VASP-5.4.4-CrayIntel-17.08.eb --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb      --set-default-module
  Python-bare-3.6.2.eb               --set-default-module --hidden
  Python-2.7.13-CrayGNU-17.08.eb
