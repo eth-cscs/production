@@ -34,9 +34,10 @@ configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
 # order is important!
 # package versions updated Mar 1st 2017
 exts_list = [
-    ('setuptools', '32.3.1', {
+    ('setuptools', '36.2.7', {
+        'source_urls': ['https://pypi.python.org/packages/07/a0/11d3d76df54b'  \
+                        '9701c0f7bf23ea9b00c61c5e14eb7962bb29aed866a5844e/'],
         'source_tmpl': '%(name)s-%(version)s.zip',
-        'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
     }),
     ('pip', '9.0.1', {
         'source_urls': ['http://pypi.python.org/packages/source/p/pip/'],
@@ -47,10 +48,15 @@ exts_list = [
     ('numpy', '1.12.0', {
         'source_tmpl': '%(name)s-%(version)s.zip',
         'source_urls': ['http://pypi.python.org/packages/source/n/numpy/'],
-#         'patches': [ 'numpy-1.8.0-mkl.patch', ],
+        'patches': [ 'numpy-1.12.0-mkl.patch', ],
     }),
-    ('scipy', '0.18.1', {
+    ('scipy', '0.19.1', {
         'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
+    }),
+    ('pyproj', '1.9.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
+                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/'],
+        'modulename' : 'pyproj',
     }),
     ('mpi4py', '2.0.0', {
         'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
@@ -132,7 +138,8 @@ exts_list = [
                         '52aabebbadecc9381d11dea0fa34e4759b4071244fa094804c/'],
     }),
     ('scikit-learn', '0.18.2', {
-        'source_urls': ['https://pypi.python.org/packages/26/c2/21c612f3a1b1ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
+        'source_urls': ['https://pypi.python.org/packages/26/c2/21c612f3a1b1'  \
+                        'ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
         #'source_urls' : [PYPI_SOURCE],
         #'sources' : [SOURCE_TAR_GZ],
         'modulename' : 'sklearn',
@@ -149,10 +156,6 @@ exts_list = [
     ('cryptography', '2.0.3', {
         'source_urls': ['https://pypi.python.org/packages/9c/1a/0fc8cffb04582' \
                         'f9ffca61b15b0681cf2e8588438e55f61403eb9880bd8e0/'],
-    }),
-    ('pyproj', '1.9.5.1', {
-        'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
-                        '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/']
     }),
 ]
 
