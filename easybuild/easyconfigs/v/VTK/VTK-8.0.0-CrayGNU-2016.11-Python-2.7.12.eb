@@ -43,17 +43,16 @@ pyver = '2.7.12'
 pyshortver = '.'.join(pyver.split('.')[:2])
 versionsuffix = '-Python-%s' % pyver
 
-preconfigopts = 'export CC=gcc && export CXX=g++ &&'
-
 dependencies = [
     ('Python', pyver),
 ]
 
-configopts = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_TESTING:BOOL=OFF "
+configopts  = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_TESTING:BOOL=OFF "
 configopts += "-DVTK_WRAP_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE:FILEPATH=${EBROOTPYTHON}/bin/python "
 configopts += "-DPYTHON_LIBRARY=${EBROOTPYTHON}/lib/libpython2.7.so -DPYTHON_INCLUDE_DIR=${EBROOTPYTHON}/include/python2.7 "
-configopts += "-DCMAKE_C_COMPILER:PATH=gcc -DCMAKE_CXX_COMPILER:PATH=g++ "
-configopts += "-DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so -DOPENGL_glu_LIBRARY=/usr/lib64/libGLU.so "
+configopts += "-DVTK_Group_MPI:BOOL=ON -DCMAKE_C_COMPILER:PATH=`which cc` -DCMAKE_CXX_COMPILER:PATH=`which CC` "
+configopts += "-DMPI_C_LIBRARIES=${CRAY_MPICH_DIR}/lib/libmpich.so -DMPI_C_INCLUDE_PATH=${CRAY_MPICH_DIR}/include"
+configopts += "-DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so -DOPENGL_glu_LIBRARY=/usr/lib64/libGLU.so "
 
 modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
 
