@@ -1,0 +1,39 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'VASP'
+version = "5.4.4"
+cudaversion = '8.0.54'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://www.vasp.at'
+description = """The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. """
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = { 'usempi': True }
+
+sources = [SOURCELOWER_TAR_BZ2]
+
+builddependencies = [
+    ('cudatoolkit/%s_2.2.8_ga620558-2.1' %cudaversion, EXTERNAL_MODULE),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+]
+
+# adapt ./arch/makefile.include.linux_intel and copy to ./makefile.include 
+prebuildopts = ' sed -e "s/mpiifort/ftn/g" -e "s/-mkl=sequential -lstdc++//" -e "/MKL_PATH   =/d" -e "s#BLAS       =.*#& \$(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a#" -e "s#LAPACK     =.*#& \$(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a#" -e "s#\$(MKL_PATH)/libmkl_scalapack_lp64.a#-lmkl_scalapack_lp64#" -e "s#\$(MKLROOT)/include/fftw#\$(MKLROOT)/include/intel64/lp64 -I\$(MKLROOT)/include -I\$(FFTW_INC)#" -e "s#LLIBS      =.*#& $(BLAS) $(LAPACK) -L$(MKLROOT)/lib/intel64 $(SCALAPACK) -lmkl_intel_lp64 -lmkl_sequential -lmkl_core $(BLACS) -L$(FFTW_DIR) -lfftw3#" -e "s#/usr/local/cuda/#\$(CUDATOOLKIT_HOME)#" -e "s/-ccbin=icc//" -e "s#_30#_60#g" -e "/GENCODE_ARCH/{n;N;d}" -e "s#\$(I_MPI_ROOT)/include64#\$(MPICH_DIR)/include#" arch/makefile.include.linux_intel > makefile.include && '
+prebuildopts += ' cat makefile.include && '
+
+# don't use parallel make, results in compilation failure
+parallel = 1
+
+# build type
+buildopts = ' gpu gpu_ncl '
+ 
+files_to_copy = [(['./bin/vasp_*'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/vasp_gpu','bin/vasp_gpu_ncl'],
+    'dirs': [],
+}
+
+moduleclass = 'phys'
