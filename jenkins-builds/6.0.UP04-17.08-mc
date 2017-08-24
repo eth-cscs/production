@@ -1,0 +1,47 @@
+ CrayCCE-17.08.eb
+ CrayGNU-17.08.eb
+ CrayIntel-17.08.eb
+ CrayPGI-17.08.eb
+ Amber-16-2017.08-CrayGNU-17.08-parallel.eb --set-default-module
+ Amber-16-2017.08-CrayGNU-17.08-serial.eb
+ CPMD-4.1-CrayIntel-17.08.eb        --set-default-module
+ GROMACS-2016.3-CrayGNU-17.08.eb    --set-default-module
+ LAMMPS-11Aug17-CrayGNU-17.08.eb           --set-default-module
+ NAMD-2.12-CrayIntel-17.08.eb       --set-default-module
+ Spark-1.6.0.eb                     --set-default-module
+ Visit-2.12.3-CrayGNU-17.08.eb      --set-default-module
+ Python-bare-3.6.2.eb               --set-default-module --hidden
+ Python-2.7.13-CrayGNU-17.08.eb
+ Python-3.6.2-CrayGNU-17.08.eb
+ Boost-1.63.0-CrayGNU-17.08-Python-2.7.13.eb    --set-default-module
+ Boost-1.63.0-CrayGNU-17.08-Python-3.6.2.eb     --set-default-module
+ CMake-3.9.1.eb                     --set-default-module
+ git-2.14.1.eb                      --set-default-module
+ HDFView-2.14.eb                    --set-default-module
+ htop-2.0.1.eb                      --set-default-module
+ hwloc-1.11.7.eb                    --set-default-module --hidden
+ idl-84.eb                          --set-default-module
+ libunwind-1.2.1.eb                 --hidden
+ likwid-4.3.0.eb                    --set-default-module
+ lynx-2.8.9dev.16.eb                --set-default-module
+ nano-2.8.6.eb                      --set-default-module
+ Ruby-2.4.1.eb                      --set-default-module
+ tmux-2.5.eb                        --set-default-module
+ Cube-4.3.5-CrayGNU-17.08.eb        --hidden
+ Cube-4.3.5.eb                      --hidden
+ ddt-7.0.5.eb                       --set-default-module
+ IPM-2.0.6-CrayCCE-17.08.eb
+ IPM-2.0.6-CrayGNU-17.08.eb         --set-default-module
+ IPM-2.0.6-CrayIntel-17.08.eb
+ IPM-2.0.6-CrayPGI-17.08.eb
+ OPARI2-2.0.2.eb                    --hidden
+ papi-wrap-1.0-CrayCCE-17.08.eb
+ papi-wrap-1.0-CrayGNU-17.08.eb     --set-default-module
+ papi-wrap-1.0-CrayIntel-17.08.eb
+ PDT-3.24.eb                        --hidden
+ Scalasca-2.3.1-CrayGNU-17.08.eb    --set-default-module
+ Scalasca-2.3.1-CrayIntel-17.08.eb
+ Scalasca-2.3.1-CrayPGI-17.08.eb
+ Score-P-3.1-CrayGNU-17.08.eb       --set-default-module
+ Score-P-3.1-CrayIntel-17.08.eb
+ Score-P-3.1-CrayPGI-17.08.eb

@@ -19,8 +19,8 @@ sources = [SOURCELOWER_TAR_GZ]
 configopts = 'CC="$CC" CXX="$CXX" --with-pic --without-python'
 
 dependencies = [
-    ('zlib', '1.2.8'),
-    ('XZ', '5.2.2'),
+    ('zlib', '1.2.11'),
+    ('XZ', '5.2.3'),
 ]
 
 moduleclass = 'lib'

@@ -18,7 +18,6 @@ patches = ['unixccompiler-Python-2.7.9.patch']
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.8'),
-    ('libreadline', '6.3'),
     ('ncurses', '6.0'),
     ('freetype', '2.6.3'),
     ('libpng', '1.6.23'),
