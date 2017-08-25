@@ -11,10 +11,9 @@ high-performance simulation of large biomolecular systems."""
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 
 sources = ['NAMD_%(version)s_Source.tar.gz']
-patches = ['config.patch']
+patches = ['NAMD-2.12.patch']
 
-prebuildopts  = ' cp $EB_CUSTOM_REPOSITORY/easyconfigs/n/NAMD/CRAY-XC.cray_fftw ./arch;'
-prebuildopts += ' ./config CRAY-XC-intel Eos --with-cray-fftw'
+prebuildopts = ' ./config CRAY-XC-intel Eos --with-cray-fftw'
 prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-smp'
 prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
 prebuildopts += ' cd CRAY-XC-intel && '
