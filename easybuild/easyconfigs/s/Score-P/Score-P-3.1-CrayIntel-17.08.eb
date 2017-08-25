@@ -1,4 +1,6 @@
-easyblock = 'EB_Score_minus_P'
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
 
 name = 'Score-P'
 version = '3.1'

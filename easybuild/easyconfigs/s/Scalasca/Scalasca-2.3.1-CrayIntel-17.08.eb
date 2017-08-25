@@ -9,7 +9,8 @@
 # http://apps.fz-juelich.de/unite/
 ##
 
-easyblock = 'EB_Score_minus_P'
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
 
 name = 'Scalasca'
 version = '2.3.1'

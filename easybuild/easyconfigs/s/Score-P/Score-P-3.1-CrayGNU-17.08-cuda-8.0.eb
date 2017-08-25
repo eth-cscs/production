@@ -1,8 +1,9 @@
-easyblock = 'EB_Score_minus_P'
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
 
 name = 'Score-P'
 version = '3.1'
-versionsuffix = '-cuda-8.0.61'
+versionsuffix = '-cuda-8.0'
 
 homepage = 'http://www.score-p.org'
 description = """The Score-P measurement infrastructure is a highly scalable and
@@ -24,7 +25,7 @@ dependencies = [
     ('OPARI2', '2.0.2', '', True),
     #PR3501 ('OTF2', '2.0', '', True),
     ('papi/5.5.1.2', EXTERNAL_MODULE),
-    ('SIONlib', '1.7.1', '', True),
+    ('SIONlib', '1.7.1'),
     ('PDT', '3.24', '', True),
     ('vampir','9.2.0', '', True),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
