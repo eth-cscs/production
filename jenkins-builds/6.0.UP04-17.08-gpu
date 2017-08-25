@@ -11,6 +11,7 @@
  LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb   --set-default-module
  NAMD-2.12-CrayIntel-17.08-cuda-8.0.eb      --set-default-module
  ParaView-5.4.1-EGL-CrayGNU-17.08.eb        --set-default-module
+ QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb --set-default-module
  Spark-1.6.0.eb                             --set-default-module
  VASP-5.4.4-CrayIntel-17.08-cuda-8.0.eb --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb              --set-default-module
