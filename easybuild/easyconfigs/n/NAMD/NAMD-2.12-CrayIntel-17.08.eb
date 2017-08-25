@@ -11,8 +11,10 @@ high-performance simulation of large biomolecular systems."""
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 
 sources = ['NAMD_%(version)s_Source.tar.gz']
+patches = ['config.patch']
 
-prebuildopts  = ' ./config CRAY-XC-intel.cuda Eos             --with-fftw3'
+prebuildopts  = ' cp $EB_CUSTOM_REPOSITORY/easyconfigs/n/NAMD/CRAY-XC.cray_fftw ./arch;'
+prebuildopts += ' ./config CRAY-XC-intel Eos --with-cray-fftw'
 prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-smp'
 prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
 prebuildopts += ' cd CRAY-XC-intel && '
@@ -21,7 +23,6 @@ builddependencies = [
     ('Charm++', '6.7.1'), 
     ('Tcl', '8.5.9', '-namd',  True),
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
-    #('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
 ]
 

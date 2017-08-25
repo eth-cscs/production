@@ -1,0 +1,16 @@
+#works on Eos with module load fftw/3.3.0.4
+FFTDIR=$(FFTW_DIR)
+FFTINCL=-I$(FFTW_INC)
+FFTLIB=-L$(FFTW_DIR)/lib -lfftw3f
+FFTFLAGS=-DNAMD_FFTW -DNAMD_FFTW_3
+FFT=$(FFTINCL) $(FFTFLAGS)
+
+loaded_modules := $(subst :, ,$(LOADEDMODULES))
+
+module := $(filter cray-fftw/3%,$(loaded_modules))
+ifeq (,$(module))
+  $(error module cray-fftw/3 is not loaded)
+else
+  $(info found module $(module))
+endif
+

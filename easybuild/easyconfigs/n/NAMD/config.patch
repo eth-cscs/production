@@ -1,0 +1,54 @@
+--- NAMD_2.12_Source/config.orig	2017-08-25 11:43:53.492581447 +0200
++++ NAMD_2.12_Source/config	2017-08-25 11:44:12.652627507 +0200
+@@ -132,6 +132,7 @@
+   set use_python = 0
+   set use_fftw = 1
+   set use_fftw3 = 0
++  set use_cray_fftw = 0
+   set use_mkl = 0
+   set use_cuda = 0
+   set use_memopt = 0
+@@ -269,9 +270,13 @@
+       case --with-fftw3:
+         set use_fftw3 = 1
+       breaksw
++      case --with-cray-fftw:
++        set use_cray_fftw = 1
++      breaksw
+       case --without-fftw:
+         set use_fftw = 0
+         set use_fftw3 = 0
++        set use_cray_fftw = 0
+       breaksw
+       case --fftw-prefix:
+         shift
+@@ -285,6 +290,7 @@
+         set use_mkl = 1
+         set use_fftw = 0
+         set use_fftw3 = 0
++        set use_cray_fftw = 0
+       breaksw
+       case --mkl-prefix:
+         shift
+@@ -500,6 +506,12 @@
+         set use_fftw3 = 1
+       endif
+     endif
++    if ( $?FFTW_PREFIX && ! $use_cray_fftw ) then
++      if ( -e $FFTW_PREFIX/include/fftw3.h ) then
++        echo "Using FFTW3 build found in $FFTW_PREFIX"
++        set use_cray_fftw = 1
++      endif
++    endif
+   endif
+ 
+   echo "Writing build options to $BUILD_LINK/Make.config"
+@@ -586,6 +598,8 @@
+     echo 'include .rootdir/arch/$(NAMD_ARCH).mkl' >> Make.config
+   else if ( $use_fftw3 ) then
+     echo 'include .rootdir/arch/$(NAMD_ARCH).fftw3' >> Make.config
++  else if ( $use_cray_fftw ) then
++    echo 'include .rootdir/arch/$(NAMD_ARCH).cray_fftw' >> Make.config
+   else if ( $use_fftw ) echo 'include .rootdir/arch/$(NAMD_ARCH).fftw' >> Make.config
+   endif
+   if ( $use_cuda ) echo 'include .rootdir/arch/$(NAMD_ARCH).cuda' >> Make.config
