@@ -27,7 +27,7 @@ dependencies = [
     ('papi/5.5.1.2', EXTERNAL_MODULE),
     ('SIONlib', '1.7.1'),
     ('PDT', '3.24', '', True),
-    ('vampir','9.2.0', '', True),
+    ('vampir','9.3.0', '', True),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
         # cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12
         # cray-libsci_acc/17.03.1
