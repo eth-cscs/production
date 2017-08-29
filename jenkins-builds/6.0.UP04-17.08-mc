@@ -37,6 +37,8 @@
  Cube-4.3.5-CrayGNU-17.08.eb        --hidden
  Cube-4.3.5.eb                      --hidden
  ddt-7.0.5.eb                       --set-default-module
+ Dimemas-5.3.3.eb                   --set-default-module
+ gperftools-2.6.1.eb                --set-default-module
  IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
