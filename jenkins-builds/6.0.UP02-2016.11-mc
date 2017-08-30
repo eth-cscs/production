@@ -37,7 +37,6 @@
  perftools-cscs-645-nogpu.eb
  perftools-base-cscs-645-loops.eb
  perftools-cscs-645-loops.eb
- pygelf-0.3.1-CrayGNU-2016.11-Python-2.7.12.eb
  QuantumESPRESSO-6.1.0-CrayIntel-2016.11.eb
  QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
  R-3.3.2-CrayGNU-2016.11.eb
