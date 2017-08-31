@@ -17,7 +17,7 @@
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- pygel-0.3.1-CrayGNU-2016.11-Python-2.7.12.eb
+ pygelf-0.3.1-CrayGNU-2016.11-Python-2.7.12.eb
  reframe-2.6.eb
  Ruby-2.3.3.eb
  tmux-2.3.eb
