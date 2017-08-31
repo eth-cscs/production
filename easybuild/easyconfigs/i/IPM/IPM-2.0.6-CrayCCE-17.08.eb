@@ -21,8 +21,8 @@ patches = [ 'IPM-2.0.6-Cray-17.08.patch' ]
 # Installing ploticus-ipm to avoid conflict with the version installed under
 # /apps/common/system/modulefiles/ploticus/'
 dependencies = [
-    ('libunwind', '1.2.1'),
-    ('mxml', '2.10'),
+    ('libunwind', '1.2.1', '', True),
+    ('mxml', '2.10', '', True),
     ('ploticus', '2.42-ipm', '', True),
     ('papi/5.5.1.2', EXTERNAL_MODULE),
 ]
