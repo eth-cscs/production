@@ -1,0 +1,3 @@
+ CP2K-4.1-CrayGNU-17.08.eb --set-default-module
+ QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb --set-default-module
+ VASP-5.4.4-CrayIntel-17.08.eb --set-default-module
