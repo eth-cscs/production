@@ -1,0 +1,37 @@
+easyblock = 'PythonPackage'
+
+name = 'vsc-base'
+version = '2.5.8'
+pyver = '2.7.12'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/vsc-base'
+description = """Base library for Python tools developed by UGent's HPC
+group, including generaloption (option parser) and fancylogger (logging
+functionality)."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = [PYPI_SOURCE]
+
+# install as zipped egg to make sure that tools that use this as a
+# dependency are responsive 
+# use_easy_install = True
+# zipped_egg = True
+
+builddependencies = [('vsc-install', '0.10.25', versionsuffix)]
+dependencies = [
+    ('Python', pyver),
+]
+
+options = {'modulename': 'vsc.utils'}
+
+shortpyver = '.'.join(SYS_PYTHON_VERSION.split('.')[:2])
+sanity_check_paths = {
+#zip:    'files': ['lib/python%(pyver)s/site-packages/vsc_base-%%(version)s-py%(pyver)s.egg' % {'pyver': shortpyver}],
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % shortpyver],
+}
+
+moduleclass = 'tools'

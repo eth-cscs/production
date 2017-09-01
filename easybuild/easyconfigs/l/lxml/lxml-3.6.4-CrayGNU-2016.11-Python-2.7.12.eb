@@ -1,0 +1,28 @@
+easyblock = 'PythonPackage'
+
+name = 'lxml'
+pyver = '2.7.12'
+version = '3.7.2'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://lxml.de/'
+description = """The lxml XML toolkit is a Pythonic binding for the C libraries
+libxml2 and libxslt."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['http://lxml.de/files/']
+sources = [SOURCE_TGZ]
+
+dependencies = [
+    ('Python', pyver),
+    # ('libxml2', '2.9.4'),
+    ('libxslt', '1.1.29'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'lib'

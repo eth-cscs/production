@@ -1,0 +1,64 @@
+easyblock = 'PythonPackage'
+
+name = 'mympingpong'
+version = '0.7.1'
+pyver = '2.7.12'
+pythonsuffix = '-Python-%(pyver)s'
+hdf5suffix = '-parallel18'
+versionsuffix = '%s%s-h5py25-mpi4py131' % (pythonsuffix, hdf5suffix)
+
+# mympingpong/0.7.1-CrayGNU-2016.11-Python-2.7.12-parallel18-h5py25-mpi4py131
+## srun -p debug -n1 -t1 -C gpu mympingpong -h -f $SCRATCH -i 200 -n 200
+#help Usage: mympingpong [options]
+#help   Pingpong related classes and tests, based on mympi
+#help Options:
+#help   -h                show short help message and exit
+#help   -H OUTPUT_FORMAT  show full help message and exit
+#help 
+#help   Main options (configfile section MAIN):
+#help     -a              check for abort signals or maxruntime (type ; def True)
+#help     -g GROUPMODE    set the groupmode (type <type 'str'>)
+#help     -i ITERATIONS   set the number of iterations (type <type 'int'>; def 20)
+#help     -t MAXRUNTIME   set the maximum runtime of pingpong in seconds                        
+#help                       (default will run infinitely) (type <type 'int'>; def 0)
+#help     -m MESSAGESIZE  set the message size in Bytes (type <type 'int'>; def 1024)
+#help     -n NUMBER       set the amount of samples that will be made (type <type 'int'>)
+#help     -f OUTPUT       set the outputdirectory. a file will be written in format             
+#help                       PP<name>-<worldssize>-msg<msgsize>-nr<number>-it<iterations
+#help                     >-<ddmmyy-hhmm>.h5 (type <type 'str'>; def test2)
+#help     -s SEED         set the seed (type <type 'int'>; def 2)
+#help   Debug and logging options (configfile section MAIN):
+#help     -d              Enable debug log mode (def False)
+#help Boolean options support disable prefix to do the inverse of the action, e.g. option --someopt also supports --disable-someopt.
+#help All long option names can be passed as environment variables. Variable name is MYMPINGPONG_<LONGNAME> eg. --some-opt is same as setting
+#help MYMPINGPONG_SOME_OPT in the environment.
+
+homepage = 'https://github.com/hpcugent/mympingpong'
+description = """A mpi4py based random pair pingpong network stress test."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', pyver),
+    ('vsc-base', '2.5.8', pythonsuffix),
+    ('vsc-mympirun', '3.4.3', pythonsuffix),
+    ('mpi4py', '1.3.1', pythonsuffix + '-timed-pingpong'),
+    #('mpi4py', '2.0.0', pythonsuffix + '-timed-pingpong'),
+     ('h5py', '2.5.0', pythonsuffix + hdf5suffix),
+    #('h5py', '2.6.0', pythonsuffix + hdf5suffix),
+    #('h5py', '2.7.0', pythonsuffix + hdf5suffix),
+    ('lxml', '3.7.2', pythonsuffix),
+    ('hwloc', '1.11.5', '', True),
+]
+
+options = {'modulename': 'vsc.mympingpong'}
+
+sanity_check_paths = {
+    'files': ['bin/mympingpong', 'bin/mympingponganalysis'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'perf'

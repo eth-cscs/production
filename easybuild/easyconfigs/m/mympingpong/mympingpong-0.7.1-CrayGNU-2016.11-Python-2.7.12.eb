@@ -1,0 +1,33 @@
+easyblock = 'PythonPackage'
+
+name = 'mympingpong'
+version = '0.7.1'
+pyver = '2.7.12'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/hpcugent/mympingpong'
+description = """A mpi4py based random pair pingpong network stress test."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', pyver),
+    ('vsc-base', '2.5.8', versionsuffix),
+    ('vsc-mympirun', '3.4.3', versionsuffix),
+    ('h5py', '2.6.0', versionsuffix + '-parallel'),
+    ('mpi4py', '2.0.0', versionsuffix + '-timed-pingpong'),
+    ('lxml', '3.7.2', versionsuffix),
+    ('hwloc', '1.11.5', '', True),
+]
+
+options = {'modulename': 'vsc.mympingpong'}
+
+sanity_check_paths = {
+    'files': ['bin/mympingpong', 'bin/mympingponganalysis'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'perf'

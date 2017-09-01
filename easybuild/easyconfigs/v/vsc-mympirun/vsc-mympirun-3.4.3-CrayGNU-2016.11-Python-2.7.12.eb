@@ -1,0 +1,44 @@
+easyblock = 'PythonPackage'
+
+name = 'vsc-mympirun'
+version = '3.4.3'
+pyver = '2.7.12'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/hpcugent/vsc-mympirun'
+description = """VSC-tools is a set of Python libraries and scripts that are
+commonly used within HPC-UGent."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://github.com/hpcugent/vsc-mympirun/archive/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', pyver),
+    ('vsc-base', '2.5.8', versionsuffix),
+    ('vsc-install', '0.10.25', versionsuffix),
+]
+# builddependencies = [('vsc-install', '0.10.25', versionsuffix)]
+
+# we ship something in bin/fake
+modextrapaths = {'PATH': 'bin/fake'}
+
+# can't check for 'import vsc.mympirun' because vsc-base may be installed system-wide
+# options = {'modulename': 'vsc.mympirun'}
+options = {'modulename': 'vsc.utils'}
+
+pyshortver = '.'.join(SYS_PYTHON_VERSION.split('.')[:2])
+sanity_check_paths = {
+    'files': ['bin/mympirun'],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+# sanity_check_commands = ["mympirun --help"]
+## check that timed pingpong routines that are added via the patch are available
+# sanity_check_commands = [
+#    ('cd /tmp; srun -t1 -n1 -C gpu mympirun --help'),
+#]
+# ('srun -t1 -n1 -C gpu python', '-c "from mpi4py.MPI import Comm; import sys; sys.exit((1, 0)[\'PingpongRS\' in dir(Comm)])"'),
+
+moduleclass = 'tools'
