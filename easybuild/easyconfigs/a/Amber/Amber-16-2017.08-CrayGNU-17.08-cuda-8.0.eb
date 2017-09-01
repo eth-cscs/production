@@ -14,8 +14,8 @@ description = 'Assisted Model Building with Energy Refinement'
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = { 'verbose' : False }
-#sources = ['Amber%(version)s.tar.bz2', 'AmberTools%(version)s.tar.bz2']
-sources = ['Amber%(version)s.tar.bz2']
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_BZ2]
 
 dependencies = [ ('bzip2', '1.0.6'),
                  ('zlib', '1.2.11') ]
