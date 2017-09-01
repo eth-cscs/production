@@ -1,0 +1,36 @@
+easyblock = 'ConfigureMake'
+
+name = 'likwid'
+version = '4.3.0'
+checksums = ['a0868ee5f8de1b47ef053480db16577d']
+
+homepage = 'http://code.google.com/p/likwid/'
+description = """Likwid stands for Like I knew what I am doing. This project
+contributes easy to use command line tools for Linux to support programmers in
+developing high performance multi threaded programs."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchainopts = {'pic': True}
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/RRZE-HPC/likwid/archive/']
+patches = ['likwid-%(version)s-config-mk.patch']
+# binutils-devel-2.26.1-9.12.1.x86_64.rpm
+# builddependencies = [('binutils', '2.27-libiberty')]
+# openpower support --> https://github.com/RRZE-HPC/likwid/issues/69
+
+skipsteps = ['configure']
+buildopts = 'PREFIX=%(installdir)s'
+# buildopts = 'CC="$CC" CFLAGS="$CFLAGS -std=c99" PREFIX=%(installdir)s'
+installopts = 'PREFIX=%(installdir)s'
+
+sanity_check_paths = {
+    'files': ["bin/likwid-memsweeper", "bin/likwid-mpirun", "bin/likwid-perfctr",
+              "bin/likwid-perfscope", "bin/likwid-pin", "bin/likwid-powermeter", "bin/likwid-topology",
+              "lib/liblikwidpin.%s" % SHLIB_EXT, "lib/liblikwid.%s" % SHLIB_EXT],
+    'dirs': ["man/man1"]
+}
+
+maxparallel = 1
+
+moduleclass = 'devel'
