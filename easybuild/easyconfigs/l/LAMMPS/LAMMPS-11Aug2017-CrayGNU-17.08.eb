@@ -27,7 +27,7 @@ buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
-    ('Python', '3.6.2'),
+    ('Python', '2.7.13'),
 ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
