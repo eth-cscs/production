@@ -1,1 +1,5 @@
+ IPM-2.0.6-CrayCCE-17.08.eb
+ IPM-2.0.6-CrayGNU-17.08.eb  --set-default-module
+ IPM-2.0.6-CrayIntel-17.08.eb
+ IPM-2.0.6-CrayPGI-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08.eb           --set-default-module
