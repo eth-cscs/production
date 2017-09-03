@@ -12,7 +12,7 @@ analyzing large biomolecular systems using 3-D graphics and built-in scripting."
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-sources = ['/apps/daint/UES/VMD/vmd-1.9.3.bin.LINUXAMD64-CUDA75-OptiX390-OSPRay111p1.text-egl.tar.gz']
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s%(versionsuffix)s.tar.gz']
 
 buildcmd = ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir="%(installdir)s/bin"#g\' configure && '
 buildcmd += ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir="%(installdir)s/lib/#g\' configure && '

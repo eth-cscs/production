@@ -2,7 +2,7 @@ easyblock = 'ConfigureMake'
 
 name = 'hwloc'
 version = '1.11.5'
-
+checksums = ['8f5fe6a9be2eb478409ad5e640b2d3ba']
 homepage = 'http://www.open-mpi.org/projects/hwloc/'
 description = """The Portable Hardware Locality (hwloc) software package provides a portable abstraction
 (across OS, versions, architectures, ...) of the hierarchical topology of modern architectures, including
@@ -18,6 +18,6 @@ sources = [SOURCE_TAR_GZ]
 
 dependencies = [('numactl', '2.0.11')]
 
-configopts = "--enable-libnuma=$EBROOTNUMACTL"
+configopts = "--enable-libnuma=$EBROOTNUMACTL --with-x"
 
 moduleclass = 'system'

@@ -1,0 +1,21 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayPGI'
+version = '17.08'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-pgi module (PE release: August 2017).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-pgi', EXTERNAL_MODULE),
+    ('atp/2.1.1', EXTERNAL_MODULE),
+    ('pgi/17.5.0', EXTERNAL_MODULE),
+    ('cray-mpich/7.6.0', EXTERNAL_MODULE),
+    ('craype/2.5.12', EXTERNAL_MODULE),
+    ('pmi/5.0.12', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'

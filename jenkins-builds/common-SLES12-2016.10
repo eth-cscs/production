@@ -3,8 +3,8 @@
  CMake-3.6.2.eb
  CMake-3.8.1.eb
  ctags-5.8.eb
- ddt-7.0.2.eb
  git-2.11.0.eb
+ git-2.13.1.eb
  HDFView-2.13.0.eb
  hwloc-1.11.5.eb
  idl-84.eb
@@ -17,7 +17,7 @@
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- reframe-2.2.eb
+ reframe-2.6.eb
  Ruby-2.3.3.eb
  tmux-2.3.eb
  vampir-9.2.0.eb

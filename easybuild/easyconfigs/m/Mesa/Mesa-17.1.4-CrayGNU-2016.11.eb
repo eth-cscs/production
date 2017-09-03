@@ -1,0 +1,58 @@
+# contributed by Luca Marsella (CSCS)
+
+# This configuration file builds Mesa for software rendering, not hardware rendering. 
+# This means using at least SSE4.2. It builds the following:
+# - llvmpipe: the high-performance Gallium LLVM driver
+# - swr: Intel's OpenSWR
+# It will try to use the llvmpipe by default. To select swr instead, set the following:
+# GALLIUM_DRIVER=swr
+
+easyblock = 'ConfigureMake'
+
+name = 'Mesa'
+version = '17.1.4'
+
+homepage = 'http://www.mesa3d.org/'
+description = """Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+# swr detects and builds parts specific for AVX and AVX2. If we use
+# -xHost, this always gets overwritten and will fail.
+toolchainopts = {'optarch': False}
+
+sources = [SOURCELOWER_TAR_XZ]
+source_urls = [
+    'https://mesa.freedesktop.org/archive'
+]
+
+builddependencies = [
+    ('flex', '2.6.0'),
+    ('Bison', '3.0.4'),
+    ('Autotools', '20150215'),
+    ('Mako', '1.0.4', '-Python-2.7.12'),
+    ('libxml2', '2.9.4', '-Python-2.7.12'),
+]
+
+dependencies = [
+    ('zlib', '1.2.8'),
+    ('nettle', '3.2'),
+    ('libdrm', '2.4.81'),
+    ('libxshmfence', '1.2'),
+    ('LLVM', '4.0.1'),
+]
+
+# GLU is not part anymore of the Mesa library
+configopts = " --enable-gallium-osmesa --with-osmesa-bits=32 --with-gallium-drivers='swrast,swr' "
+configopts += " --enable-glx=dri --enable-llvm --enable-texture-float "
+
+sanity_check_paths = {
+    'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/gl_mangle.h', 
+              'include/GL/glx.h', 'include/GL/glx_mangle.h', 'include/GL/osmesa.h', 
+              'include/GLES/gl.h', 'include/GLES2/gl2.h', 'include/GLES3/gl3.h',
+              'lib/libGL.%s' % SHLIB_EXT, 'lib/libOSMesa.%s' % SHLIB_EXT, 
+              'lib/libGLESv1_CM.%s' % SHLIB_EXT, 'lib/libGLESv2.%s' %SHLIB_EXT ],
+    'dirs': ['include/GL','lib/dri']
+}
+
+moduleclass = 'vis'

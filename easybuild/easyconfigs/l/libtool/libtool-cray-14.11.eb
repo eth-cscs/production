@@ -1,0 +1,45 @@
+# @authors: gppezzi, victorusu (CSCS)
+
+easyblock = "ConfigureMake"
+
+name = 'libtool'
+version = 'cray-14.11'
+
+commit = 'a1cb49a1dbec3f308ce18413d26b94735a379692'
+
+homepage = 'https://github.com/Cray/libtool'
+description = """Mirror of http://git.savannah.gnu.org/cgit/libtool.git with
+support for the Cray Compiling Environment (CCE)"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['https://github.com/Cray/libtool/archive/']
+sources = ['%s.tar.gz' % commit]
+
+unpack_options = '--strip 1'
+
+dependencies = [
+#    ('Autotools', '201602'),
+# rhel/7.3 provides:
+#   autoconf-2.69-11.el7.noarch
+#   automake-1.13.4-3.el7.noarch
+#   libtool-2.4.2-22.el7_3.x86_64
+# sles/12 provides:
+#   autoconf-2.69-9.71.noarch
+#   automake-1.13.4-6.2.noarch
+#   libtool-2.4.2-14.60.x86_64
+    ('help2man', '1.47.4'),
+]
+
+# EB does not support 'git clone' so we delete the contents and start from a clean folder
+preconfigopts  = 'find . -mindepth 1 -delete && ' 
+preconfigopts += 'git clone https://github.com/Cray/libtool.git . && '
+preconfigopts += 'git checkout %s && ' % commit
+preconfigopts += './bootstrap && '
+
+sanity_check_paths={
+    'files': ['lib/libltdl.so'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'lib'
