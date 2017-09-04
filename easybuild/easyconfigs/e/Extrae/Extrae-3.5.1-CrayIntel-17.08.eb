@@ -16,7 +16,7 @@ toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 toolchainopts = {'verbose': False}
 source_urls = ['https://ftp.tools.bsc.es/extrae']
 sources = ['extrae-%(version)s-src.tar.bz2']
-checksums = ['1181c42c821be1cefefae2186ac32bf7']
+checksums = ['752395edd211c3f5efcb5cd985795712']
 
 dependencies = [
     ('zlib', '1.2.11'),
