@@ -1,4 +1,3 @@
-<<<<<<< HEAD
  Boost-1.65.0-CrayGNU-17.08-Python-3.6.2.eb
  Boost-1.65.0-CrayGNU-17.08-cray-python-17.06.1.eb  --set-default-module
  Boost-1.65.0-CrayGNU-17.08.eb
