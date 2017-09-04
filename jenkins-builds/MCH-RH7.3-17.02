@@ -26,3 +26,4 @@
  Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb    
  rstudio-1.0.143.eb                             --prefix=$APPS/UES/RH7.3_generic/easybuild
  vampir-9.3.0.eb --set-default-module           --prefix=$APPS/UES/RH7.3_generic/easybuild
+ Vim-8.0.eb      --set-default-module           --prefix=$APPS/UES/RH7.3_generic/easybuild
