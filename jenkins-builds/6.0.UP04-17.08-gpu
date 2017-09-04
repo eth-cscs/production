@@ -1,8 +1,15 @@
- ddt-7.0.5.eb                       --set-default-module
+ Charm++-6.8.0-changa-CrayGNU-17.08-cuda-8.0.eb     --hidden --set-default-module
+ Charm++-6.8.0-changa-CrayGNU-17.08.eb              --hidden
+ Charm++-6.8.0-changa-CrayIntel-17.08-cuda-8.0.eb   --hidden
+ Charm++-6.8.0-changa-CrayIntel-17.08.eb            --hidden
+ ddt-7.0.5.eb                                       --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-parallel-1.10.eb    --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-1.10.eb
  IPM-2.0.6-CrayCCE-17.08.eb
- IPM-2.0.6-CrayGNU-17.08.eb  --set-default-module
+ IPM-2.0.6-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
- LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb   --set-default-module
+ LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb         --set-default-module
+ vampir-9.3.0.eb                    --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb

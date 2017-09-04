@@ -5,7 +5,8 @@ homepage = 'http://www.vampir.eu'
 description = """ Vampir provides a manageable framework for analysis, which
 enables developers to quickly display program behavior at any level of detail.
 Detailed performance data obtained from a parallel program execution can be
-analyzed with a collection of different performance views."""
+analyzed with a collection of different performance views.""" 
+
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 modtclfooter = """
