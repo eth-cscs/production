@@ -1,4 +1,4 @@
-# Contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+# Contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CMake'
