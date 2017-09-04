@@ -1,0 +1,32 @@
+easyblock = 'Bundle'
+
+name = 'six'
+version = '1.10.0'
+versionsuffix = '-cray-python-17.06.1'
+
+homepage = 'https://pypi.python.org/pypi/six/'
+description = """Python 2 and 3 compatibility utilities"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = { 'verbose' : False }
+# this is a bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+]
+
+exts_list = [
+    (name, version, {
+     'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+     }),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python2.7/site-packages'],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python2.7/site-packages']}
+
+moduleclass = 'lib'
