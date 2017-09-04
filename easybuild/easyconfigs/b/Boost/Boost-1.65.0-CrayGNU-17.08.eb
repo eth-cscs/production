@@ -1,7 +1,7 @@
 easyblock = 'boostcray'
 
 name = 'Boost'
-version = '1.63.0'
+version = '1.65.0'
 
 homepage = 'http://www.boost.org/'
 description = """Boost provides free peer-reviewed portable C++ source
