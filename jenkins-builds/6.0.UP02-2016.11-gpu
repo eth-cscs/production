@@ -68,6 +68,7 @@
  vampir-9.3.0.eb --set-default-module
  VASP-5.4.1-CrayIntel-2016.11.eb
  VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
+ Vim-8.0.eb
  Visit-2.12.0-CrayGNU-2016.11.eb
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
