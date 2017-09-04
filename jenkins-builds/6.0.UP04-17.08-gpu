@@ -1,4 +1,6 @@
  ddt-7.0.5.eb                       --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-parallel-1.10.eb    --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-1.10.eb
  IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
