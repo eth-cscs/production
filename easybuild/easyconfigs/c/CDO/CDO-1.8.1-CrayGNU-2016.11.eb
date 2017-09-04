@@ -1,4 +1,4 @@
-# Updated by @gppezzi @jgphpc
+# contributed by Guilherme Peretti Pezzi, Jean-Guillaume Piccinali and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
@@ -10,8 +10,7 @@ description = """CDO is a collection of command line Operators to manipulate and
 toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchainopts = {'opt': True, 'pic': True}
 
-sources = ['cdo-%(version)s.tar.gz']
-source_urls = ['https://code.zmaw.de/attachments/download/14271/']
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
 checksums = [ '54498438de788f245d47499efad7966c' ]
 
 # do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
