@@ -10,7 +10,7 @@
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb         --set-default-module
- Python-bare/.3.6.2                                 --hidden
+ Python-bare-3.6.2.eb                               --hidden
  vampir-9.3.0.eb                    --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
