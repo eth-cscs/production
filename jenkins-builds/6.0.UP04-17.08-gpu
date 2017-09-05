@@ -13,7 +13,6 @@
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
- papi-wrap-1.0-CrayPGI-17.08.eb
  Python-bare-3.6.2.eb                               --hidden
  reframe-2.6.eb                                     --set-default-module
  Scalasca-2.3.1-CrayGNU-17.08.eb                    --set-default-module
