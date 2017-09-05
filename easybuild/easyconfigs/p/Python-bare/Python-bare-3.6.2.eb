@@ -30,8 +30,9 @@ modextravars = {'EBROOTPYTHON': '%(installdir)s'}
 # order is important!
 # package versions updated Aug/2017
 exts_list = [
-    ('setuptools', '36.2.7', {
+    ('setuptools', '36.4.0', {
         'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
+        'source_tmpl': 'setuptools-%(version)s.zip'
     }),
     ('pip', '9.0.1', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
