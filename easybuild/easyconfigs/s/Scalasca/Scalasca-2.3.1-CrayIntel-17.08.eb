@@ -1,0 +1,58 @@
+##
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013-2016 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+#             Markus Geimer <m.geimer@fz-juelich.de>
+# License::   3-clause BSD
+#
+# This work is based on experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = 'Scalasca'
+version = '2.3.1'
+
+homepage = 'http://www.scalasca.org/'
+description = """Scalasca is a software tool that supports the performance
+optimization of parallel programs by measuring and analyzing their runtime
+behavior. The analysis identifies potential performance bottlenecks -- in
+particular those concerning communication and synchronization -- and offers
+guidance in exploring their causes."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/scalasca/%(version_major_minor)s/dist']
+checksums = [ 'a83ced912b9d2330004cb6b9cefa7585' ]
+patches = [ 'Scalasca-2.3.1.patch' ]
+
+dependencies = [
+    ('libunwind',   '1.2.1', '', True),
+    ('Cube',        '4.3.5', '', True),
+    ('OPARI2',      '2.0.2', '', True),
+    ('OTF2',        '2.0', '', True),
+    ('SIONlib',     '1.7.1'),
+    ('PDT',         '3.24', '', True),
+    ('vampir',      '9.3.0', '', True),
+    ('papi/5.5.1.2', EXTERNAL_MODULE),
+]
+
+configopts  = ' --with-machine-name=pizdaint'
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-cube=$EBROOTCUBE/bin' 
+configopts += ' --disable-gui'
+
+sanity_check_paths = {
+    'files': ["bin/scalasca", "lib/backend/libpearl.replay.a"],
+    'dirs': [],
+}
+
+# Ensure that local metric documentation is found by Cube GUI
+modextrapaths = {'CUBE_DOCPATH': 'share/doc/scalasca/patterns'}
+modextrapaths = {'PATH': 'bin/backend'}
+
+moduleclass = 'perf'
