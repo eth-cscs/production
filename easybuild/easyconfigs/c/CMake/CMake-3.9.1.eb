@@ -1,8 +1,8 @@
-# Contributed by Luca Marsella (CSCS)
+# Contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CMake'
-version = "3.8.1"
+version = "3.9.1"
 
 homepage = 'http://www.cmake.org'
 description = """CMake, the cross-platform, open-source build system.
