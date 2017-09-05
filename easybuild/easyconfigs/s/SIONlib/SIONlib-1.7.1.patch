@@ -1,0 +1,80 @@
+diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
+--- sionlib.ori/config/determine-cc.sh	2016-11-23 14:11:31.000000000 +0100
++++ sionlib/config/determine-cc.sh	2017-08-23 18:19:35.510745000 +0200
+@@ -9,33 +9,36 @@
+ fi
+ 
+ case "$CC" in
+-  /opt/cray/craype/* | /opt/cray/xt*)
++  /opt/cray/craype/* | /opt/cray/pe/craype/* | /opt/cray/xt*)
+       echo "$CC is probably a Cray XT compiler wrapper" ;;
+   *)
+       echo "Warning: $CC doesn't seem to be a Cray XT compiler wrapper!" ;;
+ esac
+ 
+-if [ `$CC -V 2>&1 | grep -c ^Cray` -gt 0 ]; then
+-  COMP=cce
+-  COMPVER=`$CC -V 2>&1 | grep ^Cray | cut -d\  -f 5`
+-  echo "Got CCE ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^Intel` -gt 0 ]; then
+-  COMP=intel
+-  COMPVER=`$CC -V 2>&1 | grep ^Intel | sed -e 's/^.*Version //' | cut -d\  -f 1`
+-  echo "Got Intel ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^pg` -gt 0 ]; then
+-  COMP=pgi
+-  COMPVER=`$CC -V 2>&1 | grep ^pg | cut -d\  -f 2`
+-  echo "Got PGI ${COMPVER} compiler"
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^PathScale` -gt 0 ]; then
+-  COMP=pathscale
+-  COMPVER=`$CC -v dummy.c 2>&1 | grep ^PathScale | sed -e 's/^.*Version //'`
+-  echo "Got PathScale $COMPVER compiler"
+-# NB: since PathScale includes GCC, test for GCC last
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^gcc` -gt 0 ]; then
+-  COMP=gnu
+-  COMPVER=`$CC -dumpversion`
+-  echo "Got GNU $COMPVER compiler"
+-else
+-  echo "'$CC' compiler not identified!"
+-fi
++ccv=`$CC -V 2>&1`
++case "$PE_ENV" in 
++
++    CRAY) 
++        COMP=cce; 
++        COMPVER=`echo "$ccv" |grep ^Cray |cut -d" " -f5` ;
++        echo "Got $COMP $COMPVER compiler";;
++    INTEL) 
++        COMP=intel; 
++        COMPVER=`echo "$ccv" |grep ^Intel |sed -e 's/^.*Version //' |cut -d" " -f1`;
++        echo "Got $COMP $COMPVER compiler";;
++    PGI) 
++        COMP=pgi;
++        COMPVER=`echo "$ccv" |grep ^pg |cut -d" " -f2`;
++        echo "Got $COMP $COMPVER compiler";;
++    GNU) 
++        COMP=gnu;
++        COMPVER=`$CC -dumpversion`;
++        echo "Got $COMP $COMPVER compiler";;
++    *) 
++        echo "CC=$CC compiler not identified!";
++        echo "PE_ENV=$PE_ENV";
++        echo "COMP=$COMP COMPVER=$COMPVER";
++        echo "ccv=$ccv";;
++esac
++
++
+diff -Naur sionlib.ori/configure sionlib/configure
+--- sionlib.ori/configure	2016-11-25 09:36:30.000000000 +0100
++++ sionlib/configure	2017-08-23 18:19:37.349492704 +0200
+@@ -378,8 +378,9 @@
+              pgi) CFGMSG="Cray XT with PGI ${COMPVER} compilers"
+                   MDB=Makefile.defs.crayxt-pgi-be
+                   ;;
+-             *)   ErrorAndExit "Unexpected Cray XT PrgEnv-compiler '${COMP}'"
+-                  ;;
++             *)   
++                  echo "COMP=$COMP COMPVER=$COMPVER"
++                  ErrorAndExit "Unexpected Cray XT PrgEnv-compiler '${COMP}'"       ;;
+            esac
+            MD=${MDB}
+            MF=Makefile.cross
