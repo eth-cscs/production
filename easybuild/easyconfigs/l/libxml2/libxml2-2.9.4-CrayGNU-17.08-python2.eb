@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = 'libxml2'
 version = "2.9.4"
-versionsuffix = "-python2.7"
+versionsuffix = "-python2"
 
 homepage = 'http://xmlsoft.org/'
 description = """Libxml2 is the XML C parser and 
@@ -16,10 +16,11 @@ toolchainopts = {'pic': True}
 source_urls = ['http://xmlsoft.org/sources/']
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = 'CC="$CC" CXX="$CXX" --with-pic --with-python-install-dir="%(installdir)s/lib/python2.7/site-packages" --with-zlib=$EBROOTZLIB'
+configopts = 'CC="$CC" CXX="$CXX" --with-pic --with-python-install-dir="$EBROOTPYEXTENSIONS/lib/python2.7/site-packages" --with-zlib=$EBROOTZLIB'
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('PyExtensions', '2.7.13'),
     ('zlib', '1.2.11')
 ]
 
@@ -27,8 +28,6 @@ sanity_check_paths = {
     'files': [('lib/libxml2.a', 'lib64/libxml2.a'), ('lib/libxml2.%s' % SHLIB_EXT, 'lib64/libxml2.%s' % SHLIB_EXT)],
     'dirs': ['bin', 'include/libxml2/libxml'],
 }
+#sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
 
-sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
-
-modextravars = { 'PYTHONPATH':'%(installdir)s/lib' }
 moduleclass = 'lib'
