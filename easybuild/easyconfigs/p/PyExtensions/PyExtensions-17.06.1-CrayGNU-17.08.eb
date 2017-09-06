@@ -8,48 +8,53 @@ homepage = 'https://github.com/eth-cscs/production'
 description = """Bundle of Python packages based on cray-python"""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+#toolchainopts = {'pic': True}
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
-    ('bzip2', '1.0.6'),
-    ('zlib', '1.2.11'),
-    ('libreadline', '7.0'),
-    ('ncurses', '6.0'),
-    ('freetype', '2.8'),
-    ('libpng', '1.6.30'),
-    ('SQLite', '3.20.0'),
-    ('Tk', '8.6.7'),
-    ('GMP', '6.1.2'),
+#    ('bzip2', '1.0.6'),
+#    ('zlib', '1.2.11'),
+#    ('libreadline', '7.0'),
+#    ('ncurses', '6.0'),
+#    ('freetype', '2.8'),
+#    ('libpng', '1.6.30'),
+#    ('SQLite', '3.20.0'),
+#    ('Tk', '8.6.7'),
+#    ('GMP', '6.1.2'),
 ]
 
-osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
+#osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
+
+# rpath is needed for buiding TensorFlow
+#configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
+
+#exts_defaultclass = 'PythonPackage'
+
+postinstallcmds = [
+    'pip2 install --target="%(installdir)/lib/python2.7/site-packages" Cython six matplotlib pandas',
+    'pip3 install --target="%(installdir)/lib/python3.5/site-packages" Cython six matplotlib pandas',
+]
+#exts_list = [
+#    ('Cython', '0.25.2', {
+#        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+#    }),
+#    ('six', '1.10.0', {
+#        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+#    }),
+#    ('matplotlib', '2.0.2', {
+#        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+#    }),
+#    ('pandas', '0.20.3', {
+#        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+#    }),
+#]
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 
 ## enviroment variable to use package repository with pip
 #modextravars = {
 #    'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
 #    'SSL_CERT_FILE':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem',
 #}
-
-# rpath is needed for buiding TensorFlow
-configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
-
-exts_defaultclass = 'PythonPackage'
-
-exts_list = [
-    ('Cython', '0.25.2', {
-        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
-    }),
-    ('six', '1.10.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
-    }),
-    ('matplotlib', '2.0.2', {
-        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
-    }),
-    ('pandas', '0.20.3', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
-    }),
-]
-
-modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 
 moduleclass = 'tools'
