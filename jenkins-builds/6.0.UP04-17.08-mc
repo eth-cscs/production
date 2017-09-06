@@ -18,3 +18,4 @@
  Scalasca-2.3.1-CrayGNU-17.08.eb                    --set-default-module
  Scalasca-2.3.1-CrayIntel-17.08.eb
  Scalasca-2.3.1-CrayPGI-17.08.eb
+ Visit-2.12.3-CrayGNU-17.08.eb                      --set-default-module
