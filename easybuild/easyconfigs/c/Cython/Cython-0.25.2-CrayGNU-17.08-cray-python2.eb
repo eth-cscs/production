@@ -1,0 +1,28 @@
+easyblock = 'PythonPackage'
+
+name = 'Cython'
+version = '0.25.2'
+versionsuffix = '-cray-python2'
+pyv = '2.7'
+
+homepage = 'https://pypi.python.org/pypi/Cython/'
+description = """The Cython language makes writing C extensions for the Python
+language as easy as Python itself.  Cython is a source code translator based on
+the well-known Pyrex, but supports more cutting edge functionality and
+optimizations."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = { 'verbose' : False }
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [('cray-python/17.06.1', EXTERNAL_MODULE),]
+
+sanity_check_paths = {
+    'files': ['bin/cython'],
+    # this fails:
+    #'dirs': ['lib/python%(pyv)s/site-packages/%(name)s-%(version)s-py%(pyv)s-linux-x86_64.egg'],
+    'dirs': ['lib/python2.7/site-packages/Cython-0.25.2-py2.7-linux-x86_64.egg'],
+}
+
+moduleclass = 'lang'
