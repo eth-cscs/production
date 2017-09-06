@@ -1,0 +1,85 @@
+diff -Nru magma-2.2.0.orig/Makefile magma-2.2.0/Makefile
+--- magma-2.2.0.orig/Makefile	2016-11-21 02:21:13.000000000 +0100
++++ magma-2.2.0/Makefile	2016-11-27 20:15:38.323164287 +0100
+@@ -4,7 +4,7 @@
+ # Users should make all changes in make.inc
+ # It should not be necesary to change anything in here.
+ 
+-include make.inc
++include make.inc-examples/make.inc.openblas
+ 
+ # defaults if nothing else is given in make.inc
+ CC         ?= cc
+@@ -79,7 +79,7 @@
+     GPU_TARGET += sm50 sm52
+ endif
+ ifneq ($(findstring Pascal, $(GPU_TARGET)),)
+-    GPU_TARGET += sm60 sm61
++    GPU_TARGET += sm60
+ endif
+ 
+ # Next, add compile options for specific smXX
+diff -Nru magma-2.2.0.orig/make.inc-examples/make.inc.openblas magma-2.2.0/make.inc-examples/make.inc.openblas
+--- magma-2.2.0.orig/make.inc-examples/make.inc.openblas	2016-11-21 02:20:04.000000000 +0100
++++ magma-2.2.0/make.inc-examples/make.inc.openblas	2016-11-27 20:11:35.849534285 +0100
+@@ -15,10 +15,10 @@
+ # --------------------
+ # programs
+ 
+-CC        = gcc
+-CXX       = g++
++#CXX       = CC # Variable already defined by EasyBuild
++##CC        = cc # Variable already defined by EasyBuild
+ NVCC      = nvcc
+-FORT      = gfortran
++FORT      = $(F90)
+ 
+ ARCH      = ar
+ ARCHFLAGS = cr
+@@ -37,11 +37,12 @@
+ # can be commented out if making only static library.
+ FPIC      = -fPIC
+ 
+-CFLAGS    = -O3 $(FPIC) -DNDEBUG -DADD_ -Wall -fopenmp
+-FFLAGS    = -O3 $(FPIC) -DNDEBUG -DADD_ -Wall -Wno-unused-dummy-argument
+-F90FLAGS  = -O3 $(FPIC) -DNDEBUG -DADD_ -Wall -Wno-unused-dummy-argument -x f95-cpp-input
+-NVCCFLAGS = -O3         -DNDEBUG -DADD_       -Xcompiler "$(FPIC)"
+-LDFLAGS   =     $(FPIC)                       -fopenmp
++CFLAGS += -DADD_ -DMAGMA_SETAFFINITY
++CXXFLAGS += -DADD_ -DMAGMA_SETAFFINITY
++FFLAGS += -DADD_ -Wall -Wno-unused-dummy-argument
++F90FLAGS += -DADD_ -Wall -Wno-unused-dummy-argument -x f95-cpp-input
++NVCCFLAGS = -O3         -DADD_       -Xcompiler "-fno-strict-aliasing $(FPIC)"
++LDFLAGS   =     $(FPIC)
+ 
+ # C++11 (gcc >= 4.7) is not required, but has benefits like atomic operations
+ CXXFLAGS := $(CFLAGS) -std=c++11
+@@ -52,10 +53,7 @@
+ # libraries
+ 
+ # gcc with OpenBLAS (includes LAPACK)
+-LIB       = -lopenblas
+-
+-LIB      += -lcublas -lcusparse -lcudart -lcudadevrt
+-
++LIB       = -lcublas -lcusparse
+ 
+ # --------------------
+ # directories
+@@ -63,10 +61,12 @@
+ # define library directories preferably in your environment, or here.
+ #OPENBLASDIR ?= /usr/local/openblas
+ #CUDADIR ?= /usr/local/cuda
+--include make.check-openblas
+--include make.check-cuda
++#-include make.check-openblas
++#-include make.check-cuda
++
++CUDADIR=$(EBROOTCUDA)
+ 
+-LIBDIR    = -L$(CUDADIR)/lib64 \
+-            -L$(OPENBLASDIR)/lib
++LIBDIR    = -L$(CUDADIR)/lib64 
+ 
+ INC       = -I$(CUDADIR)/include
++prefix    = $(EBINSTALLPREFIX)

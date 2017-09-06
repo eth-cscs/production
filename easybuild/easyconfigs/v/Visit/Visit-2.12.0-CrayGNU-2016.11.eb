@@ -54,7 +54,7 @@ toolchainopts = {'usempi': True, 'verbose': False}
 #sources = ['visit2.12.0.tar.gz']
 
 # In order to use the pre-downloaded version use the source below
-sources = [SOURCELOWER_TAR_GZ]
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
 
 srcdir='../src'
 preconfigopts  = ' export PAR_COMPILER=$CC; '
@@ -64,8 +64,8 @@ preconfigopts += ' --system-cmake --h5part --no-pyside --system-python --alt-boo
 preconfigopts += ' --vtk --mesa --parallel --hdf5 --silo --szip --makeflags -j20 '
 preconfigopts += ' --xdmf '
 preconfigopts += ' --netcdf --qt <<< "yes" && '
-preconfigopts += ' sed -i /VISIT_MPI_COMPILER/d $HOSTNAME.cmake; '
-preconfigopts += ' cp $HOSTNAME.cmake ../visit%(version)s/src/config-site; '
+preconfigopts += ' sed -i /VISIT_MPI_COMPILER/d $(hostname).cmake; '
+preconfigopts += ' cp $(hostname).cmake ../visit%(version)s/src/config-site; '
 preconfigopts += ' mkdir build; '
 preconfigopts += ' cd build; '
 
