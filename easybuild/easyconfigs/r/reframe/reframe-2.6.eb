@@ -13,7 +13,7 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 sources = [ ('archive.tar.gz?ref=v%(version)s', "tar xfz %s" )]
 source_urls = ['https://madra.cscs.ch/scs/reframe/repository/']
 
-dependencies = [('Python-bare', '3.5.2')]
+dependencies = [('Python-bare', '3.6.2')]
 
 keepsymlinks = True
 
