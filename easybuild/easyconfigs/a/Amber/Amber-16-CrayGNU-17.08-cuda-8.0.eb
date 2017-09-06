@@ -4,10 +4,9 @@
 easyblock = 'MakeCp'
 
 name = 'Amber'
-version = '16-2017.08'
+version = '16'
 cudaversion = '8.0'
 versionsuffix = '-cuda-%s' % cudaversion
-amberversion = '16'
 
 homepage = 'http://ambermd.org/'
 description = 'Assisted Model Building with Energy Refinement'
@@ -15,7 +14,8 @@ description = 'Assisted Model Building with Energy Refinement'
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = { 'verbose' : False }
 
-sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_BZ2]
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(name)s16.tar.bz2',
+           '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/AmberTools16.tar.bz2']
 
 dependencies = [ ('bzip2', '1.0.6'),
                  ('zlib', '1.2.11') ]
@@ -29,9 +29,9 @@ builddependencies = [
 
 buildininstalldir = True
 
-prebuildopts = 'cd .. && mv amber%s/* . && ' % amberversion
+prebuildopts = 'cd .. && mv amber%s/* . && ' % version
 prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HOME;'
-prebuildopts += './configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N;'
+prebuildopts += './configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< Y;'
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 
 buildopts = 'install'
