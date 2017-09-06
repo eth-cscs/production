@@ -1,7 +1,7 @@
 # contributed by Luca Marsella (CSCS)
 name = 'Boost'
 version = '1.65.0'
-versionsuffix = '-cray-python-17.06.1-3'
+versionsuffix = '-cray-python2'
 
 homepage = 'http://www.boost.org/'
 description = """Boost provides free peer-reviewed portable C++ source
@@ -13,8 +13,8 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = ['https://sourceforge.net/projects/%(namelower)s/files/%(namelower)s/%(version)s']
 
-configopts  = ' --with-python=$EBROOTCRAYPYTHON/bin/python3 --with-python-version=3.5'
-configopts += ' --with-python-root=$EBROOTCRAYPYTHON/lib/python3.5'
+configopts  = ' --with-python=$EBROOTCRAYPYTHON/bin/python2 --with-python-version=2.7'
+configopts += ' --with-python-root=$EBROOTCRAYPYTHON/lib/python2.7'
 
 dependencies = [
     ('bzip2', '1.0.6'),
