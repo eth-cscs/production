@@ -22,11 +22,12 @@ exts_list = [
     ('Jinja2', '2.8', {
         'source_urls': ['https://pypi.python.org/packages/source/J/Jinja2'],
     }),
-    ('requests', '2.11.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/r/requests'],
+    ('requests', '2.13.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
     }),
-    ('tornado', '4.4.2', {
-        'source_urls': ['https://pypi.python.org/packages/source/t/tornado'],
+    ('tornado', '4.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/df/42/a180ee540e12e2'\
+                        'ec1007ac82a42b09dd92e5461e09c98bf465e98646d187/'],
     }),
     (name, version, {
         'source_urls': ['https://pypi.python.org/packages/source/b/bokeh'],
