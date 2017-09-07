@@ -30,3 +30,4 @@
  Score-P-3.1-CrayPGI-17.08.eb
  Spark-1.6.0.eb                                     --set-default-module
  vampir-9.3.0.eb                                    --set-default-module
+ VASP-5.4.4-CrayIntel-17.08.eb                                              --set-default-module
