@@ -59,9 +59,10 @@ srcdir='../src'
 preconfigopts  = ' export PAR_COMPILER=$CC; '
 preconfigopts += ' export PAR_INCLUDE="-I$MPICH_DIR/include"; '
 preconfigopts += ' ./src/svn_bin/build_visit --console --no-visit '
-preconfigopts += ' --system-cmake --h5part --no-pyside --system-python --alt-boost-dir $EBROOTBOOST '
+preconfigopts += ' --system-cmake --h5part --no-pyside --system-python '
 preconfigopts += ' --vtk --mesa --parallel --hdf5 --silo --szip --makeflags -j20 '
-preconfigopts += ' --xdmf '
+#preconfigopts += ' --alt-boost-dir $EBROOTBOOST '
+#preconfigopts += ' --xdmf '
 preconfigopts += ' --netcdf --qt <<< "yes" && '
 preconfigopts += ' sed -i /VISIT_MPI_COMPILER/d `hostname`.cmake; '
 preconfigopts += ' cp `hostname`.cmake ../visit%(version)s/src/config-site; '
@@ -81,14 +82,16 @@ configopts += ' ${CRAY_PMI_POST_LINK_OPTS}"; '
 prebuildopts  = ' cd build; '
 buildopts = 'install'
 
-dependencies = [ ('Python', '2.7.13'),
-                 ('Boost', '1.63.0', '-Python-2.7.13'), 
-                 ('libxml2', '2.9.4', '-Python-2.7.13') ]
+#dependencies = [
+#  ('cray-python/17.06.1', EXTERNAL_MODULE),
+# ('Boost', '1.63.0', '-Python-2.7.13'), 
+# ('libxml2', '2.9.4' ) 
+#]
 
 builddependencies = [ ('CMake', '3.6.0', '', True) ]
 
-# On daint the build sometimes fail when using more than 16 cores. Not sure why
-parallel = 16
+# On dom the build sometimes fail when using too many parallel tasks. With 2, it takes about 1 hour, but it works fine
+parallel = 2
 skipsteps = ['install']
 
 files_to_copy = []
