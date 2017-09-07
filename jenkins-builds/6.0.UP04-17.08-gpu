@@ -1,4 +1,4 @@
- Amber/16-CrayGNU-17.08-cuda-8.0
+ Amber/16-CrayGNU-17.08-cuda-8.0 --set-default-module
  Amber/16-CrayGNU-17.08-parallel
  Amber/16-CrayGNU-17.08-serial
  Boost-1.65.0-CrayGNU-17.08-python2.eb

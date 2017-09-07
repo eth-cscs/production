@@ -1,4 +1,4 @@
- Amber/16-CrayGNU-17.08-parallel
+ Amber/16-CrayGNU-17.08-parallel --set-default-module
  Amber/16-CrayGNU-17.08-serial
  Boost-1.65.0-CrayGNU-17.08-python2.eb
  Boost-1.65.0-CrayGNU-17.08-python3.eb         --set-default-module
