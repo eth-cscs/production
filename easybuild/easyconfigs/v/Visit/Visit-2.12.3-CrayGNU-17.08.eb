@@ -75,7 +75,8 @@ configopts += ' -DVISIT_INSTALL_THIRD_PARTY=ON '
 configopts += ' -DVISIT_MPI_LIBS="mpich;pmi" '
 configopts += ' -DMPI_CXX_COMPILER=$CXX '
 configopts += ' -DMPI_C_COMPILER=$CC '
-configopts += ' -DVISIT_PARALLEL_CXXFLAGS="-DPARALLEL -DMPICH_IGNORE_CXX_SEEK -I${CRAY_MPICH_DIR}/include"'
+configopts += ' -DVISIT_PARALLEL_CXXFLAGS="-DPARALLEL -DMPICH_IGNORE_CXX_SEEK '
+configopts += ' -I${CRAY_MPICH_DIR}/include" '
 configopts += ' -DVISIT_PARALLEL_LINKER_FLAGS="-L${CRAY_MPICH_DIR}/lib '
 configopts += ' ${CRAY_PMI_POST_LINK_OPTS}"; '
 
@@ -88,7 +89,7 @@ buildopts = 'install'
 # ('libxml2', '2.9.4' ) 
 #]
 
-builddependencies = [ ('CMake', '3.6.0', '', True) ]
+builddependencies = [('CMake', '3.9.1', '', True)]
 
 # On dom the build sometimes fail when using too many parallel tasks. With 2, it takes about 1 hour, but it works fine
 parallel = 2

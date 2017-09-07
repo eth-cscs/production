@@ -4,7 +4,8 @@ name = 'embree'
 version = '2.16.5'
 
 homepage = 'https://embree.github.io/'
-description = "Embree is a collection of high-performance ray tracing kernels, developed at Intel."
+description = """Embree is a collection of high-performance ray tracing
+kernels, developed at Intel."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
