@@ -1,8 +1,8 @@
- Amber/16-CrayGNU-17.08-cuda-8.0 --set-default-module
- Amber/16-CrayGNU-17.08-parallel
- Amber/16-CrayGNU-17.08-serial
+ Amber-16-CrayGNU-17.08-cuda-8.0.eb                 --set-default-module
+ Amber-16-CrayGNU-17.08-parallel.eb
+ Amber-16-CrayGNU-17.08-serial.eb
  Boost-1.65.0-CrayGNU-17.08-python2.eb
- Boost-1.65.0-CrayGNU-17.08-python3.eb         --set-default-module
+ Boost-1.65.0-CrayGNU-17.08-python3.eb              --set-default-module
  Boost-1.65.0-CrayGNU-17.08.eb
  Charm++-6.8.0-changa-CrayGNU-17.08-cuda-8.0.eb     --hidden --set-default-module
  Charm++-6.8.0-changa-CrayGNU-17.08.eb              --hidden
@@ -32,7 +32,7 @@
  Score-P-3.1-CrayGNU-17.08.eb                       --set-default-module
  Score-P-3.1-CrayIntel-17.08.eb
  Score-P-3.1-CrayPGI-17.08.eb
- Spark-1.6.0.eb                     --set-default-module
+ Spark-1.6.0.eb                                     --set-default-module
  vampir-9.3.0.eb                                    --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
