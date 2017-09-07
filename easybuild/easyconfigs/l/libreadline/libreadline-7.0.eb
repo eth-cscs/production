@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'libreadline'
@@ -13,8 +14,7 @@ description = """The GNU Readline library provides a set of functions for use by
 toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'pic': True}
 
-# source_urls = ['http://ftp.gnu.org/gnu/readline']
-source_urls = ['http://ftp.gnu.org/gnu/bash']
+source_urls = ['http://ftp.gnu.org/gnu/readline']
 sources = ['readline-%(version)s.tar.gz']
 # unset EBROOTLIBREADLINE
 
