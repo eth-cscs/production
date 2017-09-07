@@ -1,0 +1,11 @@
+diff -Naur scorep-3.1.ori/configure scorep-3.1/configure
+--- scorep-3.1.ori/configure	2017-05-30 18:28:05.702625931 +0200
++++ scorep-3.1/configure	2017-08-12 13:36:39.756527399 +0200
+@@ -2826,6 +2826,7 @@
+   *) :
+     ac_scorep_platform="unknown" ;;
+ esac
++ac_scorep_platform="crayxc"
+ 
+      if test "x${ac_scorep_platform}" = "xunknown"; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_scorep_platform, please contact <support@score-p.org> if you encounter any problems." >&5
