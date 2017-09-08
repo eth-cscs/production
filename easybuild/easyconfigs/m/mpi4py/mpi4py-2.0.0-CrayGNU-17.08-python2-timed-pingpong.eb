@@ -2,7 +2,7 @@ easyblock = 'PythonPackage'
 
 name = 'mpi4py'
 version = '2.0.0'
-python = 'cray-python'
+python = 'python'
 pyver = '2'
 versionsuffix = '-%s%s-timed-pingpong' % (python, pyver)
 # pyshortver = '2.7'
@@ -16,10 +16,7 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 source_urls = [BITBUCKET_DOWNLOADS]
 sources = [SOURCE_TAR_GZ]
 patches = ['mpi4py-%(version)s-timed-pingpong.patch']
-
-dependencies = [
-    ('Cython' ,'0.25.2' ,'-cray-python2'),
-]
+dependencies = [ ('PyExtensions', '2.7') ]
 
 # force rebuilding everything, including patched files
 buildopts = '--force'

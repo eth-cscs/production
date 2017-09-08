@@ -16,7 +16,6 @@ checksums = ['b5b08e6291a68802d29c344d5807e4c2a1945375055b57c819721151775789f0']
 
 builddependencies = [('vsc-install', '0.10.26')]
 dependencies = [('vsc-base', '2.5.8')]
-
 osdependencies = ['python-setuptools']
 
 # we ship something in bin/fake
