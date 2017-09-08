@@ -1,6 +1,5 @@
-# Program environments:
-# - module load PrgEnv-gnu ; module load fftw ; module load cudatoolkit ; module load cray-libsci
-
+# contributed by Luca Marsella (CSCS)
+# modules: CrayGNU cray-fftw cray-python cudatoolkit Libint libxc flex Bison
 CC       = cc
 CPP      = 
 FC       = ftn
