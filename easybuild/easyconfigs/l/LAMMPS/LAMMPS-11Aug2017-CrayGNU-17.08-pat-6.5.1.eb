@@ -8,7 +8,9 @@ patversion = '6.5.1'
 versionsuffix = '-pat-%s' % patversion
 
 homepage = 'http://lammps.sandia.gov/'
-description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+description = """LAMMPS (Large-scale Atomic/Molecular Massively Parallel 
+                 Simulator) is a classical molecular dynamics simulation 
+                 code designed to run efficiently on parallel computers."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = { 'usempi': True, 'openmp': True }
