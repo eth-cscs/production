@@ -1,4 +1,4 @@
-# File modified for Python 3.6.1 extensions by MK - August 2017
+# File modified for Python 3.6.1 extensions by MaKra - August 2017
 name = 'Python'
 version = "3.6.2"
 
@@ -15,6 +15,7 @@ sources = [SOURCE_TGZ]
 
 # python needs bzip2 to build the bz2 package
 dependencies = [
+    ('grib_api','1.21.0'),
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.8'),
     ('libreadline', '7.0'),
@@ -25,7 +26,6 @@ dependencies = [
     ('SQLite', '3.9.2'),
     ('Tk', '8.6.6', '-no-X11' ),
     ('GMP', '6.1.1'),
-    ('grib_api','1.21.0'),
 ]
 
 # rpath is needed for buiding TensorFlow
