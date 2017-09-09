@@ -41,3 +41,7 @@
  VASP-5.4.4-CrayIntel-17.08-cuda-8.0.eb             --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
+ VTK-8.0.1-CrayGNU-17.08-python2.eb
+ VTK-8.0.1-CrayGNU-17.08-python3.eb                 --set-default-module
+ VTK-8.0.1-EGL-CrayGNU-17.08-python2.eb
+ VTK-8.0.1-EGL-CrayGNU-17.08-python3.eb             --set-default-module
