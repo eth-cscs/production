@@ -1,0 +1,23 @@
+# File modified by MaKra - August 2017 (CSCS)
+easyblock = 'Bundle'
+
+name = 'PyExtensions'
+version = 'MCH-17.08'
+versionsuffix = '-Python-3.6.2'
+
+homepage = 'https://github.com/eth-cscs/production'
+description = """Bundle of Python packages for Meteo Swiss"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+dependencies = [
+    ('Python', '3.6.2'),
+    ('Pillow', '4.2.1', '%s' % versionsuffix),
+    ('PyYAML', '3.12', '%s' % versionsuffix),
+    ('scikit-image', '0.13.0', '%s' % versionsuffix),
+    ('bokeh', '0.12.3', '%s' % versionsuffix),
+    ('cairo', '1.14.6'),
+    ('IPython', '6.1.0', '%s' % versionsuffix),
+]
+
+moduleclass = 'tools'
