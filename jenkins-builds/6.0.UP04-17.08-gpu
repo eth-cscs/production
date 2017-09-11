@@ -11,7 +11,7 @@
  ddt-7.0.5.eb                                       --set-default-module
  Extrae-3.5.1-CrayGNU-17.08.eb                      --set-default-module
  Extrae-3.5.1-CrayIntel-17.08.eb
- GROMACS-2016.3-CrayGNU-17.08-cuda-8.0.eb --set-default-module
+ GROMACS-2016.3-CrayGNU-17.08-cuda-8.0.eb           --set-default-module
  h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-parallel-1.10.eb    --set-default-module
  h5py-2.7.0-CrayGNU-17.08-cray-python-17.06.1-cray-hdf5-1.10.eb
  IPM-2.0.6-CrayCCE-17.08.eb
@@ -20,11 +20,14 @@
  IPM-2.0.6-CrayPGI-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb         --set-default-module
  magma-2.2.0-CrayGNU-17.08-cuda-8.0.eb              --set-default-module
+ mympingpong-0.7.1-CrayGNU-17.08-python2.eb         --hidden
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
  Python-bare-3.6.2.eb                               --hidden
- QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb --set-default-module
+ PyExtensions-2.7-CrayGNU-17.08.eb
+ PyExtensions-3.5-CrayGNU-17.08.eb
+ QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb           --set-default-module
  reframe-2.6.eb                                     --set-default-module
  Scalasca-2.3.1-CrayGNU-17.08.eb                    --set-default-module
  Scalasca-2.3.1-CrayIntel-17.08.eb
@@ -35,6 +38,10 @@
  Score-P-3.1-CrayPGI-17.08.eb
  Spark-1.6.0.eb                                     --set-default-module
  vampir-9.3.0.eb                                    --set-default-module
- VASP-5.4.4-CrayIntel-17.08-cuda-8.0.eb                                     --set-default-module
+ VASP-5.4.4-CrayIntel-17.08-cuda-8.0.eb             --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
+ VTK-8.0.1-CrayGNU-17.08-python2.eb
+ VTK-8.0.1-CrayGNU-17.08-python3.eb                 --set-default-module
+ VTK-8.0.1-EGL-CrayGNU-17.08-python2.eb
+ VTK-8.0.1-EGL-CrayGNU-17.08-python3.eb             --set-default-module
