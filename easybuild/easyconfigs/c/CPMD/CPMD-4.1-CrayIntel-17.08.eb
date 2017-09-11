@@ -5,8 +5,9 @@ name = 'CPMD'
 version = '4.1'
 
 homepage = 'http://www.cpmd.org/'
-description = """CPMD The CPMD code is a parallelized plane wave / pseudopotential
-implementation of Density Functional Theory, particularly designed for ab-initio molecular dynamics. """
+description = """CPMD The CPMD code is a parallelized plane wave /
+pseudopotential implementation of Density Functional Theory, particularly
+designed for ab-initio molecular dynamics. """
 
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 toolchainopts = {'usempi': True}
@@ -21,16 +22,12 @@ skipsteps = ['configure']
 
 common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
 
-prebuildopts = [
-                         common_prebuildopts,
-]
-#     'export omp=1 &&' + common_prebuildopts + ' sed -i \'s#cpmd\.x#cpmd_omp\.x#\' Makefile &&',
+prebuildopts = [ common_prebuildopts, ]
 
 files_to_copy = [(['bin/cpmd*.x'],'bin')]
 
 sanity_check_paths = {
     'files': ['bin/cpmd.x'],
-#    'files': ['bin/cpmd.x', 'bin/cpmd_omp.x'],
     'dirs': [],
 }
 
