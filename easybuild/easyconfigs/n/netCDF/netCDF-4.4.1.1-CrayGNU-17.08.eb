@@ -13,7 +13,7 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://www.unidata.ucar.edu/downloads/netcdf/ftp/']
 
 dependencies = [
-    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
 
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
@@ -21,7 +21,7 @@ postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 builddependencies = [
     ('CMake', '3.9.1', '', True),
     #('Doxygen', '1.8.9.1', '', True),
-    ('cURL', '7.49.1', '', True),
+    ('cURL', '7.55.1'),
 ]
 
 # make sure both static and shared libs are built
