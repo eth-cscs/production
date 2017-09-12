@@ -1,3 +1,4 @@
+# contributed by Jean-Guillaume Piccinali (CSCS)
 easyblock = 'CmdCp'
 
 nameletterlower = 'c'

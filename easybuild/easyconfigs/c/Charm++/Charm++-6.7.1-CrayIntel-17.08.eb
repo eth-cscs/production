@@ -1,7 +1,6 @@
 # Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
 easyblock = 'CmdCp'
 
-nameletterlower = 'c'
 name = 'Charm++'
 version = '6.7.1'
 

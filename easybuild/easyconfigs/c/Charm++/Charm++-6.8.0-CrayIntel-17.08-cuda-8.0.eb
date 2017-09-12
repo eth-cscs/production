@@ -1,7 +1,6 @@
 # contributed by Luca Marsella and Jean-Guillaume Piccinali (CSCS)
 easyblock = 'CmdCp'
 
-nameletterlower = 'c'
 name = 'Charm++'
 version = '6.8.0'
 cudaversion = '8.0'
