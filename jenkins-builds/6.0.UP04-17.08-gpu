@@ -9,6 +9,8 @@
  Charm++-6.8.0-changa-CrayIntel-17.08-cuda-8.0.eb   --hidden
  Charm++-6.8.0-changa-CrayIntel-17.08.eb            --hidden
  CP2K-5.0r18043-CrayGNU-17.08-cuda-8.0.eb           --set-default-module
+ CDO-1.9.0-CrayGNU-17.08.eb                         --set-default-module
+ CPMD-4.1-CrayIntel-17.08.eb                        --set-default-module
  ddt-7.0.5.eb                                       --set-default-module
  Extrae-3.5.1-CrayGNU-17.08.eb                      --set-default-module
  Extrae-3.5.1-CrayIntel-17.08.eb
@@ -23,6 +25,7 @@
  magma-2.2.0-CrayGNU-17.08-cuda-8.0.eb              --set-default-module
  mympingpong-0.7.1-CrayGNU-17.08-python2.eb         --hidden
  NCO-4.6.8-CrayGNU-17.08.eb                         --set-default-module
+ NCL-6.4.0.eb                                       --set-default-module
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
