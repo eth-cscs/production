@@ -1,0 +1,34 @@
+easyblock = 'PythonPackage'
+
+name = 'PyZMQ'
+version = '17.0.0b1'
+
+homepage = 'http://www.zeromq.org/bindings:python'
+description = """Python bindings for ZeroMQ"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_LOWER_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+python = 'Python'
+python_version = '3.5.2'
+zmq_version = '4.2.2'
+zmq_major_version = zmq_version.split('.')[0] 
+python_short_version = '.'.join(python_version.split('.')[:2])
+
+versionsuffix = '-Python-{0}-zmq{1}'.format(python_version, zmq_major_version)
+
+dependencies = [
+    (python, python_version),
+    ('ZeroMQ', zmq_version),
+]
+
+options = {'modulename': 'zmq'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python{0}/site-packages/zmq'.format(python_short_version)],
+}
+
+moduleclass = 'devel'

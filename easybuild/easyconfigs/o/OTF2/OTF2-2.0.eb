@@ -15,16 +15,16 @@ name = 'OTF2'
 version = '2.0'
 
 homepage = 'http://www.score-p.org'
-description = """The Open Trace Format 2 is a highly scalable, memory efficient event
- trace data format plus support library. It is the new standard trace format for
- Scalasca, Vampir, and TAU and is open for other tools."""
+description = """The Open Trace Format 2 is a highly scalable, memory efficient
+event trace data format plus support library. It is the new standard trace
+format for Scalasca, Vampir, and TAU and is open for other tools."""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 sources = ["otf2-%(version)s.tar.gz"]
 source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
 checksums = [ '5b546188b25bc1c4e285e06dddf75dfc' ] # otf2-2.0.tar.gz
-builddependencies = [ ('SIONlib', '1.7.1') ]
+#no builddependencies = [ ('SIONlib', '1.7.1') ]
 
 configopts = '--enable-shared --with-nocross-compiler-suite=gcc'
 

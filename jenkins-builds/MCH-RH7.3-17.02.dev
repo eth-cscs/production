@@ -1,0 +1,29 @@
+ Anaconda3-4.4.0.eb                             --prefix=$APPS/UES/RH7.3_generic/easybuild
+ Autotools-201602.eb                            --prefix=$APPS/UES/RH7.3_generic/easybuild
+ Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
+ CDO-1.8.2-gmvolf-17.02.eb
+ CMake-3.7.2.eb                                 --prefix=$APPS/UES/RH7.3_generic/easybuild
+ ddt-7.0.5.eb --set-default-module              --prefix=$APPS/UES/RH7.3_generic/easybuild
+ GDAL-2.1.3-gmvolf-17.02.eb
+ GSL-2.3-gmvolf-17.02.eb
+ HDF-4.2.13-gmvolf-17.02.eb
+ NCL-6.4.0.eb                                   --prefix=$APPS/UES/RH7.3_generic/easybuild
+ NCO-4.6.2-gmvolf-17.02.eb
+ PrgEnv-gnu-kesch-gmvolf-17.02.eb               --module-naming-scheme=EasyBuildMNS
+ gmvapich2-17.02_cuda_8.0_gdr.eb
+ Python-2.7.13-gmvolf-17.02.eb
+ Python-3.6.1-gmvolf-17.02.eb
+ R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
+ Ruby-2.4.0-gmvolf-17.02.eb
+ ncview-2.1.7-gmvolf-17.02.eb
+ netCDF-C++-4.3.0-gmvolf-17.02.eb
+ netCDF-Fortran-4.4.4-gmvolf-17.02.eb
+ netcdf4-python-1.2.9-gmvolf-17.02-Python-2.7.13.eb
+ netcdf4-python-1.2.9-gmvolf-17.02-Python-3.6.0.eb
+ netCDF-C++-4.3.0-CrayCCE-17.06.eb              --prefix=$APPS/UES/RH7.3_cray_PE17.06/easybuild
+ netCDF-Fortran-4.4.4-CrayCCE-17.06.eb          --prefix=$APPS/UES/RH7.3_cray_PE17.06/easybuild
+ netCDF-4.4.1.1-CrayCCE-17.06.eb                --prefix=$APPS/UES/RH7.3_cray_PE17.06/easybuild
+ Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb    
+ rstudio-1.0.143.eb                             --prefix=$APPS/UES/RH7.3_generic/easybuild
+ vampir-9.3.0.eb --set-default-module           --prefix=$APPS/UES/RH7.3_generic/easybuild
+ Vim-8.0.eb      --set-default-module           --prefix=$APPS/UES/RH7.3_generic/easybuild
