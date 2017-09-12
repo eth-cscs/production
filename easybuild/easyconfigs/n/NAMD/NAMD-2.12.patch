@@ -73,3 +73,13 @@ diff -Naur NAMD_2.12_Source.ori/config NAMD_2.12_Source/config
    else if ( $use_fftw ) echo 'include .rootdir/arch/$(NAMD_ARCH).fftw' >> Make.config
    endif
    if ( $use_cuda ) echo 'include .rootdir/arch/$(NAMD_ARCH).cuda' >> Make.config
+diff -Naur NAMD_2.12_Source.ori/arch/CRAY-XC.tcl NAMD_2.12_Source/arch/CRAY-XC.tcl
+--- NAMD_2.12_Source.ori/arch/CRAY-XC.tcl    2013-10-05 00:15:44.000000000 +0200
++++ NAMD_2.12_Source/arch/CRAY-XC.tcl    2017-09-12 15:05:58.277396079 +0200
+@@ -1,5 +1,5 @@
+ TCLDIR=$(HOME)/tcl
+ TCLINCL=-I$(TCLDIR)/include
+-TCLLIB=-L$(TCLDIR)/lib -ltcl8.5 -ldl
++TCLLIB=-L$(TCLDIR)/lib -ltcl8.6 -ldl
+ TCLFLAGS=-DNAMD_TCL
+ TCL=$(TCLINCL) $(TCLFLAGS)
