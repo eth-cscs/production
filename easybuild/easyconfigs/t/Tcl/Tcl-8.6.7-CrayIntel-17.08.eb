@@ -1,0 +1,54 @@
+# Built with EasyBuild version 3.3.1 on 2017-09-12_14-08-47
+#contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Tcl'
+version = '8.6.7'
+
+homepage = 'http://www.tcl.tk/'
+description = """Tcl (Tool Command Language) is a very powerful but easy to learn dynamic programming language,
+suitable for a very wide range of uses, including web and desktop applications, networking, administration, testing and many more."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+
+source_urls = ["http://prdownloads.sourceforge.net/tcl"]
+sources = ['%(namelower)s%(version)s-src.tar.gz']
+
+dependencies = [
+    ('zlib', '1.2.11'),
+]
+
+configopts = '--enable-threads EXTRA_INSTALL="install-private-headers"'
+
+# Cross compiling, so skipping tests
+#runtest = 'test'
+
+start_dir = 'unix'
+
+moduleclass = 'lang'
+
+# Build statistics
+buildstats = [{
+    "build_time": 451.34,
+    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild'", "--buildpath='/dev/shm/lucamar/easybuild/stage/build'", "--external-modules-metadata='/users/lucamar/production/easybuild/cray_external_modules_metadata.cfg'", "--hide-deps='ANTLR,APR,APR-util,Autoconf,Automake,Autotools,Bazel,Bison,CMake,Coreutils,CrayCCE,CrayGNU,CrayIntel,CrayPGI,Cube,Doxygen,Eigen,FLTK,GCCcore,GL2PS,GLPK,GLib,GTS,GraphicsMagick,IPython,JasPer,LLVM,LOKI,LibTIFF,M4,Mako,Mesa,NASM,NASM,OPARI2,OTF2,OpenPGM,PCRE,PDT,PIL,Pillow,PROJ,PyGTS,PyQt,PyYAML,PyZMQ,Python-Xlib,Python-bare,Qhull,Qt,SCOTCH,SCons,SIONlib,SIP,SQLite,SWIG,Serf,Szip,Tcl,Tk,UDUNITS,X11,XZ,ZeroMQ,arpack-ng,backports.weakref,binutils,bokeh,byacc,bzip2,cairo,cURL,cuDNN,expat,flex,fontconfig,freetype,funcsigs,gc,gettext,gnuplot,gperf,guile,hwloc,inputproto,kbproto,libGLU,libQGLViewer,libX11,libXau,libXdmcp,libXext,libXrender,libcerf,libdrm,libevent,libffi,libgd,libiberty,libjpeg-turbo,libjpeg-turbo,libpng,libpthread-stubs,libreadline,libsodium,libtool,libunistring,libunwind,libutempter,libxcb,libxml2,libxshmfence,libyaml,make,mock,mxml,ncurses,nettle,networkx,nose-parameterized,numactl,pixman,pkg-config,ploticus,protobuf,protobuf-core,qrupdate,renderproto,scikit-image,scikit-learn,util-linux,wheel,xcb-proto,xextproto,xorg-macros,xproto,xtrans,zlib'", "--hide-toolchains='GCCcore,gmvapich2,gmvolf,foss,gompi'", "--include-easyblocks='/users/lucamar/production/easybuild/easyblocks/*.py'", "--installpath='/apps/dom/UES/sandbox/lucamar/easybuild'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/apps/dom/UES/sandbox/lucamar/easybuild/packages'", "--prefix='/apps/dom/UES/sandbox/lucamar/easybuild'", "--repositorypath='/apps/dom/UES/sandbox/lucamar/easybuild/ebfiles_repo'", "--robot-paths='/users/lucamar/production/easybuild/easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/lucamar/easybuild/stage/tmp'", "--try-toolchain='CrayIntel,17.08'", '../../t/Tcl/Tcl-8.6.7-CrayGNU-17.08.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.3.1",
+    "easybuild-framework_version": "3.3.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 4.8.5 (SUSE Linux) ; ",
+    "glibc_version": "2.22",
+    "hostname": "dom101",
+    "install_size": 27501529,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.6/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.13 (default, Jan 11 2017, 10:56:06) [GCC]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1505218127,
+    "total_memory": 257595,
+}]
