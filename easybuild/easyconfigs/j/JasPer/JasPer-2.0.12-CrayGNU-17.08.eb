@@ -1,4 +1,4 @@
-# Contributed by Jean-Guillaume Piccinali and Samuel Omlin (CSCS)
+# Contributed by jg and Samuel Omlin (CSCS)
 easyblock = 'CMakeMake'
 
 name = 'JasPer'

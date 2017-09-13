@@ -14,7 +14,7 @@ toolchainopts = {'opt': True, 'pic': True}
 source_urls = ['ftp://ftp.unidata.ucar.edu/pub/udunits']
 sources = [SOURCELOWER_TAR_GZ]
 
-dependencies = [('expat', '2.1.0')]
+dependencies = [('expat', '2.2.0')]
 
 sanity_check_paths = {
     'files': ['bin/udunits2', 'include/converter.h', 'include/udunits2.h', 'include/udunits.h',
