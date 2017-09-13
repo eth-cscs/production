@@ -1,4 +1,4 @@
-
-remove-path   LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH)"
-prepend-path  LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH)"
-
+if { [ info exists ::env(CRAY_LD_LIBRARY_PATH) ] } {
+    remove-path   LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH)"
+    prepend-path  LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH)"
+}

@@ -1,0 +1,20 @@
+# jgp@cscs
+easyblock = 'ConfigureMake'
+
+name = 'help2man'
+version = '1.47.4'
+homepage = 'https://www.gnu.org/software/help2man/'
+description = """help2man is a tool for automatically generating simple manual
+pages from program output."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchainopts = {'optarch': True, 'pic': True}
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_XZ]
+
+sanity_check_paths = {
+    'files' : ['bin/help2man'],
+    'dirs' : [],
+}
+
+moduleclass = 'devel'

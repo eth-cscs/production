@@ -1,4 +1,3 @@
-Vim-8.0.eb
 git-2.10.1.eb
 nano-2.7.0.eb
 CMake-3.6.2.eb
@@ -7,7 +6,7 @@ Autoconf-2.69.eb
 Automake-1.15.eb
 libtool-2.4.6.eb
 numactl-2.0.11.eb
-reframe-2.5.eb
+reframe-2.6.eb
 hwloc-1.11.4.eb
 likwid-4.1.2.eb
 ctags-5.8.eb

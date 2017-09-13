@@ -97,7 +97,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         usage
     else
         module purge
-        module load craype craype-network-aries modules
+        module load craype craype-network-aries modules perftools-base ugni
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
     fi
