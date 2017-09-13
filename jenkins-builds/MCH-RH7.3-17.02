@@ -2,7 +2,7 @@
  Autotools-201602.eb                            --installpath=$APPS/UES/RH7.3_generic/easybuild
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
  CDO-1.8.2-gmvolf-17.02.eb
- CMake-3.7.2.eb                                 --installpath=$APPS/UES/RH7.3_generic/easybuild
+ CMake-3.9.1.eb                                 --installpath=$APPS/UES/RH7.3_generic/easybuild
  ddt-7.0.5.eb --set-default-module              --installpath=$APPS/UES/RH7.3_generic/easybuild
  GDAL-2.1.3-gmvolf-17.02.eb
  GSL-2.3-gmvolf-17.02.eb
