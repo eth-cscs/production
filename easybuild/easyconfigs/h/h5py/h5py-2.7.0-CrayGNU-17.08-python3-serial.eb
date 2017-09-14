@@ -29,7 +29,7 @@ req_py_minver = '5'
 
 
 prebuildopts  = ' python3 setup.py configure --mpi'
-prebuildopts += ' --hdf5-version=1.10.0.3 --hdf5=$HDF5_DIR && '
+prebuildopts += ' --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
 
 # sanity checks (import h5py) fails on login nodes (MPI not available) 
 options = {'modulename': 'os'}
