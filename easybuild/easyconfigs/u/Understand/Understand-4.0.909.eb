@@ -12,7 +12,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://latest.scitools.com/Understand/']
 sources = [ ('%(name)s-%(version)s-Linux-64bit.tgz', "tar xf %s")] 
 keepsymlinks = True
-patches = [ '%(name)s.patch' ]
+patches = [ '%(name)s-%(version)s.patch' ]
 
 sanity_check_paths = {
     'files': ['bin/linux64/und.bin'],
