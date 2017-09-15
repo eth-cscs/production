@@ -1,0 +1,41 @@
+easyblock = 'ConfigureMake'
+
+name = "Lua"
+version = "5.3.4"
+checksums = ['53a9c68bcc0eda58bdc2095ad5cdfc63']
+
+homepage = "http://www.lua.org/"
+description = """Lua is a powerful, fast, lightweight, embeddable scripting
+language.  Lua combines simple procedural syntax with powerful data description
+constructs based on associative arrays and extensible semantics. Lua is
+dynamically typed, runs by interpreting bytecode for a register-based virtual
+machine, and has automatic memory management with incremental garbage
+collection, making it ideal for configuration, scripting, and rapid
+prototyping."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = ['lua-%(version)s.tar.gz']
+source_urls = ['http://www.lua.org/ftp/']
+# patches = ['%(name)s-%(version)s.patch']
+
+builddependencies = [
+    ('ncurses', '6.0', '', True),
+#    ('libreadline', '6.3')
+]
+
+skipsteps = ['configure']
+buildopts = ' PLAT=posix'
+#buildopts = ' PLAT=linux'
+buildopts += ' INSTALL_TOP=%(installdir)s'
+installopts = ' INSTALL_TOP=%(installdir)s'
+
+## Use static linking for ncurses so it's not a runtime dep
+#configopts = "--with-static=yes"
+
+sanity_check_paths = {
+    'files': ["bin/lua"],
+    'dirs': []
+}
+
+moduleclass = "lang"
