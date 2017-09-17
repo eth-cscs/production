@@ -1,6 +1,3 @@
-#/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles  # $APPS/UES/RH7.3_gnu_PE17.02/easybuild/modules/all
-#/apps/escha/UES/PrgEnv-cray-17.06/modulefiles # $APPS/UES/RH7.3_cray_PE17.06/easybuild/modules/all
-#/apps/escha/UES/generic/modulefiles           # $APPS/UES/RH7.3_generic/easybuild/modules/all
  Anaconda3-4.4.0.eb                            --set-default-module --installpath=$APPS/UES/RH7.3_generic/easybuild 
  Autotools-201602.eb                           --set-default-module --installpath=$APPS/UES/RH7.3_generic/easybuild
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb    --set-default-module --installpath=$APPS/UES/RH7.3_gnu_PE17.02/easybuild
