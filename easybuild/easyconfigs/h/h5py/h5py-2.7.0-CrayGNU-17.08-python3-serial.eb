@@ -28,11 +28,12 @@ dependencies = [
 req_py_majver = '3'
 req_py_minver = '5'
 
-
 prebuildopts  = ' python3 setup.py configure '
 prebuildopts += ' --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
 
 options = {'modulename': 'os'}
+
+sanity_check_commands = [('python3', "-c 'import %(namelower)s'")]
 
 sanity_check_paths = {
     'files': [],
