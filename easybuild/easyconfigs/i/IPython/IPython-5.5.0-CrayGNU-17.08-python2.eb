@@ -61,9 +61,6 @@ exts_list = [
     ('pickleshare', '0.7.4', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/'],
     }),
-    ('notebook', '5.0.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/n/notebook/'],
-    }),
     ('pexpect', '4.2.1', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
     }),
@@ -168,6 +165,22 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/0c/41/67e16b243b78'  \
                         'b49f4b1650d045b63be187c27d20a76f0f7b8e61e0fcb966/'],
     }),    
+    ('widgetsnbextension', '3.0.3', {
+        'source_urls': ['https://pypi.python.org/packages/fd/5c/49fbc33d936'
+                        '13b18bc8e330a6e9b324817269ca8d878f3a1ebcd2f85ad86/'],
+    }),
+    ('ipywidgets', '7.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/be/b5/a31dd45ec96'
+                        '6d07e6f1f833a31008b4af122c2555099c8e63b9f5b2d6c05/'],
+    }),
+    ('Jinja2', '2.9.6', {
+        'source_urls': ['https://pypi.python.org/packages/90/61/f820ff0076a'  \
+                        '2599dd39406dcb858ecb239438c02ce706c8e91131ab9c7f1/'],
+        'module_name': 'jinja2',        
+    }),  
+    ('notebook', '5.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/n/notebook/'],
+    }),
     ('nbconvert', '5.3.1', {
         'source_urls': ['https://pypi.python.org/packages/39/ea/280d6c0d92f8'  \
                         'e3ca15fd798bbcc2ea141489f9539de7133d8fe10ea4b049/'], 
