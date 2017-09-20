@@ -169,7 +169,10 @@ exts_list = [
                         'b49f4b1650d045b63be187c27d20a76f0f7b8e61e0fcb966/'],
     }),    
     ('nbconvert', '5.3.1', {
-        'source_urls': ['https://pypi.python.org/pypi/nbconvert'],
+        'source_urls': ['https://pypi.python.org/packages/39/ea/280d6c0d92f8'  \
+                        'e3ca15fd798bbcc2ea141489f9539de7133d8fe10ea4b049/'], 
+        'source_tmpl': 'nbconvert-5.3.1-py2.py3-none-any.whl',
+        'unpack_sources': False,
         'use_pip' : True,
     }),
 
