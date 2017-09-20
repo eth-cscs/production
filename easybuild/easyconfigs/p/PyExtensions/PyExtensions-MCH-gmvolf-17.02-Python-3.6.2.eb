@@ -1,0 +1,45 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PyExtensions'
+version = 'MCH'
+pyver = '3.6.2'
+versionsuffix = '-Python-%s' % pyver
+
+homepage = 'https://github.com/eth-cscs/production'
+description = """Bundle of Python packages for Meteo Swiss"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+dependencies = [
+    ('Python', '3.6.2'),
+#    ('Pillow', '4.2.1', '%s' % versionsuffix),
+#    ('PyYAML', '3.12', '%s' % versionsuffix),
+#    ('scikit-image', '0.13.0', '%s' % versionsuffix),
+#    ('bokeh', '0.12.3', '%s' % versionsuffix),
+#    ('cairo', '1.14.6'),
+#    ('IPython', '6.1.0', '%s' % versionsuffix),
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+     ('bokeh', '0.12.9', {
+         'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
+     }),
+     #('cairo', '1.14.6', {
+     #    'source_urls': ['https://pypi.python.org/packages/source/c/cairo/'],
+     #}),
+     ('Pillow', '4.2.1', {
+         'source_urls': ['https://pypi.python.org/packages/source/p/pillow/'],
+     }),
+     ('PyYAML', '3.12', {
+         'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml/'],
+     }),
+     ('scikit-image', '0.13.0', {
+         'source_urls': ['https://pypi.python.org/packages/source/s/scikit-image/'],
+     }),
+]
+
+moduleclass = 'tools'
