@@ -12,15 +12,15 @@ includes timestamped events of runtime calls, performance counters and source
 code references. Besides, Extrae provides its own API to allow the user to
 manually instrument his or her application."""
 
-toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchain = {'name': 'CrayPGI', 'version': '17.08'}
 toolchainopts = {'verbose': False}
 source_urls = ['https://ftp.tools.bsc.es/extrae']
 sources = ['extrae-%(version)s-src.tar.bz2']
-checksums = ['752395edd211c3f5efcb5cd985795712']
+#checksums = ['752395edd211c3f5efcb5cd985795712']
 
 dependencies = [
-    ('zlib', '1.2.11'),
-    ('libunwind', '1.2.1'),
+    ('zlib', '1.2.11', '', True),
+    ('libunwind', '1.2.1', '', True),
     #('libxml2', '2.9.4', '', True),
     #('Boost', '1.63.0'),
     ('Paraver', '4.6.4.rc1', '', True),
@@ -31,6 +31,7 @@ dependencies = [
 ]
 
 configopts  = ' --enable-parallel-merge'
+configopts += ' CPPFLAGS="-noswitcherror -mp" LDFLAGS="-noswitcherror -mp"'
 configopts += ' --enable-sampling'
 configopts += ' --enable-openmp'
 configopts += ' --with-libz=$EBROOTZLIB'
