@@ -20,7 +20,8 @@
 easyblock = 'CMakeMake'
 
 name = 'VTK'
-version = '8.0.1-EGL'
+version = '8.0.1'
+versionsuffix = '-EGL'
 
 homepage = 'http://www.vtk.org'
 description = """The Visualization Toolkit (VTK) is an open-source, freely
