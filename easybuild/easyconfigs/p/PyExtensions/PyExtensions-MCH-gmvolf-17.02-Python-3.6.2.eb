@@ -4,6 +4,7 @@ easyblock = 'Bundle'
 name = 'PyExtensions'
 version = 'MCH'
 pyver = '3.6.2'
+pyshortver = '3.6'
 versionsuffix = '-Python-%s' % pyver
 
 homepage = 'https://github.com/eth-cscs/production'
@@ -13,10 +14,6 @@ toolchain = {'name': 'gmvolf', 'version': '17.02'}
 
 dependencies = [
     ('Python', '3.6.2'),
-#    ('Pillow', '4.2.1', '%s' % versionsuffix),
-#    ('PyYAML', '3.12', '%s' % versionsuffix),
-#    ('scikit-image', '0.13.0', '%s' % versionsuffix),
-#    ('bokeh', '0.12.3', '%s' % versionsuffix),
 #    ('cairo', '1.14.6'),
 #    ('IPython', '6.1.0', '%s' % versionsuffix),
 ]
@@ -24,22 +21,32 @@ dependencies = [
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
 
+# order matters!
 exts_list = [
+     ('tornado', '4.5.2', {
+         'source_urls': ['https://pypi.python.org/packages/source/t/tornado/'],
+     }),
      ('bokeh', '0.12.9', {
          'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
      }),
-     #('cairo', '1.14.6', {
-     #    'source_urls': ['https://pypi.python.org/packages/source/c/cairo/'],
-     #}),
+#     ('olefile', '0.44', {
+#         'source_tmpl': 'master.zip',
+#         'source_urls': ['https://github.com/decalage2/olefile/archive'],
+#     }),
      ('Pillow', '4.2.1', {
+         'modulename': 'PIL',
          'source_urls': ['https://pypi.python.org/packages/source/p/pillow/'],
      }),
      ('PyYAML', '3.12', {
-         'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml/'],
+          'modulename': 'yaml',
+          'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml/'],
      }),
      ('scikit-image', '0.13.0', {
+         'modulename': 'sklearn',
          'source_urls': ['https://pypi.python.org/packages/source/s/scikit-image/'],
      }),
 ]
+
+modextrapaths = {'PYTHONPATH': ['lib/python{0}/site-packages'.format(pyshortver)]}
 
 moduleclass = 'tools'

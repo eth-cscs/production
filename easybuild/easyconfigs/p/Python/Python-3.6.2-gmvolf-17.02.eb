@@ -140,6 +140,8 @@ exts_list = [
     ('scikit-learn', '0.18.2', {
         'source_urls': ['https://pypi.python.org/packages/26/c2/21c612f3a1b1'  \
                         'ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
+        #'source_urls' : [PYPI_SOURCE],
+        #'sources' : [SOURCE_TAR_GZ],
         'modulename' : 'sklearn',
     }),
     ('blaze', '0.10.1', {
@@ -154,22 +156,6 @@ exts_list = [
     ('cryptography', '2.0.3', {
         'source_urls': ['https://pypi.python.org/packages/9c/1a/0fc8cffb04582' \
                         'f9ffca61b15b0681cf2e8588438e55f61403eb9880bd8e0/'],
-    }),
-
-    ('bokeh', '0.12.9', {
-        'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
-    }),
-
-    ('Pillow', '4.2.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pillow/'],
-    }),
-    
-    ('PyYAML', '3.12', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml/'],
-    }),
-
-    ('scikit-image', '0.13.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/s/scikit-image/'],
     }),
 ]
 
