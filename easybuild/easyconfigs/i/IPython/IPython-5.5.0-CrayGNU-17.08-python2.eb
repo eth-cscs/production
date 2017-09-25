@@ -28,9 +28,6 @@ dependencies = [
 exts_defaultclass = 'PythonPackage'
 
 exts_list = [
-    ('nose', '1.3.7', {
-        'source_urls': ['https://pypi.python.org/packages/source/n/nose/'],
-    }),
     ('requests', '2.13.0', {
         'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
     }),
