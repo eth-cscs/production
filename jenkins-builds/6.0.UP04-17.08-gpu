@@ -8,6 +8,7 @@
  Charm++-6.8.0-CrayIntel-17.08.eb                   --hidden
  Charm++-6.8.0-CrayGNU-17.08-cuda-8.0.eb            --hidden --set-default-module
  Charm++-6.8.0-CrayIntel-17.08-cuda-8.0.eb          --hidden
+ CMake-3.9.1.eb
  CP2K-5.0r18043-CrayGNU-17.08-cuda-8.0.eb           --set-default-module
  CDO-1.9.0-CrayGNU-17.08.eb                         --set-default-module
  CPMD-4.1-CrayIntel-17.08.eb                        --set-default-module
@@ -38,7 +39,7 @@
  PyExtensions-2.7-CrayGNU-17.08.eb
  PyExtensions-3.5-CrayGNU-17.08.eb
  QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb           --set-default-module
- reframe-2.6.eb                                     --set-default-module
+ reframe-2.6.1.eb                                   --set-default-module
  Scalasca-2.3.1-CrayGNU-17.08.eb                    --set-default-module
  Scalasca-2.3.1-CrayIntel-17.08.eb
  Scalasca-2.3.1-CrayPGI-17.08.eb

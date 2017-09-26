@@ -4,7 +4,7 @@
  CDO-1.8.2-gmvolf-17.02.eb                          
  CMake-3.9.1.eb                                      --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  ddt-7.0.5.eb                                        --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
- GDAL-2.1.3-gmvolf-17.02.eb
+ GDAL-2.2.1-gmvolf-17.02.eb
  GSL-2.3-gmvolf-17.02.eb
  git-2.14.1.eb                                       --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  HDF-4.2.13-gmvolf-17.02.eb
