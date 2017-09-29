@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-version = "5.0r18043"
+version = '5.0r18043'
 cudaversion = '8.0'
 versionsuffix = '-cuda-%s' % cudaversion
 

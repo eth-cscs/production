@@ -1,3 +1,4 @@
+# contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'Score-P'
@@ -14,18 +15,13 @@ toolchainopts = {"usempi": True}
 source_urls = ['http://www.vi-hps.org/upload/packages/scorep/']
 sources = ["scorep-%(version)s.tar.gz"]
 checksums = [ '065bf8eb08398e8146c895718ddb9145' ]
-# patches = ['scorep-1.4.2.patch']
 
 dependencies = [ 
     ('libunwind', '1.2.1', '', True),
     ('OPARI2', '2.0.2', '', True),
-#PR3501    ('OTF2', '2.0', '', True),
-#   sionlib
-#   pdt
     ('papi/5.5.1.2', EXTERNAL_MODULE),
     ('Cube', '4.3.5'),
-    ('vampir/9.2.0', EXTERNAL_MODULE),
-#    ('Scalasca', '2.2.2'),
+    ('vampir', '9.3.0', '', True)
 ]
 
 configopts  = ' --with-machine-name=kescha'
@@ -44,7 +40,6 @@ configopts += ' --with-libcuda-lib=/global/opt/nvidia/cudatoolkit/$cudatoolkit_V
 configopts += ' --with-libcuda-include=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION/include'
 configopts += ' --with-libcudart=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION'
 configopts += ' --with-cupti=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION/extras/CUPTI'
-#no configopts += ' --with-libcuda=/global/opt/nvidia/cudatoolkit/6.5.14'
 
 sanity_check_paths = {
     'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
