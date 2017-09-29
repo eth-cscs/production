@@ -28,6 +28,7 @@
  NCO-4.6.8-CrayGNU-17.08.eb                         --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb                       --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
+ ncview-2.1.7-CrayGNU-17.08.eb                      --set-default-module
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
