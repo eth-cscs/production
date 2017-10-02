@@ -1,7 +1,8 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'GDAL'
-version = '2.1.3'
+version = '2.2.1'
 
 homepage = 'http://www.gdal.org/'
 description = """GDAL is a translator library for raster geospatial data formats that is released under an X/MIT style
