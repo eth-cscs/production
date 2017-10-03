@@ -36,7 +36,7 @@ while [ $# -ne 0 ]; do
             ;;
         -f | --force)
             shift
-            forcelist="$1"
+            force_list="$1"
             ;;
         -h | --help)
             usage
@@ -67,17 +67,21 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-# match forcelist items with production lists: 
+# checks force_list
+if [ -n "${force_list}" ]; then
+# match force_list items with production lists: 
 # 'grep -n' returns the 1-based line number of the matching pattern within its file
-nidx=0; 
-for item in ${forcelist}; do 
-    idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
-    ((nidx++)) 
-done
+ idx=();
+ nidx=0; 
+ for item in ${force_list}; do 
+     idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+     ((nidx++)) 
+ done
 # append force flag '-f' to matching items in production lists
-for ((i=0; i<$nidx; i++)); do
-    eb_files[${idx[$i]}]+=" -f"
-done
+ for ((i=0; i<$nidx; i++)); do
+     eb_files[${idx[$i]}]+=" -f"
+ done
+fi
 
 # optional EasyBuild arguments
 eb_args=""
