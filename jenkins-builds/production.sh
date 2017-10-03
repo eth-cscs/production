@@ -74,11 +74,13 @@ if [ -n "${force_list}" ]; then
  for item in ${force_list}; do 
      force_match=$(grep $item ${eb_lists[@]})
      if [ -n "${force_match}" ]; then
-# 'grep -n' returns the 1-based line number of the matching pattern within its file
-         idx=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+# 'grep -n' returns the 1-based line number of the matching pattern within the input file
+         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
 # append the force flag '-f' to matching items within the selected production lists
-         eb_files[$idx]+=" -f"
-         echo -e "${eb_files[$idx]}"
+         for index in ${index_list}; do
+             eb_files[$index]+=" -f"
+             echo "${eb_files[$index]}"
+         done
      fi
  done
 fi
