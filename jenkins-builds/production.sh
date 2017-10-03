@@ -70,7 +70,7 @@ done
 # checks force_list
 if [ -n "${force_list}" ]; then
 # match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
- nidx=0; 
+ echo -e "\n Items matching production list and forcelist (\"${force_list}\")"
  for item in ${force_list}; do 
      force_match=$(grep $item ${eb_lists[@]})
      if [ -n "${force_match}" ]; then
@@ -78,6 +78,7 @@ if [ -n "${force_list}" ]; then
          idx=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
 # append the force flag '-f' to matching items within the selected production lists
          eb_files[$idx]+=" -f"
+         echo -e "${eb_files[$idx]}"
      fi
  done
 fi
