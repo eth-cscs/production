@@ -70,7 +70,7 @@ done
 # checks force_list
 if [ -n "${force_list}" ]; then
 # match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
- echo -e "\n Items matching production list and forcelist (\"${force_list}\")"
+ echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do 
      force_match=$(grep $item ${eb_lists[@]})
      if [ -n "${force_match}" ]; then
