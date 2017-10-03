@@ -93,6 +93,9 @@ set     packageroot  "/apps/common/UES/${ost}${osv}/${modulename}/${version}"
         setenv          CRAY_ACC_NO_EARLY_INIT "1"
 
         set             configdir             "$env(HOME)/.allinea/${ost}${osv}"
+        if { ![info exists ::env(PE_ENV)] } {
+        setenv          PE_ENV                "GNU"
+        }
         setenv          MAP_LIBRARIES_DIRECTORY "$configdir/$env(PE_ENV)"
         if {![ file isdirectory $configdir ]} {
                         file mkdir            "$configdir"
