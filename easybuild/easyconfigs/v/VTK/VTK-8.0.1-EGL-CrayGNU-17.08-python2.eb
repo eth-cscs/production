@@ -20,7 +20,8 @@
 easyblock = 'CMakeMake'
 
 name = 'VTK'
-version = '8.0.1-EGL'
+vtk_version = '8.0.1'
+version = '%s-EGL' % vtk_version
 
 
 homepage = 'http://www.vtk.org'
@@ -39,7 +40,7 @@ toolchainopts = {'verbose': False}
 
 source_urls = ['http://www.vtk.org/files/release/%(version_major_minor)s']
 sources = [
-    SOURCE_TAR_GZ,
+    '%s-%s.tar.gz' % (name, vtk_version),
     '%(name)sData-%(version)s.tar.gz',
 ]
 
