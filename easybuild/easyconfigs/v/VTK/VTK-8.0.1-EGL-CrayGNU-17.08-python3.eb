@@ -40,7 +40,7 @@ toolchainopts = {'verbose': False}
 source_urls = ['http://www.vtk.org/files/release/%(version_major_minor)s']
 sources = [
     '%s-%s.tar.gz' % (name, vtk_version), 
-    '%(name)sData-%(version)s.tar.gz',
+    '%sData-%s.tar.gz' % (name, vtk_version),
 ]
 
 separate_build_dir = True
