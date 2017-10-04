@@ -15,9 +15,9 @@ modtclfooter = """
 conflict darshan
 conflict Cube
 
-# =============================================================================
+# ===============================================================
 # Which os/system is it ?
-# =============================================================================
+# ===============================================================
 set OS_ID "generic"
 set VERSION_ID "NULL"
 set VERSION_ID_MAJOR "NULL"
@@ -78,20 +78,37 @@ set     modulename   "ddt"
 set     version      "7.1"
 set     packageroot  "/apps/common/UES/${ost}${osv}/${modulename}/${version}"
 
-# ============================================================================
+# ===============================================================
 #if { [ module-info mode load ] } {
 
-        setenv          DDT_DIR               "$packageroot"
+        setenv          ALLINEA_DIR           "$packageroot"
         prepend-path    PATH                  "$packageroot/bin"
         prepend-path    PATH                  "$packageroot/libexec"
         prepend-path    LD_LIBRARY_PATH       "$packageroot/lib"
         prepend-path    LD_LIBRARY_PATH       "$packageroot/lib/64"
-        prepend-path    MANPATH               "$packageroot/man"
-        setenv          CRAY_ACC_NO_EARLY_INIT "1"
+        prepend-path    MODULEPATH            "$packageroot/share/modules/cray"
         append-path     PE_PRODUCT_LIST       "DDT"
         setenv          ALLINEA_LICENCE_DIR   "/apps/common/UES/licensesCSCS/ddt"
-        #setenv          DDT_LICENCE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
-        #setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/ddt/Licence"
+        #setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/map/Licence"
+        setenv          CRAY_ACC_NO_EARLY_INIT "1"
+        setenv          ALLINEA_MPIRUN        "srun"
+
+        # --- CRAY_CPU_TARGET:
+        if { ![info exists ::env(CRAY_CPU_TARGET)] } {
+        setenv          CRAY_CPU_TARGET       "haswell"
+        }
+
+        # --- PE_ENV:
+        if { ![info exists ::env(PE_ENV)] } {
+        setenv          PE_ENV                "GNU"
+        }
+
+        set             configdir             "$env(HOME)/.allinea/${ost}${osv}/$env(CRAY_CPU_TARGET)/$env(PE_ENV)"
+        if {![ file isdirectory $configdir ]} {
+                        file mkdir            "$configdir"
+        }
+        setenv          MAP_LIBRARIES_DIRECTORY "$configdir"
+        setenv          ALLINEA_CONFIG_DIR    "$configdir"
 
         setenv          DDT_MEM               "-L$packageroot/lib/64"
         setenv          DDT_LINK_DMALLOC      "-L$packageroot/lib/64 -ldmalloc"
@@ -99,13 +116,12 @@ set     packageroot  "/apps/common/UES/${ost}${osv}/${modulename}/${version}"
         setenv          DDT_LINK_DMALLOCTH    "-L$packageroot/lib/64 -ldmallocth"
         setenv          DDT_LINK_DMALLOCTHCXX "-L$packageroot/lib/64 -ldmallocthcxx"
         setenv          DDT_NO_TIMEOUT        "1"
-        setenv          ALLINEA_MPIRUN        "srun"
 
 #}
 
-# ============================================================================
+# ================================================================
 # Help message called by : module help ...
-# ============================================================================
+# ================================================================
 #if { [ module-info mode help ] } {
 proc ModulesHelp {} {
   global url url2 flags modulename version packageroot
@@ -133,16 +149,16 @@ proc ModulesHelp {} {
 }
 #}
 
-# ============================================================================
+# ================================================================
 # Short help message called by : module whatis ...
-# ============================================================================
+# ================================================================
 if { [ module-info mode whatis ] } {
 module-whatis "Set environment variables to enable the usage of the $modulename $version debugger."
 }
 
-# ============================================================================
+# ================================================================
 # Help message called by : module display ...
-# ============================================================================
+# ================================================================
 # module display "[module-info name]"
 """
 
