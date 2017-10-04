@@ -69,17 +69,19 @@ done
 
 # checks force_list
 if [ -n "${force_list}" ]; then
-# match force_list items with production lists: 
-# 'grep -n' returns the 1-based line number of the matching pattern within its file
- idx=();
- nidx=0; 
+# match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
+ echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do 
-     idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
-     ((nidx++)) 
- done
-# append force flag '-f' to matching items in production lists
- for ((i=0; i<$nidx; i++)); do
-     eb_files[${idx[$i]}]+=" -f"
+     force_match=$(grep $item ${eb_lists[@]})
+     if [ -n "${force_match}" ]; then
+# 'grep -n' returns the 1-based line number of the matching pattern within the input file
+         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+# append the force flag '-f' to matching items within the selected production lists
+         for index in ${index_list}; do
+             eb_files[$index]+=" -f"
+             echo "${eb_files[$index]}"
+         done
+     fi
  done
 fi
 
