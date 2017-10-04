@@ -42,7 +42,7 @@ exts_list = [
           'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml/'],
      }),
      ('scikit-image', '0.13.0', {
-         'modulename': 'sklearn',
+         'modulename': 'skimage',
          'source_urls': ['https://pypi.python.org/packages/source/s/scikit-image/'],
      }),
 ]
