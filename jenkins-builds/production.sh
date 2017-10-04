@@ -36,7 +36,7 @@ while [ $# -ne 0 ]; do
             ;;
         -f | --force)
             shift
-            forcelist="$1"
+            force_list="$1"
             ;;
         -h | --help)
             usage
@@ -67,17 +67,23 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-# match forcelist items with production lists: 
-# 'grep -n' returns the 1-based line number of the matching pattern within its file
-nidx=0; 
-for item in ${forcelist}; do 
-    idx[$nidx]=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
-    ((nidx++)) 
-done
-# append force flag '-f' to matching items in production lists
-for ((i=0; i<$nidx; i++)); do
-    eb_files[${idx[$i]}]+=" -f"
-done
+# checks force_list
+if [ -n "${force_list}" ]; then
+# match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
+ echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
+ for item in ${force_list}; do 
+     force_match=$(grep $item ${eb_lists[@]})
+     if [ -n "${force_match}" ]; then
+# 'grep -n' returns the 1-based line number of the matching pattern within the input file
+         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+# append the force flag '-f' to matching items within the selected production lists
+         for index in ${index_list}; do
+             eb_files[$index]+=" -f"
+             echo "${eb_files[$index]}"
+         done
+     fi
+ done
+fi
 
 # optional EasyBuild arguments
 eb_args=""
@@ -97,7 +103,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         usage
     else
         module purge
-        module load craype craype-network-aries modules ugni
+        module load craype craype-network-aries modules perftools-base ugni
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
     fi
