@@ -92,7 +92,7 @@ buildopts = 'install'
 builddependencies = [('CMake', '3.9.1', '', True)]
 
 # On dom the build sometimes fail when using too many parallel tasks. With 2, it takes about 1 hour, but it works fine
-parallel = 2
+parallel = 4
 skipsteps = ['install']
 
 files_to_copy = []
