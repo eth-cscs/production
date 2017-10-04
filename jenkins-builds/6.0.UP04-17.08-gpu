@@ -30,6 +30,8 @@
  NAMD-2.12-CrayIntel-17.08-cuda-8.0.eb              --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
  ncview-2.1.7-CrayGNU-17.08.eb                      --set-default-module
+ netcdf4-python-1.2.9-gmvolf-17.02-Python-2.7.13.eb
+ netcdf4-python-1.2.9-gmvolf-17.02-Python-3.6.0.eb  --set-default-module
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
