@@ -1,4 +1,4 @@
-# contributed by Luca Marsella and Jean-Guillaume Piccinali (CSCS)
+# contributed by Luca Marsella and jg (CSCS)
 easyblock = 'CmdCp'
 
 name = 'Charm++'
