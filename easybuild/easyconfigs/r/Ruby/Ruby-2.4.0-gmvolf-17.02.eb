@@ -21,5 +21,8 @@ sanity_check_paths = {
 }
 
 configopts = "--disable-install-doc --enable-shared"
+dependencies = [('GSL', '2.3')]
+
+postinstallcmds = [" %(installdir)s/bin/gem install bigdecimal io-console json  mail mime-types minitest more_rinda narray net-ssh open4 pony power_assert psych rb-gsl rinruby ruby-prof test-unit xml-simple svn2git"]
 
 moduleclass = 'lang'

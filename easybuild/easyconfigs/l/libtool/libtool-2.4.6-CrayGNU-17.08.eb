@@ -1,5 +1,4 @@
-# contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
-
+# @author: Guilherme Peretti Pezzi and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'libtool'
