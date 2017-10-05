@@ -17,7 +17,7 @@ dependencies = [('HDF5', '1.8.18')]
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 
 builddependencies = [
-    ('CMake', '3.7.2', '', True),
+    ('CMake', '3.9.1', '', True),
     # ('Doxygen', '1.8.9.1'),
     ('cURL', '7.52.1'),
 ]
