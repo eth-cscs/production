@@ -32,6 +32,7 @@ import os
 import easybuild.tools.environment as env
 from easybuild.easyblocks.generic.pythonpackage import PythonPackage
 from easybuild.tools.modules import get_software_root
+from easybuild.tools.run import run_cmd
 
 
 class EB_netcdf_minus_python(PythonPackage):
@@ -44,7 +45,7 @@ class EB_netcdf_minus_python(PythonPackage):
 
     def configure_step(self):
         """
-        Configure and 
+        Configure and
         Test if python module is loaded
         """
         hdf5 = get_software_root('HDF5')
@@ -57,7 +58,7 @@ class EB_netcdf_minus_python(PythonPackage):
         netcdf = get_software_root('netCDF')
         if netcdf:
             env.setvar('NETCDF4_DIR', netcdf)
-       
+
         super(EB_netcdf_minus_python, self).configure_step()
 
     def test_step(self):
@@ -65,7 +66,7 @@ class EB_netcdf_minus_python(PythonPackage):
         self.testinstall = True
         cwd = os.getcwd()
 	# ignoring test know to fail tst_dap.py tst_diskless.py
-        self.testcmd = "cd %s/test && mv tst_dap.py notst_dap.py && mv tst_diskless.py notst_diskless.py && python run_all.py && cd %s" % (self.cfg['start_dir'], cwd)
+        self.testcmd = "cd %s/test && mv tst_dap.py notst_dap.py && mv tst_diskless.py notst_diskless.py && %s run_all.py && cd %s" % (self.cfg['start_dir'], self.python_cmd, cwd)
         super(EB_netcdf_minus_python, self).test_step()
 
     def sanity_check_step(self):
