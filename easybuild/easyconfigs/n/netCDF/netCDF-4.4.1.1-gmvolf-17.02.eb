@@ -25,11 +25,11 @@ builddependencies = [
 # make sure both static and shared libs are built
 configopts = [
     "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON",
-#    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF",
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF",
 ]
 
 sanity_check_paths = {
-    'files': ['lib64/libnetcdf.so'],
+    'files': ['lib64/libnetcdf.so', 'lib64/libnetcdf.a'],
     'dirs': [],
 }
 
