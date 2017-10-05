@@ -20,7 +20,8 @@
 easyblock = 'CMakeMake'
 
 name = 'VTK'
-version = '8.0.1'
+vtk_version = '8.0.1'
+version = '%s-EGL' % vtk_version
 
 homepage = 'http://www.vtk.org'
 description = """The Visualization Toolkit (VTK) is an open-source, freely
@@ -38,8 +39,8 @@ toolchainopts = {'verbose': False}
 
 source_urls = ['http://www.vtk.org/files/release/%(version_major_minor)s']
 sources = [
-    SOURCE_TAR_GZ,
-    '%(name)sData-%(version)s.tar.gz',
+    '%s-%s.tar.gz' % (name, vtk_version), 
+    '%sData-%s.tar.gz' % (name, vtk_version),
 ]
 
 separate_build_dir = True
