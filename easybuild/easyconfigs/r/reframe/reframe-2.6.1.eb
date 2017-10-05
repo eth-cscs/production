@@ -1,0 +1,26 @@
+# @author: gppezzi
+
+easyblock = "Tarball"
+
+name = 'reframe'
+version = '2.6.1'
+
+homepage = 'https://madra.cscs.ch/scs/reframe/'
+description = "A regression framework for writing portable tests for HPC systems."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+sources = [ ('archive.tar.gz?ref=v%(version)s', "tar xfz %s" )]
+source_urls = ['https://madra.cscs.ch/scs/reframe/repository/']
+patches = ['reframe-2.6.1-hpl_hpcg.patch']
+
+dependencies = [('Python-bare', '3.6.2')]
+
+keepsymlinks = True
+
+sanity_check_paths={
+    'files': ['reframe.py', 'bin/reframe'],
+    'dirs': ['bin', 'checks', 'unittests'],
+}
+
+moduleclass = 'devel'

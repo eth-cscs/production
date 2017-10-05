@@ -25,6 +25,7 @@ dependencies = [
     #('Boost', '1.63.0'),
     ('Paraver', '4.6.4.rc1', '', True),
     ('Dimemas', '5.3.3', '', True),
+    ('clusteringsuite', '2.6.6', '', True),
     ('papi/5.5.1.2', EXTERNAL_MODULE),
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
 ]

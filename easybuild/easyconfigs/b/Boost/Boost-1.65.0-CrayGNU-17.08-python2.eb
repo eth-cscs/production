@@ -1,7 +1,7 @@
 # contributed by Luca Marsella (CSCS)
 name = 'Boost'
 version = '1.65.0'
-versionsuffix = '-cray-python2'
+versionsuffix = '-python2'
 
 homepage = 'http://www.boost.org/'
 description = """Boost provides free peer-reviewed portable C++ source

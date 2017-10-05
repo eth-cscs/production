@@ -21,7 +21,7 @@ dependencies = [
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 
 builddependencies = [
-    ('CMake', '3.7.2', '', True),
+    ('CMake', '3.9.1', '', True),
     ('cURL', '7.40.0', '', True),
 ]
 
