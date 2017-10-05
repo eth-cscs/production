@@ -1,5 +1,6 @@
 # @author: gppezzi
-easyblock = "pycuda"
+# easyblock = "pycuda"
+easyblock = 'PythonPackage'
 
 name = 'pycuda'
 version = '2017.1.1'
@@ -24,6 +25,7 @@ dependencies = [
     ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
 ]
 
+prebuildopts = "./configure.py --cuda-root=$EBROOTCUDA "
 # modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths = {
@@ -31,4 +33,4 @@ sanity_check_paths = {
     'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
 }
 
-moduleclass = 'data'
+moduleclass = 'lang'
