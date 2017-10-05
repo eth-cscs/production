@@ -53,7 +53,7 @@ toolchainopts = {'usempi': True, 'verbose': False}
 #sources = ['visit2.12.3.tar.gz']
 
 # In order to use the pre-downloaded version use the source below
-sources = [SOURCELOWER_TAR_GZ]
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
 
 srcdir='../src'
 preconfigopts  = ' export PAR_COMPILER=$CC; '
