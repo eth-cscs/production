@@ -1,8 +1,6 @@
 # contributed by Luca Marsella (CSCS)
 name = 'netcdf4-python'
 version = '1.3.0'
-pyver = '2.7.13'
-pyshortver = '2.7'
 versionsuffix = '-Python-%s' % pyver
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
@@ -19,7 +17,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('Python', '{0}'.format(pyver)),
+    ('Python', '2.7.13'),
     ('netCDF-Fortran', '4.4.4'),
 ]
 
