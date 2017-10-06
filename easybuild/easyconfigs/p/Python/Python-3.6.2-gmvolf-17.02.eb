@@ -178,9 +178,10 @@ exts_list = [
                        '64958f7a062aa287237364eb0a0959bf7a817f708d5c25d043/'],
        'source_tmpl': '%(name)s-%(version)s.zip',
    }),
-   ('Pillow', '4.2.1', {
+   ('Pillow', '4.3.0', {
        'modulename' : 'PIL',
-       'source_urls': [PYPI_SOURCE],
+       'source_urls': ['https://pypi.python.org/packages/e0/82/ec499c78bfe4'   \
+                       'ecaa91c2f3000040451d187ed0a816d58b8543e29c48827f/'],
        'sources'    : [SOURCE_TAR_GZ],
    }),
    ('PyYAML', '3.12', {
