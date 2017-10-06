@@ -125,6 +125,11 @@ fi
 if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
     export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
 fi
+# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
+if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+ mkdir -p "$EASYBUILD_PREFIX/modules/all"
+ ln -s /apps/common/UES/jenkins/easybuild/modules/all/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+fi
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
 # print EasyBuild configuration, module list, production file(s), list of builds
