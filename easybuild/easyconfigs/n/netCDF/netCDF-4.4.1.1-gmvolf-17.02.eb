@@ -17,7 +17,7 @@ dependencies = [('HDF5', '1.8.18')]
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 
 builddependencies = [
-    ('CMake', '3.7.2', '', True),
+    ('CMake', '3.9.1', '', True),
     # ('Doxygen', '1.8.9.1'),
     ('cURL', '7.52.1'),
 ]
@@ -25,11 +25,11 @@ builddependencies = [
 # make sure both static and shared libs are built
 configopts = [
     "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON",
-#    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF",
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF",
 ]
 
 sanity_check_paths = {
-    'files': ['lib64/libnetcdf.so'],
+    'files': ['lib64/libnetcdf.so', 'lib64/libnetcdf.a'],
     'dirs': [],
 }
 
