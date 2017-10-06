@@ -1,0 +1,34 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'netCDF4'
+version = '1.3.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://unidata.github.io/netcdf4-python/'
+description = """Provides an object-oriented python interface to the netCDF version 4 library"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+checksums = ['d4773f50a5b5df82b0cd002e655ad4b8']
+
+builddependencies = [
+    ('cURL', '7.56.0'),
+]
+
+dependencies = [
+    ('Python', '3.6.2'),
+    ('netCDF-Fortran', '4.4.4'),
+]
+
+options = {'modulename': '%(name)s'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-x86_64.egg/%(name)s'],
+}
+
+moduleclass = 'data'
