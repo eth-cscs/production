@@ -186,7 +186,8 @@ exts_list = [
    }),
    ('PyYAML', '3.12', {
        'modulename' : 'yaml',
-       'source_urls': [PYPI_SOURCE],
+       'source_urls': ['https://pypi.python.org/packages/4a/85/db5a2df477072b' \
+                       '2902b0eb892feb37d88ac635d36245a72a6a69b23b383a/'],
        'sources'    : [SOURCE_TAR_GZ],
    }),
    ('tornado', '4.5.1', {
