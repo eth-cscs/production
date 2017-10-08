@@ -4,9 +4,7 @@ easyblock = 'PythonPackage'
 
 name = 'pycuda'
 version = '2017.1.1'
-#python = 'cray-python'
 pyver = '2.7.13'
-#pyshortver = '.'.join(pyver.split('.')[0:2])
 pyshortver = '2.7'
 versionsuffix = '-python2-cuda-8.0'
 
@@ -26,7 +24,6 @@ dependencies = [
 ]
 
 prebuildopts = "./configure.py --cuda-root=$EBROOTCUDA "
-# modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths = {
     'files': [],
