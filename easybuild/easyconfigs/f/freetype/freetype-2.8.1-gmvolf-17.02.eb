@@ -12,6 +12,7 @@ source_urls = [GNU_SAVANNAH_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
+    ('bzip2', '1.0.6'),
     ('libpng', '1.6.32'),
     ('libtool', '2.4.6'),
 ]
