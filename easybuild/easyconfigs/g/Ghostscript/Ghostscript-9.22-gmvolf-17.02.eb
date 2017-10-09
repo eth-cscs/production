@@ -1,0 +1,26 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Ghostscript'
+version = '9.22'
+downloadversion = version.replace('.','')
+
+homepage = 'http://ghostscript.com'
+description = """Ghostscript is a versatile processor for PostScript data with the ability to render PostScript to
+ different targets. It used to be part of the cups printing stack, but is no longer used for that."""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchainopts = {'pic': True}
+
+source_urls = ["https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs{0}/".format(downloadversion)]
+sources = [SOURCELOWER_TAR_GZ]
+
+# expat, freetype and libpng are optional deps,
+# these are actually patched and included in the sources
+dependencies = [
+    ('LibTIFF', '4.0.8'),
+]
+
+configopts = "--with-system-libtiff --enable-dynamic"
+
+moduleclass = 'tools'
