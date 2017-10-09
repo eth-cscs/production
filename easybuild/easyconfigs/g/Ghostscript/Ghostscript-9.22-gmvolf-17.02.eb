@@ -18,8 +18,8 @@ sources = [SOURCELOWER_TAR_GZ]
 # expat, freetype and libpng are optional: these are actually patched and included in the sources
 dependencies = [
     ('expat', '2.2.4'),
-    ('freetype', '2.8.1'),
-    ('libpng', '1.6.32'),
+    ('freetype', '2.7.1'),
+    ('libpng', '1.6.28'),
     ('LibTIFF', '4.0.8'),
 ]
 
