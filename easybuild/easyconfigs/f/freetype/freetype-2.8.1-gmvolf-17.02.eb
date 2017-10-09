@@ -16,6 +16,7 @@ dependencies = [
     ('libtool', '2.4.6'),
 ]
 
+# RedHat 7.3: fix by https://forum.directadmin.com/showthread.php?t=55304
 configopts = '--with-harfbuzz=no'
 
 sanity_check_paths = {
