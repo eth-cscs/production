@@ -7,14 +7,14 @@ version = '7.0.7-7'
 homepage = 'http://www.imagemagick.org/'
 description = """ImageMagick is a software suite to create, edit, compose, or convert bitmap images"""
 
-toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 sources = [SOURCE_TAR_GZ]
 source_urls = ['http://www.imagemagick.org/download/']
 
 dependencies = [
     ('bzip2', '1.0.6'),
-    ('freetype', '2.7.1'),
+    ('freetype', '2.8.1'),
     ('Ghostscript', '9.22'),
     ('JasPer', '1.900.1'),
     ('libjpeg-turbo', '1.5.1'),
