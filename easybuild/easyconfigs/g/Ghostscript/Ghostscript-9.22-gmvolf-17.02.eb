@@ -15,12 +15,14 @@ toolchainopts = {'pic': True}
 source_urls = ["https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs{0}/".format(downloadversion)]
 sources = [SOURCELOWER_TAR_GZ]
 
-# expat, freetype and libpng are optional deps,
-# these are actually patched and included in the sources
+# expat, freetype and libpng are optional: these are actually patched and included in the sources
 dependencies = [
+    ('expat', '2.2.4'),
+    ('freetype', '2.8.1'),
+    ('libpng', '1.6.32'),
     ('LibTIFF', '4.0.8'),
 ]
 
-configopts = "--with-system-libtiff --enable-dynamic"
+configopts = "--enable-dynamic"
 
 moduleclass = 'tools'
