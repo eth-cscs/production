@@ -12,13 +12,11 @@ toolchain = {'name': 'gmvolf', 'version': '17.02'}
 sources = [SOURCE_TAR_GZ]
 source_urls = ['http://www.imagemagick.org/download/']
 
+# freetype and libtiff will be loaded as dependencies by Ghostscript, bzip2 by freetype
 dependencies = [
-    ('bzip2', '1.0.6'),
-    ('freetype', '2.7.1'),
     ('Ghostscript', '9.22'),
     ('JasPer', '1.900.1'),
-    ('libjpeg-turbo', '1.5.1'),
-    ('LibTIFF', '4.0.8'),
+    ('libjpeg-turbo', '1.5.2'),
 ]
 
 configopts = "--with-gslib --with-x"

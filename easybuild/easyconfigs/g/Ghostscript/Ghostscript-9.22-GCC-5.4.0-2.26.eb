@@ -9,7 +9,7 @@ homepage = 'http://ghostscript.com'
 description = """Ghostscript is a versatile processor for PostScript data with the ability to render PostScript to
  different targets. It used to be part of the cups printing stack, but is no longer used for that."""
 
-toolchain = {'name': 'dummy', 'version': 'null'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 toolchainopts = {'pic': True}
 
 source_urls = ["https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs{0}/".format(downloadversion)]
@@ -18,8 +18,8 @@ sources = [SOURCELOWER_TAR_GZ]
 # expat, freetype and libpng are optional: these are actually patched and included in the sources
 dependencies = [
     ('expat', '2.2.4'),
-    ('freetype', '2.8.1'),
-    ('libpng', '1.6.32'),
+    ('freetype', '2.7.1'),
+    ('libpng', '1.6.28'),
     ('LibTIFF', '4.0.8'),
 ]
 

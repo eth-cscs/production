@@ -2,30 +2,28 @@
 easyblock = 'ConfigureMake'
 
 name = 'ImageMagick'
-version = '7.0.7-7'
+version = '6.7.6-10'
 
 homepage = 'http://www.imagemagick.org/'
 description = """ImageMagick is a software suite to create, edit, compose, or convert bitmap images"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 
-sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.imagemagick.org/download/']
+sources = [SOURCE_TAR_XZ]
+source_urls = ['http://www.imagemagick.org/download/releases/']
 
+# freetype and libtiff will be loaded as dependencies by Ghostscript, bzip2 by freetype
 dependencies = [
-    ('bzip2', '1.0.6'),
-    ('freetype', '2.8.1'),
     ('Ghostscript', '9.22'),
     ('JasPer', '1.900.1'),
-#    ('libjpeg-turbo', '1.5.1'),
-    ('LibTIFF', '4.0.8'),
+    ('libjpeg-turbo', '1.5.2'),
 ]
 
 configopts = "--with-gslib --with-x"
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['bin', 'etc/%(name)s-%(version_major)s', 'include/%(name)s-%(version_major)s', 'lib', 'share'],
+    'dirs': ['bin', 'etc/%(name)s', 'include/%(name)s', 'lib', 'share'],
 }
 
 modextravars = {'MAGICK_HOME': '%(installdir)s'}

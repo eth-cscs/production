@@ -1,4 +1,4 @@
-# contribute by Luca Marsella (CSCS) 
+# Contributed by Luca Marsella (CSCS) 
 easyblock = 'ConfigureMake'
 
 name = 'JasPer'
@@ -6,8 +6,7 @@ version = '1.900.1'
 
 homepage = 'http://www.ece.uvic.ca/~frodo/jasper/'
 description = "gzip (GNU zip) is a popular data compression program as a replacement for compress"
-
-toolchain = {'name': 'dummy', 'version': 'null'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 toolchainopts = {'pic': True}
 
 sources = [SOURCELOWER_ZIP]

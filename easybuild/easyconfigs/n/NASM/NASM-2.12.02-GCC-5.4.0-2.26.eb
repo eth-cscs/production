@@ -2,12 +2,12 @@
 easyblock = 'ConfigureMake'
 
 name = 'NASM'
-version = '2.13.01'
+version = '2.12.02'
 
 homepage = 'http://www.nasm.us/'
 description = """NASM: General-purpose x86 assembler"""
 
-toolchain = {'name': 'dummy', 'version': 'null'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 
 source_urls = ['http://www.nasm.us/pub/nasm/releasebuilds/%(version)s']
 sources = [SOURCELOWER_TAR_BZ2]
