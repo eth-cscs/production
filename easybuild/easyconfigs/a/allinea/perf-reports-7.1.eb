@@ -1,0 +1,152 @@
+easyblock = 'Bundle'
+
+name = 'perf-reports'
+version = '7.1'
+
+homepage = 'https://www.allinea.com/product-documentation'
+description = """Allinea Performance Reports is a low-overhead tool that
+produces one-page text and HTML reports summarizing and characterizing both
+scalar and MPI application performance."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+# This module cannot be loaded if another modulefile was previously loaded
+
+conflict darshan
+conflict Cube
+
+# ===============================================================
+# Which os/system is it ?
+# ===============================================================
+set OS_ID "generic"
+set VERSION_ID "NULL"
+set VERSION_ID_MAJOR "NULL"
+
+if { [ file exist /etc/os-release ] } {
+
+    set fsize [file size /etc/os-release ]
+    set fp [open /etc/os-release r]
+    set OS_INFO [read $fp $fsize]
+
+    foreach i $OS_INFO {
+        set key [ lindex [ split $i '=' ]  0 ]
+        set value [ lindex [ split $i '=' ]  1 ]
+        # puts stderr "i=$i : $key === $value"
+
+        if { $key == "ID" } {
+            set OS_ID [ string trim $value '"' ]
+        }
+
+        if { $key == "VERSION_ID" } {
+            set VERSION_ID [ string trim $value '"' ]
+            set VERSION_ID_MAJOR [ lindex [ split $VERSION_ID '.' ]  0 ]
+        }
+
+    }
+}
+
+#puts stderr "OS_ID=${OS_ID}"
+#puts stderr "VERSION_ID=$VERSION_ID"
+#puts stderr "VERSION_ID_MAJOR=$VERSION_ID_MAJOR"
+
+if { ${OS_ID}=="sles" } {
+    set ost "SLES"
+    if { ${VERSION_ID_MAJOR}=="12" } {
+        set osv "12"
+    } else {
+        set osv "11"
+    }
+}
+
+if { ${OS_ID}=="rhel" } {
+    set ost "RHAT"
+    if { ${VERSION_ID_MAJOR}=="7" } {
+        set osv "7"
+    } else {
+        set osv "6"
+    }
+}
+
+if { ${OS_ID}=="generic" } {
+    set ost "RHAT"
+    set osv "6"
+}
+
+set     url          "http://www.allinea.com"
+set     url2         "http://user.cscs.ch"
+set     modulename   "allinea/perf-reports"
+set     version      "7.1"
+set     packageroot  "/apps/common/UES/${ost}${osv}/${modulename}/${version}"
+
+# ===============================================================
+#if { [ module-info mode load ] } {
+
+        setenv          ALLINEA_DIR           "$packageroot"
+        prepend-path    PATH                  "$packageroot/bin"
+        prepend-path    PATH                  "$packageroot/libexec"
+        prepend-path    LD_LIBRARY_PATH       "$packageroot/lib"
+        prepend-path    LD_LIBRARY_PATH       "$packageroot/lib/64"
+        prepend-path    MODULEPATH            "$packageroot/share/modules/cray"
+        append-path     PE_PRODUCT_LIST       "MAP"
+        setenv          ALLINEA_LICENCE_DIR   "/apps/common/UES/licensesCSCS/map"
+        #setenv          DDT_LICENSE_FILE      "/apps/common/UES/licensesCSCS/map/Licence"
+        setenv          CRAY_ACC_NO_EARLY_INIT "1"
+        setenv          ALLINEA_MPIRUN        "srun"
+
+        # --- CRAY_CPU_TARGET:
+        if { ![info exists ::env(CRAY_CPU_TARGET)] } {
+        setenv          CRAY_CPU_TARGET       "haswell"
+        }
+
+        # --- PE_ENV:
+        if { ![info exists ::env(PE_ENV)] } {
+        setenv          PE_ENV                "GNU"
+        }
+
+        set             configdir             "$env(HOME)/.allinea/${ost}${osv}/$env(CRAY_CPU_TARGET)/$env(PE_ENV)"
+        if {![ file isdirectory $configdir ]} {
+                        file mkdir            "$configdir"
+        }
+        setenv          MAP_LIBRARIES_DIRECTORY "$configdir"
+        setenv          ALLINEA_CONFIG_DIR    "$configdir"
+
+#}
+
+# ===============================================================
+# Help message called by : module help ...
+# ===============================================================
+#if { [ module-info mode help ] } {
+proc ModulesHelp {} {
+  global url url2 flags modulename version packageroot
+  puts stderr "
+        \tmodulefile : [module-info name] [module-info mode]
+        \t$modulename Version $version :
+        \tCSCS Users Documentation : $url
+        \t$url2
+
+        \tSee : $packageroot
+        \t \033\[01;32m ${packageroot}/doc/ \033\[0m"
+       
+  return 0
+}
+#}
+
+# ===============================================================
+# Short help message called by : module whatis ...
+# ===============================================================
+if { [ module-info mode whatis ] } {
+module-whatis "Set environment variables to enable the usage of the $modulename $version debugger."
+}
+
+# ===============================================================
+# Help message called by : module display ...
+# ===============================================================
+# module display "[module-info name]"
+"""
+
+moduleclass = 'devel'
+
+#if { [ module-info mode load ] } {
+#  if { [is-loaded darshan] } { module unload darshan }
+#}
