@@ -9,6 +9,8 @@
  GSL-2.3-gmvolf-17.02.eb
  git-2.14.1.eb                                       --installpath=/apps/escha/UES/jenkins/RH7.3-generic/easybuild
  HDF-4.2.13-gmvolf-17.02.eb
+ ImageMagick-6.7.6-10-GCC-5.4.0-2.26.eb              --installpath=/apps/escha/UES/jenkins/RH7.3-experimental/easybuild 
+ ImageMagick-7.0.7-7-GCC-5.4.0-2.26.eb               --installpath=/apps/escha/UES/jenkins/RH7.3-experimental/easybuild
  NCL-6.4.0.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.3-generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
