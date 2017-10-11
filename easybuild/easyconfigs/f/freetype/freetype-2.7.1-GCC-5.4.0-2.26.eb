@@ -1,4 +1,4 @@
-# Recipe contribted by MaKra - August 2017
+# Recipe contribted by MaKra and Luca Marsella (CSCS)
 name = 'freetype'
 version = '2.7.1'
 
@@ -10,7 +10,7 @@ high-quality output (glyph images). It can be used in graphics libraries,
 display servers, font conversion tools, text image generation tools, and many
 other products as well."""
 
-toolchain = {'name':'gmvolf', 'version':'17.02'}
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 
 source_urls = [GNU_SAVANNAH_SOURCE]
 sources = [SOURCE_TAR_GZ]

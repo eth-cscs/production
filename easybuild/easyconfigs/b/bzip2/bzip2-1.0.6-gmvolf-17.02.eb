@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 name = 'bzip2'
 version = '1.0.6'
 
@@ -11,5 +12,11 @@ toolchainopts = {'pic': True}
 
 sources = [SOURCE_TAR_GZ]
 source_urls = ['http://www.bzip.org/%(version)s']
+
+# create pkgconfig file
+postinstallcmds = [
+    'mkdir %(installdir)s/lib/pkgconfig',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: bzip2 \nDescription: bzip2 compression library \nVersion: 1.0.6 \n\nRequires: \nLibs: -L\${libdir} -L\${libdir} -lbz2 \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc'
+]
 
 moduleclass = 'tools'
