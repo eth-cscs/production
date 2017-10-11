@@ -6,7 +6,7 @@ homepage = 'http://freetype.org'
 
 description = """FreeType is a freely available software library to render fonts."""
 
-toolchain = {'name':'dummy', 'version':'null'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 source_urls = [GNU_SAVANNAH_SOURCE]
 sources = [SOURCE_TAR_GZ]
