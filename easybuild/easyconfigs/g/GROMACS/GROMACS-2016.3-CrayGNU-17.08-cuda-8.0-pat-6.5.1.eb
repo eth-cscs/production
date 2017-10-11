@@ -14,7 +14,7 @@
 name = 'GROMACS'
 version = "2016.3"
 cudaversion = '8.0'
-patversion = '651'
+patversion = '6.5.1'
 versionsuffix = '-cuda-%s-pat-%s' % (cudaversion, patversion)
 
 homepage = 'http://www.gromacs.org'
@@ -28,8 +28,8 @@ source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
 configopts = ' -DCMAKE_C_FLAGS="-g -fPIC" -DCMAKE_CXX_FLAGS="-g -fPIC" '
-
-dependencies = [('perftools-lite/6.5.1', EXTERNAL_MODULE)]
+prebuildopts = ' module load perftools-lite/{0} && '.format(patversion)
+#prebuildopts += ' export CRAYPAT_COMPILER_OPTIONS=1 && export CRAYPAT_LITE=sample_profile && '
 
 skipsteps = ['test']
 
