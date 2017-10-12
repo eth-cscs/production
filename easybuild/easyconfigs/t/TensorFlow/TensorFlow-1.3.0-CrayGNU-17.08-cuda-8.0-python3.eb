@@ -31,8 +31,9 @@ dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', ver_suffix_py),
-#    ('protobuf', '3.3.0', ver_suffix_py),
+    ('protobuf', '3.3.0', ver_suffix_py),
     ('backports.weakref', '1.0rc1', ver_suffix_py),
+    ('Werkzeug', '0.12.2', ver_suffix_py),
 ]
 
 sources = ['v%(version)s.tar.gz']
