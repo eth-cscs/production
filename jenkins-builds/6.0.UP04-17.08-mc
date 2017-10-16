@@ -46,7 +46,7 @@
  Score-P-3.1-CrayIntel-17.08.eb
  Score-P-3.1-CrayPGI-17.08.eb
  Spark-1.6.0.eb                                     --set-default-module
- Understand-4.0.909.eb                              --set-default-module --hidden
+ Understand-4.0.913.eb                              --set-default-module --hidden
  vampir-9.3.0.eb                                    --set-default-module
  VASP-5.4.4-CrayIntel-17.08.eb                      --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb                      --set-default-module
