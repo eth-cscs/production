@@ -15,7 +15,7 @@
  ImageMagick-6.7.6-10-GCC-5.4.0-2.26-sysdeps.eb      --installpath=/apps/escha/UES/RH7.3_experimental/easybuild 
  ImageMagick-7.0.7-7.eb                              --installpath=/apps/escha/UES/RH7.3_experimental/easybuild 
  ImageMagick-7.0.7-7-GCC-5.4.0-2.26.eb               --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
- ImageMagick-7.0.7-7-GCC-5.4.0-2.26-sysdeps.eb
+ ImageMagick-7.0.7-7-GCC-5.4.0-2.26-sysdeps.eb       --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  NCL-6.4.0.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
