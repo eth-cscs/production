@@ -30,7 +30,7 @@
  netCDF-Fortran-4.4.4-gmvolf-17.02.eb
  netcdf4-python-1.3.0-gmvolf-17.02-Python-2.7.13.eb
  netcdf4-python-1.3.0-gmvolf-17.02-Python-3.6.2.eb
- netcdf-4.4.1.1-gmvolf-17.02.eb
+ netCDF-4.4.1.1-gmvolf-17.02.eb
  netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
