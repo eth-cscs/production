@@ -2,13 +2,11 @@
 easyblock = 'Tarball'
 
 name = 'Understand'
-version = '4.0.909'
+version = '4.0.913'
 
 homepage = 'https://scitools.com/features/'
 description = """Understand provides you with pertinent informations regarding
 your code."""
-
-#http://latest.scitools.com/Understand/Understand-4.0.913-Linux-64bit.tgz
 
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://latest.scitools.com/Understand/']
@@ -16,7 +14,7 @@ sources = [{
   'filename': '%(name)s-%(version)s-Linux-64bit.tgz',
   'extract_cmd': "tar xf %s",
 }]
-patches = [ ('Understand-4.0.909.patch', 1) ]
+patches = [ ('Understand.patch', 1) ]
 keepsymlinks = True
 
 sanity_check_paths = {
