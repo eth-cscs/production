@@ -31,7 +31,7 @@ preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -
 configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
 prebuildopts = ' export CRAYPAT_LITE=sample_profile && cat make.inc && '
-buildopts = 'all'
+buildopts = 'all epw'
 # a single make process is required, since parallel builds fail
 maxparallel = 1
 

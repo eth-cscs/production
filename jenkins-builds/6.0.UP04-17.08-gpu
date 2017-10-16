@@ -52,7 +52,7 @@
  Spark-1.6.0.eb                                     --set-default-module
  TensorFlow-1.2.1-CrayGNU-17.08-cuda-8.0-python3.eb	--set-default-module
  TensorFlow-1.3.0-CrayGNU-17.08-cuda-8.0-python3.eb
- Understand-4.0.909.eb                              --set-default-module --hidden
+ Understand-4.0.913.eb                              --set-default-module --hidden
  vampir-9.3.0.eb                                    --set-default-module
  VASP-5.4.4-CrayIntel-17.08-cuda-8.0.eb             --set-default-module
  VMD-1.9.3-egl.eb

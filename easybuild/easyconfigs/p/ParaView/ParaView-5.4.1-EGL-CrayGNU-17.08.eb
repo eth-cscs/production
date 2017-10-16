@@ -16,7 +16,7 @@ download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
 sources = ["ParaView-v%(version)s.tar.gz"]
 
-python = 'cray-python'
+python = 'python'
 pyver = '3'
 pysuff = '-%s%s' % (python, pyver)
 dependencies = [

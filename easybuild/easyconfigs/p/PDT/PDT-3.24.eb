@@ -10,8 +10,8 @@ description = """Program Database Toolkit (PDT) is a framework for analyzing sou
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
+source_urls = ['https://www.cs.uoregon.edu/research/tau/pdt_releases']
 sources = ['pdtoolkit-%(version)s.tar.gz']
-source_urls = ['http://tau.uoregon.edu/pdt_releases/']
 checksums = [ 'b8fa5189e5602276ce225ba497b617e4' ]
 
 moduleclass = 'perf'

@@ -2,7 +2,7 @@
 easyblock = 'Tarball'
 
 name = 'Understand'
-version = '4.0.909'
+version = '4.0.913'
 
 homepage = 'https://scitools.com/features/'
 description = """Understand provides you with pertinent informations regarding
@@ -14,7 +14,7 @@ sources = [{
   'filename': '%(name)s-%(version)s-Linux-64bit.tgz',
   'extract_cmd': "tar xf %s",
 }]
-patches = [ ('Understand-4.0.909.patch', 1) ]
+patches = [ ('Understand.patch', 1) ]
 keepsymlinks = True
 
 sanity_check_paths = {
