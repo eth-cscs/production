@@ -3,7 +3,7 @@
 def methods
 def machinesList
 def isForTesting = params.test
-def pullRequestMessage = env.test ? params.customMessage : env.ghprbPullTitle
+def pullRequestMessage = env.ghprbPullTitle
 stage('Initialization') {
     node('master') {
         checkout scm
@@ -63,10 +63,8 @@ stage('Build Stage') {
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
                         commandComplete = "$command/$arch $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"
-                    println "Command: $commandComplete"
                     def buildList = sh(returnStdout: true,
                                     script: "echo \$(git diff origin/master..HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
-                    println "Build list: $buildList"
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
                              "EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
@@ -86,13 +84,12 @@ stage('Build Stage') {
                                            echo \$buildlist | tr \" \" \"\\n\" > \"$prefix/${projectName}.txt\"
                                        fi
 
-                                       #$commandComplete
+                                       $commandComplete
                                        status=\$[status+\$?]
                                        chmod -R o+r \$EASYBUILD_TMPDIR
                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
                                        exit \$status""") 
                     }
-                    deleteDir()
                 }
             }
         }
