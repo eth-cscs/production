@@ -2,7 +2,6 @@
 
 def methods
 def machinesList
-def isForTesting = params.test
 def pullRequestMessage = env.ghprbPullTitle
 stage('Initialization') {
     node('master') {
