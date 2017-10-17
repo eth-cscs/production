@@ -23,11 +23,12 @@ dependencies = [
     ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
 ]
 
-prebuildopts = "./configure.py --cuda-root=$EBROOTCUDA --python-exe=python3"
+prebuildopts = "python3 ./configure.py --cuda-root=$EBROOTCUDA --python-exe=python3"
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
+#              lib/python3.5/site-packages/pycuda-2017.1.1-py3.5-linux-x86_64.egg
 }
 
 moduleclass = 'lang'
