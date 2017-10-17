@@ -7,6 +7,8 @@ version = '2017.1.1'
 pyver = '3.5.2'
 pyshortver = '3.5'
 versionsuffix = '-python3-cuda-8.0'
+req_py_majver = 3
+req_py_minver = 5
 
 homepage = 'https://pypi.python.org/pypi/pycuda'
 description = """Python wrapper for Nvidia CUDA. PyCUDA lets you access Nvidia
@@ -28,7 +30,7 @@ prebuildopts = "python3 ./configure.py --cuda-root=$EBROOTCUDA --python-exe=pyth
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
-#              lib/python3.5/site-packages/pycuda-2017.1.1-py3.5-linux-x86_64.egg
+            # lib/python3.5/site-packages/pycuda-2017.1.1-py3.5-linux-x86_64.egg
 }
 
 moduleclass = 'lang'
