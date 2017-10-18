@@ -29,8 +29,7 @@ prebuildopts = "python3 ./configure.py --cuda-root=$EBROOTCUDA --python-exe=pyth
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
-            # lib/python3.5/site-packages/pycuda-2017.1.1-py3.5-linux-x86_64.egg
+    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],            
 }
 
 moduleclass = 'lang'
