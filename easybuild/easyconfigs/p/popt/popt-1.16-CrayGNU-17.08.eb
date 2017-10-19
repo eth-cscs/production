@@ -1,0 +1,18 @@
+easyblock = 'ConfigureMake'
+
+name = 'popt'
+version = '1.16'
+
+homepage = 'http://www.linuxfromscratch.org/blfs/view/8.0/general/popt.html'
+description = """The popt package contains the popt libraries which are used by some programs to parse command-line options."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+source_urls = ['http://rpm5.org/files/popt']
+sources = ['popt-%(version)s.tar.gz']
+
+sanity_check_paths = {
+    'files': ['lib/libpopt.la', 'lib/libpopt.so'],
+    'dirs': []
+}
+
+moduleclass = 'tools'
