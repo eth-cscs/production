@@ -2,6 +2,7 @@
 
 def methods
 def machinesList
+def loginBash = '#!/bin/bash -l'
 stage('Initialization') {
     node('master') {
         checkout scm
@@ -40,8 +41,8 @@ stage('Build Stage') {
                     def workingDir = sh(returnStdout: true, 
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true, 
-                                     script: '''#!/bin/bash -l
-                                                echo $SCRATCH''').trim()
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
                     def unuseFlag = "--unuse=${machine.unusePath}".replace('ARCH', arch)                    
                     def listFlag = "--list=$workingDir/jenkins-builds/$machineLabel"
@@ -50,7 +51,7 @@ stage('Build Stage') {
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
                              "EASYBUILD_SOURCEPATH=$prefix/sources"]) {
-                                 sh("""#!/bin/bash -l
+                                 sh("""$logiBash
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
