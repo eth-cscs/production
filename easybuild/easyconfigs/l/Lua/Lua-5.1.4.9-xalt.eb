@@ -24,12 +24,6 @@ builddependencies = [
     ('libreadline', '7.0-xalt')
 ]
 
-#skipsteps = ['configure']
-#buildopts = ' PLAT=linux'
-#buildopts += ' INSTALL_TOP=%(installdir)s'
-#no: buildopts = '--with-PACKAGE=lfs'
-#installopts = ' INSTALL_TOP=%(installdir)s'
-
 # Use static linking for ncurses so it's not a runtime dep
 configopts = "--with-static=yes"
 
