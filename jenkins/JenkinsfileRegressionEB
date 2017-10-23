@@ -37,6 +37,11 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
+                    def moduleDefinition = ''
+                    if (machineName == 'leone')
+                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
+                                              export -f module'''
+                         
                     def project_name = env.JOB_BASE_NAME.trim() 
                     def workingDir = sh(returnStdout: true, 
                                          script: 'echo $PWD').trim()
@@ -52,6 +57,7 @@ stage('Build Stage') {
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
                              "EASYBUILD_SOURCEPATH=$prefix/sources"]) {
                                  sh("""$loginBash
+                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
