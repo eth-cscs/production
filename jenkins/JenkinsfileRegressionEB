@@ -49,7 +49,8 @@ stage('Build Stage') {
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
                              "EASYBUILD_SOURCEPATH=$prefix/sources"]) {
-                                 sh("""status=0
+                                 sh("""#!/bin/bash -l
+                                       status=0
                                        if [ -d $prefix]; then
                                            rm -rf $prefix/*
                                        fi
