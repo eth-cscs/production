@@ -28,4 +28,6 @@ sanity_check_paths = {
     'dirs': []
 }
 
+modextrapaths = { 'PATH': 'lmod/lmod/libexec' }
+
 moduleclass = "tools"
