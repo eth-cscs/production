@@ -49,7 +49,7 @@ build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
 build_str += "export PYMAJVER=%s && export PYMINVER=%s &&" % (py_maj_ver, py_min_ver) # required for configure-cscs scripts
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
-build_str += "bazel build --config=cuda --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
+build_str += "bazel build --config=cuda --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
 build_str += " -c opt //tensorflow/tools/pip_package:build_pip_package && "
 build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
 build_str += "pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
