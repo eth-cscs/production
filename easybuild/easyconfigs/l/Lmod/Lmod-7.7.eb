@@ -19,8 +19,6 @@ source_urls = [
     'http://sourceforge.net/projects/lmod/files/Testing'
 ]
 
-# lua-5.2.2-4.2.x86_64.rpm
-# dependencies = [("Lua", "5.3.4")]
 dependencies = [("Lua", "5.1.4.9-xalt")]
 
 sanity_check_paths = {
