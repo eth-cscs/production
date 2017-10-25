@@ -54,3 +54,4 @@
  vampir-9.3.0.eb                                    --set-default-module
  VASP-5.4.4-CrayIntel-17.08.eb                      --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb                      --set-default-module
+ Visit-2.13.0-CrayGNU-17.08.eb
