@@ -1,4 +1,4 @@
-# @author: maximem and gppezzi
+# @author: maximem, gppezzi and sarafael
 
 easyblock = "CmdCp"
 
@@ -33,7 +33,7 @@ dependencies = [
     ('Boost', '1.65.0','-python3'),
     ('CUB', '1.4.1'),
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
-    ('OpenCV', '3.1.0', '-python-3'),
+    ('OpenCV', '3.1.0', '-python3'),
 ]
 
 buildcmd = 'cd %(builddir)s && rm -rf CNTK-2.0.rc1/Source/Multiverso/ CNTK-2.0.rc1/build && '
