@@ -22,4 +22,6 @@ sanity_check_paths = {
     'dirs': ['cfgs', ],
 }
 
+modextravars = { 'EXTRAECFGDIR': '$EBROOTPARAVER/cfgs' }
+
 moduleclass = 'perf'
