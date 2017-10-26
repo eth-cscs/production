@@ -1,0 +1,28 @@
+# EasyBuild recipe contributed by mkra (CSCS) in Oct. 2017
+easyblock = 'PackedBinary'
+name = 'IDL'
+version = '8.5'
+
+homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
+
+description = """
+IDL, short for Interactive Data Language, is a programming language 
+used for data analysis. It is popular in particular areas of science, 
+such as astronomy, atmospheric physics and medical imaging. 
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+# File was provided
+sources = [{
+    'filename' : 'idl85envi53sp1linux.x86_64.tar.gz',
+}]
+
+# The silent installation mode requires a text file containing the
+# answers to the questions asked throughout the installation process
+install_cmd  = "echo -e 'y \n%(builddir)s \ny \nn \ny \nn \ny \nn' > %(builddir)s/answers.txt"
+install_cmd += "&& %(builddir)s/./install.sh -s < %(builddir)s/answers.txt"
+
+sanity_check_commands = ['idl']
+
+moduleclass = 'lang'
