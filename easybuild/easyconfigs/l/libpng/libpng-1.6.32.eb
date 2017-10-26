@@ -1,0 +1,20 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libpng'
+version = '1.6.32'
+
+homepage = 'http://www.libpng.org/pub/png/libpng.html'
+description = "libpng is the official PNG reference library"
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchainopts = {'pic': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_XZ]
+
+dependencies = [('zlib', '1.2.11')]
+
+configopts = "--with-pic"
+
+moduleclass = 'lib'

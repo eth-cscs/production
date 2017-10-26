@@ -15,7 +15,15 @@ toolchain = {'name':'gmvolf', 'version':'17.02'}
 source_urls = [GNU_SAVANNAH_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
-dependencies = [('libpng', '1.6.28')]
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('libpng', '1.6.28'),
+    ('libtool', '2.4.6'),
+    ('zlib', '1.2.8'),
+]
+
+# RedHat 7.3: fix by https://forum.directadmin.com/showthread.php?t=55304
+configopts = '--with-bzip2 --with-harfbuzz=no --with-zlib'
 
 sanity_check_paths = {
     'files': ['bin/freetype-config', 'lib/libfreetype.a', 'lib/libfreetype.so', 'lib/pkgconfig/freetype2.pc'],
@@ -23,4 +31,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'vis'
-

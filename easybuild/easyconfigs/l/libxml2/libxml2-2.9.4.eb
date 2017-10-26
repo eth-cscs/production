@@ -20,7 +20,6 @@ configopts = 'CC="$CC" CXX="$CXX" --with-pic --without-python'
 
 dependencies = [
     ('zlib', '1.2.8'),
-    ('XZ', '5.2.2'),
 ]
 
 moduleclass = 'lib'

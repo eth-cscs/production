@@ -22,7 +22,7 @@ postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 
 builddependencies = [
     ('CMake', '3.9.1', '', True),
-    ('cURL', '7.40.0', '', True),
+    ('cURL', '7.56.0'),
 ]
 
 # make sure both static and shared libs are built
