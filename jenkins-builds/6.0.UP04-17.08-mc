@@ -1,3 +1,4 @@
+ abcpy-0.3.0-CrayGNU-17.08-python3.eb               --set-default-module
  Amber-16-CrayGNU-17.08-parallel.eb                 --set-default-module
  Amber-16-CrayGNU-17.08-serial.eb
  Boost-1.65.0-CrayGNU-17.08-python2.eb
@@ -54,3 +55,4 @@
  vampir-9.3.0.eb                                    --set-default-module
  VASP-5.4.4-CrayIntel-17.08.eb                      --set-default-module
  Visit-2.12.3-CrayGNU-17.08.eb                      --set-default-module
+ Visit-2.13.0-CrayGNU-17.08.eb
