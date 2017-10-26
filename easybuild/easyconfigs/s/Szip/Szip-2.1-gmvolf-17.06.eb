@@ -9,7 +9,7 @@ description = "Szip compression software, providing lossless compression of scie
 toolchain = {'name': 'gmvolf', 'version': '17.06'}
 toolchainopts = {'optarch': True, 'pic': True}
 
-source_urls = ['http://www.hdfgroup.org/ftp/lib-external/szip/%(version)s/src']
+source_urls = ['http://www.hdfgroup.org/ftp/lib-external/szip/previous/%(version)s/src']
 sources = [SOURCELOWER_TAR_GZ]
 
 configopts = "--with-pic"
