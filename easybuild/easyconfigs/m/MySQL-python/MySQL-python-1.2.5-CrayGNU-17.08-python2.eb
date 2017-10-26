@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'MySQL-python'
+version = '1.2.5'
+python = 'python'
+pyver = '2'
+versionsuffix = '-%s%s' % (python, pyver)
+py_maj_ver = '2'
+py_min_ver = '7'
+
+homepage = 'https://pypi.python.org/pypi/MySQL-python/1.2.5'
+description = """An interface to the MySQL database server for Python."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = { 'verbose' : False }
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_ZIP]
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('PyExtensions', '2.7'),
+]
+
+sanity_check_commands = [('python', "-c 'import MySQLdb'")]
+
+sanity_check_paths = {
+    'files': ['lib/python2.7/site-packages/MySQL_python-1.2.5-py2.7-linux-x86_64.egg'],
+    'dirs': [''],
+    #'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s.egg/%%(namelower)s' % {'pv': pyshortver}],
+}
+
+moduleclass = 'data'
