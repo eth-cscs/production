@@ -27,6 +27,7 @@
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08.eb                  --set-default-module
+ Lmod-7.7.eb                                        --set-default-module --hidden
  NCO-4.6.8-CrayGNU-17.08.eb                         --set-default-module
  NAMD-2.12-CrayIntel-17.08.eb                       --set-default-module
  NCL-6.4.0.eb                                       --set-default-module

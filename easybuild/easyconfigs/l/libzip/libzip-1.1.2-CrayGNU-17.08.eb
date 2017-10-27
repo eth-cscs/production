@@ -1,0 +1,21 @@
+# @author: gppezzi
+
+easyblock = "ConfigureMake"
+
+name = 'libzip'
+version = '1.1.2'
+
+homepage = 'https://nih.at/libzip/'
+description = """libzip is C library for reading, creating, and modifying zip archives."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://nih.at/libzip/']
+
+sanity_check_paths = {
+    'files': ['lib/libzip.so'],
+    'dirs': ['include', 'bin']
+}
+
+moduleclass = 'devel'
