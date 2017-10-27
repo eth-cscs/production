@@ -3,7 +3,7 @@ easyblock = 'PackedBinary'
 name = 'IDL'
 version = '8.5'
 
-homepage = '/apps/common/easybuild/sources/i/IDL/'
+homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
 
 description = """
 IDL, short for Interactive Data Language, is a programming language 
@@ -11,11 +11,11 @@ used for data analysis. It is popular in particular areas of science,
 such as astronomy, atmospheric physics and medical imaging. 
 """
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 # File was provided
 sources = [{
-    'filename' : 'idl85envi53sp1linux.x86_64.tar.gz',
+    'filename' : '/apps/common/easybuild/sources/i/IDL/idl85envi53sp1linux.x86_64.tar.gz',
 }]
 
 # The silent installation mode requires a text file containing the
