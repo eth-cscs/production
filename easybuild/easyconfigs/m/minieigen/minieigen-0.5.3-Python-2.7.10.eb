@@ -7,7 +7,6 @@ versionsuffix = '-Python-%(pyver)s'
 homepage = 'https://pypi.python.org/pypi/minieigen'
 description = """A built-package format for Python."""
 
-#toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 toolchain = {'name': 'foss', 'version': '2015b'}
 
 source_urls = [PYPI_SOURCE]
