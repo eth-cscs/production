@@ -23,7 +23,7 @@ dependencies = [
 
 with_configure = 'True'
 
-# configure prefix option does not work correctly, therefore we need to skip it
+# configure option '--prefix=' does not work correctly, therefore we need to skip it
 prefix_opt = 'PREFIX='
 
 preconfigopts = ' sed -i "s/\*ftn\* |//" configure && '
@@ -37,15 +37,6 @@ configopts += ' --with-blas-libs="-L$EBROOTLIBSCI -lsci_intel_mp -lsci_intel -lm
 configopts += ' --with-lapack-libs="-L$EBROOTLIBSCI -lsci_intel_mp -lsci_intel -lm" '
 #configopts += ' --with-scalapack-libs="-L$EBROOTLIBSCI -lsci_intel_mpi_mp -lsci_intel -lm" '
 configopts += ' --with-libxc-path="$EBROOTLIBXC" --with-libxc-includedir="$EBROOTLIBXC/include" --with-libxc-libdir="$EBROOTLIBXC/lib" '
-# same thing below, without using EasyBuild environment variables
-#configopts += ' --with-hdf5-includedir="$HDF5_DIR/include" --with-hdf5-libdir="$HDF5_DIR/lib" '
-#configopts += ' --with-netcdf-includedir="$NETCDF_DIR/include" --with-netcdf-libdir="$NETCDF_DIR/lib" '
-#configopts += ' --with-netcdff-includedir="$NETCDF_DIR/include" --with-netcdff-libdir="$NETCDF_DIR/lib" ' 
-#configopts += ' --with-fft-includedir="$FFTW_INC" --with-fft-libdir="$FFTW_DIR" '
-#configopts += ' --with-blas-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mp -lsci_intel -lm" '
-#configopts += ' --with-lapack-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mp -lsci_intel -lm" ' 
-#configopts += ' --with-scalapack-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mpi_mp -lsci_intel -lm" ' 
-#configopts += ' --with-libxc-path="$EBROOTLIBXC" --with-libxc-includedir="$EBROOTLIBXC/include" --with-libxc-libdir="$EBROOTLIBXC/lib" '
 
 buildopts = 'all'
 
