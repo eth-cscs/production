@@ -23,7 +23,7 @@ sources = [
 ]
 
 dependencies = [
-    ('CMake', '3.9.1'),
+    ('CMake', '3.9.1', '', True),
     ('cray-tpsl/17.06.1', EXTERNAL_MODULE),
     ('cray-petsc/3.7.6.0', EXTERNAL_MODULE),
     ('cray-hdf5-parallel/1.10.0.3', EXTERNAL_MODULE), # should not be necessary for --disable-hdf5 but seems to be
