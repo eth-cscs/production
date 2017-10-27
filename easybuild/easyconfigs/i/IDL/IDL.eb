@@ -20,7 +20,7 @@ sources = [{
 
 # The silent installation mode requires a text file containing the
 # answers to the questions asked throughout the installation process
-install_cmd  = "echo -e 'y \n%(builddir)s \ny \nn \ny \nn \ny \nn' > %(builddir)s/answers.txt"
+install_cmd  = "echo -e 'y \n%(installdir)s \ny \nn \ny \nn \ny \nn' > %(builddir)s/answers.txt"
 install_cmd += "&& %(builddir)s/./install.sh -s < %(builddir)s/answers.txt"
 
 sanity_check_commands = ['idl']
