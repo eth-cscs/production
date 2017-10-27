@@ -23,15 +23,28 @@ dependencies = [
 
 with_configure = 'True'
 
+# configure prefix option does not work correctly, therefore we need to skip it
+prefix_opt = 'PREFIX='
+
 preconfigopts = ' sed -i "s/\*ftn\* |//" configure && '
 
-configopts = ' CC=cc FC=ftn MPICC=cc CPPFLAGS="" FCFLAGS="-nofor_main -qopenmp" --enable-iotk --enable-open-mp '
-#configopts += ' --with-hdf5-includedir="$EBROOTHDF5/include" --with-hdf5-libdir="$EBROOTHDF5/lib" '
-#configopts += ' --with-netcdf-includedir="$EBROOTNETCDF/include" --with-netcdf-libdir="$EBROOTNETCDF/lib" '
-#configopts += ' --with-netcdff-includedir="$EBROOTNETCDF/include" --with-netcdff-libdir="$EBROOTNETCDF/lib" '
-#configopts += ' --with-fft-includedir="$EBROOTFFTW/include" --with-fft-libdir="$EBROOTFFTW/lib" '
-#configopts += ' --with-blas-libs="-L$EBROOTLIBSCI -lsci_cray_mp -lcraymp -lm" '
-#configopts += ' --with-lapack-libs="-L$EBROOTLIBSCI -lsci_cray_mp -lcraymp -lm" '
+configopts = ' CC=cc FC=ftn MPICC=cc CPPFLAGS="" FCFLAGS="-nofor_main -qopenmp" --enable-iotk --enable-open-mp ' 
+configopts += ' --with-hdf5-includedir="$EBROOTHDF5/include" --with-hdf5-libdir="$EBROOTHDF5/lib" '
+configopts += ' --with-netcdf-includedir="$EBROOTNETCDF/include" --with-netcdf-libdir="$EBROOTNETCDF/lib" '
+configopts += ' --with-netcdff-includedir="$EBROOTNETCDF/include" --with-netcdff-libdir="$EBROOTNETCDF/lib" '
+configopts += ' --with-fft-includedir="$EBROOTFFTW/include" --with-fft-libdir="$EBROOTFFTW/lib" '
+configopts += ' --with-blas-libs="-L$EBROOTLIBSCI -lsci_intel_mp -lsci_intel -lm" '
+configopts += ' --with-lapack-libs="-L$EBROOTLIBSCI -lsci_intel_mp -lsci_intel -lm" '
+#configopts += ' --with-scalapack-libs="-L$EBROOTLIBSCI -lsci_intel_mpi_mp -lsci_intel -lm" '
+configopts += ' --with-libxc-path="$EBROOTLIBXC" --with-libxc-includedir="$EBROOTLIBXC/include" --with-libxc-libdir="$EBROOTLIBXC/lib" '
+# same thing below, without using EasyBuild environment variables
+#configopts += ' --with-hdf5-includedir="$HDF5_DIR/include" --with-hdf5-libdir="$HDF5_DIR/lib" '
+#configopts += ' --with-netcdf-includedir="$NETCDF_DIR/include" --with-netcdf-libdir="$NETCDF_DIR/lib" '
+#configopts += ' --with-netcdff-includedir="$NETCDF_DIR/include" --with-netcdff-libdir="$NETCDF_DIR/lib" ' 
+#configopts += ' --with-fft-includedir="$FFTW_INC" --with-fft-libdir="$FFTW_DIR" '
+#configopts += ' --with-blas-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mp -lsci_intel -lm" '
+#configopts += ' --with-lapack-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mp -lsci_intel -lm" ' 
+#configopts += ' --with-scalapack-libs="-L$CRAY_LIBSCI_PREFIX_DIR/lib -lsci_intel_mpi_mp -lsci_intel -lm" ' 
 #configopts += ' --with-libxc-path="$EBROOTLIBXC" --with-libxc-includedir="$EBROOTLIBXC/include" --with-libxc-libdir="$EBROOTLIBXC/lib" '
 
 buildopts = 'all'
@@ -39,8 +52,8 @@ buildopts = 'all'
 files_to_copy = [(['bin/*'], 'bin')]
 
 sanity_check_paths = {
-    'files': ['bin/' + exe for exe in ['a2y','iotk','iotk.x','p2y','yambo','yambo_kerr','yambo_ph','ypp','ypp_ph']],
-    'dirs': []
+    'files': ['bin/' + exe for exe in ['a2y', 'p2y', 'yambo', 'yambo_kerr', 'yambo_ph', 'yambo_rt', 'ypp', 'ypp_ph', 'ypp_rt']],
+    'dirs': ['bin/']
 }
 
 moduleclass = 'phys'
