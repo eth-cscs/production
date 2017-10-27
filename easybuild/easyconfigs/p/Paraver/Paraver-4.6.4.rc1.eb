@@ -22,4 +22,6 @@ sanity_check_paths = {
     'dirs': ['cfgs', ],
 }
 
+modextravars = { 'EXTRAECFGDIR': '%(installdir)s/cfgs' }
+
 moduleclass = 'perf'
