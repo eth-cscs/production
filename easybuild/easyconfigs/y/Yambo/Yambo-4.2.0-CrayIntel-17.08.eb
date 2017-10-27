@@ -40,11 +40,11 @@ configopts += ' --with-libxc-path="$EBROOTLIBXC" --with-libxc-includedir="$EBROO
 
 buildopts = 'all'
 
-files_to_copy = [(['bin/*'], 'bin')]
+files_to_copy = [(['bin/*'], 'bin'), (['lib/*'], 'lib')]
 
 sanity_check_paths = {
     'files': ['bin/' + exe for exe in ['a2y', 'p2y', 'yambo', 'yambo_kerr', 'yambo_ph', 'yambo_rt', 'ypp', 'ypp_ph', 'ypp_rt']],
-    'dirs': ['bin/']
+    'dirs': ['bin/', 'lib/']
 }
 
 moduleclass = 'phys'
