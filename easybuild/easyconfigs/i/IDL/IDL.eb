@@ -3,7 +3,7 @@ easyblock = 'PackedBinary'
 name = 'IDL'
 version = '8.5'
 
-homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
+homepage = '/apps/common/easybuild/sources/i/IDL/'
 
 description = """
 IDL, short for Interactive Data Language, is a programming language 
@@ -11,7 +11,7 @@ used for data analysis. It is popular in particular areas of science,
 such as astronomy, atmospheric physics and medical imaging. 
 """
 
-toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 # File was provided
 sources = [{
