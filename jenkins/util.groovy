@@ -13,8 +13,10 @@ String[] getMachineConfiguration(String message, String machine, String[] archs)
     if (archs.size() == 0)
         return ['']
     def validArchs = []
+    def patternStart = /.*\[.*/
+    def patternEnd = /.*\].*/
     for (architecture in archs) {
-        def machineWithArch = "\\[.*${machine}-${architecture}.*\\]"
+        def machineWithArch = "$patternStart$machine-$architecture$patternEnd"
         if (message ==~ machineWithArch)
             validArchs.add(architecture) 
     }
@@ -29,8 +31,10 @@ String[] getMachineConfiguration(String message, String machine, String[] archs)
 * @return A boolean indicating whether there is a match.
 */
 boolean machineCheck(String message, String machine) {
-    def machinePattern = "\\[.*${machine}.*\\]"
-    return message ==~ machinePattern? true : false 
+    def patternStart = /.*\[.*/
+    def patternEnd = /.*\].*/
+    def machinePattern = "$patternStart$machine$patternEnd" 
+    return message ==~ machinePattern
 }
 
 /**
