@@ -8,7 +8,7 @@ def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            toolkits: ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI'],
            toolkitVersions: ['17.08'],
-           unusePath: '/apps/dom/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all'] 
+           unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all'] 
 
 def kesch = [name: 'kesch',
              archs: [],
