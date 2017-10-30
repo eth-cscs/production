@@ -50,6 +50,7 @@ stage('Build Stage') {
                                                 echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
                     def unuseFlag = "--unuse=${machine.unusePath}".replace('ARCH', arch)                    
+                    println "The unuse flag: $unuseFlag"
                     def listFlag = "--list=$workingDir/jenkins-builds/$machineLabel"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '') 
