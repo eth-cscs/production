@@ -18,7 +18,7 @@ pyver = '2.7.10'
 versionsuffix = '-%s-%s' % (python, pyver)
 
 dependencies = [ (python, pyver),
-                 ('GTS' ,'0.7.6') ]
+                 ('GTS' ,'0.7.6','-Python-2.7.10') ]
 
 options = {'modulename': 'gts'}
 
