@@ -1,4 +1,5 @@
-# This file is part of JSC's public easybuild repository (https://github.com/easybuilders/jsc)
+# This file is part of JSC's public easybuild repository 
+# (https://github.com/easybuilders/jsc)
 # adapted by Luca Marsella (CSCS)
 """
 EasyBlock for IDL installation
@@ -61,7 +62,8 @@ class EB_IDL(EasyBlock):
             self.cfg['answer_file'] = 'idl_answer_file'
 
         cmd = "./install.sh -s < %s" % (self.cfg['answer_file'])
-        cmd = ' '.join([self.cfg['preinstallopts'], cmd, self.cfg['installopts']])
+        cmd = ' '.join([self.cfg['preinstallopts'], cmd,                       \
+                        self.cfg['installopts']])
         self.log.info("Installing %s using command '%s'..." % (self.name, cmd))
         run_cmd(cmd, log_all=True, simple=True)
 
@@ -69,9 +71,12 @@ class EB_IDL(EasyBlock):
         """Add the bin directory to the PATH."""
 
         txt = self.module_generator.prepend_paths("PATH", ['idl/bin'])
-        txt += self.module_generator.prepend_paths("LD_LIBRARY_PATH", ['idl/bin/bin.linux.x86_64','idl/bin/bin.linux.x86_64/dm/lib',
-                                                                       'idl/idlde/bin.linux.x86_64/jre/lib/amd64', 'idl/idlde/bin.linux.x86_64/jre/lib/amd64/server',
-                                                                       'idl/idlde/bin.linux.x86_64/jre/lib/amd64/xawt'])
+        txt += self.module_generator.prepend_paths(                            \
+                  "LD_LIBRARY_PATH", ['idl/bin/bin.linux.x86_64',              \
+                  'idl/bin/bin.linux.x86_64/dm/lib',                           \
+                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64',                  \
+                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/server',           \
+                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/xawt'])
         txt += super(EB_IDL, self).make_module_extra()
         self.log.debug("make_module_extra added this: %s" % txt)
         return txt
