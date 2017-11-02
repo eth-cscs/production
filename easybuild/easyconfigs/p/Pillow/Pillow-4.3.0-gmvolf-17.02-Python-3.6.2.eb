@@ -3,9 +3,6 @@ easyblock = 'PythonPackage'
 
 name = 'Pillow'
 version = '4.3.0'
-#pyver = '3.6.2'
-#pyshortver = '3.6'
-#versionsuffix = '-Python-%s' % pyver
 versionsuffix = '-Python-%(pyver)s'
 
 homepage = 'https://pypi.python.org/pypi/Pillow/4.3.0'
