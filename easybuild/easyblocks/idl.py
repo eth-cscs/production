@@ -71,12 +71,12 @@ class EB_IDL(EasyBlock):
         """Add the bin directory to the PATH."""
 
         txt = self.module_generator.prepend_paths("PATH", ['idl/bin'])
-        txt += self.module_generator.prepend_paths(                            \
-                  "LD_LIBRARY_PATH", ['idl/bin/bin.linux.x86_64',              \
-                  'idl/bin/bin.linux.x86_64/dm/lib',                           \
-                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64',                  \
-                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/server',           \
-                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/xawt'])
+#        txt += self.module_generator.prepend_paths(                            \
+#                  "LD_LIBRARY_PATH", ['idl/bin/bin.linux.x86_64',              \
+#                  'idl/bin/bin.linux.x86_64/dm/lib',                           \
+#                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64',                  \
+#                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/server',           \
+#                  'idl/idlde/bin.linux.x86_64/jre/lib/amd64/xawt'])
         txt += super(EB_IDL, self).make_module_extra()
         self.log.debug("make_module_extra added this: %s" % txt)
         return txt

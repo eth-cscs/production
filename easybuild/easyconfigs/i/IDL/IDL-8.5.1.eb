@@ -17,10 +17,6 @@ toolchain = {'name': 'dummy', 'version': ''}
 sources = ['/apps/common/easybuild/sources/i/IDL/'                             \
            'idl{}envi53sp1linux.x86_64.tar.gz'.format(shortversion)]
 
-dependencies = [
-    ('X11', '20170314','-GCCcore-6.3.0'),
-]
-
 sanity_check_paths = {
     'files': ['idl/bin/idl'],
     'dirs': ['idl/bin', 'license']
