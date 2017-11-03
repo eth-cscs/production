@@ -10,6 +10,7 @@
  geeqie-1.3.eb                                       --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  git-2.14.1.eb                                       --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  HDF-4.2.13-gmvolf-17.02.eb
+ IDL-8.5.1.eb                                        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  ImageMagick-6.7.6-10.eb                             --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  ImageMagick-6.7.6-10-GCC-5.4.0-2.26.eb              --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  ImageMagick-6.7.6-10-GCC-5.4.0-2.26-sysdeps.eb      --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
