@@ -1,7 +1,7 @@
 easyblock = 'libqglviewer'
 
 name = 'libQGLViewer'
-version = '2.5.1'
+version = '2.6.3'
 versionsuffix = '-GLib-2.44.0-Python-2.7.12'
 
 homepage = 'http://libqglviewer.com/'

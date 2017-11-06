@@ -13,7 +13,7 @@ builddependencies = [('CMake', '3.4.1', '', True)]
 
 dependencies = [('Loki', '0.1.7'),
 	        ('Qt', '4.8.5', '-GLib-2.44.0' + versionsuffix),
-                ('libQGLViewer', '2.5.1', '-GLib-2.44.0' + versionsuffix),
+                ('libQGLViewer', '2.6.3', '-GLib-2.44.0' + versionsuffix),
                 ('PyQt', '4.11.4', '-GLib-2.44.0' + versionsuffix),
                 ('Boost', '1.61.0', versionsuffix),
                 ('MPFR', '3.1.2', '-GMP-6.1.1'),
