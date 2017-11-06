@@ -64,9 +64,9 @@ configopts += '-DCMAKE_CXX_FLAGS="-DYADE_CPM_FULL_MODEL_AVAILABLE" '
 modextravars = {'LD_PRELOAD': '%s' % '$::env(EBROOTGL2PS)/lib/libgl2ps.so'}
 
 modextrapaths = {
-    'LD_LIBRARY_PATH': ['lib64/lib64/yade-%(version)s', 'lib/x86_64-linux-gnu/yade-%(version)s'],
-    'LIBRARY_PATH': ['lib64/lib64/yade-%(version)s', 'lib/x86_64-linux-gnu/yade-%(version)s'],
-    'PYTHONPATH': ['lib/x86_64-linux-gnu/yade-%(version)s/py', 'lib64/yade-%(version)s/py'],
+    'LD_LIBRARY_PATH': ['lib64/yade-%(version)s'],
+    'LIBRARY_PATH': ['lib64/yade-%(version)s'],
+    'PYTHONPATH': ['lib64/yade-%(version)s/py'],
 }
 
 sanity_check_paths={
