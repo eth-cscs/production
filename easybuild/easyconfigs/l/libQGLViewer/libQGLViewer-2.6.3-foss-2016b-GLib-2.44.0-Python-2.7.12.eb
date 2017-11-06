@@ -20,6 +20,6 @@ buildopts = '-j 1 sub-QGLViewer sub-designerPlugin'
 installopts = 'sub-QGLViewer sub-designerPlugin'
 
 sanity_check_paths={
-    'files': ['lib/libQGLViewer.prl', 'lib/libQGLViewer.so', 'lib/libQGLViewer.so.2', 'lib/libQGLViewer.so.2.5', 'lib/libQGLViewer.so.2.5.1'],
+    'files': ['lib/libQGLViewer.prl', 'lib/libQGLViewer.so', 'lib/libQGLViewer.so.2'],
     'dirs': ['include/QGLViewer'],
 }
