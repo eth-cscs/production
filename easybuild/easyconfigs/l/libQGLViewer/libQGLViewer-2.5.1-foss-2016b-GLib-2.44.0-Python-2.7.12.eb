@@ -14,7 +14,8 @@ preinstallopts = "export EBINSTALLPREFIX=%(installdir)s && "
 buildopts = '-j 1 sub-QGLViewer sub-designerPlugin'
 installopts = 'sub-QGLViewer sub-designerPlugin'
 
-sources = ['libQGLViewer-%(version)s.tar.gz']
+source_urls = ['http://www.libqglviewer.com/src/']
+sources = [SOURCE_TAR_GZ]
 
 builddependencies = [('Qt', '4.8.5', versionsuffix)]
 
