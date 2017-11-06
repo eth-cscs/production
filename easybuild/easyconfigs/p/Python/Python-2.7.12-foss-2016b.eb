@@ -47,9 +47,8 @@ exts_list = [
         'source_tmpl': '%(name)s-%(version)s.zip',
         'patches': ['numpy-1.12.0-mkl.patch' ],
     }),
-    ('scipy', '0.19.0', {
+    ('scipy', '1.0.0', {
         'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
-        'source_tmpl': '%(name)s-%(version)s.zip',
     }),
     ('mpi4py', '2.0.0', {
         'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
