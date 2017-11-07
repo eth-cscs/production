@@ -59,8 +59,7 @@ stage('Build Stage') {
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '') 
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
-                    withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
-                             "EASYBUILD_SOURCEPATH=$prefix/sources"]) {
+                    withEnv(["EASYBUILD_TMPDIR=$prefix/sources"]) {
                                  sh("""$loginBash
                                        $moduleDefinition
                                        status=0
