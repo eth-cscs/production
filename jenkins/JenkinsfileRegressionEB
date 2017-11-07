@@ -95,4 +95,6 @@ stage('Build Stage') {
             println "The Build step failed. Exiting....."
         }
     }
+    
+    methods.notifySlackFinish()
 }

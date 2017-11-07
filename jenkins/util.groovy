@@ -67,3 +67,18 @@ boolean checkToolkits(String[] toolkits, String filename) {
     return false
 }
 return this
+
+/**
+* Notifies Slack about the result of the current build.
+*/
+void notifySlackFinish() {
+   def resultColor
+   if (currentBuild.result == "SUCCESS")
+       resultColor = '#239B56'
+   else
+       resultColor = '#E74C3C' 
+
+   slackSend(color: resultColor,
+             message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* (<${env.BUILD_URL}|Open>)")
+}
+
