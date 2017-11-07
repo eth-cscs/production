@@ -190,7 +190,7 @@ if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
     echo "loading PrgEnv-cray"
     module load PrgEnv-cray/6.0.3
     echo "module use craypat apps"
-    module use /apps/daint/UES/6.0.UP02/craypat/easybuild/modules/all
+    module use /apps/daint/UES/6.0.UP04/craypat/easybuild/modules/all
 # removing Easybuild module before the reverseMapD operation
     module unload Easybuild
     echo "running reverseMapD"
