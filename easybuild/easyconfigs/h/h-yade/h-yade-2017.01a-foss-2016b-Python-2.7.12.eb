@@ -39,6 +39,7 @@ preconfigopts = 'export EBINSTALLPREFIX=%(installdir)s && '
 preconfigopts += 'export CC=gcc && export CXX=g++ && '
 #preconfigopts += 'cp /apps/leone/UES/RH6.7_PE15.12/HILTI/EBSandBox/brefcom-mm.hh %(builddir)s && '
 preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/brefcom-mm.hh %(builddir)s && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/cpm2_interface.* %(builddir)s && '
 
 configopts = '-DINSTALL_PREFIX=$EBINSTALLPREFIX '
 configopts += '-DLOKI_INCLUDE_DIR=$EBROOTLOKI/include/ '
