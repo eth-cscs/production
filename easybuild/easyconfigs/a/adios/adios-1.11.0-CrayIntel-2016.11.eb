@@ -1,0 +1,31 @@
+# Note:
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# It was auto-generated based on a template easyconfig, so it should be used with care.
+easyblock = 'ConfigureMake'
+
+name = "adios"
+version = '1.11.0'
+
+homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
+description = """Adaptable I/O library """
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['http://users.nccs.gov/~pnorbert/']
+sources = ['adios-1.11.0.tar.gz']
+
+parallel = 1
+
+patches = []
+
+dependencies = []
+
+# The sanity test MUST be tuned before going production and submitting your contribution to upstream git repositories
+sanity_check_paths = {
+    'files': ['lib/libadios.a'],
+    'dirs': ["."]
+}
+
+# You SHOULD change the following line; Kindly consult other easyconfigs for possible options
+moduleclass = 'base'
