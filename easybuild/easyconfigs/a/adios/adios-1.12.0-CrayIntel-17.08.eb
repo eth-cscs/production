@@ -6,7 +6,8 @@ version = '1.12.0'
 versionsuffix = '-mpi'
 
 homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
-description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
+description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
+to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
 
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 toolchainopts = {'usempi': True}
