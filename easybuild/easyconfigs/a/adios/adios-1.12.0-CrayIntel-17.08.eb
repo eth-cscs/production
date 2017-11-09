@@ -1,0 +1,25 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = "adios"
+version = '1.12.0'
+
+homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
+description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['http://users.nccs.gov/~pnorbert/']
+sources = [SOURCE_TAR_GZ]
+
+parallel = 1
+
+# The sanity test MUST be tuned before going production and submitting your contribution to upstream git repositories
+sanity_check_paths = {
+    'files': ['lib/libadios.a'],
+    'dirs': ["."]
+}
+
+# You SHOULD change the following line; Kindly consult other easyconfigs for possible options
+moduleclass = 'base'
