@@ -20,7 +20,8 @@ builddependencies = [
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
 ]
 
-preconfigopts = ' CC=cc LDFLAGS+="$LDFLAGS -qopenmp" && ' 
+preconfigopts = ' module unload cray-libsci && module list && ' 
+preconfigopts += ' CC=cc LDFLAGS+="$LDFLAGS -qopenmp" && ' 
 preconfigopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" && ' 
 preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" && ' 
 preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64" && '
