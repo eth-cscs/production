@@ -21,5 +21,5 @@ sanity_check_paths = {
     'dirs': ["."]
 }
 
-# You SHOULD change the following line; Kindly consult other easyconfigs for possible options
+# check other easyconfigs for possible options
 moduleclass = 'base'
