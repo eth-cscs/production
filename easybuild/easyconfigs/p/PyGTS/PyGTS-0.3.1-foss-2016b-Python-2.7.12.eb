@@ -1,0 +1,31 @@
+easyblock = 'PythonPackage'
+
+name = 'PyGTS'
+version = '0.3.1'
+
+homepage = 'http://gts.sourceforge.net/'
+description = """GTS stands for the GNU Triangulated Surface Library.
+ It is an Open Source Free Software Library intended to provide a set of useful
+ functions to deal with 3D surfaces meshed with interconnected triangles."""
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+source_urls = ['http://downloads.sourceforge.net/project/pygts/pygts/0.3.1/']
+sources = [SOURCELOWER_TAR_GZ]
+
+python = 'Python'
+pyver = '2.7.12'
+versionsuffix = '-%s-%s' % (python, pyver)
+
+dependencies = [ (python, pyver),
+                 ('GTS' ,'0.7.6','-Python-2.7.12') ]
+
+options = {'modulename': 'gts'}
+
+pyshortver = '.'.join(pyver.split('.')[:2])
+sanity_check_paths = {
+    'files': ['lib/python%s/site-packages/gts/_gts.so' % pyshortver],
+    'dirs':[],
+}
+
+moduleclass = 'vis'
