@@ -3,7 +3,6 @@ easyblock = 'ConfigureMake'
 
 name = "adios"
 version = '1.12.0'
-versionsuffix = '-mpi'
 
 homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
 description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
@@ -28,7 +27,7 @@ configopts += ' --with-cray-ugni-libdir=/opt/cray/ugni/default/lib64 '
 
 parallel = 1
 
-# The sanity test MUST be tuned before going production and submitting your contribution to upstream git repositories
+# check if library files are created
 sanity_check_paths = {
     'files': ['lib/libadios.a'],
     'dirs': ["."]
