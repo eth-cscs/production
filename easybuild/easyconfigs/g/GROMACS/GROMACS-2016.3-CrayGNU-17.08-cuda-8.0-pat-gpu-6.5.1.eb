@@ -13,16 +13,24 @@
 #
 name = 'GROMACS'
 version = "2016.3"
+cudaversion = '8.0'
+patversion = '651'
+versionsuffix = '-cuda-%s-pat-gpu-%s' % (cudaversion, patversion)
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
  i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
-toolchainopts = {'usempi': 'True', 'openmp': 'True', 'pic': 'True'}
+toolchainopts = {'usempi': 'True', 'openmp': 'True'}
 
 source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
+
+configopts = ' -DCMAKE_C_FLAGS="-g -fPIC" -DCMAKE_CXX_FLAGS="-g -fPIC" '
+
+# It would be good to specify the full path (/opt/cray/pe/perftools/6.5.1/modulefiles/perftools-lite-gpu) as the module file does not contain the version in the name, but the module is not found that way.
+dependencies = [('perftools-lite-gpu', EXTERNAL_MODULE)]
 
 skipsteps = ['test']
 
@@ -30,6 +38,7 @@ skipsteps = ['test']
 builddependencies = [
     ('CMake', '3.9.1', '', True),
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
+    ('cudatoolkit/%s.61_2.4.3-6.0.4.0_3.1__gb475d12' %cudaversion, EXTERNAL_MODULE),
     ('libxml2', '2.9.4'),
 ]
 
