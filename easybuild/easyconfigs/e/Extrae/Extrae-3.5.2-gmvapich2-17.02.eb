@@ -1,0 +1,65 @@
+easyblock = 'ConfigureMake'
+
+name = 'Extrae'
+version = '3.5.2'
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools'
+description = """Extrae is the core instrumentation package developed by the
+Performance Tools group at BSC. Extrae is capable of instrumenting applications
+based on MPI, OpenMP, pthreads, CUDA1, OpenCL1, and StarSs1 using different
+instrumentation approaches. The information gathered by Extrae typically
+includes timestamped events of runtime calls, performance counters and source
+code references. Besides, Extrae provides its own API to allow the user to
+manually instrument his or her application."""
+
+toolchain = {'name': 'gmvapich2', 'version': '17.02'}
+toolchainopts = {'verbose': False, 'usempi': True}
+# toolchainopts = {'usempi': True}
+source_urls = ['https://ftp.tools.bsc.es/extrae']
+sources = ['extrae-%(version)s-src.tar.bz2']
+#checksums = ['1181c42c821be1cefefae2186ac32bf7']
+
+dependencies = [
+    ('zlib', '1.2.11', '', True),
+    ('libunwind', '1.2.1', '', True),
+    ('libxml2', '2.9.4', '', True),
+    #('zlib', '1.2.11'),
+    #('libunwind', '1.2.1'),
+    #('libxml2', '2.9.4'),
+    ('papi/5.5.1.2', EXTERNAL_MODULE),
+    ('Paraver', '4.6.4.rc1', '', True),
+    ('Dimemas', '5.3.3', '', True),
+    ('clusteringsuite', '2.6.6', '', True),
+    ('FFTW', '3.3.7'),
+#
+#    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+#    ('Python', pyver),
+#    ('Boost', '1.63.0', '-Python-%(pyver)s'),
+]
+
+configopts  = ' '
+configopts += ' --with-libz=$EBROOTZLIB'
+configopts += ' --with-unwind=$EBROOTLIBUNWIND'
+configopts += ' --with-xml-prefix=$EBROOTLIBXML2'
+configopts += ' --with-mpi=$EBROOTMVAPICH2'
+#configopts += ' --with-mpi=`pkg-config --variable=prefix mvapich2-gdr` '
+configopts += ' --with-fft=$EBROOTFFTW'
+#configopts += ' --with-papi=$EBROOTPAPI'
+configopts += ' --with-papi=/opt/cray/papi/$PAPI_VERSION'
+#configopts += ' --with-papi=`pkg-config --variable=prefix papi`'
+configopts += ' --with-binary-type=64'
+configopts += ' --enable-parallel-merge'
+configopts += ' --enable-sampling'
+configopts += ' --enable-openmp'
+configopts += ' --without-dyninst'
+configopts += ' --without-cuda'
+#configopts += ' --with-fft=$FFTW_DIR'
+#configopts += ' --with-boost=$EBROOTBOOST'
+configopts += ' --with-binutils=$EBROOTBINUTILS'
+
+sanity_check_paths = {
+    'files': ["include/extraef_user_events.h", ],
+    'dirs': [],
+}
+
+moduleclass = 'perf'
