@@ -46,6 +46,7 @@ stage('Build Stage') {
         def architectures = mach.architectures
         def machineName = machine.name 
         def scratchCommand = machine.scratchCommand
+        def sourceProfile = machine.sourceProfile
         for (architecture in architectures) {       
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
@@ -77,6 +78,7 @@ stage('Build Stage') {
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
                              "buildlist=$buildList"]) {
                                  sh("""$loginBash
+                                       $sourceProfile
                                        $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
