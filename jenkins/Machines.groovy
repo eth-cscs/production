@@ -32,7 +32,7 @@ def monch = [name: 'monch',
              toolkits: ['GCC', 'GCCcore', 'gmvapich2', 'gmvolf', 'foss'],
              toolkitVersions: ['17.06'],
              unusePath: '/apps/monch/UES/jenkins/RH6.9-17.06/easybuild/modules/all/',
-             scratchCommand: 'source .profile && echo $SCRATCH']
+             scratchCommand: 'source $HOME/.profile && echo $SCRATCH']
  
 
 return [daint, dom, kesch, leone, monch]

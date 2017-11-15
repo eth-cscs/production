@@ -61,7 +61,8 @@ stage('Build Stage') {
                     def workingDir = sh(returnStdout: true, 
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true, 
-                                     script: scratchCommand).trim()
+                                     script: """$loginBash
+                                                $scratchCommand""").trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
                     def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : '' 
