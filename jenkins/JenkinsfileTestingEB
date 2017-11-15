@@ -45,6 +45,7 @@ stage('Build Stage') {
         def machine = mach.machine
         def architectures = mach.architectures
         def machineName = machine.name 
+        def scratchCommand = machine.scratchCommand
         for (architecture in architectures) {       
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
@@ -60,7 +61,7 @@ stage('Build Stage') {
                     def workingDir = sh(returnStdout: true, 
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true, 
-                                     script: 'echo $SCRATCH').trim()
+                                     script: scratchCommand).trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
                     def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : '' 
