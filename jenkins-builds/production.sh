@@ -86,7 +86,7 @@ if [ -n "${force_list}" ]; then
 fi
 
 # optional EasyBuild arguments
-eb_args=""
+eb_args="--stop=build"
 
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ esch ]]; then
