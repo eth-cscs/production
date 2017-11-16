@@ -13,7 +13,7 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = ['https://sourceforge.net/projects/%(namelower)s/files/%(namelower)s/%(version)s']
 
-configopts  = ' --with-python=/opt/python/17.06.1/bin/python3'
+configopts  = ' --with-python=$EBROOTPYTHON/bin/python3'
 
 dependencies = [
     ('bzip2', '1.0.6'),
