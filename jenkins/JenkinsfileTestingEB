@@ -71,7 +71,7 @@ stage('Build Stage') {
                     def buildList = sh(returnStdout: true,
                                     script: "echo \$(git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
                     withEnv(["EASYBUILD_BUILDPATH=$buildPath",
-                             "EASYBUILD_TMPDIR=$prefix/sources",
+                             "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
                              "buildlist=$buildList"]) {
