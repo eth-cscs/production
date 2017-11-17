@@ -2,7 +2,7 @@
 
 def methods
 def machinesList
-def loginBash = '#/bin/bash -l'
+def loginBash = '#!/bin/bash -l'
 def pullRequestMessage = env.ghprbPullTitle
 stage('Initialization') {
     node('master') {
@@ -45,7 +45,6 @@ stage('Build Stage') {
         def machine = mach.machine
         def architectures = mach.architectures
         def machineName = machine.name 
-        def scratchCommand = machine.scratchCommand
         for (architecture in architectures) {       
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
@@ -62,7 +61,7 @@ stage('Build Stage') {
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true, 
                                      script: """$loginBash
-                                                $scratchCommand""").trim()
+                                                echo \$SCRATCH""").trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
                     def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : '' 
