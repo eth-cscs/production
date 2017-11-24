@@ -4,7 +4,6 @@ easyblock = 'ConfigureMake'
 
 name = 'netCDF-Fortran'
 version = "4.4.4"
-versionsuffix = '-no-pkg-config'
 
 homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
 description = """NetCDF (network Common Data Form) is a set of software libraries
