@@ -10,8 +10,10 @@ description = """CDO is a collection of command line Operators to manipulate and
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'opt': True, 'pic': True, 'usempi': True}
 
-sources = [SOURCELOWER_TAR_GZ]
-source_urls = ['https://code.zmaw.de/attachments/download/11392/']
+sources = ['/apps/common/UES/easybuild/sources/c/CDO/' + SOURCELOWER_TAR_GZ]
+
+# Version 1.7.0 is not available for download anymore
+#source_urls = ['https://code.zmaw.de/attachments/download/11392/']
 
 dependencies = [
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
