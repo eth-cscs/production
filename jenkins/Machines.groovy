@@ -14,7 +14,7 @@ def kesch = [name: 'kesch',
              archs: [],
              toolkits: ['gmvolf', 'CrayCCE', 'GCC', 'GCCcore', 'gmvapich2', 'foss'],
              toolkitVersions: ['17.02'],
-             unusePath: '/apps/escha/UES/generic/modulefiles:/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles:/apps/escha/UES/PrgEnv-cray-17.06/modulefiles:/apps/escha/UES/experimental/modulefiles']
+             unusePath: '']
 
 def leone = [name: 'leone',
              archs: [],
