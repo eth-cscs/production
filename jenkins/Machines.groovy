@@ -20,7 +20,7 @@ def leone = [name: 'leone',
              archs: [],
              toolkits: ['GCC', 'GCCcore', 'gmvapich2', 'gmvolf', 'foss'],
              toolkitVersions: ['17.06'],
-             unusePath: '/apps/leone/UES/PrgEnv-gnu-2016b'] 
+             unusePath: ''] 
 
 def monch = [name: 'monch',
              archs: [],
