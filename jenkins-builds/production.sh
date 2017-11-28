@@ -144,6 +144,7 @@ for ((i=0; i<${#eb_files[@]}; i++)); do
 done
 # module unuse PATH before building
 if [ -n "$unuse_path" ]; then
+ echo "Unuse path: $unuse_path"
  module unuse $unuse_path
 fi
 
