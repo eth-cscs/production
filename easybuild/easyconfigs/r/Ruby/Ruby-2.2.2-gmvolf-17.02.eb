@@ -33,11 +33,13 @@ configopts = "--disable-install-doc --enable-shared"
 dependencies = [('GSL', '1.16')]
 
 postinstallcmds = ["%(installdir)s/bin/gem install bigdecimal io-console json "\
-                   "mail mime-types minitest more_rinda net-ssh open4 pony "   \
+                   "mime-types minitest more_rinda net-ssh open4 pony "        \
                    "power_assert psych rinruby ruby-prof test-unit xml-simple "\
                    "svn2git", "%(installdir)s/bin/gem install narray "         \
                    "--version '0.6.1.1'", "export NARRAY=1", "%(installdir)s/" \
                    "bin/gem install gsl --version '1.16.0.6'",                 \
-                   "%(installdir)s/bin/gem install rb-gsl"]
+                   "%(installdir)s/bin/gem install rb-gsl", "%(installdir)s/"  \
+                   "bin/gem install mail --version '2.6.3'", "%(installdir)s/" \
+                   "bin/gem uninstall mail --version '2.7.0'"]
 
 moduleclass = 'lang'
