@@ -3,6 +3,7 @@ easyblock = 'Bundle'
 name = 'ddt'
 version = '7.1'
 
+
 homepage = 'https://www.allinea.com/products/forge/download'
 description = """Allinea DDT: The debugger for C, C++, Fortran threaded and
 parallel codes"""

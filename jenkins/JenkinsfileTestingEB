@@ -76,7 +76,6 @@ stage('Build Stage') {
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
                              "buildlist=$buildList"]) {
                                  sh("""$loginBash
-                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
