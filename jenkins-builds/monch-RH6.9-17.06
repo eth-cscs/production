@@ -8,4 +8,4 @@
  Python-3.5.3-gmvolf-17.06.eb 
  reframe-2.7.eb
  Vim-8.0.eb                                 --set-default-module
- vampir-9.3.0.eb                            --set-default-module
+ vampir-9.4.0.eb                            --set-default-module
