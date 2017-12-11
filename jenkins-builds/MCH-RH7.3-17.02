@@ -40,6 +40,7 @@
  netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb         --set-default-module
+ UDUNITS-2.2.25-gmvolf-17.02.eb                      --set-default-module
  Understand-4.0.913.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  vampir-9.3.0.eb                                     --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Vim-8.0.eb                                          --installpath=/apps/escha/UES/RH7.3_generic/easybuild
