@@ -10,5 +10,5 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 modtclfooter = """
 set             MATLABVersion   "r2016a"
-prepend-path    PATH            "/apps/common/UES/matlab/r2016a/bin"
+prepend-path    PATH            "/apps/common/matlab/r2016a/bin/"
 """
