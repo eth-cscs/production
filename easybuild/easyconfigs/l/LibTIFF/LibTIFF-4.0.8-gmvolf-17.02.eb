@@ -26,6 +26,8 @@ source_urls = [
 ]
 sources = ['tiff-%(version)s.tar.gz']
 
+configopts = ' --enable-ld-version-script ' 
+
 toolchain = {'name': 'gmvolf', 'version': '17.02'}
 
 sanity_check_paths = {
