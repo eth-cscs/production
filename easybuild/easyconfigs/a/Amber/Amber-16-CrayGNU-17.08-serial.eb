@@ -13,8 +13,6 @@ description = 'Assisted Model Building with Energy Refinement'
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = { 'verbose' : False }
 
-#sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(name)s16.tar.bz2',
-#           '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/AmberTools16.tar.bz2']
 sources = ['/apps/common/UES/easybuild/sources/Amber16-AmberTools16-2017-12-15.tar.gz']
 
 dependencies = [ ('bzip2', '1.0.6'),
@@ -53,6 +51,9 @@ builddependencies = [
 #        update.11, update.12
 #
 buildininstalldir = True
+
+# single make process since parallel builds might fail
+maxparallel = 1
 
 prebuildopts = 'cd .. && mv amber%s/* . && ' % version
 prebuildopts += 'export AMBERHOME=%(builddir)s;'
