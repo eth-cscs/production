@@ -9,7 +9,7 @@ description = """zlib is designed to be a free, general-purpose, legally unencum
  not covered by any patents -- lossless data-compression library for use on virtually any
  computer hardware and operating system."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
