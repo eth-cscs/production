@@ -1,3 +1,5 @@
+# LIGGGHTS was requested: WebRT #30237
+# Person in charge of the installation on Leone: Josef Kerbl (DCS Computing GmbH)
 easyblock = 'Bundle'
 name = 'LIGGGHTS'
 version = '3.8'
