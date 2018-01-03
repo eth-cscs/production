@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'networkx'
+version = '1.11'
+
+py_maj_ver = '3'
+py_min_ver = '5'
+py_rev_ver = '2'
+versionsuffix = '-python%s' % (py_maj_ver)
+
+req_py_majver = int(py_maj_ver)
+req_py_minver = int(py_min_ver)
+
+homepage = 'https://pypi.python.org/pypi/networkx'
+description = """NetworkX is a Python package for the creation, manipulation, and study of the structure, dynamics,
+ and functions of complex networks."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages/' % (py_maj_ver, py_min_ver)],
+}
+
+moduleclass = 'tools'

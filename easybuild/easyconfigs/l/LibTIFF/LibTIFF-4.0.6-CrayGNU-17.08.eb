@@ -1,0 +1,60 @@
+# Built with EasyBuild version 3.3.1 on 2018-01-03_12-03-34
+##
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2014 Uni.Lu/LCSB, NTUA
+# Authors::   Fotis Georgatos <fotis@cern.ch>, Alan O'Cais (JSC)
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/
+##
+easyblock = 'ConfigureMake'
+
+name = 'LibTIFF'
+version = '4.0.6'
+
+homepage = 'http://www.remotesensing.org/libtiff/'
+description = "tiff: Library and tools for reading and writing TIFF data files"
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [
+    'http://download.osgeo.org/libtiff/',
+    'ftp://ftp.remotesensing.org/pub/libtiff/',
+]
+sources = ['tiff-%(version)s.tar.gz']
+
+sanity_check_paths = {
+    'files': ['bin/tiffinfo'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
+
+# Build statistics
+buildstats = [{
+    "build_time": 78.21,
+    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild'", "--buildpath='/dev/shm/marcelsc/easybuild/stage/build'", "--external-modules-metadata='/project/csstaff/marcelsc/production/easybuild//cray_external_modules_metadata.cfg'", "--hide-deps='ANTLR,APR,APR-util,Autoconf,Automake,Autotools,Bazel,Bison,cloudpickle,CMake,Coreutils,Cube,Doxygen,Eigen,FLTK,GCCcore,GL2PS,glmnet,GLPK,GLib,GTS,GraphicsMagick,help2man,IPython,JasPer,LLVM,LOKI,Loki,LibTIFF,M4,Mako,Mesa,NASM,NASM,OPARI2,OTF2,OpenPGM,PCRE,PDT,PIL,Pillow,PROJ,PyGTS,PyQt,PyYAML,PyZMQ,Python-Xlib,Python-bare,Qhull,Qt,SCOTCH,SCons,SIONlib,SIP,SQLite,SWIG,Serf,Szip,Tcl,Tk,UDUNITS,X11,XZ,ZeroMQ,arpack-ng,backports.weakref,binutils,bokeh,byacc,bzip2,cairo,cURL,cuDNN,expat,flex,fontconfig,freetype,funcsigs,gc,gettext,gnuplot,gperf,guile,hwloc,inputproto,kbproto,libGLU,libQGLViewer,libX11,libXau,libXdmcp,libXext,libXrender,libcerf,libdrm,libevent,libffi,libgd,libiberty,libjpeg-turbo,libjpeg-turbo,libpng,libpthread-stubs,libreadline,libsodium,libtool,libunistring,libunwind,libutempter,libxcb,libxml2,libxshmfence,libyaml,make,minieigen,mock,mxml,ncurses,nettle,networkx,nose-parameterized,numactl,pixman,pkg-config,ploticus,popt,protobuf,protobuf-core,qrupdate,renderproto,scikit-image,scikit-learn,util-linux,Werkzeug,wheel,xcb-proto,xextproto,xorg-macros,xproto,xtrans,zlib'", "--hide-toolchains='CrayCCE,CrayGNU,CrayIntel,CrayPGI,GCCcore,gmvapich2,gmvolf,foss,gompi'", "--include-easyblocks='/project/csstaff/marcelsc/production/easybuild//easyblocks/*.py'", "--installpath='/scratch/snx3000/marcelsc/eb_test'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/scratch/snx3000/marcelsc/eb_test/packages'", "--prefix='/scratch/snx3000/marcelsc/eb_test'", "--repositorypath='/scratch/snx3000/marcelsc/eb_test/ebfiles_repo'", "--robot-paths='/project/csstaff/marcelsc/production/easybuild//easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/dev/shm/marcelsc/easybuild/stage/tmp'", "--try-toolchain-version='17.08'", 'LibTIFF-4.0.6-CrayGNU-2016.11.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.3.1",
+    "easybuild-framework_version": "3.3.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/5.3.0/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/5.3.0/snos/libexec/gcc/x86_64-suse-linux/5.3.0/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-5.3.0/configure --prefix=/opt/gcc/5.3.0/snos --disable-nls --libdir=/opt/gcc/5.3.0/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/5.3.0/snos/include/g++ --with-slibdir=/opt/gcc/5.3.0/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 5.3.0 20151204 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.22",
+    "hostname": "daint104",
+    "install_size": 4875840,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.10.6/bin/modulecmd', '3.2.10'),
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "12",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.13 (default, Jan 11 2017, 10:56:06) [GCC]",
+    "system_gcc_path": "/opt/gcc/5.3.0/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1514977414,
+    "total_memory": 257595,
+}]

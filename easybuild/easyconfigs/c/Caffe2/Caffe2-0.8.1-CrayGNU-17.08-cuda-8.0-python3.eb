@@ -1,0 +1,85 @@
+# @author: gppezzi, mschoengens
+
+easyblock = 'CMakeMake'
+
+name = 'Caffe2'
+version = '0.8.1'
+tag = 'v%s' % version
+
+py_maj_ver = '3'
+py_min_ver = '5'
+py_rev_ver = '2'
+cudaver = '8.0'
+
+ver_suffix_cuda = '-cuda-%s' % (cudaver)
+ver_suffix_py = '-python%s' % (py_maj_ver)
+versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
+
+homepage = 'https://github.com/caffe2/caffe2'
+description = """
+Caffe is a deep learning framework made with expression, speed,
+and modularity in mind. It is developed by the Berkeley Vision
+and Learning Center (BVLC) and community contributors.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'optarch': True, 'pic': False, 'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.6.0'),
+]
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+#    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
+    ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
+    ('glog', '0.3.4'),
+    ('gflags', '2.1.2'),
+    ('OpenCV', '3.2.0', versionsuffix),
+    ('LMDB', '0.9.18'),
+    ('LevelDB', '1.18'),
+    ('snappy', '1.1.3'),
+    ('Boost', '1.65.0', ver_suffix_py),
+    ('scikit-image', '0.13.0', ver_suffix_py),
+    ('protobuf', '3.3.0', ver_suffix_py),
+#  Dependencies below are already included in thirdparty
+#    ('nccl', '1.3.4-1', '-cuda-%s' % cudaversion),
+#    ('gtest', '1.7.0'),
+#    ('Eigen', '3.3.3'),
+#    ('CUB', '1.4.1'),
+]
+
+preconfigopts =  'git clone --recursive https://github.com/caffe2/caffe2.git . && '
+preconfigopts += 'git checkout %s && ' % (tag)
+
+configopts = '-DBOOST_ROOT=$EBROOTBOOST '
+configopts += '-DProtobuf_INCLUDE_DIR=$EBROOTPROTOBUFMINCORE/include  '
+configopts += '-DProtobuf_LIBRARY=$EBROOTPROTOBUFMINCORE/lib/libprotobuf.so '
+configopts += '-DCUDA_ARCH_NAME=Pascal -DCUDA_TOOLKIT_ROOT_DIR=$CUDATOOLKIT_HOME '
+configopts += '-DUSE_NNPACK=OFF -DUSE_ROCKSDB=OFF '
+configopts += '-DPYTHON_EXECUTABLE=$PYTHON_PATH/bin/python%s.%s ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_INCLUDE_DIR=$PYTHON_PATH/include/python%s.%sm ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_LIBRARY=$PYTHON_PATH/lib/libpython%s.%sm.so.1.0 ' % (py_maj_ver, py_min_ver)
+
+buildopts = 'install'
+
+# Install step rebuilds most of the code and therefore it is done during build in order to speed up
+skipsteps = ['install']
+
+modextrapaths = {
+    'PYTHONPATH' : 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
+}
+
+
+sanity_check_paths = {
+    'files': ['lib/libCaffe2_CPU.so'] +
+             ['lib/libCaffe2_GPU.so'] +
+             ['include/caffe2/proto/caffe2.pb.h'],
+    'dirs': ['binaries'],
+}
+
+# import is only supposed to work on the compute nodes
+#sanity_check_commands = [('python', "-c 'from caffe2.python import core'")]
+
+moduleclass = 'devel'

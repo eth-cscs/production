@@ -1,0 +1,85 @@
+# @author: Guilherme Peretti-Pezzi (CSCS), mschoengens
+
+easyblock = 'CMakeMake'
+
+name = 'OpenCV'
+version = '3.2.0'
+
+py_maj_ver = '3'
+py_min_ver = '5'
+py_rev_ver = '2'
+
+req_py_majver = int(py_maj_ver)
+req_py_minver = int(py_min_ver)
+
+cudamajor = '8.0'
+cudaminor = '61_2.4.3-6.0.4.0_3.1__gb475d12'
+cudaver = "%s.%s" % (cudamajor, cudaminor)
+
+versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
+
+homepage = 'http://opencv.org/'
+description = """OpenCV (Open Source Computer Vision Library) is an open source computer vision
+ and machine learning software library. OpenCV was built to provide
+ a common infrastructure for computer vision applications and to accelerate
+ the use of machine perception in the commercial products."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/opencv/opencv/archive/']
+sources = ['%(version)s.zip']
+
+builddependencies = [
+    ('CMake', '3.6.0', '', True),
+]
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('zlib', '1.2.8'),
+    ('FFmpeg', '2.8.7'),
+    ('libjpeg-turbo', '1.5.0'),
+    ('libpng', '1.6.23'),
+    ('JasPer', '1.900.1'),
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
+
+configopts = '-DCMAKE_BUILD_TYPE=RELEASE '  
+configopts = '-DCMAKE_CXX_COMPILER="g++" -DCMAKE_C_COMPILER="gcc" ' 
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DBUILD_PYTHON_SUPPORT=ON '
+configopts += '-DPYTHON_PACKAGES_PATH=%(installdir)s' + '/lib/python%s/site-packages ' % (py_maj_ver)
+configopts += '-DPYTHON3_PACKAGES_PATH=%(installdir)s' + '/lib/python%s/site-packages ' % (py_maj_ver)
+configopts += '-DPYTHON_EXECUTABLE=$PYTHON_PATH/bin/python%s.%s ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON3_EXECUTABLE=$PYTHON_PATH/bin/python%s.%s ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_INCLUDE_DIRS=$PYTHON_PATH/include/python%s.%sm ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_INCLUDE_DIR=$PYTHON_PATH/include/python%s.%sm ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON3_INCLUDE_DIR=$PYTHON_PATH/include/python%s.%sm ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON3_LIBRARY=$PYTHON_PATH/lib/libpython%s.%sm.so.1.0 ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON3_VERSION_MAJOR=%s ' % (py_maj_ver)
+configopts += '-DPYTHON3_VERSION_MINOR=%s ' % (py_min_ver)
+configopts += '-DPYTHON3_VERSION_STRING=%s.%s.%s ' % (py_maj_ver, py_min_ver, py_rev_ver)
+configopts += '-DBUILD_NEW_PYTHON_SUPPORT=ON '
+configopts += '-DZLIB_LIBRARY=$EBROOTZLIB/lib/libz.so '
+configopts += '-DZLIB_INCLUDE_DIR=$EBROOTZLIB/include '
+configopts += '-DPNG_LIBRARY=$EBROOTLIBPNG/lib/libpng.so '
+configopts += '-DPNG_INCLUDE_DIR=$EBROOTLIBPNG/include '
+configopts += '-DJPEG_LIBRARY=$EBROOTLIBJPEGMINTURBO/lib/libjpeg.so '
+configopts += '-DJPEG_INCLUDE_DIR=$EBROOTLIBJPEGMINTURBO/include '
+configopts += '-DJASPER_LIBRARY=$EBROOTJASPER/lib/libjasper.a '
+configopts += '-DJASPER_INCLUDE_DIR=$EBROOTJASPER/include '
+configopts += '-DENABLE_SSE=ON -DENABLE_SSE2=ON -DENABLE_SSE3=ON '
+configopts += '-DWITH_CUDA=OFF '
+
+sanity_check_paths = {
+    'files': ['lib/libopencv_core.%s' % SHLIB_EXT, 'lib/python%s/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so' % (py_maj_ver) ] +
+             ['bin/opencv_%s' % x for x in ['createsamples', 'traincascade']],
+    'dirs': ['include']
+}
+
+modextrapaths = {
+   'PYTHONPATH': 'lib/python%s/site-packages' % (py_maj_ver),
+    'CLASSPATH': 'share/OpenCV/java',
+}
+
+moduleclass = 'vis'
