@@ -32,7 +32,6 @@ builddependencies = [
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
-#    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('glog', '0.3.4'),
     ('gflags', '2.1.2'),
@@ -43,11 +42,6 @@ dependencies = [
     ('Boost', '1.65.0', ver_suffix_py),
     ('scikit-image', '0.13.0', ver_suffix_py),
     ('protobuf', '3.3.0', ver_suffix_py),
-#  Dependencies below are already included in thirdparty
-#    ('nccl', '1.3.4-1', '-cuda-%s' % cudaversion),
-#    ('gtest', '1.7.0'),
-#    ('Eigen', '3.3.3'),
-#    ('CUB', '1.4.1'),
 ]
 
 preconfigopts =  'git clone --recursive https://github.com/caffe2/caffe2.git . && '
