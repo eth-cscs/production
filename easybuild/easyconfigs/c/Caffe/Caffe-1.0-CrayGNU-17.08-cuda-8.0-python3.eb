@@ -1,0 +1,80 @@
+# @author: gppezzi, mschoengens
+
+easyblock = 'CMakeMake'
+
+name = 'Caffe'
+version = '1.0'
+
+py_maj_ver = '3'
+py_min_ver = '5'
+py_rev_ver = '2'
+
+req_py_majver = int(py_maj_ver)
+req_py_minver = int(py_min_ver)
+
+cudamajor = '8.0'
+cudaminor = '61_2.4.3-6.0.4.0_3.1__gb475d12'
+cudaver = "%s.%s" % (cudamajor, cudaminor)
+
+versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
+
+homepage = 'https://github.com/BVLC/caffe'
+description = """
+Caffe is a deep learning framework made with expression, speed, 
+and modularity in mind. It is developed by the Berkeley Vision 
+and Learning Center (BVLC) and community contributors.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'optarch': True, 'pic': False, 'verbose': False}
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/BVLC/caffe/archive/']
+
+builddependencies = [
+    ('CMake', '3.6.0'),
+]
+
+protobuf_ver = '3.5.1'
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
+    ('glog', '0.3.4'),
+    ('gflags', '2.1.2'),
+    ('OpenCV', '3.2.0', '-cuda-%s-python%s' % (cudamajor, py_maj_ver)),
+    ('LMDB', '0.9.18'),
+    ('LevelDB', '1.18'),
+    ('snappy', '1.1.3'),
+    ('protobuf-core', protobuf_ver),
+    ('protobuf-python', protobuf_ver, '-python%s' % py_maj_ver),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('Boost', '1.63.0', '-python%s' % py_maj_ver),
+    ('scikit-image', '0.13.0', '-python%s' % py_maj_ver)
+]
+
+# buildininstalldir = True
+
+configopts = '-DBLAS=libsci '
+configopts += '-DBOOST_ROOT=$EBROOTBOOST '
+configopts += '-DProtobuf_INCLUDE_DIR=$EBROOTPROTOBUFMINCORE/include  '
+configopts += '-DProtobuf_LIBRARY=$EBROOTPROTOBUFMINCORE/lib/libprotobuf.so '
+configopts += '-DCUDA_ARCH_NAME=Pascal -DCUDA_TOOLKIT_ROOT_DIR=$CUDATOOLKIT_HOME '
+configopts += '-DPYTHON_EXECUTABLE=$PYTHON_PATH/bin/python%s.%s ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_INCLUDE_DIR=$PYTHON_PATH/include/python%s.%sm ' % (py_maj_ver, py_min_ver)
+configopts += '-DPYTHON_LIBRARY=$PYTHON_PATH/lib/libpython%s.%sm.so.1.0 ' % (py_maj_ver, py_min_ver)
+
+
+modextrapaths = {'PYTHONPATH': ['python']}
+
+sanity_check_paths = {
+    'files': ['bin/caffe'] +
+             ['lib64/%s' % x for x in ['libcaffe.so', 'libproto.a']] +
+             ['python/caffe/_caffe.so'] +
+             ['include/caffe/proto/caffe.pb.h'],
+    'dirs': [],
+}
+
+#sanity_check_commands = [('python', "-c 'import caffe'")]
+
+moduleclass = 'devel'
