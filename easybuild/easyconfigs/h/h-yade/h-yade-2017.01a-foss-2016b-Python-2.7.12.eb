@@ -40,6 +40,8 @@ preconfigopts += 'export CC=gcc && export CXX=g++ && '
 preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/brefcom-mm.hh %(builddir)s && '
 preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/cpm2_interface.* %(builddir)s/trunk-2017.01a/pkg/dem && '
 preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/CPM2.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/cpm3_interface.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/CPM3.* %(builddir)s/trunk-2017.01a/pkg/dem && '
 
 configopts = '-DINSTALL_PREFIX=$EBINSTALLPREFIX '
 configopts += '-DLOKI_INCLUDE_DIR=$EBROOTLOKI/include/ '
