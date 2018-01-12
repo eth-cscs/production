@@ -1,0 +1,45 @@
+easyblock = 'MakeCp'
+
+name = 'COSMO'
+version = 'master'
+versionsuffix = 'float'
+
+homepage = 'https://github.com/MeteoSwiss-APN/cosmo-pompa'
+description = """cosmo-pompa"""
+
+toolchain = {'name': 'CrayCCE', 'version': '17.08'}
+toolchainopts = {'verbose': False}
+
+#source_urls = ['/scratch/snx3000/vogtha/test_easybuild/repo']
+#source_urls = ['https://github.com/MeteoSwiss-APN/stella/archive/']
+#sources = ['%(version)s.tar.gz']
+
+sources = [{
+'filename': '/scratch/snx3000/vogtha/test_easybuild/repo/cosmo-pompa-%(version)s.tar.gz'}]
+
+
+dependencies = [ ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
+#  ('Serialbox', '2.2.1'),
+#  ('STELLA', '1.05.00', "%(versionsuffix)s"),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+ ]
+
+builddependencies = [
+    ('COSMO_dycore', 'master', "%(versionsuffix)s", ('CrayGNU', '17.08')),
+    ('gcc/5.3.0', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+]
+
+patches = ['Options.lib.gpu.patch']
+
+prebuildopts = 'cd cosmo && cp Options.daint.cray.gpu Options && module swap PrgEnv-gnu PrgEnv-cray && module list &&  export FTN="ftn -D__CRAY_FORTRAN__" && CXX=$GCC_PATH/snos/bin/g++ CC=$GCC_PATH/snos/bin/gcc FC=ftn LDFLAGS="-L$GCC_PATH/snos/lib64 ${LDFLAGS}" VERBOSE=1 '
+
+buildopts = 'CPP_DYCORE=1 paropt && dir'
+
+files_to_copy = ['cosmo/cosmo']
+
+parallel = '1'
+
+moduleclass = 'devel'
+

@@ -1,0 +1,36 @@
+easyblock = 'CMakeMake'
+
+name = 'STELLA'
+version = '1.05.00'
+versionsuffix = 'double'
+
+homepage = 'https://github.com/MeteoSwiss-APN/stella'
+description = """STELLA"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+#source_urls = ['/scratch/snx3000/vogtha/test_easybuild/repo']
+#source_urls = ['https://github.com/MeteoSwiss-APN/stella/archive/']
+#sources = ['%(version)s.tar.gz']
+
+sources = [{
+'filename': '/scratch/snx3000/vogtha/test_easybuild/repo/stella-%(version)s.tar.gz'}]
+
+
+dependencies = [ ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
+  ('Serialbox', '2.2.1'),
+ ]
+
+builddependencies = [
+    ('CMake', '3.9.1', '', ('dummy', '')),
+#    ('cudatoolkit', '8.0.61', '_2.4.3-6.0.4.0_3.1__gb475d12', ('dummy', '')),
+]
+
+enable_single_precision = 'ON' if version == 'double' else 'OFF'
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DGCL=ON -DSINGLEPRECISION=%(enable_single_precision)s"
+configopts += "-DCUDA_BACKEND=ON -DCUDA_COMPUTE_CAPABILITY=sm_60 -DBOOST_ROOT=/project/c14/install/daint/boost/boost_1_49_0" 
+
+separate_build_dir = True
+
+moduleclass = 'devel'
+

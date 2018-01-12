@@ -1,0 +1,11 @@
+--- cosmo/Options.lib.gpu.bak	2018-01-12 13:39:20.000000000 +0100
++++ cosmo/Options.lib.gpu	2018-01-12 13:40:23.000000000 +0100
+@@ -28,7 +28,7 @@
+ 
+ # NetCDF library
+ NETCDFL  = 
+-NETCDFI  = 
++NETCDFI  = -I$(NETCDF_DIR)/include 
+ 
+ # Synsat library
+ RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
