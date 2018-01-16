@@ -26,7 +26,7 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'optarch': True, 'pic': False, 'verbose': False}
 
 builddependencies = [
-    ('CMake', '3.6.0'),
+    ('CMake', '3.10.1', '', True),
 ]
 
 dependencies = [

@@ -31,16 +31,16 @@ source_urls = ['https://github.com/opencv/opencv/archive/']
 sources = ['%(version)s.zip']
 
 builddependencies = [
-    ('CMake', '3.6.0', '', True),
+    ('CMake', '3.10.1', '', True),
 ]
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
-    ('zlib', '1.2.8'),
+    ('zlib', '1.2.11'),
     ('FFmpeg', '2.8.7'),
-    ('libjpeg-turbo', '1.5.0'),
+    ('libjpeg-turbo', '1.5.2'),
     ('libpng', '1.6.23'),
-    ('JasPer', '1.900.1'),
+    ('JasPer', '2.0.12'),
     ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
 ]
 

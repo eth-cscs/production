@@ -25,9 +25,9 @@ sources = [SOURCE_TAR_GZ]
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
-    ('libjpeg-turbo', '1.5.0'),
-    ('libpng', '1.6.23'),
-    ('zlib', '1.2.8'),
+    ('libjpeg-turbo', '1.5.2'),
+    ('libpng', '1.6.30'),
+    ('zlib', '1.2.11'),
     ('LibTIFF', '4.0.6'),
     ('freetype', freetype_ver),
 ]

@@ -32,7 +32,7 @@ sources = ['%(version)s.tar.gz']
 source_urls = ['https://github.com/BVLC/caffe/archive/']
 
 builddependencies = [
-    ('CMake', '3.6.0'),
+    ('CMake', '3.10.1', '', True),
 ]
 
 protobuf_ver = '3.5.1'

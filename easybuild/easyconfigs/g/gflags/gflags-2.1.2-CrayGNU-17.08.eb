@@ -17,7 +17,7 @@ sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/gflags/gflags/archive/']
 
 builddependencies = [
-    ('CMake', '3.6.0'),
+    ('CMake', '3.10.1', '', True),
 ]
 
 configopts = '-DBUILD_SHARED_LIBS=on -DBUILD_STATIC_LIBS=on'

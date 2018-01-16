@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), mschoengens
 easyblock = 'Bundle'
 
 name = 'Caffe2-PyExtensions'
