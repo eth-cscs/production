@@ -39,7 +39,7 @@ dependencies = [
     ('zlib', '1.2.11'),
     ('FFmpeg', '2.8.7'),
     ('libjpeg-turbo', '1.5.2'),
-    ('libpng', '1.6.23'),
+    ('libpng', '1.6.30'),
     ('JasPer', '2.0.12'),
     ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
 ]
