@@ -1,4 +1,4 @@
-# Updated by @gppezzi @jgphpc
+# Updated by @gppezzi, @jgphpc, @omlins
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
@@ -19,9 +19,7 @@ checksums = [ '2d88561b3b4a880df0422a62e5027e40' ]
 
 dependencies = [
     ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
-#    ('netCDF-Fortran', '4.4.4'),
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
-    # do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
     # CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
     # No MPI support
 ]
