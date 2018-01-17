@@ -3,7 +3,7 @@
 easyblock = 'CMakeMake'
 
 name = 'Caffe2'
-version = '0.8.1'
+version = '20180106'
 tag = 'v%s' % version
 
 py_maj_ver = '3'
@@ -31,7 +31,7 @@ builddependencies = [
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
-    ('Caffe2-PyExtensions', version, ver_suffix_py),
+    ('Caffe2-PyExtensions', '0.8.1', ver_suffix_py),
     ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('glog', '0.3.4'),
