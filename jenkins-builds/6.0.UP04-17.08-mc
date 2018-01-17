@@ -7,6 +7,7 @@
  CMake-3.10.1.eb
  CP2K-5.0r18043-CrayGNU-17.08.eb                    --set-default-module
  CDO-1.9.0-CrayGNU-17.08.eb                         --set-default-module
+ CDO-1.9.0-CrayIntel-17.08.eb
  CPMD-4.1-CrayIntel-17.08.eb                        --set-default-module
  ddt-7.1.eb                                         
  ddt-18.0.1.eb                                      --set-default-module
