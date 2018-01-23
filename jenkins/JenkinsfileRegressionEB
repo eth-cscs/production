@@ -8,19 +8,19 @@ stage('Initialization') {
         checkout scm
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
-        machinesList = load("${rootDir}/jenkins/Machines.groovy") 
+        machinesList = load("${rootDir}/jenkins/Machines.groovy")
     }
 }
 
-def userMessage = params.customMessage 
-def machineConfigurations = [] 
+def userMessage = params.customMessage
+def machineConfigurations = []
 stage('Machine Selection') {
-    node {    
+    node {
         def machinesToRun = machinesList.findAll({methods.machineCheck(userMessage, it.name)})
         if (!machinesToRun) {
-            println "No machines where specified. Aborting...."
+            println "No machines were specified. Aborting...."
             currentBuild.result = "FAILURE"
-            return 
+            return
         }
         for (mach in machinesToRun) {
             machineConfigurations.add(
@@ -35,8 +35,8 @@ stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
         def architectures = mach.architectures
-        def machineName = machine.name 
-        for (architecture in architectures) {       
+        def machineName = machine.name
+        for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
             builds[machineLabel] = {
@@ -46,26 +46,26 @@ stage('Build Stage') {
                     if (machineName == 'leone')
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
-                         
-                    def project_name = env.JOB_BASE_NAME.trim() 
-                    def workingDir = sh(returnStdout: true, 
+
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
-                    def scratch = sh(returnStdout: true, 
+                    def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
                     def unuseFlag
                     if (machine.unusePath != '') {
                         println("The unuse path is: $machine.unusePath")
-                        unuseFlag = arch == '' ?  "--unuse=${machine.unusePath}" : "--unuse=${machine.unusePath}".replace('ARCH', arch) 
+                        unuseFlag = arch == '' ?  "--unuse=${machine.unusePath}" : "--unuse=${machine.unusePath}".replace('ARCH', arch)
                     }
                     else {
                         println("The unuse path is empty")
                         unuseFlag = ''
-                    }                   
+                    }
                     def listFlag = "--list=$workingDir/jenkins-builds/$machineLabel"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
-                    if (arch != '') 
+                    if (arch != '')
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources"]) {
                                  sh("""$loginBash
@@ -78,7 +78,7 @@ stage('Build Stage') {
                                        status=\$[status+\$?]
                                        chmod -R o+r \$EASYBUILD_TMPDIR
                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
-                                       exit \$status""") 
+                                       exit \$status""")
                     }
                 }
             }
@@ -98,10 +98,10 @@ stage('Build Stage') {
             println "The Queue task was cancelled. Aborting....."
         }
         else {
-            currentBuild.result = "FAILURE" 
+            currentBuild.result = "FAILURE"
             println "The Build step failed. Exiting....."
         }
     }
-    
+
     methods.notifySlackFinish()
 }

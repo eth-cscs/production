@@ -9,7 +9,7 @@ stage('Initialization') {
         checkout scm
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
-        machinesList = load("${rootDir}/jenkins/Machines.groovy") 
+        machinesList = load("${rootDir}/jenkins/Machines.groovy")
         if (methods.checkWorkInProgress(pullRequestMessage)) {
             echo "Work in progress detected, aborting....."
             currentBuild.result = 'ABORTED'
@@ -20,14 +20,14 @@ stage('Initialization') {
 
 if (currentBuild.result == 'ABORTED')
     return
-def machineConfigurations = [] 
+def machineConfigurations = []
 stage('Machine Selection') {
-    node('master') {    
+    node('master') {
         def machinesToRun = machinesList.findAll({methods.machineCheck(pullRequestMessage, it.name)})
         if (!machinesToRun) {
-            println "No machines where specified. Aborting...."
+            println "No machines were specified. Aborting...."
             currentBuild.result = "ABORTED"
-            return 
+            return
         }
         for (mach in machinesToRun) {
             machineConfigurations.add(
@@ -44,8 +44,8 @@ stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
         def architectures = mach.architectures
-        def machineName = machine.name 
-        for (architecture in architectures) {       
+        def machineName = machine.name
+        for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
             builds[machineLabel] = {
@@ -55,16 +55,16 @@ stage('Build Stage') {
                     if (machineName == 'leone')
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
-                    def projectName = env.JOB_BASE_NAME.trim() 
+                    def projectName = env.JOB_BASE_NAME.trim()
                     def gitCommit = scmVars.GIT_COMMIT.trim()[0..6]
-                    def workingDir = sh(returnStdout: true, 
+                    def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
-                    def scratch = sh(returnStdout: true, 
+                    def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
-                    def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : '' 
+                    def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"
@@ -83,7 +83,7 @@ stage('Build Stage') {
                                        else
                                            mkdir -p $prefix
                                        fi
-                                       
+
                                        echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
                                        git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
                                        # if buildlist is empty, skip this build; otherwise, write .eb files to file
@@ -98,7 +98,7 @@ stage('Build Stage') {
                                        status=\$[status+\$?]
                                        chmod -R o+r \$EASYBUILD_TMPDIR
                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
-                                       exit \$status""") 
+                                       exit \$status""")
                     }
                 }
             }
@@ -118,7 +118,7 @@ stage('Build Stage') {
             println "The Queue task was cancelled. Aborting....."
         }
         else {
-            currentBuild.result = "FAILURE" 
+            currentBuild.result = "FAILURE"
             println "The Build step failed. Exiting....."
         }
     }
