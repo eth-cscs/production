@@ -41,7 +41,7 @@ stage('Build Stage') {
         def machineModulesProduction = machine.modulesProduction
         for (architecture in architectures) {
             def arch = architecture
-            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def machineLabel = arch ? "${machineName}-${arch}" : machineName
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
