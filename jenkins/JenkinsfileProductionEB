@@ -83,7 +83,6 @@ stage('Build Stage') {
                               echo \$EASYBUILD_TMPDIR
                               echo \$EASYBUILD_CUSTOM_REPOSITORY""")
                     }
-
                 }
             }
         }
