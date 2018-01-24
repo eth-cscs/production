@@ -45,6 +45,8 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
+                    println(machineLabel in machineConfigurations)
+                    println(machineLabel)
                     def moduleDefinition = ''
                     if (machineName == 'leone')
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
