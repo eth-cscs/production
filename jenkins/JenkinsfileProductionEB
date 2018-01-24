@@ -17,13 +17,8 @@ stage('Initialization') {
 def machineConfigurations = []
 stage('Machine Selection') {
     node {
-        def machinesToRun = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
-        if (!machinesToRun) {
-            println "No machines were specified. Aborting...."
-            currentBuild.result = "ABORTED"
-            return
-        }
-        for (mach in machinesToRun) {
+        def machinesToForce = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
+        for (mach in machinesToForce) {
             machineConfigurations.add(
                 [machine:mach, architectures: methods.getMachineConfiguration(
                         forcelist, mach.name, mach.archs as String[])])
@@ -36,10 +31,9 @@ if (currentBuild.result == 'ABORTED')
 def builds = [:]
 def ebForceList = forcelist.replaceAll(/\[.*\]/, '').replaceAll(/"/, '').trim()
 stage('Build Stage') {
-    println("Forcelist: $ebForceList")
-    for (mach in machineConfigurations) {
-        def machine = mach.machine
-        def architectures = mach.architectures
+    for (mach in machinesList) {
+        def machine = mach
+        def architectures = machine.archs
         def machineName = machine.name
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
