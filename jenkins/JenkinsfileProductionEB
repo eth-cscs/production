@@ -25,7 +25,6 @@ stage('Machine Force') {
                 machineConfigurations.add(fullName)
             }
         }
-        println(machineConfigurations)
     }
 }
 
@@ -41,12 +40,10 @@ stage('Build Stage') {
         def machineModulesProduction = machine.modulesProduction
         for (architecture in architectures) {
             def arch = architecture
-            def machineLabel = arch ? "${machineName}-${arch}" : machineName
+            def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    println(machineLabel in machineConfigurations)
-                    println(machineLabel)
                     def moduleDefinition = ''
                     if (machineName == 'leone')
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
