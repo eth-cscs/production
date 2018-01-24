@@ -25,6 +25,7 @@ stage('Machine Force') {
                 machineConfigurations.add(fullName)
             }
         }
+        println(machineConfigurations)
     }
 }
 
