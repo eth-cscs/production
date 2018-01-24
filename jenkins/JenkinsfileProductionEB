@@ -15,25 +15,25 @@ stage('Initialization') {
 }
 
 def machineConfigurations = []
-stage('Machine Selection') {
+stage('Machine Force') {
     node {
         def machinesToForce = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
         for (mach in machinesToForce) {
-            machineConfigurations.add(
-                [machine:mach, architectures: methods.getMachineConfiguration(
-                        forcelist, mach.name, mach.archs as String[])])
+            validArchs = methods.getMachineConfiguration(forcelist, mach.name, mach.archs as String[])
+            for (arch in validArchs) {
+                fullName = arch ? "${mach.name}-${arch}" : "${mach.name}"
+                machineConfigurations.add(fullName)
+            }
         }
     }
 }
 
-if (currentBuild.result == 'ABORTED')
-    return
 def builds = [:]
 def ebForceList = forcelist.replaceAll(/\[.*\]/, '').replaceAll(/"/, '').trim()
 stage('Build Stage') {
     for (mach in machinesList) {
         def machine = mach
-        def architectures = machine.archs
+        def architectures = machine.archs ? machine.archs : [""]
         def machineName = machine.name
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
@@ -60,10 +60,11 @@ stage('Build Stage') {
                                                echo $machinePrefix""").trim()
                     def unuseOption = unusePath ? "--unuse=$unusePath" : ""
                     def ebForceListLocal = ebForceList
+                    def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
                     def moduleUnuse = machineModulesProduction ? "module unuse $machineModulesProduction" : ""
                     def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction" : ""
                     def archOption = arch ? "--arch=$arch" : ""
-                    def command = "$workingDir/jenkins-builds/production.sh $archOption --force=$ebForceListLocal --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
+                    def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
                     withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                              "EASYBUILD_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                         sh("""$loginBash
