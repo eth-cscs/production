@@ -41,6 +41,9 @@ stage('Build Stage') {
         for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
+            if (arch) {
+                machinePrefix = machinePrefix.replace('ARCH', arch)
+            }
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
@@ -58,11 +61,11 @@ stage('Build Stage') {
                     def prefix = sh(returnStdout: true,
                                     script: """$loginBash
                                                echo $machinePrefix""").trim()
-                    def unuseOption = unusePath ? "--unuse=$unusePath" : ""
+                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
-                    def moduleUnuse = machineModulesProduction ? "module unuse $machineModulesProduction" : ""
-                    def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction" : ""
+                    def moduleUnuse = machineModulesProduction ? "module unuse $machineModulesProduction".replace('ARCH', arch) : ""
+                    def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction".replace('ARCH', arch) : ""
                     def archOption = arch ? "--arch=$arch" : ""
                     def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
                     withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
