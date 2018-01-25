@@ -20,7 +20,7 @@ dependencies = [
     ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
 ]
 
-sources = ['/apps/daint/UES/6.0.UP02/sandbox-ds/soures/cudnn-8.0-linux-x64-v7.tgz']
+sources = ['/apps/common/UES/easybuild/sources/c/cuDNN/cudnn-8.0-linux-x64-v7.tgz']
 
 checksums = [
     '33d390f9178140ca39365d873f82afe0'
