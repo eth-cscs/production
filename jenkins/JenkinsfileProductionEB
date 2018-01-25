@@ -41,9 +41,6 @@ stage('Build Stage') {
         for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
-            if (arch) {
-                machinePrefix = machinePrefix.replace('ARCH', arch)
-            }
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
@@ -51,7 +48,7 @@ stage('Build Stage') {
                     if (machineName == 'leone')
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
-
+                    def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
@@ -60,7 +57,7 @@ stage('Build Stage') {
                                                 echo \$SCRATCH""").trim()
                     def prefix = sh(returnStdout: true,
                                     script: """$loginBash
-                                               echo $machinePrefix""").trim()
+                                               echo $machinePrefixLocal""").trim()
                     def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
