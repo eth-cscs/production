@@ -3,6 +3,8 @@
 This is the CSCS Production Repository on the GitHub, with the list of CSCS production builds and [EasyBuild](https://hpcugent.github.io/easybuild) configuration files.
 Please check the [CSCS User Portal](https://user.cscs.ch) for details on how to use the [EasyBuild framework at CSCS](https://user.cscs.ch/scientific_computing/code_compilation/easybuild_framework).
 
+# Contributing back
+
 ## How to submit a pull request:
 
 1. Add the EasyBuild configuration files to a __new branch__, including __all the required dependencies__
