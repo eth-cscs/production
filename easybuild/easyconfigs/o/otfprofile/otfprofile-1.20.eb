@@ -1,0 +1,41 @@
+easyblock = 'ConfigureMake'
+
+name = 'otfprofile'
+version = '1.20'
+
+homepage = 'https://github.com/score-p/otf2_cli_profile'
+description = """Tool to read otf2 trace files
+otfprofile --help
+otfprofile --tex    -i ./traces.otf2
+otfprofile --cube   -i ./traces.otf2 
+otfprofile --csv    -i ./traces.otf2
+otfprofile --circos -i ./traces.otf2
+
+## mpi only csv example:
+FUNCTION;Process;Function;Invocations;Excl. Time (s);Incl. Time (s)
+FUNCTION;Master thread:0;MPI_Allreduce;9;9.77346159e-06;9.77346159e-06
+FUNCTION;Master thread:0;MPI_Barrier;1;4.74423079e-05;4.74423079e-05
+"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['https://github.com/score-p/otf2_cli_profile/archive']
+sources = ['master.zip']
+
+preconfigopts = [ 'cd otfprofile ; pwd; ./bootstrap && ']
+configopts  = [' --with-otf2-dir=$EBROOTOTF2 --with-cube-dir=$EBROOTCUBE --with-circos-dir=$EBROOTCIRCOS ']
+prebuildopts = [ ' pwd; cd otfprofile; ' ]
+preinstallopts = [ ' pwd; cd otfprofile; ' ]
+
+dependencies = [
+    ('OTF2', '2.1'),
+    ('Circos', '0.69-6-Perl-5.26.1-bare'),
+    ('Cube', '4.3.5'),
+]
+
+sanity_check_paths = {
+    'files': ["bin/otfprofile"],
+    'dirs': [],
+}
+
+moduleclass = 'perf'
