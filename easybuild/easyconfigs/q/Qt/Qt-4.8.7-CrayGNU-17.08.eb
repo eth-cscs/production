@@ -1,5 +1,6 @@
 name = 'Qt'
 version = '4.8.7'
+shortversion = '4.8'
 # https://github.com/hpcugent/easybuild-easyconfigs/issues/2777
 #gcc434:ko version = '4.8.7'
 
@@ -8,7 +9,7 @@ description = "Qt is a comprehensive cross-platform C++ application framework."
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
-source_urls = [ 'http://download.qt.io/official_releases/qt/4.8/4.8.7/' ]
+source_urls = [ 'http://download.qt.io/official_releases/qt/%(shortversion)s/%(version)s/' ]
 sources = [ 'qt-everywhere-opensource-src-%(version)s.tar.gz' ]
 
 # --- do not use -no-accessibility (needed for boxfish tool)
