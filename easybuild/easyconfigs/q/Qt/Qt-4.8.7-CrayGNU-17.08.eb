@@ -8,7 +8,7 @@ description = "Qt is a comprehensive cross-platform C++ application framework."
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
-source_urls = [ 'http://download.qt.io/official_releases/qt/4.8/4.8.6/' ]
+source_urls = [ 'http://download.qt.io/official_releases/qt/4.8/4.8.7/' ]
 sources = [ 'qt-everywhere-opensource-src-%(version)s.tar.gz' ]
 
 # --- do not use -no-accessibility (needed for boxfish tool)
