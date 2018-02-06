@@ -31,6 +31,7 @@
  LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb         --set-default-module
  Lmod-7.7.eb                                        --set-default-module --hidden
  magma-2.2.0-CrayGNU-17.08-cuda-8.0.eb              --set-default-module
+ magma-2.3.0-CrayIntel-17.08-cuda-8.0.eb
  NCO-4.6.8-CrayGNU-17.08.eb                         --set-default-module
  NAMD-2.12-CrayIntel-17.08-cuda-8.0.eb              --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
