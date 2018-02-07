@@ -10,7 +10,7 @@ homepage = 'http://python.org/'
 description = """Python is a programming language that lets you work more
 quickly and integrate your systems more effectively."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'pic': True, 'opt': True}
 
 source_urls = ['http://www.python.org/ftp/python/%(version)s/']
@@ -20,7 +20,6 @@ sources = ['Python-%(version)s.tgz']
 dependencies = [
     ('bzip2', '1.0.6', '', True),
     ('zlib', '1.2.11', '', True),
-#    ('libreadline', '7.0'),
     ('ncurses', '6.0', '', True),
 ]
 
@@ -33,6 +32,9 @@ exts_list = [
     ('setuptools', '36.4.0', {
         'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
         'source_tmpl': 'setuptools-%(version)s.zip'
+    }),
+    ('gnureadline', '6.3.8', {
+        'source_urls': ['https://pypi.python.org/packages/source/g/gnureadline/'],
     }),
     ('pip', '9.0.1', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
