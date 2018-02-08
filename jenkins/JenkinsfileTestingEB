@@ -96,8 +96,10 @@ stage('Build Stage') {
 
                                        $commandComplete
                                        status=\$[status+\$?]
-                                       chmod -R o+r \$EASYBUILD_TMPDIR
-                                       find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                                       if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
+                                        chmod -R o+r \$EASYBUILD_TMPDIR
+                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                                       fi
                                        exit \$status""")
                     }
                 }
