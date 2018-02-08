@@ -1,0 +1,54 @@
+diff -Nru gpaw-1.3.0.orig/config.py gpaw-1.3.0/config.py
+--- gpaw-1.3.0.orig/config.py	2017-09-12 12:49:51.000000000 +0200
++++ gpaw-1.3.0/config.py	2018-02-08 12:15:56.202042317 +0100
+@@ -150,6 +150,14 @@
+             if openblas:  # prefer openblas
+                 libraries += ['openblas']
+                 library_dirs += [libdir]
++# Cray systems: check if cray-libsci is available
++            craylibsci = False
++            if 'CRAY_LIBSCI_DIR' in os.environ:
++                craylibsci = True
++                os.environ["GPAW_MPI"] = "True"
++                os.environ["GPAW_MPI_IMPLEMENTATION"] = "cray"
++                os.environ["GPAW_MPI_COMMAND"] = "srun"
++                libraries += ['readline', 'ncurses']
+             else:
+                 if atlas:  # then atlas
+                     # http://math-atlas.sourceforge.net/errata.html#LINK
+@@ -346,6 +354,9 @@
+     elif mpi == 'poe':
+         mpicompiler = 'mpcc_r'
+ 
++    elif mpi == 'cray':
++        mpicompiler = 'cc'
++
+     else:
+         # Try to use mpicc
+         mpicompiler = 'mpicc'
+diff -Nru gpaw-1.3.0.orig/customize.py gpaw-1.3.0/customize.py
+--- gpaw-1.3.0.orig/customize.py	2017-08-14 12:26:22.000000000 +0200
++++ gpaw-1.3.0/customize.py	2018-02-08 12:17:18.494256068 +0100
+@@ -28,6 +28,7 @@
+     libraries += ['somelib', 'otherlib']
+ """
+ 
++import os
+ # compiler = 'gcc'
+ # mpicompiler = 'mpicc'  # use None if you don't want to build a gpaw-python
+ # mpilinker = 'mpicc'
+@@ -81,3 +82,14 @@
+     define_macros += [('PARALLEL', '1')]
+     mpicompiler = None
+ 
++if os.environ["GPAW_MPI"] == "True" and os.environ["GPAW_MPI_IMPLEMENTATION"] == "cray":
++   print ("Cray Libraries found on the system: building with cray wrappers, cray-libsci and cray-mpich")
++   os.environ["CRAYPE_LINK_TYPE"] = "dynamic"
++   compiler = 'cc'
++   mpicompiler = 'cc'
++   mpilinker = 'cc'
++   define_macros += [('PARALLEL', '1')]
++else:
++   compiler = 'mpicc'
++   define_macros += [('PARALLEL', '1')]
++   mpicompiler = None
