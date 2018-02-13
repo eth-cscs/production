@@ -28,8 +28,8 @@ toolchainopts = {'usempi': 'True', 'openmp': 'True'}
 source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
-preconfigopts = ' pushd ../gromacs-%(version)s && plumed-patch -p --runtime --shared <<< 2 && popd && '
-configopts = ' -DGMX_MPI=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_DOUBLE=OFF -DGMX_X11=OFF -DGMX_SIMD="AVX2_256" -DCMAKE_C_FLAGS="-g -fPIC -march=core-avx2" -DCMAKE_CXX_FLAGS="-g -fPIC -march=core-avx2" -DFFTWF_INCLUDE_DIR=$FFTW_INC -DFFTWF_LIBRARY=$FFTW_DIR/libfftw3f.a -DBUILD_SHARED_LIBS=OFF -DGMX_PREFER_STATIC_LIBS=ON -DCUDA_NVCC_FLAGS="-arch=sm_60" '
+#preconfigopts = ' pushd ../gromacs-%(version)s && plumed-patch -p --runtime --shared <<< 2 && popd && '
+configopts = ' -DGMX_MPI=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_DOUBLE=OFF -DGMX_X11=OFF -DGMX_SIMD="AVX2_256" -DCMAKE_C_FLAGS="-g -fPIC -march=core-avx2" -DCMAKE_CXX_FLAGS="-g -fPIC -march=core-avx2" -DFFTWF_INCLUDE_DIR=$FFTW_INC -DFFTWF_LIBRARY=$FFTW_DIR/libfftw3f.a -DGMX_BUILD_SHARED_EXE=OFF -DBUILD_SHARED_LIBS=OFF -DGMX_PREFER_STATIC_LIBS=ON -DCUDA_NVCC_FLAGS="-arch=sm_60" '
 skipsteps = ['test']
 
 # CMake dependency with dummy toolchain

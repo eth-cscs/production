@@ -73,17 +73,19 @@ class EB_GROMACS(CMakeMake):
         """Custom configuration procedure for GROMACS: set configure options for configure or cmake."""
 
         # check whether PLUMED is loaded as a dependency
-        #plumed_root = get_software_root('PLUMED')
-        plumed_root = ''
+        plumed_root = get_software_root('PLUMED')
+        #plumed_root = ''
         if plumed_root:
             # Need to check if PLUMED has an engine for this version
             engine = 'gromacs-%s' % self.version
 
             (out, _) = run_cmd("plumed-patch -l", log_all=True, simple=False)
             if not re.search(engine, out):
-                raise EasyBuildError("There is no support in PLUMED version %s for GROMACS %s: %s",
-                                     get_software_version('PLUMED'), self.version, out)
-
+                self.log.warning("There is officially no support in PLUMED version %s for GROMACS %s: %s",
+                                    get_software_version('PLUMED'), self.version, out)
+            #    raise EasyBuildError("There is no support in PLUMED version %s for GROMACS %s: %s",
+            #                        get_software_version('PLUMED'), self.version, out)
+             
             # PLUMED patching must be done at different stages depending on
             # version of GROMACS. Just prepare first part of cmd here
             plumed_cmd = "plumed-patch -p -e %s" % engine
