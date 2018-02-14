@@ -23,12 +23,13 @@ description = """GROMACS is a versatile package to perform molecular dynamics,
  i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
-toolchainopts = {'usempi': 'True', 'openmp': 'True'}
+toolchainopts = {'usempi': 'True', 'openmp': 'True', 'static': 'True'}
 
 source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = ' -DCMAKE_C_FLAGS="-g -fPIC" -DCMAKE_CXX_FLAGS="-g -fPIC" '
+configopts = ' -DCMAKE_C_FLAGS="-g -fPIC -march=core-avx2" -DCMAKE_CXX_FLAGS="-g -fPIC -march=core-avx2" '
+configopts += ' -DGMX_SIMD=AVX2_256 -DGMX_BUILD_SHARED_EXE=OFF -DBUILD_SHARED_LIBS=OFF -DGMX_PREFER_STATIC_LIBS=ON'
 
 prebuildopts = ' export CRAYPAT_COMPILER_OPTIONS=1 && export CRAYPAT_LITE=sample_profile && '
 
