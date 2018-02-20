@@ -20,6 +20,7 @@ sources = [
 ]
 
 preconfigopts = "ln -s %(builddir)s/libatomic_ops*/ libatomic_ops && ./autogen.sh && "
+configopts = "--enable-threads=pthreads"
 
 sanity_check_paths = {
     'files': ['include/gc.h', 'lib/libcord.a', 'lib/libcord.%s' % SHLIB_EXT, 'lib/libgc.a', 'lib/libgc.%s' % SHLIB_EXT],
