@@ -20,7 +20,7 @@ dependencies = [
     ('flex', '2.6.4'),
     ('Bison', '3.0.4'),
     ('byacc', '20170709'),
-    ('guile', '2.0.13'),
+    ('guile', '2.0.14'),
 ]
 
 #preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
