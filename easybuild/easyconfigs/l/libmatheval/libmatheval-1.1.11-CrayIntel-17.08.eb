@@ -13,7 +13,7 @@ sources = [SOURCELOWER_TAR_GZ]
 # patch for configure.in with guile2 from https://github.com/pld-linux/libmatheval/blob/master/libmatheval-guile2.patch
 patches = ['libmatheval-guile2.patch']
 
-toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 toolchainopts = {'pic': True}
 
 dependencies = [
@@ -23,8 +23,7 @@ dependencies = [
     ('guile', '2.0.14'),
 ]
 
-preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
-
+#preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
 configopts = '--with-pic '
 
 # fix for guile-config being broken because shebang line contains full path to bin/guile
