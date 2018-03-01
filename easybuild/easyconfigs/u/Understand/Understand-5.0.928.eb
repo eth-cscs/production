@@ -9,9 +9,8 @@ description = """Understand provides you with pertinent informations regarding
 your code."""
 
 toolchain = {'name': 'dummy', 'version': ''}
-source_urls = ['/apps/common/easybuild/sources/u/Understand']
 sources = [{
-  'filename': '%(name)s-%(version)s-Linux-64bit.tgz',
+  'filename': '/apps/common/easybuild/sources/u/Understand/%(name)s-%(version)s-Linux-64bit.tgz',
   'extract_cmd': "tar xf %s",
 }]
 patches = [ ('Understand.patch', 1) ]
