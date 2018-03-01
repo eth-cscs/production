@@ -43,6 +43,9 @@ stage('Build Stage') {
             def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
             builds[machineLabel] = {
                 node(machineName) {
+                    sh('ls')
+                    deleteDir()
+                    sh('ls')
                     checkout scm
                     def moduleDefinition = ''
                     if (machineName == 'leone')
