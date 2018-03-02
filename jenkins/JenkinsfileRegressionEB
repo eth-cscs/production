@@ -41,12 +41,19 @@ stage('Build Stage') {
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
             builds[machineLabel] = {
                 node(machineName) {
-                    checkout scm
+                    if (machineName != 'leone') {
+                        checkout scm
+                    }
                     def moduleDefinition = ''
-                    if (machineName == 'leone')
+                    def gitClone = ''
+                    if (machineName == 'leone') {
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
-
+                        gitClone = '''module use /apps/common/UES/RHAT6/easybuild/modules/all/
+                                      module load git
+                                      git init .
+                                      git clone https://github.com/eth-cscs/production.git'''
+                    }
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
@@ -70,6 +77,7 @@ stage('Build Stage') {
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources"]) {
                                  sh("""$loginBash
                                        $moduleDefinition
+                                       $gitClone
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
