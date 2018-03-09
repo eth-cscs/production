@@ -43,5 +43,6 @@
  Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb         --set-default-module
  Understand-4.0.913.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Understand-5.0.928.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Valgrind-3.13.0-gmvolf-17.02.eb                     --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  vampir-9.4.0.eb                                     --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Vim-8.0.eb                                          --installpath=/apps/escha/UES/RH7.3_generic/easybuild
