@@ -7,5 +7,6 @@
  Python-2.7.12-gmvolf-17.06.eb
  Python-3.5.3-gmvolf-17.06.eb 
  reframe-2.11.eb                            --set-default-module
+ tmux-2.6.eb                                --set-default-module
  Vim-8.0.eb                                 --set-default-module
  vampir-9.4.0.eb                            --set-default-module
