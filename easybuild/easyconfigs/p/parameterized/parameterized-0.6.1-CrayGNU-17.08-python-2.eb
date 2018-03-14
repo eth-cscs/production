@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'parameterized'
+version = '0.6.1'
+
+req_py_majver = 2
+req_py_minver = 7
+
+pyver = '%s' % req_py_majver
+pyshortver = '%s.%s' % (req_py_majver, req_py_minver)
+versionsuffix = '-python-%s' % pyver
+
+homepage = 'https://pypi.python.org/pypi/%s' % name
+description = """Parameterized testing with any Python test framework."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+             ('cray-python/17.06.1', EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+exts_filter = ('python -c "import parameterized"', "")
+
+moduleclass = 'tools'
