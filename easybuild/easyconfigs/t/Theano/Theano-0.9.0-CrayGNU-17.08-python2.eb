@@ -1,7 +1,7 @@
 easyblock = "PythonPackage"
 
 name = 'Theano'
-version = '1.0.1'
+version = '0.9.0'
 
 req_py_majver = 2
 req_py_minver = 7
@@ -29,7 +29,7 @@ dependencies = [
 	     ('cray-python/17.06.1', EXTERNAL_MODULE),
 	     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
 	     ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
-	     ('parameterized', '0.6.1', '-python-%s' % pyver),
+	     ('nose-parameterized', '0.5.0', '-python-%s' % pyver),
 ]
 
 # sanity check/import will fail when building on nodes where MPI is disabled 
