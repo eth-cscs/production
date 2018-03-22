@@ -6,11 +6,14 @@ version = '0.9.0'
 req_py_majver = 3
 req_py_minver = 5
 
+cudamajor = '8.0'
+
 versionsuffix = '-python%s' % req_py_majver
 
 homepage = 'http://deeplearning.net/software/theano'
-description = """Theano is a Python library that allows you to define, optimize,
-and evaluate mathematical expressions involving multi-dimensional arrays efficiently."""
+description = """Theano is a Python library that allows you to define,
+optimize, and evaluate mathematical expressions involving multi-dimensional
+arrays efficiently."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
@@ -21,18 +24,14 @@ python = 'Python'
 pyver = '%s' % req_py_majver
 pythonshortver = '%s.%s' % (req_py_majver, req_py_minver)
 
-cudamajor = '8.0'
-cudaminor = '54'
-cudabuild = '_2.2.8_ga620558-2.1'
-
 dependencies = [
-	     ('cray-python/17.06.1', EXTERNAL_MODULE),
-	     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
-	     ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
-	     ('nose-parameterized', '0.5.0', '-python-%s' % pyver),
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
+    ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
+    ('nose-parameterized', '0.5.0', '-python-%s' % pyver),
 ]
 
-# sanity check/import will fail when building on nodes where MPI is disabled 
+# sanity check/import will fail when building on nodes where MPI is disabled
 # the workaround is to change the module name
 options = {'modulename': 'os'}
 
