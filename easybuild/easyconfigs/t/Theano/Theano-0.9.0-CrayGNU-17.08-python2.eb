@@ -20,15 +20,11 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 source_urls = ['https://pypi.python.org/packages/source/T/%s' % name]
 sources = [SOURCE_TAR_GZ]
 
-python = 'Python'
-pyver = '%s' % req_py_majver
-pythonshortver = '%s.%s' % (req_py_majver, req_py_minver)
-
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
     ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
-    ('nose-parameterized', '0.5.0', '-python-%s' % pyver),
+    ('nose-parameterized', '0.5.0', '-python-%s' % req_py_majver),
 ]
 
 # sanity check/import will fail when building on nodes where MPI is disabled
@@ -37,7 +33,7 @@ options = {'modulename': 'os'}
 
 sanity_check_paths = {
     'files': ['bin/theano-cache'],
-    'dirs': ['lib/python%s/site-packages' % pythonshortver],
+    'dirs': ['lib/python%s.%s/site-packages' % (req_py_majver, req_py_minver)],
 }
 
 moduleclass = 'math'
