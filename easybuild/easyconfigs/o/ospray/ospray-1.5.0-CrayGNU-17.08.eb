@@ -9,8 +9,8 @@ Engine for High-Fidelity Visualization"""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
-sources = ['ospray-1.5.0.x86_64.linux.tar.gz']
-source_urls = ['https://github.com/ospray/ospray/releases/download/v1.5.0/']
+sources = ['ospray-%(version)s.x86_64.linux.tar.gz']
+source_urls = ['https://github.com/ospray/ospray/releases/download/v%(version)s/']
 
 sanity_check_paths={
     'files': [],
