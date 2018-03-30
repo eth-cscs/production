@@ -15,7 +15,7 @@ sources = [
 ]
 source_urls = ['https://github.com/eth-cscs/reframe/archive/']
 patches = ['reframe-2.11-cscs-settings.patch']
-dependencies = [('Python-bare', '3.6.2')]
+dependencies = [('Python-bare', '3.6.5')]
 keepsymlinks = True
 postinstallcmds = [
     'git clone --branch v%(version)s git@github.com:eth-cscs/reframe-tests.git',
