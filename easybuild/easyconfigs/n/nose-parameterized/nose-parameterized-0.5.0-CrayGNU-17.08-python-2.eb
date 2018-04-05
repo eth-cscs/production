@@ -1,0 +1,31 @@
+easyblock = 'PythonPackage'
+
+name = 'nose-parameterized'
+version = '0.5.0'
+pyver = '2'
+pyshortver = '2.7'
+versionsuffix = '-python-%s' % pyver
+
+homepage = 'https://pypi.python.org/pypi/%s' % name
+description = """A built-package format for Python."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+             ('cray-python/17.06.1', EXTERNAL_MODULE),
+]
+
+req_py_majver = 2
+req_py_minver = 7
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+exts_filter = ('python -c "import nose_parameterized"', "")
+
+moduleclass = 'tools'
