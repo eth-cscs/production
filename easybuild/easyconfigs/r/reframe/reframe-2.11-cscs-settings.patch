@@ -11,7 +11,7 @@ index 5f22981..3b7e9fc 100644
                  printer.info("%s: path `%s' does not exist. Skipping...\n" %
                               (argparser.prog, d))
 diff --git a/reframe/settings.py b/reframe/settings.py
-index c181d9d..18adaf6 100644
+index c181d9d..746f968 100644
 --- a/reframe/settings.py
 +++ b/reframe/settings.py
 @@ -1,5 +1,5 @@
@@ -286,7 +286,7 @@ index c181d9d..18adaf6 100644
 +        'modes': {
 +            '*': {
 +                'maintenance': [
-+                    '-c', '$EBROOTREFRAME', '-R',
++                    '-c', '$EBROOTREFRAME/cscs-checks', '-R',
 +                    '--exec-policy=async',
 +                    '--strict',
 +                    '--output=$APPS/UES/$USER/regression/maintenance',
@@ -298,7 +298,7 @@ index c181d9d..18adaf6 100644
 +                    '--timestamp=%F_%H-%M-%S'
 +                ],
 +                'production': [
-+                    '-c', '$EBROOTREFRAME', '-R',
++                    '-c', '$EBROOTREFRAME/cscs-checks', '-R',
 +                    '--exec-policy=async',
 +                    '--strict',
 +                    '--output=$APPS/UES/$USER/regression/production',

@@ -17,8 +17,12 @@ source_urls = ['https://github.com/eth-cscs/reframe/archive/']
 patches = ['reframe-2.11-cscs-settings.patch']
 dependencies = [('Python-bare', '3.6.2')]
 keepsymlinks = True
+postinstallcmds = [
+    'git clone --branch v%(version)s git@github.com:eth-cscs/reframe-tests.git',
+    'cp -r reframe-tests/checks %(installdir)s/cscs-checks/private'
+]
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py'],
-    'dirs': ['bin', 'cscs-checks', 'unittests'],
+    'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests'],
 }
 moduleclass = 'devel'
