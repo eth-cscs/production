@@ -1,6 +1,6 @@
  Boost-1.61.0-foss-2016b-Python-2.7.12.eb
- ddt-7.1.eb
- ddt-18.0.1.eb                              --set-default-module
+ ddt-18.0.1.eb
+ ddt-18.1.1.eb                              --set-default-module
  h-yade-2017.01a-foss-2016b-Python-2.7.12.eb
  LIGGGHTS-3.8.eb
  OpenFOAM-4.1-foss-2016b.eb
