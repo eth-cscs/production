@@ -5,6 +5,7 @@
  CMake-3.9.1.eb                                      --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  ddt-18.0.1.eb                                       
  ddt-18.1.1.eb                                       --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ ecCodes-2.7.0-gmvolf-17.02-Python-2.7.13.eb         --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GCC-4.8.2-binutils-2.24.eb                          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GCCcore-4.9.3.eb                                    --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GDAL-2.2.1-gmvolf-17.02.eb
