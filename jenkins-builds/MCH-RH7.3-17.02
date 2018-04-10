@@ -40,7 +40,8 @@
  netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
- rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild --set-default-module
+ rstudio-1.1.442.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb         --set-default-module
  Understand-4.0.913.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Understand-5.0.928.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
