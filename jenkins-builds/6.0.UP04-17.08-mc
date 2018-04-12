@@ -16,6 +16,7 @@
  Extrae-3.5.2-CrayIntel-17.08.eb
  GREASY-2.1-cscs-CrayGNU-17.08.eb                   --set-default-module
  GROMACS-2016.3-CrayGNU-17.08.eb                    --set-default-module
+ GROMACS-2018-CrayGNU-17.08.eb
  GSL-2.4-CrayGNU-17.08.eb                           --set-default-module
  GSL-2.4-CrayCCE-17.08.eb
  GSL-2.4-CrayIntel-17.08.eb
