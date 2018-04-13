@@ -13,7 +13,7 @@ cudaver = '8.0'
 
 ver_suffix_cuda = '-cuda-%s' % (cudaver)
 ver_suffix_py = '-python%s' % (py_maj_ver)
-versionsuffix = '%s%s-pb3.5' % (ver_suffix_cuda, ver_suffix_py)
+versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
 
 installdir = '%(installdir)s'
 builddir = '%(builddir)s'
@@ -35,6 +35,7 @@ dependencies = [
     ('protobuf', '3.5.1', ver_suffix_py),
     ('backports.weakref', '1.0rc1', ver_suffix_py),
     ('Werkzeug', '0.12.2', ver_suffix_py),
+    ('absl', '0.1.13', ver_suffix_py)
 ]
 
 sources = ['v%(version)s.tar.gz']
