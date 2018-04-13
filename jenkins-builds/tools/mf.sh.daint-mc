@@ -1,0 +1,92 @@
+jenkins_eb_file=CPMD-4.1-CrayIntel-17.08.eb
+jenkins_eb_file_fullpath=
+mf=/
+
+jenkins_eb_file=LAMMPS-11Aug2017-CrayGNU-17.08.eb
+jenkins_eb_file_fullpath=
+mf=/
+
+jenkins_eb_file=netcdf-python-1.2.9-CrayGNU-17.08-python2.eb
+jenkins_eb_file_fullpath=
+mf=/
+
+jenkins_eb_file=netcdf-python-1.2.9-CrayGNU-17.08-python3.eb
+jenkins_eb_file_fullpath=
+mf=/
+
+module load stat
+export LD_LIBRARY_PATH=/opt/cray/pe/stat/default/lib:$LD_LIBRARY_PATH
+dot -Tpng ./mf.sh.dot > ./mf.sh.png
+circo -Teps ././mf.sh.dot > ./mf.sh.eps
+try tulip too
+------------------------------------------------------------------
+------------------------------------------------------------------
+## l0=Amber: CrayGNU CrayIntel PrgEnv-gnu bzip2 gcc zlib 
+------------------------------------------------------------------
+## l0=Boost: CrayGNU CrayIntel PrgEnv-gnu bzip2 cray-python gcc zlib 
+------------------------------------------------------------------
+## l0=CDO: CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel cray-hdf5 cray-netcdf gcc intel netCDF netCDF-Fortran 
+------------------------------------------------------------------
+## l0=CMake:  
+------------------------------------------------------------------
+## l0=CP2K: CrayGNU Libint PrgEnv-gnu gcc libxc 
+------------------------------------------------------------------
+## l0=Extrae: CrayGNU CrayIntel Dimemas Paraver PrgEnv-gnu PrgEnv-intel clusteringsuite cray-fftw gcc intel java libunwind libxml2 papi zlib 
+------------------------------------------------------------------
+## l0=GREASY: CrayGNU PrgEnv-gnu gcc 
+------------------------------------------------------------------
+## l0=GROMACS: CrayGNU PrgEnv-gnu gcc 
+------------------------------------------------------------------
+## l0=GSL: CrayCCE CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel gcc intel 
+------------------------------------------------------------------
+## l0=HDFView:  
+------------------------------------------------------------------
+## l0=IPM: CrayCCE CrayGNU CrayIntel CrayPGI PrgEnv-gnu PrgEnv-intel PrgEnv-pgi gcc intel libunwind mxml papi pgi ploticus 
+------------------------------------------------------------------
+## l0=Lmod: Lua 
+------------------------------------------------------------------
+## l0=NAMD: CrayIntel PrgEnv-intel intel 
+------------------------------------------------------------------
+## l0=NCL:  
+------------------------------------------------------------------
+## l0=NCO: ANTLR CrayGNU JasPer Java PrgEnv-gnu UDUNITS cray-hdf5 cray-python expat gcc netCDF netCDF-Fortran 
+------------------------------------------------------------------
+## l0=PLUMED: Bison CrayCCE CrayGNU CrayIntel GSL PrgEnv-gnu byacc flex gcc guile libmatheval zlib 
+------------------------------------------------------------------
+## l0=PyExtensions: CrayGNU PrgEnv-gnu cray-python gcc 
+------------------------------------------------------------------
+## l0=Python-bare: CrayGNU CrayIntel bzip2 ncurses zlib 
+------------------------------------------------------------------
+## l0=QuantumESPRESSO: CrayIntel PrgEnv-intel intel 
+------------------------------------------------------------------
+## l0=R: CrayGNU GDAL GEOS GMP NASM PCRE PROJ PrgEnv-gnu Tcl Tk XZ bzip2 cURL cray-hdf5 cray-netcdf expat gcc gettext java libjpeg-turbo libpng libreadline libxml2 ncurses zlib 
+------------------------------------------------------------------
+## l0=RDock: CrayGNU PrgEnv-gnu gcc 
+------------------------------------------------------------------
+## l0=Scalasca: CrayGNU CrayIntel CrayPGI Cube OPARI2 OTF2 PDT PrgEnv-gnu PrgEnv-intel PrgEnv-pgi SIONlib gcc intel libunwind papi pgi vampir 
+------------------------------------------------------------------
+## l0=Score-P: CrayGNU CrayIntel CrayPGI Cube OPARI2 PDT PrgEnv-gnu PrgEnv-intel PrgEnv-pgi SIONlib gcc intel libunwind papi pgi vampir 
+------------------------------------------------------------------
+## l0=Spark: java 
+------------------------------------------------------------------
+## l0=Understand:  
+------------------------------------------------------------------
+## l0=VASP: CrayIntel PrgEnv-intel intel 
+------------------------------------------------------------------
+## l0=Visit: CrayGNU PrgEnv-gnu gcc 
+------------------------------------------------------------------
+## l0=abcpy: CrayGNU PrgEnv-gnu cloudpickle cray-python gcc glmnet scikit-learn 
+------------------------------------------------------------------
+## l0=ddt:  
+------------------------------------------------------------------
+## l0=h5py: CrayGNU PrgEnv-gnu PyExtensions cray-hdf5 cray-hdf5-parallel cray-python gcc 
+------------------------------------------------------------------
+## l0=ncview: CrayGNU PrgEnv-gnu UDUNITS cray-hdf5 cray-netcdf expat gcc libpng zlib 
+------------------------------------------------------------------
+## l0=otfprofile: Circos CrayGNU Cube GD OTF2 Perl 
+------------------------------------------------------------------
+## l0=papi-wrap: CrayCCE CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel gcc intel papi 
+------------------------------------------------------------------
+## l0=perf-reports:  
+------------------------------------------------------------------
+## l0=vampir:  
