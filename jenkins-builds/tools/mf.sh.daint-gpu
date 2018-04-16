@@ -25,82 +25,148 @@ circo -Teps ././mf.sh.dot > ./mf.sh.eps
 try tulip too
 ------------------------------------------------------------------
 ------------------------------------------------------------------
-## l0=Amber: CrayGNU CrayIntel PrgEnv-gnu bzip2 gcc zlib 
+## l0=Amber/16-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=Boost: CrayGNU CrayIntel PrgEnv-gnu bzip2 cray-python gcc zlib 
+## l0=Amber/16-CrayGNU-17.08-parallel: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=CDO: CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel cray-hdf5 cray-netcdf gcc intel netCDF netCDF-Fortran 
+## l0=Amber/16-CrayGNU-17.08-serial: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=CMake:  
+## l0=Boost/1.65.0-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=CP2K: CrayGNU Libint PrgEnv-gnu gcc libxc 
+## l0=Boost/1.65.0-CrayGNU-17.08-python2: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 cray-python/17.06.1 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=Extrae: CrayGNU CrayIntel Dimemas Paraver PrgEnv-gnu PrgEnv-intel clusteringsuite cray-fftw gcc intel java libunwind libxml2 papi zlib 
+## l0=Boost/1.65.0-CrayGNU-17.08-python3: CrayGNU/.17.08 PrgEnv-gnu bzip2/.1.0.6-CrayGNU-17.08 cray-python/17.06.1 gcc/5.3.0 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=GREASY: CrayGNU PrgEnv-gnu gcc 
+## l0=CDO/1.9.0-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu cray-hdf5/1.10.0.3 gcc/5.3.0 netCDF-Fortran/4.4.4-CrayGNU-17.08 netCDF/4.4.1.1-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=GROMACS: CrayGNU PrgEnv-gnu gcc 
+## l0=CDO/1.9.0-CrayIntel-17.08: CrayIntel/.17.08 PrgEnv-intel cray-hdf5/1.10.0.3 cray-netcdf/4.4.1.1.3 intel/17.0.4.196 
 ------------------------------------------------------------------
-## l0=GSL: CrayCCE CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel gcc intel 
+## l0=CMake/3.10.1:  
 ------------------------------------------------------------------
-## l0=HDFView:  
+## l0=CP2K/5.0r18043-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 Libint/1.1.4-CrayGNU-17.08 PrgEnv-gnu gcc/5.3.0 libxc/3.0.0-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=IPM: CrayCCE CrayGNU CrayIntel CrayPGI PrgEnv-gnu PrgEnv-intel PrgEnv-pgi gcc intel libunwind mxml papi pgi ploticus 
+## l0=CP2K/5.1-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 Libint/1.1.4-CrayGNU-17.08 PrgEnv-gnu gcc/5.3.0 libxc/3.0.0-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=Lmod: Lua 
+## l0=Extrae/3.5.2-CrayGNU-17.08: CrayGNU/.17.08 Dimemas/5.3.3 Paraver/4.6.4.rc1 PrgEnv-gnu clusteringsuite/2.6.6 cray-fftw/3.3.6.2 gcc/5.3.0 java/jdk1.8.0_51 libunwind/.1.2.1-CrayGNU-17.08 libxml2/.2.9.4-CrayGNU-17.08 papi/5.5.1.3 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=NAMD: CrayIntel PrgEnv-intel intel 
+## l0=Extrae/3.5.2-CrayIntel-17.08: CrayIntel/.17.08 Dimemas/5.3.3 Paraver/4.6.4.rc1 PrgEnv-intel clusteringsuite/2.6.6 cray-fftw/3.3.6.2 intel/17.0.4.196 java/jdk1.8.0_51 libunwind/.1.2.1-CrayIntel-17.08 libxml2/.2.9.4 papi/5.5.1.3 zlib/.1.2.11-CrayIntel-17.08 
 ------------------------------------------------------------------
-## l0=NCL:  
+## l0=GREASY/2.1-cscs-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=NCO: ANTLR CrayGNU JasPer Java PrgEnv-gnu UDUNITS cray-hdf5 cray-python expat gcc netCDF netCDF-Fortran 
+## l0=GROMACS/2016.3-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=PLUMED: Bison CrayCCE CrayGNU CrayIntel GSL PrgEnv-gnu byacc flex gcc guile libmatheval zlib 
+## l0=GROMACS/2018-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=PyExtensions: CrayGNU PrgEnv-gnu cray-python gcc 
+## l0=GSL/2.4-CrayCCE-17.08: CrayCCE/.17.08 
 ------------------------------------------------------------------
-## l0=Python-bare: CrayGNU CrayIntel bzip2 ncurses zlib 
+## l0=GSL/2.4-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=QuantumESPRESSO: CrayIntel PrgEnv-intel intel 
+## l0=GSL/2.4-CrayIntel-17.08: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 
 ------------------------------------------------------------------
-## l0=R: CrayGNU GDAL GEOS GMP NASM PCRE PROJ PrgEnv-gnu Tcl Tk XZ bzip2 cURL cray-hdf5 cray-netcdf expat gcc gettext java libjpeg-turbo libpng libreadline libxml2 ncurses zlib 
+## l0=HDFView/2.14:  
 ------------------------------------------------------------------
-## l0=RDock: CrayGNU PrgEnv-gnu gcc 
+## l0=IPM/2.0.6-CrayCCE-17.08: CrayCCE/.17.08 libunwind/.1.2.1 mxml/.2.10 papi/5.5.1.2 ploticus/.2.42-ipm 
 ------------------------------------------------------------------
-## l0=Scalasca: CrayGNU CrayIntel CrayPGI Cube OPARI2 OTF2 PDT PrgEnv-gnu PrgEnv-intel PrgEnv-pgi SIONlib gcc intel libunwind papi pgi vampir 
+## l0=IPM/2.0.6-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 libunwind/.1.2.1-CrayGNU-17.08 mxml/.2.10-CrayGNU-17.08 papi/5.5.1.2 ploticus/.2.42-ipm 
 ------------------------------------------------------------------
-## l0=Score-P: CrayGNU CrayIntel CrayPGI Cube OPARI2 PDT PrgEnv-gnu PrgEnv-intel PrgEnv-pgi SIONlib cray-libsci_acc craype-accel-nvidia60 cudatoolkit gcc intel libunwind papi pgi vampir 
+## l0=IPM/2.0.6-CrayIntel-17.08: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 libunwind/.1.2.1-CrayIntel-17.08 mxml/.2.10-CrayIntel-17.08 papi/5.5.1.2 ploticus/.2.42-ipm 
 ------------------------------------------------------------------
-## l0=Spark: java 
+## l0=IPM/2.0.6-CrayPGI-17.08: CrayPGI/.17.08 PrgEnv-pgi libunwind/.1.2.1 mxml/.2.10 papi/5.5.1.2 pgi/17.5.0 ploticus/.2.42-ipm 
 ------------------------------------------------------------------
-## l0=TensorFlow: CrayGNU PCRE PrgEnv-gnu SWIG Werkzeug backports.weakref cray-python cuDNN cudatoolkit gcc protobuf protobuf-core 
+## l0=Lmod/7.7:  
 ------------------------------------------------------------------
-## l0=Theano: CrayGNU PrgEnv-gnu cray-python cuDNN cudatoolkit gcc nose-parameterized pycuda 
+## l0=NAMD/2.12-CrayIntel-17.08-cuda-8.0: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 
 ------------------------------------------------------------------
-## l0=Understand:  
+## l0=NCL/6.4.0:  
 ------------------------------------------------------------------
-## l0=VASP: CrayIntel PrgEnv-intel intel 
+## l0=NCO/4.6.8-CrayGNU-17.08: ANTLR/.2.7.7-CrayGNU-17.08-python2 CrayGNU/.17.08 JasPer/.2.0.12-CrayGNU-17.08 Java/1.8.0_121 PrgEnv-gnu UDUNITS/.2.2.25 cray-hdf5/1.10.0.3 cray-python/17.06.1 expat/.2.2.0 gcc/5.3.0 netCDF-Fortran/4.4.4-CrayGNU-17.08 netCDF/4.4.1.1-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=VMD:  
+## l0=PLUMED/2.3.0-CrayGNU-17.08: Bison/.3.0.4-CrayGNU-17.08 CrayGNU/.17.08 GSL/2.4-CrayGNU-17.08 PrgEnv-gnu byacc/.20170709-CrayGNU-17.08 flex/.2.6.4-CrayGNU-17.08 gcc/5.3.0 guile/.2.0.13-CrayGNU-17.08 libmatheval/1.1.11-CrayGNU-17.08 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=VTK: CrayGNU PrgEnv-gnu cray-python gcc 
+## l0=PyExtensions/2.7-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=abcpy: CrayGNU PrgEnv-gnu cloudpickle cray-python gcc glmnet scikit-learn 
+## l0=PyExtensions/3.5-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=ddt:  
+## l0=Python-bare/3.6.2:  
 ------------------------------------------------------------------
-## l0=h5py: CrayGNU PrgEnv-gnu PyExtensions cray-hdf5 cray-hdf5-parallel cray-python gcc 
+## l0=QuantumESPRESSO/6.1.0-CrayIntel-17.08: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 
 ------------------------------------------------------------------
-## l0=magma: CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel cudatoolkit gcc intel 
+## l0=R/3.4.2-CrayGNU-17.08: CrayGNU/.17.08 GDAL/2.1.0-CrayGNU-17.08 GEOS/3.6.2-CrayGNU-17.08 GMP/6.1.2-CrayGNU-17.08 NASM/.2.13.01-CrayGNU-17.08 PCRE/.8.38-CrayGNU-17.08 PROJ/.4.9.3-CrayGNU-17.08 PrgEnv-gnu Tcl/.8.6.7-CrayGNU-17.08 Tk/.8.6.7-CrayGNU-17.08 XZ/.5.2.3-CrayGNU-17.08 bzip2/.1.0.6-CrayGNU-17.08 cURL/.7.55.1-CrayGNU-17.08 cray-hdf5/1.10.0.3 cray-netcdf/4.4.1.1.3 expat/.2.2.4-CrayGNU-17.08 gcc/5.3.0 gettext/.0.19.8-CrayGNU-17.08 java/jdk1.8.0_51 libjpeg-turbo/.1.5.2-CrayGNU-17.08 libpng/.1.6.30-CrayGNU-17.08 libreadline/.7.0-CrayGNU-17.08 libxml2/.2.9.4-CrayGNU-17.08 ncurses/.6.0-CrayGNU-17.08 zlib/.1.2.11-CrayGNU-17.08 
 ------------------------------------------------------------------
-## l0=ncview: CrayGNU PrgEnv-gnu UDUNITS cray-hdf5 cray-netcdf expat gcc libpng zlib 
+## l0=RDock/2013.1-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 
 ------------------------------------------------------------------
-## l0=otfprofile: Circos CrayGNU Cube GD OTF2 Perl 
+## l0=Scalasca/2.3.1-CrayGNU-17.08: CrayGNU/.17.08 Cube/.4.3.5-CrayGNU-17.08 OPARI2/.2.0.2 OTF2/.2.0 PDT/.3.24 PrgEnv-gnu SIONlib/.1.7.1-CrayGNU-17.08 gcc/5.3.0 libunwind/.1.2.1 papi/5.5.1.2 vampir/9.3.0 
 ------------------------------------------------------------------
-## l0=papi-wrap: CrayCCE CrayGNU CrayIntel PrgEnv-gnu PrgEnv-intel gcc intel papi 
+## l0=Scalasca/2.3.1-CrayIntel-17.08: CrayIntel/.17.08 Cube/.4.3.5 OPARI2/.2.0.2 OTF2/.2.0 PDT/.3.24 PrgEnv-intel SIONlib/.1.7.1-CrayIntel-17.08 intel/17.0.4.196 libunwind/.1.2.1 papi/5.5.1.2 vampir/9.3.0 
 ------------------------------------------------------------------
-## l0=perf-reports:  
+## l0=Scalasca/2.3.1-CrayPGI-17.08: CrayPGI/.17.08 Cube/.4.3.5 OPARI2/.2.0.2 OTF2/.2.0 PDT/.3.24 PrgEnv-pgi SIONlib/.1.7.1-CrayPGI-17.08 libunwind/.1.2.1 papi/5.5.1.2 pgi/17.5.0 vampir/9.3.0 
 ------------------------------------------------------------------
-## l0=pycuda: CrayGNU PrgEnv-gnu cray-python cudatoolkit gcc 
+## l0=Score-P/3.1-CrayGNU-17.08: CrayGNU/.17.08 Cube/.4.3.5-CrayGNU-17.08 OPARI2/.2.0.2 PDT/.3.24 PrgEnv-gnu SIONlib/.1.7.1-CrayGNU-17.08 gcc/5.3.0 libunwind/.1.2.1 papi/5.5.1.2 vampir/9.3.0 
 ------------------------------------------------------------------
-## l0=vampir:  
+## l0=Score-P/3.1-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 Cube/.4.3.5-CrayGNU-17.08 OPARI2/.2.0.2 PDT/.3.24 PrgEnv-gnu SIONlib/.1.7.1-CrayGNU-17.08 cray-libsci_acc craype-accel-nvidia60 cudatoolkit gcc/5.3.0 libunwind/.1.2.1 papi/5.5.1.2 vampir/9.3.0 
+------------------------------------------------------------------
+## l0=Score-P/3.1-CrayIntel-17.08: CrayIntel/.17.08 Cube/.4.3.5 OPARI2/.2.0.2 PDT/.3.24 PrgEnv-intel SIONlib/.1.7.1-CrayIntel-17.08 intel/17.0.4.196 libunwind/.1.2.1 papi/5.5.1.2 vampir/9.3.0 
+------------------------------------------------------------------
+## l0=Score-P/3.1-CrayPGI-17.08: CrayPGI/.17.08 Cube/.4.3.5 OPARI2/.2.0.2 PDT/.3.24 PrgEnv-pgi SIONlib/.1.7.1-CrayPGI-17.08 libunwind/.1.2.1 papi/5.5.1.2 pgi/17.5.0 vampir/9.3.0 
+------------------------------------------------------------------
+## l0=Spark/1.6.0: java/jdk1.8.0_51 
+------------------------------------------------------------------
+## l0=TensorFlow/1.3.0-CrayGNU-17.08-cuda-8.0-python3: CrayGNU/.17.08 PCRE/.8.38-CrayGNU-17.08 PrgEnv-gnu SWIG/.3.0.10-CrayGNU-17.08-python3 Werkzeug/.0.12.2-CrayGNU-17.08-python3 backports.weakref/.1.0rc1-CrayGNU-17.08-python3 cray-python/17.06.1 cuDNN/.5.1-cuda-8.0 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 protobuf-core/.3.3.0-CrayGNU-17.08 protobuf/.3.3.0-CrayGNU-17.08-python3 
+------------------------------------------------------------------
+## l0=TensorFlow/1.4.1-CrayGNU-17.08-cuda-8.0-python3: CrayGNU/.17.08 PCRE/.8.38-CrayGNU-17.08 PrgEnv-gnu SWIG/.3.0.10-CrayGNU-17.08-python3 Werkzeug/.0.12.2-CrayGNU-17.08-python3 backports.weakref/.1.0rc1-CrayGNU-17.08-python3 cray-python/17.06.1 cuDNN/.7.0-cuda-8.0 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 protobuf-core/.3.3.0-CrayGNU-17.08 protobuf/.3.3.0-CrayGNU-17.08-python3 
+------------------------------------------------------------------
+## l0=Theano/0.9.0-CrayGNU-17.08-cuda-8.0-python2: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 cuDNN/.5.1-cuda-8.0 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 nose-parameterized/.0.5.0-CrayGNU-17.08-python-2 pycuda/2017.1.1-CrayGNU-17.08-python2-cuda-8.0 
+------------------------------------------------------------------
+## l0=Theano/0.9.0-CrayGNU-17.08-cuda-8.0-python3: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 cuDNN/.5.1-cuda-8.0 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 nose-parameterized/.0.5.0-CrayGNU-17.08-python-3 pycuda/2017.1.1-CrayGNU-17.08-python3-cuda-8.0 
+------------------------------------------------------------------
+## l0=Understand/4.0.913:  
+------------------------------------------------------------------
+## l0=VASP/5.4.4-CrayIntel-17.08-cuda-8.0: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 
+------------------------------------------------------------------
+## l0=VMD/1.9.3-egl:  
+------------------------------------------------------------------
+## l0=VMD/1.9.3-ogl:  
+------------------------------------------------------------------
+## l0=VTK/8.1.0-CrayGNU-17.08-python2: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=VTK/8.1.0-CrayGNU-17.08-python3: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=VTK/8.1.0-EGL-CrayGNU-17.08-python2: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=VTK/8.1.0-EGL-CrayGNU-17.08-python3: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=abcpy/0.3.0-CrayGNU-17.08-python3: CrayGNU/.17.08 PrgEnv-gnu cloudpickle/.0.3.1-CrayGNU-17.08-python3 cray-python/17.06.1 gcc/5.3.0 glmnet/.2.0.0-CrayGNU-17.08-python3 scikit-learn/.0.18.2-CrayGNU-17.08-python3 
+------------------------------------------------------------------
+## l0=ddt/18.0.1:  
+------------------------------------------------------------------
+## l0=ddt/18.1.1:  
+------------------------------------------------------------------
+## l0=h5py/2.7.0-CrayGNU-17.08-python2-parallel: CrayGNU/.17.08 PrgEnv-gnu PyExtensions/2.7-CrayGNU-17.08 cray-hdf5-parallel/1.10.0.3 cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=h5py/2.7.0-CrayGNU-17.08-python2-serial: CrayGNU/.17.08 PrgEnv-gnu PyExtensions/2.7-CrayGNU-17.08 cray-hdf5/1.10.0.3 cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=h5py/2.7.0-CrayGNU-17.08-python3-parallel: CrayGNU/.17.08 PrgEnv-gnu PyExtensions/3.5-CrayGNU-17.08 cray-hdf5-parallel/1.10.0.3 cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=h5py/2.7.0-CrayGNU-17.08-python3-serial: CrayGNU/.17.08 PrgEnv-gnu PyExtensions/3.5-CrayGNU-17.08 cray-hdf5/1.10.0.3 cray-python/17.06.1 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=magma/2.2.0-CrayGNU-17.08-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=magma/2.3.0-CrayIntel-17.08-cuda-8.0: CrayIntel/.17.08 PrgEnv-intel cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 intel/17.0.4.196 
+------------------------------------------------------------------
+## l0=ncview/2.1.7-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu UDUNITS/.2.2.25-CrayGNU-17.08 cray-hdf5/1.10.0.3 cray-netcdf/4.4.1.1.3 gcc/5.3.0 libpng/.1.6.30-CrayGNU-17.08 zlib/.1.2.11-CrayGNU-17.08 
+------------------------------------------------------------------
+## l0=otfprofile/1.20: Circos/0.69-6-Perl-5.26.1-bare Cube/.4.3.5 GD/2.66-Perl-5.26.1-bare OTF2/.2.1 Perl/5.26.1-bare 
+------------------------------------------------------------------
+## l0=papi-wrap/1.0-CrayCCE-17.08: CrayCCE/.17.08 papi/5.5.1.2 
+------------------------------------------------------------------
+## l0=papi-wrap/1.0-CrayGNU-17.08: CrayGNU/.17.08 PrgEnv-gnu gcc/5.3.0 papi/5.5.1.2 
+------------------------------------------------------------------
+## l0=papi-wrap/1.0-CrayIntel-17.08: CrayIntel/.17.08 PrgEnv-intel intel/17.0.4.196 papi/5.5.1.2 
+------------------------------------------------------------------
+## l0=perf-reports/7.1:  
+------------------------------------------------------------------
+## l0=pycuda/2017.1.1-CrayGNU-17.08-python2-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=pycuda/2017.1.1-CrayGNU-17.08-python3-cuda-8.0: CrayGNU/.17.08 PrgEnv-gnu cray-python/17.06.1 cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12 gcc/5.3.0 
+------------------------------------------------------------------
+## l0=vampir/9.4.0:  

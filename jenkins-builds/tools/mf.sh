@@ -18,6 +18,7 @@ if [ "$partition" = "daint-gpu" ];then
     topdir=/apps/daint/UES/jenkins/6.0.UP04/gpu/easybuild
     MODULEPATH=$topdir/modules/all
     jenkinslist=$productiondir/jenkins-builds/6.0.UP04-17.08-gpu
+    #jenkinslist=./daint-jg
 fi
 
 if [ "$partition" = "daint-mc" ];then
@@ -44,7 +45,8 @@ installed_ebs=`find $topdir/software -name \*.eb 2> /dev/null`
 echo $installed_ebs |tr " " "\n" > log.jg
 
 mflist=""
-for jenkins_eb_file in `grep -v \# $jenkinslist |awk '{print $1}' |tr -d " "` ;do
+jenkins_eblist=`grep -v \# $jenkinslist |awk '{print $1}' |tr -d " "` 
+for jenkins_eb_file in $jenkins_eblist ;do
 
     jenkins_eb_file_fullpath=`echo $installed_ebs |tr " " "\n" |grep "$jenkins_eb_file"`
     mf=`echo $jenkins_eb_file_fullpath |sed "s-$topdir/software--" |awk -F/ '{print $2"/"$3}'`    
@@ -83,50 +85,55 @@ for mf in $mflist ;do
     module show $mf > $outf0 2>&1 
     grep -q "ERROR:105" $outf0 ;rc=$?
     mfn=`echo $mf |cut -d/ -f1`
-    if [ $rc -eq 0 ] ;then
-        # mf is probably hidden => Unable to locate a modulefile
-        mfv=`echo $mf |cut -d/ -f2`
-        module show $mfn/.$mfv > $outf0 2>&1
-    fi
-    echo $mfn >> eff.level0
+#old     if [ $rc -eq 0 ] ;then
+#old         # mf is probably hidden => Unable to locate a modulefile
+#old         mfv=`echo $mf |cut -d/ -f2`
+#old         module show $mfn/.$mfv > $outf0 2>&1
+#old     fi
+    #echo $mfn >> eff.level0
+    echo $mf >> eff.level0
     listofdeps0=`grep " load " $outf0 |awk -Fload '{print $2}' |tr -d " "`
     if [ -n "$listofdeps0" ] ;then
+
         for deps0 in $listofdeps0 ;do 
-            mfmv=`echo $mf |cut -d/ -f1`
-            dep0mv=`echo $deps0 |cut -d/ -f1`
-            echo "\"$mfmv\" -> \"$dep0mv\";"
+            #mfmv=`echo $mf |cut -d/ -f1`
+            #dep0mv=`echo $deps0 |cut -d/ -f1`
+            #echo "\"$mfmv\" -> \"$dep0mv\";"
+            echo "\"$mf\" -> \"$deps0\";"
 
             # --- sublevel1
             module show $deps0 > $outf1 2>&1
             grep -q "ERROR:105" $outf1 ;rc=$?
-            if [ $rc -eq 0 ] ;then
-                # mf is probably hidden => Unable to locate a modulefile
-                mfn=`echo $deps0 |cut -d/ -f1`
-                mfv=`echo $deps0 |cut -d/ -f2`
-                module show $mfn/.$mfv > $outf1 2>&1
-            fi
+#old             if [ $rc -eq 0 ] ;then
+#old                 # mf is probably hidden => Unable to locate a modulefile
+#old                 mfn=`echo $deps0 |cut -d/ -f1`
+#old                 mfv=`echo $deps0 |cut -d/ -f2`
+#old                 module show $mfn/.$mfv > $outf1 2>&1
+#old             fi
             listofdeps1=`grep " load " $outf1 |awk -Fload '{print $2}' |tr -d " "`
             if [ -n "$listofdeps1" ] ;then
                 for deps1 in $listofdeps1 ;do
-                    dep0mv=`echo $deps0 |cut -d/ -f1`
-                    dep1mv=`echo $deps1 |cut -d/ -f1`
-                    echo "\"$dep0mv\" -> \"$dep1mv\";"
+                    #dep0mv=`echo $deps0 |cut -d/ -f1`
+                    #dep1mv=`echo $deps1 |cut -d/ -f1`
+                    #echo "\"$dep0mv\" -> \"$dep1mv\";"
+                    echo "\"$deps0\" -> \"$deps1\";"
 
                     # --- sublevel2
                     module show $deps1 > $outf2 2>&1
                     grep -q "ERROR:105" $outf2 ;rc=$?
-                    if [ $rc -eq 0 ] ;then
-                        # mf is probably hidden => Unable to locate a modulefile
-                        mfn=`echo $deps1 |cut -d/ -f1`
-                        mfv=`echo $deps1 |cut -d/ -f2`
-                        module show $mfn/.$mfv > $outf2 2>&1
-                    fi
+#old                     if [ $rc -eq 0 ] ;then
+#old                         # mf is probably hidden => Unable to locate a modulefile
+#old                         mfn=`echo $deps1 |cut -d/ -f1`
+#old                         mfv=`echo $deps1 |cut -d/ -f2`
+#old                         module show $mfn/.$mfv > $outf2 2>&1
+#old                     fi
                     listofdeps2=`grep " load " $outf2 |awk -Fload '{print $2}' |tr -d " "`
                     if [ -n "$listofdeps2" ] ;then
                         for deps2 in $listofdeps2 ;do
-                            dep1mv=`echo $deps1 |cut -d/ -f1`
-                            dep2mv=`echo $deps2 |cut -d/ -f1`
-                            echo "\"$dep1mv\" -> \"$dep2mv\";"
+                            #dep1mv=`echo $deps1 |cut -d/ -f1`
+                            #dep2mv=`echo $deps2 |cut -d/ -f1`
+                            #echo "\"$dep1mv\" -> \"$dep2mv\";"
+                            echo "\"$deps1\" -> \"$deps2\";"
                         done
                     fi # --- sublevel2
 
@@ -152,6 +159,7 @@ echo '------------------------------------------------------------------'
 # iterate through the list of software (=level0)
 for l0 in `sort -u eff.level0` ;do
 
+#echo continue;read
     #echo "Listing l0=$l0 ..."
     unset listl1a
     unset listl1b
