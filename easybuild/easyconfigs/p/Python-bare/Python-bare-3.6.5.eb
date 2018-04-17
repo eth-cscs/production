@@ -1,10 +1,10 @@
-# @author: gppezzi 
+# @author: manitart
 # This version should be used only for replacing the system python, not for building scientific apps
 
 easyblock = 'EB_Python'
 
 name = 'Python-bare'
-version = "3.6.2"
+version = "3.6.5"
 
 homepage = 'http://python.org/'
 description = """Python is a programming language that lets you work more
@@ -41,6 +41,9 @@ exts_list = [
     }),
     ('virtualenv', '15.1.0', {
         'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+    }),
+    ('pycodestyle', '2.4.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pycodestyle'],
     }),
     ('pytest', '3.5.0', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pytest'],
