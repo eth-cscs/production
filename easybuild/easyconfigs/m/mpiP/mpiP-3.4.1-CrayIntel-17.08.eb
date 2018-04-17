@@ -1,0 +1,36 @@
+easyblock = 'ConfigureMake'
+
+name = 'mpiP'
+version = '3.4.1'
+
+homepage = 'https://github.com/LLNL/mpiP/releases'
+description = """A light-weight MPI profiler. http://llnl.github.io/mpiP"""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+# toolchainopts = {'verbose': False}
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+
+source_urls = ['https://github.com/LLNL/mpiP/archive']
+sources = ['%(version)s.tar.gz']
+checksums = [ '829497507bbe236640db860971fe7e5f' ]
+
+dependencies = [
+    ('libunwind', '1.2.1'),
+]
+
+#preconfigopts += ' sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
+buildopts = ' CC=cc F77=ftn '
+configopts = ' --with-libunwind=$EBROOTLIBUNWIND '
+#postinstallcmds = ["mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl "]
+
+sanity_check_paths = {
+    'files': ["lib/libmpiP.a"],
+    'dirs': [],
+}
+
+#modextrapaths = { 'IPM_KEYFILE': 'etc/ipm_key_mpi' }
+modextravars = { 
+    'MPIPLD' : '-L%(installdir)s/lib -Wl,--whole-archive -lmpiP -Wl,--no-whole-archive',
+}
+
+moduleclass = 'perf'
