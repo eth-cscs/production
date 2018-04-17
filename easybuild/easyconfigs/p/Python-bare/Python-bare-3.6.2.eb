@@ -1,4 +1,4 @@
-# @author: gppezzi 
+# @author: gppezzi
 # This version should be used only for replacing the system python, not for building scientific apps
 
 easyblock = 'EB_Python'
@@ -41,6 +41,9 @@ exts_list = [
     }),
     ('virtualenv', '15.1.0', {
         'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+    }),
+    ('pycodestyle', '2.4.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pycodestyle'],
     }),
     ('pytest', '3.5.0', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pytest'],
