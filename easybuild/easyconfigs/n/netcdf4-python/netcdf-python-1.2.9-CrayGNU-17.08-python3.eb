@@ -15,7 +15,7 @@ req_py_majver = 3
 req_py_minver = 5
 
 pythonver = '%s.%s' % (req_py_majver, req_py_minver)
-versionsuffix = '-python-%s' % req_py_majver
+versionsuffix = '-python%s' % req_py_majver
 
 dependencies = [
     ('cray-python/17.06.1', EXTERNAL_MODULE),
