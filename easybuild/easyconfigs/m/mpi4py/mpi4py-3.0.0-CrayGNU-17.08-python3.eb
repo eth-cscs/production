@@ -21,7 +21,7 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 source_urls = [BITBUCKET_DOWNLOADS]
 sources = [SOURCE_TAR_GZ]
 
-dependencies = [ ('PyExtensions', '3.5') ]
+dependencies = [ ('PyExtensions', '%s.%s' % (req_py_majver, req_py_minver)) ]
 
 # force rebuilding everything, including patched files
 buildopts = '--force'
