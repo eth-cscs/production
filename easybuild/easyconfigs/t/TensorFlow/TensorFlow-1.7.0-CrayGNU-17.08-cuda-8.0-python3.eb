@@ -1,4 +1,4 @@
-# @author: mschoengens, victorusu, gppezzi
+# @author: sarafael, mschoengens, victorusu, gppezzi
 
 easyblock = "CmdCp"
 
@@ -30,7 +30,6 @@ builddependencies = [
 
 dependencies = [
     ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
-    ('PyExtensions', '3.6'),
     ('cuDNN', '7.0', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', ver_suffix_py),
     ('protobuf', '3.5.1', ver_suffix_py),
