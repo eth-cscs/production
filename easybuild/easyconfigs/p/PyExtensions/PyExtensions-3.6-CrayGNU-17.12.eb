@@ -24,25 +24,25 @@ dependencies = [
 exts_defaultclass = 'PythonPackage'
 
 exts_list = [
-    ('Cython', '0.26.1', {
+    ('Cython', '0.28.2', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/68/41/2f259b62306268d9cf0d6434b4e83a2fb1785b34cfce27fdeeca3adffd0e/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/79/9d/dea8c5181cdb77d32e20a44dd5346b0e4bac23c4858f2f66ad64bbcf4de8/'],
     }),
-    ('six', '1.10.0', {
+    ('six', '1.11.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/b3/b2/238e2590826bfdd113244a40d9d3eb26918bd798fc187e2360a8367068db/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/'],
     }),
-    ('matplotlib', '2.0.2', {
+    ('matplotlib', '2.2.2', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/f5/f0/9da3ef24ea7eb0ccd12430a261b66eca36b924aeef06e17147f9f9d7d310/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/ec/ed/46b835da53b7ed05bd4c6cae293f13ec26e877d2e490a53a709915a9dcb7/'],
     }),
-    ('pandas', '0.20.3', {
+    ('pandas', '0.22.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/ee/aa/90c06f249cf4408fa75135ad0df7d64c09cf74c9870733862491ed5f3a50/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/08/01/803834bc8a4e708aedebb133095a88a4dad9f45bbaf5ad777d2bea543c7e/'],
     }),
     ('pygelf', '0.3.1', {
         'req_py_majver': '3',
