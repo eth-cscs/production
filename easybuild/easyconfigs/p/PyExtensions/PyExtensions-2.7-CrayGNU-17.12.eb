@@ -25,28 +25,28 @@ exts_defaultclass = 'PythonPackage'
 
 exts_list = [
     ('Cython', '0.26.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/68/41/2f259b62306268d9cf0d6434b4e83a2fb1785b34cfce27fdeeca3adffd0e/'],
     }),
     ('six', '1.10.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/b3/b2/238e2590826bfdd113244a40d9d3eb26918bd798fc187e2360a8367068db/'],
     }),
     ('matplotlib', '2.0.2', {
-        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/f5/f0/9da3ef24ea7eb0ccd12430a261b66eca36b924aeef06e17147f9f9d7d310/'],
     }),
     ('pandas', '0.20.3', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/ee/aa/90c06f249cf4408fa75135ad0df7d64c09cf74c9870733862491ed5f3a50/'],
     }),
     ('pygelf', '0.3.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/bf/f3/0a1b034d917e9f2451cade049411292eca90de6862466c293242b7b3bc98/'],
     }),
     ('PyMySQL', '0.7.11', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/PyMySQL/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/29/f8/919a28976bf0557b7819fd6935bfd839118aff913407ca58346e14fa6c86/'],
     }),
     ('influxdb', '4.1.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/i/influxdb/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/e1/af/94faea244de2a73b7a0087637660db2d638edaae58f22d3f0d0d219ad8b7/'],
     }),
     ('virtualenv', '15.1.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv/'],
+        'source_urls': ['https://files.pythonhosted.org/packages/d4/0c/9840c08189e030873387a73b90ada981885010dd9aea134d6de30cd24cb8/'],
     }),
 ]
 
