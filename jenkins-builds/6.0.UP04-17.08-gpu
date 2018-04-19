@@ -67,6 +67,7 @@
  TensorFlow-1.3.0-CrayGNU-17.08-cuda-8.0-python3.eb --set-default-module
  TensorFlow-1.4.1-CrayGNU-17.08-cuda-8.0-python3.eb
  TensorFlow-1.4.1-CrayGNU-17.12-cuda-8.0-python3.eb
+ TensorFlow-1.7.0-CrayGNU-17.12-cuda-8.0-python3.eb
  Theano-0.9.0-CrayGNU-17.08-cuda-8.0-python2.eb
  Theano-0.9.0-CrayGNU-17.08-cuda-8.0-python3.eb     --set-default-module
  Understand-4.0.913.eb                              --set-default-module --hidden

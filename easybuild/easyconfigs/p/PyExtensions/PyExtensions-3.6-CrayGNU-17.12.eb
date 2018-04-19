@@ -27,37 +27,37 @@ exts_list = [
     ('Cython', '0.28.2', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/79/9d/dea8c5181cdb77d32e20a44dd5346b0e4bac23c4858f2f66ad64bbcf4de8/'],
+        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
     }),
     ('six', '1.11.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/'],
+        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
     }),
     ('matplotlib', '2.2.2', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/ec/ed/46b835da53b7ed05bd4c6cae293f13ec26e877d2e490a53a709915a9dcb7/'],
+        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
     }),
     ('pandas', '0.22.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/08/01/803834bc8a4e708aedebb133095a88a4dad9f45bbaf5ad777d2bea543c7e/'],
+        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
     }),
     ('pygelf', '0.3.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/bf/f3/0a1b034d917e9f2451cade049411292eca90de6862466c293242b7b3bc98/'],
+        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
     }),
     ('PyMySQL', '0.7.11', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/29/f8/919a28976bf0557b7819fd6935bfd839118aff913407ca58346e14fa6c86/'],
+        'source_urls': ['https://pypi.python.org/packages/source/p/pymysql/'],
     }),
     ('influxdb', '4.1.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
-        'source_urls': ['https://files.pythonhosted.org/packages/e1/af/94faea244de2a73b7a0087637660db2d638edaae58f22d3f0d0d219ad8b7/'],
+        'source_urls': ['https://pypi.python.org/packages/source/i/influxdb/'],
     }),
 ]
 
