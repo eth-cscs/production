@@ -1,0 +1,30 @@
+easyblock = 'ConfigureMake'
+
+name = 'ExtraP'
+version = '3.0'
+homepage = 'http://www.scalasca.org/software/extra-p'
+description = """Extra-P is an automatic performance-modeling tool that
+supports the user in the identification of scalability bugs. A scalability bug
+is a part of the program whose scaling behavior is unintentionally poor, that
+is, much worse than expected."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.12'}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/extra-p']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = [ '4a5e6996be73aff870d2bde52f4aacd6' ]
+dependencies = [ 
+    # PyQt depens on SIP and PyExtensions
+    ('PyQt', '4.12.1', '-python3'), 
+    ('Cube', '4.3.5'),
+]
+
+configopts = ' CPPFLAGS="`python3-config --includes`" '
+
+sanity_check_paths = {
+    'files': ['bin/extrap-modeler', 'lib/libextrap_python.a', 'share/input.txt'],
+    'dirs': [],
+}
+
+#modextrapaths = { 'MANPATH': 'man/man1' }
+
+moduleclass = 'perf'
