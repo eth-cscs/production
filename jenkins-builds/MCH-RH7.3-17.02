@@ -3,7 +3,7 @@
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
  CDO-1.8.2-gmvolf-17.02.eb
  CMake-3.9.1.eb                                      --installpath=/apps/escha/UES/RH7.3_generic/easybuild
- ddt-18.0.1.eb                                       
+ ddt-18.0.1.eb
  ddt-18.1.1.eb                                       --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  ecCodes-2.7.0-gmvolf-17.02-Python-2.7.13.eb         --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GCC-4.8.2-binutils-2.24.eb                          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
@@ -30,6 +30,7 @@
  Python-3.6.2-gmvolf-17.02.eb
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
  reframe-2.11.eb                                     --set-default-module
+ reframe-2.12-dev1.eb
  Ruby-2.2.2-gmvolf-17.02.eb
  ncview-2.1.7-gmvolf-17.02.eb
  netCDF-C++-4.3.0-gmvolf-17.02.eb

@@ -1,0 +1,69 @@
+# @author: manitart
+# This version should be used only for replacing the system python, not for building scientific apps
+
+easyblock = 'EB_Python'
+
+name = 'Python-bare'
+version = '3.6.5'
+
+homepage = 'http://python.org/'
+description = """Python is a programming language that lets you work more
+quickly and integrate your systems more effectively."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+toolchainopts = {'pic': True, 'opt': True}
+
+source_urls = ['http://www.python.org/ftp/python/%(version)s/']
+sources = ['Python-%(version)s.tgz']
+
+# python needs bzip2 to build the bz2 package
+dependencies = [
+    ('bzip2', '1.0.6', '', True),
+    ('zlib', '1.2.11', '', True),
+    ('ncurses', '6.0', '', True),
+]
+
+# workaround for being able to change name to Python-bare
+modextravars = {'EBROOTPYTHON': '%(installdir)s'}
+
+# order is important!
+# package versions updated April/2018
+exts_list = [
+    ('setuptools', '39.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
+        'source_tmpl': 'setuptools-%(version)s.zip'
+    }),
+    ('gnureadline', '6.3.8', {
+        'source_urls': ['https://pypi.python.org/packages/source/g/gnureadline/'],
+    }),
+    ('pip', '10.0.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
+    }),
+    ('virtualenv', '15.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+    }),
+    ('pycodestyle', '2.4.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pycodestyle'],
+    }),
+    ('pytest', '3.5.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pytest'],
+    }),
+    ('pytest-xdist', '1.22.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pytest-xdist'],
+        'modulename': 'xdist',
+    }),
+    ('pytest-cov', '2.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pytest-cov'],
+        'modulename': 'pytest_cov',
+    }),
+    ('pytest-pep8', '1.0.6', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pytest-pep8'],
+        'modulename': 'pytest_pep8',
+    }),
+    ('pytest-html', '1.16.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pytest-html'],
+        'modulename': 'pytest_html',
+    }),
+]
+
+moduleclass = 'lang'
