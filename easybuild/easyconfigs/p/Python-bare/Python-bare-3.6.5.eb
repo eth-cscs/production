@@ -27,16 +27,16 @@ dependencies = [
 modextravars = {'EBROOTPYTHON': '%(installdir)s'}
 
 # order is important!
-# package versions updated Aug/2017
+# package versions updated April/2018
 exts_list = [
-    ('setuptools', '36.4.0', {
+    ('setuptools', '39.0.1', {
         'source_urls': ['https://pypi.python.org/packages/source/s/setuptools/'],
         'source_tmpl': 'setuptools-%(version)s.zip'
     }),
     ('gnureadline', '6.3.8', {
         'source_urls': ['https://pypi.python.org/packages/source/g/gnureadline/'],
     }),
-    ('pip', '9.0.1', {
+    ('pip', '10.0.0', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
     }),
     ('virtualenv', '15.1.0', {
