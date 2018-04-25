@@ -26,7 +26,7 @@ preconfigopts += ' CC=cc LDFLAGS+="$LDFLAGS -qopenmp" && '
 preconfigopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" && ' 
 preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" && ' 
 preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64" && '
-configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack --disable-xml '
 
 prebuildopts = ' cat make.inc && '
 buildopts = 'all epw'
