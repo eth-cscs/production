@@ -29,7 +29,7 @@ diff -Nru gpaw-1.3.0.orig/config.py gpaw-1.3.0/config.py
 diff -Nru gpaw-1.3.0.orig/customize.py gpaw-1.3.0/customize.py
 --- gpaw-1.3.0.orig/customize.py	2017-08-14 12:26:22.000000000 +0200
 +++ gpaw-1.3.0/customize.py	2018-02-08 12:17:18.494256068 +0100
-@@ -28,6 +28,7 @@
+@@ -28,19 +28,17 @@
      libraries += ['somelib', 'otherlib']
  """
  
@@ -37,7 +37,21 @@ diff -Nru gpaw-1.3.0.orig/customize.py gpaw-1.3.0/customize.py
  # compiler = 'gcc'
  # mpicompiler = 'mpicc'  # use None if you don't want to build a gpaw-python
  # mpilinker = 'mpicc'
-@@ -81,3 +82,14 @@
+ # platform_id = ''
+-# scalapack = False
++scalapack = True
+ 
+ # Use ScaLAPACK:
+ # Warning! At least scalapack 2.0.1 is required!
+ # See https://trac.fysik.dtu.dk/projects/gpaw/ticket/230
+ if scalapack:
+-    libraries += ['scalapack-openmpi',
+-                  'blacsCinit-openmpi',
+-                  'blacs-openmpi']
+     define_macros += [('GPAW_NO_UNDERSCORE_CBLACS', '1')]
+     define_macros += [('GPAW_NO_UNDERSCORE_CSCALAPACK', '1')]
+ 
+@@ -81,3 +79,14 @@
      define_macros += [('PARALLEL', '1')]
      mpicompiler = None
  
