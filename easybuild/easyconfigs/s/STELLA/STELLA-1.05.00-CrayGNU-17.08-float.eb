@@ -1,0 +1,37 @@
+easyblock = 'CMakeMake'
+
+name = 'STELLA'
+version = '1.05.00'
+versionsuffix = '-float'
+
+homepage = 'https://github.com/MeteoSwiss-APN/stella'
+description = """STELLA"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'verbose': False}
+#source_urls = ['https://github.com/MeteoSwiss-APN/stella/archive/']
+#sources = ['%(version)s.tar.gz']
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/s/STELLA/stella-%(version)s.tar.gz'},
+]
+
+builddependencies = [ ('CMake', '3.10.1', '', True), ]
+
+dependencies = [ 
+    ('Serialbox', '2.3.1'),
+    ('Boost', '1.67.0'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+configopts  = "-DBoost_INCLUDE_DIR=${EBROOTBOOST}/include "
+configopts += "-DCMAKE_BUILD_TYPE=Release "
+configopts += "-DX86_BACKEND=ON " 
+configopts += "-DSINGLEPRECISION=ON "
+configopts += "-DCUDA_BACKEND=ON -DCUDA_COMPUTE_CAPABILITY=sm_60 "
+configopts += "-DSTELLA_KSIZE=60 -DSTELLA_KFLAT=11 "
+configopts += "-DENABLE_OPENMP=OFF "
+configopts += "-DGCL=OFF "
+separate_build_dir = True
+
+moduleclass = 'devel'
+
