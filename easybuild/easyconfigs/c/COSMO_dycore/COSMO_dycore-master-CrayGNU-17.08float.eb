@@ -1,0 +1,39 @@
+easyblock = 'CMakeMake'
+
+name = 'COSMO_dycore'
+version = 'master'
+versionsuffix = 'float'
+
+homepage = 'https://github.com/MeteoSwiss-APN/cosmo-pompa'
+description = """cosmo-pompa"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'verbose': False}
+
+#source_urls = ['/scratch/snx3000/vogtha/test_easybuild/repo']
+#source_urls = ['https://github.com/MeteoSwiss-APN/stella/archive/']
+#sources = ['%(version)s.tar.gz']
+
+sources = [{
+'filename': '/scratch/snx3000/vogtha/test_easybuild/repo/cosmo-pompa-%(version)s.tar.gz'}]
+
+
+dependencies = [ ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
+  ('Serialbox', '2.2.1'),
+  ('STELLA', '1.05.00', "%(versionsuffix)s"),
+ ]
+
+builddependencies = [
+    ('CMake', '3.9.1', '', ('dummy', '')),
+#    ('cudatoolkit', '8.0.61', '_2.4.3-6.0.4.0_3.1__gb475d12', ('dummy', '')),
+]
+
+#configure_cmd_prefix = "cd dycore && "
+srcdir = "../cosmo-pompa-%(version)s/dycore"
+
+configopts = "-DSTELLA_DIR=${EBROOTSTELLA} " 
+
+separate_build_dir = True
+
+moduleclass = 'devel'
+
