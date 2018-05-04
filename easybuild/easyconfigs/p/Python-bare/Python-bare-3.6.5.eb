@@ -36,6 +36,9 @@ exts_list = [
     ('gnureadline', '6.3.8', {
         'source_urls': ['https://pypi.python.org/packages/source/g/gnureadline/'],
     }),
+    ('nose', '1.3.7', {
+        'source_urls': ['https://pypi.python.org/packages/source/n/nose/'],
+    }),
     ('pip', '10.0.0', {
         'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
     }),
