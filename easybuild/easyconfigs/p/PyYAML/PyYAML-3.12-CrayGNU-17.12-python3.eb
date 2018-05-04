@@ -1,0 +1,38 @@
+easyblock = 'PythonPackage'
+
+name = 'PyYAML'
+version = '3.12'
+
+req_py_majver = 3
+req_py_minver = 6
+
+py_maj_ver = '%s' % req_py_majver
+py_min_ver = '%s' % req_py_minver
+py_rev_ver = '1.1'
+
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = "https://pypi.python.org/pypi/PyYAML/"
+description = """PyYAML is a YAML parser and emitter for the Python programming language."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.12'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+prebuildopts = "LDSHARED='cc -shared' " 
+
+dependencies = [
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+    ('libyaml', '0.1.6'),
+]
+
+options = {'modulename': 'yaml'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)],
+}
+
+moduleclass = 'lib'
