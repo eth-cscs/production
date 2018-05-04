@@ -21,18 +21,15 @@ description = """Tensors and Dynamic neural networks in Python with strong GPU a
 PyTorch is a deep learning framework that puts Python first."""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.12'}
-#toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'debug': True}
 toolchainopts = {'verbose': False}
 
 # This environment is needed to prevent setup.py from invoking git to determine version.
 prebuildopts = 'PYTORCH_BUILD_VERSION=%(version)s PYTORCH_BUILD_NUMBER=1'
 prebuildopts += ' CUDA_CUDART_LIBRARY=/opt/nvidia/cudatoolkit8.0/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12/lib64/libcudart.so'
-#prebuildopts = " LDSHARED='cc -shared' "
-
 
 pytorchdir = 'pytorch-%(version)s'
 extract_cmd_pattern = 'tar -C %s/%s --strip-components=1 -xf %%s'
-extract_cmd_pattern2 = 'mkdir %s/aten/src/ATen/utils/catch/single_include; cp %%s %s/aten/src/ATen/utils/catch/single_include'
+copy_catch_hpp = 'mkdir %s/aten/src/ATen/utils/catch/single_include; cp %%s %s/aten/src/ATen/utils/catch/single_include'
 
 source_urls = [
     'https://github.com/pytorch/pytorch/archive',
@@ -85,19 +82,9 @@ sources = [
     },
     {
         'filename': 'catch.hpp',
-        'extract_cmd': extract_cmd_pattern2 % (pytorchdir, pytorchdir),
-        #'mkdir %s/aten/src/ATen/utils/catch/single_include' % pytorchdir, # && cp catch.hpp aten/src/ATen/utils/catch/single_include && cp catch.hpp aten/src/ATen/utils/catch/include',
+        'extract_cmd': copy_catch_hpp % (pytorchdir, pytorchdir),
     },
 ]
-
-#checksums = [
-#    'f9f405f4e6a023af20ee3f005ca5213f6c71d3fd4ee0c58407f53f15fa55c85e',  # pytorch-0.3.0.tar.gz
-#    'e19072df8b5f88cb81c6263e90b539c4b5ea93eeb9c68055603137eb7793dba7',  # gloo-05ad98a.tar.gz
-#    '175a22300b3450e27e5f2e6f95cc9abca74617cbc21a1e0ed19bdfbd22ea0305',  # googletest-ec44c6c.tar.gz
-#    '7d18b9bdc10de382da1643c2b1b0227131db47eef89998050b5e0a829d3bd0af',  # nanopb-14efb1a.tar.gz
-#    '3a53dac15e87056a9724b9b6403343b47bb71fec26c090979562f71d7ec9ee98',  # pybind11-9f6a636.tar.gz
-#    '828e0d6238e2129a9e08071750dc16ba10e38eacf96f21b8a71e501c2085b282',  # clang-cindex-python3-6a00cbc.tar.gz
-#]
 
 options = {'modulename': 'torch'}
 
@@ -108,7 +95,6 @@ builddependencies = [
 dependencies = [
     ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('cuDNN', '7.0', '-cuda-%s' % cudaver, True),
-#    ('magma', '2.2.0', '-cuda-%s' % cudaver, True),
     ('PyYAML', '3.12', versionsuffix),
     ('typing', '3.6.4', versionsuffix)
 ]
