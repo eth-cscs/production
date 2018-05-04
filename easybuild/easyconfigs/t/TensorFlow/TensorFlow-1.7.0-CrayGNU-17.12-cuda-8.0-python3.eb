@@ -35,7 +35,8 @@ dependencies = [
     ('protobuf', '3.5.1', ver_suffix_py),
     ('backports.weakref', '1.0rc1', ver_suffix_py),
     ('Werkzeug', '0.12.2', ver_suffix_py),
-    ('absl', '0.1.13', ver_suffix_py)
+    ('absl', '0.1.13', ver_suffix_py),
+    ('dask', '0.17.0', ver_suffix_py)
 ]
 
 sources = ['v%(version)s.tar.gz']
