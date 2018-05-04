@@ -22,8 +22,8 @@ source_urls = ['https://github.com/RRZE-HPC/likwid/archive/']
 
 # git clone:
 ## EB does not support 'git clone' so we delete the contents and start from a clean folder
-#preconfigopts  = 'find . -mindepth 1 -delete && ' 
-#preconfigopts += 'git clone https://github.com/RRZE-HPC/likwid.git . && '
+preconfigopts  = 'find . -mindepth 1 -delete && ' 
+preconfigopts += 'git clone https://github.com/RRZE-HPC/likwid.git . && '
 
 # --- config.mk:
 prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-' config.mk && "
