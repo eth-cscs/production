@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS) and GPPezzi (CSCS)
+# contributed by Luca Marsella (CSCS), GPPezzi (CSCS) and Anton K. (CSCS)
 easyblock = "PythonPackage"
 
 name = 'GPAW'
