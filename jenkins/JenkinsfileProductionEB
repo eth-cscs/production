@@ -44,14 +44,7 @@ stage('Build Stage') {
             def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
             builds[machineLabel] = {
                 node(machineName) {
-                    sh('ls')
-                    deleteDir()
-                    sh('ls')
                     checkout scm
-                    def moduleDefinition = ''
-                    if (machineName == 'leone')
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
                     def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
@@ -68,11 +61,11 @@ stage('Build Stage') {
                     def moduleUnuse = machineModulesProduction ? "module unuse $machineModulesProduction".replace('ARCH', arch) : ""
                     def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction".replace('ARCH', arch) : ""
                     def archOption = arch ? "--arch=$arch" : ""
-                    def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
+                    def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
+                                   --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
                     withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                              "EASYBUILD_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                         sh("""$loginBash
-                              $moduleDefinition
                               $moduleUnuse
                               $moduleUse
                               echo -e '\nMODULEPATH:'
