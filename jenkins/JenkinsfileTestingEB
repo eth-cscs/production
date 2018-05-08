@@ -51,10 +51,6 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     def scmVars = checkout scm
-                    def moduleDefinition = ''
-                    if (machineName == 'leone')
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
                     def projectName = env.JOB_BASE_NAME.trim()
                     def gitCommit = scmVars.GIT_COMMIT.trim()[0..6]
                     def workingDir = sh(returnStdout: true,
@@ -76,7 +72,6 @@ stage('Build Stage') {
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
                              "buildlist=$buildList"]) {
                                  sh("""$loginBash
-                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*

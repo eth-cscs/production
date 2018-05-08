@@ -42,11 +42,6 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    def moduleDefinition = ''
-                    if (machineName == 'leone')
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
-
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
@@ -69,7 +64,6 @@ stage('Build Stage') {
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_TMPDIR=$prefix/sources"]) {
                                  sh("""$loginBash
-                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
