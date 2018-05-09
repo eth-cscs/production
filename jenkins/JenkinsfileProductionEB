@@ -11,7 +11,6 @@ stage('Initialization') {
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
-        println("The production list chosen is: ${productionList}")
     }
 }
 
@@ -45,6 +44,10 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
+                    def moduleDefinition = ''
+                    if (machineName == 'leone')
+                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
+                                              export -f module'''
                     def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
@@ -66,6 +69,7 @@ stage('Build Stage') {
                     withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                              "EASYBUILD_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                         sh("""$loginBash
+                              $moduleDefinition
                               $moduleUnuse
                               $moduleUse
                               echo -e '\nMODULEPATH:'
@@ -97,5 +101,5 @@ stage('Build Stage') {
             println "The Build step failed. Exiting....."
         }
     }
-//    methods.notifySlackFinish()
+    methods.notifySlackFinish()
 }
