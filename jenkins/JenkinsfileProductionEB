@@ -61,7 +61,7 @@ stage('Build Stage') {
                     def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
-                    def moduleUnuse = machineModulesProduction ? "module unuse $machineModulesProduction".replace('ARCH', arch) : ""
+                    def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
                     def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction".replace('ARCH', arch) : ""
                     def archOption = arch ? "--arch=$arch" : ""
                     def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
