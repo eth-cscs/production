@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'ASE'
+version = '3.15.0'
+pyshortver = '2.7'
+versionsuffix = '-python2'
+
+homepage = 'https://wiki.fysik.dtu.dk/ase/'
+description = """ASE is a python package providing an open source Atomic Simulation Environment
+ in the Python scripting language."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = ['https://pypi.python.org/packages/source/a/ase']
+sources = ['%(namelower)s-%(version)s.tar.gz']
+
+dependencies = [
+    ('PyExtensions', pyshortver),
+]
+
+sanity_check_paths = {
+    'files': ['bin/ase-build', 'bin/ase-db', 'bin/ase-gui', 'bin/ase-info', 'bin/ase-run'],
+    'dirs': ['lib/python%s/site-packages/%%(namelower)s-%s-py%s.egg/%%(namelower)s' % (pyshortver, version, pyshortver)],
+}
+
+moduleclass = 'chem'

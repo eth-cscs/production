@@ -1,0 +1,19 @@
+# contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+name = 'Qt'
+version = '4.8.7'
+shortversion = '4.8'
+
+homepage = 'http://qt-project.org/'
+description = "Qt is a comprehensive cross-platform C++ application framework."
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+sources = ['http://download.qt.io/official_releases/qt/%s/%s/qt-everywhere-opensource-src-%s.tar.gz' %(shortversion, version, version)]
+
+# --- do not use -no-accessibility (needed for boxfish tool)
+configopts  = ' -opensource -nomake tests -nomake examples -confirm-license'
+configopts += ' -release -shared -no-sql-mysql -no-sql-sqlite'
+platform = 'linux-g++-64'
+
+moduleclass = 'devel'
+
