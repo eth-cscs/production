@@ -64,7 +64,7 @@ stage('Build Stage') {
                                                 echo \$SCRATCH""").trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
-                    def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : ''
+                    def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"
