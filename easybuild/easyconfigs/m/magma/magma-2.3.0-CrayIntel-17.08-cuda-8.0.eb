@@ -19,13 +19,13 @@ source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
 patches = [('magma-2.3.0-CrayIntel-Pascal.patch')]
 dependencies = [ ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE), ]
 
-files_to_copy = ["lib", "include", "testing", "docs", "README"]
+files_to_copy = ["lib", "include", "testing", "docs", "README", (['control/*.h'], 'control')]
 
 modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths={
     'files': ['lib/libmagma.so', 'lib/libmagma.a'],
-    'dirs': ['include'],
+    'dirs': ['include', 'control'],
 }
 
 moduleclass = 'math'
