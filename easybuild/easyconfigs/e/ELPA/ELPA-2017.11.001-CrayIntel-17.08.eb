@@ -21,6 +21,8 @@ preconfigopts += ' FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
 
 configopts = '--enable-openmp --enable-static'
 
+maxparallel = 1
+
 sanity_check_paths = {
     'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.%s' % SHLIB_EXT],
     'dirs': ['bin', 'include/elpa_openmp-%(version)s/elpa', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig']
