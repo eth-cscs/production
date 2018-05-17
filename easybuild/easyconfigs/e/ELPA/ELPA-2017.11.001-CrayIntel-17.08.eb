@@ -15,9 +15,9 @@ source_urls = ['http://elpa.mpcdf.mpg.de/html/Releases/%(version)s/']
 sources = [SOURCELOWER_TAR_GZ]
 
 preconfigopts  = ' module unload cray-libsci && module list &&' 
-preconfigopts += ' CC=cc FC=ftn CPP=cpp FCPP=cpp '
-preconfigopts += ' LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64  -lpthread -lstdc++ -ldl" '
-preconfigopts += ' FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
+preconfigopts += ' CC=cc FC=ftn CPP=cpp FCPP=cpp && '
+preconfigopts += ' LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl" && '
+preconfigopts += ' FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" && '
 
 configopts = '--enable-openmp --enable-static'
 
