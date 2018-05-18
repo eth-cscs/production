@@ -3,6 +3,8 @@ easyblock = 'MakeCp'
 
 name = 'SIRIUS'
 version = '5.5'
+cudaversion = 8.0
+versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = 'https://electronic-structure.github.io/SIRIUS/'
 description = """Domain specific library for electronic structure calculations."""
@@ -14,9 +16,6 @@ source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
 sources = ['v%(version)s.tar.gz']
 
 patches = [('platform.Intel.json', './')]
-
-cudaversion = 8.0
-versionsuffix = '-cuda-%s' % cudaversion
 
 dependencies = [
   ('GSL', '2.4'),
