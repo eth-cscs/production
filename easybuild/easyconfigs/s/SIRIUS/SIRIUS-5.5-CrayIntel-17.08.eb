@@ -15,13 +15,16 @@ sources = ['v%(version)s.tar.gz']
 
 patches = [('platform.Intel.json', './')]
 
+cudaversion = 8.0
+versionsuffix = '-cuda-%s` % cudaversion
+
 dependencies = [
   ('GSL', '2.4'),
   ('libxc', '3.0.0'),
   ('spglib','1.10.3'),
   ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
-  ('cudatoolkit/8.0.61_2.4.3-6.0.4.0_3.1__gb475d12', EXTERNAL_MODULE),
-  ('magma', '2.3.0', '-cuda-8.0')
+  ('cudatoolkit/%s.61_2.4.3-6.0.4.0_3.1__gb475d12' % cudaversion, EXTERNAL_MODULE),
+  ('magma', '2.3.0', '-cuda-%s' % cudaversion)
 ]
 
 skipsteps = ['configure']
