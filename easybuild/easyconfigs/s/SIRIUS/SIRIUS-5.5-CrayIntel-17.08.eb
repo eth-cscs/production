@@ -16,7 +16,7 @@ sources = ['v%(version)s.tar.gz']
 patches = [('platform.Intel.json', './')]
 
 cudaversion = 8.0
-versionsuffix = '-cuda-%s` % cudaversion
+versionsuffix = '-cuda-%s' % cudaversion
 
 dependencies = [
   ('GSL', '2.4'),
