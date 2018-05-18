@@ -1,0 +1,17 @@
+{
+    "MPI_CXX"     : "CC",
+    "MPI_CXX_OPT" : "-qopenmp -std=c++11 -D__GPU -D__MAGMA -I$(MKLROOT)/include/fftw/ -D__SPGLIB_STD_INCLUDE_PATH",
+    "MPI_FC"      : "ftn",
+    "MPI_FC_OPT"  : "-O3 -qopenmp -cpp",
+    "CC"          : "cc",
+    "CXX"         : "CC",
+    "FC"          : "ftn",
+    "FCCPP"       : "cpp",
+    "CUDA_ROOT"   : "/opt/nvidia/cudatoolkit8.0/default",
+    "NVCC"        : "nvcc",
+    "CUDA_OPT"    : "-arch=sm_60 -m64 -DNDEBUG",
+    "SYSTEM_LIBS" : "-lxc -lsymspg -lgsl -lmagma_sparse -lmagma -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl",
+    "install"     : []
+}
+
+
