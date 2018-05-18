@@ -21,7 +21,7 @@ preconfigopts += ' FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
 
 configopts = '--enable-openmp --enable-static'
 
-prebuildopts = ' module unload cray-libsci && which cpp && gcc --version && cpp --version && '
+prebuildopts = ' module unload cray-libsci && module load gcc/5.3.0 && which cpp && gcc --version && cpp --version && '
 
 #maxparallel = 1
 
