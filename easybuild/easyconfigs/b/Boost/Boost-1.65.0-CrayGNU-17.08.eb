@@ -20,4 +20,8 @@ dependencies = [
 configopts = ' --without-libraries=python'
 boost_mpi = True
 
+modextravars = {
+    'BOOST_ROOT' : "%(installdir)s",
+}
+
 moduleclass = 'devel'
