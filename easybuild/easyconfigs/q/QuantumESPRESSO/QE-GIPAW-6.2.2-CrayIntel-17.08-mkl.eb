@@ -10,22 +10,14 @@ Quantum ESPRESSO is an integrated suite of computer codes for electronic-structu
 and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, 
 and pseudopotentials (both norm-conserving and ultrasoft)."""
 
-toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchain = {'name': 'CrayIntel', 'version': '17.08-mkl'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
 sources = ['qe-%(version)s.gipaw-%(version)s.tar.gz']
 source_urls = ['https://github.com/dceresoli/qe-gipaw/releases/download/6.2.2/']
 
-builddependencies = [
-    ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
-]
-
-preconfigopts = ' module unload cray-libsci && module list && ' 
-preconfigopts += ' CC=cc LDFLAGS+="$LDFLAGS -qopenmp" && ' 
-preconfigopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" && ' 
-preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" && ' 
-preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64" && '
-configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack --disable-xml '
+preconfigopts = ' MPIF90="ftn" F90=ifort" CC="icc" F77="ifort" '
+configopts = ' --enable-openmp --enable-parallel --with-scalapack=intel --disable-xml '
 
 prebuildopts = ' cat make.inc && '
 buildopts = 'all epw gipaw'
@@ -33,7 +25,7 @@ buildopts = 'all epw gipaw'
 maxparallel = 1
 
 sanity_check_paths = {
-      'files': ['bin/pw.x', 'bin/cp.x'],
+      'files': ['bin/cp.x', 'bin/gipaw.x', 'bin/pw.x'],
       'dirs': ['']
 }
 
