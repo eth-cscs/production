@@ -12,15 +12,15 @@ source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
 sources = ['netCDF4-%(version)s.tar.gz']
 
 req_py_majver = 3
-req_py_minver = 5
+req_py_minver = 6
 
 pythonver = '%s.%s' % (req_py_majver, req_py_minver)
 versionsuffix = '-python%s' % req_py_majver
 
 dependencies = [
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/3.6.1.1', EXTERNAL_MODULE),
+#    ('cray-python/17.06.1', EXTERNAL_MODULE),
     ('netCDF-Fortran', '4.4.4'),
-    #('cray-hdf5/1.8.16', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
 
