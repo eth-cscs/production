@@ -75,7 +75,7 @@ stage('Build Stage') {
                               echo -e '\nMODULEPATH:'
                               echo \$MODULEPATH | tr : '\n' | sort
                               echo 'Running...'
-                              echo $command
+                              $command
                               echo \$EASYBUILD_TMPDIR
                               echo \$EASYBUILD_CUSTOM_REPOSITORY""")
                     }
