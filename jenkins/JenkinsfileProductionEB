@@ -1,0 +1,103 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+def loginBash = '#!/bin/bash -l'
+def forcelist = params.forcelist
+def unusePath = params.unusePath
+stage('Initialization') {
+    node {
+        checkout scm
+        def rootDir = pwd()
+        methods = load("${rootDir}/jenkins/util.groovy")
+        machinesList = load("${rootDir}/jenkins/Machines.groovy")
+    }
+}
+
+def machineConfigurations = []
+stage('Machine Force') {
+    node {
+        def machinesToForce = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
+        for (mach in machinesToForce) {
+            validArchs = methods.getMachineConfiguration(forcelist, mach.name, mach.archs as String[])
+            for (arch in validArchs) {
+                fullName = arch ? "${mach.name}-${arch}" : "${mach.name}"
+                machineConfigurations.add(fullName)
+            }
+        }
+    }
+}
+
+def builds = [:]
+def ebForceList = forcelist.replaceAll(/\[.*\]/, '').replaceAll(/"/, '').trim()
+stage('Build Stage') {
+    for (mach in machinesList) {
+        def machine = mach
+        def architectures = machine.archs ? machine.archs : [""]
+        def machineName = machine.name
+        def machinePrefix = machine.prefixProduction
+        def machineModulesUnuseProduction = machine.modulesUnuseProduction
+        def machineModulesProduction = machine.modulesProduction
+        for (architecture in architectures) {
+            def arch = architecture
+            def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
+            builds[machineLabel] = {
+                node(machineName) {
+                    checkout scm
+                    def moduleDefinition = ''
+                    if (machineName == 'leone')
+                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
+                                              export -f module'''
+                    def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def prefix = sh(returnStdout: true,
+                                    script: """$loginBash
+                                               echo $machinePrefixLocal""").trim()
+                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
+                    def ebForceListLocal = ebForceList
+                    def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
+                    def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
+                    def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction".replace('ARCH', arch) : ""
+                    def archOption = arch ? "--arch=$arch" : ""
+                    def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
+                                   --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
+                    withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                             "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
+                        sh("""$loginBash
+                              $moduleDefinition
+                              $moduleUnuse
+                              $moduleUse
+                              echo -e '\nMODULEPATH:'
+                              echo \$MODULEPATH | tr : '\n' | sort
+                              echo 'Running...'
+                              $command""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting....."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting....."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting....."
+        }
+    }
+    methods.notifySlackFinish()
+}
