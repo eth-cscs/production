@@ -1,4 +1,4 @@
-#
+# contributed by Luca Marsella (CSCS)
 name = 'netcdf-python'
 version = '1.2.9'
 
@@ -19,7 +19,6 @@ versionsuffix = '-python%s' % req_py_majver
 
 dependencies = [
     ('cray-python/3.6.1.1', EXTERNAL_MODULE),
-#    ('cray-python/17.06.1', EXTERNAL_MODULE),
     ('netCDF-Fortran', '4.4.4'),
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
