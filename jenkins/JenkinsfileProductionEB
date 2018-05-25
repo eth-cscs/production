@@ -67,7 +67,7 @@ stage('Build Stage') {
                     def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
                                    --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
                     withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
-                             "EASYBUILD_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
+                             "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                         sh("""$loginBash
                               $moduleDefinition
                               $moduleUnuse
@@ -77,7 +77,7 @@ stage('Build Stage') {
                               echo 'Running...'
                               $command
                               echo \$EASYBUILD_TMPDIR
-                              echo \$EASYBUILD_CUSTOM_REPOSITORY""")
+                              echo \$EB_CUSTOM_REPOSITORY""")
                     }
                 }
             }
