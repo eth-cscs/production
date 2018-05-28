@@ -66,7 +66,7 @@ stage('Build Stage') {
                     def archOption = arch ? "--arch=$arch" : ""
                     def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
                                    --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
-                    withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                    withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/$machineLabel/tmp",
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                         sh("""$loginBash
                               $moduleDefinition
