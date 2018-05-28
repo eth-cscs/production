@@ -2,9 +2,13 @@ easyblock = 'PythonPackage'
 
 name = 'nose-parameterized'
 version = '0.5.0'
-pyver = '3'
-pyshortver = '3.5'
-versionsuffix = '-python-%s' % pyver
+
+req_py_majver = 3
+req_py_minver = 6
+
+pyver = '%s.%s' % (req_py_majver, req_py_minver)
+
+versionsuffix = '-python-%s' % req_py_majver
 
 homepage = 'https://pypi.python.org/pypi/%s' % name
 description = """A built-package format for Python."""
@@ -15,7 +19,7 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-             ('cray-python/17.06.1', EXTERNAL_MODULE),
+             ('cray-python/%s.1.1' % pyver, EXTERNAL_MODULE),
 ]
 
 req_py_majver = 3
@@ -23,7 +27,7 @@ req_py_minver = 5
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % pyshortver],
+    'dirs': ['lib/python%s/site-packages' % pyver],
 }
 
 exts_filter = ('python -c "import nose_parameterized"', "")
