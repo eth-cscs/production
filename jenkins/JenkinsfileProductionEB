@@ -58,7 +58,7 @@ stage('Build Stage') {
                     def prefix = sh(returnStdout: true,
                                     script: """$loginBash
                                                echo $machinePrefixLocal""").trim()
-                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
+                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : "--unuse="
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
                     def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
