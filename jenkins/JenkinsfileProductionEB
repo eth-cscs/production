@@ -75,7 +75,8 @@ stage('Build Stage') {
                               echo -e '\nMODULEPATH:'
                               echo \$MODULEPATH | tr : '\n' | sort
                               echo 'Running...'
-                              $command""")
+                              echo $command
+                              """)
                     }
                 }
             }
