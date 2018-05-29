@@ -6,8 +6,8 @@ name = 'TensorFlow'
 version = '1.4.1'
 
 py_maj_ver = '3'
-py_min_ver = '5'
-py_rev_ver = '2'
+py_min_ver = '6'
+py_rev_ver = '1.1'
 
 cudaver = '8.0'
 
@@ -29,7 +29,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('cuDNN', '7.0', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.10', ver_suffix_py),
     ('protobuf', '3.3.0', ver_suffix_py),
