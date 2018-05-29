@@ -3,12 +3,12 @@
 easyblock = "Binary"
 
 name = 'Bazel'
-version = '0.4.5'
+version = '0.9.0'
 
 py_maj_ver = '3'
-py_min_ver = '5'
-py_rev_ver = '2'
-versionsuffix = '-python%s' % (py_maj_ver)
+py_min_ver = '6'
+
+versionsuffix = '-python%s.%s' % (py_maj_ver, py_min_ver)
 
 homepage = 'http://baze.io/'
 description = """Correct, reproducible, fast builds for everyone"""
@@ -23,7 +23,7 @@ dependencies = [
 sources = ['bazel-%(version)s-installer-linux-x86_64.sh']
 source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
 
-install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s --bazelrc=%(installdir)s/bazelrc'
+install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s'
 
 files_to_copy = [(['output/bazel'], 'bin')]
 

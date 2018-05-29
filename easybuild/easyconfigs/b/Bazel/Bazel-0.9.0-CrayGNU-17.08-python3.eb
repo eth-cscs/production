@@ -6,8 +6,8 @@ name = 'Bazel'
 version = '0.9.0'
 
 py_maj_ver = '3'
-py_min_ver = '6'
-
+py_min_ver = '5'
+py_rev_ver = '2'
 versionsuffix = '-python%s' % (py_maj_ver)
 
 homepage = 'http://baze.io/'

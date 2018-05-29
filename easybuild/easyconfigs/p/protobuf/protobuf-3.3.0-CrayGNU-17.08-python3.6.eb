@@ -4,9 +4,10 @@ name = 'protobuf'
 version = '3.3.0'
 
 py_maj_ver = '3'
-py_min_ver = '5'
-py_rev_ver = '2'
-versionsuffix = '-python%s' % (py_maj_ver)
+py_min_ver = '6'
+py_rev_ver = '1.1'
+
+versionsuffix = '-python%s.%s' % (py_maj_ver, py_min_ver)
 
 req_py_majver = int(py_maj_ver)
 req_py_minver = int(py_min_ver)
@@ -20,7 +21,7 @@ source_urls = ['https://github.com/google/protobuf/archive/v%(version)s']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('protobuf-core', version)
 ]
 
