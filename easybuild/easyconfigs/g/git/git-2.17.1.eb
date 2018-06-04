@@ -15,6 +15,7 @@ sources = ['v%(version)s.tar.gz']
 
 dependencies = [
     ('Autotools', '201602'),
+    ('cURL', '7.60.0'),
 ]
 #    ('cURL', '7.47.0'),
 #    ('expat', '2.1.0'),
