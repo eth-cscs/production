@@ -38,16 +38,17 @@ stage('Build Stage') {
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
-        for (architecture in architectures) {
-            def arch = architecture
-            def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
-            builds[machineLabel] = {
-                node(machineName) {
-                    checkout scm
-                    def moduleDefinition = ''
-                    if (machineName == 'leone')
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
+        builds[machineName] = {
+            node(machineName) {
+                checkout scm
+                def moduleDefinition = ''
+                if (machineName == 'leone')
+                    moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
+                                          export -f module'''
+                for (architecture in architectures) {
+                    def arch = architecture
+                    def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
+
                     def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
@@ -58,7 +59,7 @@ stage('Build Stage') {
                     def prefix = sh(returnStdout: true,
                                     script: """$loginBash
                                                echo $machinePrefixLocal""").trim()
-                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : ""
+                    def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : "--unuse="
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=$ebForceListLocal" : ""
                     def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
@@ -75,6 +76,7 @@ stage('Build Stage') {
                               echo -e '\nMODULEPATH:'
                               echo \$MODULEPATH | tr : '\n' | sort
                               echo 'Running...'
+                              echo $command
                               $command""")
                     }
                 }
