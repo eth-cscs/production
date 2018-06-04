@@ -8,7 +8,7 @@ req_py_minver = 6
 
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
 
-versionsuffix = '-python-%s' % req_py_majver
+versionsuffix = '-python%s' % req_py_majver
 
 homepage = 'https://pypi.python.org/pypi/%s' % name
 description = """A built-package format for Python."""
