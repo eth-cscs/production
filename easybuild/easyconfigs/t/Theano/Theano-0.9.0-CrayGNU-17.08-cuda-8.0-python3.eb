@@ -27,7 +27,7 @@ dependencies = [
     ('PyExtensions', pyver),
     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
     ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
-    ('nose-parameterized', '0.5.0', '-python-%s' % req_py_majver),
+    ('nose-parameterized', '0.5.0', '-python%s' % req_py_majver),
 ]
 
 # sanity check/import will fail when building on nodes where MPI is disabled
