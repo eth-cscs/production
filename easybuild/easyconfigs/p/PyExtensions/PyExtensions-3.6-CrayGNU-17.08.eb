@@ -50,12 +50,7 @@ exts_list = [
         'req_py_majver': '3',
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/p/pymysql/'],
-    }),
-    ('influxdb', '4.1.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/influxdb/'],
-    }),
+    })
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
