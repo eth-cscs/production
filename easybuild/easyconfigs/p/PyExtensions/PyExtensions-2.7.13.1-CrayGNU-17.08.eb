@@ -15,7 +15,7 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'pic': True, 'verbose' : False }
 
 dependencies = [
-    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+    ('cray-python/%s' % version, EXTERNAL_MODULE),
 ]
 
 # bundle of Python packages
