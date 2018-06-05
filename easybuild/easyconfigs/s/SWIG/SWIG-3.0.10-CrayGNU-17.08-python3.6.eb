@@ -25,8 +25,8 @@ dependencies = [
 ]
 
 configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"'
-configopts += ' --with-python=$EBROOTCRAYPYTHON/bin/python%s --with-python-version=%s.%s' % (py_maj_ver, py_maj_ver, py_min_ver)
-configopts += ' --with-python-root=$EBROOTCRAYPYTHON/lib/python%s.%s' % (py_maj_ver, py_min_ver)
+configopts += ' --with-python=$EBROOTPYTHON/bin/python%s --with-python-version=%s.%s' % (py_maj_ver, py_maj_ver, py_min_ver)
+configopts += ' --with-python-root=$EBROOTPYTHON/lib/python%s.%s' % (py_maj_ver, py_min_ver)
 
 moduleclass = 'devel'
 

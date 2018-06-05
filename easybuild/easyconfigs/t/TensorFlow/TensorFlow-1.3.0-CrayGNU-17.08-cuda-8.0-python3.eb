@@ -48,7 +48,7 @@ with_configure = False
 whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
 build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
-build_str += "export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s && " % (py_maj_ver, py_min_ver, py_rev_ver) # required for configure-cscs scripts
+build_str += "export PYMAJVER=%s && export PYMINVER=%s && " % (py_maj_ver, py_min_ver) # required for configure-cscs scripts
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
 build_str += "bazel build --config=cuda --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
