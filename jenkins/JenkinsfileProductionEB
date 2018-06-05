@@ -77,7 +77,13 @@ stage('Build Stage') {
                               echo \$MODULEPATH | tr : '\n' | sort
                               echo 'Running...'
                               echo $command
-                              $command""")
+                              $command
+                              status=\$[status+\$?]
+                              if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
+                               chmod -R o+r \$EASYBUILD_TMPDIR
+                               find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                              fi
+                              exit \$status""")
                     }
                 }
             }
