@@ -52,7 +52,7 @@
  pycuda-2017.1.1-CrayGNU-17.08-python2-cuda-8.0.eb
  pycuda-2017.1.1-CrayGNU-17.08-python3-cuda-8.0.eb  --set-default-module
  PyExtensions-2.7-CrayGNU-17.08.eb
- PyExtensions-3.5-CrayGNU-17.08.eb
+ PyExtensions-3.6-CrayGNU-17.08.eb
  QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb           --set-default-module
  R-3.4.2-CrayGNU-17.08.eb                           --set-default-module
  RDock-2013.1-CrayGNU-17.08.eb                      --set-default-module
