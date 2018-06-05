@@ -30,6 +30,7 @@ dependencies = [
     ('minieigen', '0.5.3', versionsuffix) 
 ]
 
+
 sources = ['yade-%(version)s.tar.gz']
 source_urls = ['https://launchpad.net/yade/trunk/yade-1.00.0/+download/']
 

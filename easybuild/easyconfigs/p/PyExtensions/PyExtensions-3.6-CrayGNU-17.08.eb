@@ -1,14 +1,11 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
-
 name = 'PyExtensions'
-
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
-
-# python version used from cray-python
-version = '%s.%s' % (py_maj_ver, py_min_ver)
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+version = '%s' % pyver
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -53,22 +50,17 @@ exts_list = [
         'req_py_majver': '3',
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/p/pymysql/'],
-    }),
-    ('influxdb', '4.1.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/influxdb/'],
-    }),
+    })
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
 
-modextrapaths = {'PYTHONPATH': ['lib/python{0}/site-packages'.format(version)]}
+modextrapaths = {'PYTHONPATH': ['lib/python{0}/site-packages'.format(pyver)]}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % version]
+    'dirs': ['lib/python%s/site-packages' % pyver]
 }
 
 moduleclass = 'tools'
