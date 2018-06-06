@@ -7,6 +7,7 @@ req_py_majver = 3
 req_py_minver = 6
 
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
+py_rev_ver = '1.1'
 
 cudamajor = '8.0'
 
@@ -23,7 +24,7 @@ source_urls = ['https://pypi.python.org/packages/source/T/%s' % name]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s.1.1' % pyver, EXTERNAL_MODULE),
+    ('cray-python/%s.%s' % (pyver, py_rev_ver), EXTERNAL_MODULE),
     ('PyExtensions', pyver),
     ('cuDNN', '5.1', '-cuda-%s' % cudamajor, True),
     ('pycuda', '2017.1.1', '-python%s-cuda-%s' % (req_py_majver, cudamajor)),
