@@ -27,7 +27,6 @@ dependencies = [
 
 prebuildopts  = ' python setup.py configure --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
 
-# sanity checks (import h5py) fails on login nodes (MPI not available) 
 options = {'modulename': 'os'}
 
 sanity_check_paths = {
