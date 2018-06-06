@@ -1,11 +1,12 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = "PythonPackage"
+
 name = 'h5py'
 version = '2.7.1'
 req_py_majver = '3'
 req_py_minver = '6'
-py_rev_ver = '1.1'
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
+py_rev_ver = '1.1'
 versionsuffix = '-python%s-serial' % req_py_majver
 
 homepage = 'http://www.h5py.org/'
@@ -24,8 +25,7 @@ dependencies = [
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
 
-prebuildopts  = ' python setup.py configure '
-prebuildopts += ' --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
+prebuildopts  = ' python setup.py configure --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
 
 options = {'modulename': 'os'}
 
