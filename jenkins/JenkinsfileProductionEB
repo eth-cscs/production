@@ -76,7 +76,7 @@ stage('Build Stage') {
                                  echo \$MODULEPATH | tr : '\n' | sort
                                  echo 'Running...'
                                  echo $archCommand
-                                 #$archCommand
+                                 $archCommand
                                  status=\$[status+\$?]
                                  """
                 }
