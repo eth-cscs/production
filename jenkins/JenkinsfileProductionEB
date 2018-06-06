@@ -38,6 +38,7 @@ stage('Build Stage') {
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
+
         builds[machineName] = {
             node(machineName) {
                 checkout scm
@@ -47,12 +48,16 @@ stage('Build Stage') {
                                           export -f module'''
                 def workingDir = sh(returnStdout: true,
                                     script: 'echo $PWD').trim()
-                def command = """$loginBash
-                                 $moduleDefinition"""
-                def project_name = env.JOB_BASE_NAME.trim()
+                                def project_name = env.JOB_BASE_NAME.trim()
                 def scratch = sh(returnStdout: true,
                                  script: """$loginBash
                                             echo \$SCRATCH""").trim()
+                def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction" : ""
+                def moduleUse = machineModulesProduction ? "module use $machineModulesProduction" : ""
+                def command = """$loginBash
+                                 $moduleDefinition
+                                 $moduleUnuse
+                                 $moduleUse"""
 
                 for (architecture in architectures) {
                     def arch = architecture
@@ -64,14 +69,10 @@ stage('Build Stage') {
                     def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : "--unuse="
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=\"$ebForceListLocal\"" : ""
-                    def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
-                    def moduleUse = machineModulesProduction ? "module use $machineModulesProduction".replace('ARCH', arch) : ""
-                    def archOption = arch ? "--arch=$arch" : ""
+                                        def archOption = arch ? "--arch=$arch" : ""
                     def archCommand = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
                                        --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
                     command = """$command
-                                 $moduleUnuse
-                                 $moduleUse
                                  echo -e '\nMODULEPATH:'
                                  echo \$MODULEPATH | tr : '\n' | sort
                                  echo 'Running...'
