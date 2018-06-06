@@ -5,8 +5,8 @@ name = 'h5py'
 version = '2.7.1'
 req_py_majver = '3'
 req_py_minver = '6'
-py_rev_ver = '1.1'
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
+py_rev_ver = '1.1'
 versionsuffix = '-python%s-parallel' % req_py_majver
 
 homepage = 'http://www.h5py.org/'
@@ -25,8 +25,7 @@ dependencies = [
     ('cray-hdf5-parallel/1.10.0.3', EXTERNAL_MODULE),
 ]
 
-prebuildopts  = ' python setup.py configure --mpi'
-prebuildopts += ' --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
+prebuildopts  = ' python setup.py configure --mpi --hdf5-version=1.10.0 --hdf5=$HDF5_DIR && '
 
 # sanity checks (import h5py) fails on login nodes (MPI not available) 
 options = {'modulename': 'os'}
