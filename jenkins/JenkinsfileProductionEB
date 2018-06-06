@@ -38,6 +38,7 @@ stage('Build Stage') {
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
+
         builds[machineName] = {
             node(machineName) {
                 checkout scm
@@ -45,46 +46,50 @@ stage('Build Stage') {
                 if (machineName == 'leone')
                     moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                           export -f module'''
+                def workingDir = sh(returnStdout: true,
+                                    script: 'echo $PWD').trim()
+                                def project_name = env.JOB_BASE_NAME.trim()
+                def scratch = sh(returnStdout: true,
+                                 script: """$loginBash
+                                            echo \$SCRATCH""").trim()
+                def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction" : ""
+                def moduleUse = machineModulesProduction ? "module use $machineModulesProduction" : ""
+                def command = """$loginBash
+                                 $moduleDefinition
+                                 $moduleUnuse
+                                 $moduleUse"""
+
                 for (architecture in architectures) {
                     def arch = architecture
                     def machineLabel = arch ? "${machineName}-${arch}" : "${machineName}"
-
                     def machinePrefixLocal = arch ? machinePrefix.replace('ARCH', arch) : machinePrefix
-                    def project_name = env.JOB_BASE_NAME.trim()
-                    def workingDir = sh(returnStdout: true,
-                                         script: 'echo $PWD').trim()
-                    def scratch = sh(returnStdout: true,
-                                     script: """$loginBash
-                                                echo \$SCRATCH""").trim()
                     def prefix = sh(returnStdout: true,
                                     script: """$loginBash
                                                echo $machinePrefixLocal""").trim()
                     def unuseOption = unusePath ? "--unuse=$unusePath".replace('ARCH', arch) : "--unuse="
                     def ebForceListLocal = ebForceList
                     def forceOption = machineLabel in machineConfigurations ? "--force=\"$ebForceListLocal\"" : ""
-                    def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction".replace('ARCH', arch) : ""
-                    def moduleUse = machineModulesProduction ? "module  use $machineModulesProduction".replace('ARCH', arch) : ""
-                    def archOption = arch ? "--arch=$arch" : ""
-                    def command = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
-                                   --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
-                    withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
-                             "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
-                        sh("""$loginBash
-                              $moduleDefinition
-                              $moduleUnuse
-                              $moduleUse
-                              echo -e '\nMODULEPATH:'
-                              echo \$MODULEPATH | tr : '\n' | sort
-                              echo 'Running...'
-                              echo $command
-                              $command
-                              status=\$[status+\$?]
-                              if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
-                               chmod -R o+r \$EASYBUILD_TMPDIR
-                               find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
-                              fi
-                              exit \$status""")
-                    }
+                                        def archOption = arch ? "--arch=$arch" : ""
+                    def archCommand = "$workingDir/jenkins-builds/production.sh $archOption $forceOption \
+                                       --list=$workingDir/jenkins-builds/$machineLabel --prefix=$prefix $unuseOption"
+                    command = """$command
+                                 echo -e '\nMODULEPATH:'
+                                 echo \$MODULEPATH | tr : '\n' | sort
+                                 echo 'Running...'
+                                 echo $archCommand
+                                 $archCommand
+                                 status=\$[status+\$?]
+                                 """
+                }
+
+                withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                         "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
+                    sh("""$command
+                          if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
+                              chmod -R o+r \$EASYBUILD_TMPDIR
+                              find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                          fi
+                          exit \$status""")
                 }
             }
         }
