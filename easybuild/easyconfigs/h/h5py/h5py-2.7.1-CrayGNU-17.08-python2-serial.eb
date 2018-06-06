@@ -3,10 +3,10 @@ easyblock = "PythonPackage"
 
 name = 'h5py'
 version = '2.7.1'
-req_py_majver = '3'
-req_py_minver = '6'
+req_py_majver = '2'
+req_py_minver = '7'
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
-py_rev_ver = '1.1'
+py_rev_ver = '13.1'
 versionsuffix = '-python%s-serial' % req_py_majver
 
 homepage = 'http://www.h5py.org/'
