@@ -1,5 +1,6 @@
 # Author: @bignamic, @gppezzi
 
+
 easyblock = 'CMakeMake'
 
 name = 'h-yade'
