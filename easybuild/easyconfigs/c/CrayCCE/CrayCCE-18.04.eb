@@ -1,0 +1,27 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '18.04'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module
+(PE release: April 2018).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-cray', EXTERNAL_MODULE),
+    ('atp/2.1.1', EXTERNAL_MODULE),
+    ('cce/8.7.0', EXTERNAL_MODULE),
+    ('cray-libsci/18.04.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.7.0', EXTERNAL_MODULE),
+    ('craype/2.5.14', EXTERNAL_MODULE),
+    ('pmi/5.0.13', EXTERNAL_MODULE),
+]
+
+modextravars = {
+        'LD_LIBRARY_PATH' : '$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'
+}
+
+moduleclass = 'toolchain'
