@@ -21,6 +21,10 @@
  GSL-2.4-CrayGNU-17.08.eb                           --set-default-module
  GSL-2.4-CrayCCE-17.08.eb
  GSL-2.4-CrayIntel-17.08.eb
+ h5py-2.7.0-CrayGNU-17.08-python2-parallel.eb
+ h5py-2.7.0-CrayGNU-17.08-python2-serial.eb
+ h5py-2.7.0-CrayGNU-17.08-python3-parallel.eb       --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-python3-serial.eb
  h5py-2.7.1-CrayGNU-17.08-python2-parallel.eb
  h5py-2.7.1-CrayGNU-17.08-python2-serial.eb
  h5py-2.7.1-CrayGNU-17.08-python3-parallel.eb       --set-default-module

@@ -21,7 +21,7 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s.%s' % (pyver, py_rev_ver), EXTERNAL_MODULE),
+    ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
     ('cray-hdf5-parallel/1.10.0.3', EXTERNAL_MODULE),
 ]
 
