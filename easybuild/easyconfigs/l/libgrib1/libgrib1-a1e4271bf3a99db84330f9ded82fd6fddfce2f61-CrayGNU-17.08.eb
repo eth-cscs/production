@@ -1,0 +1,33 @@
+easyblock = "ConfigureMake"
+
+name = 'libgrib1'
+version = 'a1e4271bf3a99db84330f9ded82fd6fddfce2f61'
+commit = 'a1e4271bf3a99db84330f9ded82fd6fddfce2f61'
+
+homepage = 'https://github.com/C2SM-RCM/libgrib1/tree/master/libgrib1/trunk'
+description = """libgrib1"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+#source_urls = ['']
+sources = [ '%s-%s.tar.gz' % (name, commit) ]
+
+dependencies = [
+    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+]
+
+# can't clone private repo (+ no official release)
+# EB does not support 'git clone' so we delete the contents and start from a clean folder
+#preconfigopts  = 'find . -mindepth 1 -delete && ' 
+#preconfigopts += 'git clone https://github.com/C2SM-RCM/libgrib1.git . && '
+#preconfigopts += 'git checkout -f %s && ' % commit
+skipsteps = ['configure']
+prebuildopts = 'cd source ; ln -fs Makefile.daint.gnu Makefile &&'
+preinstallopts = 'cd source && '
+installopts = ' LIBDIR=%(installdir)s'
+
+sanity_check_paths={
+    'files': ['libgrib1_gnu.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
