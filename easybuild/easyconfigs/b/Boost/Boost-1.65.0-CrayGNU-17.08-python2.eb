@@ -19,7 +19,7 @@ configopts += ' --with-python-root=$EBROOTCRAYPYTHON/lib/python2.7'
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/2.7.13.1', EXTERNAL_MODULE),
 ]
 
 # also build boost_mpi
