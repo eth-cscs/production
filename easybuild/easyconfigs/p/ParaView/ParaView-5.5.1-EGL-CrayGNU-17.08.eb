@@ -22,7 +22,7 @@ pysuff = '-%s%s' % (python, pyver)
 dependencies = [
     ('Boost', '1.65.0', pysuff),
     ('h5py', '2.7.1', '-python3-serial'),
-    ('ospray', '1.5.0'),
+    ('ospray', '1.6.1'),
     ('cray-python/3.6.1.1', EXTERNAL_MODULE)
 ]
 
@@ -64,6 +64,8 @@ configopts += '-DPARAVIEW_BUILD_PLUGIN_pvNVIDIAIndeX:BOOL=ON '
 # of parallel downloads. Using ; insted of && gives a second chance to download the test files, if the
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
+
+modextravars = { 'LD_LIBRARY_PATH':'/opt/python/3.6.1.1/lib:$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
