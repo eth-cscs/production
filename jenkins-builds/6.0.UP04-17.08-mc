@@ -29,6 +29,7 @@
  h5py-2.7.1-CrayGNU-17.08-python3-parallel.eb       --set-default-module
  h5py-2.7.1-CrayGNU-17.08-python3-serial.eb
  HDFView-2.14.eb                                    --set-default-module
+ HPX-1.1.0-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
