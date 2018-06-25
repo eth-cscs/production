@@ -13,12 +13,13 @@ version = '1.0.0'
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
 
-toolchain = {'name': 'CrayGNU', 'version': '17.12'}
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('PyExtensions', '%s' % pyver),
+    ('IPython', '6.4.0')
 ]
 
 
@@ -27,78 +28,6 @@ exts_defaultclass = 'PythonPackage'
 
 
 exts_list = [
-    ('decorator', '4.3.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
-    }),
-    ('wcwidth', '0.1.7', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/'],
-        }),
-    ('prompt_toolkit', '1.0.15', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/prompt_toolkit/'],
-        }),
-    ('pickleshare', '0.7.4', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/'],
-        }),
-    ('parso', '0.2.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/parso/'],
-        }),
-    ('jedi', '0.12.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/j/jedi/'],
-        }),
-    ('ptyprocess', '0.6.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/ptyprocess/'],
-        }),
-    ('pexpect', '4.6.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
-        }),
-    ('ipython_genutils', '0.2.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/'],
-        }),
-    ('traitlets', '4.3.2', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
-        }),
-    ('backcall', '0.1.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/b/backcall/'],
-        }),
-    ('simplegeneric', '0.8.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/s/simplegeneric/'],
-            'source_tmpl': 'simplegeneric-%(version)s.zip',
-        }),
-    ('Pygments', '2.2.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/Pygments/'],
-        }),
-    ('ipython', '6.4.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'modulename': 'IPython',
-            'source_urls': ['https://pypi.python.org/packages/source/i/ipython/'],
-        }),
     ('tornado', '5.0.2', {
             'req_py_majver': '3',
             'req_py_minver': '6',
@@ -234,11 +163,5 @@ sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyver]
 }
-
-sanity_check_commands = [
-    ('ipython -h', ''),
-  #  ('iptest', ''),
-  #  ('iptest3', ''),
-]
 
 moduleclass = 'tools'
