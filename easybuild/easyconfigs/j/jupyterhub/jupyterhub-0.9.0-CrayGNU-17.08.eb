@@ -1,6 +1,8 @@
+# @author: sarafael, gppezzi
+
 easyblock = 'Bundle'
 
-name = 'JupyterHub'
+name = 'jupyterhub'
 
 py_maj_ver = '3'
 py_min_ver = '6'
@@ -19,7 +21,6 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 
 dependencies = [
-    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('PyExtensions', '%s' % pyver),
     ('configurable-http-proxy', '3.1.1')
 ]
