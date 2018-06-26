@@ -3,9 +3,6 @@ easyblock = 'PythonPackage'
 name = 'Werkzeug'
 version = '0.14.1'
 
-req_py_majver = 3
-req_py_minver = 6
-
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
@@ -14,7 +11,7 @@ versionsuffix = '-python%s' % (py_maj_ver)
 req_py_majver = int(py_maj_ver)
 req_py_minver = int(py_min_ver)
 
-homepage = 'https://pypi.python.org/pypi/Werkzeug' 
+homepage = 'https://pypi.python.org/pypi/Werkzeug'
 description = """Werkzeug started as simple collection of various utilities for WSGI
 applications and has become one of the most advanced WSGI utility modules."""
 
@@ -33,4 +30,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'tools'
-

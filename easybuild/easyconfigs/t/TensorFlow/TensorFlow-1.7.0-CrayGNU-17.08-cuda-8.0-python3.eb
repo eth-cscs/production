@@ -5,9 +5,6 @@ easyblock = "CmdCp"
 name = 'TensorFlow'
 version = '1.7.0'
 
-req_py_majver = 3
-req_py_minver = 6
-
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
@@ -32,7 +29,6 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('cuDNN', '7.0', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.12', ver_suffix_py),
     ('protobuf', '3.5.1', ver_suffix_py),

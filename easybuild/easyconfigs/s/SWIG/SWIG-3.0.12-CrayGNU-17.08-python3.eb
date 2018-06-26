@@ -3,9 +3,6 @@
 name = 'SWIG'
 version = '3.0.12'
 
-req_py_majver = 3
-req_py_minver = 6
-
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
