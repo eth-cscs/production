@@ -10,7 +10,7 @@ py_rev_ver = '1.1'
 pyver = '%s.%s' % (py_maj_ver, py_min_ver)
 javaver = 'jdk1.8.0_51'
 
-versionsuffix = '-Hadoop-2.6-Java-%s-python%s' % (javaver, pyver)
+versionsuffix = '-Hadoop-2.6-Java-%s-python%s' % (javaver, py_maj_ver)
 
 homepage = 'http://spark.apache.org'
 description = """Spark is Hadoop MapReduce done in memory"""
