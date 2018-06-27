@@ -1,0 +1,35 @@
+# @author: sarafael, gppezzi, marcelsc
+
+easyblock = "Binary"
+
+name = 'Bazel'
+version = '0.11.1'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'http://baze.io/'
+description = """Correct, reproducible, fast builds for everyone"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+dependencies = [
+    ('SWIG', '3.0.12', versionsuffix),
+    ('java/jdk1.8.0_51', EXTERNAL_MODULE),
+]
+
+sources = ['bazel-%(version)s-installer-linux-x86_64.sh']
+source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
+
+install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s'
+
+files_to_copy = [(['output/bazel'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/bazel'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'
