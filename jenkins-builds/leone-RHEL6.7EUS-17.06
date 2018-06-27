@@ -8,6 +8,6 @@
  ParaView-5.4.0-foss-2016b.eb
  PrgEnv-gnu-leone-foss-2016b.eb
  Python-2.7.12-foss-2016b.eb
- reframe-2.12.eb                            --set-default-module
+ reframe-2.13.eb                            --set-default-module
  Vim-8.0.eb                                 --set-default-module
  vampir-9.4.0.eb                            --set-default-module

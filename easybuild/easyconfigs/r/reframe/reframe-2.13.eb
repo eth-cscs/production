@@ -7,21 +7,11 @@ version = '2.13'
 homepage = 'https://madra.cscs.ch/scs/reframe/'
 description = 'A regression framework for writing portable tests for HPC systems.'
 toolchain = {'name': 'dummy', 'version': ''}
-sources = [
-    {
-        'filename': 'v%(version)s.tar.gz',
-        'extract_cmd': 'tar xfz %s'
-    },
-    {
-        'filename': 'fix_settings.tar'
-    }
-]
+sources = [{'filename': 'v%(version)s.tar.gz'}]
 source_urls = ['https://github.com/eth-cscs/reframe/archive/']
-#patches = ['reframe-2.12-dev1-cscs-settings.patch']
 dependencies = [('Python-bare', '3.6.5')]
 keepsymlinks = True
 postinstallcmds = [
-    '%(builddir)s/fix_settings.sh %(installdir)s/config/cscs.py',
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
     'git clone --branch v%(version)s git@github.com:eth-cscs/reframe-tests.git',
     'cp -r reframe-tests/checks %(installdir)s/cscs-checks/private',
