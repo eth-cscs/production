@@ -68,7 +68,7 @@ moduleclass = 'devel'
 modtclfooter = """
 ## Required internal variables
 set name     spark
-set version  2.2.0
+set version  %(version)s
 set sparkbin  $root/cscs-custom 
 
 ## Required for SVN hook to generate SWDB entry
