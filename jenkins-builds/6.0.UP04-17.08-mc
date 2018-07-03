@@ -63,6 +63,7 @@
  Score-P-3.1-CrayIntel-17.08.eb
  Score-P-3.1-CrayPGI-17.08.eb
  Spark-1.6.0.eb                                     --set-default-module
+ Spark-2.2.0-CrayGNU-17.08-Hadoop-2.6-Java-jdk1.8.0_51.eb
  Understand-4.0.913.eb                              --set-default-module --hidden
  vampir-9.4.0.eb                                    --set-default-module
  VASP-5.4.4-CrayIntel-17.08.eb                      --set-default-module
