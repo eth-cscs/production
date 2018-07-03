@@ -99,6 +99,7 @@ exts_list = [
             'req_py_minver': '6',
             'modulename': 'IPython',
             'source_urls': ['https://pypi.python.org/packages/source/i/ipython/'],
+            'patches': ['ipython-5.7.0-jupyter.patch'],
         }),
 ]
 
