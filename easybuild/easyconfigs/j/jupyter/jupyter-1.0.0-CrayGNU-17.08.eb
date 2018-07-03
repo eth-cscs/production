@@ -20,7 +20,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('PyExtensions', '%s' % pyver),
-    ('IPython', '6.4.0')
+    ('IPython', '5.7.0')
 ]
 
 
