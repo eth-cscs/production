@@ -3,21 +3,16 @@ easyblock = 'Tarball'
 name = 'Spark'
 version = '2.2.0'
 
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '1.1'
-
-pyver = '%s.%s' % (py_maj_ver, py_min_ver)
 javaver = 'jdk1.8.0_51'
 
-versionsuffix = '-Hadoop-2.6-Java-%s-python%sa' % (javaver, py_maj_ver)
+versionsuffix = '-Hadoop-2.6-Java-%s' % (javaver)
 
 homepage = 'http://spark.apache.org'
 description = """Spark is Hadoop MapReduce done in memory"""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
-patches = [('patch-file.patch', 1)]
+patches = [('spark-2.2.0-Hadoop-2.6-Java-%s.patch' % (javaver), 1)]
 
 sources = ['%(namelower)s-%(version)s-bin-hadoop2.6.tgz']
 source_urls = [
@@ -28,35 +23,12 @@ source_urls = [
 checksums = ['86f33f6f4fe545cb848600004144f09b6e8413af47ce02c1203c3ecda075288d']
 
 dependencies = [
-    ('cray-python/3.6.1.1', EXTERNAL_MODULE),
     ('java/%s' % javaver, EXTERNAL_MODULE),
 ]
 
-prebuildopts = "export SLURM_JOBID=11111"
-postinstallcmds = [("export SLURM_JOBID=11111")]
-#modextravars = {'SLURM_JOBID': 1} 
-
-exts_defaultclass = 'PythonPackage'
-
-#exts_list = [
-#    ('py4j', '0.10.4', {
-#        'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'prebuildopts': "export SLURM_JOBID=11111",
-#        'postinstallcmds': [("export SLURM_JOBID=11111")],
-#        'source_urls': ['https://pypi.python.org/packages/source/p/py4j'],
-#        'checksums': ['b49a28c6bd96d334a39c15c3ce52225585332eff5e2659c7dc7aa223aa8bd454'],
-#    }),
-#    ('pyspark', version, {
-#        'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'source_tmpl': 'spark-%(version)s-bin-hadoop2.6.tgz',
-#        'start_dir': 'python',
-#        'checksums': ['86f33f6f4fe545cb848600004144f09b6e8413af47ce02c1203c3ecda075288d'],
-#    }),
-#]
-
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % (pyver)]}
+postinstallcmds = [
+    ("chmod +x %(installdir)s/cscs-custom/getmaster.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh")]
 
 sanity_check_paths = {
     'files': ['bin/spark-shell', 'bin/pyspark'],
