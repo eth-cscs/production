@@ -34,6 +34,7 @@
  IPM-2.0.6-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
+ ipykernel-4.8.2-CrayGNU-17.08-python2.eb
  jupyter-1.0.0-CrayGNU-17.08.eb
  jupyterhub-0.9.0-CrayGNU-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08.eb                  --set-default-module
