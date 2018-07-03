@@ -160,6 +160,8 @@ full_sanity_check = True
 
 modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyver]}
 
+modextravars = {'JUPYTER_PATH' : "%(installdir)s"}
+
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyver]

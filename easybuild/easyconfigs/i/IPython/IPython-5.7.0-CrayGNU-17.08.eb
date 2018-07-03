@@ -119,4 +119,9 @@ sanity_check_commands = [
 #    ('iptest3', ''),
 ]
 
+postinstallcmds = [
+    'mkdir %(installdir)s/startup && ' +
+    'cp /apps/common/UES/easybuild/sources/i/IPython/00-detect-virtualenv-sitepackages.py %(installdir)s/startup'
+]
+
 moduleclass = 'tools'
