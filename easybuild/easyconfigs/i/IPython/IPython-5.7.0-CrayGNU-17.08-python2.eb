@@ -1,0 +1,137 @@
+# @author: sarafael, gppezzi
+
+easyblock = 'Bundle'
+
+name = 'IPython'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '13.1'
+
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+version = '5.7.0'
+
+versionsuffix = '-python2'
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+]
+
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+
+exts_list = [
+    ('decorator', '4.3.0', {
+        'req_py_majver': '2',
+        'req_py_minver': '7',
+        'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
+    }),
+    ('wcwidth', '0.1.7', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/'],
+        }),
+    ('prompt_toolkit', '1.0.15', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/prompt_toolkit/'],
+        }),
+    ('pickleshare', '0.7.4', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/'],
+        }),
+    ('parso', '0.2.1', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/parso/'],
+        }),
+    ('jedi', '0.12.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/j/jedi/'],
+        }),
+    ('ptyprocess', '0.6.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/ptyprocess/'],
+        }),
+    ('pexpect', '4.6.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
+        }),
+    ('ipython_genutils', '0.2.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/'],
+        }),
+    ('traitlets', '4.3.2', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
+        }),
+    ('backcall', '0.1.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/b/backcall/'],
+        }),
+    ('simplegeneric', '0.8.1', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/s/simplegeneric/'],
+            'source_tmpl': 'simplegeneric-%(version)s.zip',
+        }),
+    ('Pygments', '2.2.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': ['https://pypi.python.org/packages/source/p/Pygments/'],
+        }),
+   ('enum34', '1.1.6', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+        'source_urls': ['https://pypi.python.org/packages/bf/3e/31d502c2530'  \
+                        '2814a7c2f1d3959d2a3b3f78e509002ba91aea64993936876/'],
+        'modulename': 'enum',
+    }),
+    ('ipython', version, {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'modulename': 'IPython',
+            'source_urls': ['https://pypi.python.org/packages/source/i/ipython/'],
+            'patches': ['ipython-5.7.0-jupyter.patch'],
+        }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyver]}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyver]
+}
+
+sanity_check_commands = [
+    ('ipython -h', ''),
+#    ('iptest', ''),
+#    ('iptest3', ''),
+]
+
+postinstallcmds = [
+    'mkdir %(installdir)s/startup && ' +
+    'cp /apps/common/UES/easybuild/sources/i/IPython/00-detect-virtualenv-sitepackages.py %(installdir)s/startup && ' +
+    'cp /apps/common/UES/easybuild/sources/i/IPython/py27launcher %(installdir)s'
+]
+
+moduleclass = 'tools'

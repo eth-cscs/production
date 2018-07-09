@@ -1,4 +1,4 @@
- abcpy-0.3.0-CrayGNU-17.08-python3.eb               --set-default-module
+ abcpy-0.5.0-CrayGNU-17.12-python3.eb               --set-default-module
  Amber-16-CrayGNU-17.08-cuda-8.0.eb                 --set-default-module
  Amber-16-CrayGNU-17.08-parallel.eb
  Amber-16-CrayGNU-17.08-serial.eb
@@ -25,11 +25,19 @@
  h5py-2.7.0-CrayGNU-17.08-python2-serial.eb
  h5py-2.7.0-CrayGNU-17.08-python3-parallel.eb       --set-default-module
  h5py-2.7.0-CrayGNU-17.08-python3-serial.eb
+ h5py-2.7.1-CrayGNU-17.08-python2-parallel.eb
+ h5py-2.7.1-CrayGNU-17.08-python2-serial.eb
+ h5py-2.7.1-CrayGNU-17.08-python3-parallel.eb       --set-default-module
+ h5py-2.7.1-CrayGNU-17.08-python3-serial.eb
  HDFView-2.14.eb                                    --set-default-module
+ HPX-1.1.0-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayCCE-17.08.eb
  IPM-2.0.6-CrayGNU-17.08.eb                         --set-default-module
  IPM-2.0.6-CrayIntel-17.08.eb
  IPM-2.0.6-CrayPGI-17.08.eb
+ ipykernel-4.8.2-CrayGNU-17.08-python2.eb
+ jupyter-1.0.0-CrayGNU-17.08.eb
+ jupyterhub-0.9.0-CrayGNU-17.08.eb
  LAMMPS-11Aug2017-CrayGNU-17.08-cuda-8.0.eb         --set-default-module
  Lmod-7.7.eb                                        --set-default-module --hidden
  magma-2.2.0-CrayGNU-17.08-cuda-8.0.eb              --set-default-module
@@ -44,15 +52,14 @@
  papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-17.08.eb
  papi-wrap-1.0-CrayIntel-17.08.eb
- ParaView-5.4.1-EGL-CrayGNU-17.08.eb
- ParaView-5.5.0-EGL-CrayGNU-17.08.eb                --set-default-module
+ ParaView-5.5.1-EGL-CrayGNU-17.08.eb                --set-default-module
  perf-reports-7.1.eb                                --set-default-module
  PLUMED-2.3.0-CrayGNU-17.08.eb
  Python-bare-3.6.2.eb                               --hidden
  pycuda-2017.1.1-CrayGNU-17.08-python2-cuda-8.0.eb
  pycuda-2017.1.1-CrayGNU-17.08-python3-cuda-8.0.eb  --set-default-module
- PyExtensions-2.7-CrayGNU-17.08.eb
- PyExtensions-3.5-CrayGNU-17.08.eb
+ PyExtensions-2.7.13.1-CrayGNU-17.08.eb
+ PyExtensions-3.6.1.1-CrayGNU-17.08.eb
  QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb           --set-default-module
  R-3.4.2-CrayGNU-17.08.eb                           --set-default-module
  RDock-2013.1-CrayGNU-17.08.eb                      --set-default-module
@@ -67,7 +74,7 @@
  TensorFlow-1.3.0-CrayGNU-17.08-cuda-8.0-python3.eb --set-default-module
  TensorFlow-1.4.1-CrayGNU-17.08-cuda-8.0-python3.eb
  TensorFlow-1.4.1-CrayGNU-17.12-cuda-8.0-python3.eb
- TensorFlow-1.7.0-CrayGNU-17.12-cuda-8.0-python3.eb
+ TensorFlow-1.7.0-CrayGNU-17.08-cuda-8.0-python3.eb
  Theano-0.9.0-CrayGNU-17.08-cuda-8.0-python2.eb
  Theano-0.9.0-CrayGNU-17.08-cuda-8.0-python3.eb     --set-default-module
  Understand-4.0.913.eb                              --set-default-module --hidden

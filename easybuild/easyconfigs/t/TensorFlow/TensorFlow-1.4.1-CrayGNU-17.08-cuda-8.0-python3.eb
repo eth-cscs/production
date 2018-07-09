@@ -6,13 +6,14 @@ name = 'TensorFlow'
 version = '1.4.1'
 
 py_maj_ver = '3'
-py_min_ver = '5'
-py_rev_ver = '2'
+py_min_ver = '6'
+py_rev_ver = '1.1'
 
 cudaver = '8.0'
 
 ver_suffix_cuda = '-cuda-%s' % (cudaver)
 ver_suffix_py = '-python%s' % (py_maj_ver)
+ver_long_suffix_py = '-python%s.%s' % (py_maj_ver, py_min_ver)
 versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
 
 installdir = '%(installdir)s'
@@ -24,17 +25,17 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
 builddependencies = [
-    ('wheel', '0.30.0a0', ver_suffix_py),
-    ('Bazel', '0.9.0', ver_suffix_py),
+    ('wheel', '0.30.0a0', ver_long_suffix_py),
+    ('Bazel', '0.9.0', ver_long_suffix_py),
 ]
 
 dependencies = [
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
     ('cuDNN', '7.0', '-cuda-%s' % cudaver, True),
-    ('SWIG', '3.0.10', ver_suffix_py),
-    ('protobuf', '3.3.0', ver_suffix_py),
-    ('backports.weakref', '1.0rc1', ver_suffix_py),
-    ('Werkzeug', '0.12.2', ver_suffix_py),
+    ('SWIG', '3.0.10', ver_long_suffix_py),
+    ('protobuf', '3.3.0', ver_long_suffix_py),
+    ('backports.weakref', '1.0rc1', ver_long_suffix_py),
+    ('Werkzeug', '0.12.2', ver_long_suffix_py),
 ]
 
 sources = ['v%(version)s.tar.gz']
@@ -44,10 +45,10 @@ patches = [('tensorflow-v%s-cuda-python%s-cscs.patch' % (version, py_maj_ver))]
 
 with_configure = False
 
-whl_file = 'tensorflow-%(version)s-cp35-cp35m-linux_x86_64.whl'
+whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
 build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
-build_str += "export PYMAJVER=%s && export PYMINVER=%s &&" % (py_maj_ver, py_min_ver) # required for configure-cscs scripts
+build_str += "export PYMAJVER=%s && export PYMINVER=%s && " % (py_maj_ver, py_min_ver) # required for configure-cscs scripts
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
 build_str += "bazel build --config=cuda --verbose_failures --incompatible_load_argument_is_label=false --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
