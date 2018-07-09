@@ -27,7 +27,7 @@ checksums = [
 ]
 
 dependencies = [
-     ('libreadline', '7.0'),
+     ('libreadline', '6.3'),
      ('ncurses', '6.0'),
      # OpenFOAM requires 64 bit METIS using 32 bit indexes (array indexes)
      # ('METIS', '5.1.0'),
