@@ -2,13 +2,13 @@
 easyblock = 'ConfigureMake'
 
 name = 'Bison'
-version = '3.0.4'
+version = '3.0.5'
 
 homepage = 'http://www.gnu.org/software/bison'
 description = """Bison is a general-purpose parser generator that converts an annotated context-free grammar
  into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = [GNU_SOURCE]
