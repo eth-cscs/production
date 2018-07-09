@@ -3,11 +3,12 @@
  ddt-18.1.1.eb                              --set-default-module
  h-yade-2017.01a-foss-2016b-Python-2.7.12.eb
  LIGGGHTS-3.8.eb
- OpenFOAM-4.1-foss-2016b.eb
+ OpenFOAM-4.1-foss-2016b.eb                 --set-default-module 
+ OpenFOAM-5.0-20180108-foss-2016b.eb
  OpenFOAM-Extend-4.0-foss-2016b.eb
  ParaView-5.4.0-foss-2016b.eb
  PrgEnv-gnu-leone-foss-2016b.eb
  Python-2.7.12-foss-2016b.eb
- reframe-2.12.eb                            --set-default-module
+ reframe-2.13.eb                            --set-default-module
  Vim-8.0.eb                                 --set-default-module
  vampir-9.4.0.eb                            --set-default-module

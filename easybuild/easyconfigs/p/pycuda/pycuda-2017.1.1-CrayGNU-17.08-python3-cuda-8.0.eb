@@ -6,7 +6,10 @@ version = '2017.1.1'
 cudaversion = '8.0'
 req_py_majver = 3
 req_py_minver = 6
+
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
+py_rev_ver = '1.1'
+
 versionsuffix = '-python%s-cuda-%s' % (req_py_majver, cudaversion)
 
 homepage = 'https://pypi.python.org/pypi/pycuda'
@@ -20,7 +23,7 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s.1.1' % pyver , EXTERNAL_MODULE),
+    ('cray-python/%s.%s' % (pyver, py_rev_ver), EXTERNAL_MODULE),
     ('cudatoolkit/%s.61_2.4.3-6.0.4.0_3.1__gb475d12' % cudaversion, EXTERNAL_MODULE),
 ]
 
@@ -28,7 +31,7 @@ prebuildopts = "python ./configure.py --cuda-root=$EBROOTCUDA"
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyver}],            
+    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyver}],
 }
 
 moduleclass = 'lang'

@@ -67,6 +67,11 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/p/pytest-html'],
         'modulename': 'pytest_html',
     }),
+    ('pygelf', '0.3.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
+    }),
 ]
 
 moduleclass = 'lang'
