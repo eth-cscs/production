@@ -7,6 +7,7 @@ py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
 
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 versionsuffix = '-python%s' % (py_maj_ver)
 
 req_py_majver = int(py_maj_ver)
@@ -21,7 +22,7 @@ source_urls = ['https://github.com/google/protobuf/archive/v%(version)s']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (py_maj_ver, py_min_ver)),
+    ('PyExtensions', '%s' % pyver),
     ('protobuf-core', version)
 ]
 
