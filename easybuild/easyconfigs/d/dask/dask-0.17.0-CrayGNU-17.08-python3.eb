@@ -7,6 +7,7 @@ py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '1.1'
 
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 versionsuffix = '-python%s' % (py_maj_ver)
 
 homepage = 'http://github.com/dask/dask/'
@@ -19,7 +20,7 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 exts_defaultclass = 'PythonPackage'
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (py_maj_ver, py_min_ver)),
+    ('PyExtensions', '%s' % pyver),
 ]
 
 
