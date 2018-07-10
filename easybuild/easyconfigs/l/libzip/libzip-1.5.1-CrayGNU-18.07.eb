@@ -1,5 +1,5 @@
 # contributed by Luca Marsella and Guilherme Peretti Pezzi (CSCS)
-easyblock = "ConfigureMake"
+easyblock = "CMakeMake"
 
 name = 'libzip'
 version = '1.5.1'
@@ -12,8 +12,11 @@ toolchain = {'name': 'CrayGNU', 'version': '18.07'}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://nih.at/libzip/']
 
+builddependencies = [
+    ('CMake', '3.11.4', '', True),
+]
 sanity_check_paths = {
-    'files': ['lib/libzip.so'],
+    'files': ['lib64/libzip.so'],
     'dirs': ['include', 'bin']
 }
 
