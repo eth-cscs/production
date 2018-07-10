@@ -5,14 +5,14 @@ version = '2.2.0'
 
 javaver = 'jdk1.8.0_51'
 
-versionsuffix = '-Hadoop-2.6-Java-%s' % (javaver)
+versionsuffix = '-Hadoop-2.6'
 
 homepage = 'http://spark.apache.org'
 description = """Spark is Hadoop MapReduce done in memory"""
 
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
-patches = [('spark-2.2.0-Hadoop-2.6-Java-%s.patch' % (javaver), 1)]
+patches = [('spark-2.2.0-Hadoop-2.6.patch', 1)]
 
 sources = ['%(namelower)s-%(version)s-bin-hadoop2.6.tgz']
 source_urls = [
