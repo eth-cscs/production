@@ -65,6 +65,7 @@ stage('Build Stage') {
                                                 echo \$SCRATCH""").trim()
                     def buildPath = "/dev/shm/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
+                    def dryRun = "eb -D -r --disable-extended-dry-run-ignore-errors \$(cat jenkins-builds/$machineLabel | awk '{ print \$1 }')"
                     def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
@@ -85,6 +86,12 @@ stage('Build Stage') {
                                            mkdir -p $prefix
                                        fi
 
+                                       $dryRun
+                                       status=\$[status+\$?]
+                                       if [[ "\$status" != "0" ]]; then
+                                           exit \$status
+                                       fi
+
                                        echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
                                        git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
                                        # if buildlist is empty, skip this build; otherwise, write .eb files to file
@@ -94,6 +101,7 @@ stage('Build Stage') {
                                        else
                                            echo \$buildlist | tr \" \" \"\\n\" > \"$prefix/${projectName}.txt\"
                                        fi
+
 
                                        $commandComplete
                                        status=\$[status+\$?]
