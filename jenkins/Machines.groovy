@@ -5,7 +5,7 @@ def daint = [name: 'daint',
              unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
              modulesProduction: '/apps/common/UES/jenkins/production/login-UP04',
              modulesUnuseProduction: '/apps/daint/UES/easybuild/modulefiles',
-             prefixProduction: '$APPS/UES/jenkins/6.0.UP06/ARCH/easybuild']
+             prefixProduction: '$APPS/UES/jenkins/6.0.UP04/ARCH/easybuild']
 
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
