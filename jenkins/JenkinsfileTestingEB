@@ -88,8 +88,8 @@ stage('Build Stage') {
 
                                        $dryRun
                                        status=\$[status+\$?]
-                                       if [[ "$status" != "0" ]]; then
-                                           exit $status
+                                       if [[ "\$status" != "0" ]]; then
+                                           exit \$status
                                        fi
 
                                        echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
