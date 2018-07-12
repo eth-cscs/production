@@ -3,6 +3,7 @@
 def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
+def buildPath = params.buildPath
 def forcelist = params.forcelist
 def unusePath = params.unusePath
 stage('Initialization') {
@@ -82,7 +83,8 @@ stage('Build Stage') {
                                  """
                 }
 
-                withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                withEnv(["EASYBUILD_BUILDPATH=$buildPath",
+                         "EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                          "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                     sh("""$command
                           if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
