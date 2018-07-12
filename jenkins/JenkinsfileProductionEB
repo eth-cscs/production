@@ -3,7 +3,6 @@
 def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
-def buildPath = params.buildPath
 def forcelist = params.forcelist
 def unusePath = params.unusePath
 stage('Initialization') {
