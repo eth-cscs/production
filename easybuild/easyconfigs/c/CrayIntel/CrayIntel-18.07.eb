@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'CrayToolchain'
 
 name = 'CrayIntel'

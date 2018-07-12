@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'CrayToolchain'
 
 name = 'CrayPGI'
@@ -17,7 +18,7 @@ dependencies = [
     ('cray-libsci/18.07.1', EXTERNAL_MODULE),
     ('cray-mpich/7.7.1', EXTERNAL_MODULE),
     ('craype/2.5.15', EXTERNAL_MODULE),
-    ('pmi/5.0.15', EXTERNAL_MODULE),
+    ('pmi/5.0.14', EXTERNAL_MODULE),
 ]
 
 modextravars = {
