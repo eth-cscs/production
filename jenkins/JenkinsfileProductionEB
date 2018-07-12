@@ -35,6 +35,7 @@ stage('Build Stage') {
         def machine = mach
         def architectures = machine.archs ? machine.archs : [""]
         def machineName = machine.name
+        def buildPath = machine.buildPath
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
@@ -82,7 +83,8 @@ stage('Build Stage') {
                                  """
                 }
 
-                withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                withEnv(["EASYBUILD_BUILDPATH=$buildPath",
+                         "EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                          "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                     sh("""$command
                           if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
