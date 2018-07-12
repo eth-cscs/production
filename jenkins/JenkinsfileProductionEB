@@ -36,6 +36,7 @@ stage('Build Stage') {
         def machine = mach
         def architectures = machine.archs ? machine.archs : [""]
         def machineName = machine.name
+        def buildPath=machine.buildPath
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
