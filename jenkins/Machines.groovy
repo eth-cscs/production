@@ -14,7 +14,7 @@ def dom = [name: 'dom',
            unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/6.0.UP04/ARCH/easybuild-1']
+           prefixProduction: '$APPS/UES/jenkins/6.0.UP06/ARCH/easybuild']
 
 def kesch = [name: 'kesch',
              archs: [],
