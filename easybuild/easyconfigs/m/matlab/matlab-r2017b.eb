@@ -9,6 +9,6 @@ description = """Matlab"""
 toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
-set             MATLABVersion   "r2017b"
-prepend-path    PATH            "/apps/common/matlab/r2017b/bin/"
-"""
+set             MATLABVersion   "%s"
+prepend-path    PATH            "/apps/common/matlab/%s/bin/"
+""" % (version, version)
