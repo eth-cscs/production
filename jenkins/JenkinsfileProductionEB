@@ -6,7 +6,7 @@ def loginBash = '#!/bin/bash -l'
 def forcelist = params.forcelist
 def unusePath = params.unusePath
 stage('Initialization') {
-    node {
+    node('master') {
         checkout scm
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
@@ -16,7 +16,7 @@ stage('Initialization') {
 
 def machineConfigurations = []
 stage('Machine Force') {
-    node {
+    node('master') {
         def machinesToForce = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
         for (mach in machinesToForce) {
             validArchs = methods.getMachineConfiguration(forcelist, mach.name, mach.archs as String[])
