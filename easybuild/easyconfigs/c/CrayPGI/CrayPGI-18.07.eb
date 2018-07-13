@@ -15,6 +15,7 @@ dependencies = [
     ('PrgEnv-pgi', EXTERNAL_MODULE),
     ('atp/2.1.2', EXTERNAL_MODULE),
     ('pgi/18.3.0', EXTERNAL_MODULE),
+# libsci is not part of the default PrgEnv-pgi, do not load it
 #    ('cray-libsci/18.07.1', EXTERNAL_MODULE),
     ('cray-mpich/7.7.1', EXTERNAL_MODULE),
     ('craype/2.5.15', EXTERNAL_MODULE),
