@@ -11,7 +11,10 @@ toolchain = {'name': 'CrayIntel', 'version': '18.07'}
 source_urls = [ ' https://github.com/jgphpc/papi-wrap/archive/' ]
 sources = [ '%(version)s.tar.gz' ] 
 checksums = [ 'e72a6c1d631ffb600e9cea1a0b4da947' ]
-dependencies = [ ('papi/5.5.1.2', EXTERNAL_MODULE), ]
+
+# papi provided by perftools-base since 7.0.2 (results in conflict otherwise) 
+# dependencies = [ ('papi/5.5.1.2', EXTERNAL_MODULE), ]
+
 parallel = 1
 prebuildopts = ' ln -fs cscs/makefile . ;'
 files_to_copy = [ 
