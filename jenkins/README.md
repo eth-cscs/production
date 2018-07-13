@@ -10,6 +10,7 @@ The following dictionary keys are provided:
     * `archs`: the list of supported architectures (empty list if none)
     * `toolkits`: the list of supported toolkits
     * `toolkitVersions`: the list of supported toolkit versions
+    * `buildPath`: the path used as EASYBUILD_BUILDPATH for production
     * `unusePath`: colon separated string containing the paths to unuse for regression (empty string if none)
     * `modulesProduction`: the modules path to use
     * `modulesUnuseProduction`: the modules path to unuse
