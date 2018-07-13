@@ -37,7 +37,8 @@ dependencies = [
     ('SIONlib',     '1.7.1'),
     ('PDT',         '3.24', '', True),
     ('vampir',      '9.3.0', '', True),
-    ('papi/5.5.1.2', EXTERNAL_MODULE),
+#   Papi is now provided by perftools-base
+#   ('papi/5.5.1.2', EXTERNAL_MODULE),
 ]
 
 configopts  = ' --with-machine-name=pizdaint'
