@@ -59,9 +59,3 @@ modextravars = {
 
 moduleclass = 'perf'
 
-#set             host       [lindex [split $env(APPS) "/"] 2]
-#set             gid        [lindex [split $env(PROJECT) "/"] 2]
-#set             uid        [lindex [split $env(PROJECT) "/"] 3]
-#file            mkdir     "/project/ipm/$host/$gid/$uid"
-#setenv          IPM_LOGDIR "/project/ipm/$host/$gid/$uid"
-
