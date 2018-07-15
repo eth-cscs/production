@@ -14,7 +14,7 @@ applications"""
 
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 
-source_urls = ['https://github.com/libunwind/libunwind/releases/download/v%(version)s/'
+source_urls = ['https://github.com/libunwind/libunwind/releases/download/v%(version)s/']
 sources = ['libunwind-%(version)s.tar.gz']
 
 sanity_check_paths = {
