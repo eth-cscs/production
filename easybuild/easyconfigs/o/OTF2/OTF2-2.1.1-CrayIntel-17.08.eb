@@ -15,9 +15,9 @@ source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
 
 configopts = '--enable-shared CC=cc FC=ftn CXX=CC'
 
-#sanity_check_paths = {
-#    'files': ["bin/otf2-config", "include/otf2/otf2.h", ("lib/libotf2.a", "lib64/libotf2.a")],
-#    'dirs': [],
-#}
+sanity_check_paths = {
+    'files': ["bin/otf2-config", "include/otf2/otf2.h", ("lib/libotf2.a", "lib64/libotf2.a")],
+    'dirs': [],
+}
 
 moduleclass = 'perf'
