@@ -11,7 +11,6 @@ description = """IDL (Interactive Data Language) is a scientific programming
                  visualizations from complex numerical data """
 
 toolchain = {'name': 'dummy', 'version': ''}
-
 # source package file provided under licence
 sources = ['/apps/common/easybuild/sources/i/IDL/'                             \
            'idl{}envi53sp1linux.x86_64.tar.gz'.format(shortversion)]

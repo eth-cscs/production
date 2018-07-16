@@ -23,6 +23,7 @@
  HDFView-3.0.0.eb                                    --set-default-module
  LAMMPS-13Mar2018-CrayGNU-18.07.eb                  --set-default-module
  HPX-1.1.0-CrayGNU-18.07.eb                         --set-default-module
+ IDL-8.5.1.eb                                       --set-default-module
  IPM-2.0.6-CrayCCE-18.07.eb
  IPM-2.0.6-CrayGNU-18.07.eb                         --set-default-module
  IPM-2.0.6-CrayIntel-18.07.eb
