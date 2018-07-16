@@ -6,7 +6,6 @@ version = "8.5.1"
 shortversion = '85'
 
 homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
-
 description = """IDL (Interactive Data Language) is a scientific programming 
                  language used across disciplines to extract meaningful 
                  visualizations from complex numerical data """
