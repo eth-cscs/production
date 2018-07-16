@@ -1,0 +1,29 @@
+# Anton Kozhevnikov (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'apex'
+version = '2.0.1'
+
+homepage = 'https://github.com/khuck/xpress-apex'
+description = """APEX is an introspection and runtime adaptation library for asynchronous multitasking runtime systems. 
+"""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+
+builddependencies = [('CMake', '3.10.1', '', True)]
+
+dependencies = [
+    ('OTF2', '2.1.1')
+]
+
+source_urls = ['https://github.com/khuck/xpress-apex/archive']
+sources = ['v%(version)s.tar.gz']
+
+separate_build_dir = True
+
+configopts  = '-DCMAKE_C_COMPILER=cc '
+configopts += '-DCMAKE_CXX_COMPILER=CC ' 
+configopts += '-DUSE_OTF2=1 '
+
+moduleclass = 'tools'
+
