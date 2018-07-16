@@ -1,0 +1,34 @@
+# jgp@cscs
+easyblock = 'MakeCp'
+
+name = "papi-wrap"
+version = "1.0"
+
+homepage = 'https://github.com/bcumming/papi-wrap'
+description = """wrappers around papi hardware counters."""
+
+toolchain = {'name': 'CrayPGI', 'version': '18.07'}
+source_urls = [ ' https://github.com/jgphpc/papi-wrap/archive/' ]
+sources = [ '%(version)s.tar.gz' ] 
+checksums = [ 'e72a6c1d631ffb600e9cea1a0b4da947' ]
+
+# papi provided by perftools-base since 7.0.2 (results in conflict otherwise) 
+# dependencies = [ ('papi/5.5.1.2', EXTERNAL_MODULE), ]
+
+parallel = 1
+prebuildopts  = 'sed -i "s-\$(error-# -" cscs/makefile && '
+prebuildopts += 'ln -fs cscs/makefile . ; '
+files_to_copy = [ 
+    (['libpapi_wrap.a'], 'lib'), 
+    (['*.mod'], 'include'), 
+]
+
+sanity_check_paths = {
+    'files': [ 'lib/libpapi_wrap.a', ],
+    'dirs': [],
+}
+
+modextravars = { 'CSCSPERF_EVENTS' : 'PAPI_TOT_CYC|PAPI_TOT_INS', }
+
+moduleclass = 'perf'
+
