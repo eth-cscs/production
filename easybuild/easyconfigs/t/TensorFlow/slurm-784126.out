@@ -1,0 +1,38 @@
+/var/spool/slurmd/job784126/slurm_script: line 15: EasyBuild-custom/cscs: No such file or directory
+== temporary log file in case of crash /dev/shm/sarafael/easybuild/stage/tmp/eb-88aI7M/easybuild-wxeoHp.log
+== resolving dependencies ...
+== processing EasyBuild easyconfig /users/sarafael/git/production/easybuild/easyconfigs/t/TensorFlow/TensorFlow-1.7.0-CrayGNU-18.07-cuda-8.0-python3.eb
+== building and installing TensorFlow/1.7.0-CrayGNU-18.07-cuda-9.1-python3...
+== fetching files...
+== creating build dir, resetting environment...
+== unpacking...
+== patching...
+== preparing...
+== configuring...
+== building...
+== testing...
+== installing...
+== FAILED: Installation ended unsuccessfully (build directory: /tmp/sarafael/gpu/TensorFlow/1.7.0/CrayGNU-18.07-cuda-9.1-python3): build failed (first 300 chars): Failed to chmod/chown several paths: ['/apps/daint/UES/6.0.UP04/sandboxes/sarafael/software/TensorFlow/1.7.0-CrayGNU-18.07-cuda-9.1-python3'] (last error: [Errno 30] Read-only file system: '/apps/daint/UES/6.0.UP04/sandboxes/sarafael/software/TensorFlow/1.7.0-CrayGNU-18.07-cuda-9.1-python3')
+== Results of the build can be found in the log file(s) /dev/shm/sarafael/easybuild/stage/tmp/eb-88aI7M/easybuild-TensorFlow-1.7.0-20180716.135008.JRvfu.log
+ERROR: Build of /users/sarafael/git/production/easybuild/easyconfigs/t/TensorFlow/TensorFlow-1.7.0-CrayGNU-18.07-cuda-8.0-python3.eb failed (err: "build failed (first 300 chars): Failed to chmod/chown several paths: ['/apps/daint/UES/6.0.UP04/sandboxes/sarafael/software/TensorFlow/1.7.0-CrayGNU-18.07-cuda-9.1-python3'] (last error: [Errno 30] Read-only file system: '/apps/daint/UES/6.0.UP04/sandboxes/sarafael/software/TensorFlow/1.7.0-CrayGNU-18.07-cuda-9.1-python3')")
+srun: error: nid00002: task 0: Exited with exit code 1
+srun: Terminating job step 784126.0
+ 
+Batch Job Summary Report for Job "buildtf" (784126) on dom
+-----------------------------------------------------------------------------------------------------
+             Submit            Eligible               Start                 End    Elapsed  Timelimit 
+------------------- ------------------- ------------------- ------------------- ---------- ---------- 
+2018-07-16T13:50:01 2018-07-16T13:50:01 2018-07-16T13:50:01 2018-07-16T14:19:04   00:29:03   01:00:00 
+-----------------------------------------------------------------------------------------------------
+Username    Account     Partition   NNodes   Energy
+----------  ----------  ----------  ------  --------------
+sarafael    csstaff     normal           1  240.66K joules
+ 
+This job did not utilize any GPUs
+ 
+----------------------------------------------------------
+Scratch File System        Files       Quota
+--------------------  ----------  ----------
+/scratch/snx1600tds           73     1000000
+/scratch/snx3000tds        35673     1000000
+ 
