@@ -11,7 +11,7 @@ parallel a list of different tasks."""
 toolchain = {'name': 'CrayGNU', 'version': '18.07'}
 toolchainopts = {'opt': True, 'pic': True}
 
-sources = ['/apps/common/easybuild/sources/g/GREASY/greasy-%(version)s.tar.gz']
+sources = ['/apps/common/easybuild/sources/g/GREASY/greasy-%(version)s-mc.tar.gz']
 
 preconfigopts = './autogen.sh && '
 
