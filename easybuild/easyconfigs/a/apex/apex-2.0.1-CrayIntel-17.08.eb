@@ -25,5 +25,12 @@ configopts  = '-DCMAKE_C_COMPILER=cc '
 configopts += '-DCMAKE_CXX_COMPILER=CC ' 
 configopts += '-DUSE_OTF2=1 '
 
+patches = ['cmake.patch'] 
+
+sanity_check_paths = {
+  'files': ['lib/libapex.%s' % SHLIB_EXT, 'lib/libtaudummy.%s' % SHLIB_EXT],
+  'dirs': []
+}
+
 moduleclass = 'tools'
 
