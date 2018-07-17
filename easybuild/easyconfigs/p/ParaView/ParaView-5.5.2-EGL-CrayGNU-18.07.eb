@@ -20,13 +20,13 @@ python = 'python'
 pyver = '3'
 pysuff = '-%s%s' % (python, pyver)
 dependencies = [
-    ('Boost', '1.65.0', pysuff),
+    ('Boost', '1.66.0', pysuff),
     ('h5py', '2.7.1', '-python3-serial'),
     ('ospray', '1.6.1'),
     ('cray-python/3.6.1.1', EXTERNAL_MODULE)
 ]
 
-builddependencies = [('CMake', '3.9.1','', True)]
+builddependencies = [('CMake', '3.11.4','', True)]
 
 separate_build_dir = True
 
