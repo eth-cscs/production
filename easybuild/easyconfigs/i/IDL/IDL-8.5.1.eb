@@ -6,13 +6,11 @@ version = "8.5.1"
 shortversion = '85'
 
 homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
-
 description = """IDL (Interactive Data Language) is a scientific programming 
                  language used across disciplines to extract meaningful 
                  visualizations from complex numerical data """
 
 toolchain = {'name': 'dummy', 'version': ''}
-
 # source package file provided under licence
 sources = ['/apps/common/easybuild/sources/i/IDL/'                             \
            'idl{}envi53sp1linux.x86_64.tar.gz'.format(shortversion)]
