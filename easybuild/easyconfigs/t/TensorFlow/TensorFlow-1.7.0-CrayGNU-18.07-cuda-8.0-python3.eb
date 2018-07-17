@@ -41,13 +41,12 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-cuda-python%s-cscs-a.patch' % (version, py_maj_ver))]
+patches = [('tensorflow-v%s-cuda-python%s-cscs-cuda-%s.patch' % (version, py_maj_ver, cudaver))]
 
 with_configure = False
 
 whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
-#build_str  = "export TEST_TMPDIR=/dev/shm/$USER/bazelout/ && "
 build_str  = "export TEST_TMPDIR=/tmp/$USER/bazelout/ && "
 build_str += "export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s && " % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
 build_str += "chmod +x configure-cscs.sh && "
