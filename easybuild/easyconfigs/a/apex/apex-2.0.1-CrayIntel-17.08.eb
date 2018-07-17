@@ -21,6 +21,9 @@ sources = ['v%(version)s.tar.gz']
 
 separate_build_dir = True
 
+preconfigopts  = ' module unload cray-libsci && module load gcc/5.3.0 && module list && '
+prebuildopts = ' module unload cray-libsci && module load gcc/5.3.0 && '
+
 configopts  = '-DCMAKE_C_COMPILER=cc '
 configopts += '-DCMAKE_CXX_COMPILER=CC ' 
 configopts += '-DUSE_OTF2=1 '
