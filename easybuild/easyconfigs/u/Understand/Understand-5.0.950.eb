@@ -1,20 +1,19 @@
 # contributed by jg (CSCS)
 easyblock = 'Tarball'
-
 name = 'Understand'
-version = '5.0.949'
+version = '5.0.950'
 
 homepage = 'https://scitools.com/features/'
 description = """Understand provides you with pertinent informations regarding
 your code."""
 
 toolchain = {'name': 'dummy', 'version': ''}
-sources = [{
-  'filename': '/apps/common/easybuild/sources/u/Understand/%(name)s-%(version)s-Linux-64bit.tgz',
-  'extract_cmd': "tar xf %s",
-}]
-patches = [ ('Understand.patch', 1) ]
+source_urls = ['http://latest.scitools.com/Understand/']
+sources = ['%(name)s-%(version)s-Linux-64bit.tgz']
+checksums = [ '38f96f2d8ea8f4d813715a8368d3e429' ]
 keepsymlinks = True
+postinstallcmds = ['echo "Server: velan 00000000 9000" > ' \
+                   '%(installdir)s/conf/license/locallicense.dat']
 
 sanity_check_paths = {
     'files': ['bin/linux64/und.bin'],
