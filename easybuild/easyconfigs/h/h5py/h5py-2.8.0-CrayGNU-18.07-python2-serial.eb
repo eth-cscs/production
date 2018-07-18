@@ -27,8 +27,6 @@ dependencies = [
 
 prebuildopts  = ' python setup.py configure --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && '
 
-options = {'modulename': 'os'}
-
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyver}],
