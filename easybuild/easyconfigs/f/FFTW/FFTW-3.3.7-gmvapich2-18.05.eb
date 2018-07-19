@@ -16,7 +16,7 @@ toolchainopts = {'optarch': True, 'pic': True}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = [homepage]
 
-common_configopts = "LDFLAGS=-L/opt/local/slurm/default/lib64 --enable-threads --enable-openmp --with-pic"
+common_configopts = "--enable-threads --enable-openmp --with-pic"
 
 configopts = [
     common_configopts + " --enable-single --enable-sse2 --enable-mpi",
