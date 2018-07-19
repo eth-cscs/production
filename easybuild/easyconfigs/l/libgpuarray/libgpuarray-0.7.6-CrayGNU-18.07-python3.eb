@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 builddependencies = [
-    ('CMake', '3.8.1', '', True),
+    ('CMake', '3.11.4', '', True),
     ('PyExtensions', '%s' % pyver),
 ]
 
