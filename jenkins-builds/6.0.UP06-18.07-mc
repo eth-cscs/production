@@ -1,4 +1,4 @@
- abcpy-0.5.1-CrayGNU-17.12-python3.eb               --set-default-module
+ abcpy-0.5.1-CrayGNU-18.07-python3.eb               --set-default-module
  Amber-16-CrayGNU-18.07-parallel.eb                 --set-default-module
  Boost-1.67.0-CrayGNU-18.07-python2.eb
  Boost-1.67.0-CrayGNU-18.07-python3.eb              --set-default-module
