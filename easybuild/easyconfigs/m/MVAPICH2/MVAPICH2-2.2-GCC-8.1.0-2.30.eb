@@ -20,7 +20,9 @@ configopts = [
 --enable-mcast \
 --enable-g=dbg \
 --enable-debuginfo \
---with-cluster-size=level"
+--with-cluster-size=level \
+--with-pm=no \
+--with-pmi=slurm"
 ]
 
 withhwloc = 'True'
