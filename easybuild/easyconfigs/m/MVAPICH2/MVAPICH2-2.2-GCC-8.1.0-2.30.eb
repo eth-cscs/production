@@ -25,7 +25,10 @@ configopts = [
 
 withhwloc = 'True'
 
-builddependencies = [ ('Bison', '3.0.5', '', True) ]
+builddependencies = [
+    ('Bison', '3.0.5', '', True),
+    ('slurm', EXTERNAL_MODULE)
+]
 
 sanity_check_paths = {
     'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
