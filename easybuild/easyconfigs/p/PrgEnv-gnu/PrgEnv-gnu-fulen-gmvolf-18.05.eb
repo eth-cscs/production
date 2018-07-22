@@ -12,7 +12,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
 #set thepath "/apps/fulen/UES/jenkins/RH7.4/gmvolf/18.05/modules/all"
-set thepath "/apps/fulen/UES/RH-7.4/sandboxes/hvictor/gmvolf/18.05/easybuild"
+set thepath "/apps/fulen/UES/RH-7.4/sandboxes/hvictor/gmvolf/18.05/easybuild/modules/all"
 
 if {[module-info mode switch] || [module-info mode switch1] || [module-info mode switch2] || [module-info mode switch3] || [module-info mode remove]} {
   # Get the command line that invoked this process; unload only if switching
