@@ -42,7 +42,6 @@
  papi-wrap-1.0-CrayGNU-18.07.eb                     --set-default-module
  papi-wrap-1.0-CrayCCE-18.07.eb
  papi-wrap-1.0-CrayIntel-18.07.eb
- perf-reports-7.1.eb                                --set-default-module
  PLUMED-2.4.2-CrayGNU-18.07.eb
  Python-bare-3.6.2.eb                               --hidden
  PyExtensions-2.7.13.1-CrayGNU-18.07.eb
