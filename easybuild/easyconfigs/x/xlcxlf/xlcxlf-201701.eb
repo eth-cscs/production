@@ -4,12 +4,12 @@ name = 'xlcxlf'
 version = '2017.01'
 
 homepage = 'http://www-03.ibm.com/software/products/en/xlcpp-linux'
-description = """IBM XL C/C++/Fortran toolchain for Linux on Power, V13.1.5 (Community Edition)\n"""
+description = """IBM XL C/C++/Fortran toolchain for Linux on Power, V13.1.5
+(Community Edition)\n"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 dependencies = [
-    # ('at/10.0', EXTERNAL_MODULE),
     ('xlc/13.1.5', EXTERNAL_MODULE),
     ('xlf/15.1.5', EXTERNAL_MODULE),
 

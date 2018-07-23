@@ -5,20 +5,14 @@ name = 'Szip'
 version = '2.1'
 
 homepage = 'http://www.hdfgroup.org/doc_resource/SZIP/'
-description = "Szip compression software, providing lossless compression of scientific data"
+description = """Szip compression software, providing lossless compression of
+scientific data"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'pic': True}
 source_urls = ['http://www.hdfgroup.org/ftp/lib-external/szip/%(version)s/src']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['902f831bcefb69c6b635374424acbead']
-
-# configopts = '-DBUILD_SHARED_LIBS=on -DBUILD_STATIC_LIBS=on'
-# configopts = "--with-pic"
-# build_shared_libs = 'ON'
-# configopts = '-DBUILD_SHARED_LIBS=ON'
-      
-# 'files': ["lib/libsz.a", "lib/libsz.so"] +
 sanity_check_paths = {
     'files': ["lib/libszip.a"] +
              ["include/%s" % x for x in ["SZconfig.h", "szip_adpt.h", "szlib.h"]],

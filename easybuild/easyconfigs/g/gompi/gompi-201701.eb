@@ -4,9 +4,10 @@ name = 'gompi'
 version = '2017.01'
 
 homepage = '(none)'
-description = """IBM GNU Compiler Collection (GCC) toolchain for Linux on Power, including OpenMPI for MPI support."""
+description = """IBM GNU Compiler Collection (GCC) toolchain for Linux on
+Power, including OpenMPI for MPI support."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 dependencies = [
     #no ('at/10.0', EXTERNAL_MODULE),

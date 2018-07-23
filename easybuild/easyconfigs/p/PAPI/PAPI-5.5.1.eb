@@ -5,13 +5,15 @@ version = '5.5.1'
 checksums = ['86a8a6f3d0f34cd83251da3514aae15d']
 
 homepage = 'http://icl.cs.utk.edu/projects/papi/'
-description = """PAPI provides the tool designer and application engineer with a consistent interface and
- methodology for use of the performance counter hardware found in most major microprocessors. PAPI enables
- software engineers to see, in near real time, the relation between software performance and processor events.
- In addition Component PAPI provides access to a collection of components
- that expose performance measurement opportunites across the hardware and software stack."""
+description = """PAPI provides the tool designer and application engineer with
+a consistent interface and methodology for use of the performance counter
+hardware found in most major microprocessors. PAPI enables software engineers
+to see, in near real time, the relation between software performance and
+processor events.  In addition Component PAPI provides access to a collection
+of components that expose performance measurement opportunites across the
+hardware and software stack."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://icl.cs.utk.edu/projects/papi/downloads/']
 sources = [SOURCELOWER_TAR_GZ]
 
