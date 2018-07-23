@@ -1,0 +1,59 @@
+# @author: gppezzi, victorusu
+
+easyblock = 'Bundle'
+
+name = 'PrgEnv-gnu'
+version = '18.03'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides a meta module for the Programming Environment on fulen"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+modtclfooter = """
+#set thepath "/apps/fulen/UES/jenkins/RH7.4/gmvolf/18.03/modules/all"
+set thepath "/apps/fulen/UES/RH-7.4/sandboxes/hvictor/gmvolf/18.03/easybuild/modules/all"
+
+if {[module-info mode switch] || [module-info mode switch1] || [module-info mode switch2] || [module-info mode switch3] || [module-info mode remove]} {
+  # Get the command line that invoked this process; unload only if switching
+  # from login to another cluster module, e.g., "module switch PrgEnv-gnu/18.03 PrgEnv-gnu/18.05"
+  set commandWords [split [exec /bin/ps -p [pid] -o args=] " "]
+  set switchFrom [lindex [split [module-info name] "/"] 0]
+  set switchTo [lindex [split [lindex $commandWords end] "/"] 0]
+  set unloadApps [expr ! [string equal $switchTo $switchFrom]]
+  set unloadApps 1
+} elseif {[module-info mode remove]} {
+  set unloadApps 1
+} else {
+  set unloadApps 0
+}
+
+if {$unloadApps && [info exists env(LOADEDMODULES)]} {
+  foreach app [split $env(LOADEDMODULES) ":"] {
+    # Check whether any PrgEnv-dependent module dir contains a module with this name
+    set app_path [concat $thepath "/" $app]
+    set app_path [regsub {\s} $app_path ""]
+    set app_path [regsub {\s} $app_path ""]
+    #puts stderr "app_path $app_path"
+    if {[llength [glob -nocomplain $app_path]] > 0} {
+      puts stderr "Unloading PrgEnv-dependent module $app"
+      module unload [lindex [split $app "/"] 0]
+    }
+  }
+}
+
+# Add all PrgEnv-dependent module dirs to the search path
+foreach path [glob -nocomplain $thepath] {
+  prepend-path MODULEPATH $path
+}
+
+# Load gmvolf/.18.03 if it is found in the modulepath
+foreach mypath [split $env(MODULEPATH) ":"] {
+  # Check whether any PrgEnv-dependent module dir contains a module with this name
+  if { $mypath == $thepath} {
+    module load gmvolf/.18.03
+  }
+}
+"""
+
+moduleclass = 'devel'
