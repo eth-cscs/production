@@ -1,0 +1,22 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayIntel'
+version = '17.08g'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-intel module (PE release: August 2017).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-intel', EXTERNAL_MODULE),
+    ('atp/2.1.1', EXTERNAL_MODULE),
+    ('intel/17.0.1.132', EXTERNAL_MODULE),
+    ('cray-libsci/17.06.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.6.0', EXTERNAL_MODULE),
+    ('craype/2.5.12', EXTERNAL_MODULE),
+    ('pmi/5.0.12', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'

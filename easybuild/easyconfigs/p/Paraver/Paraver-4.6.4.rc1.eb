@@ -1,0 +1,27 @@
+easyblock = 'BinariesTarball'
+
+name = "Paraver"
+version = "4.6.4.rc1"
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools/paraver'
+description = """A very powerful performance visualization and analysis tool
+based on traces that can be used to analyse any information that is expressed
+on its input trace format. Traces for parallel MPI, OpenMP and other programs
+can be genereated with Extrae."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+source_urls = ['https://ftp.tools.bsc.es/wxparaver/']
+sources = ['wxparaver-%(version)s-Linux_x86_64.tar.bz2']
+checksums = ['f94cd50eeb042ed4ac5af761024a616d']
+postinstallcmds = [
+    "cp -a %(builddir)s/wxparaver-%(version)s-Linux_x86_64/* %(installdir)s/",
+]
+
+sanity_check_paths = {
+    'files': ['include/cfg.h', 'bin/wxparaver'],
+    'dirs': ['cfgs', ],
+}
+
+modextravars = { 'EXTRAECFGDIR': '%(installdir)s/cfgs' }
+
+moduleclass = 'perf'

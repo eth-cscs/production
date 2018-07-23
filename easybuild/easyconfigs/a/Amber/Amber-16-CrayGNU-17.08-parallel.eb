@@ -1,0 +1,77 @@
+# @author: karakasv gppezzi
+# @author: victor holanda rusu
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+version = '16'
+versionsuffix = '-parallel'
+
+homepage = 'http://ambermd.org/'
+description = 'Assisted Model Building with Energy Refinement'
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = { 'verbose' : False }
+
+sources = ['/apps/common/UES/easybuild/sources/a/Amber/Amber16-AmberTools16-2017-12-15.tar.gz']
+
+dependencies = [ ('bzip2', '1.0.6'),
+                 ('zlib', '1.2.11') ]
+
+builddependencies = [
+    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('flex', '2.6.4'),
+]
+
+#
+# In order to avoid failures on Amber due to patch downloading
+# we are avoiding the download of the internal patches.
+# So, we have prepared a tar.gz file following the following commands
+#
+# tar xf AmberTools16.tar.bz2
+# tar xf Amber16.tar.bz2
+# cd amber16
+# export AMBERHOME=$PWD
+# ./update_amber --update
+# tar cfz Amber16-AmberTools16-2017-12-15.tar.gz amber16
+#
+#
+# The following patches were applied
+#
+#Available AmberTools 16 patches:
+#
+#    update.1, update.2, update.3, update.4, update.5, update.6, update.7, update.8, update.9.gz, update.10,
+#    update.11, update.12, update.13, update.14, update.15, update.16, update.17, update.18, update.19, update.20,
+#    update.21, update.22
+#
+#    Available Amber 16 patches:
+#
+#        update.1, update.2, update.3, update.4.gz, update.5, update.6, update.7, update.8, update.9, update.10,
+#        update.11, update.12
+#
+buildininstalldir = True
+
+# single make process since parallel builds might fail
+maxparallel = 1
+
+prebuildopts = 'cd .. && mv amber%s/* . && ' % version
+prebuildopts += 'export AMBERHOME=%(builddir)s;'
+prebuildopts += './configure -mpi -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N;'
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+
+buildopts = 'install'
+parallel = 4
+
+files_to_copy = []
+
+sanity_check_paths = {
+    'files' : [ 'bin/pmemd.MPI' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s',
+}
+
+moduleclass = 'bio'

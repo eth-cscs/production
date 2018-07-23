@@ -1,0 +1,38 @@
+# File modified by MaKra - August 2017 (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ecCodes'
+version = '2.7.0'
+versionsuffix='-Python-2.7.13'
+
+homepage = 'https://software.ecmwf.int/wiki/display/GRIB/Home'
+description = """ecCodes is a package developed by ECMWF which provides an
+application programming interface and a set of tools for decoding and encoding
+messages in different formats"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+source_urls = ['https://software.ecmwf.int/wiki/download/attachments/45757960/']
+sources = ['%(namelower)s-%(version)s-Source.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.9.1', '', True),
+]
+
+dependencies = [
+    ('JasPer', '1.900.1'),
+    ('netCDF', '4.4.1.1'),
+    ('Python', '2.7.13'),
+]
+
+modextrapaths = {
+    'PYTHONPATH' : 'lib/python2.7/site-packages'
+}
+
+#configopts = '--with-jasper=$EBROOTJASPER'
+separate_build_dir = True
+configopts = '-DENABLE_JPG=ON -DENABLE_NETCDF=ON -DENABLE_PYTHON=ON'
+
+parallel = 1
+
+moduleclass = 'data'

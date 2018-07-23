@@ -1,0 +1,29 @@
+# Recipe contributed by MaKra and Luca Marsella (CSCS)
+name = 'freetype'
+version = '2.8.1'
+
+homepage = 'http://freetype.org'
+
+description = """FreeType is a freely available software library to render fonts."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = [GNU_SAVANNAH_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('libpng', '1.6.32'),
+    ('libtool', '2.4.6'),
+    ('zlib', '1.2.11'),
+]
+
+# RedHat 7.3: fix by https://forum.directadmin.com/showthread.php?t=55304
+configopts = '--with-bzip2 --without-harfbuzz --with-zlib'
+
+sanity_check_paths = {
+    'files': ['bin/freetype-config', 'lib/libfreetype.a', 'lib/libfreetype.so', 'lib/pkgconfig/freetype2.pc'],
+    'dirs': ['include/freetype2'],
+}
+
+moduleclass = 'vis'

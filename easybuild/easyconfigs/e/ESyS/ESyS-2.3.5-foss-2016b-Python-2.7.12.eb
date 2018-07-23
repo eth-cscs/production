@@ -1,0 +1,40 @@
+# @author: jgp, gppezzi (CSCS)
+
+easyblock = 'ConfigureMake'
+
+name = 'ESyS'
+version = '2.3.5'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://launchpad.net/esys-particle'
+description = """ESyS-Particle is Open Source software for particle-based
+numerical modelling."""
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+source_urls = ['https://launchpad.net/esys-particle/trunk/%(version)s/+download/']
+sources = ['ESyS-Particle-%(version)s.tar.gz']
+
+dependencies = [ 
+    ('Python', '2.7.12'), 
+    ('Boost', '1.61.0', '-Python-%(pyver)s'), 
+]
+
+preconfigopts = ' ./autogen.sh && '
+configopts  = '--with-boost=$EBROOTBOOST' 
+configopts += ' --with-boost-system=boost_system'
+configopts += ' --with-boost-filesystem=boost_filesystem'
+configopts += ' --with-boost-python=boost_python'
+configopts += ' CXXFLAGS="-O3 -Wall -Wextra -Wno-unused-parameter"'
+configopts += ' CC=mpicc CXX=mpic++'
+
+modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
+
+sanity_check_commands = ["python -c 'import esys'"]
+    
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'

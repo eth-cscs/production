@@ -1,0 +1,33 @@
+# Recipe contribted by MaKra - August 2017
+name = 'freetype'
+version = '2.7.1'
+
+homepage = 'http://freetype.org'
+
+description = """FreeType 2 is a software font engine that is designed to be
+small, efficient, highly customizable, and portable while capable of producing
+high-quality output (glyph images). It can be used in graphics libraries,
+display servers, font conversion tools, text image generation tools, and many
+other products as well."""
+
+toolchain = {'name':'gmvolf', 'version':'17.02'}
+
+source_urls = [GNU_SAVANNAH_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('libpng', '1.6.28'),
+    ('libtool', '2.4.6'),
+    ('zlib', '1.2.8'),
+]
+
+# RedHat 7.3: fix by https://forum.directadmin.com/showthread.php?t=55304
+configopts = '--with-bzip2 --with-harfbuzz=no --with-zlib'
+
+sanity_check_paths = {
+    'files': ['bin/freetype-config', 'lib/libfreetype.a', 'lib/libfreetype.so', 'lib/pkgconfig/freetype2.pc'],
+    'dirs': ['include/freetype2'],
+}
+
+moduleclass = 'vis'

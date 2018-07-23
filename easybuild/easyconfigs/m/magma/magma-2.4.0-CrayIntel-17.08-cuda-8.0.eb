@@ -1,0 +1,36 @@
+# @author: wsawyer
+
+easyblock = 'MakeCp'
+
+name = 'magma'
+version = '2.4.0'
+cudaversion = 8.0
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://icl.cs.utk.edu/magma/'
+description = """The MAGMA project aims to develop a dense linear algebra
+library similar to LAPACK but for heterogeneous/hybrid architectures, starting
+with current Multicore+GPU systems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'pic': True}
+
+sources = [SOURCE_TAR_GZ]
+source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
+patches = [('make.inc-2.4.0', './')]
+dependencies = [ 
+  ('cudatoolkit/%s.61_2.4.3-6.0.4.0_3.1__gb475d12' % cudaversion, EXTERNAL_MODULE),
+]
+
+files_to_copy = ["lib", "include", "testing", "docs", "README", (['control/*.h'], 'control')]
+
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
+prebuildopts = 'mv make.inc-2.4.0 make.inc && CUDADIR=/opt/nvidia/cudatoolkit8.0/default '
+
+sanity_check_paths={
+    'files': ['lib/libmagma.so', 'lib/libmagma.a'],
+    'dirs': ['include', 'control'],
+}
+
+moduleclass = 'math'

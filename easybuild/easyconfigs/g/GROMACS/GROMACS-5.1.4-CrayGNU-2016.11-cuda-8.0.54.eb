@@ -39,4 +39,6 @@ installopts = " -j16"
 # skip tests as they call the MPI executable gmx_mpi and would fail on the login nodes
 runtest = False
 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
 moduleclass = 'bio'

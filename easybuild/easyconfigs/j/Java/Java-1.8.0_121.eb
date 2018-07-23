@@ -1,0 +1,16 @@
+name = 'Java'
+version = '1.8.0_121'
+
+homepage = 'http://java.com/'
+description = """Java Platform, Standard Edition (Java SE) lets you develop and deploy
+ Java applications on desktops and servers."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# The tar.gz must be dowloaded manually as the licence agreement must be accepted. The webpage is: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+(vp, vs) = version.split('_')
+altver = '%su%s' % (vp.split('.')[1], vs)
+sourcespath = '/apps/common/UES/easybuild/sources/j/Java'
+sources = ['%s/jdk-%s-linux-x64.tar.gz' % (sourcespath, altver)]
+
+moduleclass = 'lang'

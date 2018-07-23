@@ -1,0 +1,62 @@
+easyblock = 'Bundle'
+
+name = 'dask'
+version = '0.17.0'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'http://github.com/dask/dask/'
+description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
+ and task scheduling."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+# this is a bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+]
+
+
+exts_list = [
+    ('toolz', '0.9.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/toolz'],
+        'checksums': ['929f0a7ea7f61c178bd951bdae93920515d3fbdbafc8e6caf82d752b9b3b31c9'],
+    }),
+    (name, version, {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/d/dask'],
+        'checksums': ['4d2b0754d16ddc3f87026c1fc4fa3b589d7604a41d3f6510268f172abc1d0a5e'],
+    }),
+    ('cloudpickle', '0.5.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/c/cloudpickle'],
+    }),
+    ('partd', '0.3.8', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/partd'],
+    }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)]}
+
+moduleclass = 'data'

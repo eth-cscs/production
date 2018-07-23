@@ -1,0 +1,102 @@
+diff -Nru magma-2.3.0.orig/Makefile magma-2.3.0/Makefile
+--- magma-2.3.0.orig/Makefile	2018-01-23 11:31:10.541548000 +0100
++++ magma-2.3.0/Makefile	2018-01-29 18:33:59.421730000 +0100
+@@ -35,7 +35,7 @@
+ LIBDIR     ?= -L$(CUDADIR)/lib
+ LIB        ?= -lcudart -lcublas -lcusparse -llapack -lblas
+ 
+-GPU_TARGET ?= Kepler Maxwell Pascal
++GPU_TARGET ?= Pascal
+ 
+ # Extension for object files: o for unix, obj for Windows?
+ o_ext      ?= o
+diff -Nru magma-2.3.0.orig/make.inc magma-2.3.0/make.inc
+--- magma-2.3.0.orig/make.inc	1970-01-01 01:00:00.000000000 +0100
++++ magma-2.3.0/make.inc	2018-01-29 18:34:07.135119000 +0100
+@@ -0,0 +1,59 @@
++#//////////////////////////////////////////////////////////////////////////////
++#  -- MAGMA (version 2.3.0) --
++#   Univ. of Tennessee, Knoxville
++#   Univ. of California, Berkeley
++#   Univ. of Colorado, Denver
++#   @date November 2017
++#//////////////////////////////////////////////////////////////////////////////
++# GPU_TARGET contains one or more of Fermi, Kepler, Maxwell, Pascal, Volta
++# to specify for which GPUs you want to compile MAGMA:
++#   Fermi  - NVIDIA compute capability 2.x cards
++#   Kepler - NVIDIA compute capability 3.x cards
++#   Maxwell - NVIDIA compute capability 5.x cards
++#   Pascal - NVIDIA compute capability 6.x cards
++#   Volta  - NVIDIA compute capability 7.x cards
++# The default is "Kepler Maxwell Pascal".
++# Note that NVIDIA no longer supports 1.x cards, as of CUDA 6.5.
++# See http://developer.nvidia.com/cuda-gpus
++#
++GPU_TARGET ?= Pascal
++# --------------------
++# programs
++CC    = icc
++CXX    = icpc
++NVCC   = nvcc
++FORT   = ifort
++ARCH   = ar
++ARCHFLAGS = cr
++RANLIB  = ranlib
++# --------------------
++# flags
++# Use -fPIC to make shared (.so) and static (.a) library;
++# can be commented out if making only static library.
++FPIC   = -fPIC
++CFLAGS  = -O3 $(FPIC) -qopenmp -DNDEBUG -DADD_ -Wall -Wshadow -DMAGMA_WITH_MKL
++FFLAGS  = -O3 $(FPIC)     -DNDEBUG -DADD_ -warn all -warn nounused -nogen-interfaces
++F90FLAGS = -O3 $(FPIC)     -DNDEBUG -DADD_ -warn all -warn nounused
++NVCCFLAGS = -O3         -DNDEBUG -DADD_ -Xcompiler "$(FPIC) -Wall -Wno-unused-function"
++LDFLAGS  =   $(FPIC) -qopenmp
++# C++11 (icc >= 13) is not required, but has benefits like atomic operations
++CXXFLAGS := $(CFLAGS) -std=c++11
++CFLAGS  += -std=c99
++# --------------------
++# libraries
++# see MKL Link Advisor at http://software.intel.com/sites/products/mkl/
++# icc/ifort with MKL 10.3, Intel OpenMP threads
++LIB    = -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lsvml -lpthread -lstdc++ -lm
++LIB   += -lcublas -lcusparse -lcudart -lcudadevrt
++# --------------------
++# directories
++# define library directories preferably in your environment, or here.
++# for MKL run, e.g.: source /opt/intel/composerxe/mkl/bin/mklvars.sh intel64
++#MKLROOT ?= /opt/intel/composerxe/mkl
++CUDADIR ?= $(CUDATOOLKIT_HOME)
++-include make.check-mkl
++-include make.check-cuda
++LIBDIR  = -L$(CUDADIR)/lib64 \
++      -L$(MKLROOT)/lib/intel64
++INC    = -I$(CUDADIR)/include \
++      -I$(MKLROOT)/include
+diff -Nru magma-2.3.0.orig/sparse/control/magma_zparict_tools.cpp magma-2.3.0/sparse/control/magma_zparict_tools.cpp
+--- magma-2.3.0.orig/sparse/control/magma_zparict_tools.cpp	2018-01-23 11:31:10.762491000 +0100
++++ magma-2.3.0/sparse/control/magma_zparict_tools.cpp	2018-01-29 18:34:32.841317000 +0100
+@@ -203,7 +203,11 @@
+ 
+     #pragma omp parallel
+     {
++#if _OPENMP
+         magma_int_t id = omp_get_thread_num();
++#else
++	magma_int_t id = 0;
++#endif
+         if( id == 0 ){
+             for( magma_int_t i = 0; i<L.num_rows; i++ ){
+                 L_new->nnz = L_new->nnz + L_new->row[ i+1 ];
+diff -Nru magma-2.3.0.orig/testing/run_tests.py magma-2.3.0/testing/run_tests.py
+--- magma-2.3.0.orig/testing/run_tests.py	2018-01-23 11:31:11.776505000 +0100
++++ magma-2.3.0/testing/run_tests.py	2018-01-29 18:35:33.586687000 +0100
+@@ -1654,7 +1654,7 @@
+ 			cmdp = cmdp[1:]
+ 		
+ 		# command to run
+-		cmd_args = './' + cmdp +' '+ options +' '+ global_options + sizes
++		cmd_args = 'srun -n 1 ./' + cmdp +' '+ options +' '+ global_options + sizes
+ 		cmd_args = re.sub( '  +', ' ', cmd_args )  # compress spaces
+ 		
+ 		# command to print on console, lacks sizes

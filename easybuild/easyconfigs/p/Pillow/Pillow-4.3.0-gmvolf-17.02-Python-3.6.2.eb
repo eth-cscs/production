@@ -1,0 +1,44 @@
+# contributed Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Pillow'
+version = '4.3.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/Pillow/4.3.0'
+description = """Pillow is the friendly PIL fork by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.6.2'),
+    ('libjpeg-turbo', '1.5.2'),
+    ('libpng', '1.6.32'),
+    ('zlib', '1.2.11'),
+    ('LibTIFF', '4.0.8'),
+    ('freetype', '2.8.1'),
+]
+
+options = {'modulename': 'PIL'}
+
+sanity_check_paths = {
+    'files': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-x86_64.egg'],
+    'dirs': [],
+}
+
+exts_defaultclass = 'PythonPackage'
+
+# Package versions updated on Oct 6th 2017
+exts_list = [
+     ('olefile', '0.44', {
+         'source_tmpl': 'master.zip',
+         'source_urls': ['https://github.com/decalage2/olefile/archive'],
+     }),
+]
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+moduleclass = 'vis'

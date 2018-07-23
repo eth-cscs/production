@@ -1,0 +1,26 @@
+easyblock = 'PythonPackage'
+
+name = 'minieigen'
+version = '0.5.3'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/minieigen'
+description = """A built-package format for Python."""
+
+#toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.12'),
+    ('Eigen', '3.2.1')
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'

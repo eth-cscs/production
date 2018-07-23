@@ -1,0 +1,37 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = "adios"
+version = '1.12.0'
+
+homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
+description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
+to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['http://users.nccs.gov/~pnorbert/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('mxml', '2.10'),
+    ('pmi/5.0.12', EXTERNAL_MODULE)
+]
+
+configopts = '--with-mxml=$EBROOTMXML --with-lustre=/usr/lib64 ' 
+configopts += ' --with-cray-pmi-incdir=$EBROOTPMI/include '
+configopts += ' --with-cray-pmi-libdir=$EBROOTPMI/lib64 '
+configopts += ' --with-cray-ugni-incdir=/opt/cray/gni-headers/default/include '
+configopts += ' --with-cray-ugni-libdir=/opt/cray/ugni/default/lib64 '
+
+parallel = 1
+
+# check if library files are created
+sanity_check_paths = {
+    'files': ['lib/libadios.a'],
+    'dirs': ["."]
+}
+
+# check other easyconfigs for possible options
+moduleclass = 'base'

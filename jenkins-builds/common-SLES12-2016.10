@@ -1,9 +1,10 @@
  Autoconf-2.69.eb
  Automake-1.15.eb
  CMake-3.6.2.eb
+ CMake-3.8.1.eb
  ctags-5.8.eb
- ddt-6.1.2.eb
  git-2.11.0.eb
+ git-2.13.1.eb
  HDFView-2.13.0.eb
  hwloc-1.11.5.eb
  idl-84.eb
@@ -12,13 +13,11 @@
  Lmod-7.1.eb
  lynx-2.8.8rel.2.eb
  M4-1.4.17.eb
- matlab-r2016a.eb
+ matlab-r2017b.eb    --hidden
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- PyRegression-2.0.1.eb
- PyRegression-dev.eb
+ reframe-2.13.eb     --set-default-module
+ reframe-2.14-dev0.eb
  Ruby-2.3.3.eb
  tmux-2.3.eb
- vampir-9.2.0.eb
- Vim-8.0.eb

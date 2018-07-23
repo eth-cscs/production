@@ -1,0 +1,47 @@
+#%Module
+
+# set environment
+set apps "$env(APPS)"
+set path "/apps/dom/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all"
+# set gpupath and mcpath
+set gpupath [ string map { ARCH gpu } "${path}" ]
+set mcpath [ string map { ARCH mc } "${path}" ]
+# list of modulefiles in mcpath
+set mclist [exec ls --color=none "${mcpath}"]
+
+# checks for conflicts
+if { [ is-loaded craype-haswell ] } {
+ module unload craype-haswell
+ module unuse "${gpupath}"
+}
+# conflicts
+conflict craype-haswell
+conflict daint-gpu
+
+# module remove (unload) or switch (swap): unload dependencies
+if { [module-info mode remove] || [module-info mode switch] } {
+ foreach module ${mclist} {
+#  if { [is-loaded ${module}] } {
+   module unload ${module}
+#  }
+ }
+}
+
+# load dependency and update MODULEPATH
+module load craype-broadwell
+module use "${mcpath}"
+
+# load additional modules
+#module load xalt
+
+# print help screen
+if { [ module-info mode help ] } {
+proc ModulesHelp { } {
+ global apps mcpath
+ puts stderr "\t Set environment for mc broadwell compute nodes:
+  \t - module load craype-broadwell
+  \t - module use ${mcpath} 
+ "
+ return 0
+}
+}

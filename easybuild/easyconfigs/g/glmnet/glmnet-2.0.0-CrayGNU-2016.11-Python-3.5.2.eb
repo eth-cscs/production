@@ -1,0 +1,28 @@
+easyblock = 'PythonPackage'
+
+name = 'glmnet'
+version = '2.0.0'
+pyver = '3.5.2'
+versionsuffix= '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/glmnet/'
+description = """This is a Python wrapper for the fortran library used in the R package
+[`glmnet`](http://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html)."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+prebuildopts = 'LDFLAGS="$LDFLAGS -nostartfiles -shared" FFLAGS="$FFLAGS -fPIC"'
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', pyver),
+    ('scikit-learn', '0.18.2', '-Python-%(pyver)s'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'devel'

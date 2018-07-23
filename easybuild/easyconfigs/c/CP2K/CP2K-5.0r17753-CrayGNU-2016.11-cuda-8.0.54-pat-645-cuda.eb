@@ -1,0 +1,64 @@
+# contributed by Luca Marsella (CSCS)
+#
+# You should reduce the lenght of the BUILDPATH. E.g.:
+# export EASYBUILD_BUILDPATH=/dev/shm/$USER
+
+easyblock = 'MakeCp'
+
+name = 'CP2K'
+version = "5.0r17753"
+cudaversion = '8.0.54'
+patversion = '645-cuda'
+versionsuffix = '-cuda-%s-pat-%s' %(cudaversion, patversion)
+
+homepage = 'http://www.cp2k.org/'
+description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
+ simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different
+ methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and
+ classical pair and many-body potentials. """
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+# source file packaged from: CP2K SVN trunk of Feb 09 2017
+sources = [SOURCELOWER_TAR_BZ2]
+
+dependencies = [
+    ('Libint', '1.1.4'),
+    ('libxc', '3.0.0'),
+]
+
+builddependencies = [
+    ('perftools-cscs', '%s' %patversion, '', True),
+    ('cudatoolkit/%s_2.2.8_ga620558-2.1' %cudaversion, EXTERNAL_MODULE),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('Python', '2.7.12'),
+    ('flex', '2.6.0'),
+    ('Bison', '3.0.4'),
+]
+
+# add define flags
+prebuildopts = " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# add includes
+prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# add libraries 
+prebuildopts += " sed -i -e '/LIBS     +=/a LIBS     += -lcudart -lcublas -lcufft -lrt $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a ' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# correct reference to specific GPU architecture (sm_60)
+prebuildopts += " sed -i -e 's/-arch sm_35/-arch sm_60/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# removes wrong link to libsmm
+prebuildopts += " sed -i -e '/alazzaro/d' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+prebuildopts += " cat ./arch/CRAY-XC30-gfortran-cuda.psmp && pushd makefiles && "
+
+# build type
+buildopts = 'ARCH=CRAY-XC30-gfortran-cuda VERSION=psmp'
+ 
+files_to_copy = [(['./exe/CRAY-XC30-gfortran-cuda/cp2k.psmp'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/cp2k.psmp'],
+    'dirs': [],
+}
+
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
+moduleclass = 'chem'

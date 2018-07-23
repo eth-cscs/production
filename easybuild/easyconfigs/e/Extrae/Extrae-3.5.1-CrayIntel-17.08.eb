@@ -1,0 +1,54 @@
+easyblock = 'ConfigureMake'
+
+name = 'Extrae'
+version = '3.5.1'
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools'
+description = """Extrae is the core instrumentation package developed by the
+Performance Tools group at BSC. Extrae is capable of instrumenting applications
+based on MPI, OpenMP, pthreads, CUDA1, OpenCL1, and StarSs1 using different
+instrumentation approaches. The information gathered by Extrae typically
+includes timestamped events of runtime calls, performance counters and source
+code references. Besides, Extrae provides its own API to allow the user to
+manually instrument his or her application."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://ftp.tools.bsc.es/extrae']
+sources = ['extrae-%(version)s-src.tar.bz2']
+checksums = ['28d8598002b7cfeefcc241b8c1c05d9e']
+
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('libunwind', '1.2.1'),
+    #('libxml2', '2.9.4', '', True),
+    #('Boost', '1.63.0'),
+    ('Paraver', '4.6.4.rc1', '', True),
+    ('Dimemas', '5.3.3', '', True),
+    ('clusteringsuite', '2.6.6', '', True),
+    ('papi/5.5.1.2', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
+]
+
+configopts  = ' --enable-parallel-merge'
+configopts += ' --enable-sampling'
+configopts += ' --enable-openmp'
+configopts += ' --with-libz=$EBROOTZLIB'
+configopts += ' --with-unwind=$EBROOTLIBUNWIND'
+#configopts += ' --with-xml-prefix=$EBROOTLIBXML2'
+#configopts += ' --with-boost=$EBROOTBOOST'
+#configopts += ' --with-binutils=$EBROOTBINUTILS'
+configopts += ' --with-mpi=${CRAY_MPICH_DIR}'
+configopts += ' --with-fft=$FFTW_DIR'
+configopts += ' --with-papi=`pkg-config --variable=papi_prefix papi`'
+configopts += ' --enable-sampling'
+configopts += ' --without-dyninst'
+configopts += ' --without-cuda'
+configopts += ' --with-binary-type=64'
+
+sanity_check_paths = {
+    'files': ["include/extraef_user_events.h", ],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

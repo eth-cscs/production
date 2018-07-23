@@ -1,0 +1,13 @@
+--- ipython-5.7.0/IPython/core/application.py.orig	2018-07-03 12:53:32.668815137 +0200
++++ ipython-5.7.0/IPython/core/application.py	2018-07-03 12:44:53.319583534 +0200
+@@ -43,7 +43,9 @@
+         "/usr/local/etc/ipython",
+         "/etc/ipython",
+     ]
+-
++ebroot=os.environ.get('EBROOTIPYTHON', None)
++if ebroot:
++        SYSTEM_CONFIG_DIRS.append(ebroot)
+ 
+ ENV_CONFIG_DIRS = []
+ _env_config_dir = os.path.join(sys.prefix, 'etc', 'ipython')

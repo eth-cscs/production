@@ -1,5 +1,4 @@
-# Built with EasyBuild version 2.7.0.dev0-r0479d88454e39c1ab0e60daeeb26f64e4305cf4e on 2016-03-16_03-23-11
-# jgp (CSCS)
+# Contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'Bison'
@@ -14,8 +13,7 @@ toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = [GNU_SOURCE]
 
-#builddependencies = [('M4', '1.4.17')]
-dependencies = [('M4', '1.4.17')]
+dependencies = [('M4', '1.4.18')]
 
 sanity_check_paths = {
     'files': ["bin/%s" % x for x in ["bison", "yacc"]] + ["lib/liby.a"],

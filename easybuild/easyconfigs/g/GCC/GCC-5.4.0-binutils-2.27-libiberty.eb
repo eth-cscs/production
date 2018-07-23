@@ -1,0 +1,53 @@
+name = 'GCC'
+version = '5.4.0'
+binutilsver = '2.27-libiberty'
+versionsuffix = '-binutils-%s' % binutilsver
+
+homepage = 'http://gcc.gnu.org/'
+description = """The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, and Ada,
+ as well as libraries for these languages (libstdc++, libgcj,...)."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = [
+    'http://ftpmirror.gnu.org/%(namelower)s/%(namelower)s-%(version)s', # GCC auto-resolving HTTP mirror
+    'http://ftpmirror.gnu.org/gmp',                                     # idem for GMP
+    'http://ftpmirror.gnu.org/mpfr',                                    # idem for MPFR
+    'http://www.multiprecision.org/mpc/download',                       # MPC official
+    'ftp://gcc.gnu.org/pub/gcc/infrastructure/',                        # GCC dependencies
+    'http://gcc.cybermirror.org/infrastructure/',                       # HTTP mirror for GCC dependencies
+    'http://isl.gforge.inria.fr/',                                      # original HTTP source for ISL
+]
+
+# mpfr_version = '3.1.5'
+sources = [
+    SOURCELOWER_TAR_BZ2,
+    'gmp-6.1.2.tar.bz2',
+    'mpfr-3.1.5.tar.gz',
+#    'mpfr-%s.tar.gz' % mpfr_version,
+    'mpc-1.0.3.tar.gz',
+    'isl-0.18.tar.bz2',
+]
+
+# patches = [('mpfr-%s-allpatches-20151029.patch' % mpfr_version, '../mpfr-%s' % mpfr_version)]
+dependencies = [('binutils', binutilsver)]
+
+builddependencies = [('M4', '1.4.18')]
+
+checksums = [
+    '4c626ac2a83ef30dfb9260e6f59c2b30',     # gcc
+    '8ddbb26dc3bd4e2302984debba1406a5',     # gmp
+    '2706a315849ef18b961308ab9148eef7',     # mpfr
+    'd6a1d5f8ddea3abd2cc3e98f58352d26',     # mpc
+    '11436d6b205e516635b666090b94ab32',     # isl
+#    '6476b450c3db177b2250f3549362380e',     # mpfr-3.1.3-allpatches-20151029.patch
+]
+
+languages = ['c', 'c++', 'fortran']
+
+withisl = True
+
+# building GCC sometimes fails if make parallelism is too high, so let's limit it
+# maxparallel = 4
+
+moduleclass = 'compiler'

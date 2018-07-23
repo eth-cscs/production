@@ -36,6 +36,8 @@ buildopts = ' gpu gpu_ncl '
  
 files_to_copy = [(['./bin/vasp_*'],'bin')]
 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
 sanity_check_paths = {
     'files': ['bin/vasp_gpu','bin/vasp_gpu_ncl'],
     'dirs': [],

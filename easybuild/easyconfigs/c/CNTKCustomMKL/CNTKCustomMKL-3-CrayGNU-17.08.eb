@@ -1,0 +1,25 @@
+# @author: gppezzi
+
+easyblock = "Tarball"
+
+name = 'CNTKCustomMKL'
+version = '3'
+
+homepage = 'https://www.cntk.ai/mkl/'
+description = """Computational Network Toolkit Custom MKL Package."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+sources = ['CNTKCustomMKL-Linux-%(version)s.tgz']
+source_urls = ['https://www.cntk.ai/mkl/']
+
+postinstallcmds = [
+    'mkdir %(installdir)s/%(version)s && mv %(installdir)s/x64 %(installdir)s/include %(installdir)s/%(version)s'
+]
+
+sanity_check_paths = {
+    'files': ['%(version)s/x64/parallel/libmkl_cntk_p.so'],
+    'dirs': ['%(version)s/include']
+}
+
+moduleclass = 'devel'

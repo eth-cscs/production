@@ -1,0 +1,13 @@
+# @author: gppezzi
+
+easyblock = 'Bundle'
+
+name = 'PrgEnv-gnu'
+version = 'leone'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides a meta module for the Programming Environment on Leone"""
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+moduleclass = 'devel'

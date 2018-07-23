@@ -23,10 +23,8 @@ dependencies = [
     ('ncurses', '6.0'),
 ]
 
-# enviroment variable to use package repository with pip
-modextravars = {'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem'}
-
-osdependencies = [('libopenssl-devel')]
+# workaround for being able to change name to Python-bare
+modextravars = {'EBROOTPYTHON': '%(installdir)s'}
 
 # order is important!
 # package versions updated October 2016

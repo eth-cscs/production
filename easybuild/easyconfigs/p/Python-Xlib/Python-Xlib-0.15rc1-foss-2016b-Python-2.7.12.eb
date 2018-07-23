@@ -1,0 +1,31 @@
+easyblock = 'PythonPackage'
+
+name = 'Python-Xlib'
+version = '0.15rc1'
+
+homepage = 'http://ipython.org/index.html'
+description = """ The Python X Library is a complete X11R6 client-side implementation, written in pure Python.
+It can be used to write low-levelish X Windows client applications in Python. """
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+python = 'Python'
+pyver = '2.7.12'
+pyshortver = '.'.join(pyver.split('.')[:2])
+versionsuffix = '-%s-%s' % (python, pyver)
+
+dependencies = [
+    (python, pyver),
+]
+
+options = {'modulename': 'Xlib'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib']
+}
+
+moduleclass = 'tools'

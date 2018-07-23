@@ -1,0 +1,208 @@
+# File modified for Python 3.6.1 extensions by MaKra - August 2017
+name = 'Python'
+version = "3.6.2"
+
+homepage = 'http://python.org/'
+description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
+
+toolchain = {'name':'gmvolf', 'version':'17.02' }
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
+sources = [SOURCE_TGZ]
+
+#patches = ['unixccompiler-Python-2.7.9.patch']
+# suffix = '-Python-%s' % version
+
+# python needs bzip2 to build the bz2 package
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('expat', '2.2.0'),
+    ('fontconfig', '2.12.1'),
+    ('freetype', '2.7.1'),
+    ('grib_api','1.21.0'),
+    ('GMP', '6.1.1'),
+    ('libreadline', '7.0'),
+    ('libffi','3.2.1'),
+    ('libpng', '1.6.28'),
+    ('libjpeg-turbo', '1.5.1'),
+    ('LibTIFF','4.0.8'),
+    ('libX11','1.6.3'),
+    ('libxcb','1.11.1'),
+    ('libXext','1.3.3'),
+    ('libXrender','0.9.9'),
+    ('libyaml','0.1.6'),
+    ('ncurses', '6.0'),
+    ('pixman', '0.34.0'),
+    ('Qhull', '2015.2'),
+    ('SQLite', '3.9.2'),
+    ('Tk', '8.6.6', '-no-X11' ),
+    ('zlib', '1.2.8'),
+]
+
+# rpath is needed for buiding TensorFlow
+configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
+
+# order is important!
+# package versions updated Mar 1st 2017
+exts_list = [
+    ('setuptools', '36.2.7', {
+        'source_urls': ['https://pypi.python.org/packages/07/a0/11d3d76df54b'  \
+                        '9701c0f7bf23ea9b00c61c5e14eb7962bb29aed866a5844e/'],
+        'source_tmpl': '%(name)s-%(version)s.zip',
+    }),
+    ('pip', '9.0.1', {
+        'source_urls': ['http://pypi.python.org/packages/source/p/pip/'],
+    }),
+    ('nose', '1.3.7', {
+        'source_urls': ['http://pypi.python.org/packages/source/n/nose/'],
+    }),
+    ('numpy', '1.12.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/n/numpy/'],
+        'source_tmpl': '%(name)s-%(version)s.zip',
+        'patches': [ 'numpy-1.12.0-mkl.patch', ],
+    }),
+   ('scipy', '0.19.1', {
+       'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
+   }),
+   ('pyproj', '1.9.5.1', {
+       'source_urls': ['https://pypi.python.org/packages/29/72/5c1888c494'    \
+                       '8a0c7b736d10e0f0f69966e7c0874a660222ed0a2c2c6daa9f/'],
+       'modulename' : 'pyproj',
+   }),
+   ('mpi4py', '2.0.0', {
+       'source_urls': ['http://bitbucket.org/mpi4py/mpi4py/downloads/'],
+   }),
+   ('Cython', '0.25.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+   }),
+   ('six', '1.10.0', {
+       'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+   }),
+   ('virtualenv', '15.1.0', {
+       'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+   }),
+   ('matplotlib', '2.0.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+   }),
+   ('pandas', '0.20.3', {
+       'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+   }),
+   ('pygrib', '2.0.2', {
+       'source_urls': ['https://pypi.python.org/packages/3c/16/d128a64f2f'    \
+                       '5e9f776d6e080ba62551b5d103a4c0acb283204135bd23f14e/']
+   }),
+   ('datashape', '0.5.2', {
+       'source_urls': ['https://pypi.python.org/packages/a6/5b/95b2ed56b6'    \
+                       '1e649b69c9a5b1ecb32ff0a5cd68b9f69f5aa7774540e6b444/'],
+   }),
+   ('Glymur', '0.8.10', {
+       'source_urls': ['https://pypi.python.org/packages/77/7c/90272815ce'    \
+                       '390d456bc0d52c74cd8f1719f37ef116fb289b5029754d64cc/'],
+   }),
+   ('Jasper', '0.1', {
+       'source_urls': ['https://pypi.python.org/packages/46/e4/10df228762'    \
+                       '1ab9a9ad06d4d2b9a1cd1de186b2c88b4d3db91ad51e726fc7'],
+   }),
+   ('XlsxWriter', '0.9.8', {
+       'source_urls': ['https://pypi.python.org/packages/1c/1a/350a5fbee0'    \
+                       'ab3f54006004fe1b86d1f7df3556203417125435b7c6e57bf2/'],
+   }),
+   ('xarray', '0.9.6', {
+       'source_urls': ['https://pypi.python.org/packages/87/d3/9d777006cc'    \
+                       '34c5d628cb83e07d1e534865f6fc31e3c7ee0989478924f4d7/']
+   }),
+   ('watchdog', '0.8.3', {
+       'source_urls': ['https://pypi.python.org/packages/54/7d/c7c0ad1e32'    \
+                       'b9f132075967fc353a244eb2b375a3d2f5b0ce612fd96e107e/']
+   }),
+   ('toolz', '0.8.2', {
+       'source_urls': ['https://pypi.python.org/packages/75/9c/a26de5efd5'    \
+                       '6009e15af607bff6d2a395631e3c20e7c64b861c9bc4b34288/']
+   }),
+   ('sympy', '1.1', {
+       'source_urls': ['https://pypi.python.org/packages/d5/40/153799104c'    \
+                       'a0d644f539ef8212f83fe67f67f57324d4ef51a16f85141915/']
+   }),
+   ('spyder', '3.1.4', {
+       'source_urls': ['https://pypi.python.org/packages/26/8d/110cdf96a6'    \
+                       'ed0d1bc38e9dc15fa7263a5b601f27951bb09cc080f11024f1/']
+   }),
+   ('seaborn', '0.8', {
+       'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
+                       '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
+   }),
+   ('pykdtree', '1.2.2', {
+       'source_urls': ['https://pypi.python.org/packages/65/4d/29a5f9c3ec'    \
+                       'f5ce9ccfda5975d6503e9111a73364a3cef61720ad60740449/']
+   }),
+   ('graphviz', '0.8', {
+       'source_tmpl': '%(name)s-%(version)s.zip',
+       'source_urls': ['https://pypi.python.org/packages/da/84/0e99752032'    \
+                       '3d6b01124eb01c68d5c101814d0aab53083cd62bd75a90f70b/']
+   }),
+   ('inotify', '0.2.8', {
+       'source_urls': ['https://pypi.python.org/packages/ab/3b/ad48cb45af'    \
+                       '4af32341fc6bf28497081a885d1e23777d2827f3c61d734f02/']
+   }),
+   ('docutils', '0.14', {
+       'source_urls': ['https://pypi.python.org/packages/84/f4/5771e41fdf'    \
+                       '52aabebbadecc9381d11dea0fa34e4759b4071244fa094804c/'],
+   }),
+   ('scikit-learn', '0.18.2', {
+       'source_urls': ['https://pypi.python.org/packages/26/c2/21c612f3a1b1'  \
+                       'ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
+       'modulename' : 'sklearn',
+   }),
+   ('scikit-image', '0.13.1', {
+       'source_urls': ['https://pypi.python.org/packages/83/2a/c5a39c12c196c19'\
+                       'a443fa4d17c0768a24231e46ae952930a9d66bad45557/'],
+       'sources'    : [SOURCE_TAR_GZ],
+       'modulename' : 'skimage',
+   }),
+   ('blaze', '0.10.1', {
+       'source_urls': ['https://pypi.python.org/packages/a1/99/ec4fc29409'    \
+                       'd68d83a2138b190722f74d15ca1ca303b5c055171b22baa4c0/']
+   }),
+   ('pyOpenSSL', '17.2.0', {
+       'modulename' : 'OpenSSL',
+       'source_urls': ['https://pypi.python.org/packages/b0/9e/7088f6165c'    \
+                       '40c46416aff434eb806c1d64ad6ec6dbc201f5ad4d0484704e/'],
+   }),
+   ('cryptography', '2.0.3', {
+       'source_urls': ['https://pypi.python.org/packages/9c/1a/0fc8cffb04582' \
+                       'f9ffca61b15b0681cf2e8588438e55f61403eb9880bd8e0/'],
+   }),
+   ('networkx', '2.0', {
+       'source_urls': ['https://pypi.python.org/packages/73/58/0add7d81cf'    \
+                       '64958f7a062aa287237364eb0a0959bf7a817f708d5c25d043/'],
+       'source_tmpl': '%(name)s-%(version)s.zip',
+   }),
+   ('Pillow', '4.3.0', {
+       'modulename' : 'PIL',
+       'source_urls': ['https://pypi.python.org/packages/e0/82/ec499c78bfe4'   \
+                       'ecaa91c2f3000040451d187ed0a816d58b8543e29c48827f/'],
+       'sources'    : [SOURCE_TAR_GZ],
+   }),
+   ('PyYAML', '3.12', {
+       'modulename' : 'yaml',
+       'source_urls': ['https://pypi.python.org/packages/4a/85/db5a2df477072b' \
+                       '2902b0eb892feb37d88ac635d36245a72a6a69b23b383a/'],
+       'sources'    : [SOURCE_TAR_GZ],
+   }),
+   ('tornado', '4.5.1', {
+       'source_urls': ['https://pypi.python.org/packages/df/42/a180ee540e12e2'\
+                       'ec1007ac82a42b09dd92e5461e09c98bf465e98646d187/'],
+   }),
+   ('requests', '2.13.0', {
+       'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
+   }),
+   ('Jinja2', '2.8', {
+       'source_urls': ['https://pypi.python.org/packages/source/J/Jinja2'],
+   }),
+   ('bokeh', '0.12.3', {
+       'source_urls': ['https://pypi.python.org/packages/source/b/bokeh'],
+   }),
+]
+
+moduleclass = 'lang'
