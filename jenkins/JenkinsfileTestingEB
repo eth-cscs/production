@@ -57,14 +57,15 @@ stage('Build Stage') {
                                               export -f module'''
                     def projectName = env.JOB_BASE_NAME.trim()
                     def gitCommit = scmVars.GIT_COMMIT.trim()[0..6]
+                    def buildID = env.BUILD_ID
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
-                    def buildPath = "/dev/shm/jenscscs/$gitCommit/"
-                    def prefix = "$scratch/$projectName/$machineLabel/$gitCommit"
-                    def command = machineName == 'dom' ? "srun -u --constraint=$arch --job-name=${projectName} --time=06:00:00" : ''
+                    def buildPath = "/tmp/jenscscs/$gitCommit/"
+                    def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
+                    def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"

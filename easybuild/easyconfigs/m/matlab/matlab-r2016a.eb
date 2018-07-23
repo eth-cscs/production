@@ -6,7 +6,7 @@ version = 'r2016a'
 homepage = 'https://www.mathworks.com/products/matlab.html'
 description = """Matlab"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
 set             MATLABVersion   "r2016a"

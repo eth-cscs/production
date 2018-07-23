@@ -1,0 +1,59 @@
+# jg (CSCS)
+## ddt/18.1.3 is the latest supported version until we get the new license
+easyblock = 'Tarball'
+name = 'ddt'
+version = '18.1.3'
+versionsuffix = '-Suse-12'
+
+homepage = 'https://developer.arm.com/products/software-development-tools/hpc/downloads/download-arm-forge'
+description = """Arm DDT is a cross-platform debugger for C, C++, Fortran
+threaded and parallel codes, compatible with most flavors of Linux on Intel
+x86_64 (Xeon), IBM Power8, NVIDIA CUDA, and Armv8-A hardware.
+# --------------------------------------------------------------------------
+CSCS Users Documentation: http://user.cscs.ch
+Youtube channel: https://www.youtube.com/playlist?list=PL1tk5lGm7zvR1CPR9KYZZEyRlCYQYY-Xp
+Non-MPI codes may need to add a dummy MPI_Init()/MPI_Finalize() call
+To avoid conflict, module unload Visit Cube darshan
+Licensing : http://velan:4241/status.html"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = [ 'http://content.allinea.com/downloads/' ]
+sources = [ 'arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix) ]
+checksums = [ '456cd5e3238b4e0c4421d3a1fe8c7f91' ]
+
+postinstallcmds = [ './textinstall.sh --accept-licence %(installdir)s && ' \
+                    'echo -e "type=2\nserial_number=6784\nhostname=velan\nserverport=4241" > ' \
+                    '%(installdir)s/licences/License && ' \
+                    'echo -e "type=2\nserial_number=6784\nhostname=velan\nserverport=4241" > ' \
+                    '%(installdir)s/licences/Licence ; ' ]
+
+sanity_check_paths = {
+    'files': ['bin/ddt'],
+    'dirs': ['bin', 'licences']
+}
+
+modextrapaths = {
+    'PATH': 'bin',
+    'PATH': 'libexec',
+    'LD_LIBRARY_PATH': 'lib',
+    'LD_LIBRARY_PATH': 'lib/64',
+    'MODULEPATH': 'share/modules/cray',
+}
+
+modextravars = {
+    'CRAY_ACC_NO_EARLY_INIT': '1',
+    'DDT_NO_TIMEOUT': '1',
+    'ALLINEA_MPIRUN': 'srun',    
+    'DDT_MEM': '-L%(installdir)s/lib/64',
+    'DDT_LINK_DMALLOC': '-L%(installdir)s/lib/64 -ldmalloc',
+    'DDT_LINK_DMALLOCXX': '-L%(installdir)s/lib/64 -ldmallocxx',
+    'DDT_LINK_DMALLOCTH': '-L%(installdir)s/lib/64 -ldmallocth',
+    'DDT_LINK_DMALLOCTHCXX': '-L%(installdir)s/lib/64 -ldmallocthcxx',
+    'DDT_EXAMPLES': '%(installdir)s/examples',
+#    'ALLINEA_CONFIG_DIR': '',
+#    'MAP_LIBRARIES_DIRECTORY': 
+#    'ALLINEA_LICENCE_DIR' /apps/common/UES/licensesCSCS/ddt
+#    'LM_LICENSE_FILE': '%(installdir)s/license/license.dat'
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,27 @@
+# LIGGGHTS was requested: WebRT #30237
+# Person in charge of the installation on Leone: Josef Kerbl (DCS Computing GmbH)
+easyblock = 'Bundle'
+name = 'LIGGGHTS'
+version = "4.0"
+
+homepage = 'http://www.cfdem.com'
+description = """
+              LIGGGHTS stands for LAMMPS improved for general granular and 
+              granular heat transfer simulations. LAMMPS is a classical 
+              molecular dynamics simulator. It is widely used in the field of 
+              Molecular Dynamics. Thanks to physical and algorithmic analogies, 
+              LAMMPS is a very good platform for DEM simulations.
+              """
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [ ('CMake/3.4.1', EXTERNAL_MODULE),
+                 ('gcc/5.3.0', EXTERNAL_MODULE),
+                 ('mvapich2/2.1-gcc-5.3.0', EXTERNAL_MODULE) ]
+
+modtclfooter = """
+prepend-path PATH "/apps/leone/hilti/RH6.7/LIGGGHTS/LIGGGHTS-HILTI/src"
+prepend-path LD_LIBRARY_PATH "/apps/leone/hilti/RH6.7/LIGGGHTS/VTK-8.0.1/lib"
+"""
+
+moduleclass = 'cae'

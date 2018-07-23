@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'CrayToolchain'
+
+name = 'CrayIntel'
+version = '18.07'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-intel module
+(PE release: July 2018).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-intel', EXTERNAL_MODULE),
+    ('atp/2.1.2', EXTERNAL_MODULE),
+    ('intel/18.0.2.199', EXTERNAL_MODULE),
+    ('cray-libsci/18.07.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.7.1', EXTERNAL_MODULE),
+    ('craype/2.5.15', EXTERNAL_MODULE),
+    ('pmi/5.0.14', EXTERNAL_MODULE),
+]
+
+modextravars = {
+        'LD_LIBRARY_PATH' : '$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'
+}
+
+moduleclass = 'toolchain'

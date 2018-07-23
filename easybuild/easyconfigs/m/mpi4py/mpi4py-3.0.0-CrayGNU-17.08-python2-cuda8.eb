@@ -1,0 +1,39 @@
+# Contributed by Theofilos Manitaras (cscs)
+# Victor Holanda (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'mpi4py'
+version = '3.0.0'
+python = 'python'
+pyver = '2'
+cudaversion='8'
+versionsuffix = '-%s%s-cuda%s' % (python, pyver,cudaversion)
+
+homepage = 'https://bitbucket.org/mpi4py/mpi4py'
+description = """MPI for Python (mpi4py) provides bindings of the Message
+Passing Interface (MPI) standard for the Python programming language, allowing
+any Python program to exploit multiple processors."""
+
+req_py_majver = '2'
+req_py_minver = '7'
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+source_urls = [BITBUCKET_DOWNLOADS]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+        ('PyExtensions', '%s.%s' % (req_py_majver, req_py_minver)),
+        ('cudatoolkit/%s.0.61_2.4.3-6.0.4.0_3.1__gb475d12' % cudaversion, EXTERNAL_MODULE),
+        ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+# force rebuilding everything, including patched files
+buildopts = '--force'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python2.7/site-packages/mpi4py'],
+}
+
+moduleclass = 'mpi'
