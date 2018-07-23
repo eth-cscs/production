@@ -1,0 +1,79 @@
+ abcpy-0.5.1-CrayGNU-18.07-python3.eb               --set-default-module
+ Amber-16-CrayGNU-18.07-cuda-9.1.eb                 --set-default-module
+ Amber-16-CrayGNU-18.07-parallel.eb
+ Boost-1.67.0-CrayGNU-18.07-python2.eb
+ Boost-1.67.0-CrayGNU-18.07-python3.eb              --set-default-module
+ Boost-1.67.0-CrayGNU-18.07.eb
+ CMake-3.12.0.eb
+ CP2K-5.1-CrayGNU-18.07-cuda-9.1.eb                 --set-default-module
+ CDO-1.9.4-CrayGNU-18.07.eb                         --set-default-module
+ CDO-1.9.4-CrayIntel-18.07.eb
+ CPMD-4.1-CrayIntel-18.07.eb                        --set-default-module
+ ddt-18.1.3-Suse-12.eb                              --set-default-module
+ Extrae-3.5.4-CrayGNU-18.07.eb                      --set-default-module
+ Extrae-3.5.4-CrayIntel-18.07.eb
+ GREASY-2.1-cscs-CrayGNU-18.07.eb                   --set-default-module
+ GROMACS-2018.2-CrayGNU-18.07-cuda-9.1.eb             --set-default-module
+ GSL-2.5-CrayGNU-18.07.eb                           --set-default-module
+ GSL-2.5-CrayCCE-18.07.eb
+ GSL-2.5-CrayIntel-18.07.eb
+ h5py-2.8.0-CrayGNU-18.07-python2-parallel.eb
+ h5py-2.8.0-CrayGNU-18.07-python2-serial.eb
+ h5py-2.8.0-CrayGNU-18.07-python3-parallel.eb       --set-default-module
+ h5py-2.8.0-CrayGNU-18.07-python3-serial.eb
+ HDFView-3.0.0.eb                                    --set-default-module
+ HPX-1.1.0-CrayGNU-18.07.eb                         --set-default-module
+ IDL-8.5.1.eb                                       --set-default-module
+ IPM-2.0.6-CrayCCE-18.07.eb
+ IPM-2.0.6-CrayGNU-18.07.eb                         --set-default-module
+ IPM-2.0.6-CrayIntel-18.07.eb
+ IPM-2.0.6-CrayPGI-18.07.eb
+ ipykernel-4.8.2-CrayGNU-18.07-python2.eb
+ jupyter-1.0.0-CrayGNU-18.07.eb
+ jupyterhub-0.9.0-CrayGNU-18.07.eb
+ LAMMPS-13Mar2018-CrayGNU-18.07-cuda-9.1.eb         --set-default-module
+ Lmod-7.7.eb                                        --set-default-module --hidden
+ magma-2.4.0-CrayGNU-18.07-cuda-9.1.eb              --set-default-module
+ magma-2.4.0-CrayIntel-18.07-cuda-9.1.eb
+ NCO-4.7.5-CrayGNU-18.07.eb                         --set-default-module
+ NAMD-2.12-CrayIntel-18.07-cuda-9.1.eb              --set-default-module
+ NCL-6.4.0.eb                                       --set-default-module
+ ncview-2.1.7-CrayGNU-18.07.eb                      --set-default-module
+ netcdf-python-1.4.0-CrayGNU-18.07-python2.eb
+ netcdf-python-1.4.0-CrayGNU-18.07-python3.eb       --set-default-module
+ otfprofile-1.20.eb                                 --set-default-module
+ papi-wrap-1.0-CrayGNU-18.07.eb                     --set-default-module
+ papi-wrap-1.0-CrayCCE-18.07.eb
+ papi-wrap-1.0-CrayIntel-18.07.eb
+ ParaView-5.5.2-EGL-CrayGNU-18.07.eb                --set-default-module
+ perf-reports-7.1.eb                                --set-default-module
+ PLUMED-2.4.2-CrayGNU-18.07.eb
+ Python-bare-3.6.2.eb                               --hidden
+ pycuda-2017.1.1-CrayGNU-18.07-python2-cuda-9.1.eb
+ pycuda-2017.1.1-CrayGNU-18.07-python3-cuda-9.1.eb  --set-default-module
+ PyExtensions-2.7.13.1-CrayGNU-18.07.eb
+ PyExtensions-3.6.1.1-CrayGNU-18.07.eb
+ QuantumESPRESSO-6.3.0-CrayIntel-18.07.eb           --set-default-module
+ R-3.5.1-CrayGNU-18.07.eb                           --set-default-module
+ RDock-2013.1-CrayGNU-18.07.eb                      --set-default-module
+ Scalasca-2.4-CrayGNU-18.07.eb                    --set-default-module
+ Scalasca-2.4-CrayIntel-18.07.eb
+ Scalasca-2.4-CrayPGI-18.07.eb
+ Score-P-4.0-CrayGNU-18.07-cuda-9.1.eb
+ Score-P-4.0-CrayGNU-18.07.eb                       --set-default-module
+ Score-P-4.0-CrayIntel-18.07.eb
+ Score-P-4.0-CrayPGI-18.07.eb
+ Spark-2.3.1.eb                                     --set-default-module
+ Spark-2.3.1-CrayGNU-18.07-Hadoop-2.7.eb
+ TensorFlow-1.8.0-CrayGNU-18.07-cuda-9.1-python3.eb --set-default-module
+ Theano-1.0.1-CrayGNU-18.07-cuda-9.1-python2.eb
+ Theano-1.0.1-CrayGNU-18.07-cuda-9.1-python3.eb     --set-default-module
+ Understand-4.0.913.eb                              --set-default-module --hidden
+ vampir-9.4.0.eb                                    --set-default-module
+ VASP-5.4.4-CrayIntel-18.07-cuda-9.1.eb             --set-default-module
+ VMD-1.9.3-egl.eb
+ VMD-1.9.3-ogl.eb
+ VTK-8.1.1-CrayGNU-18.07-python2.eb
+ VTK-8.1.1-CrayGNU-18.07-python3.eb                 --set-default-module
+ VTK-8.1.1-EGL-CrayGNU-18.07-python2.eb
+ VTK-8.1.1-EGL-CrayGNU-18.07-python3.eb             --set-default-module

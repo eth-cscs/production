@@ -1,7 +1,6 @@
 def daint = [name: 'daint',
              archs: ['gpu', 'mc'],
-             toolkits: ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI'],
-             toolkitVersions: ['17.08'],
+             buildPath: '/dev/shm/$USER/easybuild/stage/build',
              unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
              modulesProduction: '/apps/common/UES/jenkins/production/login-UP04',
              modulesUnuseProduction: '/apps/daint/UES/easybuild/modulefiles',
@@ -9,17 +8,23 @@ def daint = [name: 'daint',
 
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
-           toolkits: ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI'],
-           toolkitVersions: ['17.08'],
+           buildPath: '/tmp/$USER/easybuild',
            unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/6.0.UP04/ARCH/easybuild-1']
+           prefixProduction: '$APPS/UES/jenkins/6.0.UP06/ARCH/easybuild']
+
+def fulen = [name: 'fulen',
+             archs: [],
+             buildPath: '/dev/shm/$USER/easybuild/stage/build',
+             unusePath: '',
+             modulesProduction: '',
+             modulesUnuseProduction: '',
+             prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
 
 def kesch = [name: 'kesch',
              archs: [],
-             toolkits: ['gmvolf', 'CrayCCE', 'GCC', 'GCCcore', 'gmvapich2', 'foss'],
-             toolkitVersions: ['17.02'],
+             buildPath: '/dev/shm/$USER/easybuild/stage/build',
              unusePath: '/apps/escha/UES/generic/modulefiles:/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles:/apps/escha/UES/PrgEnv-cray-17.06/modulefiles:/apps/escha/UES/experimental/modulefiles',
              modulesProduction: '',
              modulesUnuseProduction: '',
@@ -27,8 +32,7 @@ def kesch = [name: 'kesch',
 
 def leone = [name: 'leone',
              archs: [],
-             toolkits: ['GCC', 'GCCcore', 'gmvapich2', 'gmvolf', 'foss'],
-             toolkitVersions: ['17.06'],
+             buildPath: '/dev/shm/$USER/easybuild/stage/build',
              unusePath: '/apps/leone/UES/PrgEnv-gnu-2016b',
              modulesProduction: '',
              modulesUnuseProduction: '',
@@ -37,11 +41,10 @@ def leone = [name: 'leone',
 
 def monch = [name: 'monch',
              archs: [],
-             toolkits: ['GCC', 'GCCcore', 'gmvapich2', 'gmvolf', 'foss'],
-             toolkitVersions: ['17.06'],
+             buildPath: '/dev/shm/$USER/easybuild/stage/build',
              unusePath: '/apps/monch/UES/jenkins/RH6.9-17.06/easybuild/modules/all/',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '$APPS/UES/jenkins/RH6.9-17.06/easybuild']
 
-return [daint, dom, kesch, leone, monch]
+return [daint, dom, fulen, kesch, leone, monch]

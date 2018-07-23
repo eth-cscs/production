@@ -6,7 +6,7 @@ def loginBash = '#!/bin/bash -l'
 def forcelist = params.forcelist
 def unusePath = params.unusePath
 stage('Initialization') {
-    node {
+    node('master') {
         checkout scm
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
@@ -16,7 +16,7 @@ stage('Initialization') {
 
 def machineConfigurations = []
 stage('Machine Force') {
-    node {
+    node('master') {
         def machinesToForce = machinesList.findAll({methods.machineCheck(forcelist, it.name)})
         for (mach in machinesToForce) {
             validArchs = methods.getMachineConfiguration(forcelist, mach.name, mach.archs as String[])
@@ -35,6 +35,7 @@ stage('Build Stage') {
         def machine = mach
         def architectures = machine.archs ? machine.archs : [""]
         def machineName = machine.name
+        def buildPath = machine.buildPath
         def machinePrefix = machine.prefixProduction
         def machineModulesUnuseProduction = machine.modulesUnuseProduction
         def machineModulesProduction = machine.modulesProduction
@@ -52,6 +53,9 @@ stage('Build Stage') {
                 def scratch = sh(returnStdout: true,
                                  script: """$loginBash
                                             echo \$SCRATCH""").trim()
+                def buildPathExpanded = sh(returnStdout: true,
+                                           script: """$loginBash
+                                                      echo $buildPath""").trim()
                 def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction" : ""
                 def moduleUse = machineModulesProduction ? "module use $machineModulesProduction" : ""
                 def command = """$loginBash
@@ -82,7 +86,8 @@ stage('Build Stage') {
                                  """
                 }
 
-                withEnv(["EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
+                withEnv(["EASYBUILD_BUILDPATH=$buildPathExpanded",
+                         "EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                          "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                     sh("""$command
                           if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
