@@ -20,7 +20,7 @@ patches = ['%(name)s-%(version)s_includes.patch']
 
 
 dependencies = [
-    ('Java', '1.8.0_181', '', True),
+    ('java/jdk1.8.0_51', EXTERNAL_MODULE)
     ('cray-python/2.7.13.1', EXTERNAL_MODULE),
 ]
 
