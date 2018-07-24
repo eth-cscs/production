@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), updated by Samuel Omlin (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'ANTLR'
@@ -21,7 +21,7 @@ patches = ['%(name)s-%(version)s_includes.patch']
 
 dependencies = [
     ('Java', '1.8.0_121', '', True),
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/2.7.13.1', EXTERNAL_MODULE),
 ]
 
 configopts = '--disable-examples --disable-csharp '
