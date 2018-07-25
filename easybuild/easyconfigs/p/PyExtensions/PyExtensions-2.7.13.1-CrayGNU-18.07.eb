@@ -37,9 +37,6 @@ exts_list = [
      ('pandas', '0.23.3', {
          'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
      }),
-     ('pygelf', '0.3.4', {
-         'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
-     }),
      ('virtualenv', '16.0.0', {
          'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv/'],
      }),

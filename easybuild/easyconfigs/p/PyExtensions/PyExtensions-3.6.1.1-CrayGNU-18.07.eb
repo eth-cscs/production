@@ -43,11 +43,6 @@ exts_list = [
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
     }),
-    ('pygelf', '0.3.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
-    }),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
