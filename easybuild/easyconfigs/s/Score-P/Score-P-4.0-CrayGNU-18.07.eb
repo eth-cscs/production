@@ -4,6 +4,7 @@ easyblock = 'ConfigureMake'
 name = 'Score-P'
 version = '4.0'
 
+
 homepage = 'http://www.score-p.org'
 description = """The Score-P measurement infrastructure is a highly scalable and
  easy-to-use tool suite for profiling, event tracing, and online analysis of HPC
@@ -17,16 +18,19 @@ checksums = [ 'f04478e0407d67eeb8c49c3c51d91e12' ]
 patches = [ '%(name)s-%(version)s-Cray.patch' ]
 
 dependencies = [
-    # ('libiberty', '5.3.0-scorep', '', True),
-    ('libunwind', '1.2.1', '', True), # REDO
-    ('CubeGUI', '4.4', '', True),     # #
-    ('CubeW', '4.4'),                 # with -fPIC
+    # libiberty was need in previous versions of scorep, keeping as a reminder
+    #('libiberty', '5.3.0-scorep', '', True),
+    ('libunwind', '1.2.1', '', True),
+    ('CubeGUI', '4.4', '', True),
+    ('CubeW', '4.4'),
     ('CubeLib', '4.4'),
-    ('OPARI2', '2.0.3', '', True),    # REDO
+    ('OPARI2', '2.0.3', '', True),
+    # will build with internal/scorep version of otf2
     #PR3501 ('OTF2', '2.0', '', True),
+    # will use papi from perftools-base
     #('papi/5.5.1.2', EXTERNAL_MODULE),
     ('SIONlib', '1.7.2'),
-    ('PDT', '3.25', '', True),        # REDO
+    ('PDT', '3.25', '', True),
     ('vampir','9.5.0', '', True),
 
 
@@ -34,7 +38,7 @@ dependencies = [
 ]
 
 configopts  = ' --with-machine-name=daint'
-#no: configopts  = ' --disable-gcc-plugin'
+#plugins are needed, do not use this option:configopts  = ' --disable-gcc-plugin'
 configopts += ' --enable-shared'
 configopts += ' --with-libpmi-include=/opt/cray/pe/pmi/default/include'
 configopts += ' --with-libpmi-lib=/opt/cray/pe/pmi/default/lib64'
@@ -42,13 +46,13 @@ configopts += ' --with-librca-include=/opt/cray/rca/default/include'
 configopts += ' --with-librca-lib=/opt/cray/rca/default/lib64'
 configopts += ' --with-papi-header=$PAT_BUILD_PAPI_BASEDIR/include'
 configopts += ' --with-papi-lib=$PAT_BUILD_PAPI_BASEDIR/lib64'
-#configopts += ' --with-otf2='
+#see previous comment: configopts += ' --with-otf2='
 configopts += ' --with-sionlib=$EBROOTSIONLIB'
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
 configopts += ' --with-opari2=$EBROOTOPARI2/bin'
 configopts += ' --with-cubew=$EBROOTCUBEW/bin'
 configopts += ' --with-cubelib=$EBROOTCUBELIB/bin'
-# --- cuda
+# --- no cuda on daint-mc
 
 
 
