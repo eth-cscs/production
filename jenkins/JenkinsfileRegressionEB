@@ -4,7 +4,7 @@ def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
 stage('Initialization') {
-    node {
+    node('master') {
         checkout scm
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
@@ -15,7 +15,7 @@ stage('Initialization') {
 def userMessage = params.customMessage
 def machineConfigurations = []
 stage('Machine Selection') {
-    node {
+    node('master') {
         def machinesToRun = machinesList.findAll({methods.machineCheck(userMessage, it.name)})
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
