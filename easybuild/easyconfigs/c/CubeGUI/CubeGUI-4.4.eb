@@ -14,7 +14,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = [ '0ade1cd54636e6c85efba1a4a6af0068' ]
-builddependencies = [('CubeLib', '4.4', '', True)]
+builddependencies = [('CubeLib', '4.4')]
 
 sanity_check_paths = {
     'files': ['bin/cube'],
