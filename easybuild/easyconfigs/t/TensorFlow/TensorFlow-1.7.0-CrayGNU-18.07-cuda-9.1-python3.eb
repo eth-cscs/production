@@ -41,7 +41,7 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-cuda-python%s-cscs-cuda-%s.patch' % (version, py_maj_ver, cudaver))]
+patches = [('tensorflow-v%s-python%s-cscs-cuda-%s.patch' % (version, py_maj_ver, cudaver))]
 
 with_configure = False
 
