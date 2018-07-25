@@ -1,0 +1,22 @@
+--- boost_1_66_0/tools/build/src/tools/python.jam.org	2018-07-16 16:57:50.814402857 +0200
++++ boost_1_66_0/tools/build/src/tools/python.jam	2018-07-16 16:58:43.454530148 +0200
+@@ -544,8 +544,18 @@
+     }
+     else
+     {
+-        includes ?= $(prefix)/include/python$(version) ;
+ 
++
++      if  not($(prefix)/include/python$(version)m)
++        {   
++           debug-message "Used include path: $(prefix)/include/python$(version)m" ;
++           includes ?= $(prefix)/include/python$(version)m ;
++        }
++        else
++        {
++           debug-message "Used include path: $(prefix)/include/python$(version)" ;
++           includes ?= $(prefix)/include/python$(version) ;
++        }
+         local lib = $(exec-prefix)/lib ;
+         libraries ?= $(lib)/python$(version)/config $(lib) ;
+     }

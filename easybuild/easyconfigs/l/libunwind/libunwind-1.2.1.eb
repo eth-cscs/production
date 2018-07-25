@@ -14,8 +14,8 @@ applications"""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-sources = [SOURCE_TAR_GZ]
-source_urls = [GNU_SAVANNAH_SOURCE]
+source_urls = ['https://github.com/libunwind/libunwind/releases/download/v%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
 
 sanity_check_paths = {
     'files': ["include/libunwind.h", "lib/libunwind.%s" % SHLIB_EXT],
