@@ -1,0 +1,21 @@
+# jgp (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'hello'
+version = '1.0'
+
+homepage = 'http://www.cscs.ch'
+description = """test"""
+
+toolchain = {'name': 'xlcxlf', 'version': '2017.01'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = [('ftp://ftp.cscs.ch/out/jgp/easybuild/hello-%(version)s.tar.gz')]
+checksums = [ 'bf03ae7f3d1868af9da38e24a242e653' ] # hello-1.0.tar.gz
+sanity_check_paths = {
+    'files': ['bin/hello'],
+    'dirs': [],
+}
+
+moduleclass = 'debugger'
+

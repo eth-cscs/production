@@ -60,10 +60,10 @@
  Scalasca-2.4-CrayIntel-18.07.eb
  Scalasca-2.4-CrayPGI-18.07.eb
  Scalasca-2.4-CrayCCE-18.07.eb
- Score-P-4.0-CrayGNU-18.07-cuda-9.1.eb
- Score-P-4.0-CrayGNU-18.07.eb                       --set-default-module
+ Score-P-4.0-CrayGNU-18.07-cuda-9.1.eb              --set-default-module
  Score-P-4.0-CrayIntel-18.07.eb
  Score-P-4.0-CrayPGI-18.07.eb
+ Score-P-4.0-CrayCCE-18.07.eb
  Spark-2.3.1.eb                                     --set-default-module
  Spark-2.3.1-CrayGNU-18.07-Hadoop-2.7.eb
  TensorFlow-1.7.0-CrayGNU-18.07-cuda-9.1-python3.eb --set-default-module
