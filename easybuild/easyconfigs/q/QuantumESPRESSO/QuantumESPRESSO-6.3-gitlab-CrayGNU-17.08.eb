@@ -1,0 +1,32 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO'
+version = '6.3'
+versionsuffix = '-gitlab'
+
+homepage = 'https://gitlab.com/QEF/q-e/'
+description = """Quantum ESPRESSO from the official repository"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+sources = ['https://gitlab.com/QEF/q-e/-/archive/' + 'qe-%(version)s/q-e-qe-%(version)s.tar.gz']
+
+preconfigopts = ' module list && ' 
+#preconfigopts += ' CC=cc FC=ftn  '
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack --disable-xml '
+configopts += ' FCFLAGS=-cpp F90FLAGS=-cpp '
+
+prebuildopts = ' cat make.inc && '
+buildopts = 'pw'
+preinstallopts = ' pwd && ls -la && mkdir -p %(installdir)s/bin && cp */pw.x -L %(installdir)s/bin/ ; '
+# a single make process is required, since parallel builds fail
+#maxparallel = 1
+
+sanity_check_paths = {
+      'files': ['bin/pw.x'],
+      'dirs': ['bin']
+}
+
+moduleclass = 'chem'
