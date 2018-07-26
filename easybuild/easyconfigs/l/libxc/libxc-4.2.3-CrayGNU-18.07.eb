@@ -12,7 +12,7 @@ toolchain = {'name': 'CrayGNU', 'version': '18.07'}
 toolchainopts = {'opt': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.tddft.org/programs/octopus/down.php?file=libxc/']
+source_urls = ['http://www.tddft.org/programs/octopus/down.php?file=libxc/%s' % version]
 
 configopts = 'FC="$F77" FCFLAGS="$FFLAGS" --enable-shared'
 
