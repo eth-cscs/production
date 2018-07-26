@@ -17,7 +17,7 @@ comp = (compname, compver)
 # compiler toolchain dependencies
 dependencies = [
     comp,
-    ('MVAPICH2', '2.2', '', ('GCC', '8.1.0-2.30') ),
+    ('MVAPICH2', '2.3', '', ('GCC', '8.1.0-2.30') ),
 ]
 
 moduleclass = 'toolchain'
