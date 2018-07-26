@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
-version = '1.9.3'
+version = '1.9.3' # Building fails with 1.9.4 for unkown reasons
 
 homepage = 'https://code.zmaw.de/projects/cdo'
 description = """CDO is a collection of command line Operators to manipulate
