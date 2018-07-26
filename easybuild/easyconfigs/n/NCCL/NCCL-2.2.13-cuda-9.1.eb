@@ -1,0 +1,35 @@
+# @author: gppezzi, marcelsc
+
+easyblock = 'Tarball'
+
+name = 'NCCL'
+version = '2.2.13'
+
+homepage = 'https://developer.nvidia.com/cudnn'
+description = """Nvidias deep neural network library."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+cudamajor = '9.1'
+cudaminor = '85_3.10-6.0.6.1_2.1__gf7a1bfb'
+cudaver = "%s.%s" % (cudamajor, cudaminor)
+
+versionsuffix = '-cuda-%s' % cudamajor
+
+dependencies = [
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
+
+sources = ['/apps/common/UES/easybuild/sources/n/NCCL/nccl_2.2.13-1+cuda9.0_x86_64.txz']
+
+# checksums = [
+#     'b29fd0cf7faf7b1b44acc4edeef6b802'
+# ]
+
+sanity_check_paths = {
+    'files': ['include/nccl.h', 'lib/libnccl.so.2.2.13', 'lib/libnccl_static.a'],
+    'dirs': ['include', 'lib'],
+}
+
+#moduleclass = 'numlib'
+

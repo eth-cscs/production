@@ -8,6 +8,7 @@
  CDO-1.9.4-CrayGNU-18.07.eb                         --set-default-module
  CDO-1.9.4-CrayIntel-18.07.eb
  CPMD-4.1-CrayIntel-18.07.eb                        --set-default-module
+ CubeGUI-4.4.eb                                     --set-default-module
  ddt-18.1.3-Suse-12.eb                              --set-default-module
  Extrae-3.5.4-CrayGNU-18.07.eb                      --set-default-module
  Extrae-3.5.4-CrayIntel-18.07.eb
@@ -49,12 +50,13 @@
  QuantumESPRESSO-6.3.0-CrayIntel-18.07.eb           --set-default-module
  R-3.5.1-CrayGNU-18.07.eb                           --set-default-module
  RDock-2013.1-CrayGNU-18.07.eb                      --set-default-module
- Scalasca-2.4-CrayGNU-18.07.eb                    --set-default-module
+ Scalasca-2.4-CrayGNU-18.07.eb                      --set-default-module
  Scalasca-2.4-CrayIntel-18.07.eb
  Scalasca-2.4-CrayPGI-18.07.eb
  Score-P-4.0-CrayGNU-18.07.eb                       --set-default-module
  Score-P-4.0-CrayIntel-18.07.eb
  Score-P-4.0-CrayPGI-18.07.eb
+ Score-P-4.0-CrayCCE-18.07.eb
  Spark-2.3.1.eb                                     --set-default-module
  Spark-2.3.1-CrayGNU-18.07-Hadoop-2.7.eb
  Understand-4.0.926.eb                              --set-default-module --hidden
