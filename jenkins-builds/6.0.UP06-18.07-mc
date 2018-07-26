@@ -30,6 +30,9 @@
  PyExtensions-2.7.13.1-CrayGNU-18.07.eb
  PyExtensions-3.6.1.1-CrayGNU-18.07.eb
  Scalasca-2.4-CrayGNU-18.07.eb                      --set-default-module
+ Scalasca-2.4-CrayIntel-18.07.eb                      
+ Scalasca-2.4-CrayPGI-18.07.eb                      
+ Scalasca-2.4-CrayCCE-18.07.eb                      
  Score-P-4.0-CrayGNU-18.07.eb                       --set-default-module
  Score-P-4.0-CrayIntel-18.07.eb
  Score-P-4.0-CrayPGI-18.07.eb
