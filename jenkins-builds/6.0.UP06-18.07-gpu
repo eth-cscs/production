@@ -32,6 +32,10 @@
  pycuda-2017.1.1-CrayGNU-18.07-python3-cuda-9.1.eb  --set-default-module
  PyExtensions-2.7.13.1-CrayGNU-18.07.eb
  PyExtensions-3.6.1.1-CrayGNU-18.07.eb
+ QuantumESPRESSO-6.3.0-CrayIntel-18.07.eb           --set-default-module
+ R-3.5.1-CrayGNU-18.07.eb                           --set-default-module
+ RDock-2013.1-CrayGNU-18.07.eb                      --set-default-module
+ Scalasca-2.4-CrayGNU-18.07.eb                      --set-default-module
  Score-P-4.0-CrayGNU-18.07-cuda-9.1.eb              --set-default-module
  Score-P-4.0-CrayIntel-18.07.eb
  Score-P-4.0-CrayPGI-18.07.eb
@@ -41,6 +45,6 @@
  Theano-1.0.2-CrayGNU-18.07-cuda-9.1-python2.eb
  Theano-1.0.2-CrayGNU-18.07-cuda-9.1-python3.eb     --set-default-module
  Understand-4.0.926.eb                              --set-default-module --hidden
- vampir-9.4.0.eb                                    --set-default-module
+ vampir-9.5.0.eb                                    --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
