@@ -3,16 +3,16 @@ easyblock = "PythonPackage"
 name = 'Theano'
 version = '1.0.2'
 
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '1.1'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '13.1'
 
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 cudamajor = '9.1'
 
-versionsuffix = '-python%s' % py_maj_ver
+versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
 
 homepage = 'http://deeplearning.net/software/theano'
 description = """Theano is a Python library that allows you to define,
