@@ -13,7 +13,7 @@
  Extrae-3.5.4-CrayGNU-18.07.eb                      --set-default-module
  Extrae-3.5.4-CrayIntel-18.07.eb
  GREASY-2.1-cscs-CrayGNU-18.07.eb                   --set-default-module
- GROMACS-2018.2-CrayGNU-18.07.eb                      --set-default-module
+ GROMACS-2018.2-CrayGNU-18.07.eb                    --set-default-module
  GSL-2.5-CrayGNU-18.07.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.07.eb
  GSL-2.5-CrayIntel-18.07.eb
@@ -21,7 +21,7 @@
  h5py-2.8.0-CrayGNU-18.07-python2-serial.eb
  h5py-2.8.0-CrayGNU-18.07-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-18.07-python3-serial.eb
- HDFView-3.0.0.eb                                    --set-default-module
+ HDFView-3.0.0.eb                                   --set-default-module
  LAMMPS-13Mar2018-CrayGNU-18.07.eb                  --set-default-module
  HPX-1.1.0-CrayGNU-18.07.eb                         --set-default-module
  IDL-8.5.1.eb                                       --set-default-module
@@ -48,8 +48,6 @@
  PyExtensions-2.7.13.1-CrayGNU-18.07.eb
  PyExtensions-3.6.1.1-CrayGNU-18.07.eb
  QuantumESPRESSO-6.3.0-CrayIntel-18.07.eb           --set-default-module
- R-3.5.1-CrayGNU-18.07.eb                           --set-default-module
- RDock-2013.1-CrayGNU-18.07.eb                      --set-default-module
  Scalasca-2.4-CrayGNU-18.07.eb                      --set-default-module
  Scalasca-2.4-CrayIntel-18.07.eb
  Scalasca-2.4-CrayPGI-18.07.eb
