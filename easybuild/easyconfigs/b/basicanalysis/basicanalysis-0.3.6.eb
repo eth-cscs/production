@@ -1,0 +1,45 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'basicanalysis'
+version = '0.3.6'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Automatic extraction of fundamental factors for Paraver traces."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://ftp.tools.bsc.es/%(name)s/']
+sources = ['%(name)s-%(version)s-src.tar.bz2']
+checksums = ['6909417304f18f5573bb9bcfa2d19941']
+keepsymlinks = True
+postinstallcmds = [
+    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
+    # that are binaries without having to rebuild Extrae:
+	#   ls -l easybuild/software/basicanalysis/
+ 	#       0.3.6
+	#       latest -> 0.3.6/
+	#   ls -l modules/all/basicanalysis/
+	#       0.3.6
+	#       latest -> 0.3.6
+    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
+    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
+    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
+]
+
+sanity_check_paths={
+    'files': ['modelfactors.py', 'cfgs/modelfactors.gp'],
+    'dirs': ['cfgs'],
+}
+
+dependencies = [
+    ('Paraver','4.7.2'),
+    ('Dimemas','5.3.6'),
+]
+
+modextrapaths = { 'PATH' : '.', }
+modextravars = { 
+    'PARAVER_HOME': '$::env(EBROOTPARAVER)',
+    'DIMEMAS_HOME': '$::env(EBROOTDIMEMAS)',
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'
