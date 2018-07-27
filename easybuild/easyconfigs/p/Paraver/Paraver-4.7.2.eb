@@ -1,0 +1,41 @@
+# jg (CSCS)
+easyblock = 'BinariesTarball'
+name = 'Paraver'
+version = '4.7.2'
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools/paraver'
+description = """A very powerful performance visualization and analysis tool
+based on traces that can be used to analyse any information that is expressed
+on its input trace format. Traces for parallel MPI, OpenMP and other programs
+can be genereated with Extrae."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://ftp.tools.bsc.es/wxparaver/']
+sources = ['wxparaver-%(version)s-Linux_x86_64.tar.bz2']
+checksums = ['00e2a6fa23bb58fad00f41c13cc8ac7e']
+postinstallcmds = [
+    'cp -a %(builddir)s/wxparaver-%(version)s-Linux_x86_64/* %(installdir)s/ && ' \
+    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
+    # that are binaries without having to rebuild Extrae:
+	#   ls -l easybuild/software/Paraver/
+ 	#       4.7.2
+	#       latest -> 4.7.2/
+	#   ls -l modules/all/Paraver/
+	#       4.7.2
+	#       latest -> 4.7.2
+    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
+    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
+    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
+]
+
+sanity_check_paths = {
+    'files': ['include/cfg.h', 'bin/wxparaver'],
+    'dirs': ['cfgs', ],
+}
+
+modextravars = { 
+    'EXTRAECFGDIR': '%(installdir)s/cfgs', 
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'
