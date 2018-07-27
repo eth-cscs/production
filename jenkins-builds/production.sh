@@ -132,6 +132,7 @@ if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
 fi
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
+
 # print EasyBuild configuration, module list, production file(s), list of builds
 echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
@@ -144,8 +145,19 @@ for ((i=0; i<${#eb_files[@]}; i++)); do
 done
 # module unuse PATH before building
 if [ -n "$unuse_path" ]; then
- echo "Unuse path: $unuse_path"
+ echo -e "\n Unuse path: $unuse_path \n"
  module unuse $unuse_path
+fi
+
+# checks dependency list using dry run
+dryrun=$(eb ${eb_files[@]} -Dr ${eb_args} 2>&1)
+if [[ "$dryrun" =~ "ERROR" ]]; then
+ echo -e "$dryrun" | grep "ERROR"
+ exit 1
+#else
+# # list of production builds including dependencies
+# echo -e " List of builds (including dependencies):"
+# echo "$dryrun" | awk '$1~/\*/{sub(/\$.*\//,"",$(NF-2)); print $(NF-2)}'
 fi
 
 # start time
