@@ -1,0 +1,41 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'folding'
+version = '1.3.2'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Combined instrumentation and sampling for instantaneous metric
+evolution with low overhead."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://ftp.tools.bsc.es/%(name)s']
+sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
+keepsymlinks = True
+checksums = ['620c65abf8b4970eae1ce625a0450082']
+postinstallcmds = [
+    # folding-1.3.2-Linux_x86_64.tar.bz2 was released with broken links (will be fixed in next release):
+    ' cd  %(installdir)s/lib64 ;ln -fs libparavertraceconfig.so.0 libparavertraceconfig.so; cd - && ' \
+    ' cd  %(installdir)s/lib64 ;ln -fs libparavertraceparser.so.0 libparavertraceparser.so; cd - && ' \
+    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
+    # that are binaries without having to rebuild Extrae:
+	#   ls -l easybuild/software/folding/
+ 	#       1.3.2
+	#       latest -> 1.3.2/
+	#   ls -l modules/all/folding/
+	#       1.3.2
+	#       latest -> 1.3.2
+    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
+    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
+    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
+]
+
+sanity_check_paths={
+    'files': ['bin/folding'],
+    'dirs': ['include', 'lib64']
+}
+
+modextravars = {
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'
