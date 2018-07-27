@@ -1,7 +1,7 @@
 # jg (CSCS)
 easyblock = "Tarball"
 name = 'basicanalysis'
-version = '0.3.2'
+version = '0.3.6'
 
 homepage = 'https://tools.bsc.es/downloads'
 description = """Automatic extraction of fundamental factors for Paraver traces."""
