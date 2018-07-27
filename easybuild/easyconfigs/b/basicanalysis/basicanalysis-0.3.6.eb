@@ -9,7 +9,7 @@ description = """Automatic extraction of fundamental factors for Paraver traces.
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://ftp.tools.bsc.es/%(name)s/']
 sources = ['%(name)s-%(version)s-src.tar.bz2']
-checksums = ['1bf7e77306f02720e6b1106a84ac418d']
+checksums = ['6909417304f18f5573bb9bcfa2d19941']
 keepsymlinks = True
 postinstallcmds = [
     # The following commands will allow greater flexibility in upgrading Extrae's dependencies
