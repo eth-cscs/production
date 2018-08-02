@@ -1,5 +1,5 @@
 #!/bin/bash
-usage() {                                                                    
+usage() {
     echo "Usage: $0 <daint-gpu|daint-mc>"
     exit 1;
 }
@@ -8,17 +8,13 @@ partition=$1
 if [ -z $partition ] ;then
     usage
 fi
+outlog=deps.log
 
-### jenkinslist=$productiondir/jenkins-builds/6.0.UP04-17.08-gpu
-### jenkinslist=$productiondir/jenkins-builds/daint-jg
-#jenkinslist=$productiondir/jenkins-builds/6.0.UP04-17.08-mc
-#jenkinslist=daint-jg
-productiondir=/apps/common/UES/sandbox/jgp/production.git
+productiondir=../..
 if [ "$partition" = "daint-gpu" ];then
     topdir=/apps/daint/UES/jenkins/6.0.UP04/gpu/easybuild
     MODULEPATH=$topdir/modules/all
     jenkinslist=$productiondir/jenkins-builds/6.0.UP04-17.08-gpu
-    #jenkinslist=./daint-jg
 fi
 
 if [ "$partition" = "daint-mc" ];then
@@ -27,8 +23,6 @@ if [ "$partition" = "daint-mc" ];then
     jenkinslist=$productiondir/jenkins-builds/6.0.UP04-17.08-mc
 fi
 
-# export MODULEPATH=/apps/escha/UES/easybuild/modulefiles
-# module load daint-gpu
 MODULEPATH=/apps/daint/UES/easybuild/modulefiles:$MODULEPATH
 MODULEPATH=/opt/cray/ari/modulefiles:$MODULEPATH
 MODULEPATH=/opt/cray/modulefiles:$MODULEPATH
@@ -39,10 +33,8 @@ MODULEPATH=/opt/cray/pe/perftools/6.5.1/modulefiles:$MODULEPATH
 MODULEPATH=/opt/modulefiles:$MODULEPATH
 export MODULEPATH
 
-# mflist=MVAPICH2/2.1_cuda_7.0_gdr
-# mflist=`module avail -t 2>&1 |cut -d/ -f1 |sort -u`
 installed_ebs=`find $topdir/software -name \*.eb 2> /dev/null`
-echo $installed_ebs |tr " " "\n" > log.jg
+echo $installed_ebs |tr " " "\n" > $outlog
 
 mflist=""
 jenkins_eblist=`grep -v \# $jenkinslist |awk '{print $1}' |tr -d " "` 
@@ -50,7 +42,6 @@ for jenkins_eb_file in $jenkins_eblist ;do
 
     jenkins_eb_file_fullpath=`echo $installed_ebs |tr " " "\n" |grep "$jenkins_eb_file"`
     mf=`echo $jenkins_eb_file_fullpath |sed "s-$topdir/software--" |awk -F/ '{print $2"/"$3}'`    
-    # /apps/daint/UES/jenkins/6.0.UP04/gpu/easybuild/software/Score-P/3.1-CrayGNU-17.08/easybuild/Score-P-3.1-CrayGNU-17.08.eb
 
     if [ $mf != "/" ] ;then    
         mflist="$mf $mflist"
@@ -61,8 +52,7 @@ for jenkins_eb_file in $jenkins_eblist ;do
         echo
     fi
 done
-# echo $mflist
-echo -e "\n $mflist" >> log.jg
+echo -e "\n $mflist" >> $outlog
 #echo "# --- step1 done"
 #exit 0
 
@@ -77,62 +67,36 @@ echo -e "\n $mflist" >> log.jg
 outf0=eff0
 outf1=eff1
 outf2=eff2
+tmp0=eff.level0
 echo "digraph $HOSTNAME {" > $0.dot
 
-echo > eff.level0
+echo > $tmp0
 for mf in $mflist ;do
-    echo "# Processing $mf ..." |tee -a log.jg
+    echo "# Processing $mf ..." |tee -a $outlog
     module show $mf > $outf0 2>&1 
     grep -q "ERROR:105" $outf0 ;rc=$?
     mfn=`echo $mf |cut -d/ -f1`
-#old     if [ $rc -eq 0 ] ;then
-#old         # mf is probably hidden => Unable to locate a modulefile
-#old         mfv=`echo $mf |cut -d/ -f2`
-#old         module show $mfn/.$mfv > $outf0 2>&1
-#old     fi
-    #echo $mfn >> eff.level0
-    echo $mf >> eff.level0
+    echo $mf >> $tmp0
     listofdeps0=`grep " load " $outf0 |awk -Fload '{print $2}' |tr -d " "`
     if [ -n "$listofdeps0" ] ;then
 
         for deps0 in $listofdeps0 ;do 
-            #mfmv=`echo $mf |cut -d/ -f1`
-            #dep0mv=`echo $deps0 |cut -d/ -f1`
-            #echo "\"$mfmv\" -> \"$dep0mv\";"
             echo "\"$mf\" -> \"$deps0\";"
 
             # --- sublevel1
             module show $deps0 > $outf1 2>&1
             grep -q "ERROR:105" $outf1 ;rc=$?
-#old             if [ $rc -eq 0 ] ;then
-#old                 # mf is probably hidden => Unable to locate a modulefile
-#old                 mfn=`echo $deps0 |cut -d/ -f1`
-#old                 mfv=`echo $deps0 |cut -d/ -f2`
-#old                 module show $mfn/.$mfv > $outf1 2>&1
-#old             fi
             listofdeps1=`grep " load " $outf1 |awk -Fload '{print $2}' |tr -d " "`
             if [ -n "$listofdeps1" ] ;then
                 for deps1 in $listofdeps1 ;do
-                    #dep0mv=`echo $deps0 |cut -d/ -f1`
-                    #dep1mv=`echo $deps1 |cut -d/ -f1`
-                    #echo "\"$dep0mv\" -> \"$dep1mv\";"
                     echo "\"$deps0\" -> \"$deps1\";"
 
                     # --- sublevel2
                     module show $deps1 > $outf2 2>&1
                     grep -q "ERROR:105" $outf2 ;rc=$?
-#old                     if [ $rc -eq 0 ] ;then
-#old                         # mf is probably hidden => Unable to locate a modulefile
-#old                         mfn=`echo $deps1 |cut -d/ -f1`
-#old                         mfv=`echo $deps1 |cut -d/ -f2`
-#old                         module show $mfn/.$mfv > $outf2 2>&1
-#old                     fi
                     listofdeps2=`grep " load " $outf2 |awk -Fload '{print $2}' |tr -d " "`
                     if [ -n "$listofdeps2" ] ;then
                         for deps2 in $listofdeps2 ;do
-                            #dep1mv=`echo $deps1 |cut -d/ -f1`
-                            #dep2mv=`echo $deps2 |cut -d/ -f1`
-                            #echo "\"$dep1mv\" -> \"$dep2mv\";"
                             echo "\"$deps1\" -> \"$deps2\";"
                         done
                     fi # --- sublevel2
@@ -157,7 +121,7 @@ echo '------------------------------------------------------------------'
 
 #set -x
 # iterate through the list of software (=level0)
-for l0 in `sort -u eff.level0` ;do
+for l0 in `sort -u $tmp0` ;do
 
 #echo continue;read
     #echo "Listing l0=$l0 ..."
