@@ -1,0 +1,35 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'COSMO_dycore'
+version = '1596740a01fff0c3ab036fda09da49d137830b62'
+versionsuffix = '-float'
+
+homepage = 'https://github.com/MeteoSwiss-APN/cosmo-pompa'
+description = """cosmo-pompa"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'verbose': False}
+
+# can't clone private repo github.com/MeteoSwiss-APN/cosmo-pompa.git (+ no official release)
+sources = [
+{'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(name)s-%(version)s.tar.gz'}
+]
+
+builddependencies = [ ('CMake', '3.11.4', '', True), ]
+
+dependencies = [
+    ('STELLA', '1.05.00', '%(versionsuffix)s'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+srcdir = "../dycore"
+configopts  = "-DCMAKE_BUILD_TYPE=Release "
+configopts += "-DSINGLEPRECISION=ON "
+configopts += "-DCUDA_BACKEND=ON "
+configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
+
+separate_build_dir = True
+
+moduleclass = 'devel'
+
