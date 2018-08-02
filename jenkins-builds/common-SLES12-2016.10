@@ -13,7 +13,7 @@
  Lmod-7.1.eb
  lynx-2.8.8rel.2.eb
  M4-1.4.17.eb
- matlab-r2017b.eb    --hidden
+ matlab-r2017b.eb
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
