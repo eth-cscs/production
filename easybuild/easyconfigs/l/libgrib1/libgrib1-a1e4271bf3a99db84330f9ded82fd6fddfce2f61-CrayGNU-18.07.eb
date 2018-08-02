@@ -1,3 +1,4 @@
+# jg (cscs)
 easyblock = "ConfigureMake"
 
 name = 'libgrib1'

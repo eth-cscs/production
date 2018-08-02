@@ -1,3 +1,4 @@
+# jg (cscs)
 easyblock = 'CMakeMake'
 
 name = 'STELLA'
