@@ -1,0 +1,24 @@
+easyblock = "ConfigureMake"
+
+name = 'libgrib1'
+version = 'a1e4271bf3a99db84330f9ded82fd6fddfce2f61'
+
+homepage = 'https://github.com/C2SM-RCM/libgrib1/tree/master/libgrib1/trunk'
+description = """libgrib1"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.07'}
+# can't clone private c2sm repo (+ no official release)
+sources = ['/apps/common/UES/easybuild/sources/l/%(name)s/%(name)s-%(version)s.tar.gz']
+
+dependencies = [('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),]
+skipsteps = ['configure']
+prebuildopts = 'cd source ; ln -fs Makefile.daint.gnu Makefile &&'
+preinstallopts = 'cd source && '
+installopts = ' LIBDIR=%(installdir)s'
+
+sanity_check_paths={
+    'files': ['libgrib1_gnu.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
