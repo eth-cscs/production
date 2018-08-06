@@ -1,0 +1,40 @@
+# Contributed by Luca Marsella and Victor Holanda Rusu (CSCS)
+easyblock = 'MakeCp'
+
+name = 'LAMMPS'
+version = '16Mar2018'
+release = 'stable_%s' % version
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'gmvolf', 'version': '18.05'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+source_urls = ['https://github.com/lammps/lammps/archive']
+sources = ['%s.tar.gz' % (release)]
+
+prebuildopts = ' cd ./src && '
+prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-user-misc && '
+prebuildopts += ' make no-voronoi no-reax no-poems no-mscg no-meam no-latte no-kokkos no-kim no-gpu && '
+prebuildopts += ' make package-update && '
+# go to folder ./lib/reax and make package reax
+prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
+# create Makefile.omp and correct Makefile.mpi
+prebuildopts += ' sed -e \'s/mpicxx/mpicxx -fopenmp/\' ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
+prebuildopts += ' cp ../lib/python/Makefile.lammps.python3 ../lib/python/Makefile.lammps && '
+buildopts = [ ' mpi ', ' omp ' ]
+
+dependencies = [
+    ('FFTW', '3.3.7'),
+    ('Python', '3.6.5'),
+]
+
+files_to_copy = [(['src/lmp*'], "bin")]
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi','bin/lmp_omp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
