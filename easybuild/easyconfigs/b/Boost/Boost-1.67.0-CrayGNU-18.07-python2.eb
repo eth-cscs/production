@@ -22,11 +22,14 @@ dependencies = [
     ('cray-python/2.7.13.1', EXTERNAL_MODULE),
 ]
 
-postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
+# CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
+#
+# postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
+# 
+# modtclfooter = """
+#     setenv PE_PKGCONFIG_LIBS boost_python27
+# """
 
-modtclfooter = """
-    setenv PE_PKGCONFIG_LIBS boost_python27
-"""
 #
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
