@@ -14,7 +14,8 @@
 name = 'GROMACS'
 version = "2018"
 cudaversion = '8.0'
-versionsuffix = '-PLUMED-2.4.2-cuda-%s' % cudaversion
+plumedversion = '2.4.2'
+versionsuffix = '-PLUMED-%s-cuda-%s' % (plumedversion, cudaversion)
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
@@ -39,7 +40,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('PLUMED', '2.4.2'),
+    ('PLUMED', '%s' % plumedversion),
 ]
 
 moduleclass = 'bio'
