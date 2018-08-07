@@ -11,6 +11,11 @@ parallel a list of different tasks."""
 toolchain = {'name': 'CrayGNU', 'version': '18.07'}
 toolchainopts = {'opt': True, 'pic': True}
 
+#
+# GREASY source code modified by us in order to properly use SLURM scheduler
+# The original code was taken from https://github.com/jonarbo/GREASY 
+# This version contains the current constraint options to use the MC partition on Piz Daint
+#
 sources = ['/apps/common/easybuild/sources/g/GREASY/greasy-%(version)s-mc.tar.gz']
 
 preconfigopts = './autogen.sh && '
