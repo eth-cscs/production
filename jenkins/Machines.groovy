@@ -12,7 +12,7 @@ def dom = [name: 'dom',
            unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/6.0.UP06/ARCH/easybuild']
+           prefixProduction: '$APPS/UES/jenkins/6.0.UP07/ARCH/easybuild']
 
 def fulen = [name: 'fulen',
              archs: [],
