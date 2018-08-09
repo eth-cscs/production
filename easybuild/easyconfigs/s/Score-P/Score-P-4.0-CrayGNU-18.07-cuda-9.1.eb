@@ -20,8 +20,8 @@ dependencies = [
     # libiberty was need in previous versions of scorep, keeping as a reminder
     #('libiberty', '5.3.0-scorep', '', True),
     ('libunwind', '1.2.1', '', True),
-    ('CubeGUI', '4.4', '', True),   
-    ('CubeW', '4.4'),              
+    ('CubeGUI', '4.4', '', True),
+    ('CubeW', '4.4'),
     ('CubeLib', '4.4'),
     ('OPARI2', '2.0.3', '', True),
     # will build with internal/scorep version of otf2
