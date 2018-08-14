@@ -114,6 +114,7 @@ fi
 # create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
 if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
  mkdir -p "$EASYBUILD_PREFIX/modules/all"
+ mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
  ln -s /apps/common/UES/jenkins/easybuild/modules/all/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
 fi
 
