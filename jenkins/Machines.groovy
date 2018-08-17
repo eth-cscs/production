@@ -47,4 +47,4 @@ def monch = [name: 'monch',
              modulesUnuseProduction: '',
              prefixProduction: '$APPS/UES/jenkins/RH6.9-17.06/easybuild']
 
-return [daint, dom, fulen, kesch, leone, monch]
+return [daint, dom, kesch, leone, monch]
