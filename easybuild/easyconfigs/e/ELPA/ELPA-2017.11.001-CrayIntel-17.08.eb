@@ -1,0 +1,33 @@
+#http://elpa.mpcdf.mpg.de/html/Releases/2017.11.001/elpa-2017.11.001.tar.gz
+
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2017.11.001'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = """Eigenvalue SoLvers for Petaflop-Applications ."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['http://elpa.mpcdf.mpg.de/html/Releases/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts  = ' module unload cray-libsci && module load gcc/5.3.0 && module list &&' 
+preconfigopts += ' CC=cc FC=ftn CPP=cpp FCPP=cpp '
+preconfigopts += ' LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl" '
+preconfigopts += ' FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
+
+configopts = '--enable-openmp --enable-static'
+
+prebuildopts = ' module unload cray-libsci && module load gcc/5.3.0 && '
+
+#maxparallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.%s' % SHLIB_EXT],
+    'dirs': ['bin', 'include/elpa_openmp-%(version)s/elpa', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig']
+}
+
+moduleclass = 'math'

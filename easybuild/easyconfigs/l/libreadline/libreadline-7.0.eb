@@ -19,7 +19,7 @@ sources = ['readline-%(version)s.tar.gz']
 # unset EBROOTLIBREADLINE
 
 # for the termcap symbols, use EB ncurses
-dependencies = [('ncurses', '6.0')]
+dependencies = [('ncurses', '6.1')]
 preconfigopts = "LDFLAGS='-lncurses'"
 
 sanity_check_paths = {

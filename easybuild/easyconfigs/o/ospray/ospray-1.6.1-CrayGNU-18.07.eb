@@ -1,0 +1,20 @@
+easyblock = "Tarball"
+
+name = 'ospray'
+version = '1.6.1'
+
+homepage = 'https://github.com/ospray'
+description = """An Open, Scalable, Parallel, Ray Tracing Based Rendering
+Engine for High-Fidelity Visualization"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.07'}
+
+sources = ['ospray-%(version)s.x86_64.linux.tar.gz']
+source_urls = ['https://github.com/ospray/ospray/releases/download/v%(version)s/']
+
+sanity_check_paths={
+    'files': [],
+    'dirs': ['include', 'lib']
+}
+
+moduleclass = 'devel'

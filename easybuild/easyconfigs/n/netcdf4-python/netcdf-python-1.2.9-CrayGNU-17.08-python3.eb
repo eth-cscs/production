@@ -1,6 +1,10 @@
-#
+# contributed by Luca Marsella (CSCS)
 name = 'netcdf-python'
 version = '1.2.9'
+req_py_majver = 3
+req_py_minver = 6
+pyver = '%s.%s' % (req_py_majver, req_py_minver)
+versionsuffix = '-python%s' % req_py_majver
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
 description = """Python/numpy interface to netCDF."""
@@ -11,23 +15,15 @@ toolchainopts = {'verbose': False}
 source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
 sources = ['netCDF4-%(version)s.tar.gz']
 
-req_py_majver = 3
-req_py_minver = 5
-
-pythonver = '%s.%s' % (req_py_majver, req_py_minver)
-versionsuffix = '-python%s' % req_py_majver
-
 dependencies = [
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/%s.1.1' % pyver, EXTERNAL_MODULE),
     ('netCDF-Fortran', '4.4.4'),
-    #('cray-hdf5/1.8.16', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
 
 sanity_check_paths = {
     'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
-    'dirs': ['lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': '%s.%s' % (req_py_majver, req_py_minver) }],
+    'dirs': ['lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': '%s' % pyver }],
 }
 
 moduleclass = 'data'
-

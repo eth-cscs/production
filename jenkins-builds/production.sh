@@ -95,20 +95,6 @@ else
  system=${HOSTNAME%%[0-9]*}
 fi
 
-# --- SYSTEM SPECIFIC SETUP ---
-if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
-# architecture (Dom and Piz Daint only)
-    if [ -z "$ARCH" ]; then
-        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
-        usage
-    else
-        module purge
-        module load craype craype-network-aries modules perftools-base ugni
-        module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
-    fi
-fi
-
 # --- COMMON SETUP ---
 # xalt table update for Piz Daint
 if [ -z "$update_xalt_table" ]; then
@@ -128,10 +114,28 @@ fi
 # create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
 if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
  mkdir -p "$EASYBUILD_PREFIX/modules/all"
+ mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
  ln -s /apps/common/UES/jenkins/easybuild/modules/all/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
 fi
+
+# --- SYSTEM SPECIFIC SETUP ---
+if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# architecture (Dom and Piz Daint only)
+    if [ -z "$ARCH" ]; then
+        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
+        usage
+    else
+        module purge
+        module load craype craype-network-aries modules perftools-base ugni
+        module load daint-${ARCH}
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
+    fi
+fi
+
+# --- BUILD ---
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
+
 # print EasyBuild configuration, module list, production file(s), list of builds
 echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
@@ -144,8 +148,19 @@ for ((i=0; i<${#eb_files[@]}; i++)); do
 done
 # module unuse PATH before building
 if [ -n "$unuse_path" ]; then
- echo "Unuse path: $unuse_path"
+ echo -e "\n Unuse path: $unuse_path \n"
  module unuse $unuse_path
+fi
+
+# checks dependency list using dry run
+dryrun=$(eb ${eb_files[@]} -Dr ${eb_args} 2>&1)
+if [[ "$dryrun" =~ "ERROR" ]]; then
+ echo -e "$dryrun" | grep "ERROR"
+ exit 1
+#else
+# # list of production builds including dependencies
+# echo -e " List of builds (including dependencies):"
+# echo "$dryrun" | awk '$1~/\*/{sub(/\$.*\//,"",$(NF-2)); print $(NF-2)}'
 fi
 
 # start time

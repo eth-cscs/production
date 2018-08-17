@@ -6,7 +6,6 @@
  PrgEnv-gnu-monch-gmvolf-17.06.eb
  Python-2.7.12-gmvolf-17.06.eb
  Python-3.5.3-gmvolf-17.06.eb
- reframe-2.11.eb                            --set-default-module
- reframe-2.12-dev1.eb
+ reframe-2.13.eb                            --set-default-module
  Vim-8.0.eb                                 --set-default-module
  vampir-9.4.0.eb                            --set-default-module

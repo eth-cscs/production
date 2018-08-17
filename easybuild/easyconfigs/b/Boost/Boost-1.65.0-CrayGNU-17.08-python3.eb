@@ -18,7 +18,7 @@ configopts  = ' --with-python=$EBROOTPYTHON/bin/python3'
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/3.6.1.1', EXTERNAL_MODULE),
 ]
 
 patches = ['Boost-1.65.0_python3.patch']
