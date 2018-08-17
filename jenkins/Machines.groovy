@@ -14,6 +14,7 @@ def dom = [name: 'dom',
            modulesUnuseProduction: '',
            prefixProduction: '$APPS/UES/jenkins/6.0.UP07/ARCH/easybuild']
 
+/*
 def fulen = [name: 'fulen',
              archs: [],
              buildPath: '/dev/shm/$USER/easybuild/stage/build',
@@ -21,6 +22,7 @@ def fulen = [name: 'fulen',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
+*/
 
 def kesch = [name: 'kesch',
              archs: [],
