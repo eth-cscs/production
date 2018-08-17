@@ -14,7 +14,6 @@ def dom = [name: 'dom',
            modulesUnuseProduction: '',
            prefixProduction: '$APPS/UES/jenkins/6.0.UP07/ARCH/easybuild']
 
-/*
 def fulen = [name: 'fulen',
              archs: [],
              buildPath: '/dev/shm/$USER/easybuild/stage/build',
@@ -22,7 +21,6 @@ def fulen = [name: 'fulen',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
-*/
 
 def kesch = [name: 'kesch',
              archs: [],
@@ -49,4 +47,4 @@ def monch = [name: 'monch',
              modulesUnuseProduction: '',
              prefixProduction: '$APPS/UES/jenkins/RH6.9-17.06/easybuild']
 
-return [daint, dom, fulen, kesch, leone, monch]
+return [daint, dom, kesch, leone, monch]
