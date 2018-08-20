@@ -1,7 +1,7 @@
 easyblock = 'PythonPackage'
 
 name = 'PyTorch'
-version = '0.4.0'
+version = '0.4.1'
 
 req_py_majver = 3
 req_py_minver = 6
@@ -29,7 +29,7 @@ prebuildopts += ' CUDA_CUDART_LIBRARY=/opt/nvidia/cudatoolkit9.1/9.1.85_3.18-6.0
 
 pytorchdir = 'pytorch-%(version)s'
 extract_cmd_pattern = 'tar -C %s/%s --strip-components=1 -xf %%s'
-copy_catch_hpp = 'mkdir %s/aten/src/ATen/utils/catch/single_include; cp %%s %s/aten/src/ATen/utils/catch/single_include'
+#copy_catch_hpp = 'mkdir %s/aten/src/ATen/utils/catch/single_include; cp %%s %s/aten/src/ATen/utils/catch/single_include'
 
 source_urls = [
     'https://github.com/pytorch/pytorch/archive',
@@ -68,22 +68,22 @@ sources = [
         'filename': '6a00cbc4a9b8e68b71caf7f774b3f9c753ae84d5.tar.gz',
         'extract_cmd': extract_cmd_pattern % (pytorchdir, 'third_party/pybind11/tools/clang'),
     },
-    {
-        'filename': 'v2.2.2.tar.gz',
-        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/utils/catch'),
-    },
-    {
-        'filename': '2018_U3.tar.gz',
-        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/cpu/tbb/tbb_remote'),
-    },
-    {
-        'filename': 'd0222b47948234cc01983243a2e0ede018f97f3a.tar.gz',
-        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/cpu/cpuinfo'),
-    },
-    {
-        'filename': 'catch.hpp',
-        'extract_cmd': copy_catch_hpp % (pytorchdir, pytorchdir),
-    },
+#    {
+#        'filename': 'v2.2.2.tar.gz',
+#        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/utils/catch'),
+#    },
+#    {
+#        'filename': '2018_U3.tar.gz',
+#        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/cpu/tbb/tbb_remote'),
+#    },
+#    {
+#        'filename': 'd0222b47948234cc01983243a2e0ede018f97f3a.tar.gz',
+#        'extract_cmd': extract_cmd_pattern % (pytorchdir, 'aten/src/ATen/cpu/cpuinfo'),
+#    },
+#    {
+#        'filename': 'catch.hpp',
+#        'extract_cmd': copy_catch_hpp % (pytorchdir, pytorchdir),
+#    },
 ]
 
 options = {'modulename': 'torch'}
