@@ -28,7 +28,7 @@ common_prebuildopts = './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &
 
 prebuildopts = [ common_prebuildopts, ]
 
-files_to_copy = [(['bin/cpmd*.x'],'bin')]
+files_to_copy = [(['bin/cpmd.x'],'bin')]
 
 sanity_check_paths = {
     'files': ['bin/cpmd.x'],
