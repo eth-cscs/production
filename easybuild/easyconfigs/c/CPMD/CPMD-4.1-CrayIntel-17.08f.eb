@@ -9,6 +9,10 @@ description = """CPMD The CPMD code is a parallelized plane wave /
 pseudopotential implementation of Density Functional Theory, particularly
 designed for ab-initio molecular dynamics. """
 
+whatis = 'CPMD built with a more recent version of the intel compiler and the \
+          mpi library to fix a possible bug which is still under investigation\
+          and might affect the default version'
+
 toolchain = {'name': 'CrayIntel', 'version': '17.08f'}
 toolchainopts = {'usempi': True}
 
