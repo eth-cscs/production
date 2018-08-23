@@ -17,7 +17,7 @@ def dom = [name: 'dom',
 def fulen = [name: 'fulen',
              archs: [],
              buildPath: '/dev/shm/$USER/easybuild/stage/build',
-             unusePath: '',
+             unusePath: '/apps/fulen/UES/jenkins/RH7.4/easybuild/modules/all',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
