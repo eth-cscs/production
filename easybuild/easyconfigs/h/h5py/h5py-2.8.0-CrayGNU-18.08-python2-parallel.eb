@@ -6,7 +6,7 @@ version = '2.8.0'
 req_py_majver = '2'
 req_py_minver = '7'
 pyver = '%s.%s' % (req_py_majver, req_py_minver)
-py_rev_ver = '13.1'
+py_rev_ver = '15.1'
 versionsuffix = '-python%s-parallel' % req_py_majver
 
 homepage = 'http://www.h5py.org/'

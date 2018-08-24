@@ -5,7 +5,7 @@ version = '0.6.1'
 
 py_maj_ver = '2'
 py_min_ver = '7'
-py_rev_ver = '13.1'
+py_rev_ver = '15.1'
 
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
