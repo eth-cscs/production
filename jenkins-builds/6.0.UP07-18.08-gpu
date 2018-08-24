@@ -29,8 +29,8 @@
  Python-bare-3.6.2.eb                               --hidden
  pycuda-2017.1.1-CrayGNU-18.08-python2-cuda-9.1.eb
  pycuda-2017.1.1-CrayGNU-18.08-python3-cuda-9.1.eb  --set-default-module
- PyExtensions-2.7.13.1-CrayGNU-18.08.eb
- PyExtensions-3.6.1.1-CrayGNU-18.08.eb
+ PyExtensions-2.7.15.1-CrayGNU-18.08.eb
+ PyExtensions-3.6.5.1-CrayGNU-18.08.eb
  Scalasca-2.4-CrayGNU-18.08.eb                      --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Scalasca-2.4-CrayIntel-18.08.eb                    --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Scalasca-2.4-CrayPGI-18.08.eb                      --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
