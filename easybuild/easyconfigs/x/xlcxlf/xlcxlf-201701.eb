@@ -1,0 +1,18 @@
+easyblock = 'Toolchain'
+
+name = 'xlcxlf'
+version = '2017.01'
+
+homepage = 'http://www-03.ibm.com/software/products/en/xlcpp-linux'
+description = """IBM XL C/C++/Fortran toolchain for Linux on Power, V13.1.5
+(Community Edition)\n"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    ('xlc/13.1.5', EXTERNAL_MODULE),
+    ('xlf/15.1.5', EXTERNAL_MODULE),
+
+]
+
+moduleclass = 'toolchain'
