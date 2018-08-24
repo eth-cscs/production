@@ -6,7 +6,7 @@ version = '17.12'
 homepage = 'https://pubs.cray.com/discover'
 description = """Toolchain using Cray compiler wrapper, using PrgEnv-intel module (PE release: December 2017).\n"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 dependencies = [
     # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
