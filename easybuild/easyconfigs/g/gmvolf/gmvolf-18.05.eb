@@ -26,7 +26,7 @@ comp_mpi_tc = (comp_mpi_tc_name, version)
 # we need GCC and MVAPICH2 as explicit dependencies instead of gmvapivh2 toolchain
 dependencies = [
     comp,
-    ('MVAPICH2', '2.2', '', ('GCC', '8.1.0-2.30') ),
+    ('MVAPICH2', '2.3', '', ('GCC', '8.1.0-2.30') ),
     (blaslib, blasver, '', ('GCC', '8.1.0-2.30') ),
     ('FFTW', '3.3.7', '', comp_mpi_tc),
     ('ScaLAPACK', '2.0.2', '-%s' % blas, comp_mpi_tc)
