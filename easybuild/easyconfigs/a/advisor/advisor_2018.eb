@@ -1,0 +1,29 @@
+# jg (CSCS)
+easyblock = 'Bundle'
+name = 'advisor'
+version = '2018'
+#versionsuffix = '.2.0.551025'
+
+homepage = 'https://software.intel.com/en-us/intel-advisor-xe'
+description = """Intel Advisor XE is Intel's Vectorization Optimization and
+Thread Prototyping tool: 
+ - Vectorize & thread code for maximum performance
+ - Easy workflow + data + tips = faster code faster
+ - Prioritize, Prototype & Predict performance gain."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+postinstallcmds = [ 'ln -fs /opt/intel/%(name)s_%(version)s/* %(installdir)s' ]
+
+modextrapaths = {
+    'PATH': 'bin64',
+    'PYTHONPATH': 'pythonapi',
+}
+
+modextravars = {
+    'ADVISOR_2018_DIR': '%(installdir)s/',
+    'ADVISOR_DOC': '%(installdir)s/documentation/en',
+    'ADVISOR_SAMPLES': '%(installdir)s/samples/en',
+}
+
+moduleclass = 'tools'
+
