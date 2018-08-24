@@ -9,7 +9,9 @@ description = """Intel VTune Amplifier XE is Intel's performance profiler for
 C, C++, Fortran, Assembly and Python."""
 
 toolchain = {'name': 'dummy', 'version': ''}
-postinstallcmds = [ 'ln -fs /opt/intel/%(name)s_%(version)s/* %(installdir)s' ]
+postinstallcmds = [ 'cp -a /opt/intel/%(name)s_%(version)s/* %(installdir)s' ]
+# ln instead of cp would save some space but will fail at the permissions step
+# that can not be skipped.
 
 modextrapaths = {
     'PATH': 'bin64',

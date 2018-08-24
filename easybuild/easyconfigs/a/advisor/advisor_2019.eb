@@ -13,7 +13,9 @@ Thread Prototyping tool:
  - Prioritize, Prototype & Predict performance gain."""
 
 toolchain = {'name': 'dummy', 'version': ''}
-postinstallcmds = [ 'ln -fs /apps/common/UES/intel/%(version)s/%(name)s_%(version)s/* %(installdir)s' ]
+postinstallcmds = [ 'cp -a /apps/common/UES/intel/%(version)s/%(name)s_%(version)s/* %(installdir)s' ]
+# ln instead of cp would save some space but will fail at the permissions step
+# that can not be skipped.
 
 modextrapaths = {
     'PATH': 'bin64',
