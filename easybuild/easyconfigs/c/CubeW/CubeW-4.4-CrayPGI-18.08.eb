@@ -1,0 +1,22 @@
+easyblock = 'ConfigureMake'
+name = 'CubeW'
+version = '4.4'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Cube Writer Library is a high-performance library for
+writing a multi-dimensional performance space consisting of the dimensions (i)
+performance metric, (ii) call path, and (iii) system resource."""
+
+toolchain = {'name': 'CrayPGI', 'version': '18.08'}
+toolchainopts = {'verbose': False, 'pic': True}
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = [ 'e9beb140719c2ad3d971e1efb99e0916' ]
+
+sanity_check_paths = {
+    'files': ['bin/cubew-config', 'lib/libcube4w.a'],
+    'dirs': ['include/cubew'],
+}
+
+moduleclass = 'perf'
