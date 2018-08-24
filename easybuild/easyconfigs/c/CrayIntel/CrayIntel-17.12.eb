@@ -4,7 +4,7 @@ name = 'CrayIntel'
 version = '17.12'
 
 homepage = 'https://pubs.cray.com/discover'
-description = """Toolchain using Cray compiler wrapper, using PrgEnv-intel module (PE release: August 2017).\n"""
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-intel module (PE release: December 2017).\n"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
