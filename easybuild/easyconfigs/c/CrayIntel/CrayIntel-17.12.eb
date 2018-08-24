@@ -19,4 +19,8 @@ dependencies = [
     ('pmi/5.0.13', EXTERNAL_MODULE),
 ]
 
+modextravars = {
+        'LD_LIBRARY_PATH' : '$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'
+}
+
 moduleclass = 'toolchain'
