@@ -43,7 +43,7 @@ configopts += '-DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DPARAVIEW_ENA
 configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,${EBROOTLLVM}/lib -L${EBROOTLLVM}/lib" '
 configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 -DPARAVIEW_USE_MPI:BOOL=ON '
 configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON '
-configopts += '-DVTK_USE_SYSTEM_HDF5:BOOL=OFF '
+configopts += '-DVTK_USE_SYSTEM_HDF5:BOOL=ON '
 configopts += '-DPARAVIEW_USE_VTKM:BOOL=OFF '
 # use TBB for on-the-node parallelism
 configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
