@@ -1,4 +1,6 @@
  abcpy-0.5.1-CrayGNU-18.08-python3.eb               --set-default-module
+ advisor_2018.eb                                    --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ advisor_2019.eb                                                         --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Boost-1.67.0-CrayGNU-18.08-python2.eb
  Boost-1.67.0-CrayGNU-18.08-python3.eb              --set-default-module
  Boost-1.67.0-CrayGNU-18.08.eb
@@ -12,6 +14,8 @@
  h5py-2.8.0-CrayGNU-18.08-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-18.08-python3-serial.eb
  IDL-8.5.1.eb                                       --set-default-module
+ inspector_2018.eb                                  --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ inspector_2019.eb                                                       --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  IPM-2.0.6-CrayCCE-18.08.eb                         --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  IPM-2.0.6-CrayGNU-18.08.eb                         --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  IPM-2.0.6-CrayIntel-18.08.eb                       --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
@@ -48,3 +52,5 @@
  VASP-5.4.4-CrayIntel-18.08-cuda-9.1.eb             --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
+ vtune_amplifier_2018.eb                            --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ vtune_amplifier_2019.eb                                                 --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
