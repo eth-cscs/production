@@ -9,7 +9,7 @@ versionsuffix='-OSMesa'
 homepage = "http://www.paraview.org"
 description = "ParaView is a scientific parallel visualizer."
 
-toolchain = {'name': 'CrayGNU', 'version': '18.07'}
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
