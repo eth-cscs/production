@@ -68,7 +68,7 @@ configopts += '-DPARAVIEW_BUILD_PLUGIN_pvNVIDIAIndeX:BOOL=ON '
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
 
-modextravars = { 'LD_LIBRARY_PATH':'/opt/python/3.6.1.1/lib:$::env(LD_LIBRARY_PATH)'}
+modextravars = { 'LD_LIBRARY_PATH':'/opt/python/3.6.5.1/lib:$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
