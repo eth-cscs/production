@@ -18,9 +18,9 @@ source_urls = ['http://slepc.upv.es/download/distrib/']
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-      ('cray-petsc-complex-64/3.7.6.2', EXTERNAL_MODULE),
+      ('cray-petsc-complex-64/3.7.6.0', EXTERNAL_MODULE),
       ('cray-tpsl/17.06.1', EXTERNAL_MODULE),
-      ('cray-hdf5-parallel/1.10.1.1', EXTERNAL_MODULE),
+      ('cray-hdf5-parallel/1.10.0.3', EXTERNAL_MODULE),
 ]
 
 preconfigopts = 'unset F90FLAGS FFLAGS CXXFLAGS CFLAGS &&'
