@@ -23,7 +23,7 @@
  jupyterhub-0.9.0-CrayGNU-18.07.eb
  Lmod-7.7.eb                                        --set-default-module --hidden
  NCO-4.7.5-CrayGNU-18.07.eb                         --set-default-module
- NCL-6.4.0.eb                                       --set-default-module
+ NCL-6.5.0.eb                                       --set-default-module
  otfprofile-1.20.eb                                 --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-18.07.eb                     --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  papi-wrap-1.0-CrayCCE-18.07.eb                     --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools

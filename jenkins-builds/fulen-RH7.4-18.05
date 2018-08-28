@@ -1,0 +1,3 @@
+ gmvolf-18.05.eb --hidden
+ PrgEnv-gnu-fulen-gmvolf-18.05.eb
+ reframe-2.13.eb                            --set-default-module

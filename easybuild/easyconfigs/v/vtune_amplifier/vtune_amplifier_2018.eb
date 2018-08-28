@@ -1,0 +1,27 @@
+# jg (CSCS)
+easyblock = 'Bundle'
+name = 'vtune_amplifier'
+version = '2018'
+#versionsuffix = '.2.0.551022'
+
+homepage = 'https://software.intel.com/en-us/intel-vtune-amplifier-xe'
+description = """Intel VTune Amplifier XE is Intel's performance profiler for
+C, C++, Fortran, Assembly and Python."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+postinstallcmds = [ 'cp -a /opt/intel/%(name)s_%(version)s/* %(installdir)s' ]
+# ln instead of cp would save some space but will fail at the permissions step
+# that can not be skipped.
+
+modextrapaths = {
+    'PATH': 'bin64',
+}
+
+modextravars = {
+    'VTUNE_AMPLIFIER_2018_DIR': '%(installdir)s/',
+    'VTUNE_AMPLIFIER_DOC': '%(installdir)s/documentation/en',
+    'VTUNE_AMPLIFIER_SAMPLES': '%(installdir)s/samples/en',
+}
+
+moduleclass = 'tools'
+
