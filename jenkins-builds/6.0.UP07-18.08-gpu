@@ -7,7 +7,7 @@
  CMake-3.12.0.eb
  CP2K-6.1-CrayGNU-18.08-cuda-9.1.eb                 --set-default-module
  CubeGUI-4.4.eb                                     --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
- ddt-18.1.3-Suse-12.eb                              --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ ddt-18.2.1-Suse-12.eb                              --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Extrae-3.5.4-CrayGNU-18.08.eb                      --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  h5py-2.8.0-CrayGNU-18.08-python2-parallel.eb
  h5py-2.8.0-CrayGNU-18.08-python2-serial.eb
