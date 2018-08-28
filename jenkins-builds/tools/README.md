@@ -31,6 +31,12 @@ CREATE (zlib1211CrayGNU1808)-[:DEPSON]->(CrayGNU1808);
 MATCH (res:mfile)-[:DEPSON]->(target:mfile) WHERE target.name='cray-python' AND target.version='3.6.5.1' RETURN target,res;
 ```
 
+and run with:
+
+```
+cat mf.sh.neo4j | ./cypher-shell -uneo4j
+```
+
 ### example text report
 
 ![txt1](img/txt.png)
