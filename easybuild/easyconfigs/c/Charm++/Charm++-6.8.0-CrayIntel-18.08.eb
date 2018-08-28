@@ -21,8 +21,8 @@ cmds_map = [('charm-%(version)s.tar.bz2',
 builddependencies = [ 
     ('craype-hugepages8M', EXTERNAL_MODULE),
     # pmi-lib required by CrayNid.c (function getXTNodeID)
-    ('pmi/5.0.12', EXTERNAL_MODULE),
-    ('pmi-lib/5.0.12', EXTERNAL_MODULE),
+    ('pmi/5.0.14', EXTERNAL_MODULE),
+    ('pmi-lib/5.0.14', EXTERNAL_MODULE),
 ]
 
 files_to_copy = ['gni-crayxc-hugepages-smp'] 
