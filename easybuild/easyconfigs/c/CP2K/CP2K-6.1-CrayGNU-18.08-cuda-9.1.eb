@@ -20,7 +20,7 @@ sources = [SOURCELOWER_TAR_BZ2]
 source_urls = [SOURCEFORGE_SOURCE]
 
 builddependencies = [
-    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' %cudaversion, EXTERNAL_MODULE),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
     ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
     ('cray-python/2.7.15.1', EXTERNAL_MODULE),
     ('flex', '2.6.4'),
