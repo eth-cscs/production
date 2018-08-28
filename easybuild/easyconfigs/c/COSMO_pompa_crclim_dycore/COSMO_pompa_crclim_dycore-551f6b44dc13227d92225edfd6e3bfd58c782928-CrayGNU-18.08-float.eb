@@ -28,6 +28,7 @@ configopts  = "-DCMAKE_BUILD_TYPE=Release "
 configopts += "-DSINGLEPRECISION=ON "
 configopts += "-DCUDA_BACKEND=ON "
 configopts += "-DSTELLA_DIR=${EBROOTSTELLA_CRCLIM} " 
+configopts += "-DBITREPRO=OFF "
 
 separate_build_dir = True
 
