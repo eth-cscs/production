@@ -12,11 +12,8 @@ pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 versionsuffix = '-complex-64'
 
-homepage = 'http://slepc.upv.es/'
-description = """SLEPc (Scalable Library for Eigenvalue Problem Computations) is a software library for the solution of
-large scale sparse eigenvalue problems on parallel computers. It is an extension of PETSc and can be used for either
-standard or generalized eigenproblems, with real or complex arithmetic. It can also be used for computing a partial
-SVD of a large, sparse, rectangular matrix, and to solve quadratic eigenvalue problems."""
+homepage = 'https://bitbucket.org/slepc/slepc4py'
+description = "slepc4py package provides Python bindings for SLEPc, the Scalable Library for Eigenvalue Problem Computations."
 
 toolchain = {'name': 'CrayIntel', 'version': '17.08'}
 
