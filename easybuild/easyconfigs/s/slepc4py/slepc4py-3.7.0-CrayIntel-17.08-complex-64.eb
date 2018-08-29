@@ -29,9 +29,6 @@ dependencies = [
     ('petsc4py', version, versionsuffix)
 ]
 
-prebuildopts = "export SLEPC_DIR=$EBROOTSLEPC && "
-preinstallopts = "export SLEPC_DIR=$EBROOTSLEPC && "
-
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyshortver],
