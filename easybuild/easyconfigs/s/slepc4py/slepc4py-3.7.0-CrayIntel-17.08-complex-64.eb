@@ -1,0 +1,40 @@
+easyblock = 'PythonPackage'
+
+name = 'slepc4py'
+version = '3.7.0'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+versionsuffix = '-complex-64'
+
+homepage = 'http://slepc.upv.es/'
+description = """SLEPc (Scalable Library for Eigenvalue Problem Computations) is a software library for the solution of
+large scale sparse eigenvalue problems on parallel computers. It is an extension of PETSc and can be used for either
+standard or generalized eigenproblems, with real or complex arithmetic. It can also be used for computing a partial
+SVD of a large, sparse, rectangular matrix, and to solve quadratic eigenvalue problems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('SLEPc', '3.7.4', versionsuffix),
+    ('petsc4py', version, versionsuffix)
+]
+
+prebuildopts = "export SLEPC_DIR=$EBROOTSLEPC && "
+preinstallopts = "export SLEPC_DIR=$EBROOTSLEPC && "
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'tools'
