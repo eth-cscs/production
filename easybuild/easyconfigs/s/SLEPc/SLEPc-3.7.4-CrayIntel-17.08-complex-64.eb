@@ -27,6 +27,8 @@ preconfigopts = 'unset F90FLAGS FFLAGS CXXFLAGS CFLAGS &&'
 
 buildopts = 'SLEPC_DIR=$PWD PETSC_DIR=$PETSC_DIR'
 
+modextravars = { 'SLEPC_DIR':'$::env(EBROOTSLEPC)'}
+
 parallel = 1
 
 sanity_check_paths = {
