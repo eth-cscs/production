@@ -10,6 +10,7 @@
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
  GSL-2.5-CrayIntel-18.08.eb
+ HDFView-2.14.eb                                    --set-default-module
  h5py-2.8.0-CrayGNU-18.08-python2-parallel.eb
  h5py-2.8.0-CrayGNU-18.08-python2-serial.eb
  h5py-2.8.0-CrayGNU-18.08-python3-parallel.eb       --set-default-module
