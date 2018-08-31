@@ -6,6 +6,7 @@
  CDO-1.9.5-CrayIntel-18.08.eb
  CMake-3.12.0.eb
  CP2K-6.1-CrayGNU-18.08.eb                          --set-default-module
+ CPMD-4.1-CrayIntel-18.08.eb                        --set-default-module
  GROMACS-2018.2-CrayGNU-18.08.eb                    --set-default-module
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
