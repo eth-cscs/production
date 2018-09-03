@@ -1,0 +1,31 @@
+easyblock = 'Bundle'
+
+name = 'c2sm'
+version = '03.09.18'
+
+homepage = 'https://github.com/C2SM-RCM/c2sm-rcm-env'
+description = 'c2sm environment'
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = []
+source_urls = []
+keepsymlinks = True
+
+hidden = True
+
+commit = 'fea87169a8333504f8e7a85eb2bddbb9be0a9c4a'
+
+installdir = '%(installdir)s'
+
+postinstallcmds = [
+    ("git clone https://github.com/C2SM-RCM/c2sm-rcm-env.git ."),
+    ("git checkout %s" % commit),
+    ("cp -r modules/kesch/c2sm/* %(installdir)s/../../../modules/all/%(name)s/"),
+    ("cp -r * %(installdir)s")]
+
+sanity_check_paths = {
+    'files': ['env', 'README.md'],
+    'dirs':  ['modules'],
+}
+moduleclass = 'devel'
