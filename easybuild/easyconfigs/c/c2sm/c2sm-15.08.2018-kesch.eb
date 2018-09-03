@@ -14,19 +14,27 @@ keepsymlinks = True
 
 commit = 'fea87169a8333504f8e7a85eb2bddbb9be0a9c4a'
 
+system = 'kesch'
+installdir = '%(installdir)s'
+
 postinstallcmds = [
     ("git clone https://github.com/C2SM-RCM/c2sm-rcm-env.git ."),
     ("git checkout %s" % commit),
-    ("cp -r modules/kesch/c2sm %(installdir)s")]
+    ("cp -r modules/%s %s"  %(system, installdir))]
 
-modtclfooter = """
+add_to_module = """
 conflict c2sm
-module use %(installdir)s
+module use %s/%s
 """
 
+modtclfooter = add_to_module % (installdir, system) 
+
 sanity_check_paths = {
-    'files': ['c2sm/base', 'c2sm/gnu_for_cpp'],
-    'dirs':  ['c2sm/cray-env', 'c2sm/gnu-env', 'c2sm/pgi-env'],
+    'files': ['%s/c2sm/base' % (system),
+              '%s/c2sm/gnu_for_cpp' % (system)],
+    'dirs':  ['%s/c2sm/cray-env' % (system),
+              '%s/c2sm/gnu-env' % (system),
+              '%s/c2sm/pgi-env' % (system)],
 }
 
 moduleclass = 'devel'
