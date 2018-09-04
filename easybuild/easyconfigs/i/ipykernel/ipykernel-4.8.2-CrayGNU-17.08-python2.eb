@@ -22,7 +22,6 @@ toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('PyExtensions', '%s' % pyver),
     ('IPython', '5.7.0', '-python2')
 ]
 
