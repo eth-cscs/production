@@ -1,7 +1,7 @@
 easyblock = 'Bundle'
 
-name = 'c2sm'
-version = '15.08.18'
+name = 'c2sm-rcm'
+version = '26.07.18'
 
 homepage = 'https://github.com/C2SM-RCM/c2sm-rcm-env'
 description = 'c2sm environment'
@@ -12,7 +12,7 @@ sources = []
 source_urls = []
 keepsymlinks = True
 
-commit = 'fea87169a8333504f8e7a85eb2bddbb9be0a9c4a'
+commit = '24036d44cce8ca0d20dc132bc3622a7858ae789b'
 
 system = 'kesch'
 installdir = '%(installdir)s'
@@ -23,11 +23,11 @@ postinstallcmds = [
     ("cp -r modules/%s %s"  %(system, installdir))]
 
 add_to_module = """
-conflict c2sm
+conflict %s
 module use %s/%s
 """
 
-modtclfooter = add_to_module % (installdir, system) 
+modtclfooter = add_to_module % (name, installdir, system) 
 
 sanity_check_paths = {
     'files': ['%s/c2sm/base' % (system),
