@@ -48,7 +48,7 @@ build_str += "unset CC && "
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
 build_str += "bazel build --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
-build_str += "-c opt //tensorflow/tools/pip_package:build_pip_package &&"
+build_str += "-c opt //tensorflow/tools/pip_package:build_pip_package //tensorflow:libtensorflow_cc.so &&"
 build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
 build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/" + whl_file
 
@@ -60,6 +60,7 @@ files_to_copy = [
     (['%(builddir)s/' + whl_file], '%(installdir)s'),
 	(['%(builddir)s/bin'], '%(installdir)s'),
 	(['%(builddir)s/lib'], '%(installdir)s'),
+	(['%(builddir)s/tensorflow-1.7.0/bazel-out/k8-py3-opt'], '%(installdir)s'),
 ]
 
 sanity_check_paths={
