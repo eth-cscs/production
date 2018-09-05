@@ -16,7 +16,7 @@ description = """The LLVM Core libraries provide a modern source- and target-ind
  to use LLVM as an optimizer and code generator."""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
-toolchainopts = {'dynamic': False}
+toolchainopts = {'dynamic': True}
 
 source_urls = ["http://llvm.org/releases/%(version)s"]
 sources = ["llvm-%(version)s.src.tar.xz"]
