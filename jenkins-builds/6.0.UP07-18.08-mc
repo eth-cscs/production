@@ -20,11 +20,14 @@
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
  jupyterhub-0.9.0-CrayGNU-18.08.eb
+ LLVM-5.0.0-CrayGNU-18.08.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
+ Mesa-17.2.8-CrayGNU-18.08.eb
  NAMD-2.12-CrayIntel-18.08.eb                       --set-default-module
  NCO-4.7.5-CrayGNU-18.08.eb                         --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
  ncview-2.1.7-CrayGNU-18.08.eb                      --set-default-module
+ ParaView-5.5.2-OSMesa-CrayGNU-18.08.eb             --set-default-module
  Python-bare-3.6.2.eb                               --hidden
  PyExtensions-2.7.15.1-CrayGNU-18.08.eb
  PyExtensions-3.6.5.1-CrayGNU-18.08.eb
