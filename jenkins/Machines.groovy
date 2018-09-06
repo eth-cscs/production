@@ -38,7 +38,6 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '$APPS/UES/jenkins/RH6.7EUS/easybuild']
 
-
 def monch = [name: 'monch',
              archs: [],
              buildPath: '/dev/shm/$USER/easybuild/stage/build',
@@ -47,4 +46,4 @@ def monch = [name: 'monch',
              modulesUnuseProduction: '',
              prefixProduction: '$APPS/UES/jenkins/RH6.9-17.06/easybuild']
 
-return [daint, dom, fulen, kesch, leone, monch]
+return [daint, dom, fulen, kesch, leone]
