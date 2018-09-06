@@ -11,7 +11,7 @@ description = "The GNU Project Debugger"
 source_urls = ['http://mirror.switch.ch/ftp/mirror/gnu/gdb/']
 sources = [SOURCELOWER_TAR_XZ]
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 dependencies = [('ncurses', '6.0')]
 
