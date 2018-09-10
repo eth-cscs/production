@@ -9,7 +9,7 @@ def daint = [name: 'daint',
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            buildPath: '/tmp/$USER/easybuild',
-           unusePath: '/apps/daint/UES/jenkins/6.0.UP04/ARCH/easybuild/modules/all',
+           unusePath: '/apps/dom/UES/jenkins/6.0.UP07/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/6.0.UP07/ARCH/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
            prefixProduction: '$APPS/UES/jenkins/6.0.UP07/ARCH/easybuild']
