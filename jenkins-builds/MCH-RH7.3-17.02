@@ -26,6 +26,7 @@
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
  gmvapich2-17.02_cuda_8.0_gdr.eb
  matlab-r2016a.eb                                    --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ pgi-17.10-gcc-5.4.0-2.26.eb                         --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.2-gmvolf-17.02.eb
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
