@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'GDB'
-version = '7.10.1'
+version = '8.1.1'
 
 homepage = 'http://www.gnu.org/software/gdb/gdb.html'
 description = "The GNU Project Debugger"
