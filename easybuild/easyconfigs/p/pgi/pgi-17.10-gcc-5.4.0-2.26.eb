@@ -1,6 +1,6 @@
 easyblock = 'Bundle'
 
-name = 'PGI'
+name = 'pgi'
 version = '17.10'
 gccver = '5.4.0'
 binutilsver = '2.26'
