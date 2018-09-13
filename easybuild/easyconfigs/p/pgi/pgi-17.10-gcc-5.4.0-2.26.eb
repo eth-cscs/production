@@ -12,8 +12,8 @@ description = "C, C++ and Fortran compilers from The Portland Group - PGI"
 toolchain = {'name': 'dummy', 'version': ''}
 
 dependencies = [
-    ('GCC', '5.4.0-2.26'),
-    ('pgi/17.10', EXTERNAL_MODULE),
+    ('GCC', '%s-%s' % (gccver,binutilsver)),
+    ('pgi/%s' % (version), EXTERNAL_MODULE),
 ]   
 
 moduleclass = 'compiler'
