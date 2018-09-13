@@ -1,0 +1,23 @@
+# jg (cscs)
+easyblock = "ConfigureMake"
+
+name = 'libgrib1_crclim'
+version = 'a1e4271bf3a99db84330f9ded82fd6fddfce2f61'
+homepage = 'https://github.com/C2SM-RCM/libgrib1/tree/master/libgrib1/trunk'
+description = """libgrib1"""
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+# c2sm repo is private (+ no official release)
+sources = ['/apps/common/UES/easybuild/sources/l/%(name)s/%(name)s_%(version)s.tar.bz2']
+
+dependencies = [('cray-netcdf/4.6.1.2', EXTERNAL_MODULE),]
+skipsteps = ['configure']
+prebuildopts = 'pwd; ls -l ;cd libgrib1_cosmo/source ; ln -fs Makefile.daint.gnu Makefile &&'
+preinstallopts = 'cd libgrib1_cosmo/source && '
+installopts = ' LIBDIR=%(installdir)s'
+
+sanity_check_paths={
+    'files': ['libgrib1_gnu.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
