@@ -7,7 +7,7 @@ homepage = 'http://www.hdfgroup.org/doc_resource/SZIP/'
 description = """Szip compression software, providing lossless compression of
 scientific data"""
 
-toolchain = {'name': 'PGI', 'version': '17.10-gcc-5.4.0-2.26'}
+toolchain = {'name': 'pgi', 'version': '17.10-gcc-5.4.0-2.26'}
 toolchainopts = {'pic': True}
 
 source_urls = ['http://www.hdfgroup.org/ftp/lib-external/szip/%(version)s/src']
