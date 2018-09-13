@@ -1,0 +1,69 @@
+easyblock = "CmdCp"
+
+name = 'DeePMD'
+version = '0.10.2'
+
+homepage = 'https://github.com/deepmodeling/deepmd-kit/'
+description = """DeePMD-kit is a package written in Python/C++, designed to
+minimize the effort required to build deep learning based model of interatomic
+potential energy and force field and to perform molecular dynamics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'dynamic': True, 'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.11.4', '', True),
+]
+
+dependencies = [
+    ('TensorFlow', '1.7.0', '-cc-python3'),
+    ('xdrfile', '1.1.4'),
+]
+
+sources = ['v%(version)s.tar.gz']
+source_urls = ['https://github.com/deepmodeling/deepmd-kit/archive/']
+
+installdir = '%(installdir)s'
+patches = [('deepmd-%s.patch' % version)]
+
+with_configure = False
+
+prepare_libs_dir = "mkdir -p %(installdir)s/tensorflow/include %(installdir)s/tensorflow/lib && "
+prepare_libs_dir += "export TF_INCLUDE=%(installdir)s/tensorflow/include && "
+prepare_libs_dir += "export TF_LIB=%(installdir)s/tensorflow/lib && "
+prepare_libs_dir += "ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/nsync/public/nsync* $TF_INCLUDE && "
+prepare_libs_dir += "ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/eigen_archive/Eigen $TF_INCLUDE && "
+prepare_libs_dir += "ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/eigen_archive/unsupported $TF_INCLUDE && "
+prepare_libs_dir += "ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/protobuf_archive/src/google $TF_INCLUDE && "
+prepare_libs_dir += "ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/tensorflow $TF_INCLUDE && "
+prepare_libs_dir += "ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/third_party $TF_INCLUDE && "
+prepare_libs_dir += "ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/libtensorflow_cc.so $TF_LIB && "
+prepare_libs_dir += "ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/libtensorflow_framework.so $TF_LIB"
+
+build_str = "%s && " % prepare_libs_dir
+build_str += "mkdir source/build && "
+build_str += "cd source/build; cmake -DXDRFILE_ROOT=$EBROOTXDRFILE -DTENSORFLOW_ROOT=%(installdir)s/tensorflow -DCMAKE_INSTALL_PREFIX=%(builddir)s/install --debug-trycompile .. && "
+build_str += "cd source/build; make install "
+
+cmds_map = [
+    ('v%(version)s.tar.gz', build_str),
+]
+
+files_to_copy = [
+	(['%(builddir)s/install/bin'], '%(installdir)s'),
+	(['%(builddir)s/install/include'], '%(installdir)s'),
+	(['%(builddir)s/install/lib'], '%(installdir)s'),
+]
+
+sanity_check_paths={
+    'files': ['%s/bin/dp_frz' % installdir],
+    'dirs': ['%s/include/deepmd' % installdir],
+}
+
+postinstallcmds = [prepare_libs_dir, 'rm -rf /dev/shm/$USER/bazelout/' ]
+
+modextrapaths = {                                                                  
+    'PYTHONPATH' : 'lib/python%s/site-packages' % 'x',
+}
+
+moduleclass = 'devel'

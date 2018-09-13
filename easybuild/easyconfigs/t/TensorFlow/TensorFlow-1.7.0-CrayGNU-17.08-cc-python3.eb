@@ -10,7 +10,8 @@ py_min_ver = '6'
 py_rev_ver = '1.1'
 
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-versionsuffix = '-python%s' % (py_maj_ver)
+versionsuffix = '-cc-python%s' % (py_maj_ver)
+depssuffix = '-python%s' % (py_maj_ver)
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -18,17 +19,17 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 
 builddependencies = [
-    ('wheel', '0.31.1', versionsuffix),
-    ('Bazel', '0.11.1', versionsuffix),
+    ('wheel', '0.31.1', depssuffix),
+    ('Bazel', '0.11.1', depssuffix),
 ]
 
 dependencies = [
-    ('SWIG', '3.0.12', versionsuffix),
-    ('protobuf', '3.6.0', versionsuffix),
-    ('backports.weakref', '1.0.post1', versionsuffix),
-    ('Werkzeug', '0.14.1', versionsuffix),
-    ('absl', '0.2.2', versionsuffix),
-    ('dask', '0.18.1', versionsuffix)
+    ('SWIG', '3.0.12', depssuffix),
+    ('protobuf', '3.6.0', depssuffix),
+    ('backports.weakref', '1.0.post1', depssuffix),
+    ('Werkzeug', '0.14.1', depssuffix),
+    ('absl', '0.2.2', depssuffix),
+    ('dask', '0.18.1', depssuffix)
 ]
 
 sources = ['v%(version)s.tar.gz']
@@ -48,7 +49,7 @@ build_str += "unset CC && "
 build_str += "chmod +x configure-cscs.sh && "
 build_str += "./configure-cscs.sh && "
 build_str += "bazel build --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
-build_str += "-c opt //tensorflow/tools/pip_package:build_pip_package &&"
+build_str += "-c opt //tensorflow/tools/pip_package:build_pip_package //tensorflow:libtensorflow_cc.so &&"
 build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
 build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/" + whl_file
 
@@ -60,6 +61,7 @@ files_to_copy = [
     (['%(builddir)s/' + whl_file], '%(installdir)s'),
 	(['%(builddir)s/bin'], '%(installdir)s'),
 	(['%(builddir)s/lib'], '%(installdir)s'),
+	(['%(builddir)s/tensorflow-1.7.0/bazel-out/k8-py3-opt'], '%(installdir)s'),
 ]
 
 sanity_check_paths={
