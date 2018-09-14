@@ -51,7 +51,7 @@ modextravars = {
     'DDT_LINK_DMALLOCTH': '-L%(installdir)s/lib/64 -ldmallocth',
     'DDT_LINK_DMALLOCTHCXX': '-L%(installdir)s/lib/64 -ldmallocthcxx',
     'DDT_EXAMPLES': '%(installdir)s/examples',
-    #TODO: 'ALLINEA_CONFIG_DIR': '',
+    #WIP: 'ALLINEA_CONFIG_DIR': '',
 }
 
 moduleclass = 'tools'
