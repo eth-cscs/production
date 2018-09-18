@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'SIRIUS'
-version = '5.8'
+version = '5.8.1'
 cudaversion = 8.0
 versionsuffix = '-cuda-%s' % cudaversion
 
