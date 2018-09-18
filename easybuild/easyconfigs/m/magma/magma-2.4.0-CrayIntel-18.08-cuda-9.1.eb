@@ -26,7 +26,7 @@ files_to_copy = ["lib", "include", "testing", "docs", "README", (['control/*.h']
 
 modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
-prebuildopts = 'mv make.inc-2.4.0 make.inc && CUDADIR=/opt/nvidia/cudatoolkit9.1/default '
+prebuildopts = 'mv make.inc-2.4.0 make.inc && CUDADIR=$EBROOTCUDA '
 
 sanity_check_paths={
     'files': ['lib/libmagma.so', 'lib/libmagma.a'],
