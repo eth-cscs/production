@@ -43,7 +43,8 @@ prepare_libs_dir += "ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/libtenso
 build_str = "%s && " % prepare_libs_dir
 build_str += "mkdir source/build && "
 build_str += "cd source/build; cmake -DXDRFILE_ROOT=$EBROOTXDRFILE -DTENSORFLOW_ROOT=%(installdir)s/tensorflow -DCMAKE_INSTALL_PREFIX=%(builddir)s/install --debug-trycompile .. && "
-build_str += "cd source/build; make install "
+build_str += "cd source/build; make install &&"
+build_str += "cd source/build; make lammps"
 
 cmds_map = [
     ('v%(version)s.tar.gz', build_str),
@@ -53,6 +54,7 @@ files_to_copy = [
 	(['%(builddir)s/install/bin'], '%(installdir)s'),
 	(['%(builddir)s/install/include'], '%(installdir)s'),
 	(['%(builddir)s/install/lib'], '%(installdir)s'),
+	(['%(builddir)s/deepmd-kit-%(version)s/source/build/USER-DEEPMD'], '%(installdir)s'),
 ]
 
 sanity_check_paths={
