@@ -2,8 +2,8 @@
 easyblock = 'MakeCp'
 
 name = 'LAMMPS'
-version = '11Aug17'
-release = 'stable_11Aug2017'
+version = '22Aug18'
+release = 'stable_22Aug2018'
 deepmd_version = '0.10.2'
 versionsuffix = '-deepmd-%s' % deepmd_version
 
@@ -19,7 +19,7 @@ sources = ['%s.tar.gz' % (release)]
 prebuildopts = ' cd ./src && '
 prebuildopts += ' ln -snf $EBROOTDEEPMD/USER-DEEPMD . && '
 prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-user-misc yes-user-deepmd && '
-prebuildopts += ' make no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg no-gpu && '
+prebuildopts += ' make no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg no-gpu no-latte && '
 prebuildopts += ' make package-update && '
 # go to folder ./lib/reax and make package reax
 prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
@@ -30,7 +30,7 @@ buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/2.7.13.1', EXTERNAL_MODULE),
     ('DeePMD', deepmd_version),
 ]
 
