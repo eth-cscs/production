@@ -19,7 +19,7 @@ pythonver = '%s.%s' % (req_py_majver, req_py_minver)
 versionsuffix = '-python%s' % req_py_majver
 
 dependencies = [
-    ('cray-python/3.6.1.1', EXTERNAL_MODULE),
+    ('cray-python/3.6.5.1', EXTERNAL_MODULE),
     ('cURL', '7.61.1'),
 ]
 

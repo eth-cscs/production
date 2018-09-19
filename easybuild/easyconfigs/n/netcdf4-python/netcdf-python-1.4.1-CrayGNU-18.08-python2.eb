@@ -19,10 +19,9 @@ versionsuffix = '-python%s' % req_py_majver
 
 dependencies = [
     ('cray-python/2.7.15.1', EXTERNAL_MODULE),
-    ('netCDF-Fortran', '4.4.4'),
+    ('cray-netcdf/4.6.1.2', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
     ('cftime', '1.0.0', '-python2'),
-    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
-    #('cray-hdf5/1.8.16', EXTERNAL_MODULE),
 ]
 
 sanity_check_paths = {
