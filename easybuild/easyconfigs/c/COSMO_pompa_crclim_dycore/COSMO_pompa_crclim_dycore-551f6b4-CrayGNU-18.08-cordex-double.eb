@@ -1,4 +1,4 @@
-# jg (cscs)
+#  omlins, kraushm, jg, havogt (cscs)
 easyblock = 'CMakeMake'
 
 name = 'COSMO_pompa_crclim_dycore'
@@ -31,4 +31,3 @@ configopts += "-DBITREPRO=OFF "
 separate_build_dir = True
 
 moduleclass = 'devel'
-
