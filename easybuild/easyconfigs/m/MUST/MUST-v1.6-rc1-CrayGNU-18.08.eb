@@ -33,8 +33,8 @@ configopts += " -DCMAKE_EXE_LINKER_FLAGS:STRING='-L$EBROOTZLIB/lib -ldl -lz'"
 separate_build_dir = True
 
 # MUST is hardcoding paths hence we need to:
-preinstallopts  = " pwd && ls -l && find .. -name getStatusSize.f && echo xxx && "
-preinstallopts += " sed -i -e 's@$EASYBUILD_BUILDPATH/%(name)s/%(version)s/%(toolchain_name)s-%(toolchain_version)s%/%(name)s-%(version)s@%(installdir)s@g' ./utility/mustrun && "
+preinstallopts  = " pwd && ls -l && echo EASYBUILD_BUILDPATH=$EASYBUILD_BUILDPATH && find .. -name getStatusSize.f && echo xxxx && "
+preinstallopts += " sed -i -e 's@$EASYBUILD_BUILDPATH/%(name)s/%(version)s/%(toolchain_name)s-%(toolchain_version)s%@%(installdir)s@g' ./utility/mustrun && "
 preinstallopts += " sed -i -e 's@externals/GTI/system-builder@@g' ./utility/mustrun && "
 
 sanity_check_paths = {
