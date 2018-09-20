@@ -1,4 +1,4 @@
-# jg (cscs)
+# omlins, kraushm, jg, havogt (cscs)
 easyblock = 'CMakeMake'
 
 name = 'STELLA_CRCLIM'
