@@ -2,8 +2,8 @@
 easyblock = 'CMakeMake'
 
 name = 'STELLA_CRCLIM'
-version = '4a5f9c53d3b159cbdf9cfaa2eb4450181780f594'
-versionsuffix = '-float'
+version = '4a5f9c5'
+versionsuffix = '-double'
 
 homepage = 'https://github.com/C2SM-RCM/stella (-b crclim)'
 description = """STELLA"""
@@ -27,12 +27,13 @@ dependencies = [
 configopts  = "-DBoost_INCLUDE_DIR=${EBROOTBOOST}/include "
 configopts += "-DCMAKE_BUILD_TYPE=Release "
 configopts += "-DX86_BACKEND=ON " 
-configopts += "-DSINGLEPRECISION=ON "
+configopts += "-DSINGLEPRECISION=OFF "
 configopts += "-DCUDA_BACKEND=ON -DCUDA_COMPUTE_CAPABILITY=sm_60 "
 configopts += "-DSTELLA_KSIZE=60 -DSTELLA_KFLAT=11 "
 configopts += "-DENABLE_OPENMP=OFF "
-configopts += "-DGCL=OFF "
+configopts += "-DGCL=ON "
 configopts += "-DSTELLA_BITREPRO=OFF "
+# configopts += "-DSTELLA_ENABLE_SERIALIZATION=OFF"
 separate_build_dir = True
 
 moduleclass = 'devel'

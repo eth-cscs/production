@@ -1,14 +1,16 @@
-# contribute by Luca Marsella (CSCS) 
 easyblock = 'ConfigureMake'
 
 name = 'JasPer'
 version = '1.900.1'
 
 homepage = 'http://www.ece.uvic.ca/~frodo/jasper/'
-description = """The JasPer Project is an open-source initiative to provide a free
- software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standard."""
+description = """
+The JasPer Project is an open-source initiative to provide a free 
+software-based reference implementation of the codec specified in 
+the JPEG-2000 Part-1 standard.
+"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = {'name': 'CrayCCE', 'version': '18.08'}
 toolchainopts = {'pic': True}
 
 sources = [SOURCELOWER_ZIP]
