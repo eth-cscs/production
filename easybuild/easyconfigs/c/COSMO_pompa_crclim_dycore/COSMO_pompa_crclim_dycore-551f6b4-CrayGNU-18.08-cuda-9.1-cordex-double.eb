@@ -5,7 +5,7 @@ name = 'COSMO_pompa_crclim_dycore'
 version = '551f6b4'
 cudaversion = 9.1
 precision = '-cordex-double'
-versionsuffix = '-cuda-%s-%s' % (cudaversion, precision)
+versionsuffix = '-cuda-%s%s' % (cudaversion, precision)
 
 homepage = 'https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)'
 description = """cosmo-pompa-dycore"""
