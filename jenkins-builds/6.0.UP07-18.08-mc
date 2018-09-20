@@ -16,6 +16,7 @@
  h5py-2.8.0-CrayGNU-18.08-python2-serial.eb
  h5py-2.8.0-CrayGNU-18.08-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-18.08-python3-serial.eb
+ HPX-1.1.0-CrayGNU-18.08.eb                         --set-default-module
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
