@@ -20,20 +20,8 @@ toolchainopts = {'dynamic': True}
 source_urls = ["http://llvm.org/releases/%(version)s"]
 sources = ["llvm-%(version)s.src.tar.xz"]
 
-#python = 'python'
-#pyver = '3'
-#pysuff = '-%s%s' % (python, pyver)
-#dependencies = [
-#    ('zlib', '1.2.11'),
-#    ('cray-python/3.6.1.1', EXTERNAL_MODULE)
-#]
-
 builddependencies = [('CMake', '3.12.0','', True)]
 separate_build_dir = True
-
-# configopts = '-DCMAKE_BUILD_TYPE:STRING=Release '
-#-DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON 
-#-DBUILD_SHARED_LIBS=OFF'
 
 # required to install extra tools in bin/
 configopts  = "-DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86 "
