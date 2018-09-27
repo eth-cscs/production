@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'STELLA_CRCLIM'
-version = '4a5f9c53d3b159cbdf9cfaa2eb4450181780f594'
+version = '4a5f9c5'
 versionsuffix = '-float'
 
 homepage = 'https://github.com/C2SM-RCM/stella (-b crclim)'

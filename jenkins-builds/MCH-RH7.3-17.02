@@ -3,8 +3,7 @@
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
  CDO-1.8.2-gmvolf-17.02.eb
  CMake-3.9.1.eb                                      --installpath=/apps/escha/UES/RH7.3_generic/easybuild
- ddt-18.0.1.eb
- ddt-18.1.1.eb                                       --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ ddt-18.2.2-Redhat-7.0.eb                            --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  ecCodes-2.7.0-gmvolf-17.02-Python-2.7.13.eb         --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GCC-4.8.2-binutils-2.24.eb                          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  GCCcore-4.9.3.eb                                    --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
@@ -29,7 +28,7 @@
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.2-gmvolf-17.02.eb
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
- reframe-2.13.eb                                     --set-default-module
+ reframe-2.14.eb                                     --set-default-module
  Ruby-2.2.2-gmvolf-17.02.eb
  ncview-2.1.7-gmvolf-17.02.eb
  netCDF-C++-4.3.0-gmvolf-17.02.eb
@@ -40,6 +39,9 @@
  netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-4.6.1-PGI-17.10-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ netCDF-C++-4.3.0-PGI-17.10-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ netCDF-Fortran-4.4.4-PGI-17.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  PROJ-5.1.0-gmvolf-17.02.eb
  rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild --set-default-module
  rstudio-1.1.442.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild

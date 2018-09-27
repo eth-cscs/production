@@ -2,7 +2,7 @@
 easyblock = "ConfigureMake"
 
 name = 'libgrib1_crclim'
-version = 'a1e4271bf3a99db84330f9ded82fd6fddfce2f61'
+version = 'a1e4271'
 homepage = 'https://github.com/C2SM-RCM/libgrib1/tree/master/libgrib1/trunk'
 description = """libgrib1"""
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}

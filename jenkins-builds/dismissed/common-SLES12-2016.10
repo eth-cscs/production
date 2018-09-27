@@ -17,7 +17,6 @@
  mc-4.8.18.eb
  nano-2.7.0.eb
  numactl-2.0.11.eb
- reframe-2.13.eb     --set-default-module
- reframe-2.14-dev0.eb
+ reframe-2.14.eb     --set-default-module
  Ruby-2.3.3.eb
  tmux-2.3.eb

@@ -2,7 +2,7 @@
 easyblock = 'Tarball'
 name = 'ddt'
 version = '18.2.2'
-versionsuffix = '-Redhat-7.0'
+versionsuffix = '-Redhat-6.0'
 
 homepage = 'https://developer.arm.com/products/software-development-tools/hpc/downloads/download-arm-forge'
 description = """Arm DDT is a cross-platform debugger for C, C++, Fortran
@@ -17,15 +17,15 @@ Licensing : http://velan:4241/status.html"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = [ 'http://content.allinea.com/downloads/' ]
-sources = [ 'arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix) ]
-checksums = [ 'b0ab02dcb156352c6984c1c658937c2c' ]
+sources = [ 'arm-forge-%(version)s%(versionsuffix)s-x86_64.tar' ]
+checksums = [ '8499f28b76bf4a6d8822e33e3d840541' ]
 
 postinstallcmds = [ './textinstall.sh --accept-licence %(installdir)s && ' \
                     'echo -e "type=2\nserial_number=6784\nhostname=velan\nserverport=4241" > ' \
                     '%(installdir)s/licences/License && ' \
                     'cp %(installdir)s/licences/License %(installdir)s/licences/Licence' ]
 
-# use ddt's libexec/gdb instead of GDB
+# ddt uses its own libexec/gdb instead of GDB
 # dependencies = [('GDB','8.1.1')]
 
 sanity_check_paths = {

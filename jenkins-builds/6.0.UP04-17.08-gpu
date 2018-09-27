@@ -14,13 +14,14 @@
  CDO-1.9.5-CrayIntel-17.08.eb
  CPMD-4.1-CrayIntel-17.08g.eb                       --set-default-module
  CPMD-4.1-CrayIntel-17.12.eb
- ddt-18.0.1.eb                                      
+ ddt-18.0.1.eb
  ddt-18.1.1.eb                                      --set-default-module
  Extrae-3.5.2-CrayGNU-17.08.eb                      --set-default-module
  Extrae-3.5.2-CrayIntel-17.08.eb
  GREASY-2.1-cscs-CrayGNU-17.08.eb                   --set-default-module
- GROMACS-2016.3-CrayGNU-17.08-cuda-8.0.eb           
+ GROMACS-2016.3-CrayGNU-17.08-cuda-8.0.eb
  GROMACS-2018-CrayGNU-17.08-cuda-8.0.eb             --set-default-module
+ GROMACS-2018.3-CrayGNU-17.08-cuda-8.0.eb
  GSL-2.4-CrayGNU-17.08.eb                           --set-default-module
  GSL-2.4-CrayCCE-17.08.eb
  GSL-2.4-CrayIntel-17.08.eb
