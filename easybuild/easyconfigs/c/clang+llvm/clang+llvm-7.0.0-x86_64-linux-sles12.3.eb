@@ -1,0 +1,33 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'clang+llvm'
+version = '7.0.0'
+versionsuffix = '-x86_64-linux-sles12.3'
+
+homepage = 'http://clang.llvm.org/'
+description = """The Clang project provides a language front-end and tooling
+infrastructure for languages in the C language family (C, C++, Objective C/C++,
+OpenCL, CUDA, and RenderScript) for the LLVM project.
+The pre-built binaries include Clang, LLD, compiler-rt, various LLVM tools,
+etc. varying slightly between platforms."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://releases.llvm.org/%(version)s']
+sources = [ '{}-{}{}.tar.xz'.format(name, version, versionsuffix) ]
+checksums = [ '127b8a6305b739bbc2a829f8ebcd08e9' ]
+
+sanity_check_paths = {
+    'files': ['bin/llc', 'bin/lld', 'bin/clang', 'bin/llvm-cov', 'bin/llvm-config'],
+    'dirs': ['include/c++', 'lib/clang']
+}
+
+
+modextrapaths = {
+    'PATH': 'bin',
+    'PATH': 'libexec',
+    'LD_LIBRARY_PATH': 'lib',
+    'MANPATH': 'share/man/man1',
+}
+
+moduleclass = 'tools'
