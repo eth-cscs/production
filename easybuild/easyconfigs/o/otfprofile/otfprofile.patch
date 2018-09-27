@@ -1,0 +1,13 @@
+diff -Naur otf2_cli_profile.ori/include/definitions.h otf2_cli_profile/include/definitions.h
+--- otf2_cli_profile.ori/include/definitions.h	2018-08-14 10:27:39.000000000 +0200
++++ otf2_cli_profile/include/definitions.h	2018-09-25 14:39:51.936067879 +0200
+@@ -221,7 +221,8 @@
+     std::map<uint64_t, SystemNode_t*> locations{};
+     uint32_t _size = 0;
+     // test
+-    std::vector<uint32_t> num_nodes_per_level;
++    //std::vector<uint32_t> num_nodes_per_level;
++    std::vector<uint32_t> num_nodes_per_level = {1000,0}; //cscs
+ };
+ 
+ // TODO iterator traits
