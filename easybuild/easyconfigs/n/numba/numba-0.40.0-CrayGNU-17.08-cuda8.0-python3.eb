@@ -10,8 +10,8 @@ py_rev_ver = '1.1'
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
-cudamajor = '9.0'
-cudaminor = '103_3.7-6.0.4.1_2.1__g72b395b'
+cudamajor = '8.0'
+cudaminor = '61_2.4.3-6.0.4.0_3.1__gb475d12'
 cudaver = "%s.%s" % (cudamajor, cudaminor)
 
 versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
@@ -23,12 +23,15 @@ description = """Numba is an Open Source NumPy-aware optimizing compiler for Pyt
 toolchain = {'name': 'CrayGNU', 'version': '17.08'}
 toolchainopts = {'pic': True, 'verbose': False}
 
-# this is a bundle of Python packages
 exts_defaultclass = 'PythonPackage'
+
+builddependencies = [
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
 
 dependencies = [
     ('PyExtensions', '%s' % pyver),
-    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
     ('LLVM', '6.0.1'),
 ]
 
@@ -51,7 +54,6 @@ exts_list = [
     }),
 ]
 
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
 
 sanity_check_paths = {
