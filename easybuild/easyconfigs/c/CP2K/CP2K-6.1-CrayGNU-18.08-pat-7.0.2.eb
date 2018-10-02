@@ -3,8 +3,8 @@ easyblock = 'MakeCp'
 
 name = 'CP2K'
 version = '6.1'
-cudaversion = '9.1'
-versionsuffix = '-cuda-%s' % cudaversion
+patversion = '7.0.2'
+versionsuffix = '-pat-%s' % patversion
 
 py_maj_ver = '2'
 py_min_ver = '7'
@@ -21,20 +21,19 @@ description = """CP2K is a freely available (GPL) program, written in Fortran 95
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 toolchainopts = { 'usempi': True, 'openmp': True }
 
-patches = [('%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp', '%(builddir)s/%(namelower)s-%(version)s/arch')]
+patches = [('%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s.psmp', '%(builddir)s/%(namelower)s-%(version)s/arch')]
 sources = [SOURCELOWER_TAR_BZ2]
 source_urls = [SOURCEFORGE_SOURCE]
 
 builddependencies = [
-    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
     ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.0.5'),
+    ('perftools-lite/%s' % patversion, EXTERNAL_MODULE)
 ]
 
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
     ('Libint', '1.1.4'),
     ('libxc', '4.2.3'),
 ]
@@ -42,15 +41,15 @@ dependencies = [
 # use the non-threaded version of BLAS provided by cray-libsci and go to folder makefiles
 prebuildopts = " export PE_LIBSCI_OMP_REQUIRES_openmp="" && pushd makefiles && "
 # build type
-buildopts = 'ARCH=%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s VERSION=psmp'
+buildopts = 'ARCH=%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s VERSION=psmp'
  
-files_to_copy = [(['./arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp'],'arch'),
-                 (['./exe/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s/*'],'bin'), 
+files_to_copy = [(['./arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s.psmp'],'arch'),
+                 (['./exe/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s/*'],'bin'),
                  (['./data'],'.'),
                  (['./tests'],'.')]
 
 sanity_check_paths = {
-    'files': ['arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp', 
+    'files': ['arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s.psmp',
               'bin/cp2k.psmp'],
     'dirs': ['data','tests'],
 }
