@@ -20,7 +20,7 @@ builddependencies = [
 separate_build_dir = True
 
 configopts  = '-DCMAKE_CXX_COMPILER=`which g++` -DCMAKE_C_COMPILER=`which gcc` '
-configopts += '-Dgtest_build_samples=ON '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -Dgtest_build_samples=ON '
 
 installopts  = " && pwd && mkdir -p %(installdir)s/bin "
 installopts += " && cp googlemock/gtest/sample*_unittest %(installdir)s/bin/ ; "
