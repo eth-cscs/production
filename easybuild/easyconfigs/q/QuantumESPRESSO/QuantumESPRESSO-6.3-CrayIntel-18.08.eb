@@ -38,7 +38,7 @@ preconfigopts = ' module unload cray-libsci && module list && '
 preconfigopts += ' LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl -qopenmp"'
 preconfigopts += ' LDFLAGS=$LIBS LD_LIBS=$LIBS'
 preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" '
-preconfigopts += ' CC="cc" FC="ftn" FFLAGS="-O3 -g -assume byterecl -traceback" LDFLAGS="-mkl" '
+preconfigopts += ' CC="cc" FC="ftn" FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" F90FLAGS="-O3 -g -assume byterecl -traceback -qopenmp" LDFLAGS="-mkl" '
 configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
 
