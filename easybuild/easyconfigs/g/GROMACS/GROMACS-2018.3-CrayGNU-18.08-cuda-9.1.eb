@@ -28,7 +28,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 patches = ['gromacs-2018.2.patch']
 
-configopts = ' -DCMAKE_C_FLAGS="-g -fPIC" -DCMAKE_CXX_FLAGS="-g -fPIC" -DGMX_CUDA_TARGET_SM=60'
+configopts = ' -DCMAKE_C_FLAGS="-O3 -fPIC" -DCMAKE_CXX_FLAGS="-O3 -fPIC" -DGMX_CUDA_TARGET_SM=60 -DCMAKE_BUILD_TYPE=Release '
 
 skipsteps = ['test']
 
