@@ -16,17 +16,23 @@ toolchainopts = {'usempi': True, 'openmp': True}
 source_urls = ['https://github.com/QEF/q-e/releases/download/qe-6.3/']
 sources = ['qe-%(version)s.tar.gz']
 
-builddependencies = [
-    ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
-]
+#builddependencies = [
+#    ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
+#]
 
 preconfigopts = ' module unload cray-libsci && module list && '
-preconfigopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" '
-preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" '
-preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64" '
-preconfigopts += ' FFT_LIBS="-L$FFTW_DIR -lfftw3" '
-preconfigopts += ' CC="cc" FC="ftn" FFLAGS="-O3 -g -assume byterecl -traceback" LDFLAGS="-mkl" '
-configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
+preconfigopts += ' CC=cc FC=ftn '
+preconfigopts += ' LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl -qopenmp"'
+preconfigopts += ' LDFLAGS=$LIBS LD_LIBS=$LIBS'
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack  '
+
+#preconfigopts = ' module unload cray-libsci && module list && '
+#preconfigopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" '
+#preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" '
+#preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64" '
+#preconfigopts += ' FFT_LIBS="-L$FFTW_DIR -lfftw3" '
+#preconfigopts += ' CC="cc" FC="ftn" FFLAGS="-O3 -g -assume byterecl -traceback" LDFLAGS="-mkl" '
+#configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
 # correct install rule in Makefile with a phony target (a folder "install" already exists)  
 prebuildopts = ' sed -i -e "s/install :/.PHONY: install\\ninstall:/" Makefile && '
