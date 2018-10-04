@@ -18,9 +18,9 @@ sources = ['qe-%(version)s.tar.gz']
 
 preconfigopts = ' module unload cray-libsci && module list && '
 preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" '
-preconfigopts += ' LD_LIBS="-lpthread -lstdc++ -ldl -qopenmp" ' 
+preconfigopts += ' LD_LIBS="-lpthread -lstdc++ -ldl" ' 
 preconfigopts += ' FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" '
-preconfigopts += ' F90FLAGS="$FFLAGS" CFLAGS="-O3" FFT_LIBS="-mkl" FC="ftn" CC="cc" '
+preconfigopts += ' LDFLAGS="-qopenmp" F90FLAGS="$FFLAGS" FFT_LIBS="-mkl" FC="ftn" CFLAGS="-O3" CC="cc" '
 configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
 # correct install rule in Makefile with a phony target (a folder "install" already exists)  
