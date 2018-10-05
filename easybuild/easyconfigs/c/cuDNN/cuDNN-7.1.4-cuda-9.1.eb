@@ -11,7 +11,7 @@ description = """Nvidias deep neural network library."""
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 cudamajor = '9.1'
-cudaminor = '85_3.10-6.0.6.1_2.1__gf7a1bfb'
+cudaminor = '85_3.18-6.0.7.0_5.1__g2eb7c52'
 cudaver = "%s.%s" % (cudamajor, cudaminor)
 
 versionsuffix = '-cuda-%s' % cudamajor
