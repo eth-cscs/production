@@ -17,12 +17,14 @@ sources = [
     {'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(name)s_%(version)s.tar.gz'}
 ]
 
-builddependencies = [ ('CMake', '3.12.0', '', True), ]
+builddependencies = [ 
+    ('CMake', '3.12.0', '', True),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+]
 
 dependencies = [
-    ('STELLA_CRCLIM', '4a5f9c5', '%s' % precision),
-    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('STELLA_CRCLIM', '4a5f9c5', '%s' % precision),
 ]
 
 srcdir = "../dycore"
