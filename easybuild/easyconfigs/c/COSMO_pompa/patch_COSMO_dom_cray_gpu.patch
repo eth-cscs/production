@@ -1,0 +1,92 @@
+diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
+--- cosmo_pompa.orig/cosmo/Options	2018-10-04 10:06:23.000000000 +0200
++++ cosmo_pompa/cosmo/Options	2018-10-04 10:12:11.000000000 +0200
+@@ -1,17 +1,17 @@
+ # compiler
+-F90      = ftn -D__CRAY_FORTRAN__
++F90      = ftn -D__CRAY_FORTRAN__ # -h system_alloc 
+ COMPILER = cray
+ 
+ # linker
+ LD       = $(F90)
+ 
+--include $(ROOT)/Options.$(COMPILER).cpu
++-include $(ROOT)/Options.$(COMPILER).gpu
+ 
+ #PFLAGS  += -DSINGLEPRECISION # run model in single precision
+ 
+--include $(ROOT)/Options.lib.cpu
++-include $(ROOT)/Options.lib.gpu
+ 
+-# bit-repro math
+-CMATH_DIR=/users/charpill/prg/mch/cmath
+-FMATH_DIR=/users/charpill/prg/mch/fmath
+-CC = CC
+\ No newline at end of file
++# Old fix for Dom
++# LIB += -L/apps/common/UES/SLES12/ddt/18.1.1/lib/64 -Wl,--undefined=malloc -ldmallocth
++
++INC     += -I$(MPICH_DIR)/include
+diff -Nru cosmo_pompa.orig/cosmo/Options.dom.cray.gpu cosmo_pompa/cosmo/Options.dom.cray.gpu
+--- cosmo_pompa.orig/cosmo/Options.dom.cray.gpu	2018-10-04 10:06:22.000000000 +0200
++++ cosmo_pompa/cosmo/Options.dom.cray.gpu	2018-10-04 10:07:05.000000000 +0200
+@@ -1,5 +1,5 @@
+ # compiler
+-F90      = ftn -D__CRAY_FORTRAN__
++F90      = ftn -D__CRAY_FORTRAN__ # -h system_alloc 
+ COMPILER = cray
+ 
+ # linker
+diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
+--- cosmo_pompa.orig/cosmo/Options.lib.gpu	2018-10-04 10:06:23.000000000 +0200
++++ cosmo_pompa/cosmo/Options.lib.gpu	2018-10-04 10:10:27.000000000 +0200
+@@ -18,35 +18,34 @@
+ MPII     = -D__MPICH2
+ 
+ # Grib1 library
+-GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_cray
+ GRIBDWDI =
+ 
+ # Grib-API library
+-GRIBAPI_VERSION = v1.13.1.2
+-GRIBAPIL = -L$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/lib -lgrib_api_f90 -lgrib_api -L$(INSTALL_DIR)/libjasper/lib -ljasper
+-GRIBAPII = -I$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/include
++# GRIBAPI_VERSION = v1.13.1
++GRIBAPIL = -L${EBROOTGRIB_API}/lib -lgrib_api_f90 -lgrib_api -L${EBROOTJASPER}/lib -ljasper
++GRIBAPII = -I${EBROOTGRIB_API}/include
+ 
+ # NetCDF library
+-NETCDFL  = 
+-NETCDFI  = 
++NETCDFL  = -L${NETCDF_DIR}/lib
++NETCDFI  = -I${NETCDF_DIR}/include
+ 
+ # Synsat library
+-RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
++#RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
+ RTTOV7I  =
+ RTTOV10L =
+ RTTOV10I =
+ 
+ # Serialization library
+-SERIALBOX  =
+-SERIALBOXL =
+-SERIALBOXI =
++SERIALBOX  = ${EBROOTSERIALBOX}
++SERIALBOXL = -L${EBROOTSERIALBOX}/lib
+ 
+ # STELLA library
+-STELLA   = $(STELLA_DIR)
+-STELLAL  = -L$(STELLA)/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
+-STELLAI  =
++STELLA   = ${EBROOTSTELLA_CRCLIM}
++STELLAL  = -L${EBROOTSTELLA_CRCLIM}/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
++STELLAI  = -I${EBROOTSTELLA_CRCLIM}/include/STELLA
+ 
+ # Dycore library
+-DYCORE   = $(DYCORE_DIR)
+-DYCOREL  = -L$(DYCORE)/lib -lDycoreWrapperCUDA -lDycoreCUDA
++DYCORE   = ${EBROOTCOSMO_POMPA_CRCLIM_DYCORE}
++DYCOREL  = -L${EBROOTCOSMO_POMPA_CRCLIM_DYCORE}/lib -lDycoreWrapperCUDA -lDycoreCUDA
+ DYCOREI  =
