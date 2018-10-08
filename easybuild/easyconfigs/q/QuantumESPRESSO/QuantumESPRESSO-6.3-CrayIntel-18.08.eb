@@ -13,7 +13,7 @@ description = """Quantum ESPRESSO  is an integrated suite of computer codes
 toolchain = {'name': 'CrayIntel', 'version': '18.08'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
-source_urls = ['https://github.com/QEF/q-e/releases/download/qe-6.3/']
+source_urls = ['https://github.com/QEF/q-e/archive']
 sources = ['qe-%(version)s.tar.gz']
 
 preconfigopts = ' module unload cray-libsci && module list && '
