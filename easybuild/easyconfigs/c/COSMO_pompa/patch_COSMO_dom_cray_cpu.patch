@@ -1,22 +1,9 @@
 diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 --- cosmo_pompa.orig/cosmo/Options	2018-10-04 10:06:23.000000000 +0200
-+++ cosmo_pompa/cosmo/Options	2018-10-04 12:02:30.000000000 +0200
-@@ -1,17 +1,18 @@
- # compiler
--F90      = ftn -D__CRAY_FORTRAN__
-+F90      = ftn -D__CRAY_FORTRAN__ -h system_alloc 
- COMPILER = cray
++++ cosmo_pompa/cosmo/Options	2018-10-06 11:59:45.000000000 +0200
+@@ -11,7 +11,4 @@
  
- # linker
- LD       = $(F90)
- 
---include $(ROOT)/Options.$(COMPILER).cpu
-+-include $(ROOT)/Options.$(COMPILER).gpu
- 
- #PFLAGS  += -DSINGLEPRECISION # run model in single precision
- 
---include $(ROOT)/Options.lib.cpu
-+-include $(ROOT)/Options.lib.gpu
+ -include $(ROOT)/Options.lib.cpu
  
 -# bit-repro math
 -CMATH_DIR=/users/charpill/prg/mch/cmath
@@ -24,19 +11,23 @@ diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 -CC = CC
 \ No newline at end of file
 +INC     += -I$(MPICH_DIR)/include
-+
-+# ensure usage of cray c++ when compiling C/C++ 
-+#portable math functions
-+CC = CC
-diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
---- cosmo_pompa.orig/cosmo/Options.lib.gpu	2018-10-04 10:06:23.000000000 +0200
-+++ cosmo_pompa/cosmo/Options.lib.gpu	2018-10-06 01:07:19.000000000 +0200
-@@ -18,35 +18,34 @@
+diff -Nru cosmo_pompa.orig/cosmo/Options.lib.cpu cosmo_pompa/cosmo/Options.lib.cpu
+--- cosmo_pompa.orig/cosmo/Options.lib.cpu	2018-10-04 10:06:23.000000000 +0200
++++ cosmo_pompa/cosmo/Options.lib.cpu	2018-10-06 12:04:34.000000000 +0200
+@@ -2,7 +2,6 @@
+ 
+ # global libraries and includes
+ LIB      = $(LDFLAGS)
+-
+ INC      = -I.
+ INC     += -I$(ROOT)/$(SRCDIR)
+ 
+@@ -19,35 +18,34 @@
  MPII     = -D__MPICH2
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
-+GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_cray
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_$(COMPILER)
  GRIBDWDI =
  
  # Grib-API library
@@ -48,8 +39,8 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
 +GRIBAPII = -I${EBROOTGRIB_API}/include
  
  # NetCDF library
--NETCDFL  = 
--NETCDFI  = 
+-NETCDFL  =
+-NETCDFI  =
 +NETCDFL  = -L${NETCDF_DIR}/lib
 +NETCDFI  = -I${NETCDF_DIR}/include
  
@@ -61,23 +52,24 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
  RTTOV10I =
  
  # Serialization library
--SERIALBOX  =
--SERIALBOXL =
--SERIALBOXI =
+-SERIALBOX  = ${SERIALBOX_DIR}
+-SERIALBOXL = ${SERIALBOX_FORTRAN_LIBRARIES} -lstdc++
+-SERIALBOXI = -I$(SERIALBOX)/include
+- 
 +SERIALBOX  = ${EBROOTSERIALBOX}
-+SERIALBOXL = -L${EBROOTSERIALBOX}/lib
- 
++SERIALBOXL = -L${EBROOTSERIALBOX}/lib -lstdc++
++
  # STELLA library
 -STELLA   = $(STELLA_DIR)
--STELLAL  = -L$(STELLA)/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
+-STELLAL  = -L$(STELLA)/lib -lCommunicationFramework -ljson -lStella -lgcl -lStellaUtils -lSharedInfrastructure -lstdc++
 -STELLAI  =
 +STELLA   = ${EBROOTSTELLA}
-+STELLAL  = -L${EBROOTSTELLA}/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
++STELLAL  = -L${EBROOTSTELLA}/lib -lCommunicationFramework -ljson -lStella -lgcl -lStellaUtils -lSharedInfrastructure -lstdc++
 +STELLAI  = -I${EBROOTSTELLA}/include/STELLA
  
  # Dycore library
 -DYCORE   = $(DYCORE_DIR)
--DYCOREL  = -L$(DYCORE)/lib -lDycoreWrapperCUDA -lDycoreCUDA
+-DYCOREL  = -L$(DYCORE)/lib -lDycoreWrapper -lDycore
 +DYCORE   = ${EBROOTDYCORE}
-+DYCOREL  = -L${EBROOTDYCORE}/lib -lDycoreWrapperCUDA -lDycoreCUDA
++DYCOREL  = -L${EBROOTDYCORE}/lib -lDycoreWrapper -lDycore
  DYCOREI  =

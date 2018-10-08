@@ -3,9 +3,9 @@ easyblock = 'MakeCp'
 name = 'COSMO_pompa'
 cudaversion = 9.1
 version = '31d7227'
-implementation = 'crCLIM'
-precision = '-double'
-versionsuffix = '-cuda-%s-%s' % (cudaversion, implementation)
+implementation = 'cordex'
+precision = 'double'
+versionsuffix = '-cuda-%s-%s-%s' % (cudaversion, implementation, precision)
 
 homepage = 'https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)'
 description = """
@@ -25,8 +25,9 @@ builddependencies = [
     ('libgrib1_crclim', 'a1e4271'),
     ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' 
       % cudaversion, EXTERNAL_MODULE),
-    ('COSMO_pompa_crclim_dycore/551f6b4-CrayGNU-18.08-cuda-%s-double' 
-      % cudaversion, EXTERNAL_MODULE),
+    ('Dycore/551f6b4-CrayGNU-18.08-cuda-%s-%s-%s' 
+      % ( cudaversion, implementation, precision),  
+      EXTERNAL_MODULE),
 ]
 
 dependencies = [ 
@@ -68,11 +69,11 @@ files_to_copy = [
 ]
 
 postinstallcmds = [
-    'mv %(installdir)s/cosmo %(installdir)s/cosmo_gpu_%s' % implementation,
+    'cd %%(installdir)s; ln -s cosmo cosmo_gpu_%s' % implementation,
 ]
 
 sanity_check_paths = {
-    'files': ['cosmo_gpu_%s' % implementation],
+    'files': ['cosmo', 'cosmo_gpu_%s' % implementation],
     'dirs': []
 }
 
