@@ -6,6 +6,11 @@ version = '22Aug18'
 release = 'stable_22Aug2018'
 cudaversion =  '9.1'
 versionsuffix = '-cuda-%s' % cudaversion
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.1'
+pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
+pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -33,7 +38,7 @@ buildopts = [ ' mpi ', ' omp ' ]
 builddependencies = [
     ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' %cudaversion, EXTERNAL_MODULE),
     ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
-    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('cray-python/%s' %pyver, EXTERNAL_MODULE),
 ]
     
 dependencies = [
