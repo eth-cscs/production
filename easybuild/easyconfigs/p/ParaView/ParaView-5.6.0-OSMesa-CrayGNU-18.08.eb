@@ -24,7 +24,7 @@ pysuff = '-%s%s' % (python, pyver)
 dependencies = [
     ('Boost', '1.67.0', '-python3'),
     ('h5py', '2.8.0', '-python3-serial'),
-    ('ospray', '1.6.1'),
+    ('ospray', '1.7.0'),
     ('Mesa', '17.2.8'),
     ('cray-python/3.6.1.1', EXTERNAL_MODULE)
 ]
