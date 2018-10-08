@@ -30,8 +30,7 @@ builddependencies = [
     ('PyExtensions', '%s' % pyver),
 ]
 
-options = {'modulename': 'scorep_bindings'}
-#skip = ['sanity']
+options = {'modulename': 'scorep'}
 
 sanity_check_paths = {
     'files': ['lib/python%(pv)s/site-packages/scorep/scorep_bindings_mpi.cpython-36m-x86_64-linux-gnu.so' % {'pv': pyshortver}],
