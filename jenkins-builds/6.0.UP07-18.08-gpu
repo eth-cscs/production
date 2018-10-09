@@ -22,6 +22,7 @@
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
  jupyterhub-0.9.0-CrayGNU-18.08.eb
+ LAMMPS-22Aug2018-CrayGNU-18.08-cuda-9.1.eb         --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  magma-2.2.0-CrayGNU-18.08-cuda-9.1.eb              --set-default-module
  magma-2.3.0-CrayIntel-18.08-cuda-9.1.eb
@@ -38,6 +39,7 @@
  pycuda-2017.1.1-CrayGNU-18.08-python3-cuda-9.1.eb  --set-default-module
  PyExtensions-2.7.15.1-CrayGNU-18.08.eb
  PyExtensions-3.6.5.1-CrayGNU-18.08.eb
+ QuantumESPRESSO-6.3-CrayIntel-18.08.eb             --set-default-module
  Spark-2.3.1-CrayGNU-18.08-Hadoop-2.7.eb
  TensorFlow-1.7.0-CrayGNU-18.08-cuda-9.1-python3.eb --set-default-module
  Theano-1.0.2-CrayGNU-18.08-cuda-9.1-python2.eb
