@@ -8,7 +8,10 @@ version = "6.0.1"
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '1.1'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 homepage = "http://llvm.org/"
 description = """The LLVM Core libraries provide a modern source- and target-independent
@@ -27,7 +30,7 @@ sources = ["llvm-%(version)s.src.tar.xz"]
 
 dependencies = [
     ('zlib', '1.2.11'),
-    ('cray-python/3.6.1.1', EXTERNAL_MODULE)
+    ('cray-python/%s % pyver', EXTERNAL_MODULE)
 ]
 
 builddependencies = [('CMake', '3.12.0','', True)]
