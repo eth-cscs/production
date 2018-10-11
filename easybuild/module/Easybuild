@@ -93,7 +93,7 @@ if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
     setenv EASYBUILD_TMPDIR                         $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
 if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
-    setenv EASYBUILD_BUILDPATH                      $::env($XDG_RUNTIME_DIR)/easybuild/build
+    setenv EASYBUILD_BUILDPATH                      $::env(XDG_RUNTIME_DIR)/easybuild/build
 }
 #
 # If not set, define EASYBUILD_SOURCEPATH
