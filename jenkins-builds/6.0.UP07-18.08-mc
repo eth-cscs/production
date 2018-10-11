@@ -22,6 +22,7 @@
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
  jupyterhub-0.9.0-CrayGNU-18.08.eb
+ LAMMPS-22Aug2018-CrayGNU-18.08.eb                  --set-default-module
  LLVM-5.0.0-CrayGNU-18.08.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  Mesa-17.2.8-CrayGNU-18.08.eb
@@ -33,6 +34,7 @@
  Python-bare-3.6.2.eb                               --hidden
  PyExtensions-2.7.15.1-CrayGNU-18.08.eb
  PyExtensions-3.6.5.1-CrayGNU-18.08.eb
+ QuantumESPRESSO-6.3-CrayIntel-18.08.eb             --set-default-module
  Spark-2.3.1-CrayGNU-18.08-Hadoop-2.7.eb
  VASP-5.4.4-CrayIntel-18.08.eb                      --set-default-module
  advisor_2018.eb                                    --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools

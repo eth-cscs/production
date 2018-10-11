@@ -87,13 +87,13 @@ if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
 }
 setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 #
-# If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to /dev/shm/$USER/easbuild/stage
+# If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to $XDG_RUNTIME_DIR/easybuild
 #
 if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
-    setenv EASYBUILD_TMPDIR                         /dev/shm/$::env(USER)/easybuild/stage/tmp
+    setenv EASYBUILD_TMPDIR                         $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
 if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
-    setenv EASYBUILD_BUILDPATH                      /dev/shm/$::env(USER)/easybuild/stage/build
+    setenv EASYBUILD_BUILDPATH                      $::env($XDG_RUNTIME_DIR)/easybuild/build
 }
 #
 # If not set, define EASYBUILD_SOURCEPATH

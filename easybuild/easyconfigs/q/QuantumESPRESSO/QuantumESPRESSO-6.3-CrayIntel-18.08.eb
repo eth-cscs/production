@@ -1,4 +1,4 @@
-# contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
+# contributed by Guilherme Peretti Pezzi, Luca Marsella and Anton Kozhevnikov (CSCS)
 easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
@@ -13,8 +13,7 @@ description = """Quantum ESPRESSO  is an integrated suite of computer codes
 toolchain = {'name': 'CrayIntel', 'version': '18.08'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
-source_urls = ['https://github.com/QEF/q-e/releases/download/qe-6.3/']
-sources = ['qe-%(version)s.tar.gz']
+sources = ['https://gitlab.com/QEF/q-e/-/archive/' + 'qe-%(version)s/q-e-qe-%(version)s.tar.gz']
 
 preconfigopts = ' module unload cray-libsci && module list && '
 preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" '
