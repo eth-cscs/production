@@ -32,7 +32,7 @@ builddependencies = [
 dependencies = [
     ('PyExtensions', '%s' % pyver),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('LLVM', '6.0.1'),
+    ('LLVM', '6.0.1'),  # llvmlite requires LLVM 6.0.x 
 ]
 
 exts_list = [
