@@ -1,21 +1,30 @@
 #%Module
 proc ModulesHelp { } {
-    puts stderr { EasyBuild is a software build and installation framework
-written in Python that allows you to install software in a structured,
-repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/
+    puts stderr {
+
+Description
+===========
+Production EasyBuild @ CSCS
+
+
+More information
+================
+ - Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild
     }
 }
 
-module-whatis {Description: EasyBuild is a software build and installation framework
-written in Python that allows you to install software in a structured,
-repeatable and robust way. - Homepage: http://hpcugent.github.com/easybuild/}
+module-whatis {Description: Production EasyBuild @ CSCS }
+module-whatis {Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild}
+
+set root /apps/common/UES/jenkins/easybuild/software/EasyBuild-custom/cscs
+
+conflict EasyBuild-custom
+
+setenv	EBROOTEASYBUILDMINCUSTOM		"$root"
+setenv	EBVERSIONEASYBUILDMINCUSTOM		"cscs"
+setenv	EBDEVELEASYBUILDMINCUSTOM		"$root/easybuild/EasyBuild-custom-cscs-easybuild-devel"
 
 
-#
-# Conflicts
-#
-conflict EasyBuild-cscs
-# the part below comes from easybuild/easyconfigs/e/EasyBuild-custom.eb
 ################
 # COMMON SETUP #
 ################
@@ -37,7 +46,7 @@ if { ! [ info exists ::env(EB_CUSTOM_REPOSITORY) ] } {
 setenv XDG_CONFIG_DIRS                          $::env(EB_CUSTOM_REPOSITORY)
 setenv EASYBUILD_ROBOT_PATHS                    $::env(EB_CUSTOM_REPOSITORY)/easyconfigs/:
 setenv EASYBUILD_INCLUDE_EASYBLOCKS             $::env(EB_CUSTOM_REPOSITORY)/easyblocks/*.py
-setenv EASYBUILD_EXTERNAL_MODULES_METADATA  $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
+setenv EASYBUILD_EXTERNAL_MODULES_METADATA      $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
 #
 # Checking if we have the command modulecmd
 # If so, then module is a c version
@@ -49,7 +58,7 @@ if { $status == 0 } {
 } else {
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesTcl
     if { [ file readable "/usr/share/Modules/tcl" ] } {
-        prepend-path PATH                           /usr/share/Modules/tcl
+        prepend-path PATH                       /usr/share/Modules/tcl
     }
 }
 #########################
@@ -58,7 +67,7 @@ if { $status == 0 } {
 # current system name
 if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
-} else {
+} else { 
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
 # system specific setup
@@ -66,7 +75,7 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
-    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme   
 } else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
 }
@@ -89,11 +98,15 @@ setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 #
 # If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to $XDG_RUNTIME_DIR/easybuild
 #
-if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
-    setenv EASYBUILD_TMPDIR                         $::env(XDG_RUNTIME_DIR)/easybuild/tmp
+if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
+    setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
+} else {
+    setenv EASYBUILD_TMPDIR                     $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
-if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
-    setenv EASYBUILD_BUILDPATH                      $::env($XDG_RUNTIME_DIR)/easybuild/build
+if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
+    setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
+} else {
+    setenv EASYBUILD_BUILDPATH                  $::env(XDG_RUNTIME_DIR)/easybuild/build
 }
 #
 # If not set, define EASYBUILD_SOURCEPATH
@@ -112,3 +125,5 @@ if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
 prepend-path MODULEPATH                         $::env(EASYBUILD_INSTALLPATH)/modules/all
 # Loading easybuild module
 module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
+
+# Built with EasyBuild version 3.6.2
