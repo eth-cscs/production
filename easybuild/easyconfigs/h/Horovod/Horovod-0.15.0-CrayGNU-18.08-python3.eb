@@ -3,7 +3,6 @@ easyblock = 'PythonPackage'
 name = 'Horovod'
 version = '0.15.0'
 
-
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '5.1'
@@ -30,7 +29,6 @@ dependencies = [
 
 skipsteps = ['build']
 
-
 preinstallopts = 'module unload atp/2.1.2 && '
 preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
 preinstallopts += "export HOROVOD_WITH_TENSORFLOW=1 && "
@@ -41,6 +39,7 @@ sanity_check_paths = {
     'dirs': ['lib/python%s/site-packages' % pyshortver],
 }
 
+# This is needed to link to libtensorflow_framework.so
 modextravars = { 'LD_LIBRARY_PATH':'$::env(EBROOTTENSORFLOW)/lib/python3.6/site-packages/tensorflow/:$::env(LD_LIBRARY_PATH)'}
 
 moduleclass = 'tools'
