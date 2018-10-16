@@ -12,7 +12,7 @@ toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 toolchainopts = {'dynamic': True, 'verbose': False}
 
 builddependencies = [
-    ('CMake', '3.11.4', '', True),
+    ('CMake', '3.12.0', '', True),
 ]
 
 dependencies = [

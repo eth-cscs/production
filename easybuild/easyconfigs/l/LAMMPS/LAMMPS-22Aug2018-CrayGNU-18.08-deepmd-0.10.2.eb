@@ -7,6 +7,13 @@ release = 'stable_22Aug2018'
 deepmd_version = '0.10.2'
 versionsuffix = '-deepmd-%s' % deepmd_version
 
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
 
@@ -30,8 +37,8 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
-    ('cray-python/2.7.13.1', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('DeePMD', deepmd_version),
 ]
 
