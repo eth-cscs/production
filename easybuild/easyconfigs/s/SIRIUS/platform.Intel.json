@@ -1,6 +1,6 @@
 {
     "MPI_CXX"     : "CC",
-    "MPI_CXX_OPT" : "-qopenmp -std=c++11 -D__GPU -D__MAGMA -I$(MKLROOT)/include/fftw/ -D__SPGLIB_STD_INCLUDE_PATH",
+    "MPI_CXX_OPT" : "-qopenmp -std=c++11 -D__GPU -D__MAGMA -I$(MKLROOT)/include/fftw/ -D__SPGLIB_STD_INCLUDE_PATH -D__SCALAPACK",
     "MPI_FC"      : "ftn",
     "MPI_FC_OPT"  : "-O3 -qopenmp -cpp",
     "CC"          : "cc",

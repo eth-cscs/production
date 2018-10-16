@@ -1,0 +1,32 @@
+# jg (CSCS)
+# beta will expire on: October 11, 2018
+easyblock = 'Bundle'
+name = 'advisor'
+version = '2019'
+#versionsuffix = '.0.0.553933'
+
+homepage = 'https://software.intel.com/en-us/intel-advisor-xe'
+description = """Intel Advisor XE is Intel's Vectorization Optimization and
+Thread Prototyping tool: 
+ - Vectorize & thread code for maximum performance
+ - Easy workflow + data + tips = faster code faster
+ - Prioritize, Prototype & Predict performance gain."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+postinstallcmds = [ 'cp -a /apps/common/UES/intel/%(version)s/%(name)s_%(version)s/* %(installdir)s' ]
+# ln instead of cp would save some space but will fail at the permissions step
+# that can not be skipped.
+
+modextrapaths = {
+    'PATH': 'bin64',
+    'PYTHONPATH': 'pythonapi',
+}
+
+modextravars = {
+    'ADVISOR_2019_DIR': '%(installdir)s/',
+    'ADVISOR_DOC': '%(installdir)s/documentation/en',
+    'ADVISOR_SAMPLES': '%(installdir)s/samples/en',
+}
+
+moduleclass = 'tools'
+

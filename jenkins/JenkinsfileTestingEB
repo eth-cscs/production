@@ -52,7 +52,7 @@ stage('Build Stage') {
                 node(machineName) {
                     def scmVars = checkout scm
                     def moduleDefinition = ''
-                    if (machineName == 'leone')
+                    if (machineName in ['leone', 'fulen'])
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
                     def projectName = env.JOB_BASE_NAME.trim()
@@ -63,7 +63,7 @@ stage('Build Stage') {
                     def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
-                    def buildPath = "/dev/shm/jenscscs/$gitCommit/"
+                    def buildPath = "/tmp/jenscscs/$gitCommit/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
                     def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"

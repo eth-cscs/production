@@ -1,0 +1,27 @@
+easyblock = 'ConfigureMake'
+
+name = 'emacs'
+version = '26.1'
+
+homepage = 'http://www.gnu.org/software/emacs/'
+description = """GNU Emacs is an extensible, customizable text editor—and more.
+ At its core is an interpreter for Emacs Lisp, a dialect of the Lisp programming language
+ with extensions to support text editing."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+sources = ['emacs-%(version)s.tar.gz']
+source_urls = ['http://mirror.switch.ch/ftp/mirror/gnu/emacs/']
+
+dependencies = [
+    ('ncurses', '6.1'),
+]
+
+configopts = '--with-gif=no --with-tiff=no --with-x-toolkit=no --with-xpm=no --with-jpeg=no'
+
+sanity_check_paths = {
+    'files': ["bin/emacs", "bin/emacs-%(version)s", "bin/emacsclient", "bin/etags"],
+    'dirs': []
+}
+
+moduleclass = 'tools'
