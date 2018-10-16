@@ -3,16 +3,21 @@
 # set environment
 set apps "$env(APPS)"
 set path "${apps}/UES/jenkins/6.0.UP07/ARCH/easybuild/modules/all"
-# set gpupath and mcpath
+set toolspath "${apps}/UES/jenkins/6.0.UP07/ARCH/easybuild/tools/modules/all"
+# set gpupath and mcpath and corresponding toolspath
 set gpupath [ string map { ARCH gpu } "${path}" ]
+set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
 set mcpath [ string map { ARCH mc } "${path}" ]
-# list of modulefiles in mcpath
+set toolsmcpath [string map { ARCH mc } "${toolspath}"]
+# list of modulefiles in mcpath and toolsmcpath
 set mclist [exec ls --color=none "${mcpath}"]
+set toolsmclist [exec ls --color=none "${toolsmcpath}"]
 
 # checks for conflicts
 if { [ is-loaded craype-haswell ] } {
  module unload craype-haswell
  module unuse "${gpupath}"
+ module unuse "${toolsgpupath}"
 }
 # conflicts
 conflict craype-haswell
@@ -21,15 +26,17 @@ conflict daint-gpu
 # module remove (unload) or switch (swap): unload dependencies
 if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${mclist} {
-#  if { [is-loaded ${module}] } {
    module unload ${module}
-#  }
+ }
+ foreach module ${toolsmclist} {
+   module unload ${module}
  }
 }
 
 # load dependency and update MODULEPATH
 module load craype-broadwell
 module use "${mcpath}"
+module use "${toolsmcpath}"
 
 # load additional modules
 #module load xalt
@@ -41,6 +48,7 @@ proc ModulesHelp { } {
  puts stderr "\t Set environment for mc broadwell compute nodes:
   \t - module load craype-broadwell
   \t - module use ${mcpath} 
+  \t - module use ${toolsmcpath} 
  "
  return 0
 }
