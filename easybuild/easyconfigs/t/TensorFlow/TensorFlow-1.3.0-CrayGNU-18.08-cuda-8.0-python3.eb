@@ -7,7 +7,7 @@ version = '1.3.0'
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '1.1'
+py_rev_ver = '5.1'
 
 cudaver = '8.0'
 
@@ -15,6 +15,9 @@ ver_suffix_cuda = '-cuda-%s' % (cudaver)
 ver_suffix_py = '-python%s' % (py_maj_ver)
 ver_long_suffix_py = '-python%s.%s' % (py_maj_ver, py_min_ver)
 versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
+
+pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
+pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
 
 installdir = '%(installdir)s'
 builddir = '%(builddir)s'
@@ -62,9 +65,9 @@ cmds_map = [
 ]
 
 files_to_copy = [
-              (['%(builddir)s/' +  whl_file], '%(installdir)s'),
-	      (['%(builddir)s/bin'], '%(installdir)s'),
-	      (['%(builddir)s/lib'], '%(installdir)s'),
+    (['%(builddir)s/' +  whl_file], '%(installdir)s'),
+    (['%(builddir)s/bin'], '%(installdir)s'),
+    (['%(builddir)s/lib'], '%(installdir)s'),
 ]
 
 sanity_check_paths={
