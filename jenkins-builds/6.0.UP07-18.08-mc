@@ -10,6 +10,7 @@
  CPMD-4.1-CrayIntel-18.08.eb                        --set-default-module
  GREASY-2.1-cscs-CrayGNU-18.08.eb                   --set-default-module
  GROMACS-2018.3-CrayGNU-18.08.eb                    --set-default-module
+ GROMACS-2018.3-CrayGNU-18.08-PLUMED-2.4.3.eb
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
  GSL-2.5-CrayIntel-18.08.eb
