@@ -10,7 +10,6 @@
  CPMD-4.1-CrayIntel-18.08.eb                        --set-default-module
  GREASY-2.1-cscs-CrayGNU-18.08-gpu.eb               --set-default-module
  GROMACS-2018.3-CrayGNU-18.08-cuda-9.1.eb           --set-default-module
- GROMACS-2018.3-CrayGNU-18.08-PLUMED-2.4.3-cuda-9.1.eb
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
  GSL-2.5-CrayIntel-18.08.eb
@@ -36,6 +35,7 @@
  netcdf-python-1.4.1-CrayGNU-18.08-python2.eb
  netcdf-python-1.4.1-CrayGNU-18.08-python3.eb       --set-default-module
  ParaView-5.5.2-EGL-CrayGNU-18.08.eb                --set-default-module
+ PLUMED-2.4.3-CrayGNU-18.08.eb                      --set-default-module
  Python-bare-3.6.2.eb                               --hidden
  pycuda-2017.1.1-CrayGNU-18.08-python2-cuda-9.1.eb
  pycuda-2017.1.1-CrayGNU-18.08-python3-cuda-9.1.eb  --set-default-module
