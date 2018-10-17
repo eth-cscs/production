@@ -21,7 +21,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
     ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
-    ('PCRE', '8.38'),
+    ('PCRE', '8.42'),
 ]
 
 configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"'
