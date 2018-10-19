@@ -9,15 +9,14 @@ py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '5.1'
 
+pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
+pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
+
 cudaver = '8.0'
 
 ver_suffix_cuda = '-cuda-%s' % (cudaver)
 ver_suffix_py = '-python%s' % (py_maj_ver)
-ver_long_suffix_py = '-python%s.%s' % (py_maj_ver, py_min_ver)
 versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
-
-pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
-pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
 
 installdir = '%(installdir)s'
 builddir = '%(builddir)s'
@@ -33,7 +32,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('cuDNN', '5.1', '-cuda-%s' % cudaver, True),
     ('SWIG', '3.0.12', ver_suffix_py),
     ('protobuf', '3.6.0', ver_suffix_py),
@@ -72,13 +71,13 @@ files_to_copy = [
 
 sanity_check_paths={
     'files': [whl_file],
-    'dirs': ['%s/lib/python%s.%s/site-packages' % (installdir, py_maj_ver, py_min_ver)],
+    'dirs': ['%s/lib/python%s/site-packages' % (installdir, pyshortver)],
 }
 
 postinstallcmds = [ 'rm -rf /dev/shm/$USER/bazelout/' ]
 
 modextrapaths = {
-    'PYTHONPATH' : 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
+    'PYTHONPATH' : 'lib/python%s/site-packages' % pyshortver,
 }
 
 moduleclass = 'devel'

@@ -7,7 +7,7 @@ version = '0.4.5'
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '1.1'
+py_rev_ver = '5.1'
 versionsuffix = '-python%s' % (py_maj_ver)
 
 homepage = 'http://baze.io/'
@@ -33,4 +33,3 @@ sanity_check_paths={
 }
 
 moduleclass = 'devel'
-
