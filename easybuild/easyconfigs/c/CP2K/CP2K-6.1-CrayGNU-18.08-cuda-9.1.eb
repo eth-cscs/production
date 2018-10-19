@@ -34,7 +34,6 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
     ('Libint', '1.1.4'),
     ('libxc', '4.2.3'),
 ]
