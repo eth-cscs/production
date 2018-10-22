@@ -27,12 +27,6 @@ dependencies = [
 exts_defaultclass = 'PythonPackage'
 
 exts_list = [
-    (name, version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab/'],
-        }),
     ('jupyterlab_server', '0.2.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
@@ -44,6 +38,12 @@ exts_list = [
         'req_py_minver': '6',
         'use_pip': True,
         'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab_launcher/'],
+        }),
+    (name, version, {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab/'],
         }),
 ]
 
