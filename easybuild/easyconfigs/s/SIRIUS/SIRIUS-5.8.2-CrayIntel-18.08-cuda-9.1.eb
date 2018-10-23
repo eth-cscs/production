@@ -1,0 +1,52 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SIRIUS'
+version = '5.8.2'
+cudaversion = 9.1
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://electronic-structure.github.io/SIRIUS/'
+description = """Domain specific library for electronic structure calculations."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [('CMake', '3.12.0', '', True)]
+
+dependencies = [
+  ('GSL', '2.5'),
+  ('libxc', '4.2.3'),
+  ('spglib','1.10.4'),
+  ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+  ('magma', '2.4.0', '-cuda-%s' % cudaversion)
+]
+
+separate_build_dir = True
+
+common_prebuildopts = 'module unload cray-libsci && module load gcc && module list &&'
+
+prebuildopts = [ common_prebuildopts ]
+
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DGPU_MODEL='P100'"
+
+modextrapaths = {'CPATH': ['fortran']}
+
+#buildopts = 'sirius'
+
+#files_to_copy=[
+#  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib'),
+#  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib64'),
+#  (['src/sirius.mod'], 'include')
+#]
+#
+#sanity_check_paths = {
+#    'files': ['lib/libsirius_f.a', 'lib/libsirius.a', 'lib64/libsirius_f.a', 'lib64/libsirius.a', 'include/sirius.mod'],
+#    'dirs': ['lib', 'lib64', 'include']
+#}
+
+moduleclass = 'chem'
