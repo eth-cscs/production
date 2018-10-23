@@ -39,7 +39,4 @@ sanity_check_paths = {
     'dirs': ['lib/python%s/site-packages' % pyshortver],
 }
 
-# This is needed to link to libtensorflow_framework.so
-modextravars = { 'LD_LIBRARY_PATH':'$::env(EBROOTTENSORFLOW)/lib/python3.6/site-packages/tensorflow/:$::env(LD_LIBRARY_PATH)'}
-
 moduleclass = 'tools'
