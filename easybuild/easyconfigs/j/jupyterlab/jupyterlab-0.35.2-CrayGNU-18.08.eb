@@ -51,7 +51,7 @@ modextravars = {
 }
 
 # install labhub extension
-modextrapaths = { 'JUPYTERLAB_DIR':'share/jupyter/lab' }
+postinstallcmds = ["export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/; "
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH; "
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyterlab/hub-extension@0.12.0"]
 
