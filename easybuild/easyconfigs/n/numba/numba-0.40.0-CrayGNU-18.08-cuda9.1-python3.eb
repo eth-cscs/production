@@ -1,0 +1,72 @@
+easyblock = 'Bundle'
+
+name = 'numba'
+version = '0.40.0'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+cudamajor = '9.1'
+cudaminor = '85_3.18-6.0.7.0_5.1__g2eb7c52'
+cudaver = "%s.%s" % (cudamajor, cudaminor)
+
+versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
+
+homepage = 'http://numba.pydata.org/'
+description = """Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics,
+ Inc. It uses the remarkable LLVM compiler infrastructure to compile Python syntax to machine code."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+exts_defaultclass = 'PythonPackage'
+
+builddependencies = [
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('LLVM', '6.0.1'),  # llvmlite requires LLVM 6.0.x 
+]
+
+exts_list = [
+    ('llvmlite', '0.25.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'prebuildopts' : 'export LLVM_CONFIG=$EBROOTLLVM/bin/llvm-config; ',
+        'patches': ['llvmlite-0.25.0_fix-ffi-Makefile.patch'],
+        'source_urls': ['https://pypi.python.org/packages/source/l/llvmlite/'],
+        'checksums': [
+            'fd64def9a51dd7dc61913a7a08eeba5b9785522740bec5a7c5995b2a90525025',
+        ],
+    }),
+    (name, version, {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/n/numba/'],
+        'checksums': ['2510fbeee71c07bbd0987d4fbbcb8fa6b02f95da8a81ebc0e31b825dda198f45'],
+    }),
+]
+
+full_sanity_check = True
+
+sanity_check_paths = {
+    'files': ['bin/numba', 'bin/pycc'],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+
+modextravars = {
+    'NUMBAPRO_CUDALIB' : '$::env(CRAY_CUDATOOLKIT_DIR)/lib64',
+    'NUMBAPRO_NVVM' : '$::env(CRAY_CUDATOOLKIT_DIR)/nvvm/lib64/libnvvm.so',
+    'NUMBAPRO_LIBDEVICE' : '$::env(CRAY_CUDATOOLKIT_DIR)/nvvm/libdevice',
+}
+
+moduleclass = 'lang'
