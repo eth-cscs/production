@@ -21,6 +21,7 @@ builddependencies = [
 ]
 
 dependencies = [
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
