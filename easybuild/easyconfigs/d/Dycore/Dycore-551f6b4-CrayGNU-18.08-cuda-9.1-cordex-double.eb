@@ -1,0 +1,42 @@
+# omlins, kraushm, jg, havogt (cscs)
+easyblock = 'CMakeMake'
+
+name = 'Dycore'
+version = '551f6b4'
+cudaversion = 9.1
+implementation = 'cordex'
+precision = 'double'
+versionsuffix = '-cuda-%s-%s-%s' % (cudaversion, implementation, precision)
+
+homepage = 'https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)'
+description = """cosmo-pompa-dycore"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
+# repo is private (+ no official release)
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/d/%(name)s/'              \
+                 '%(name)s_%(version)s.tar.gz'}
+]
+
+builddependencies = [ 
+    ('CMake', '3.12.0', '', True),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('STELLA', '4a5f9c5', '-%s-%s' % (implementation, precision)),
+]
+
+srcdir = "../dycore"
+configopts  = "-DCMAKE_BUILD_TYPE=Release "
+configopts += "-DSINGLEPRECISION=OFF "
+configopts += "-DCUDA_BACKEND=ON "
+configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
+configopts += "-DBITREPRO=OFF "
+
+separate_build_dir = True
+
+moduleclass = 'devel'
+
