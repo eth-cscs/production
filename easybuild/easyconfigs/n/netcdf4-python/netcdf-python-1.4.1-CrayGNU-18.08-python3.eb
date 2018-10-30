@@ -21,9 +21,10 @@ pysuff = '-python%s' % py_maj_ver
 versionsuffix = pysuff
 dependencies = [
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('PyExtensions', '%s' % pyver),
     ('cray-netcdf/4.6.1.2', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
-    ('cftime', '1.0.0', pysuff),
+    ('cftime', '1.0.2.1', pysuff),
 ]
 
 sanity_check_paths = {
