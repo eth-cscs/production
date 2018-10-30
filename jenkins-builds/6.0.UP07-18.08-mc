@@ -57,6 +57,7 @@
  jengafettplugin-0.1.eb                             --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-18.08-python3.eb         --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-18.08.eb                     --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ oq-engine-3.2.0-CrayGNU-18.08.eb                   --hidden
  otfprofile-6e2022d-CrayGNU-18.08.eb                --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  papi-wrap-1.0-CrayGNU-18.08.eb                     --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  papi-wrap-1.0-CrayCCE-18.08.eb                                          --installpath=/apps/dom/UES/jenscscs/6.0.UP07/mc/easybuild/tools
