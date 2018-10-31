@@ -67,7 +67,7 @@ if { $status == 0 } {
 # current system name
 if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
-} else { 
+} else {
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
 # system specific setup
@@ -75,7 +75,7 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
-    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme   
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
 } else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
 }
@@ -95,16 +95,27 @@ if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
     setenv EASYBUILD_PREFIX                     $::env(EASYBUILD_PREFIX)
 }
 setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
+
+# attempt to prevent production installations by mistake
+if { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
+    setenv EASYBUILD_PREFIX                     $::env(SCRATCH)/easybuild/$system
+}
+
 #
 # If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to $XDG_RUNTIME_DIR/easybuild
 #
 if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
     setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
+} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
+    setenv EASYBUILD_TMPDIR                     /tmp/easybuild/tmp
 } else {
     setenv EASYBUILD_TMPDIR                     $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
+
 if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
     setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
+} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
+    setenv EASYBUILD_BUILDPATH                  /tmp/easybuild/build
 } else {
     setenv EASYBUILD_BUILDPATH                  $::env(XDG_RUNTIME_DIR)/easybuild/build
 }
