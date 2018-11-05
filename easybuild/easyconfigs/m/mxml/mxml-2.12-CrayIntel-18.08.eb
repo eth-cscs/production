@@ -3,7 +3,6 @@ easyblock = 'ConfigureMake'
 
 name = 'mxml'
 version = '2.12'
-# versionsuffix = '-ipm'
 
 homepage = 'http://michaelrsweet.github.io/mxml/'
 description = """Mini-XML is a tiny XML library that you can use to read and
