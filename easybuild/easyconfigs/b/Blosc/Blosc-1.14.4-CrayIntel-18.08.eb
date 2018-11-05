@@ -1,0 +1,26 @@
+# @omlins
+easyblock = 'CMakeMake'
+
+name = 'Blosc'
+version = '1.14.4'
+
+homepage = 'http://www.blosc.org/'
+description = "Blosc, an extremely fast, multi-threaded, meta-compressor library"
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://github.com/Blosc/c-blosc/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+]
+
+sanity_check_paths = {
+    'files': ['include/blosc-export.h', 'include/blosc.h', 'lib/libblosc.a',
+              'lib/libblosc.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

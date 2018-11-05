@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS) 
+# contributed by Luca Marsella (CSCS); updated by @omlins 
 name = 'bzip2'
 version = '1.0.6'
 
@@ -7,19 +7,16 @@ description = """bzip2 is a freely available, patent free, high-quality data com
  compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical
  compressors), whilst being around twice as fast at compression and six times faster at decompression."""
 
-toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
 toolchainopts = {'pic': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.bzip.org/%(version)s']
+source_urls = ['https://sourceforge.net/projects/bzip2/files/']
 
 # create pkgconfig file
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
     'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: bzip2 \nDescription: bzip2 compression library \nVersion: 1.0.6 \n\nRequires: \nLibs: -L\${libdir} -lbz2 \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc'
 ]
-
-# prepend PKG_CONFIG_PATH: EasyBuild does this automatically
-#modextrapaths = {'PKG_CONFIG_PATH': ['lib/pkgconfig']}
 
 moduleclass = 'tools'

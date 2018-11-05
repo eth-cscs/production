@@ -1,0 +1,27 @@
+# @omlins
+easyblock = 'ConfigureMake'
+
+name = 'lz4'
+version = '1.8.3'
+
+homepage = 'https://lz4.github.io/lz4/'
+description = """LZ4 is lossless compression algorithm, providing compression speed at 400 MB/s per core. 
+ It features an extremely fast decoder, with speed in multiple GB/s per core."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+
+source_urls = ['https://github.com/lz4/lz4/archive/']
+sources = ['v%(version)s.tar.gz']
+
+skipsteps = ['configure']
+
+installopts = "PREFIX=%(installdir)s"
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ["bin/lz4", "lib/liblz4.%s" % SHLIB_EXT, "include/lz4.h"],
+    'dirs': ["lib/pkgconfig"]
+}
+
+moduleclass = 'lib'
