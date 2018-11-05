@@ -1,3 +1,4 @@
+#@omlins
 easyblock = 'ConfigureMake'
 
 name = 'Szip'
