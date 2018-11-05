@@ -9,7 +9,6 @@ description = "Szip compression software, providing lossless compression of scie
 
 toolchain = {'name': 'CrayIntel', 'version': '18.08'}
 toolchainopts = {'pic': True}
-# toolchainopts = {'optarch': True, 'pic': True}
 
 source_urls = ['http://www.hdfgroup.org/ftp/lib-external/szip/%(version)s/src']
 sources = [SOURCELOWER_TAR_GZ]
