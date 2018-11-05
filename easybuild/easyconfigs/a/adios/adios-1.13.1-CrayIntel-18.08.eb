@@ -1,0 +1,48 @@
+# contributed by Luca Marsella (CSCS); extended by Samuel Omlin (CSCS)
+easyblock = 'ConfigureMake'
+
+name = "adios"
+version = '1.13.1'
+
+homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
+description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
+to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['http://users.nccs.gov/~pnorbert/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('mxml', '2.12'),
+    ('zlib', '1.2.11'),
+    ('bzip2', '1.0.6'),
+    ('Szip', '2.1.1'),
+    ('lz4', '1.8.3'),
+    ('Blosc', '1.14.4'),
+    ('pmi/5.0.14', EXTERNAL_MODULE),
+    ('ugni/6.0.14.0-6.0.7.0_23.1__gea11d3d.ari', EXTERNAL_MODULE)
+]
+
+configopts = ('--with-mxml=$EBROOTMXML '
+              '--with-zlib=$EBROOTZLIB '
+              '--with-bzip2=$EBROOTBZIP2 '
+              '--with-szip=$EBROOTSZIP '
+              '--with-lz4=$EBROOTSLZ4 '
+              '--with-blosc=$EBROOTBLOSC '
+              '--with-cray-pmi=$EBROOTPMI '
+              '--with-cray-ugni-incdir=/opt/cray/gni-headers/default/include '
+              '--with-cray-ugni-libdir=/opt/cray/ugni/default/lib64 '
+              '--with-lustre=/usr/lib64 ')
+
+parallel = 1
+
+# check if library files are created
+sanity_check_paths = {
+    'files': ['lib/libadios.a'],
+    'dirs': ["."]
+}
+
+# check other easyconfigs for possible options
+moduleclass = 'base'
