@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'SIRIUS'
-version = '5.8.2'
+version = '5.8.6'
 cudaversion = 9.1
 versionsuffix = '-cuda-%s' % cudaversion
 
@@ -22,31 +22,18 @@ dependencies = [
   ('libxc', '4.2.3'),
   ('spglib','1.10.4'),
   ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
-  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
-  ('magma', '2.4.0', '-cuda-%s' % cudaversion)
+  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE)
+  #('magma', '2.4.0', '-cuda-%s' % cudaversion)
 ]
 
 separate_build_dir = True
 
-common_prebuildopts = 'module unload cray-libsci && module load gcc && module list &&'
+common_prebuildopts = 'module unload cray-libsci && module load gcc/6.2.0 && module list &&'
 
 prebuildopts = [ common_prebuildopts ]
 
-configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DGPU_MODEL='P100'"
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DGPU_MODEL='P100'"
 
 modextrapaths = {'CPATH': ['fortran']}
-
-#buildopts = 'sirius'
-
-#files_to_copy=[
-#  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib'),
-#  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib64'),
-#  (['src/sirius.mod'], 'include')
-#]
-#
-#sanity_check_paths = {
-#    'files': ['lib/libsirius_f.a', 'lib/libsirius.a', 'lib64/libsirius_f.a', 'lib64/libsirius.a', 'include/sirius.mod'],
-#    'dirs': ['lib', 'lib64', 'include']
-#}
 
 moduleclass = 'chem'
