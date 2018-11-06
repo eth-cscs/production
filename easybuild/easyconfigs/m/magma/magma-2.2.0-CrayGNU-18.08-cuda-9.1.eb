@@ -19,7 +19,7 @@ sources = [SOURCE_TAR_GZ]
 source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
 patches = [('magma-2.2.0-Cray-Pascal.patch')]
 
-builddependencies = [
+dependencies = [
   ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE)
 ]
 
