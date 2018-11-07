@@ -72,6 +72,8 @@
  papi-wrap-1.0-CrayCCE-18.08.eb                                          --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  papi-wrap-1.0-CrayIntel-18.08.eb                                        --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  pudb-2018.1-CrayGNU-18.08-python3.eb               --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ pygelf-0.3.1-CrayGNU-18.08-python2.eb              --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools --hidden
+ PyMySQL-0.9.2-CrayGNU-18.08-python2.eb             --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools --hidden
  Scalasca-2.4-CrayGNU-18.08.eb                      --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Scalasca-2.4-CrayIntel-18.08.eb                                         --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Scalasca-2.4-CrayPGI-18.08.eb                                           --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
