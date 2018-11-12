@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'nano'
+version = '3.2'
+
+homepage = 'http://www.nano-editor.org/'
+description = """GNU nano is designed to be a free replacement for the Pico
+text editor"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+# https://www.nano-editor.org/dist/v3/nano-3.2.tar.gz
+source_urls = ['http://www.nano-editor.org/dist/v%s' % '.'.join(version.split('.')[0:1])]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [('ncurses', '6.0'), ]
+
+sanity_check_paths = {
+    'files': ['bin/nano'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
