@@ -9,7 +9,7 @@ description = """The Adaptable IO System (ADIOS) provides a simple, flexible way
 to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
 
 toolchain = {'name': 'CrayIntel', 'version': '18.08'}
-toolchainopts = {'usempi': True}
+toolchainopts = {'usempi': True, 'pic': True}
 
 source_urls = ['http://users.nccs.gov/~pnorbert/']
 sources = [SOURCE_TAR_GZ]
@@ -34,7 +34,9 @@ configopts = ('--with-mxml=$EBROOTMXML '
               '--with-cray-pmi=$EBROOTPMI '
               '--with-cray-ugni-incdir=/opt/cray/gni-headers/default/include '
               '--with-cray-ugni-libdir=/opt/cray/ugni/default/lib64 '
-              '--with-lustre=/usr/lib64 ')
+              '--with-lustre=/usr/lib64 '
+              '--enable-static '
+              '--enable-shared ')
 
 parallel = 1
 
