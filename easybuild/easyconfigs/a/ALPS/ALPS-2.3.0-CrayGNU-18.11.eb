@@ -16,8 +16,13 @@ source_urls = ['http://alps.comp-phys.org/static/software/releases/']
 patches = ['cmake_boost.patch']
 
 dependencies = [
+    ('cray-python/2.7.15.1', EXTERNAL_MODULE),
     ('Boost', '1.67.0', '-python2'),
     ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE)
+]
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True)
 ]
 
 # path to the project directory if not at top
