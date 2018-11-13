@@ -26,9 +26,11 @@ dependencies = [
 ]
 
 builddependencies = [
-    ('CMake', '3.12.0'),
+    ('CMake', '3.12.0', '', True),
     ('OpenSSL', '1.1.0h')
 ]
+
+configopts = "-DBLAS_LAPACK_SELECTOR=manual -DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' -DCMAKE_CXX_FLAGS=-fopenmp -DCMAKE_EXE_LINKER_FLAGS=\'-ldl -L/opt/python/2.7.15.1/lib -lpython2.7\'"
 
 # path to the project directory if not at top
 start_dir = 'dmrg'
