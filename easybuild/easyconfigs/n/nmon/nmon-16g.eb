@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'BinariesTarball'
+
+name = 'nmon'
+version = '16g'
+
+homepage = 'http://nmon.sourceforge.net'
+description = """ nmon for Linux - nmon is short for Nigel's performance Monitor for Linux on POWER, x86, x86_64, Mainframe & now ARM (Raspberry Pi) """
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = ['http://sourceforge.net/projects/nmon/files/' + '%(name)s%(version)s_x86.tar.gz']
+
+postinstallcmds = ['ln -s %(name)s%(version)s_x86_rhel72 %(installdir)s/bin/%(name)s']
+
+sanity_check_paths = {
+    'files': ['bin/nmon'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'chem'
