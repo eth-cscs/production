@@ -154,12 +154,12 @@ exts_list = [
                        'ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
        'modulename' : 'sklearn',
    }),
-   ('scikit-image', '0.13.1', {
-       'source_urls': ['https://pypi.python.org/packages/83/2a/c5a39c12c196c19'\
-                       'a443fa4d17c0768a24231e46ae952930a9d66bad45557/'],
-       'sources'    : [SOURCE_TAR_GZ],
-       'modulename' : 'skimage',
-   }),
+   #('scikit-image', '0.13.1', {
+   #    'source_urls': ['https://pypi.python.org/packages/83/2a/c5a39c12c196c19'\
+   #                    'a443fa4d17c0768a24231e46ae952930a9d66bad45557/'],
+   #    'sources'    : [SOURCE_TAR_GZ],
+   #    'modulename' : 'skimage',
+   #}),
    ('blaze', '0.10.1', {
        'source_urls': ['https://pypi.python.org/packages/a1/99/ec4fc29409'    \
                        'd68d83a2138b190722f74d15ca1ca303b5c055171b22baa4c0/']
