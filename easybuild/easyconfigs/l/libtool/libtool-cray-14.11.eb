@@ -35,6 +35,8 @@ dependencies = [
 preconfigopts  = 'find . -mindepth 1 -delete && ' 
 preconfigopts += 'git clone https://github.com/Cray/libtool.git . && '
 preconfigopts += 'git checkout %s && ' % commit
+preconfigopts += 'sed -i "s/AC_PREREQ(2.62)/AC_PREREQ(2.63)/" configure.ac && '
+preconfigopts += 'mv gl/top/README-release.diff gl/top/README-release.diff.bak && '
 preconfigopts += './bootstrap && '
 
 sanity_check_paths={
