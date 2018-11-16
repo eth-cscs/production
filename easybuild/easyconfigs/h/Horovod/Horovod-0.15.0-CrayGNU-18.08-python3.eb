@@ -10,6 +10,7 @@ py_rev_ver = '5.1'
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
+cudaver = 'cuda-9.1'
 versionsuffix = '-python%s' % py_maj_ver
 
 homepage = 'https://github.com/uber/horovod'
@@ -24,7 +25,8 @@ checksums = ['d4ddf281d64ba687e2fbfcb5897779503c4df579c57a3e2e146ac356d02aecda']
 
 builddependencies = [
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-    ('TensorFlow', '1.7.0', '-%s%s' % ('cuda-9.1', versionsuffix)),
+    ('NCCL', '2.2.13', '-%s' % cudaver, True),
+    ('TensorFlow', '1.7.0', '-%s%s' % (cudaver, versionsuffix) ),
 ]
 dependencies = [
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
@@ -33,6 +35,8 @@ dependencies = [
 skipsteps = ['build']
 
 preinstallopts = 'module unload atp/2.1.2 && '
+preinstallopts += "export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && "
+preinstallopts += "export HOROVOD_GPU_ALLREDUCE=NCCL && "
 preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
 preinstallopts += "export HOROVOD_WITH_TENSORFLOW=1 && "
 preinstallopts += "export HOROVOD_WITHOUT_PYTORCH=1 && "
