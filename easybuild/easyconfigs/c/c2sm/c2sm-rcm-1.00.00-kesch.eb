@@ -16,11 +16,7 @@ installdir = '%(installdir)s'
 sources = ['%(version)s.tar.gz']
 source_urls = ['https://github.com/C2SM-RCM/c2sm-rcm-env/archive']
 
-build_str = ""
-
-cmds_map = [
-    ('%(version)s.tar.gz', build_str),
-]
+skipsteps = ['build']
 
 files_to_copy = [
     (["modules/%s" % system], '%(installdir)s')
