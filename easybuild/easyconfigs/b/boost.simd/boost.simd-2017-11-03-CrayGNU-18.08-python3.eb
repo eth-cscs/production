@@ -1,0 +1,23 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'boost.simd'
+version = '2017-11-03'
+versionsuffix = '-python3'
+
+homepage = 'https://developer.numscale.com/bsimd/documentation/v1.17.6.0'
+description = """Portable SIMD computation library - to be proposed as a Boost
+library """
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+source_urls = ['https://github.com/NumScale/%(name)s/archive']
+sources = ['develop.zip']
+checksums = ['f698096b4044e2f1ab4ed06e6da71a37']
+
+dependencies = [ ('Boost', '1.67.0', '-python3'), ]
+separate_build_dir = True
+
+sanity_check_paths = {'files': ['include/boost/simd.hpp'],
+                      'dirs': ['share']}
+
+moduleclass = 'devel'

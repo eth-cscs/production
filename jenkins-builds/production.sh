@@ -115,7 +115,7 @@ fi
 if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
  mkdir -p "$EASYBUILD_PREFIX/modules/all"
  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
- ln -s /apps/common/UES/jenkins/easybuild/modules/all/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -204,16 +204,14 @@ done
 if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
 # update xalt table of modulefiles
     echo "loading PrgEnv-cray"
-    module load PrgEnv-cray/6.0.3
-    echo "module use craypat apps"
-    module use /apps/daint/UES/6.0.UP04/craypat/easybuild/modules/all
+    module load PrgEnv-cray
 # removing Easybuild module before the reverseMapD operation
     module unload Easybuild
     echo "running reverseMapD"
     userid=$(id -u)
 # commands run by jenscscs user only
     if [ $userid -eq 23395 ]; then
-        module load Lmod
+        module load Lmod/.7.8.2
         export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
         export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
         export XALTPROD=/apps/daint/UES/xalt/git

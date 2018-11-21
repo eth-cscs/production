@@ -1,0 +1,29 @@
+# jg/mkr (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'jengafettplugin'
+version = '0.1'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """This plugin allows to display correlation between metrics as a
+parallel bar charts distribution across the system tree."""
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['ae8203112acf1acb6d438f3244b1b49b']
+
+dependencies = [
+    ('CubeGUI', '4.4'),    
+]
+
+configopts  = ' CC=gcc'
+configopts += ' --with-cube-gui=$EBROOTCUBEGUI/bin'
+sanity_check_paths = {
+    'files': ['lib/cube-plugins/libjengafett-plugin.so'],
+    'dirs': [''],
+}
+
+# Ensure that bladeplugin is found by CubeGUI:
+modextrapaths = {'CUBE_PLUGIN_DIR': 'lib/cube-plugins'}
+
+moduleclass = 'perf'

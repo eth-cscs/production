@@ -15,7 +15,7 @@ toolchainopts = {'usempi': True, 'openmp': True}
 sources = ['https://github.com/electronic-structure/q-e-sirius/archive/' + 'v%(version)s-sirius.tar.gz']
 
 dependencies = [
-  ('SIRIUS', '5.8', '-cuda-%s' % cudaversion)
+  ('SIRIUS', '5.8.1', '-cuda-%s' % cudaversion)
 ]
 
 preconfigopts = ' module unload cray-libsci && module list && ' 
