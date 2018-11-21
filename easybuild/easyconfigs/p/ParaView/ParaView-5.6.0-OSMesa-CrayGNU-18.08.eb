@@ -14,7 +14,7 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
-sources = ["ParaView-v%(version)s-RC2.tar.xz"]
+sources = ["ParaView-v%(version)s.tar.gz"]
 
 patches = ['nek5000reader.patch']
 
@@ -24,7 +24,7 @@ pysuff = '-%s%s' % (python, pyver)
 dependencies = [
     ('Boost', '1.67.0', '-python3'),
     ('h5py', '2.8.0', '-python3-serial'),
-    ('ospray', '1.7.0'),
+    ('ospray', '1.7.2'),
     ('Mesa', '17.2.8'),
     ('cray-python/3.6.1.1', EXTERNAL_MODULE)
 ]
