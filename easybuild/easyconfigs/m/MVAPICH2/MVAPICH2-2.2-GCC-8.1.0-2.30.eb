@@ -3,7 +3,8 @@ name = 'MVAPICH2'
 version = '2.2'
 
 homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
-description = """OSU MVAPICH2 2.3rc1 (02/19/18), integrated and ABI compatible with MPICH-3.2"""
+description = """OSU MVAPICH2 2.3rc1 (02/19/18), integrated and ABI compatible
+with MPICH-3.2"""
 
 toolchain = {'name': 'GCC', 'version': '8.1.0-2.30'}
 
@@ -25,18 +26,15 @@ configopts = [
 
 withhwloc = 'True'
 
-<<<<<<< HEAD
-builddependencies = [ ('Bison', '3.0.5', '', True) ]
-=======
 builddependencies = [
     ('Bison', '3.0.5', '', True),
     ('slurm', EXTERNAL_MODULE)
 ]
->>>>>>> 9a39079efb471fd4cbb62c335c59f735049c3bbe
 
 sanity_check_paths = {
     'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
-             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in
+    ['%s.so'%x, '%s.a'%x]],
     'dirs': ['include']
 }
 
