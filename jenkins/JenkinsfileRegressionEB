@@ -22,6 +22,7 @@ stage('Machine Selection') {
             currentBuild.result = "FAILURE"
             return
         }
+        println "The user message is: $userMessage"
         for (mach in machinesToRun) {
             machineConfigurations.add(
                 [machine:mach, architectures: methods.getMachineConfiguration(

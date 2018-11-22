@@ -76,6 +76,8 @@ postinstallcmds = ['rm -rf /dev/shm/$USER/bazelout/']
 
 modextrapaths = {
     'PYTHONPATH': 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
+    # This is needed by other software to link to libtensorflow_framework.so
+    'LD_LIBRARY_PATH':'$::env(EBROOTTENSORFLOW)/lib/python3.6/site-packages/tensorflow/:$::env(LD_LIBRARY_PATH)',
 }
 
 moduleclass = 'devel'

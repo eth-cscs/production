@@ -4,6 +4,12 @@ easyblock = 'MakeCp'
 name = 'CP2K'
 version = '6.1'
 
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.1'
+pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
+pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
+
 homepage = 'http://www.cp2k.org/'
 description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
  simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different
@@ -19,7 +25,7 @@ source_urls = [SOURCEFORGE_SOURCE]
 
 builddependencies = [
     ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
-    ('cray-python/2.7.15.1', EXTERNAL_MODULE),
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.0.5'),
 ]

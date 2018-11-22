@@ -8,7 +8,8 @@ py_maj_ver = '2'
 py_min_ver = '7'
 py_rev_ver = '13.1'
 
-pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 version = '5.7.0'
 
@@ -115,11 +116,11 @@ exts_list = [
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
 
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyver]}
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % pyver]
+    'dirs': ['lib/python%s/site-packages' % pyshortver]
 }
 
 sanity_check_commands = [

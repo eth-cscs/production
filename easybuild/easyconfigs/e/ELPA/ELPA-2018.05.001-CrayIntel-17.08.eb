@@ -30,4 +30,6 @@ sanity_check_paths = {
     'dirs': ['bin', 'include/elpa_openmp-%(version)s/elpa', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig']
 }
 
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s/elpa']}
+
 moduleclass = 'math'
