@@ -22,7 +22,7 @@ source_urls = ['https://github.com/lammps/lammps/archive']
 sources = ['%s.tar.gz' % (release)]
 
 prebuildopts = ' cd ./src && '
-prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-gpu yes-k-space yes-molecule yes-mpiio yes-rigid yes-misc yes-user-misc yes-user-meamc && '
+prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-gpu yes-k-space yes-molecule yes-mpiio yes-rigid yes-misc yes-user-misc  && '
 prebuildopts += ' make no-latte no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg && '
 prebuildopts += ' make package-update && '
 # go to folder ./lib/reax and make package reax
