@@ -17,7 +17,7 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 dependencies = [ ('CMake/3.4.1', EXTERNAL_MODULE),
                  ('gcc/5.3.0', EXTERNAL_MODULE),
-                 ('mvapich2/2.1-gcc-5.3.0', EXTERNAL_MODULE) ]
+                 ('OpenMPI/1.10.2-GCC-5.3.0-2.26', EXTERNAL_MODULE) ]
 
 modtclfooter = """
 prepend-path PATH "/apps/leone/hilti/RH6.7/LIGGGHTS/LIGGGHTS-HILTI/src"

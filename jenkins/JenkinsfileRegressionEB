@@ -22,6 +22,7 @@ stage('Machine Selection') {
             currentBuild.result = "FAILURE"
             return
         }
+        println "The user message is: $userMessage"
         for (mach in machinesToRun) {
             machineConfigurations.add(
                 [machine:mach, architectures: methods.getMachineConfiguration(
@@ -43,7 +44,7 @@ stage('Build Stage') {
                 node(machineName) {
                     checkout scm
                     def moduleDefinition = ''
-                    if (machineName == 'leone')
+                    if (machineName in ['leone', 'fulen'])
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
 

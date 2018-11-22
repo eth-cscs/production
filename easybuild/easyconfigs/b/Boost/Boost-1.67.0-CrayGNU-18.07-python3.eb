@@ -24,15 +24,17 @@ dependencies = [
 
 patches = ['Boost-1.67.0_python3.patch']
 
-postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
-
-modtclfooter = """
-    setenv PE_PKGCONFIG_LIBS boost_python36
-"""
+# CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
+#
+# postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
+#
+# modtclfooter = """
+#     setenv PE_PKGCONFIG_LIBS boost_python36
+# """
 
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
-                                'lib/libboost_python36.so'], 
+                                'lib/libboost_python36.so'],
                       'dirs': ['include/boost']}
 
 # also build boost_mpi

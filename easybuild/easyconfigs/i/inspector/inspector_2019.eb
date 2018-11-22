@@ -1,0 +1,28 @@
+# jg (CSCS)
+# beta will expire on: October 11, 2018
+easyblock = 'Bundle'
+name = 'inspector'
+version = '2019'
+#versionsuffix = '.0.0.551423' 
+
+homepage = 'https://software.intel.com/en-us/intel-inspector-xe'
+description = """Intel Inspector XE is Intel's memory error checker and
+thread checker tool for serial and parallel applications"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+postinstallcmds = [ 'cp -a /apps/common/UES/intel/%(version)s/%(name)s_%(version)s/* %(installdir)s' ]
+# ln instead of cp would save some space but will fail at the permissions step
+# that can not be skipped.
+
+modextrapaths = {
+    'PATH': 'bin64',
+}
+
+modextravars = {
+    'INSPECTOR_2019_DIR': '%(installdir)s/',
+    'INSPECTOR_DOC': '%(installdir)s/documentation/en',
+    'INSPECTOR_SAMPLES': '%(installdir)s/samples/en',
+}
+
+moduleclass = 'tools'
+

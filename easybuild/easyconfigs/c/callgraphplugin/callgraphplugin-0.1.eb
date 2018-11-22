@@ -1,0 +1,38 @@
+# jg/mkr (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'callgraphplugin'
+version = '0.1'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """This plugin builds a call graph based on call tree and
+assigns the metric values to the edges. Allows to detect a critical calls in
+the program execution."""
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['eb48d4f7084cd5f6c53444eef0677fe4']
+
+dependencies = [
+    ('CubeGUI', '4.4'),
+    ('graphviz', '2.40.1'),
+]
+
+configopts  = ' CC=gcc'
+configopts += ' --with-cube-gui=$EBROOTCUBEGUI/bin'
+configopts += ' --with-dot=$EBROOTGRAPHVIZ/bin'
+configopts += ' --with-neato=$EBROOTGRAPHVIZ/bin'
+configopts += ' --with-twopi=$EBROOTGRAPHVIZ/bin'
+configopts += ' --with-circo=$EBROOTGRAPHVIZ/bin'
+configopts += ' --with-fdp=$EBROOTGRAPHVIZ/bin'
+configopts += ' --with-sfdp=$EBROOTGRAPHVIZ/bin'
+
+sanity_check_paths = {
+    'files': ['lib/cube-plugins/libcallgraphplugin.so'],
+    'dirs': [''],
+}
+
+# Ensure that bladeplugin is found by CubeGUI:
+modextrapaths = {'CUBE_PLUGIN_DIR': 'lib/cube-plugins'}
+
+moduleclass = 'perf'

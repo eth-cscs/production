@@ -1,0 +1,33 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'googletest'
+version = '1.8.1'
+
+homepage = 'https://github.com/google/googletest'
+description = "Google's C++ test framework"
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/google/googletest/archive/']
+sources = ['release-%(version)s.tar.gz']
+checksums = ['2e6fbeb6a91310a16efe181886c59596']
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+]
+
+separate_build_dir = True
+
+configopts  = '-DCMAKE_CXX_COMPILER=`which g++` -DCMAKE_C_COMPILER=`which gcc` '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -Dgtest_build_samples=ON '
+
+installopts  = " && pwd && mkdir -p %(installdir)s/bin "
+installopts += " && cp googlemock/gtest/sample*_unittest %(installdir)s/bin/ ; "
+
+sanity_check_paths = {
+    'files': ['lib/libgmock.a', 'lib/libgmock_main.a', 'lib/libgtest.a', 'lib/libgtest_main.a'],
+    'dirs': ['include/gmock', 'include/gtest'],
+}
+
+moduleclass = 'tools'
