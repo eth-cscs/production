@@ -43,10 +43,6 @@ builddependencies = [
     ('cray-python/%s' %pyver, EXTERNAL_MODULE),
 ]
     
-dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
-]
-
 dependencies = [ ('PLUMED', '%s' %plumedversion) ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
