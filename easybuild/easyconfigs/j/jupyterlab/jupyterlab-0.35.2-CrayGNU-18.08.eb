@@ -41,7 +41,7 @@ exts_list = [
         }),
 ]
 
-installopts = ' --install-option=--skip-npm "
+installopts = " --install-option=--skip-npm "
     
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
