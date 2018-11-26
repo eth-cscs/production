@@ -16,8 +16,11 @@ cudaver = "%s.%s" % (cudamajor, cudaminor)
 
 versionsuffix = '-cuda-%s' % cudamajor
 
-dependencies = [
+builddependencies = [
     ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
 sources = ['/apps/common/UES/easybuild/sources/c/cuDNN/cudnn-9.0-linux-x64-v7.1.tgz']
