@@ -1,0 +1,18 @@
+# contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PrgEnv-pgi'
+version = '18.10'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides The Portland Group Compiler Collection (PGI), including MVAPICH2 for MPI support for the Programming Environment on kesch/escha"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+# compiler toolchain dependencies
+dependencies = [
+    ('PGI', '18.10', '', ('GCC', '5.4.0-2.26') ),
+    ('MVAPICH2', '2.2', '', ('GCC', '5.4.0-2.26') ),
+]
+
+moduleclass = 'devel'
