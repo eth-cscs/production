@@ -15,7 +15,7 @@ sources = ['v%(version)s.tar.gz']
 
 dependencies = [
     ('HDF5', '1.10.4', '-serial'),
-    ('cURL', '7.62.0'),
+    ('cURL', '7.62.0', '', True),
 ]
 
 builddependencies = [
