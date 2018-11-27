@@ -3,6 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = "adios"
 version = '1.13.1'
+versionsuffix = '-nompi'
 
 homepage = 'https://www.olcf.ornl.gov/center-projects/adios/'
 description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
@@ -36,26 +37,27 @@ configopts = ['--with-mxml=$EBROOTMXML '
               '--with-cray-ugni-libdir=/opt/cray/ugni/default/lib64 '
               '--with-lustre=/usr/lib64 '
               '--enable-shared '
-              '--disable-static ']
+              '--disable-static '
+              '--without-mpi']
 
 parallel = 1
 
 # create pkgconfig files
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios \nDescription: ADIOS I/O library \nVersion: %(version)s \n\nRequires: mxml, zlib, bzip2, szip, lz4, blosc \nLibs: -L\${libdir} -ladios -llustreapi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adiosf \nDescription: ADIOS I/O library (Fortran) \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladiosf \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)sf.pc',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios_nompi \nDescription: Serial ADIOS I/O library \nVersion: %(version)s \n\nRequires: mxml, zlib, bzip2, szip, lz4, blosc \nLibs: -L\${libdir} -ladios_nompi -llustreapi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s_nompi.pc',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios_nompif \nDescription: Serial ADIOS I/O library (Fortran) \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladiosf_nompi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)sf_nompi.pc',
 ]
 
 sanity_check_paths = {
-    'files': ['include/adios.h', 'include/adios_mpi.h', 'lib/libadios.a', 'lib/libadiosf.a', 'lib/libadios_nompi.a', 'lib/libadiosf_nompi.a', 'lib/pkgconfig/%(name)s.pc', 'lib/pkgconfig/%(name)sf.pc'],
+    'files': ['include/adios.h', 'lib/libadios_nompi.a', 'lib/libadiosf_nompi.a', 'lib/pkgconfig/%(name)s_nompi.pc', 'lib/pkgconfig/%(name)sf_nompi.pc'],
     'dirs': [".", "lib/pkgconfig", "lib/python"]
 }
 
 modextravars = {
     'PE_PKGCONFIG_PRODUCTS': 'ADIOS:$::env(PE_PKGCONFIG_PRODUCTS)',
-    'ADIOS_PKGCONFIG_LIBS': 'adios',
-    'ADIOS_FORTRAN_PKGCONFIG_LIBS': 'adiosf',
+    'ADIOS_PKGCONFIG_LIBS': 'adios_nompi',
+    'ADIOS_FORTRAN_PKGCONFIG_LIBS': 'adiosf_nompi',
 }
 
 

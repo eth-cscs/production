@@ -13,8 +13,8 @@ source_urls = [('https://github.com/michaelrsweet/mxml/releases/download/v%(vers
 sources = [SOURCELOWER_TAR_GZ]
 
 sanity_check_paths = {
-    'files': ['include/mxml.h', 'lib/libmxml.so', 'lib/libmxml.a'],
-    'dirs': [],
+    'files': ['include/mxml.h', 'lib/libmxml.so', 'lib/libmxml.a', 'lib/pkgconfig/mxml.pc'],
+    'dirs': ["lib/pkgconfig"],
 }
 
 moduleclass = 'lib'

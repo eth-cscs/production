@@ -15,10 +15,16 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configopts = "--with-pic"
 
+# create pkgconfig file
+postinstallcmds = [
+    'mkdir %(installdir)s/lib/pkgconfig',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: %(namelower)s \nDescription: szip compression library \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -lsz \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc'
+]
+
 sanity_check_paths = {
-    'files': ["lib/libsz.a", "lib/libsz.so"] +
+    'files': ["lib/libsz.a", "lib/libsz.so", 'lib/pkgconfig/szip.pc' ] +
              ["include/%s" % x for x in ["ricehdf.h", "szip_adpt.h", "szlib.h"]],
-    'dirs': [],
+    'dirs': ['lib/pkgconfig' ],
 }
 
 moduleclass = 'tools'

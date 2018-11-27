@@ -19,8 +19,13 @@ installopts = "PREFIX=%(installdir)s"
 
 runtest = 'check'
 
+# rename pkgconfig file to standard format used
+postinstallcmds = [
+    'mv %(installdir)s/lib/pkgconfig/liblz4.pc %(installdir)s/lib/pkgconfig/lz4.pc'
+]
+
 sanity_check_paths = {
-    'files': ["bin/lz4", "lib/liblz4.%s" % SHLIB_EXT, "include/lz4.h"],
+    'files': ["bin/lz4", "lib/liblz4.%s" % SHLIB_EXT, "include/lz4.h", "lib/pkgconfig/lz4.pc"],
     'dirs': ["lib/pkgconfig"]
 }
 
