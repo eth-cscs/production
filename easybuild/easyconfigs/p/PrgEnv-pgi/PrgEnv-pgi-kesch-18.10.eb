@@ -12,7 +12,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 # compiler toolchain dependencies
 dependencies = [
     ('PGI', '18.10', '', ('GCC', '5.4.0-2.26') ),
-    ('MVAPICH2', '2.2', '', ('GCC', '5.4.0-2.26') ),
+    ('mvapich2gdr_gnu/2.3_cuda_8.0_gcc54', EXTERNAL_MODULE),
 ]
 
 moduleclass = 'devel'
