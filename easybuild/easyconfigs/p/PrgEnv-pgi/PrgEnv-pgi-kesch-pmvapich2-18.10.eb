@@ -11,7 +11,7 @@ description = """This bundle provides a meta module for the Programming Environm
 toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
-module load pgi/.18.10-gcc-5.4.0-2.26
+module load pmvapich2/.18.10
 """
 
 moduleclass = 'devel'
