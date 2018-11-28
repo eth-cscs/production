@@ -33,7 +33,8 @@
  ncview-2.1.7-CrayGNU-18.08.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-18.08-python2.eb
  netcdf-python-1.4.1-CrayGNU-18.08-python3.eb       --set-default-module
- ParaView-5.5.2-OSMesa-CrayGNU-18.08.eb             --set-default-module
+ ParaView-5.5.2-OSMesa-CrayGNU-18.08.eb
+ ParaView-5.6.0-OSMesa-CrayGNU-18.08.eb             --set-default-module
  PLUMED-2.4.3-CrayGNU-18.08.eb                      --set-default-module
  Python-bare-3.6.2.eb                               --hidden
  PyExtensions-2.7.15.1-CrayGNU-18.08.eb
