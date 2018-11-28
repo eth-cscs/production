@@ -43,7 +43,7 @@ parallel = 1
 # create pkgconfig files
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios \nDescription: ADIOS I/O library \nVersion: %(version)s \n\nRequires: mxml, zlib, bzip2, szip, lz4, blosc \nLibs: -L\${libdir} -ladios -llustreapi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios \nDescription: ADIOS I/O library \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladios -lblosc -lmxml -lz -llz4 -lbz2 -llustreapi -lsz \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc',
     'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adiosf \nDescription: ADIOS I/O library (Fortran) \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladiosf \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)sf.pc',
 ]
 

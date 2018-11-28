@@ -45,7 +45,7 @@ parallel = 1
 # create pkgconfig files
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios_nompi \nDescription: Serial ADIOS I/O library \nVersion: %(version)s \n\nRequires: mxml, zlib, bzip2, szip, lz4, blosc \nLibs: -L\${libdir} -ladios_nompi -llustreapi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s_nompi.pc',
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios_nompi \nDescription: Serial ADIOS I/O library \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladios_nompi -lblosc -lmxml -lz -llz4 -lbz2 -llustreapi -lsz \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s_nompi.pc',
     'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: adios_nompif \nDescription: Serial ADIOS I/O library (Fortran) \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -ladiosf_nompi \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)sf_nompi.pc',
 ]
 
