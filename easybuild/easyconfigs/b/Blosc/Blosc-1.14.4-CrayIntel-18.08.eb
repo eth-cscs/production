@@ -24,21 +24,10 @@ dependencies = [
 
 configopts = ' -DPREFER_EXTERNAL_ZLIB="ON" -DPREFER_EXTERNAL_LZ4="ON" '
 
-
-# Modify pcgconfig dependencies
-postinstallcmds = [
-'cat %(installdir)s/lib/pkgconfig/%(namelower)s.pc | perl -p -e "s/Requires:/Requires: zlib, lz4\n/g" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc'
-]
-
 sanity_check_paths = {
-    'files': ['include/blosc-export.h', 'include/blosc.h', 'lib/libblosc.a', 'lib/pkgconfig/blosc.pc', 'lib/libblosc.%s' % SHLIB_EXT],
-    'dirs': ['lib/pkgconfig'],
-}
-
-modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS BLOSC" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
-
-modextravars = {
-    'BLOSC_PKGCONFIG_LIBS': 'blosc',
+    'files': ['include/blosc-export.h', 'include/blosc.h', 'lib/libblosc.a',
+              'lib/libblosc.%s' % SHLIB_EXT],
+    'dirs': [],
 }
 
 moduleclass = 'lib'

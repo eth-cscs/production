@@ -13,14 +13,8 @@ source_urls = [('https://github.com/michaelrsweet/mxml/releases/download/v%(vers
 sources = [SOURCELOWER_TAR_GZ]
 
 sanity_check_paths = {
-    'files': ['include/mxml.h', 'lib/libmxml.so', 'lib/libmxml.a', 'lib/pkgconfig/mxml.pc'],
-    'dirs': ["lib/pkgconfig"],
-}
-
-modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS MXML" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
-
-modextravars = {
-    'MXML_PKGCONFIG_LIBS': 'mxml',
+    'files': ['include/mxml.h', 'lib/libmxml.so', 'lib/libmxml.a'],
+    'dirs': [],
 }
 
 moduleclass = 'lib'

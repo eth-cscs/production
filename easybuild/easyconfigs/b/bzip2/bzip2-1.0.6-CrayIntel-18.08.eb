@@ -16,18 +16,7 @@ source_urls = ['https://sourceforge.net/projects/bzip2/files/']
 # create pkgconfig file
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: %(namelower)s \nDescription: bzip2 compression library \nVersion: %(version)s \n\nRequires: \nLibs: -L\${libdir} -lbz2 \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(namelower)s.pc'
+    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: bzip2 \nDescription: bzip2 compression library \nVersion: 1.0.6 \n\nRequires: \nLibs: -L\${libdir} -lbz2 \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc'
 ]
-
-sanity_check_paths = {
-    'files': ['include/bzlib.h', 'lib/libbz2.a', 'lib/libbz2.so', 'lib/pkgconfig/bzip2.pc'],
-    'dirs': ['lib/pkgconfig'],
-}
-
-modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS BZIP2" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
-
-modextravars = {
-    'BZIP2_PKGCONFIG_LIBS': 'bzip2',
-}
 
 moduleclass = 'tools'

@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS); updated by @omlins
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'zlib'
@@ -16,14 +16,8 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = [('http://sourceforge.net/projects/libpng/files/zlib/%(version)s', 'download')]
 
 sanity_check_paths = {
-    'files': ['include/zconf.h', 'include/zlib.h', 'lib/libz.a', 'lib/libz.so', 'lib/pkgconfig/zlib.pc'],
-    'dirs': ['lib/pkgconfig'],
-}
-
-modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ZLIB" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
-
-modextravars = {
-    'ZLIB_PKGCONFIG_LIBS': 'zlib',
+    'files': ['include/zconf.h', 'include/zlib.h', 'lib/libz.a', 'lib/libz.so'],
+    'dirs': [],
 }
 
 moduleclass = 'lib'
