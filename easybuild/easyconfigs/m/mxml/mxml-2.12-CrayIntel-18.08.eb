@@ -17,4 +17,10 @@ sanity_check_paths = {
     'dirs': ["lib/pkgconfig"],
 }
 
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS MXML" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
+modextravars = {
+    'MXML_PKGCONFIG_LIBS': 'mxml',
+}
+
 moduleclass = 'lib'

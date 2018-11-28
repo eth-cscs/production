@@ -52,8 +52,9 @@ sanity_check_paths = {
     'dirs': [".", "lib/pkgconfig", "lib/python"]
 }
 
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ADIOS" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
 modextravars = {
-    'PE_PKGCONFIG_PRODUCTS': 'ADIOS:$::env(PE_PKGCONFIG_PRODUCTS)',
     'ADIOS_PKGCONFIG_LIBS': 'adios',
     'ADIOS_FORTRAN_PKGCONFIG_LIBS': 'adiosf',
 }

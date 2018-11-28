@@ -29,4 +29,10 @@ sanity_check_paths = {
     'dirs': ["lib/pkgconfig"]
 }
 
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS LZ4" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
+modextravars = {
+    'LZ4_PKGCONFIG_LIBS': 'lz4',
+}
+
 moduleclass = 'lib'

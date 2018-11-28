@@ -27,4 +27,10 @@ sanity_check_paths = {
     'dirs': ['lib/pkgconfig' ],
 }
 
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS SZIP" # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
+modextravars = {
+    'SZIP_PKGCONFIG_LIBS': 'szip',
+}
+
 moduleclass = 'tools'
