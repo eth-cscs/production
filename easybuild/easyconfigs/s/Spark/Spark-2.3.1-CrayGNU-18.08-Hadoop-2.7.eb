@@ -5,7 +5,7 @@ version = '2.3.1'
 
 javaver = 'jdk1.8.0_51'
 
-versionsuffix = '-xxx-Hadoop-2.7'
+versionsuffix = '-Hadoop-2.7'
 
 homepage = 'http://spark.apache.org'
 description = """Spark is Hadoop MapReduce done in memory"""
