@@ -51,10 +51,10 @@ modextravars = {
 }
 
 # install labhub extension
-postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache; "
+postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
-                   "%(installdir)s/bin/jupyter-labextension install -y @jupyterlab/hub-extension@0.12.0";
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyterlab/hub-extension@0.12.0;"
                    "rm -r $YARN_CACHE_FOLDER"]
 
 sanity_check_paths = {
