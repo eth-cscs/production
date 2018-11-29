@@ -1,0 +1,41 @@
+diff --git a/setup.py b/setup.py
+index 74906ab..5844c55 100644
+--- a/setup.py
++++ b/setup.py
+@@ -83,7 +83,8 @@ def get_config(scorep_config):
+ 
+ def get_mpi_config():
+     (_, mpi_version, mpi_version2) = scorep.helper.call(
+-        ["mpiexec", "--version"])
++        ["srun", "--version"])
++        #["mpiexec", "--version"])
+     mpi_version = mpi_version + mpi_version2
+     if "OpenRTE" in mpi_version:
+         print("OpenMPI detected")
+@@ -96,17 +97,17 @@ def get_mpi_config():
+         (_, compile_flags, _) = scorep.helper.call(["mpicc", "-compile_info"])
+     else:
+         print("cannot determine mpi version: \"{}\"".format(mpi_version))
+-        exit(-1)
++        #exit(-1)
+ 
+-    ldflags = " " + ldflags
+-    compile_flags = " " + compile_flags
++    ldflags = " "
++    compile_flags = " "
+ 
+-    lib_dir = re.findall(" -L[/+-@.\w]*", ldflags)
+-    lib = re.findall(" -l[/+-@.\w]*", ldflags)
+-    include = re.findall(" -I[/+-@.\w]*", compile_flags)
+-    macro = re.findall(" -D[/+-@.\w]*", compile_flags)
+-    linker_flags = re.findall(" -Wl[/+-@.\w]*", ldflags)
+-    linker_flags_2 = re.findall(" -Xlinker [/+-@.\w]*", ldflags)
++    lib_dir = ""
++    lib = ""
++    include = ""
++    macro = ""
++    linker_flags = ""
++    linker_flags_2 = ""
+ 
+     def remove_flag3(x): return x[3:]
+ 
