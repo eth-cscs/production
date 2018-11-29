@@ -1,6 +1,7 @@
  Anaconda3-4.4.0.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Autotools-201602.eb                                 --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
+ c2sm-rcm-1.00.00-kesch.eb                           --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  CDO-1.8.2-gmvolf-17.02.eb
  CMake-3.9.1.eb                                      --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  ddt-18.2.2-Redhat-7.0.eb                            --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
