@@ -12,7 +12,14 @@ description = """Spark is Hadoop MapReduce done in memory"""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
-patches = [('spark-2.3.1-Hadoop-2.7.patch', 1)]
+patches = [('spark-2.3.1-Hadoop-2.7.patch'),
+           ('spark-2.3.1-Hadoop-2.7_cscs-customs.patch', 1)]
+#patches = [
+#    ("getmaster.sh", "%(builddir)s/cscs-custom/"),
+#    ("getslaves.sh", "%(builddir)s/cscs-custom/"),
+#    ("start-all.sh", "%(builddir)s/cscs-custom/"),
+#    ("start-ssh.sh", "%(builddir)s/cscs-custom/"),
+#    ("stop-all.sh",  "%(builddir)s/cscs-custom/")]
 
 sources = ['%(namelower)s-%(version)s-bin-hadoop2.7.tgz']
 source_urls = [
@@ -29,7 +36,10 @@ dependencies = [
 
 postinstallcmds = [
     ("chmod +x %(installdir)s/cscs-custom/getmaster.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh")]
+    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/start-all.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/start-ssh.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/stop-all.sh")]
 
 sanity_check_paths = {
     'files': ['bin/spark-shell', 'bin/pyspark'],
