@@ -18,7 +18,8 @@ sources = ['v%(version)s.tar.gz']
 dependencies = [('netCDF', '4.6.1')]
 
 # Add -noswitcherror to make PGI compiler ignore the unknown compiler option -pthread
-preconfigopts = 'export CXX="$CXX -noswitcherror" && '
+preconfigopts = ' CC="pgcc" CXX="pgc++ -noswitcherror" CXXFLAGS="-O2 -tp=haswell -Mflushz -fPIC" '
+configopts = ' --with-pic '
 
 sanity_check_paths = {
     'files': ['include/netcdf', 'include/ncDouble.h',

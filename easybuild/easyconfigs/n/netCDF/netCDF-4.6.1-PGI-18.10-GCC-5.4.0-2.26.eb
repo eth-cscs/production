@@ -25,12 +25,7 @@ builddependencies = [
     ('Doxygen', '1.8.14', '', True),
 ]
 
-preconfigopts = ' CC=pgcc CFLAGS="-O2 -Mflushz -fPIC" '
+preconfigopts = ' CC=pgcc CFLAGS="-O2 -Mflushz -fPIC -tp=haswell" '
 configopts = ' --with-pic '
-## make sure both static and shared libs are built
-#configopts = [
-#    "-DBUILD_SHARED_LIBS=OFF ",
-#    "-DBUILD_SHARED_LIBS=ON ",
-#]
 
 moduleclass = 'data'

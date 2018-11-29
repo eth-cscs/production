@@ -28,9 +28,9 @@
  netCDF-Fortran-4.4.4-gmvolf-17.02.eb
  netcdf4-python-1.3.0-gmvolf-17.02-Python-2.7.13.eb
  netcdf4-python-1.3.0-gmvolf-17.02-Python-3.6.2.eb
- netCDF-4.6.1-PGI-18.10-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild --optarch=haswell
- netCDF-C++-4.3.0-PGI-18.10-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild --optarch=haswell
- netCDF-Fortran-4.4.4-PGI-18.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild --optarch=haswell
+ netCDF-4.6.1-PGI-18.10-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild 
+ netCDF-C++-4.3.0-PGI-18.10-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild
+ netCDF-Fortran-4.4.4-PGI-18.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.4/pgi_PE18.10/easybuild --module-naming-scheme=EasyBuildMNS
  netCDF-4.4.1.1-gmvolf-17.02.eb
  netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.4/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
