@@ -16,6 +16,9 @@ source_urls = [
     'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
 ]
 
+preconfigopts = ' FC="pgfortran" FCFLAGS="-O2 -Mflushz -fPIC -tp=haswell" '
+configopts = ' --with-pic '
+
 dependencies = [('netCDF', '4.6.1')]
 
 moduleclass = 'data'
