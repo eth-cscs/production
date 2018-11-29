@@ -79,7 +79,7 @@ diff -Nru spark-2.2.0-bin-hadoop2.6.orig/cscs-custom/start-ssh.sh spark-2.2.0-bi
 diff -Nru spark-2.2.0-bin-hadoop2.6.orig/cscs-custom/stop-all.sh spark-2.2.0-bin-hadoop2.6/cscs-custom/stop-all.sh
 --- spark-2.2.0-bin-hadoop2.6.orig/cscs-custom/stop-all.sh	1970-01-01 01:00:00.000000000 +0100
 +++ spark-2.2.0-bin-hadoop2.6/cscs-custom/stop-all.sh	2018-07-01 07:31:29.524079000 +0200
-@@ -0,0 +1,16 @@
+@@ -0,0 +1,21 @@
 +#!/bin/bash
 +
 +# Stop Workers
@@ -88,7 +88,12 @@ diff -Nru spark-2.2.0-bin-hadoop2.6.orig/cscs-custom/stop-all.sh spark-2.2.0-bin
 +sleep 30
 +
 +# Stop Master
-+srun -N1 -n1 -w $SPARKMASTER stop-master.sh &>/dev/null
++# srun -N1 -n1 -w $SPARKMASTER stop-master.sh &>/dev/null
++DEPLOY="ssh"
++SPARK_SSH_OPTS="-p 2222 -o StrictHostKeyChecking=no"
++SPARK_var=$(env | grep SPARK)
++JAVA_var=$(env | grep JAVA)
++$DEPLOY $SPARK_SSH_OPTS $SPARKMASTER $SPARK_var $JAVA_var ${EBROOTSPARK}/sbin/stop-master.sh
 +
 +sleep 10
 +
