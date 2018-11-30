@@ -12,14 +12,7 @@ description = """Spark is Hadoop MapReduce done in memory"""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
-patches = [('spark-2.3.1-Hadoop-2.7.patch'),
-           ('spark-2.3.1-Hadoop-2.7_cscs-custom.patch', 1)]
-# patches = [
-#     ('getmaster.sh', 'cscs-custom/'),
-#     ('getslaves.sh', 'cscs-custom/'),
-#     ('start-all.sh', 'cscs-custom/'),
-#     ('start-ssh.sh', 'cscs-custom/'),
-#     ('stop-all.sh',  'cscs-custom/')]
+patches = [('spark-2.3.1-Hadoop-2.7.patch', 1)]
 
 sources = ['%(namelower)s-%(version)s-bin-hadoop2.7.tgz']
 source_urls = [
