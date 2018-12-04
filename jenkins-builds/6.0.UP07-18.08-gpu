@@ -23,6 +23,7 @@
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
  jupyterhub-0.9.4-CrayGNU-18.08.eb
+ jupyterlab-0.35.2-CrayGNU-18.08.eb
  LAMMPS-22Aug2018-CrayGNU-18.08-cuda-9.1.eb         --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  magma-2.2.0-CrayGNU-18.08-cuda-9.1.eb              --set-default-module
@@ -34,7 +35,8 @@
  ncview-2.1.7-CrayGNU-18.08.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-18.08-python2.eb
  netcdf-python-1.4.1-CrayGNU-18.08-python3.eb       --set-default-module
- ParaView-5.5.2-EGL-CrayGNU-18.08.eb                --set-default-module
+ ParaView-5.5.2-EGL-CrayGNU-18.08.eb
+ ParaView-5.6.0-EGL-CrayGNU-18.08.eb                --set-default-module
  PLUMED-2.4.3-CrayGNU-18.08.eb                      --set-default-module
  Python-bare-3.6.2.eb                               --hidden
  pycuda-2017.1.1-CrayGNU-18.08-python2-cuda-9.1.eb

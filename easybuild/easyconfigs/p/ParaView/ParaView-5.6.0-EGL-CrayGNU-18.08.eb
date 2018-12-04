@@ -1,0 +1,83 @@
+# CrayGNU version by Jean Favre (CSCS)
+
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.6.0'
+versionsuffix='-EGL'
+
+homepage = "http://www.paraview.org"
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
+sources = ["ParaView-v%(version)s.tar.gz"]
+
+patches = ['nek5000reader.patch']
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+pysuff = '-python%s' % py_maj_ver
+
+dependencies = [
+    ('Boost', '1.67.0', pysuff),
+    ('h5py', '2.8.0', '%s-serial' % pysuff),
+    ('ospray', '1.7.2'),
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE)
+]
+
+builddependencies = [('CMake', '3.12.0','', True)]
+
+separate_build_dir = True
+
+maxparallel = 16
+
+#configopts = '-DVTK_Group_MPI:BOOL=ON -DMPI_C_INCLUDE_PATH=${CRAY_MPICH_DIR}/include -DMPI_C_LIBRARIES=${CRAY_MPICH_DIR}/lib/libmpich.so '
+configopts = '-DVTK_Group_MPI:BOOL=ON '
+configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
+configopts += '-DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DPARAVIEW_ENABLE_CATALYST:BOOL=ON -DPARAVIEW_BUILD_PLUGIN_SierraPlotTools=OFF '
+configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
+configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 -DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON '
+configopts += '-DVTK_USE_SYSTEM_HDF5:BOOL=ON '
+# use TBB for on-the-node parallelism
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbbmalloc.so '
+#
+configopts += '-DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so '
+configopts += '-DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include '
+configopts += '-DPARAVIEW_ENABLE_XDMF3:BO0L=ON -DBoost_INCLUDE_DIR=${EBROOTBOOST}/include '
+configopts += '-DPARAVIEW_BUILD_QT_GUI:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF -DModule_vtkGeovisCore=ON -DModule_vtklibproj4=ON '
+# CSCS specific for EGL
+configopts += '-DVTK_OPENGL_HAS_EGL:BOOL=ON -DEGL_INCLUDE_DIR=/users/jfavre/Projects/EGL/code-samples/posts/egl_OpenGl_without_Xserver -DEGL_LIBRARY=/opt/cray/nvidia/default/lib64/libEGL.so -DEGL_opengl_LIBRARY=/opt/cray/nvidia/default/lib64/libOpenGL.so -DVTK_USE_X:BOOL=OFF '
+# CSCS specific for OSPRAY Rendering
+configopts += '-DPARAVIEW_USE_OSPRAY:BOOL=ON '
+configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
+configopts += '-DPARAVIEW_EXTERNAL_PLUGIN_DIRS:STRING="/users/jfavre/Projects/BioMedical2;/users/jfavre/Projects/Jackson/src;/users/jfavre/Projects/Tipsy;/users/jfavre/Projects/Gadget;/users/jfavre/Projects/Adamek;/users/jfavre/Projects/Lucg;/users/jfavre/Projects/Elephant" '
+# Using CSCS NVIDIA IndeX lib
+configopts += '-DPARAVIEW_BUILD_PLUGIN_pvNVIDIAIndeX:BOOL=ON '
+
+# Or consult https://gitlab.kitware.com/vtk/vtk/blob/master/Documentation/dev/git/data.md
+# and download ExternalData to $EASYBUILD_SOURCEPATH and adjust -DExternalData_OBJECT_STORES accordingly
+# Without internet connection, comment the following two lines (configopts and prebuildopts)
+# configopts += '-DExternalData_OBJECT_STORES=%(builddir)s/ExternalData '
+# The ParaView server can be cranky, test downloads are quite often failing, especially in the case
+# of parallel downloads. Using ; insted of && gives a second chance to download the test files, if the
+# first serial attempt would fail.
+#prebuildopts = 'make VTKData ;'
+
+modextravars = { 'LD_LIBRARY_PATH':'/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % pyver}
+
+sanity_check_paths = {
+    'files': ['bin/pvbatch', 'bin/pvserver'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
