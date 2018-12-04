@@ -29,7 +29,10 @@ dependencies = [
 
 postinstallcmds = [
     ("chmod +x %(installdir)s/cscs-custom/getmaster.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh")]
+    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/start-all.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/start-ssh.sh"),
+    ("chmod +x %(installdir)s/cscs-custom/stop-all.sh")]
 
 sanity_check_paths = {
     'files': ['bin/spark-shell', 'bin/pyspark'],
