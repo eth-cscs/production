@@ -10,7 +10,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
-        'source_urls': 'https://github.com/eth-cscs/reframe/archive/'
+        'source_urls': ['https://github.com/eth-cscs/reframe/archive/']
     },
     {
         'filename': '/apps/common/easybuild/sources/%(nameletterlower)s/'
