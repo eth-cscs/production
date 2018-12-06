@@ -14,12 +14,12 @@ source_urls = [
 
 sources = ['%(namelower)s-everywhere-opensource-src-%(version)s.tar.xz']
 
-python = 'Python'
-pyver = '2.7.12'
-pysuff = '-%s-%s' % (python, pyver)
-dependencies = [
-    (python, pyver)
-]
+#python = 'Python'
+#pyver = '2.7.12'
+#pysuff = '-%s-%s' % (python, pyver)
+#dependencies = [
+#    (python, pyver)
+#]
 
 configopts  = ' -opensource -confirm-license -release -skip qtconnectivity '
 configopts += ' -skip qtgamepad -skip qtlocation -skip qtmultimedia -skip qtsensors '
@@ -27,6 +27,6 @@ configopts += ' -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwe
 configopts += ' -skip qtwebsockets -nomake examples -nomake tests -no-dbus -qt-libjpeg '
 configopts += ' -qt-pcre -system-zlib -no-openssl -skip qtsvg -qt-xcb -system-libpng -fontconfig '
 
-maxparallel = 8
+maxparallel = 12
 
 moduleclass = 'devel'
