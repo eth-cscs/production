@@ -62,6 +62,7 @@
  CubeGUI-4.4.eb                                     --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  ddt-18.2.1-Suse-12.eb                              --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  ddt-18.3-Suse-12.eb                                                     --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ ddt-18.3-Ubuntu-16.04.eb                                                --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools --hidden
  Extrae-3.5.4-CrayGNU-18.08.eb                      --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  inspector_2018.eb                                  --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  inspector_2019.eb                                                       --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
