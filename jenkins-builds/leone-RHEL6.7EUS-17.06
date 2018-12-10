@@ -6,7 +6,8 @@
  OpenFOAM-4.1-foss-2016b.eb                 --set-default-module 
  OpenFOAM-5.0-20180108-foss-2016b.eb
  OpenFOAM-Extend-4.0-foss-2016b.eb
- ParaView-5.4.0-foss-2016b.eb
+ ParaView-5.4.0-foss-2016b.eb               --set-default-module
+ ParaView-5.6.0-foss-2016b.eb
  PrgEnv-gnu-leone-foss-2016b.eb
  Python-2.7.12-foss-2016b.eb
  reframe-2.14.eb                            --set-default-module
