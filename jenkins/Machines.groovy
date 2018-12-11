@@ -1,7 +1,7 @@
 def daint = [name: 'daint',
              archs: ['gpu', 'mc'],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/dom/UES/jenkins/6.0.UP07/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/6.0.UP07/ARCH/easybuild/modules/all',
+             unusePath: '/apps/daint/UES/jenkins/6.0.UP07/ARCH/easybuild/tools/modules/all:/apps/daint/UES/jenkins/6.0.UP07/ARCH/easybuild/modules/all',
              modulesProduction: '/apps/common/UES/jenkins/production/login',
              modulesUnuseProduction: '/apps/daint/UES/easybuild/modulefiles',
              prefixProduction: '$APPS/UES/jenkins/6.0.UP07/ARCH/easybuild']
@@ -33,17 +33,9 @@ def kesch = [name: 'kesch',
 def leone = [name: 'leone',
              archs: [],
              buildPath: '/dev/shm/$USER/easybuild/build',
-             unusePath: '/apps/leone/UES/PrgEnv-gnu-2016b',
+             unusePath: '/apps/leone/UES/modulefiles',
              modulesProduction: '',
              modulesUnuseProduction: '',
-             prefixProduction: '$APPS/UES/jenkins/RH6.7EUS/easybuild']
-
-def monch = [name: 'monch',
-             archs: [],
-             buildPath: '/dev/shm/$USER/easybuild/stage/build',
-             unusePath: '/apps/monch/UES/jenkins/RH6.9-17.06/easybuild/modules/all/',
-             modulesProduction: '',
-             modulesUnuseProduction: '',
-             prefixProduction: '$APPS/UES/jenkins/RH6.9-17.06/easybuild']
+             prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
 return [daint, dom, kesch, leone, fulen]
