@@ -14,9 +14,9 @@ rendering of very complex performance monitoring data."""
 site_contacts = 'service@vampir.eu'
 
 toolchain = {'name': 'dummy', 'version': ''}
-sources = ['vampir-{}{}.bin'.format(version, archsuffix)]
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/{}-{}{}.bin'.format(name, version, archsuffix)]
 checksums = [ '3303e859f5348f131570d7c113cd7347' ]
-install_cmd  = './vampir-{}{}.bin --silent --instdir=%(installdir)s'.format(version, archsuffix)
+install_cmd  = '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/{}-{}{}.bin --silent --instdir=%(installdir)s'.format(name, version, archsuffix)
 install_cmd += ' --no-icon --no-menu-items'
 
 sanity_check_paths = {
