@@ -90,5 +90,6 @@
  Score-P-4.0-CrayCCE-18.08.eb                                            --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  Understand-4.0.926.eb                              --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  vampir-9.5.0.eb                                    --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
+ vampir-9.6.0.eb                                                         --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  vtune_amplifier_2018.eb                            --set-default-module --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  vtune_amplifier_2019.eb                                                 --installpath=/apps/dom/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
