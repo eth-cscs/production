@@ -12,7 +12,7 @@ pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 cudaver = '9.1'
 tfver = '1.11.0'
-versionsuffix = '-tf%s' % tfver
+versionsuffix = '-tf-%s' % tfver
 
 homepage = 'https://github.com/uber/horovod'
 description = "Horovod is a distributed training framework for TensorFlow."
