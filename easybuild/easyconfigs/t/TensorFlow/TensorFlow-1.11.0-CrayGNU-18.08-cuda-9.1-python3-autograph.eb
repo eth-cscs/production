@@ -53,7 +53,7 @@ with_configure = False
 
 whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
-build_str  = "export TEST_TMPDIR=/tmp/$USER/bazelout/"
+build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
 build_str += " && rm -rf $TEST_TMPDIR"
 build_str += " && export PYTHON_BIN_PATH=$(which python%s)" % py_maj_ver
 build_str += " && export TF_NEED_JEMALLOC=0"
