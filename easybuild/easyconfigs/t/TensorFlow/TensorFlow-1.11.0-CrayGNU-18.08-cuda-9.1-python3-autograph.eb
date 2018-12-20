@@ -53,7 +53,8 @@ with_configure = False
 
 whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
-build_str  = "export TEST_TMPDIR=/tmp/$USER/bazelout/"
+build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
+build_str += " && rm -rf $TEST_TMPDIR"
 build_str += " && export PYTHON_BIN_PATH=$(which python%s)" % py_maj_ver
 build_str += " && export TF_NEED_JEMALLOC=0"
 build_str += " && export TF_NEED_GCP=0"
@@ -88,6 +89,7 @@ build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
 build_str += " && pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
+build_str += " && rm -rf $TEST_TMPDIR"
 
 
 cmds_map = [
@@ -104,8 +106,6 @@ sanity_check_paths = {
     'files': [whl_file],
     'dirs': ['%s/lib/python%s.%s/site-packages' % (installdir, py_maj_ver, py_min_ver)],
 }
-
-postinstallcmds = ['rm -rf /dev/shm/$USER/bazelout/']
 
 modextrapaths = {
     'PYTHONPATH': 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
