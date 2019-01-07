@@ -82,6 +82,10 @@
  Score-P-4.0-CrayIntel-18.08.eb                                          --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  Score-P-4.0-CrayPGI-18.08.eb                                            --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  Score-P-4.0-CrayCCE-18.08.eb                                            --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ Score-P-5.0-rc1-CrayGNU-18.08.eb                                        --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ Score-P-5.0-rc1-CrayIntel-18.08.eb                                      --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ Score-P-5.0-rc1-CrayPGI-18.08.eb                                        --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ Score-P-5.0-rc1-CrayCCE-18.08.eb                                        --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  Understand-4.0.926.eb                              --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  vampir-9.5.0.eb                                    --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  vampir-9.6.0.eb                                                         --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
