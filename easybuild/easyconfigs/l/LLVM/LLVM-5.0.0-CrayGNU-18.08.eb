@@ -1,0 +1,46 @@
+# Contributed by Jean M. Favre (CSCS)
+# The build options and the version number were inherited from the VisIt build (as a guarantee that it works there)
+# http://visit.ilight.com/svn/visit/trunk/src/svn_bin/bv_support/bv_llvm.sh
+easyblock = 'CMakeMake'
+
+name = 'LLVM'
+version = "5.0.0"
+
+homepage = "http://llvm.org/"
+description = """The LLVM Core libraries provide a modern source- and target-independent
+ optimizer, along with code generation support for many popular CPUs
+ (as well as some less common ones!) These libraries are built around a well
+ specified code representation known as the LLVM intermediate representation
+ ("LLVM IR"). The LLVM Core libraries are well documented, and it is
+ particularly easy to invent your own language (or port an existing compiler)
+ to use LLVM as an optimizer and code generator."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'dynamic': True}
+
+source_urls = ["http://llvm.org/releases/%(version)s"]
+sources = ["llvm-%(version)s.src.tar.xz"]
+
+python = 'python'
+pyver = '3'
+pysuff = '-%s%s' % (python, pyver)
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('cray-python/3.6.1.1', EXTERNAL_MODULE)
+]
+
+builddependencies = [('CMake', '3.12.0','', True)]
+
+
+configopts = '-DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON -DBUILD_SHARED_LIBS=OFF'
+# required to install extra tools in bin/
+configopts += " -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_RTTI:BOOL=ON -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON -DLLVM_ENABLE_ZLIB=ON"
+
+sanity_check_paths = {
+    'files': ['bin/llvm-ar', 'bin/FileCheck'],
+    'dirs': ['include/llvm', 'include/llvm-c'],
+}
+
+separate_build_dir = True
+
+moduleclass = 'compiler'

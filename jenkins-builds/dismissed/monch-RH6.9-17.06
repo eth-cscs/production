@@ -1,0 +1,11 @@
+ Boost-1.63.0-gmvolf-17.06-Python-3.5.3.eb
+ ddt-18.0.1.eb
+ ddt-18.1.1.eb                              --set-default-module
+ HDF5-1.8.18-gmvolf-17.06-serial.eb
+ HDF5-1.8.18-gmvolf-17.06.eb
+ PrgEnv-gnu-monch-gmvolf-17.06.eb
+ Python-2.7.12-gmvolf-17.06.eb
+ Python-3.5.3-gmvolf-17.06.eb
+ reframe-2.13.eb                            --set-default-module
+ Vim-8.0.eb                                 --set-default-module
+ vampir-9.4.0.eb                            --set-default-module

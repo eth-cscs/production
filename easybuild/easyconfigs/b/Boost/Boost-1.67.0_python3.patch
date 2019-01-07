@@ -1,0 +1,21 @@
+diff -Nru boost_1_67_0-original/tools/build/src/tools/python.jam boost_1_67_0/tools/build/src/tools/python.jam
+--- boost_1_67_0-original/tools/build/src/tools/python.jam	2018-07-18 11:45:54.000000000 +0200
++++ boost_1_67_0/tools/build/src/tools/python.jam	2018-07-18 11:47:24.000000000 +0200
+@@ -544,7 +544,16 @@
+     }
+     else
+     {
+-        includes ?= $(prefix)/include/python$(version) ;
++        if  not($(prefix)/include/python$(version)m)
++            {
++               debug-message "Used include path: $(prefix)/include/python$(version)m" ;
++               includes ?= $(prefix)/include/python$(version)m ;
++            }
++        else
++            {
++               debug-message "Used include path: $(prefix)/include/python$(version)" ;
++               includes ?= $(prefix)/include/python$(version) ;
++            }
+ 
+         local lib = $(exec-prefix)/lib ;
+         libraries ?= $(lib)/python$(version)/config $(lib) ;

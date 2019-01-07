@@ -1,0 +1,48 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = 'MakeCp'
+
+name = 'SIRIUS'
+version = '5.5'
+cudaversion = 8.0
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://electronic-structure.github.io/SIRIUS/'
+description = """Domain specific library for electronic structure calculations."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
+sources = ['v%(version)s.tar.gz']
+
+patches = [('platform.Intel.json', './')]
+
+dependencies = [
+  ('GSL', '2.4'),
+  ('libxc', '3.0.0'),
+  ('spglib','1.10.3'),
+  ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+  ('cudatoolkit/%s.61_2.4.3-6.0.4.0_3.1__gb475d12' % cudaversion, EXTERNAL_MODULE),
+  ('magma', '2.3.0', '-cuda-%s' % cudaversion)
+]
+
+skipsteps = ['configure']
+
+common_prebuildopts = 'module unload cray-libsci && module load gcc/5.3.0 && module list && python configure.py platform.Intel.json &&'
+
+prebuildopts = [ common_prebuildopts ]
+
+buildopts = 'sirius'
+
+files_to_copy=[
+  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib'),
+  (['src/libsirius_f.a', 'src/libsirius.a'], 'lib64'),
+  (['src/sirius.mod'], 'include')
+]
+
+sanity_check_paths = {
+    'files': ['lib/libsirius_f.a', 'lib/libsirius.a', 'lib64/libsirius_f.a', 'lib64/libsirius.a', 'include/sirius.mod'],
+    'dirs': ['lib', 'lib64', 'include']
+}
+
+moduleclass = 'chem'

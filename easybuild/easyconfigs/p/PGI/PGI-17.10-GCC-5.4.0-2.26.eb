@@ -1,0 +1,19 @@
+easyblock = 'Bundle'
+
+name = 'PGI'
+version = '17.10'
+gccver = '5.4.0'
+binutilsver = '2.26'
+versionsuffix = '-GCC-%s-%s' % (gccver, binutilsver)
+
+homepage = 'http://www.pgroup.com/'
+description = "C, C++ and Fortran compilers from The Portland Group - PGI"
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    ('GCC', '%s-%s' % (gccver,binutilsver)),
+    ('pgi/%s' % (version), EXTERNAL_MODULE),
+]   
+
+moduleclass = 'compiler'
