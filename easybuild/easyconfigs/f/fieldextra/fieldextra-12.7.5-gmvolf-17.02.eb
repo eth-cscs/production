@@ -1,0 +1,51 @@
+# added by Matthias Kraushaar (CSCS) - 07/01/2019
+easyblock = 'ConfigureMake'
+name = 'fieldextra'
+version = '12.7.5'
+
+homepage = 'https://github.com/MeteoSwiss-APN/3fieldextra.git'
+description = """
+    Fieldextra is a **generic tool** to manipulate NWP model data and gridded 
+    observations; simple data processing and more complex data operations are 
+    supported. Fieldextra is designed as a toolbox; a large set of primitive 
+    operations which can be arbitrarily combined are provided. Fieldextra can 
+    import GRIB 1, GRIB 2, NetCDF (starting with release 12.8.0) and some 
+    special simple ASCII format. Special care is taken to offer the **best 
+    compatibility with the COSMO, the ICON and the IFS models**.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: This module provides the optimized, serial version
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/f/fieldextra/%(name)s-%(version)s.tar.gz'}
+]
+
+start_dir = './src'
+
+dependencies = [
+    ('libaec', '1.0.0'),
+    ('JasPer', '1.900.1'),
+    ('grib_api', '1.20.0'),
+    ('rttov', '11.2.0'),
+    ('libgrib1', '2.8', '-MCH'),
+    ('icontools', '0.94'),
+]
+
+parallel = 1
+
+buildopts = ['mode=gnu,opt']
+installopts = ['mode=gnu,opt']
+postinstallcmds = ['cp -a ../bin %(installdir)s']
+
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin']
+}
+
+moduleclass = 'geo'

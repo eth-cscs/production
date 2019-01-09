@@ -1,0 +1,30 @@
+# Added by Matthias Kraushaar (CSCS) - January 2019
+easyblock = 'ConfigureMake'
+name = 'HDF5'
+version = "1.8.15-patch1"
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """
+    HDF5 is a unique technology suite that makes possible the management of 
+    extremely large and complex data collections.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: HDF version provided with Fieldextra
+        Build using ./configure
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchainopts = {'optarch': True, 'pic': True, 'usempi': True}
+
+source_urls = ['https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8'
+               '/hdf5-%(version)s/src']
+sources = [SOURCELOWER_TAR_BZ2]
+
+configopts = '--with-zlib=$EBROOTZLIB'
+
+dependencies = [
+    ('zlib', '1.2.7'),
+]
+
+moduleclass = 'data'
