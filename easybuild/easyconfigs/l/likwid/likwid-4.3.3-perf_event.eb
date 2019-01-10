@@ -9,15 +9,22 @@ checksums = ['70ff0d1238989010842644db792f4910']
 homepage = 'https://github.com/RRZE-HPC/likwid/releases'
 description = """Likwid stands for Like I knew what I am doing. This project
 contributes easy to use command line tools for Linux to support programmers in
-developing high performance multi threaded programs."""
+developing high performance multi threaded programs.
+
+## compile your code with -dynamic
+## then run with:
+##   srun -n1 -Cperf,gpu -t1 likwid-perfctr --execpid -g MEM ./my.exe
+
+## Requirements for 'ACCESSMODE = perf_event':
+## srun -n1 -Cperf,gpu cat /proc/sys/kernel/perf_event_paranoid # must return 0
+"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 toolchainopts = {'pic': True}
 source_urls = ['https://github.com/RRZE-HPC/likwid/archive/']
 sources = ['%(version)s.tar.gz']
-# binutils-devel-2.26.1-9.12.1.x86_64.rpm
+# reminder for openpower support --> https://github.com/RRZE-HPC/likwid/issues/69
 # builddependencies = [('binutils', '2.27-libiberty')]
-# for openpower support --> https://github.com/RRZE-HPC/likwid/issues/69
 
 # --- config.mk:
 prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-'                     config.mk && "
@@ -36,7 +43,6 @@ prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'                       
 
 skipsteps = ['configure']
 buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" PREFIX=%(installdir)s'
-#buildopts = 'COMPILER="GCC" CC="$CC" CFLAGS="$CFLAGS -g -std=c99" PREFIX=%(installdir)s'
 installopts = 'PREFIX=%(installdir)s'
 
 sanity_check_paths = {
@@ -46,37 +52,6 @@ sanity_check_paths = {
               "lib/liblikwidpin.%s" % SHLIB_EXT, "lib/liblikwid.%s" % SHLIB_EXT],
     'dirs': ["man/man1"]
 }
-
-## Sanity check: ftn -dynamic -g hello_world_serial.f90 
-## srun -Cgpu -n1 -t1 likwid-perfctr -g L2 a.out
-## CPU name: Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz
-## CPU type: Intel Xeon Haswell EN/EP/EX processor
-## CPU clock: 2.60 GHz
-## Cannot get access to MSRs. Please check permissions to the MSRs
-
-## module load daint-gpu
-##      module use /scratch/snx1600tds/piccinal/easybuild/modules/all
-##      module load likwid/4.3.2-CrayGNU-17.08-perf
-##      ftn -dynamic -g regression.git/src/hello_world_serial.f90 -o GNU.x
-##      gfortran  -g ~/git/reframe.git/cscs-checks/prgenv/src/hello_world_serial.f90
-##      srun -Cgpu -n1 -t1 likwid-perfctr --execpid -g MEM ./GNU.x 
-##    srun -n1 -Cperf,gpu -t1 likwid-perfctr --execpid -g MEM ./a.out
-## You can build using:
-## https://github.com/eth-cscs/production/tree/likwid/easybuild/easyconfigs/l/likwid/*perf.eb
-
-## Requirements for 'ACCESSMODE = perf_event':
-## cat /proc/sys/kernel/perf_event_paranoid # must be 0
-## srun -n1 -Cperf,gpu -t1 cat /proc/sys/kernel/perf_event_paranoid
-
-# TODO: cp config.mk + use --execpid flag
-# https://webrt.cscs.ch/Ticket/Display.html?id=31452
-
-# postinstallcmds = [
-#     'echo "================================================================================"',
-#     'echo "IMPORTANT: you will have to manually apply the following changes **as root**:"',
-#     'echo "   sudo chown root:root \$EBROOTLIKWID/sbin/likwid-accessD"',
-#     'echo "   sudo chmod u+s \$EBROOTLIKWID/sbin/likwid-accessD"'
-# ]
 
 maxparallel = 1
 

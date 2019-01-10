@@ -65,6 +65,7 @@
  IPM-2.0.6-CrayIntel-18.08.eb                                            --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  IPM-2.0.6-CrayPGI-18.08.eb                                              --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  jengafettplugin-0.1.eb                             --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ likwid-4.3.3-perf_event.eb                         --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-18.08-python3.eb         --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-18.08.eb                     --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  otfprofile-6e2022d-CrayGNU-18.08.eb                --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
