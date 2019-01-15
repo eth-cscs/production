@@ -11,6 +11,7 @@
  dask-1.0.0-CrayGNU-18.08-python3.eb                --set-default-module
  GREASY-2.1-cscs-CrayGNU-18.08-gpu.eb               --set-default-module
  GROMACS-2018.3-CrayGNU-18.08-cuda-9.1.eb           --set-default-module
+ GROMACS-2019-CrayGNU-18.08-cuda-9.1.eb
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
  GSL-2.5-CrayIntel-18.08.eb
