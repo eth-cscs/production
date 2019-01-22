@@ -22,7 +22,8 @@ sources = ['grib_api-%(version)s-Source.tar.gz']
 
 dependencies = [
     ('JasPer', '1.900.1'),
-    ('netCDF', '4.2.1.1'),
+#    ('netCDF', '4.2.1.1'),
+    ('netCDF', '4.4.1.1'),
     ('libaec', '1.0.0'),
 ]
 

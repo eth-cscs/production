@@ -21,8 +21,10 @@ sources = [
 ]
 
 dependencies = [
-    ('netCDF', '4.2.1.1'),
-    ('netCDF-Fortran', '4.2'),
+#    ('netCDF', '4.2.1.1'),
+#    ('netCDF-Fortran', '4.2'),
+    ('netCDF', '4.4.1.1'),
+    ('netCDF-Fortran', '4.4.4'),
 ]
 
 parallel = 1
