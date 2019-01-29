@@ -11,7 +11,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://github.com/fltk/fltk/archive']
 sources = ['release-%(version)s.tar.gz']
 separate_build_dir = True
-configopts = "CC=gcc CXX=g++ "
+configopts = "-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc "
 
 moduleclass = 'devel'
 
