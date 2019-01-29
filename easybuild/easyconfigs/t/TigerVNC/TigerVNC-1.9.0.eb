@@ -16,6 +16,7 @@ configopts += " -DFLTK_DIR:PATH=$EBROOTFLTK"
 configopts += " -DFLTK_INCLUDE_DIR:PATH=$EBROOTFLTK/include"
 configopts += " -DFLTK_BASE_LIBRARY:FILEPATH=$EBROOTFLTK/lib64/libfltk.a"
 configopts += " -DFLTK_IMAGES_LIBRARY:FILEPATH=$EBROOTFLTK/lib64/libfltk_images.a"
+configopts += " CC=gcc CXX=g++"
 parallel = 8
 
 dependencies = [

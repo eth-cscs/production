@@ -12,7 +12,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://github.com/LibVNC/libvncserver/archive']
 sources = ['%(name)s-%(version)s.tar.gz']
 separate_build_dir = True
-
+configopts = "CC=gcc CXX=g++ "
 
 sanity_check_paths = {
     'files': ['lib/libvncserver.so'],
