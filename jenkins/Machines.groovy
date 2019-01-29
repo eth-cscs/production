@@ -22,13 +22,13 @@ def fulen = [name: 'fulen',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
 
-def kesch = [name: 'keschTDS',
+def kesch = [name: 'keschTDS_RH7.5',
              archs: [],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/escha/UES/generic/modulefiles:/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles:/apps/escha/UES/PrgEnv-cray-17.06/modulefiles:/apps/escha/UES/experimental/modulefiles',
+             unusePath: '/apps/escha/UES/jenkins/RH7.4/gnu_PE17.02/easybuild/modules/all:/apps/escha/UES/jenkins/RH7.4/generic/easybuild/modules/all',
              modulesProduction: '',
              modulesUnuseProduction: '',
-             prefixProduction: '/apps/escha/UES/jenkins/RH7.4/gnu_PE17.02/easybuild']
+             prefixProduction: '/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild']
 
 def leone = [name: 'leone',
              archs: [],
