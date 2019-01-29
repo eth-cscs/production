@@ -20,10 +20,7 @@ dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.8'),
     ('libreadline', '7.0'),
-    #('ncurses', '6.1'),
-    #('SQLite', '3.24.0'),
-    #('XZ', '5.2.4'),
-    ('openssl', '1.1.0c'),
+    ('OpenSSL', '1.1.0c'),
 ] 
 
 # rpath is needed for buiding TensorFlow
@@ -35,32 +32,34 @@ exts_list = [
     ('setuptools', '40.7.0', {
         'source_tmpl': '%(name)s-%(version)s.zip', 
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['4380932816f38096e43623a7daca5cf34085683bc009feb5058fa78d09375b9d'],
+        'checksums': [('4380932816f38096e43623a7daca5cf34085683bc009feb5058fa7'
+                       '8d09375b9d')],
     }),
     ('pip', '19.0.1', {
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['e81ddd35e361b630e94abeda4a1eddd36d47a90e71eb00f38f46b57f787cd1a5'],
+        'checksums': [('e81ddd35e361b630e94abeda4a1eddd36d47a90e71eb00f38f46b5'
+                       '7f787cd1a5')],
     }),
     ('pipenv', '2018.11.26', {
         'source_tmpl': '%(name)s-%(version)s.tar.gz',
-        # 'source_urls': ['http://pypi.python.org/packages/source/p/pipenv/'],
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3cab3fee846'],
+        'checksums': [('a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3'
+                       'cab3fee846')],
     }),
     ('virtualenv', '16.3.0', {
-       # 'source_urls': ['http://pypi.python.org/packages/source/v/virtualenv'],
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['729f0bcab430e4ef137646805b5b1d8efbb43fe53d4a0f33328624a84a5121f7'],
+        'checksums': [('729f0bcab430e4ef137646805b5b1d8efbb43fe53d4a0f33328624'
+                       'a84a5121f7')],
     }),
     ('virtualenvwrapper', '4.8.2', {
-       # 'source_urls': ['http://pypi.python.org/packages/source/v/virtualenvwrapper'],
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['18d8e4c500c4c4ee794f704e050cf2bbb492537532a4521d1047e7dd1ee4e374'],
+        'checksums': [('18d8e4c500c4c4ee794f704e050cf2bbb492537532a4521d1047e7'
+                       'dd1ee4e374')],
     }),
     ('cookiecutter', '1.6.0', {
-       # 'source_urls': ['http://pypi.python.org/packages/source/c/cookiecutter'],
         'source_urls': [PYPI_LOWER_SOURCE],
-        'checksums': ['1316a52e1c1f08db0c9efbf7d876dbc01463a74b155a0d83e722be88beda9a3e'],
+        'checksums': [('1316a52e1c1f08db0c9efbf7d876dbc01463a74b155a0d83e722be'
+                       '88beda9a3e')],
     }),
 ]
 
