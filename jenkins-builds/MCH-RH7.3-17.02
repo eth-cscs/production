@@ -20,6 +20,7 @@
  ImageMagick-7.0.7-7.eb                              --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  ImageMagick-7.0.7-7-GCC-5.4.0-2.26.eb               --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  ImageMagick-7.0.7-7-GCC-5.4.0-2.26-sysdeps.eb       --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ IPython-7.2.0-gmvolf-17.02-Python-3.7.2.eb          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  NCL-6.2.1.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  NCL-6.4.0.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
@@ -28,6 +29,7 @@
  matlab-r2016a.eb                                    --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.2-gmvolf-17.02.eb
+ Python-3.7.2-gmvolf-17.02.eb                        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
  R-3.5.2-gmvolf-17.02-libX11-1.6.3.eb
  reframe-2.14.eb                                     --set-default-module
