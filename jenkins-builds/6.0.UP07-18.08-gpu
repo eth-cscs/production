@@ -57,7 +57,8 @@
  VASP-5.4.4-CrayIntel-18.08-cuda-9.1.eb             --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
- VTK-8.1.1-EGL-CrayGNU-18.08-python3.eb             --set-default-module
+ VTK-8.1.1-EGL-CrayGNU-18.08-python3.eb
+ VTK-8.2.0-EGL-CrayGNU-18.08-python3.eb             --set-default-module
  advisor_2018.eb                                    --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  advisor_2019.eb                                                         --installpath=/apps/daint/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
  bladeplugin-0.1.eb                                 --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/gpu/easybuild/tools
