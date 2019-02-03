@@ -1,0 +1,21 @@
+# jg (cscs)
+easyblock = 'Tarball'
+
+name = 'newlib'
+version = '3.1.0.20181231'
+homepage = 'https://github.com/MentorEmbedded/nvptx-newlib'
+description = """Newlib is a C library (needed for GCC offload/nvptx support):
+ https://sourceware.org/newlib/"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['ftp://sourceware.org/pub/%(name)s']
+sources = ['%(name)s-%(version)s.tar.gz']
+checksums = ['d25fd33b39147d79741faece37dd33a8']
+
+sanity_check_paths = {
+    'files': ['newlib/libc/machine/nvptx/Makefile.in'],
+    'dirs': ['config', 'etc']
+}
+
+moduleclass = 'devel'
+
