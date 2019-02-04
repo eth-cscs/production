@@ -23,6 +23,7 @@
  IPython-7.2.0-gmvolf-17.02-Python-3.7.2.eb          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  NCL-6.2.1.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  NCL-6.4.0.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ NCL-6.5.0-gmvolf-18.05.eb                           --installpath=/apps/escha/UES/RH7.3_generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
  gmvapich2-17.02_cuda_8.0_gdr.eb
