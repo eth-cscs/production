@@ -20,13 +20,13 @@ builddependencies = [
 ]
 
 preconfigopts = [
-    'tar xf $EASYBUILD_SOURCEPATH/g/GCCcore/gmp-6.1.2.tar.bz2 &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/gmp-6.1.2.tar.bz2 &&'
     'ln -s gmp-6.1.2 gmp &&'
-    'tar xf $EASYBUILD_SOURCEPATH/g/GCCcore/mpfr-3.1.4.tar.bz2 &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/mpfr-3.1.4.tar.bz2 &&'
     'ln -s mpfr-3.1.4 mpfr &&'
-    'tar xf $EASYBUILD_SOURCEPATH/g/GCCcore/mpc-1.1.0.tar.gz &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/mpc-1.1.0.tar.gz &&'
     'ln -s mpc-1.1.0 mpc &&'
-    'tar xf $EASYBUILD_SOURCEPATH/g/GCCcore/isl-0.16.1.tar.bz2 &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/isl-0.16.1.tar.bz2 &&'
     'ln -s isl-0.16.1 isl &&'
     'ln -s $EBROOTNEWLIB/newlib newlib &&'
     'mkdir build-nvptx-gcc ;cd build-nvptx-gcc && '
