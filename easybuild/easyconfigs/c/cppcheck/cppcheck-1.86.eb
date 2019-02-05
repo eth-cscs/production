@@ -13,10 +13,6 @@ source_urls = ['https://github.com/danmar/cppcheck/archive']
 sources = ['%(version)s.tar.gz']
 separate_build_dir = True
 
-#files_to_copy = [
-#    (['cppcheck'], 'bin'),
-#]
-
 sanity_check_paths = {
     'files': ['bin/cppcheck'],
     'dirs': []
