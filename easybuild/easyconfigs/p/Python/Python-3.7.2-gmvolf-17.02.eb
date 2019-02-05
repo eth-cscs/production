@@ -1,0 +1,168 @@
+# File modified for Python 3.7.2 extensions by MKr - January 2019
+name = 'Python'
+version = "3.7.2"
+
+homepage = 'http://python.org/'
+description = """
+    Python is a programming language that lets you work more quickly and 
+    integrate your systems more effectively.
+"""
+
+toolchain = {'name':'gmvolf', 'version':'17.02' }
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
+sources = [SOURCE_TGZ]
+checksums = ['02a75015f7cd845e27b85192bb0ca4cb']
+
+# python needs bzip2 to build the bz2 package
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.8'),
+    ('libreadline', '7.0'),
+    ('OpenSSL', '1.1.0c'),
+] 
+
+# rpath is needed for buiding TensorFlow
+configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=%(installdir)s/lib"'
+
+# order is important!
+# package versions based on latest available 28.01.2019
+exts_list = [
+    ('setuptools', '40.7.0', {
+        'source_tmpl': '%(name)s-%(version)s.zip', 
+        'source_urls': [('https://pypi.python.org/packages/source/s/'
+                         'setuptools/')],
+        'checksums': [('4380932816f38096e43623a7daca5cf34085683bc009feb5058fa7'
+                       '8d09375b9d')],
+    }),
+    ('pip', '19.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pip/'],
+        'checksums': [('e81ddd35e361b630e94abeda4a1eddd36d47a90e71eb00f38f46b5'
+                       '7f787cd1a5')],
+    }),
+    ('virtualenv', '16.3.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/v/'
+                         'virtualenv/')],
+        'checksums': [('729f0bcab430e4ef137646805b5b1d8efbb43fe53d4a0f33328624'
+                       'a84a5121f7')],
+    }),
+    ('virtualenv-clone', '0.5.1', {
+        'source_urls': [('https://pypi.python.org/packages/source/v/'
+                         'virtualenv-clone/')],
+        'checksums': [('217bd3f0880c9f85672c0bcc9ad9e0354ab7dfa89c2f117e63aa87'
+                       '8b4279f5bf')],
+        'modulename': 'clonevirtualenv',
+    }),
+    ('certifi', '2018.11.29', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
+        'checksums': [('47f9c83ef4c0c621eaef743f133f09fa8a74a9b75f037e8624f83b'
+                       'd1b6626cb7')],
+    }),
+    ('virtualenvwrapper', '4.8.2', {
+        'source_urls': [('https://pypi.python.org/packages/source/v/'
+                         'virtualenvwrapper')],
+        'checksums': [('18d8e4c500c4c4ee794f704e050cf2bbb492537532a4521d1047e7'
+                       'dd1ee4e374')],
+    }),
+    ('pipenv', '2018.11.26', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pipenv/'],
+        'checksums': [('a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3'
+                       'cab3fee846')],
+    }),
+    ('urllib3', '1.24.1', {
+        'source_urls': [('https://pypi.python.org/packages/source/u/'
+                         'urllib3/')],
+        'checksums': [('de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663'
+                       '385c6a9c22')],
+    }),
+    ('chardet', '3.0.4', {
+        'source_urls': [('https://pypi.python.org/packages/source/c/'
+                         'chardet/')],
+        'checksums': [('84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64'
+                       'a3e2a5eaae')],
+    }),
+    ('idna', '2.8', {
+        'source_urls': [('https://pypi.python.org/packages/source/i/idna/')],
+        'checksums': [('c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bc'
+                       'de5e9c3407')],
+    }),
+    ('requests', '2.21.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/r/'
+                         'requests/')],
+        'checksums': [('502a824f31acdacb3a35b6690b5fbf0bc41d63a24a45c4004352b0'
+                       '242707598e')],
+    }),
+    ('six', '1.12.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/s/six/')],
+        'checksums': [('d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa80'
+                       '4d0e0eba73')],
+    }),
+    ('python-dateutil', '2.7.5', {
+        'source_urls': [('https://pypi.python.org/packages/source/p/'
+                         'python-dateutil')],
+        'checksums': [('88f9287c0174266bb0d8cedd395cfba9c58e87e5ad86b2ce58859b'
+                       'c11be3cf02')],
+        'modulename': 'dateutil',
+    }),
+    ('arrow', '0.13.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/a/arrow/')],
+        'checksums': [('9cb4a910256ed536751cd5728673bfb53e6f0026e240466f90c2a9'
+                       '2c0b79c895')],
+    }),
+    ('MarkupSafe', '1.1.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/m/'
+                         'MarkupSafe/')],
+        'checksums': [('4e97332c9ce444b0c2c38dd22ddc61c743eb208d916e4265a2a3b5'
+                       '75bdccb1d3')],
+        'modulename': 'markupsafe',
+    }),
+    ('Jinja2', '2.10', {
+        'source_urls': [('https://pypi.python.org/packages/source/j/Jinja2/')],
+        'checksums': [('f84be1bb0040caca4cea721fcbbbbd61f9be9464ca236387158b0f'
+                       'eea01914a4')],
+    }),
+    ('jinja2-time', '0.2.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/j/'
+                         'jinja2-time/')],
+        'checksums': [('d14eaa4d315e7688daa4969f616f226614350c48730bfa1692d2ca'
+                       'ebd8c90d40')],
+        'modulename': 'jinja2_time',
+    }),
+    ('poyo', '0.4.2', {
+        'source_urls': [('https://pypi.python.org/packages/source/p/poyo/')],
+        'checksums': [('c34a5413191210ed564640510e9c4a4ba3b698746d6b454d46eb5b'
+                       'fb30edcd1d')],
+    }),
+    ('whichcraft', '0.5.2', {
+        'source_urls': [('https://pypi.python.org/packages/source/w/'
+                         'whichcraft/')],
+        'checksums': [('fecddd531f237ffc5db8b215409afb18fa30300699064cca481752'
+                       '1b4fc81815')],
+    }),
+    ('Click', '7.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/c/Click/')],
+        'checksums': [('5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c9'
+                       '4d5a8ff2d7')],
+        'modulename': 'click', 
+    }),
+    ('binaryornot', '0.4.4', {
+        'source_urls': [('https://pypi.python.org/packages/source/b/'
+                         'binaryornot/')],
+        'checksums': [('359501dfc9d40632edc9fac890e19542db1a287bbcfa58175b6665'
+                       '8392018061')],
+    }),
+    ('future', '0.17.1', {
+        'source_urls': [('https://pypi.python.org/packages/source/f/future/')],
+        'checksums': [('67045236dcfd6816dc439556d009594abf643e5eb48992e36beac0'
+                       '9c2ca659b8')],
+    }),
+    ('cookiecutter', '1.6.0', {
+        'source_urls': [('https://pypi.python.org/packages/source/c/'
+                         'cookiecutter/')],
+        'checksums': [('1316a52e1c1f08db0c9efbf7d876dbc01463a74b155a0d83e722be'
+                       '88beda9a3e')],
+    }),
+]
+
+moduleclass = 'lang'

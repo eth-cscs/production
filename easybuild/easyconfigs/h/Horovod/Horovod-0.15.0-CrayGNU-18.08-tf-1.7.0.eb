@@ -10,8 +10,9 @@ py_rev_ver = '5.1'
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
-cudaver = 'cuda-9.1'
-versionsuffix = '-python%s' % py_maj_ver
+cudaver = '9.1'
+tfver = '1.7.0'
+versionsuffix = '-tf-%s' % tfver
 
 homepage = 'https://github.com/uber/horovod'
 description = "Horovod is a distributed training framework for TensorFlow."
@@ -23,13 +24,10 @@ source_urls = [PYPI_LOWER_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['d4ddf281d64ba687e2fbfcb5897779503c4df579c57a3e2e146ac356d02aecda']
 
-builddependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-    ('NCCL', '2.2.13', '-%s' % cudaver, True),
-    ('TensorFlow', '1.7.0', '-%s%s' % (cudaver, versionsuffix) ),
-]
 dependencies = [
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('NCCL', '2.2.13', '-cuda-%s' % cudaver, True),
+    ('TensorFlow', tfver, '-cuda-%s-python%s' % (cudaver, py_maj_ver)),
 ]
 
 skipsteps = ['build']

@@ -1,0 +1,23 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'LibVNCServer'
+version = '0.9.12'
+homepage = 'https://github.com/LibVNC/libvncserver'
+description = """LibVNCServer/Client are cross-platform C libraries that
+allow you to easily implement VNC server or client functionality in your
+program."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://github.com/LibVNC/libvncserver/archive']
+sources = ['%(name)s-%(version)s.tar.gz']
+separate_build_dir = True
+configopts = "-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc "
+
+sanity_check_paths = {
+    'files': ['lib/libvncserver.so'],
+    'dirs': ['lib/pkgconfig']
+}
+
+moduleclass = 'devel'
+
