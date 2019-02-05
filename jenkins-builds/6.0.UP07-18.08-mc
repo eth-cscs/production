@@ -57,6 +57,7 @@
  ddt-18.3-Ubuntu-16.04.eb                                                --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools --hidden
  ddt-19.0-Ubuntu-16.04.eb                                                --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools --hidden
  Extrae-3.5.4-CrayGNU-18.08.eb                      --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
+ gperftools-2.7.eb                                  --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  gprof2dot-2017.9.19-CrayGNU-18.08-python3.eb       --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  inspector_2018.eb                                  --set-default-module --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
  inspector_2019.eb                                                       --installpath=/apps/daint/UES/jenscscs/6.0.UP07/mc/easybuild/tools
