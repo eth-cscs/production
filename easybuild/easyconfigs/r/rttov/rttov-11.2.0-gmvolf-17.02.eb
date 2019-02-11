@@ -26,13 +26,11 @@ sources = [
 parallel = 1
 
 prebuildopts = (
-    'export CC=gcc && '
-    'export ARCH=gfortran && '
     'cd src && '
-    'make ARCH=${ARCH} clean && '
+    'make ARCH=gfortran clean && '
 )
 
-buildopts = ['ARCH=${ARCH}']
+buildopts = ['ARCH=gfortran']
 
 files_to_copy = [
     (['./bin'], '.'),
