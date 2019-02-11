@@ -21,23 +21,23 @@ sources = [
 ]
 
 dependencies = [
-#    ('netCDF', '4.2.1.1'),
-#    ('netCDF-Fortran', '4.2'),
-    ('netCDF', '4.4.1.1'),
-    ('netCDF-Fortran', '4.4.4'),
+    ('netCDF', '4.4.1.1', '-serial'),
+    ('netCDF-Fortran', '4.4.4', '-serial'),
 ]
 
 parallel = 1
+skipsteps = ['configure']
 
 buildopts = ['mode=gnu,opt']
 installopts = ['mode=gnu,opt']
-postinstallcmds = ['make clean && cp -a ./icontools_gnu/* %(installdir)s/.']
-
-skipsteps = ['configure']
+postinstallcmds = [(
+    'cp -r %(builddir)s/icontools-0.94/lib %(installdir)s/. && '
+    'cp -r %(builddir)s/icontools-0.94/include %(installdir)s/.'
+)]
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib']
+    'dirs': ['lib', 'include']
 }
 
 moduleclass = 'tools'

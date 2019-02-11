@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = 'libgrib1'
 version = '2.8'
-versionsuffix = '-MCH-OpenMP'
+versionsuffix = 'Fieldextra-OpenMP'
 
 homepage = ''
 description = """
@@ -18,22 +18,21 @@ toolchain = {'name': 'gmvolf', 'version': '17.02'}
 
 sources = [
     {'filename': '/apps/common/UES/easybuild/sources/l/libgrib1'
-                 '/libgrib1-2.8-MCH.tar.gz'}
+                 '/%(name)s-%(version)s-Fieldextra.tar.gz'}
 ]
 
 parallel = 1
-
+skipsteps = ['configure']
 start_dir = './src'
 
 buildopts = ['mode=gnu,opt,omp']
 installopts = ['mode=gnu,opt,omp']
-postinstallcmds = ['make clean && cp -a ../grib1_gnu/* %(installdir)s/.']
+postinstallcmds = ['cp -a ./install/* %(installdir)s/.']
 
-skipsteps = ['configure']
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib']
+    'dirs': ['lib', 'include']
 }
 
 moduleclass = 'lib'

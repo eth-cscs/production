@@ -27,16 +27,18 @@ dependencies = [
 ]
 
 parallel = 1
+skipsteps = ['configure']
 
 buildopts = ['mode=gnu,opt,omp']
 installopts = ['mode=gnu,opt,omp']
-postinstallcmds = ['make clean && cp -a ./icontools_gnu/* %(installdir)s/.']
-
-skipsteps = ['configure']
+postinstallcmds = [(
+    'cp -r %(builddir)s/icontools-0.94/lib %(installdir)s/. && '
+    'cp -r %(builddir)s/icontools-0.94/include %(installdir)s/.'
+)]
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib']
+    'dirs': ['lib', 'include']
 }
 
 moduleclass = 'tools'

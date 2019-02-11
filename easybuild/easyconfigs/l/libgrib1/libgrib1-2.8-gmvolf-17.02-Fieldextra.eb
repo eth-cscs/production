@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = 'libgrib1'
 version = '2.8'
-versionsuffix = '-MCH'
+versionsuffix = '-Fieldextra'
 
 homepage = ''
 description = """
@@ -23,18 +23,16 @@ sources = [
 ]
 
 parallel = 1
-
+skipsteps = ['configure']
 start_dir = './src'
 
 buildopts = ['mode=gnu,opt']
 installopts = ['mode=gnu,opt']
-postinstallcmds = ['make clean && cp -a ../grib1_gnu/* %(installdir)s/.']
-
-skipsteps = ['configure']
+postinstallcmds = ['cp -a ./install/*  %(installdir)s/.']
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib']
+    'dirs': ['lib', 'include']
 }
 
 moduleclass = 'lib'
