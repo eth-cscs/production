@@ -28,7 +28,7 @@ def kesch = [name: 'keschTDS',
              unusePath: '/apps/escha/UES/generic/modulefiles:/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles:/apps/escha/UES/PrgEnv-cray-17.06/modulefiles:/apps/escha/UES/experimental/modulefiles',
              modulesProduction: '',
              modulesUnuseProduction: '',
-             prefixProduction: '/apps/escha/UES/jenkins/RH7.4/gnu_PE17.02/easybuild']
+             prefixProduction: '/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild']
 
 def leone = [name: 'leone',
              archs: [],
