@@ -10,7 +10,7 @@ event-driven, non-blocking I/O model that makes it lightweight and efficient,
 perfect for data-intensive real-time applications that run across distributed
 devices."""
 
-toolchain = {'name':'dummy', 'version':''}
+toolchain = {'name':'CrayGNU', 'version':'18.08'}
 sources = ['node-v%(version)s.tar.gz']
 source_urls = ['http://nodejs.org/dist/v%(version)s/']
 # Python is required (only) as build dependency
