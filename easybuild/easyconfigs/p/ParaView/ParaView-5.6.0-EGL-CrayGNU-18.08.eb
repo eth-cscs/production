@@ -73,7 +73,8 @@ configopts += '-DPARAVIEW_BUILD_PLUGIN_pvNVIDIAIndeX:BOOL=ON '
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
 
-modextravars = { 'LD_LIBRARY_PATH':'/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % pyver}
+modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % pyver, 
+                 'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView'}
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
