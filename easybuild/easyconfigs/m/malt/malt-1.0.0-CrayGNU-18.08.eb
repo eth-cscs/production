@@ -8,6 +8,7 @@ description = """MALT is a memory profiling tool used to find where you
 allocate your memory and how."""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
 source_urls = ['https://github.com/memtt/malt/archive']
 sources = ['v%(version)s.tar.gz']
 separate_build_dir = True
