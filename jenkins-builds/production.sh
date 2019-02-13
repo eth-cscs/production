@@ -44,7 +44,6 @@ while [ $# -ne 0 ]; do
         -l | --list)
             shift
             mapfile -O ${#eb_files[@]} -t eb_files < $1
-            eb_files=$(eval echo ${eb_files[@]})
             eb_lists+=($1)
             ;;
         -p | --prefix)
