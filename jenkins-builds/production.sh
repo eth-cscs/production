@@ -10,7 +10,6 @@ scriptdir=$(dirname $0)
 
 usage() {
     echo -e "\n Usage: $0 [OPTIONS] -l <list> -p <prefix>
-    
     -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
     -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
     -h,--help     Help message
@@ -44,6 +43,9 @@ while [ $# -ne 0 ]; do
         -l | --list)
             shift
             mapfile -O ${#eb_files[@]} -t eb_files < $1
+            for i in ${!eb_files[*]}; do
+                eb_files[i]=$(eval echo ${eb_files[i]})
+            done
             eb_lists+=($1)
             ;;
         -p | --prefix)
@@ -71,11 +73,11 @@ done
 if [ -n "${force_list}" ]; then
 # match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
  echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
- for item in ${force_list}; do 
+ for item in ${force_list}; do
      force_match=$(grep $item ${eb_lists[@]})
      if [ -n "${force_match}" ]; then
 # 'grep -n' returns the 1-based line number of the matching pattern within the input file
-         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}') 
+         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}')
 # append the force flag '-f' to matching items within the selected production lists
          for index in ${index_list}; do
              eb_files[$index]+=" -f"
