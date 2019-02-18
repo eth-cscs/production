@@ -1,0 +1,75 @@
+# jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'GCCcore'
+version = '7.3.0'
+cudaversion = '9.1'
+versionsuffix = '-cuda-%s-offload' % cudaversion
+
+homepage = 'http://gcc.gnu.org/'
+description = """The GNU Compiler with OpenMP/offload gpu nvptx support"""
+toolchain = {'name': 'dummy', 'version': ''}
+target = 'x86_64-pc-linux-gnu'
+
+sources = ['/apps/common/UES/easybuild/sources/g/GCCcore/gcc-7.3.0_svn.tar']
+# only src from trunk will compile, do not use ftpmirror.gnu.org
+
+builddependencies = [
+    ('newlib', '3.1.0.20181231'),
+    ('nvptx-tools', '5f6f343','-cuda-9.1'),
+]
+
+preconfigopts = [
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/gmp-6.1.2.tar.bz2 &&'
+    'ln -s gmp-6.1.2 gmp &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/mpfr-3.1.4.tar.bz2 &&'
+    'ln -s mpfr-3.1.4 mpfr &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/mpc-1.1.0.tar.gz &&'
+    'ln -s mpc-1.1.0 mpc &&'
+    'tar xf /apps/common/UES/easybuild/sources/g/GCCcore/isl-0.16.1.tar.bz2 &&'
+    'ln -s isl-0.16.1 isl &&'
+    'ln -s $EBROOTNEWLIB/newlib newlib &&'
+    'mkdir build-nvptx-gcc ;cd build-nvptx-gcc && '
+    'echo "#cscs:build-nvptx-gcc" && '
+]
+
+# --- cscs:build-nvptx-gcc:
+configure_cmd_prefix = '../'
+configopts = [
+    '--target=nvptx-none '
+    '--with-build-time-tools=$EBROOTNVPTXMINTOOLS/nvptx-none/bin '
+    '--enable-as-accelerator-for=x86_64-pc-linux-gnu '
+    '--disable-sjlj-exceptions '
+    '--enable-newlib-io-long-long '
+    '--enable-languages="c,c++,fortran,lto" '
+    'RANLIB=`which ranlib` RANLIB_FOR_TARGET=`which ranlib` '
+]
+prebuildopts = 'cd build-nvptx-gcc && '
+buildopts = 'RANLIB_FOR_TARGET=`which ranlib` '
+preinstallopts = 'cd build-nvptx-gcc && '
+installopts = 'RANLIB_FOR_TARGET=`which ranlib` '
+
+# --- cscs:build-host-gcc:
+postinstallcmds = [
+    'mkdir build-host-gcc ;cd build-host-gcc && '
+    'echo "#cscs:build-host-gcc" && '
+    '../configure LDFLAGS_FOR_TARGET=-L/opt/cray/nvidia/default/lib64 '
+    'LDFLAGS=-L/opt/cray/nvidia/default/lib64 '
+    'CUDA_DRIVER_LDFLAGS=-L/opt/cray/nvidia/default/lib64 '
+    '--enable-offload-targets=nvptx-none '
+    '--with-cuda-driver-include=/opt/nvidia/cudatoolkit9.1/default/include '
+    '--with-cuda-driver-lib=/opt/nvidia/cudatoolkit9.1/default/lib64 '
+    '--disable-bootstrap '
+    '--disable-multilib '
+    '--enable-languages="c,c++,fortran,lto" '
+    '--enable-__cxa_atexit '
+    '--with-ppl '
+    '--with-cloog '
+    '--prefix=%(installdir)s && '
+    'make -j15 LDFLAGS_FOR_TARGET=-L/opt/cray/nvidia/default/lib64 && '
+    'make -j4 install && '
+    'cd %(installdir)s/nvptx-none;ln -fs $EBROOTNVPTXMINTOOLS/nvptx-none/bin/ . ;cd - && '
+    'cd %(installdir)s/bin;ln -fs $EBROOTNVPTXMINTOOLS//bin/* . '
+]
+
+moduleclass = 'compiler'
