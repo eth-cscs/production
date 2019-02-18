@@ -1,0 +1,58 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'likwid'
+version = '4.3.3'
+versionsuffix = '-perf_event'
+checksums = ['70ff0d1238989010842644db792f4910']
+
+homepage = 'https://github.com/RRZE-HPC/likwid/releases'
+description = """Likwid stands for Like I knew what I am doing. This project
+contributes easy to use command line tools for Linux to support programmers in
+developing high performance multi threaded programs.
+
+## compile your code with -dynamic
+## then run with:
+##   srun -n1 -Cperf,gpu -t1 likwid-perfctr --execpid -g MEM ./my.exe
+
+## Requirements for 'ACCESSMODE = perf_event':
+## srun -n1 -Cperf,gpu cat /proc/sys/kernel/perf_event_paranoid # must return 0
+"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+toolchainopts = {'pic': True}
+source_urls = ['https://github.com/RRZE-HPC/likwid/archive/']
+sources = ['%(version)s.tar.gz']
+# reminder for openpower support --> https://github.com/RRZE-HPC/likwid/issues/69
+# builddependencies = [('binutils', '2.27-libiberty')]
+
+# --- config.mk:
+prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-'                     config.mk && "
+prebuildopts += "sed -i 's-^FORTRAN_INTERFACE = false-FORTRAN_INTERFACE = true-' config.mk && "
+prebuildopts += "sed -i 's-^INSTALL_CHOWN-#INSTALL_CHOWN-'                       config.mk && "
+prebuildopts += "sed -i 's-^CFG_FILE_PATH = /-CFG_FILE_PATH = $(PREFIX)/-'       config.mk && "
+prebuildopts += "sed -i 's-^TOPO_FILE_PATH = /-TOPO_FILE_PATH = $(PREFIX)/-'     config.mk && "
+prebuildopts += "sed -i 's-^BUILDFREQ = true-BUILDFREQ = false-'                 config.mk && "
+prebuildopts += "sed -i 's-^BUILDDAEMON = true-BUILDDAEMON = false-'             config.mk && "
+prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
+
+# --- make/include_GCC.mk:
+prebuildopts += "sed -i 's@^FC  = ifort@FC  = gfortran@'                         make/include_GCC.mk && "
+prebuildopts += "sed -i 's@FCFLAGS  = -module@#FCFLAGS  = -module@'              make/include_GCC.mk && "
+prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'                        make/include_GCC.mk && "
+
+skipsteps = ['configure']
+buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" PREFIX=%(installdir)s'
+installopts = 'PREFIX=%(installdir)s'
+
+sanity_check_paths = {
+    'files': ["bin/likwid-memsweeper", "bin/likwid-mpirun", "bin/likwid-perfctr",
+              "bin/likwid-perfscope", "bin/likwid-pin", "bin/likwid-powermeter", 
+              "bin/likwid-topology",
+              "lib/liblikwidpin.%s" % SHLIB_EXT, "lib/liblikwid.%s" % SHLIB_EXT],
+    'dirs': ["man/man1"]
+}
+
+maxparallel = 1
+
+moduleclass = 'devel'
