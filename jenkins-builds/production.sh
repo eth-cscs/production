@@ -214,7 +214,7 @@ if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
         module load Lmod/.7.8.2
         export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
         export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
-        export XALTPROD=/apps/daint/UES/xalt/git
+        export XALTPROD=/apps/daint/UES/xalt/production
         cd $XALTJENKINS/
         rm -rf $XALTJENKINS/reverseMapD
         ./cray_build_rmapT.sh .
