@@ -1,0 +1,33 @@
+diff -Nru alps-2.3.0-src/alps/config/FindBoostForALPS.cmake alps-2.3.0-src.mod/alps/config/FindBoostForALPS.cmake
+--- alps-2.3.0-src/alps/config/FindBoostForALPS.cmake	2017-01-04 18:19:10.000000000 +0100
++++ alps-2.3.0-src.mod/alps/config/FindBoostForALPS.cmake	2018-11-12 11:59:45.070962000 +0100
+@@ -54,12 +54,13 @@
+     set(TIMER timer)
+   endif (Boost_FOUND)
+   set(NUMPY)
+-  find_package(Boost 1.48.0 COMPONENTS numpy)
++  find_package(Boost 1.48.0 COMPONENTS numpy27)
+   if (Boost_FOUND)
+-    set(NUMPY numpy)
++    set(NUMPY numpy27)
+   endif (Boost_FOUND)
++
+   # The final library finding for precompiled Boost.
+-  find_package(Boost 1.48.0 COMPONENTS chrono date_time filesystem iostreams program_options python regex system serialization thread ${MPI} ${UTF} ${TIMER} ${NUMPY})
++  find_package(Boost 1.48.0 COMPONENTS chrono date_time filesystem iostreams program_options python27 regex system serialization thread ${MPI} ${UTF} ${TIMER} ${NUMPY})
+   # Unset local variable
+   unset(MPI)
+   unset(UTF)
+diff -Nru alps-2.3.0-src/alps/src/alps/CMakeLists.txt alps-2.3.0-src.mod/alps/src/alps/CMakeLists.txt
+--- alps-2.3.0-src/alps/src/alps/CMakeLists.txt	2017-01-13 08:59:45.000000000 +0100
++++ alps-2.3.0-src.mod/alps/src/alps/CMakeLists.txt	2018-11-12 13:01:22.892064000 +0100
+@@ -93,7 +93,8 @@
+     set(ALPS_LINK_LIBS ${ALPS_LINK_LIBS} ${PYTHON_LIBRARY} ${PYTHON_EXTRA_LIBS})
+   endif(PYTHONLIBS_FOUND)
+   if(MPI_FOUND)
+-    set(ALPS_LINK_LIBS ${ALPS_LINK_LIBS} ${MPI_LIBRARIES} ${MPI_EXTRA_LIBRARY})
++    #set(ALPS_LINK_LIBS ${ALPS_LINK_LIBS} ${MPI_LIBRARIES} ${MPI_EXTRA_LIBRARY})
++    set(ALPS_LINK_LIBS ${ALPS_LINK_LIBS} ${MPI_CXX_LIBRARIES})
+   endif(MPI_FOUND)
+   target_link_libraries(alps ${ALPS_LINK_LIBS})
+ else (Boost_FOUND)
