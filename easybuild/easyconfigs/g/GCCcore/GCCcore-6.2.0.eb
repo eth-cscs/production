@@ -1,0 +1,50 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'EB_GCC'
+
+name = 'GCCcore'
+version = '6.2.0'
+
+homepage = 'http://gcc.gnu.org/'
+description = """The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, and Ada,
+ as well as libraries for these languages (libstdc++, libgcj,...)."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+gmp_version = '6.1.2'
+mpfr_version = '4.0.1'
+mpc_version = '1.1.0'
+isl_version = '0.19'
+
+source_urls = [
+    'ftp://gcc.gnu.org/pub/gcc/releases/gcc-%(version)s',
+    'http://ftpmirror.gnu.org/gnu/gcc/gcc-%(version)s',  # GCC auto-resolving HTTP mirror
+    'http://ftpmirror.gnu.org/gnu/gmp',  # idem for GMP
+    'http://ftpmirror.gnu.org/gnu/mpfr',  # idem for MPFR
+    'http://ftpmirror.gnu.org/gnu/mpc', # idem for MPC
+    'ftp://gcc.gnu.org/pub/gcc/infrastructure',  # GCC dependencies
+    'http://isl.gforge.inria.fr',  # original HTTP source for ISL
+]
+
+sources = [
+    'gcc-%(version)s.tar.gz',
+    'gmp-%s.tar.bz2' % gmp_version,
+    'mpfr-%s.tar.bz2' % mpfr_version,
+    'mpc-%s.tar.gz' % mpc_version,
+    'isl-%s.tar.bz2' % isl_version,
+]
+
+builddependencies = [
+    ('M4', '1.4.18'),
+    ('binutils', '2.30'),
+]
+
+patches = [
+#    ('mpfr-%s-allpatches-20170907.patch' % mpfr_version, '../mpfr-%s' % mpfr_version),
+    'GCCcore-6.2.0-fix-find-isl.patch',
+]
+
+languages = ['c', 'c++', 'fortran']
+
+withisl = True
+
+moduleclass = 'compiler'

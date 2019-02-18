@@ -17,6 +17,13 @@ builddependencies = [
     ('CMake', '3.12.0', '', True),
 ]
 
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('lz4', '1.8.3'),
+]
+
+configopts = ' -DPREFER_EXTERNAL_ZLIB="ON" -DPREFER_EXTERNAL_LZ4="ON" '
+
 sanity_check_paths = {
     'files': ['include/blosc-export.h', 'include/blosc.h', 'lib/libblosc.a',
               'lib/libblosc.%s' % SHLIB_EXT],
