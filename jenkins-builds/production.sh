@@ -43,9 +43,6 @@ while [ $# -ne 0 ]; do
         -l | --list)
             shift
             mapfile -O ${#eb_files[@]} -t eb_files < $1
-            for i in ${!eb_files[*]}; do
-                eb_files[i]=$(eval echo ${eb_files[i]})
-            done
             eb_lists+=($1)
             ;;
         -p | --prefix)
@@ -146,6 +143,8 @@ echo -e " $(module list -t)"
 echo -e " Production file(s): ${eb_lists[@]} \n"
 echo -e " List of builds (including options):"
 for ((i=0; i<${#eb_files[@]}; i++)); do
+# use eval to expand environment variables in the EasyBuild options of each build
+    eb_files[i]=$(eval echo ${eb_files[i]})
     echo ${eb_files[$i]}
 done
 # module unuse PATH before building
