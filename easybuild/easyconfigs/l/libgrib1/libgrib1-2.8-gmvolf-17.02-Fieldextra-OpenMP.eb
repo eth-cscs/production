@@ -20,6 +20,10 @@ sources = [
     {'filename': '/apps/common/UES/easybuild/sources/l/libgrib1'
                  '/%(name)s-%(version)s-Fieldextra.tar.gz'}
 ]
+patches = [
+    'libgrib1-2.8-Fieldextra_Makefile.patch',
+    'libgrib1-2.8-Fieldextra_RH75.patch',
+]
 
 parallel = 1
 skipsteps = ['configure']
@@ -27,7 +31,7 @@ start_dir = './src'
 
 buildopts = ['mode=gnu,opt,omp']
 installopts = ['mode=gnu,opt,omp']
-postinstallcmds = ['cp -a ./install/* %(installdir)s/.']
+postinstallcmds = ['cp -a ../install/* %(installdir)s/.']
 
 sanity_check_paths = {
     'files': [],
