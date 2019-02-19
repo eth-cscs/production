@@ -19,7 +19,7 @@ toolchain = {'name': 'gmvolf', 'version': '17.02'}
 
 sources = [
     {'filename': '/apps/common/UES/easybuild/sources/l/libgrib1'
-                 '/%(name)s-%(version)s%(versionsuffix)s.tar.gz'}
+                 '/%(name)s-%(version)s-Fieldextra.tar.gz'}
 ]
 
 parallel = 1

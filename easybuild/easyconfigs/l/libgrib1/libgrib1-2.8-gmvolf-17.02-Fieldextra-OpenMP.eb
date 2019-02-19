@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = 'libgrib1'
 version = '2.8'
-versionsuffix = 'Fieldextra-OpenMP'
+versionsuffix = '-Fieldextra-OpenMP'
 
 homepage = ''
 description = """
@@ -28,7 +28,6 @@ start_dir = './src'
 buildopts = ['mode=gnu,opt,omp']
 installopts = ['mode=gnu,opt,omp']
 postinstallcmds = ['cp -a ./install/* %(installdir)s/.']
-
 
 sanity_check_paths = {
     'files': [],

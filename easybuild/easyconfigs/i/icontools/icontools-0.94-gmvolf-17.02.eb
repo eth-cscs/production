@@ -31,8 +31,7 @@ skipsteps = ['configure']
 buildopts = ['mode=gnu,opt']
 installopts = ['mode=gnu,opt']
 postinstallcmds = [(
-    'cp -r %(builddir)s/icontools-0.94/lib %(installdir)s/. && '
-    'cp -r %(builddir)s/icontools-0.94/include %(installdir)s/.'
+    'cp -r %(builddir)s/icontools-0.94/install/* %(installdir)s/.'
 )]
 
 sanity_check_paths = {

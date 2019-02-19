@@ -32,7 +32,7 @@ dependencies = [
     ('JasPer', '1.900.1'),
     ('grib_api', '1.20.0', '-OpenMP'),
     ('rttov', '11.2.0'),
-    ('libgrib1', '2.8', '-MCH-OpenMP'),
+    ('libgrib1', '2.8', '-Fieldextra-OpenMP'),
     ('icontools', '0.94', '-OpenMP'),
 ]
 
