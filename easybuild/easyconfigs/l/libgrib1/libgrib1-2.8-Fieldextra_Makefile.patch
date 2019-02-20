@@ -1,0 +1,77 @@
+--- grib1.ORIG/src/Makefile	2018-11-19 14:38:12.000000000 +0100
++++ grib1/src/Makefile	2019-02-19 14:54:47.434829560 +0100
+@@ -23,7 +23,7 @@
+ crays = rosa,albis,lema,cca-login
+ 
+ # Valid modes (to be separated by commas, without spaces)
+-valid_modes = dbg,opt,omp,gnu,intel,ibm,sun
++valid_modes = dbg,opt,prof,omp,gnu,intel,ibm,sun
+ 
+ # Default value for mode
+ mode =
+@@ -80,6 +80,12 @@
+   endif
+   optimization = opt
+ endif
++ifeq (prof,$(findstring prof,$(mode)))
++  ifdef optimization
++    $(error $(invalid_combination))
++  endif
++  optimization = prof
++endif
+ # Default
+ ifndef optimization
+   optimization = opt
+@@ -218,10 +224,30 @@
+   ifeq (sun,$(compiler))
+     opt_flags = -O2
+   endif
+-  CFLAGS  += $(opt_flags)
++  CFLAGS += $(opt_flags)
+   FFLAGS += $(opt_flags)
+ endif
+ 
++# Add flags for profiling if requested
++ifeq (prof,$(optimization))
++  ifeq (gnu,$(compiler))
++    CFLAGS += -pg
++    FFLAGS += -pg
++  endif
++  ifeq (intel,$(compiler))
++    CFLAGS += -p
++    FFLAGS += -p
++  endif
++  ifeq (ibm,$(compiler))
++    CFLAGS += -pg
++    FFLAGS += -pg
++  endif
++  ifeq (sun,$(compiler))
++    CFLAGS += -pg
++    FFLAGS += -pg
++  endif
++endif
++
+ # Add OpenMP flags if requested
+ ifeq (omp,$(parallelization))
+   ifeq (gnu,$(compiler))
+@@ -334,8 +360,8 @@
+ 	rm -f *.o *.L* *.G *.a *.mod *genmod.* penmp
+ 
+ # Installation
+-LIBDIR = ../grib1_$(compiler)/lib
+-INCLUDEDIR = ../grib1_$(compiler)/include
++LIBDIR = ../install/lib
++INCLUDEDIR = ../install/include
+ install: 
+ 	@ if [ -n "$(LIB)" ] && [ -r "$(LIB)" ]; then \
+ 	   $(MKDIR) -p $(LIBDIR); \
+@@ -357,7 +383,8 @@
+ 	@ $(ECHO) "  sun  : sun compiler"
+ 	@ $(ECHO) "  opt  : enable flags for optimization (DEFAULT)"
+ 	@ $(ECHO) "  dbg  : enable flags for debugging"
++	@ $(ECHO) " prof  : enable flags for profiling"
+ 	@ $(ECHO) "  omp  : enable flags for OpenMP parallelization"
+-	@ $(ECHO) "The modes (gnu|intel|ibm|sun), (opt|dbg), and (omp) can be combined and have to be separated by commas (without space)."
++	@ $(ECHO) "The modes (gnu|intel|ibm|sun), (opt|dbg|prof), and (omp) can be combined and have to be separated by commas (without space)."
+ 	@ $(ECHO) "Example:"
+ 	@ $(ECHO) "  type 'make mode=intel,dbg,omp' to enable debugging and OpenMP flags with intel compiler."
