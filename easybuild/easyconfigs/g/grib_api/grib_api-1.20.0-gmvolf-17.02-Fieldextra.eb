@@ -1,20 +1,19 @@
-# File modified by MKra - January 2019 (CSCS)
+# File modified by MaKra - January 2019 (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'grib_api'
 version = "1.20.0"
-versionsuffix = '-OpenMP'
+versionsuffix = "-Fieldextra"
 
 homepage = 'https://software.ecmwf.int/wiki/display/GRIB/Home'
 description = """
     The ECMWF GRIB API is an application program interface accessible from C, 
     FORTRAN and Python programs developed for encoding and decoding WMO FM-92 
     GRIB edition 1 and edition 2 messages. A useful set of command line tools 
-    is also provided to give quick access to GRIB messages.
 
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    NB: LIBGRIB1 with OpenMP support for Fieldextra
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: LIBGRIB1 without OpenMP support for Fieldextra
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 """
 
 toolchain = {'name': 'gmvolf', 'version': '17.02'}
@@ -28,14 +27,19 @@ dependencies = [
     ('libaec', '1.0.0'),
 ]
 
-configopts = (
-    "--with-aec=$EBROOTAEC "
-    "--with-jasper=$EBROOTJASPER "
-    "--with-netcdf=$EBROOTNETCDF "
-    "--disable-shared "
-    "--enable-pthread "
-    "--enable-omp-packing"
-)
+configopts = [
+    ("--with-aec=$EBROOTAEC "
+     "--with-jasper=$EBROOTJASPER "
+     "--with-netcdf=$EBROOTNETCDF "
+     "--disable-shared "),
+#    ("--with-aec=$EBROOTAEC "
+#     "--with-jasper=$EBROOTJASPER "
+#     "--with-netcdf=$EBROOTNETCDF "
+#     "--disable-shared "
+#     "--enable-pthread "
+#     "--program-suffix=\"_omp\" "
+#     "--enable-omp-packing")
+]
 
 parallel = 1
 
