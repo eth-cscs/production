@@ -20,6 +20,7 @@
  h5py-2.8.0-CrayGNU-18.08-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-18.08-python3-serial.eb
  HPX-1.1.0-CrayGNU-18.08.eb                         --set-default-module
+ HPX-1.2.0-CrayGNU-18.08.eb
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  ipyparallel-6.2.3-CrayGNU-18.08-python3.eb
@@ -68,6 +69,7 @@
  jengafettplugin-0.1.eb                             --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
  likwid-4.3.3-perf_event.eb                         --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-18.08-python3.eb         --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
+ malt-1.0.0-CrayGNU-18.08.eb                        --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-18.08.eb                     --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
  otfprofile-6e2022d-CrayGNU-18.08.eb                --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools
  papi-wrap-1.0-CrayGNU-18.08.eb                     --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/mc/easybuild/tools

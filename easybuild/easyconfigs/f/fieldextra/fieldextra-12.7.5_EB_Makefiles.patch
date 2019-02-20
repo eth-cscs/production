@@ -1,0 +1,55 @@
+diff -Nru fieldextra-12.7.5.ORIG/src/Makefile fieldextra-12.7.5/src/Makefile
+--- fieldextra-12.7.5.ORIG/src/Makefile	2018-11-19 14:38:12.000000000 +0100
++++ fieldextra-12.7.5/src/Makefile	2019-01-07 18:03:28.000000000 +0100
+@@ -133,16 +133,16 @@
+ 
+ # Dirs
+ srcdir            = ./
+-lgrib1dir         = ../grib1/grib1_$(compiler)/lib
+-laecdir           = ../libaec/libaec-$(libaec_version)/libaec_$(compiler)/lib
+-ljasperdir        = ../jasper/jasper-$(jasper_version)/jasper_$(compiler)/lib
+-lgribapidir       = ../grib_api/grib_api-$(grib_api_version)/grib_api_$(compiler)$(gapi_parallelization)/lib
+-lzdir             = ../zlib/zlib-$(zlib_version)/zlib_$(compiler)/lib
+-lhdf5dir          = ../hdf5/hdf5-$(hdf5_version)/hdf5_$(compiler)/lib
+-lnetcdfdir        = ../netcdf/netcdf-$(netcdf_version)/netcdf_$(compiler)/lib
+-lnetcdffortrandir = ../netcdf/netcdf-fortran-$(netcdf_fortran_version)/netcdf-fortran_$(compiler)/lib
+-lrttovdir         = ../rttov/rttov-${rttov_version}/rttov_$(compiler)/lib
+-licontoolsdir     = ../icontools/icontools-${icontools_version}/icontools_$(compiler)/lib
++lgrib1dir         = ${EBROOTLIBGRIB1}/lib
++laecdir           = ${EBROOTLIBAEC}/lib
++ljasperdir        = ${EBROOTJASPER}/lib
++lgribapidir       = ${EBROOTGRIB_API}/lib
++lzdir             = ${EBROOTZLIB}/lib
++lhdf5dir          = ${EBROOTHDF5}/lib
++lnetcdfdir        = ${EBROOTNETCDF}/lib
++lnetcdffortrandir = ${EBROOTNETCDFMINFORTRAN}/lib
++lrttovdir         = ${EBROOTRTTOV}/lib
++licontoolsdir     = ${EBROOTICONTOOLS}/lib
+ 
+ # Include files
+ ifeq (sun,$(compiler))
+diff -Nru fieldextra-12.7.5.ORIG/src/Makefile-vers fieldextra-12.7.5/src/Makefile-vers
+--- fieldextra-12.7.5.ORIG/src/Makefile-vers	2018-11-19 14:38:12.000000000 +0100
++++ fieldextra-12.7.5/src/Makefile-vers	2019-01-08 15:16:20.000000000 +0100
+@@ -1,12 +1,12 @@
+ # Versions of external libraries and resources used by fieldextra
+-libaec_version                   = 1.0.0
+-jasper_version                   = 1.900.1
+-grib_api_version                 = 1.20.0
++libaec_version                   = ${EBVERSIONLIBAEC}
++jasper_version                   = ${EBVERSIONJASPER}
++grib_api_version                 = ${EBVERSIONGRIB_API}
+ grib_api_cosmo_resources_version = 1.20.0.3
+-hdf5_version                     = 1.8.15-patch1
+-zlib_version                     = 1.2.7
+-netcdf_version                   = 4.2.1.1
+-netcdf_fortran_version           = 4.2
+-rttov_version                    = 11.2.0
+-icontools_version                = 0.94
++hdf5_version                     = ${EBVERSIONHDF5}
++zlib_version                     = ${EBVERSIONZLIB}
++netcdf_version                   = ${EBVERSIONNETCDF}
++netcdf_fortran_version           = ${EBVERSIONNETCDFMINFORTRAN}
++rttov_version                    = ${EBVERSIONRTTOV}
++icontools_version                = ${EBVERSIONICONTOOLS}
+ 

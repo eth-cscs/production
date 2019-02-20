@@ -1,0 +1,46 @@
+# Added by Matthias Kraushaar (CSCS) - 07/01/2019
+easyblock = 'ConfigureMake'
+name = 'icontools'
+version = '0.94'
+versionsuffix = '-OpenMP'
+
+homepage = 'https://svn.zmaw.de/svn/dwd_icon_tools/trunk'
+description = """
+    A set of routines for reading, remapping and writing of fields from and to 
+    predefined grids, e. g. regular (lat-lon, gaussian) or triangular (ICON).
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: Icontools with OpenMP support for Fieldextra
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/i/icontools'
+                 '/%(name)s-%(version)s.tar.gz'}
+]
+patches = [
+    'icontools_EB_Makefile.patch'
+]
+
+dependencies = [
+    ('netCDF', '4.4.1.1', '-serial'),
+    ('netCDF-Fortran', '4.4.4', '-serial'),
+]
+
+parallel = 1
+skipsteps = ['configure']
+
+buildopts = ['mode=gnu,opt,omp']
+installopts = ['mode=gnu,opt,omp']
+postinstallcmds = [(
+    'cp -r %(builddir)s/icontools-0.94/install/* %(installdir)s/.'
+)]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib', 'include']
+}
+
+moduleclass = 'tools'

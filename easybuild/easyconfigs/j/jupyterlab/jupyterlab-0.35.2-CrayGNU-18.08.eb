@@ -56,10 +56,12 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyterlab/hub-extension@0.12.0;"
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@0.38.1;"
                    "rm -r $YARN_CACHE_FOLDER"]
 
 sanity_check_paths = {
-    'files': ['share/jupyter/lab/extensions/jupyterlab-hub-extension-0.12.0.tgz'],
+    'files': ['share/jupyter/lab/extensions/jupyterlab-hub-extension-0.12.0.tgz',
+              'share/jupyter/lab/extensions/jupyter-widgets-jupyterlab-manager-0.38.1.tgz'],
     'dirs': ['lib/python%s/site-packages' % pyshortver,
              'share/jupyter/lab/extensions',
              'share/jupyter/lab/schemas',
