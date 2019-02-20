@@ -34,9 +34,9 @@
  netCDF-Fortran-4.4.4-PGI-18.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild --module-naming-scheme=EasyBuildMNS
  netCDF-4.4.1.1-gmvolf-17.02.eb
- netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
- netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
- netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-C++-4.3.0-CrayCCE-18.12.eb                   --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-Fortran-4.4.4-CrayCCE-18.12.eb               --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-4.4.1.1-CrayCCE-18.12.eb                     --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  PROJ-5.1.0-gmvolf-17.02.eb
  rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --set-default-module
  rstudio-1.1.442.eb                                  --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
