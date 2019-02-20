@@ -1,0 +1,33 @@
+# jg/mkr (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'bladeplugin'
+version = '0.1'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Simple OTF2 trace explorer"""
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['305804fad578b1b6e4e188bd71b9b922']
+
+dependencies = [
+    ('OTF2', '2.1.1'),
+    ('CubeGUI', '4.4'),
+    ('CubeLib', '4.4'),
+]
+
+configopts  = ' CC=gcc'
+configopts += ' --with-otf2-library=$EBROOTOTF2/bin'
+configopts += ' --with-cube-gui=$EBROOTCUBEGUI/bin'
+configopts += ' --with-cube-library=$EBROOTCUBELIB/bin' 
+
+sanity_check_paths = {
+    'files': ['lib/cube-plugins/libblade-plugin.so'],
+    'dirs': ['include/bladeplugin'],
+}
+
+# Ensure that bladeplugin is found by CubeGUI:
+modextrapaths = {'CUBE_PLUGIN_DIR': 'lib/cube-plugins'}
+
+moduleclass = 'perf'

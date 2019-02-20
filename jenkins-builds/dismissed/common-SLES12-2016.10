@@ -1,0 +1,22 @@
+ Autoconf-2.69.eb
+ Automake-1.15.eb
+ CMake-3.6.2.eb
+ CMake-3.8.1.eb
+ ctags-5.8.eb
+ git-2.11.0.eb
+ git-2.13.1.eb
+ HDFView-2.13.0.eb
+ hwloc-1.11.5.eb
+ idl-84.eb
+ libtool-2.4.6.eb
+ likwid-4.1.2.eb
+ Lmod-7.1.eb
+ lynx-2.8.8rel.2.eb
+ M4-1.4.17.eb
+ matlab-r2017b.eb
+ mc-4.8.18.eb
+ nano-2.7.0.eb
+ numactl-2.0.11.eb
+ reframe-2.14.eb     --set-default-module
+ Ruby-2.3.3.eb
+ tmux-2.3.eb

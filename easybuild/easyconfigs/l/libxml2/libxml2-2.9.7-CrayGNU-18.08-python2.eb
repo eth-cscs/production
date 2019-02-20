@@ -1,0 +1,40 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libxml2'
+version = "2.9.7"
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.1'
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = "-python%s" % py_maj_ver
+
+homepage = 'http://xmlsoft.org/'
+description = """Libxml2 is the XML C parser and 
+toolchain developed for the Gnome project
+ (but usable outside of the Gnome platform)."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://xmlsoft.org/sources/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = 'CC="$CC" CXX="$CXX" --with-pic --with-python-install-dir="%(installdir)s/lib/python{0}/site-packages" --with-zlib=$EBROOTZLIB'.format(pyver)
+
+dependencies = [
+    ('cray-python/%s.%s' % (pyver, py_rev_ver), EXTERNAL_MODULE),
+    ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
+    ('zlib', '1.2.11')
+]
+
+pythonpath = 'lib/python%s/site-packages' % pyver
+sanity_check_paths = {
+    'files': [('lib/libxml2.a', 'lib64/libxml2.a'), ('lib/libxml2.%s' % SHLIB_EXT, 'lib64/libxml2.%s' % SHLIB_EXT)],
+    'dirs': ['bin', 'include/libxml2/libxml', pythonpath],
+}
+sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
+
+modextrapaths = {"PYTHONPATH": pythonpath}
+
+moduleclass = 'lib'

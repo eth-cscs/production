@@ -1,0 +1,50 @@
+# modified by MKr (CSCS) Feb. 2019
+easyblock = 'CMakeMake'
+name = 'netCDF'
+version = '4.4.1.1'
+versionsuffix = '-serial'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """
+    NetCDF (network Common Data Form) is a set of software libraries and 
+    machine-independent data formats that support the creation, access, and 
+    sharing of array-oriented scientific data.
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchainopts = {'pic': True, 'usempi': False}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://www.unidata.ucar.edu/downloads/netcdf/ftp/']
+
+dependencies = [
+    ('HDF5', '1.8.18', '-serial'), 
+]
+
+postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
+
+builddependencies = [
+    ('CMake', '3.9.1', '', True),
+    ('cURL', '7.52.1'),
+]
+
+# make sure both static and shared libs are built
+configopts = [
+    ("-DCMAKE_BUILD_TYPE=Release "
+     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+     "-DHDF5_DIR=${EBROOTHDF5} "
+     "-DBUILD_SHARED_LIBS=ON "
+     "-DENABLE_DAP=OFF"),
+    ("-DCMAKE_BUILD_TYPE=Release "
+     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+     "-DHDF5_DIR=${EBROOTHDF5} "
+     "-DBUILD_SHARED_LIBS=OFF "
+     "-DENABLE_DAP=OFF"),
+]
+
+sanity_check_paths = {
+    'files': ['lib64/libnetcdf.so', 'lib64/libnetcdf.a'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
