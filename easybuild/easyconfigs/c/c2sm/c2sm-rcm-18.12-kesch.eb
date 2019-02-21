@@ -14,7 +14,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 installdir = '%(installdir)s'
 
-sources = ['/apps/common/UES/easybuild/sources/c/c2sm/'+'18.12.tar.gz']
+sources = ['/apps/common/UES/easybuild/sources/c/c2sm-rcm/'+'18.12.tar.gz']
 
 skipsteps = ['build']
 
