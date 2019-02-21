@@ -10,12 +10,13 @@ including MVAPICH2 for MPI support for the Programming Environment on kesch/esch
 
 toolchain = {'name': 'dummy', 'version': ''}
 
+# PrgEnv-pgi needs a custom Fortran MPI wrapper
 postinstallpath = '%(installdir)s/bin'
 postinstallcmds = ["mkdir {0} && cp $EASYBUILD_SOURCEPATH/p/PrgEnv-pgi/%(name)s-%(version)s.mpif90 {0}/mpif90".format(postinstallpath)]
 
 modtclfooter = """
 module load pgi/18.10-gcc-5.4.0-2.26
-module load mvapich2gdr_gnu/2.3_cuda_8.0_gcc54
+module load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
 set-alias mpif90 %s/mpif90
 """ % postinstallpath
 
