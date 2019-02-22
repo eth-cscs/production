@@ -6,7 +6,7 @@ version = '4.0.0'
 homepage = 'http://www.open-mpi.org/'
 description = """The Open MPI Project is an open source MPI-3 implementation."""
 
-toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 source_urls = ['http://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
 sources = [SOURCELOWER_TAR_GZ]
@@ -15,20 +15,15 @@ sources = [SOURCELOWER_TAR_GZ]
 # needed for --with-verbs
 # osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
 
-dependencies = [
-    ('zlib', '1.2.11'),
-    ('hwloc', '1.11.10')
-]
 
-preconfigopts = 'CC=/opt/gcc/8.2.0/bin/gcc CXX=/opt/gcc/8.2.0/bin/g++ FC=/opt/gcc/8.2.0/bin/gfortran F90=/opt/gcc/8.2.0/bin/gfortran F77=/opt/gcc/8.2.0/bin/gfortran CFLAGS="-O2 -fno-math-errno" CXXFLAGS="-O2 -fno-math-errno" F90FLAGS="-O2 -fno-math-errno" FFLAGS="-O2 -fno-math-errno" FCFLAGS="-O2 -fno-math-errno"'
+preconfigopts = 'module load gcc/7.3.0 && '
 
-#configopts = '--enable-shared --enable-mpi-thread-multiple --with-verbs '
 configopts = '--enable-shared --enable-mpi-thread-multiple '
-#configopts += '--enable-mpirun-prefix-by-default '  # suppress failure modes in relation to mpirun path
-configopts += '--with-hwloc=$EBROOTHWLOC '  # hwloc support
 
 # to enable SLURM integration (site-specific)
 # configopts += '--with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr'
+
+prebuildopts = 'module load gcc/7.3.0 && '
 
 libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
