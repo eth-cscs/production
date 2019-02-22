@@ -12,7 +12,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 # PrgEnv-pgi needs a custom Fortran MPI wrapper
 postinstallpath = '%(installdir)s/bin'
-postinstallcmds = ["mkdir {0} && cp $EASYBUILD_SOURCEPATH/p/PrgEnv-pgi/%(name)s-%(version)s.mpif90 {0}/mpif90".format(postinstallpath)]
+postinstallcmds = ["""mkdir {0} && 
+cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s.mpif90 {0}/mpif90""".format(postinstallpath)]
 
 modtclfooter = """
 module load pgi/18.10-gcc-5.4.0-2.26
