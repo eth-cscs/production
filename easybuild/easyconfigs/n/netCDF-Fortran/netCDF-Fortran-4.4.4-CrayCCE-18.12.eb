@@ -1,0 +1,29 @@
+# @author: gppezzi, omlins (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'netCDF-Fortran'
+version = '4.4.4'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented
+ scientific data."""
+
+toolchain = {'name': 'CrayCCE', 'version': '18.12'}
+toolchainopts = {'pic': True}
+
+source_urls = ['ftp://ftp.unidata.ucar.edu/pub/netcdf/', 'ftp://ftp.unidata.ucar.edu/pub/netcdf/old']
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('netCDF', '4.4.1.1'),
+]
+
+# Copies uppercase mod files to lowercase in order to avoid failure of 'make install'
+preinstallopts = "cd %(builddir)s/%(namelower)s-%(version)s/fortran && for i in *.mod; do cp $i ${i,,}; done && cd .. && "
+
+# Create symlinks of lowercase modfiles to uppercase (CrayCCE default).
+postinstallcmds = ['cd %(installdir)s/include && for i in *.mod; do ln -s $i $(echo $i | awk \'{ sub(/.mod$/,""); print toupper($0) ".mod" }\') ; done']
+modextravars = {'PKGCONFIG_ENABLED': '0'}
+
+moduleclass = 'data'
