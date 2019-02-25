@@ -12,7 +12,6 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
 module use /apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild/modules/all
-module load PrgEnv-cray
 module load CrayCCE/.17.06
 """
 
