@@ -1,0 +1,12 @@
+diff -Nru test.ORIG/configure.ac test/configure.ac
+--- configure.ac	2019-02-22 14:21:27.619124923 +0100
++++ configure.ac	2019-02-22 14:21:37.367102207 +0100
+@@ -24,7 +24,7 @@
+ ####
+ 
+ 
+-AC_PREREQ(2.62)
++AC_PREREQ(2.63)
+ dnl Oldest automake required for bootstrap is below in AM_INIT_AUTOMAKE.
+ 
+ 
