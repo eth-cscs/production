@@ -16,6 +16,7 @@ postinstallcmds = ["""mkdir {0} &&
 cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s.mpif90 {0}/mpif90""".format(postinstallpath)]
 
 modtclfooter = """
+module use /apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild/modules/all
 module load pgi/18.10-gcc-5.4.0-2.26
 module load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
 set-alias mpif90 %s/mpif90
