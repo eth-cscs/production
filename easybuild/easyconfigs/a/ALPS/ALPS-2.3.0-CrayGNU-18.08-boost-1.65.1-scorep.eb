@@ -1,0 +1,50 @@
+# 
+easyblock = 'CMakeMake'
+
+name = 'ALPS'
+version = "2.3.0"
+boostversion = "1.65.1"
+versionsuffix = "-Boost-%s-scorep" % boostversion
+
+homepage = 'http://alps.comp-phys.org'
+description = """The ALPS project (Algorithms and Libraries for Physics Simulations) is an open source effort aiming at providing high-end simulation codes for strongly correlated quantum mechanical systems as well as C++ libraries for simplifying the development of such code."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'dynamic': True}
+
+sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
+#source_urls = [('http://alps.comp-phys.org/static/software/releases/', 'download')]
+source_urls = ['http://alps.comp-phys.org/static/software/releases/']
+#patches = ['cmake_boost.patch']
+patches = ['average.patch']
+
+dependencies = [
+    ('cray-python/2.7.15.1', EXTERNAL_MODULE),
+    ('Boost', "%s" % boostversion, '-python2'),
+    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+    ('Score-P', '4.0', '-cuda-9.1') 
+]
+
+builddependencies = [
+    ('CMake', '3.12.4', '', True)
+]
+
+# path to the project directory if not at top
+start_dir = 'alps'
+
+configopts = "-DALPS_BUILD_APPLICATIONS=OFF -DALPS_BUILD_EXAMPLES=OFF -DALPS_BUILD_MPS=OFF -DALPS_BUILD_TESTS=OFF -DALPS_ENABLE_MPI=OFF -DALPS_INCLUDE_TUTORIALS=OFF -DALPS_INSTALL_MPS_FRAMEWORK=OFF "
+
+scorepopts = " -DCMAKE_C_COMPILER=$(which scorep-cc) -DCMAKE_CXX_COMPILER=$(which scorep-CC) "
+configopts += scorepopts
+
+separate_build_dir = True
+
+sanity_check_paths = {
+    'files': ['lib/libalps.%s' % SHLIB_EXT],
+    'dirs': ['include/alps', 'bin/', 'share/'],
+}
+
+modextravars = {'ALPS_ROOT': '%(installdir)s'}
+modextrapaths = {'PYTHONPATH': ['lib']}
+
+moduleclass = 'lib'
