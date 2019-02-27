@@ -33,8 +33,10 @@ builddependencies = [
 
 # dirty hack to link against MKL in a GNU environment
 # will be obsolete once the app is working with CRAY libsci
-preconfigopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/ && '
-preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/ && '
+#preconfigopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/ && '
+#preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/ && '
+preconfigopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/linux/mkl && '
+preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/linux/mkl && '
 
 configopts = "-DBLAS_LAPACK_SELECTOR=mkl_parallel -DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' -DCMAKE_CXX_FLAGS=-fopenmp -DCMAKE_EXE_LINKER_FLAGS=\'-ldl -L/opt/python/2.7.15.1/lib -lpython2.7\'"
 
