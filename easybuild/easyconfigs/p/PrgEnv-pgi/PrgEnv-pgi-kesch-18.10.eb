@@ -6,7 +6,8 @@ version = '18.10'
 
 homepage = 'http://user.cscs.ch'
 description = """This bundle provides the Portland Group Compiler Collection (PGI), 
-including MVAPICH2 for MPI support for the Programming Environment on kesch/escha"""
+including MVAPICH2 for MPI support for the Programming Environment on kesch/escha. 
+Use the environment variable $MPIF90 to compile MPI codes in shell scripts."""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
