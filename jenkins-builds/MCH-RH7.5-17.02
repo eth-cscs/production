@@ -19,7 +19,7 @@
  PrgEnv-CrayCCE-17.06                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  PrgEnv-CrayCCE-18.12                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
- gmvapich2-17.02_cuda_8.0_gdr.eb
+ gmvapich2-17.02_cuda_9.2_gdr.eb
  matlab-r2016a.eb                                    --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.2-gmvolf-17.02.eb
