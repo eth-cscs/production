@@ -16,7 +16,6 @@
  NCO-4.6.2-gmvolf-17.02.eb
  nmon-16g.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
- PrgEnv-CrayCCE-17.06                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  PrgEnv-CrayCCE-18.12                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  gmvapich2-17.02_cuda_9.2_gdr.eb
