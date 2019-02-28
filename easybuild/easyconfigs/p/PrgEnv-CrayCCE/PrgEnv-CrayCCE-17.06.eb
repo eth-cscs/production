@@ -1,22 +1,19 @@
-# @author: gppezzi
+# @author: kraushm, gpezzi
 
 easyblock = 'Bundle'
 
-name = 'PrgEnv-gnu'
-version = '17.02'
+name = 'PrgEnv-CrayCCE'
+version = '17.06'
 
 homepage = 'http://user.cscs.ch'
 description = """This bundle provides a meta module for the Programming Environment on kesch/escha"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
-builddependencies = [
-    ('gmvolf', '17.02', '', True),
-]
-
 modtclfooter = """
-module use /apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild/modules/all
-module load gmvolf/.17.02
+module use /apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild/modules/all
+module load CrayCCE/.17.06
 """
 
 moduleclass = 'devel'
+

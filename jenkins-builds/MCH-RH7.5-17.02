@@ -15,7 +15,10 @@
  NCL-6.5.0.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  nmon-16g.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
- PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
+ PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
+ PrgEnv-CrayCCE-17.06                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
+ PrgEnv-CrayCCE-18.12                                --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
+ PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  gmvapich2-17.02_cuda_8.0_gdr.eb
  matlab-r2016a.eb                                    --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  Python-2.7.13-gmvolf-17.02.eb
@@ -32,7 +35,6 @@
  netCDF-4.6.1-PGI-18.10-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild 
  netCDF-C++-4.3.0-PGI-18.10-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild
  netCDF-Fortran-4.4.4-PGI-18.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild
- PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild --module-naming-scheme=EasyBuildMNS
  netCDF-4.4.1.1-gmvolf-17.02.eb
  netCDF-C++-4.3.0-CrayCCE-18.12.eb                   --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb               --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
