@@ -19,7 +19,6 @@ sources = [
 
 builddependencies = [ 
     ('CMake', '3.12.0', '', True),
-    #('gcc', '5.3.0', '', True),
 ]
 
 dependencies = [
@@ -27,14 +26,13 @@ dependencies = [
 ]
 
 srcdir = "../dycore"
-#preconfigopts = "export CXXFLAGS=\"-std=c++11 $CXXFLAGS\" && "
-preconfigopts = "echo $CXXFLAGS && "
+
 configopts  = "-DCMAKE_BUILD_TYPE=Release "
-configopts += "-DCMAKE_CXX_FLAGS='-std=c++11' "
 configopts += "-DSINGLEPRECISION=ON "
 configopts += "-DCUDA_BACKEND=OFF "
 configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
 configopts += "-DBITREPRO=OFF "
+configopts += "-DCMAKE_CXX_FLAGS='-std=gnu++98' "
 
 separate_build_dir = True
 

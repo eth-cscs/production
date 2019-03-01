@@ -29,11 +29,13 @@ dependencies = [
 ]
 
 srcdir = "../dycore"
+
 configopts  = "-DCMAKE_BUILD_TYPE=Release "
 configopts += "-DSINGLEPRECISION=ON "
 configopts += "-DCUDA_BACKEND=ON "
 configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
 configopts += "-DBITREPRO=OFF "
+configopts += "-DCMAKE_CXX_FLAGS='-std=gnu++98' "
 
 separate_build_dir = True
 

@@ -27,13 +27,12 @@ dependencies = [
 
 srcdir = "../dycore"
 
-preconfigopts = "export LD_LIBRARY_PATH=$CRAY_LD_LIBRARY_PATH:$LD_LIBRARY_PATH && "
-
 configopts  = "-DCMAKE_BUILD_TYPE=Release "
 configopts += "-DSINGLEPRECISION=OFF "
 configopts += "-DCUDA_BACKEND=OFF "
 configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
 configopts += "-DBITREPRO=OFF "
+configopts += "-DCMAKE_CXX_FLAGS='-std=gnu++98' "
 
 separate_build_dir = True
 
