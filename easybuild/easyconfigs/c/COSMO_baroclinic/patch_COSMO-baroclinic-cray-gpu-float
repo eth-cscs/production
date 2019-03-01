@@ -1,6 +1,6 @@
 diff -Nru cosmo_pompa.ORIG/cosmo/Options cosmo_pompa/cosmo/Options
 --- cosmo_pompa.ORIG/cosmo/Options	2019-02-25 15:48:49.000000000 +0100
-+++ cosmo_pompa/cosmo/Options	2019-02-27 10:04:39.572447000 +0100
++++ cosmo_pompa/cosmo/Options	2019-03-01 11:21:29.612753000 +0100
 @@ -5,8 +5,11 @@
  # linker
  LD       = $(F90)
@@ -8,7 +8,8 @@ diff -Nru cosmo_pompa.ORIG/cosmo/Options cosmo_pompa/cosmo/Options
 --include $(ROOT)/Options.$(COMPILER).cpu
 +-include $(ROOT)/Options.$(COMPILER).gpu
  
- #PFLAGS  += -DSINGLEPRECISION # run model in single precision
+-#PFLAGS  += -DSINGLEPRECISION # run model in single precision
++PFLAGS  += -DSINGLEPRECISION # run model in single precision
  
 --include $(ROOT)/Options.lib.cpu
 +-include $(ROOT)/Options.lib.gpu

@@ -27,9 +27,7 @@ sources = [
 builddependencies = [
     ('CMake', '3.12.0', '', True), 
     ('libgrib1_crclim', 'a1e4271'),
-    #('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' 
-    #  % cudaversion, EXTERNAL_MODULE),
-    ('cudatoolkit/8.0.61_2.4.9-6.0.7.0_17.1__g899857c', EXTERNAL_MODULE),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
     ('Dycore/5.0_2017.4-CrayGNU-18.08-cuda-%s-%s-%s' 
       % ( cudaversion, implementation, precision),  
       EXTERNAL_MODULE),
@@ -38,12 +36,11 @@ builddependencies = [
 dependencies = [ 
     ('cray-netcdf/4.6.1.2', EXTERNAL_MODULE),
     ('grib_api', '1.13.1'),
-    #('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('cudatoolkit/8.0.61_2.4.9-6.0.7.0_17.1__g899857c', EXTERNAL_MODULE),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
 patches = [
-    'patch_COSMO-baroclinic-cray-gpu'
+    'patch_COSMO-baroclinic-cray-gpu-float'
 ]
 
 prebuildopts  = (
