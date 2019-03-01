@@ -3,9 +3,10 @@ easyblock = 'MakeCp'
 
 name = 'COSMO_pompa'
 version = '5.0_2017.4'
+cudaversion = 9.1
 implementation = 'baroclinic'
 precision = 'double'
-versionsuffix = '-%s-%s' % (implementation, precision)
+versionsuffix = '-cuda-%s-%s-%s' % (cudaversion, implementation, precision)
 
 homepage = ''
 description = """
@@ -22,24 +23,27 @@ toolchainopts = {'verbose': False}
 # repo is private (+ no official release)
 sources = [
     {'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(namelower)s_'
-                 '%(version)s-%(implementation)s.tar.gz'}
+                 '%(version)s.tar.gz'}
     # {'filename': '/apps/common/easybuild/sources/c/COSMO_pompa/cosmo_pompa_5.0_2017.4-baroclinic.tar.gz'}
 ]
 
 builddependencies = [
     ('CMake', '3.12.0', '', True), 
     ('libgrib1_crclim', 'a1e4271'),
-    ('Dycore/5.0_2017.4-CrayGNU-18.08-%s-%s' 
-      % ( implementation, precision), EXTERNAL_MODULE),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+    ('Dycore/5.0_2017.4-CrayGNU-18.08-cuda-%s-%s-%s' 
+      % ( cudaversion, implementation, precision),  
+      EXTERNAL_MODULE),
 ]
 
 dependencies = [ 
     ('cray-netcdf/4.6.1.2', EXTERNAL_MODULE),
     ('grib_api', '1.13.1'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
 patches = [
-    'patch_COSMO-baroclinic-cray-cpu'
+    'patch_COSMO-baroclinic-cray-gpu'
 ]
 
 prebuildopts  = (
@@ -62,7 +66,8 @@ prebuildopts  = (
  '4.6.1.2\/GNU\/6.1/netcdf\/4.6.1.2\/CRAY\/8.6/g\') && '
 )
 
-buildopts  = 'CPP_DYCORE=1 '
+buildopts  = 'ACCGPU=1 '
+buildopts += 'CPP_DYCORE=1 '
 buildopts += 'paropt '
 
 parallel = 6
@@ -72,11 +77,11 @@ files_to_copy = [
 ]
 
 postinstallcmds = [
-    'cd %%(installdir)s; ln -s cosmo cosmo_cpu_%s' % implementation,
+    'cd %%(installdir)s; ln -s cosmo cosmo_gpu_%s' % implementation,
 ]
 
 sanity_check_paths = {
-    'files': ['cosmo', 'cosmo_cpu_%s' % implementation],
+    'files': ['cosmo', 'cosmo_gpu_%s' % implementation],
     'dirs': []
 }
 

@@ -30,12 +30,9 @@ diff -Nru cosmo_pompa.ORIG/cosmo/Options.lib.cpu cosmo_pompa/cosmo/Options.lib.c
  # Serialization library
 -SERFW    = $(STELLA_DIR)
 -SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
-+#SERFW    = ${EBROOTSTELLA}
-+#SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
-+#SERFWI   = -I$(SERFW)/include
-+SERFW    = ${EBROOTSERIALBOX}
-+SERFWL   = -L$(SERFW)/lib -lstdc++
- SERFWI   = -I$(SERFW)/include
++SERFW    = ${EBROOTSTELLA}
++SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
++SERFWI   = -I$(SERFW)/include
  
  # STELLA library
 -STELLA   = $(STELLA_DIR)

@@ -4,7 +4,7 @@ easyblock = 'MakeCp'
 name = 'COSMO_pompa'
 version = '5.0_2017.4'
 implementation = 'baroclinic'
-precision = 'double'
+precision = 'float'
 versionsuffix = '-%s-%s' % (implementation, precision)
 
 homepage = ''
@@ -23,7 +23,7 @@ toolchainopts = {'verbose': False}
 sources = [
     {'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(namelower)s_'
                  '%(version)s-%(implementation)s.tar.gz'}
-    # {'filename': '/apps/common/easybuild/sources/c/COSMO_pompa/cosmo_pompa_5.0_2017.4-baroclinic.tar.gz'}
+    #{'filename': '/apps/common/easybuild/sources/c/COSMO_pompa/cosmo_pompa_5.0_2017.4-baroclinic.tar.gz'}
 ]
 
 builddependencies = [
@@ -39,7 +39,7 @@ dependencies = [
 ]
 
 patches = [
-    'patch_COSMO-baroclinic-cray-cpu'
+    'patch_COSMO-baroclinic-cray-cpu-float'
 ]
 
 prebuildopts  = (

@@ -50,9 +50,9 @@ diff -Nru cosmo_pompa.ORIG/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
 -SERFW    =
 -SERFWL   =
 -SERFWI   =
-+SERFW    = ${EBROOTSERIALBOX}
-+SERFWL   = $(SERFW)/lib
-+SERFWI   = $(SERFW)/include
++SERFW    = ${EBROOTSTELLA}
++SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
++SERFWI   = -I$(SERFW)/include
  
  # STELLA library
 -STELLA   = $(STELLA_DIR)
