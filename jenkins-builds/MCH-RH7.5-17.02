@@ -12,6 +12,8 @@
  HDF-4.2.13-gmvolf-17.02.eb
  IDL-8.5.1.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  ImageMagick-7.0.8-14.eb                             --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
+ Kesch-CrayCCE-17.06.eb                              --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
+ Kesch-CrayCCE-18.12.eb                              --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  NCL-6.5.0.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  nmon-16g.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
