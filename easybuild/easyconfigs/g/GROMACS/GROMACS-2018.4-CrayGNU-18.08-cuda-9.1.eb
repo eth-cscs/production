@@ -35,9 +35,7 @@ skipsteps = ['test']
 # CMake dependency with dummy toolchain
 builddependencies = [
     ('CMake', '3.13.3', '', True),
-    #('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
     ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' %cudaversion, EXTERNAL_MODULE),
-    #('libxml2', '2.9.7'),
 ]
 dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE)
