@@ -24,7 +24,7 @@ diff -Nru cosmo_pompa.ORIG/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
-+GRIBDWDL = -L${EBROOTLIBRIB1_CRCLIM} -lgrib1_cray
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_cray
  GRIBDWDI =
  
  # Grib-API library
@@ -53,7 +53,7 @@ diff -Nru cosmo_pompa.ORIG/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
 -SERFWI   =
 +SERFW    = ${EBROOTSTELLA}
 +SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
-+SERFWI   = -I$(SERFW)/include
++SERFWI   = -I$(SERFW)/include/STELLA
  
  # STELLA library
 -STELLA   = $(STELLA_DIR)

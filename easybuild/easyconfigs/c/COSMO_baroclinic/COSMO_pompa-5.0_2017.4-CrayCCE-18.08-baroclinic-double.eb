@@ -21,16 +21,15 @@ toolchain = {'name': 'CrayCCE', 'version': '18.08'}
 toolchainopts = {'verbose': False}
 # repo is private (+ no official release)
 sources = [
-    {'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(namelower)s_'
-                 '%(version)s-%(implementation)s.tar.gz'}
-    # {'filename': '/apps/common/easybuild/sources/c/COSMO_pompa/cosmo_pompa_5.0_2017.4-baroclinic.tar.gz'}
+    {'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/'
+                 '%(namelower)s_%(version)s-{0}.tar.gz'.format(implementation)}
 ]
 
 builddependencies = [
     ('CMake', '3.12.0', '', True), 
     ('libgrib1_crclim', 'a1e4271'),
     ('Dycore/5.0_2017.4-CrayGNU-18.08-%s-%s' 
-      % ( implementation, precision), EXTERNAL_MODULE),
+      % (implementation, precision), EXTERNAL_MODULE),
 ]
 
 dependencies = [ 
