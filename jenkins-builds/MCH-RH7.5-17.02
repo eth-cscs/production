@@ -12,8 +12,6 @@
  HDF-4.2.13-gmvolf-17.02.eb
  IDL-8.5.1.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  ImageMagick-7.0.8-14.eb                             --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
- Kesch-CrayCCE-17.06.eb                              --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
- Kesch-CrayCCE-18.12.eb                              --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild --module-naming-scheme=EasyBuildMNS
  NCL-6.5.0.eb                                        --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  NCO-4.6.2-gmvolf-17.02.eb
  nmon-16g.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
@@ -22,6 +20,8 @@
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild --module-naming-scheme=EasyBuildMNS
  gmvapich2-17.02_cuda_9.2_gdr.eb
  matlab-r2016a.eb                                    --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
+ PE-17.06.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
+ PE-18.12.eb                                         --installpath=/apps/escha/UES/jenkins/RH7.5/generic/easybuild
  Python-2.7.13-gmvolf-17.02.eb
  Python-3.6.2-gmvolf-17.02.eb
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb

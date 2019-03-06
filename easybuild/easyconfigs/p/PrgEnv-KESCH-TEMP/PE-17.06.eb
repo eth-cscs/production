@@ -1,8 +1,8 @@
 # created by MKr (CSCS), 1 March 2019
 easyblock = 'Bundle'
 
-name = 'Kesch'
-version = 'CrayCCE-17.06'
+name = 'PE'
+version = '17.06'
 
 homepage = 'http://user/cscs.ch'
 description = """
@@ -13,14 +13,10 @@ description = """
 toolchain = {'name': 'dummy', 'version': ''}
 
 modtclfooter = """
-   module unuse /apps/escha/UES/generic/modulefiles
-   module unuse /apps/escha/UES/experimental/modulefiles 
-   module unuse /apps/escha/UES/PrgEnv-gnu-17.02/modulefiles
-   module unuse /apps/escha/UES/PrgEnv-cray-17.06/modulefiles
-   module use /apps/escha/UES/jenkins/RH7.5/generic/easybuild/modules/all
    module use /apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild/modules/all
    module use /apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild/modules/all
    module use /apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild/modules/all
 """
 
 moduleclass = 'devel'
+
