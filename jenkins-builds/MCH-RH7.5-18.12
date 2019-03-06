@@ -1,5 +1,6 @@
  Anaconda3-4.4.0.eb                                  
  Autotools-201602.eb                                 
+ binutils-2.26-GCCcore-5.4.0.eb                      --hidden
  Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb          --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild 
  c2sm-rcm-1.00.00-kesch.eb                           --set-default-module
  CDO-1.8.2-gmvolf-17.02.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
