@@ -14,7 +14,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 # PrgEnv-pgi needs a custom Fortran MPI wrapper
 postinstallpath = '%(installdir)s/bin'
 postinstallcmds = ["""mkdir {0} && 
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s.mpif90 {0}/mpif90""".format(postinstallpath)]
+cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/pgi-18.10-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif90 {0}/mpif90""".format(postinstallpath)]
 
 modextravars = {'MPIF90': '{0}/mpif90'.format(postinstallpath)}
 
