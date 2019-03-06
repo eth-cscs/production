@@ -32,7 +32,6 @@
  nmon-16g.eb                                         
  PE-17.06.eb                                         --module-naming-scheme=EasyBuildMNS
  PE-18.12.eb                                         --module-naming-scheme=EasyBuildMNS
- PGI-18.10-GCC-5.4.0-2.26.eb                         --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild
  PrgEnv-CrayCCE-18.12.eb                             --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE18.12/easybuild --module-naming-scheme=EasyBuildMNS       
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-kesch-18.10.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.10/easybuild --module-naming-scheme=EasyBuildMNS
