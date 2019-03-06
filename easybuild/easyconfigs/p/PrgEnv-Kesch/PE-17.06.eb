@@ -2,7 +2,7 @@
 easyblock = 'Bundle'
 
 name = 'PE'
-version = '18.12'
+version = '17.06'
 
 homepage = 'http://user/cscs.ch'
 description = """
