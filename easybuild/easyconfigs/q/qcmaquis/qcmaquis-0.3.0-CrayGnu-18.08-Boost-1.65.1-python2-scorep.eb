@@ -2,9 +2,9 @@
 easyblock = 'CMakeMake'
 
 name = 'qcmaquis'
-version = "0.2.0"
+version = "0.3.0"
 versionpython = "-Boost-1.65.1-python2"
-versionsuffix = '%s-patrun' % (versionpython)
+versionsuffix = '%s-scorep' % (versionpython)
 
 homepage = 'https://github.com/eth-cscs/qcmaquis'
 description = """Quantum-Chemical DMRG simulation software for approximate
@@ -20,7 +20,7 @@ dependencies = [
     ('ALPS', '2.3.0', versionpython),
     ('GSL', '2.5'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('perftools-preload', EXTERNAL_MODULE),
+    ('Score-P', '5.0-rc1', '-cuda-9.1'),
 ]
 
 builddependencies = [
@@ -36,7 +36,11 @@ preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/l
 configopts  = "-DBLAS_LAPACK_SELECTOR=mkl_parallel "
 configopts += "-DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' "
 configopts += "-DCMAKE_CXX_FLAGS=-fopenmp "
-configopts += "-DCMAKE_EXE_LINKER_FLAGS=\'-ldl -L$(EBROOTPYTHON)/lib -lpython2.7\' "
+configopts += "-DCMAKE_EXE_LINKER_FLAGS=\"-L$(EBROOTBOOST)/lib\" "
+configopts += "-DCMAKE_C_COMPILER=$(which scorep-cc) "
+configopts += "-DCMAKE_CXX_COMPILER=$(which scorep-CC) "
+configopts += "-DCUDA_NVCC_EXECUTABLE=$(which scorep-nvcc) "
+configopts += "-DCUDA_HOST_COMPILER=$(which CC) "
 
 # path to the project directory if not at top
 start_dir = 'dmrg'
@@ -49,6 +53,7 @@ sanity_check_paths = {
 }
 
 modextrapaths = {'PYTHONPATH': ['lib/python', 'lib/python/pyeval']}
-modextravars  = {'PATRUN_HELP': 'srun -Cgpu pat_run dmrg input ;pat_report dmrg+*s >xf'}
+modextravars  = {'SCOREP_ENABLE_PROFILING': 'true',
+                 'SCOREP_ENABLE_TRACING': 'false'}
 
 moduleclass = 'chem'

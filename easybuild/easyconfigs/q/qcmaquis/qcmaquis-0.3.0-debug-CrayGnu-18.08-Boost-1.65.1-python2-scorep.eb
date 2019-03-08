@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'qcmaquis'
-version = "0.2.0-debug"
+version = "0.3.0-debug"
 versionpython = "-Boost-1.65.1-python2"
 versionsuffix = '%s-scorep' % (versionpython)
 
@@ -36,7 +36,7 @@ preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/l
 configopts  = "-DBLAS_LAPACK_SELECTOR=mkl_parallel "
 configopts += "-DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' "
 configopts += "-DCMAKE_CXX_FLAGS=-fopenmp "
-configopts += "-DCMAKE_EXE_LINKER_FLAGS=\'-ldl -L$(EBROOTPYTHON)/lib -lpython2.7\' "
+configopts += "-DCMAKE_EXE_LINKER_FLAGS=\"-L$(EBROOTBOOST)/lib\" "
 configopts += "-DCMAKE_C_COMPILER=$(which scorep-cc) "
 configopts += "-DCMAKE_CXX_COMPILER=$(which scorep-CC) "
 configopts += "-DCUDA_NVCC_EXECUTABLE=$(which scorep-nvcc) "
