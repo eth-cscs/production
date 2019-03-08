@@ -6,22 +6,21 @@ version = '18.10'
 
 homepage = 'http://user.cscs.ch'
 description = """This bundle provides the Portland Group Compiler Collection (PGI), 
-including MVAPICH2 for MPI support for the Programming Environment on kesch/escha. 
-Use the environment variable $MPIF90 to compile MPI codes in shell scripts."""
+including MVAPICH2 with MPI support for the Programming Environment on kesch/escha. 
+Please use the environment variable $MPIF90 to compile MPI codes in shell scripts."""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
 # PrgEnv-pgi needs a custom Fortran MPI wrapper
-postinstallpath = '%(installdir)s/bin'
-postinstallcmds = ["""mkdir {0} && 
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif90 {0}/mpif90""".format(postinstallpath)]
-
-modextravars = {'MPIF90': '{0}/mpif90'.format(postinstallpath)}
+postinstallcmds = ["""mkdir %(installdir)s/bin && 
+cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif90 %(installdir)s/bin/mpif90"""]
 
 modtclfooter = """
 module load pgi/18.10-gcc-5.4.0-2.26
 module load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
-set-alias mpif90 %s/mpif90
-""" % postinstallpath
+"""
+
+modaliases = {'mpif90': '$root/bin/mpif90'}
+modextravars = {'MPIF90': '$root/bin/mpif90'}
 
 moduleclass = 'devel'
