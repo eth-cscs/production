@@ -20,9 +20,6 @@
  netCDF-Fortran-4.4.4-gmvolf-17.02.eb                --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  netcdf4-python-1.3.0-gmvolf-17.02-Python-2.7.13.eb  --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  netcdf4-python-1.3.0-gmvolf-17.02-Python-3.6.2.eb   --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
- netCDF-4.6.1-PGI-18.05-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.05/easybuild 
- netCDF-C++-4.3.0-PGI-18.05-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.05/easybuild
- netCDF-Fortran-4.4.4-PGI-18.05-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.05/easybuild
  netCDF-4.4.1.1-gmvolf-17.02.eb                      --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
  netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
@@ -31,7 +28,6 @@
  PE-17.06.eb                                         --module-naming-scheme=EasyBuildMNS
  PrgEnv-CrayCCE-17.06.eb                             --installpath=/apps/escha/UES/jenkins/RH7.5/cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS       
  PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild --module-naming-scheme=EasyBuildMNS
- PrgEnv-pgi-kesch-18.05.eb                           --installpath=/apps/escha/UES/jenkins/RH7.5/pgi_PE18.05/easybuild --module-naming-scheme=EasyBuildMNS
  PROJ-5.1.0-gmvolf-17.02.eb                          --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  Python-2.7.13-gmvolf-17.02.eb                       --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  Python-3.6.2-gmvolf-17.02.eb                        --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
