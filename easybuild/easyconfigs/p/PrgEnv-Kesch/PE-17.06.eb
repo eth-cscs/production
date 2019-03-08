@@ -1,4 +1,4 @@
-# created by MKr and modified by Luca marsella (CSCS)
+# created by MKr and modified by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
 name = 'PE'
@@ -9,7 +9,6 @@ description = """
     The meta-module allows access to the following programming environments:
        - Cray 17.06
        - GNU 17.02
-       - PGI 18.10 
 """
 
 toolchain = {'name': 'dummy', 'version': ''}
@@ -17,7 +16,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 dependencies = [
     ("cray_PE", "17.06"),
     ("gnu_PE", "17.02"),
-    ("pgi_PE", "18.10"),
+#    ("pgi_PE", "18.05"),
 ]
 
 recursive_module_unload = 'True'
