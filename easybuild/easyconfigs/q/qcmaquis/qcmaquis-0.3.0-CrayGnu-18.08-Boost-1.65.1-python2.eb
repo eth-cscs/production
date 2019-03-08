@@ -34,7 +34,7 @@ preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/l
 configopts  = "-DBLAS_LAPACK_SELECTOR=mkl_parallel "
 configopts += "-DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' "
 configopts += "-DCMAKE_CXX_FLAGS=-fopenmp "
-configopts += "-DCMAKE_EXE_LINKER_FLAGS=\"-L$(EBROOTBOOST)/lib\" "
+configopts += "-DCMAKE_EXE_LINKER_FLAGS=\"-L$EBROOTBOOST/lib\" "
 
 # path to the project directory if not at top
 start_dir = 'dmrg'
