@@ -17,7 +17,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 dependencies = [
     ("cray_PE", "17.06"),
     ("gnu_PE", "17.02"),
-    ("pgi_PE", "18.05"),
+    ("pgi_PE", "18.5"),
 ]
 
 recursive_module_unload = 'True'
