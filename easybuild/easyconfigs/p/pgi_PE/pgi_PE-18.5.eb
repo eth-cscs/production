@@ -2,7 +2,7 @@
 easyblock = 'Bundle'
 
 name = 'pgi_PE'
-version = '18.10'
+version = '18.5'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -21,6 +21,9 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${list} {
    module unload ${module}
  }
+ module unload gcccore
+ module unload mvapich2gdr_gnu
+ module unload cudatoolkit
 }
 
 module use %s
