@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+name = 'netCDF-Fortran'
+version = "4.4.4"
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software
+libraries and machine-independent data formats that support the creation,
+access, and sharing of array-oriented scientific data."""
+
+toolchain = {'name': 'PGI', 'version': '18.5-GCC-5.4.0-2.26'}
+toolchainopts = {'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = [
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/',
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
+]
+
+preconfigopts = ' FC="pgfortran" FCFLAGS="-O2 -Mflushz -fPIC -tp=haswell" '
+configopts = ' --with-pic '
+
+dependencies = [('netCDF', '4.6.1')]
+
+moduleclass = 'data'

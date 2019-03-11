@@ -13,7 +13,7 @@ sources = ['%(namelower)s-%(version)s.linux.bin.tar.gz']
 source_urls = ['http://ftp.stack.nl/pub/users/dimitri/']
 
 builddependencies = [
-    ('CMake', '3.13.0'),
+    ('CMake', '3.13.4'),
 ]
 
 sanity_check_paths = {
