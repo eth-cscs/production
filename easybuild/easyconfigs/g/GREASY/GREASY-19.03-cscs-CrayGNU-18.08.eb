@@ -1,7 +1,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'GREASY'
-version = 'CSCS-19.03'
+version = '19.03-cscs'
 
 homepage = 'https://github.com/jonarbo/GREASY'
 description = """Greasy is a tool designed to make easier the deployment of
