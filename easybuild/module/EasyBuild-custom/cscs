@@ -43,7 +43,6 @@ set eb_config_dir          /apps/common/UES/jenkins/production/easybuild
 if { ! [ info exists ::env(EB_CUSTOM_REPOSITORY) ] } {
     setenv EB_CUSTOM_REPOSITORY $eb_config_dir
 }
-setenv XDG_CONFIG_DIRS                          $::env(EB_CUSTOM_REPOSITORY)
 setenv EASYBUILD_ROBOT_PATHS                    $::env(EB_CUSTOM_REPOSITORY)/easyconfigs/:
 setenv EASYBUILD_INCLUDE_EASYBLOCKS             $::env(EB_CUSTOM_REPOSITORY)/easyblocks/*.py
 setenv EASYBUILD_EXTERNAL_MODULES_METADATA      $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
