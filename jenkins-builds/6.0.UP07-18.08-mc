@@ -9,7 +9,7 @@
  CP2K-6.1-CrayGNU-18.08.eb                          --set-default-module
  CPMD-4.1-CrayIntel-18.08.eb                        --set-default-module
  dask-1.0.0-CrayGNU-18.08-python3.eb                --set-default-module
- GREASY-2.1-cscs-CrayGNU-18.08.eb                   --set-default-module
+ GREASY-19.03-cscs-CrayGNU-18.08.eb                 --set-default-module
  GROMACS-2018.3-CrayGNU-18.08.eb                    --set-default-module
  GSL-2.5-CrayGNU-18.08.eb                           --set-default-module
  GSL-2.5-CrayCCE-18.08.eb
