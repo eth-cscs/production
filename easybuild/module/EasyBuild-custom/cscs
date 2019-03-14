@@ -75,6 +75,8 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
+} elseif { [ string match *arolla* $system ] || [ string match *tsa* $system ] } {
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
 } elseif { [ string match *fulen* $system ] } {
     setenv XDG_RUNTIME_DIR                      /dev/shm/$::env(USER)
 } else {
