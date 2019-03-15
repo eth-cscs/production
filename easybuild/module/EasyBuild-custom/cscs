@@ -61,8 +61,6 @@ if { $status == 0 } {
         prepend-path PATH                       /usr/share/Modules/tcl
     }
 }
-# temporary fix!
-setenv EASYBUILD_MODULE_SYNTAX                  Tcl
 #########################
 # SYSTEM SPECIFIC SETUP #
 #########################
