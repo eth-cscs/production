@@ -11,6 +11,7 @@ stage('Initialization') {
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
+        machinesList.remove('dom')
     }
 }
 
