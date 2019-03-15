@@ -1,0 +1,29 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2018.11.001'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = """Eigenvalue SoLvers for Petaflop-Applications ."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['http://elpa.mpcdf.mpg.de/html/Releases/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = ' CC=cc FC=ftn CPP=cpp FCPP=cpp '
+configopts = '--enable-openmp --enable-static'
+
+sanity_check_paths = {
+    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.%s' % SHLIB_EXT],
+    'dirs': ['bin', 'include/elpa_openmp-%(version)s/elpa', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig']
+}
+
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s/elpa']}
+modextravars = {
+    'ELPA_INCLUDE_DIR': '$root/include/elpa_openmp-%(version)s',
+    'ELPA_LIBRARY_DIR': '$root/lib'
+}
+moduleclass = 'math'
