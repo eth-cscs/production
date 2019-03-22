@@ -18,10 +18,9 @@ sources = [{
     }
 }]
 
+start_dir = 'mpiP'
 configopts = ' --with-libunwind=$EBROOTLIBUNWIND '
-prebuildopts = 'cd mpiP ;'
 buildopts = ' CC=cc F77=ftn '
-preinstallopts = 'cd mpiP ;'
 
 sanity_check_paths = {
     'files': ["lib/libmpiP.a"],
