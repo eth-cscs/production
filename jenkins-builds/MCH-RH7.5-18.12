@@ -40,7 +40,8 @@
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb                --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  R-3.5.2-gmvolf-17.02-libX11-1.6.3.eb                --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  reframe-2.16.eb
- Ruby-2.5.3-gmvolf-17.02.eb                          --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
+ Ruby-2.4.0-gmvolf-17.02.eb                          --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
+ Ruby-2.5.3-gmvolf-17.02.eb                          --installpath=/apps/escha/UES/jenkins/RH7.5_experimental/easybuild
  rstudio-1.0.143.eb                                  --set-default-module
  rstudio-1.1.442.eb                                  
  Understand-5.0.928.eb                               
