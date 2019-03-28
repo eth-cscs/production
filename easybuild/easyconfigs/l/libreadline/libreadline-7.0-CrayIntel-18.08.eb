@@ -1,0 +1,29 @@
+# contributed by Luca Marsella (CSCS) 
+easyblock = 'ConfigureMake'
+
+name = 'libreadline'
+version = '7.0'
+
+homepage = 'http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html'
+description = """The GNU Readline library provides a set of functions for use by applications that
+ allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available.
+ The Readline library includes additional functions to maintain a list of previously-entered command lines,
+ to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://ftp.gnu.org/gnu/readline']
+sources = ['readline-%(version)s.tar.gz']
+
+dependencies = [
+    ('ncurses', '6.0'),
+]
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'lib/libhistory.a', 'include/readline/chardefs.h', 'include/readline/history.h', 'include/readline/keymaps.h', 'include/readline/readline.h', 'include/readline/rlconf.h', 'include/readline/rlstdc.h', 'include/readline/rltypedefs.h', 'include/readline/tilde.h'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
