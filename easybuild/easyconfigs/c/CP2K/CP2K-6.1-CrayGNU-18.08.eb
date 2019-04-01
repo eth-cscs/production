@@ -31,6 +31,7 @@ builddependencies = [
 ]
 
 dependencies = [
+    ('ELPA', '2016.11.001.pre'),
     ('Libint', '1.1.4'),
     ('libxc', '4.2.3'),
 ]
