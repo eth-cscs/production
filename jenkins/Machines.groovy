@@ -38,7 +38,7 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
-def dom_cle7 = [name: 'dom_cle7',
+def DOM_cle7 = [name: 'DOM_cle7',
            archs: ['gpu', 'mc'],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
            unusePath: '/apps/dom/UES/jenkins/7.0.UP00/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP00/ARCH/easybuild/modules/all',
@@ -46,4 +46,4 @@ def dom_cle7 = [name: 'dom_cle7',
            modulesUnuseProduction: '',
            prefixProduction: '$APPS/UES/jenkins/7.0.UP00/ARCH/easybuild']
 
-return [daint, dom, kesch, leone, fulen, dom_cle7]
+return [daint, dom, kesch, leone, fulen, DOM_cle7]
