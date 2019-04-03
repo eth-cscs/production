@@ -63,7 +63,7 @@ stage('Build Stage') {
                     def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
-                    def buildPath = "/tmp/jenscscs/$gitCommit/"
+                    def buildPath = "/tmp/jenscscs/${gitCommit}${arch}/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
                     def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
