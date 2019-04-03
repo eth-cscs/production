@@ -47,7 +47,7 @@ buildcmd += 'sed -i "s#cuda/include/cudnn.h#include/cudnn.h#g" ../../configure &
 buildcmd += 'sed -i "s#lmultiverso#lmultiverso -L$EBROOTPROTOBUFMINCORE/lib -lprotobuf#g" ../../Makefile && '
 buildcmd += 'sed -i "s/libprotobuf.a/libprotobuf.so/g" ../../configure && '
 buildcmd += 'sed -i "s/libprotobuf.a/libprotobuf.so/g" ../../Makefile && '
-buildcmd += 'export MPI_EXTRA_LIBRARY=/opt/cray/pe/mpt/7.7.2/gni/mpich-gnu/7.1/lib/libmpichcxx.so && '
+buildcmd += 'export MPI_EXTRA_LIBRARY=$CRAY_MPICH_DIR/lib/libmpichcxx.so && '
 buildcmd += '../../configure --cuda=yes --mpi=yes --with-cuda=$CUDATOOLKIT_HOME --with-mpi=$MPICH_DIR '
 buildcmd += '--with-mkl=$EBROOTMKLML --with-cub=$EBROOTCUB --with-cudnn=$EBROOTCUDNN '
 buildcmd +=  '--with-libzip=$EBROOTLIBZIP --with-boost=$EBROOTBOOST --with-protobuf=$EBROOTPROTOBUFMINCORE '
