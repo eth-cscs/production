@@ -16,7 +16,9 @@ name = 'Automake'
 version = "1.16.1"
 
 homepage = 'http://www.gnu.org/software/automake/automake.html'
-description = "Automake: GNU Standards-compliant Makefile generator"
+description = """
+    Automake: GNU Standards-compliant Makefile generator
+"""
 
 toolchain = {'name': 'dummy', 'version': ''}
 
