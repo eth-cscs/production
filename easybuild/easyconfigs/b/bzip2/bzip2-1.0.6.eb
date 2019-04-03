@@ -4,9 +4,9 @@ version = '1.0.6'
 
 homepage = 'http://www.bzip.org/'
 description = """
-    bzip2 is a freely available, patent free, high-quality data compressor. It 
-    typically compresses files to within 10% to 15% of the best available 
-    techniques (the PPM family of statistical compressors), whilst being around 
+    bzip2 is a freely available, patent free, high-quality data compressor. It
+    typically compresses files to within 10% to 15% of the best available
+    techniques (the PPM family of statistical compressors), whilst being around
     twice as fast at compression and six times faster at decompression.
 """
 
@@ -22,7 +22,12 @@ os.environ['CFLAGS'] = '-O3 -fPIC'
 # create pkgconfig file
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \nincludedir=\${prefix}/include \n\nName: bzip2 \nDescription: bzip2 compression library \nVersion: 1.0.6 \n\nRequires: \nLibs: -L\${libdir} -L\${libdir} -lbz2 \nCflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc'
+    ('echo -e "prefix=%(installdir)s \nlibdir=\${prefix}/lib \n'
+     'includedir=\${prefix}/include \n\nName: bzip2 \n'
+     'Description: bzip2 compression library \n'
+     'Version: 1.0.6 \n\nRequires: \n'
+     'Libs: -L\${libdir} -L\${libdir} -lbz2 \n'
+     'Cflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc')
 ]
 
 # prepend PKG_CONFIG_PATH: EasyBuild does this automatically
