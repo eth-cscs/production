@@ -13,7 +13,7 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://nih.at/libzip/']
 
 builddependencies = [
-    ('CMake', '3.11.4', '', True),
+    ('CMake', '3.12.0', '', True),
 ]
 sanity_check_paths = {
     'files': ['lib64/libzip.so'],
