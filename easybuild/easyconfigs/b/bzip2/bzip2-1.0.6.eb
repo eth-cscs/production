@@ -15,7 +15,6 @@ description = """
 toolchain = {'name': 'dummy', 'version': ''}
 
 sources = [SOURCE_TAR_GZ]
-#source_urls = ['http://www.bzip.org/%(version)s/']
 source_urls = [SOURCEFORGE_SOURCE]
 
 os.environ['CC'] = 'gcc'
