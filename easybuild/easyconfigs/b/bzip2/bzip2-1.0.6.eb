@@ -1,4 +1,6 @@
 # contributed by Luca Marsella (CSCS)
+import os
+
 name = 'bzip2'
 version = '1.0.6'
 
@@ -15,7 +17,6 @@ toolchain = {'name': 'dummy', 'version': ''}
 sources = [SOURCE_TAR_GZ]
 source_urls = ['http://www.bzip.org/%(version)s/']
 
-import os
 os.environ['CC'] = 'gcc'
 os.environ['CFLAGS'] = '-O3 -fPIC'
 
