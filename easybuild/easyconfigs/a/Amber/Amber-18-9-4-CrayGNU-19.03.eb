@@ -22,14 +22,14 @@ sources = [
 ]
 
 dependencies = [
-    ('bzip2', '1.0.6'),
-    ('zlib', '1.2.11'),
+    ('bzip2', '1.0.6', '', True),
+    ('zlib', '1.2.11', '', True),
 ]
 
 builddependencies = [
     ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
     ('cray-netcdf/4.6.1.3', EXTERNAL_MODULE),
-    ('flex', '2.6.4'),
+    ('flex', '2.6.4', '', True),
 ]
 
 buildininstalldir = True

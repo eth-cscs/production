@@ -1,1 +1,2 @@
+ Amber-18-9-4-CrayGNU-18.08.eb --set-default-module
  CMake-3.14.1.eb 
