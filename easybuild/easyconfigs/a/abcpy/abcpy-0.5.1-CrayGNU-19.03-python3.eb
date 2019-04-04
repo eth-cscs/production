@@ -5,7 +5,7 @@ version = '0.5.1'
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '5.1'
+py_rev_ver = '5.6'
 
 versionsuffix = '-python%s' % (py_maj_ver)
 
