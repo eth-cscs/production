@@ -1,4 +1,4 @@
  abcpy-0.5.1-CrayGNU-19.03-python3.eb               --set-default-module
- CDO-1.9.5-CrayGNU-18.08.eb                         --set-default-module
- CDO-1.9.5-CrayIntel-18.08.eb
+ CDO-1.9.5-CrayGNU-19.03.eb                         --set-default-module
+ CDO-1.9.5-CrayIntel-19.03.eb
  CMake-3.14.1.eb
