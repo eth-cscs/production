@@ -1,0 +1,87 @@
+# @author: sarafael, gppezzi
+
+easyblock = 'Bundle'
+
+name = 'ipykernel'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+version = '4.8.2'
+
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'https://pypi.python.org/pypi'
+description = """
+    This module is a bundle of Python packages on Cray systems based on the
+    module cray-python
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+    ('IPython', '5.7.0', '-python2')
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+
+exts_list = [
+    ('tornado', '5.0.2', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': [
+                'https://pypi.python.org/packages/source/t/tornado/'
+            ],
+        }),
+    ('pyzmq', '17.0.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'modulename': 'zmq',
+            'source_urls': [
+                'https://pypi.python.org/packages/source/p/pyzmq/'
+            ],
+        }),
+    ('jupyter_core', '4.4.0', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': [
+                'https://pypi.python.org/packages/source/j/jupyter-core/'
+            ],
+        }),
+    ('jupyter_client', '5.2.3', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'use_pip': True,
+            'source_urls': [
+                'https://pypi.python.org/packages/source/j/jupyter-client/'
+            ],
+        }),
+    ('ipykernel', '4.8.2', {
+            'req_py_majver': '2',
+            'req_py_minver': '7',
+            'source_urls': [
+                'https://pypi.python.org/packages/source/i/ipykernel/'
+            ],
+        }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than
+# just trying to load the module
+full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver]
+}
+
+moduleclass = 'tools'
