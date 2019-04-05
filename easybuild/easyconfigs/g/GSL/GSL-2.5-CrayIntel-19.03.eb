@@ -16,7 +16,7 @@ description = """
 toolchain = {'name': 'CrayIntel', 'version': '19.03'}
 toolchainopts = {'opt': True, 'optarch': True, 'unroll': True, 'pic': True}
 
-source_urls = ['http://mirror.switch.ch/ftp/mirror/gnu/gsl']
+source_urls = [GNU_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
 configopts = "--with-pic"
