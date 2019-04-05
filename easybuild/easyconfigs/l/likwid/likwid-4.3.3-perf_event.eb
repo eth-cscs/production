@@ -37,17 +37,18 @@ prebuildopts += "sed -i 's-^BUILDDAEMON = true-BUILDDAEMON = false-'            
 prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
 
 # --- make/include_GCC.mk:
-prebuildopts += "sed -i 's@^FC  = ifort@FC  = gfortran@'                         make/include_GCC.mk && "
-prebuildopts += "sed -i 's@FCFLAGS  = -module@#FCFLAGS  = -module@'              make/include_GCC.mk && "
-prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'                        make/include_GCC.mk && "
+prebuildopts += "sed -i 's@^FC  = ifort@FC  = gfortran@'            make/include_GCC.mk && "
+prebuildopts += "sed -i 's@FCFLAGS  = -module@#FCFLAGS  = -module@' make/include_GCC.mk && "
+prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'           make/include_GCC.mk && "
 
 skipsteps = ['configure']
-buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" PREFIX=%(installdir)s'
+buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" ' \
+            'PREFIX=%(installdir)s'
 installopts = 'PREFIX=%(installdir)s'
 
 sanity_check_paths = {
     'files': ["bin/likwid-memsweeper", "bin/likwid-mpirun", "bin/likwid-perfctr",
-              "bin/likwid-perfscope", "bin/likwid-pin", "bin/likwid-powermeter", 
+              "bin/likwid-perfscope", "bin/likwid-pin", "bin/likwid-powermeter",
               "bin/likwid-topology",
               "lib/liblikwidpin.%s" % SHLIB_EXT, "lib/liblikwid.%s" % SHLIB_EXT],
     'dirs': ["man/man1"]
