@@ -1,0 +1,43 @@
+# omlins, kraushm, jg, havogt (cscs)
+easyblock = 'CMakeMake'
+
+name = 'Dycore'
+version = '5.0_2017.4'
+cudaversion = 9.1
+precision = 'float'
+versionsuffix = '-cuda-%s-baroclinic-%s' % (cudaversion, precision)
+
+homepage = ''
+description = """cosmo-pompa-dycore"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
+# repo is private (+ no official release)
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/d/%(name)s/'              \
+                 '%(name)s-%(version)s.tar.gz'}
+]
+
+builddependencies = [ 
+    ('CMake', '3.12.0', '', True),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('STELLA', '5.0_2017.4', '-baroclinic-%s' % (precision)),
+]
+
+srcdir = "../dycore"
+
+configopts  = "-DCMAKE_BUILD_TYPE=Release "
+configopts += "-DSINGLEPRECISION=ON "
+configopts += "-DCUDA_BACKEND=ON "
+configopts += "-DSTELLA_DIR=${EBROOTSTELLA} " 
+configopts += "-DBITREPRO=OFF "
+configopts += "-DCMAKE_CXX_FLAGS='-std=gnu++98' "
+
+separate_build_dir = True
+
+moduleclass = 'devel'
+

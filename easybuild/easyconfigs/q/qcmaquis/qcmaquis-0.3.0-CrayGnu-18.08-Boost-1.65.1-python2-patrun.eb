@@ -1,0 +1,54 @@
+# @author: sebkelle1
+easyblock = 'CMakeMake'
+
+name = 'qcmaquis'
+version = "0.3.0"
+versionpython = "-Boost-1.65.1-python2"
+versionsuffix = '%s-patrun' % (versionpython)
+
+homepage = 'https://github.com/eth-cscs/qcmaquis'
+description = """Quantum-Chemical DMRG simulation software for approximate
+eigenstate calculations of molecular systems"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'dynamic': True}
+sourcepath = ['/apps/common/UES/easybuild/sources/q/%(name)s']
+sources = ['%(version)s.tar.gz']
+
+dependencies = [
+# ALPS will load Boost, python2 and cray-hdf5:
+    ('ALPS', '2.3.0', versionpython),
+    ('GSL', '2.5'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('perftools-preload', EXTERNAL_MODULE),
+]
+
+builddependencies = [
+    ('CMake', '3.12.4', '', True),
+    ('OpenSSL', '1.1.0h')
+]
+
+# dirty hack to link against MKL in a GNU environment
+# will be obsolete once the app will work with cray-libsci[_acc]
+preconfigopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/linux/mkl && '
+preinstallopts = 'export MKLROOT=/opt/intel/compilers_and_libraries_2018.2.199/linux/mkl && '
+
+configopts  = "-DBLAS_LAPACK_SELECTOR=mkl_parallel "
+configopts += "-DBUILD_SYMMETRIES=\'SU2U1;SU2U1PG;TwoU1;TwoU1PG;U1\' "
+configopts += "-DCMAKE_CXX_FLAGS=-fopenmp "
+configopts += "-DCMAKE_EXE_LINKER_FLAGS=\"-L$EBROOTBOOST/lib\" "
+
+# path to the project directory if not at top
+start_dir = 'dmrg'
+
+separate_build_dir = True
+
+sanity_check_paths = {
+    'files': ['bin/dmrg', 'lib/libcpp_maquis.%s' % SHLIB_EXT],
+    'dirs': ['include/dmrg', 'bin/', 'share/'],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python', 'lib/python/pyeval']}
+modextravars  = {'PATRUN_HELP': 'srun -Cgpu pat_run dmrg input ;pat_report dmrg+*s >xf'}
+
+moduleclass = 'chem'

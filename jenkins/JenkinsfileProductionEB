@@ -11,6 +11,8 @@ stage('Initialization') {
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
+        //disable exclusion of DOM from production for testing during CLE7 upgrade
+        //machinesList = machinesList.findAll({it.name != 'dom'})
     }
 }
 

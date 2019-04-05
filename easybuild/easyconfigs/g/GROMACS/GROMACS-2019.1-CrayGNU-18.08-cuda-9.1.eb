@@ -1,0 +1,44 @@
+# contributed by Luca Marsella, Victor Holanda Rusu (CSCS)
+#
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2013 University of Luxembourg / LCSB, Cyprus Institute / CaSToRC, Ghent University
+# Authors::   Wiktor Jurkowski <wiktor.jurkowski@uni.lu>, Fotis Georgatos <fotis.georgatos@uni.lu>, \
+#             George Tsouloupas <g.tsouloupas@cyi.ac.cy>, Kenneth Hoste
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
+#
+name = 'GROMACS'
+version = "2019.1"
+cudaversion = '9.1'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://www.gromacs.org'
+description = """GROMACS is a versatile package to perform molecular dynamics,
+ i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True, 'dynamic': False}
+
+source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = ['gromacs-2018.2.patch']
+
+configopts = '-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON'
+
+skipsteps = ['test']
+
+# CMake dependency with dummy toolchain
+builddependencies = [
+    ('CMake', '3.13.3', '', True),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' %cudaversion, EXTERNAL_MODULE),
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+]
+
+moduleclass = 'bio'
