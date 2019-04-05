@@ -1,0 +1,78 @@
+diff -Naur IPM-2.0.6.ori/src/ipm_env.c IPM-2.0.6/src/ipm_env.c
+--- IPM-2.0.6.ori/src/ipm_env.c	2016-07-17 01:15:01.000000000 +0200
++++ IPM-2.0.6/src/ipm_env.c	2017-06-12 17:42:35.362296000 +0200
+@@ -103,9 +103,12 @@
+     }
+ 
+     /* write logs to this directory */
++    /*
+     else if(!strcmp("IPM_LOGDIR", key)) {
+       ipm_check_env(ENV_LOGDIR, val);
+     }
++    // see below instead
++    */
+ 
+     /* write log to this file */
+     else if(!strcmp("IPM_OUTFILE", key)) {
+@@ -150,7 +153,35 @@
+     
+     cp++;
+   }
+-  
++ 
++  // cscs --- force IPM_LOGDIR=$SCRATCH/../piccinal/%Y/%m/%d/
++  char *scratchpath = getenv("SCRATCH");                
++  // char *username = getenv("USER");                   
++  const char slash[2] = "/";                            
++  char *token1 = strtok(scratchpath, slash);            
++  // printf( "1:|%s|%d\n", token1, strlen(token1) );       
++  char *token2 = strtok(NULL, slash);                   
++  // printf( "2:|%s|%d\n", token2, strlen(token2) );
++  char cscs_scratch_buffer[512];
++  sprintf(cscs_scratch_buffer, "/%s/%s/piccinal" ,token1, token2);
++  // printf( "|%s|\n", cscs_scratch_buffer );
++
++  time_t cscs_rawtime;
++  struct tm *cscs_tm_info;
++  char cscs_tm_buffer[80];
++  time( &cscs_rawtime );
++  cscs_tm_info = localtime( &cscs_rawtime );
++  // strftime(cscs_tm_buffer, 30, "/project/ipm/daint/%Y/%m/%d", cscs_tm_info); 
++  // strftime(cscs_tm_buffer, 40, "/scratch/snx2000tds/piccinal/%Y/%m/%d", cscs_tm_info); 
++  strftime(cscs_tm_buffer, 40, "%Y/%m/%d", cscs_tm_info); 
++
++  char cscs_logdir[1024];
++  sprintf(cscs_logdir, "%s/%s" ,cscs_scratch_buffer , cscs_tm_buffer);
++  strcpy(task.logdir, cscs_logdir);
++  // printf("Logfile in |%s|\n", task.logdir);
++  // printf("|%s|\n", buffer);
++  // cscs --- force IPM_LOGDIR
++ 
+   return IPM_OK;
+ }
+ 
+diff -Naur IPM-2.0.6.ori/src/perfdata.c IPM-2.0.6/src/perfdata.c
+--- IPM-2.0.6.ori/src/perfdata.c	2016-07-17 01:15:01.000000000 +0200
++++ IPM-2.0.6/src/perfdata.c	2017-06-12 17:37:22.733213000 +0200
+@@ -51,7 +51,8 @@
+   ipm_get_mach_info(t->mach_info, MAXSIZE_MACHINFO);
+ 
+   ipm_get_exec_cmdline(t->exec_cmdline, t->exec_realpath);
+-  ipm_get_exec_md5sum(t->exec_md5sum, t->exec_realpath);
++  //cscs ipm_get_exec_md5sum(t->exec_md5sum, t->exec_realpath);
++  sprintf(t->exec_md5sum, "%s", "unknown"); 
+ 
+   /*
+    * determine local appname and filename prefix 
+diff -Naur IPM-2.0.6.ori/src/report.c IPM-2.0.6/src/report.c
+--- IPM-2.0.6.ori/src/report.c	2016-07-17 01:15:01.000000000 +0200
++++ IPM-2.0.6/src/report.c	2017-06-12 17:45:05.886609451 +0200
+@@ -513,6 +513,8 @@
+ 
+     /* --- print it --- */
+     ipm_print_banner(f, &banner);
++
++  fprintf(f, "Report file in |%s|\n", task.logdir);
+   }
+ }
+ 

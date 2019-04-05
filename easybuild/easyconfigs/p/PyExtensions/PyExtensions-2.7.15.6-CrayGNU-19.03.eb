@@ -1,0 +1,56 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PyExtensions'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+version = '%s.%s' % (pyver, py_rev_ver)
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose' : False }
+
+dependencies = [
+    ('cray-python/%s' % version, EXTERNAL_MODULE),
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+     ('Cython', '0.28.4', {
+         'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+     }),
+     ('six', '1.11.0', {
+         'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+     }),
+     ('subprocess32', '3.5.2', {
+         'source_urls': ['https://pypi.python.org/packages/source/s/subprocess32/'],
+     }),
+     ('matplotlib', '2.2.2', {
+         'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+     }),
+     ('pandas', '0.23.3', {
+         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+     }),
+     ('virtualenv', '16.0.0', {
+         'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv/'],
+     }),
+ ]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+pythonpath = 'lib/python%s/site-packages' % pyver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [pythonpath]
+}
+
+modextrapaths = {'PYTHONPATH': pythonpath}
+
+moduleclass = 'tools'
