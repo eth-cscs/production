@@ -27,8 +27,8 @@ configopts  = (
 )
 
 dependencies = [
-    ('bzip2', '1.0.6', '', True),
-    ('zlib', '1.2.11', '', True),
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
     ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), 
      EXTERNAL_MODULE),
 ]

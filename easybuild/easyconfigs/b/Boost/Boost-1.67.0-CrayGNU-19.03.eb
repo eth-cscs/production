@@ -15,8 +15,8 @@ sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = [SOURCEFORGE_SOURCE]
 
 dependencies = [
-    ('bzip2', '1.0.6', '', True),
-    ('zlib', '1.2.11', '', True),
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
 ]
 
 configopts = 'CXXFLAGS="-std=gnu++98 ${CXXFLAGS}" --without-libraries=python'
