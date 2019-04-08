@@ -1,0 +1,51 @@
+# Built with EasyBuild version 3.8.1 on 2019-04-05_15-45-44
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'zlib'
+version = '1.2.11'
+
+homepage = 'http://www.zlib.net/'
+description = """zlib is designed to be a free, general-purpose, legally unencumbered -- that is,
+ not covered by any patents -- lossless data-compression library for use on virtually any
+ computer hardware and operating system."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+toolchainopts = {'pic': True, 'dynamic': True}
+
+source_urls = [('http://sourceforge.net/projects/libpng/files/%(name)s/%(version)s', 'download')]
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/zconf.h', 'include/%(name)s.h', 'lib/libz.a', 'lib/libz.so'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
+
+# Build statistics
+buildstats = [{
+    "build_time": 7.64,
+    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild'", "--buildpath='/run/user/23271/easybuild/build'", "--containerpath='/scratch/snx3000tds/bignamic/easybuild_install/containers'", "--external-modules-metadata='/apps/common/UES/jenkins/production/easybuild/cray_external_modules_metadata.cfg'", "--hide-deps='absl,ANTLR,APR,APR-util,Autoconf,Automake,Autotools,Bison,Bazel,cloudpickle,CMake,configurable-http-proxy,Coreutils,Cube,dask,Doxygen,Eigen,FLTK,GCCcore,GL2PS,glmnet,GLPK,GLib,GTS,GraphicsMagick,help2man,IPython,JasPer,LLVM,LOKI,Loki,LibTIFF,M4,Mako,Mesa,NASM,NASM,OPARI2,OTF2,OpenPGM,PCRE,PDT,PIL,Pillow,PROJ,PyGTS,PyQt,PyYAML,PyZMQ,Python-Xlib,Python-bare,Qhull,Qt,SCOTCH,SCons,SIONlib,SIP,SQLite,SWIG,Serf,Szip,Tcl,Tk,UDUNITS,X11,XZ,ZeroMQ,arpack-ng,backports.weakref,binutils,bokeh,byacc,bzip2,cairo,cURL,cuDNN,expat,flex,fontconfig,freetype,funcsigs,gc,gettext,gnuplot,gperf,guile,hwloc,inputproto,jemalloc,kbproto,libGLU,libgpuarray,libQGLViewer,libspatialindex,libX11,libXau,libXdmcp,libXext,libXrender,libcerf,libdrm,libevent,libffi,libgd,libiberty,libjpeg-turbo,libjpeg-turbo,libpng,libpthread-stubs,libreadline,libsodium,libtool,libunistring,libunwind,libutempter,libxcb,libxml2,libxshmfence,libyaml,make,minieigen,mock,mxml,ncurses,nettle,networkx,nodejs,nose-parameterized,numactl,parameterized,pixman,pkg-config,ploticus,popt,protobuf,protobuf-core,qrupdate,renderproto,scikit-image,scikit-learn,util-linux,Werkzeug,wheel,xcb-proto,xextproto,xorg-macros,xproto,xtrans,zlib'", "--hide-toolchains='CrayCCE,CrayGNU,CrayIntel,CrayPGI,GCCcore,gmvapich2,gmvolf,foss,gompi'", "--include-easyblocks='/apps/common/UES/jenkins/production/easybuild/easyblocks/*.py'", "--installpath='/scratch/snx3000tds/bignamic/easybuild_install/'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='haswell'", "--packagepath='/scratch/snx3000tds/bignamic/easybuild_install/packages'", "--prefix='/scratch/snx3000tds/bignamic/easybuild_install/'", "--repositorypath='/scratch/snx3000tds/bignamic/easybuild_install/ebfiles_repo'", "--robot='/apps/common/UES/jenkins/production/easybuild/easyconfigs:/scratch/snx3000tds/bignamic/production/easybuild/easyconfigs:/apps/common/UES/easybuild/software/EasyBuild/3.8.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.8.1-py2.7.egg/easybuild/easyconfigs'", "--robot-paths='/apps/common/UES/jenkins/production/easybuild/easyconfigs:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/run/user/23271/easybuild/tmp'", "--try-toolchain='CrayIntel,19.03'", './NAMD-2.12-CrayIntel-18.08.eb'],
+    "core_count": 20,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "3.8.1",
+    "easybuild-framework_version": "3.8.1",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper; OFFLOAD_TARGET_NAMES=hsa:nvptx-none; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none=/usr/nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 7.3.1 20180323 [gcc-7-branch revision 258812] (SUSE Linux) ; ",
+    "glibc_version": "2.26",
+    "hostname": "dom101",
+    "install_size": 709960,
+    "modules_tool": ('EnvironmentModulesC', '/opt/cray/pe/modules/3.2.11.1/bin/modulecmd', '3.2.11'),
+    "os_name": "UNKNOWN",
+    "os_type": "Linux",
+    "os_version": "UNKNOWN",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.7.14 (default, Nov 30 2017, 11:33:17) [GCC]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1554471944,
+    "total_memory": 257488,
+}]

@@ -5,19 +5,25 @@
  CDO-1.9.5-CrayGNU-19.03.eb                         --set-default-module
  CDO-1.9.5-CrayIntel-19.03.eb
  CMake-3.14.1.eb
+ CP2K-6.1-CrayGNU-19.03.eb                          --set-default-module
  CPMD-4.1-CrayIntel-19.03.eb                        --set-default-module
- dask-1.0.0-CrayGNU-18.08-python3.eb                --set-default-module
+ dask-1.0.0-CrayGNU-19.03-python3.eb                --set-default-module
  GREASY-19.03-cscs-CrayGNU-19.03.eb                 --set-default-module
  GROMACS-2018.3-CrayGNU-19.03.eb                    --set-default-module
  GSL-2.5-CrayGNU-19.03.eb                           --set-default-module
  GSL-2.5-CrayCCE-19.03.eb
  GSL-2.5-CrayIntel-19.03.eb
- h5py-2.8.0-CrayGNU-18.08-python2-parallel.eb
- h5py-2.8.0-CrayGNU-18.08-python2-serial.eb
- h5py-2.8.0-CrayGNU-18.08-python3-parallel.eb       --set-default-module
- h5py-2.8.0-CrayGNU-18.08-python3-serial.eb
- PyExtensions-2.7.15.1-CrayGNU-19.03.eb
- PyExtensions-3.6.5.1-CrayGNU-19.03.eb
+ HDFView-2.14.eb                                    --set-default-module
+ h5py-2.8.0-CrayGNU-19.03-python2-parallel.eb
+ h5py-2.8.0-CrayGNU-19.03-python2-serial.eb
+ h5py-2.8.0-CrayGNU-19.03-python3-parallel.eb       --set-default-module
+ h5py-2.8.0-CrayGNU-19.03-python3-serial.eb
+ IDL-8.5.1.eb                                       --set-default-module
+ Lmod-7.8.2.eb                                      --set-default-module --hidden
+ NCL-6.4.0.eb                                       --set-default-module
+ PyExtensions-2.7.15.6-CrayGNU-19.03.eb
+ PyExtensions-3.6.5.6-CrayGNU-19.03.eb
+ Python-bare-3.6.2.eb                               --hidden
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  IPM-2.0.6-CrayGNU-19.03.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
