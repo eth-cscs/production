@@ -16,7 +16,7 @@ sources = ['/apps/common/UES/easybuild/sources/a/%(name)s/'
 checksums = ['23f4e1194d67e3f4bc55c56630b9463e']
 patches = ['%(name)s_%(version)s.patch']
 postinstallcmds = ['rm -fr ~/.intel/.pset',
-                   'sed -i "s-XXXXX-%(installdir)s-" silent.cfg',
+                   'sed -i "s@XXXXX@%(installdir)s@" silent.cfg',
                    './install.sh -s silent.cfg --user-mode --SHARED_INSTALL',]
 
 sanity_check_paths = {
