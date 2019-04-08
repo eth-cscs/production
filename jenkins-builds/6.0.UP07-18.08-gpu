@@ -62,8 +62,7 @@
  VMD-1.9.3-ogl.eb
  VTK-8.1.1-EGL-CrayGNU-18.08-python3.eb
  VTK-8.2.0-EGL-CrayGNU-18.08-python3.eb             --set-default-module
- advisor_2018.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
- advisor_2019.eb                                                         --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
+ advisor_2019_update3.eb                            --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
  bladeplugin-0.1.eb                                 --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
  callgraphplugin-0.1.eb                             --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
  CubeGUI-4.4.eb                                     --set-default-module --installpath=$APPS/UES/jenkins/6.0.UP07/gpu/easybuild/tools
