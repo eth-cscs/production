@@ -21,8 +21,7 @@ dependencies = [
     ('libtool', '2.4.6'),
 ]
 
-#preconfigopts = " export CC=cc && unset CFLAGS && export CXX=CC && unset CXXFLAGS &&"
-preconfigopts = "unset CFLAGS && unset CXXFLAGS && "
+preconfigopts = " export CC=cc && unset CFLAGS && export CXX=CC && unset CXXFLAGS &&"
 configopts = " --enable-error-on-warning=no"
 
 sanity_check_paths = {
