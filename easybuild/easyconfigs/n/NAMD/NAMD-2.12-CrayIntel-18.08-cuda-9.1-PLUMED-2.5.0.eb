@@ -38,8 +38,6 @@ dependencies = [
     ('PLUMED', '%s' % plumedversion),
 ]
 
-#charm_arch = 'gni-crayxc-hugepages-smp'
-
 files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]
 
 sanity_check_paths = {

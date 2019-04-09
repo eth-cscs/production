@@ -40,5 +40,4 @@ modextrapaths = {
     'PLUMED_ROOT': 'lib/plumed',
 }
 
-
 moduleclass = 'chem'
