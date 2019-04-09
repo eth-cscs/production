@@ -1,0 +1,43 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+name = 'advisor'
+version = '2019_update3'
+
+homepage = 'https://software.intel.com/en-us/intel-advisor-xe'
+description = """Intel Advisor XE is Intel's Vectorization Optimization and
+Thread Prototyping tool:
+ - Vectorize & thread code for maximum performance
+ - Easy workflow + data + tips = faster code faster
+ - Prioritize, Prototype & Predict performance gain."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+sources = ['/apps/common/UES/easybuild/sources/a/%(name)s/'
+           '%(name)s_%(version)s.tar.gz']
+checksums = ['23f4e1194d67e3f4bc55c56630b9463e']
+patches = ['%(name)s_%(version)s.patch']
+postinstallcmds = ['rm -fr ~/.intel ~/intel',
+                   'sed -i "s@XXXXX@%(installdir)s@" silent.cfg',
+                   './install.sh -s silent.cfg --user-mode --SHARED_INSTALL',]
+
+sanity_check_paths = {
+    'files': ['%(name)s/advixe-vars.sh'],
+    'dirs': ['%(name)s/bin64']
+}
+
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': '%(name)s/bin64',
+    'PYTHONPATH': '%(name)s/pythonapi',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+}
+
+modextravars = {
+    'ADVISOR_2019_DIR': '%(installdir)s/%(name)s',
+}
+
+docpaths = {
+    'ADVISOR_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'ADVISOR_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'
