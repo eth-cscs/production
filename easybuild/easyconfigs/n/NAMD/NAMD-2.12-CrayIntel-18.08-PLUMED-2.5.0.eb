@@ -3,7 +3,8 @@ easyblock = 'MakeCp'
 
 name = 'NAMD'
 version = '2.12'
-versionsuffix = '-PLUMED-2.5.0'
+plumedversion = '2.5.0'
+versionsuffix = '-PLUMED-%s' % plumedversion
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """NAMD is a parallel molecular dynamics code designed for
@@ -14,10 +15,13 @@ toolchain = {'name': 'CrayIntel', 'version': '18.08'}
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + 'NAMD_%(version)s_Source.tar.gz']
 patches = ['NAMD-2.12.patch']
 
-prebuildopts =  'plumed-patch -f -p --runtime --shared <<< 4 && '
-prebuildopts += ' ./config CRAY-XC-intel Eos --with-cray-fftw'
+# configure NAMD
+prebuildopts = ' ./config CRAY-XC-intel Eos --with-cray-fftw'
 prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-hugepages-smp'
 prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
+# patch with PLUMED
+prebuildopts +=  'plumed-patch -p -e %(namelower)s-%(version)s --runtime --shared && '
+# change folder to build
 prebuildopts += ' cd CRAY-XC-intel && '
 
 builddependencies = [
@@ -27,7 +31,7 @@ builddependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
 ]
 dependencies = [
-    ('PLUMED', '2.5.0'),
+    ('PLUMED', '%s' % plumedversion),
 ]
 
 files_to_copy = [(['./CRAY-XC-intel/namd2'], 'bin')]

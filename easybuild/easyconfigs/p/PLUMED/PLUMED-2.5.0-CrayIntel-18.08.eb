@@ -30,11 +30,15 @@ configopts = " --exec-prefix=%(installdir)s --enable-gsl --enable-matheval --ena
 prebuildopts = "source sourceme.sh && "
 buildopts = 'LD_RO="ld.gold -r -o"'
 
-modextrapaths = {'PLUMED_KERNEL': 'lib/libplumedKernel.so', 'PLUMED_ROOT': 'lib/%(namelower)s'}
-
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
     'dirs': ['lib/%(namelower)s'],
 }
+
+modextrapaths = {
+    'PLUMED_KERNEL': 'lib/libplumedKernel.%s' % SHLIB_EXT,
+    'PLUMED_ROOT': 'lib/plumed',
+}
+
 
 moduleclass = 'chem'
