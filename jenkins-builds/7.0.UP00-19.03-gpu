@@ -22,6 +22,8 @@
  HPX-1.2.0-CrayGNU-19.03.eb                         --set-default-module
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-19.03-python2.eb
+ ipyparallel-6.2.3-CrayGNU-19.03-python3.eb
+ jupyter-1.0.0-CrayGNU-19.03.eb
  NCL-6.4.0.eb                                       --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
  PyExtensions-3.6.5.6-CrayGNU-19.03.eb
