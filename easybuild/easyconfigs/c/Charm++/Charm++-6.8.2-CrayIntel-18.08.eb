@@ -1,0 +1,34 @@
+# contributed by jg (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.8.2'
+
+homepage = 'http://charm.cs.illinois.edu/research/charm/'
+description = """Charm++ is a machine independent parallel programming system.
+Programs written using this system will run unchanged on MIMD machines with or
+without a shared memory."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'dynamic': False}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib/']
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/charm-%(version)s.tar.gz']
+
+builddependencies = [
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('pmi/5.0.12', EXTERNAL_MODULE),
+    ('pmi-lib/5.0.12', EXTERNAL_MODULE),
+]
+
+cmds_map = [('charm-%(version)s.tar.gz', './build ChaNGa gni-crayxc hugepages smp --enable-lbuserdata --with-production -j12')]
+files_to_copy = ['gni-crayxc-hugepages-smp']
+modextrapaths = {'PATH': 'gni-crayxc-hugepages-smp/bin'}
+modextravars = {'EBTYPECHARMPLUSPLUS': 'gni-crayxc-hugepages-smp'}
+
+sanity_check_paths = {
+    'files': ['gni-crayxc-hugepages-smp/bin/charmc'],
+    'dirs': ['gni-crayxc-hugepages-smp/bin', 'gni-crayxc-hugepages-smp/lib', 'gni-crayxc-hugepages-smp/include'],
+}  # pmi-lib required by CrayNid.c (function getXTNodeID)
+
+moduleclass = 'lib'
