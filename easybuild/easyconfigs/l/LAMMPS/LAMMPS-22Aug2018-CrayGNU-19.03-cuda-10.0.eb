@@ -1,0 +1,51 @@
+# Contributed by TWR (CSCS)
+easyblock = 'MakeCp'
+
+name = 'LAMMPS'
+version = '22Aug18'
+release = 'stable_22Aug2018'
+cudaversion =  '10.0'
+versionsuffix = '-cuda-%s' % cudaversion
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
+pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+source_urls = ['https://github.com/lammps/lammps/archive']
+sources = ['%s.tar.gz' % (release)]
+
+prebuildopts = ' cd ./src && '
+prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-gpu yes-k-space yes-molecule yes-mpiio yes-rigid yes-misc yes-user-misc  && '
+prebuildopts += ' make no-latte no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg && '
+prebuildopts += ' make package-update && '
+# go to folder ./lib/reax and make package reax
+prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
+# go to folder ./lib/gpu, create Makefile.gpu and correct file ./lib/gpu/geryon/nvd_device.h
+prebuildopts += ' pushd ../lib/gpu && sed -e "s/-march=bdver1//g" -e "s/sm_[0-9]*/sm_60/g" Makefile.xk7 > Makefile.gpu && '
+prebuildopts += ' make -f Makefile.gpu && popd && '
+#create Makefile.omp and correct Makefile.mpi
+prebuildopts += ' sed -e \'s/mpicxx/CC -fopenmp/\' ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
+prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
+buildopts = [ ' mpi ', ' omp ' ]
+
+builddependencies = [
+    ('cudatoolkit/%s.130_3.22-7.0.0.0_5.1__gdfb4ce5' %cudaversion, EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.2', EXTERNAL_MODULE),
+    ('cray-python/%s' %pyver, EXTERNAL_MODULE),
+]
+
+files_to_copy = [(['src/lmp*'], "bin")]
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi','bin/lmp_omp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
