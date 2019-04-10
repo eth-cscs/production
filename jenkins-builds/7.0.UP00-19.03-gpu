@@ -19,7 +19,9 @@
  h5py-2.8.0-CrayGNU-19.03-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.03-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-19.03-python3-serial.eb
+ HPX-1.2.0-CrayGNU-19.03.eb                         --set-default-module
  IDL-8.5.1.eb                                       --set-default-module
+ ipykernel-4.8.2-CrayGNU-19.03-python2.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NCL-6.4.0.eb                                       --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
