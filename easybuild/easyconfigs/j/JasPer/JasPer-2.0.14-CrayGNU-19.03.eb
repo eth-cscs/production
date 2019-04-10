@@ -14,7 +14,7 @@ toolchainopts = {'pic': True}
 source_urls = ['http://www.ece.uvic.ca/~frodo/jasper/software/']
 sources = [SOURCELOWER_TAR_GZ]
 
-builddependencies = [('CMake', '3.13.3', '', True)]
+builddependencies = [('CMake', '3.14.1', '', True)]
 
 configopts = '-DJAS_ENABLE_DOC=FALSE'
 
