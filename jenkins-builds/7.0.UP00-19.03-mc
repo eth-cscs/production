@@ -24,6 +24,7 @@
  ipyparallel-6.2.3-CrayGNU-19.03-python3.eb
  jupyter-1.0.0-CrayGNU-19.03.eb
  LAMMPS-22Aug2018-CrayGNU-19.03.eb                  --set-default-module
+ LLVM-8.0.0-CrayGNU-19.03.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NAMD-2.13-CrayIntel-19.03.eb                       --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
