@@ -7,17 +7,26 @@ version = '1.9.3'
 versionsuffix = '-egl'
 
 homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
-description = """VMD is a molecular visualization program for displaying, animating, and 
-analyzing large biomolecular systems using 3-D graphics and built-in scripting."""
+description = """
+    VMD is a molecular visualization program for displaying, animating, and
+    analyzing large biomolecular systems using 3-D graphics and built-in
+    scripting.
+"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
-sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s%(versionsuffix)s.tar.gz']
+sources = [(
+    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/'
+    '%(namelower)s-%(version)s%(versionsuffix)s.tar.gz'
+)]
 
-buildcmd = ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir="%(installdir)s/bin"#g\' configure && '
-buildcmd += ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir="%(installdir)s/lib/#g\' configure && '
-buildcmd += ' ./configure && '
-buildcmd += ' cd src && make install '
+buildcmd = (
+    ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir='
+    '"%(installdir)s/bin"#g\' configure && '
+    ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir='
+    '"%(installdir)s/lib/#g\' configure && '
+    ' ./configure && cd src && make install '
+)
 
 buildininstalldir = True
 
