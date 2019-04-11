@@ -3,7 +3,8 @@ easyblock = 'Tarball'
 name = 'Spark'
 version = '2.3.1'
 
-javaver = 'jdk1.8.0_51'
+# Currently not needed due to the change to osdependencies
+#javaver = 'jdk1.8.0_51'
 
 versionsuffix = '-Hadoop-2.7'
 
