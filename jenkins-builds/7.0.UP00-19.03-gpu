@@ -15,7 +15,6 @@
  GSL-2.5-CrayCCE-19.03.eb
  GSL-2.5-CrayIntel-19.03.eb
  HDFView-2.14.eb                                    --set-default-module
- Horovod-0.16.0-CrayGNU-19.03-tf-1.12.0.eb          --set-default-module
  h5py-2.8.0-CrayGNU-19.03-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.03-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.03-python3-parallel.eb       --set-default-module
