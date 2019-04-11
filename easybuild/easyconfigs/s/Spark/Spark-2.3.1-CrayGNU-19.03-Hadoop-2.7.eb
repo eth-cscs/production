@@ -23,9 +23,12 @@ source_urls = [
 
 checksums = ['e87499e5417a64341cbda25e087632dd9f6ce7ad249dfeba47d9d02a51305fc2']
 
-dependencies = [
-    ('java/%s' % javaver, EXTERNAL_MODULE),
-]
+# On CLE7, java is no longer avail. as a stand-alone module
+# Therefore, `osdependencies` are used
+#dependencies = [
+#    ('java/%s' % javaver, EXTERNAL_MODULE),
+#]
+osdependencies = ['java']
 
 postinstallcmds = [
     ("chmod +x %(installdir)s/cscs-custom/getmaster.sh"),
