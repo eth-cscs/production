@@ -1,0 +1,29 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'gc'
+version = '7.6.0'
+
+homepage = 'http://hboehm.info/gc/'
+description = """The Boehm-Demers-Weiser conservative garbage collector can be used as a garbage collecting
+ replacement for C malloc or C++ new."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+
+source_urls = [
+    'https://github.com/ivmai/bdwgc/archive/', # gc7_6_0.tar.gz
+    'https://github.com/ivmai/libatomic_ops/archive/' # libatomic_ops-7_4_4.tar.gz
+]
+sources = [
+    'gc7_6_0.tar.gz',
+    'libatomic_ops-7_4_4.tar.gz'
+]
+
+preconfigopts = "ln -s %(builddir)s/libatomic_ops*/ libatomic_ops && ./autogen.sh && "
+
+sanity_check_paths = {
+    'files': ['include/gc.h', 'lib/libcord.a', 'lib/libcord.%s' % SHLIB_EXT, 'lib/libgc.a', 'lib/libgc.%s' % SHLIB_EXT],
+    'dirs': ['include/gc', 'share'],
+}
+
+moduleclass = 'lib'

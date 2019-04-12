@@ -1,0 +1,85 @@
+diff -Nru NAMD_2.13_Source.orig/arch/CRAY-XC.cray_fftw NAMD_2.13_Source/arch/CRAY-XC.cray_fftw
+--- NAMD_2.13_Source.orig/arch/CRAY-XC.cray_fftw	1970-01-01 01:00:00.000000000 +0100
++++ NAMD_2.13_Source/arch/CRAY-XC.cray_fftw	2019-04-10 16:42:32.000000000 +0200
+@@ -0,0 +1,16 @@
++#works on Eos with module load fftw/3.3.0.4
++FFTDIR=$(FFTW_DIR)
++FFTINCL=-I$(FFTW_INC)
++FFTLIB=-L$(FFTW_DIR)/lib -lfftw3f
++FFTFLAGS=-DNAMD_FFTW -DNAMD_FFTW_3
++FFT=$(FFTINCL) $(FFTFLAGS)
++
++loaded_modules := $(subst :, ,$(LOADEDMODULES))
++
++module := $(filter cray-fftw/3%,$(loaded_modules))
++ifeq (,$(module))
++  $(error module cray-fftw/3 is not loaded)
++else
++  $(info found module $(module))
++endif
++
+diff -Nru NAMD_2.13_Source.orig/arch/CRAY-XC.tcl NAMD_2.13_Source/arch/CRAY-XC.tcl
+--- NAMD_2.13_Source.orig/arch/CRAY-XC.tcl	2019-04-10 16:29:00.000000000 +0200
++++ NAMD_2.13_Source/arch/CRAY-XC.tcl	2019-04-10 17:26:12.000000000 +0200
+@@ -1,5 +1,5 @@
+ TCLDIR=$(HOME)/tcl
+ TCLINCL=-I$(TCLDIR)/include
+-TCLLIB=-L$(TCLDIR)/lib -ltcl8.5 -ldl
++TCLLIB=-L$(TCLDIR)/lib -ltcl8.6 -ldl
+ TCLFLAGS=-DNAMD_TCL
+ TCL=$(TCLINCL) $(TCLFLAGS)
+diff -Nru NAMD_2.13_Source.orig/config NAMD_2.13_Source/config
+--- NAMD_2.13_Source.orig/config	2019-04-10 16:29:12.000000000 +0200
++++ NAMD_2.13_Source/config	2019-04-10 17:21:57.000000000 +0200
+@@ -137,6 +137,7 @@
+   use_python=0
+   use_fftw=1
+   use_fftw3=0
++  use_cray_fftw=0
+   use_mkl=0
+   use_cuda=0
+   use_memopt=0
+@@ -274,9 +275,13 @@
+       --with-fftw3)
+         use_fftw3=1
+       ;;
++      --with-cray-fftw)
++        use_cray_fftw=1
++      ;;      
+       --without-fftw)
+         use_fftw=0
+         use_fftw3=0
++        use_cray_fftw=0
+       ;;
+       --fftw-prefix)
+         shift
+@@ -290,6 +295,7 @@
+         use_mkl=1
+         use_fftw=0
+         use_fftw3=0
++        use_cray_fftw=0
+       ;;
+       --mkl-prefix)
+         shift
+@@ -547,6 +553,12 @@
+         use_fftw3=1
+       fi
+     fi
++    if [[ -n "$FFTW_PREFIX" && $use_cray_fftw -eq 0 ]]; then
++      if [ -e "$FFTW_PREFIX/include/fftw3.h" ]; then
++        echo "Using FFTW3 build found in $FFTW_PREFIX"
++        use_cray_fftw=1
++      fi
++    fi
+   fi
+ 
+   echo "Writing build options to $BUILD_LINK/Make.config"
+@@ -634,6 +646,8 @@
+     echo 'include .rootdir/arch/$(NAMD_ARCH).mkl' >> Make.config
+   elif (( $use_fftw3 )); then
+     echo 'include .rootdir/arch/$(NAMD_ARCH).fftw3' >> Make.config
++  elif (( $use_cray_fftw )); then
++    echo 'include .rootdir/arch/$(NAMD_ARCH).cray_fftw' >> Make.config
+   elif (( $use_fftw )); then
+     echo 'include .rootdir/arch/$(NAMD_ARCH).fftw' >> Make.config
+   fi
