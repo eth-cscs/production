@@ -16,7 +16,6 @@ source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/'
                '%(version_major_minor)s/dist']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['df33da52534f6e85adad3ed3f983fd7c']
-configopts = '--with-qt=/usr/lib64/qt5/bin/qmake '
 builddependencies = [('CubeLib', '4.4.3')]
 osdependencies = [('libQt5Network-devel', 'libQt5Gui-devel',
                    'libQt5Widgets-devel', 'libQt5PrintSupport-devel',
