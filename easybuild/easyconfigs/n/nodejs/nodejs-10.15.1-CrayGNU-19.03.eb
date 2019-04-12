@@ -1,0 +1,34 @@
+# jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'nodejs'
+version = '10.15.1'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+
+homepage = 'http://nodejs.org'
+description = """
+    Node.js is a platform built on Chrome's JavaScript runtime for easily
+    building fast, scalable network applications. Node.js uses an event-driven,
+    non-blocking I/O model that makes it lightweight and efficient, perfect for
+    data-intensive real-time applications that run across distributed devices.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+
+source_urls = ['http://%(name)s.org/dist/v%(version)s/']
+sources = ['node-v%(version)s.tar.gz']
+
+# Python is required (only) as build dependency
+allow_system_deps = [
+    ('Python', '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)),
+]
+
+sanity_check_paths = {
+    'files': ['bin/node', 'bin/npm'],
+    'dirs': ['lib/node_modules', 'include/node'],
+}
+
+moduleclass = 'lang'
