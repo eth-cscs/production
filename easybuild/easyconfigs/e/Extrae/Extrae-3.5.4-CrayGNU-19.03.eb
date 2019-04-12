@@ -19,7 +19,7 @@ toolchainopts = {'verbose': False}
 
 source_urls = ['https://ftp.tools.bsc.es/extrae']
 sources = ['extrae-%(version)s-src.tar.bz2']
-checksums = ['f8135d23142feef1975d31684057087c']
+checksums = ['4eec4a8fc8400990fdafed6b40089215']
 
 dependencies = [
     ('zlib', '1.2.11'),
