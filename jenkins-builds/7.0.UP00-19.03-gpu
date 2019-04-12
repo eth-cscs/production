@@ -19,12 +19,29 @@
  h5py-2.8.0-CrayGNU-19.03-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.03-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-19.03-python3-serial.eb
+ HPX-1.2.0-CrayGNU-19.03.eb                         --set-default-module
  IDL-8.5.1.eb                                       --set-default-module
+ ipykernel-4.8.2-CrayGNU-19.03-python2.eb
+ ipyparallel-6.2.3-CrayGNU-19.03-python3.eb
+ jupyter-1.0.0-CrayGNU-19.03.eb
+ LAMMPS-22Aug2018-CrayGNU-19.03-cuda-10.0.eb        --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
+ magma-2.4.0-CrayIntel-19.03-cuda-10.0.eb           --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
+ NCO-4.7.5-CrayGNU-19.03.eb                         --set-default-module
+ ncview-2.1.7-CrayGNU-19.03.eb                      --set-default-module
+ netcdf-python-1.4.1-CrayGNU-19.03-python2.eb
+ netcdf-python-1.4.1-CrayGNU-19.03-python3.eb       --set-default-module
+ ParaView-5.6.0-EGL-CrayGNU-19.03.eb                --set-default-module
+ pycuda-2018.1.1-CrayGNU-19.03-python2-cuda-10.0.eb 
+ pycuda-2018.1.1-CrayGNU-19.03-python3-cuda-10.0.eb --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
  PyExtensions-3.6.5.6-CrayGNU-19.03.eb
  Python-bare-3.6.2.eb                               --hidden
+ VASP-5.4.4-CrayIntel-19.03-cuda-10.0.eb            --set-default-module
+ VMD-1.9.3-egl.eb
+ VMD-1.9.3-ogl.eb
+ VTK-8.2.0-EGL-CrayGNU-19.03-python3.eb             --set-default-module
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  IPM-2.0.6-CrayGNU-19.03.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
