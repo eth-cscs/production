@@ -1,7 +1,7 @@
 # jg (CSCS)
 easyblock = "Tarball"
 name = 'clusteringsuite'
-version = '2.6.7'
+version = "2.6.8"
 
 homepage = 'https://tools.bsc.es/downloads'
 description = """Automatically expose the main performance trends in
@@ -10,7 +10,7 @@ applications' computation structure."""
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://ftp.tools.bsc.es/clusteringsuite/']
 sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
-checksums = ['9ea5f737616ec7c342f68eb1c2c31225']
+checksums = ['cee8e0d527e97fcc9649500bbd36511c']
 keepsymlinks = True
 postinstallcmds = [
     # The following commands will allow greater flexibility in upgrading Extrae's dependencies
