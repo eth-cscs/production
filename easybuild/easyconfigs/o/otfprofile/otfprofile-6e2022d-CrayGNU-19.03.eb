@@ -30,8 +30,14 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '19.03'}
 toolchainopts = {'verbose': False, 'dynamic': True,}
 
-source_urls = ['https://github.com/score-p/otf2_cli_profile/archive']
-sources = ['master.zip']
+sources = [{
+    'filename': 'otfprofile.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/score-p',
+        'repo_name': 'otf2_cli_profile',
+        'tag': 'master',
+    },
+}]
 # The patch will fix the memory error detected in:
 # definitions::SystemTree::insert_node (definitions.h:147): read/write beyond 
 # end of allocation
