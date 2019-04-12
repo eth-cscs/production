@@ -11,7 +11,7 @@ description = """
     data-intensive real-time applications that run across distributed devices.
 """
 
-toolchain = {'name':'CrayGNU', 'version':'18.08'}
+toolchain = {'name':'CrayGNU', 'version':'19.03'}
 
 sources = ['node-v%(version)s.tar.gz']
 source_urls = ['http://nodejs.org/dist/v%(version)s/']
