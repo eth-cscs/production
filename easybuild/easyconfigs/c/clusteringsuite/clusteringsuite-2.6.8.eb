@@ -1,0 +1,38 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'clusteringsuite'
+version = "2.6.8"
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Automatically expose the main performance trends in
+applications' computation structure."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://ftp.tools.bsc.es/clusteringsuite/']
+sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
+checksums = ['cee8e0d527e97fcc9649500bbd36511c']
+keepsymlinks = True
+postinstallcmds = [
+    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
+    # that are binaries without having to rebuild Extrae:
+	#   ls -l easybuild/software/clusteringsuite/
+ 	#       2.6.7
+	#       latest -> 2.6.7/
+	#   ls -l modules/all/clusteringsuite/
+	#       2.6.7
+	#       latest -> 2.6.7
+    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
+    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
+    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
+]
+
+sanity_check_paths={
+    'files': ['bin/ClustersDiff'],
+    'dirs': ['lib64', 'share/doc'],
+}
+
+modextravars = {
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'

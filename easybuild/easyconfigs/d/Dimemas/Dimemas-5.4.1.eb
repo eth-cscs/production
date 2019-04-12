@@ -1,0 +1,38 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'Dimemas'
+version = "5.4.1"
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """High-abstracted network simulator for message-passing
+programs."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://ftp.tools.bsc.es/dimemas']
+sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
+checksums = ['6f543c084d893e387a1b9f7e8c7cc721']
+osdependencies = ['java']
+postinstallcmds = [
+    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
+    # that are binaries without having to rebuild Extrae:
+	#   ls -l easybuild/software/Dimemas/
+ 	#       5.3.6
+	#       latest -> 5.3.6/
+	#   ls -l modules/all/Dimemas/
+	#       5.3.6
+	#       latest -> 5.3.6
+    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
+    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
+    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
+]
+
+sanity_check_paths={
+    'files': ['bin/Dimemas', 'include/extern_comm_model.h',],
+    'dirs': ['include', 'lib64']
+}
+
+modextravars = {
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'
