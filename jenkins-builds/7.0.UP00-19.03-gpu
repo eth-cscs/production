@@ -34,6 +34,7 @@
  netcdf-python-1.4.1-CrayGNU-19.03-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.03-python3.eb       --set-default-module
  ParaView-5.6.0-EGL-CrayGNU-19.03.eb                --set-default-module
+ PLUMED-2.5.1-CrayGNU-19.03.eb                      --set-default-module
  pycuda-2018.1.1-CrayGNU-19.03-python2-cuda-10.0.eb 
  pycuda-2018.1.1-CrayGNU-19.03-python3-cuda-10.0.eb --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
