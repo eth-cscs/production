@@ -11,7 +11,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://ftp.tools.bsc.es/dimemas']
 sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
 checksums = ['43b4986508cf23a8c14fe9aa09ea43f8']
-dependencies = [('java/jdk1.8.0_51', EXTERNAL_MODULE),]
+osdependencies = ['java']
 postinstallcmds = [
     # The following commands will allow greater flexibility in upgrading Extrae's dependencies
     # that are binaries without having to rebuild Extrae:
