@@ -15,7 +15,6 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = [GNU_SOURCE]
 
 configopts = "--enable-c++"
-prebuildopts = " module switch intel intel/19.0.1.144 && "
 
 sanity_check_paths = {
     'files': ["bin/m4"],

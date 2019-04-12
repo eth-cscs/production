@@ -16,8 +16,12 @@ description = """PLUMED is an open source library for free energy calculations i
 toolchain = {'name': 'CrayIntel', 'version': '19.03'}
 toolchainopts = {'usempi': 'True'}
 
-source_urls = ['https://github.com/%(namelower)s/plumed2/archive/']
+source_urls = ['https://github.com/plumed/plumed2/archive/']
 sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('binutils', '2.32')
+]
 
 dependencies = [
     ('zlib', '1.2.11'),
@@ -30,11 +34,11 @@ dependencies = [
 preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
 configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
 prebuildopts = " source sourceme.sh && "
-#buildopts = 'LD_RO="ld.gold -r -o"'
+buildopts = 'LD_RO="ld.gold -r -o"'
 
 sanity_check_paths = {
-    'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
-    'dirs': ['lib/%(namelower)s'],
+    'files': ['bin/plumed', 'lib/libplumedKernel.%s' % SHLIB_EXT, 'lib/libplumed.%s' % SHLIB_EXT],
+    'dirs': ['lib/plumed']
 }
 
 modextrapaths = {
