@@ -15,7 +15,7 @@ separate_build_dir = True
 
 dependencies = [
     ('libunwind', '1.2.1', '', True),
-    ('libelf', '0.8.13', '', True),
+    ('elfutils', '0.176', '', True),
     ('nodejs', '10.15.1')
 ]
 
