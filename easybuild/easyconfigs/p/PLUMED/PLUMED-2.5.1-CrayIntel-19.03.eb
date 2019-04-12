@@ -24,10 +24,11 @@ dependencies = [
     ('GSL', '2.5'),
 ]
 
-# The following options are enabled by default in configure:
+# The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-gsl --enable-mpi --enable-python
 # Make sure to set the include and library paths accordingly: Cray wrappers set them here
-configopts = " --exec-prefix=%(installdir)s --enable-modules=all"
+preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
+configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
 prebuildopts = " source sourceme.sh && "
 #buildopts = 'LD_RO="ld.gold -r -o"'
 
