@@ -19,7 +19,8 @@ toolchainopts = {'pic': True}
 # server seems to be down, using /apps to get the tgz file:
 # source_urls = ['http://apps.fz-juelich.de/jsc/%(namelower)s/download.php?'
 #                'version=%(version)s']
-sources = ['%(namelower)s-%(version)sl.tar.gz']
+sources = ['/apps/common/UES/easybuild/sources/s/%(name)s/%(namelower)s-'
+           '%(version)sl.tar.gz']
 checksums = ['24594f004bf709d7f48580001bbbef66']
 patches = ['%(name)s-%(version)s.patch']
 
