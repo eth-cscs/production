@@ -11,11 +11,19 @@ description = """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.03'}
 
-source_urls = ['https://github.com/Tencent/%(name)s/archive']
-sources = ['%(version)s.tar.gz']
-checksums = ['badd12c511e081fec6c89c43a7027bce']
+sources = [{
+    'filename': '%(name)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Tencent',
+        'repo_name': 'rapidjson',
+        'tag': 'master',
+        # v.1.1.0 does not compile 
+        #'tag': 'v1.1.0',
+    },
+}]
 
 builddependencies = [ ('CMake', '3.14.1', '', True), ]
+separate_build_dir = 'True'
 
 postinstallcmds = ['cp -a bin %(installdir)s']
 
