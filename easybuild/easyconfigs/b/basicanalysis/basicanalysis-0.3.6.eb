@@ -32,7 +32,7 @@ sanity_check_paths={
 
 dependencies = [
     ('Paraver','4.7.2'),
-    ('Dimemas','5.3.6'),
+    ('Dimemas','5.4.1'),
 ]
 
 modextrapaths = { 'PATH' : '.', }
