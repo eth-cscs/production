@@ -1,7 +1,7 @@
 # jg (CSCS)
 easyblock = "Tarball"
 name = 'Dimemas'
-version = '5.3.6'
+version = "5.4.1"
 
 homepage = 'https://tools.bsc.es/downloads'
 description = """High-abstracted network simulator for message-passing
@@ -10,8 +10,8 @@ programs."""
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://ftp.tools.bsc.es/dimemas']
 sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
-checksums = ['43b4986508cf23a8c14fe9aa09ea43f8']
-dependencies = [('java/jdk1.8.0_51', EXTERNAL_MODULE),]
+checksums = ['6f543c084d893e387a1b9f7e8c7cc721']
+osdependencies = ['java']
 postinstallcmds = [
     # The following commands will allow greater flexibility in upgrading Extrae's dependencies
     # that are binaries without having to rebuild Extrae:
