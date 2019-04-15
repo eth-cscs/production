@@ -27,7 +27,7 @@ sources = [SOURCE_TAR_GZ]
 
 dependencies = [
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('cudatoolkit/%s.130_3.22-7.0.0.0_5.1__gdfb4ce5' % cudaversion, EXTERNAL_MODULE),
 ]
 
 prebuildopts = "python ./configure.py --cuda-root=$EBROOTCUDA"
