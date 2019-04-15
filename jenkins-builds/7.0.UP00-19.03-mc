@@ -35,6 +35,7 @@
  oq-engine-3.2.0-CrayGNU-19.03.eb                   --hidden
  ParaView-5.6.0-OSMesa-CrayGNU-19.03.eb             --set-default-module
  PLUMED-2.5.1-CrayGNU-19.03.eb                      --set-default-module
+ PLUMED-2.5.1-CrayIntel-19.03.eb                    --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
  PyExtensions-3.6.5.6-CrayGNU-19.03.eb
  Python-bare-3.6.2.eb                               --hidden
