@@ -1,0 +1,23 @@
+# jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'CubeW'
+version = '4.4.2'
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Cube Writer Library is a high-performance library for
+writing a multi-dimensional performance space consisting of the dimensions (i)
+performance metric, (ii) call path, and (iii) system resource."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False, 'pic': True}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/'
+               '%(version_major_minor)s/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['55697081697abee7ffd34f30fda27bc3']
+
+sanity_check_paths = {
+    'files': ['bin/cubew-config', 'lib/libcube4w.a'],
+    'dirs': ['include/cubew'],
+}
+
+moduleclass = 'perf'
