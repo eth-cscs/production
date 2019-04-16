@@ -1,0 +1,206 @@
+diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
+--- sionlib.ori/config/determine-cc.sh	2019-04-15 13:03:41.000000000 +0200
++++ sionlib/config/determine-cc.sh	2019-04-16 10:49:44.732392000 +0200
+@@ -9,33 +9,35 @@
+ fi
+ 
+ case "$CC" in
+-  /opt/cray/craype/* | /opt/cray/xt*)
++  /opt/cray/craype/* | /opt/cray/xt* | /opt/cray/pe/craype/*)
+       echo "$CC is probably a Cray XT compiler wrapper" ;;
+   *)
+       echo "Warning: $CC doesn't seem to be a Cray XT compiler wrapper!" ;;
+ esac
+ 
+-if [ `$CC -V 2>&1 | grep -c ^Cray` -gt 0 ]; then
+-  COMP=cce
+-  COMPVER=`$CC -V 2>&1 | grep ^Cray | cut -d\  -f 5`
+-  echo "Got CCE ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^Intel` -gt 0 ]; then
+-  COMP=intel
+-  COMPVER=`$CC -V 2>&1 | grep ^Intel | sed -e 's/^.*Version //' | cut -d\  -f 1`
+-  echo "Got Intel ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^pg` -gt 0 ]; then
+-  COMP=pgi
+-  COMPVER=`$CC -V 2>&1 | grep ^pg | cut -d\  -f 2`
+-  echo "Got PGI ${COMPVER} compiler"
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^PathScale` -gt 0 ]; then
+-  COMP=pathscale
+-  COMPVER=`$CC -v dummy.c 2>&1 | grep ^PathScale | sed -e 's/^.*Version //'`
+-  echo "Got PathScale $COMPVER compiler"
+-# NB: since PathScale includes GCC, test for GCC last
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^gcc` -gt 0 ]; then
+-  COMP=gnu
+-  COMPVER=`$CC -dumpversion`
+-  echo "Got GNU $COMPVER compiler"
+-else
+-  echo "'$CC' compiler not identified!"
+-fi
++ccv=`$CC -V 2>&1`
++
++case "$PE_ENV" in
++
++    CRAY)
++        COMP=cce;
++        COMPVER=`echo "$ccv" |grep ^Cray |cut -d" " -f5` ;
++        echo "Got $COMP $COMPVER compiler";;
++    INTEL)
++        COMP=intel;
++        COMPVER=`echo "$ccv" |grep ^Intel |sed -e 's/^.*Version //' |cut -d" " -f1`;
++        echo "Got $COMP $COMPVER compiler";;
++    PGI)
++        COMP=pgi;
++        COMPVER=`echo "$ccv" |grep ^pg |cut -d" " -f2`;
++        echo "Got $COMP $COMPVER compiler";;
++    GNU)
++        COMP=gnu;
++        COMPVER=`$CC -dumpversion`;
++        echo "Got $COMP $COMPVER compiler";;
++    *)
++        echo "CC=$CC compiler not identified!";
++        echo "PE_ENV=$PE_ENV";
++        echo "COMP=$COMP COMPVER=$COMPVER";
++        echo "ccv=$ccv";;
++esac
+diff -Naur sionlib.ori/mf/Makefile.defs.linux-pgi sionlib/mf/Makefile.defs.linux-pgi
+--- sionlib.ori/mf/Makefile.defs.linux-pgi	1970-01-01 01:00:00.000000000 +0100
++++ sionlib/mf/Makefile.defs.linux-pgi	2019-04-16 10:43:09.163211334 +0200
+@@ -0,0 +1,138 @@
++#------------------------------------------------------------------------------
++# SIONlib Makefile Definitions (Makefile.defs.linux-intel)
++#------------------------------------------------------------------------------
++
++CFGKEY = linux-pgi
++CONFIG = Linux cluster with PGI compilers and MPICH mpi
++
++#------------------------------------------------------------------------------
++# Platform Settings
++#------------------------------------------------------------------------------
++PREC   = 32
++PFLAG  =
++AFLAG  =
++
++PREFIX = $(TOPDIR)/../../install/sionlib_linux_pgi
++
++PLAT     = linux
++#PLAT_LDIR   = -DPFORM_LDIR=\"/tmp\"
++MACHINE  = -DMACHINE=\"Linux\ PGI\"
++PLAT_CONF= $(MACHINE) $(PLAT_LDIR)
++#PLATCC   = mpicc -cc="$(CC)"
++PLATCC   = cc
++
++#------------------------------------------------------------------------------
++# SIONlib General Settings
++#------------------------------------------------------------------------------
++LARGEFILE=-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D__USE_LARGEFILE64 -D__USE_FILE_OFFSET64
++OPTFLAGS = -g
++CC       = cc
++CFLAGS   = -c99 $(OPTFLAGS) $(SION_PLATFORM) $(LARGEFILE)
++CXX      = CC
++CXXFLAGS = $(OPTFLAGS) $(SION_PLATFORM) -O3 $(LARGEFILE)
++F77      = ftn
++#F77      = ifc    #Intel 7.x or older
++F90      = $(F77)
++FFLAGS   = $(OPTFLAGS)
++FPP      = -fpp2
++FDOPT    = -D
++LDFLAGS  = $(OPTFLAGS) 
++
++
++#------------------------------------------------------------------------------
++# SIONlib Settings
++#------------------------------------------------------------------------------
++SION_PLATFORM        = -D_SION_LINUX 
++SION_MSA         =
++ARCH                 = LINUX
++
++SION_LIBNAME_COM     = lsioncom_$(PREC)
++SION_LIBNAME_SER     = lsionser_$(PREC)
++SION_LIBNAME_GEN     = lsiongen_$(PREC)
++SION_LIBNAME_OMP     = lsionomp_$(PREC)
++SION_LIBNAME_MPI     = lsionmpi_$(PREC)
++SION_LIBNAME_OMPI    = lsionompi_$(PREC)
++
++PARUTILENABLE    = 1
++
++FORTRANENABLE        = 1
++FORTRANNAMES         = -D_FORTRANUNDERSCORE
++SION_LIBNAME_F77_SER = lsionser_f77_$(PREC)
++SION_LIBNAME_F77_MPI = lsionmpi_f77_$(PREC)
++SION_LIBNAME_F90_SER = lsionser_f90_$(PREC)
++SION_LIBNAME_F90_MPI = lsionmpi_f90_$(PREC)
++SION_MODPATH = mod_$(PREC)
++
++CXXENABLE            = 1
++SION_LIBNAME_CXX_SER = lsionser_cxx_$(PREC)
++SION_LIBNAME_CXX_MPI = lsionmpi_cxx_$(PREC)
++
++PYTHONENABLE        = 0
++
++SION_DEBUG           = 
++
++COVERAGE             =
++
++#------------------------------------------------------------------------------
++# MPI Settings
++#------------------------------------------------------------------------------
++
++MPIENABLE = 1
++FMPIOBJ   =
++MPIEXTRA  =
++
++MPI_BUILD_TARGETS   = 
++MPI_INSTALL_TARGETS = 
++MPI_CONFIG_TARGETS  = mpi_gen_headers
++
++
++#------------------------------------------------------------------------------
++# OpenMP Settings
++#------------------------------------------------------------------------------
++
++OMPENABLE  = 1
++OMPCC      = $(CC)
++OMPCXX     = $(CXX)
++OMPF77     = $(F77) 
++OMPF90     = $(F90) 
++OMPFLAG    = -mp
++
++#------------------------------------------------------------------------------
++# Hybrid MPI/OpenMP Settings
++#------------------------------------------------------------------------------
++
++HYBENABLE  = 1
++HYBCC      = $(MPICC)
++HYBCXX     = $(MPICXX)
++HYBF77     = $(MPIF77)
++HYBF90     = $(MPIF90)
++HYBFLAG    = $(OMPFLAG)
++
++#------------------------------------------------------------------------------
++# Compression Support
++#------------------------------------------------------------------------------
++
++SZLIB          = szlib
++SZLIB_OPTFLAGS = -O3
++SZLIB_CFLAGS   = -I$(TOPDIR)/utils/szlib -DELG_COMPRESSED -DCUBE_COMPRESSED
++SZLIB_LIBPATH  = -L$(TOPDIR)/utils/szlib
++SZLIB_LIB      = -lsc.z
++
++
++#------------------------------------------------------------------------------
++# SIONlib Cache Settings
++#------------------------------------------------------------------------------
++
++CACHEFLAGS=
++CACHELIB=
++#CACHEFLAGS=-D_SION_CACHE
++#CACHELIB=-lrt
++
++#------------------------------------------------------------------------------
++# CUDA Settings
++#------------------------------------------------------------------------------
++
++SION_CUDA =
++CUDA_INCLUDE_PATHS =
++CUDA_LIBRARY_PATHS =
++CUDA_LIBRARIES =
