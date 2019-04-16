@@ -10,6 +10,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['305804fad578b1b6e4e188bd71b9b922']
+patches = ['%(name)s-%(version)s.patch']
 
 dependencies = [
     ('OTF2', '2.1.1'),
