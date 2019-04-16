@@ -18,7 +18,8 @@ sources = [
 ]
 patches = ['NAMD-2.13.patch']
 
-prebuildopts = ' ./config CRAY-XC-intel Eos --with-cray-fftw'
+prebuildopts = ' module switch intel intel/18.0.2.199 && '
+prebuildopts += ' ./config CRAY-XC-intel Eos --with-cray-fftw'
 prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS'
 prebuildopts += ' --charm-arch gni-crayxc-hugepages-smp'
 prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS'
