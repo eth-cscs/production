@@ -10,6 +10,7 @@ parallel bar charts distribution across the system tree."""
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
 sources = [SOURCELOWER_TAR_GZ]
+patches = ['%(name)s-%(version)s.patch']
 checksums = ['07a842a6a1fe9b7ca90457947f03d6fa']
 
 dependencies = [
