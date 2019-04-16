@@ -1,0 +1,23 @@
+# Contributed by Luca Marsella (CSCS)
+name = 'ncurses'
+version = '6.0'
+
+homepage = 'http://www.gnu.org/software/ncurses/'
+description = """The Ncurses (new curses) library is a free software emulation
+of curses in System V Release 4.0, and more. It uses Terminfo format, supports
+pads and color and multiple highlights and forms characters and function-key
+mapping, and has all the other SYSV-curses enhancements over BSD Curses."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['bin/captoinfo', 'bin/clear', 'bin/infocmp', 'bin/infotocap', 'bin/ncurses6-config', 'bin/reset', 'bin/tabs', 'bin/tic', 'bin/toe', 'bin/tput', 'bin/tset', 'lib/libform.a', 'lib/libform.a', 'lib/libmenu.a', 'lib/libmenu_g.a', 'lib/libncurses.a', 'lib/libncurses++.a', 'lib/libncurses_g.a', 'lib/libpanel.a', 'lib/libpanel_g.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'devel'
