@@ -14,7 +14,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.03'}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = [GNU_SOURCE]
 
-configopts = "--enable-cxx"
+configopts = "--enable-c++"
 
 sanity_check_paths = {
     'files': ["bin/m4"],

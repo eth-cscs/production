@@ -1,0 +1,44 @@
+easyblock = "PythonPackage"
+
+name = 'Theano'
+version = '1.0.2'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+cudamajor = '10.0'
+
+versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
+
+homepage = 'http://deeplearning.net/software/theano'
+description = """Theano is a Python library that allows you to define,
+optimize, and evaluate mathematical expressions involving multi-dimensional
+arrays efficiently."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+
+source_urls = ['https://pypi.python.org/packages/source/T/%s' % name]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('libgpuarray', '0.7.6', '-python%s' % py_maj_ver),
+    ('cuDNN', '7.5.0', '-cuda-%s' % cudamajor, True),
+    ('pycuda', '2018.1.1', '-python%s-cuda-%s' % (py_maj_ver, cudamajor)),
+    ('parameterized', '0.6.1', '-python%s' % py_maj_ver),
+]
+
+# sanity check/import will fail when building on nodes where MPI is disabled
+# the workaround is to change the module name
+options = {'modulename': 'os'}
+
+sanity_check_paths = {
+    'files': ['bin/theano-cache'],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'math'

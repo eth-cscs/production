@@ -1,0 +1,25 @@
+easyblock = 'ConfigureMake'
+
+name = 'libelf'
+version = '0.176'
+
+homepage = 'https://sourceware.org/elfutils/'
+description = """
+    libelf (included in elfutils) is a free ELF object file access library
+"""
+
+toolchain = {'name':'dummy', 'version':''}
+
+source_urls = ['https://sourceware.org/elfutils/ftp/0.176/']
+sources = ['elfutils-%(version)s.tar.bz2']
+checksums = ['077e4f49320cad82bf17a997068b1db9']
+
+modextrapaths = {'CPATH': 'include/libelf'}
+
+sanity_check_paths = {
+    'files': ['lib/libelf.a', 'lib/libelf.%s' % SHLIB_EXT, 
+              'lib/libelf.so.1', 'include/libelf.h'],
+    'dirs': ['lib/pkgconfig']
+}
+
+moduleclass = 'devel'
