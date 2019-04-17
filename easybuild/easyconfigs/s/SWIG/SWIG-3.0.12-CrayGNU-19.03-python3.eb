@@ -1,0 +1,32 @@
+# @author: gppezzi, marcelsc
+
+name = 'SWIG'
+version = '3.0.12'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.6'
+
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'http://www.swig.org/'
+description = """SWIG is a software development tool that connects programs written in C and C++ with
+ a variety of high-level programming languages."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'opt': True, 'optarch': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+    ('PCRE', '8.42'),
+]
+
+configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"'
+configopts += ' --with-python=/opt/python/%s.%s.%s/bin/python' % (py_maj_ver, py_min_ver, py_rev_ver)
+configopts += ' --with-python-version=%s.%s' % (py_maj_ver, py_min_ver)
+configopts += ' --with-python-root=/opt/python/%s.%s.%s/lib/python%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver, py_maj_ver, py_min_ver)
+
+moduleclass = 'devel'
