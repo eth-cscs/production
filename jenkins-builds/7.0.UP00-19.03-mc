@@ -33,13 +33,16 @@
  netcdf-python-1.4.1-CrayGNU-19.03-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.03-python3.eb       --set-default-module
  oq-engine-3.2.0-CrayGNU-19.03.eb                   --hidden
+ ParaView-5.6.0-OSMesa-CrayGNU-19.03.eb             --set-default-module
  PLUMED-2.5.1-CrayGNU-19.03.eb                      --set-default-module
  PLUMED-2.5.1-CrayIntel-19.03.eb                    --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.03.eb
  PyExtensions-3.6.5.6-CrayGNU-19.03.eb
  Python-bare-3.6.2.eb                               --hidden
+ QuantumESPRESSO-6.3-CrayIntel-19.03.eb             --set-default-module
  Spark-2.3.1-CrayGNU-19.03-Hadoop-2.7.eb            --set-default-module
  VASP-5.4.4-CrayIntel-19.03.eb                      --set-default-module
+ CubeGUI-4.4.3.eb                                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  Extrae-3.5.4-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
@@ -56,4 +59,8 @@
  papi-wrap-1.0-CrayCCE-19.03.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  papi-wrap-1.0-CrayIntel-19.03.eb                                        --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  pudb-2018.1-CrayGNU-19.03-python3.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
+ Scalasca-2.5-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
+ Score-P-5.0-CrayCCE-19.03.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
+ Score-P-5.0-CrayGNU-19.03.eb                       --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
+ Score-P-5.0-CrayIntel-19.03.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  Understand-4.0.926.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
