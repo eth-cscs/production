@@ -1,7 +1,7 @@
 # @author: jg (CSCS)
 easyblock = 'ConfigureMake'
 name = 'Score-P'
-version = '5.0-rc1'
+version = '5.0'
 versionsuffix = '-cuda-10.0'
 
 homepage = 'http://www.score-p.org'
