@@ -19,7 +19,8 @@ toolchainopts = {'verbose': False}
 
 source_urls = ['https://ftp.tools.bsc.es/extrae']
 sources = ['extrae-%(version)s-src.tar.bz2']
-checksums = ['4eec4a8fc8400990fdafed6b40089215']
+# The checksum check was removed, since the value for the sources kept changing.
+# The checksum value of the sources is reported in the log file of the module.
 
 dependencies = [
     ('zlib', '1.2.11'),

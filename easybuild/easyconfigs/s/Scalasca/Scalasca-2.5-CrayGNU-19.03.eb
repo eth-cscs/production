@@ -1,0 +1,53 @@
+# jg/mkr (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Scalasca'
+version = '2.5'
+homepage = 'http://www.scalasca.org/'
+description = """Scalasca is a software tool that supports the performance
+optimization of parallel programs by measuring and analyzing their runtime
+behavior. The analysis identifies potential performance bottlenecks -- in
+particular those concerning communication and synchronization -- and offers
+guidance in exploring their causes."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+source_urls = ['http://apps.fz-juelich.de/%(namelower)s/releases/'
+               '%(namelower)s/%(version)s/dist/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['c4ea190408ef34592008f9706dc30a0c']
+
+dependencies = [
+    ('libunwind', '1.2.1', '', True),
+    ('CubeGUI', '4.4.3', '', True),
+    ('CubeW', '4.4.2'),
+    # cubelib may replace cubew: ('CubeLib', '4.4'),
+    ('OPARI2',      '2.0.4', '', True),
+    ('OTF2',        '2.1.1', '', True),
+    ('SIONlib',     '1.7.3l'),
+    ('PDT',         '3.25', '', True),
+    ('vampir',      '9.6.0', '', True),
+    # papi already loaded by perftools-base:
+    # ('papi/5.6.0.6', EXTERNAL_MODULE),
+    # plugins:
+    ('bladeplugin', '0.1', '', True),
+    ('jengafettplugin', '0.2', '', True),
+]
+
+configopts = ' --with-machine-name=pizdaint'
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-cubew=$EBROOTCUBEW/bin'
+configopts += ' --with-papi-header=$PAT_BUILD_PAPI_BASEDIR/include'
+configopts += ' --with-papi-lib=$PAT_BUILD_PAPI_BASEDIR/lib64'
+configopts += ' --disable-gui'
+
+sanity_check_paths = {
+    'files': ["bin/scalasca", "lib/backend/libpearl.replay.a"],
+    'dirs': [],
+}
+
+# Ensure that local metric documentation is found by Cube GUI
+modextrapaths = {'CUBE_DOCPATH': 'share/doc/scalasca/patterns'}
+modextrapaths = {'PATH': 'bin/backend'}
+
+moduleclass = 'perf'
