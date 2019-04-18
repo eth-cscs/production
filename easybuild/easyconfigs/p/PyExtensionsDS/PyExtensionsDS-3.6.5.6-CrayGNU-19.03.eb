@@ -66,6 +66,31 @@ exts_list = [
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/t/termcolor'],
     }),
+    ('chardet', '3.0.4', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
+    }),
+    ('certifi', '2018.8.24', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
+    }),
+    ('idna', '2.7', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
+    }),
+    ('urllib3', '1.23', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
+    }),
+    ('requests', '2.19.1', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
+    }),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
