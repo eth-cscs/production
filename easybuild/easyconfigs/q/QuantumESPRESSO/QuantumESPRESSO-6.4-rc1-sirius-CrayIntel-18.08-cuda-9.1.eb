@@ -1,0 +1,41 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO-SIRIUS'
+version = '6.4-rc1'
+cudaversion = 9.1
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://github.com/electronic-structure/q-e-sirius/'
+description = """ SIRIUS-enabled version of Quantum ESPRESSO """
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+#toolchainopts = {'usempi': True, 'openmp': True}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
+
+sources = ['https://github.com/electronic-structure/q-e-sirius/archive/' + 'v%(version)s-sirius.tar.gz']
+
+dependencies = [
+  ('SIRIUS', '6.1.5', '-cuda-%s' % cudaversion)
+]
+
+preconfigopts = ' module unload cray-libsci && module load gcc/6.2.0 && module list && ' 
+preconfigopts += ' CC=cc FC=ftn '
+preconfigopts += ' LIBS="-lsirius_f -lsirius_cu -lxc -lsymspg -lgsl -lmagma_sparse -lmagma -lcufft -lcublas -lcusolver -L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl -qopenmp"'
+preconfigopts += ' LDFLAGS=$LIBS LD_LIBS=$LIBS'
+preconfigopts += ' FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" F90FLAGS="$FFLAGS" CFLAGS="-O3"'
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack --disable-xml '
+
+prebuildopts = ' module unload cray-libsci && module load gcc/6.2.0 && cat make.inc && '
+prebuildopts += ' sed -i -e "/LAPACK_LIBS    =/d" make.inc && '
+prebuildopts += ' sed -i -e "s/LAPACK_LIBS_SWITCH = internal/LAPACK_LIBS_SWITCH = external/" make.inc && '
+buildopts = 'pw'
+# a single make process is required, since parallel builds fail
+#maxparallel = 1
+
+sanity_check_paths = {
+      'files': ['bin/pw.x'],
+      'dirs': ['']
+}
+
+moduleclass = 'chem'
