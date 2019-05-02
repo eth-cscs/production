@@ -1,0 +1,40 @@
+# contributed by Luca Marsella (CSCS), @omlins
+easyblock = 'ConfigureMake'
+
+name = 'ABINIT'
+version = "8.10.2"
+
+homepage = 'http://www.abinit.org/'
+description = """ABINIT is a package whose main program allows one to find the total energy, charge density and
+ electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional
+ Theory (DFT), using pseudopotentials and a planewave or wavelet basis."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'usempi': 'True', 'openmp': 'True'} 
+
+source_urls = ['https://www.abinit.org/sites/default/files/packages/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = ' CFLAGS=-fopenmp CXXFLAGS=-fopenmp FCFLAGS="-fopenmp -ffree-line-length-none" ';
+
+configopts = ' --enable-openmp --enable-mpi --enable-mpi-io --with-mpi-level=2 '
+configopts +='--with-linalg-flavor=custom --with-linalg-libs="-lsci_gnu_48_mpi -lgfortran -lm -lsci_gnu_48 -lmpich_gnu_48" '
+configopts +='--with-fft-flavor=fftw3 --with-fft-libs="-L$FFTW_DIR" --with-fft-incs="-I$FFTW_INC" '
+configopts +='--with-netcdf-incs="-I$NETCDF_DIR/include" --with-netcdf-libs="-L$NETCDF_DIR/lib" '
+configopts +='--with-libxc-libs="-L$EBROOTLIBXC/lib" --with-libxc-incs="-I$EBROOTLIBXC/include" '
+
+builddependencies = [ 
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('cray-netcdf-hdf5parallel/4.6.1.2', EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('libxc', '4.2.3'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['abinit', 'aim', 'cut3d', 'conducti', 'mrgddb', 'mrgscr', 'optic']],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'chem'
