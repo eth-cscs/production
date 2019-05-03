@@ -22,12 +22,14 @@ sources = ['v%(version)s.tar.gz']
 dependencies = [
     ('zlib', '1.2.11'),
     ('GSL', '2.5'),
-    ('libmatheval', '1.1.11'),
 ]
 
-configopts = " --exec-prefix=%(installdir)s --enable-gsl --enable-matheval --enable-modules=all"
-
-prebuildopts = "source sourceme.sh && "
+# The following search options are activated by default in configure:
+# --enable-external-blas --enable-external-lapack --enable-gsl --enable-mpi --enable-python
+# Make sure to set the include and library paths accordingly: Cray wrappers set them here
+preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
+configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
+prebuildopts = " source sourceme.sh && "
 buildopts = 'LD_RO="ld.gold -r -o"'
 
 sanity_check_paths = {

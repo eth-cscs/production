@@ -28,7 +28,7 @@ prebuildopts +=  'plumed-patch -p -e %(namelower)s-%(version)s --runtime --share
 prebuildopts += ' cd CRAY-XC-intel.cuda && '
 
 builddependencies = [
-    ('Charm++', '6.8.2'),
+    ('Charm++', '6.8.0'),
     ('Tcl', '8.6.7'),
     ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
