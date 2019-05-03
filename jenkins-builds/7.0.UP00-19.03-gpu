@@ -1,4 +1,5 @@
  abcpy-0.5.1-CrayGNU-19.03-python3.eb               --set-default-module
+ Amber-18-14-14-CrayGNU-19.03-cuda-10.0.eb          --set-default-module
  Boost-1.67.0-CrayGNU-19.03-python2.eb
  Boost-1.67.0-CrayGNU-19.03-python3.eb              --set-default-module
  Boost-1.67.0-CrayGNU-19.03.eb
@@ -51,6 +52,7 @@
  VMD-1.9.3-ogl.eb
  VTK-8.2.0-EGL-CrayGNU-19.03-python3.eb             --set-default-module
  CubeGUI-4.4.3.eb                                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
+ ddt-19.0.4-Suse-15.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  Extrae-3.5.4-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
