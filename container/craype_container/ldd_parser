@@ -1,0 +1,96 @@
+#!/usr/bin/python
+import re
+import subprocess
+import argparse
+import os.path
+from itertools import groupby
+
+''' Tool used to extract all binary dependencies'''
+
+
+def extract_ldd(pgname):
+   ''' Extract path and library name of all dynamically-linked libraries
+        Extracts only library on the /opt path '''
+   libraries = dict()
+   try:
+       ldd_out = subprocess.check_output(['ldd', pgname])
+   except:
+       return libraries
+   for line in ldd_out.decode().splitlines():
+      match = re.match(r'\t(.*) => (.*) \(0x', line)
+      if match:
+         libname = match.group(1)
+         libpath = match.group(2)
+         if libpath.startswith('/opt'):
+            libraries[libname] = libpath
+   return libraries
+
+def valid_lib(libname):
+    common_lib = ['libpthread.so', 'libdl.so', 'librt.so', 'libm.so',
+                  'libc.so', 'ld-linux-x86-64.so']
+    if len(libname.split()) > 1: #more than one word, garbabe
+        return False
+    for l in common_lib:
+        if l in libname:
+            return False
+    return True
+
+def check_dlopen(pgname):
+   ''' Try to identify if dlopen is used and derived the used library '''
+   libraries = list()
+   try:
+       strings_out = subprocess.check_output(['strings', pgname])
+   except:
+       return libraries
+   dlopen_found = False
+   for line in strings_out.decode().splitlines():
+        match_libso = re.search(r'\.so(\.[0-9])?$', line)
+        if match_libso:
+            if valid_lib(line):
+               libraries.append(line)
+        match_dlopen = re.match(r'dlopen\(\'(\w*\.so(\.[0-9]*)?)\'', line)
+        if match_dlopen or 'dlopen' in line:
+            dlopen_found = True
+            if match_dlopen:
+               libraries.append(match_dlopen.group(1))
+   if dlopen_found:
+       return libraries
+   return list()
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--binaries', nargs='+', help='list of binaries to extract dynamic-linked libraries', type=str, required=True)
+    cmd = parser.parse_args()
+    binary = cmd.binaries
+    active_bin = binary[:]
+    binary_dep = list()
+    binary_dep_name = list()
+    binary_dep_dlopen = list()
+    while len(active_bin) > 0:
+       pgname = active_bin.pop()
+       if not os.path.isfile(pgname):
+          continue
+       libraries = extract_ldd(pgname)
+       for k,p in libraries.items():
+           if p not in active_bin and p not in binary_dep:
+              active_bin.append(p)
+           if p not in binary_dep:
+              binary_dep.append(p)
+              binary_dep_name.append(k)
+    for k in binary+binary_dep:
+        libraries_dlopen = check_dlopen(k)
+        for p in libraries_dlopen:
+            if p not in binary_dep_name and p not in binary_dep_dlopen:
+               binary_dep_dlopen.append(p)
+    duplicate_libs={key: len(list(group)) for key, group in groupby(sorted(binary_dep_name))}
+    for k,i in zip(binary_dep_name,binary_dep):
+        if duplicate_libs[k] == 1:
+           print(i)
+    print("Duplicated reference to libraries:")
+    for k,i in zip(binary_dep_name,binary_dep):
+        if duplicate_libs[k] > 1:
+           print(i)
+    print("Dlopen identified libraries:")
+    for i in binary_dep_dlopen:
+        print(i)
