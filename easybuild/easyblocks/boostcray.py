@@ -156,6 +156,9 @@ class boostcray(EasyBlock):
 
         bjamoptions = " --prefix=%s" % self.objdir
 
+        if self.cfg['parallel']:
+            bjamoptions += " -j %s" % self.cfg['parallel']
+
         # specify path for bzip2/zlib if module is loaded
         if not self.cfg['boost_mpi']:
             for lib in ["bzip2", "zlib"]:
