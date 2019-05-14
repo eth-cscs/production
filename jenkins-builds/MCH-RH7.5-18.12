@@ -1,0 +1,18 @@
+ Anaconda3-2019.03.eb                                
+ Autotools-20180311.eb                               
+ CMake-3.14.3.eb                                   
+ ddt-19.0.5-Redhat-7.0.eb                         --set-default-module
+ geeqie-1.4.eb                                     
+ git-2.21.0.eb                                     
+ IDL-8.5.1.eb                                      
+ ImageMagick-6.7.6-10.eb                          -set-default-module
+ ImageMagick-7.0.8-45.eb                           
+ NCL-6.2.1.eb                                     -set-default-module
+ NCL-6.6.2.eb                                      
+ nmon-16g.eb                                       
+ reframe-2.17.eb
+ rstudio-1.0.143.eb                               --set-default-module
+ rstudio-1.2.1335.eb                                  
+ Understand-5.0.950.eb
+ vampir-9.6.0.eb                                     
+ Vim-8.1.eb                                

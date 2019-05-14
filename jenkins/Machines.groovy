@@ -38,4 +38,12 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
-return [daint, dom, kesch, leone, fulen]
+def tsa = [name: 'tsaTDS',
+           archs: [],
+           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
+           unusePath: '',
+           modulesProduction: '',
+           modulesUnuseProduction: '',
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.5/generic/easybuild']
+
+return [tsa]
