@@ -13,6 +13,6 @@
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module
  rstudio-1.2.1335.eb                                  
- Understand-5.0.950.eb
+ Understand-5.0.928.eb
  vampir-9.6.0.eb                                     
  Vim-8.1.eb                                
