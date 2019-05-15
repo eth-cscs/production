@@ -1,5 +1,6 @@
  Anaconda3-2019.03.eb                                
  Autotools-20180311.eb                               
+ binutils-2.32-GCCcore-7.4.0.eb                   --hidden
  CMake-3.14.3.eb                                   
  ddt-19.0.5-Redhat-7.0.eb                         --set-default-module
  geeqie-1.4.eb                                     
