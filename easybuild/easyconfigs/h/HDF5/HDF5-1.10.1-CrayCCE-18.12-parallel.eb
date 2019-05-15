@@ -25,6 +25,4 @@ prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
 
 buildopts = '-l6'
 
-#builddependencies = [('libtool', 'cray-14.11', '', True)]
-
 moduleclass = 'data'
