@@ -12,12 +12,17 @@
  netCDF-C++-4.3.0-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb            --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-4.4.1.1-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-C++-4.3.0-gmvolf-18.12.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
+ PGI-18.10-gcc-7.4.0-2.32.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/18.10/easybuild
  PROJ-6.0.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module
  rstudio-1.2.1335.eb                                  
  Ruby-2.4.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Understand-5.0.928.eb
  vampir-9.6.0.eb                                     
  Vim-8.1.eb                                

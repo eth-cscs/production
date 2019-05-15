@@ -15,7 +15,7 @@ sources = ['v%(version)s.tar.gz']
 checksums = ['a2fabf27c72a5ee746e3843e1debbaad37cd035767eaede2045371322211eebb']
 
 dependencies = [
-    ('HDF5', '1.10.3', '-serial'),
+    ('HDF5', '1.10.5', '-serial'),
     ('cURL', '7.64.1', '', True),
 ]
 
