@@ -3,13 +3,15 @@
  binutils-2.32-GCCcore-7.4.0.eb                   --hidden
  CMake-3.14.3.eb                                   
  ddt-19.0.5-Redhat-7.0.eb                         --set-default-module
- geeqie-1.4.eb                                     
  git-2.21.0.eb                                     
  IDL-8.5.1.eb                                      
  ImageMagick-6.7.6-10.eb                          --set-default-module
  ImageMagick-7.0.8-45.eb                           
  NCL-6.2.1.eb                                     --set-default-module
  NCL-6.6.2.eb                                      
+ netCDF-C++-4.3.0-CrayCCE-18.12.eb                    --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-Fortran-4.4.4-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-4.4.1.1-CrayCCE-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  nmon-16g.eb                                       
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module

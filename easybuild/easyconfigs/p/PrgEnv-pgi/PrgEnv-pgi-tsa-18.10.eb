@@ -1,9 +1,9 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-prgenv = 'gnu' 
+prgenv = 'pgi' 
 name = 'PrgEnv-%s' % prgenv
-version = '18.12'
+version = '18.10'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -24,11 +24,10 @@ if { [module-info mode remove] || [module-info mode switch] } {
  }
  module unload binutils
  module unload gcccore
- module unload mvapich2
 }
 
 module use %s
-module load gmvolf/.%s
-""" % (path, path, version, version)
+module load %s/%s-gcc-7.4.0-2.32
+""" % (path, path, prgenv, version)
 
 moduleclass = 'devel'

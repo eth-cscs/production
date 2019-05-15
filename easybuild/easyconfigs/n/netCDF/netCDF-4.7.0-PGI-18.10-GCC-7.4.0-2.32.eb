@@ -1,0 +1,33 @@
+# contributed by Luca Marsella (CSCS)
+name = 'netCDF'
+version = '4.7.0'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software
+libraries and machine-independent data formats that support the creation,
+access, and sharing of array-oriented scientific data."""
+
+toolchain = {'name': 'PGI', 'version': '18.10-GCC-7.4.0-2.32'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://github.com/Unidata/netcdf-c/archive/']
+sources = ['v%(version)s.tar.gz']
+checksums = ['a2fabf27c72a5ee746e3843e1debbaad37cd035767eaede2045371322211eebb']
+
+dependencies = [
+    ('HDF5', '1.10.5', '-serial'),
+    ('cURL', '7.64.1', '', True),
+]
+
+builddependencies = [
+    ('CMake', '3.14.3', '', True),
+    ('Doxygen', '1.8.15', '', True),
+]
+
+# make sure both static and shared libs are built
+configopts = [
+    "-DBUILD_SHARED_LIBS=OFF ",
+    "-DBUILD_SHARED_LIBS=ON ",
+]
+
+moduleclass = 'data'

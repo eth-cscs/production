@@ -1,0 +1,20 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '18.12'
+
+homepage = 'https://pubs.cray.com/content/00672623-DA/DA00672622'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module (PE release: 18.12).\n"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-cray/1.0.4', EXTERNAL_MODULE),
+    ('cce/8.7.7', EXTERNAL_MODULE),
+    ('cray-libsci/18.07.1', EXTERNAL_MODULE),
+    ('cray-mvapich2/2.3', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'
