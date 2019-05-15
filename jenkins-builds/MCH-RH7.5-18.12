@@ -14,6 +14,7 @@
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module
  rstudio-1.2.1335.eb                                  
+ Ruby-2.4.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Understand-5.0.928.eb
  vampir-9.6.0.eb                                     
  Vim-8.1.eb                                
