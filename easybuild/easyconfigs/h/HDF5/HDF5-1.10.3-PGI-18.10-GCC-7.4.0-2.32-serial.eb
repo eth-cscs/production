@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'HDF5'
-version = '1.10.5'
+version = '1.10.3'
 versionsuffix = '-serial'
 
 homepage = 'http://www.hdfgroup.org/HDF5/'

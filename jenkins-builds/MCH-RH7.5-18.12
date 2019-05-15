@@ -9,9 +9,9 @@
  ImageMagick-7.0.8-45.eb                           
  NCL-6.2.1.eb                                     --set-default-module
  NCL-6.6.2.eb                                      
- netCDF-C++-4.3.0-CrayCCE-18.12.eb                    --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- netCDF-Fortran-4.4.4-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- netCDF-4.4.1.1-CrayCCE-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-C++-4.3.0-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-Fortran-4.4.4-CrayCCE-18.12.eb            --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-4.4.1.1-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  nmon-16g.eb                                       
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module
