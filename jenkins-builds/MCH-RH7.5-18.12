@@ -16,7 +16,6 @@
  netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
- PGI-18.10-GCC-7.4.0-2.32.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/18.10/easybuild
  PROJ-6.0.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  reframe-2.17.eb
  rstudio-1.0.143.eb                               --set-default-module
