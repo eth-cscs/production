@@ -36,7 +36,7 @@ dependencies = [
     (libx11, libxver),
     ('libreadline', '7.0'),
     ('ncurses', '6.0'),
-#   ('libpng', '1.6.28'),               # for plotting in R
+    ('libpng', '1.6.28'),               # for plotting in R
     ('libjpeg-turbo', '1.5.1'),         # for plottting in R
     ('Java', '1.8.0_121', '', True),    # Java bindings are built if Java is found, might as well provide it
     ('GDAL', '2.2.1'),                  # for rgdal

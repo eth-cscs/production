@@ -3,6 +3,7 @@
  binutils-2.32-GCCcore-7.4.0.eb                   --hidden
  CMake-3.14.3.eb                                   
  ddt-19.0.5-Redhat-7.0.eb                         --set-default-module
+ GDAL-3.0.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  git-2.21.0.eb                                     
  IDL-8.5.1.eb                                      
  ImageMagick-6.7.6-10.eb                          --set-default-module
@@ -16,14 +17,9 @@
  netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
- PROJ-6.0.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  reframe-2.17.eb
- rstudio-1.0.143.eb                               --set-default-module
  rstudio-1.2.1335.eb                                  
  Ruby-2.4.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  vampir-9.6.0.eb                                     
  Vim-8.1.eb                                
- PrgEnv-cce-tsa-18.12.eb                          --module-naming-scheme=EasyBuildMNS
- PrgEnv-gnu-tsa-gmvolf-18.12.eb                   --module-naming-scheme=EasyBuildMNS
- PrgEnv-pgi-tsa-18.10.eb                          --module-naming-scheme=EasyBuildMNS
