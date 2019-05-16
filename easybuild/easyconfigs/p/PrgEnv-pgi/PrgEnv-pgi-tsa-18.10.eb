@@ -29,7 +29,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
 }
 
 module use %s
-module load %s/%s-gcc-7.4.0-2.32
-""" % (path, path, prgenv, version)
+module load %s/%s/%s-gcc-7.4.0-2.32
+""" % (path, path, path, prgenv, version)
 
 moduleclass = 'devel'

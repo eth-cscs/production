@@ -27,7 +27,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
 }
 
 module use %s
-module load CrayCCE/.%s
-""" % (path, path, version)
+module load %s/CrayCCE/.%s
+""" % (path, path, path, version)
 
 moduleclass = 'devel'

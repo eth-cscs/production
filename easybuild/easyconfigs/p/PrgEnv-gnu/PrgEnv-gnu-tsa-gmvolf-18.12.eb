@@ -30,7 +30,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
 }
 
 module use %s
-module load gmvolf/.%s
-""" % (path, path, version)
+module load %s/gmvolf/.%s
+""" % (path, path, path, version)
 
 moduleclass = 'devel'
