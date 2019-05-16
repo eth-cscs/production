@@ -6,7 +6,7 @@ name = 'IPython'
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '5.6'
+py_rev_ver = '5.7'
 
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
