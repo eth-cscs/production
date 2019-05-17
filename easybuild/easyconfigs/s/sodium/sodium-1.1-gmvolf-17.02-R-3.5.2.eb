@@ -16,7 +16,7 @@ source_urls = ['https://cran.r-project.org/src/contrib']
 sources = ['%(name)s_%(version)s.tar.gz']
 
 dependencies = [
-    ('libsodium', '1.0.12'),
+    ('libsodium', '1.0.17'),
     ('R', '3.5.2', '-libx11-1.6.3'),
 ]
 
