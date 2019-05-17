@@ -7,13 +7,11 @@ description = """The Ncurses (new curses) library is a free software emulation o
  and more. It uses Terminfo format, supports pads and color and multiple highlights and forms characters and
  function-key mapping, and has all the other SYSV-curses enhancements over BSD Curses."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
 toolchainopts = {'optarch': True, 'pic': True}
 
 source_urls = [GNU_SOURCE]
 sources = [SOURCE_TAR_GZ]
-
-preconfigopts = 'CFLAGS="-fPIC"'
 
 sanity_check_paths = {
     'files' : ['bin/%s' % x for x in ["captoinfo", "clear", "infocmp", "infotocap", "ncurses6-config", "reset", "tabs", "tic", "toe", "tput", "tset"]] + ['lib/lib%s.a' % x for x in ["form", "form", "menu", "menu_g", "ncurses", "ncurses++", "ncurses_g", "panel", "panel_g"]],

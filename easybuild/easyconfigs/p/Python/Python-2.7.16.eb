@@ -1,7 +1,7 @@
 # @author: gppezzi and Luca Marsella (CSCS)
 # This version should be used only for replacing the system python, not for building scientific apps
 name = 'Python'
-version = "3.7.3"
+version = "2.7.16"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."

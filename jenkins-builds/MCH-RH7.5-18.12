@@ -17,9 +17,14 @@
  netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
+ Python-2.7.16.eb
+ PyExtensions-2.7.16-gmvolf-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ Python-3.7.3.eb
+ PyExtensions-3.7.3-gmvolf-18.12.eb               --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  reframe-2.17.eb
  rstudio-1.2.1335.eb                                  
+ R-3.5.2-gmvolf-18.12.eb                          --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Ruby-2.4.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  vampir-9.6.0.eb                                     
- Vim-8.1.eb                                
+ Vim-8.1.eb 
