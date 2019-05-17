@@ -5,10 +5,13 @@ version = '6.2.3'
 
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '5.6'
+py_rev_ver = '5.7'
 
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 versionsuffix = '-python%s' % (py_maj_ver)
+
+req_py_majver = py_maj_ver
+req_py_minver = py_min_ver
 
 homepage = 'https://pypi.org/project/ipyparallel'
 description = """Use multiple instances of IPython in parallel, interactively."""
