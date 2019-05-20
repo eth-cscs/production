@@ -24,9 +24,6 @@ builddependencies = [
     ('XZ', '5.2.4', '', True),
     ('PCRE', '8.43', '', True),
     ('cURL', '7.64.1', '', True),
-]
-
-dependencies = [
     ('libX11', '1.6.7'),
     ('libreadline', '8.0', '', True),
     ('ncurses', '6.1', '', True),

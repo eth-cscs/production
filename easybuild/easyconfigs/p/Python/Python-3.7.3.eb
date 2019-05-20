@@ -11,7 +11,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 
-dependencies = [
+builddependencies = [
     ('zlib', '1.2.11'),
     ('libreadline', '8.0'),
     ('ncurses', '6.1'),
