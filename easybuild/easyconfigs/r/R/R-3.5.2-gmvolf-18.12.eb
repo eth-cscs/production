@@ -20,11 +20,11 @@ configopts = "--with-lapack --with-blas --with-pic --enable-threads --with-x=yes
 configopts += " --with-recommended-packages=no"
 
 osdependencies = [
-    ('openssl-devel')
+    ('openssl-devel'),
+    ('bzip2')
 ]
 
 builddependencies = [ 
-    ('bzip2', '1.0.6', '', True),
     ('XZ', '5.2.4', '', True),
     ('PCRE', '8.43', '', True),
     ('cURL', '7.64.1', '', True),
@@ -36,6 +36,7 @@ dependencies = [
     ('ncurses', '6.1', '', True),
     ('libpng', '1.6.37'),               # for plotting in R
     ('libjpeg-turbo', '2.0.2'),         # for plottting in R
+    ('libsodium', '1.0.17'),            # for sodium
     ('Java', '1.8.0_212', '', True),    # Java bindings
     ('GDAL', '3.0.0'),                  # for rgdal
     ('PROJ', '6.0.0'),                  # for rgdal
@@ -71,6 +72,7 @@ exts_list = [
     ('rgdal', '1.4-3', ext_options),
     ('rgeos', '0.4-3' , ext_options),
     ('rJava', '0.9-11', ext_options),
+    ('sodium', '1.1', ext_options)
 ]
 
 moduleclass = 'lang'
