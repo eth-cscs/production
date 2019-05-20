@@ -17,6 +17,7 @@ path='/apps/arolla/UES/jenkins/RH7.5/%s/%s/easybuild/modules/all' % (prgenv, ver
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
+lappend list binutils gcccore
 
 if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${list} {
@@ -24,13 +25,15 @@ if { [module-info mode remove] || [module-info mode switch] } {
    module unload ${module}
   }
  }
- module unload binutils
- module unload gcccore
- module unload mvapich2
+ module unuse %s
 }
 
-module use %s
-module load %s/gmvolf/.%s
-""" % (path, path, path, version)
+if { [module-info mode load] } {
+ module use %s
+ if { ![ is-loaded gmvolf/.%s ] } {
+  module load gmvolf/.%s
+ }
+}
+""" % (path, path, path, version, version)
 
 moduleclass = 'devel'
