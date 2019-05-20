@@ -29,5 +29,5 @@
  vampir-9.6.0.eb                                     
  Vim-8.1.eb 
  PrgEnv-cce-tsa-18.12.eb                          --module-naming-scheme=EasyBuildMNS
- PrgEnv-gnu-tsa-18.12.eb                          --module-naming-scheme=EasyBuildMNS
+ PrgEnv-gnu-tsa-gmvolf-18.12.eb                   --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-18.10.eb                          --module-naming-scheme=EasyBuildMNS
