@@ -24,8 +24,8 @@
  rstudio-1.2.1335.eb                                  
  R-3.5.2-gmvolf-18.12.eb                          --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  R-3.6.0-gmvolf-18.12.eb                          --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
- Ruby-2.4.0-gmvolf-18.12.eb                       --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
- Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ Ruby-2.4.0-gmvolf-18.12.eb                       --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  vampir-9.6.0.eb                                     
  Vim-8.1.eb 
  PrgEnv-cce-tsa-18.12.eb                          --module-naming-scheme=EasyBuildMNS
