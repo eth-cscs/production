@@ -19,12 +19,8 @@ configopts = "--with-lapack --with-blas --with-pic --enable-threads --with-x=yes
 # some recommended packages may fail in a parallel build (e.g. Matrix)
 configopts += " --with-recommended-packages=no"
 
-osdependencies = [
-    ('openssl-devel'),
-    ('bzip2')
-]
-
 builddependencies = [ 
+    ('bzip2', '1.0.6', '', True),
     ('XZ', '5.2.4', '', True),
     ('PCRE', '8.43', '', True),
     ('cURL', '7.64.1', '', True),
@@ -38,7 +34,7 @@ dependencies = [
     ('libjpeg-turbo', '2.0.2'),         # for plottting in R
     ('libsodium', '1.0.17'),            # for sodium
     ('Java', '1.8.0_212', '', True),    # Java bindings
-    ('GDAL', '3.0.0'),                  # for rgdal
+    ('GDAL', '2.4.1'),                  # for rgdal
     ('PROJ', '6.0.0'),                  # for rgdal
     ('GEOS', '3.7.2'),                  # for rgeos
 ]

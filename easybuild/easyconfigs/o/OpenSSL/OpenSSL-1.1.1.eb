@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+name = 'OpenSSL'
+version = '1.1.1'
+
+homepage = 'http://www.openssl.org/'
+description = """The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured,
+ and Open Source toolchain implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) 
+ protocols as well as a full-strength general purpose cryptography library. """
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['http://www.openssl.org/source/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('Perl', '5.28.2', '-bare'),
+    ('binutils', '2.32'),
+    ('zlib', '1.2.11')
+]
+
+preconfigopts = ' export CFLAGS="-fPIC" && '
+runtest = 'test'
+
+moduleclass = 'system'

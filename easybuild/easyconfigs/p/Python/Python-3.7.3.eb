@@ -7,7 +7,6 @@ homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
 
 toolchain = {'name': 'dummy', 'version': ''}
-toolchainopts = {'pic': True, 'opt': True}
 
 source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
@@ -17,15 +16,6 @@ dependencies = [
     ('libreadline', '8.0'),
     ('ncurses', '6.1'),
 ]
-
-# python needs bzip2 to build the bz2 package
-osdependencies = [
-    ('bzip2'),
-    ('openssl-devel')
-]
-
-# enviroment variable to use package repository with pip
-modextravars = {'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem'}
 
 # order is important! package versions updated May 2019
 exts_list = [
