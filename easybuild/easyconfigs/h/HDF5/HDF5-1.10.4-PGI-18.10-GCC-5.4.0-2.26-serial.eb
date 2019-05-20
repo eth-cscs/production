@@ -1,0 +1,34 @@
+# @author: Guilherme Peretti Pezzi and Luca Marsella (CSCS)
+
+easyblock = 'ConfigureMake'
+
+name = 'HDF5'
+version = '1.10.4'
+versionsuffix = '-serial'
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """HDF5 is a unique technology suite that makes possible the
+management of extremely large and complex data collections."""
+
+toolchain = {'name': 'PGI', 'version': '18.10-GCC-5.4.0-2.26'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = ['https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-%(version_major_minor)s/hdf5-%(version)s/src']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = 'unset CFLAGS && unset FCFLAGS && unset CPPFLAGS && unset LDFLAGS && unset CXXFLAGS && '
+# Add -noswitcherror to make PGI compiler ignore the unknown compiler option -pthread
+preconfigopts += 'export CXX="$CXX -noswitcherror" && '
+
+configopts =  '--disable-silent-rules --disable-sharedlib-rpath --enable-fortran '
+configopts += '--enable-static --with-pic --enable-shared '
+configopts += '--with-zlib=/usr/include,/usr/lib64 --enable-cxx CPP=cpp '
+
+buildopts = '-l6'
+
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('Szip', '2.1.1'),
+]
+
+moduleclass = 'data'

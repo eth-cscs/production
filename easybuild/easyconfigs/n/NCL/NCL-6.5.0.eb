@@ -1,3 +1,4 @@
+# contributed by Samuel Omlin and Luca marsella (CSCS)
 easyblock = 'PackedBinary'
 name = 'NCL'
 version = '6.5.0'
@@ -19,10 +20,6 @@ sources = [
     ncl_prefix + 'gshhs_2.zip',
     ncl_prefix + 'gshhs_3.zip',
     ncl_prefix + 'examples.tgz',
-]
-
-dependencies = [
-    ('gcc/6.2.0', EXTERNAL_MODULE),
 ]
 
 preinstallopts = 'mkdir -p lib/ncarg/database/rangs examples;' + \
