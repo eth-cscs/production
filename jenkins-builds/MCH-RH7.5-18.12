@@ -16,14 +16,15 @@
  netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
- Python-2.7.16.eb                                 --rpath --recursive-module-unload
+ Python-2.7.16.eb                                 --rpath
  PyExtensions-2.7.16-gmvolf-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
- Python-3.7.3.eb                                  --rpath --recursive-module-unload
+ Python-3.7.3.eb                                  --rpath
  PyExtensions-3.7.3-gmvolf-18.12.eb               --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  reframe-2.17.eb
  rstudio-1.2.1335.eb                                  
- R-3.5.2-gmvolf-18.12.eb                          --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath --recursive-module-unload
- Ruby-2.4.0-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ R-3.5.2-gmvolf-18.12.eb                          --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ R-3.6.0-gmvolf-18.12.eb                          --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ Ruby-2.4.0-gmvolf-18.12.eb                       --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Ruby-2.6.3-gmvolf-18.12.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  vampir-9.6.0.eb                                     
  Vim-8.1.eb 
