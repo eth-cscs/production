@@ -15,7 +15,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
     ('Perl', '5.28.2', '-bare'),
-    ('binutils', '2.32'),
+    ('binutils', '2.31.1'),
     ('zlib', '1.2.11')
 ]
 

@@ -17,12 +17,8 @@ builddependencies = [
     ('xcb-proto', '1.13', '', True),
     ('inputproto', '2.3.2'),
     ('xproto', '7.0.31'),
-    ('libpthread-stubs', '0.4'),
     ('kbproto', '1.0.7'),
     ('xtrans', '1.4.0'),
-]
-
-dependencies = [
     ('libxcb', '1.13'),
 ]
 
