@@ -67,8 +67,8 @@ class CrayToolchain(Bundle):
 
         # unload statements for other PrgEnv modules
         prgenv_unloads = ['']
-        for prgenv in [prgenv for prgenv in KNOWN_PRGENVS if not prgenv_mod.startswith(prgenv)]:
-            prgenv_unloads.append(self.module_generator.unload_module(prgenv).strip())
+        #for prgenv in [prgenv for prgenv in KNOWN_PRGENVS if not prgenv_mod.startswith(prgenv)]:
+        #    prgenv_unloads.append(self.module_generator.unload_module(prgenv).strip())
 
         # load statement for selected PrgEnv module (only when not loaded yet)
         prgenv_load = self.module_generator.load_module(prgenv_mod, recursive_unload=False)
