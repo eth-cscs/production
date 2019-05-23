@@ -13,13 +13,13 @@ description = """GNU Compiler Collection (GCC) based compiler toolchain,
 toolchain = {'name': 'dummy', 'version': ''}
 
 compname = 'GCC'
-compver = '7.4.0-2.32'
+compver = '7.4.0-2.31.1'
 comp = (compname, compver)
 
 # compiler toolchain dependencies
 dependencies = [
     comp,
-    ('MVAPICH2', '2.3', '-cuda-%s' % cudaversion, ('GCC', '7.4.0-2.32') ),
+    ('MVAPICH2', '2.3.1', '-cuda-%s' % cudaversion, ('GCC', '7.4.0-2.31.1') ),
 ]
 
 moduleclass = 'toolchain'

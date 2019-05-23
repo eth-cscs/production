@@ -29,12 +29,18 @@ exts_list = [
     ('matplotlib', '3.0.3', {
         'source_urls': ['http://pypi.python.org/packages/source/m/matplotlib/'],
     }),
+    ('mpi4py', '3.0.1', {
+        'source_urls': ['http://pypi.python.org/packages/source/m/mpi4py/'],
+    }),
+    ('pandas', '0.24.2', {
+        'source_urls': ['http://pypi.python.org/packages/source/p/pandas/'],
+    }),
     ('scipy', '1.2.1', {
         'source_urls': ['http://pypi.python.org/packages/source/s/scipy/'],
     }),
-    ('mpi4py', '3.0.1', {
-        'source_urls': ['http://pypi.python.org/packages/source/m/mpi4py/'],
-    })
+    ('sympy', '1.4', {
+        'source_urls': ['http://pypi.python.org/packages/source/s/sympy/'],
+    }),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module

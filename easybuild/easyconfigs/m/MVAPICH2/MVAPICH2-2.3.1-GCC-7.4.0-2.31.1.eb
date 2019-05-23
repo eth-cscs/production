@@ -1,11 +1,11 @@
 # contributed by Luca Marsella (CSCS)
 name = 'MVAPICH2'
-version = '2.3'
+version = '2.3.1'
 
 homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
-description = """OSU MVAPICH2 2.3 integrated and ABI compatible with MPICH-3.2.1"""
+description = """OSU MVAPICH2 2.3.1 integrated and ABI compatible with MPICH-3.2.1"""
 
-toolchain = {'name': 'GCC', 'version': '7.4.0-2.32'}
+toolchain = {'name': 'GCC', 'version': '7.4.0-2.31.1'}
 
 source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
 sources = [SOURCELOWER_TAR_GZ]

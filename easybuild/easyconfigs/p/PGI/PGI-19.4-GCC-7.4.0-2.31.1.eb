@@ -1,11 +1,11 @@
 # contributed by Luca Marsella (CSCS)
 name = 'PGI'
-version_major = '18'
-version_minor = '10'
+version_major = '19'
+version_minor = '4'
 version = '%s.%s' % (version_major,version_minor)
 
 gccver = '7.4.0'
-binutilsver = '2.32'
+binutilsver = '2.31.1'
 versionsuffix = '-GCC-%s-%s' % (gccver, binutilsver)
 
 homepage = 'http://www.pgroup.com/'

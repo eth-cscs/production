@@ -1,12 +1,14 @@
  Anaconda3-2019.03.eb                                
  Autotools-20180311.eb                               
- binutils-2.32-GCCcore-7.4.0.eb                   --hidden
+ binutils-2.31.1-GCCcore-7.4.0.eb                 --hidden --rpath
  CMake-3.14.3.eb                                   
  ddt-19.0.5-Redhat-7.0.eb                         --set-default-module
  git-2.21.0.eb                                     
+ gmvapich2-18.12-cuda-9.2.eb                      --hidden --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  IDL-8.5.1.eb                                      
  ImageMagick-6.7.6-10.eb                          --set-default-module
  ImageMagick-7.0.8-45.eb                           
+ MVAPICH2-2.2-GCC-7.4.0-2.31.1-cuda-9.2.eb        --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  NCL-6.2.1.eb                                     --set-default-module
  NCL-6.6.2.eb                                      
  netCDF-C++-4.3.0-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
