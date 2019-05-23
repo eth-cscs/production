@@ -27,11 +27,11 @@
 ## Step 0
 
 Docker should have an image installed based on the elogin node.
-To install such image, copy the file from `/project/csstaff/maximem/pe_container/elogin_prod_up07_20181205160931.squashfs`, convert it and install it inside docker.
+To install such image, copy the file `elogin_prod_up07_20181205160931.squashfs`, convert it and install it inside docker.
 You will need to have the 'squashfs tools' installed.
 
 ```
-$ scp /project/csstaff/maximem/pe_container/elogin_prod_up07_20181205160931.squashfs .
+$ scp /project/.../elogin_prod_up07_20181205160931.squashfs .
 $ mkdir unsqashfs
 $ sudo unsquashfs -f -d unsquashfs elogin_prod_up07_20181205160931.squashfs
 $ sudo tar -C unsquashfs -c . | docker import - elogin_prod:up07_20181205160931
@@ -45,7 +45,7 @@ Example: `CDT-16.11-07.iso` or `CDT-18.10-03.iso`
 
 ## Step 2
 
-Copy from `/project/csstaff/maximem/pe_container/cuda/*.rpm` inside a directory named `cuda` in the same location as the Dockerfile
+Copy from `/project/.../cuda/*.rpm` inside a directory named `cuda` in the same location as the Dockerfile
 
 ## Step 3
 
@@ -117,7 +117,7 @@ We suppose that the code you have built is installed in `/home/pe_user/install`.
 From that container do:
 
 ```
-$ cd /home/pe_user_install
+$ cd /home/pe_user/install
 $ ldd_parser --binaries /opt/cray/pe/cce/8.7.3/cce/x86_64/lib/libfi.so
 ldd: warning: you do not have execution permission for `/opt/gcc/6.2.0/snos/lib/../lib64/libgcc_s.so.1'
 ldd: warning: you do not have execution permission for `/opt/cray/pe/gcc-libs/libgcc_s.so.1'
@@ -135,13 +135,13 @@ Duplicated reference to libraries:
 Dlopen identified libraries:
 libmemkind.so.0
 libnuma.so
-$ # copy the required libraries to craype_runtime
+$ # copy the required libraries to /home/pe_user/install
 ```
 
 Note that the `ldd_parser` will identify libraries recursively of all dependencies, it might find duplicated references and it will try to find out `dlopen` libraries.
 You need to select which libraries to copy.
 It is not a perfect tool to find all dependencies, so at running time libraries could be missed (you need an error and trial approach).
-Now in `craype_runtime` you should see all the libraries of the PE required by your binaries.
+Now in `/home/pe_user/install` you should see all the libraries of the PE required by your binaries.
 You can now leave the CRAYPE_BUILD container
 
 ## Step 7
