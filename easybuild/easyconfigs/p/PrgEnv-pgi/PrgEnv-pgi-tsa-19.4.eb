@@ -3,7 +3,7 @@ easyblock = 'Bundle'
 
 prgenv = 'pgi' 
 name = 'PrgEnv-%s' % prgenv
-version = '18.10'
+version = '19.4'
 
 homepage = 'http://user.cscs.ch'
 description = """

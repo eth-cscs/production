@@ -18,6 +18,8 @@
  netCDF-Fortran-4.4.4-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.4.1.1-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  nmon-16g.eb                                       
+ PGI-18.10-GCC-7.4.0-2.31.1.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/18.10/easybuild
+ PGI-19.4-GCC-7.4.0-2.31.1.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/19.4/easybuild
  Python-2.7.16.eb                                 --rpath
  PyExtensions-2.7.16-gmvolf-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  Python-3.7.3.eb                                  --rpath
@@ -33,3 +35,4 @@
  PrgEnv-cce-tsa-18.12.eb                          --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-gmvolf-18.12.eb                   --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-18.10.eb                          --module-naming-scheme=EasyBuildMNS
+ PrgEnv-pgi-tsa-19.4.eb                           --module-naming-scheme=EasyBuildMNS
