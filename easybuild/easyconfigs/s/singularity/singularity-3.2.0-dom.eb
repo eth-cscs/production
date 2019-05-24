@@ -21,7 +21,7 @@ if { ![ is-loaded PrgEnv-gnu ] } {
 }
 
 # Swap the cray-mpich with the cray-mpich-abi
-if { ![ is-loaded cray-mpich-abi ] } {
+if { [ is-loaded cray-mpich ] } {
      module swap cray-mpich cray-mpich-abi/7.7.6
 }
 
