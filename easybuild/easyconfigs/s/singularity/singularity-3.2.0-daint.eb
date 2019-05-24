@@ -21,8 +21,10 @@ if { ![ is-loaded PrgEnv-gnu ] } {
 }
 
 # Swap the cray-mpich with the cray-mpich-abi
-if { ![ is-loaded cray-mpich-abi ] } {
-     module swap cray-mpich cray-mpich-abi/7.7.2
+if { [ is-loaded cray-mpich ] } {
+    module swap cray-mpich cray-mpich-abi/7.7.2
+} else {
+    module load cray-mpich-abi/7.7.2
 }
 
 # Load the wlm_detect module
