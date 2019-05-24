@@ -22,16 +22,18 @@ if { ![ is-loaded PrgEnv-gnu ] } {
 
 # Swap the cray-mpich with the cray-mpich-abi
 if { [ is-loaded cray-mpich ] } {
-     module swap cray-mpich cray-mpich-abi/7.7.6
+    module swap cray-mpich cray-mpich-abi/7.7.6
+} else {
+    module load cray-mpich-abi/7.7.6
 }
 
 # Load the wlm_detect module
 if { ![ is-loaded wlm_detect ] } {
-     module load wlm_detect
+    module load wlm_detect
 }
 
 module load singularity/3.2.0
 
 setenv SINGULARITY_BIND /etc/alternatives/cray-nvidia,/opt/cray,/var/opt/cray,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
-setenv SINGULARITYENV_LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/nvidia/default/lib64"
+setenv SINGULARITYENV_LD_LIBRARY_PATH  "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/nvidia/default/lib64"
 """
