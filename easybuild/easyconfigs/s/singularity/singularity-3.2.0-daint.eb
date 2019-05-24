@@ -4,7 +4,7 @@ name = 'singularity'
 version = '3.2.0'
 versionsuffix = '-daint'
 
-homepage = 'http://singularity.lbl.gov'
+homepage = 'https://www.sylabs.io/'
 description = """Singularity is a portable application stack packaging and runtime utility."""
 
 toolchain = {'name': 'dummy', 'version': ''}
