@@ -32,11 +32,11 @@ exts_list = [
     ('six', '1.12.0', {
         'source_urls': [('https://pypi.python.org/packages/source/s/six/')],
     }),
-    ('virtualenv', '16.6.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
-    }),
     ('Cython', '0.29.7', {
         'source_urls': ['http://pypi.python.org/packages/source/c/cython/'],
+    }),
+    ('virtualenv', '16.6.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
     })
 ]
 
