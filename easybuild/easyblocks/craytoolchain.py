@@ -30,12 +30,19 @@ EasyBuild support for installing Cray toolchains, implemented as an easyblock
 @author: Petar Forai (IMP/IMBA)
 """
 
+import subprocess
 from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.build_log import EasyBuildError
 
 
 KNOWN_PRGENVS = ['PrgEnv-cray', 'PrgEnv-gnu', 'PrgEnv-intel', 'PrgEnv-pgi']
-
+AVAIL_PRGENVS=[]
+for prgenv in [prgenv for prgenv in KNOWN_PRGENVS]:
+    try:
+        subprocess.check_call("module unload %s &> /dev/null" % prgenv, shell=True)
+        AVAIL_PRGENVS.append(prgenv)
+    except subprocess.CalledProcessError: 
+        continue
 
 class CrayToolchain(Bundle):
     """
@@ -67,8 +74,8 @@ class CrayToolchain(Bundle):
 
         # unload statements for other PrgEnv modules
         prgenv_unloads = ['']
-        #for prgenv in [prgenv for prgenv in KNOWN_PRGENVS if not prgenv_mod.startswith(prgenv)]:
-        #    prgenv_unloads.append(self.module_generator.unload_module(prgenv).strip())
+        for prgenv in [prgenv for prgenv in AVAIL_PRGENVS if not prgenv_mod.startswith(prgenv)]:
+            prgenv_unloads.append(self.module_generator.unload_module(prgenv).strip())
 
         # load statement for selected PrgEnv module (only when not loaded yet)
         prgenv_load = self.module_generator.load_module(prgenv_mod, recursive_unload=False)
