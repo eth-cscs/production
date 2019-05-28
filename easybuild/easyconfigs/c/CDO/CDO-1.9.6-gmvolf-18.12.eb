@@ -11,11 +11,10 @@ toolchain = {'name': 'gmvolf', 'version': '18.12'}
 toolchainopts = {'opt': True, 'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
-source_urls = ['https://code.mpimet.mpg.de/attachments/download/14686/']
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/19299/']
 
 dependencies = [
     ('HDF5', '1.10.5'),
-    ('netCDF', '4.7.0'),
     ('netCDF-Fortran', '4.4.5'),
     # CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
     # No MPI support
