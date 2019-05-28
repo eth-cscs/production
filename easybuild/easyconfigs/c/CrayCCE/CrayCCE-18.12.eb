@@ -17,4 +17,6 @@ dependencies = [
     ('cray-mvapich2/2.3', EXTERNAL_MODULE)
 ]
 
+modextrapaths = {'CRAY_LD_LIBRARY_PATH': ''}
+
 moduleclass = 'toolchain'
