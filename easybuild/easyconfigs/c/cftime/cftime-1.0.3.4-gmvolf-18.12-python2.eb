@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'cftime'
+version = '1.0.3.4'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '16'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'https://github.com/Unidata/cftime'
+description = """Time-handling functionality from netcdf4-python"""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '%s' % pyver, ''),
+    ('cURL', '7.64.1'),
+]
+
+sanity_check_paths = {
+    'files':  [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'data'
