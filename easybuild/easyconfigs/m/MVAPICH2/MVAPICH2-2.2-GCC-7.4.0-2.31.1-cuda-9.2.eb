@@ -5,26 +5,31 @@ cudaversion = '9.2'
 versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
-description = """OSU MVAPICH2 2.3.1 integrated and ABI compatible with MPICH-3.2.1"""
+description = """OSU MVAPICH2 2.2 integrated and ABI compatible with MPICH-3.2.1"""
 
 toolchain = {'name': 'GCC', 'version': '7.4.0-2.31.1'}
 
 source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = [
-"--enable-threads=multiple \
---enable-rdma-cm \
---with-rdma=gen2 \
---enable-smpcoll \
---disable-xrc \
---with-device=ch3:mrail \
---enable-mcast \
---enable-g=dbg \
---enable-debuginfo \
---with-cluster-size=level \
---enable-cuda"
-]
+configopts = [(
+    "--enable-threads=multiple "
+    "--enable-rdma-cm "
+    "--with-rdma=gen2 "
+    "--enable-smpcoll "
+    "--disable-xrc "
+    "--with-device=ch3:mrail "
+    "--enable-mcast "
+    "--enable-g=dbg "
+    "--enable-debuginfo "
+    "--with-cluster-size=level "
+    "--enable-cuda "
+)]
+
+prebuildopts = [(
+    "sed -i '/NVCFLAGS = -cuda -arch sm_20 -maxrregcount 32/c "
+    "NVCFLAGS = -cuda -arch sm_70 -maxrregcount 32' Makefile && "
+)]
 
 withhwloc = 'True'
 
