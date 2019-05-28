@@ -1,7 +1,7 @@
  Anaconda3-2019.03.eb                                
  Autotools-20180311.eb                               
  binutils-2.31.1-GCCcore-7.4.0.eb               --hidden --rpath
- CDO-1.9.6-gmvolf-18.12                         --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ CDO-1.9.6-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  CMake-3.14.3.eb                                
  ddt-19.0.5-Redhat-7.0.eb                       --set-default-module
  git-2.21.0.eb                                  
@@ -12,7 +12,7 @@
  MVAPICH2-2.2-GCC-7.4.0-2.31.1-cuda-9.2.eb      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  NCL-6.2.1.eb                                   --set-default-module
  NCL-6.6.2.eb                                    
- NCO-4.8.0-gmvolf-18.12                         --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ NCO-4.8.0-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
