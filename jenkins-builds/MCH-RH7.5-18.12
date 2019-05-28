@@ -13,8 +13,10 @@
  NCL-6.2.1.eb                                   --set-default-module
  NCL-6.6.2.eb                                    
  NCO-4.8.0-gmvolf-18.12                         --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-4.6.3-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-C++-4.3.0-gmvolf-18.12.eb               --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-Fortran-4.4.5-gmvolf-18.12.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netcdf4-python-1.5.1.2-gmvolf-18.12-python2.eb --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
