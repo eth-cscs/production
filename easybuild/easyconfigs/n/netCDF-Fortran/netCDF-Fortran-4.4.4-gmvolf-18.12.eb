@@ -16,7 +16,7 @@ source_urls = [
     'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
 ]
 
-dependencies = [('netCDF', '4.4.1.1')]
+dependencies = [('netCDF', '4.7.0')]
 
 moduleclass = 'data'
 

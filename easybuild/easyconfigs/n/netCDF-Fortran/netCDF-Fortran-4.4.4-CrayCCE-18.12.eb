@@ -18,7 +18,7 @@ source_urls = [
     'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
 ]
 
-dependencies = [('netCDF', '4.4.1.1')]
+dependencies = [('netCDF', '4.7.0')]
 
 # Copies uppercase mod files to lowercase in order to avoid failure of 'make install'
 preinstallopts = 'cd %(builddir)s/netcdf-fortran-%(version)s/fortran && '
