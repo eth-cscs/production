@@ -85,6 +85,16 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
 } else {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
 }
+
+# set XDG_RUNTIME_DIR if not defined on the current system
+if { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
+    if { [ info exists ::env(SCRATCH) ] } {
+        setenv XDG_RUNTIME_DIR                     $::env(SCRATCH)
+    } else {
+        setenv XDG_RUNTIME_DIR                     /tmp/$::env(USER)
+    }
+}
+
 #
 # EASYBUILD_PREFIX
 # the following variables should depend on it
@@ -102,18 +112,11 @@ if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
 }
 setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 
-# attempt to prevent production installations by mistake
-if { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
-    setenv EASYBUILD_PREFIX                     $::env(SCRATCH)/easybuild/$system
-}
-
 #
 # If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to $XDG_RUNTIME_DIR/easybuild
 #
 if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
     setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
-} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
-    setenv EASYBUILD_TMPDIR                     /tmp/$::env(USER)/easybuild/tmp
 } else {
     setenv EASYBUILD_TMPDIR                     $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
