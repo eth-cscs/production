@@ -26,6 +26,6 @@ builddependencies = [
     ('GSL', '2.5')
 ]
 
-postinstallcmds = [" %(installdir)s/bin/gem install bigdecimal io-console json  mail mime-types minitest more_rinda narray net-ssh open4 pony power_assert psych rb-gsl rinruby ruby-prof test-unit xml-simple svn2git"]
+postinstallcmds = [" %(installdir)s/bin/gem install --no-document bigdecimal io-console json  mail mime-types minitest more_rinda narray net-ssh open4 pony power_assert psych rb-gsl rinruby ruby-prof test-unit xml-simple svn2git"]
 
 moduleclass = 'lang'
