@@ -1,0 +1,33 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ncview'
+version = '2.1.7'
+
+homepage = 'http://meteora.ucsd.edu/~pierce/ncview_home_page.html'
+description = """Ncview is a visual browser for netCDF format files."""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['ftp://cirrus.ucsd.edu/pub/ncview/']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('netCDF', '4.6.3'),
+    ('HDF5', '1.10.5'),
+    ('UDUNITS', '2.2.26', '', True),
+    ('libpng', '1.6.37'), 
+    ('zlib', '1.2.11'),
+    ('cURL', '7.64.1'),
+]
+
+configopts = 'CC=`which mpicc`'
+
+sanity_check_paths = {
+    'files': ['bin/ncview'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
+
