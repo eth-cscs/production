@@ -17,6 +17,7 @@
  netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ Boost-1.70.0-gmvolf-18.12-python2.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  CDO-1.9.6-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  gmvapich2-18.12-cuda-9.2.eb                    --hidden --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  MVAPICH2-2.2-GCC-7.4.0-2.31.1-cuda-9.2.eb      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
