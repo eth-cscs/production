@@ -24,6 +24,7 @@
  netCDF-4.6.3-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-C++-4.3.0-gmvolf-18.12.eb               --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-Fortran-4.4.5-gmvolf-18.12.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+ ncview-2.1.7-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
  nmon-16g.eb                                    
  PyExtensions-2.7.16-gmvolf-18.12.eb            --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  PyExtensions-3.7.3-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
