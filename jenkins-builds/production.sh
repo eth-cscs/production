@@ -175,8 +175,8 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build licensed software (CPMD and VASP)
-    if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
+# build licensed software (CPMD, MATLAB, VASP)
+    if [[ "$name" =~ "CPMD" || "$name" =~ "MATLAB" || "$name" =~ "VASP" ]]; then
 # custom footer for ${name} modulefile with a warning for users not belonging to group ${name,,}
         footer="if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {
  puts stderr \"WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files\"
