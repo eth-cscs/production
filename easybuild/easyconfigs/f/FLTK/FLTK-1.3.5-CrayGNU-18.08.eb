@@ -1,0 +1,34 @@
+# author: Dina Mahmoud Ibrahim ( Cairo University )
+easyblock = 'ConfigureMake'
+
+name = 'FLTK'
+version = '1.3.5'
+
+homepage = 'http://www.fltk.org'
+description = """FLTK is a cross-platform C++ GUI toolkit for UNIX/Linux (X11), Microsoft Windows,
+ and MacOS X. FLTK provides modern GUI functionality without the bloat and supports 3D graphics via OpenGL
+ and its built-in GLUT emulation."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+sources = ['%(namelower)s-%(version)s-source.tar.gz']
+source_urls = ['http://fltk.org/pub/%(namelower)s/%(version)s/']
+
+patches = ['%(name)s-%(version)s_undefined_reference.patch']
+
+configopts = '--enable-shared --enable-threads --enable-xft'
+
+builddependencies = [
+    ('Mesa', '12.0.2'),
+    ('libjpeg-turbo', '1.5.0'),
+    ('xprop', '1.2.2'),
+    ('zlib', '1.2.8'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/fltk-config', 'bin/fluid', 'lib/libfltk.a', 'lib/libfltk.%s' % SHLIB_EXT],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'vis'
