@@ -1,6 +1,6 @@
  Anaconda3-2019.03.eb                                
  Autotools-20180311.eb                               
- binutils-2.31.1-GCCcore-7.4.0.eb               --hidden --rpath
+ binutils-2.31.1-GCCcore-7.4.0.eb               --hidden
  CMake-3.14.3.eb                                
  ddt-19.0.5-Redhat-7.0.eb                       --set-default-module
  git-2.21.0.eb                                  
@@ -9,30 +9,31 @@
  ImageMagick-7.0.8-45.eb                         
  NCL-6.2.1.eb                                   --set-default-module
  NCL-6.6.2.eb                                    
- Python-2.7.16.eb                               --rpath
- Python-3.7.3.eb                                --rpath
+ Python-2.7.16.eb                               
+ Python-3.7.3.eb                               
  rstudio-1.2.1335.eb                               
  vampir-9.6.0.eb                                  
  Vim-8.1.eb 
+ netCDF-4.4.1.1-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- Boost-1.70.0-gmvolf-18.12-python2.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ Boost-1.70.0-gmvolf-18.12-python2.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
  CDO-1.9.6-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
- gmvapich2-18.12-cuda-9.2.eb                    --hidden --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
- MVAPICH2-2.2-GCC-7.4.0-2.31.1-cuda-9.2.eb      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ gmvapich2-18.12-cuda-9.2.eb                    --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --hidden
+ MVAPICH2-2.2-GCC-7.4.0-2.31.1-cuda-9.2.eb      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
  NCO-4.8.0-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-4.6.3-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-C++-4.3.0-gmvolf-18.12.eb               --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  netCDF-Fortran-4.4.5-gmvolf-18.12.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
- ncview-2.1.7-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ ncview-2.1.7-gmvolf-18.12.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
  nmon-16g.eb                                    
  PyExtensions-2.7.16-gmvolf-18.12.eb            --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  PyExtensions-3.7.3-gmvolf-18.12.eb             --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
- R-3.5.2-gmvolf-18.12.eb                        --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
- R-3.6.0-gmvolf-18.12.eb                        --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
- Ruby-2.4.0-gmvolf-18.12.eb                     --set-default-module --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
- Ruby-2.6.3-gmvolf-18.12.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --rpath
+ R-3.5.2-gmvolf-18.12.eb                        --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --set-default-module
+ R-3.6.0-gmvolf-18.12.eb                        --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
+ Ruby-2.4.0-gmvolf-18.12.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --set-default-module
+ Ruby-2.6.3-gmvolf-18.12.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
  PGI-18.10-GCC-7.4.0-2.31.1.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/18.10/easybuild
  PGI-19.4-GCC-7.4.0-2.31.1.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.5/pgi/19.4/easybuild
  PrgEnv-cce-tsa-18.12.eb                        --module-naming-scheme=EasyBuildMNS
