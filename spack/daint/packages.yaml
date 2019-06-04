@@ -192,10 +192,6 @@ packages:
             petsc@3.8.4.0%intel+complex+int64:  cray-petsc-complex-64/3.8.4.0
             petsc@3.8.4.0%cce+complex+int64:    cray-petsc-complex-64/3.8.4.0
             petsc@3.8.4.0%pgi+complex+int64:    cray-petsc-complex-64/3.8.4.0
-    python:
-        modules:
-             python@2.7.15.1: cray-python/2.7.15.1
-             python@3.6.5.1: cray-python/3.6.5.1
     quantum-espresso:
         variants: ~elpa +mpi +openmp
     readline:
