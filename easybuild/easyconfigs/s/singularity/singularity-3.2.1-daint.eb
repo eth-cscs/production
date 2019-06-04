@@ -2,7 +2,7 @@
 easyblock = 'Bundle'
 
 name = 'singularity'
-version = '3.2.0'
+version = '3.2.1'
 versionsuffix = '-daint'
 
 homepage = 'https://www.sylabs.io/'
@@ -32,7 +32,7 @@ if { ![ is-loaded wlm_detect ] } {
      module load wlm_detect
 }
 
-module load singularity/3.2.0
+module load singularity/3.2.1
 
 setenv SINGULARITY_BIND /etc/alternatives/cray-nvidia,/opt/cray,/var/opt/cray,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
 setenv SINGULARITYENV_LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/nvidia/default/lib64"
