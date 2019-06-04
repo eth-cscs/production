@@ -11,7 +11,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 sources = [ '/apps/common/UES/easybuild/sources/m/MATLAB/%s.tar' % version]
 
-# read configuration file: filename in local EASYBUILD_SOURCEPATH is name-version 
+# read configuration file: filename in local EASYBUILD_SOURCEPATH is "name"-"version".txt
 import re
 filename = '/apps/common/UES/easybuild/sources/m/MATLAB/' + '%s-%s.txt' % (name, version)
 with open (filename, 'r') as myfile:
