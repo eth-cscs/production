@@ -9,7 +9,7 @@ description = """MATLAB is a high-level language and interactive environment
 
 toolchain = {'name': 'dummy', 'version': ''}
 
-sources = ['%s.tar' % version]
+sources = [ '/apps/common/UES/easybuild/sources/m/MATLAB/%s.tar' % version]
 
 # read configuration file: filename in local EASYBUILD_SOURCEPATH is name-version 
 import re
