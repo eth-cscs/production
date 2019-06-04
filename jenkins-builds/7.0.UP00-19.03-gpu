@@ -26,6 +26,7 @@
  ipykernel-4.8.2-CrayGNU-19.03-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.03-python3.eb
  jupyterlab-0.35.2-CrayGNU-19.03.eb 
+ jupyterhub-0.9.6-CrayGNU-19.03.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.03-cuda-10.0.eb        --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  magma-2.4.0-CrayIntel-19.03-cuda-10.0.eb           --set-default-module
