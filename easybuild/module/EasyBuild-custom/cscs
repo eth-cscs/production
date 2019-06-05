@@ -77,6 +77,7 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
 } elseif { [ string match *esch* $system ] } {
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
 } elseif { [ string match *arolla* $system ] || [ string match *tsa* $system ] } {
+    setenv EASYBUILD_RPATH                      1    
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModules
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
