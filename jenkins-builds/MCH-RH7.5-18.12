@@ -9,15 +9,15 @@
  ImageMagick-7.0.8-45.eb                         
  NCL-6.2.1.eb                                   --set-default-module
  NCL-6.6.2.eb                                    
- Python-2.7.16.eb                               
+ Python-2.7.16.eb                               --disable-rpath                             
  Python-3.7.3.eb                               
- rstudio-1.2.1335.eb                               
+ rstudio-1.2.1335.eb                            --disable-rpath
  vampir-9.6.0.eb                                  
  Vim-8.1.eb 
- netCDF-4.4.1.1-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
- netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake
+ netCDF-4.4.1.1-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
+ netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
+ netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
+ netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  Boost-1.70.0-gmvolf-18.12-python2.eb           --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild 
  CDO-1.9.6-gmvolf-18.12.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
  gmvapich2-18.12-cuda-9.2.eb                    --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild --hidden
