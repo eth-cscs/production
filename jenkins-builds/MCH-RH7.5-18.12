@@ -14,7 +14,6 @@
  rstudio-1.2.1335.eb                            --disable-rpath
  vampir-9.6.0.eb                                  
  Vim-8.1.eb 
- netCDF-4.4.1.1-CrayCCE-18.12.eb                --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  netCDF-4.7.0-CrayCCE-18.12.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  netCDF-C++-4.3.0-CrayCCE-18.12.eb              --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  netCDF-Fortran-4.4.4-CrayCCE-18.12.eb          --installpath=/apps/arolla/UES/jenkins/RH7.5/cce/18.12/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
