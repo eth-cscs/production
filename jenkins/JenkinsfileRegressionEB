@@ -65,7 +65,9 @@ stage('Build Stage') {
                         println("The unuse path is empty")
                         unuseFlag = ''
                     }
-                    def listFlag = "--list=$workingDir/jenkins-builds/$machineLabel"
+                    def listFile = "$workingDir/jenkins-builds/$machineLabel"
+                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $listFile > ${listFile}_stripped"
+                    def listFlag = "--list=${listFile}_stripped"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '')
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
