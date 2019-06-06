@@ -29,7 +29,7 @@ dependencies = [
     #('Paraver', '4.7.2', '', True),
     #('Dimemas', '5.3.6', '', True),
     ('basicanalysis', '0.3.6', '', True),
-    ('clusteringsuite', '2.6.7', '', True),
+    ('clusteringsuite', '2.6.8', '', True),
     ('folding', '1.3.2', '', True),
     ('spectral', '3.4.1', '', True),
 ]
