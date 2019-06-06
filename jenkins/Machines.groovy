@@ -38,4 +38,4 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
-return [daint, dom, kesch, leone, fulen]
+return [daint, dom, kesch, leone]

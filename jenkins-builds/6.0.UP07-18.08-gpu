@@ -29,7 +29,8 @@
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  ipyparallel-6.2.3-CrayGNU-18.08-python3.eb
  jupyter-1.0.0-CrayGNU-18.08.eb
- jupyterhub-0.9.4-CrayGNU-18.08.eb
+ jupyterhub-0.9.4-CrayGNU-18.08.eb                  --set-default-module
+ jupyterhub-0.9.6-CrayGNU-18.08.eb
  jupyterlab-0.35.2-CrayGNU-18.08.eb
  LAMMPS-22Aug2018-CrayGNU-18.08-cuda-9.1.eb         --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
@@ -52,6 +53,7 @@
  PyExtensions-3.6.5.1-CrayGNU-18.08.eb
  QuantumESPRESSO-6.3-CrayIntel-18.08.eb             --set-default-module
  Spark-2.3.1-CrayGNU-18.08-Hadoop-2.7.eb
+ singularity-3.2.1-daint.eb
  TensorFlow-1.7.0-CrayGNU-18.08-cuda-9.1-python3.eb --set-default-module
  TensorFlow-1.11.0-CrayGNU-18.08-cuda-9.1-python3.eb
  TensorFlow-1.12.0-CrayGNU-18.08-cuda-9.1-python3.eb
