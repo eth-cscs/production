@@ -140,8 +140,8 @@ stage('Archive Logs') {
                     finally {
                         dir("$prefix") {
                             deleteDir()
+                        }
                     }
-
                 }
             }
         }
