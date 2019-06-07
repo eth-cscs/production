@@ -130,10 +130,18 @@ stage('Archive Logs') {
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
-                    archiveArtifacts "${prefix}/**/*.log"
-                    dir("$prefix") {
-                        deleteDir()
+
+                    try {
+                        archiveArtifacts "${prefix}/**/*.log"
                     }
+                    catch(err) {
+                        println "Failed to archive artifacts in ${prefix}"
+                    }
+                    finally {
+                        dir("$prefix") {
+                            deleteDir()
+                    }
+
                 }
             }
         }
@@ -144,5 +152,7 @@ stage('Archive Logs') {
     } catch(err) {
         println "Failed to archive artifacts"
     }
-    methods.notifySlackFinish()
+    finally {
+        methods.notifySlackFinish()
+    }
 }
