@@ -130,7 +130,7 @@ stage('Archive Logs') {
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
-                    archiveArtifacts "${prefix}/sources/**/*.log"
+                    archiveArtifacts "${prefix}/**/*.log"
                     dir("$prefix") {
                         deleteDir()
                     }
