@@ -32,6 +32,7 @@ stage('Machine Selection') {
 }
 
 def builds = [:]
+def archiveBuilds = [:]
 stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
@@ -40,6 +41,22 @@ stage('Build Stage') {
         for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            archiveBuilds[machineLabel] = {
+                node(machineName) {
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def prefix = "$scratch/$project_name/$machineLabel"
+                    archiveArtifacts "${prefix}/**/*.log"
+                    dir("$prefix") {
+                        deleteDir()
+                    }
+                }
+            }
+
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
@@ -108,6 +125,9 @@ stage('Build Stage') {
             currentBuild.result = "FAILURE"
             println "The Build step failed. Exiting....."
         }
+    }
+    finally {
+        parallel archiveBuilds
     }
 
     methods.notifySlackFinish()
