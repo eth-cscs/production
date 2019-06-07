@@ -16,7 +16,6 @@ toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 toolchainopts = {'verbose': False}
 source_urls = ['https://ftp.tools.bsc.es/extrae']
 sources = ['extrae-%(version)s-src.tar.bz2']
-checksums = ['f8135d23142feef1975d31684057087c']
 
 dependencies = [
     ('zlib', '1.2.11'),
@@ -29,7 +28,7 @@ dependencies = [
     #('Paraver', '4.7.2', '', True),
     #('Dimemas', '5.3.6', '', True),
     ('basicanalysis', '0.3.6', '', True),
-    ('clusteringsuite', '2.6.7', '', True),
+    ('clusteringsuite', '2.6.8', '', True),
     ('folding', '1.3.2', '', True),
     ('spectral', '3.4.1', '', True),
 ]
