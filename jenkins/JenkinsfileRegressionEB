@@ -130,15 +130,21 @@ stage('Archive Logs') {
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                     def prefix = "$scratch/$project_name/$machineLabel"
-
+                    def logDir = "${project_name}-${machineLabel}-logs"
                     try {
-                        archiveArtifacts "${prefix}/**/*.log"
+                        dir("$logDir") {
+                            sh "find ${prefix} -type f | grep -i '\\.log' | xargs -i cp {} ."
+                        }
+                        archiveArtifacts "$logDir"
                     }
                     catch(err) {
-                        println "Failed to archive artifacts in ${prefix}"
+                        println "Failed to archive artifacts for ${machineLabel}"
                     }
                     finally {
                         dir("$prefix") {
+                            deleteDir()
+                        }
+                        dir("$logDir") {
                             deleteDir()
                         }
                     }
