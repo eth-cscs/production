@@ -129,25 +129,21 @@ stage('Archive Logs') {
                     def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
-                    def prefix = "$scratch/$project_name/$machineLabel"
+                    def prefix = "${scratch}/${project_name}/${machineLabel}"
                     def logDir = "${project_name}-${machineLabel}-logs"
                     try {
                         dir("$logDir") {
                             sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
-                            sh "ls -lha"
                         }
                         archiveArtifacts "${logDir}/*"
                     }
                     catch(err) {
-                        println "Failed to archive artifacts for ${machineLabel}"
+                        println "Failed to archive artifacts for $machineLabel"
                     }
                     finally {
-                        dir("$prefix") {
-                            deleteDir()
-                        }
-                        dir("$logDir") {
-                            deleteDir()
-                        }
+                       sh ("""$loginBash
+                              rm -rf $prefix
+                              rm -rf $logDir""")
                     }
                 }
             }
