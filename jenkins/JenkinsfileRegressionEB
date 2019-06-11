@@ -133,10 +133,10 @@ stage('Archive Logs') {
                     def logDir = "${project_name}-${machineLabel}-logs"
                     try {
                         dir("$logDir") {
-                            sh "find ${prefix} -type f | grep -i '\\.log' | xargs -i cp {} ."
+                            sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
                             sh "ls -lha"
                         }
-                        archiveArtifacts "$logDir"
+                        archiveArtifacts "${logDir}/*"
                     }
                     catch(err) {
                         println "Failed to archive artifacts for ${machineLabel}"
