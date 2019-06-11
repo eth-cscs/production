@@ -134,6 +134,7 @@ stage('Archive Logs') {
                     try {
                         dir("$logDir") {
                             sh "find ${prefix} -type f | grep -i '\\.log' | xargs -i cp {} ."
+                            sh "ls -lha"
                         }
                         archiveArtifacts "$logDir"
                     }
