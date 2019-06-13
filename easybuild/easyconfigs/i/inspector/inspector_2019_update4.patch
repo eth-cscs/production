@@ -1,0 +1,42 @@
+diff -Naur inspector_2019_update4.ori/clean_cscs.sh inspector_2019_update4/clean_cscs.sh
+--- inspector_2019_update4.ori/clean_cscs.sh	1970-01-01 01:00:00.000000000 +0100
++++ inspector_2019_update4/clean_cscs.sh	2019-06-07 10:09:30.261810000 +0200
+@@ -0,0 +1,10 @@
++#!/bin/bash
++rm -fr XX/CLI_Install
++rm -fr XX/pset
++rm -fr XX/rpm
++rm -fr XX/PUBLIC_KEY.PUB
++rm -fr XX/silent.cfg
++rm -fr XX/install.sh
++rm -fr XX/install_GUI.sh
++rm -fr XX/license.txt
++rm -fr XX/support.txt
+diff -Naur inspector_2019_update4.ori/silent.cfg inspector_2019_update4/silent.cfg
+--- inspector_2019_update4.ori/silent.cfg	2019-04-29 11:47:16.000000000 +0200
++++ inspector_2019_update4/silent.cfg	2019-06-07 09:26:19.362984000 +0200
+@@ -7,13 +7,13 @@
+ # comppat     - the component abbreviation (intel-component-0123.4-567__arch), use installer command line option to get it
+ 
+ # Accept EULA, valid values are: {accept, decline}
+-ACCEPT_EULA=decline
++ACCEPT_EULA=accept
+ 
+ # Optional error behavior, valid values are: {yes, no}
+ CONTINUE_WITH_OPTIONAL_ERROR=yes
+ 
+ # Install location, valid values are: {/opt/intel, filepat}
+-PSET_INSTALL_DIR=/opt/intel
++PSET_INSTALL_DIR=XXXXX
+ 
+ # Continue with overwrite of existing installation directory, valid values are: {yes, no}
+ CONTINUE_WITH_INSTALLDIR_OVERWRITE=yes
+@@ -57,7 +57,7 @@
+ # Yes - I consent to the collection of my Information
+ # No  - I do NOT consent to the collection of my Information
+ #, valid values are: {yes, no}
+-#INTEL_SW_IMPROVEMENT_PROGRAM_CONSENT=no
++INTEL_SW_IMPROVEMENT_PROGRAM_CONSENT=no
+ 
+ # Perform validation of digital signatures of RPM files, valid values are: {yes, no}
+ SIGNING_ENABLED=yes
