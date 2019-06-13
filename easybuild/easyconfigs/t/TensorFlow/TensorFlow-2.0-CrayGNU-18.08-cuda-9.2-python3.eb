@@ -51,7 +51,6 @@ with_configure = False
 whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (shortversion, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
 build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
-build_str += " && module switch gcc/6.2.0 gcc/7.3.0"
 build_str += " && rm -rf $TEST_TMPDIR"
 build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
 build_str += " && sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@$CRAY_CUDATOOLKIT_DIR@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
@@ -63,7 +62,6 @@ build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
 build_str += " && pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
 build_str += " && rm -rf $TEST_TMPDIR"
-
 
 cmds_map = [
     ('v%(version)s.tar.gz', build_str),
