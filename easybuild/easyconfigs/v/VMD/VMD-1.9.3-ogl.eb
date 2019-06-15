@@ -20,7 +20,7 @@ sources = [(
     '%(namelower)s-%(version)s%(versionsuffix)s.tar.gz'
 )]
 
-buildcmd = (
+vmd_buildcmd = (
     ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir='
     '"%(installdir)s/bin"#g\' configure && '
     ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir='
@@ -30,7 +30,7 @@ buildcmd = (
 
 buildininstalldir = True
 
-cmds_map = [('.*', buildcmd)]
+cmds_map = [('.*', vmd_buildcmd)]
 
 files_to_copy = [] 
 
