@@ -1,0 +1,97 @@
+#@author: Victor Holanda
+easyblock = 'Tarball'
+
+name = 'Spack'
+version = 'daint'
+versionsuffix = '-git-master'
+
+homepage = 'https://spack.io/'
+description = """Spack is a package manager for supercomputers, Linux, and macOS. It makes installing scientific
+ software easy. With Spack, you can build a package with multiple versions, configurations, platforms, and compilers,
+ and all of these builds can coexist on the same machine."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# This source is useless
+# Due to reproducebily issues EB removes the .git folder from installation dir
+#
+# The exact EB commands are
+# git clone --branch master https://github.com/spack/spack.git
+# tar cfvz /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz --exclude .git spack
+# tar xzf /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz
+sources = [{
+        'filename': 'spack-master.tar.gz',
+        'git_config': {
+            'url': 'https://github.com/spack',
+            'repo_name': 'spack',
+            'tag': 'master',
+        },
+    },
+]
+
+postinstallcmds = [
+# Removing the files that EB has previously downloaded
+# and cloning the branch ourselves
+    'cd %(installdir)s && find . -mindepth 1 -delete ',
+    'cd %(installdir)s && git clone https://github.com/spack/spack.git .',
+# copying specific Spack config files for daint
+    'cp -r /apps/common/UES/jenkins/production/spack/daint %(installdir)s/etc/spack/cray',
+# generating the initial compiler list on the system
+    '%(installdir)s/bin/spack compiler find --scope site/cray',
+# creating default modules folders
+# this paths should be in sync with the ones from
+# https://github.com/eth-cscs/production/tree/master/spack/daint
+    'mkdir -p $HOME/daint/spack/share/modules/`%(installdir)s/bin/spack arch -p`-`%(installdir)s/bin/spack arch -o`-haswell',
+    'mkdir -p $HOME/daint/spack/share/modules/`%(installdir)s/bin/spack arch -p`-`%(installdir)s/bin/spack arch -o`-broadwell']
+
+sanity_check_paths = {
+    'files': ['bin/spack'],
+    'dirs': ['etc/spack/defaults', 'lib/spack', 'share/spack', 'var/spack'],
+}
+
+sanity_check_commands = [
+    "spack list",
+    "spack versions gcc",
+]
+
+modtclfooter="""
+set username $::env(USER)
+set cscs_spack_user_modules ""
+
+set status [catch {exec spack config get config} [list result]]
+if { $status == 0 } {
+
+    set tclfolder [lindex [regexp -inline -line {tcl:\s?(.*)} $result] 1]
+
+    if { [regexp -line {(\$spack)} $tclfolder] >= 1 } {
+        set status [catch {exec which spack} [list result]]
+        set spack_root [file dirname [file dirname $result]]
+        set tclfolder [regsub {\$spack} $tclfolder $spack_root]
+    }
+    set tclfolder [regsub {\$user} $tclfolder $username]
+    set tclfolder [regsub {\$tempdir} $tclfolder "/tmp"]
+
+    set status [catch {exec envsubst << $tclfolder} [list result]]
+    if { $status == 0 } {
+        set tclfolder $result
+    }
+
+    if { ! [ info exists ::env(_CSCS_SPACK_USER_MODULES) ] } {
+        set cscs_spack_user_modules ""
+        foreach folder [glob -nocomplain -directory $tclfolder -type d *] {
+            lappend cscs_spack_user_modules $folder
+        }
+        if { $cscs_spack_user_modules == "" } {
+            set status [catch {exec spack arch} [list result]]
+            set cscs_spack_user_modules [concat $tclfolder $result]
+            set cscs_spack_user_modules [join $cscs_spack_user_modules "/" ]
+        }
+        set cscs_spack_user_modules [join $cscs_spack_user_modules ":" ]
+    } else {
+        set cscs_spack_user_modules $::env(_CSCS_SPACK_USER_MODULES)
+    }
+    prepend-path MODULEPATH $cscs_spack_user_modules
+    setenv _CSCS_SPACK_USER_MODULES $cscs_spack_user_modules
+}
+"""
+moduleclass = 'devel'
