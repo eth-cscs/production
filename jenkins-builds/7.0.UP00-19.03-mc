@@ -46,7 +46,7 @@
  Spark-2.3.1-CrayGNU-19.03-Hadoop-2.7.eb            --set-default-module
  VASP-5.4.4-CrayIntel-19.03.eb                      --set-default-module
  CubeGUI-4.4.3.eb                                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
- ddt-19.0.4-Suse-15.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
+ ddt-19.1-Suse-15.0.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  Extrae-3.5.4-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/mc/easybuild/tools
