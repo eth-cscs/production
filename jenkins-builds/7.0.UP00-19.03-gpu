@@ -5,7 +5,7 @@
  Boost-1.67.0-CrayGNU-19.03.eb
  CDO-1.9.5-CrayGNU-19.03.eb                         --set-default-module
  CDO-1.9.5-CrayIntel-19.03.eb
- CMake-3.14.1.eb
+ CMake-3.14.5.eb
  CP2K-6.1-CrayGNU-19.03-cuda-10.0.eb                --set-default-module
  CPMD-4.1-CrayIntel-19.03.eb                        --set-default-module
  dask-1.0.0-CrayGNU-19.03-python3.eb                --set-default-module
@@ -26,6 +26,8 @@
  ipykernel-4.8.2-CrayGNU-19.03-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.03-python3.eb
  jupyterlab-0.35.2-CrayGNU-19.03.eb 
+ jupyterhub-0.9.6-CrayGNU-19.03.eb                 
+ jupyterhub-1.0.0-CrayGNU-19.03.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.03-cuda-10.0.eb        --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  magma-2.4.0-CrayIntel-19.03-cuda-10.0.eb           --set-default-module
@@ -52,7 +54,7 @@
  VMD-1.9.3-ogl.eb
  VTK-8.2.0-EGL-CrayGNU-19.03-python3.eb             --set-default-module
  CubeGUI-4.4.3.eb                                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
- ddt-19.0.4-Suse-15.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
+ ddt-19.1-Suse-15.0.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  Extrae-3.5.4-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  IPM-2.0.6-CrayCCE-19.03.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
@@ -65,6 +67,8 @@
  mpiP-57fc864-CrayGNU-19.03.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  mpiP-57fc864-CrayIntel-19.03.eb                                         --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-19.03.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
+ nvidia-nsight-2019.3.1.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
+ nvtop-1.0.0-CrayGNU-19.03-cuda-10.0.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.03.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  papi-wrap-1.0-CrayCCE-19.03.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
  papi-wrap-1.0-CrayIntel-19.03.eb                                        --installpath=$APPS/UES/jenkins/7.0.UP00/gpu/easybuild/tools
