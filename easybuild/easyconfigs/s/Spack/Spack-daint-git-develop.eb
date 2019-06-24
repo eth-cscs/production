@@ -17,14 +17,14 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 #
 # The exact EB commands are
 # git clone --branch master https://github.com/spack/spack.git
-# tar cfvz /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz --exclude .git spack
-# tar xzf /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz
+# tar cfvz /apps/common/easybuild/sources/s/Spack/spack-develop.tar.gz --exclude .git spack
+# tar xzf /apps/common/easybuild/sources/s/Spack/spack-develop.tar.gz
 sources = [{
-        'filename': 'spack-master.tar.gz',
+        'filename': 'spack-develop.tar.gz',
         'git_config': {
             'url': 'https://github.com/spack',
             'repo_name': 'spack',
-            'tag': 'master',
+            'tag': 'develop',
         },
     },
 ]
