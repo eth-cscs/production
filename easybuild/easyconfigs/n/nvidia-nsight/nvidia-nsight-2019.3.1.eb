@@ -1,0 +1,22 @@
+# jg (CSCS)
+# tar created with ./nsight-compute-linux-2019.3.1.2-26317742.run --nox11
+easyblock = 'Tarball'
+
+name = 'nvidia-nsight'
+version = '2019.3.1'
+homepage = 'https://docs.nvidia.com/nsight-compute/index.html'
+description = """NVIDIA Nsight Compute profiling tools."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+sources = ['/apps/common/UES/easybuild/sources/%(nameletter)s/%(name)s/' +
+           SOURCELOWER_TAR_GZ]
+
+sanity_check_paths = {
+    'files': ['nv-nsight-cu-cli'],
+    'dirs': ['docs', 'host/linux-desktop-glibc_2_11_3-x64']
+}
+
+modextrapaths = {'PATH': '.'}
+docpaths = {'NSIGHT_DOC': '%(installdir)s/docs'}
+
+moduleclass = 'tools'
