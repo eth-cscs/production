@@ -1,4 +1,4 @@
-#@author: Victor Holanda
+#@author: Victor Holanda and gppezzi
 easyblock = 'Tarball'
 
 name = 'Spack'
@@ -13,18 +13,19 @@ description = """Spack is a package manager for supercomputers, Linux, and macOS
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 # This source is useless
-# Due to reproducebily issues EB removes the .git folder from installation dir
+# Due to reproducibility issues EB removes the .git folder from installation dir
 #
 # The exact EB commands are
 # git clone --branch master https://github.com/spack/spack.git
-# tar cfvz /apps/common/easybuild/sources/s/Spack/spack-develop.tar.gz --exclude .git spack
-# tar xzf /apps/common/easybuild/sources/s/Spack/spack-develop.tar.gz
+# tar cfvz /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz --exclude .git spack
+# tar xzf /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz
+# Note: We're actually using the develop branch in the postinstallcmds
 sources = [{
-        'filename': 'spack-develop.tar.gz',
+        'filename': 'spack-master.tar.gz',
         'git_config': {
             'url': 'https://github.com/spack',
             'repo_name': 'spack',
-            'tag': 'develop',
+            'tag': 'master',
         },
     },
 ]
