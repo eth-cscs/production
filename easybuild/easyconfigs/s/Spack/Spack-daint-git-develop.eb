@@ -3,7 +3,7 @@ easyblock = 'Tarball'
 
 name = 'Spack'
 version = 'daint'
-versionsuffix = '-git-master'
+versionsuffix = '-git-develop'
 
 homepage = 'https://spack.io/'
 description = """Spack is a package manager for supercomputers, Linux, and macOS. It makes installing scientific
