@@ -145,6 +145,7 @@ if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
 # Adding easybuild installed software to the list of modules
 prepend-path MODULEPATH                         $::env(EASYBUILD_INSTALLPATH)/modules/all
 # Loading easybuild module
-module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest
+module use /apps/common/UES/easybuild/modules/all
+module load EasyBuild
 
 # Built with EasyBuild version 3.6.2

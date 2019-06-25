@@ -110,5 +110,52 @@ stage('Build Stage') {
         }
     }
 
-    methods.notifySlackFinish()
+}
+
+archiveBuilds = [:]
+stage('Archive Logs') {
+    for (mach in machineConfigurations) {
+        def machine = mach.machine
+        def architectures = mach.architectures
+        def machineName = machine.name
+        for (architecture in architectures) {
+            def arch = architecture
+            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            archiveBuilds[machineLabel] = {
+                node(machineName) {
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def prefix = "${scratch}/${project_name}/${machineLabel}"
+                    def logDir = "${project_name}-${machineLabel}-logs"
+                    try {
+                        dir("$logDir") {
+                            sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
+                        }
+                        archiveArtifacts "${logDir}/*"
+                    }
+                    catch(err) {
+                        println "Failed to archive artifacts for $machineLabel"
+                    }
+                    finally {
+                       sh ("""$loginBash
+                              rm -rf $prefix
+                              rm -rf $logDir""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel archiveBuilds
+    } catch(err) {
+        println "Failed to archive artifacts"
+    }
+    finally {
+        methods.notifySlackFinish()
+    }
 }
