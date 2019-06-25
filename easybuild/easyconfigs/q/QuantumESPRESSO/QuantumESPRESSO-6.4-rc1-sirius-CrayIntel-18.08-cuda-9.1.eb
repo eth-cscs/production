@@ -16,10 +16,10 @@ toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 
 sources = ['https://github.com/electronic-structure/q-e-sirius/archive/' + 'v%(version)s-sirius.tar.gz']
 
 dependencies = [
-  ('SIRIUS', '6.1.5', '-cuda-%s' % cudaversion)
+  ('SIRIUS', '6.2.0', '-cuda-%s' % cudaversion)
 ]
 
-preconfigopts = ' module unload cray-libsci && module load gcc/6.2.0 && module list && ' 
+preconfigopts = ' module unload cray-libsci && module load gcc/6.2.0 && module list && '
 preconfigopts += ' CC=cc FC=ftn '
 preconfigopts += ' LIBS="-lsirius_f -lsirius_cu -lxc -lsymspg -lgsl -lmagma_sparse -lmagma -lcufft -lcublas -lcusolver -L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl -qopenmp"'
 preconfigopts += ' LDFLAGS=$LIBS LD_LIBS=$LIBS'
