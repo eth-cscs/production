@@ -21,9 +21,7 @@ dependencies = [
     # cuda/10.1 < gcc/9   Y       Y       Y       Y       Y       -
     # -----------------
     ('gcc/8.3.0', EXTERNAL_MODULE),
-    # modules>3.2.11.1 fails with: 
-    # "Changing environment as dictated by module failed: invalid syntax"
-    ('modules/3.2.11.1', EXTERNAL_MODULE),
+    ('modules/3.2.11.2', EXTERNAL_MODULE),
     ('cray-libsci/19.06.1', EXTERNAL_MODULE),
     ('cray-mpich/7.7.8', EXTERNAL_MODULE),
     ('craype/2.6.0', EXTERNAL_MODULE),
