@@ -20,8 +20,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://curl.haxx.se/download/']
 
-osdependencies = [('libopenssl-devel')]
-#osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
+#osdependencies = [('libopenssl-devel')]
+osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
 # dependencies = [('OpenSSL', '1.0.1t')]
 # configopts = "--with-ssl=$EBROOTOPENSSL"
