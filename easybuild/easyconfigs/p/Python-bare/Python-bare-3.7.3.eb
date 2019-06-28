@@ -17,9 +17,12 @@ source_urls = ['http://www.python.org/ftp/python/%(version)s/']
 sources = ['Python-%(version)s.tgz']
 
 dependencies = [
-    ('zlib', '1.2.11', '', True),
+    ('libffi', '3.2.1', '', True),
     ('ncurses', '6.1', '', True),
+    ('zlib', '1.2.11', '', True),
 ]
+
+configopts = ' --with-system-ffi CFLAGS="-I$EBROOTLIBFFI/lib/libffi-3.2.1/include" LDFLAGS="-L$EBROOTLIBFFI/lib64" '
 
 # workaround for being able to change name to Python-bare
 modextravars = {'EBROOTPYTHON': '%(installdir)s'}
