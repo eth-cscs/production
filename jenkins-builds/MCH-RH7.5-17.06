@@ -44,7 +44,7 @@
  rstudio-1.0.143.eb                                  --set-default-module
  rstudio-1.1.442.eb                                  
  Understand-5.0.928.eb                               
- UDUNITS-2.2.24                                      --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
+ UDUNITS-2.2.24.eb                                   --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  Valgrind-3.13.0-gmvolf-17.02.eb                     --installpath=/apps/escha/UES/jenkins/RH7.5/gnu_PE17.02/easybuild
  vampir-9.4.0.eb                                     
  Vim-8.0.eb                                          
