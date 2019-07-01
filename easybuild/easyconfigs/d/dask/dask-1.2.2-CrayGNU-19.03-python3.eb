@@ -14,7 +14,7 @@ homepage = 'http://github.com/dask/dask/'
 description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
  and task scheduling."""
 
-toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
 toolchainopts = {'verbose': False}
 
 # this is a bundle of Python packages
