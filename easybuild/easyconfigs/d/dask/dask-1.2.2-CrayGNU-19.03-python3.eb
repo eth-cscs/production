@@ -1,3 +1,4 @@
+# contributed by Timothy W. Robinson (CSCS)
 easyblock = 'Bundle'
 
 name = 'dask'
