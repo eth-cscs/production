@@ -14,7 +14,7 @@ sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['https://github.com/westes/flex/releases/download/v%(version)s']
 
 builddependencies = [
-    ('Bison', '3.0.5'),
+    ('Bison', '3.3.2'),
 ]
 
 moduleclass = 'lang'

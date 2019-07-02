@@ -16,11 +16,13 @@ toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 source_urls = [GNU_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
-dependencies = [('M4', '1.4.18')]
+dependencies = [
+    ('M4', '1.4.18'),
+]
+
 
 sanity_check_paths = {
-    'files': ["bin/%s" % x for x in ["autoconf", "autoheader", "autom4te", "autoreconf", "autoscan",
-                                     "autoupdate", "ifnames"]],
+    'files': ['bin/%(namelower)s', 'bin/autoheader', 'bin/autom4te', 'bin/autoreconf', 'bin/autoscan', 'bin/autoupdate', 'bin/ifnames'],
     'dirs': [],
 }
 

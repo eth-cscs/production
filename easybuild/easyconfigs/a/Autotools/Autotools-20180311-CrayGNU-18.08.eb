@@ -5,7 +5,7 @@ name = 'Autotools'
 version = '20180311'  # date of the most recent change
 
 homepage = 'http://autotools.io'
-description = """This bundle collect the standard GNU build tools: Autoconf, Automake and libtool"""
+description = "This bundle collect the standard GNU build tools: Autoconf, Automake and libtool"
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
@@ -14,5 +14,6 @@ dependencies = [
     ('Automake', '1.16.1'),  # 20180311
     ('libtool', '2.4.6'),  # 20150215
 ]
+
 
 moduleclass = 'devel'

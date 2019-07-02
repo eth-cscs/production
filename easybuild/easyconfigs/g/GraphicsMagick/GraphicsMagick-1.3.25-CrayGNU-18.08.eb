@@ -1,0 +1,35 @@
+easyblock = 'ConfigureMake'
+
+name = 'GraphicsMagick'
+version = '1.3.25'
+
+homepage = 'http://www.graphicsmagick.org/'
+description = "GraphicsMagick is the swiss army knife of image processing."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+source_urls = [
+    SOURCEFORGE_SOURCE,
+    'ftp://ftp.%(namelower)s.org/pub/%(name)s/%(version_major_minor)s/',
+]
+sources = [SOURCE_TAR_GZ]
+patches = ['%(name)s-%(version)s_intel.patch']
+
+builddependencies = [
+    ('libtool', '2.4.6'),
+]
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('freetype', '2.8.1'),
+    ('libpng', '1.6.30'),
+    ('libjpeg-turbo', '1.5.3'),
+    ('LibTIFF', '4.0.9'),
+    ('libxml2', '2.9.7'),
+    ('XZ', '5.2.2'),
+    ('zlib', '1.2.11'),
+]
+
+modextrapaths = {'CPATH': ['include/%(name)s']}
+
+moduleclass = 'vis'

@@ -17,11 +17,9 @@ description = "tiff: Library and tools for reading and writing TIFF data files"
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
-source_urls = [
-    'http://download.osgeo.org/libtiff/',
-    'ftp://ftp.remotesensing.org/pub/libtiff/',
-]
+source_urls = ['http://download.osgeo.org/%(namelower)s/', 'ftp://ftp.remotesensing.org/pub/%(namelower)s/']
 sources = ['tiff-%(version)s.tar.gz']
+
 
 sanity_check_paths = {
     'files': ['bin/tiffinfo'],
@@ -29,4 +27,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'lib'
-

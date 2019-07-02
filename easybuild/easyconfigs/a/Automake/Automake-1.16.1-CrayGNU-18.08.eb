@@ -13,7 +13,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'Automake'
-version = "1.16.1"
+version = '1.16.1'
 
 homepage = 'http://www.gnu.org/software/automake/automake.html'
 description = "Automake: GNU Standards-compliant Makefile generator"
@@ -23,11 +23,14 @@ toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 source_urls = [GNU_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
-dependencies = [('Autoconf', '2.69')]
+dependencies = [
+    ('Autoconf', '2.69'),
+]
+
 
 sanity_check_paths = {
-    'files': ['bin/automake', 'bin/aclocal'],
-    'dirs': []
+    'files': ['bin/%(namelower)s', 'bin/aclocal'],
+    'dirs': [],
 }
 
 moduleclass = 'devel'

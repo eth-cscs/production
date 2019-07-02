@@ -1,0 +1,27 @@
+easyblock = 'ConfigureMake'
+
+name = 'libgd'
+version = '2.2.3'
+
+homepage = 'http://libgd.bitbucket.org/'
+description = "GD is an open source code library for the dynamic creation of images by programmers."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/gd-%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('fontconfig', '2.11.94'),
+    ('libjpeg-turbo', '1.5.3'),
+    ('libpng', '1.6.30'),
+    ('zlib', '1.2.11'),
+]
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'lib/%(name)s.so'],
+    'dirs': ['bin', 'include'],
+}
+
+moduleclass = 'lib'

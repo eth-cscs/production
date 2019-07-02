@@ -1,0 +1,20 @@
+easyblock = 'ConfigureMake'
+
+name = 'libdrm'
+version = '2.4.70'
+
+homepage = 'http://dri.freedesktop.org'
+description = "Direct Rendering Manager runtime library."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = ['http://dri.freedesktop.org/%(name)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/xf86drm.h', 'include/xf86drmMode.h', 'lib/libdrm_intel.so', 'lib/libdrm_radeon.so', 'lib/%(name)s.so', 'lib/libkms.so'],
+    'dirs': ['include/%(name)s', 'include/libkms', 'lib/pkgconfig'],
+}
+
+moduleclass = 'lib'

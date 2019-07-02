@@ -1,0 +1,26 @@
+easyblock = 'ConfigureMake'
+
+name = 'libcerf'
+version = '1.5'
+
+homepage = 'http://gnuplot.sourceforge.net/'
+description = """libcerf is a self-contained numeric library that provides an efficient and accurate
+ implementation of complex error functions, along with Dawson, Faddeeva, and Voigt functions."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = ['http://apps.jcns.fz-juelich.de/src/%(name)s/', 'http://apps.jcns.fz-juelich.de/src/%(name)s/old']
+sources = [SOURCE_TGZ]
+
+builddependencies = [
+    ('Autotools', '20180311'),
+    ('libtool', '2.4.6'),
+]
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.so'],
+    'dirs': [],
+}
+
+moduleclass = 'math'

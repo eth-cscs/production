@@ -1,0 +1,51 @@
+# the purpose of the easyconfig is to build a Mesa for software rendering,
+# not hardware rendering. This means you want at least SSE4.2. We build:
+# - llvmpipe: the high-performance Gallium LLVM driver
+# - swr: Intel's OpenSWR
+# it will try to use the llvmpipe by default. It you want swr, do:
+# GALLIUM_DRIVER=swr
+easyblock = 'ConfigureMake'
+
+name = 'Mesa'
+version = '12.0.2'
+
+homepage = 'http://www.mesa3d.org/'
+description = """Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+# swr detects and builds parts specific for AVX and AVX2. If we use
+# -xHost, this always gets overwritten and will fail.
+toolchainopts = {'optarch': False}
+
+source_urls = [
+    'https://%(namelower)s.freedesktop.org/archive/%(version)s',
+    'ftp://ftp.freedesktop.org/pub/%(namelower)s/%(version)s',
+    'ftp://ftp.freedesktop.org/pub/%(namelower)s/older-versions/%(version_major)s.x/%(version)s',
+]
+sources = [SOURCELOWER_TAR_XZ]
+
+builddependencies = [
+    ('flex', '2.6.4'),
+    ('Bison', '3.3.2'),
+    ('Autotools', '20180311'),
+    ('Mako', '1.0.4', '-Python-2.7.15.1'),
+    ('libxml2', '2.9.4', '-Python-2.7.15.1'),
+]
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('nettle', '3.2'),
+    ('libdrm', '2.4.70'),
+    ('LLVM', '3.8.1'),
+]
+
+# GLU is not part anymore of Mesa package!
+configopts = " --disable-osmesa --enable-gallium-osmesa --enable-gallium-llvm --enable-glx --disable-dri --disable-driglx-direct --with-gallium-drivers='swrast,swr' --disable-egl --with-osmesa-bits=32 --enable-texture-float --enable-llvm-shared-libs "
+
+
+sanity_check_paths = {
+    'files': ['lib/libGL.so', 'lib/libOSMesa.so', 'lib/libGLESv1_CM.so', 'lib/libGLESv2.so', 'include/GL/glext.h', 'include/GL/gl_mangle.h', 'include/GL/glx.h', 'include/GL/osmesa.h', 'include/GL/wglext.h', 'include/GL/gl.h', 'include/GL/glxext.h', 'include/GL/glx_mangle.h', 'include/GLES/gl.h', 'include/GLES2/gl2.h', 'include/GLES3/gl3.h'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

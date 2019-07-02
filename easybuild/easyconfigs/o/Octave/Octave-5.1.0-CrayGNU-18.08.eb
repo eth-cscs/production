@@ -1,0 +1,58 @@
+# @author: gppezzi (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Octave'
+version = '5.1.0'
+
+homepage = 'http://www.gnu.org/software/octave/'
+description = "GNU Octave is a high-level interpreted language, primarily intended for numerical computations."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'dynamic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('Bison', '3.3.2'),
+    ('flex', '2.6.4'),
+    ('Autotools', '20180311'),
+    ('libtool', '2.4.6'),
+    ('gperf', '3.0.4'),
+    ('PCRE', '8.38'),
+    ('ncurses', '6.1'),
+    ('arpack-ng', '3.3.0'),
+    ('cURL', '7.49.1'),
+    ('FLTK', '1.3.3'),
+    ('fontconfig', '2.11.94'),
+    ('freetype', '2.8.1'),
+    ('GLPK', '4.60'),
+    ('java/jdk1.8.0_51', EXTERNAL_MODULE),
+    ('zlib', '1.2.11'),
+    ('qrupdate', '1.1.2'),
+    ('Qt', '4.8.6', '', True),
+    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('gnuplot', '5.0.5'),
+    ('GraphicsMagick', '1.3.25'),
+]
+dependencies = [
+    ('GL2PS', '1.3.9'),
+    ('bzip2', '1.0.6'),
+    ('LibTIFF', '4.0.9'),
+    ('libxml2', '2.9.7'),
+    ('libjpeg-turbo', '1.5.3'),
+    ('libreadline', '8.0'),
+]
+
+configopts = "MOC=$EBROOTQT/bin/moc UIC=$EBROOTQT/bin/uic RCC=$EBROOTQT/bin/rcc LRELEASE=$EBROOTQT/bin/lrelease  --disable-docs  --enable-shared --disable-static --enable-dynamic  --without-java  --enable-link-all-dependencies  --without-qt "
+
+modextravars = {'CRAYPE_LINK_TYPE': 'dynamic'}
+sanity_check_commands = [('%(namelower)s', '--eval "1+2"')]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'math'

@@ -1,0 +1,27 @@
+easyblock = 'ConfigureMake'
+
+name = 'nettle'
+version = '3.2'
+
+homepage = 'http://www.lysator.liu.se/~nisse/nettle/'
+description = """Nettle is a cryptographic library that is designed to fit easily
+ in more or less any context: In crypto toolkits for object-oriented
+ languages (C++, Python, Pike, ...), in applications like LSH or GNUPG,
+ or even in kernel space."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('GMP', '6.1.1'),
+]
+
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s-hash', 'bin/%(name)s-lfib-stream', 'bin/pkcs1-conv', 'bin/sexp-conv', 'lib64/libhogweed.a', 'lib64/libhogweed.so', 'lib64/libnettle.a', 'lib64/libnettle.so'],
+    'dirs': ['include/%(name)s'],
+}
+
+moduleclass = 'lib'
