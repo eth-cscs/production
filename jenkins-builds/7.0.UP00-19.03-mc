@@ -8,7 +8,8 @@
  CMake-3.14.5.eb
  CP2K-6.1-CrayGNU-19.03.eb                          --set-default-module
  CPMD-4.1-CrayIntel-19.03.eb                        --set-default-module
- dask-1.0.0-CrayGNU-19.03-python3.eb                --set-default-module
+ dask-1.0.0-CrayGNU-19.03-python3.eb                
+ dask-1.2.2-CrayGNU-19.03-python3.eb                --set-default-module
  GREASY-19.03-cscs-CrayGNU-19.03.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.03.eb                    --set-default-module
  GROMACS-2019.1-CrayGNU-19.03.eb
