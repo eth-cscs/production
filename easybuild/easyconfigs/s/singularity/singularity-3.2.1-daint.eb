@@ -1,0 +1,39 @@
+# @author: teojgo gppezzi
+easyblock = 'Bundle'
+
+name = 'singularity'
+version = '3.2.1'
+versionsuffix = '-daint'
+
+homepage = 'https://www.sylabs.io/'
+description = """Singularity is a portable application stack packaging and runtime utility."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+modtclfooter = """
+# Swap the programming environment
+module unload PrgEnv-cray
+module unload PrgEnv-intel
+module unload PrgEnv-pgi
+
+if { ![ is-loaded PrgEnv-gnu ] } {
+    module load PrgEnv-gnu
+}
+
+# Swap the cray-mpich with the cray-mpich-abi
+if { [ is-loaded cray-mpich ] } {
+    module swap cray-mpich cray-mpich-abi/7.7.2
+} else {
+    module load cray-mpich-abi/7.7.2
+}
+
+# Load the wlm_detect module
+if { ![ is-loaded wlm_detect ] } {
+     module load wlm_detect
+}
+
+module load singularity/3.2.1
+
+setenv SINGULARITY_BIND /etc/alternatives/cray-nvidia,/opt/cray,/var/opt/cray,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
+setenv SINGULARITYENV_LD_LIBRARY_PATH         "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/nvidia/default/lib64"
+"""
