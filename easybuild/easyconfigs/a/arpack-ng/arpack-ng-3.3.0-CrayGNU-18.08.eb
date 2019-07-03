@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'arpack-ng'
+version = '3.3.0'
+
+homepage = 'http://forge.scilab.org/index.php/p/arpack-ng/'
+description = "ARPACK is a collection of Fortran77 subroutines designed to solve large scale eigenvalue problems."
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True}
+
+source_urls = ['https://github.com/opencollab/%(name)s/archive/']
+sources = ['%(version)s.tar.gz']
+
+builddependencies = [
+    ('Autotools', '20180311'),
+]
+
+preconfigopts = "sh bootstrap && "
+configopts = '--with-pic --with-blas="$LIBBLAS" --with-lapack="$LIBLAPACK"'
+
+
+sanity_check_paths = {
+    'files': ['lib/libarpack.a', 'lib/libarpack.so'],
+    'dirs': [],
+}
+
+moduleclass = 'numlib'
