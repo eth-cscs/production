@@ -26,7 +26,7 @@ dependencies = [
     ('libjpeg-turbo', '1.5.3'),
     ('libpng', '1.6.30'),
     ('libgd', '2.2.3'),
-    ('libcerf', '1.5'),
+    ('libcerf', '1.13'),
     ('Qt', '4.8.6', '', True),
 ]
 
