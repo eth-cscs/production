@@ -30,7 +30,7 @@ builddependencies = [
     ('java/jdk1.8.0_51', EXTERNAL_MODULE),
     ('zlib', '1.2.11'),
     ('qrupdate', '1.1.2'),
-    ('Qt', '4.8.6', '', True),
+   # ('Qt', '5.7.0-debug', '', True),        # This would be needed to build with the GUI
     ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
     ('gnuplot', '5.0.5'),

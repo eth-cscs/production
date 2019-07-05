@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'fontconfig'
+version = '2.13.1'
+
+homepage = 'http://www.freedesktop.org/software/fontconfig'
+description = """Fontconfig is a library designed to provide system-wide font configuration, customization and
+application access."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = ['http://www.freedesktop.org/software/%(name)s/release/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('expat', '2.1.0'),
+    ('freetype', '2.8.1'),
+    ('gperf', '3.0.4'),
+]
+
+configopts = "--disable-docs "
+
+
+moduleclass = 'vis'
