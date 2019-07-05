@@ -9,10 +9,10 @@ def daint = [name: 'daint',
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/dom/UES/jenkins/7.0.UP00/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP00/ARCH/easybuild/modules/all',
+           unusePath: '/apps/dom/UES/jenkins/7.0.UP00/ARCH/19.06/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP00/ARCH/19.06/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/7.0.UP00/ARCH/easybuild']
+           prefixProduction: '$APPS/UES/jenkins/7.0.UP00/ARCH/19.06/easybuild']
 
 def fulen = [name: 'fulen',
              archs: [],
