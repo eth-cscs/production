@@ -27,7 +27,7 @@ dependencies = [
     ('libpng', '1.6.30'),
     ('libgd', '2.2.3'),
     ('libcerf', '1.13'),
-    ('Qt', '4.8.6', '', True),
+    ('Qt', '5.7.0-debug', '', True),
 ]
 
 preconfigopts = 'export CXXFLAGS="-std=c++11 $CXXFLAGS" && '
