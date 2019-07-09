@@ -33,7 +33,7 @@ builddependencies = [
    # ('Qt', '5.7.0-debug', '', True),        # This would be needed to build with the GUI
     ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
     ('fftw/3.3.4.10', EXTERNAL_MODULE),
-    ('gnuplot', '5.0.5'),
+    ('gnuplot', '5.0.6', '', True),
     ('GraphicsMagick', '1.3.25'),
 ]
 dependencies = [
