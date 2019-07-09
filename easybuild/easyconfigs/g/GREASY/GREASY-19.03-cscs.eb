@@ -18,8 +18,8 @@ toolchainopts = {'opt': True, 'pic': True}
 #
 sources = ['https://github.com/eth-cscs/GREASY/archive/%(version)s.tar.gz']
 
-preconfigopts = 'module load gcc/7.3.0 && '
-prebuildopts = 'module load gcc/7.3.0 && '
+preconfigopts = 'module load gcc/6.2.0 && '
+prebuildopts = 'module load gcc/6.2.0 && '
 
 sanity_check_paths = {
     'files': ["bin/greasy"],
