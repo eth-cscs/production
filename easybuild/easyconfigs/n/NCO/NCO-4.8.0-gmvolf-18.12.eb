@@ -1,0 +1,33 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = '4.8.0'
+
+homepage = 'http://nco.sourceforge.net/'
+description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+toolchainopts = {'opt': True, 'pic': True, 'usempi': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://nco.sourceforge.net/src/']
+
+dependencies = [
+    # not using cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
+    # NCO: openmp support built by default, mpi is not yet supported
+    ('HDF5', '1.10.5'),
+    ('netCDF-Fortran', '4.4.5'),
+    ('cURL', '7.64.1'),
+    ('JasPer', '2.0.14'),
+    ('UDUNITS', '2.2.26', '', True),
+]
+
+configopts = "--disable-ncap2 "
+
+sanity_check_paths = {
+    'files': ["bin/ncbo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'
