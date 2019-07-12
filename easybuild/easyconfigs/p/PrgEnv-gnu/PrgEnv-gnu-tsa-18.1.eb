@@ -3,7 +3,7 @@ easyblock = 'Bundle'
 
 prgenv = 'gnu' 
 name = 'PrgEnv-%s' % prgenv
-version = '18.01'
+version = '18.1'
 fossversion = '2018b'
 
 homepage = 'http://user.cscs.ch'
