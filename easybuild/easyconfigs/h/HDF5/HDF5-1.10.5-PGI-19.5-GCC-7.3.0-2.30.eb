@@ -15,7 +15,7 @@ source_urls = ['https://support.hdfgroup.org/ftp/%(name)s/releases/%(namelower)s
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('zlib', '1.2.11', '', ('GCCcore', '7.3.0')),
+    ('zlib', '1.2.11'),
     ('Szip', '2.1.1'),
 ]
 
