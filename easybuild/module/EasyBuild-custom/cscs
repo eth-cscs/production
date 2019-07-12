@@ -76,11 +76,16 @@ if { [ string match *daint* $system ] || [ string match *dom* $system ] } {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
-} elseif { [ string match *arolla* $system ] || [ string match *tsa* $system ] } {
-    setenv EASYBUILD_RPATH                      1    
+} elseif { [ string match *arolla* $system ] || [ string match *tsa-ln* $system ] } {
+    setenv EASYBUILD_RPATH                      1
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModules
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
+} elseif { [ string match *tsa-cn* $system ] } {
+    setenv EASYBUILD_RPATH                      1
+    setenv EASYBUILD_MODULES_TOOL               Lmod
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
+    setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1    
 } elseif { [ string match *fulen* $system ] } {
     setenv XDG_RUNTIME_DIR                      /dev/shm/$::env(USER)
 } else {
