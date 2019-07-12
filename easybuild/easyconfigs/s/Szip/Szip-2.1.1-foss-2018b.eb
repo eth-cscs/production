@@ -1,4 +1,4 @@
-# contributed by Matthias Kraushaar (CSCS)
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'Szip'
@@ -8,7 +8,7 @@ homepage = 'http://www.hdfgroup.org/doc_resource/SZIP/'
 description = """Szip compression software, providing lossless compression of
 scientific data"""
 
-toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.3.0-2.30'}
+toolchain = {'name': 'foss', 'version': '2018b'}
 toolchainopts = {'pic': True}
 
 source_urls = ['http://www.hdfgroup.org/ftp/lib-external/%(namelower)s/%(version)s/src']

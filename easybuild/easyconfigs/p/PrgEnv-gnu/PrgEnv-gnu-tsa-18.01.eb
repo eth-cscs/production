@@ -3,7 +3,8 @@ easyblock = 'Bundle'
 
 prgenv = 'gnu' 
 name = 'PrgEnv-%s' % prgenv
-version = '2018b'
+version = '18.01'
+fossversion = '2018b'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -34,6 +35,6 @@ if { [module-info mode load] } {
   module load foss/.%s
  }
 }
-""" % (path, path, path, version, version)
+""" % (path, path, path, fossversion, fossversion)
 
 moduleclass = 'devel'
