@@ -15,7 +15,9 @@
  vampir-9.6.0.eb                                  
  Vim-8.1.eb 
  nmon-16g.eb                                    
- OpenMPI-3.1.1-GCC-7.3.0-2.30-cuda-10.0.eb          --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.01/easybuild
- OpenMPI-3.1.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ netCDF-C++-4.3.0-foss-2018b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.01/easybuild
+ netCDF-Fortran-4.4.5-foss-2018b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.01/easybuild
+ netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  PrgEnv-gnu-tsa-18.01.eb                            --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS
