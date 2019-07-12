@@ -16,7 +16,7 @@ sources = ['v%(version)s.tar.gz']
 
 dependencies = [
     ('Autotools', '20180311'),
-    ('cURL', '7.64.1'),
+    ('cURL', '7.65.1'),
 ]
 
 preconfigopts = 'make configure && '
@@ -24,7 +24,6 @@ preconfigopts = 'make configure && '
 # Work around git build system bug.  If LIBS contains -lpthread, then configure
 # will not append -lpthread to LDFLAGS, but Makefile ignores LIBS.
 configopts = "--with-perl=/usr/bin/perl --enable-pthreads='-lpthread'"
-#prebuildopts= "  cd contrib/subtree && make install && cd - && "
 postinstallcmds= [ "cd contrib/subtree && make install && cd - " ]
 
 sanity_check_paths = {
