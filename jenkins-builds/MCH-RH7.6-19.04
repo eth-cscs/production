@@ -6,7 +6,7 @@
  git-2.22.0.eb                                      
  IDL-8.5.1.eb                                        
  ImageMagick-6.7.6-10.eb                            --set-default-module
- ImageMagick-7.0.8-45.eb                             
+ ImageMagick-7.0.8-53.eb                             
  NCL-6.2.1.eb                                       --set-default-module
  NCL-6.6.2.eb                                        
  Python-2.7.16.eb                                   --disable-rpath                             
