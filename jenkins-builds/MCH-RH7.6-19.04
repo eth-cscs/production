@@ -10,11 +10,11 @@
  NCL-6.2.1.eb                                       --modules-tool=Lmod --set-default-module
  NCL-6.6.2.eb                                       --modules-tool=Lmod  
  Python-2.7.16.eb                                   --modules-tool=Lmod 
- Python-3.7.4.eb                               
+ Python-3.7.4.eb                                    --modules-tool=Lmod
  rstudio-1.2.1335.eb                                --modules-tool=Lmod --disable-rpath
- vampir-9.6.0.eb                                  
- Vim-8.1.eb 
- nmon-16g.eb                                    
+ vampir-9.6.0.eb                                    --modules-tool=Lmod
+ Vim-8.1.eb 					    --modules-tool=Lmod
+ nmon-16g.eb                                        --modules-tool=Lmod
  netCDF-C++-4.3.0-foss-2018b.eb                     --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-Fortran-4.4.5-foss-2018b.eb                 --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
