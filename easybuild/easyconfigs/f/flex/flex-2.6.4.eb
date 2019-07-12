@@ -19,7 +19,7 @@ source_urls = [
 ]
 
 builddependencies = [
-    ('Bison', '3.3.2'),
+    ('Bison', '3.0.5'),
 ]
 
 moduleclass = 'lang'

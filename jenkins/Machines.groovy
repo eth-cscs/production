@@ -38,12 +38,12 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
-def tsa = [name: 'tsa',
+def tsa = [name: 'tsa-cn17',
            archs: [],
            buildPath: '/dev/shm/$USER/easybuild/build',
            unusePath: '',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.5/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
 
 return [tsa]
