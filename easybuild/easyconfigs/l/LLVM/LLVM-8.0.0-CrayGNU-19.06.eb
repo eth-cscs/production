@@ -26,9 +26,13 @@ separate_build_dir = True
 prebuildopts = 'module load gcc/7.3.0 && module list &&'
 
 # required to install extra tools in bin/
-configopts = " -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86 "
-configopts += "-DLLVM_ENABLE_RTTI:BOOL=ON -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON "
-configopts += "-DLLVM_ENABLE_ZLIB=ON "
+configopts  = " -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86 "
+configopts += " -DLLVM_TARGETS_TO_BUILD=X86 "
+configopts += " -DLLVM_ENABLE_RTTI:BOOL=ON "
+configopts += " -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON "
+configopts += " -DLLVM_ENABLE_ZLIB=ON "
+configopts += " -DCMAKE_BUILD_TYPE=Release "
+configopts += " -DBUILD_SHARED_LIBS=ON "
 
 sanity_check_paths = {
     'files': ['bin/llvm-ar', 'bin/FileCheck'],
