@@ -1,23 +1,24 @@
- Anaconda3-2019.03.eb                                
- Autotools-20180311.eb                               
- binutils-2.30-GCCcore-7.3.0.eb                     --hidden
- CMake-3.14.5.eb                                    
- ddt-19.0.5-Redhat-7.0.eb                           --set-default-module
- git-2.22.0.eb                                      
- IDL-8.5.1.eb                                        
- ImageMagick-6.7.6-10.eb                            --set-default-module
- ImageMagick-7.0.8-53.eb                             
- NCL-6.2.1.eb                                       --set-default-module
- NCL-6.6.2.eb                                        
- Python-2.7.16.eb                                   
+ Anaconda3-2019.03.eb                               --modules-tool=Lmod  
+ Autotools-20180311.eb                              --modules-tool=Lmod  
+ binutils-2.30-GCCcore-7.3.0.eb                     --modules-tool=Lmod --hidden
+ CMake-3.14.5.eb                                    --modules-tool=Lmod 
+ ddt-19.0.5-Redhat-7.0.eb                           --modules-tool=Lmod --set-default-module
+ git-2.22.0.eb                                      --modules-tool=Lmod 
+ IDL-8.5.1.eb                                       --modules-tool=Lmod  
+ ImageMagick-6.7.6-10.eb                            --modules-tool=Lmod --set-default-module
+ ImageMagick-7.0.8-53.eb                            --modules-tool=Lmod  
+ NCL-6.2.1.eb                                       --modules-tool=Lmod --set-default-module
+ NCL-6.6.2.eb                                       --modules-tool=Lmod  
+ Python-2.7.16.eb                                   --modules-tool=Lmod 
  Python-3.7.4.eb                               
- rstudio-1.2.1335.eb                                --disable-rpath
+ rstudio-1.2.1335.eb                                --modules-tool=Lmod --disable-rpath
  vampir-9.6.0.eb                                  
  Vim-8.1.eb 
  nmon-16g.eb                                    
- netCDF-C++-4.3.0-foss-2018b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
- netCDF-Fortran-4.4.5-foss-2018b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
- netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- PrgEnv-gnu-tsa-18.1.eb                             --module-naming-scheme=EasyBuildMNS
- PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS
+ netCDF-C++-4.3.0-foss-2018b.eb                     --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
+ netCDF-Fortran-4.4.5-foss-2018b.eb                 --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
+ netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ OpenMPI-3.1.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --modules-tool=Lmod --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ PrgEnv-gnu-tsa-18.1.eb                             --modules-tool=Lmod --module-naming-scheme=EasyBuildMNS
+ PrgEnv-pgi-tsa-19.5.eb                             --modules-tool=Lmod --module-naming-scheme=EasyBuildMNS
