@@ -42,8 +42,8 @@
  pycuda-2018.1.1-CrayGNU-19.06-python3-cuda-10.1.eb --set-default-module
  PyExtensions-2.7.15.6-CrayGNU-19.06.eb
  PyExtensions-3.6.5.6-CrayGNU-19.06.eb
- Python-bare-3.6.2.eb                               --hidden
- QuantumESPRESSO-6.3-CrayIntel-19.06.eb             --set-default-module
+ Python-bare-3.7.3.eb                               --hidden
+ QuantumESPRESSO-6.4.1-CrayIntel-19.06-cuda-10.1.eb --set-default-module
  Spark-2.3.1-CrayGNU-19.06-Hadoop-2.7.eb            --set-default-module
  VASP-5.4.4-CrayIntel-19.06-cuda-10.1.eb            --set-default-module
  VMD-1.9.3-egl.eb
