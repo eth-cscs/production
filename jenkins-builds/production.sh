@@ -95,12 +95,11 @@ else
 fi
 
 # --- COMMON SETUP ---
-# module unuse PATH before building
+# module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
  echo -e "\n Unuse path: $unuse_path \n"
  module unuse $unuse_path
 fi
-
 # xalt table update for Piz Daint
 if [ -z "$update_xalt_table" ]; then
     update_xalt_table=yes
