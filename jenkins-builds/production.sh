@@ -95,14 +95,14 @@ else
 fi
 
 # --- COMMON SETUP ---
+# set production repository folder
+if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+fi
 # module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
  echo -e "\n Unuse path: $unuse_path \n"
  module unuse $unuse_path
-fi
-# xalt table update for Piz Daint
-if [ -z "$update_xalt_table" ]; then
-    update_xalt_table=yes
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
@@ -110,10 +110,11 @@ if [ -z "$PREFIX" ]; then
     usage
 else
  export EASYBUILD_PREFIX=$PREFIX
-fi
-# set production repository folder
-if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+# check if PREFIX is already in MODULEPATH after unuse
+ statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
+ if [ -z "$statuspath" ]; then
+  module use $EASYBUILD_PREFIX/modules/all
+ fi
 fi
 # create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
 if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
@@ -133,6 +134,10 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module load craype craype-network-aries modules perftools-base ugni
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
+    fi
+# xalt table update for Piz Daint
+    if [ -z "$update_xalt_table" ]; then
+        update_xalt_table=yes
     fi
 fi
 
