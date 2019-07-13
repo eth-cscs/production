@@ -101,9 +101,9 @@ if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
 fi
 # module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
- echo -e "\n Unuse path: $unuse_path \n"
+ echo -e "\n Unuse path: $unuse_path "
  module unuse $unuse_path
- echo -e "\n Updated MODULEPATH: $MODULEPATH \n"
+ echo -e " Updated MODULEPATH: $MODULEPATH \n"
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
@@ -114,9 +114,9 @@ else
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
-  echo -e "\n Use path: $EASYBUILD_PREFIX/modules/all \n"
+  echo -e "\n Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all"
   module use $EASYBUILD_PREFIX/modules/all
-  echo -e "\n Updated MODULEPATH: $MODULEPATH \n"
+  echo -e " Updated MODULEPATH: $MODULEPATH \n"
  fi
 fi
 # create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
