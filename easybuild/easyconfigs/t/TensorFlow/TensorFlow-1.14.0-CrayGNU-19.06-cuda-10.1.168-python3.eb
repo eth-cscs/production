@@ -26,7 +26,6 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '19.06'}
 
 builddependencies = [
-    ('wheel', '0.31.1', ver_suffix_py),
     ('Bazel', '0.24.1', ver_suffix_py),
 ]
 
@@ -82,6 +81,20 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/t/tensorflow_estimator'],
         'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
         'modulename': 'tensorflow_estimator',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
+    ('grpcio', '1.22.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/g/grpcio'],
+        'modulename': 'grpc',
+    }),
+    ('tensorboard', '1.14.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/tensorboard'],
+        'source_tmpl': 'tensorboard-1.14.0-py3-none-any.whl',
         'unpack_sources': False,
         'use_pip' : True,
     }),
