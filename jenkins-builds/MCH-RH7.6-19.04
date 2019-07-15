@@ -31,6 +31,6 @@
  R-3.6.1-foss-2018b.eb 				    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  Ruby-2.4.0-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild --set-default-module
  Ruby-2.6.3-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
- PrgEnv-cce-tsa-19.4.eb                             --module-naming-scheme=EasyBuildMNS
+ PrgEnv-cce-tsa-19.04.eb                            --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-18.1.eb                             --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS

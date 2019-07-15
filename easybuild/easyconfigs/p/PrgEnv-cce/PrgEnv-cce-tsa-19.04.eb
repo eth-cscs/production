@@ -3,7 +3,7 @@ easyblock = 'Bundle'
 
 prgenv = 'cce' 
 name = 'PrgEnv-%s' % prgenv
-version = '19.4'
+version = '19.04'
 
 homepage = 'http://user.cscs.ch'
 description = """
