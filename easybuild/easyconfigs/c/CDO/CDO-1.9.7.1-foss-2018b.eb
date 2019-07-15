@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
-version = '1.9.7'
+version = '1.9.7.1'
 
 homepage = 'https://code.zmaw.de/projects/cdo'
 description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
@@ -11,7 +11,7 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 toolchainopts = {'opt': True, 'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
-source_urls = ['https://code.mpimet.mpg.de/attachments/download/19299/']
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/20124']
 
 # OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support, no MPI support
 dependencies = [
