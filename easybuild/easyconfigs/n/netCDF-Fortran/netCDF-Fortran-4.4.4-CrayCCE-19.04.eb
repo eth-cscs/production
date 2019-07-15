@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'netCDF-Fortran'
-version = "4.4.5"
+version = "4.4.4"
 
 homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
 description = """NetCDF (network Common Data Form) is a set of software libraries
@@ -19,6 +19,8 @@ source_urls = [
 ]
 
 dependencies = [('netCDF', '4.7.0')]
+
+prebuildopts = ' sed "s/nc_inq_nparams/nc_inq_varnparams/" fortran/module_netcdf4_nc_interfaces.f90 && '
 
 # Copies uppercase mod files to lowercase in order to avoid failure of 'make install'
 preinstallopts = 'cd %(builddir)s/netcdf-fortran-%(version)s/fortran && '

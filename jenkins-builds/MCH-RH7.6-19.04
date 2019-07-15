@@ -15,6 +15,8 @@
  vampir-9.6.0.eb                                    
  Vim-8.1.eb 					    
  nmon-16g.eb                                        
+ netCDF-C++-4.3.0-CrayCCE-19.04.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.6/cce/19.04/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
+ netCDF-Fortran-4.4.4-CrayCCE-19.04.eb              --installpath=/apps/arolla/UES/jenkins/RH7.6/cce/19.04/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  Boost-1.70.0-foss-2018b-python2.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  Boost-1.70.0-foss-2018b-python3.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  CDO-1.9.7-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
@@ -22,15 +24,15 @@
  ncview-2.1.7-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-C++-4.3.0-foss-2018b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-Fortran-4.4.5-foss-2018b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
- netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- OpenMPI-3.1.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  PyExtensions-2.7.16-foss-2018b.eb 		    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  PyExtensions-3.7.4-foss-2018b.eb 		    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  R-3.5.2-foss-2018b.eb 				    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild --set-default-module
  R-3.6.1-foss-2018b.eb 				    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  Ruby-2.4.0-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild --set-default-module
  Ruby-2.6.3-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
+ netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ OpenMPI-3.1.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  PrgEnv-cce-tsa-19.04.eb                            --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-18.1.eb                             --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS
