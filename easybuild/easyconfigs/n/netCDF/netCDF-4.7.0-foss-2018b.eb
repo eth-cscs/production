@@ -24,9 +24,11 @@ dependencies = [
 
 # make sure both static and shared libs are built
 configopts = [
-    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON",
-    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF",
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
 ]
+
+maxparallel =1 
 
 postinstallcmds = [('ln -s %(installdir)s/lib64 %(installdir)s/lib')]
 
