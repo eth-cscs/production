@@ -9,7 +9,7 @@
  ImageMagick-7.0.8-53.eb                             
  NCL-6.2.1.eb                                       --set-default-module
  NCL-6.6.2.eb                                        
- Python-2.7.16.eb                                   
+ Python-2.7.16.eb                                   --disable-rpath 
  Python-3.7.4.eb                                    
  rstudio-1.2.1335.eb                                --disable-rpath
  vampir-9.6.0.eb                                    
