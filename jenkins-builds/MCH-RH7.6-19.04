@@ -15,6 +15,7 @@
  vampir-9.6.0.eb                                    
  Vim-8.1.eb 					    
  nmon-16g.eb                                        
+ reframe-2.18.eb
  netCDF-C++-4.3.0-CrayCCE-19.04.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.6/cce/19.04/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  netCDF-Fortran-4.4.4-CrayCCE-19.04.eb              --installpath=/apps/arolla/UES/jenkins/RH7.6/cce/19.04/easybuild --module-naming-scheme=EasyBuildMNS --optarch=x86-skylake --disable-rpath
  Boost-1.70.0-foss-2018b-python2.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
