@@ -81,11 +81,11 @@ class EB_PGI(PackedBinary):
     @staticmethod
     def extra_options():
         extra_vars = {
-            'install_managed': [True, "Install OpenACC Unified Memory Evaluation package", CUSTOM],
-            'install_nvidia': [True, "Install CUDA Toolkit Components", CUSTOM],
-            'install_java': [True, "Install Java JRE for graphical debugger",  CUSTOM],
-            'install_mpi': [True, "Install OpenMPI", CUSTOM],
-            'mpi_gpu_support': [True, "Enable GPU support for OpenMPI", CUSTOM],
+    #        'install_managed': [True, "Install OpenACC Unified Memory Evaluation package", CUSTOM],
+    #        'install_nvidia': [True, "Install CUDA Toolkit Components", CUSTOM],
+    #        'install_java': [True, "Install Java JRE for graphical debugger",  CUSTOM],
+    #        'install_mpi': [True, "Install OpenMPI", CUSTOM],
+    #        'mpi_gpu_support': [True, "Enable GPU support for OpenMPI", CUSTOM],
         }
         return PackedBinary.extra_options(extra_vars)
 
@@ -130,11 +130,11 @@ class EB_PGI(PackedBinary):
             'PGI_SILENT': 'true',
             'PGI_ACCEPT_EULA': 'accept',
             'PGI_INSTALL_DIR': self.installdir,
-            'PGI_INSTALL_MANAGED': str(self.cfg['install_managed']).lower(),
-            'PGI_INSTALL_NVIDIA': str(self.cfg['install_nvidia']).lower(),
-            'PGI_INSTALL_JAVA': str(self.cfg['install_java']).lower(),
-            'PGI_INSTALL_MPI': str(self.cfg['install_mpi']).lower(),
-            'PGI_MPI_GPU_SUPPORT': str(self.cfg['mpi_gpu_support']).lower(),
+            #'PGI_INSTALL_MANAGED': str(self.cfg['install_managed']).lower(),
+            #'PGI_INSTALL_NVIDIA': str(self.cfg['install_nvidia']).lower(),
+            #'PGI_INSTALL_JAVA': str(self.cfg['install_java']).lower(),
+            #'PGI_INSTALL_MPI': str(self.cfg['install_mpi']).lower(),
+            #'PGI_MPI_GPU_SUPPORT': str(self.cfg['mpi_gpu_support']).lower(),
             }
         cmd = "%s ./install" % ' '.join(['%s=%s' % x for x in sorted(pgi_env_vars.items())])
         run_cmd(cmd, log_all=True, simple=True)
