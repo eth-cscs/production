@@ -7,19 +7,17 @@ homepage = 'https://pubs.cray.com/discover'
 description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
 (PE release: April 2019).\n"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
+# PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
 dependencies = [
-    # PrgEnv version is not pinned, as Cray recommends to use the latest
-    # (default) version
     ('PrgEnv-cray/1.0.5', EXTERNAL_MODULE),
     ('cce/8.7.10', EXTERNAL_MODULE),
     ('cray-libsci/18.07.1', EXTERNAL_MODULE),
     ('cray-mvapich2/2.3', EXTERNAL_MODULE),
-    ('craype/2.5.18', EXTERNAL_MODULE),
-    ('cuda10.0/toolkit/10.0.130', EXTERNAL_MODULE),
 ]
 
-# LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
+# quick and dirty fix for CrayCCE
+modextrapaths = {'CRAY_LD_LIBRARY_PATH': ''}
 
 moduleclass = 'toolchain'

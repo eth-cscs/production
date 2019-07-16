@@ -17,7 +17,7 @@ path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (prgenv, ver
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
-lappend list PrgEnv-cray/1.0.5 shared
+lappend list cray-libsci/18.07.1 PrgEnv-cray/1.0.5 shared
 
 if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${list} {
