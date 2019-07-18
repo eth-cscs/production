@@ -1,8 +1,8 @@
-# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), September 12, 2018
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), September 12, 2018 (updated July 17, 2019)
 easyblock = 'PackedBinary'
 
 name = 'julia'
-version = '1.0.0'
+version = '1.0.4'
 
 homepage = 'https://julialang.org'
 description = 'Julia is a high-level general-purpose dynamic programming language that was originally designed to address the needs of high-performance numerical analysis and computational science, without the typical need of separate compilation to be fast, also usable for client and server web use, low-level systems programming or as a specification language (wikipedia.org). Julia provides ease and expressiveness for high-level numerical computing, in the same way as languages such as R, MATLAB, and Python, but also supports general programming. To achieve this, Julia builds upon the lineage of mathematical programming languages, but also borrows much from popular dynamic languages, including Lisp, Perl, Python, Lua, and Ruby (julialang.org).'
@@ -12,7 +12,7 @@ toolchain = { 'name' : 'dummy', 'version' : '' }
 source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
 sources = ['%(namelower)s-%(version)s-linux-x86_64.tar.gz']
 
-checksums = [ '9b80b1b5ca161eed4553caf6e8a73b08' ]
+checksums = [ '1adcc6bca84829a9251c3c867fa912f7' ]
 
 sanity_check_paths = {
     'files' : ['LICENSE.md'],
