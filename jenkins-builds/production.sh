@@ -68,7 +68,7 @@ done
 
 # checks force_list
 if [ -n "${force_list}" ]; then
-# match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
+# match force_list items with production lists: only matching items will be built using the EasyBuild flag '-f'
  echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do
      force_match=$(grep $item ${eb_lists[@]})
@@ -95,9 +95,15 @@ else
 fi
 
 # --- COMMON SETUP ---
-# xalt table update for Piz Daint
-if [ -z "$update_xalt_table" ]; then
-    update_xalt_table=yes
+# set production repository folder
+if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+fi
+# module unuse PATH before loading EasyBuild module and building
+if [ -n "$unuse_path" ]; then
+ echo -e "\n Unuse path: $unuse_path "
+ module unuse $unuse_path
+ echo -e " Updated MODULEPATH: $MODULEPATH \n"
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
@@ -105,16 +111,19 @@ if [ -z "$PREFIX" ]; then
     usage
 else
  export EASYBUILD_PREFIX=$PREFIX
-fi
-# set production repository folder
-if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
-fi
 # create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
-if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
- mkdir -p "$EASYBUILD_PREFIX/modules/all"
- mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
- ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+  mkdir -p "$EASYBUILD_PREFIX/modules/all"
+  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
+  ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ fi
+# check if PREFIX is already in MODULEPATH after unuse command
+ statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
+ if [ $statuspath -eq 0 ]; then
+  echo -e "\n Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all"
+  module use $EASYBUILD_PREFIX/modules/all
+  echo -e " Updated MODULEPATH: $MODULEPATH \n"
+ fi
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -128,6 +137,10 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module load craype craype-network-aries modules perftools-base ugni
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
+    fi
+# xalt table update for Piz Daint
+    if [ -z "$update_xalt_table" ]; then
+        update_xalt_table=yes
     fi
 fi
 
@@ -147,11 +160,6 @@ for ((i=0; i<${#eb_files[@]}; i++)); do
     eb_files[i]=$(eval echo ${eb_files[i]})
     echo ${eb_files[$i]}
 done
-# module unuse PATH before building
-if [ -n "$unuse_path" ]; then
- echo -e "\n Unuse path: $unuse_path \n"
- module unuse $unuse_path
-fi
 
 # checks dependency list using dry run
 dryrun=$(eb ${eb_files[@]} -Dr ${eb_args} 2>&1)
