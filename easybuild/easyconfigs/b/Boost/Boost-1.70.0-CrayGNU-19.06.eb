@@ -1,4 +1,3 @@
-easyblock = 'boostcray'
 
 name = 'Boost'
 version = '1.70.0'
@@ -9,7 +8,7 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.06'}
-toolchainopts = {'pic': True, 'usempi': True}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = [SOURCEFORGE_SOURCE]
@@ -19,7 +18,7 @@ dependencies = [
     ('zlib', '1.2.11'),
 ]
 
-configopts = 'CXXFLAGS="-std=gnu++98 ${CXXFLAGS}" --without-libraries=python'
+configopts = '--without-libraries=python'
 boost_mpi = True
 
 modextravars = {
