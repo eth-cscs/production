@@ -1,8 +1,8 @@
  abcpy-0.5.1-CrayGNU-19.06-python3.eb               --set-default-module
  Amber-18-14-14-CrayGNU-19.06-cuda-10.1.eb          --set-default-module
- Boost-1.67.0-CrayGNU-19.06-python2.eb
- Boost-1.67.0-CrayGNU-19.06-python3.eb              --set-default-module
- Boost-1.67.0-CrayGNU-19.06.eb
+ Boost-1.70.0-CrayGNU-19.06-python2.eb
+ Boost-1.70.0-CrayGNU-19.06-python3.eb              --set-default-module
+ Boost-1.70.0-CrayGNU-19.06.eb
  CDO-1.9.5-CrayGNU-19.06.eb                         --set-default-module
  CDO-1.9.5-CrayIntel-19.06.eb
  CMake-3.14.5.eb
