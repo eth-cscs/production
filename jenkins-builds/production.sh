@@ -204,7 +204,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         status=$[status+$?]
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-        chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+        chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
         chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 # build other software
     else
