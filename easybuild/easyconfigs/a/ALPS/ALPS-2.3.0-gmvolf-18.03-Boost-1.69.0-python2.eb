@@ -1,0 +1,47 @@
+# @author: sebkelle1 
+easyblock = 'CMakeMake'
+
+name = 'ALPS'
+version = "2.3.0"
+versionsuffix = "-Boost-1.69.0-python2"
+
+homepage = 'http://alps.comp-phys.org'
+description = """The ALPS project (Algorithms and Libraries for Physics
+Simulations) is an open source effort aiming at providing high-end simulation
+codes for strongly correlated quantum mechanical systems as well as C++
+libraries for simplifying the development of such code."""
+
+toolchain = {'name': 'gmvolf', 'version': '18.03'}
+toolchainopts = {'pic': True}
+source_urls = ['http://alps.comp-phys.org/static/software/releases/']
+sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
+patches = ["average.patch", "riterator.patch",
+           "boost_min_workspace.patch", "cmake_boost.patch",
+           "boost_noncopyable.patch"]
+
+dependencies = [
+    ('Boost', '1.69.0', '-python2'),
+    ('hdf5_18/1.8.20', EXTERNAL_MODULE)
+]
+
+builddependencies = [
+    ('CMake', '3.14.3', '', True)
+]
+
+# path to the project directory if not at top
+start_dir = 'alps'
+
+configopts  = '-DALPS_BUILD_APPLICATIONS=OFF -DALPS_BUILD_EXAMPLES=OFF '
+configopts += '-DALPS_BUILD_MPS=OFF -DALPS_BUILD_TESTS=OFF -DALPS_ENABLE_MPI=OFF '
+configopts += '-DALPS_INCLUDE_TUTORIALS=OFF -DALPS_INSTALL_MPS_FRAMEWORK=OFF '
+separate_build_dir = True
+
+sanity_check_paths = {
+    'files': ['lib/libalps.%s' % SHLIB_EXT],
+    'dirs': ['include/alps', 'bin/', 'share/'],
+}
+
+modextravars = {'ALPS_ROOT': '%(installdir)s'}
+modextrapaths = {'PYTHONPATH': ['lib']}
+
+moduleclass = 'lib'
