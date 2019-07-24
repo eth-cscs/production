@@ -21,6 +21,6 @@ dependencies = [
 ]
 
 # license file
-license_file = '/opt/pgi/license.dat'
+license_file = '/apps/common/UES/easybuild/sources/p/PGI/license.dat'
 
 moduleclass = 'compiler'
