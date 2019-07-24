@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 builddependencies = [
-    ('CMake', '3.13.0', '', True),
+    ('CMake', '3.13.4', '', True),
     ('Doxygen', '1.8.14', '', True),
 ]
 
