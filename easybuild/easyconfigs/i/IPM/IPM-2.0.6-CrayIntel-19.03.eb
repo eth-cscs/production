@@ -1,0 +1,61 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'IPM'
+version = '2.0.6'
+
+homepage = 'https://github.com/nerscadmin/IPM'
+description = """Integrated Performance Monitoring for High Performance
+Computing"""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+
+source_urls = ['https://github.com/nerscadmin/IPM/archive']
+sources = ['%(version)s.tar.gz']
+checksums = [ 'c01207ca942bef74c7d48df965fca99f' ]
+# Forcing $IPM_LOGDIR to archive all reports in a shared dir:
+patches = [ 'IPM-2.0.6-Cray-19.03.patch' ]
+
+# ploticus+mxml required for parser
+# Installing ploticus-ipm to avoid conflict with the version installed under
+# /apps/common/system/modulefiles/ploticus/'
+dependencies = [
+    ('libunwind', '1.2.1', '', True),
+    ('mxml', '2.10', '', True),
+    ('ploticus', '2.42-ipm', '', True),
+# papi provided by perftools-base
+#    ('papi/5.6.0.2', EXTERNAL_MODULE),
+]
+
+preconfigopts  = ' ./bootstrap.sh && '
+preconfigopts += ' sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
+buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
+configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
+# With Cray, we can use perftools' papi, otherwise:
+# configopts  = ' --with-papi=`pkg-config --variable=papi_prefix papi`'
+configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
+configopts += ' CPPFLAGS="-I$EBROOTMXML/include "'
+configopts += ' LIBS="-L$EBROOTMXML/lib "'
+configopts += ' --enable-parser '
+#no! configopts += ' --enable-shared '
+
+postinstallcmds = ["mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl "]
+
+sanity_check_paths = {
+    'files': ["bin/ipm_parse.pl",
+             "etc/ipm_key_mpi",
+             "lib/libipm.a",
+            ],
+    'dirs': [],
+}
+
+modextrapaths = { 'IPM_KEYFILE': 'etc/ipm_key_mpi' }
+modextravars = {
+    'IPM' : '-L%(installdir)s/lib -Wl,--whole-archive -lipmf -lipm -Wl,--no-whole-archive',
+    'IPM_HPM' : 'PAPI_TOT_CYC',
+}
+
+moduleclass = 'perf'
+

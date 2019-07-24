@@ -43,6 +43,11 @@ exts_list = [
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
     }),
+    ('Mako', '1.0.8', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/m/mako/'],
+    }),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module

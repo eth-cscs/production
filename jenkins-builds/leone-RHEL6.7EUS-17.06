@@ -11,7 +11,7 @@
  PrgEnv-gnu-leone-foss-2016b.eb
  Python-2.7.12-foss-2016b.eb                --set-default-module
  Python-3.5.2-foss-2016b.eb
- reframe-2.16.eb                            --set-default-module
- reframe-2.17-dev0.eb
+ reframe-2.17.eb                            --set-default-module
+ reframe-2.18-dev0.eb
  Vim-8.0.eb                                 --set-default-module
  vampir-9.4.0.eb                            --set-default-module

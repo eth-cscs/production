@@ -1,22 +1,23 @@
+# jg (CSCS)
 easyblock = 'ConfigureMake'
+
 name = 'OTF2'
 version = '2.1.1'
-
 homepage = 'http://www.score-p.org'
 description = """The Open Trace Format 2 is a highly scalable, memory efficient
 event trace data format plus support library. It is the new standard trace
-format for Scalasca, Vampir, and TAU and is open for other tools."""
+format for Scalasca, Vampir, and TAU and is open for other tools.
+python3-bindings are supported too."""
 
 toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://www.vi-hps.org/cms/upload/packages/otf2']
 sources = ["otf2-%(version)s.tar.gz"]
-source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
 checksums = ['e51ad0d8ca374d25f47426746ca629e7']
-#no builddependencies = [ ('SIONlib', '1.7.1') ]
 configopts = '--enable-shared --with-nocross-compiler-suite=gcc CC=gcc '
-# for python api, see OTF2-2.1.1-CrayGNU-17.08-python3-bindings.eb
 
 sanity_check_paths = {
-    'files': ["bin/otf2-config", "include/otf2/otf2.h", ("lib/libotf2.a", "lib64/libotf2.a")],
+    'files': ["bin/otf2-config", "include/otf2/otf2.h",
+              ("lib/libotf2.a", "lib64/libotf2.a")],
     'dirs': [],
 }
 

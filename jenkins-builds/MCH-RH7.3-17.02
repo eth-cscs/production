@@ -1,0 +1,59 @@
+ Anaconda3-4.4.0.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Autotools-201602.eb                                 --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Boost-1.63.0-gmvolf-17.02-Python-2.7.13.eb
+ c2sm-rcm-1.00.00-kesch.eb                           --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ CDO-1.8.2-gmvolf-17.02.eb
+ CMake-3.9.1.eb                                      --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ ddt-18.2.2-Redhat-7.0.eb                            --set-default-module --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ ecCodes-2.7.0-gmvolf-17.02-Python-2.7.13.eb         --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ GCC-4.8.2-binutils-2.24.eb                          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ GCCcore-4.9.3.eb                                    --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ GDAL-2.2.1-gmvolf-17.02.eb
+ GSL-1.16-gmvolf-17.02.eb
+ geeqie-1.3.eb                                       --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ git-2.14.1.eb                                       --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ HDF-4.2.13-gmvolf-17.02.eb
+ IDL-8.5.1.eb                                        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ ImageMagick-6.7.6-10.eb                             --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ ImageMagick-6.7.6-10-GCC-5.4.0-2.26.eb              --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ ImageMagick-6.7.6-10-GCC-5.4.0-2.26-sysdeps.eb      --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ ImageMagick-7.0.7-7.eb                              --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ ImageMagick-7.0.7-7-GCC-5.4.0-2.26.eb               --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ ImageMagick-7.0.7-7-GCC-5.4.0-2.26-sysdeps.eb       --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ IPython-7.2.0-gmvolf-17.02-Python-3.7.2.eb          --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ NCL-6.2.1.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ NCL-6.4.0.eb                                        --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ NCL-6.5.0-gmvolf-18.05.eb                           --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ NCO-4.6.2-gmvolf-17.02.eb
+ PrgEnv-gnu-kesch-gmvolf-17.02.eb                    --module-naming-scheme=EasyBuildMNS
+ gmvapich2-17.02_cuda_8.0_gdr.eb
+ matlab-r2016a.eb                                    --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Python-2.7.13-gmvolf-17.02.eb
+ Python-3.6.2-gmvolf-17.02.eb
+ Python-3.7.2-gmvolf-17.02.eb                        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
+ R-3.5.2-gmvolf-17.02-libX11-1.6.3.eb
+ reframe-2.17.eb                                     --set-default-module
+ reframe-2.18-dev0.eb
+ Ruby-2.2.2-gmvolf-17.02.eb
+ ncview-2.1.7-gmvolf-17.02.eb
+ netCDF-C++-4.3.0-gmvolf-17.02.eb
+ netCDF-Fortran-4.4.4-gmvolf-17.02.eb
+ netcdf4-python-1.3.0-gmvolf-17.02-Python-2.7.13.eb
+ netcdf4-python-1.3.0-gmvolf-17.02-Python-3.6.2.eb
+ netCDF-4.4.1.1-gmvolf-17.02.eb
+ netCDF-C++-4.3.0-CrayCCE-17.06.eb                   --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-Fortran-4.4.4-CrayCCE-17.06.eb               --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-4.4.1.1-CrayCCE-17.06.eb                     --installpath=/apps/escha/UES/jenkins/RH7.3-cray_PE17.06/easybuild --module-naming-scheme=EasyBuildMNS --optarch=haswell
+ netCDF-4.6.1-PGI-17.10-GCC-5.4.0-2.26.eb            --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ netCDF-C++-4.3.0-PGI-17.10-GCC-5.4.0-2.26.eb        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ netCDF-Fortran-4.4.4-PGI-17.10-GCC-5.4.0-2.26.eb    --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
+ PROJ-5.1.0-gmvolf-17.02.eb
+ rstudio-1.0.143.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild --set-default-module
+ rstudio-1.1.442.eb                                  --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Score-P-3.1-gmvapich2-17.02_cuda_8.0_gdr.eb         --set-default-module
+ Understand-4.0.913.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Understand-5.0.928.eb                               --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Valgrind-3.13.0-gmvolf-17.02.eb
+ vampir-9.4.0.eb                                     --installpath=/apps/escha/UES/RH7.3_generic/easybuild
+ Vim-8.0.eb                                          --installpath=/apps/escha/UES/RH7.3_generic/easybuild

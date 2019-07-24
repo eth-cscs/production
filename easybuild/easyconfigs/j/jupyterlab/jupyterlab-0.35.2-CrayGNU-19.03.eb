@@ -1,0 +1,74 @@
+# @author: robinson, sarafael 
+
+easyblock = 'Bundle'
+
+name = 'jupyterlab'
+version = '0.35.2'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.7'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('jupyter', '1.0.0'),
+    ('jupyterhub', '0.9.4')
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('jupyterlab_server', '0.2.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab_server/'],
+        }),
+    (name, version, {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'installopts': ' --install-option=--skip-npm ',
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab/'],
+        }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+
+modextravars = {
+    'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
+}
+
+# install labhub extension
+postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
+                   "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
+                   "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyterlab/hub-extension@0.12.0;"
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@0.38.1;"
+                   "rm -r $YARN_CACHE_FOLDER"]
+
+sanity_check_paths = {
+    'files': ['share/jupyter/lab/extensions/jupyterlab-hub-extension-0.12.0.tgz',
+              'share/jupyter/lab/extensions/jupyter-widgets-jupyterlab-manager-0.38.1.tgz'],
+    'dirs': ['lib/python%s/site-packages' % pyshortver,
+             'share/jupyter/lab/extensions',
+             'share/jupyter/lab/schemas',
+             'share/jupyter/lab/staging',
+             'share/jupyter/lab/static',
+             'share/jupyter/lab/themes',
+             ]
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,22 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libunistring'
+version = '0.9.7'
+
+homepage = 'http://www.gnu.org/software/libunistring/'
+description = """This library provides functions for manipulating Unicode strings and for manipulating C strings
+according to the Unicode standard."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'lib/%(name)s.so', 'include/unicase.h', 'include/uniconv.h', 'include/unictype.h', 'include/unigbrk.h', 'include/unilbrk.h', 'include/uniname.h', 'include/uninorm.h', 'include/unistdio.h', 'include/unistr.h', 'include/unitypes.h', 'include/uniwbrk.h', 'include/uniwidth.h'],
+    'dirs': ['include/unistring'],
+}
+
+moduleclass = 'lib'

@@ -1,0 +1,28 @@
+diff -Naur advisor_2019_update3.ori/silent.cfg advisor_2019_update3/silent.cfg
+--- advisor_2019_update3.ori/silent.cfg	2019-02-26 10:38:45.000000000 +0100
++++ advisor_2019_update3/silent.cfg	2019-04-08 14:23:26.246261000 +0200
+@@ -7,13 +7,13 @@
+ # comppat     - the component abbreviation (intel-component-0123.4-567__arch), use installer command line option to get it
+ 
+ # Accept EULA, valid values are: {accept, decline}
+-ACCEPT_EULA=decline
++ACCEPT_EULA=accept
+ 
+ # Optional error behavior, valid values are: {yes, no}
+ CONTINUE_WITH_OPTIONAL_ERROR=yes
+ 
+ # Install location, valid values are: {/opt/intel, filepat}
+-PSET_INSTALL_DIR=/opt/intel
++PSET_INSTALL_DIR=XXXXX
+ 
+ # Continue with overwrite of existing installation directory, valid values are: {yes, no}
+ CONTINUE_WITH_INSTALLDIR_OVERWRITE=yes
+@@ -57,7 +57,7 @@
+ # Yes - I consent to the collection of my Information
+ # No  - I do NOT consent to the collection of my Information
+ #, valid values are: {yes, no}
+-#INTEL_SW_IMPROVEMENT_PROGRAM_CONSENT=no
++INTEL_SW_IMPROVEMENT_PROGRAM_CONSENT=no
+ 
+ # Perform validation of digital signatures of RPM files, valid values are: {yes, no}
+ SIGNING_ENABLED=yes

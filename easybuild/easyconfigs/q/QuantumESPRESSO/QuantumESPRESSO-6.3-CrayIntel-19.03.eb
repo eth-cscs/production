@@ -1,0 +1,42 @@
+# contributed by Guilherme Peretti Pezzi, Luca Marsella and Anton Kozhevnikov (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO'
+version = '6.3'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+sources = ['https://gitlab.com/QEF/q-e/-/archive/' + 'qe-%(version)s/q-e-qe-%(version)s.tar.gz']
+
+preconfigopts = ' module unload cray-libsci && module list && '
+preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" '
+preconfigopts += ' LD_LIBS="-lpthread -lstdc++ -ldl" ' 
+preconfigopts += ' FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" '
+preconfigopts += ' LDFLAGS="-qopenmp" F90FLAGS="$FFLAGS" FFT_LIBS="-mkl" FC="ftn" CFLAGS="-O3" CC="cc" '
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
+
+# correct install rule in Makefile with a phony target (a folder "install" already exists)  
+prebuildopts = ' sed -i -e "s/install :/.PHONY: install\\ninstall:/" Makefile && '
+# correct download url and filename of package W90 (replacing release 2.1.0 with 3.0.0)
+W90 = 'wannier90-3.0.0'
+W90_URL = 'https://github.com/wannier-developers/wannier90/archive/v3.0.0.tar.gz'
+prebuildopts += ' sed -i -e "s/W90=.*/W90=%s/" -e "s#W90_URL=.*#W90_URL=%s#" install/plugins_list && ' % (W90, W90_URL)
+prebuildopts += ' sed -i -e "s/wannier90-2.1.0/%s/" EPW/src/Makefile && ' % W90
+prebuildopts += ' module unload cray-libsci && module list && cat make.inc && '
+buildopts = 'all epw'
+# a single make process is required, since parallel builds fail
+maxparallel = 1
+
+sanity_check_paths = {
+      'files': ['bin/pw.x', 'bin/cp.x'],
+      'dirs': ['']
+}
+
+moduleclass = 'chem'

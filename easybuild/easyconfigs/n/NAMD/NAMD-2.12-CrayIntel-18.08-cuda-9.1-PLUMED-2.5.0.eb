@@ -1,0 +1,48 @@
+# Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
+easyblock = 'MakeCp'
+
+nameletterlower = 'n'
+name = 'NAMD'
+version = "2.12"
+cudaversion = '9.1'
+plumedversion = '2.5.0'
+versionsuffix = '-PLUMED-%s-cuda-%s' % (plumedversion, cudaversion)
+
+homepage = 'http://www.ks.uiuc.edu/Research/namd/'
+description = """NAMD is a parallel molecular dynamics code designed for
+high-performance simulation of large biomolecular systems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+toolchainopts = {'dynamic': False}
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + 'NAMD_%(version)s_Source.tar.gz']
+patches = ['NAMD-2.12.patch']
+
+# configure NAMD
+prebuildopts = ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-cray-fftw'
+prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-hugepages-smp'
+prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
+# patch with PLUMED
+prebuildopts +=  'plumed-patch -p -e %(namelower)s-%(version)s --runtime --shared && '
+# change folder to build
+prebuildopts += ' cd CRAY-XC-intel.cuda && '
+
+builddependencies = [
+    ('Charm++', '6.8.0'),
+    ('Tcl', '8.6.7'),
+    ('cray-fftw/3.3.6.5', EXTERNAL_MODULE),
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+]
+dependencies = [
+    ('PLUMED', '%s' % plumedversion),
+]
+
+files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/namd2'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

@@ -13,7 +13,7 @@ heap-profiler and cpu-profiler."""
 toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://github.com/gperftools/gperftools/releases/download/%(namelower)s-%(version)s']
 sources = [SOURCE_TAR_GZ]
-dependencies = [('libunwind', '1.2.1')]
+dependencies = [('libunwind', '1.2.1'), ('pprof', '9daae4f')]
 configopts  = " --enable-libunwind CPPFLAGS=-I$EBROOTLIBUNWIND/include"
 configopts += " LDFLAGS=-L$EBROOTLIBUNWIND/lib"
 

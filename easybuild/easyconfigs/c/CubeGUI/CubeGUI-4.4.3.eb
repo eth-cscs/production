@@ -1,0 +1,32 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CubeGUI'
+version = '4.4.3'
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Cube, which is used as performance report explorer for
+Scalasca and Score-P, is a generic tool for displaying a multi-dimensional
+performance space consisting of the dimensions (i) performance metric, (ii)
+call path, and (iii) system resource. Each dimension can be represented as a
+tree, where non-leaf nodes of the tree can be collapsed or expanded to achieve
+the desired level of granularity."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/'
+               '%(version_major_minor)s/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['df33da52534f6e85adad3ed3f983fd7c']
+patches = ['%(name)s-%(version)s.patch']
+preconfigopts = 'export PATH=/usr/lib64/qt5/bin:$PATH && '
+builddependencies = [('CubeLib', '4.4.3')]
+osdependencies = [('libQt5Network-devel', 'libQt5Gui-devel', 'libglvnd'
+                   'libQt5Widgets-devel', 'libQt5PrintSupport-devel',
+                   'libQt5Core-devel')]
+sanity_check_paths = {
+    'files': ['bin/cube'],
+    'dirs': ['include/cubegui'],
+}
+
+modextravars = {'CUBE_PLUGIN_DIR': '%(installdir)s/lib/cube-plugins'}
+
+moduleclass = 'perf'

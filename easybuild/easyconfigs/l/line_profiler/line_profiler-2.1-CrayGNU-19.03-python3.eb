@@ -1,0 +1,36 @@
+# jg (cscs) 
+easyblock = 'PythonPackage'
+
+name = 'line_profiler'
+version = '2.1'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.6'
+req_py_majver = py_maj_ver
+req_py_minver = py_min_ver
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'https://github.com/rkern/line_profiler'
+description = """Line-by-line profiler for Python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/rkern/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+
+dependencies = [ ('PyExtensions', pyver) ] # Cython 
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [(
+        'lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s'
+        '-linux-x86_64.egg' % {'pv': pyshortver}
+    )],
+}
+
+moduleclass = 'lang'

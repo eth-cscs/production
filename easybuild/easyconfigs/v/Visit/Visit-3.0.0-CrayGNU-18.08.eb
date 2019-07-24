@@ -1,0 +1,106 @@
+# contributed by Jean Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Visit'
+version = "3.0.0"
+
+homepage = 'https://wci.llnl.gov/codes/visit/'
+description = """VisIt is an Open Source, interactive, scalable, visualization,
+animation and analysis tool."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'usempi': True, 'verbose': False}
+
+#
+# Visit downloads all its dependencies by itself during the configuration.
+# The downloads may fail due to different reasons. So, we have pre-packaged
+# visit with the downloaded dependencies.
+#
+# Below you will find the steps to create the SOURCELOWER_TAR_GZ file used in
+# this recipe.
+#
+# wget http://portal.nersc.gov/project/visit/releases/3.0.0/visit3.0.0.tar.gz
+# tar xfz visit3.0.0.tar.gz
+# cd visit3.0.0
+# ./src/tools/dev/scripts/build_visit --console --no-visit --parallel \
+#                            --system-cmake --hdf5 --icet --llvm --mesagl \
+#                            --qt --qwt --silo --netcdf --vtk --system-python \
+#                            --download-only 
+# cd ..
+
+# tar cfz  visit-3.0.0.tar.gz visit3.0.0
+# mkdir -p $EASYBUILD_SOURCEPATH/v/Visit
+# cp visit-3.0.0.tar.gz $EASYBUILD_SOURCEPATH/v/Visit/
+#
+# NOTES:
+# * The new visit package is named visit-3.0.0.tar.gz, not visit3.0.0.tar.gz
+#   as the original file.
+# * The download-only option must not be included in the actual build.
+# * The configuration options are the same as the ones below.
+# * We are using the system-python because one cannot compile python with xalt
+#   enabled.
+# * In the preconfigopts commands below, there is an additional <<< "yes".
+#   This is used to accept the Qt License. This is not needed when using
+#   --download-only
+# * The original intent was to compile only the server-side components, disabling the
+#   use of the GUI client for loggin nodes. Yet, this also removes the cli, preventing
+#   us to run python-based batch-mode scripts. Thus, we build all components [default]
+
+
+# In order to use the pre-downloaded version use the source below
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
+
+srcdir='../src'
+#preconfigopts  = ' export PAR_COMPILER=$CC; '
+#preconfigopts += ' export PAR_INCLUDE="-I$MPICH_DIR/include"; '
+preconfigopts = ' mkdir third_party; '
+preconfigopts += ' ./src/tools/dev/scripts/build_visit --console --no-visit --parallel '
+preconfigopts += ' --system-cmake --hdf5 --icet --llvm --mesagl --silo --netcdf --vtk '
+preconfigopts += ' --makeflags -j24 --system-python --alt-python-dir ${EBROOTPYTHON} '
+preconfigopts += ' --alt-boost-dir $EBROOTBOOST '
+#preconfigopts += ' --xdmf '
+preconfigopts += ' --qwt --qt <<< "yes" && '
+preconfigopts += ' sed -i /VISIT_MPI_COMPILER/d `hostname`.cmake; '
+preconfigopts += ' sed -i "s/rca TYPE/mpichcxx_gnu_51 rt mpich_gnu_51 rt rca pthread TYPE/g" `hostname`.cmake; '
+preconfigopts += ' cp `hostname`.cmake ../visit%(version)s/src/config-site; '
+preconfigopts += ' mkdir build; cd build; '
+
+configopts  = ' -DCMAKE_BUILD_TYPE=RelWithDebInfo '
+configopts += ' -DVISIT_DATA_MANUAL_EXAMPLES:BOOL=ON '
+configopts += ' -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON '
+configopts += ' -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF '
+
+prebuildopts  = ' cd build; '
+buildopts = 'install'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+pysuff = '-python%s' % py_maj_ver
+
+dependencies = [
+    ('Boost', '1.67.0', pysuff),
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE)
+]
+
+builddependencies = [('binutils', '2.30', '', True),
+                     ('CMake', '3.9.3', '', True)
+                    ]
+
+parallel = 24
+skipsteps = ['install']
+
+files_to_copy = []
+
+runtest = False
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['current', 'bin', 'data', '%(version)s' ],
+}
+
+moduleclass = 'vis'

@@ -1,0 +1,43 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+name = 'inspector'
+version = '2019_update4'
+
+homepage = 'https://software.intel.com/en-us/inspector'
+description = """Intel Inspector is Intel's dynamic memory and threading error
+checking tool"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+sources = ['/apps/common/UES/easybuild/sources/i/%(name)s/'
+           '%(name)s_%(version)s.tar.gz']
+checksums = ['1a6f6eadee7c2e397b8748a36dff9648']
+patches = ['%(name)s_%(version)s.patch']
+
+postinstallcmds = [
+  'rm -fr ~/.intel ~/intel',
+  'sed -i "s@XXXXX@%(installdir)s@" silent.cfg',
+  './install.sh -s silent.cfg --user-mode --SHARED_INSTALL',
+  'sed -i "s@XX@%(installdir)s@g" ./clean_cscs.sh',
+  'bash ./clean_cscs.sh'
+]
+
+sanity_check_paths = {
+    'files': ['%(name)s/inspxe-vars.sh'],
+    'dirs': ['%(name)s/bin64']
+}
+
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': '%(name)s/bin64',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+}
+
+modextravars = {
+    'INSPECTOR_2019_DIR': '%(installdir)s/%(name)s',
+}
+docpaths = {
+    'INSPECTOR_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'INSPECTOR_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'

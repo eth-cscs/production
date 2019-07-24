@@ -1,0 +1,46 @@
+easyblock = 'PythonPackage'
+
+name = 'Horovod'
+version = '0.16.0'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.6'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+cudaver = '10.0'
+tfver = '1.12.0'
+versionsuffix = '-tf-%s' % tfver
+
+homepage = 'https://github.com/uber/horovod'
+description = "Horovod is a distributed training framework for TensorFlow."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_LOWER_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['72650b0fe0b37f72551a22de60d6d32ead154fb85bf7a398edecf72ed04178d3']
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('TensorFlow', tfver, '-cuda-%s-python%s' % (cudaver, py_maj_ver)),
+]
+
+skipsteps = ['build']
+
+preinstallopts = 'module unload atp/2.1.3 && '
+preinstallopts += "export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && "
+preinstallopts += "export HOROVOD_GPU_ALLREDUCE=NCCL && "
+preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
+preinstallopts += "export HOROVOD_WITH_TENSORFLOW=1 && "
+preinstallopts += "export HOROVOD_WITHOUT_PYTORCH=1 && "
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'tools'

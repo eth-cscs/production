@@ -8,7 +8,7 @@ homepage = 'http://michaelrsweet.github.io/mxml/'
 description = """Mini-XML is a tiny XML library that you can use to read and
 write XML and XML-like data files"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 source_urls = [('https://github.com/michaelrsweet/mxml/releases/download/release-%(version)s/')]
 sources = [SOURCELOWER_TAR_GZ]
 

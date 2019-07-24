@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'RPackage'
+
+name = 'sodium'
+version = '1.1'
+versionsuffix = '-R-%(rver)s'
+
+homepage = 'https://cran.r-project.org/web/packages/sodium/index.html'
+description = """
+Bindings to libsodium: a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more. 
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+source_urls = ['https://cran.r-project.org/src/contrib']
+sources = ['%(name)s_%(version)s.tar.gz']
+
+dependencies = [
+    ('libsodium', '1.0.17'),
+    ('R', '3.5.2', '-libx11-1.6.3'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [name],
+}
+
+moduleclass = 'devel'

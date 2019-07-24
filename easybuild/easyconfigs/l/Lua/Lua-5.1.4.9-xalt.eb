@@ -21,7 +21,7 @@ sources = ['lua-%(version)s.tar.bz2']
 
 builddependencies = [
     #('ncurses', '6.0'),
-    ('libreadline', '7.0-xalt')
+    ('libreadline', '8.0-xalt')
 ]
 
 # Use static linking for ncurses so it's not a runtime dep

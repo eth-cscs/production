@@ -1,7 +1,7 @@
  gmvolf-18.05.eb --hidden
  PrgEnv-gnu-fulen-gmvolf-18.05.eb
- reframe-2.13.eb                            --set-default-module
- reframe-2.17-dev0.eb
+ reframe-2.17.eb                            --set-default-module
+ reframe-2.18-dev0.eb
  ddt-18.2.2-Redhat-7.0.eb                   --set-default-module --installpath=/apps/fulen/UES/jenkins/RH7.4/easybuild/tools
  ddt-18.3-Redhat-7.0.eb                                          --installpath=/apps/fulen/UES/jenkins/RH7.4/easybuild/tools
  Python-2.7.15-gmvolf-18.05.eb

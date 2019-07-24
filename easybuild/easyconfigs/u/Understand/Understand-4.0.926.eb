@@ -6,16 +6,21 @@ name = 'Understand'
 version = '4.0.926'
 
 homepage = 'https://scitools.com/features/'
-description = """Understand provides you with pertinent informations regarding
-your code."""
+description = """
+    Understand provides you with pertinent informations regarding your code.
+"""
 
 toolchain = {'name': 'dummy', 'version': ''}
+
 source_urls = ['http://builds.scitools.com/all_builds/b926/%(name)s/']
 sources = ['%(name)s-%(version)s-Linux-64bit.tgz']
 checksums = [ 'eade52911b4d5ddbc237eaeb8e0558c1' ]
+
 keepsymlinks = True
-postinstallcmds = ['echo "Server: velan 00000000 9000" > ' \
-                   '%(installdir)s/conf/license/locallicense.dat']
+postinstallcmds = [(
+    'echo "Server: velan 00000000 9000" > '
+    '%(installdir)s/conf/license/locallicense.dat'
+)]
 
 sanity_check_paths = {
     'files': ['bin/linux64/und.bin'],

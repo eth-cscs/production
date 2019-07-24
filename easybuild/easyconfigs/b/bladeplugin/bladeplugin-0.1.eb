@@ -10,17 +10,18 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['305804fad578b1b6e4e188bd71b9b922']
+patches = ['%(name)s-%(version)s.patch']
 
 dependencies = [
     ('OTF2', '2.1.1'),
-    ('CubeGUI', '4.4'),
-    ('CubeLib', '4.4'),
+    ('CubeGUI', '4.4.3'),
+    ('CubeLib', '4.4.3'),
 ]
 
-configopts  = ' CC=gcc'
+configopts = ' CC=gcc'
 configopts += ' --with-otf2-library=$EBROOTOTF2/bin'
 configopts += ' --with-cube-gui=$EBROOTCUBEGUI/bin'
-configopts += ' --with-cube-library=$EBROOTCUBELIB/bin' 
+configopts += ' --with-cube-library=$EBROOTCUBELIB/bin'
 
 sanity_check_paths = {
     'files': ['lib/cube-plugins/libblade-plugin.so'],

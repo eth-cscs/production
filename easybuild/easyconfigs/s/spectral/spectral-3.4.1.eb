@@ -11,7 +11,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://ftp.tools.bsc.es/%(name)s']
 sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 keepsymlinks = True
-checksums = ['87e656ce23ee36a26dac54e8f830f7f9']
+# The checksum check was removed, since the value for the sources kept changing.
+# The checksum value of the sources is reported in the log file of the module.
 postinstallcmds = [
     # The following commands will allow greater flexibility in upgrading Extrae's dependencies
     # that are binaries without having to rebuild Extrae:
