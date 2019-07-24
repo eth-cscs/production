@@ -10,7 +10,7 @@ and to some extent D."""
 
 toolchain = {'name': 'dummy', 'version': ''}
 sources = ['%(namelower)s-%(version)s.linux.bin.tar.gz']
-source_urls = ['http://ftp.stack.nl/pub/users/dimitri/']
+source_urls = ['https://sourceforge.net/projects/doxygen/files/rel-%s' % version]
 
 builddependencies = [
     ('CMake', '3.13.4'),
