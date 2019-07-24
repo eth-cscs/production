@@ -10,7 +10,7 @@ description = """ImageMagick is a software suite to create, edit, compose, or co
 toolchain = {'name': 'dummy', 'version': ''}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.imagemagick.org/download/']
+source_urls = ['https://mirror.sobukus.de/files/src/imagemagick/']
 
 configopts = "--with-gslib --with-x"
 
