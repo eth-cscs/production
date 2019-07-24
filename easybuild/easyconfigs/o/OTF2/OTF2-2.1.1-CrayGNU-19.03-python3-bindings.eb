@@ -1,0 +1,31 @@
+# jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'OTF2'
+version = '2.1.1'
+versionsuffix = '-python3-bindings'
+
+homepage = 'https://silc.zih.tu-dresden.de/otf2-2.1/python/index.html'
+description = """The Open Trace Format 2 is a highly scalable, memory efficient
+event trace data format plus support library. It is the new standard trace
+format for Scalasca, Vampir, and TAU and is open for other tools.
+This is the Python OTF2 interface."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+sources = ["otf2-%(version)s.tar.gz"]
+source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
+checksums = ['e51ad0d8ca374d25f47426746ca629e7']
+dependencies = [ ('PyExtensions', '3.6.5.6') ]
+configopts = '--enable-shared --with-nocross-compiler-suite=gcc '
+configopts += 'PYTHON=`which python3` '
+
+sanity_check_paths = {
+    'files': ["bin/otf2-config", "include/otf2/otf2.h",
+              ("lib/libotf2.a", "lib64/libotf2.a")],
+    'dirs': [],
+}
+
+modextrapaths = { 'PYTHONPATH': 'lib/python3.6/site-packages' }
+
+moduleclass = 'perf'

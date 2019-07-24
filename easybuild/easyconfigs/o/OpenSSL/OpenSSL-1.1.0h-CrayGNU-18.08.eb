@@ -1,0 +1,23 @@
+# @author: sebkelle1
+name = 'OpenSSL'
+version = '1.1.0h'
+
+homepage = 'http://www.openssl.org/'
+description = """The OpenSSL Project is a collaborative effort to develop a
+robust, commercial-grade, full-featured, and Open Source toolchain implementing
+the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1)
+ protocols as well as a full-strength general purpose cryptography library. """
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.openssl.org/source/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['5835626cde9e99656585fc7aaa2302a73a7e1340bf8c14fd635a62c66802a517']
+dependencies = [('zlib', '1.2.11')]
+
+start_dir = '%(namelower)s-%(version)s'
+
+runtest = 'test'
+
+moduleclass = 'system'

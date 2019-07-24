@@ -1,0 +1,13 @@
+diff -Nru alps-2.3.0-src-with-boost/alps/src/alps/boost/accumulators/numeric/functional/vector.hpp alps-2.3.0-src-with-boost.mod/alps/src/alps/boost/accumulators/numeric/functional/vector.hpp
+--- alps-2.3.0-src-with-boost/alps/src/alps/boost/accumulators/numeric/functional/vector.hpp	2010-02-01 12:56:37.000000000 +0100
++++ alps-2.3.0-src-with-boost.mod/alps/src/alps/boost/accumulators/numeric/functional/vector.hpp	2019-02-26 11:39:21.000000000 +0100
+@@ -229,6 +229,9 @@
+             }
+         };
+ 
++        template<typename Left, typename Right, typename bla, typename bla2>
++        struct average {};
++
+         // partial specialization for std::vector.
+         template<typename Left, typename Right>
+         struct average<Left, Right, std_vector_tag, void>

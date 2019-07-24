@@ -1,0 +1,40 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = "PythonPackage"
+
+name = 'h5py'
+version = '2.8.0'
+req_py_majver = '2'
+req_py_minver = '7'
+pyver = '%s.%s' % (req_py_majver, req_py_minver)
+py_rev_ver = '15.6'
+versionsuffix = '-python%s-serial' % req_py_majver
+
+homepage = 'http://www.h5py.org/'
+description = """
+    HDF5 for Python (h5py) is a general-purpose Python interface to the
+    Hierarchical Data Format library, version 5. HDF5 is a versatile, mature
+    scientific software library designed for the fast, flexible storage of
+    enormous amounts of data.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose' : False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
+    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+]
+
+prebuildopts  = (
+    'python setup.py configure --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && '
+)
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyver}],
+}
+
+moduleclass = 'data'

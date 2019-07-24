@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libmatheval'
+version = '1.1.11'
+
+homepage = 'http://www.gnu.org/software/libmatheval/'
+description = """GNU libmatheval is a library (callable from C and Fortran) to parse
+ and evaluate symbolic expressions input as text."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.03'}
+toolchainopts = {'pic': True}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+# patch for configure.in with guile2 from https://github.com/pld-linux/libmatheval/blob/master/libmatheval-guile2.patch
+patches = ['%(name)s-guile2.patch']
+
+dependencies = [
+    ('flex', '2.6.4'),
+    ('Bison', '3.3.2'),
+    ('byacc', '20170709'),
+    ('guile', '2.0.14'),
+]
+
+#preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
+configopts = '--with-pic GUILE_CONFIG="$EBROOTGUILE/bin/guile -e main -s $EBROOTGUILE/bin/guile-config"'
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'include/matheval.h'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

@@ -12,7 +12,7 @@ the call-chain (non-local goto). The API supports both local (same-process) and
 remote (across-process) operation. As such, the API is useful in a number of
 applications"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 source_urls = ['https://github.com/libunwind/libunwind/releases/download/v%(version)s/']
 sources = [SOURCELOWER_TAR_GZ]

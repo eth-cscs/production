@@ -24,6 +24,11 @@ configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
 # correct install rule in Makefile with a phony target (a folder "install" already exists)  
 prebuildopts = ' sed -i -e "s/install :/.PHONY: install\\ninstall:/" Makefile && '
+# correct download url and filename of package W90 (replacing release 2.1.0 with 3.0.0)
+W90 = 'wannier90-3.0.0'
+W90_URL = 'https://github.com/wannier-developers/wannier90/archive/v3.0.0.tar.gz'
+prebuildopts += ' sed -i -e "s/W90=.*/W90=%s/" -e "s#W90_URL=.*#W90_URL=%s#" install/plugins_list && ' % (W90, W90_URL)
+prebuildopts += ' sed -i -e "s/wannier90-2.1.0/%s/" EPW/src/Makefile && ' % W90
 prebuildopts += ' module unload cray-libsci && module list && cat make.inc && '
 buildopts = 'all epw'
 # a single make process is required, since parallel builds fail

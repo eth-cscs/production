@@ -1,0 +1,83 @@
+# @author: victor holanda rusu
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+patchlevels = (14, 14) # (AmberTools, Amber)
+version = '18-%s-%s' % (patchlevels[0], patchlevels[1])
+cudaversion = '10.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://ambermd.org/'
+description = """Amber (Assisted Model Building with Energy Refinement)
+is software for performing molecular dynamics and structure prediction"""
+whatis = [ "Amber 18 && AmberTools 18",
+           "AmberTools patch level %s" % patchlevels[0],
+           "Amber patch level %s" % patchlevels[1]]
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = { 'verbose': False }
+
+sources = [
+    '/apps/common/UES/easybuild/sources/a/Amber/Amber18.tar.bz2',
+    '/apps/common/UES/easybuild/sources/a/Amber/AmberTools18.tar.bz2'
+]
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+    #('Boost', '1.67.0', '-python2'),
+    # Amber cannot be compiled with this flex. Using the system one
+    #('flex', '2.6.4'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+builddependencies = [
+    ('cudatoolkit/10.0.130_3.22-7.0.0.0_5.1__gdfb4ce5', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+    ('cray-netcdf/4.6.1.3', EXTERNAL_MODULE),
+]
+
+buildininstalldir = True
+
+# single make process since parallel builds might fail
+maxparallel = 1
+
+prebuildopts = 'cd .. && mv amber%s/* . && ' % version[:2]
+prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HOME;'
+prebuildopts += './update_amber --update-to %s/%s && ' % ("AmberTools", patchlevels[0])
+prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", patchlevels[1])
+#
+# Setting updates to N, because we already have applied them
+# Compiling several times in order to consolidate the Amber installation into a single module
+#prebuildopts += './configure -noX11 -netcdfstatic -static --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += './configure      -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+prebuildopts += './configure      -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+prebuildopts += './configure -mpi -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+prebuildopts += './configure -mpi -noX11         --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+prebuildopts += './configure -cuda -mpi -noX11         --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+buildopts = 'install'
+
+files_to_copy = []
+
+sanity_check_paths = {
+    'files' : [ 'bin/pmemd.cuda.MPI', 'bin/pmemd.MPI', 'bin/pmemd' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s',
+}
+
+moduleclass = 'bio'

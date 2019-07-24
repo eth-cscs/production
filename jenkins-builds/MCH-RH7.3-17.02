@@ -33,8 +33,8 @@
  Python-3.7.2-gmvolf-17.02.eb                        --installpath=/apps/escha/UES/RH7.3_experimental/easybuild
  R-3.3.2-gmvolf-17.02-libX11-1.6.3.eb
  R-3.5.2-gmvolf-17.02-libX11-1.6.3.eb
- reframe-2.16.eb                                     --set-default-module
- reframe-2.17-dev0.eb
+ reframe-2.17.eb                                     --set-default-module
+ reframe-2.18-dev0.eb
  Ruby-2.2.2-gmvolf-17.02.eb
  ncview-2.1.7-gmvolf-17.02.eb
  netCDF-C++-4.3.0-gmvolf-17.02.eb

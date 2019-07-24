@@ -18,3 +18,4 @@ sanity_check_paths = {
     'files' : ['LICENSE.md'],
     'dirs' : [ 'bin', 'include', 'lib', 'etc', 'share' ],
 }
+sanity_check_commands = [('julia', '--eval "1+2"')]

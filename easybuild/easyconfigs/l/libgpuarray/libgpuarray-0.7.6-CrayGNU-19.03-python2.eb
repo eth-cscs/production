@@ -1,0 +1,54 @@
+easyblock = 'CMakeMake'
+
+name = 'libgpuarray'
+version = '0.7.6'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'http://deeplearning.net/software/libgpuarray/'
+description = "Library to manipulate tensors on the GPU."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/Theano/libgpuarray/releases/download/v%(version)s/']
+sources = [SOURCE_TAR_GZ]
+checksums = ['887b6433a30282cb002117da89b05812c770fd9469f93950ff3866ddd02bfc64']
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+]
+
+builddependencies = [
+    ('CMake', '3.14.1', '', True),
+    ('PyExtensions', '%s' % pyver),
+]
+
+exts_defaultclass = 'PythonPackage'
+exts_list = [
+    (name, version, {
+        'source_urls': source_urls,
+        'source_tmpl': SOURCE_TAR_GZ,
+        'req_py_majver': '2',
+        'req_py_minver': '7',
+        'checksums': ['887b6433a30282cb002117da89b05812c770fd9469f93950ff3866ddd02bfc64'],
+        'buildcmd': 'build_ext',
+        'modulename': 'pygpu',
+    }),
+]
+
+modextrapaths = {'PYTHONPATH': 'lib/python%s/site-packages' % pyshortver}
+
+sanity_check_paths = {
+    'files': ['lib/libgpuarray.%s' % SHLIB_EXT, 'lib/libgpuarray-static.a'],
+    'dirs': ['include/gpuarray', 'lib/python%s/site-packages' % pyshortver],
+}
+
+moduleclass = 'lib'

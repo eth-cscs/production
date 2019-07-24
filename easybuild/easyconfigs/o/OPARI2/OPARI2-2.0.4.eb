@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'OPARI2'
+version = '2.0.4'
+
+homepage = 'http://www.score-p.org'
+description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
+ is a source-to-source instrumentation tool for OpenMP and hybrid codes.
+ It surrounds OpenMP directives and runtime library calls with calls to
+ the POMP2 measurement interface."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+configopts = ' --enable-shared'
+source_urls = ['http://www.vi-hps.org/cms/upload/packages/opari2/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['0c75dfd43069228337aa867bdfb11ca1']
+
+# issue: cray/cs platform not detected (but 2.0.2 ok)
+sanity_check_paths = {
+    'files': ["bin/opari2", "include/opari2/pomp2_lib.h"],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

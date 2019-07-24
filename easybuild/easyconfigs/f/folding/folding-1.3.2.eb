@@ -11,7 +11,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 source_urls = ['https://ftp.tools.bsc.es/%(name)s']
 sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 keepsymlinks = True
-checksums = ['620c65abf8b4970eae1ce625a0450082']
+# The checksum check was removed, since the value for the sources kept changing.
+# The checksum value of the sources is reported in the log file of the module.
 postinstallcmds = [
     # folding-1.3.2-Linux_x86_64.tar.bz2 was released with broken links (will be fixed in next release):
     ' cd  %(installdir)s/lib64 ;ln -fs libparavertraceconfig.so.0 libparavertraceconfig.so; cd - && ' \

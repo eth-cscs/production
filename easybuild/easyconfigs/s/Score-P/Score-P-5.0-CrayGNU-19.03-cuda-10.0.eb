@@ -1,0 +1,71 @@
+# @author: jg (CSCS)
+easyblock = 'ConfigureMake'
+name = 'Score-P'
+version = '5.0'
+versionsuffix = '-cuda-10.0'
+
+homepage = 'http://www.score-p.org'
+description = """The Score-P measurement infrastructure is a highly scalable
+and easy-to-use tool suite for profiling, event tracing, and online analysis of
+HPC applications."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True}
+source_urls = ['http://www.vi-hps.org/cms/upload/packages/scorep/']
+sources = ['scorep-%(version)s.tar.gz']
+checksums = ['2311f6feb062f75863c4fcd4e336f20f']
+
+dependencies = [
+    # libiberty was need in previous versions of scorep, keeping as a reminder
+    # ('libiberty', '5.3.0-scorep', '', True),
+    ('libunwind', '1.2.1', '', True),
+    ('CubeGUI', '4.4.3', '', True),
+    ('OPARI2', '2.0.4', '', True),
+    ('PDT', '3.25', '', True),
+    ('vampir', '9.6.0', '', True),
+    ('CubeW', '4.4.2'),
+    ('CubeLib', '4.4.3'),
+    ('SIONlib', '1.7.2'),
+    # OTF2: will build with internal/scorep version of otf2, keeping to remind
+    # PR3501 ('OTF2', '2.0', '', True),
+    # PAPI: will build with papi from perftools-base, keeping as a reminder
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+        # craype-accel-nvidia60 will load:
+        #   cudatoolkit/10.0.130_3.22-7.0.0.0_5.1__gdfb4ce5
+        #   cray-libsci_acc/19.03.1
+]
+
+configopts = ' --with-machine-name=daint'
+# plugins are needed, do not use this configopts  = ' --disable-gcc-plugin'
+configopts += ' --enable-shared'
+configopts += ' --with-libpmi-include=/opt/cray/pe/pmi/default/include'
+configopts += ' --with-libpmi-lib=/opt/cray/pe/pmi/default/lib64'
+configopts += ' --with-librca-include=/opt/cray/rca/default/include'
+configopts += ' --with-librca-lib=/opt/cray/rca/default/lib64'
+configopts += ' --with-papi-header=$PAT_BUILD_PAPI_BASEDIR/include'
+configopts += ' --with-papi-lib=$PAT_BUILD_PAPI_BASEDIR/lib64'
+# see previous comment: configopts += ' --with-otf2='
+configopts += ' --with-sionlib=$EBROOTSIONLIB'
+configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-cubew=$EBROOTCUBEW/bin'
+configopts += ' --with-cubelib=$EBROOTCUBELIB/bin'
+# --- cuda
+configopts += ' --enable-cuda'
+configopts += ' --with-libcuda-lib=$CRAY_CUDATOOLKIT_DIR/lib64/stubs'
+configopts += ' --with-libcuda-include=$CRAY_CUDATOOLKIT_DIR/include'
+configopts += ' --with-libcudart=$CRAY_CUDATOOLKIT_DIR'
+configopts += ' --with-cupti=$CRAY_CUDATOOLKIT_DIR/extras/CUPTI'
+
+sanity_check_paths = {
+    'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
+              ("lib/backend/libscorep_adapter_mpi_event.a",
+               "lib/libscorep_adapter_mpi_event.%s" % SHLIB_EXT)],
+    'dirs': [],
+}
+
+# Ensure that local metric documentation is found by Cube GUI
+modextrapaths = {'CUBE_DOCPATH': 'share/doc/scorep/profile'}
+modextravars = {'CRAYPE_LINK_TYPE': 'dynamic'}
+
+moduleclass = 'perf'

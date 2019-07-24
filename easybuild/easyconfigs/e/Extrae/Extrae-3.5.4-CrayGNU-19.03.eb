@@ -1,0 +1,62 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+name = 'Extrae'
+version = '3.5.4'
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools'
+description = """
+    Extrae is the core instrumentation package developed by the Performance
+    Tools group at BSC. Extrae is capable of instrumenting applications based
+    on MPI, OpenMP, pthreads, CUDA1, OpenCL1, and StarSs1 using different
+    instrumentation approaches. The information gathered by Extrae typically
+    includes timestamped events of runtime calls, performance counters and
+    source code references. Besides, Extrae provides its own API to allow the
+    user to manually instrument his or her application.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://ftp.tools.bsc.es/extrae']
+sources = ['extrae-%(version)s-src.tar.bz2']
+# The checksum check was removed, since the value for the sources kept changing.
+# The checksum value of the sources is reported in the log file of the module.
+
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('libunwind', '1.2.1'),
+    ('libxml2', '2.9.7'),
+    # use papi from perftools-base instead
+    #('papi/5.5.1.3', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.2', EXTERNAL_MODULE),
+    # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
+    #('Paraver', '4.7.2', '', True),
+    #('Dimemas', '5.3.6', '', True),
+    ('basicanalysis', '0.3.6', '', True),
+    ('clusteringsuite', '2.6.8', '', True),
+    ('folding', '1.3.2', '', True),
+    ('spectral', '3.4.1', '', True),
+]
+
+configopts  = ' '
+configopts += ' --with-libz=$EBROOTZLIB'
+configopts += ' --with-unwind=$EBROOTLIBUNWIND'
+configopts += ' --with-mpi=$CRAY_MPICH_DIR'
+configopts += ' --enable-openmp'
+configopts += ' --with-fft=$FFTW_DIR'
+configopts += ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
+configopts += ' --with-binary-type=64'
+configopts += ' --enable-parallel-merge'
+configopts += ' --enable-sampling'
+configopts += ' --with-clustering=$EBROOTCLUSTERINGSUITE'
+configopts += ' --with-spectral=$EBROOTSPECTRAL'
+configopts += ' --without-dyninst'
+# to build without cuda, use:
+configopts += ' --without-cuda'
+
+sanity_check_paths = {
+    'files': ["include/extraef_user_events.h", ],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

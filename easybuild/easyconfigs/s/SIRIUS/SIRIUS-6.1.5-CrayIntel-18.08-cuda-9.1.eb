@@ -1,0 +1,41 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SIRIUS'
+version = '6.1.5'
+cudaversion = 9.1
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://electronic-structure.github.io/SIRIUS/'
+description = """Domain specific library for electronic structure calculations."""
+
+toolchain = {'name': 'CrayIntel', 'version': '18.08'}
+#toolchainopts = {'usempi': True, 'openmp': True}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
+
+source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [('CMake', '3.12.0', '', True)]
+
+dependencies = [
+  ('GSL', '2.5'),
+  ('libxc', '4.2.3'),
+  ('spglib','1.12.0'),
+  ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
+  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+  ('magma', '2.4.0', '-cuda-%s' % cudaversion)
+]
+
+separate_build_dir = True
+
+common_prebuildopts = 'module unload cray-libsci && module load gcc/6.2.0 && module list &&'
+
+prebuildopts = [ common_prebuildopts ]
+
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DGPU_MODEL='P100'"
+#configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MKL=1 -DGPU_MODEL='P100' -DUSE_SCALAPACK=1"
+
+modextrapaths = {'CPATH': ['fortran']}
+
+moduleclass = 'chem'
