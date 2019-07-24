@@ -22,10 +22,10 @@ def fulen = [name: 'fulen',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/fulen/UES/jenkins/RH7.4/easybuild']
 
-def kesch = [name: 'keschTDS',
+def kesch = [name: 'kesch',
              archs: [],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '',
+             unusePath: '/apps/escha/UES/easybuild/modulefiles',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
