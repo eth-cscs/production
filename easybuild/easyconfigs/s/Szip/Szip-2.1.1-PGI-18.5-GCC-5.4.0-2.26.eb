@@ -16,7 +16,6 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configopts = '--with-pic'
 
-
 sanity_check_paths = {
     'files': ['lib/libsz.a', 'lib/libsz.so', 'include/ricehdf.h', 'include/szip_adpt.h', 'include/szlib.h'],
     'dirs': [],
