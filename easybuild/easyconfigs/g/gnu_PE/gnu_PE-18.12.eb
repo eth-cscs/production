@@ -21,11 +21,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${list} {
    module unload ${module}
  }
-<<<<<<< HEAD:easybuild/easyconfigs/c/cray_PE/cray_PE-17.06.eb
- module unload PrgEnv-cray
-=======
  module unload gcccore
->>>>>>> origin/rh7.5-18.12:easybuild/easyconfigs/g/gnu_PE/gnu_PE-18.12.eb
  module unload mvapich2gdr_gnu
  module unload cudatoolkit
 }
