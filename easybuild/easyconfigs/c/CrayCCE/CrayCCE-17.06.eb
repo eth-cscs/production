@@ -15,7 +15,6 @@ dependencies = [
     ('cce/8.6.0', EXTERNAL_MODULE),
     ('cray-libsci/17.06.1', EXTERNAL_MODULE),
     ('mvapich2_cce/2.2rc1.0.3_cuda80', EXTERNAL_MODULE),
-    ('slurm/17.11', EXTERNAL_MODULE)
 ]
 
 moduleclass = 'toolchain'
