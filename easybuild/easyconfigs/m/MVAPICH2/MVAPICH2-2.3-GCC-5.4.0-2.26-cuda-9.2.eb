@@ -4,7 +4,7 @@ cudaversion = '9.2'
 versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
-description = """MVAPICH2/2.2 (includes MPICH-3.1.4)"""
+description = """MVAPICH2/2.3 (includes MPICH-3.1.4)"""
 
 toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
 
