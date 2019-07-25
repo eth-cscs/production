@@ -12,10 +12,10 @@ description = """zlib is designed to be a free, general-purpose, legally unencum
 toolchain = {'name': 'PGI', 'version': '18.10-GCC-5.4.0-2.26'}
 
 sources = [SOURCELOWER_TAR_GZ]
-source_urls = [('http://sourceforge.net/projects/libpng/files/zlib/%(version)s', 'download')]
+source_urls = ['https://www.zlib.net']
 
 sanity_check_paths = {
-    'files': ['include/zconf.h', 'include/zlib.h', 'lib/libz.a', 'lib/libz.so'],
+    'files': ['include/zconf.h', 'include/%(name)s.h', 'lib/libz.a', 'lib/libz.so'],
     'dirs': [],
 }
 
