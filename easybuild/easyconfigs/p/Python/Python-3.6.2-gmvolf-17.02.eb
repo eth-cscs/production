@@ -128,10 +128,10 @@ exts_list = [
        'source_urls': ['https://pypi.python.org/packages/26/8d/110cdf96a6'    \
                        'ed0d1bc38e9dc15fa7263a5b601f27951bb09cc080f11024f1/']
    }),
-   ('seaborn', '0.8', {
-       'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
-                       '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
-   }),
+   #('seaborn', '0.8', {
+   #    'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
+   #                    '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
+   #}),
    ('pykdtree', '1.2.2', {
        'source_urls': ['https://pypi.python.org/packages/65/4d/29a5f9c3ec'    \
                        'f5ce9ccfda5975d6503e9111a73364a3cef61720ad60740449/']
