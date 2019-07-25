@@ -11,7 +11,7 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
 dependencies = [
-    ('PrgEnv-cray/1.0.5', EXTERNAL_MODULE),
+    ('PrgEnv-cray', EXTERNAL_MODULE),
     ('cce/8.7.10', EXTERNAL_MODULE),
     ('cray-libsci/18.07.1', EXTERNAL_MODULE),
     ('cray-mvapich2/2.3', EXTERNAL_MODULE),
