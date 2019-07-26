@@ -8,7 +8,7 @@ homepage = 'https://github.com/nerscadmin/IPM'
 description = """Integrated Performance Monitoring for High Performance
 Computing"""
 
-toolchain = {'name': 'CrayIntel', 'version': '19.06'}
+toolchain = {'name': 'CrayCCE', 'version': '19.06-classic'}
 toolchainopts = {'verbose': False}
 # verbose=False avoids the configure step to fail (-craype-verbose error)
 
