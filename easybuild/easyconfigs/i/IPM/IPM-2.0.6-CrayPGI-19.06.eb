@@ -8,7 +8,7 @@ homepage = 'https://github.com/nerscadmin/IPM'
 description = """Integrated Performance Monitoring for High Performance
 Computing"""
 
-toolchain = {'name': 'CrayIntel', 'version': '19.06'}
+toolchain = {'name': 'CrayPGI', 'version': '19.06'}
 toolchainopts = {'verbose': False}
 # verbose=False avoids the configure step to fail (-craype-verbose error)
 
@@ -26,13 +26,17 @@ dependencies = [
 
 preconfigopts  = './bootstrap.sh && '
 preconfigopts += 'sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
-buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
+# pgi only:
+preconfigopts += 'sed -ie "s-CXX=pgcpp-CXX=CC-g" configure && '
+preconfigopts += 'sed -ie "s-CC=pgcc-CXX=cc-g" configure && '
+preconfigopts += 'sed -ie "s-F77=pgf77-F77=ftn-g" configure && '
 configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
-# With Cray, we can use perftools' papi, otherwise:
+# With Cray, we can use perftools' papi, otherwise use:
 # configopts  = ' --with-papi=`pkg-config --variable=papi_prefix papi`'
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
 configopts += ' CPPFLAGS="-I$EBROOTMXML/include "'
 configopts += ' LIBS="-L$EBROOTMXML/lib "'
+buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
 
 postinstallcmds = ["mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl "]
 
