@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'pgi_PE'
+version = '18.10'
+
+homepage = 'http://user.cscs.ch'
+description = """
+    The meta-module sets the MODULEPATH to access the following programming environment: 
+        - %s %s
+""" % (name, version) 
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+path='/apps/escha/UES/jenkins/RH7.5/%s%s/easybuild/modules/all' % (name, version)
+
+modtclfooter = """
+set list [exec ls --color=none %s ]
+
+if { [module-info mode remove] || [module-info mode switch] } {
+ foreach module ${list} {
+   module unload ${module}
+ }
+ module unload gcccore
+ module unload mvapich2gdr_gnu
+ module unload cudatoolkit
+}
+
+module use %s
+""" % (path, path)
+
+moduleclass = 'devel'
