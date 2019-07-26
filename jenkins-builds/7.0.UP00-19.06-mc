@@ -16,6 +16,7 @@
  GSL-2.5-CrayCCE-19.06.eb
  GSL-2.5-CrayIntel-19.06.eb
  HDFView-2.14.eb                                    --set-default-module
+ HPX-1.2.0-CrayGNU-19.06.eb                         --set-default-module
  h5py-2.8.0-CrayGNU-19.06-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.06-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.06-python3-parallel.eb       --set-default-module
@@ -48,8 +49,11 @@
  ddt-19.1-Suse-15.0.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Extrae-3.5.4-CrayGNU-19.06.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ IPM-2.0.6-CrayCCE-19.06-classic.eb                                      --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ IPM-2.0.6-CrayCCE-19.06.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  IPM-2.0.6-CrayGNU-19.06.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  IPM-2.0.6-CrayIntel-19.06.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ IPM-2.0.6-CrayPGI-19.06.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  likwid-4.3.3-perf_event.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-19.06-python3.eb         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  malt-1.0.0-CrayGNU-19.06.eb                        --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
@@ -65,4 +69,3 @@
  Score-P-5.0-CrayGNU-19.06.eb                       --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Score-P-5.0-CrayIntel-19.06.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Understand-4.0.926.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
- HPX-1.2.0-CrayGNU-19.06.eb                         --set-default-module
