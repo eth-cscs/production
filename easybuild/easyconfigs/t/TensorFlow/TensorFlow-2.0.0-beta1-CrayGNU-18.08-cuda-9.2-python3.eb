@@ -3,13 +3,13 @@
 easyblock = "CmdCp"
 
 name = 'TensorFlow'
-version = '2.0.0-beta0'
-shortversion = '2.0.0b0'
+version = '2.0.0-beta1'
+shortversion = '2.0.0b1'
 
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '5.1'
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, '5.1')
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 cudaversion = '9.2'
@@ -27,8 +27,8 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
 builddependencies = [
-    ('wheel', '0.31.1', ver_suffix_py),
     ('Bazel', '0.24.1', ver_suffix_py),
+    ('wheel', '0.31.1', ver_suffix_py),
 ]
 
 dependencies = [
@@ -43,7 +43,7 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, py_maj_ver)),
+patches = [('tensorflow-v%s-cuda%s-cscs.patch' % (version, cudaversion)),
            ('configure-cscs-v%s.sh' % version, '%s/tensorflow-%s/' % (builddir, version))]
 
 with_configure = False
@@ -57,7 +57,7 @@ build_str += " && sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@$CRAY_CUDATOOLKIT_DIR@g thir
 build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
 build_str += " && bash configure-cscs-v%s.sh" % version
 build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
-build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
+build_str += "    --config=v2 --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
 build_str += " && pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
@@ -71,6 +71,55 @@ files_to_copy = [
     (['%(builddir)s/' + whl_file], '%(installdir)s'),
     (['%(builddir)s/bin'], '%(installdir)s'),
     (['%(builddir)s/lib'], '%(installdir)s'),
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('wrapt', '1.11.2', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/w/wrapt/'],
+    }),
+    ('setuptools', '41.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/s/setuptools'],
+        'source_tmpl': 'setuptools-41.0.1.zip',
+    }),
+    ('Markdown', '3.1.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/m/markdown'],
+    }),
+    ('wheel', '0.33.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/w/wheel'],
+    }),
+    ('tensorflow-estimator', '1.14.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/tensorflow_estimator'],
+        'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
+        'modulename': 'tensorflow_estimator',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
+    ('grpcio', '1.22.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/g/grpcio'],
+        'modulename': 'grpc',
+    }),
+    ('tensorboard', '1.14.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/tensorboard'],
+        'source_tmpl': 'tensorboard-1.14.0-py3-none-any.whl',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
 ]
 
 sanity_check_paths = {
