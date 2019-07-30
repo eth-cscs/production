@@ -36,7 +36,7 @@ dependencies = [
     ('protobuf', '3.6.0', ver_suffix_py),
     ('dask', '1.0.0', '-python%s' % py_maj_ver),
     ('PyExtensionsDS', pyver),
-    ('CUDA', cudaversion),
+    ('CUDA', cudaversion, '', True),
 ]
 
 sources = ['v%(version)s.tar.gz']
