@@ -72,6 +72,55 @@ files_to_copy = [
     (['%(builddir)s/lib'], '%(installdir)s'),
 ]
 
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('wrapt', '1.11.2', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/w/wrapt/'],
+    }),
+    ('setuptools', '41.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/s/setuptools'],
+        'source_tmpl': 'setuptools-41.0.1.zip',
+    }),
+    ('Markdown', '3.1.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/m/markdown'],
+    }),
+    ('wheel', '0.33.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/w/wheel'],
+    }),
+    ('tensorflow-estimator', '1.14.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/tensorflow_estimator'],
+        'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
+        'modulename': 'tensorflow_estimator',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
+    ('grpcio', '1.22.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/g/grpcio'],
+        'modulename': 'grpc',
+    }),
+    ('tensorboard', '1.14.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/tensorboard'],
+        'source_tmpl': 'tensorboard-1.14.0-py3-none-any.whl',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
+]
+
 sanity_check_paths = {
     'files': [whl_file],
     'dirs': ['%s/lib/python%s.%s/site-packages' % (installdir, py_maj_ver, py_min_ver)],
