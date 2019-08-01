@@ -11,9 +11,9 @@ HPC applications."""
 
 toolchain = {'name': 'CrayCCE', 'version': '19.06-classic'}
 toolchainopts = {'pic': True}
-source_urls = ['http://www.vi-hps.org/cms/upload/packages/scorep/']
-sources = ['sources.r14595.tar.gz']
-checksums = ['daada034e8560a8181be74bec3bb1619']
+source_urls = ['https://www.vi-hps.org/cms/upload/packages/scorep/']
+sources = ['scorep-%(version)s.tar.gz']
+checksums = ['71b11aa547cdffb8c31b4e70bf51511d']
 
 dependencies = [
     # libiberty needed in older versions of scorep, keeping as a reminder
