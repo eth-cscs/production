@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 name = 'Score-P'
 version = '6.0'
-versionsuffix = '-release-preview'
+preview = '-release-preview'
 
 homepage = 'http://www.score-p.org'
 description = """The Score-P measurement infrastructure is a highly scalable
@@ -18,10 +18,10 @@ checksums = ['daada034e8560a8181be74bec3bb1619']
 dependencies = [
     # libiberty needed in older versions of scorep, keeping as a reminder
     ('libunwind', '1.3.1', '', True),
-    ('CubeW', '4.5', '%(versionsuffix)s'),
-    ('CubeLib', '4.5', '%(versionsuffix)s'),
-    ('CubeGUI', '4.5', '%(versionsuffix)s', True),
-    ('OPARI2', '2.0.4', '', True),
+    ('CubeW', '4.5', '%s' % preview),
+    ('CubeLib', '4.5', '%s' % preview),
+    ('CubeGUI', '4.5', '%s' % preview, True),
+    ('OPARI2', '2.0.5', '', True),
     ('PDT', '3.25', '', True),
     ('SIONlib', '1.7.4l'),
     ('vampir', '9.7.0', '', True),
