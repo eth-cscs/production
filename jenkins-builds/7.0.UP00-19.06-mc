@@ -62,6 +62,8 @@
  mpiP-57fc864-CrayCCE-19.06.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  mpiP-57fc864-CrayGNU-19.06.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  mpiP-57fc864-CrayIntel-19.06.eb                                         --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ mpiP-57fc864-CrayCCE-19.06-classic.eb                                   --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ mpiP-57fc864-CrayPGI-19.06.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-19.06.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.06.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  papi-wrap-1.0-CrayCCE-19.06.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
