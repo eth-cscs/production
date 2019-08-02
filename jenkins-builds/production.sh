@@ -183,8 +183,8 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build licensed software (CPMD, IDL, VASP)
-    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" || "$name" =~ "VASP" ]]; then
+# build licensed software (CPMD, IDL, MATLAB, VASP)
+    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]]; then
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
         if [[ "$name" =~ "IDL" ]]; then
          group="${name,,}ethz"
