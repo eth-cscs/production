@@ -1,0 +1,92 @@
+diff -Naur sionlib.ori/config/determine-cc.sh sionlib/config/determine-cc.sh
+--- sionlib.ori/config/determine-cc.sh	2019-04-30 19:06:31.000000000 +0200
++++ sionlib/config/determine-cc.sh	2019-07-31 13:21:38.973277000 +0200
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # determine what compiler is behind "cc" (and presumably "CC" and "ftn") wrapper
+ 
+ CC=`which cc 2>/dev/null`
+@@ -9,33 +9,39 @@
+ fi
+ 
+ case "$CC" in
+-  /opt/cray/craype/* | /opt/cray/xt*)
++  /opt/cray/craype/* | /opt/cray/xt* | /opt/cray/pe/craype/*)
+       echo "$CC is probably a Cray XT compiler wrapper" ;;
+   *)
+       echo "Warning: $CC doesn't seem to be a Cray XT compiler wrapper!" ;;
+ esac
+ 
+-if [ `$CC -V 2>&1 | grep -c ^Cray` -gt 0 ]; then
+-  COMP=cce
+-  COMPVER=`$CC -V 2>&1 | grep ^Cray | cut -d\  -f 5`
+-  echo "Got CCE ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^Intel` -gt 0 ]; then
+-  COMP=intel
+-  COMPVER=`$CC -V 2>&1 | grep ^Intel | sed -e 's/^.*Version //' | cut -d\  -f 1`
+-  echo "Got Intel ${COMPVER} compiler"
+-elif [ `$CC -V 2>&1 | grep -c ^pg` -gt 0 ]; then
+-  COMP=pgi
+-  COMPVER=`$CC -V 2>&1 | grep ^pg | cut -d\  -f 2`
+-  echo "Got PGI ${COMPVER} compiler"
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^PathScale` -gt 0 ]; then
+-  COMP=pathscale
+-  COMPVER=`$CC -v dummy.c 2>&1 | grep ^PathScale | sed -e 's/^.*Version //'`
+-  echo "Got PathScale $COMPVER compiler"
+-# NB: since PathScale includes GCC, test for GCC last
+-elif [ `$CC -v dummy.c 2>&1 | grep -c ^gcc` -gt 0 ]; then
+-  COMP=gnu
+-  COMPVER=`$CC -dumpversion`
+-  echo "Got GNU $COMPVER compiler"
+-else
+-  echo "'$CC' compiler not identified!"
+-fi
++ccv=`$CC --version 2>&1`
++
++case "$PE_ENV" in
++    GNU)
++        COMP=gnu;
++        COMPVER=`echo "$ccv" |grep ^g++ |awk '{print $3}'`;
++        echo "Got $COMP $COMPVER compiler";;
++    INTEL)
++        COMP=intel;
++        COMPVER=`echo "$ccv" |grep ^icpc |awk '{print $3}'`;
++        echo "Got $COMP $COMPVER compiler";;
++    PGI)
++        COMP=pgi;
++        COMPVER=`echo "$ccv" |grep ^pgc++ |awk '{print $2}'`;
++        echo "Got $COMP $COMPVER compiler";;
++    CRAY)
++        COMP=cce;
++        echo $CRAY_PE_CCE_VARIANT |grep -q Clang;rc=$?;
++        if [ "$rc" -eq 0 ] ;then 
++            # CC=Clang:FTN=Classic
++            COMPVER=`echo "$ccv" |grep ^Cray |awk '{print $4}'`;
++        else
++            # CC=Classic:FTN=Classic
++            COMPVER=`echo "$ccv" |grep ^Cray |awk '{print $5}'`;
++        fi;
++        echo "Got $COMP $COMPVER compiler";;
++    *)
++        echo "CC=$CC compiler not identified!";
++        echo "PE_ENV=$PE_ENV COMP=$COMP COMPVER=$COMPVER ccv=$ccv";;
++esac
+diff -Naur sionlib.ori/mf/Makefile.defs.linux-pgi sionlib/mf/Makefile.defs.linux-pgi
+--- sionlib.ori/mf/Makefile.defs.linux-pgi	2019-04-30 19:26:41.000000000 +0200
++++ sionlib/mf/Makefile.defs.linux-pgi	2019-07-31 13:23:49.649163000 +0200
+@@ -26,11 +26,11 @@
+ #------------------------------------------------------------------------------
+ LARGEFILE=-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D__USE_LARGEFILE64 -D__USE_FILE_OFFSET64
+ OPTFLAGS = -g
+-CC       = pgcc
++CC       = cc
+ CFLAGS   = -c99 $(PFLAG) $(OPTFLAGS) $(SION_PLATFORM) $(LARGEFILE)
+-CXX      = pgc++
++CXX      = CC
+ CXXFLAGS = $(PFLAG) $(OPTFLAGS) $(SION_PLATFORM) -O3 $(LARGEFILE)
+-F77      = pgfortran
++F77      = ftn
+ F90      = $(F77)
+ FFLAGS   = $(PFLAG) $(OPTFLAGS)
+ FPP      = 

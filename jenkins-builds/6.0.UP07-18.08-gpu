@@ -38,6 +38,7 @@
  magma-2.2.0-CrayGNU-18.08-cuda-9.1.eb              --set-default-module
  magma-2.3.0-CrayIntel-18.08-cuda-9.1.eb
  magma-2.4.0-CrayIntel-18.08-cuda-9.1.eb
+ MATLAB-R2019a.eb
  NAMD-2.12-CrayIntel-18.08-cuda-9.1.eb              --set-default-module
  NCO-4.7.5-CrayGNU-18.08.eb                         --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
