@@ -21,8 +21,7 @@ checksums = [
 ]
 
 builddependencies = [
-    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), 
-     EXTERNAL_MODULE),
+    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), EXTERNAL_MODULE),
     ('hwloc', '2.0.3', '', True)
 ]
 
