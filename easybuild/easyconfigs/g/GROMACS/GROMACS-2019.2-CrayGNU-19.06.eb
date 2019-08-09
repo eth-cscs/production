@@ -13,7 +13,7 @@
 #
 easyblock = 'CMakeMake'
 name = 'GROMACS'
-version = "2018.6"
+version = "2019.2"
 cudaversion = '10.1'
 versionsuffix = '-cuda-%s' % cudaversion
 
@@ -23,11 +23,12 @@ description = """GROMACS is a versatile package to perform molecular dynamics,
 
 toolchain = {'name': 'CrayGNU', 'version': '19.06'}
 toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True, 'dynamic': False}
+onlytcmod = True
 
 source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
-local_common_options = '-DCMAKE_BUILD_TYPE=Release -DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256'
+local_common_options = '-DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=OFF -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256'
 configopts = ['%s -DGMX_MPI=OFF ' % local_common_options,
               '%s -DGMX_MPI=ON ' % local_common_options]
 
@@ -36,10 +37,10 @@ skipsteps = ['test']
 # CMake dependency with dummy toolchain
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('cudatoolkit/10.1.105_3.23-7.0.0.1_2.1__g85b26e9', EXTERNAL_MODULE),
 ]
+
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+    ('cray-libsci/19.06.1', EXTERNAL_MODULE)
 ]
 
 moduleclass = 'bio'
