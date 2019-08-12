@@ -11,6 +11,7 @@
 # This work implements a part of the HPCBIOS project and is a component of the policy:
 # http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
 #
+easyblock = 'CMakeMake'
 name = 'GROMACS'
 version = "2018.6"
 
@@ -24,7 +25,9 @@ toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 
 source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = '-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DGMX_SIMD=AVX2_256 -DGMX_OPENMP_MAX_THREADS=128'
+local_common_options = '-DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=OFF -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256'
+configopts = ['%s -DGMX_MPI=OFF ' % local_common_options,
+              '%s -DGMX_MPI=ON ' % local_common_options]
 
 skipsteps = ['test']
 
