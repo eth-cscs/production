@@ -86,12 +86,6 @@ exts_list = [
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/b/backcall/'],
     }),
-#    ('simplegeneric', '0.8.1', {
-#        'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'source_urls': ['https://pypi.python.org/packages/source/s/simplegeneric/'],
-#        'source_tmpl': 'simplegeneric-%(version)s.zip',
-#    }),
     ('Pygments', '2.4.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
