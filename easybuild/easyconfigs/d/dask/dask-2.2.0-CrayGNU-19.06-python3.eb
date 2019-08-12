@@ -44,12 +44,6 @@ exts_list = [
         'use_pip': True,        
         'source_urls': ['https://pypi.python.org/packages/source/l/locket'],
     }),
-#no strict requirement for toolz more than 0.7.3 from cray-python 3.6.5.7, twr
-#    ('toolz', '0.9.0', {
-#       'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'source_urls': ['https://pypi.python.org/packages/source/t/toolz'],
-#    }),
     ('partd', '1.0.0', {
         'req_py_majver': '3',
         'req_py_minver': '6',
