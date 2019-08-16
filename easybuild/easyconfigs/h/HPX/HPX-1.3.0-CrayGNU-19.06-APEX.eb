@@ -17,6 +17,8 @@ toolchainopts = {'pic': True}
 
 builddependencies = [('CMake', '3.14.5', '', True)]
 
+patches = ['git_external.patch']
+
 dependencies = [
     ('Boost', '1.70.0', '-python3'),
     ('hwloc', '2.0.3', '', True),
