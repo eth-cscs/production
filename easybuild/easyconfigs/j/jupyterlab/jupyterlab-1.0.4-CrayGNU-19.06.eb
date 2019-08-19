@@ -458,11 +458,11 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyshortver,
-             'share/jupyter/lab/extensions',
-             'share/jupyter/lab/schemas',
-             'share/jupyter/lab/staging',
-             'share/jupyter/lab/static',
-             'share/jupyter/lab/themes',
+##             'share/jupyter/lab/extensions',
+##             'share/jupyter/lab/schemas',
+##             'share/jupyter/lab/staging',
+##             'share/jupyter/lab/static',
+##             'share/jupyter/lab/themes',
              ]
 }
 
