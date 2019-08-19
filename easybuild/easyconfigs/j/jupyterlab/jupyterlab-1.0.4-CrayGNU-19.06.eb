@@ -370,7 +370,7 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/p/packaging/'],
         }),
     ('Pillow', '6.1.0', {
-       'req_py_majver': '3',
+        'req_py_majver': '3',
         'req_py_minver': '6',
         'modulename': 'PIL',
         'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
