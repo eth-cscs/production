@@ -42,8 +42,8 @@ dependencies = [
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, py_maj_ver)),
-           ('configure-cscs-v%s.sh' % version, '%s/tensorflow-%s/' % (builddir, version))]
+patches = [('tensorflow-v%s-python%s-cscs-cuda%s.patch' % (version, py_maj_ver, cudaversion)),
+           ('configure-cscs-v%s-cuda%s.sh' % (version, cudaversion), '%s/tensorflow-%s/' % (builddir, version))]
 
 with_configure = False
 
@@ -54,7 +54,7 @@ build_str += " && rm -rf $TEST_TMPDIR"
 build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
 build_str += " && sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@$CRAY_CUDATOOLKIT_DIR@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
 build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
-build_str += " && bash configure-cscs-v%s.sh" % version
+build_str += " && bash configure-cscs-v%s-cuda%s.sh" % (version, cudaversion)
 build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
