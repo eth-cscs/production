@@ -10,6 +10,7 @@
  CPMD-4.1-CrayIntel-19.06.eb                        --set-default-module
  dask-1.2.2-CrayGNU-19.06-python3.eb               
  dask-2.2.0-CrayGNU-19.06-python3.eb                --set-default-module
+ dask-labextension-1.0.3-CrayGNU-19.06-python3.eb
  GREASY-19.03-cscs-CrayGNU-19.06.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.06.eb                    --set-default-module
  GROMACS-2019.1-CrayGNU-19.06.eb
