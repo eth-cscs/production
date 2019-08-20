@@ -11,6 +11,7 @@
  dask-1.0.0-CrayGNU-18.08-python3.eb
  dask-1.2.2-CrayGNU-18.08-python3.eb                
  dask-2.2.0-CrayGNU-18.08-python3.eb                --set-default-module
+ dask-labextension-1.0.3-CrayGNU-18.08-python3.eb
  GREASY-19.03-cscs.eb                               --set-default-module
  GROMACS-2018.3-CrayGNU-18.08-cuda-9.1.eb           --set-default-module
  GROMACS-2019-CrayGNU-18.08-cuda-9.1.eb
