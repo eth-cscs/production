@@ -430,18 +430,19 @@ modextravars = {
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
-                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0;"
-                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib;"
-                   "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0;"
-                   "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6;"
-                   "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor;"
-                   "%(installdir)s/bin/jupyter labextension install dask-labextension;"
-                   "%(installdir)s/bin/jupyter serverextension enable jupyter_server_proxy;"
-#                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm;" #not ready for JLab 1.x, twr
-#                   "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1;" #qgrid not yet working in JLab 1.x, twr
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
+                   "%(installdir)s/bin/jupyter serverextension enable jupyter_server_proxy --no-build;"
+#                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
+#                   "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
+                    "%(installdir)s/bin/jupyter lab build --dev-build=False;"
                    "rm -r $YARN_CACHE_FOLDER"]
 sanity_check_paths = {
     'files': [],
