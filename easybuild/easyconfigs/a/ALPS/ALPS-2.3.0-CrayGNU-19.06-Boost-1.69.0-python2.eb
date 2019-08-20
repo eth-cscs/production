@@ -3,7 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'ALPS'
 version = "2.3.0"
-versionsuffix = "-Boost-1.65.1-python2"
+versionsuffix = "-Boost-1.69.0-python2"
 
 homepage = 'http://alps.comp-phys.org'
 description = """The ALPS project (Algorithms and Libraries for Physics
@@ -11,20 +11,21 @@ Simulations) is an open source effort aiming at providing high-end simulation
 codes for strongly correlated quantum mechanical systems as well as C++
 libraries for simplifying the development of such code."""
 
-toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchain = {'name': 'CrayGNU', 'version': '19.06'}
 toolchainopts = {'pic': True}
 source_urls = ['http://alps.comp-phys.org/static/software/releases/']
 sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
 patches = ["average.patch", "riterator.patch",
-           "boost_min_workspace.patch"]
+           "boost_min_workspace.patch", "cmake_boost.patch",
+           "boost_noncopyable.patch", "boost_exception.patch"]
 
 dependencies = [
-    ('Boost', '1.65.1', '-python2'),
-    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE)
+    ('Boost', '1.69.0', '-python2'),
+    ('cray-hdf5/1.10.5.0', EXTERNAL_MODULE)
 ]
 
 builddependencies = [
-    ('CMake', '3.12.4', '', True)
+    ('CMake', '3.14.5', '', True)
 ]
 
 # path to the project directory if not at top
