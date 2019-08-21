@@ -375,7 +375,21 @@ exts_list = [
         'modulename': 'PIL',
         'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
         }),
-
+#twr temporary
+       ('jupyter-server-proxy', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+        }),
+    ('dask_labextension', '1.0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        }),
+    
+    
 # bqplot: requires the labextension below
 ##    ('traittypes', '0.2.1', {
 ##        'req_py_majver': '3',
