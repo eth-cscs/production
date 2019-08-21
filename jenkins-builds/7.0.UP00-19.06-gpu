@@ -23,6 +23,7 @@
  h5py-2.8.0-CrayGNU-19.06-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.06-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-19.06-python3-serial.eb
+ Horovod-0.16.4-CrayGNU-19.06-tf-1.14.0.eb
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-19.06-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.06-python3.eb
