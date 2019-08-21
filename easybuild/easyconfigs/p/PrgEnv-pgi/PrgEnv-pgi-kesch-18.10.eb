@@ -12,32 +12,33 @@ Please use the environment variables $MPICC, $MPICXX, $MPIF90 to compile MPI cod
 toolchain = {'name': 'dummy', 'version': ''}
 
 # PrgEnv-pgi needs custom MPI wrappers
+wrapperbase = '/apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpi'
+installbase = '%(installdir)s/bin/mpi'
 postinstallcmds = ["""mkdir %(installdir)s/bin && 
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpicxx %(installdir)s/bin/mpic++
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpicc %(installdir)s/bin/mpicc
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpicxx %(installdir)s/bin/mpicxx
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif77 %(installdir)s/bin/mpif77
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif90 %(installdir)s/bin/mpif90
-cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpifort %(installdir)s/bin/mpifort
-"""]
+cp {0}cxx  {1}c++
+cp {0}cc   {1}cc
+cp {0}cxx  {1}cxx
+cp {0}f77  {1}f77
+cp {0}f90  {1}f90
+cp {0}fort {1}fort
+""".format(wrapperbase, installbase)]
 
 modtclfooter = """
 module load pgi/18.10-gcc-5.4.0-2.26
 module load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
 """
 
-modaliases = {
-    'mpic++': '$root/bin/mpic++',
-    'mpicc': '$root/bin/mpicc',
-    'mpicxx': '$root/bin/mpicxx',
-    'mpif77': '$root/bin/mpif77',
-    'mpif90': '$root/bin/mpif90',
-    'mpifort': '$root/bin/mpifort'
-}
-modextravars = {
-    'MPICC': '$root/bin/mpicc',
-    'MPICXX': '$root/bin/mpicxx',
-    'MPIF90': '$root/bin/mpif90'
-}
+# define aliases and extra environment variables
+rootbase = '$root/bin/mpi'
+
+aliaslist = ['c++','cc','cxx','f77','f90','fort']
+modaliases = {}
+for item in aliaslist:
+    modaliases['mpi'+item] = rootbase+item
+
+modextravars ={}
+varlist = ['CC','CXX','F90']
+for item in varlist:
+    modextravars['MPI'+item] = rootbase+item
 
 moduleclass = 'devel'
