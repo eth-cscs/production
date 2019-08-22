@@ -29,8 +29,6 @@ osdependencies = [(
     'rdma-core-devel', 
 )]
 
-patches = ['OpenMPI_3.1-fix_ib_query.patch']
-
 configopts = (
     "CC=pgcc "
     "CXX=pgc++ "
