@@ -81,11 +81,11 @@ class EB_PGI(PackedBinary):
     @staticmethod
     def extra_options():
         extra_vars = {
-    #        'install_managed': [True, "Install OpenACC Unified Memory Evaluation package", CUSTOM],
-    #        'install_nvidia': [True, "Install CUDA Toolkit Components", CUSTOM],
-    #        'install_java': [True, "Install Java JRE for graphical debugger",  CUSTOM],
-    #        'install_mpi': [True, "Install OpenMPI", CUSTOM],
-    #        'mpi_gpu_support': [True, "Enable GPU support for OpenMPI", CUSTOM],
+            'install_managed': [True, "Install OpenACC Unified Memory Evaluation package", CUSTOM],
+            'install_nvidia': [True, "Install CUDA Toolkit Components", CUSTOM],
+            'install_java': [True, "Install Java JRE for graphical debugger",  CUSTOM],
+            'install_mpi': [True, "Install OpenMPI", CUSTOM],
+            'mpi_gpu_support': [True, "Enable GPU support for OpenMPI", CUSTOM],
         }
         return PackedBinary.extra_options(extra_vars)
 
