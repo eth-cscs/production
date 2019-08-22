@@ -10,7 +10,7 @@ class ReframeSettings:
             'docker': {
                 'descr': 'Docker',
                 'hostnames': ['0dfb1e216f80'],
-                'modules_system': 'tmod4',
+                'modules_system': 'lmod',
                 'resourcesdir': '/apps/common/UES/reframe/resources',
                 'partitions': {
 
