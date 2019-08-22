@@ -1,0 +1,43 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'nsimd'
+version = '579084'
+homepage = 'https://github.com/agenium-scale/nsimd'
+description = """NSIMD is a vectorization library that abstracts SIMD
+programming.
+https://raw.githubusercontent.com/agenium-scale/nsimd/master/LICENSE"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.06'}
+toolchainopts = {'verbose': False}
+
+preconfigopts = 'git clone https://github.com/agenium-scale/nsimd.git nsimd.git && '
+preconfigopts += 'cd nsimd.git ;git checkout %(version)s && '
+preconfigopts += 'python3 egg/hatch.py -Af && '
+preconfigopts += 'pwd && ls -la && '
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('clang+llvm', '8.0.1', '-x86_64-linux-sles11.3', True),
+]
+dependencies = [
+    ('MIPP', 'master', '', True),
+    ('sleef', '3.4.0'),
+    ('googlebenchmark', '1.5.0'),
+]
+configopts  = '-DSIMD=AVX2 -DSIMD_OPTIONALS=FMA -DCMAKE_BUILD_TYPE=RELEASE '
+configopts += '-DMPFR_ROOT_DIR=/opt/gcc/mpfr/3.1.4 '
+configopts += '-DENABLE_BENCHMARK=on '
+configopts += '-DSleef_ROOT_DIR=$EBROOTSLEEF '
+configopts += '-DMIPP_ROOT_DIR=$EBROOTMIPP '
+configopts += '-Dbenchmark_ROOT_DIR=$EBROOTGOOGLEBENCHMARK '
+
+prebuildopts = 'cd nsimd.git && '
+preinstallopts = 'cd nsimd.git && '
+postinstallcmds = ['cd nsimd.git && tar cf %(installdir)s/benches.tar benches']
+
+sanity_check_paths = {
+    'files': ['include/include/nsimd/nsimd.h', 'lib/libnsimd_x86_64.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'devel'

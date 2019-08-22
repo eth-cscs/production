@@ -1,0 +1,18 @@
+# @author: kraushm, gpezzi, Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PrgEnv-CrayCCE'
+version = '17.06'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides a meta module for the Cray Programming Environment
+on kesch/escha including MVAPICH2 for MPI support"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+modtclfooter = """
+module load CrayCCE/.17.06
+module load mvapich2gdr_gnu/2.2_cuda_8.0
+"""
+
+moduleclass = 'devel'

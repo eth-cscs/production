@@ -1,0 +1,29 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'FileCheck'
+version = '873043d'
+homepage = 'https://github.com/rofirrim/FileCheck.git'
+description = """This is a version of LLVM's FileCheck that can be built as a
+standalone binary.
+https://raw.githubusercontent.com/rofirrim/FileCheck/master/LICENSE.TXT"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.06'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/rofirrim/%(name)s/archive']
+sources = ['master.zip']
+builddependencies = [('CMake', '3.14.5', '', True)]
+separate_build_dir = True
+
+skipsteps = ['install']
+postinstallcmds = [
+    'mkdir -p %(installdir)s/bin',
+    'cp %(name)s %(installdir)s/bin/',
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
