@@ -38,7 +38,7 @@ def leone = [name: 'leone',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
-def tsa = [name: 'tsaTDS',
+def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/dev/shm/$USER/easybuild/build',
            unusePath: '/apps/arolla/UES/modulefiles',
