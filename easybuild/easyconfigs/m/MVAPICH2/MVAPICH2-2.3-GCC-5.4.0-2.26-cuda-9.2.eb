@@ -1,0 +1,42 @@
+name = 'MVAPICH2'
+version = '2.3'
+cudaversion = '9.2'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = """MVAPICH2/2.3 (includes MPICH-3.1.4)"""
+
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [
+"--enable-threads=multiple \
+--enable-rdma-cm \
+--enable-smpcoll \
+--disable-xrc \
+--with-device=ch3:mrail \
+--enable-mcast \
+--enable-g=dbg \
+--enable-debuginfo \
+--with-cluster-size=level \
+--enable-cuda \
+--with-cuda-include=/global/opt/nvidia/cudatoolkit/9.2.148/include \
+--with-cuda-libpath=/global/opt/nvidia/cudatoolkit/9.2.148/lib64"
+]
+
+withhwloc = 'True'
+
+builddependencies = [
+    ('Bison', '3.0.4', '', True),
+    ('cudatoolkit/%s.148' % cudaversion, EXTERNAL_MODULE)
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+moduleclass = 'mpi'

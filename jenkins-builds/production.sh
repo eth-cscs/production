@@ -111,6 +111,12 @@ if [ -z "$PREFIX" ]; then
     usage
 else
  export EASYBUILD_PREFIX=$PREFIX
+# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
+ if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+  mkdir -p "$EASYBUILD_PREFIX/modules/all"
+  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
+  ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ fi
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
@@ -118,12 +124,6 @@ else
   module use $EASYBUILD_PREFIX/modules/all
   echo -e " Updated MODULEPATH: $MODULEPATH \n"
  fi
-fi
-# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
-if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
- mkdir -p "$EASYBUILD_PREFIX/modules/all"
- mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
- ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -183,11 +183,16 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build licensed software (CPMD and VASP)
-    if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
-# custom footer for ${name} modulefile with a warning for users not belonging to group ${name,,}
-        footer="if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {
- puts stderr \"WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files\"
+# build licensed software (CPMD, IDL, MATLAB, VASP)
+    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]]; then
+# custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
+        if [[ "$name" =~ "IDL" ]]; then
+         group="${name,,}ethz"
+        else
+         group=${name,,}
+        fi
+        footer="if { [lsearch [exec groups] \"${group}\"]==-1 && [module-info mode load] } {
+ puts stderr \"WARNING: Only users belonging to group ${group} with a valid ${name} license are allowed to access ${name} executables and library files\"
 }"
         if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
             (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
@@ -199,7 +204,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         status=$[status+$?]
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-        chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+        chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
         chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 # build other software
     else

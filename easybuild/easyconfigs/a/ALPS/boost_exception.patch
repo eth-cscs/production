@@ -1,0 +1,22 @@
+diff -Nru alps-2.3.0-src-with-boost/alps/src/alps/parapack/filelock.C alps-2.3.0-src-with-boost.mod/alps/src/alps/parapack/filelock.C
+--- alps-2.3.0-src-with-boost/alps/src/alps/parapack/filelock.C	2011-12-16 09:13:42.000000000 +0100
++++ alps-2.3.0-src-with-boost.mod/alps/src/alps/parapack/filelock.C	2019-07-18 15:41:23.000000000 +0200
+@@ -27,6 +27,7 @@
+ 
+ #include "filelock.h"
+ #include <boost/filesystem/operations.hpp>
++#include <boost/throw_exception.hpp>
+ #include <iostream>
+ #include <fcntl.h> // for open()
+ #include <sys/stat.h>
+diff -Nru alps-2.3.0-src-with-boost/alps/src/alps/parapack/parapack.C alps-2.3.0-src-with-boost.mod/alps/src/alps/parapack/parapack.C
+--- alps-2.3.0-src-with-boost/alps/src/alps/parapack/parapack.C	2015-08-20 07:13:53.000000000 +0200
++++ alps-2.3.0-src-with-boost.mod/alps/src/alps/parapack/parapack.C	2019-07-18 15:41:03.000000000 +0200
+@@ -50,6 +50,7 @@
+ #include <boost/foreach.hpp>
+ #include <boost/regex.hpp>
+ #include <boost/timer.hpp>
++#include <boost/throw_exception.hpp>
+ 
+ #include <iostream>
+ #include <string>

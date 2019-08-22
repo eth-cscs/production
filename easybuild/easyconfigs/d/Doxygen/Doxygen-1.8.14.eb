@@ -1,4 +1,4 @@
-# jgp (CSCS)
+# Contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
 easyblock = 'Tarball'
 name = 'Doxygen'
 version = '1.8.14'
@@ -10,14 +10,10 @@ and to some extent D."""
 
 toolchain = {'name': 'dummy', 'version': ''}
 sources = ['%(namelower)s-%(version)s.linux.bin.tar.gz']
-source_urls = ['http://ftp.stack.nl/pub/users/dimitri/']
-
-#configopts = " CPPFLAGS=-g"
+source_urls = ['https://sourceforge.net/projects/doxygen/files/rel-%s' % version]
 
 builddependencies = [
-#cray:    ('flex', '2.6.0'),
-#cray:    ('Bison', '3.0.4'),
-    ('CMake', '3.12.0'),
+    ('CMake', '3.13.4'),
 ]
 
 sanity_check_paths = {

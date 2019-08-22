@@ -12,7 +12,7 @@ codes for strongly correlated quantum mechanical systems as well as C++
 libraries for simplifying the development of such code."""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
-toolchainopts = {'pic': True, 'dynamic': True}
+toolchainopts = {'pic': True}
 source_urls = ['http://alps.comp-phys.org/static/software/releases/']
 sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
 patches = ["average.patch", "riterator.patch",

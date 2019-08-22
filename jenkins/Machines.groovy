@@ -25,10 +25,10 @@ def fulen = [name: 'fulen',
 def kesch = [name: 'kesch',
              archs: [],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/escha/UES/generic/modulefiles:/apps/escha/UES/PrgEnv-gnu-17.02/modulefiles:/apps/escha/UES/PrgEnv-cray-17.06/modulefiles:/apps/escha/UES/experimental/modulefiles',
+             unusePath: '/apps/escha/UES/easybuild/modulefiles',
              modulesProduction: '',
              modulesUnuseProduction: '',
-             prefixProduction: '/apps/escha/UES/jenkins/RH7.3-gnu_PE17.02/easybuild']
+             prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
 
 def leone = [name: 'leone',
              archs: [],
@@ -46,4 +46,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
 
-return [tsa]
+return [daint, dom, kesch, tsa]
