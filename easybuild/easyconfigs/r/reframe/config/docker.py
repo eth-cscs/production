@@ -15,7 +15,8 @@ class ReframeSettings:
                 'partitions': {
 
                     'mc': {
-                        'scheduler': 'local+mpiexec',
+                        'scheduler': 'local',
+                        #'scheduler': 'local+mpiexec',
                         'environs': ['PrgEnv-gnu'],
                         'descr': 'Docker TDS',
                         'max_jobs': 5,
