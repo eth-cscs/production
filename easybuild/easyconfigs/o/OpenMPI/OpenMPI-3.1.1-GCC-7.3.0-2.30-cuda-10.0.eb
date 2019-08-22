@@ -33,8 +33,6 @@ builddependencies = [
      EXTERNAL_MODULE),
 ]
 
-patches = ['OpenMPI_3.1-fix_ib_query.patch']
-
 configopts = (
     "--enable-shared "
     "--with-pmi=/opt/slurm/default "
