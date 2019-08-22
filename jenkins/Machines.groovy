@@ -46,4 +46,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
 
-return [daint, dom, kesch, tsa]
+return [tsa]
