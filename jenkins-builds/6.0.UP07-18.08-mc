@@ -24,6 +24,8 @@
  h5py-2.8.0-CrayGNU-18.08-python3-serial.eb
  HPX-1.1.0-CrayGNU-18.08.eb                         --set-default-module
  HPX-1.2.0-CrayGNU-18.08.eb
+ HPX-1.3.0-CrayGNU-18.08.eb
+ HPX-1.3.0-CrayGNU-18.08-APEX.eb
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  ipyparallel-6.2.3-CrayGNU-18.08-python3.eb
