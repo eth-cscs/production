@@ -25,7 +25,6 @@ dependencies = [
     ('julia/1.0.4', EXTERNAL_MODULE),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
-    ('dask-labextension', '1.0.3', '-python%s' % py_maj_ver),
 ]
 
 # bundle of Python packages
@@ -417,6 +416,65 @@ exts_list = [
 #        'source_urls': ['https://pypi.python.org/packages/source/q/qgrid/'],
 #        }),
 
+# dask-labextension
+# his package provides a JupyterLab extension to manage Dask clusters, 
+# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+    ('simpervisor', '0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
+        }),
+    ('multidict', '4.5.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
+        }),
+    ('yarl', '1.3.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True, 
+        'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
+        }),
+    ('typing_extensions', '3.7.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
+        }),
+    ('async-timeout', '3.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
+        }),
+    ('idna-ssl', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'modulename': 'idna_ssl',
+        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
+        }),
+   ('aiohttp', '3.5.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
+        }),
+   ('jupyter-server-proxy', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+        }),
+    ('dask_labextension', '1.0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        }),
+    
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
