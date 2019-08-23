@@ -1,0 +1,49 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'MVAPICH2'
+version = '2.2'
+cudamajversion = '8'
+cudaminversion = '0'
+cudarevversion = '61'
+cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
+cudaversion = '%s.%s' % (cudarelease, cudarevversion)
+versionsuffix = '-cuda-%s' % cudarelease
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = """MVAPICH2/2.2 (includes MPICH-3.1.4)"""
+
+toolchain = {'name': 'PGI', 'version': '18.5-GCC-5.4.0-2.26'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [
+"--enable-threads=multiple \
+--enable-rdma-cm \
+--enable-smpcoll \
+--disable-xrc \
+--enable-mcast \
+--enable-g=dbg \
+--enable-debuginfo \
+--with-cluster-size=level \
+--enable-cuda \
+--with-libcuda=/global/opt/nvidia/cudatoolkit/{0}/lib64/stubs \
+--with-libcudart=/global/opt/nvidia/cudatoolkit/{0}/lib64 \
+--with-cuda=/global/opt/nvidia/cudatoolkit/{0} \
+--with-cuda-include=/global/opt/nvidia/cudatoolkit/{0}/include \
+--with-cuda-libpath=/global/opt/nvidia/cudatoolkit/{0}/lib64".format(cudaversion)
+]
+
+builddependencies = [
+    ('Bison', '3.0.4', '', True),
+    ('cudatoolkit/%s' % cudaversion, EXTERNAL_MODULE)
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+moduleclass = 'mpi'
