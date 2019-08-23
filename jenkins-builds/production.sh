@@ -94,6 +94,24 @@ else
  system=${HOSTNAME%%[0-9]*}
 fi
 
+# --- SYSTEM SPECIFIC SETUP ---
+if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# architecture (Dom and Piz Daint only)
+    if [ -z "$ARCH" ]; then
+        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
+        usage
+    else
+        module purge
+        module load craype craype-network-aries modules perftools-base ugni
+        module load daint-${ARCH}
+        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
+    fi
+# xalt table update for Piz Daint
+    if [ -z "$update_xalt_table" ]; then
+        update_xalt_table=yes
+    fi
+fi
+
 # --- COMMON SETUP ---
 # set production repository folder
 if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
@@ -124,24 +142,6 @@ else
   module use $EASYBUILD_PREFIX/modules/all
   echo -e " Updated MODULEPATH: $MODULEPATH \n"
  fi
-fi
-
-# --- SYSTEM SPECIFIC SETUP ---
-if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
-# architecture (Dom and Piz Daint only)
-    if [ -z "$ARCH" ]; then
-        echo -e "\n No architecture defined. Please use the option -a,--arch to define the architecture \n"
-        usage
-    else
-        module purge
-        module load craype craype-network-aries modules perftools-base ugni
-        module load daint-${ARCH}
-        eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
-    fi
-# xalt table update for Piz Daint
-    if [ -z "$update_xalt_table" ]; then
-        update_xalt_table=yes
-    fi
 fi
 
 # --- BUILD ---
