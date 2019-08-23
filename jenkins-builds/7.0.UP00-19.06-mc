@@ -19,6 +19,8 @@
  GSL-2.5-CrayIntel-19.06.eb
  HDFView-2.14.eb                                    --set-default-module
  HPX-1.2.0-CrayGNU-19.06.eb                         --set-default-module
+ HPX-1.3.0-CrayGNU-19.06.eb
+ HPX-1.3.0-CrayGNU-19.06-APEX.eb
  h5py-2.8.0-CrayGNU-19.06-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.06-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.06-python3-parallel.eb       --set-default-module
@@ -26,6 +28,7 @@
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-19.06-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.06-python3.eb
+ julia-1.0.4.eb  
  jupyterhub-0.9.6-CrayGNU-19.06.eb
  jupyterhub-1.0.0-CrayGNU-19.06.eb                  --set-default-module
  jupyterlab-0.35.2-CrayGNU-19.06.eb
