@@ -428,12 +428,14 @@ exts_list = [
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
 
-jupyter_path = 'share/jupyter'
+# For Julia packages needed for Jupyter
+julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
+    'JULIA_DEPOT_PATH': julia_depot_path,
 }
 
 # install extensions
@@ -442,6 +444,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
                    "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
+                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
@@ -459,7 +462,15 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "%(installdir)s/bin/jupyter lab build --dev-build=False;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
-                   "rm -r $YARN_CACHE_FOLDER"]
+                   # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
+                   # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
+                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\'',
+                   # to trigger the precompilation
+                   'julia -e \'using IJulia\'',
+                   # adjust permissions of precompiled files
+                   #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path,
+                   "rm -r $YARN_CACHE_FOLDER"
+                   ]
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyshortver,
