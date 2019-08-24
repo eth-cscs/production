@@ -10,7 +10,7 @@ behavior. The analysis identifies potential performance bottlenecks -- in
 particular those concerning communication and synchronization -- and offers
 guidance in exploring their causes."""
 
-toolchain = {'name': 'CrayGNU', 'version': '19.06'}
+toolchain = {'name': 'CrayCCE', 'version': '19.06'}
 source_urls = ['http://apps.fz-juelich.de/%(namelower)s/releases/'
                '%(namelower)s/%(version)s/dist/']
 sources = [SOURCELOWER_TAR_GZ]
