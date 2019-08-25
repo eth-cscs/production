@@ -13,14 +13,14 @@ sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 checksums = ['cee8e0d527e97fcc9649500bbd36511c']
 keepsymlinks = True
 postinstallcmds = [
-    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
-    # that are binaries without having to rebuild Extrae:
-	#   ls -l easybuild/software/clusteringsuite/
- 	#       2.6.7
-	#       latest -> 2.6.7/
-	#   ls -l modules/all/clusteringsuite/
-	#       2.6.7
-	#       latest -> 2.6.7
+    # The following commands will allow greater flexibility in upgrading
+    # Extrae's dependencies that are binaries without having to rebuild Extrae:
+    #   ls -l easybuild/software/clusteringsuite/
+        #       2.6.7
+        #       latest -> 2.6.7/
+    #   ls -l modules/all/clusteringsuite/
+        #       2.6.7
+        #       latest -> 2.6.7
     'ln -fs %(version)s/ %(installdir)s/../latest && ' \
     'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
     'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
