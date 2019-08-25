@@ -13,9 +13,9 @@ checksums = ['305804fad578b1b6e4e188bd71b9b922']
 patches = ['%(name)s-%(version)s.patch']
 
 dependencies = [
-    ('OTF2', '2.1.1'),
-    ('CubeGUI', '4.4.3'),
-    ('CubeLib', '4.4.3'),
+    ('OTF2', '2.2'),
+    ('CubeGUI', '4.5-release-preview'),
+    ('CubeLib', '4.5-release-preview'),
 ]
 
 configopts = ' CC=gcc'
