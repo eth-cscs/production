@@ -355,7 +355,7 @@ exts_list = [
  ###       }),
 
 # bokeh, requires the labextension below
-    ('PyYAML', '5.1.2', {
+ ###   ('PyYAML', '5.1.2', {
 ###        'req_py_majver': '3',
  ###       'req_py_minver': '6',
  ###       'modulename': 'yaml',
