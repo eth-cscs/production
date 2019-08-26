@@ -22,7 +22,7 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-    ('julia','1.0.4'),
+    ('julia','1.0.4', '', ''),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
 ]
