@@ -528,7 +528,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\'',
+                   "julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")';"
                    # to trigger the precompilation
                    "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
