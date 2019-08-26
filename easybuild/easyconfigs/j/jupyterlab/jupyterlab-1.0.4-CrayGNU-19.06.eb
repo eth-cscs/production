@@ -528,7 +528,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
                    'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\'',
                    # to trigger the precompilation
-                   'julia -e \'using IJulia\'',
+                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
