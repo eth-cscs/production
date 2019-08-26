@@ -22,7 +22,9 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-    ('configurable-http-proxy', '3.1.1')
+    ('julia/1.0.4', EXTERNAL_MODULE),
+    ('configurable-http-proxy', '3.1.1'),
+    ('dask', '2.2.0', '-python%s' % py_maj_ver),
 ]
 
 # bundle of Python packages
@@ -374,8 +376,8 @@ exts_list = [
         'req_py_minver': '6',
         'modulename': 'PIL',
         'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
-        }),
-
+        }),    
+    
 # bqplot: requires the labextension below
     ('traittypes', '0.2.1', {
         'req_py_majver': '3',
@@ -395,12 +397,12 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'],
         }),
     ('nbresuse', '0.3.2', {
-        'req_py_majver': '3',
+       'req_py_majver': '3',
         'req_py_minver': '6',
         'source_urls': ['https://pypi.python.org/packages/source/n/nbresuse/'],
         }),
 
-# jupyterlab-slrum extension to implement common slurm commands in the notebook, not ready for jlab 1.0, 0.1.3 is ready but not yet in pypi, twr
+# jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.0
 #    ('jupyterlab_slurm', '0.1.1', {
 #        'req_py_majver': '3',
 #        'req_py_minver': '6',
@@ -414,6 +416,65 @@ exts_list = [
 #        'source_urls': ['https://pypi.python.org/packages/source/q/qgrid/'],
 #        }),
 
+# dask-labextension
+# his package provides a JupyterLab extension to manage Dask clusters, 
+# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+    ('simpervisor', '0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
+        }),
+    ('multidict', '4.5.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
+        }),
+    ('yarl', '1.3.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True, 
+        'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
+        }),
+    ('typing_extensions', '3.7.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
+        }),
+    ('async-timeout', '3.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
+        }),
+    ('idna-ssl', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'modulename': 'idna_ssl',
+        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
+        }),
+   ('aiohttp', '3.5.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
+        }),
+   ('jupyter-server-proxy', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+        }),
+    ('dask_labextension', '1.0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        }),
+    
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
@@ -428,12 +489,15 @@ exts_list = [
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 full_sanity_check = True
 
-jupyter_path = 'share/jupyter'
+# For Julia packages needed for Jupyter
+julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
+    'JULIA_DEPOT_PATH': julia_depot_path,
+    'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
 # install extensions
@@ -441,7 +505,10 @@ modextravars = {
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
-                   "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
+#                   "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
+                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
+                   "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
+                   "export JUPYTER=%(installdir)s/bin/jupyter;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
@@ -451,13 +518,22 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
                    "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
-                   "%(installdir)s/bin/jupyter serverextension enable jupyter_server_proxy;"
+#                   "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
 #                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
 #                   "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
                    "%(installdir)s/bin/jupyter lab build --dev-build=False;"
+# commented twr    "%(installdir)s/bin/jupyter serverextension enable --py dask_labextension;"
+                   "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
-                   "rm -r $YARN_CACHE_FOLDER"]
+                   # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
+                   # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
+                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+                   # to trigger the precompilation
+                   "julia -e \'using IJulia\';"
+                   # adjust permissions of precompiled files
+                   #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
+                   ]
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % pyshortver,
