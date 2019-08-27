@@ -16,8 +16,12 @@ toolchain = {'name': 'PGI', 'version': '18.10-GCC-5.4.0-2.26'}
 source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
 sources = [SOURCELOWER_TAR_GZ]
 
+preconfigopts = 'CC=pgcc CXX=pgc++ FC=pgfortran F77=pgfortran '
+preconfigopts += 'CFLAGS=-fast CXXFLAGS=-fast FCFLAGS=-fast FFLAGS=-fast '
+preconfigopts += 'LDFLAGS=\'-L/global/opt/nvidia/cudatoolkit/{0}/lib64 -lcudart -lcuda\''.format(cudaversion)
+
 configopts = [
-"--enable-threads=multiple \
+'--enable-threads=multiple \
 --enable-rdma-cm \
 --enable-smpcoll \
 --disable-xrc \
@@ -27,10 +31,10 @@ configopts = [
 --with-cluster-size=level \
 --enable-cuda \
 --with-cuda-include=/global/opt/nvidia/cudatoolkit/{0}/include \
---with-cuda-libpath=/global/opt/nvidia/cudatoolkit/{0}/lib64".format(cudaversion)
+--with-cuda-libpath=/global/opt/nvidia/cudatoolkit/{0}/lib64'.format(cudaversion)
 ]
 
-debug = 'True'
+prebuildopts = ' sed -i \'s/sm_20/sm_35/\' Makefile && ' 
 
 builddependencies = [
     ('Bison', '3.0.4', '', True),
