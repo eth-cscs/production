@@ -492,7 +492,10 @@ full_sanity_check = True
 # For Julia packages needed for Jupyter
 julia_depot_path = "%(installdir)s/share/julia/site/"
 
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+modextrapaths = {
+    'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
+    'JUPYTER_PATH': "%(installdir)s/share/jupyter/",
+}
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
