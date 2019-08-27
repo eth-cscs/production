@@ -11,7 +11,7 @@
  NCL-6.2.1.eb                             
  NCL-6.5.0.eb                                        
  nmon-16g.eb                                         
- reframe-2.18.eb
+ reframe-2.19.eb
  rstudio-1.0.143.eb                                  --set-default-module
  rstudio-1.1.442.eb                                  
  Understand-5.0.928.eb                               
