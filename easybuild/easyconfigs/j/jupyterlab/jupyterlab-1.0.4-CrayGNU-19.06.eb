@@ -494,7 +494,7 @@ julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
-    'JUPYTER_PATH': "%(installdir)s/share/jupyter/",
+    'JUPYTER_PATH': 'share/jupyter',
 }
 
 modextravars = {
