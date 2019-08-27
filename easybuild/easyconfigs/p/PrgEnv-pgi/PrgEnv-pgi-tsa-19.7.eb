@@ -31,7 +31,6 @@ if { [module-info mode remove] || [module-info mode switch] } {
 if { [module-info mode load] } {
  module use %s
  if { ![ is-loaded %s/%s-gcc-7.3.0-2.30 ] } {
-  #module load openmpi/3.1.1-%s-%s-gcc-7.3.0-2.30-cuda-10.0
   module load %s/%s-gcc-7.3.0-2.30
  }
 }

@@ -40,7 +40,7 @@ def leone = [name: 'leone',
 
 def tsa = [name: 'tsa',
            archs: [],
-           buildPath: '/dev/shm/$USER/easybuild/build',
+           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
