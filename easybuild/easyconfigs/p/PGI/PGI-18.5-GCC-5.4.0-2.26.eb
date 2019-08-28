@@ -17,8 +17,8 @@ sources = ['/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%(version_major)
 
 install_amd = 'False'
 install_java = 'False'
-install_mpi = 'True'
-mpi_gpu_support = 'True'
+install_mpi = 'False'
+mpi_gpu_support = 'False'
 
 dependencies = [
     ('GCCcore', gccver),
