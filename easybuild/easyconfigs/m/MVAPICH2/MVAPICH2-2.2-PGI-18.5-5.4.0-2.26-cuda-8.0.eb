@@ -31,7 +31,7 @@ configopts = [
 --with-cluster-size=level \
 --enable-cuda \
 --with-cuda-include=/global/opt/nvidia/cudatoolkit/{0}/include \
---with-cuda-libpath=/global/opt/nvidia/cudatoolkit/{0}/lib64 \
+--with-cuda-libpath=/global/opt/nvidia/cudatoolkit/{0}/lib64".format(cudaversion)
 ]
 
 builddependencies = [
