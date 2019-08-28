@@ -17,7 +17,6 @@ source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
 sources = [SOURCELOWER_TAR_GZ]
 
 preconfigopts = 'CC=pgcc CXX=pgc++ FC=pgfortran F77=pgfortran '
-preconfigopts += 'CFLAGS=-fast CXXFLAGS=-fast FCFLAGS=-fast FFLAGS=-fast '
 preconfigopts += 'LDFLAGS=\'-L/global/opt/nvidia/cudatoolkit/{0}/lib64 -lcudart -lcuda\''.format(cudaversion)
 
 configopts = [
