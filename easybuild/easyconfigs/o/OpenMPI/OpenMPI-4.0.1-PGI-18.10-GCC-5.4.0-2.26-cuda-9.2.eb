@@ -1,0 +1,80 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '4.0.1'
+cudamajversion = '9'
+cudaminversion = '2'
+cudarevversion = '148'
+cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
+cudaversion = '%s.%s' % (cudarelease, cudarevversion)
+versionsuffix = '-cuda-%s' % cudarelease
+
+homepage = 'https://www.open-mpi.org/'
+description = "The Open MPI Project is an open source MPI-3 implementation."
+
+toolchain = {'name': 'PGI', 'version': '18.10-GCC-5.4.0-2.26'}
+toolchainopts = {'vectorize': False}
+
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('cudatoolkit/%s' % cudaversion, EXTERNAL_MODULE),
+]
+
+# needed for --with-verbs
+osdependencies = [(
+    'libibverbs-dev', 
+    'libibverbs-devel', 
+    'rdma-core-devel', 
+)]
+
+configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgf90 "
+    "CFLAGS=-m64 "
+    "CXXFLAGS=-m64 "
+    "FCFLAGS=-m64 "
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--without-mxm "
+    "--with-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--disable-memchecker "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda=/global/opt/nvidia/cudatoolkit/%s "
+    "--without-lsf "
+    "--without-sge "
+) % cudaversion
+
+postinstallcmds = [
+    "sed -i -e '50 i btl_openib_allow_ib = 1' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '51 i btl_openib_warn_default_gid_prefix = 0' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '52 i btl_openib_cpc_include = rdmacm' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '53 i btl_openib_receive_queues = P, 65536,256,192,128' %(installdir)s/etc/openmpi-mca-params.conf",
+]
+
+sanity_check_paths = {
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 
+        'lib/libompitrace.so', 'lib/libopen-pal.so', 
+        'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 
+        'include/mpi.h', 'include/mpi_portable_platform.h'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
