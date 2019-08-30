@@ -1,0 +1,68 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = "4.0.1"
+cudaversion = '10.0'
+versionsuffix = '-cuda-%s-UCX' % cudaversion
+
+homepage = 'https://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = {'name': 'PGI', 'version': '19.7-GCC-7.3.0-2.30'}
+toolchainopts = {'vectorize': False}
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = []
+
+builddependencies = [
+    ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), 
+     EXTERNAL_MODULE),
+    ('ucx', '1.5.2', '', ('GCCcore','7.3.0')),
+]
+
+configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgf90 "
+    "CFLAGS=-m64 "
+    "CXXFLAGS=-m64 "
+    "FCFLAGS=-m64 "
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--with-ucx=${EBROOTUCX} "
+    "--without-mxm "
+    "--without-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--without-loadleveler "
+    "--disable-memchecker "
+    "--with-hwloc=${EBROOTHWLOC} "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda "
+    "--without-lsf "
+    "--without-sge "
+    "--enable-mpirun-prefix-by-default "
+)
+
+postinstallcmds = [
+    "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '50 i pml=ucx' %(installdir)s/etc/openmpi-mca-params.conf",
+]
+
+libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
