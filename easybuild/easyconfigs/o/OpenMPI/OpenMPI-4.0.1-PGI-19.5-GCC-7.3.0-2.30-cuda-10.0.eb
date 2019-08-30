@@ -4,7 +4,7 @@ easyblock = 'ConfigureMake'
 name = 'OpenMPI'
 version = "4.0.1"
 cudaversion = '10.0'
-versionsuffix = '-cuda-%s-UCX' % cudaversion
+versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = 'https://www.open-mpi.org/'
 description = """The Open MPI Project is an open source MPI-3 implementation."""
