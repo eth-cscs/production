@@ -1,0 +1,11 @@
+diff -Naur likwid-4.3.4.ori/src/includes/perfmon_perfevent.h likwid-4.3.4/src/includes/perfmon_perfevent.h
+--- likwid-4.3.4.ori/src/includes/perfmon_perfevent.h	2019-04-15 18:20:00.000000000 +0200
++++ likwid-4.3.4/src/includes/perfmon_perfevent.h	2019-08-27 15:33:34.796938240 +0200
+@@ -87,7 +87,6 @@
+             fprintf(stderr, "WARN: Paranoid level 0 or root access is required to measure Uncore counters\n");
+         }
+ #endif
+-        }
+         informed_paranoid = 1;
+     }
+     lock_acquire((int*) &tile_lock[affinity_thread2core_lookup[cpu_id]], cpu_id);

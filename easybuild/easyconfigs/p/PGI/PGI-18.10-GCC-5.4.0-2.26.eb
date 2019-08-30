@@ -1,0 +1,26 @@
+# contributed by Luca Marsella (CSCS)
+name = 'PGI'
+version_major = '18'
+version_minor = '10'
+version = '%s.%s' % (version_major,version_minor)
+
+gccver = '5.4.0'
+binutilsver = '2.26'
+versionsuffix = '-GCC-%s-%s' % (gccver, binutilsver)
+
+homepage = 'http://www.pgroup.com/'
+description = "C, C++ and Fortran compilers from The Portland Group - PGI"
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = ['/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%(version_major)s-%(version_major)s%(version_minor)s-x86-64.tar.gz']
+
+dependencies = [
+    ('GCCcore', gccver),
+    ('binutils', binutilsver, '', ('GCCcore', gccver)),
+]
+
+# license file
+license_file = '/apps/common/UES/easybuild/sources/p/PGI/license.dat'
+
+moduleclass = 'compiler'

@@ -11,7 +11,7 @@ toolchain = {'name': 'gmvolf', 'version': '17.02'}
 toolchainopts = {'pic': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.bzip.org/%(version)s']
+source_urls = [SOURCEFORGE_SOURCE]
 
 # create pkgconfig file
 postinstallcmds = [

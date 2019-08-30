@@ -1,0 +1,98 @@
+easyblock = 'Bundle'
+
+name = 'dask-labextension'
+version = '1.0.3'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'http://github.com/dask/dask/'
+description = """This package provides a JupyterLab extension to manage Dask clusters, 
+as well as embed Dask's dashboard plots directly into JupyterLab panes."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
+
+# this is a bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+    ('jupyterlab', '1.0.4'),
+    ('dask', '2.2.0', '%s' % versionsuffix),
+]
+
+
+exts_list = [
+    ('simpervisor', '0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
+        }),
+    ('multidict', '4.5.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
+        }),
+    ('yarl', '1.3.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True, 
+        'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
+        }),
+    ('typing_extensions', '3.7.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
+        }),
+    ('async-timeout', '3.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
+        }),
+    ('idna-ssl', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'modulename': 'idna_ssl',
+        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
+        }),
+   ('aiohttp', '3.5.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
+        }),
+   ('jupyter-server-proxy', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+        }),
+    ('dask_labextension', '1.0.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True 
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)]}
+
+moduleclass = 'data'
