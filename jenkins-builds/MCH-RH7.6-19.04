@@ -34,7 +34,7 @@
  netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  OpenMPI-4.0.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- OpenMPI-4.0.1-PGI-19.7-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ OpenMPI-4.0.1-PGI-19.7-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.7/easybuild
  PrgEnv-cce-tsa-19.04.eb                            --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-18.1.eb                             --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS
