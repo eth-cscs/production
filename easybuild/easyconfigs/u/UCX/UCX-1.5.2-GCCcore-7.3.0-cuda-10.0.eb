@@ -3,7 +3,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'UCX'
-version = "1.5.2"
+version = '1.5.2'
 cudaversion = '10.0'
 versionsuffix = '-cuda-%s' % cudaversion
 

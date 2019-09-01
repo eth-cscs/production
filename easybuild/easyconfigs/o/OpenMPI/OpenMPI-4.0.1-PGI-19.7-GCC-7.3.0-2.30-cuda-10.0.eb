@@ -18,7 +18,7 @@ checksums = []
 
 builddependencies = [
     ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), EXTERNAL_MODULE),
-    ('ucx', '1.5.2', '-cuda-%s' % cudaversion, ('GCCcore','7.3.0')),
+    ('UCX', '1.5.2', '-cuda-%s' % cudaversion, ('GCCcore','7.3.0')),
 ]
 
 configopts = (
