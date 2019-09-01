@@ -4,6 +4,8 @@ easyblock = 'ConfigureMake'
 
 name = 'UCX'
 version = "1.5.2"
+cudaversion = '10.0'
+versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = 'http://www.openucx.org/'
 description = """
@@ -19,7 +21,7 @@ source_urls = ['https://github.com/openucx/%(namelower)s/releases/download/v%(ve
 sources = [SOURCELOWER_TAR_GZ]
 checksums = []
 builddependencies = [
-    ('cuda10.0/toolkit/10.0.130', EXTERNAL_MODULE),
+    ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), EXTERNAL_MODULE),
 ]
 
 configopts = "--with-cuda "
