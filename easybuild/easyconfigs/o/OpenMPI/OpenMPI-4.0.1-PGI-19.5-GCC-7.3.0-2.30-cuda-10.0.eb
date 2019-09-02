@@ -3,8 +3,12 @@ easyblock = 'ConfigureMake'
 
 name = 'OpenMPI'
 version = "4.0.1"
-cudaversion = '10.0'
-versionsuffix = '-cuda-%s' % cudaversion
+cudamajversion = '10'
+cudaminversion = '0'
+cudarevversion = '130'
+cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
+cudaversion = '%s.%s' % (cudarelease, cudarevversion)
+versionsuffix = '-cuda-%s' % cudarelease
 
 homepage = 'https://www.open-mpi.org/'
 description = """The Open MPI Project is an open source MPI-3 implementation."""
@@ -17,9 +21,9 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = []
 
 builddependencies = [
-    ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), 
+    ('cuda%s/toolkit/%s' % (cudarelease, cudaversion), 
      EXTERNAL_MODULE),
-    ('UCX', '1.5.2', '-cuda-%s' % cudaversion, ('GCCcore', '7.3.0')),
+    ('UCX', '1.5.2', '-cuda-%s' % cudarelease, ('GCCcore', '7.3.0')),
 ]
 
 configopts = (
