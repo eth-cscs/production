@@ -4,6 +4,7 @@
 name = "IDL"
 version = "8.5.1"
 shortversion = '85'
+versionsuffix = '-OPR'
 
 homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
 description = """IDL (Interactive Data Language) is a scientific programming 
@@ -24,6 +25,7 @@ modextravars = {
     'EXELIS_DIR': '%(installdir)s',
     'IDL_DIR': '%(installdir)s/idl',
     'IDL_ONLINE_HELP_HTML_BROWSER': '/usr/bin/firefox -no-remote',
+    'IDL_LMGRD_LICENSE_FILE': '1700@srv-at001:1700@srv-at002:1700@srv-at003',
     'LM_LICENSE_FILE': '1700@srv-at001:1700@srv-at002:1700@srv-at003'
 }
 
