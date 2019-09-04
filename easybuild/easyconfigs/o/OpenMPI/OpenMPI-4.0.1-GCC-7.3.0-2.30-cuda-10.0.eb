@@ -21,7 +21,7 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = []
 
 builddependencies = [
-    ('cuda%s/toolkit/%s.130' % (cudarelease, cudaversion), EXTERNAL_MODULE),
+    ('cuda%s/toolkit/%s' % (cudarelease, cudaversion), EXTERNAL_MODULE),
     ('UCX', '1.5.2', '-cuda-%s' % cudarelease, ('GCCcore','7.3.0')),
 ]
 
