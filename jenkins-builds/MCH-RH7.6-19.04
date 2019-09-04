@@ -26,6 +26,7 @@
  ncview-2.1.7-foss-2018b.eb 			    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-C++-4.3.0-foss-2018b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  netCDF-Fortran-4.4.5-foss-2018b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
+ OpenMPI-4.0.1-GCC-7.3.0-2.30-cuda-10.0.eb          --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  PyExtensions-2.7.16-foss-2018b.eb 		    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  PyExtensions-3.7.4-foss-2018b.eb 		    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
  R-3.5.2-foss-2018b.eb 				    --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild --set-default-module
