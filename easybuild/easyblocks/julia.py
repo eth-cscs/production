@@ -60,16 +60,16 @@ class EB_Julia(PackedBinary):
         hostname_short = ''.join(c for c in hostname if not c.isdigit())
 
         if self.cfg['arch_name']:
-            env_path = '-'.join([self.version, hostname_short, self.cfg['arch_name']])
+            env_path = '-'.join([hostname_short, self.cfg['arch_name']])
             return env_path
 
         optarch = build_option('optarch') or None
         if optarch:
-            env_path = '-'.join([self.version, hostname_short, optarch])
+            env_path = '-'.join([hostname_short, optarch])
         else:
             arch = systemtools.get_cpu_architecture()
             cpu_family = systemtools.get_cpu_family()
-            env_path = '-'.join([self.version, hostname_short, cpu_family, arch])
+            env_path = '-'.join([hostname_short, cpu_family, arch])
         return env_path
 
     def get_user_depot_path(self):
@@ -80,11 +80,11 @@ class EB_Julia(PackedBinary):
 
         optarch = build_option('optarch') or None
         if optarch:
-            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.get_environment_path())
+            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.version, self.get_environment_path())
         else:
             arch = systemtools.get_cpu_architecture()
             cpu_family = systemtools.get_cpu_family()
-            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.get_environment_path())
+            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.version, self.get_environment_path())
         return user_depot_path
 
     def __init__(self, *args, **kwargs):
@@ -96,9 +96,9 @@ class EB_Julia(PackedBinary):
         share_depot = os.path.join(self.installdir, 'share', 'julia')
         extensions_depot = os.path.join(self.installdir, 'extensions')
 
-        self.depot_path = ':'.join([user_depot, local_share_depot, share_depot])
-        self.julia_project = os.path.join(user_depot, "environments", self.get_environment_path()) 
-        self.julia_load_path = '@:%s:@stdlib' % self.get_environment_path()
+        self.depot_path = ':'.join([user_depot, extensions_depot, local_share_depot, share_depot])
+        self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()])) 
+        self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_path()
 
     def sanity_check_step(self):
         """Custom sanity check for Julia."""
@@ -117,14 +117,9 @@ class EB_Julia(PackedBinary):
     def make_module_extra(self, *args, **kwargs):
         txt = super(EB_Julia, self).make_module_extra(*args, **kwargs)
 
-        if self.depot_path:
-            txt += self.module_generator.set_environment('JULIA_DEPOT_PATH', self.depot_path)
-
-        if self.julia_project:
-            txt += self.module_generator.set_environment('JULIA_PROJECT', self.julia_project)
-
-        if self.julia_load_path:
-            txt += self.module_generator.set_environment('JULIA_LOAD_PATH', self.julia_load_path)
-
+        txt += self.module_generator.set_environment('JULIA_DEPOT_PATH', self.depot_path)
+        txt += self.module_generator.set_environment('JULIA_PROJECT', self.julia_project)
+        txt += self.module_generator.set_environment('JULIA_LOAD_PATH', self.julia_load_path)
+        txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_path()]))
         return txt
 

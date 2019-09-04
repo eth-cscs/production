@@ -49,7 +49,15 @@ class JuliaPackage(ExtensionEasyBlock):
         """Initliaze RPackage-specific class variables."""
 
         super(JuliaPackage, self).__init__(*args, **kwargs)
-        self.package_name = ""
+        self.package_name = self.name
+        names = self.package_name.split('.')
+        if len(names) > 1:
+            self.package_name = ''.join(names[:-1])
+
+	julia_env_name = os.getenv('EBJULIA_ENV_NAME', '')
+        self.depot=os.path.join(self.installdir, 'extensions')
+        self.projectdir=os.path.join(self.depot, 'environments', julia_env_name)
+        self.log.info("Depot for package installations: %s" % self.depot) 
 
     def patch_step(self, beginpath=None):
         pass
@@ -69,20 +77,8 @@ class JuliaPackage(ExtensionEasyBlock):
         """No separate build step for Julia packages."""
         pass
 
-    def make_julia_cmd(self, prefix=None, remove=False):
+    def make_julia_cmd(self, remove=False):
         """Create a command to run in julia to install an julia package."""
-
-        if not prefix:
-            prefix = ''
-	#TODO: the place of the depot should be taken from the julia easyconfig file: variable extensions_depot
-        self.depot=os.path.join(prefix, 'extensions')
-        self.log.debug("Depot for package installations: %s" % self.depot) 
-
-        self.package_name = self.name
-        names = self.package_name.split('.')
-        if len(names) > 1:
-            self.package_name = ''.join(names[:-1])
-        print("package_name: %s" % self.package_name)
 
         install_opts = ""
         if self.cfg['installopts']:
@@ -90,28 +86,27 @@ class JuliaPackage(ExtensionEasyBlock):
         else:
             install_opts = "name=\"%s\", version=\"%s\"" % (self.package_name, self.version)
 
+	pre_cmd = '%s export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.projectdir)
         if remove:
-            cmd = "%s export JULIA_DEPOT_PATH=%s && unset JULIA_PROJECT && julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % (self.cfg['preinstallopts'], self.depot, install_opts)
+            cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
         else:
-            cmd = "%s export JULIA_DEPOT_PATH=%s && unset JULIA_PROJECT && julia --eval 'using Pkg; Pkg.add(PackageSpec(%s))'" % (self.cfg['preinstallopts'], self.depot, install_opts)
-
-        self.log.debug("make_julia_cmd returns %s" % cmd)
+            cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.add(PackageSpec(%s))'" % install_opts])
 
         return cmd
 
     def install_step(self):
         """Install procedure for Julia packages."""
 
-        cmd = self.make_julia_cmd(prefix=self.installdir, remove=False)
+        cmd = self.make_julia_cmd(remove=False)
         cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
 
         cmderrors = parse_log_for_error(cmdttdouterr, regExp="^ERROR:")
         if cmderrors:
-            cmd = self.make_julia_cmd(prefix=self.installdir, remove=True)
+            cmd = self.make_julia_cmd(remove=True)
             run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=stdin, regexp=False)
             raise EasyBuildError("Errors detected during installation of Julia package %s!", self.name)
         else:
-            self.log.debug("Julia package %s installed succesfully" % self.name)
+            self.log.info("Julia package %s installed succesfully" % self.name)
 
 
     def run(self):
@@ -123,19 +118,11 @@ class JuliaPackage(ExtensionEasyBlock):
         """
         Custom sanity check for Julia packages
         """
-
-        if 'CUDA' in self.package_name or 'CuArrays' in self.package_name:
-            #NOTE: we don't use Pkg.status with arguments as only supported for Julia >=v1.1
-            cmd = "export JULIA_DEPOT_PATH=%s && unset JULIA_PROJECT && julia --eval 'using Pkg; Pkg.status()'" % (self.depot)
-            cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
-            return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
-            
-        else:
-            cmd = "export JULIA_DEPOT_PATH=%s && unset JULIA_PROJECT && julia --eval 'import %s'" % (self.depot, self.package_name)
-            cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
-            return len(parse_log_for_error(cmdttdouterr, regExp="ERROR")) == 0
-
-        #return super(JuliaPackage, self).sanity_check_step(EXTS_FILTER_R_PACKAGES, *args, **kwargs)
+        #NOTE: we don't use Pkg.status with arguments as only supported for Julia >=v1.1
+	cmd = "export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.projectdir)
+        cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
+        self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
+        return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
 
     #def make_module_extra(self):
     #    """Add install path to R_LIBS"""
