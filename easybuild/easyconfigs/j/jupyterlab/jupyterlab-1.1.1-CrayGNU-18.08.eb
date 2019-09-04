@@ -500,7 +500,7 @@ exts_list = [
 full_sanity_check = True
 
 # For Julia packages needed for Jupyter
-julia_depot_path = "%(installdir)s/share/julia/site/"
+#twr julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
@@ -509,7 +509,7 @@ modextrapaths = {
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
-    'JULIA_DEPOT_PATH': julia_depot_path,
+#twr    'JULIA_DEPOT_PATH': julia_depot_path,
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
