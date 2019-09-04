@@ -3,7 +3,7 @@
 easyblock = 'Bundle'
 
 name = 'jupyterlab'
-version = '1.0.4'
+version = '1.1.1'
 
 py_maj_ver = '3'
 py_min_ver = '6'
@@ -25,6 +25,7 @@ dependencies = [
     ('julia','1.0.4', '', True),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
+    ('graphviz', '2.40.1', '', True),
 ]
 
 # bundle of Python packages
@@ -416,8 +417,17 @@ exts_list = [
 #        'source_urls': ['https://pypi.python.org/packages/source/q/qgrid/'],
 #        }),
 
+# graphviz, for dask graph visualization
+     ('graphviz', '0.12', {
+         'req_py_majver': '3',
+         'req_py_minver': '6',
+         'use_pip': True,
+         'source_urls': ['https://pypi.python.org/packages/source/g/graphviz/'],
+         'source_tmpl': 'graphviz-%(version)s.zip',
+         }),
+
 # dask-labextension
-# his package provides a JupyterLab extension to manage Dask clusters, 
+# This package provides a JupyterLab extension to manage Dask clusters, 
 # as well as embed Dask's dashboard plots directly into JupyterLab panes    
     ('simpervisor', '0.3', {
         'req_py_majver': '3',
@@ -508,7 +518,7 @@ modextravars = {
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
-#                   "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
+#                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
                    "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
                    "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
                    "export JUPYTER=%(installdir)s/bin/jupyter;"
@@ -521,11 +531,11 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
                    "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
-#                   "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
-#                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
-#                   "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
+#                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
+#                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
+#                  "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
                    "%(installdir)s/bin/jupyter lab build --dev-build=False;"
-# commented twr    "%(installdir)s/bin/jupyter serverextension enable --py dask_labextension;"
+# now at launch    "%(installdir)s/bin/jupyter serverextension enable --py dask_labextension;"
                    "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"

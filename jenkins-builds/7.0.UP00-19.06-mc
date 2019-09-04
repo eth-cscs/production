@@ -19,6 +19,8 @@
  GSL-2.5-CrayIntel-19.06.eb
  HDFView-2.14.eb                                    --set-default-module
  HPX-1.2.0-CrayGNU-19.06.eb                         --set-default-module
+ HPX-1.3.0-CrayGNU-19.06.eb
+ HPX-1.3.0-CrayGNU-19.06-APEX.eb
  h5py-2.8.0-CrayGNU-19.06-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.06-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.06-python3-parallel.eb       --set-default-module
@@ -26,6 +28,8 @@
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-19.06-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.06-python3.eb
+ julia-1.0.4.eb  
+ julia-1.1.1.eb
  jupyterhub-0.9.6-CrayGNU-19.06.eb
  jupyterhub-1.0.0-CrayGNU-19.06.eb                  --set-default-module
  jupyterlab-0.35.2-CrayGNU-19.06.eb
@@ -59,7 +63,7 @@
  IPM-2.0.6-CrayGNU-19.06.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  IPM-2.0.6-CrayIntel-19.06.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  IPM-2.0.6-CrayPGI-19.06.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
- likwid-4.3.3-perf_event.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ likwid-4.3.4-perf_event.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-19.06-python3.eb         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  malt-1.0.0-CrayGNU-19.06.eb                        --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  mpiP-57fc864-CrayCCE-19.06.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
@@ -73,6 +77,10 @@
  papi-wrap-1.0-CrayIntel-19.06.eb                                        --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  pudb-2018.1-CrayGNU-19.06-python3.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Scalasca-2.5-CrayGNU-19.06.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ Scalasca-2.5-CrayCCE-19.06-classic.eb                                   --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ Scalasca-2.5-CrayCCE-19.06.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ Scalasca-2.5-CrayIntel-19.06.eb                                         --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
+ Scalasca-2.5-CrayPGI-19.06.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Score-P-6.0-CrayCCE-19.06-classic.eb                                    --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Score-P-6.0-CrayCCE-19.06.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
  Score-P-6.0-CrayGNU-19.06.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP00/PE19.06/mc/easybuild/tools
