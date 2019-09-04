@@ -2,6 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'OpenMPI'
+version = '4.0.1'
 cudamajversion = '10'
 cudaminversion = '0'
 cudarevversion = '130'
