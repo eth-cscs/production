@@ -80,11 +80,11 @@ class EB_Julia(PackedBinary):
 
         optarch = build_option('optarch') or None
         if optarch:
-            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.version, self.get_environment_path())
+            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_path())
         else:
             arch = systemtools.get_cpu_architecture()
             cpu_family = systemtools.get_cpu_family()
-            user_depot_path = os.path.join(os.getenv("HOME"), '.julia', self.version, self.get_environment_path())
+            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_path())
         return user_depot_path
 
     def __init__(self, *args, **kwargs):
@@ -97,7 +97,7 @@ class EB_Julia(PackedBinary):
         extensions_depot = os.path.join(self.installdir, 'extensions')
 
         self.depot_path = ':'.join([user_depot, extensions_depot, local_share_depot, share_depot])
-        self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()])) 
+        self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()]))
         self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_path()
 
     def sanity_check_step(self):
@@ -109,7 +109,7 @@ class EB_Julia(PackedBinary):
         }
         custom_commands = [
             "julia --version",
-            "julia --eval '1+2'", 
+            "julia --eval '1+2'",
         ]
 
         super(EB_Julia, self).sanity_check_step(custom_paths=custom_paths, custom_commands=custom_commands)
