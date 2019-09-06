@@ -32,6 +32,7 @@ import os
 import shutil
 import socket
 
+from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.config import build_option
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.easyblocks.generic.packedbinary import PackedBinary
@@ -39,19 +40,26 @@ from easybuild.tools.build_log import EasyBuildError
 from easybuild.tools.filetools import mkdir
 from easybuild.tools.run import run_cmd, parse_log_for_error
 from easybuild.tools import systemtools
+#from easybuild.easyblocks.generic.pythonpackage import PythonPackage, det_pylibdir
+from juliapackage import JuliaPackage
 
 
-class EB_Julia(PackedBinary):
+class JuliaBundle(Bundle):
     """
     Install an Julia package as a separate module, or as an extension.
     """
+
     @staticmethod
     def extra_options(extra_vars=None):
-        extra_vars = {
-            'arch_name': [None, "Change julia's Project.toml pathname", CUSTOM],
-        }
-        return PackedBinary.extra_options(extra_vars)
-
+        """Easyconfig parameters specific to bundles of Python packages."""
+        #50         extra_vars = {
+        #51             'arch_name': [None, "Change julia's Project.toml pathname", CUSTOM],
+        #52         }
+        if extra_vars is None:
+            extra_vars = {}
+        # combine custom easyconfig parameters of Bundle & PythonPackage
+        extra_vars = Bundle.extra_options(extra_vars)
+        return JuliaPackage.extra_options(extra_vars)
 
     def get_environment_path(self):
         env_path = ''
@@ -89,37 +97,54 @@ class EB_Julia(PackedBinary):
 
     def __init__(self, *args, **kwargs):
         """Initliaze RPackage-specific class variables."""
-        super(EB_Julia, self).__init__(*args, **kwargs)
+        super(JuliaBundle, self).__init__(*args, **kwargs)
+        self.cfg['exts_defaultclass'] = 'JuliaPackage'
 
-        user_depot = self.get_user_depot_path()
-        local_share_depot = os.path.join(self.installdir, 'local', 'share', 'julia')
-        share_depot = os.path.join(self.installdir, 'share', 'julia')
-        extensions_depot = os.path.join(self.installdir, 'extensions')
+        # need to disable templating to ensure that actual value for exts_default_options is updated...
+        prev_enable_templating = self.cfg.enable_templating
+        self.cfg.enable_templating = False
 
-        self.depot_path = ':'.join([user_depot, extensions_depot, local_share_depot, share_depot])
-        self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()]))
-        self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_path()
+        # set default options for extensions according to relevant top-level easyconfig parameters
+        julpkg_keys = JuliaPackage.extra_options().keys()
+        for key in julpkg_keys:
+            if key not in self.cfg['exts_default_options']:
+                self.cfg['exts_default_options'][key] = self.cfg[key]
+
+        self.cfg['exts_default_options']['download_dep_fail'] = True
+        self.log.info("Detection of downloaded extension dependencies is enabled")
+
+        self.cfg.enable_templating = prev_enable_templating
+
+        self.log.info("exts_default_options: %s", self.cfg['exts_default_options'])
+
+        self.user_depot = self.get_user_depot_path()
+        #local_share_depot = os.path.join(self.installdir, 'local', 'share', 'julia')
+        #share_depot = os.path.join(self.installdir, 'share', 'julia')
+        #self.extensions_depot = os.path.join(self.installdir, 'extensions')
+        self.extensions_depot = 'extensions'
+
+        #self.depot_path = ':'.join([user_depot, extensions_depot])
+        # this is very important to remember the addition of the self.verion
+        #self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()]))
+        #self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_path()
 
     def sanity_check_step(self):
         """Custom sanity check for Julia."""
 
         custom_paths = {
-            'files': [os.path.join('bin', 'julia'), 'LICENSE.md'],
-            'dirs': ['bin', 'include', 'lib', 'share'],
+                # extensions/environments/1.0.4-daint-gpu/Manifest.toml
+            'files': [],
+            'dirs': ['extensions'],
         }
-        custom_commands = [
-            "julia --version",
-            "julia --eval '1+2'",
-        ]
-
-        super(EB_Julia, self).sanity_check_step(custom_paths=custom_paths, custom_commands=custom_commands)
+        super(Bundle, self).sanity_check_step(custom_paths=custom_paths)
 
     def make_module_extra(self, *args, **kwargs):
-        txt = super(EB_Julia, self).make_module_extra(*args, **kwargs)
+        txt = super(Bundle, self).make_module_extra(*args, **kwargs)
 
-        txt += self.module_generator.set_environment('JULIA_DEPOT_PATH', self.depot_path)
-        txt += self.module_generator.set_environment('JULIA_PROJECT', self.julia_project)
-        txt += self.module_generator.set_environment('JULIA_LOAD_PATH', self.julia_load_path)
-        txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_path()]))
+        txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.extensions_depot)
+        txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.user_depot, allow_abs=False, expand_relpaths=False)
+        #txt += self.module_generator.set_environment('JULIA_PROJECT', self.julia_project)
+        #txt += self.module_generator.set_environment('JULIA_LOAD_PATH', self.julia_load_path)
+        #txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_path()]))
         return txt
 

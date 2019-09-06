@@ -45,6 +45,16 @@ class JuliaPackage(ExtensionEasyBlock):
     Install an Julia package as a separate module, or as an extension.
     """
 
+    @staticmethod
+    def extra_options(extra_vars=None):
+        if extra_vars is None:
+            extra_vars = {}
+
+        extra_vars.update({
+            'arch_name': [None, "Change julia's Project.toml pathname", CUSTOM],
+        })
+        return ExtensionEasyBlock.extra_options(extra_vars=extra_vars)
+
     def __init__(self, *args, **kwargs):
         """Initliaze RPackage-specific class variables."""
 
@@ -54,10 +64,10 @@ class JuliaPackage(ExtensionEasyBlock):
         if len(names) > 1:
             self.package_name = ''.join(names[:-1])
 
-	julia_env_name = os.getenv('EBJULIA_ENV_NAME', '')
+        julia_env_name = os.getenv('EBJULIA_ENV_NAME', '')
         self.depot=os.path.join(self.installdir, 'extensions')
         self.projectdir=os.path.join(self.depot, 'environments', julia_env_name)
-        self.log.info("Depot for package installations: %s" % self.depot) 
+        self.log.info("Depot for package installations: %s" % self.depot)
 
     def patch_step(self, beginpath=None):
         pass
@@ -86,7 +96,7 @@ class JuliaPackage(ExtensionEasyBlock):
         else:
             install_opts = "name=\"%s\", version=\"%s\"" % (self.package_name, self.version)
 
-	pre_cmd = '%s export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.projectdir)
+        pre_cmd = '%s export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.projectdir)
         if remove:
             cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
         else:
@@ -119,7 +129,7 @@ class JuliaPackage(ExtensionEasyBlock):
         Custom sanity check for Julia packages
         """
         #NOTE: we don't use Pkg.status with arguments as only supported for Julia >=v1.1
-	cmd = "export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.projectdir)
+        cmd = "export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.projectdir)
         cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
