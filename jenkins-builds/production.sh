@@ -121,9 +121,9 @@ if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
 fi
 # module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
- echo -e "\n Unuse path: $unuse_path "
+ echo -e " Unuse path: $unuse_path "
  module unuse $unuse_path
- echo -e " Updated MODULEPATH: $MODULEPATH \n"
+ echo -e " Updated MODULEPATH: $MODULEPATH "
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
@@ -140,9 +140,9 @@ else
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
-  echo -e "\n Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all"
+  echo -e " Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all "
   module use $EASYBUILD_PREFIX/modules/all
-  echo -e " Updated MODULEPATH: $MODULEPATH \n"
+  echo -e " Updated MODULEPATH: $MODULEPATH "
  fi
 fi
 
@@ -185,24 +185,18 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build licensed software (CPMD, IDL, MATLAB, VASP)
-    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]]; then
+# build licensed software (CPMD, IDL, MATLAB, VASP) on Dom and Piz Daint
+    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
-        if [[ "$name" =~ "IDL" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
-         group="${name,,}ethz"
+        if [[ "$name" =~ "IDL" ]]; then
+            group="${name,,}ethz"
         else
-         group=${name,,}
+            group=${name,,}
         fi
         footer="if { [lsearch [exec groups] \"${group}\"]==-1 && [module-info mode load] } {
  puts stderr \"WARNING: Only users belonging to group ${group} with a valid ${name} license are allowed to access ${name} executables and library files\"
 }"
-        if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
-            (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
-        elif [[ "$system" =~ "arolla" || "$system" =~ "esch" || "$system" =~ "tsa" ]]
-            true
-        else
-            echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
-        fi
+        (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
         echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
         eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
@@ -210,7 +204,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
         chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
         chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
-# build other software
+# build other software on every system
     else
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r ${eb_args}
