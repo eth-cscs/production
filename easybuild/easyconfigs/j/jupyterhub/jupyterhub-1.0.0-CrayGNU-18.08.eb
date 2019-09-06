@@ -17,7 +17,7 @@ homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
 
 
-toolchain = {'name': 'CrayGNU', 'version': '19.06'}
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 
