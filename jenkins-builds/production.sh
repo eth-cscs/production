@@ -88,8 +88,10 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ esch ]]; then
+if [[ "$HOSTNAME" =~ "esch" ]]; then
  system=${HOSTNAME%%[cl]n-[0-9]*}
+elif [[ "$HOSTNAME" =~ "arolla" || "$HOSTNAME" =~ "tsa" ]]; then 
+ system=${HOSTNAME%%-[cl]n[0-9]*}
 else
  system=${HOSTNAME%%[0-9]*}
 fi
@@ -186,7 +188,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
 # build licensed software (CPMD, IDL, MATLAB, VASP)
     if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]]; then
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
-        if [[ "$name" =~ "IDL" ]]; then
+        if [[ "$name" =~ "IDL" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
          group="${name,,}ethz"
         else
          group=${name,,}
@@ -196,6 +198,8 @@ for((i=0; i<${#eb_files[@]}; i++)); do
 }"
         if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
             (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
+        elif [[ "$system" =~ "arolla" || "$system" =~ "esch" || "$system" =~ "tsa" ]]
+            continue
         else
             echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
         fi
