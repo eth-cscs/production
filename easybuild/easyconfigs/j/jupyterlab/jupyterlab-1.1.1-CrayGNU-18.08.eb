@@ -22,7 +22,7 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-    ('JuliaExtensions','1.0.4','-cuda9.1'),
+    ('JuliaExtensions','1.0.4','-cuda-9.1'),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
     ('graphviz', '2.40.1', '', True),
@@ -500,18 +500,23 @@ exts_list = [
 full_sanity_check = True
 
 # For Julia packages needed for Jupyter
-#twr julia_depot_path = "%(installdir)s/share/julia/site/"
+julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
     'JUPYTER_PATH': 'share/jupyter',
+#    'JULIA_DEPOT_PATH': 
 }
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
-#twr    'JULIA_DEPOT_PATH': julia_depot_path,
+#    'JULIA_DEPOT_PATH': julia_depot_path,
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
+
+modtclfooter = """
+append-path JULIA_DEPOT_PATH %s
+""" % julia_depot_path
 
 # install extensions
 # jupyterlab/hub-extension no longer needed as the hub menu is built into jupyterlab core from JLab 1.x, twr
@@ -541,9 +546,9 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-#twr                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
                    # to trigger the precompilation
-#twr                   "julia -e \'using IJulia\';"
+                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
