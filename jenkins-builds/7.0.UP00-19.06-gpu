@@ -33,7 +33,8 @@
  julia-1.1.1.eb  
  julia-1.2.0.eb
  jupyterlab-0.35.2-CrayGNU-19.06.eb
- jupyterlab-1.0.4-CrayGNU-19.06.eb                  --set-default-module
+ jupyterlab-1.0.4-CrayGNU-19.06.eb                  
+ jupyterlab-1.1.1-CrayGNU-19.06.eb                  --set-default-module
  jupyterhub-0.9.6-CrayGNU-19.06.eb
  jupyterhub-1.0.0-CrayGNU-19.06.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.06-cuda-10.1.eb        --set-default-module
