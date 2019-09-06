@@ -199,7 +199,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
             (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
         elif [[ "$system" =~ "arolla" || "$system" =~ "esch" || "$system" =~ "tsa" ]]
-            continue
+            true
         else
             echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
         fi
