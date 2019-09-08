@@ -515,9 +515,9 @@ modextravars = {
 }
 
 modtclfooter = """
-append-path JULIA_DEPOT_PATH %s
-append-path JULIA_LOAD_PATH %s
-""" % julia_depot_path
+append-path JULIA_DEPOT_PATH "%s"
+append-path JULIA_LOAD_PATH "%s"
+""" % (julia_depot_path, julia_depot_path)
 
 # install extensions
 # jupyterlab/hub-extension no longer needed as the hub menu is built into jupyterlab core from JLab 1.x, twr
