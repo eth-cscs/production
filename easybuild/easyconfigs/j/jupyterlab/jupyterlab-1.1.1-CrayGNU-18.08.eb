@@ -516,6 +516,7 @@ modextravars = {
 
 modtclfooter = """
 append-path JULIA_DEPOT_PATH %s
+append-path JULIA_LOAD_PATH %s
 """ % julia_depot_path
 
 # install extensions
