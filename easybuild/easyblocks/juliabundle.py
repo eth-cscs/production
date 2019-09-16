@@ -61,7 +61,7 @@ class JuliaBundle(Bundle):
         extra_vars = Bundle.extra_options(extra_vars)
         return JuliaPackage.extra_options(extra_vars)
 
-    def get_environment_path(self):
+    def get_environment_folder(self):
         env_path = ''
 
         hostname = socket.gethostname()
@@ -88,11 +88,11 @@ class JuliaBundle(Bundle):
 
         optarch = build_option('optarch') or None
         if optarch:
-            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_path())
+            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_folder())
         else:
             arch = systemtools.get_cpu_architecture()
             cpu_family = systemtools.get_cpu_family()
-            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_path())
+            user_depot_path = os.path.join('~', '.julia', self.version, self.get_environment_folder())
         return user_depot_path
 
     def __init__(self, *args, **kwargs):
@@ -118,15 +118,13 @@ class JuliaBundle(Bundle):
         self.log.info("exts_default_options: %s", self.cfg['exts_default_options'])
 
         self.user_depot = self.get_user_depot_path()
-        #local_share_depot = os.path.join(self.installdir, 'local', 'share', 'julia')
-        #share_depot = os.path.join(self.installdir, 'share', 'julia')
-        #self.extensions_depot = os.path.join(self.installdir, 'extensions')
         self.extensions_depot = 'extensions'
 
+        self.admin_load_path = os.path.join(self.extensions_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
         #self.depot_path = ':'.join([user_depot, extensions_depot])
         # this is very important to remember the addition of the self.verion
-        #self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_path()]))
-        #self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_path()
+        #self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
+        #self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_folder()
 
     def sanity_check_step(self):
         """Custom sanity check for Julia."""
@@ -142,9 +140,10 @@ class JuliaBundle(Bundle):
         txt = super(Bundle, self).make_module_extra(*args, **kwargs)
 
         txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.extensions_depot)
-        txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.user_depot, allow_abs=False, expand_relpaths=False)
-        #txt += self.module_generator.set_environment('JULIA_PROJECT', self.julia_project)
-        #txt += self.module_generator.set_environment('JULIA_LOAD_PATH', self.julia_load_path)
-        #txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_path()]))
+        txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_DEPOT_PATH', self.extensions_depot)
+
+        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.admin_load_path)
+        txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_LOAD_PATH', self.admin_load_path)
+
         return txt
 
