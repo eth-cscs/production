@@ -96,7 +96,7 @@ class JuliaPackage(ExtensionEasyBlock):
         else:
             install_opts = "name=\"%s\", version=\"%s\"" % (self.package_name, self.version)
 
-        pre_cmd = '%s export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.projectdir)
+        pre_cmd = '%s unset EBJULIA_USER_DEPOT_PATH && export EBJULIA_ADMIN_DEPOT_PATH=%s && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.depot, self.projectdir)
         if remove:
             cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
         else:
@@ -118,24 +118,23 @@ class JuliaPackage(ExtensionEasyBlock):
         else:
             self.log.info("Julia package %s installed succesfully" % self.name)
 
-
     def run(self):
         """Install Julia package as an extension."""
         self.install_step()
-
 
     def sanity_check_step(self, *args, **kwargs):
         """
         Custom sanity check for Julia packages
         """
         #NOTE: we don't use Pkg.status with arguments as only supported for Julia >=v1.1
-        cmd = "export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.projectdir)
+        cmd = "unset EBJULIA_USER_DEPOT_PATH && export EBJULIA_ADMIN_DEPOT_PATH=%s && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.depot, self.projectdir)
         cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
 
-    #def make_module_extra(self):
-    #    """Add install path to R_LIBS"""
-    #    # prepend R_LIBS with install path
-    #    extra = self.module_generator.prepend_paths("R_LIBS", [self.cfg['exts_subdir']])
-    #    return super(RPackage, self).make_module_extra(extra)
+#    def make_module_extra(self, *args, **kwargs):
+#        txt = super(EB_JuliaPackages, self).make_module_extra(*args, **kwargs)
+#
+#        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.projectdir)
+#
+#        return txt
