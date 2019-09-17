@@ -22,7 +22,6 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-    ('julia','1.0.4', '', True),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
     ('graphviz', '2.40.1', '', True),
@@ -500,7 +499,7 @@ exts_list = [
 full_sanity_check = True
 
 # For Julia packages needed for Jupyter
-julia_depot_path = "%(installdir)s/share/julia/site/"
+#twr julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
@@ -509,7 +508,7 @@ modextrapaths = {
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
-    'JULIA_DEPOT_PATH': julia_depot_path,
+#twr    'JULIA_DEPOT_PATH': julia_depot_path,
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
@@ -541,9 +540,9 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+#twr                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
                    # to trigger the precompilation
-                   "julia -e \'using IJulia\';"
+#twr                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
