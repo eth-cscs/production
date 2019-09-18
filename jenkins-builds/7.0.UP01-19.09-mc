@@ -30,6 +30,7 @@
  Julia-1.0.4.eb  
  jupyterhub-0.9.6-CrayGNU-19.09.eb
  jupyterhub-1.0.0-CrayGNU-19.09.eb                  --set-default-module
+ jupyterlab-1.1.1-CrayGNU-19.09.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.09.eb                  --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NAMD-2.13-CrayIntel-19.09.eb                       --set-default-module
