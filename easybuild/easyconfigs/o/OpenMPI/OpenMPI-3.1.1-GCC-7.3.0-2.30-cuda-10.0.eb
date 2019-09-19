@@ -29,8 +29,7 @@ checksums = [
 osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
 
 builddependencies = [
-    ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), 
-     EXTERNAL_MODULE),
+    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), EXTERNAL_MODULE),
 ]
 
 configopts = (

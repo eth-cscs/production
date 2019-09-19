@@ -18,19 +18,14 @@ checksums = [ 'c01207ca942bef74c7d48df965fca99f' ]
 # Forcing $IPM_LOGDIR to archive all reports in a shared dir:
 patches = [ 'IPM-2.0.6-Cray-19.06.patch' ]
 
-# ploticus+mxml required for parser
-# Installing ploticus-ipm to avoid conflict with the version installed under
-# /apps/common/system/modulefiles/ploticus/'
 dependencies = [
-    ('libunwind', '1.2.1'),
-    ('mxml', '2.10'),
+    ('libunwind', '1.3.1'),
+    ('mxml', '3.0'),
     ('ploticus', '2.42-ipm', '', True),
-# papi provided by perftools-base
-#    ('papi/5.6.0.2', EXTERNAL_MODULE),
 ]
 
-preconfigopts  = ' ./bootstrap.sh && '
-preconfigopts += ' sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
+preconfigopts  = './bootstrap.sh && '
+preconfigopts += 'sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
 buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
 configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
 # With Cray, we can use perftools' papi, otherwise:
@@ -38,8 +33,6 @@ configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
 configopts += ' CPPFLAGS="-I$EBROOTMXML/include "'
 configopts += ' LIBS="-L$EBROOTMXML/lib "'
-configopts += ' --enable-parser '
-#no! configopts += ' --enable-shared '
 
 postinstallcmds = ["mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl "]
 

@@ -1,0 +1,40 @@
+# @author: jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'vampir'
+version = '9.7.0'
+archsuffix = '-Linux'
+
+homepage = 'http://www.vampir.eu'
+description = """The VAMPIR software tool provides an easy-to-use framework
+that enables developers to quickly display and analyze arbitrary program
+behavior at any level of detail. The tool suite implements optimized event
+analysis algorithms and customizable displays that enable fast and interactive
+rendering of very complex performance monitoring data."""
+site_contacts = 'service@vampir.eu'
+
+toolchain = {'name': 'dummy', 'version': ''}
+sources = [{
+  'filename': '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/{}-{}{}.tar.gz'.format(name, version, archsuffix),
+  # tgz created with `{name}-{version}{archsuffix}.bin --create-tar`
+  'extract_cmd': "tar xf %s",
+}]
+checksums = ['7d551c749d78faea31755abd7aadca88']
+
+sanity_check_paths = {
+    'files': ['bin/vampir', 'doc/vampir-manual.pdf'],
+    'dirs': []
+}
+
+# --------------------------------------------------------------------------
+# Vampir requires activation by email (only once):
+# launch vampir, get and install the vampir.activation file, mv (not cp!) the licenses to /apps/common:
+#   mv %(installdir)s/.vampir.id     /apps/common/UES/licensesCSCS/vampir/daint/eb/.vampir.id     
+#   mv %(installdir)s/vampir.license /apps/common/UES/licensesCSCS/vampir/daint/eb/vampir.license
+# Future installations will depend on $VAMPIR_LICENSE:
+modextravars = {
+    'VAMPIR_LICENSE': '/apps/common/UES/licensesCSCS/vampir/daint/vampir.license',
+    'VAMPIR_DOC': '%(installdir)s/doc/vampir-manual.pdf'
+}
+
+moduleclass = 'tools'

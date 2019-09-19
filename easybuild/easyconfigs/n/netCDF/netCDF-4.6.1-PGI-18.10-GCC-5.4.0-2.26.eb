@@ -1,0 +1,31 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'netCDF'
+version = '4.6.1'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software
+libraries and machine-independent data formats that support the creation,
+access, and sharing of array-oriented scientific data."""
+
+toolchain = {'name': 'PGI', 'version': '18.10-GCC-5.4.0-2.26'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://github.com/Unidata/netcdf-c/archive/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('HDF5', '1.10.4', '-serial'),
+    ('cURL', '7.62.0'),
+]
+
+builddependencies = [
+    ('CMake', '3.13.4', '', True),
+    ('Doxygen', '1.8.14', '', True),
+]
+
+preconfigopts = ' CC=pgcc CFLAGS="-O2 -Mflushz -fPIC -tp=haswell" '
+configopts = ' --with-pic '
+
+moduleclass = 'data'

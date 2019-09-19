@@ -15,8 +15,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 sources = ['/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%(version_major)s-%(version_major)s%(version_minor)s-x86-64.tar.gz']
 
+install_amd = 'False'
 install_java = 'False'
-install_nvidia = 'False'
 install_mpi = 'False'
 mpi_gpu_support = 'False'
 

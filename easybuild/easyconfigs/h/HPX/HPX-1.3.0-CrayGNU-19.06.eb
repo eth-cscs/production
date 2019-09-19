@@ -1,0 +1,38 @@
+# Mikael Simberg (CSCS), John Biddiscombe (CSCS), Victor Holanda (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'HPX'
+version = '1.3.0'
+checksums = ['cd34da674064c4cc4a331402edbd65c5a1f8058fb46003314ca18fa08423c5ad']
+
+homepage = 'http://stellar-group.org/libraries/hpx'
+description = """HPX (High Performance ParalleX) is a general purpose C++
+runtime system for parallel and distributed applications of any scale. It
+strives to provide a unified programming model which transparently utilizes
+the available resources to achieve unprecedented levels of scalability.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.06'}
+toolchainopts = {'pic': True}
+
+builddependencies = [('CMake', '3.14.5', '', True)]
+
+dependencies = [
+    ('Boost', '1.70.0', '-python3'),
+    ('hwloc', '2.0.3', '', True),
+    ('jemalloc', '5.1.0'),
+]
+
+source_urls = ['https://github.com/STEllAR-GROUP/hpx/archive']
+sources = ['%(version)s.tar.gz']
+
+separate_build_dir = True
+
+configopts  = '-DHWLOC_ROOT=$EBROOTHWLOC '
+configopts += '-DHPX_WITH_MALLOC=JEMALLOC '
+configopts += '-DJEMALLOC_ROOT=$EBROOTJEMALLOC '
+configopts += '-DHPX_WITH_MAX_CPU_COUNT=128 '
+configopts += '-DHPX_WITH_PARCELPORT_MPI=ON '
+configopts += '-DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON '
+
+moduleclass = 'tools'
