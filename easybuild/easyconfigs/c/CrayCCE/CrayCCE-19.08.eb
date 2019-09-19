@@ -14,7 +14,6 @@ dependencies = [
     ('PrgEnv-cray', EXTERNAL_MODULE),
     ('atp/2.1.3', EXTERNAL_MODULE),
     ('cce/9.0.1', EXTERNAL_MODULE),
-    ('modules/3.2.11.2', EXTERNAL_MODULE),
     ('cray-libsci/19.06.1', EXTERNAL_MODULE),
     ('cray-mpich/7.7.9', EXTERNAL_MODULE),
     ('craype/2.6.0', EXTERNAL_MODULE),
