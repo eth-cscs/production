@@ -19,9 +19,9 @@ checksums = ['71b11aa547cdffb8c31b4e70bf51511d']
 dependencies = [
     # libiberty needed in older versions of scorep, keeping as a reminder
     ('libunwind', '1.3.1', '', True),
-    ('CubeW', '4.5', '%s' % preview),
-    ('CubeLib', '4.5', '%s' % preview),
-    ('CubeGUI', '4.5', '%s' % preview, True),
+    ('CubeGUI', '4.4.4', '', True),
+    ('CubeLib', '4.4.4'),
+    ('CubeW', '4.4.3'),
     ('OPARI2', '2.0.5', '', True),
     ('PDT', '3.25', '', True),
     ('SIONlib', '1.7.4l'),
