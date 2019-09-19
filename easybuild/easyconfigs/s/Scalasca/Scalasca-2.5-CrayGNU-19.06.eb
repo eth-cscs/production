@@ -17,20 +17,13 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['c4ea190408ef34592008f9706dc30a0c']
 
 dependencies = [
-    ('libunwind', '1.2.1', '', True),
-    ('CubeGUI', '4.4.3', '', True),
-    ('CubeW', '4.4.2'),
-    # cubelib may replace cubew: ('CubeLib', '4.4'),
-    ('OPARI2',      '2.0.4', '', True),
-    ('OTF2',        '2.1.1', '', True),
-    ('SIONlib',     '1.7.3l'),
-    ('PDT',         '3.25', '', True),
-    ('vampir',      '9.6.0', '', True),
+    ('Score-P', '6.0'),
+    ('OTF2', '2.2', '', True),
     # papi already loaded by perftools-base:
-    # ('papi/5.6.0.6', EXTERNAL_MODULE),
-    # plugins:
-    ('bladeplugin', '0.1', '', True),
-    ('jengafettplugin', '0.2', '', True),
+    # ('papi/5.7.0.1', EXTERNAL_MODULE),
+    # plugins can be loaded afterwards, do not build in this recipe:
+    #('bladeplugin', '0.1', '-cube-4.4-otf-2.2', True),
+    #('jengafettplugin', '0.2', '', True),
 ]
 
 configopts = ' --with-machine-name=pizdaint'

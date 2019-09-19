@@ -31,10 +31,10 @@ if { [module-info mode remove] || [module-info mode switch] } {
 
 if { [module-info mode load] } {
  module use %s
- if { ![ is-loaded foss/.%s ] } {
-  module load foss/.%s
+ if { ![ is-loaded openmpi/4.0.1-gcc-7.3.0-2.30-cuda-10.0 ] } {
+  module load openmpi/4.0.1-gcc-7.3.0-2.30-cuda-10.0
  }
 }
-""" % (path, path, path, fossversion, fossversion)
+""" % (path, path, path)
 
 moduleclass = 'devel'

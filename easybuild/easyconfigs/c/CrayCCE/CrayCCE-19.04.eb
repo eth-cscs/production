@@ -1,3 +1,4 @@
+# contributed by Luca Marsella
 easyblock = 'CrayToolchain'
 
 name = 'CrayCCE'
@@ -9,15 +10,15 @@ description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
 
 toolchain = {'name': 'dummy', 'version': ''}
 
-# PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
 dependencies = [
+# PrgEnv version is pinned to avoid conflicts, although Cray recommends to use the latest (default) version
     ('PrgEnv-cray/1.0.5', EXTERNAL_MODULE),
     ('cce/8.7.10', EXTERNAL_MODULE),
     ('cray-libsci/18.07.1', EXTERNAL_MODULE),
     ('cray-mvapich2/2.3', EXTERNAL_MODULE),
 ]
 
-# quick and dirty fix for CrayCCE
+# quick fix for Module ERROR: can't read "::env(CRAY_LD_LIBRARY_PATH)": no such variable
 modextrapaths = {'CRAY_LD_LIBRARY_PATH': ''}
 
 moduleclass = 'toolchain'

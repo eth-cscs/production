@@ -5,7 +5,7 @@
  CUDA/10.1.243.eb                                   --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/19.2/easybuild
  ddt-19.0.5-Redhat-7.0.eb                           --set-default-module
  git-2.22.0.eb                                      
- IDL-8.5.1.eb                                        
+ IDL-8.5.1-MCH.eb
  ImageMagick-6.7.6-10.eb                            --set-default-module
  ImageMagick-7.0.8-53.eb                             
  NCL-6.2.1.eb                                       --set-default-module
@@ -13,6 +13,7 @@
  Python-2.7.16.eb                                   --disable-rpath 
  Python-3.7.4.eb                                    
  rstudio-1.2.1335.eb                                --disable-rpath
+ UCX-1.5.2-GCCcore-7.3.0-cuda-10.0.eb               --hidden
  vampir-9.6.0.eb                                    
  Vim-8.1.eb 					    
  nmon-16g.eb                                        
@@ -36,8 +37,10 @@
  netCDF-Fortran-4.4.5-foss-2019.02.eb               --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/19.2/easybuild
  netCDF-C++-4.3.0-PGI-19.5-GCC-7.3.0-2.30.eb        --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
- OpenMPI-3.1.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ OpenMPI-4.0.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
+ OpenMPI-4.0.1-PGI-19.7-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.7/easybuild
  PrgEnv-cce-tsa-19.04.eb                            --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-18.1.eb                             --module-naming-scheme=EasyBuildMNS
  PrgEnv-gnu-tsa-19.2.eb                             --module-naming-scheme=EasyBuildMNS
  PrgEnv-pgi-tsa-19.5.eb                             --module-naming-scheme=EasyBuildMNS
+ PrgEnv-pgi-tsa-19.7.eb                             --module-naming-scheme=EasyBuildMNS

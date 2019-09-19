@@ -1,0 +1,25 @@
+# created by MKr and modified by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PE'
+version = '18.12'
+
+homepage = 'http://user/cscs.ch'
+description = """
+    The meta-module allows access to the following programming environments:
+       - Cray 18.12
+       - GNU 18.12
+       - PGI 18.10
+"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    ("cray_PE", "18.12"),
+    ("gnu_PE", "18.12"),
+    ("pgi_PE", "18.10"),
+]
+
+recursive_module_unload = 'True'
+
+moduleclass = 'devel'
