@@ -1,6 +1,4 @@
 # Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS)
-#easyblock = 'PackedBinary'
-
 name = 'Julia'
 version = '1.2.0'
 cudaversion = '9.1'
