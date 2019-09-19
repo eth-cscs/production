@@ -19,7 +19,6 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('hwloc', '2.0.4', '', True),
     ('UCX', '1.6.0', '-cuda-10.1'),
 ]
 
@@ -37,7 +36,7 @@ configopts = (
     "--without-alps "
     "--without-tm "
     "--disable-memchecker "
-    "--with-hwloc=${EBROOTHWLOC} "
+    "--with-hwloc=/usr/ "
     "--enable-dlopen "
     "--enable-cxx-exceptions "
     "--with-cuda "

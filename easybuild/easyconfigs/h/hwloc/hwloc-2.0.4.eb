@@ -24,7 +24,7 @@ source_urls = ['http://www.open-mpi.org/software/hwloc/'
 sources = [SOURCE_TAR_GZ]
 
 # use installed libnuma-devel-2.0.11-2.18.x86_64.rpm
-# dependencies = [('numactl', '2.0.12')]
+dependencies = [('numactl', '2.0.12')]
 # configopts = "--enable-libnuma=$EBROOTNUMACTL --with-x"
 #configopts = "--with-x"
 
