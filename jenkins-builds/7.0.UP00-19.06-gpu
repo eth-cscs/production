@@ -10,7 +10,6 @@
  CPMD-4.1-CrayIntel-19.06.eb                        --set-default-module
  dask-1.2.2-CrayGNU-19.06-python3.eb                
  dask-2.2.0-CrayGNU-19.06-python3.eb                --set-default-module
- dask-labextension-1.0.3-CrayGNU-19.06-python3.eb
  GREASY-19.03-cscs-CrayGNU-19.06.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.06-cuda-10.1.eb          --set-default-module
  GROMACS-2019.1-CrayGNU-19.06-cuda-10.1.eb
@@ -29,12 +28,6 @@
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-19.06-python2.eb
  ipyparallel-6.2.3-CrayGNU-19.06-python3.eb
- julia-1.0.4.eb
- julia-1.1.1.eb  
- julia-1.2.0.eb
- jupyterlab-0.35.2-CrayGNU-19.06.eb
- jupyterlab-1.0.4-CrayGNU-19.06.eb                  
- jupyterlab-1.1.1-CrayGNU-19.06.eb                  --set-default-module
  jupyterhub-0.9.6-CrayGNU-19.06.eb
  jupyterhub-1.0.0-CrayGNU-19.06.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.06-cuda-10.1.eb        --set-default-module
