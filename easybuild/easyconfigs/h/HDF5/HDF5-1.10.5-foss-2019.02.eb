@@ -1,0 +1,23 @@
+# contributed by Luca Marsella (CSCS)
+name = 'HDF5'
+version = '1.10.5'
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """HDF5 is a unique technology suite that makes possible the management of 
+ extremely large and complex data collections."""
+
+toolchain = {'name': 'foss', 'version': '2019.02'}
+toolchainopts = {'optarch': True, 'usempi': True, 'pic': True}
+
+source_urls = ['https://support.hdfgroup.org/ftp/%(name)s/releases/%(namelower)s-%(version_major_minor)s/%(namelower)s-%(version)s/src']
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('zlib', '1.2.11', '', ('GCCcore', '8.3.0')),
+    ('Szip', '2.1.1', '', ('GCCcore', '8.3.0')),
+]
+
+buildopts = 'CXXFLAGS="$CXXFLAGS -DMPICH_IGNORE_CXX_SEEK"'
+
+
+moduleclass = 'data'
