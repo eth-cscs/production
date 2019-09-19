@@ -3,7 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'ALPS'
 version = "2.3.0"
-versionsuffix = "-Boost-1.69.0-python2"
+versionsuffix = "-Boost-1.70.0-python2"
 
 homepage = 'http://alps.comp-phys.org'
 description = """The ALPS project (Algorithms and Libraries for Physics
@@ -20,7 +20,7 @@ patches = ["average.patch", "riterator.patch",
            "boost_noncopyable.patch", "boost_exception.patch"]
 
 dependencies = [
-    ('Boost', '1.69.0', '-python2'),
+    ('Boost', '1.70.0', '-python2'),
     ('cray-hdf5/1.10.5.0', EXTERNAL_MODULE)
 ]
 
