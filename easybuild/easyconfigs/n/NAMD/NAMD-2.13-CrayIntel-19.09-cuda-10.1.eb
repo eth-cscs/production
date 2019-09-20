@@ -31,7 +31,7 @@ prebuildopts += ' cd CRAY-XC-intel.cuda && '
 builddependencies = [
     ('Charm++', '6.8.0'),
     ('Tcl', '8.6.7'),
-    ('cray-fftw/3.3.8.2', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]

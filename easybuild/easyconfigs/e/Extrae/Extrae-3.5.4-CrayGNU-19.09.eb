@@ -27,8 +27,8 @@ dependencies = [
     ('libunwind', '1.2.1'),
     ('libxml2', '2.9.7'),
     # use papi from perftools-base instead
-    #('papi/5.5.1.3', EXTERNAL_MODULE),
-    ('cray-fftw/3.3.8.2', EXTERNAL_MODULE),
+    #('papi/5.7.0.2', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
     # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
     #('Paraver', '4.7.2', '', True),
     #('Dimemas', '5.3.6', '', True),

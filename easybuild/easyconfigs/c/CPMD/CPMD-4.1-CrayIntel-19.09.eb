@@ -20,7 +20,7 @@ sources = [
 
 patches = [('CRAY-XE6-INTEL-MKL', 'CPMD/configure')]
 
-dependencies = [('cray-fftw/3.3.8.2', EXTERNAL_MODULE)]
+dependencies = [('cray-fftw/3.3.8.3', EXTERNAL_MODULE)]
 
 skipsteps = ['configure']
 

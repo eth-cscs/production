@@ -38,7 +38,7 @@ dependencies = [
     # ('OTF2',      '2.2', '', True),
     # 
     # papi already loaded by perftools-base:
-    # ('papi/5.7.0.1', EXTERNAL_MODULE),
+    # ('papi/5.7.0.2', EXTERNAL_MODULE),
 ]
 
 configopts = ' CC=gcc'
