@@ -25,7 +25,7 @@ sources = [SOURCE_TAR_GZ]
 
 dependencies = [
     ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
-    ('cray-hdf5-parallel/1.10.2.0', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel/1.10.5.1', EXTERNAL_MODULE),
 ]
 
 prebuildopts  = (

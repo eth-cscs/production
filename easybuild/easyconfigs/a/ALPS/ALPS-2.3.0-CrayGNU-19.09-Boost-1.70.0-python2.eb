@@ -21,7 +21,7 @@ patches = ["average.patch", "riterator.patch",
 
 dependencies = [
     ('Boost', '1.70.0', '-python2'),
-    ('cray-hdf5/1.10.5.0', EXTERNAL_MODULE)
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE)
 ]
 
 builddependencies = [
