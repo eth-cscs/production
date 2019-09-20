@@ -6,7 +6,7 @@ version = '57fc864'
 homepage = 'https://github.com/LLNL/mpiP/releases'
 description = """A light-weight MPI profiler. http://llnl.github.io/mpiP"""
 
-toolchain = {'name': 'CrayCCE', 'version': '19.06-classic'}
+toolchain = {'name': 'CrayCCE', 'version': '19.09-classic'}
 toolchainopts = {'verbose': False}
 dependencies = [('libunwind', '1.2.1', '', True)]
 

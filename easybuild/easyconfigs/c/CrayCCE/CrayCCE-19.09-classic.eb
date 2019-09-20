@@ -1,7 +1,7 @@
 easyblock = 'CrayToolchain'
 
 name = 'CrayCCE'
-version = '19.06-classic'
+version = '19.09-classic'
 
 homepage = 'https://pubs.cray.com/discover'
 description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
