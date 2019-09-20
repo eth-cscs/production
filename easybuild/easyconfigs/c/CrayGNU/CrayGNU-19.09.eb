@@ -21,7 +21,6 @@ dependencies = [
     # cuda/10.1 < gcc/9   Y       Y       Y       Y       Y       -
     # -----------------
     ('gcc/8.3.0', EXTERNAL_MODULE),
-    ('modules/3.2.11.3', EXTERNAL_MODULE),
     ('cray-libsci/19.06.1', EXTERNAL_MODULE),
     ('cray-mpich/7.7.10', EXTERNAL_MODULE),
     ('craype/2.6.1', EXTERNAL_MODULE),
