@@ -35,6 +35,8 @@
  ipyparallel-6.2.3-CrayGNU-18.08-python3.eb
  Julia-1.0.4-CrayGNU-18.08-cuda-9.1.eb
  JuliaExtensions-1.0.4-CrayGNU-18.08-cuda-9.1.eb
+ Julia-1.2.0-CrayGNU-18.08-cuda-9.1.eb              --set-default-module
+ JuliaExtensions-1.2.0-CrayGNU-18.08-cuda-9.1.eb    --set-default-module
  jupyter-1.0.0-CrayGNU-18.08.eb
  jupyterhub-0.9.4-CrayGNU-18.08.eb                  --set-default-module
  jupyterhub-0.9.6-CrayGNU-18.08.eb
