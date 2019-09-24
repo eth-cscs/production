@@ -326,82 +326,82 @@ exts_list = [
         }),
 
 # widgets: note the lab extensions below
-    ('widgetsnbextension', '3.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/widgetsnbextension/'],
-        }),
-    ('ipywidgets', '7.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipywidgets/'],
-        }),
+#twr    ('widgetsnbextension', '3.5.1', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/w/widgetsnbextension/'],
+#twr        }),
+#twr    ('ipywidgets', '7.5.1', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/i/ipywidgets/'],
+#twr        }),
 # ipympl matplotlib widgets, requires lab extension 
-    ('ipympl', '0.3.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipympl/'],
-        }),
+#twr    ('ipympl', '0.3.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/i/ipympl/'],
+#twr        }),
 
 # plotly, requires the lab extension below
-    ('retrying', '1.3.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/r/retrying/'],
-        }),
-    ('plotly', '4.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/plotly/'],
-        }),
+#twr    ('retrying', '1.3.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/r/retrying/'],
+#twr        }),
+#twr    ('plotly', '4.0.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/plotly/'],
+#twr        }),
 
 # bokeh, requires the labextension below
-    ('PyYAML', '5.1.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'modulename': 'yaml',
-        'source_urls': ['https://pypi.python.org/packages/source/p/PyYAML/'],
-        }),
-    ('bokeh', '1.3.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
-        }),
-    ('packaging', '19.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/packaging/'],
-        }),
-    ('Pillow', '6.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'modulename': 'PIL',
-        'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
-        }),    
+#twr    ('PyYAML', '5.1.2', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'modulename': 'yaml',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/PyYAML/'],
+#twr        }),
+#twr    ('bokeh', '1.3.4', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
+#twr        }),
+#twr    ('packaging', '19.1', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/packaging/'],
+#twr        }),
+#twr    ('Pillow', '6.1.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'modulename': 'PIL',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
+#twr        }),    
     
 # bqplot: requires the labextension below
-    ('traittypes', '0.2.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/traittypes/'],
-        }),
-    ('bqplot', '0.11.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/bqplot/'],
-        }),
+#twr    ('traittypes', '0.2.1', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/t/traittypes/'],
+#twr        }),
+#twr    ('bqplot', '0.11.6', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/b/bqplot/'],
+#twr        }),
 
 # nbresuse for jupyterlab-system-monitor extension
-    ('psutil', '5.6.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'],
-        }),
-    ('nbresuse', '0.3.2', {
-       'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/n/nbresuse/'],
-        }),
+#twr    ('psutil', '5.6.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'],
+#twr        }),
+#twr    ('nbresuse', '0.3.2', {
+#twr       'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/n/nbresuse/'],
+#twr        }),
 
 # jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.0
 #    ('jupyterlab_slurm', '0.1.1', {
@@ -418,81 +418,81 @@ exts_list = [
 #        }),
 
 # graphviz, for dask graph visualization
-     ('graphviz', '0.12', {
-         'req_py_majver': '3',
-         'req_py_minver': '6',
-         'use_pip': True,
-         'source_urls': ['https://pypi.python.org/packages/source/g/graphviz/'],
-         'source_tmpl': 'graphviz-%(version)s.zip',
-         }),
+#twr    ('graphviz', '0.12', {
+#twr         'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True,
+#twr         'source_urls': ['https://pypi.python.org/packages/source/g/graphviz/'],
+#twr         'source_tmpl': 'graphviz-%(version)s.zip',
+#twr         }),
 
 # dask-labextension
 # This package provides a JupyterLab extension to manage Dask clusters, 
 # as well as embed Dask's dashboard plots directly into JupyterLab panes    
-    ('simpervisor', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
-        }),
-    ('multidict', '4.5.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
-        }),
-    ('yarl', '1.3.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True, 
-        'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
-        }),
-    ('typing_extensions', '3.7.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
-        }),
-    ('async-timeout', '3.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
-        }),
-    ('idna-ssl', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'modulename': 'idna_ssl',
-        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
-        }),
-   ('aiohttp', '3.5.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
-        }),
-   ('jupyter-server-proxy', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
-        }),
-    ('dask_labextension', '1.0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
-        }),
+#twr     ('simpervisor', '0.3', {
+#twr         'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True,        
+#twr         'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
+#twr         }),
+#twr     ('multidict', '4.5.2', {
+#twr         'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True,        
+#twr         'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
+#twr         }),
+#twr     ('yarl', '1.3.0', {
+#twr         'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True, 
+#twr         'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
+#twr         }),
+#twr     ('typing_extensions', '3.7.4', {
+#twr        'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True,        
+#twr         'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
+#twr         }),
+#twr     ('async-timeout', '3.0.1', {
+#twr         'req_py_majver': '3',
+#twr         'req_py_minver': '6',
+#twr         'use_pip': True,        
+#twr         'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
+#twr        }),
+#twr    ('idna-ssl', '1.1.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,        
+#twr        'modulename': 'idna_ssl',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
+#twr        }),
+#twr   ('aiohttp', '3.5.4', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,        
+#twr        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
+#twr        }),
+#twr   ('jupyter-server-proxy', '1.1.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,        
+#twr        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+#twr        }),
+#twr    ('dask_labextension', '1.0.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,        
+#twr        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+#twr        }),
     
 # kernels
 # bash kernel, requires kernel install below, twr
-    ('bash_kernel', '0.7.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/b/bash_kernel/'],
-        }),
+#twr    ('bash_kernel', '0.7.2', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/b/bash_kernel/'],
+#twr        }),
     
 ]
 
@@ -528,14 +528,14 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
                    "export JUPYTER=%(installdir)s/bin/jupyter;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
+#twr                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
+#twr not compat with 1.1.4                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
+#twr                    "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
 #                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
 #                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
 #                  "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
