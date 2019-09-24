@@ -202,128 +202,128 @@ exts_list = [
         }),
 
 # jupyterhub and its deps
-    ('SQLAlchemy', '1.3.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/s/SQLAlchemy/'],
-        }),
-    ('Mako', '1.0.14', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/m/Mako/'],
-        }),
-    ('alembic', '1.0.11', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/alembic/'],
-        }),
-    ('python-editor', '1.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'modulename': 'editor',
-        'source_urls': ['https://pypi.python.org/packages/source/p/python-editor/'],
-        }),
-    ('async_generator', '1.10', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/async_generator/'],
-        }),
-    ('pycparser', '2.19', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pycparser/'],
-        }),
-    ('cffi', '1.12.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': False,
-        'source_urls': ['https://pypi.python.org/packages/source/c/cffi/'],
-        }),
-    ('asn1crypto', '0.24.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/asn1crypto/'],
-        }),
-    ('cryptography', '2.7', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/cryptography/'],
-        }),
-    ('pyOpenSSL', '19.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'modulename': "OpenSSL",
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyOpenSSL/'],
-        }),
-    ('certipy', '0.1.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/certipy/'],
-        }),
-    ('entrypoints', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoint/'],
-        }),
-    ('oauthlib', '3.0.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/o/oauthlib/'],
-        }),
-    ('pamela', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pamela/'],
-        }),
-    ('urllib3', '1.25.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
-        }),
-    ('idna', '2.8', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
-        }),
-    ('chardet', '3.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
-        }),
-    ('certifi', '2019.6.16', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
-        }),
-    ('requests', '2.22.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
-        }),
-    ('jupyterhub', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterhub/'],
-        }),
+#twr    ('SQLAlchemy', '1.3.6', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/s/SQLAlchemy/'],
+#twr        }),
+#twr    ('Mako', '1.0.14', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/m/Mako/'],
+#twr        }),
+#twr    ('alembic', '1.0.11', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr       'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/a/alembic/'],
+#twr        }),
+#twr    ('python-editor', '1.0.4', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'modulename': 'editor',
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/python-editor/'],
+#twr        }),
+#twr    ('async_generator', '1.10', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/a/async_generator/'],
+#twr        }),
+#twr    ('pycparser', '2.19', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/pycparser/'],
+#twr        }),
+#twr    ('cffi', '1.12.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': False,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/c/cffi/'],
+#twr        }),
+#twr    ('asn1crypto', '0.24.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/a/asn1crypto/'],
+#twr        }),
+#twr    ('cryptography', '2.7', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/c/cryptography/'],
+#twr        }),
+#twr    ('pyOpenSSL', '19.0.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'modulename': "OpenSSL",
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/pyOpenSSL/'],
+#twr        }),
+#twr    ('certipy', '0.1.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/c/certipy/'],
+#twr        }),
+#twr    ('entrypoints', '0.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoint/'],
+#twr        }),
+#twr    ('oauthlib', '3.0.2', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/o/oauthlib/'],
+#twr        }),
+#twr    ('pamela', '1.0.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/p/pamela/'],
+#twr        }),
+#twr    ('urllib3', '1.25.3', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
+#twr        }),
+#twr    ('idna', '2.8', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
+#twr        }),
+#twr    ('chardet', '3.0.4', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
+#twr        }),
+#twr    ('certifi', '2019.6.16', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
+#twr        }),
+#twr    ('requests', '2.22.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
+#twr        }),
+#twr    ('jupyterhub', '1.0.0', {
+#twr        'req_py_majver': '3',
+#twr        'req_py_minver': '6',
+#twr        'use_pip': True,
+#twr        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterhub/'],
+#twr        }),
 
 # widgets: note the lab extensions below
 #twr    ('widgetsnbextension', '3.5.1', {
@@ -546,10 +546,9 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 #twr                   "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-#twr                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
-                   'julia -e \'DEPOT_PATH';'
+                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
                    # to trigger the precompilation
-#twr                   "julia -e \'using IJulia\';"
+                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files - this is no longer required, twr
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
