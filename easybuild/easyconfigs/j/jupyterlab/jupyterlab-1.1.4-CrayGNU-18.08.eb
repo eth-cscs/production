@@ -22,7 +22,7 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-    ('Julia','1.0.4','-cuda-9.1'),
+    ('Julia','1.2.0','-cuda-9.1'),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
     ('graphviz', '2.40.1', '', True),
