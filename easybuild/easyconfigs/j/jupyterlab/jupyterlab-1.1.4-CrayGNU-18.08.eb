@@ -509,7 +509,7 @@ modextrapaths = {
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
-    'JULIA_DEPOT_PATH': julia_depot_path,
+#    'JULIA_DEPOT_PATH': julia_depot_path,
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
@@ -531,7 +531,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 #twr                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
 #twr                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
 #twr                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
-#twr not compat with 1.1.4                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
+#twr not compat with 1.1.4 apparently       "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
 #twr                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
 #twr                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
 #twr                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
@@ -543,12 +543,13 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 # now at launch    "%(installdir)s/bin/jupyter serverextension enable --py dask_labextension;"
                    "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
-                   "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
+#twr                   "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+#twr                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+                   'julia -e \'DEPOT_PATH';'
                    # to trigger the precompilation
-                   "julia -e \'using IJulia\';"
+#twr                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files - this is no longer required, twr
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
