@@ -34,8 +34,12 @@ EasyBuild support for Python packages, implemented as an easyblock
 import os
 import tempfile
 from os.path import expanduser
-#from vsc import fancylogger
-from vsc.utils import fancylogger
+try:
+    # EasyBuild 4.0 and newer
+    from easybuild.base import fancylogger
+except ImportError:
+    # EasyBuild 3.x
+    from vsc.utils import fancylogger
 
 import easybuild.tools.environment as env
 from easybuild.easyblocks.python import EXTS_FILTER_PYTHON_PACKAGES
