@@ -1,0 +1,13 @@
+# metadata useful to EasyBuild (hpcugent.github.io/easybuild) for modules provided by Cray on Cray systems
+# authors: Guilherme Peretti-Pezzi (CSCS), Petar Forai (IMP/IMBA), Kenneth Hoste (HPC-UGent), Eirini Koutsaniti (CSCS)
+
+[cray-hdf5]
+name = HDF5
+version = 1.10.5.1
+prefix = HDF5_DIR
+
+[cray-netcdf]
+name = netCDF, netCDF-Fortran
+version = 4.6.3.1, 4.6.3.1
+prefix = NETCDF_DIR
+
