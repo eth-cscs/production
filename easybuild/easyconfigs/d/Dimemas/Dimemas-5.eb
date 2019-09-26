@@ -1,0 +1,13 @@
+# jg (CSCS)
+easyblock = 'ModuleRC'
+name = 'Dimemas'
+version = '5'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """High-abstracted network simulator for message-passing
+programs."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+dependencies = [('%(name)s', '%(version)s.4.1')]
+
+moduleclass = 'perf'
