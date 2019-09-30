@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'SIRIUS'
-version = '5.8.6'
+version = '6.4.0'
 cudaversion = 9.1
 versionsuffix = '-cuda-%s' % cudaversion
 
@@ -16,15 +16,17 @@ toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 
 source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
 sources = ['v%(version)s.tar.gz']
 
-builddependencies = [('CMake', '3.12.0', '', True)]
+builddependencies = [('CMake', '3.12.4', '', True)]
 
 dependencies = [
   ('GSL', '2.5'),
-  ('libxc', '4.2.3'),
-  ('spglib','1.10.4'),
+  ('libxc', '4.3.4'),
+  ('spglib','1.14.1'),
+  ('ELPA','2019.05.001'), 
   ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
-  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE)
-  #('magma', '2.4.0', '-cuda-%s' % cudaversion)
+  ('cudatoolkit/%s.85_3.18-6.0.7.0_5.1__g2eb7c52' % cudaversion, EXTERNAL_MODULE),
+  ('magma', '2.5.1', '-cuda-%s' % cudaversion),
+  ('SpFFT', '0.9.7', '-cuda-%s' % cudaversion)
 ]
 
 separate_build_dir = True
@@ -33,9 +35,9 @@ common_prebuildopts = 'module unload cray-libsci && module load gcc/6.2.0 && mod
 
 prebuildopts = [ common_prebuildopts ]
 
-#configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DGPU_MODEL='P100'"
-configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MKL=1 -DGPU_MODEL='P100' -DUSE_SCALAPACK=1"
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DGPU_MODEL='P100' -DSpFFT_DIR=$EBROOTSPFFT/lib/cmake/SpFFT"
+#configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MKL=1 -DGPU_MODEL='P100' -DUSE_SCALAPACK=1"
 
-modextrapaths = {'CPATH': ['fortran']}
+modextrapaths = {'CPATH': ['include/sirius']}
 
 moduleclass = 'chem'

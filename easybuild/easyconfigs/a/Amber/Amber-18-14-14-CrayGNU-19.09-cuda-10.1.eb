@@ -31,8 +31,8 @@ dependencies = [
 
 builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
-    ('cray-hdf5/1.10.2.0', EXTERNAL_MODULE),
-    ('cray-netcdf/4.6.1.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
+    ('cray-netcdf/4.6.3.1', EXTERNAL_MODULE),
 ]
 
 buildininstalldir = True

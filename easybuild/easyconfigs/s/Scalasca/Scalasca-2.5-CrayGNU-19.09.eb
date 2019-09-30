@@ -20,7 +20,7 @@ dependencies = [
     ('Score-P', '6.0'),
     ('OTF2', '2.2', '', True),
     # papi already loaded by perftools-base:
-    # ('papi/5.7.0.1', EXTERNAL_MODULE),
+    # ('papi/5.7.0.2', EXTERNAL_MODULE),
     # plugins can be loaded afterwards, do not build in this recipe:
     #('bladeplugin', '0.1', '-cube-4.4-otf-2.2', True),
     #('jengafettplugin', '0.2', '', True),

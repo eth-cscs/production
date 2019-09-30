@@ -13,19 +13,6 @@ sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 keepsymlinks = True
 # The checksum check was removed, since the value for the sources kept changing.
 # The checksum value of the sources is reported in the log file of the module.
-postinstallcmds = [
-    # The following commands will allow greater flexibility in upgrading Extrae's dependencies
-    # that are binaries without having to rebuild Extrae:
-	#   ls -l easybuild/software/spectral/
- 	#       3.4.1
-	#       latest -> 3.4.1/
-	#   ls -l modules/all/spectral/
-	#       3.4.1
-	#       latest -> 3.4.1
-    'ln -fs %(version)s/ %(installdir)s/../latest && ' \
-    'touch %(installdir)s/../../../modules/all/%(name)s/%(version)s && ' \
-    'ln -fs %(version)s %(installdir)s/../../../modules/all/%(name)s/latest ; ' 
-]
 
 sanity_check_paths={
     'files': ['bin/trace-analysis'],

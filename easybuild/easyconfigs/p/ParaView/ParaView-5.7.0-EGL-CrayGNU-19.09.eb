@@ -9,18 +9,16 @@ versionsuffix='-EGL'
 homepage = "http://www.paraview.org"
 description = "ParaView is a scientific parallel visualizer."
 
-toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
 sources = ["ParaView-v%(version)s.tar.gz"]
 
-#patches = ['VisRTX_Camera.patch']
-
 py_maj_ver = '3'
 py_min_ver = '6'
-py_rev_ver = '5.1'
+py_rev_ver = '5.7'
 
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
@@ -30,7 +28,7 @@ dependencies = [
     ('h5py', '2.8.0', '%s-serial' % pysuff),
     ('ospray', '1.8.5'),
     ('oidn', '0.9.0'),
-#    ('VisRTX', '0.1.5'), not available until NVIDIA driver is updated
+    ('VisRTX', '0.1.6'),
     ('cray-python/%s' % pyver, EXTERNAL_MODULE)
 ]
 
@@ -59,11 +57,11 @@ configopts += '-DVTK_OPENGL_HAS_EGL:BOOL=ON -DOPENGL_egl_LIBRARY=/opt/cray/nvidi
 # CSCS specific for Raytracing (OSPRAY and/or OptiX)
 configopts += '-DPARAVIEW_USE_RAYTRACING:BOOL=ON '
 configopts += '-DVTK_ENABLE_OSPRAY:BOOL=ON '
-#configopts += '-DVTK_ENABLE_VISRTX:BOOL=ON '
+configopts += '-DVTK_ENABLE_VISRTX:BOOL=ON '
 configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
 configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
 configopts += '-DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" '
-#configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-0.1.5" '
+configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" '
 # Using Cray HDF5
 #configopts += '-DVTK_MODULE_USE_EXTERNAL_VTK_hdf5:BOOL=ON -DHDF5_DIR=$HDF5_DIR '
 #configopts += '-DHDF5_C_INCLUDE_DIR="$HDF5_DIR"/include '
@@ -80,7 +78,7 @@ configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
 
-modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % pyver, 
+modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % pyver, 
                  'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView'}
 
 sanity_check_paths = {

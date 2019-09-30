@@ -2,7 +2,7 @@
 easyblock = "CMakeMake"
 
 name = 'VisRTX'
-version = '0.1.5'
+version = '0.1.6'
 
 homepage = 'https://github.com/NVIDIA/VisRTX'
 description = """VisRTX is a C++ rendering framework developed by the HPC Visualization Developer Technology team at NVIDIA"""
