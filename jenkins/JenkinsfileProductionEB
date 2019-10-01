@@ -46,7 +46,7 @@ stage('Build Stage') {
             node(machineName) {
                 checkout scm
                 def moduleDefinition = ''
-                if (machineName in ['leone', 'fulen'])
+                if (machineName in ['fulen'])
                     moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                           export -f module'''
                 def workingDir = sh(returnStdout: true,
