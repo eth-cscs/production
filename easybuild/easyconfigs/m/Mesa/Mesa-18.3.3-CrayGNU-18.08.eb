@@ -33,7 +33,8 @@ description = """Mesa is an open-source implementation of the OpenGL specificati
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
-sources = [SOURCELOWER_TAR_XZ]
+# Using the patched tar version by @jfavre (as described above)
+sources = ['/apps/common/UES/easybuild/sources/m/Mesa/mesa-%(version)s.tar.xz']
 source_urls = [
     'https://mesa.freedesktop.org/archive'
 ]
