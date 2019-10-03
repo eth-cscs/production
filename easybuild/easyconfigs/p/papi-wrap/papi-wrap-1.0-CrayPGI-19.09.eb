@@ -6,7 +6,7 @@ version = "1.0"
 homepage = 'https://github.com/bcumming/papi-wrap'
 description = """wrappers around papi hardware counters."""
 
-toolchain = {'name': 'CrayGNU', 'version': '19.09'}
+toolchain = {'name': 'CrayPGI', 'version': '19.09'}
 source_urls = [' https://github.com/jgphpc/papi-wrap/archive/']
 sources = ['%(version)s.tar.gz']
 checksums = ['e72a6c1d631ffb600e9cea1a0b4da947']
@@ -17,7 +17,8 @@ checksums = ['e72a6c1d631ffb600e9cea1a0b4da947']
 dependencies = [('PAPI', '5-7-0', '', True)]
 
 parallel = 1
-prebuildopts = ' ln -fs cscs/makefile . ;'
+prebuildopts  = 'sed -i "s-\$(error-# -" cscs/makefile && '
+prebuildopts += 'ln -fs cscs/makefile . ; '
 buildopts = 'PAPI_PATH=$EBROOTPAPI '
 
 files_to_copy = [
