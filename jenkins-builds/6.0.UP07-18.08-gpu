@@ -65,6 +65,7 @@
  PyExtensions-3.6.5.1-CrayGNU-18.08.eb
  QuantumESPRESSO-6.3-CrayIntel-18.08.eb             --set-default-module
  Spark-2.3.1-CrayGNU-18.08-Hadoop-2.7.eb
+ SIRIUS-6.4.0-CrayIntel-18.08-cuda-9.1.eb           --set-default-module
  singularity-3.2.1-daint.eb
  TensorFlow-1.7.0-CrayGNU-18.08-cuda-9.1-python3.eb --set-default-module
  TensorFlow-1.11.0-CrayGNU-18.08-cuda-9.1-python3.eb
