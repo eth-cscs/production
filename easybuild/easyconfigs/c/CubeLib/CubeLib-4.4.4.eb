@@ -8,7 +8,7 @@ description = """Cube Library is a general purpose library for reading and
 writing of a multi-dimensional performance space consisting of the dimensions
 (i) performance metric, (ii) call path, and (iii) system resource."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 toolchainopts = {'verbose': False, 'pic': True}
 # verbose=False avoids the configure step to fail (-craype-verbose error)
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
