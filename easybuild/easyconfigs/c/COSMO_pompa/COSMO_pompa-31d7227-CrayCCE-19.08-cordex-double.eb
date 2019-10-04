@@ -1,0 +1,49 @@
+# kraushm, omlins (CSCS)
+easyblock = 'MakeCp'
+
+name = 'COSMO_pompa'
+version = '31d7227'
+versionsuffix = '-cordex-double'
+
+homepage = "https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)"
+description = """
+Performance On Massively Parallel Architectures: It is the goal of this project 
+to prepare the COSMO model code for these emerging massively parallel systems.
+
+see: http://www2.cosmo-model.org/content/tasks/priorityProjects/pompa/default.htm
+"""
+
+toolchain = {'name': 'CrayCCE', 'version': '19.08'}
+toolchainopts = {'verbose': False}
+
+# repo is private (+ no official release)
+sources = [{'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(namelower)s_%(version)s.tar.gz'}]
+patches = ['patch_COSMO_dom_cray_cpu.patch']
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('libgrib1_crclim', 'a1e4271'),
+    ('Dycore/551f6b4-CrayGNU-19.08-cordex-double', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('cray-netcdf/4.6.3.0', EXTERNAL_MODULE),
+    ('grib_api', '1.13.1'),
+]
+
+prebuildopts = """cd %(builddir)s/%(namelower)s/cosmo && module switch PrgEnv-gnu PrgEnv-cray && export EBROOTNETCDF=$NETCDF_DIR && export EBROOTNETCDFMINFORTRAN=$NETCDF_DIR && export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/netcdf\/4.6.3.0\/GNU\/6.1/netcdf\/4.6.3.0\/CRAY\/8.6/g') && export LDFLAGS=$(echo $LDFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/6.1/netcdf\/4.6.3.0\/CRAY\/8.6/g') && export CPPFLAGS=$(echo $CPPFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/6.1/netcdf\/4.6.3.0\/CRAY\/8.6/g') && export EBVARLDFLAGS=$(echo $EBVARLDFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/6.1/netcdf\/4.6.3.0\/CRAY\/8.6/g') && export EBVARCPPFLAGS=$(echo $EBVARCPPFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/6.1/netcdf\/4.6.3.0\/CRAY\/8.6/g') && mv Options.cray.cpu Options.cray.cpu.orig && cat Options.cray.cpu.orig | perl -pe "s/-hnosecond_underscore//g" > Options.cray.cpu &&"""
+buildopts = "CPP_DYCORE=1 paropt "
+
+parallel = 6
+
+modtclfooter = """
+prepend-path PATH %(installdir)s
+"""
+postinstallcmds = ['cd %(installdir)s; ln -s cosmo cosmo_cpu_cordex']
+files_to_copy = [(['cosmo/cosmo'], '.')]
+
+sanity_check_paths = {
+    'files': ['cosmo', 'cosmo_cpu_cordex'],
+    'dirs': [],
+}
+
+moduleclass = 'geo'

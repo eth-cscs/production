@@ -9,10 +9,10 @@ def daint = [name: 'daint',
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/dom/UES/jenkins/7.0.UP00/PE19.06/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP00/PE19.06/ARCH/easybuild/modules/all',
+           unusePath: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/7.0.UP00/PE19.06/ARCH/easybuild']
+           prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
 
 def fulen = [name: 'fulen',
              archs: [],
@@ -29,14 +29,6 @@ def kesch = [name: 'kesch',
              modulesProduction: '',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
-
-def leone = [name: 'leone',
-             archs: [],
-             buildPath: '/dev/shm/$USER/easybuild/build',
-             unusePath: '/apps/leone/UES/modulefiles',
-             modulesProduction: '',
-             modulesUnuseProduction: '',
-             prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
 
 def tsa = [name: 'tsa',
            archs: [],

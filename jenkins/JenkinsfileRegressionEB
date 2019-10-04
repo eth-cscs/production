@@ -44,7 +44,7 @@ stage('Build Stage') {
                 node(machineName) {
                     checkout scm
                     def moduleDefinition = ''
-                    if (machineName in ['leone', 'fulen'])
+                    if (machineName in ['fulen'])
                         moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
                                               export -f module'''
 
@@ -71,7 +71,8 @@ stage('Build Stage') {
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '')
                         command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
-                    withEnv(["EASYBUILD_TMPDIR=$prefix/sources",
+                    withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
+                             "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_BUILDPATH=$buildPath"]) {
                                  sh("""$loginBash
                                        $moduleDefinition

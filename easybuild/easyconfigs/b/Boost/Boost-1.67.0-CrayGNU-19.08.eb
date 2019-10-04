@@ -1,0 +1,26 @@
+easyblock = 'boostcray'
+
+name = 'Boost'
+version = '1.67.0'
+
+homepage = 'http://www.boost.org/'
+description = """Boost provides free peer-reviewed portable C++ source
+libraries."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.08'}
+toolchainopts = {'usempi': True, 'pic': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_67_0.tar.gz']
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = " --without-libraries=python"
+
+boost_mpi = True
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
+moduleclass = 'devel'
