@@ -68,7 +68,7 @@ done
 
 # checks force_list
 if [ -n "${force_list}" ]; then
-# match force_list items with production lists: only macthing items will be built using the EasyBuild flag '-f'
+# match force_list items with production lists: only matching items will be built using the EasyBuild flag '-f'
  echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do
      force_match=$(grep $item ${eb_lists[@]})
@@ -88,33 +88,12 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ esch ]]; then
+if [[ "$HOSTNAME" =~ "esch" ]]; then
  system=${HOSTNAME%%[cl]n-[0-9]*}
+elif [[ "$HOSTNAME" =~ "arolla" || "$HOSTNAME" =~ "tsa" ]]; then 
+ system=${HOSTNAME%%-[cl]n[0-9]*}
 else
  system=${HOSTNAME%%[0-9]*}
-fi
-
-# --- COMMON SETUP ---
-# xalt table update for Piz Daint
-if [ -z "$update_xalt_table" ]; then
-    update_xalt_table=yes
-fi
-# check prefix folder
-if [ -z "$PREFIX" ]; then
-    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
-    usage
-else
- export EASYBUILD_PREFIX=$PREFIX
-fi
-# set production repository folder
-if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
-fi
-# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
-if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
- mkdir -p "$EASYBUILD_PREFIX/modules/all"
- mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
- ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
@@ -129,6 +108,42 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module load daint-${ARCH}
         eb_args="${eb_args} --modules-header=${scriptdir%/*}/login/daint-${ARCH}.h --modules-footer=${scriptdir%/*}/login/daint.footer"
     fi
+# xalt table update for Piz Daint
+    if [ -z "$update_xalt_table" ]; then
+        update_xalt_table=yes
+    fi
+fi
+
+# --- COMMON SETUP ---
+# set production repository folder
+if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+fi
+# module unuse PATH before loading EasyBuild module and building
+if [ -n "$unuse_path" ]; then
+ echo -e " Unuse path: $unuse_path "
+ module unuse $unuse_path
+ echo -e " Updated MODULEPATH: $MODULEPATH "
+fi
+# check prefix folder
+if [ -z "$PREFIX" ]; then
+    echo -e "\n Prefix folder not defined. Please use the option -p,--prefix to define the prefix folder \n"
+    usage
+else
+ export EASYBUILD_PREFIX=$PREFIX
+# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
+ if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+  mkdir -p "$EASYBUILD_PREFIX/modules/all"
+  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
+  ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ fi
+# check if PREFIX is already in MODULEPATH after unuse command
+ statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
+ if [ $statuspath -eq 0 ]; then
+  echo -e " Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all "
+  module use $EASYBUILD_PREFIX/modules/all
+  echo -e " Updated MODULEPATH: $MODULEPATH "
+ fi
 fi
 
 # --- BUILD ---
@@ -147,11 +162,6 @@ for ((i=0; i<${#eb_files[@]}; i++)); do
     eb_files[i]=$(eval echo ${eb_files[i]})
     echo ${eb_files[$i]}
 done
-# module unuse PATH before building
-if [ -n "$unuse_path" ]; then
- echo -e "\n Unuse path: $unuse_path \n"
- module unuse $unuse_path
-fi
 
 # checks dependency list using dry run
 dryrun=$(eb ${eb_files[@]} -Dr ${eb_args} 2>&1)
@@ -175,25 +185,26 @@ for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
 # define name and version of the current build
     name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
-# build licensed software (CPMD and VASP)
-    if [[ "$name" =~ "CPMD" || "$name" =~ "VASP" ]]; then
-# custom footer for ${name} modulefile with a warning for users not belonging to group ${name,,}
-        footer="if { [lsearch [exec groups] \"${name,,}\"]==-1 && [module-info mode load] } {
- puts stderr \"WARNING: Only users belonging to group ${name,,} with a valid ${name} license are allowed to access ${name} executables and library files\"
-}"
-        if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
-            (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
+# build licensed software (CPMD, IDL, MATLAB, VASP) on Dom and Piz Daint
+    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
+        if [[ "$name" =~ "IDL" ]]; then
+            group="${name,,}ethz"
         else
-            echo "$footer" > ${EASYBUILD_TMPDIR}/${name}.footer
+            group=${name,,}
         fi
+        footer="if { [lsearch [exec groups] \"${group}\"]==-1 && [module-info mode load] } {
+ puts stderr \"WARNING: Only users belonging to group ${group} with a valid ${name} license are allowed to access ${name} executables and library files\"
+}"
+        (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
         echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
         eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
 # change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
         echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-        chgrp ${name,,} -R ${EASYBUILD_INSTALLPATH}/software/${name}
+        chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
         chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
-# build other software
+# build other software on every system
     else
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r ${eb_args}

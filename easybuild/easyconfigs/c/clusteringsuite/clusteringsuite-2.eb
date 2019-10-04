@@ -1,0 +1,13 @@
+# jg (CSCS)
+easyblock = 'ModuleRC'
+name = 'clusteringsuite'
+version = '2'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Automatically expose the main performance trends in
+applications computation structure."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+dependencies = [('%(name)s', '%(version)s.6.9')]
+
+moduleclass = 'perf'

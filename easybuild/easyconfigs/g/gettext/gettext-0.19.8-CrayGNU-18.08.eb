@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'gettext'
@@ -10,15 +11,14 @@ and documentation"""
 
 toolchain = {'name': 'CrayGNU', 'version': '18.08'}
 
-source_urls = [GNU_SOURCE]
 sources = [SOURCE_TAR_GZ]
+source_urls = [GNU_SOURCE]
 
 dependencies = [
     ('libxml2', '2.9.7'),
     ('ncurses', '6.1'),
 ]
 
-configopts = "--without-emacs --with-libxml2-prefix=$EBROOTLIBXML2"
-
+configopts = '--without-emacs --with-libxml2-prefix=$EBROOTLIBXML2'
 
 moduleclass = 'vis'

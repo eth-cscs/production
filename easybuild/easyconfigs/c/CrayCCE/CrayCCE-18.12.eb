@@ -1,0 +1,20 @@
+# contributed by Luca Marsella
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '18.12'
+
+homepage = 'https://pubs.cray.com/content/S-2372/17.06/cray-programming-environments-installation-guide-1706-s-2372/pe-installation-procedures-for-cle-6'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module (PE release: 18.12).\n"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    # PrgEnv version is pinned to avoid conflicts, although Cray recommends to use the latest (default) version
+    ('PrgEnv-cray/1.0.4', EXTERNAL_MODULE),
+    ('cce/8.7.7', EXTERNAL_MODULE),
+    ('cray-libsci/18.07.1', EXTERNAL_MODULE),
+    ('cray-mvapich2/2.3', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
