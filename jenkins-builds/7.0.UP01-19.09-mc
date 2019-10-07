@@ -30,7 +30,7 @@
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NAMD-2.13-CrayIntel-19.09.eb                       --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
- NCO-4.7.5-CrayGNU-19.09.eb                         --set-default-module
+ NCO-4.8.1-CrayGNU-19.09.eb                         --set-default-module
  ncview-2.1.7-CrayGNU-19.09.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-19.09-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.09-python3.eb       --set-default-module
