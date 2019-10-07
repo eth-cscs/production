@@ -36,6 +36,7 @@
  ncview-2.1.7-CrayGNU-19.09.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-19.09-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.09-python3.eb       --set-default-module
+ ParaView-5.7.0-EGL-CrayGNU-19.09.eb                --set-default-module
  PLUMED-2.5.1-CrayGNU-19.09.eb                      --set-default-module
  PLUMED-2.5.1-CrayIntel-19.09.eb                    --set-default-module
  pycuda-2018.1.1-CrayGNU-19.09-python2-cuda-10.1.eb
