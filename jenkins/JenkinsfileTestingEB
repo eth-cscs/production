@@ -44,7 +44,7 @@ stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
         def architectures = mach.architectures
-        def cpus = mach.cpus
+        def cpus = machine.cpus
         def machineName = machine.name
         for (architecture in architectures) {
             def arch = architecture
