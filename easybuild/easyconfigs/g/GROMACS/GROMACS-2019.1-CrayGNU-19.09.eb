@@ -12,24 +12,24 @@
 # http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
 #
 name = 'GROMACS'
-version = "2019.1"
+version = '2019.1'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
  i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True, 'dynamic': False}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
 
-source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
+source_urls = ['ftp://ftp.%(namelower)s.org/pub/%(namelower)s/']
 sources = [SOURCELOWER_TAR_GZ]
-
-configopts = '-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DGMX_SIMD=AVX2_256 -DGMX_OPENMP_MAX_THREADS=128'
-
-skipsteps = ['test']
 
 builddependencies = [
     ('CMake', '3.14.1', '', True),
 ]
+
+configopts = "-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DGMX_SIMD=AVX2_256 -DGMX_OPENMP_MAX_THREADS=128"
+
+skipsteps = ['test']
 
 moduleclass = 'bio'

@@ -15,24 +15,21 @@ toolchainopts = {'opt': True, 'pic': True}
 
 # Files visible at https://code.mpimet.mpg.de/projects/cdo/files,
 # however link is different for each version!
-source_urls = ['https://code.mpimet.mpg.de/attachments/download/18264/'] 
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/18264/']
 sources = [SOURCELOWER_TAR_GZ]
-checksums = [ '0c60f2c94dc5c76421ecf363153a5043' ]
+checksums = ['0c60f2c94dc5c76421ecf363153a5043']  # No MPI support
 
 dependencies = [
     ('cray-netcdf/4.6.3.1', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
-    # CDO: OpenMP support for compute intensive operators:
-    # https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
-    # No MPI support
 ]
 
-preconfigopts = 'export NC_CONFIG=`which nc-config` && '
-
+preconfigopts = "export NC_CONFIG=`which nc-config` && "
 configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
 
+
 sanity_check_paths = {
-    'files': ["bin/cdo"],
+    'files': ['bin/%(namelower)s'],
     'dirs': [],
 }
 

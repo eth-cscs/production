@@ -13,7 +13,7 @@ description = """
 
 toolchain = {'name': 'CrayIntel', 'version': '19.09'}
 
-source_urls = ["http://prdownloads.sourceforge.net/tcl"]
+source_urls = ['http://prdownloads.sourceforge.net/%(namelower)s']
 sources = ['%(namelower)s%(version)s-src.tar.gz']
 
 dependencies = [
@@ -24,7 +24,6 @@ configopts = '--enable-threads EXTRA_INSTALL="install-private-headers"'
 
 # Cross compiling, so skipping tests
 #runtest = 'test'
-
 start_dir = 'unix'
 
 moduleclass = 'lang'

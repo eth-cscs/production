@@ -4,7 +4,7 @@ name = 'protobuf-core'
 version = '3.6.0'
 
 homepage = 'https://github.com/google/protobuf/'
-description = """Google Protocol Buffers"""
+description = "Google Protocol Buffers"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
@@ -13,10 +13,10 @@ sources = [SOURCE_TAR_GZ]
 
 preconfigopts = "./autogen.sh &&"
 
+
 sanity_check_paths = {
-    'files': ['bin/protoc','lib/libprotobuf.%s' % SHLIB_EXT],
+    'files': ['bin/protoc', 'lib/libprotobuf.so'],
     'dirs': [],
 }
 
 moduleclass = 'devel'
-

@@ -2,36 +2,36 @@ easyblock = 'CMakeMake'
 
 name = 'SpFFT'
 version = '0.9.7'
-cudaversion = 10.1
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-10.1'
 
 homepage = 'https://github.com/eth-cscs/SpFFT'
-description = """Sparse 3D FFT library with MPI, OpenMP, CUDA and ROCm support"""
+description = "Sparse 3D FFT library with MPI, OpenMP, CUDA and ROCm support"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 #toolchainopts = {'usempi': True, 'openmp': True}
-toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
 
-source_urls = ['https://github.com/eth-cscs/SpFFT/archive']
+source_urls = ['https://github.com/eth-cscs/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
 
-builddependencies = [('CMake', '3.12.4', '', True)]
-
-dependencies = [
-  ('cudatoolkit/%s.105_3.27-7.0.1.0_8.1__ga311ce7' % cudaversion, EXTERNAL_MODULE),
-  ('gcc/8.3.0', EXTERNAL_MODULE),
-  ('intel/19.0.1.144', EXTERNAL_MODULE),
+builddependencies = [
+    ('CMake', '3.12.4', '', True),
 ]
-
-separate_build_dir = True
-
-prebuildopts = [ ]
+dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
+    ('gcc/8.3.0', EXTERNAL_MODULE),
+    ('intel/19.0.1.144', EXTERNAL_MODULE),
+]
 
 configopts = "-DCMAKE_BUILD_TYPE=RELEASE -DSPFFT_GPU_BACKEND=CUDA -DSPFFT_SINGLE_PRECISION=ON -DSPFFT_MPI=ON -DSPFFT_OMP=ON"
 
-moduleclass = 'lib'
+prebuildopts = []
+
+separate_build_dir = True
 
 sanity_check_paths = {
-    'files': ['lib/libspfft.so', 'include/spfft/config.h', 'include/spfft/spfft.hpp'],
-    'dirs': []
+    'files': ['lib/libspfft.so', 'include/%(namelower)s/config.h', 'include/%(namelower)s/%(namelower)s.hpp'],
+    'dirs': [],
 }
+
+moduleclass = 'lib'

@@ -3,19 +3,10 @@ easyblock = 'PythonPackage'
 
 name = 'line_profiler'
 version = '2.1'
-
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-req_py_majver = py_maj_ver
-req_py_minver = py_min_ver
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-versionsuffix = '-python%s' % (py_maj_ver)
+versionsuffix = '-python3'
 
 homepage = 'https://github.com/rkern/line_profiler'
-description = """Line-by-line profiler for Python"""
+description = "Line-by-line profiler for Python"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'verbose': False}
@@ -23,14 +14,16 @@ toolchainopts = {'verbose': False}
 source_urls = ['https://github.com/rkern/%(name)s/archive']
 sources = ['%(version)s.tar.gz']
 
-dependencies = [ ('PyExtensions', pyver) ] # Cython
+dependencies = [
+    ('PyExtensions', '3.6.5.7'),
+]  # Cython
+
+req_py_minver = '6'
+req_py_majver = '3'
 
 sanity_check_paths = {
     'files': [],
-    'dirs': [(
-        'lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s'
-        '-linux-x86_64.egg' % {'pv': pyshortver}
-    )],
+    'dirs': ['lib/python3.6/site-packages/%(name)s-%(version)s-py3.6-linux-%(arch)s.egg'],
 }
 
 moduleclass = 'lang'

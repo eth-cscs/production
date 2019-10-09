@@ -2,127 +2,46 @@
 easyblock = 'Bundle'
 
 name = 'PyExtensionsDS'
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-version = '%s' % pyver
+version = '3.6.5.7'
 
 homepage = 'https://pypi.python.org/pypi'
-description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-    ('h5py', '2.8.0', '-python%s-serial' % py_maj_ver),
-    ('PyExtensions', pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('h5py', '2.8.0', '-python3-serial'),
+    ('PyExtensions', '3.6.5.7'),
 ]
 
+exts_list = [
+    ('backports.weakref', '1.0.post1', {'source_urls': ['https://pypi.python.org/packages/source/b/backports.weakref/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('Werkzeug', '0.14.1', {'source_urls': ['https://pypi.python.org/packages/source/w/werkzeug/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('absl-py', '0.6.1', {'source_urls': ['https://pypi.python.org/packages/source/a/absl-py/'], 'req_py_majver': '3', 'modulename': 'absl', 'req_py_minver': '6'}),
+    ('Keras_Applications', '1.0.6', {'source_urls': ['https://pypi.python.org/packages/source/k/keras_applications'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('Keras_Preprocessing', '1.0.5', {'source_urls': ['https://pypi.python.org/packages/source/k/keras_preprocessing'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('gast', '0.2.0', {'source_urls': ['https://pypi.python.org/packages/source/g/gast'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('astor', '0.7.1', {'source_urls': ['https://pypi.python.org/packages/source/a/astor'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('termcolor', '1.1.0', {'source_urls': ['https://pypi.python.org/packages/source/t/termcolor'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('chardet', '3.0.4', {'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('certifi', '2018.8.24', {'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('idna', '2.7', {'source_urls': ['https://pypi.python.org/packages/source/i/idna/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('urllib3', '1.23', {'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('requests', '2.19.1', {'source_urls': ['https://pypi.python.org/packages/source/r/requests/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('wrapt', '1.11.2', {'source_urls': ['https://pypi.python.org/packages/source/w/wrapt/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('setuptools', '41.0.1', {'source_urls': ['https://pypi.python.org/packages/source/s/setuptools'], 'req_py_majver': '3', 'source_tmpl': 'setuptools-41.0.1.zip', 'req_py_minver': '6'}),
+    ('Markdown', '3.1.1', {'source_urls': ['https://pypi.python.org/packages/source/m/markdown'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('wheel', '0.33.4', {'source_urls': ['https://pypi.python.org/packages/source/w/wheel'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+]
+modextrapaths = {'PYTHONPATH': 'lib/python3.6/site-packages'}
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
 
-exts_list = [
-    ('backports.weakref', '1.0.post1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/backports.weakref/'],
-    }),
-    ('Werkzeug', '0.14.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/werkzeug/'],
-    }),
-    ('absl-py', '0.6.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/a/absl-py/'],
-        'modulename': 'absl',
-    }),
-    ('Keras_Applications', '1.0.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/k/keras_applications'],
-    }),
-    ('Keras_Preprocessing', '1.0.5', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/k/keras_preprocessing'],
-    }),
-    ('gast', '0.2.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/g/gast'],
-    }),
-    ('astor', '0.7.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/a/astor'],
-    }),
-    ('termcolor', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/termcolor'],
-    }),
-    ('chardet', '3.0.4', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
-    }),
-    ('certifi', '2018.8.24', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
-    }),
-    ('idna', '2.7', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
-    }),
-    ('urllib3', '1.23', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
-    }),
-    ('requests', '2.19.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
-    }),
-    ('wrapt', '1.11.2', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/w/wrapt/'],
-    }),
-    ('setuptools', '41.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/s/setuptools'],
-        'source_tmpl': 'setuptools-41.0.1.zip',
-    }),
-    ('Markdown', '3.1.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/m/markdown'],
-    }),
-    ('wheel', '0.33.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/wheel'],
-    }),
-]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-full_sanity_check = True
-
-pythonpath = 'lib/python%s/site-packages' % pyshortver
 sanity_check_paths = {
     'files': [],
-    'dirs': [pythonpath]
+    'dirs': ['lib/python3.6/site-packages'],
 }
-
-modextrapaths = {'PYTHONPATH': pythonpath}
 
 moduleclass = 'tools'

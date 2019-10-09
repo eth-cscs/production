@@ -1,178 +1,55 @@
 # @author: sarafael, gppezzi
-
 easyblock = 'Bundle'
 
 name = 'oq-engine'
-
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
 version = '3.2.0'
 
 homepage = 'https://pypi.python.org/pypi'
-description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
-
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
-
 dependencies = [
-    ('PyExtensions', '%s' % pyver),
+    ('PyExtensions', '3.6.5.7'),
     ('GEOS', '3.6.2'),
     ('libspatialindex', '1.8.5'),
-    ('h5py', '2.8.0', '-python%s-parallel' % py_maj_ver)
+    ('h5py', '2.8.0', '-python3-parallel'),
 ]
-
-exts_defaultclass = 'PythonPackage'
 
 exts_list = [
-    ('pytz', '2018.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pytz/'],
-    }),
-    ('mock', '2.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/m/mock/'],
-    }),
-    ('psutil', '5.4.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'],
-    }),
-    ('Shapely', '1.6.4.post1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/S/shapely/'],
-    }),
-    ('pbr', '4.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pbr/'],
-    }),
-    ('Django', '2.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/D/django/'],
-    }),
-    ('certifi', '2018.1.18', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
-    }),
-    ('pyshp', '1.2.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyshp/'],
-        'modulename': 'shapefile'
-    }),
-    ('setproctitle', '1.1.10', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/s/setproctitle/'],
-    }),
-    ('python-prctl', '1.6.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/python-prctl/'],
-        'modulename': 'prctl'
-    }),
-    ('Rtree', '0.8.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/R/rtree/'],
-    }),
-    ('vine', '1.1.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/v/vine/'],
-    }),
-    ('amqp', '2.2.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/a/amqp/'],
-    }),
-    ('kombu', '4.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/k/kombu/'],
-    }),
-    ('billiard', '3.5.0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/billiard/'],
-    }),
-    ('celery', '4.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/c/celery/'],
-    }),
-    ('python-dateutil', '2.7.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/python-dateutil/'],
-        'modulename': 'dateutil'
-    }),
-    ('pyproj', '1.9.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyproj/'],
-    }),
-    ('basemap', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://github.com/matplotlib/basemap/archive'],
-        'source_tmpl': 'v1.1.0.tar.gz',
-        'prebuildopts': 'export GEOS_DIR=$EBROOTGEOS; ',
-        'preinstallopts': 'export GEOS_DIR=$EBROOTGEOS; ',
-        'modulename': 'os',
-    }),
-    ('flake8', '3.5.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/f/flake8/'],
-    }),
-    ('pdbpp', '0.9.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pdbpp/'],
-        'modulename': 'pdb'
-    }),
-    ('fancycompleter', '0.8', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/f/fancycompleter/'],
-    }),
-    ('wmctrl', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/wmctrl'],
-        'modulename': 'os'
-    }),
-    (name, version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://github.com/gem/oq-engine/archive/'],
-        'source_tmpl': 'v%(version)s.tar.gz',
-        'modulename': 'openquake'
-    }),
+    ('pytz', '2018.3', {'source_urls': ['https://pypi.python.org/packages/source/p/pytz/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('mock', '2.0.0', {'source_urls': ['https://pypi.python.org/packages/source/m/mock/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('psutil', '5.4.3', {'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('Shapely', '1.6.4.post1', {'source_urls': ['https://pypi.python.org/packages/source/S/shapely/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('pbr', '4.0.0', {'source_urls': ['https://pypi.python.org/packages/source/p/pbr/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('Django', '2.0.4', {'source_urls': ['https://pypi.python.org/packages/source/D/django/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('certifi', '2018.1.18', {'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('pyshp', '1.2.3', {'source_urls': ['https://pypi.python.org/packages/source/p/pyshp/'], 'req_py_majver': '3', 'modulename': 'shapefile', 'req_py_minver': '6'}),
+    ('setproctitle', '1.1.10', {'source_urls': ['https://pypi.python.org/packages/source/s/setproctitle/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('python-prctl', '1.6.1', {'source_urls': ['https://pypi.python.org/packages/source/p/python-prctl/'], 'req_py_majver': '3', 'modulename': 'prctl', 'req_py_minver': '6'}),
+    ('Rtree', '0.8.3', {'source_urls': ['https://pypi.python.org/packages/source/R/rtree/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('vine', '1.1.4', {'source_urls': ['https://pypi.python.org/packages/source/v/vine/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('amqp', '2.2.2', {'source_urls': ['https://pypi.python.org/packages/source/a/amqp/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('kombu', '4.1.0', {'source_urls': ['https://pypi.python.org/packages/source/k/kombu/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('billiard', '3.5.0.3', {'source_urls': ['https://pypi.python.org/packages/source/b/billiard/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('celery', '4.1.0', {'source_urls': ['https://pypi.python.org/packages/source/c/celery/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('python-dateutil', '2.7.2', {'source_urls': ['https://pypi.python.org/packages/source/p/python-dateutil/'], 'req_py_majver': '3', 'modulename': 'dateutil', 'req_py_minver': '6'}),
+    ('pyproj', '1.9.5.1', {'source_urls': ['https://pypi.python.org/packages/source/p/pyproj/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('basemap', '1.1.0', {'preinstallopts': 'export GEOS_DIR=$EBROOTGEOS; ', 'modulename': 'os', 'prebuildopts': 'export GEOS_DIR=$EBROOTGEOS; ', 'source_tmpl': 'v1.1.0.tar.gz', 'req_py_minver': '6', 'source_urls': ['https://github.com/matplotlib/basemap/archive'], 'req_py_majver': '3'}),
+    ('flake8', '3.5.0', {'source_urls': ['https://pypi.python.org/packages/source/f/flake8/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('pdbpp', '0.9.2', {'source_urls': ['https://pypi.python.org/packages/source/p/pdbpp/'], 'req_py_majver': '3', 'modulename': 'pdb', 'req_py_minver': '6'}),
+    ('fancycompleter', '0.8', {'source_urls': ['https://pypi.python.org/packages/source/f/fancycompleter/'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('wmctrl', '0.3', {'source_urls': ['https://pypi.python.org/packages/source/w/wmctrl'], 'req_py_majver': '3', 'modulename': 'os', 'req_py_minver': '6'}),
+    ('oq-engine', '3.2.0', {'source_urls': ['https://github.com/gem/oq-engine/archive/'], 'req_py_majver': '3', 'source_tmpl': 'v%(version)s.tar.gz', 'modulename': 'openquake', 'req_py_minver': '6'}),
 ]
-
-full_sanity_check = True
-
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
-
+modextrapaths = {'PYTHONPATH': ['lib/python3.6/site-packages']}
+exts_defaultclass = 'PythonPackage'
 modextravars = {'OQ_DATADIR': '$::env(SCRATCH)/oqdata'}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % pyshortver]
+    'dirs': ['lib/python3.6/site-packages'],
 }
 
 moduleclass = 'tools'

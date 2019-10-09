@@ -10,13 +10,13 @@ Computing"""
 
 toolchain = {'name': 'CrayCCE', 'version': '19.09-classic'}
 toolchainopts = {'verbose': False}
-# verbose=False avoids the configure step to fail (-craype-verbose error)
 
-source_urls = ['https://github.com/nerscadmin/IPM/archive']
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+source_urls = ['https://github.com/nerscadmin/%(name)s/archive']
 sources = ['%(version)s.tar.gz']
-checksums = [ 'c01207ca942bef74c7d48df965fca99f' ]
 # Forcing $IPM_LOGDIR to archive all reports in a shared dir:
-patches = [ 'IPM-2.0.6-Cray-19.06.patch' ]
+patches = ['%(name)s-%(version)s-Cray-19.06.patch']
+checksums = ['c01207ca942bef74c7d48df965fca99f']
 
 dependencies = [
     ('libunwind', '1.3.1', '', True),
@@ -24,31 +24,21 @@ dependencies = [
     ('ploticus', '2.42-ipm', '', True),
 ]
 
-preconfigopts  = './bootstrap.sh && '
-preconfigopts += 'sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
-buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
-configopts  = ' --with-papi=$PAT_BUILD_PAPI_LIBDIR/..'
-# With Cray, we can use perftools' papi, otherwise:
-# configopts  = ' --with-papi=`pkg-config --variable=papi_prefix papi`'
-configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
-configopts += ' CPPFLAGS="-I$EBROOTMXML/include "'
-configopts += ' LIBS="-L$EBROOTMXML/lib "'
+preconfigopts = "./bootstrap.sh && sed -i -e 's/-qversion/-qversion --version/g' configure && "
+configopts = ' --with-papi=$PAT_BUILD_PAPI_LIBDIR/.. --with-libunwind=$EBROOTLIBUNWIND CPPFLAGS="-I$EBROOTMXML/include " LIBS="-L$EBROOTMXML/lib "'
 
-postinstallcmds = ["mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl "]
+buildopts = " MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn "
+
+modextrapaths = {'IPM_KEYFILE': 'etc/ipm_key_mpi'}
+postinstallcmds = ['mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl ']
+modextravars = {
+    '%(name)s': "-L%(installdir)s/lib -Wl,--whole-archive -lipmf -lipm -Wl,--no-whole-archive",
+    'IPM_HPM': 'PAPI_TOT_CYC',
+}
 
 sanity_check_paths = {
-    'files': ["bin/ipm_parse.pl",
-             "etc/ipm_key_mpi",
-             "lib/libipm.a",
-            ],
+    'files': ['bin/ipm_parse.pl', 'etc/ipm_key_mpi', 'lib/libipm.a'],
     'dirs': [],
 }
 
-modextrapaths = { 'IPM_KEYFILE': 'etc/ipm_key_mpi' }
-modextravars = {
-    'IPM' : '-L%(installdir)s/lib -Wl,--whole-archive -lipmf -lipm -Wl,--no-whole-archive',
-    'IPM_HPM' : 'PAPI_TOT_CYC',
-}
-
 moduleclass = 'perf'
-

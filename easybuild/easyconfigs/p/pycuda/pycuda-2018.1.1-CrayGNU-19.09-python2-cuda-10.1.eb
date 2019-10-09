@@ -3,17 +3,7 @@ easyblock = 'PythonPackage'
 
 name = 'pycuda'
 version = '2018.1.1'
-
-cudaversion = '10.1'
-
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-versionsuffix = '-python%s-cuda-%s' % (py_maj_ver, cudaversion)
+versionsuffix = '-python2-cuda-10.1'
 
 homepage = 'https://pypi.python.org/pypi/pycuda'
 description = """Python wrapper for Nvidia CUDA. PyCUDA lets you access Nvidia
@@ -26,15 +16,16 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]
 
 prebuildopts = "python ./configure.py --cuda-root=$EBROOTCUDA"
 
+
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
+    'dirs': ['lib/python2.7/site-packages/%(name)s-%(version)s-py2.7-linux-%(arch)s.egg'],
 }
 
 moduleclass = 'lang'

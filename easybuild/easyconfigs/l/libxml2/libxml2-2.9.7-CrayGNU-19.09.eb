@@ -2,7 +2,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'libxml2'
-version = "2.9.7"
+version = '2.9.7'
 
 homepage = 'http://xmlsoft.org/'
 description = """Libxml2 is the XML C parser and 
@@ -12,24 +12,19 @@ toolchain developed for the Gnome project
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True}
 
-source_urls = [
-    'http://xmlsoft.org/sources/',
-    'http://xmlsoft.org/sources/old/'
-]
+source_urls = ['http://xmlsoft.org/sources/', 'http://xmlsoft.org/sources/old/']
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = (
-    'CC="$CC" CXX="$CXX" --with-pic --without-python --with-zlib=$EBROOTZLIB'
-)
+dependencies = [
+    ('zlib', '1.2.11'),
+]
 
-dependencies = [('zlib', '1.2.11')]
+configopts = 'CC="$CC" CXX="$CXX" --with-pic --without-python --with-zlib=$EBROOTZLIB'
+
 
 sanity_check_paths = {
-    'files': [
-        ('lib/libxml2.a', 'lib64/libxml2.a'), 
-        ('lib/libxml2.%s' % SHLIB_EXT, 'lib64/libxml2.%s' % SHLIB_EXT)
-    ],
-    'dirs': ['bin', 'include/libxml2/libxml'],
+    'files': [('lib/%(name)s.a', 'lib64/%(name)s.a'), ('lib/%(name)s.so', 'lib64/%(name)s.so')],
+    'dirs': ['bin', 'include/%(name)s/libxml'],
 }
 
 moduleclass = 'lib'

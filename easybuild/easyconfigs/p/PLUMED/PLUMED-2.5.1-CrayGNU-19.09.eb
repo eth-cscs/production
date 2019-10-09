@@ -3,7 +3,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'PLUMED'
-version = "2.5.1"
+version = '2.5.1'
 
 homepage = 'http://www.plumed-code.org'
 description = """PLUMED is an open source library for free energy calculations in molecular systems which
@@ -16,7 +16,7 @@ description = """PLUMED is an open source library for free energy calculations i
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'usempi': 'True'}
 
-source_urls = ['https://github.com/plumed/plumed2/archive/']
+source_urls = ['https://github.com/%(namelower)s/plumed2/archive/']
 sources = ['v%(version)s.tar.gz']
 
 dependencies = [
@@ -29,16 +29,14 @@ dependencies = [
 # Make sure to set the include and library paths accordingly: Cray wrappers set them here
 preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
 configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
+
 prebuildopts = " source sourceme.sh && "
 
-sanity_check_paths = {
-    'files': ['bin/plumed', 'lib/libplumedKernel.%s' % SHLIB_EXT, 'lib/libplumed.%s' % SHLIB_EXT],
-    'dirs': ['lib/plumed']
-}
+modextrapaths = {'PLUMED_KERNEL': 'lib/libplumedKernel.so', 'PLUMED_ROOT': 'lib/%(namelower)s'}
 
-modextrapaths = {
-    'PLUMED_KERNEL': 'lib/libplumedKernel.%s' % SHLIB_EXT,
-    'PLUMED_ROOT': 'lib/plumed',
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
+    'dirs': ['lib/%(namelower)s'],
 }
 
 moduleclass = 'chem'

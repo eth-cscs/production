@@ -1,9 +1,8 @@
 # contributed by Simon Pintarelli (CSCS)
-
 easyblock = 'CMakeMake'
 
 name = 'libxc'
-version = "4.3.4"
+version = '4.3.4'
 
 homepage = 'http://www.tddft.org/programs/octopus/wiki/index.php/Libxc'
 description = """Libxc is a library of exchange-correlation functionals for density-functional theory.
@@ -12,21 +11,23 @@ description = """Libxc is a library of exchange-correlation functionals for dens
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'opt': True}
 
+source_urls = ['https://gitlab.com/%(name)s/%(name)s/-/archive/%(version)s/%(name)s-%(version)s.tar.gz']
 sources = [SOURCE_TAR_GZ]
-source_urls = ['https://gitlab.com/libxc/libxc/-/archive/%s/libxc-%s.tar.gz' % (version, version)]
 
-separate_build_dir = True
-preconfigopts = 'export FC="$F77" && export FCFLAGS="$FFLAGS" &&'
-configopts = '-DBUILD_SHARED_LIBS=On'
 builddependencies = [
     ('CMake', '3.14.5', '', True),
 ]
 
-sanity_check_paths = {
-    'files': ['lib64/libxc.so'],
-    'dirs': ['include'],
-}
+preconfigopts = 'export FC="$F77" && export FCFLAGS="$FFLAGS" &&'
+configopts = '-DBUILD_SHARED_LIBS=On'
 
 parallel = 10
+
+separate_build_dir = True
+
+sanity_check_paths = {
+    'files': ['lib64/%(name)s.so'],
+    'dirs': ['include'],
+}
 
 moduleclass = 'chem'

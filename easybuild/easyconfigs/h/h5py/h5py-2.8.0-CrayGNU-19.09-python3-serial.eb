@@ -1,13 +1,9 @@
 # contributed by Luca Marsella (CSCS)
-easyblock = "PythonPackage"
+easyblock = 'PythonPackage'
 
 name = 'h5py'
 version = '2.8.0'
-req_py_majver = '3'
-req_py_minver = '6'
-pyver = '%s.%s' % (req_py_majver, req_py_minver)
-py_rev_ver = '5.7'
-versionsuffix = '-python%s-serial' % req_py_majver
+versionsuffix = '-python3-serial'
 
 homepage = 'http://www.h5py.org/'
 description = """
@@ -18,23 +14,24 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'verbose' : False}
+toolchainopts = {'verbose': False}
 
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
+    ('PyExtensions', '3.6.5.7'),
     ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
 ]
 
-prebuildopts  = (
-    'python setup.py configure --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && '
-)
+prebuildopts = "python setup.py configure --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && "
+
+req_py_minver = '6'
+req_py_majver = '3'
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyver}],
+    'dirs': ['lib/python3.6/site-packages/%(name)s-%(version)s-py3.6-linux-%(arch)s.egg'],
 }
 
 moduleclass = 'data'

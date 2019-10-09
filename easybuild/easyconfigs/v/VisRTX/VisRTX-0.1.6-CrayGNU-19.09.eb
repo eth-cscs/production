@@ -1,33 +1,33 @@
 # by Jean M. Favre (CSCS)
-easyblock = "CMakeMake"
+easyblock = 'CMakeMake'
 
 name = 'VisRTX'
 version = '0.1.6'
 
 homepage = 'https://github.com/NVIDIA/VisRTX'
-description = """VisRTX is a C++ rendering framework developed by the HPC Visualization Developer Technology team at NVIDIA"""
+description = "VisRTX is a C++ rendering framework developed by the HPC Visualization Developer Technology team at NVIDIA"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
+source_urls = ['https://github.com/NVIDIA/%(name)s/archive/']
 sources = ['v%(version)s.tar.gz']
-source_urls = ['https://github.com/NVIDIA/VisRTX/archive/']
 
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
+]
 dependencies = [
-  ('OptiX', '6.0.0'),
-  ('mdl', '317500.2554')
+    ('OptiX', '6.0.0'),
+    ('mdl', '317500.2554'),
 ]
 
-builddependencies = [('CMake', '3.14.5','', True),
-                     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE)
-]
+configopts = "-DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
 
 separate_build_dir = True
 
-configopts = "-DCMAKE_BUILD_TYPE=RelWithDebInfo  "
-configopts += "-DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
-
 sanity_check_paths = {
-    'files': ['lib64/libVisRTX.%s' % SHLIB_EXT],
+    'files': ['lib64/libVisRTX.so'],
     'dirs': [],
 }
+
 moduleclass = 'vis'

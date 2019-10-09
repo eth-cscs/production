@@ -3,8 +3,8 @@ easyblock = 'ConfigureMake'
 
 name = 'SIONlib'
 version = '1.7.4l'
-homepage = 'http://www.fz-juelich.de/ias/jsc/EN/Expertise/Support/Software/' \
-           'SIONlib/_node.html'
+
+homepage = 'http://www.fz-juelich.de/ias/jsc/EN/Expertise/Support/Software/SIONlib/_node.html'
 description = """SIONlib is a scalable I/O library for parallel access to
 task-local files. The library not only supports writing and reading binary
 data to or from several thousands of processors into a single or a small number
@@ -16,18 +16,19 @@ tool requiring a different SIONlib version."""
 
 toolchain = {'name': 'CrayCCE', 'version': '19.09-classic'}
 toolchainopts = {'pic': True}
-sources = ['/apps/common/UES/easybuild/sources/s/%(name)s/%(namelower)s-'
-           '%(version)s.tar.gz']
-checksums = ['83c68563fa2181ab79bc6d20bd89e639']
-patches = ['%(name)s-%(version)s.patch']
 
-configopts = '--disable-cxx --disable-fortran --disable-ompi --disable-mic'
+sources = ['/apps/common/UES/easybuild/sources/s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
+checksums = ['83c68563fa2181ab79bc6d20bd89e639']
+
+configopts = "--disable-cxx --disable-fortran --disable-ompi --disable-mic"
+
 buildopts = ' SION_PLATFORM=" -D_SION_XT -fPIC"'
 
+
 sanity_check_paths = {
-    'files': ['bin/sionconfig'] +
-    ['lib/libl%s_64.a' % x for x in ['sionser', 'siongen', 'sioncom']],
-    'dirs': []
+    'files': ['bin/sionconfig', 'lib/liblsionser_64.a', 'lib/liblsiongen_64.a', 'lib/liblsioncom_64.a'],
+    'dirs': [],
 }
 
 moduleclass = 'lib'

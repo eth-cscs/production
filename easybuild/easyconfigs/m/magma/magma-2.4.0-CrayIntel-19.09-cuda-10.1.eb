@@ -1,11 +1,9 @@
 # @author: wsawyer
-
 easyblock = 'MakeCp'
 
 name = 'magma'
 version = '2.4.0'
-cudaversion = 10.1
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://icl.cs.utk.edu/magma/'
 description = """The MAGMA project aims to develop a dense linear algebra
@@ -15,21 +13,18 @@ with current Multicore+GPU systems."""
 toolchain = {'name': 'CrayIntel', 'version': '19.09'}
 toolchainopts = {'pic': True}
 
+source_urls = ['http://icl.cs.utk.edu/projectsfiles/%(name)s/downloads/']
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
-patches = [('make.inc-2.4.0', './')]
+patches = [('make.inc-%(version)s', './')]
 
 dependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]
 
-files_to_copy = ["lib", "include", "testing",
-                 "docs", "README", (['control/*.h'], 'control')]
+prebuildopts = "mv make.inc-%(version)s make.inc && CUDADIR=$EBROOTCUDA "
 
-modextravars = {
-    'LD_LIBRARY_PATH': '$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
-
-prebuildopts = 'mv make.inc-2.4.0 make.inc && CUDADIR=$EBROOTCUDA '
+files_to_copy = ['lib', 'include', 'testing', 'docs', 'README', (['control/*.h'], 'control')]
+modextravars = {'LD_LIBRARY_PATH': '$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
 sanity_check_paths = {
     'files': ['lib/libmagma.so', 'lib/libmagma.a'],

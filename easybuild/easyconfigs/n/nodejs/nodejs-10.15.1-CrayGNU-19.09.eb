@@ -1,5 +1,6 @@
 # jg (cscs)
 easyblock = 'ConfigureMake'
+
 name = 'nodejs'
 version = '10.15.1'
 
@@ -11,17 +12,17 @@ description = """
     data-intensive real-time applications that run across distributed devices.
 """
 
-toolchain = {'name':'CrayGNU', 'version':'19.09'}
+toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
+source_urls = ['http://%(name)s.org/dist/v%(version)s/']
 sources = ['node-v%(version)s.tar.gz']
-source_urls = ['http://nodejs.org/dist/v%(version)s/']
 
 # Python is required (only) as build dependency
-allow_system_deps = [('Python', SYS_PYTHON_VERSION)]
+allow_system_deps = [('Python', '2.7.14')]
 
 sanity_check_paths = {
-    'files': ["bin/node", "bin/npm"],
-    'dirs': ["lib/node_modules", "include/node"]
+    'files': ['bin/node', 'bin/npm'],
+    'dirs': ['lib/node_modules', 'include/node'],
 }
 
 moduleclass = 'lang'

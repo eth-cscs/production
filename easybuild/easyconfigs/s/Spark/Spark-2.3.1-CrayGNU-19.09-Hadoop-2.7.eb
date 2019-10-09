@@ -2,26 +2,22 @@ easyblock = 'Tarball'
 
 name = 'Spark'
 version = '2.3.1'
-
 # Currently not needed due to the change to osdependencies
 #javaver = 'jdk1.8.0_51'
-
 versionsuffix = '-Hadoop-2.7'
 
 homepage = 'http://spark.apache.org'
-description = """Spark is Hadoop MapReduce done in memory"""
+description = "Spark is Hadoop MapReduce done in memory"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
-patches = [('spark-2.3.1-Hadoop-2.7.patch', 1)]
-
-sources = ['%(namelower)s-%(version)s-bin-hadoop2.7.tgz']
 source_urls = [
     'http://apache.belnet.be/%(namelower)s/%(namelower)s-%(version)s/',
     'http://www.eu.apache.org/dist/%(namelower)s/%(namelower)s-%(version)s/',
     'http://www.us.apache.org/dist/%(namelower)s/%(namelower)s-%(version)s/',
 ]
-
+sources = ['%(namelower)s-%(version)s-bin-hadoop2.7.tgz']
+patches = [('%(namelower)s-%(version)s-Hadoop-2.7.patch', 1)]
 checksums = ['e87499e5417a64341cbda25e087632dd9f6ce7ad249dfeba47d9d02a51305fc2']
 
 # On CLE7, java is no longer avail. as a stand-alone module
@@ -31,33 +27,19 @@ checksums = ['e87499e5417a64341cbda25e087632dd9f6ce7ad249dfeba47d9d02a51305fc2']
 #]
 osdependencies = ['java']
 
-postinstallcmds = [
-    ("chmod +x %(installdir)s/cscs-custom/getmaster.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/getslaves.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/start-all.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/start-ssh.sh"),
-    ("chmod +x %(installdir)s/cscs-custom/stop-all.sh")]
-
-sanity_check_paths = {
-    'files': ['bin/spark-shell', 'bin/pyspark'],
-    'dirs': ['python']
-}
-
-moduleclass = 'devel'
-
 modtclfooter = """
 ## Required internal variables
-set name     spark
+set name     %(namelower)s
 set version  %(version)s
 set sparkbin  $root/cscs-custom
 
 ## Required for SVN hook to generate SWDB entry
-set     fullname    Spark
-set     externalurl http://spark.apache.org
-set     nerscurl    http://spark.apache.org
+set     fullname    %(name)s
+set     externalurl http://%(namelower)s.apache.org
+set     nerscurl    http://%(namelower)s.apache.org
 set     maincategory    applications
 set     subcategory debugging
-set     description "Spark data analytic framework"
+set     description "%(name)s data analytic framework"
 
 prepend-path PATH $sparkbin:$root
 if {! [info exists env(SLURM_JOBID) ] } {
@@ -84,7 +66,21 @@ if { [ module-info mode load ] } {
 
     exec /bin/mkdir -p $env(SPARK_WORKER_DIR)
     exec  $sparkbin/getslaves.sh $env(SPARK_WORKER_DIR)/slaves
-    setenv SPARKURL spark://$master:7077
+    setenv SPARKURL %(namelower)s://$master:7077
     setenv SPARKMASTER $master
 }
 """
+postinstallcmds = [
+    "chmod +x %(installdir)s/cscs-custom/getmaster.sh",
+    "chmod +x %(installdir)s/cscs-custom/getslaves.sh",
+    "chmod +x %(installdir)s/cscs-custom/start-all.sh",
+    "chmod +x %(installdir)s/cscs-custom/start-ssh.sh",
+    "chmod +x %(installdir)s/cscs-custom/stop-all.sh",
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-shell', 'bin/pyspark'],
+    'dirs': ['python'],
+}
+
+moduleclass = 'devel'

@@ -9,17 +9,15 @@ description = """Libint library is used to evaluate the traditional (electron re
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'opt': True, 'pic': True}
 
+source_urls = ('http://sourceforge.net/projects/%(namelower)s/files/v1-releases/', 'download')
 sources = [SOURCELOWER_TAR_GZ]
-source_urls = ('http://sourceforge.net/projects/libint/files/v1-releases/', 'download')
 
 configopts = "--enable-deriv --enable-r12"
 
+
 sanity_check_paths = {
-    'files': ['include/lib%(x)s/lib%(x)s.h' % {'x': x} for x in ['deriv', 'int', 'r12']] +
-             ['include/libint/hrr_header.h', 'include/libint/vrr_header.h'] +
-             ['lib/lib%s.a' % x for x in ['deriv', 'int', 'r12']] +
-             ['lib/lib%s.so' % x for x in ['deriv', 'int', 'r12']],
-    'dirs':[],
+    'files': ['include/libderiv/libderiv.h', 'include/%(namelower)s/%(namelower)s.h', 'include/libr12/libr12.h', 'include/%(namelower)s/hrr_header.h', 'include/%(namelower)s/vrr_header.h', 'lib/libderiv.a', 'lib/%(namelower)s.a', 'lib/libr12.a', 'lib/libderiv.so', 'lib/%(namelower)s.so', 'lib/libr12.so'],
+    'dirs': [],
 }
 
 moduleclass = 'chem'

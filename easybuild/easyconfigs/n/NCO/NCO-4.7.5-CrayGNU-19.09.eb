@@ -2,19 +2,18 @@
 easyblock = 'ConfigureMake'
 
 name = 'NCO'
-version = "4.7.5"
+version = '4.7.5'
 
 homepage = 'http://nco.sourceforge.net/'
-description = """The NCO toolkit manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5."""
+description = "The NCO toolkit manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5."
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'opt': True, 'pic': True}
 
-sources = [SOURCELOWER_TAR_GZ]
-source_urls = ['http://nco.sourceforge.net/src/']
+source_urls = ['http://%(namelower)s.sourceforge.net/src/']
+sources = [SOURCELOWER_TAR_GZ]  # NCO: openmp support built by default, mpi is not yet supported
 
 dependencies = [
-    # NCO: openmp support built by default, mpi is not yet supported
     ('ANTLR', '2.7.7', '-python2'),
     ('cray-netcdf/4.6.3.1', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
@@ -22,8 +21,9 @@ dependencies = [
     ('UDUNITS', '2.2.26', '', True),
 ]
 
+
 sanity_check_paths = {
-    'files': ["bin/ncbo"],
+    'files': ['bin/ncbo'],
     'dirs': [],
 }
 

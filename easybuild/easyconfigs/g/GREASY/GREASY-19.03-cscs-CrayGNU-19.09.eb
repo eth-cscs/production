@@ -16,12 +16,12 @@ toolchainopts = {'opt': True, 'pic': True}
 # The original code was taken from https://github.com/jonarbo/GREASY
 # This version contains the current constraint options to use the GPU on Piz Daint
 #
-sources = ['https://github.com/eth-cscs/GREASY/archive/%(version)s.tar.gz']
+sources = ['https://github.com/eth-cscs/%(name)s/archive/%(version)s.tar.gz']
+
 
 #preconfigopts = './autogen.sh && '
-
 sanity_check_paths = {
-    'files': ["bin/greasy"],
+    'files': ['bin/%(namelower)s'],
     'dirs': [],
 }
 

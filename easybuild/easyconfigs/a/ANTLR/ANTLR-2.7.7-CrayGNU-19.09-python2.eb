@@ -2,14 +2,8 @@
 easyblock = 'ConfigureMake'
 
 name = 'ANTLR'
-version = "2.7.7"
-
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-
-versionsuffix = '-python%s' % py_maj_ver
+version = '2.7.7'
+versionsuffix = '-python2'
 
 homepage = 'http://www.antlr.org/'
 description = """
@@ -22,21 +16,18 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
 source_urls = ['http://www.antlr2.org/download/']
-sources = [SOURCELOWER_TAR_GZ]
-
+sources = [SOURCELOWER_TAR_GZ]  # ('java/jdk1.8.0_51', EXTERNAL_MODULE),
 patches = ['%(name)s-%(version)s_includes.patch']
 
-osdependency = ['java']
 dependencies = [
-    # On DOM this dependency is provided as osdependency
-    #('java/jdk1.8.0_51', EXTERNAL_MODULE),
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
 
-configopts = '--disable-examples --disable-csharp '
+configopts = "--disable-examples --disable-csharp "
+
 
 sanity_check_paths = {
-    'files': ['bin/antlr', 'bin/antlr-config'],
+    'files': ['bin/%(namelower)s', 'bin/%(namelower)s-config'],
     'dirs': ['include'],
 }
 

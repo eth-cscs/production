@@ -1,11 +1,9 @@
 # Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
 easyblock = 'MakeCp'
 
-nameletterlower = 'n'
 name = 'NAMD'
 version = '2.13'
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """NAMD is a parallel molecular dynamics code designed for
@@ -14,19 +12,8 @@ high-performance simulation of large biomolecular systems."""
 toolchain = {'name': 'CrayIntel', 'version': '19.09'}
 toolchainopts = {'dynamic': False}
 
-sources = [
-    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' +
-    'NAMD_%(version)s_Source.tar.gz'
-]
-patches = ['NAMD-2.13.patch']
-
-prebuildopts = ' module switch intel intel/18.0.2.199 && '
-prebuildopts += ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-cray-fftw'
-prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS'
-prebuildopts += ' --charm-arch gni-crayxc-hugepages-smp'
-prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS'
-prebuildopts += ' -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
-prebuildopts += ' cd CRAY-XC-intel.cuda && '
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
 
 builddependencies = [
     ('Charm++', '6.8.0'),
@@ -36,8 +23,10 @@ builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
+
+prebuildopts = ' module switch intel intel/18.0.2.199 &&  ./config CRAY-XC-intel.cuda Eos --with-cuda --with-cray-fftw --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-hugepages-smp --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" &&  cd CRAY-XC-intel.cuda && '
 
 files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]
 

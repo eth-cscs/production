@@ -1,5 +1,6 @@
 # jg (CSCS)
 easyblock = 'ConfigureMake'
+
 name = 'Extrae'
 version = '3.5.4'
 
@@ -17,45 +18,27 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'verbose': False}
 
-source_urls = ['https://ftp.tools.bsc.es/extrae']
-sources = ['extrae-%(version)s-src.tar.bz2']
+source_urls = ['https://ftp.tools.bsc.es/%(namelower)s']
+sources = ['%(namelower)s-%(version)s-src.tar.bz2']  # ('Dimemas', '5.3.6', '', True),
+
 # The checksum check was removed, since the value for the sources kept changing.
 # The checksum value of the sources is reported in the log file of the module.
-
 dependencies = [
     ('zlib', '1.2.11'),
     ('libunwind', '1.2.1'),
     ('libxml2', '2.9.7'),
-    # use papi from perftools-base instead
-    #('papi/5.7.0.2', EXTERNAL_MODULE),
     ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
-    # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
-    #('Paraver', '4.7.2', '', True),
-    #('Dimemas', '5.3.6', '', True),
     ('basicanalysis', '0.3.6', '', True),
     ('clusteringsuite', '2.6.8', '', True),
     ('folding', '1.3.2', '', True),
     ('spectral', '3.4.1', '', True),
 ]
 
-configopts  = ' '
-configopts += ' --with-libz=$EBROOTZLIB'
-configopts += ' --with-unwind=$EBROOTLIBUNWIND'
-configopts += ' --with-mpi=$CRAY_MPICH_DIR'
-configopts += ' --enable-openmp'
-configopts += ' --with-fft=$FFTW_DIR'
-configopts += ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
-configopts += ' --with-binary-type=64'
-configopts += ' --enable-parallel-merge'
-configopts += ' --enable-sampling'
-configopts += ' --with-clustering=$EBROOTCLUSTERINGSUITE'
-configopts += ' --with-spectral=$EBROOTSPECTRAL'
-configopts += ' --without-dyninst'
-# to build without cuda, use:
-configopts += ' --without-cuda'
+configopts = "  --with-libz=$EBROOTZLIB --with-unwind=$EBROOTLIBUNWIND --with-mpi=$CRAY_MPICH_DIR --enable-openmp --with-fft=$FFTW_DIR --with-papi=$PAT_BUILD_PAPI_BASEDIR --with-binary-type=64 --enable-parallel-merge --enable-sampling --with-clustering=$EBROOTCLUSTERINGSUITE --with-spectral=$EBROOTSPECTRAL --without-dyninst --without-cuda"
+
 
 sanity_check_paths = {
-    'files': ["include/extraef_user_events.h", ],
+    'files': ['include/extraef_user_events.h'],
     'dirs': [],
 }
 

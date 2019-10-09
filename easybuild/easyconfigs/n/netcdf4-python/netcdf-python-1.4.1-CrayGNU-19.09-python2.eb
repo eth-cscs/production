@@ -1,9 +1,10 @@
 #
 name = 'netcdf-python'
 version = '1.4.1'
+versionsuffix = '-python2'
 
 homepage = 'http://unidata.github.io/netcdf4-python/'
-description = """Python/numpy interface to netCDF."""
+description = "Python/numpy interface to netCDF."
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'verbose': False}
@@ -11,24 +12,17 @@ toolchainopts = {'verbose': False}
 source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
 sources = ['netCDF4-%(version)s.tar.gz']
 
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-pysuff = '-python%s' % py_maj_ver
-
-versionsuffix = pysuff
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('cray-netcdf/4.6.3.1', EXTERNAL_MODULE),
     ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
-    ('cftime', '1.0.0', pysuff),
+    ('cftime', '1.0.0', '-python2'),
 ]
 
+
 sanity_check_paths = {
-    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 'lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': pyshortver}],
-    'dirs': []
+    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 'lib/python2.7/site-packages/netCDF4-%(version)s-py2.7-linux-%(arch)s.egg'],
+    'dirs': [],
 }
 
 moduleclass = 'data'

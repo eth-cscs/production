@@ -12,23 +12,18 @@
 # http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
 #
 name = 'GROMACS'
-version = "2019.1"
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
+version = '2019.1'
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
  i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True, 'dynamic': False}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
 
-source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
+source_urls = ['ftp://ftp.%(namelower)s.org/pub/%(namelower)s/']
 sources = [SOURCELOWER_TAR_GZ]
-
-configopts = '-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DGMX_SIMD=AVX2_256 -DGMX_OPENMP_MAX_THREADS=64'
-
-skipsteps = ['test']
 
 # CMake dependency with dummy toolchain
 builddependencies = [
@@ -36,7 +31,11 @@ builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
+
+configopts = "-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DGMX_SIMD=AVX2_256 -DGMX_OPENMP_MAX_THREADS=64"
+
+skipsteps = ['test']
 
 moduleclass = 'bio'

@@ -1,12 +1,7 @@
 # contributed by Luca Marsella (CSCS)
 name = 'Boost'
 version = '1.70.0'
-
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-
-versionsuffix = '-python%s' % py_maj_ver
+versionsuffix = '-python2'
 
 homepage = 'http://www.boost.org/'
 description = """
@@ -14,24 +9,21 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
 
-sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = [SOURCEFORGE_SOURCE]
-
-configopts  = (
-    ' --with-python=$(EBROOTPYTHON)/bin/python '
-    ' --with-python-version={0}.{1}'
-    ' --with-python-root=$(EBROOTPYTHON)/lib/python{0}.{1}'
-    .format(py_maj_ver, py_min_ver)
-)
+sources = ['%(namelower)s_1_70_0.tar.gz']
 
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver),
-     EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
+
+configopts = " --with-python=$(EBROOTPYTHON)/bin/python  --with-python-version=2.7 --with-python-root=$(EBROOTPYTHON)/lib/python2.7"
+
+# also build boost_mpi
+boost_mpi = True
 
 # CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
 #
@@ -40,16 +32,11 @@ dependencies = [
 # modtclfooter = """
 #     setenv PE_PKGCONFIG_LIBS boost_python27
 # """
-
 #
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {
-    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
-              'lib/libboost_python%s%s.so' % (py_maj_ver, py_min_ver)],
-    'dirs': ['include/boost']
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so', 'lib/libboost_python27.so'],
+    'dirs': ['include/%(namelower)s'],
 }
-
-# also build boost_mpi
-boost_mpi = True
 
 moduleclass = 'devel'

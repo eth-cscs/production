@@ -12,26 +12,20 @@
 # http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
 #
 easyblock = 'CMakeMake'
+
 name = 'GROMACS'
-version = "2018.6"
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
+version = '2018.6'
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
  i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True, 'dynamic': False}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
 
-source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
+source_urls = ['ftp://ftp.%(namelower)s.org/pub/%(namelower)s/']
 sources = [SOURCELOWER_TAR_GZ]
-
-local_common_options = '-DCMAKE_BUILD_TYPE=Release -DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256'
-configopts = ['%s -DGMX_MPI=OFF ' % local_common_options,
-              '%s -DGMX_MPI=ON ' % local_common_options]
-
-skipsteps = ['test']
 
 # CMake dependency with dummy toolchain
 builddependencies = [
@@ -39,7 +33,14 @@ builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
 ]
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
+
+configopts = [
+    "-DCMAKE_BUILD_TYPE=Release -DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256 -DGMX_MPI=OFF ",
+    "-DCMAKE_BUILD_TYPE=Release -DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256 -DGMX_MPI=ON ",
+]
+
+skipsteps = ['test']
 
 moduleclass = 'bio'

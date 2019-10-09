@@ -3,15 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'CP2K'
 version = '6.1'
-release = '%s.0' % version
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
-
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
-pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://www.cp2k.org/'
 description = """
@@ -24,26 +16,19 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = { 'usempi': True, 'openmp': True }
+toolchainopts = {'usempi': True, 'openmp': True}
 
-patches = [(
-    '%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp',
-    '%(builddir)s/%(namelower)s-%(version)s/arch'
-)]
-
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/releases/download/v6.1.0']
 sources = [SOURCELOWER_TAR_BZ2]
-source_urls = [
-    'https://github.com/%(namelower)s/%(namelower)s/releases/download/v{0}'.format(release)
-]
+patches = [('%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp', '%(builddir)s/%(namelower)s-%(version)s/arch')]
 
 builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
     ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
 ]
-
 dependencies = [
     ('ELPA', '2016.11.001.pre'),
     ('Libint', '1.1.4'),
@@ -51,24 +36,22 @@ dependencies = [
 ]
 
 # use the non-threaded version of BLAS provided by cray-libsci and go to folder makefiles
-prebuildopts = " export PE_LIBSCI_OMP_REQUIRES_openmp="" && pushd makefiles && "
+prebuildopts = " export PE_LIBSCI_OMP_REQUIRES_openmp= && pushd makefiles && "
 # build type
-buildopts = 'ARCH=%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s VERSION=psmp'
+buildopts = "ARCH=%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s VERSION=psmp"
 
 files_to_copy = [
-    (['./arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp'],'arch'),
-    (['./exe/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s/*'],'bin'),
-    (['./data'],'.'),
-    (['./tests'],'.')
+    (['./arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp'], 'arch'),
+    (['./exe/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s/*'], 'bin'),
+    (['./data'], '.'),
+    (['./tests'], '.'),
 ]
-
-sanity_check_paths = {
-    'files': ['arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp',
-              'bin/cp2k.psmp'],
-    'dirs': ['data','tests'],
-}
-
 # set custom CP2K_DATA_DIR
 modextravars = {'CP2K_DATA_DIR': '%(installdir)s/data'}
+
+sanity_check_paths = {
+    'files': ['arch/%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.psmp', 'bin/%(namelower)s.psmp'],
+    'dirs': ['data', 'tests'],
+}
 
 moduleclass = 'chem'

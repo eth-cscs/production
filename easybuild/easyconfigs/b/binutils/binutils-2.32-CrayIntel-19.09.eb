@@ -3,7 +3,6 @@ name = 'binutils'
 version = '2.32'
 
 homepage = 'http://directory.fsf.org/project/binutils/'
-
 description = "binutils: GNU binary utilities"
 
 toolchain = {'name': 'CrayIntel', 'version': '19.09'}
@@ -17,6 +16,7 @@ builddependencies = [
     ('zlib', '1.2.11'),
 ]
 
-configopts = " --enable-gold=yes " 
+configopts = " --enable-gold=yes "
+
 
 moduleclass = 'tools'

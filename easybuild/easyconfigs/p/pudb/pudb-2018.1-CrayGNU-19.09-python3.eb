@@ -1,15 +1,9 @@
 # jg (cscs)
-easyblock = "PythonPackage"
+easyblock = 'PythonPackage'
 
 name = 'pudb'
 version = '2018.1'
-
-req_py_majver = '3'
-req_py_minver = '6'
-py_rev_ver = '5.7'
-pyver = '%s.%s' % (req_py_majver, req_py_minver)
-
-versionsuffix = '-python%s' % req_py_majver
+versionsuffix = '-python3'
 
 homepage = 'https://documen.tician.de/pudb/'
 description = """
@@ -18,20 +12,21 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'verbose' : False}
+toolchainopts = {'verbose': False}
+
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (pyver, py_rev_ver)),
+    ('PyExtensions', '3.6.5.7'),
 ]
+
+req_py_minver = '6'
+req_py_majver = '3'
 
 sanity_check_paths = {
     'files': ['bin/pudb3'],
-    'dirs': [(
-        'lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s.egg' %
-        {'pv': pyver}
-    )],
+    'dirs': ['lib/python3.6/site-packages/%(name)s-%(version)s-py3.6.egg'],
 }
 
 moduleclass = 'data'

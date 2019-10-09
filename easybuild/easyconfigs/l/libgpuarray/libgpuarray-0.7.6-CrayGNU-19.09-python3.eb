@@ -2,15 +2,7 @@ easyblock = 'CMakeMake'
 
 name = 'libgpuarray'
 version = '0.7.6'
-
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-versionsuffix = '-python%s' % py_maj_ver
+versionsuffix = '-python3'
 
 homepage = 'http://deeplearning.net/software/libgpuarray/'
 description = "Library to manipulate tensors on the GPU."
@@ -18,37 +10,25 @@ description = "Library to manipulate tensors on the GPU."
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
-source_urls = ['https://github.com/Theano/libgpuarray/releases/download/v%(version)s/']
+source_urls = ['https://github.com/Theano/%(name)s/releases/download/v%(version)s/']
 sources = [SOURCE_TAR_GZ]
 checksums = ['887b6433a30282cb002117da89b05812c770fd9469f93950ff3866ddd02bfc64']
 
-dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-]
-
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('PyExtensions', '%s' % pyver),
+    ('PyExtensions', '3.6.5.7'),
+]
+dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
 ]
 
+exts_list = [('libgpuarray', '0.7.6', {'modulename': 'pygpu', 'source_tmpl': '%(name)s-%(version)s.tar.gz', 'req_py_minver': '6', 'buildcmd': 'build_ext', 'source_urls': ['https://github.com/Theano/libgpuarray/releases/download/v%(version)s/'], 'checksums': ['887b6433a30282cb002117da89b05812c770fd9469f93950ff3866ddd02bfc64'], 'req_py_majver': '3'})]
+modextrapaths = {'PYTHONPATH': 'lib/python3.6/site-packages'}
 exts_defaultclass = 'PythonPackage'
-exts_list = [
-    (name, version, {
-        'source_urls': source_urls,
-        'source_tmpl': SOURCE_TAR_GZ,
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'checksums': ['887b6433a30282cb002117da89b05812c770fd9469f93950ff3866ddd02bfc64'],
-        'buildcmd': 'build_ext',
-        'modulename': 'pygpu',
-    }),
-]
-
-modextrapaths = {'PYTHONPATH': 'lib/python%s/site-packages' % pyshortver}
 
 sanity_check_paths = {
-    'files': ['lib/libgpuarray.%s' % SHLIB_EXT, 'lib/libgpuarray-static.a'],
-    'dirs': ['include/gpuarray', 'lib/python%s/site-packages' % pyshortver],
+    'files': ['lib/%(name)s.so', 'lib/%(name)s-static.a'],
+    'dirs': ['include/gpuarray', 'lib/python3.6/site-packages'],
 }
 
 moduleclass = 'lib'

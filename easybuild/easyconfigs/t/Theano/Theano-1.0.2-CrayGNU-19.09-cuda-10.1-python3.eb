@@ -1,20 +1,8 @@
-easyblock = "PythonPackage"
+easyblock = 'PythonPackage'
 
 name = 'Theano'
 version = '1.0.2'
-
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-
-req_py_majver = '3'
-
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-cudamajor = '10.1'
-
-versionsuffix = '-cuda-%s-python%s' % (cudamajor, py_maj_ver)
+versionsuffix = '-cuda-10.1-python3'
 
 homepage = 'http://deeplearning.net/software/theano'
 description = """Theano is a Python library that allows you to define,
@@ -23,24 +11,25 @@ arrays efficiently."""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
-source_urls = ['https://pypi.python.org/packages/source/T/%s' % name]
+source_urls = ['https://pypi.python.org/packages/source/T/%(name)s']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
-    ('libgpuarray', '0.7.6', '-python%s' % py_maj_ver),
-    ('cuDNN', '7.6.1', '-cuda-%s' % cudamajor, True),
-    ('pycuda', '2018.1.1', '-python%s-cuda-%s' % (py_maj_ver, cudamajor)),
-    ('parameterized', '0.6.1', '-python%s' % py_maj_ver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('libgpuarray', '0.7.6', '-python3'),
+    ('cuDNN', '7.6.1', '-cuda-10.1', True),
+    ('pycuda', '2018.1.1', '-python3-cuda-10.1'),
+    ('parameterized', '0.6.1', '-python3'),
 ]
 
+req_py_majver = '3'
 # sanity check/import will fail when building on nodes where MPI is disabled
 # the workaround is to change the module name
 options = {'modulename': 'os'}
 
 sanity_check_paths = {
-    'files': ['bin/theano-cache'],
-    'dirs': ['lib/python%s/site-packages' % pyshortver],
+    'files': ['bin/%(namelower)s-cache'],
+    'dirs': ['lib/python3.6/site-packages'],
 }
 
 moduleclass = 'math'

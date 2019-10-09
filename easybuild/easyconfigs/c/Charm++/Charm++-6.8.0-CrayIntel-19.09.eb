@@ -15,33 +15,22 @@ toolchain = {'name': 'CrayIntel', 'version': '19.09'}
 toolchainopts = {'dynamic': False}
 
 source_urls = ['http://charm.cs.illinois.edu/distrib/']
-sources = [
-    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' +
-    'charm-%(version)s.tar.bz2'
-]
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/charm-%(version)s.tar.bz2']  # pmi-lib required by CrayNid.c (function getXTNodeID)
 
-cmds_map = [(
-    'charm-%(version)s.tar.bz2', 
-    './build ChaNGa gni-crayxc hugepages smp --enable-lbuserdata --with-production -j12'
-)]
-
-builddependencies = [ 
+builddependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
-    # pmi-lib required by CrayNid.c (function getXTNodeID)
     ('pmi/5.0.14', EXTERNAL_MODULE),
     ('pmi-lib/5.0.14', EXTERNAL_MODULE),
 ]
 
-files_to_copy = ['gni-crayxc-hugepages-smp'] 
+cmds_map = [('charm-%(version)s.tar.bz2', './build ChaNGa gni-crayxc hugepages smp --enable-lbuserdata --with-production -j12')]
+modextrapaths = {'PATH': 'gni-crayxc-hugepages-smp/bin'}
+files_to_copy = ['gni-crayxc-hugepages-smp']
+modextravars = {'EBTYPECHARMPLUSPLUS': 'gni-crayxc-hugepages-smp'}
 
 sanity_check_paths = {
     'files': ['gni-crayxc-hugepages-smp/bin/charmc'],
-    'dirs': ['gni-crayxc-hugepages-smp/bin', 
-             'gni-crayxc-hugepages-smp/lib', 
-             'gni-crayxc-hugepages-smp/include'],
+    'dirs': ['gni-crayxc-hugepages-smp/bin', 'gni-crayxc-hugepages-smp/lib', 'gni-crayxc-hugepages-smp/include'],
 }
-
-modextrapaths = { 'PATH': 'gni-crayxc-hugepages-smp/bin' }
-modextravars = { 'EBTYPECHARMPLUSPLUS': 'gni-crayxc-hugepages-smp' }
 
 moduleclass = 'lib'

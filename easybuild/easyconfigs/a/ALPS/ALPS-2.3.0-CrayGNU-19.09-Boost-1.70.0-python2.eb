@@ -2,8 +2,8 @@
 easyblock = 'CMakeMake'
 
 name = 'ALPS'
-version = "2.3.0"
-versionsuffix = "-Boost-1.70.0-python2"
+version = '2.3.0'
+versionsuffix = '-Boost-1.70.0-python2'
 
 homepage = 'http://alps.comp-phys.org'
 description = """The ALPS project (Algorithms and Libraries for Physics
@@ -13,35 +13,37 @@ libraries for simplifying the development of such code."""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True}
-source_urls = ['http://alps.comp-phys.org/static/software/releases/']
-sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
-patches = ["average.patch", "riterator.patch",
-           "boost_min_workspace.patch", "cmake_boost.patch",
-           "boost_noncopyable.patch", "boost_exception.patch"]
 
-dependencies = [
-    ('Boost', '1.70.0', '-python2'),
-    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE)
+source_urls = ['http://%(namelower)s.comp-phys.org/static/software/releases/']
+sources = ['%(namelower)s-%(version)s-src-with-boost.tar.gz']
+patches = [
+    'average.patch',
+    'riterator.patch',
+    'boost_min_workspace.patch',
+    'cmake_boost.patch',
+    'boost_noncopyable.patch',
+    'boost_exception.patch',
 ]
 
 builddependencies = [
-    ('CMake', '3.14.5', '', True)
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('Boost', '1.70.0', '-python2'),
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
 ]
 
-# path to the project directory if not at top
-start_dir = 'alps'
+configopts = "-DALPS_BUILD_APPLICATIONS=OFF -DALPS_BUILD_EXAMPLES=OFF -DALPS_BUILD_MPS=OFF -DALPS_BUILD_TESTS=OFF -DALPS_ENABLE_MPI=OFF -DALPS_INCLUDE_TUTORIALS=OFF -DALPS_INSTALL_MPS_FRAMEWORK=OFF "
 
-configopts  = '-DALPS_BUILD_APPLICATIONS=OFF -DALPS_BUILD_EXAMPLES=OFF '
-configopts += '-DALPS_BUILD_MPS=OFF -DALPS_BUILD_TESTS=OFF -DALPS_ENABLE_MPI=OFF '
-configopts += '-DALPS_INCLUDE_TUTORIALS=OFF -DALPS_INSTALL_MPS_FRAMEWORK=OFF '
+modextrapaths = {'PYTHONPATH': ['lib']}
 separate_build_dir = True
+# path to the project directory if not at top
+start_dir = '%(namelower)s'
+modextravars = {'ALPS_ROOT': '%(installdir)s'}
 
 sanity_check_paths = {
-    'files': ['lib/libalps.%s' % SHLIB_EXT],
-    'dirs': ['include/alps', 'bin/', 'share/'],
+    'files': ['lib/libalps.so'],
+    'dirs': ['include/%(namelower)s', 'bin/', 'share/'],
 }
-
-modextravars = {'ALPS_ROOT': '%(installdir)s'}
-modextrapaths = {'PYTHONPATH': ['lib']}
 
 moduleclass = 'lib'

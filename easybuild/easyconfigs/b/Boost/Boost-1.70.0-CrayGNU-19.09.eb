@@ -1,4 +1,3 @@
-
 name = 'Boost'
 version = '1.70.0'
 
@@ -8,10 +7,10 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
-toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
 
-sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_70_0.tar.gz']
 
 dependencies = [
     ('bzip2', '1.0.6'),
@@ -19,10 +18,8 @@ dependencies = [
 ]
 
 configopts = '--without-libraries=python'
-boost_mpi = True
 
-modextravars = {
-    'BOOST_ROOT' : "%(installdir)s",
-}
+boost_mpi = True
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
 
 moduleclass = 'devel'

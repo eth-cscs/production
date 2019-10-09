@@ -3,7 +3,6 @@ easyblock = 'ConfigureMake'
 
 name = 'jemalloc'
 version = '5.1.0'
-checksums = ['ff28aef89df724bd7b6bd6fde8597695514e0e3404d1afad2f1eb8b55ef378d3']
 
 homepage = 'jemalloc.net'
 description = """jemalloc is a general purpose malloc(3) implementation that
@@ -21,15 +20,16 @@ real world applications.
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
-source_urls = ['https://github.com/jemalloc/jemalloc/archive']
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
 sources = ['%(version)s.tar.gz']
+checksums = ['ff28aef89df724bd7b6bd6fde8597695514e0e3404d1afad2f1eb8b55ef378d3']
 
-preconfigopts = './autogen.sh && '
+preconfigopts = "./autogen.sh && "
+
+# specifing the buildops because we would like to skip the docs build
+buildopts = "install_bin install_include install_lib"
 
 # Skipping install because we do not plan to install the docs
 skipsteps = ['install']
-
-# specifing the buildops because we would like to skip the docs build
-buildopts = 'install_bin install_include install_lib'
 
 moduleclass = 'tools'

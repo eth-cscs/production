@@ -3,6 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'malt'
 version = '1.0.0'
+
 homepage = 'https://memtt.github.io/malt/'
 description = """
     MALT is a memory profiling tool used to find where you allocate your memoryi
@@ -12,23 +13,22 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'verbose': False}
 
-source_urls = ['https://github.com/memtt/malt/archive']
+source_urls = ['https://github.com/memtt/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
-separate_build_dir = True
 
 dependencies = [
     ('libunwind', '1.2.1', '', True),
     ('libelf', '0.176', '', True),
-    ('nodejs', '10.15.1')
+    ('nodejs', '10.15.1'),
 ]
 
-configopts  = '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
-configopts += '-DLIBELF_PREFIX=$EBROOTLIBELF '
-configopts += '-DLIBUNWIND_PREFIX=$EBROOTLIBUNWIND '
+configopts = "-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DLIBELF_PREFIX=$EBROOTLIBELF -DLIBUNWIND_PREFIX=$EBROOTLIBUNWIND "
+
+separate_build_dir = True
 
 sanity_check_paths = {
-    'files': ['bin/malt'],
-    'dirs': []
+    'files': ['bin/%(name)s'],
+    'dirs': [],
 }
 
 moduleclass = 'tools'

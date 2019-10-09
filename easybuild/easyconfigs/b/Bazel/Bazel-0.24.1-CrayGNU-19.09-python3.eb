@@ -1,35 +1,24 @@
 # @author: sarafael, gppezzi, marcelsc
-
-easyblock = "Binary"
+easyblock = 'Binary'
 
 name = 'Bazel'
 version = '0.24.1'
-
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-versionsuffix = '-python%s' % (py_maj_ver)
+versionsuffix = '-python3'
 
 homepage = 'http://baze.io/'
-description = """Correct, reproducible, fast builds for everyone"""
+description = "Correct, reproducible, fast builds for everyone"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
-dependencies = [
-#    ('SWIG', '3.0.12', versionsuffix),
-]
+source_urls = ['https://github.com/bazelbuild/%(namelower)s/releases/download/%(version)s']
+sources = ['%(namelower)s-%(version)s-installer-linux-%(arch)s.sh']
 
 osdependencies = ['java']
 
-sources = ['bazel-%(version)s-installer-linux-x86_64.sh']
-source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
-
-install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s'
-
-files_to_copy = [(['output/bazel'], 'bin')]
+install_cmd = "chmod +x %(namelower)s-%(version)s-installer-linux-%(arch)s.sh && ./%(namelower)s-%(version)s-installer-linux-%(arch)s.sh --bin=%(installdir)s --base=%(installdir)s"
 
 sanity_check_paths = {
-    'files': ['bin/bazel'],
+    'files': ['bin/%(namelower)s'],
     'dirs': ['bin'],
 }
 

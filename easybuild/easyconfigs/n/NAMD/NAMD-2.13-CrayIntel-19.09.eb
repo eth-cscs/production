@@ -12,19 +12,8 @@ description = """
 
 toolchain = {'name': 'CrayIntel', 'version': '19.09'}
 
-sources = [
-    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + 
-    'NAMD_%(version)s_Source.tar.gz'
-]
-patches = ['NAMD-2.13.patch']
-
-prebuildopts = ' module switch intel intel/18.0.2.199 && '
-prebuildopts += ' ./config CRAY-XC-intel Eos --with-cray-fftw'
-prebuildopts += ' --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS'
-prebuildopts += ' --charm-arch gni-crayxc-hugepages-smp'
-prebuildopts += ' --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS'
-prebuildopts += ' -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
-prebuildopts += ' cd CRAY-XC-intel && '
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
 
 builddependencies = [
     ('Charm++', '6.8.0'),
@@ -32,6 +21,8 @@ builddependencies = [
     ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
 ]
+
+prebuildopts = ' module switch intel intel/18.0.2.199 &&  ./config CRAY-XC-intel Eos --with-cray-fftw --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-hugepages-smp --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" &&  cd CRAY-XC-intel && '
 
 files_to_copy = [(['./CRAY-XC-intel/namd2'], 'bin')]
 

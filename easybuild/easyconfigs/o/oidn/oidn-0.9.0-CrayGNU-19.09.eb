@@ -1,4 +1,4 @@
-easyblock = "Tarball"
+easyblock = 'Tarball'
 
 name = 'oidn'
 version = '0.9.0'
@@ -9,12 +9,13 @@ high-quality denoising filters for images rendered with ray tracing"""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
-sources = ['oidn-%(version)s.x86_64.linux.tar.gz']
-source_urls = ['https://github.com/OpenImageDenoise/oidn/releases/download/v%(version)s/']
+source_urls = ['https://github.com/OpenImageDenoise/%(name)s/releases/download/v%(version)s/']
+sources = ['%(name)s-%(version)s.%(arch)s.linux.tar.gz']
 
-sanity_check_paths={
+
+sanity_check_paths = {
     'files': [],
-    'dirs': ['include', 'lib']
+    'dirs': ['include', 'lib'],
 }
 
 moduleclass = 'devel'
