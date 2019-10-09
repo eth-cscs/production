@@ -44,17 +44,15 @@ stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
         def architectures = mach.architectures
+        def cpus = machine.cpus
         def machineName = machine.name
         for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def cpusPerTask = arch == "" ? cpus : cpus[arch]
             builds[machineLabel] = {
                 node(machineName) {
                     def scmVars = checkout scm
-                    def moduleDefinition = ''
-                    if (machineName in ['fulen'])
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
                     def projectName = env.JOB_BASE_NAME.trim()
                     def gitCommit = scmVars.GIT_COMMIT.trim()[0..6]
                     def buildID = env.BUILD_ID
@@ -65,7 +63,7 @@ stage('Build Stage') {
                                                 echo \$SCRATCH""").trim()
                     def buildPath = "/tmp/jenscscs/${gitCommit}${arch}/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
-                    def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
+                    def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch --cpus-per-task=$cpusPerTask --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"
@@ -77,7 +75,6 @@ stage('Build Stage') {
                              "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
                              "buildlist=$buildList"]) {
                                  sh("""$loginBash
-                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*

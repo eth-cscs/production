@@ -36,18 +36,15 @@ stage('Build Stage') {
     for (mach in machineConfigurations) {
         def machine = mach.machine
         def architectures = mach.architectures
+        def cpus = machine.cpus
         def machineName = machine.name
         for (architecture in architectures) {
             def arch = architecture
             def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def cpusPerTask = arch == "" ? cpus : cpus[arch]
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    def moduleDefinition = ''
-                    if (machineName in ['fulen'])
-                        moduleDefinition = '''module() { eval `/usr/bin/modulecmd bash $*`; }
-                                              export -f module'''
-
                     def project_name = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
@@ -70,12 +67,11 @@ stage('Build Stage') {
                     def listFlag = "--list=${listFile}_stripped"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '')
-                        command = "srun -u --constraint=$arch --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
+                        command = "srun -u --constraint=$arch --cpus-per-task=$cpusPerTask --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_BUILDPATH=$buildPath"]) {
                                  sh("""$loginBash
-                                       $moduleDefinition
                                        status=0
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
