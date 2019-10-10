@@ -67,7 +67,7 @@ stage('Build Stage') {
                     def listFlag = "--list=${listFile}_stripped"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '')
-                        command = "srun -u --constraint=$arch --cpus-per-task=$cpusPerTask --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
+                        command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
                     withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_BUILDPATH=$buildPath"]) {
