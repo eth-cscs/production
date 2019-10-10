@@ -2,7 +2,7 @@ easyblock = 'MakeCp'
 
 name = 'ploticus'
 version = '2.42'
-versiontrim = '242'
+local_versiontrim = '242'
 versionsuffix = '-ipm'
 # to avoid using /apps/common/system/modulefiles/ploticus/
 
@@ -10,9 +10,9 @@ homepage = 'http://ploticus.sourceforge.net/doc/welcome.html'
 description = """Ploticus is a free GPL software utility that can produce
 various types of plots and graphs"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = [('https://sourceforge.net/projects/ploticus/files/ploticus/%(version)s')]
-sources = ['ploticus%s_src.tar.gz' % versiontrim]
+sources = ['ploticus%s_src.tar.gz' % local_versiontrim]
 
 prebuildopts = ' cd src ; '
 installopts = ' INSTALLBIN=%(installdir)s install '

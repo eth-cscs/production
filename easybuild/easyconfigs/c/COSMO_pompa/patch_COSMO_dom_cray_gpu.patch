@@ -4,7 +4,7 @@ diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 @@ -1,17 +1,18 @@
  # compiler
 -F90      = ftn -D__CRAY_FORTRAN__
-+F90      = ftn -D__CRAY_FORTRAN__ -h system_alloc 
++F90      = ftn -D__CRAY_FORTRAN__ -h system_alloc
  COMPILER = cray
  
  # linker
