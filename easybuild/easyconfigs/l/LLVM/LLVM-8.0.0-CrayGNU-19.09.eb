@@ -1,4 +1,4 @@
-#  jg (cscs)
+#  jf (cscs)
 easyblock = 'CMakeMake'
 
 name = 'LLVM'
@@ -20,7 +20,7 @@ toolchainopts = {'dynamic': True}
 source_urls = ["http://llvm.org/releases/%(version)s"]
 sources = ["llvm-%(version)s.src.tar.xz"]
 
-builddependencies = [('CMake', '3.14.1', '', True)]
+builddependencies = [('CMake', '3.14.5', '', True)]
 separate_build_dir = True
 
 prebuildopts = 'module load gcc/7.3.0 && module list &&'
