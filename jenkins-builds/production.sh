@@ -10,19 +10,20 @@ scriptdir=$(dirname $0)
 
 usage() {
     echo -e "\n Usage: $0 [OPTIONS] -l <list> -p <prefix>
-    -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
-    -h,--help     Help message
-    -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
-    -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
-    -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
-    -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
-    --hide-deps   Hide the hidden dependencies
+    -a,--arch         Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
+    -f,--force        Force build of item(s) in list     (optional: double quotes for multiple items)
+    -h,--help         Help message
+    -l,--list         Absolute path to production file   (mandatory: EasyBuild production list)
+    -p,--prefix       Absolute path to EasyBuild prefix  (mandatory: installation folder)
+    -u,--unuse        Module unuse colon separated PATH  (optional: default is null)
+    -x,--xalt         [yes|no] update XALT database      (optional: default is yes)
+    --hide-deps       Hide the hidden dependencies
+    --exit-on-error   Hide the hidden dependencies
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:,hide-deps"
+longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:,hide-deps,exit-on-error"
 shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
@@ -57,6 +58,9 @@ while [ $# -ne 0 ]; do
         -x | --xalt)
             shift
             update_xalt_table={$1,,}
+            ;;
+        --exit-on-error)
+            exit_on_error=true
             ;;
         --hide-deps)
             hidden_deps=true
@@ -236,6 +240,9 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r ${eb_args}
         status=$[status+$?]
+    fi
+    if [ -n "${exit_on_error}" ] && [ "X$status" != "X0" ]; then
+        exit 1
     fi
 done
 
