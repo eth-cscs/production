@@ -165,7 +165,7 @@ if [ -n "${eb_lists}" ] && [ -n "${hidden_deps}" ]; then
   __eb_list=`eb --show-full-config | grep -i hide | awk -F'=' '{print $2}' | head -1`
   IFS=', ' read -r -a hidden_deps <<< ${__eb_list}
 
-# match force_list items with production lists: only matching items will be built using the EasyBuild flag '-f'
+# match  items with hide deps list: matching items will be built using the EasyBuild flag '--hidden'
  echo -e "Items matching hidden list and easybuild recipes to install (\"${eb_lists}\")"
  for item in ${hidden_deps[@]}; do
      hidden_match=$(grep $item ${eb_lists[@]})
