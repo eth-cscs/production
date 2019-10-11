@@ -16,7 +16,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('numpy', '1.17.2'),
     ('h5py', '2.8.0', '-python%s-serial' % py_maj_ver),
     ('PyExtensions', pyver),
 ]

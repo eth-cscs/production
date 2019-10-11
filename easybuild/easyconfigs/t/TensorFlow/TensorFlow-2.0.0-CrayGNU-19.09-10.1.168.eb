@@ -15,7 +15,6 @@ cudaversion = '10.1.168'
 
 versionsuffix = '-cuda-%s' % (cudaversion)
 ver_suffix_py = '-python%s' % (py_maj_ver)
-# versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
 
 installdir = '%(installdir)s'
 builddir = '%(builddir)s'
@@ -27,13 +26,12 @@ toolchain = {'name': 'CrayGNU', 'version': '19.09'}
 
 builddependencies = [
     ('Bazel', '0.24.1', ver_suffix_py),
-#    ('wheel', '0.31.1', ver_suffix_py),
 ]
 
 dependencies = [
-    ('cuDNN', '7.6.1', '-cuda-%s' % cudaversion, True),
+    ('cuDNN', '7.6.4', '-cuda-%s' % cudaversion, True),
     ('SWIG', '3.0.12', ver_suffix_py),
-    ('NCCL', '2.4.7', '-cuda-%s' % cudaversion, True),
+    ('NCCL', '2.4.8', '-cuda-%s' % cudaversion, True),
     ('protobuf', '3.6.0', ver_suffix_py),
     ('dask', '1.0.0', '-python%s' % py_maj_ver),
     ('PyExtensionsDS', pyver),
