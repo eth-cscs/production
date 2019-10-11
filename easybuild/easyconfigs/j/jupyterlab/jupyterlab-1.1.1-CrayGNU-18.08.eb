@@ -22,7 +22,7 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', '%s' % pyver),
     ('IPython', '7.7.0', '-python%s' % py_maj_ver),
-#twr    ('julia','1.0.4', '', True),
+    ('Julia','1.2.0','-cuda-9.1'),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % py_maj_ver),
     ('graphviz', '2.40.1', '', True),
@@ -500,7 +500,7 @@ exts_list = [
 full_sanity_check = True
 
 # For Julia packages needed for Jupyter
-#twr julia_depot_path = "%(installdir)s/share/julia/site/"
+julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver],
@@ -513,15 +513,23 @@ modextravars = {
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
+modtclfooter = """
+prepend-path JULIA_DEPOT_PATH "%s"
+prepend-path EBJULIA_ADMIN_DEPOT_PATH "%s"
+""" % (julia_depot_path, julia_depot_path)
+
 # install extensions
 # jupyterlab/hub-extension no longer needed as the hub menu is built into jupyterlab core from JLab 1.x, twr
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
 #                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
-                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
-                   "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
-                   "export JUPYTER=%(installdir)s/bin/jupyter;"
+                  "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
+                   "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site:${JULIA_DEPOT_PATH};"
+                   "echo JULIA_DEPOT_PATH is $JULIA_DEPOT_PATH;"
+                   "export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/julia/site:${EBJULIA_ADMIN_DEPOT_PATH};"
+                   "echo EBJULIA_ADMIN_DEPOT_PATH is $EBJULIA_ADMIN_DEPOT_PATH;"
+                   "export JUPYTER=%(installdir)s/bin/jupyter;" #needed for IJulia
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
@@ -541,9 +549,9 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-#twr                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+                   'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
                    # to trigger the precompilation
-#twr                   "julia -e \'using IJulia\';"
+                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
                    ]
