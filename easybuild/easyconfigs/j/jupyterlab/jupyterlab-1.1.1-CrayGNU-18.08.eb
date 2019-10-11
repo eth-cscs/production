@@ -548,7 +548,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 # now at launch    "%(installdir)s/bin/jupyter serverextension enable --py dask_labextension;"
                    "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
-                   "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
+#twr                   "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
                    'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
