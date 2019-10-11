@@ -64,9 +64,9 @@ stage('Build Stage') {
                     def buildPath = "/tmp/jenscscs/${gitCommit}${arch}/"
                     def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
                     def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
-                    def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix"
+                    def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --hide-deps"
                     if (arch)
-                        commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no"
+                        commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no --hide-deps"
                     def buildList = sh(returnStdout: true,
                                     script: "echo \$(git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
                     withEnv(["EASYBUILD_BUILDPATH=$buildPath",
