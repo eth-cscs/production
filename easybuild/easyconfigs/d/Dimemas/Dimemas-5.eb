@@ -7,7 +7,8 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """High-abstracted network simulator for message-passing
 programs."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
+
 dependencies = [('%(name)s', '%(version)s.4.1')]
 
 moduleclass = 'perf'

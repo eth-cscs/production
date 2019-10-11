@@ -10,7 +10,7 @@ more robust applications.  Especially of use to those developing multi-threaded
 applications in C++ with templates. Includes TCMalloc, heap-checker,
 heap-profiler and cpu-profiler."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://github.com/gperftools/gperftools/releases/download/%(namelower)s-%(version)s']
 sources = [SOURCE_TAR_GZ]
 dependencies = [('libunwind', '1.2.1'), ('pprof', '9daae4f')]

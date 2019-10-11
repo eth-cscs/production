@@ -19,7 +19,7 @@ developing high performance multi threaded programs.
 ## srun -n1 -Cperf,gpu cat /proc/sys/kernel/perf_event_paranoid # must return 0
 """
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 toolchainopts = {'pic': True}
 source_urls = ['https://github.com/RRZE-HPC/likwid/archive/']
 sources = ['%(version)s.tar.gz']

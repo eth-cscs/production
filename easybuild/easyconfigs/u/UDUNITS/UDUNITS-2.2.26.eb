@@ -8,7 +8,7 @@ homepage = 'http://www.unidata.ucar.edu/software/udunits/'
 description = """UDUNITS supports conversion of unit specifications between formatted and binary forms,
  arithmetic manipulation of units, and conversion of values between compatible scales of measurement."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 toolchainopts = {'opt': True, 'pic': True}
 
 source_urls = ['ftp://ftp.unidata.ucar.edu/pub/udunits']
