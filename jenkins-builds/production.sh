@@ -17,8 +17,8 @@ usage() {
     -p,--prefix       Absolute path to EasyBuild prefix  (mandatory: installation folder)
     -u,--unuse        Module unuse colon separated PATH  (optional: default is null)
     -x,--xalt         [yes|no] update XALT database      (optional: default is yes)
-    --hide-deps       Hide the hidden dependencies
-    --exit-on-error   Hide the hidden dependencies
+    --hide-deps       Force hide modules listed in 'hide-deps' (TestingEB only)
+    --exit-on-error   Exit when an error occurs (TestingEB only)
     "
     exit 1;
 }
