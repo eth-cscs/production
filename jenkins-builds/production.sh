@@ -159,9 +159,6 @@ fi
 # --- BUILD ---
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
-if [[ "$system" =~ "dom" ]]; then
- export EASYBUILD_EXTERNAL_MODULES_METADATA=${EB_CUSTOM_REPOSITORY}/cray_external_modules_metadata.cfg-19.10
-fi
 
 # add hidden flag
 if [ -n "${eb_lists}" ] && [ -n "${hidden_deps}" ]; then

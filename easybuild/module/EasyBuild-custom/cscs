@@ -46,7 +46,10 @@ if { ! [ info exists ::env(EB_CUSTOM_REPOSITORY) ] } {
 setenv XDG_CONFIG_DIRS                          $::env(EB_CUSTOM_REPOSITORY)
 setenv EASYBUILD_ROBOT_PATHS                    $::env(EB_CUSTOM_REPOSITORY)/easyconfigs/:
 setenv EASYBUILD_INCLUDE_EASYBLOCKS             $::env(EB_CUSTOM_REPOSITORY)/easyblocks/*.py
-setenv EASYBUILD_EXTERNAL_MODULES_METADATA      $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
+if [[ "$system" =~ "dom" ]]; then
+ setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-19.10.cfg
+else
+ setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
 #
 # Checking if we have the command modulecmd
 # If so, then module is a c version
