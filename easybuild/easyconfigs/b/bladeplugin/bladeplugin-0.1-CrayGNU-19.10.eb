@@ -1,0 +1,57 @@
+# jg/mkr (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'bladeplugin'
+version = '0.1'
+# versionsuffix = '-cube-4.4-otf-2.2'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Simple OTF2 trace explorer"""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False}
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/4.4/dist']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['305804fad578b1b6e4e188bd71b9b922']
+patches = ['%(name)s-%(version)s.patch']
+
+dependencies = [
+    ('Scalasca', '2.5'),
+    # module load OTF2/.2.2
+    # module load Score-P/6.0-CrayGNU-19.06
+    #    module load CrayGNU/.19.06
+    #    module load libunwind/.1.3.1
+    #    module load CubeGUI/4.4.4
+    #    module load CubeLib/4.4.4-CrayGNU-19.06
+    #    module load CubeW/4.4.3-CrayGNU-19.06
+    #    module load OPARI2/.2.0.5
+    #    module load PDT/.3.25
+    #    module load SIONlib/.1.7.4l-CrayGNU-19.06
+    #    module load vampir/9.7.0
+    # ('libunwind', '1.3.1', '', True),
+    # ('CubeGUI',   '4.4.4', '', True),
+    # ('CubeLib',   '4.4.4'),
+    # ('CubeW',     '4.4.3'),
+    # ('OPARI2',    '2.0.5', '', True),
+    # ('SIONlib',   '1.7.4l'),
+    # ('PDT',       '3.25', '', True),
+    # ('vampir',    '9.7.0', '', True),
+    # ('OTF2',      '2.2', '', True),
+    # 
+    # papi already loaded by perftools-base:
+    # ('papi', EXTERNAL_MODULE),
+]
+
+configopts = ' CC=gcc'
+configopts += ' --with-otf2-library=$EBROOTOTF2/bin'
+configopts += ' --with-cube-gui=$EBROOTCUBEGUI/bin'
+configopts += ' --with-cube-library=$EBROOTCUBELIB/bin'
+
+sanity_check_paths = {
+    'files': ['lib/cube-plugins/libblade-plugin.so'],
+    'dirs': ['include/bladeplugin'],
+}
+
+# Ensure that bladeplugin is found by CubeGUI:
+modextrapaths = {'CUBE_PLUGIN_DIR': 'lib/cube-plugins'}
+
+moduleclass = 'perf'

@@ -18,8 +18,7 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 checksums = []
 builddependencies = [
-    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), 
-     EXTERNAL_MODULE),
+    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), EXTERNAL_MODULE),
 ]
 
 # needed for --with-verbs
@@ -28,8 +27,6 @@ osdependencies = [(
     'libibverbs-devel', 
     'rdma-core-devel', 
 )]
-
-patches = ['OpenMPI_3.1-fix_ib_query.patch']
 
 configopts = (
     "CC=pgcc "

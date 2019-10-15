@@ -128,10 +128,10 @@ exts_list = [
        'source_urls': ['https://pypi.python.org/packages/26/8d/110cdf96a6'    \
                        'ed0d1bc38e9dc15fa7263a5b601f27951bb09cc080f11024f1/']
    }),
-   ('seaborn', '0.8', {
-       'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
-                       '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
-   }),
+   #('seaborn', '0.8', {
+   #    'source_urls': ['https://pypi.python.org/packages/d6/13/dd3da2cd6e'    \
+   #                    '03e522bbd389735d3adcb47d7a4470a968ebc3348fbac8eddd/']
+   #}),
    ('pykdtree', '1.2.2', {
        'source_urls': ['https://pypi.python.org/packages/65/4d/29a5f9c3ec'    \
                        'f5ce9ccfda5975d6503e9111a73364a3cef61720ad60740449/']
@@ -154,12 +154,12 @@ exts_list = [
                        'ba97b7b4bbd1fcdc59b475a09e25efad13fec4565ab9d563/'],
        'modulename' : 'sklearn',
    }),
-   ('scikit-image', '0.13.1', {
-       'source_urls': ['https://pypi.python.org/packages/83/2a/c5a39c12c196c19'\
-                       'a443fa4d17c0768a24231e46ae952930a9d66bad45557/'],
-       'sources'    : [SOURCE_TAR_GZ],
-       'modulename' : 'skimage',
-   }),
+   #('scikit-image', '0.13.1', {
+   #    'source_urls': ['https://pypi.python.org/packages/83/2a/c5a39c12c196c19'\
+   #                    'a443fa4d17c0768a24231e46ae952930a9d66bad45557/'],
+   #    'sources'    : [SOURCE_TAR_GZ],
+   #    'modulename' : 'skimage',
+   #}),
    ('blaze', '0.10.1', {
        'source_urls': ['https://pypi.python.org/packages/a1/99/ec4fc29409'    \
                        'd68d83a2138b190722f74d15ca1ca303b5c055171b22baa4c0/']

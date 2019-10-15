@@ -1,0 +1,36 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenBLAS'
+version = '0.3.6'
+
+homepage = 'http://xianyi.github.com/OpenBLAS/'
+description = """
+    OpenBLAS is an optimized BLAS library based on GotoBLAS2 1.13 BSD version.
+    Please read the documentation on the OpenBLAS wiki pages: https://github.com/xianyi/OpenBLAS/wiki.
+"""
+
+toolchain = {'name': 'GCC', 'version': '8.3.0-2.32'}
+toolchainopts = {'vectorize': False}
+
+source_urls = ['http://www.netlib.org/lapack/timing/', 'https://github.com/xianyi/%(name)s/archive/']
+sources = ['v%(version)s.tar.gz']
+patches = [('large.tgz', '.'), ('timing.tgz', '.')]
+checksums = [
+    '8a110a25b819a4b94e8a9580702b6495',  # v0.3.6.tar.gz (%(name)s)
+    '5d138a84f302fd6804e4fab4b338cb18',  # large.tgz
+    '2025bee0fecccc792938978d857472f4',  # timing.tgz
+]
+
+buildopts = 'BINARY=64 USE_THREAD=1 USE_OPENMP=1 CC="$CC" FC="$F77"'
+
+installopts = "USE_THREAD=1 USE_OPENMP=1 PREFIX=%(installdir)s"
+
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': ['include/cblas.h', 'include/f77blas.h', 'include/lapacke_config.h', 'include/lapacke.h', 'include/lapacke_mangling.h', 'include/lapacke_utils.h', 'include/openblas_config.h', 'lib/libopenblas.a', 'lib/libopenblas.so'],
+    'dirs': [],
+}  # order matters, trying to download the large.tgz/timing.tgz LAPACK tarballs from GitHub causes trouble
+
+moduleclass = 'numlib'

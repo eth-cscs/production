@@ -8,7 +8,7 @@ description = """
     libelf (included in elfutils) is a free ELF object file access library
 """
 
-toolchain = {'name':'dummy', 'version':''}
+toolchain = SYSTEM
 
 source_urls = ['https://sourceware.org/elfutils/ftp/0.176/']
 sources = ['elfutils-%(version)s.tar.bz2']

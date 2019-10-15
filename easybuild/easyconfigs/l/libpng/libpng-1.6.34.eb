@@ -7,7 +7,7 @@ version = '1.6.34'
 homepage = 'http://www.libpng.org/pub/png/libpng.html'
 description = "libpng is the official PNG reference library"
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = SYSTEM
 toolchainopts = {'pic': True}
 
 source_urls = [SOURCEFORGE_SOURCE]
