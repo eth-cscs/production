@@ -9,7 +9,7 @@ based on traces that can be used to analyse any information that is expressed
 on its input trace format. Traces for parallel MPI, OpenMP and other programs
 can be genereated with Extrae."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://ftp.tools.bsc.es/wxparaver/']
 sources = ['wxparaver-%(version)s-Linux_x86_64.tar.bz2']
 postinstallcmds = [

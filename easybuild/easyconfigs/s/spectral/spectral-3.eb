@@ -7,7 +7,7 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """Signal processing techniques to select representative
 regions from Paraver traces."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 dependencies = [('%(name)s', '%(version)s.4.1')]
 
 moduleclass = 'perf'

@@ -7,7 +7,7 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """Automatically expose the main performance trends in
 applications computation structure."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['http://ftp.tools.bsc.es/clusteringsuite/']
 sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 keepsymlinks = True

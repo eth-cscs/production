@@ -32,10 +32,11 @@
  magma-2.4.0-CrayIntel-19.09-cuda-10.1.eb           --set-default-module
  NAMD-2.13-CrayIntel-19.09-cuda-10.1.eb             --set-default-module
  NCL-6.4.0.eb                                       --set-default-module
- NCO-4.7.5-CrayGNU-19.09.eb                         --set-default-module
+ NCO-4.8.1-CrayGNU-19.09.eb                         --set-default-module
  ncview-2.1.7-CrayGNU-19.09.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-19.09-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.09-python3.eb       --set-default-module
+ ParaView-5.7.0-EGL-CrayGNU-19.09.eb                --set-default-module
  PLUMED-2.5.1-CrayGNU-19.09.eb                      --set-default-module
  PLUMED-2.5.1-CrayIntel-19.09.eb                    --set-default-module
  pycuda-2018.1.1-CrayGNU-19.09-python2-cuda-10.1.eb
@@ -71,6 +72,7 @@
  mpiP-57fc864-CrayPGI-19.09.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-19.09.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-systems-2019.5.1.eb                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ nvidia-nsight-compute-2019.4.0.12.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-19.09-cuda-10.1.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.09.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayCCE-19.09.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools

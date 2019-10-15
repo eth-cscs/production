@@ -10,18 +10,20 @@ scriptdir=$(dirname $0)
 
 usage() {
     echo -e "\n Usage: $0 [OPTIONS] -l <list> -p <prefix>
-    -a,--arch     Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
-    -f,--force    Force build of item(s) in list     (optional: double quotes for multiple items)
-    -h,--help     Help message
-    -l,--list     Absolute path to production file   (mandatory: EasyBuild production list)
-    -p,--prefix   Absolute path to EasyBuild prefix  (mandatory: installation folder)
-    -u,--unuse    Module unuse colon separated PATH  (optional: default is null)
-    -x,--xalt     [yes|no] update XALT database      (optional: default is yes)
+    -a,--arch         Architecture (gpu or mc)           (mandatory: Dom and Piz Daint only)
+    -f,--force        Force build of item(s) in list     (optional: double quotes for multiple items)
+    -h,--help         Help message
+    -l,--list         Absolute path to production file   (mandatory: EasyBuild production list)
+    -p,--prefix       Absolute path to EasyBuild prefix  (mandatory: installation folder)
+    -u,--unuse        Module unuse colon separated PATH  (optional: default is null)
+    -x,--xalt         [yes|no] update XALT database      (optional: default is yes)
+    --hide-deps       Force hide modules listed in 'hide-deps' (TestingEB only)
+    --exit-on-error   Exit when an error occurs (TestingEB only)
     "
     exit 1;
 }
 
-longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:"
+longopts="arch:,force:,help,list:,prefix:,unuse:,xalt:,hide-deps,exit-on-error"
 shortopts="a:,f:,h,l:,p:,u:,x:"
 eval set -- $(getopt -o ${shortopts} -l ${longopts} -n ${scriptname} -- "$@" 2> /dev/null)
 
@@ -57,6 +59,12 @@ while [ $# -ne 0 ]; do
             shift
             update_xalt_table={$1,,}
             ;;
+        --exit-on-error)
+            exit_on_error=true
+            ;;
+        --hide-deps)
+            hidden_deps=true
+            ;;
         --)
             ;;
         *)
@@ -66,8 +74,9 @@ while [ $# -ne 0 ]; do
     shift
 done
 
+
 # checks force_list
-if [ -n "${force_list}" ]; then
+if [ -n "${force_list}" ] && [ -n "${eb_lists}" ]; then
 # match force_list items with production lists: only matching items will be built using the EasyBuild flag '-f'
  echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do
@@ -84,13 +93,14 @@ if [ -n "${force_list}" ]; then
  done
 fi
 
+
 # optional EasyBuild arguments
 eb_args=""
 
 # system name (excluding node number)
 if [[ "$HOSTNAME" =~ "esch" ]]; then
  system=${HOSTNAME%%[cl]n-[0-9]*}
-elif [[ "$HOSTNAME" =~ "arolla" || "$HOSTNAME" =~ "tsa" ]]; then 
+elif [[ "$HOSTNAME" =~ "arolla" || "$HOSTNAME" =~ "tsa" ]]; then
  system=${HOSTNAME%%-[cl]n[0-9]*}
 else
  system=${HOSTNAME%%[0-9]*}
@@ -149,6 +159,27 @@ fi
 # --- BUILD ---
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
+
+# add hidden flag
+if [ -n "${eb_lists}" ] && [ -n "${hidden_deps}" ]; then
+  __eb_list=`eb --show-full-config | grep -i hide | awk -F'=' '{print $2}' | head -1`
+  IFS=', ' read -r -a hidden_deps <<< ${__eb_list}
+
+# match  items with hide deps list: matching items will be built using the EasyBuild flag '--hidden'
+ echo -e "Items matching hidden list and easybuild recipes to install (\"${eb_lists}\")"
+ for item in ${hidden_deps[@]}; do
+     hidden_match=$(grep $item ${eb_lists[@]})
+     if [ -n "${hidden_match}" ]; then
+# 'grep -n' returns the 1-based line number of the matching pattern within the input file
+         index_list=$(cat ${eb_lists[@]} | grep -n $item | awk -F ':' '{print $(NF-1)-1}')
+# append the --hidden flag to matching items within the selected build list
+         for index in ${index_list}; do
+             eb_files[$index]+=" --hidden"
+             echo "${eb_files[$index]}"
+         done
+     fi
+ done
+fi
 
 # print EasyBuild configuration, module list, production file(s), list of builds
 echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
@@ -210,6 +241,9 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         eb ${eb_files[$i]} -r ${eb_args}
         status=$[status+$?]
     fi
+    if [ -n "${exit_on_error}" ] && [ "X$status" != "X0" ]; then
+        exit 1
+    fi
 done
 
 # --- SYSTEM SPECIFIC POST-PROCESSING ---
@@ -219,10 +253,11 @@ if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
     module load PrgEnv-cray
 # removing Easybuild module before the reverseMapD operation
     module unload Easybuild
-    echo "running reverseMapD"
     userid=$(id -u)
+    echo "check if will run reverseMapD"
 # commands run by jenscscs user only
     if [ $userid -eq 23395 ]; then
+        echo "running reverseMapD"
         module load Lmod/.7.8.2
         export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
         export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS

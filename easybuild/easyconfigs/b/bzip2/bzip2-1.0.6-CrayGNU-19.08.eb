@@ -10,7 +10,7 @@ description = """bzip2 is a freely available, patent free, high-quality data com
 toolchain = {'name': 'CrayGNU', 'version': '19.08'}
 toolchainopts = {'pic': True}
 
-source_urls = ['http://www.bzip.org/%(version)s']
+source_urls = [SOURCEFORGE_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 # create pkgconfig file
