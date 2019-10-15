@@ -10,7 +10,7 @@ behavior. The analysis identifies potential performance bottlenecks -- in
 particular those concerning communication and synchronization -- and offers
 guidance in exploring their causes."""
 
-toolchain = {'name': 'CrayCCE', 'version': '19.06-classic'}
+toolchain = {'name': 'CrayCCE', 'version': '19.09-classic'}
 source_urls = ['http://apps.fz-juelich.de/%(namelower)s/releases/'
                '%(namelower)s/%(version)s/dist/']
 sources = [SOURCELOWER_TAR_GZ]
@@ -20,7 +20,7 @@ dependencies = [
     ('Score-P', '6.0'),
     ('OTF2', '2.2', '', True),
     # papi already loaded by perftools-base:
-    # ('papi/5.7.0.1', EXTERNAL_MODULE),
+    # ('papi/5.7.0.2', EXTERNAL_MODULE),
     # plugins can be loaded afterwards, do not build in this recipe:
     #('bladeplugin', '0.1', '-cube-4.4-otf-2.2', True),
     #('jengafettplugin', '0.2', '', True),

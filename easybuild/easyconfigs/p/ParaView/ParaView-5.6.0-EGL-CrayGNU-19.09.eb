@@ -27,7 +27,7 @@ pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 pysuff = '-python%s' % py_maj_ver
 
 dependencies = [
-    ('Boost', '1.67.0', pysuff),
+    ('Boost', '1.70.0', pysuff),
     ('h5py', '2.8.0', '%s-serial' % pysuff),
     ('ospray', '1.8.4'),
     ('cray-python/%s' % pyver, EXTERNAL_MODULE)

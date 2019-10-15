@@ -1,0 +1,25 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '19.08'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
+(PE release: June 2019).
+"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}  # (default) version
+
+dependencies = [
+    ('PrgEnv-cray', EXTERNAL_MODULE),
+    ('atp/2.1.3', EXTERNAL_MODULE),
+    ('cce/9.0.1', EXTERNAL_MODULE),
+    ('cray-libsci/19.06.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.7.9', EXTERNAL_MODULE),
+    ('craype/2.6.0', EXTERNAL_MODULE),
+    ('pmi/5.0.14', EXTERNAL_MODULE),
+]
+
+
+# LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
+moduleclass = 'toolchain'

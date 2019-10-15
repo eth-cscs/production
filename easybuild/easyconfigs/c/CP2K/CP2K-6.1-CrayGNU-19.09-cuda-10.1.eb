@@ -38,7 +38,7 @@ source_urls = [
 
 builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.0_8.1__ga311ce7', EXTERNAL_MODULE),
-    ('cray-fftw/3.3.8.2', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.3.2'),

@@ -30,14 +30,6 @@ def kesch = [name: 'kesch',
              modulesUnuseProduction: '',
              prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
 
-def leone = [name: 'leone',
-             archs: [],
-             buildPath: '/dev/shm/$USER/easybuild/build',
-             unusePath: '/apps/leone/UES/modulefiles',
-             modulesProduction: '',
-             modulesUnuseProduction: '',
-             prefixProduction: '/apps/leone/UES/jenkins/RHEL6.10/easybuild']
-
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',

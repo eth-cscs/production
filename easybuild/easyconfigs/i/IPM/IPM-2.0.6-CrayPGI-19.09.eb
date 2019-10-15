@@ -30,7 +30,7 @@ preconfigopts += 'sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
 preconfigopts += 'sed -ie "s-CXX=pgcpp-CXX=CC-g" configure && '
 preconfigopts += 'sed -ie "s-CC=pgcc-CXX=cc-g" configure && '
 preconfigopts += 'sed -ie "s-F77=pgf77-F77=ftn-g" configure && '
-configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
+configopts  = ' --with-papi=$PAT_BUILD_PAPI_LIBDIR/..'
 # With Cray, we can use perftools' papi, otherwise use:
 # configopts  = ' --with-papi=`pkg-config --variable=papi_prefix papi`'
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'
