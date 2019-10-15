@@ -11,7 +11,7 @@ call path, and (iii) system resource. Each dimension can be represented as a
 tree, where non-leaf nodes of the tree can be collapsed or expanded to achieve
 the desired level of granularity."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/'
                '%(version_major_minor)s/dist']
 sources = [SOURCELOWER_TAR_GZ]

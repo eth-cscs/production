@@ -8,7 +8,7 @@ description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
  It surrounds OpenMP directives and runtime library calls with calls to
  the POMP2 measurement interface."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 configopts = ' --enable-shared'
 source_urls = ['http://www.vi-hps.org/cms/upload/packages/opari2/']
 sources = [SOURCELOWER_TAR_GZ]

@@ -11,7 +11,7 @@ description = """
     for use on virtually any computer hardware and operating system.
 """
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 toolchainopts = {'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
