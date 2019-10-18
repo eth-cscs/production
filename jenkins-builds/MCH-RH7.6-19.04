@@ -51,6 +51,8 @@
  netCDF-Fortran-4.4.5-fosscuda-2019b.eb             --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/19.2/easybuild
  netCDF-Fortran-4.4.5-PGI-19.5-GCC-7.3.0-2.30.eb    --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  netCDF-Fortran-4.4.5-PGI-19.9-GCC-8.3.0.eb         --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.9/easybuild
+ OpenMPI-4.0.1-GCC-7.3.0-2.30-cuda-10.0.eb          --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/18.1/easybuild
+ OpenMPI-4.0.2-gcccuda-2019b-cuda-10.1.eb           --installpath=/apps/arolla/UES/jenkins/RH7.6/gnu/19.2/easybuild
  OpenMPI-4.0.1-PGI-19.5-GCC-7.3.0-2.30-cuda-10.0.eb --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.5/easybuild
  OpenMPI-4.0.2-PGI-19.9-GCC-8.3.0-cuda-10.1.eb      --installpath=/apps/arolla/UES/jenkins/RH7.6/pgi/19.9/easybuild
  PrgEnv-cce-tsa-19.04.eb                            --module-naming-scheme=EasyBuildMNS --set-default-module
