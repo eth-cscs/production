@@ -3,15 +3,14 @@ easyblock = 'ConfigureMake'
 
 name = 'nvptx-tools'
 version = '5f6f343'
-local_cudaversion = '9.1'
-local_cudatoolkit = '9.1.85_3.18-6.0.7.0_5.1__g2eb7c52'
+local_cudaversion = '10.1'
+local_cudatoolkit = '10.1.105_3.27-7.0.1.1_4.1__ga311ce7'
 versionsuffix = '-cuda-%s' % local_cudaversion
 homepage = 'https://github.com/MentorEmbedded/nvptx-tools'
 description = """a collection of tools for use with nvptx-none GCC toolchains:
  https://gcc.gnu.org/wiki/nvptx"""
 
 toolchain = SYSTEM
-
 source_urls = ['https://github.com/MentorEmbedded/nvptx-tools/archive']
 sources = ['master.zip']
 checksums = ['f2a59471853797ed272133206b183ce4']
