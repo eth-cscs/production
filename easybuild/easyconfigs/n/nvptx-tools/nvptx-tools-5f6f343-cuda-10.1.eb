@@ -18,7 +18,6 @@ configopts  = "--with-cuda-driver-include=$CUDATOOLKIT_HOME/include"
 configopts += "--with-cuda-driver-lib=$CUDATOOLKIT_HOME/lib64"
 dependencies = [
     ('cudatoolkit/%s' % local_cudatoolkit, EXTERNAL_MODULE),
-    # ('binutils', '2.33.1'),
 ]
 
 sanity_check_paths = {
