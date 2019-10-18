@@ -9,13 +9,13 @@ description = """GNU `gettext' is an important step for the GNU Translation Proj
 build many other steps. This package offers to programmers, translators, and even users, a well integrated set of tools
 and documentation"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 sources = [SOURCE_TAR_GZ]
 source_urls = [GNU_SOURCE]
 
 dependencies = [
-    ('libxml2', '2.9.9'),
+    ('libxml2', '2.9.9', '', ('GCCcore', '8.3.0')),
     ('ncurses', '6.1'),
 ]
 

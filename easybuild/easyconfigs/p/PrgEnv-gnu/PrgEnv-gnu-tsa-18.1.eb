@@ -1,20 +1,22 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-prgenv = 'gnu' 
 name = 'PrgEnv-%s' % prgenv
 version = '18.1'
-fossversion = '2018b'
+local_prgenv = 'gnu' 
+local_fossversion = '2018b'
 
 homepage = 'http://user.cscs.ch'
 description = """
-    The meta-module sets the MODULEPATH to access the following programming environment: 
+    The meta-module sets the MODULEPATH to access the following programming
+    environment: 
         - %s %s
 """ % (name, version) 
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
-path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (prgenv, version)
+local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % 
+           (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -35,6 +37,6 @@ if { [module-info mode load] } {
   module load openmpi/4.0.1-gcc-7.3.0-2.30-cuda-10.0
  }
 }
-""" % (path, path, path)
+""" % (local_path, local_path, local_path)
 
 moduleclass = 'devel'

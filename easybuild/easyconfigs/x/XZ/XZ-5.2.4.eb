@@ -7,7 +7,7 @@ version = '5.2.4'
 homepage = 'http://tukaani.org/xz/'
 description = "xz: XZ utilities"
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 sources = [SOURCELOWER_TAR_BZ2]
 source_urls = ['http://tukaani.org/xz/']

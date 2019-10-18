@@ -128,13 +128,13 @@ class EB_PGI(PackedBinary):
         """Install by running install command."""
 
         pgi_env_vars = {
+            'PGI_SILENT': 'true',
             'PGI_ACCEPT_EULA': 'accept',
             'PGI_INSTALL_AMD': str(self.cfg['install_amd']).lower(),
             'PGI_INSTALL_DIR': self.installdir,
             'PGI_INSTALL_JAVA': str(self.cfg['install_java']).lower(),
             'PGI_INSTALL_MANAGED': str(self.cfg['install_managed']).lower(),
             'PGI_INSTALL_NVIDIA': str(self.cfg['install_nvidia']).lower(),
-            'PGI_SILENT': 'true',
             'PGI_INSTALL_MPI': str(self.cfg['install_mpi']).lower(),
             'PGI_MPI_GPU_SUPPORT': str(self.cfg['mpi_gpu_support']).lower(),
             }

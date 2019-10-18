@@ -1,0 +1,38 @@
+# Updated by @gppezzi @jgphpc and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '1.9.7.1'
+
+homepage = 'https://code.zmaw.de/projects/cdo'
+description = "CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+toolchainopts = {'opt': True, 'pic': True}
+
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/20124']
+sources = [SOURCELOWER_TAR_GZ]
+
+# OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support, no MPI support
+builddependencies = [
+    ('HDF5', '1.10.5'),
+    ('netCDF-Fortran', '4.4.5'),
+    ('UDUNITS', '2.2.26', '', True),
+    ('PROJ', '6.1.1'),
+    ('ecCodes', '2.13.0', '-python3'),
+    ('YAXT', '0.6.2'),
+]
+
+preconfigopts = " export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && "
+configopts = " --with-szlib=$EBROOTSZIP --with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN  --with-udunits2=$EBROOTUDUNITS --with-fftw3 --with-proj=$EBROOTPROJ  --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES "
+
+# fix for linking issues with HDF5 libraries for libcdi, should link with both -lnetcdf and -lhdf5_hl -lhdf5
+prebuildopts = "find libcdi -name Makefile -exec sed -i 's/-lnetcdf/-lnetcdff -lnetcdf/g' '{}' \; && "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'

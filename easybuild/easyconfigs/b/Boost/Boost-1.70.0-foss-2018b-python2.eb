@@ -1,12 +1,12 @@
 # contributed by Luca Marsella
 name = 'Boost'
 version = '1.70.0'
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '16'
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-pyver = '%s.%s' % (pyshortver, py_rev_ver)
-versionsuffix = '-python%s' % py_maj_ver
+local_py_maj_ver = '2'
+local_py_min_ver = '7'
+local_py_rev_ver = '16'
+local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+local_pyver = '%s.%s' % (local_pyshortver, local_py_rev_ver)
+versionsuffix = '-python%s' % local_py_maj_ver
 
 homepage = 'http://www.boost.org/'
 description = """Boost provides free peer-reviewed portable C++ source libraries."""
@@ -19,7 +19,7 @@ sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
 
 builddependencies = [
     ('zlib', '1.2.11'),
-    ('Python', pyver, '', True),
+    ('Python', local_pyver, '', True),
 ]
 
 # also build boost_mpi
