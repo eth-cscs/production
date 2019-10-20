@@ -1,8 +1,8 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-prgenv = 'pgi' 
-name = 'PrgEnv-%s' % prgenv
+local_prgenv = 'pgi' 
+name = 'PrgEnv-%s' % local_prgenv
 version = '19.7'
 
 homepage = 'http://user.cscs.ch'
@@ -13,7 +13,7 @@ description = """
 
 toolchain = SYSTEM
 
-path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (prgenv, version)
+local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -34,6 +34,6 @@ if { [module-info mode load] } {
   module load openmpi/4.0.1-%s-%s-gcc-7.3.0-2.30-cuda-10.0
  }
 }
-""" % (path, path, path, prgenv, version, prgenv, version)
+""" % (local_path, local_path, local_path, local_prgenv, version, local_prgenv, version)
 
 moduleclass = 'devel'
