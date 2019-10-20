@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'YAXT'
+version = '0.6.2'
+
+homepage = 'https://www.dkrz.de/redmine/projects/yaxt'
+description = "Yet Another eXchange Tool"
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['https://www.dkrz.de/redmine/attachments/download/492']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = 'FC="$F90" FCFLAGS="$F90FLAGS -cpp"'
+
+
+sanity_check_paths = {
+    'files': ['include/%(namelower)s.h', 'include/%(namelower)s.mod', 'lib/libyaxt.a', 'lib/libyaxt.so'],
+    'dirs': ['include/xt'],
+}
+
+moduleclass = 'tools'

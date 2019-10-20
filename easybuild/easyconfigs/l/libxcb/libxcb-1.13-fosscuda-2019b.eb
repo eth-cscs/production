@@ -1,0 +1,34 @@
+# contributed byLuca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libxcb'
+version = '1.13'
+
+homepage = 'http://xcb.freedesktop.org/'
+description = """The X protocol C-language Binding (XCB) is a replacement for Xlib featuring a small footprint,
+latency hiding, direct access to the protocol, improved threading support, and extensibility."""
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+
+source_urls = ['http://xcb.freedesktop.org/dist/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('xcb-proto', '1.13', '', True),
+    ('xproto', '7.0.31'),
+]
+dependencies = [
+    ('libXau', '1.0.9'),
+    ('libXdmcp', '1.1.3'),
+]
+
+preconfigopts = ' sed -i "s/pthread-stubs//" configure && '
+configopts = " $XORG_CONFIG --enable-xevie --enable-xprint --without-doxygen "
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'lib/%(name)s-composite.a', 'lib/%(name)s-damage.a', 'lib/%(name)s-dpms.a', 'lib/%(name)s-dri2.a', 'lib/%(name)s-glx.a', 'lib/%(name)s-randr.a', 'lib/%(name)s-record.a', 'lib/%(name)s-render.a', 'lib/%(name)s-res.a', 'lib/%(name)s-screensaver.a', 'lib/%(name)s-shape.a', 'lib/%(name)s-shm.a', 'lib/%(name)s-sync.a', 'lib/%(name)s-xevie.a', 'lib/%(name)s-xf86dri.a', 'lib/%(name)s-xfixes.a', 'lib/%(name)s-xinerama.a', 'lib/%(name)s-xprint.a', 'lib/%(name)s-xtest.a', 'lib/%(name)s-xv.a', 'lib/%(name)s-xvmc.a'],
+    'dirs': ['include/xcb', 'lib/pkgconfig'],
+}
+
+moduleclass = 'lib'
