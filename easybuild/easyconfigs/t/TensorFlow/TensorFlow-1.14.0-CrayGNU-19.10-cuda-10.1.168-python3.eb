@@ -23,7 +23,7 @@ builddir = '%(builddir)s'
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
 
-toolchain = {'name': 'CrayGNU', 'version': '19.09'}
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 
 builddependencies = [
     ('Bazel', '0.24.1', ver_suffix_py),
