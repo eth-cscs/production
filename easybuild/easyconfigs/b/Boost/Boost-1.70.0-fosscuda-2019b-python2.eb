@@ -1,0 +1,23 @@
+# contributed by Luca Marsella
+name = 'Boost'
+version = '1.70.0'
+versionsuffix = '-python2'
+
+homepage = 'http://www.boost.org/'
+description = "Boost provides free peer-reviewed portable C++ source libraries."
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+toolchainopts = {'usempi': True, 'pic': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_70_0.tar.gz']
+
+builddependencies = [
+    ('zlib', '1.2.11'),
+    ('Python', '2.7.16', '', True),
+]
+
+# also build boost_mpi
+boost_mpi = True
+
+moduleclass = 'devel'

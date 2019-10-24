@@ -1,20 +1,22 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-prgenv = 'gnu' 
 name = 'PrgEnv-%s' % prgenv
 version = '19.2'
-fossversion = '2019.02'
+local_prgenv = 'gnu' 
+local_fossversion = '2019b'
 
 homepage = 'http://user.cscs.ch'
 description = """
-    The meta-module sets the MODULEPATH to access the following programming environment: 
+    The meta-module sets the MODULEPATH to access the following programming
+    environment: 
         - %s %s
 """ % (name, version) 
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
-path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (prgenv, version)
+local_path = '/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % 
+             (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -31,10 +33,10 @@ if { [module-info mode remove] || [module-info mode switch] } {
 
 if { [module-info mode load] } {
  module use %s
- if { ![ is-loaded foss/.%s ] } {
-  module load foss/.%s
+ if { ![ is-loaded fosscuda/.%s ] } {
+  module load fosscuda/.%s
  }
 }
-""" % (path, path, path, fossversion, fossversion)
+""" % (local_path, local_path, local_path, local_fossversion, local_fossversion)
 
 moduleclass = 'devel'
