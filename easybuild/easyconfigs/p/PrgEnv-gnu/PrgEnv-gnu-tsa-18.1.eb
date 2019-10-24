@@ -1,10 +1,9 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-name = 'PrgEnv-%s' % prgenv
-version = '18.1'
 local_prgenv = 'gnu' 
-local_fossversion = '2018b'
+name = 'PrgEnv-%s' % local_prgenv
+version = '18.1'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -15,8 +14,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % 
-           (local_prgenv, version)
+local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
