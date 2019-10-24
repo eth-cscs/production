@@ -5,20 +5,20 @@ easyblock = "CmdCp"
 name = 'TensorFlow'
 version = '1.14.0'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.7'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
-local_cudaversion = '10.1.168'
+cudaversion = '10.1.168'
 
-local_ver_suffix_cuda = '-cuda-%s' % (local_cudaversion)
-local_ver_suffix_py = '-python%s' % (local_py_maj_ver)
-versionsuffix = '%s%s' % (local_ver_suffix_cuda, local_ver_suffix_py)
+ver_suffix_cuda = '-cuda-%s' % (cudaversion)
+ver_suffix_py = '-python%s' % (py_maj_ver)
+versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
 
-local_installdir = '%(local_installdir)s'
-local_builddir = '%(local_builddir)s'
+installdir = '%(installdir)s'
+builddir = '%(builddir)s'
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -26,50 +26,50 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 
 builddependencies = [
-    ('Bazel', '0.24.1', local_ver_suffix_py),
+    ('Bazel', '0.24.1', ver_suffix_py),
 ]
 
 dependencies = [
-    ('cuDNN', '7.6.1', '-cuda-%s' % local_cudaversion, True),
-    ('SWIG', '3.0.12', local_ver_suffix_py),
-    ('NCCL', '2.4.7', '-cuda-%s' % local_cudaversion, True),
-    ('protobuf', '3.6.0', local_ver_suffix_py),
-    ('dask', '1.0.0', '-python%s' % local_py_maj_ver),
-    ('PyExtensionsDS', local_pyver),
-    ('CUDA', local_cudaversion, '', True),
+    ('cuDNN', '7.6.1', '-cuda-%s' % cudaversion, True),
+    ('SWIG', '3.0.12', ver_suffix_py),
+    ('NCCL', '2.4.7', '-cuda-%s' % cudaversion, True),
+    ('protobuf', '3.6.0', ver_suffix_py),
+    ('dask', '1.0.0', '-python%s' % py_maj_ver),
+    ('PyExtensionsDS', pyver),
+    ('CUDA', cudaversion, '', True),
 ]
 
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, local_py_maj_ver)),
-           ('configure-cscs-v%s.sh' % version, '%s/tensorflow-%s/' % (local_builddir, version))]
+patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, py_maj_ver)),
+           ('configure-cscs-v%s.sh' % version, '%s/tensorflow-%s/' % (builddir, version))]
 
 with_configure = False
 
-local_whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, local_py_maj_ver, local_py_min_ver, local_py_maj_ver, local_py_min_ver)
+whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
-local_build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % local_builddir
-local_build_str += " && rm -rf $TEST_TMPDIR"
-local_build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
-local_build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
-local_build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)   # required for configure-cscs scripts
-local_build_str += " && bash configure-cscs-v%s.sh" % version
-local_build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
-local_build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
-local_build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
-local_build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(local_builddir)s"
-local_build_str += " && pip%s install --no-deps --prefix  %s %s/" % (local_py_maj_ver, local_builddir, local_builddir) + local_whl_file
-local_build_str += " && rm -rf $TEST_TMPDIR"
+build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
+build_str += " && rm -rf $TEST_TMPDIR"
+build_str += r" && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += r" && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
+build_str += " && bash configure-cscs-v%s.sh" % version
+build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
+build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
+build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
+build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
+build_str += " && pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
+build_str += " && rm -rf $TEST_TMPDIR"
 
 cmds_map = [
-    ('v%(version)s.tar.gz', local_build_str),
+    ('v%(version)s.tar.gz', build_str),
 ]
 
 files_to_copy = [
-    (['%(local_builddir)s/' + local_whl_file], '%(local_installdir)s'),
-    (['%(local_builddir)s/bin'], '%(local_installdir)s'),
-    (['%(local_builddir)s/lib'], '%(local_installdir)s'),
+    (['%(builddir)s/' + whl_file], '%(installdir)s'),
+    (['%(builddir)s/bin'], '%(installdir)s'),
+    (['%(builddir)s/lib'], '%(installdir)s'),
 ]
 
 exts_defaultclass = 'PythonPackage'
@@ -101,12 +101,12 @@ exts_list = [
 ]
 
 sanity_check_paths = {
-    'files': [local_whl_file],
-    'dirs': ['%s/lib/python%s.%s/site-packages' % (local_installdir, local_py_maj_ver, local_py_min_ver)],
+    'files': [whl_file],
+    'dirs': ['%s/lib/python%s.%s/site-packages' % (installdir, py_maj_ver, py_min_ver)],
 }
 
 modextrapaths = {
-    'PYTHONPATH': 'lib/python%s.%s/site-packages' % (local_py_maj_ver, local_py_min_ver),
+    'PYTHONPATH': 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
 }
 
 moduleclass = 'devel'
