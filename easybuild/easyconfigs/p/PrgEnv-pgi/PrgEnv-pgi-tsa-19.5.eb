@@ -2,7 +2,7 @@
 easyblock = 'Bundle'
 
 local_prgenv = 'pgi' 
-name = 'PrgEnv-%s' % prgenv
+name = 'PrgEnv-%s' % local_prgenv
 version = '19.5'
 
 homepage = 'http://user.cscs.ch'
@@ -14,8 +14,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % 
-           (local_prgenv, version)
+local_path = '/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
