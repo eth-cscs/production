@@ -13,14 +13,14 @@ description = """
     scripting.
 """
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = SYSTEM
 
 sources = [(
     '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/'
     '%(namelower)s-%(version)s%(versionsuffix)s.tar.gz'
 )]
 
-vmd_buildcmd = (
+local_vmd_buildcmd = (
     ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir='
     '"%(installdir)s/bin"#g\' configure && '
     ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir='
@@ -30,7 +30,7 @@ vmd_buildcmd = (
 
 buildininstalldir = True
 
-cmds_map = [('.*', vmd_buildcmd)]
+cmds_map = [('.*', local_vmd_buildcmd)]
 
 files_to_copy = [] 
 

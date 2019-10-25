@@ -8,6 +8,7 @@ The following dictionary keys are provided:
 
     * `name`: the name of the machine
     * `archs`: the list of supported architectures (empty list if none)
+    * `cpus` : the number of cpu cores per architecture (single number if `archs` is an empty list)
     * `buildPath`: the path used as EASYBUILD_BUILDPATH for production
     * `unusePath`: colon separated string containing the paths to unuse for regression (empty string if none)
     * `modulesProduction`: the modules path to use

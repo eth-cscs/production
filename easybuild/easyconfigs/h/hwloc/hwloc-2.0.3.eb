@@ -13,7 +13,7 @@ locality of I/O devices such as network interfaces, InfiniBand HCAs or GPUs. It
 primarily aims at helping applications with gathering information about modern
 computing hardware so as to exploit it accordingly and efficiently."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 source_urls = ['http://www.open-mpi.org/software/hwloc/'
                'v%(version_major_minor)s/downloads/']

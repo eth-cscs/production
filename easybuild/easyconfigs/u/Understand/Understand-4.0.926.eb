@@ -10,7 +10,7 @@ description = """
     Understand provides you with pertinent informations regarding your code.
 """
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 source_urls = ['http://builds.scitools.com/all_builds/b926/%(name)s/']
 sources = ['%(name)s-%(version)s-Linux-64bit.tgz']

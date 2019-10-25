@@ -8,7 +8,7 @@ description = """pprof is a tool for visualization and analysis of profiling
 data (from gperftools for instance). It is based on the go language; graphviz
 output is supported."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 sources = [{
     'filename': '%s-%s.tar.gz' % (name, version),
     'git_config': {

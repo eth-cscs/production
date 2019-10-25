@@ -8,7 +8,7 @@ homepage = 'https://www.hdfgroup.org/products/java/'
 description = """A visual tool for browsing and editing HDF4 and HDF5 files 
 for 32-bit Object IDs (HDF5-1.8)"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://support.hdfgroup.org/ftp/HDF5/hdf-java/current/bin/']
 sources = ['HDFView-2.14-centos7_64.tar.gz']
 

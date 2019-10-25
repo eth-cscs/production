@@ -8,15 +8,15 @@ version = '7.6.1'
 homepage = 'https://developer.nvidia.com/cudnn'
 description = """Nvidias deep neural network library."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = SYSTEM
 
-cudamajor = '10.1'
-cudaminor = '168'
-cudaversion = "%s.%s" % (cudamajor, cudaminor)
+local_cudamajor = '10.1'
+local_cudaminor = '168'
+local_cudaversion = "%s.%s" % (local_cudamajor, local_cudaminor)
 
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-%s' % local_cudaversion
 
-sources = ['/apps/common/UES/easybuild/sources/c/cuDNN/cudnn-%s-linux-x64-v%s.34.tgz' % (cudamajor, version)]
+sources = ['/apps/common/UES/easybuild/sources/c/cuDNN/cudnn-%s-linux-x64-v%s.34.tgz' % (local_cudamajor, version)]
 
 # checksums = [
 #     'e3e72e9e2bf4c5e4cdd467aa6b824effc4566d230a2cda4153ad894d7d15cf73'

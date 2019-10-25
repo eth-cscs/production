@@ -27,7 +27,7 @@ dependencies = [
 preconfigopts  = './bootstrap.sh && '
 preconfigopts += 'sed -i -e \'s/-qversion/-qversion --version/g\' configure && '
 buildopts = ' MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn '
-configopts  = ' --with-papi=$PAT_BUILD_PAPI_BASEDIR'
+configopts  = ' --with-papi=$PAT_BUILD_PAPI_LIBDIR/..'
 # With Cray, we can use perftools' papi, otherwise:
 # configopts  = ' --with-papi=`pkg-config --variable=papi_prefix papi`'
 configopts += ' --with-libunwind=$EBROOTLIBUNWIND'

@@ -1,0 +1,38 @@
+# @author: sebkelle1
+easyblock = 'CMakeMake'
+
+name = 'ecCodes'
+version = '2.12.5'
+#versionsuffix='-Python-3.6.5'
+
+homepage = 'https://software.ecmwf.int/wiki/display/GRIB/Home'
+description = """ecCodes is a package developed by ECMWF which provides an
+application programming interface and a set of tools for decoding and encoding
+messages in different formats"""
+
+toolchain = {'name': 'CrayCCE', 'version': '18.08'}
+
+source_urls = ['https://software.ecmwf.int/wiki/download/attachments/45757960/']
+sources = ['%(namelower)s-%(version)s-Source.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+
+dependencies = [
+    ('JasPer', '1.900.1'),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    #('cray-python/3.6.5.1', EXTERNAL_MODULE),
+]
+
+#modextrapaths = {
+#    'PYTHONPATH' : 'lib/python2.7/site-packages'
+#}
+
+#configopts = '--with-jasper=$EBROOTJASPER'
+separate_build_dir = True
+configopts = '-DENABLE_JPG=ON -DENABLE_NETCDF=ON -DENABLE_PYTHON=OFF'
+
+parallel = 1
+
+moduleclass = 'data'

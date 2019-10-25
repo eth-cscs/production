@@ -7,7 +7,7 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """Automatic extraction of fundamental factors for Paraver
 traces."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['http://ftp.tools.bsc.es/%(name)s/']
 sources = ['%(name)s-%(version)s-src.tar.bz2']
 checksums = ['6909417304f18f5573bb9bcfa2d19941']
