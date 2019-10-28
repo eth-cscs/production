@@ -41,8 +41,8 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.cpu cosmo_pompa/cosmo/Options.lib.c
  # NetCDF library
 -NETCDFL  =
 -NETCDFI  =
-+NETCDFL  = -L${CRAY_NETCDF_DIR}/cray/9.0/lib
-+NETCDFI  = -I${CRAY_NETCDF_DIR}/cray/9.0/include
++NETCDFL  = -L${NETCDF_DIR}/lib
++NETCDFI  = -I${NETCDF_DIR}/include
  
  # Synsat library
 -RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
