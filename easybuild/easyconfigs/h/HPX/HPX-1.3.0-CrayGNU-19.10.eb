@@ -1,10 +1,9 @@
-# Mikael Simberg (CSCS), John Biddiscombe (CSCS), Victor Holanda (CSCS)
+# contributed by Mikael Simberg, John Biddiscombe and Victor Holanda Rusu (CSCS)
 easyblock = 'CMakeMake'
 
 name = 'HPX'
 version = '1.3.0'
 checksums = ['cd34da674064c4cc4a331402edbd65c5a1f8058fb46003314ca18fa08423c5ad']
-versionsuffix='-APEX'
 
 homepage = 'http://stellar-group.org/libraries/hpx'
 description = """HPX (High Performance ParalleX) is a general purpose C++
@@ -13,7 +12,7 @@ strives to provide a unified programming model which transparently utilizes
 the available resources to achieve unprecedented levels of scalability.
 """
 
-toolchain = {'name': 'CrayGNU', 'version': '19.09'}
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True}
 
 builddependencies = [('CMake', '3.14.5', '', True)]
@@ -35,18 +34,15 @@ separate_build_dir = True
 
 build_type = 'RelWithDebInfo'
 
-configopts  = '-DHPX_WITH_MALLOC=JEMALLOC '
-configopts += '-DHPX_WITH_MAX_CPU_COUNT=128 '
-configopts += '-DHPX_WITH_PARCELPORT_MPI=ON '
-configopts += '-DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON '
-configopts += '-DHPX_WITH_PAPI=ON '
-configopts += '-DHPX_WITH_APEX=ON '
-configopts += '-DHPX_WITH_APEX_TAG=v2.1.3 '
-configopts += '-DAPEX_WITH_PAPI=ON '
-configopts += '-DAPEX_WITH_OTF2=ON '
-configopts += '-DHWLOC_ROOT=$EBROOTHWLOC '
-configopts += '-DJEMALLOC_ROOT=$EBROOTJEMALLOC '
-configopts += '-DOTF2_ROOT=$EBROOTOTF2 '
-configopts += '-DPAPI_ROOT=$PAT_BUILD_PAPI_BASEDIR '
+commonopts = "-DHWLOC_ROOT=$EBROOTHWLOC -DHPX_WITH_MALLOC=JEMALLOC -DJEMALLOC_ROOT=$EBROOTJEMALLOC -DHPX_WITH_MAX_CPU_COUNT=128 -DHPX_WITH_PARCELPORT_MPI=ON -DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON"
+
+apexopts = "-DHPX_WITH_PAPI=ON -DHPX_WITH_APEX=ON -DHPX_WITH_APEX_TAG=v2.1.3 -DAPEX_WITH_PAPI=ON -DAPEX_WITH_OTF2=ON -DOTF2_ROOT=$EBROOTOTF2 -DPAPI_ROOT=$(dirname $PAT_BUILD_PAPI_LIBDIR) -DCMAKE_INSTALL_PREFIX=%(installdir)s/APEX"
+
+configopts = [
+     commonopts,
+     commonopts + apexopts
+]
+
+modextravars = {'HPX_APEX_PATH' : "%(installdir)s/APEX"}
 
 moduleclass = 'tools'
