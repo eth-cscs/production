@@ -15,7 +15,7 @@ sources = ['%(namelower)s_1_67_0.tar.gz']
 
 dependencies = [
     ('bzip2', '1.0.6'),
-    ('zlib', '1.2.11'),
+    ('zlib', '1.2.11', '', True),
 ]
 
 configopts = " --without-libraries=python"
