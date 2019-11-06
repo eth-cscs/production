@@ -30,11 +30,11 @@ dependencies = [
 
 separate_build_dir = True
 
-common_prebuildopts = 'module unload cray-libsci && module load gcc/8.3.0 && module list &&'
+common_prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && module list &&'
 
 prebuildopts = [ common_prebuildopts ]
 
-configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DGPU_MODEL='P100' -DSpFFT_DIR=$EBROOTSPFFT/lib/cmake/SpFFT"
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=0 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DGPU_MODEL='P100' -DSpFFT_DIR=$EBROOTSPFFT/lib/cmake/SpFFT"
 #configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=1 -DUSE_MKL=1 -DGPU_MODEL='P100' -DUSE_SCALAPACK=1"
 
 modextrapaths = {'CPATH': ['include/sirius']}
