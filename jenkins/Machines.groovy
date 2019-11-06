@@ -3,7 +3,7 @@ def daint = [name: 'daint',
              cpus: ['gpu': 12, 'mc': 36],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
              unusePath: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
-             modulesProduction: '/apps/common/UES/jenkins/production/login',
+             modulesProduction: '/apps/common/UES/jenkins/production/login-cle7',
              modulesUnuseProduction: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
              prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
 
