@@ -4,7 +4,7 @@ def daint = [name: 'daint',
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
              unusePath: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
              modulesProduction: '/apps/common/UES/jenkins/production/login',
-             modulesUnuseProduction: '/apps/daint/UES/easybuild/modulefiles',
+             modulesUnuseProduction: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
              prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
 
 def dom = [name: 'dom',
