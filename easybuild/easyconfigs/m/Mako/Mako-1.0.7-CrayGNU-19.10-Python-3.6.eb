@@ -1,0 +1,35 @@
+easyblock = 'PythonPackage'
+
+name = 'Mako'
+version = '1.0.7'
+
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+
+local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
+local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+local_pysuff = '-python%s' % local_py_maj_ver
+
+versionsuffix = '-Python-%s' % (local_pyshortver)
+
+homepage = 'http://www.makotemplates.org'
+description = """A super-fast templating language that borrows the best ideas from the existing templating languages"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+
+dependencies = [
+    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE)
+]
+
+sanity_check_paths = {
+#    'files': ['bin/mako-render', 'lib/python%(local_py_maj_ver)s.%(local_py_min_ver)s/site-packages/%(name)s-%(version)s-py%(local_py_maj_ver)s.%(local_py_min_ver)s.egg'],
+    'files': ['bin/mako-render'],
+    'dirs': [],
+}
+
+moduleclass = 'devel'

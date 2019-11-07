@@ -7,7 +7,7 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """High-abstracted network simulator for message-passing
 programs."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://ftp.tools.bsc.es/dimemas']
 sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
 checksums = ['6f543c084d893e387a1b9f7e8c7cc721']

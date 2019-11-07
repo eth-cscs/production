@@ -1,0 +1,89 @@
+# CrayGNU version by Jean Favre (CSCS)
+
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.7.0'
+versionsuffix='-EGL'
+
+homepage = "http://www.paraview.org"
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+local_download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_suffix]
+sources = ["ParaView-v%(version)s.tar.gz"]
+
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+
+local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
+local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+local_pysuff = '-python%s' % local_py_maj_ver
+
+dependencies = [
+    ('h5py', '2.8.0', '%s-serial' % local_pysuff),
+    ('ospray', '1.8.5'),
+    ('oidn', '0.9.0'),
+    ('VisRTX', '0.1.6'),
+    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE)
+]
+
+builddependencies = [('CMake', '3.14.5','', True)]
+
+separate_build_dir = True
+
+maxparallel = 16
+
+configopts =  '-DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
+configopts += '-DBUILD_TESTING:BOOL=OFF -DPARAVIEW_ENABLE_CATALYST:BOOL=ON '
+configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
+configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
+# use TBB for on-the-node parallelism
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbbmalloc.so '
+#
+configopts += '-DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so '
+configopts += '-DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include '
+configopts += '-DPARAVIEW_ENABLE_XDMF3:BO0L=OFF '
+configopts += '-DPARAVIEW_BUILD_QT_GUI:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF '
+# CSCS specific for EGL
+configopts += '-DVTK_OPENGL_HAS_EGL:BOOL=ON -DOPENGL_egl_LIBRARY=/opt/cray/nvidia/default/lib64/libEGL.so -DOPENGL_opengl_LIBRARY=/opt/cray/nvidia/default/lib64/libOpenGL.so -DVTK_USE_X:BOOL=OFF '
+# CSCS specific for Raytracing (OSPRAY and/or OptiX)
+configopts += '-DPARAVIEW_USE_RAYTRACING:BOOL=ON '
+configopts += '-DVTK_ENABLE_OSPRAY:BOOL=ON '
+configopts += '-DVTK_ENABLE_VISRTX:BOOL=ON '
+configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
+configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
+configopts += '-DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" '
+configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" '
+# Using Cray HDF5
+#configopts += '-DVTK_MODULE_USE_EXTERNAL_VTK_hdf5:BOOL=ON -DHDF5_DIR=$HDF5_DIR '
+#configopts += '-DHDF5_C_INCLUDE_DIR="$HDF5_DIR"/include '
+#configopts += '-DHDF5_hdf5_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5.so -DHDF5_hdf5_hl_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5_hl.so '
+# Using CSCS NVIDIA IndeX lib
+configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
+
+# Or consult https://gitlab.kitware.com/vtk/vtk/blob/master/Documentation/dev/git/data.md
+# and download ExternalData to $EASYBUILD_SOURCEPATH and adjust -DExternalData_OBJECT_STORES accordingly
+# Without internet connection, comment the following two lines (configopts and prebuildopts)
+# configopts += '-DExternalData_OBJECT_STORES=%(builddir)s/ExternalData '
+# The ParaView server can be cranky, test downloads are quite often failing, especially in the case
+# of parallel downloads. Using ; insted of && gives a second chance to download the test files, if the
+# first serial attempt would fail.
+#prebuildopts = 'make VTKData ;'
+
+modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % local_pyver, 
+                 'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView'}
+
+sanity_check_paths = {
+    'files': ['bin/pvbatch', 'bin/pvserver'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

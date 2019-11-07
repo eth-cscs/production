@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS), updated by Samuel Omlin (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = "4.8.1"
+
+homepage = 'http://nco.sourceforge.net/'
+description = """The NCO toolkit manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.09'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = ['https://github.com/nco/nco/archive/%s.tar.gz' % version]
+
+dependencies = [
+    ('ANTLR', '2.7.7', '-python2'),
+    ('cray-netcdf/4.6.3.1', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
+    ('JasPer', '2.0.14'),
+    ('UDUNITS', '2.2.26', '', True),
+]
+
+sanity_check_paths = {
+    'files': ["bin/ncbo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

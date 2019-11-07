@@ -7,7 +7,7 @@ homepage = 'https://tools.bsc.es/downloads'
 description = """Signal processing techniques to select representative
 regions from Paraver traces."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://ftp.tools.bsc.es/%(name)s']
 sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
 keepsymlinks = True

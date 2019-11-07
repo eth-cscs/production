@@ -1,0 +1,23 @@
+# jg (CSCS)
+easyblock = 'Binary'
+
+name = 'nvidia-nsight-compute'
+version = '2019.4.0.12'
+homepage = 'https://developer.nvidia.com/nsight-compute-2019_4'
+description = """NVIDIA Nsight Compute is an interactive kernel profiler for
+CUDA applications."""
+
+toolchain = SYSTEM
+sources = ['/apps/common/UES/easybuild/sources/%(nameletter)s/%(name)s/%(name)s-linux-%(version)s.run']
+checksums = ['157687c72397b0dc6f12848e7e10d120']
+install_cmd = sources[0] + " --nox11 --nochown --target %(installdir)s -- -targetpath=%(installdir)s -noprompt "
+skipsteps = ['source']
+
+sanity_check_paths = {
+    'files': ['nv-nsight-cu-cli'],
+    'dirs': [''],
+}
+
+docpaths = {'NSIGHT_DOC': '%(installdir)s/docs/pdf'}
+
+moduleclass = 'tools'

@@ -10,7 +10,7 @@ tools. PDT implements a standard program representation, the program database
 (PDB), that can be accessed in a uniform way through a class library supporting
 common PDB operations."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://www.cs.uoregon.edu/research/tau/pdt_releases']
 sources = ['pdtoolkit-%(version)s.tar.gz']
 checksums = ['2cad41fcabf4c79cab8780d3b87f7bb4']
