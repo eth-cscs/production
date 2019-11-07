@@ -1,0 +1,37 @@
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS)
+easyblock = 'JuliaBundle'
+
+name = 'JuliaExtensions'
+version = '1.2.0'
+cudaversion = '10.1'
+versionsuffix = '-cuda-%s' % cudaversion
+
+arch_name = 'gpu'
+
+homepage = 'https://julialang.org'
+description = 'Extensions for julia'
+
+toolchain = { 'name' : 'CrayGNU', 'version' : '19.10' }
+toolchainopts = {'pic': True, 'verbose': True}
+
+dependencies = [
+    ('Julia', version, versionsuffix),
+]
+
+exts_list = [
+    ('Plots.jl', '0.27.0', {
+        'source_tmpl': 'v0.27.0.tar.gz',
+        'source_urls': ['https://github.com/JuliaPlots/Plots.jl/archive/'],
+    }),
+    ('PyCall.jl', '1.91.2', {
+        'source_tmpl': 'v1.91.2.tar.gz',
+        'source_urls': ['https://github.com/JuliaPy/PyCall.jl/archive/'],
+    }),
+    ('HDF5.jl', '0.12.4', {
+        'source_tmpl': 'v0.12.4.tar.gz',
+        'source_urls': ['https://github.com/JuliaIO/HDF5.jl/archive/'],
+    }),
+]
+
+
+moduleclass = 'tools'
