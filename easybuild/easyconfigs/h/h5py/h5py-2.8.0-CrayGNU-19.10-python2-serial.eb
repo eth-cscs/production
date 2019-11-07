@@ -29,7 +29,8 @@ dependencies = [
 ]
 
 prebuildopts  = (
-    'python setup.py configure --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && '
+    "HDF_VERSION=$(echo ${CRAY_HDF5_VERSION} | awk -F . '{print $1\".\"$2\".\"$3}') && "
+    'python setup.py configure --hdf5-version=$HDF_VERSION --hdf5=$HDF5_DIR && '
 )
 
 sanity_check_paths = {
