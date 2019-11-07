@@ -19,4 +19,7 @@ sanity_check_paths={
     'dirs': ['include', 'linux-x86-64/lib']
 }
 
+# set custom LD_LIBRARY_PATH
+modextravars = {'LD_LIBRARY_PATH': '%(installdir)s/linux-x86-64/lib:$::env(LD_LIBRARY_PATH)'}
+
 moduleclass = 'devel'
