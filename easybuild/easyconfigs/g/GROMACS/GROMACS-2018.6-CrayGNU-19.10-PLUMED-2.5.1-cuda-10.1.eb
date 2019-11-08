@@ -30,7 +30,7 @@ patches = ['%(namelower)s-%(version_major)s.2.patch']
 builddependencies = [
     ('CMake', '3.14.5', '', True),
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('libxml2', '2.9.7'),
 ]
 dependencies = [
