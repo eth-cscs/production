@@ -114,10 +114,10 @@ packages:
     mpich:
         buildable: false
         modules:
-            mpich@3.2%gcc:   cray-mpich-abi/7.7.10
-            mpich@3.2%intel: cray-mpich-abi/7.7.10
-            mpich@3.2%cce:   cray-mpich-abi/7.7.10
-            mpich@3.2%pgi:   cray-mpich-abi/7.7.10
+            mpich@3.2%gcc:   cray-mpich/7.7.10
+            mpich@3.2%intel: cray-mpich/7.7.10
+            mpich@3.2%cce:   cray-mpich/7.7.10
+            mpich@3.2%pgi:   cray-mpich/7.7.10
     netcdf:
         buildable: false
         modules:
