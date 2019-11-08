@@ -3,7 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'COSMO_pompa'
 version = '31d7227'
-versionsuffix = '-cuda-10.1-cordex-double'
+versionsuffix = '-cuda-10.0-cordex-double'
 
 homepage = "https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)"
 description = """
