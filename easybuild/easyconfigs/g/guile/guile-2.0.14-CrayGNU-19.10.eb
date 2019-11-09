@@ -18,7 +18,6 @@ dependencies = [
     ('gc', '7.6.0'),
     ('libunistring', '0.9.10'),
     ('libffi', '3.2.1'),
-    ('libreadline', '7.0'),
     ('libtool', '2.4.6'),
 ]
 
