@@ -37,7 +37,7 @@ configopts = (
     "--with-hwloc=/usr/ "
     "--enable-dlopen "
     "--enable-cxx-exceptions "
-    "--with-cuda "
+    "--with-cuda=${EBROOTCUDA} "
     "--without-lsf "
     "--without-sge "
     "--enable-mpirun-prefix-by-default "

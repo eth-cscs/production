@@ -23,9 +23,10 @@ builddependencies = [
     ('CUDA', '10.1.243', '', True),
 ]
 
-configure_cmd = "./contrib/./configure-release"
+#configure_cmd = "./contrib/./configure-release"
+configure_cmd = "./configure"
 configopts = (
-    "--with-cuda "
+    "--with-cuda=${EBROOTCUDA} "
     "--disable-doxygen-doc "
 )
 

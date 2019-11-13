@@ -27,7 +27,7 @@ configopts = (
     "CFLAGS=-m64 "
     "CXXFLAGS=-m64 "
     "FCFLAGS=-m64 "
-    "--with-cuda "
+    "--with-cuda=${EBROOTCUDA} "
     "--with-hwloc=internal "
     "--with-pmi=/opt/slurm/default "
     "--with-ucx=${EBROOTUCX} "
