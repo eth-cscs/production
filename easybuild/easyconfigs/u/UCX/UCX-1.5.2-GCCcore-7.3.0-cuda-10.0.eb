@@ -24,7 +24,7 @@ builddependencies = [
     ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), EXTERNAL_MODULE),
 ]
 
-configopts = "--with-cuda "
+configopts = "--with-cuda=${EBROOTCUDA} "
 
 buildopts = 'V=1'
 
