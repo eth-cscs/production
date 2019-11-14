@@ -1,0 +1,45 @@
+# @author: marcelsc, gppezzi, victorusu
+easyblock = 'CmdCp'
+
+name = 'TensorFlow'
+version = '1.7.0'
+versionsuffix = '-cc-python3'
+
+homepage = 'https://www.tensorflow.org/'
+description = "An open-source software library for Machine Intelligence."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive/']
+sources = ['v%(version)s.tar.gz']
+patches = ['%(namelower)s-v1.7.0-python3-cscs.patch']
+
+builddependencies = [
+    ('wheel', '0.31.1', '-python3'),
+    ('Bazel', '0.11.1', '-python3'),
+]
+dependencies = [
+    ('SWIG', '3.0.12', '-python3'),
+    ('protobuf', '3.6.0', '-python3'),
+    ('backports.weakref', '1.0.post1', '-python3'),
+    ('Werkzeug', '0.14.1', '-python3'),
+    ('absl', '0.2.2', '-python3'),
+    ('dask', '0.18.1', '-python3'),
+]
+
+cmds_map = [('v%(version)s.tar.gz', 'export TEST_TMPDIR=/tmp/$USER/bazelout/ && export PYMAJVER=3 && export PYMINVER=6 && export PYREVVER=5.7 && unset CC && chmod +x configure-cscs.sh && ./configure-cscs.sh && bazel build --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 -c opt //%(namelower)s/tools/pip_package:build_pip_package //%(namelower)s:libtensorflow_cc.so &&bazel-bin/%(namelower)s/tools/pip_package/build_pip_package %(builddir)s &&pip install --no-deps --prefix  %(builddir)s %(builddir)s/%(namelower)s-%(version)s-cp36-cp36m-linux_x86_64.whl')]
+modextrapaths = {'PYTHONPATH': 'lib/python3.6/site-packages'}
+postinstallcmds = ['rm -rf /dev/shm/$USER/bazelout/']
+files_to_copy = [
+    (['%(builddir)s/%(namelower)s-%(version)s-cp36-cp36m-linux_x86_64.whl'], '%(installdir)s'),
+    (['%(builddir)s/bin'], '%(installdir)s'),
+    (['%(builddir)s/lib'], '%(installdir)s'),
+    (['%(builddir)s/%(namelower)s-%(version)s/bazel-out/k8-py3-opt'], '%(installdir)s'),
+]
+
+sanity_check_paths = {
+    'files': ['%(namelower)s-%(version)s-cp36-cp36m-linux_x86_64.whl'],
+    'dirs': ['%(installdir)s/lib/python3.6/site-packages'],
+}
+
+moduleclass = 'devel'

@@ -1,0 +1,27 @@
+easyblock = 'PythonPackage'
+
+name = 'Werkzeug'
+version = '0.14.1'
+versionsuffix = '-python3'
+
+homepage = 'https://pypi.python.org/pypi/Werkzeug'
+description = """Werkzeug started as simple collection of various utilities for WSGI
+applications and has become one of the most advanced WSGI utility modules."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+]
+
+req_py_majver = 3
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.6/site-packages'],
+}
+
+moduleclass = 'tools'
