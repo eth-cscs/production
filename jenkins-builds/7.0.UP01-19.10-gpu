@@ -6,7 +6,7 @@
  CDO-1.9.5-CrayIntel-19.10.eb
  CMake-3.14.5.eb                                    --set-default-module
  CP2K-6.1-CrayGNU-19.10-cuda-10.1.eb                --set-default-module
- CPMD-4.1-CrayIntel-19.10.eb                        --set-default-module   
+ CPMD-4.1-CrayIntel-19.10.eb                        --set-default-module
  dask-2.2.0-CrayGNU-19.10-python3.eb                --set-default-module
  GREASY-19.03-cscs-CrayGNU-19.10.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.10-cuda-10.1.eb          --set-default-module
@@ -46,6 +46,7 @@
  PyExtensions-3.6.5.6-CrayGNU-19.10.eb
  Python-bare-3.7.3.eb                               --hidden
  QuantumESPRESSO-6.4.1-CrayIntel-19.10-cuda-10.1.eb --set-default-module
+ singularity-3.4.2-daint.eb
  Spark-2.3.1-CrayGNU-19.10-Hadoop-2.7.eb            --set-default-module
  TensorFlow-1.14.0-CrayGNU-19.10-cuda-10.1.168-python3.eb --set-default-module
  VASP-5.4.4-CrayIntel-19.10-cuda-10.1.eb            --set-default-module
