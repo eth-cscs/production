@@ -1,0 +1,29 @@
+# @author: sarafael, gppezzi, marcelsc
+easyblock = 'Binary'
+
+name = 'Bazel'
+version = '0.11.1'
+versionsuffix = '-python3'
+
+homepage = 'http://baze.io/'
+description = "Correct, reproducible, fast builds for everyone"
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = ['https://github.com/bazelbuild/%(namelower)s/releases/download/%(version)s']
+sources = ['%(namelower)s-%(version)s-installer-linux-%(arch)s.sh']  # ('java/jdk1.8.0_51', EXTERNAL_MODULE),
+
+dependencies = [
+    ('SWIG', '3.0.12', '-python3'),
+]
+
+osdependencies = ['java']
+
+install_cmd = "chmod +x %(namelower)s-%(version)s-installer-linux-%(arch)s.sh && ./%(namelower)s-%(version)s-installer-linux-%(arch)s.sh --bin=%(installdir)s --base=%(installdir)s"
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'
