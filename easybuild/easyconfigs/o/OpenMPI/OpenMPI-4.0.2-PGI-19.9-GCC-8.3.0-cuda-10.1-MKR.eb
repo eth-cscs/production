@@ -2,19 +2,13 @@
 easyblock = 'ConfigureMake'
 
 name = 'OpenMPI'
-version = "4.0.1"
-cudamajversion = '10'
-cudaminversion = '0'
-cudarevversion = '130'
-cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
-cudaversion = '%s.%s' % (cudarelease, cudarevversion)
-versionsuffix = '-cuda-%s' % cudarelease
+version = '4.0.2'
+versionsuffix = '-cuda-10.1-MKR'
 
 homepage = 'https://www.open-mpi.org/'
-description = """The Open MPI Project is an open source MPI-3 implementation."""
+description = "The Open MPI Project is an open source MPI-3 implementation."
 
-toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.3.0-2.30'}
-toolchainopts = {'vectorize': False}
+toolchain = {'name': 'PGI', 'version': '19.9-GCC-8.3.0'}
 
 source_urls = [
     'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
@@ -22,8 +16,8 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('cuda%s/toolkit/%s' % (cudarelease, cudaversion), EXTERNAL_MODULE),
-    ('UCX', '1.5.2', '-cuda-%s' % cudarelease, ('GCCcore', '7.3.0')),
+    ('CUDA', '10.1.243', '', True),
+    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
 ]
 
 configopts = (
@@ -33,7 +27,7 @@ configopts = (
     "CFLAGS=-m64 "
     "CXXFLAGS=-m64 "
     "FCFLAGS=-m64 "
-    "--with-cuda=${EBROOTCUDA} "
+    "--with-cuda=${CUDA_ROOT} "
     "--with-hwloc=internal "
     "--with-pmi=/opt/slurm/default "
     "--with-ucx=${EBROOTUCX} "
@@ -61,16 +55,18 @@ postinstallcmds = [
     "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
     "sed -i -e '50 i pml=ucx' %(installdir)s/etc/%(namelower)s-mca-params.conf",
 ]
-
 modtclfooter = """
     setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
 """
 
-libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
-    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
-             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
-             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 'lib/libompitrace.so', 
+        'lib/libopen-pal.so', 'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 'include/mpi.h', 
+        'include/mpi_portable_platform.h'
+    ],
     'dirs': [],
 }
 

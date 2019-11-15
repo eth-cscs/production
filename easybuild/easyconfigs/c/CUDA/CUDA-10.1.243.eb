@@ -17,4 +17,8 @@ sources = ['%%(namelower)s_%%(version)s_%s_linux.run' % local_nv_version]
 checksums = []
 postinstallcmds = ['rm /tmp/cuda-installer.log']
 
+modtclfooter="""
+    prepend-path LD_LIBRARY_PATH /cm/local/apps/cuda/libs/current/lib64
+"""
+
 moduleclass = 'system'
