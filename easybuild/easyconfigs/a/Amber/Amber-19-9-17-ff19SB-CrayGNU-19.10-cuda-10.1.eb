@@ -4,7 +4,7 @@ easyblock = 'MakeCp'
 
 name = 'Amber'
 local_patchlevels = (9, 17) # (AmberTools, Amber)
-version = '19-%s-%s--ff19SB' % (local_patchlevels[0], local_patchlevels[1])
+version = '19-%s-%s-ff19SB' % (local_patchlevels[0], local_patchlevels[1])
 local_cudaversion = '10.1'
 versionsuffix = '-cuda-%s' % local_cudaversion
 
