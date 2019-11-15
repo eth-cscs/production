@@ -1,0 +1,23 @@
+diff --git a/src/gromacs/mdrun/md.cpp b/src/gromacs/mdrun/md.cpp
+index a49a15df5..23ade5375 100644
+--- a/src/gromacs/mdrun/md.cpp
++++ b/src/gromacs/mdrun/md.cpp
+@@ -41,6 +41,9 @@
+  * \author David van der Spoel <david.vanderspoel@icm.uu.se>
+  * \ingroup module_mdrun
+  */
++
++#include <scorep/SCOREP_User.h>
++
+ #include "gmxpre.h"
+ 
+ #include <cinttypes>
+@@ -683,6 +686,8 @@ void gmx::Integrator::do_md()
+     while (!bLastStep)
+     {
+ 
++        SCOREP_USER_REGION("mdloop", SCOREP_USER_REGION_TYPE_LOOP);
++
+         /* Determine if this is a neighbor search step */
+         bNStList = (ir->nstlist > 0  && step % ir->nstlist == 0);
+ 
