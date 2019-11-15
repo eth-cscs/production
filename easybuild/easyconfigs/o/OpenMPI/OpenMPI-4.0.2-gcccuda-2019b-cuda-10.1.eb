@@ -1,8 +1,7 @@
 # Modified for Tsa/Arolla by MKr - July 2019
 name = 'OpenMPI'
-version = "4.0.2"
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+version = '4.0.2'
+versionsuffix = '-cuda-10.1'
 
 homepage = 'https://www.open-mpi.org/'
 description = """
@@ -16,33 +15,33 @@ source_urls = [
 ]
 sources = [SOURCELOWER_TAR_GZ]
 
-dependencies = [
+builddependencies = [
+    ('CUDA', '10.1.243', '', True),
     ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
 ]
 
 configopts = (
-    "--enable-shared "
-    "--with-pmi=/opt/slurm/default "
-    "--enable-static "
-    "--enable-mpi-cxx "
-    "--with-zlib "
-    "--without-libfabric "
-    "--with-ucx=${EBROOTUCX} "
-    "--without-mxm "
-    "--without-verbs "
-    "--without-psm2 "
-    "--without-alps "
-    "--without-tm "
-    "--disable-memchecker "
-    "--with-hwloc=/usr/ "
-    "--enable-dlopen "
-    "--enable-cxx-exceptions "
     "--with-cuda=${EBROOTCUDA} "
+    "--with-hwloc=internal "
+    "--with-pmi=/opt/slurm/default "
+    "--with-ucx=${EBROOTUCX} "
+    "--with-zlib "
+    "--without-alps "
+    "--without-libfabric "
     "--without-lsf "
+    "--without-psm2 "
     "--without-sge "
-    "--enable-mpirun-prefix-by-default "
+    "--without-tm "
+    "--without-verbs "
+    "--enable-cxx-exceptions "
+    "--enable-dlopen "
     "--enable-mca-no-build=btl-uct "
+    "--enable-mpi-cxx "
+    "--enable-mpirun-prefix-by-default "
     "--enable-mpi1-compatibility "
+    "--enable-shared "
+    "--enable-static "
+    "--disable-memchecker "
 )
 
 parallel = 8

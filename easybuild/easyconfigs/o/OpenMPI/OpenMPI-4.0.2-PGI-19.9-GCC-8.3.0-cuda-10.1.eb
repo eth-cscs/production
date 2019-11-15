@@ -1,12 +1,12 @@
 # Modified for Tsa/Arolla by MKr - July 2019
-easyblock = 'ConfigureMake'
-
 name = 'OpenMPI'
 version = '4.0.2'
 versionsuffix = '-cuda-10.1'
 
 homepage = 'https://www.open-mpi.org/'
-description = "The Open MPI Project is an open source MPI-3 implementation."
+description = """
+    The Open MPI Project is an open source MPI-3 implementation.
+"""
 
 toolchain = {'name': 'PGI', 'version': '19.9-GCC-8.3.0'}
 
@@ -23,7 +23,7 @@ builddependencies = [
 configopts = (
     "CC=pgcc "
     "CXX=pgc++ "
-    "FC=pgf90 "
+    "FC=pgfortran "
     "CFLAGS=-m64 "
     "CXXFLAGS=-m64 "
     "FCFLAGS=-m64 "
@@ -34,7 +34,6 @@ configopts = (
     "--with-zlib "
     "--without-alps "
     "--without-libfabric "
-    "--without-loadleveler "
     "--without-lsf "
     "--without-mxm "
     "--without-psm2 "
@@ -51,13 +50,16 @@ configopts = (
     "--disable-memchecker "
 )
 
-modtclfooter = """
-    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
-"""
+parallel = 8
+
 postinstallcmds = [
     "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
     "sed -i -e '50 i pml=ucx' %(installdir)s/etc/%(namelower)s-mca-params.conf",
 ]
+
+modtclfooter = """
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+"""
 
 sanity_check_paths = {
     'files': [
