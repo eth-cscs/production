@@ -1,6 +1,4 @@
 # Modified for Tsa/Arolla by MKr - July 2019
-easyblock = 'ConfigureMake'
-
 name = 'OpenMPI'
 version = "4.0.1"
 cudamajversion = '10'
@@ -11,7 +9,9 @@ cudaversion = '%s.%s' % (cudarelease, cudarevversion)
 versionsuffix = '-cuda-%s' % cudarelease
 
 homepage = 'https://www.open-mpi.org/'
-description = """The Open MPI Project is an open source MPI-3 implementation."""
+description = """
+    The Open MPI Project is an open source MPI-3 implementation.
+"""
 
 toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.3.0-2.30'}
 toolchainopts = {'vectorize': False}
@@ -29,7 +29,7 @@ builddependencies = [
 configopts = (
     "CC=pgcc "
     "CXX=pgc++ "
-    "FC=pgf90 "
+    "FC=pgfortran "
     "CFLAGS=-m64 "
     "CXXFLAGS=-m64 "
     "FCFLAGS=-m64 "
@@ -40,7 +40,6 @@ configopts = (
     "--with-zlib "
     "--without-alps "
     "--without-libfabric "
-    "--without-loadleveler "
     "--without-lsf "
     "--without-mxm "
     "--without-psm2 "
@@ -56,6 +55,8 @@ configopts = (
     "--enable-static "
     "--disable-memchecker "
 )
+
+parallel = 8
 
 postinstallcmds = [
     "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
