@@ -1,0 +1,41 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SIRIUS'
+version = '6.4.2'
+cudaversion = 10.1
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://electronic-structure.github.io/SIRIUS/'
+description = """Domain specific library for electronic structure calculations."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
+
+source_urls = ['https://github.com/electronic-structure/SIRIUS/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [('CMake', '3.14.5', '', True)]
+
+dependencies = [
+  ('GSL', '2.5'),
+  ('libxc', '4.3.4'),
+  ('spglib','1.14.1'),
+  ('ELPA','2019.05.001'),
+  ('cray-hdf5', EXTERNAL_MODULE),
+  ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' % cudaversion , EXTERNAL_MODULE),
+  ('magma', '2.5.1', '-cuda-%s' % cudaversion),
+  ('SpFFT', '0.9.8', '-cuda-%s' % cudaversion)
+]
+
+separate_build_dir = True
+
+common_prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && module list &&'
+
+prebuildopts = [ common_prebuildopts ]
+
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=0 -DUSE_MAGMA=1 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DGPU_MODEL='P100' -DSpFFT_DIR=$EBROOTSPFFT/lib/cmake/SpFFT"
+
+modextrapaths = {'CPATH': ['include/sirius']}
+
+moduleclass = 'chem'
