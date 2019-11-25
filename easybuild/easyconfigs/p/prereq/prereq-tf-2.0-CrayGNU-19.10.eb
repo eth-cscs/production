@@ -1,18 +1,18 @@
 # contributed by mschoengens and sarafael (CSCS)
 easyblock = 'Bundle'
 
-name = 'PyExtensionsDS'
+name = 'prereq'
 py_maj_ver = '3'
 py_min_ver = '6'
 py_rev_ver = '5.7'
 pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-version = '%s' % pyver
+version = 'tf-2.0'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
 
-toolchain = {'name': 'CrayGNU', 'version': '19.09'}
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
