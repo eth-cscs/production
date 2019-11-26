@@ -39,7 +39,7 @@ stage('Build Stage') {
         def machineName = machine.name
         def buildPath = machine.buildPath
         def machinePrefix = machine.prefixProduction
-        def machineModulesUnuseProduction = machine.modulesUnuseProduction
+        def machineModulesUnuse = machine.unusePath
         def machineModulesProduction = machine.modulesProduction
 
         builds[machineName] = {
@@ -54,7 +54,7 @@ stage('Build Stage') {
                 def buildPathExpanded = sh(returnStdout: true,
                                            script: """$loginBash
                                                       echo $buildPath""").trim()
-                def moduleUnuse = machineModulesUnuseProduction ? "module unuse $machineModulesUnuseProduction" : ""
+                def moduleUnuse = machineModulesUnuse ? "module unuse $machineModulesUnuse" : ""
                 def moduleUse = machineModulesProduction ? "module use $machineModulesProduction" : ""
                 def command = """$loginBash
                                  $moduleUnuse
