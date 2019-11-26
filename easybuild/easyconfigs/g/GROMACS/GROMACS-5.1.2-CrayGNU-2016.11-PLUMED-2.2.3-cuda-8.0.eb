@@ -1,0 +1,36 @@
+# contributed by Luca Marsella (CSCS)
+#         and Victor Holanda Rusu (CSCS)
+#
+name = 'GROMACS'
+version = "5.1.2"
+cudaversion = '8.0'
+versionsuffix = '-PLUMED-2.2.3-cuda-%s' % cudaversion
+
+homepage = 'http://www.gromacs.org'
+description = """GROMACS is a versatile package to perform molecular dynamics,
+ i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False}
+
+source_urls = ['ftp://ftp.gromacs.org/pub/gromacs/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = ' cd ../gromacs-%(version)s && plumed-patch -p --runtime --shared <<< 5 && cd - && '
+
+dependencies = [ ('PLUMED', '2.2.3'),
+                 ('Boost', '1.61.0', '-Python-2.7.12') ]
+
+# CMake and libxml2 dependencies with dummy toolchain
+builddependencies = [
+    ('CMake', '3.6.0'),
+    ('cudatoolkit/%s.34_2.2.5_g8ce7a9a-2.1' %cudaversion, EXTERNAL_MODULE),
+    ('PLUMED' , '2.2.3'),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('Boost', '1.61.0', '-Python-2.7.12'),
+    ('libxml2', '2.9.3'),
+]
+
+runtest = False
+
+moduleclass = 'bio'

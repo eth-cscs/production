@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'abcpy'
+version = '0.3.0'
+pyver = '3.5.2'
+versionsuffix= '-Python-%(pyver)s'
+
+homepage = 'http://github.com/eth-cscs/abcpy'
+description = """Python library for Approximate Bayesian Computation."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = ['https://github.com/eth-cscs/abcpy/archive/']
+sources = ['v%(version)s.tar.gz']
+use_pip = True
+
+dependencies = [
+    ('Python', pyver),
+    ('scikit-learn', '0.18.2', '-Python-%(pyver)s'),
+    ('glmnet', '2.0.0', '-Python-%(pyver)s'),
+    ('cloudpickle', '0.3.1', '-Python-%(pyver)s'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'devel'

@@ -1,0 +1,31 @@
+# modified by MKr (CSCS) in February 2019 for Fieldextra Build on Kesch
+name = 'HDF5'
+version = '1.8.18'
+versionsuffix = '-serial'
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """
+    HDF5 is a unique technology suite that makes possible the management of 
+    extremely large and complex data collections.
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchainopts = {'optarch': True, 'pic': True, 'usempi': False}
+
+source_urls = [
+    'http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-%(version)s/src'
+]
+sources = [SOURCELOWER_TAR_BZ2]
+
+configopts = (
+    'CXXFLAGS="$CXXFLAGS '
+    '-DHDF5_ENABLE_Z_LIB_SUPPORT=ON '
+    '-DZLIB_INCLUDE_DIR=${EBROOTZLIB}/include '
+    '-DZLIB_LIBRARY=${EBROOTZLIB}/lib/libz.so"'
+)
+
+dependencies = [
+    ('zlib', '1.2.11'),
+]
+
+moduleclass = 'data'

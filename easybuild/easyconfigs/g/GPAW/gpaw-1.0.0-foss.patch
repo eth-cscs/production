@@ -1,0 +1,48 @@
+diff -Nru gpaw-1.0.0.orig/config.py gpaw-1.0.0/config.py
+--- gpaw-1.0.0.orig/config.py	2016-03-14 15:21:06.000000000 +0100
++++ gpaw-1.0.0/config.py	2016-10-13 17:58:23.824507031 +0200
+@@ -133,7 +133,7 @@
+                     libdir = dir
+                     break
+             openblas = False
+-            for dir in ['/usr/lib', '/usr/local/lib', '/usr/lib64']:
++            for dir in ['/usr/lib', '/usr/local/lib', '/usr/lib64', os.environ["EBROOTOPENBLAS"] + '/lib']:
+                 if glob(join(dir, 'libopenblas.so')) != []:
+                     openblas = True
+                     libdir = dir
+diff -Nru gpaw-1.0.0.orig/customize.py gpaw-1.0.0/customize.py
+--- gpaw-1.0.0.orig/customize.py	2016-02-17 08:10:53.000000000 +0100
++++ gpaw-1.0.0/customize.py	2016-10-13 18:02:28.537278296 +0200
+@@ -32,16 +32,17 @@
+ # mpicompiler = 'mpicc'  # use None if you don't want to build a gpaw-python
+ # mpilinker = 'mpicc'
+ # platform_id = ''
+-# scalapack = False
++scalapack = True
+ # hdf5 = False
+ 
+ # Use ScaLAPACK:
+ # Warning! At least scalapack 2.0.1 is required!
+ # See https://trac.fysik.dtu.dk/projects/gpaw/ticket/230
+ if scalapack:
+-    libraries += ['scalapack-openmpi',
+-                  'blacsCinit-openmpi',
+-                  'blacs-openmpi']
++    libraries += ['scalapack',
++                  'gfortran', 
++                  'readline',
++                  'openblas']
+     define_macros += [('GPAW_NO_UNDERSCORE_CBLACS', '1')]
+     define_macros += [('GPAW_NO_UNDERSCORE_CSCALAPACK', '1')]
+ 
+@@ -58,8 +59,8 @@
+         
+ # - dynamic linking (requires rpath or setting LD_LIBRARY_PATH at runtime):
+ if 0:
+-    include_dirs += ['/home/user/libxc-2.0.1-1/include']
+-    library_dirs += ['/home/user/libxc-2.0.1-1/lib']
++    include_dirs += [os.environ["EBROOTOPENBLAS"] + '/include']
++    library_dirs += [os.environ["EBROOTOPENBLAS"] + '/lib']
+     # You can use rpath to avoid changing LD_LIBRARY_PATH:
+     # extra_link_args += ['-Wl,-rpath=/home/user/libxc-2.0.1-1/lib']
+     if 'xc' not in libraries:

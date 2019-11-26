@@ -1,0 +1,27 @@
+# jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'nvptx-tools'
+version = '5f6f343'
+cudaversion = '9.1'
+versionsuffix = '-cuda-%s' % cudaversion
+homepage = 'https://github.com/MentorEmbedded/nvptx-tools'
+description = """a collection of tools for use with nvptx-none GCC toolchains:
+ https://gcc.gnu.org/wiki/nvptx"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['https://github.com/MentorEmbedded/nvptx-tools/archive']
+sources = ['master.zip']
+checksums = ['f2a59471853797ed272133206b183ce4']
+configopts  = "--with-cuda-driver-include=$CUDATOOLKIT_HOME/include"
+configopts += "--with-cuda-driver-lib=$CUDATOOLKIT_HOME/lib64"
+builddependencies = [ ('cudatoolkit/9.1.85_3.18-6.0.7.0_5.1__g2eb7c52',EXTERNAL_MODULE) ]
+
+sanity_check_paths = {
+    'files': ['bin/nvptx-none-ld'],
+    'dirs': []
+}
+
+moduleclass = 'devel'
+

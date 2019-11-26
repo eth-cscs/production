@@ -1,0 +1,23 @@
+# @author: gppezzi
+
+easyblock = "Tarball"
+
+name = 'CUB'
+version = '1.7.4'
+
+homepage = 'http://nvlabs.github.com/cub/'
+description = """CUB is a flexible library of cooperative threadblock primitives and other utilities for CUDA kernel programming."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/NVlabs/cub/archive/']
+
+unpack_options = '--strip 1'
+
+sanity_check_paths = {
+    'files': ['cub/cub.cuh'],
+    'dirs': ['cub']
+}
+
+moduleclass = 'devel'

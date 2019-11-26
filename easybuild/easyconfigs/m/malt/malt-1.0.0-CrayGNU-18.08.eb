@@ -1,0 +1,31 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'malt'
+version = '1.0.0'
+homepage = 'https://memtt.github.io/malt/'
+description = """MALT is a memory profiling tool used to find where you
+allocate your memory and how."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/memtt/malt/archive']
+sources = ['v%(version)s.tar.gz']
+separate_build_dir = True
+
+dependencies = [
+    ('libunwind', '1.2.1', '', True),
+    ('libelf', '0.8.13', '', True),
+    ('nodejs', '10.15.1')
+]
+
+configopts  = '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
+configopts += '-DLIBELF_PREFIX=$EBROOTLIBELF '
+configopts += '-DLIBUNWIND_PREFIX=$EBROOTLIBUNWIND '
+
+sanity_check_paths = {
+    'files': ['bin/malt'],
+    'dirs': []
+}
+
+moduleclass = 'tools'

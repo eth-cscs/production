@@ -1,0 +1,47 @@
+# Created by Matthias Kraushaar (CSCS) - 04/01/2019
+easyblock = 'MakeCp'
+
+name = 'rttov'
+version = '11.2.0'
+
+homepage = 'https://www.nwpsaf.eu/site/software/rttov/'
+description = """
+    RTTOV (Radiative Transfer for TOVS) is a very fast radiative transfer model for 
+    passive visible, infrared and microwave downward-viewing satellite radiometers, 
+    spectrometers and interferometers. It is a FORTRAN 90 code for simulating 
+    satellite radiances, designed to be incorporated within user applications.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: Library provided with Fieldextra
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/r/%(name)s'
+                 '/%(name)s-%(version)s.tar.gz'}
+]
+
+parallel = 1
+
+prebuildopts = (
+    'cd src && '
+    'make ARCH=gfortran clean && '
+)
+
+buildopts = ['ARCH=gfortran']
+
+files_to_copy = [
+    (['./bin'], '.'),
+    (['./lib'], '.'),
+    (['./mod'], '.'),
+    (['./include'], '.'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin', 'lib', 'include']
+}
+
+moduleclass = 'lib'

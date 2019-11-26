@@ -1,0 +1,10 @@
+diff -Nru xpress-apex-2.0.1.orig/src/apex/CMakeLists.standalone xpress-apex-2.0.1/src/apex/CMakeLists.standalone
+--- xpress-apex-2.0.1.orig/src/apex/CMakeLists.standalone	2018-07-02 19:38:57.000000000 +0200
++++ xpress-apex-2.0.1/src/apex/CMakeLists.standalone	2018-07-16 16:42:18.269312000 +0200
+@@ -89,5 +89,5 @@
+     task_identifier.hpp
+     DESTINATION include)
+ 
+-INSTALL(TARGETS apex RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
++INSTALL(TARGETS apex taudummy RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+ 

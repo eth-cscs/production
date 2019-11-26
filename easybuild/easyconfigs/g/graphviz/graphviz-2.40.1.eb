@@ -1,0 +1,20 @@
+easyblock = 'ConfigureMake'
+
+name = 'graphviz'
+version = '2.40.1'
+
+homepage = 'http://www.graphviz.org/Download_source.php'
+description = """Graphviz is open source graph visualization software."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES']
+sources = ['%(name)s.tar.gz']
+checksums = ['4ea6fd64603536406166600bcc296fc8']
+
+sanity_check_paths = {
+    'files': ['bin/dot'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

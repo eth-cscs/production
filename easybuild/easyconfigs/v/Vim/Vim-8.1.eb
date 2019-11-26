@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'Vim'
+version = '8.1'
+
+homepage = 'http://www.vim.org'
+description = """ Vim is an advanced text editor that seeks to provide the power 
+ of the de-facto Unix editor 'Vi', with a more complete feature set. """
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['http://ftp.vim.org/pub/vim/unix/']
+sources = [SOURCELOWER_TAR_BZ2]
+
+# won't work with dummy:
+#builddependencies = [( 'ncurses', '6.1' )]
+# => mll ncurses/6.1
+
+preconfigopts  = 'CFLAGS="-I\$EBROOTNCURSES/include" '
+preconfigopts += 'LIBS="-L\$EBROOTNCURSES/lib -lncurses" '
+configopts = '--with-features=huge '
+
+sanity_check_paths = {
+    'files': ['bin/vim','bin/vimdiff'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

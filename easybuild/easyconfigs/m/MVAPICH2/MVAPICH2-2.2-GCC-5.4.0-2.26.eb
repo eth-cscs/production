@@ -1,0 +1,38 @@
+name = 'MVAPICH2'
+version = '2.2'
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = """MVAPICH2/2.2 (includes MPICH-3.1.4)"""
+
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['939b65ebe5b89a5bc822cdab0f31f96e']
+
+configopts = [
+"--enable-threads=multiple \
+--enable-rdma-cm \
+--enable-smpcoll \
+--disable-xrc \
+--with-device=ch3:mrail \
+--enable-mcast \
+--enable-g=dbg \
+--enable-debuginfo \
+--with-cluster-size=level"
+]
+
+withhwloc = 'True'
+#withlimic2 = 'True'
+#withmpe = 'True'
+
+builddependencies = [ ('Bison', '3.0.4', '', True) ]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+
+moduleclass = 'mpi'

@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'ctags'
+version = '5.8'
+
+homepage = 'http://ctags.sourceforge.net'
+description = """Ctags generates an index (or tag) file of language objects found in source files that allows these items to be quickly and easily located by a text editor or other utility."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchainopts = {'pic': True}
+
+sources = [SOURCE_TAR_GZ]
+# http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
+source_urls = ['http://prdownloads.sourceforge.net/ctags/']
+
+# skipsteps = ['configure']
+# buildopts = 'PREFIX=%(installdir)s'
+# buildopts = 'CC="$CC" CFLAGS="$CFLAGS -std=c99" PREFIX=%(installdir)s'
+# installopts = 'PREFIX=%(installdir)s'
+
+sanity_check_paths = {
+    'files': [ "bin/ctags" ],
+    'dirs': [ "bin", "share/man/man1"]
+}
+
+# maxparallel = 1
+
+moduleclass = 'devel'

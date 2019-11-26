@@ -1,0 +1,35 @@
+# contributed by Guilherme Peretti Pezzi, Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '1.8.1' # = '13660'
+
+homepage = 'https://code.zmaw.de/projects/cdo'
+description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
+checksums = [ '54498438de788f245d47499efad7966c' ]
+
+# do not use cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
+# CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
+# No MPI support
+dependencies = [
+    ('netCDF', '4.4.1.1'),
+    ('netCDF-Fortran', '4.4.4'),
+    ('cray-hdf5/1.8.16', EXTERNAL_MODULE),
+]
+
+#preconfigopts = 'export NC_CONFIG=`which nc-config` && '
+preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
+
+configopts = "--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDFMINFORTRAN "
+
+sanity_check_paths = {
+    'files': ["bin/cdo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

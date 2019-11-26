@@ -1,0 +1,25 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'Serialbox'
+version = '2.4.1'
+
+homepage = 'https://github.com/eth-cscs/serialbox2'
+description = """Serialbox is a serialization library and tools for C/C++,
+Python3 and Fortran."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+source_urls = ['https://github.com/eth-cscs/serialbox2/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('Boost', '1.67.0'),
+]
+
+configopts = "-DSERIALBOX_ENABLE_FORTRAN=ON"
+separate_build_dir = True
+parallel = 4
+
+moduleclass = 'devel'
+

@@ -1,0 +1,73 @@
+# @author: maximem, gppezzi and sarafael
+
+easyblock = "CmdCp"
+
+name = 'CNTK'
+version = '2.6'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, '5.1')
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+cudaver = '9.1'
+
+homepage = 'https://www.microsoft.com/en-us/research/product/cognitive-toolkit/'
+description = """The Microsoft Cognitive Toolkit."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True}
+
+sources = [{
+    'filename': 'cntk-2.6.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Microsoft',
+        'repo_name': 'CNTK',
+        'tag': 'v2.6',
+        'recursive': 'True',
+        },
+    }]
+
+builddir = '%(builddir)s'
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('mklml', '0.14'),
+    ('protobuf-core', '3.1.0'),
+    ('zlib', '1.2.11'),
+    ('libzip', '1.5.1'),
+    ('Boost', '1.67.0','-python3'),
+    ('CUB', '1.7.4'),
+    ('cuDNN', '7.4.2', '-cuda-%s' % cudaver, True),
+]
+
+buildcmd = 'mkdir -p %(builddir)s/CNTK/build/release && cd %(builddir)s/CNTK/build/release && '
+buildcmd += 'sed -i "s#cuda/include/cudnn.h#include/cudnn.h#g" ../../configure && '
+buildcmd += 'sed -i "s#lmultiverso#lmultiverso -L$EBROOTPROTOBUFMINCORE/lib -lprotobuf#g" ../../Makefile && '
+buildcmd += 'sed -i "s/libprotobuf.a/libprotobuf.so/g" ../../configure && '
+buildcmd += 'sed -i "s/libprotobuf.a/libprotobuf.so/g" ../../Makefile && '
+buildcmd += 'export MPI_EXTRA_LIBRARY=$CRAY_MPICH_DIR/lib/libmpichcxx.so && '
+buildcmd += '../../configure --cuda=yes --mpi=yes --with-cuda=$CUDATOOLKIT_HOME --with-mpi=$MPICH_DIR '
+buildcmd += '--with-mkl=$EBROOTMKLML --with-cub=$EBROOTCUB --with-cudnn=$EBROOTCUDNN '
+buildcmd +=  '--with-libzip=$EBROOTLIBZIP --with-boost=$EBROOTBOOST --with-protobuf=$EBROOTPROTOBUFMINCORE '
+buildcmd += '--with-gdk-include=$CUDATOOLKIT_HOME/include --with-gdk-nvml-lib=/opt/cray/nvidia/default/lib64/ && '
+buildcmd += 'sed -i "s#CXX = \$(MPI_PATH)/bin/mpic++#CXX = \$(CRAYPE_DIR)/bin/CC#g" ../../Makefile && '
+buildcmd += 'sed -i "s#-DCMAKE_CXX_COMPILER=\$(DEFAULT_CXX)#-DCMAKE_CXX_COMPILER=\$($CXX) -DMPI_LIBRARY=\$(CRAY_MPICH_DIR)/lib/libmpich.so#g" ../../Makefile && '
+buildcmd += 'sed -i "s#-Werror -fcheck-new#-fcheck-new#g" ../../Makefile && '
+buildcmd += 'make -j 16'
+
+buildininstalldir = True
+
+cmds_map = [('.*', buildcmd)]
+
+files_to_copy = [] 
+
+modextrapaths = {'PATH': 'CNTK-%s/build/bin' % version}
+
+sanity_check_paths = {
+    'files': ['CNTK/build/release/bin/cntk'],
+    'dirs': ['']
+}
+
+moduleclass = 'devel'

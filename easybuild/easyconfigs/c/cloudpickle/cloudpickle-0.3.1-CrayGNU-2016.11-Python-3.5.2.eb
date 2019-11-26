@@ -1,0 +1,25 @@
+easyblock = 'PythonPackage'
+
+name = 'cloudpickle'
+version = '0.3.1'
+pyver = '3.5.2'
+versionsuffix= '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/cloudpickle/0.3.1'
+description = """Extended pickling support for Python objects"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', pyver),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'devel'

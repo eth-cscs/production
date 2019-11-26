@@ -1,0 +1,77 @@
+# @author: gppezzi
+
+name = 'R'
+version = '3.3.2'
+
+libx11 = 'libX11'
+libxver = '1.6.3'
+versionsuffix = '-%s-%s' % (libx11, libxver)
+
+homepage = 'http://www.r-project.org/'
+
+description = """R is a free software environment for statistical computing and
+graphics."""
+
+toolchain = {'name': 'gmvolf', 'version': '15.11'}
+
+source_urls = ['http://stat.ethz.ch/CRAN/src/base/R-%(version_major)s']
+sources = [SOURCE_TAR_GZ]
+
+preconfigopts = 'BLAS_LIBS="$LIBBLAS" LAPACK_LIBS="$LIBLAPACK"'     # gmvolf loads OpenBLAS
+configopts = "--with-lapack --with-blas --with-pic --enable-threads --with-x=yes --enable-R-shlib"
+# some recommended packages may fail in a parallel build (e.g. Matrix), and we're installing them anyway below
+configopts += " --with-recommended-packages=no"
+
+# patches = ['R-3.2.4-gmvolf-15.11.patch']
+
+builddependencies = [ 
+    ('bzip2', '1.0.6'),
+    ('XZ', '5.2.3', '', True),
+    ('PCRE', '8.38', '', True),
+    ('cURL', '7.48.0', '', True),
+]
+
+dependencies = [
+    (libx11, libxver),
+    ('libreadline', '6.3'),
+    ('ncurses', '5.9'),
+#   ('libpng', '1.6.28'),               # for plotting in R
+    ('libjpeg-turbo', '1.4.0'),         # for plottting in R
+    ('Java', '1.7.0_80', '', True),    # Java bindings are built if Java is found, might as well provide it
+    ('GDAL', '1.9.2'),                  # for rgdal
+    ('PROJ', '4.9.2'),                  # for rgdal
+    ('GEOS', '3.6.0'),                  # for rgeos
+]
+
+name_tmpl = '%(name)s_%(version)s.tar.gz'
+ext_options = {
+    'source_urls': [
+        'http://cran.r-project.org/src/contrib/Archive/%(name)s',  # package archive
+        'http://cran.r-project.org/src/contrib/',  # current version of packages
+        'http://cran.freestatistics.org/src/contrib',  # mirror alternative for current packages
+    ],
+    'source_tmpl': name_tmpl,
+}
+
+exts_list = [
+    # default libraries, only here to sanity check their presence
+    'base',
+    'datasets',
+    'graphics',
+    'grDevices',
+    'grid',
+    'methods',
+    'splines',
+    'stats',
+    'stats4',
+    'tools',
+    'utils',
+    # non-standard libraries, should be specified with fixed versions!
+    ('lattice', '0.20-34', ext_options),
+    ('sp', '1.2-4', ext_options),
+    ('rgdal', '1.2-5', ext_options),
+    ('rgeos', '0.3-22' , ext_options),
+    ('rJava', '0.9-8', ext_options),
+]
+
+moduleclass = 'lang'

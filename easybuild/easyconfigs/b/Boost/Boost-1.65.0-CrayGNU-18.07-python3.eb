@@ -1,0 +1,34 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.65.0'
+versionsuffix = '-python3'
+
+homepage = 'http://www.boost.org/'
+description = """Boost provides free peer-reviewed portable C++ source
+libraries."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.07'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
+source_urls = ['https://sourceforge.net/projects/%(namelower)s/files/%(namelower)s/%(version)s']
+
+configopts  = ' --with-python=$EBROOTPYTHON/bin/python3'
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+    ('cray-python/3.6.1.1', EXTERNAL_MODULE),
+]
+
+patches = ['Boost-1.65.0_python3.patch']
+
+# for python3 the corresponding lib is libboost_python3.so
+sanity_check_paths = {'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
+                                'lib/libboost_python3.so'], 
+                      'dirs': ['include/boost']}
+
+# also build boost_mpi
+boost_mpi = True
+
+moduleclass = 'devel'

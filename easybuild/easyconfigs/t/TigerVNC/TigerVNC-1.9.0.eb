@@ -1,0 +1,37 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'TigerVNC'
+version = '1.9.0'
+
+homepage = 'https://github.com/TigerVNC/tigervnc'
+description = """High performance, multi-platform VNC client and server."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://github.com/%(name)s/tigervnc/archive']
+sources = ['v%(version)s.tar.gz']
+separate_build_dir = True
+configopts  = "-DBUILD_VIEWER=OFF -DCMAKE_EXE_LINKER_FLAGS=-ldl"
+configopts += " -DFLTK_DIR:PATH=$EBROOTFLTK"
+configopts += " -DFLTK_INCLUDE_DIR:PATH=$EBROOTFLTK/include"
+configopts += " -DFLTK_BASE_LIBRARY:FILEPATH=$EBROOTFLTK/lib64/libfltk.a"
+configopts += " -DFLTK_IMAGES_LIBRARY:FILEPATH=$EBROOTFLTK/lib64/libfltk_images.a"
+configopts += " -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc "
+parallel = 8
+
+dependencies = [
+    ('fltk', '1.3.4-1'),
+    ('LibVNCServer', '0.9.12'),
+]
+
+postinstallcmds = [
+     "ln -s /usr/bin/Xvnc %(installdir)s/bin/",
+]
+
+sanity_check_paths = {
+    'files': ['bin/vncserver'],
+    'dirs': ['share/man/man1']
+}
+
+moduleclass = 'devel'
+

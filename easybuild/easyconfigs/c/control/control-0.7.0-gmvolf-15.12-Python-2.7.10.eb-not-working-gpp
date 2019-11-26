@@ -1,0 +1,28 @@
+# @author: gppezzi
+
+easyblock = 'PythonPackage'
+
+name = 'control'
+version = '0.7.0'
+versionsuffix = '-Python-%(pyver)s'
+
+
+homepage = 'https://sourceforge.net/projects/python-control/'
+description = """The Python Control Systems Library, python-control, is a python module that implements basic operations for analysis and design of feedback control systems."""
+
+toolchain = {'name': 'gmvolf', 'version': '15.12'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.10'),
+    ('slycot', '0.2.0', '-Python-%(pyver)s')
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'lib'

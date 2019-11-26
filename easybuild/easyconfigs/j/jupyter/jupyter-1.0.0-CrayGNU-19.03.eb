@@ -1,0 +1,171 @@
+# @author: sarafael, gppezzi
+
+easyblock = 'Bundle'
+
+name = 'jupyter'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.7'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+version = '1.0.0'
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('PyExtensions', '%s' % pyver),
+    ('IPython', '5.7.0', '-python%s' % py_maj_ver)
+]
+
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+
+exts_list = [
+    ('tornado', '5.0.2', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/t/tornado/'],
+        }),
+    ('pyzmq', '17.0.0', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'modulename': 'zmq',
+            'source_urls': ['https://pypi.python.org/packages/source/p/pyzmq/'],
+        }),
+    ('jupyter_core', '4.4.0', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-core/'],
+        }),
+    ('jupyter_client', '5.2.3', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'use_pip': True,
+            'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-client/'],
+        }),
+    ('ipykernel', '4.8.2', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/i/ipykernel/'],
+        }),
+    ('webencodings', '0.5.1', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/w/webencodings/'],
+        }),
+    ('html5lib', '1.0.1', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/h/html5lib/'],
+        }),
+    ('bleach', '2.1.3', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/b/bleach/'],
+        }),
+    ('jsonschema', '2.6.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/j/jsonschema/'],
+        }),
+    ('nbformat', '4.4.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/n/nbformat/'],
+        }),
+    ('MarkupSafe', '1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/m/MarkupSafe/'],
+        }),
+    ('Jinja2', '2.10', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/j/Jinja2/'],
+        }),
+    ('testpath', '0.3.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/testpath/'],
+        }),
+    ('entrypoints', '0.2.3', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoints/'],
+        }),
+    ('pandocfilters', '1.4.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pandocfilters/'],
+        }),
+    ('nbconvert', '5.3.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/n/nbconvert/'],
+        }),
+    ('qtconsole', '4.3.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/q/qtconsole/'],
+        }), 
+    ('terminado', '0.8.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/terminado/'],
+        }),
+    ('Send2Trash', '1.5.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/s/Send2Trash/'],
+        }),
+    ('notebook', '5.5.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/n/notebook/'],
+        }),
+    ('widgetsnbextension', '3.2.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/w/widgetsnbextension/'],
+        }),
+    ('ipywidgets', '7.2.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/i/ipywidgets/'],
+        }),
+    ('jupyter_console', '5.2.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-console/'],
+        }),
+    ('jupyter', version, {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter/'],
+        }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % pyshortver]}
+
+modextravars = {'JUPYTER_PATH' : "%(installdir)s"}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyshortver]
+}
+
+moduleclass = 'tools'

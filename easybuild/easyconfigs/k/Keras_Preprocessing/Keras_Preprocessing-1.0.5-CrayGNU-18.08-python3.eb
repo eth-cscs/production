@@ -1,0 +1,32 @@
+easyblock = "PythonPackage"
+
+name = 'Keras_Preprocessing'
+version = '1.0.5'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+
+versionsuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'https://pypi.org/project/Keras-Preprocessing/'
+description = """Easy data preprocessing and data augmentation for deep learning models"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % (pyshortver)],
+}
+
+moduleclass = 'lib'

@@ -1,0 +1,55 @@
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = "Scalasca"
+version = "2.2.2"
+
+homepage = 'http://www.scalasca.org/'
+description = """Scalasca is a software tool that supports the performance optimization of
+ parallel programs by measuring and analyzing their runtime behavior. The analysis identifies
+ potential performance bottlenecks -- in particular those concerning communication and
+ synchronization -- and offers guidance in exploring their causes."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015a'}
+toolchainopts = {"usempi": True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/scalasca/%(version_major_minor)s/dist']
+
+checksums = [
+    '2bafce988b0522d18072f7771e491ab9',
+]
+
+dependencies = [
+    ('Cube', '4.3.2'),
+    ('OTF2', '1.5.1'),
+    ('OPARI2', '1.1.4'),
+    ('binutils', '2.25'),
+]
+
+configopts  = ' --with-cube=$EBROOTCUBE/bin' 
+configopts += ' --with-otf2=$EBROOTOTF2/bin'
+configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-papi=/opt/cray/papi/default'
+configopts += ' --disable-gui'
+configopts += ' --with-qt=/apps/ela/qt/4.8.4/gnu_434'
+configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
+# configopts += '--with-libbfd='
+# configopts += ''
+# configopts += ''
+# 'PAPI': ['--with-papi-header=%s/include', '--with-papi-lib=%%s/%s' % get_software_libdir('PAPI')],
+
+sanity_check_paths = {
+    'files': ["bin/scalasca", ("lib64/libpearl.replay.a", "lib/libpearl.replay.a")],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

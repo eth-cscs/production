@@ -1,0 +1,26 @@
+# contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PrgEnv-pgi'
+version = '18.10'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides the Portland Group Compiler Collection (PGI), 
+including MVAPICH2 with MPI support for the Programming Environment on kesch/escha. 
+Please use the environment variable $MPIF90 to compile MPI codes in shell scripts."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+# PrgEnv-pgi needs a custom Fortran MPI wrapper
+postinstallcmds = ["""mkdir %(installdir)s/bin && 
+cp /apps/common/UES/easybuild/sources/p/PrgEnv-pgi/%(name)s-%(version)s-mvapich2gdr-2.3-mofed-4.4-cuda-9.2.mpif90 %(installdir)s/bin/mpif90"""]
+
+modtclfooter = """
+module load pgi/18.10-gcc-5.4.0-2.26
+module load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
+"""
+
+modaliases = {'mpif90': '$root/bin/mpif90'}
+modextravars = {'MPIF90': '$root/bin/mpif90'}
+
+moduleclass = 'devel'

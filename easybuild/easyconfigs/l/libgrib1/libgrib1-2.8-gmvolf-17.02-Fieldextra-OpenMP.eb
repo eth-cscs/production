@@ -1,0 +1,41 @@
+# Created by Matthias Kraushaar (CSCS) - 04/01/2019
+easyblock = 'ConfigureMake'
+
+name = 'libgrib1'
+version = '2.8'
+versionsuffix = '-Fieldextra-OpenMP'
+
+homepage = ''
+description = """
+    GRIB1 Library (provided with Fieldextra)
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: This module provides the optimized version with OpenMP
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/l/libgrib1'
+                 '/%(name)s-%(version)s-Fieldextra.tar.gz'}
+]
+patches = [
+    'libgrib1-2.8-Fieldextra_Makefile.patch',
+    'libgrib1-2.8-Fieldextra_RH75.patch',
+]
+
+parallel = 1
+skipsteps = ['configure']
+start_dir = './src'
+
+buildopts = ['mode=gnu,opt,omp']
+installopts = ['mode=gnu,opt,omp']
+postinstallcmds = ['cp -a ../install/* %(installdir)s/.']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib', 'include']
+}
+
+moduleclass = 'lib'

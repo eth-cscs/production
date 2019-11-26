@@ -1,0 +1,32 @@
+easyblock = 'Bundle'
+
+name = 'dask'
+version = '0.18.1'
+versionsuffix = '-python3'
+
+homepage = 'http://github.com/dask/dask/'
+description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
+ and task scheduling."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+dependencies = [
+    ('PyExtensions', '3.6.5.7'),
+]
+
+exts_list = [
+    ('toolz', '0.9.0', {'source_urls': ['https://pypi.python.org/packages/source/t/toolz'], 'checksums': ['929f0a7ea7f61c178bd951bdae93920515d3fbdbafc8e6caf82d752b9b3b31c9'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('dask', '0.18.1', {'source_urls': ['https://pypi.python.org/packages/source/d/dask'], 'checksums': ['b50b435c51bf5ca30c2667d0d92649765b732a2e6bebe7e219e6dd3fe8d7ac4e'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('cloudpickle', '0.5.2', {'source_urls': ['https://pypi.python.org/packages/source/c/cloudpickle'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+    ('partd', '0.3.8', {'source_urls': ['https://pypi.python.org/packages/source/p/partd'], 'req_py_majver': '3', 'req_py_minver': '6'}),
+]
+modextrapaths = {'PYTHONPATH': ['lib/python3.6/site-packages']}
+# this is a bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.6/site-packages'],
+}
+
+moduleclass = 'data'

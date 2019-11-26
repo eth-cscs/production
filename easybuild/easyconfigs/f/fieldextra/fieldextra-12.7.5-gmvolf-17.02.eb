@@ -1,0 +1,67 @@
+# added by Matthias Kraushaar (CSCS) - 07/01/2019
+easyblock = 'ConfigureMake'
+name = 'fieldextra'
+version = '12.7.5'
+
+homepage = 'https://github.com/MeteoSwiss-APN/3fieldextra.git'
+description = """
+    Fieldextra is a **generic tool** to manipulate NWP model data and gridded 
+    observations; simple data processing and more complex data operations are 
+    supported. Fieldextra is designed as a toolbox; a large set of primitive 
+    operations which can be arbitrarily combined are provided. Fieldextra can 
+    import GRIB 1, GRIB 2, NetCDF (starting with release 12.8.0) and some 
+    special simple ASCII format. Special care is taken to offer the **best 
+    compatibility with the COSMO, the ICON and the IFS models**.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    NB: This module provides the optimized, serial version
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = [
+    {'filename': '/apps/common/UES/easybuild/sources/f/fieldextra/%(name)s-%(version)s.tar.gz'}
+]
+patches = [
+    'fieldextra-12.7.5_EB_Makefiles.patch'
+]
+
+start_dir = './src'
+
+dependencies = [
+    ('libaec', '1.0.0'),
+    ('JasPer', '1.900.1'),
+    ('grib_api', '1.20.0', '-Fieldextra'),
+    ('rttov', '11.2.0'),
+    ('libgrib1', '2.8', '-Fieldextra'),
+    ('icontools', '0.94'),
+]
+
+parallel = 1
+
+buildopts = ['mode=gnu,opt']
+installopts = ['mode=gnu,opt']
+postinstallcmds = [(
+    'cp -a %(builddir)s/fieldextra-12.7.5/* %(installdir)s '
+    '&& ln -s ${EBROOTNETCDF}/bin/* %(installdir)s/tools '
+    '&& ln -s ${EBROOTNETCDFMINFORTRAN}/bin/* %(installdir)s/tools '
+    '&& ln -s ${EBROOTGRIB_API}/bin/* %(installdir)s/tools '
+    '&& ln -s %(installdir)s/bin/* %(installdir)s/tools/support/fieldextra '
+    '&& ln -s %(installdir)s/resources %(installdir)s/tools/support/dictionaries '
+    '&& ln -s %(installdir)s/resources/grib_api_samples/COSMO_GRIB2_default.tmpl '
+           '%(installdir)s/tools/support/grib2_sample '
+    '&& ln -s %(installdir)s/resources/grib_api_definitions_cosmo '
+           '%(installdir)s/tools/support/grib_api_definitions_1 '
+    '&& ln -s %(installdir)s/resources/grib_api_definitions_vendor '
+           '%(installdir)s/tools/support/grib_api_definitions_2'
+)]
+
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin']
+}
+
+moduleclass = 'geo'

@@ -1,0 +1,67 @@
+# @author: gppezzi
+
+easyblock = 'CMakeMake'
+
+name = 'Caffe'
+version = '1.0'
+
+cudaversion = '8.0'
+versionsuffix = '-cuda-%s-Python-%%(pyver)s' % cudaversion
+
+homepage = 'https://github.com/BVLC/caffe'
+description = """
+Caffe is a deep learning framework made with expression, speed, 
+and modularity in mind. It is developed by the Berkeley Vision 
+and Learning Center (BVLC) and community contributors.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'optarch': True, 'pic': False, 'verbose': False}
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/BVLC/caffe/archive/']
+
+builddependencies = [
+    ('CMake', '3.6.0'),
+]
+
+protobuf_ver = '3.1.0'
+
+dependencies = [
+    ('glog', '0.3.4'),
+    ('gflags', '2.1.2'),
+    ('OpenCV', '3.2.0', '-Python-%(pyver)s'),
+    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE), 
+    ('cuDNN', '5.1', '-cuda-8.0', True),
+    ('LMDB', '0.9.18'),
+    ('LevelDB', '1.18'),
+    ('snappy', '1.1.3'),
+    ('protobuf-core', protobuf_ver),
+    ('protobuf-python', protobuf_ver, '-Python-%(pyver)s'),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('Boost', '1.63.0', '-Python-%(pyver)s'),
+    ('Python', '2.7.12'),
+    ('scikit-image', '0.13.0', '-Python-%(pyver)s')
+]
+
+buildininstalldir = True
+
+configopts = '-DBLAS=libsci '
+configopts += '-DBOOST_ROOT=$EBROOTBOOST '
+configopts += '-DProtobuf_INCLUDE_DIR=$EBROOTPROTOBUFMINCORE/include  '
+configopts += '-DProtobuf_LIBRARY=$EBROOTPROTOBUFMINCORE/lib/libprotobuf.so '
+configopts += '-DCUDA_ARCH_NAME=Pascal -DCUDA_TOOLKIT_ROOT_DIR=$CUDATOOLKIT_HOME '
+
+modextrapaths = {'PYTHONPATH': ['python']}
+
+sanity_check_paths = {
+    'files': ['bin/caffe'] +
+             ['lib64/%s' % x for x in ['libcaffe.so', 'libproto.a']] +
+             ['python/caffe/_caffe.so'] +
+             ['include/caffe/proto/caffe.pb.h'],
+    'dirs': [],
+}
+
+#sanity_check_commands = [('python', "-c 'import caffe'")]
+
+moduleclass = 'devel'

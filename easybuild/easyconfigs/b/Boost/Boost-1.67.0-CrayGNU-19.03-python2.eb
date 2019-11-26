@@ -1,0 +1,55 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.67.0'
+
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.6'
+
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
+source_urls = [SOURCEFORGE_SOURCE]
+
+configopts  = (
+    ' --with-python=$(EBROOTPYTHON)/bin/python '
+    ' --with-python-version={0}.{1}'
+    ' --with-python-root=$(EBROOTPYTHON)/lib/python{0}.{1}'
+    .format(py_maj_ver, py_min_ver)
+)
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), 
+     EXTERNAL_MODULE),
+]
+
+# CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
+#
+# postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
+# 
+# modtclfooter = """
+#     setenv PE_PKGCONFIG_LIBS boost_python27
+# """
+
+#
+# for python3 the corresponding lib is libboost_python36.so
+sanity_check_paths = {
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
+              'lib/libboost_python%s%s.so' % (py_maj_ver, py_min_ver)],
+    'dirs': ['include/boost']
+}
+
+# also build boost_mpi
+boost_mpi = True
+
+moduleclass = 'devel'

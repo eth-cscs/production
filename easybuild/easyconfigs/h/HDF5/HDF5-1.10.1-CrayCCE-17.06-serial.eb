@@ -1,0 +1,31 @@
+# @author: gppezzi
+
+easyblock = 'ConfigureMake'
+
+name = 'HDF5'
+version = '1.10.1'
+versionsuffix = '-serial'
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """HDF5 is a unique technology suite that makes possible the management of 
+ extremely large and complex data collections."""
+
+toolchain = {'name': 'CrayCCE', 'version': '17.06'}
+toolchainopts = {'optarch': True, 'pic': True, 'usempi': True}
+
+source_urls = ['https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-%(version_major_minor)s/hdf5-%(version)s/src']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['43a2f9466702fb1db31df98ae6677f15']
+
+preconfigopts = 'unset CFLAGS && unset FCFLAGS && unset CPPFLAGS && unset LDFLAGS && unset CXXFLAGS && '
+
+configopts =  '--disable-silent-rules --disable-sharedlib-rpath --enable-fortran --enable-static --with-pic --enable-shared '
+configopts += '--with-zlib=/usr/include,/usr/lib64 --enable-cxx'
+
+prebuildopts = 'rm libtool && ln -s $EBROOTLIBTOOL/bin/libtool . && '
+
+buildopts = '-l6'
+
+builddependencies = [('libtool', 'cray-14.11', '', True)]
+
+moduleclass = 'data'

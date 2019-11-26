@@ -1,0 +1,26 @@
+diff --git a/checks/cuda/hpcg_check.py b/checks/cuda/hpcg_check.py
+index c670310..80ff454 100644
+--- a/checks/cuda/hpcg_check.py
++++ b/checks/cuda/hpcg_check.py
+@@ -60,7 +60,7 @@ class HPCGCheck(RunOnlyRegressionTest):
+         }
+ 
+         self.maintainers = ['VH', 'VK']
+-        self.tags = { 'maintenance' }
++        # self.tags = { 'maintenance' }
+ 
+ def _get_checks(**kwargs):
+     return [ HPCGCheck(**kwargs) ]
+diff --git a/checks/cuda/hpl_check.py b/checks/cuda/hpl_check.py
+index 6230b98..b525e01 100644
+--- a/checks/cuda/hpl_check.py
++++ b/checks/cuda/hpl_check.py
+@@ -109,7 +109,7 @@ class HPLBigCheck(HPLBaseCheck):
+             },
+         }
+ 
+-        self.tags = {'maintenance'}
++        # self.tags = {'maintenance'}
+ 
+ 
+ def _get_checks(**kwargs):

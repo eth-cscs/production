@@ -1,0 +1,46 @@
+# contributed by Luca MArsella and GPPezzi (CSCS)
+
+name = 'Python'
+version = "2.7.11"
+
+homepage = 'http://python.org/'
+description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
+
+toolchain = {'name': 'GCC', 'version': '4.9.2'}
+toolchainopts = {'pic': True, 'opt': True}
+
+source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
+sources = [SOURCE_TGZ]
+
+patches = ['unixccompiler-Python-2.7.9.patch']
+
+# python needs bzip2 to build the bz2 package
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.8'),
+    ('libreadline', '6.3'),
+    ('ncurses', '5.9'),
+]
+
+# enviroment variable to use package repository with pip
+modextravars = {'PIP_CERT':'/apps/common/UES/certificates/DigiCertHighAssuranceEVRootCA.pem'}
+
+osdependencies = [('libopenssl-devel')]
+
+buildopts = 'LINKCC="$CC -dynamic"'
+
+# order is important!
+# package versions updated Dec 1st 2015
+exts_list = [
+    ('setuptools', '20.1.1', {
+        'source_urls': ['http://pypi.python.org/packages/source/s/setuptools/'],
+    }),
+    ('pip', '8.0.2', {
+        'source_urls': ['http://pypi.python.org/packages/source/p/pip/'],
+    }),
+    ('virtualenv', '14.0.6', {
+        'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv'],
+    }),
+]
+
+moduleclass = 'lang'

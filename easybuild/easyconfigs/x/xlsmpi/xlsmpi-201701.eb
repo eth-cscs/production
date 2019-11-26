@@ -1,0 +1,19 @@
+easyblock = "Toolchain"
+
+name = 'xlsmpi'
+version = '2017.01'
+
+homepage = '(none)'
+description = """IBM XLC/XLF Compiler Collection toolchain for Linux on Power,
+including IBM Spectrum MPI for MPI support."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+dependencies = [
+    # do not load at
+    #('at/10.0', EXTERNAL_MODULE),
+    ('xlcxlf/2017.01', EXTERNAL_MODULE),
+    ('ibm_smpi/10.1', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'

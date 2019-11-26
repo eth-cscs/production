@@ -1,0 +1,20 @@
+# contributed by Luca Marsella (CSCS)
+# modules: CrayGNU cray-fftw cray-python cudatoolkit Libint libxc flex Bison PLUMED
+include $(EBROOTPLUMED)/lib/plumed/src/lib/Plumed.inc
+NVCC     = nvcc
+CC       = cc
+CPP      = 
+FC       = ftn
+LD       = ftn
+AR       = ar -r
+CPPFLAGS =
+DFLAGS   = -D__FFTW3 -D__parallel -D__SCALAPACK -D__HAS_smm_dnn -D__ACC -D__DBCSR_ACC -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN -D__PLUMED2
+CFLAGS   = $(DFLAGS)
+FCFLAGS  = $(DFLAGS) -O3 -mavx -fopenmp -funroll-loops -ffast-math -ftree-vectorize -ffree-form -ffree-line-length-512
+FCFLAGS  += -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include
+LDFLAGS  = $(FCFLAGS)
+NVFLAGS  = $(DFLAGS) -O3 -arch sm_60
+LIBS   	 = -lfftw3 -lfftw3_threads -lcudart -lcublas -lcufft -lrt
+LIBS     += $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -lplumed
+LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS     += /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a

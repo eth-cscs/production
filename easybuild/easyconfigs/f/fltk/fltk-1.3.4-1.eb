@@ -1,0 +1,17 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'fltk'
+version = '1.3.4-1'
+
+homepage = 'https://github.com/fltk/fltk'
+description = """Fast Light Tool Kit - cross platform GUI development"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://github.com/fltk/fltk/archive']
+sources = ['release-%(version)s.tar.gz']
+separate_build_dir = True
+configopts = "-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc "
+
+moduleclass = 'devel'
+

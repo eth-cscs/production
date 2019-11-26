@@ -1,0 +1,69 @@
+# @gppezzi
+
+easyblock = 'EB_OpenFOAM'
+
+name = 'OpenFOAM-Extend'
+version = '4.0'
+
+homepage = 'http://www.extend-project.de/'
+description = """OpenFOAM is a free, open source CFD software package. 
+OpenFOAM has an extensive range of features to solve anything from complex fluid flows
+involving chemical reactions, turbulence and heat transfer, 
+to solid dynamics and electromagnetics."""
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['https://github.com/Unofficial-Extend-Project-Mirror/foam-extend-foam-extend-%(version)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+patches = [
+#    'OpenFOAM-Extend-%(version)s-ParMGridGen.patch',
+    'OpenFOAM-Extend-3.1_build-qa.patch',
+    'OpenFOAM-Extend-3.1_comp-mpi.patch',
+    'OpenFOAM-Extend-3.1_skip-ThirdParty-OpenMPI.patch',
+]
+
+dependencies = [
+    ('hwloc', '1.11.3'),
+    ('METIS', '5.1.0'),  # order matters, METIS need to be listed after ParMETIS to get $CPATH right
+    ('SCOTCH', '6.0.4'),
+    # Libccmio v2.6.1, zoltan v3.5
+]
+
+builddependencies = [
+    ('Bison', '3.0.4'),
+    ('CMake', '3.6.1'),
+    ('flex', '2.6.0'),
+]
+
+prebuildopts = "(wcleanAll || echo 'all is fine') && "  # clean up everything first (and ignore any errors)
+
+# too many builds in parallel actually slows down the build
+maxparallel = 12
+
+sanity_check_paths = {
+    'files': ['foam-extend-4.0/etc/bashrc', 
+              'foam-extend-4.0/etc/cshrc', 
+              'foam-extend-4.0/bin/foamExec', 
+              'foam-extend-4.0/bin/paraFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/buoyantSimpleFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/buoyantBoussinesqSimpleFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/boundaryFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/engineFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/sonicFoam', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceAdd',
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceFind', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/surfaceSmooth', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/deformedGeom', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/engineSwirl', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/modifyMesh', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/refineMesh', 
+              'foam-extend-4.0/applications/bin/linux64GccDPOpt/wdot', 
+              'foam-extend-4.0/lib/linux64GccDPOpt/libscotchDecomp.so',
+              'foam-extend-4.0/lib/linux64GccDPOpt/libmetisDecomp.so', 
+    ],
+    'dirs': ['foam-extend-4.0/applications/bin/linux64GccDPOpt', 'foam-extend-4.0/lib/linux64GccDPOpt']
+}
+
+moduleclass = 'cae'

@@ -1,0 +1,41 @@
+easyblock = 'MakeCp'
+name = 'Amber'
+version = '14'
+versionsuffix = '_serial'
+amber_version='%(version)s'[:2]
+
+homepage = 'http://ambermd.org/'
+description = 'Assisted Model Building with Energy Refinement'
+
+toolchain = { 'name' : 'CrayGNU', 'version' : '2016.03' }
+toolchainopts = { 'verbose' : False }
+sources = ['Amber%(version)s.tar.gz', 'AmberTools15.tar.bz2']
+patches = ['amber-configure-forceupdate.patch']
+
+dependencies = [ ('bzip2', '1.0.6'),
+                 ('zlib', '1.2.8') ]
+
+builddependencies = [('cray-netcdf/4.3.2', EXTERNAL_MODULE)]
+
+buildininstalldir = True
+configopts = 'gnu'
+prebuildopts = 'export AMBERHOME=%(builddir)s/amber%(version)s;'
+prebuildopts = prebuildopts + './configure -noX11 -crayxt5 --with-netcdf $EBROOTNETCDF gnu;'
+buildopts = 'install'
+
+files_to_copy = []
+sanity_check_paths = {
+    'files' : [ 'amber%(version)s/bin/pmemd',
+                'amber%(version)s/bin/pmemd.amoeba'],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s/amber%(version)s',
+}
+
+modextrapaths = {
+    'PATH' : 'amber%(version)s/bin',
+}
+
+#sanity_check_commands = [('export AMBERHOME=%(builddir)s/amber%(version)s; export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH; make', '-C amber%(version)s test')]

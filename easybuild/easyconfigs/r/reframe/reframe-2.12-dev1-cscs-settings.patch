@@ -1,0 +1,20 @@
+diff --git a/config/cscs.py b/config/cscs.py
+index ce2dbe6..746f968 100644
+--- a/config/cscs.py
++++ b/config/cscs.py
+@@ -275,6 +275,7 @@ class ReframeSettings:
+         'modes': {
+             '*': {
+                 'maintenance': [
++                    '-c', '$EBROOTREFRAME/cscs-checks', '-R',
+                     '--exec-policy=async',
+                     '--strict',
+                     '--output=$APPS/UES/$USER/regression/maintenance',
+@@ -286,6 +287,7 @@ class ReframeSettings:
+                     '--timestamp=%F_%H-%M-%S'
+                 ],
+                 'production': [
++                    '-c', '$EBROOTREFRAME/cscs-checks', '-R',
+                     '--exec-policy=async',
+                     '--strict',
+                     '--output=$APPS/UES/$USER/regression/production',

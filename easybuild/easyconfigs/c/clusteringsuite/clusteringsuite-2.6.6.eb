@@ -1,0 +1,20 @@
+easyblock = "Tarball"
+
+name = 'clusteringsuite'
+version = '2.6.6'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Automatically expose the main performance trends in
+applications' computation structure."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+source_urls = ['http://ftp.tools.bsc.es/clusteringsuite/']
+sources = ['clusteringsuite-%(version)s-linux_x86_64.tar.gz']
+keepsymlinks = True
+
+sanity_check_paths={
+    'files': ['bin/ClustersDiff'],
+    'dirs': ['lib64', 'share/doc'],
+}
+
+moduleclass = 'perf'

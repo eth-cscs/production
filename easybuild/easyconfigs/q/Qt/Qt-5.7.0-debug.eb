@@ -1,0 +1,29 @@
+# debug version: -debug in configopts
+name = 'Qt'
+version = '5.7.0'
+versionsuffix = '-debug'
+# https://github.com/hpcugent/easybuild-easyconfigs/issues/2777
+#gcc434:ko version = '4.8.7'
+#gcc434:ko version>5.x
+
+homepage = 'http://qt-project.org/'
+description = "Qt is a comprehensive cross-platform C++ application framework."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = [ 'http://download.qt.io/official_releases/qt/5.7/%(version)s/single/' ]
+sources = [ 'qt-everywhere-opensource-src-%(version)s.tar.gz' ]
+checksums = [ '9a46cce61fc64c20c3ac0a0e0fa41b42' ] # qt-everywhere-opensource-src-5.7.0.tar.gz
+
+configopts  = ' -opensource -nomake tests -nomake examples -confirm-license'
+configopts += ' -debug -shared -no-accessibility -no-sql-mysql -no-sql-sqlite'
+configopts += ' -no-pulseaudio -no-alsa -no-cups'
+configopts += ' -no-compile-examples -qt-xcb'
+# configopts += ' -release -shared -no-accessibility -no-sql-mysql -no-sql-sqlite'
+# configopts += ' -no-avx512 -no-sse2 -no-sse3 -no-ssse3'
+
+platform = 'linux-g++-64'
+# building sometimes fails if make parallelism is too high
+maxparallel = 8
+
+moduleclass = 'devel'

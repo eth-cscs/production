@@ -1,0 +1,41 @@
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+# Copyright:: Copyright 2013 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+# License::   New BSD
+#
+# This work is based from experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = "OPARI2"
+version = "2.0-beta1"
+
+homepage = 'http://www.score-p.org'
+description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
+ is a source-to-source instrumentation tool for OpenMP and hybrid codes.
+ It surrounds OpenMP directives and runtime library calls with calls to
+ the POMP2 measurement interface."""
+
+# toolchain = {'version': '15.11_cuda_7.0_gdr', 'name': 'gmvapich2'}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+configopts = ' --enable-shared'
+dependencies = [ ('binutils', '2.26-libiberty'), ('libunwind', '1.1') ]
+# builddependencies = [ ('zlib', '1.2.8'), ('binutils', '2.25'), ('libunwind', '1.1') ]
+
+#sources = [SOURCELOWER_TAR_GZ]
+sources = ["opari2-%(version)s.tar.gz"]
+source_urls = ['ftp://ftp.cscs.ch/out/jgp/easybuild/']
+#source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
+
+checksums = [
+        'ebf2a58e2dd34a7ba2f65e49dbc6e16f', # opari2-2.0-beta1.tar.gz    
+]
+
+sanity_check_paths = {
+    'files': ["bin/opari2", "include/opari2/pomp2_lib.h"],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

@@ -1,0 +1,23 @@
+# contributed by Luca Marsella and Guilherme Peretti Pezzi (CSCS)
+easyblock = "CMakeMake"
+
+name = 'libzip'
+version = '1.5.1'
+
+homepage = 'https://nih.at/libzip/'
+description = """libzip is C library for reading, creating, and modifying zip archives."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.07'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://nih.at/libzip/']
+
+builddependencies = [
+    ('CMake', '3.11.4', '', True),
+]
+sanity_check_paths = {
+    'files': ['lib64/libzip.so'],
+    'dirs': ['include', 'bin']
+}
+
+moduleclass = 'devel'

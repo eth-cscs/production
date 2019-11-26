@@ -1,0 +1,27 @@
+easyblock = 'MakeCp'
+
+name = 'libutempter'
+version = '1.1.6'
+versionsuffix = '-3'
+
+homepage = 'https://www.openhub.net/p/libutempter'
+description = """libutempter is library that provides an interface for terminal emulators"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['http://http.debian.net/debian/pool/main/libu/libutempter/']
+sources = ['libutempter_%(version)s.orig.tar.bz2']
+checksums = ['b43827806923903aba2bc7cd3a2d45b7']
+
+files_to_copy = [
+    (['libutempter.so'], 'lib'),
+    (['libutempter.a'], 'lib'),
+]
+
+installopts = "DESTDIR=%(installdir)s/ libdir=lib libexecdir=lib includedir=include mandir=man"
+
+sanity_check_paths = {
+    'files': ['lib/libutempter.so'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'tools'

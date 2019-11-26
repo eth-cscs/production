@@ -1,0 +1,69 @@
+easyblock = 'Bundle'
+name = 'vampir'
+version = '9.3.0'
+homepage = 'http://www.vampir.eu'
+description = """ Vampir provides a manageable framework for analysis, which
+enables developers to quickly display program behavior at any level of detail.
+Detailed performance data obtained from a parallel program execution can be
+analyzed with a collection of different performance views.""" 
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+# HOSTNAME ------------------------------------------------------
+set H        "[exec uname -n]"
+set HH       "[string range $H 0 3]"
+set HHH      "[string tolower $HH]"
+# ---------------------------------------------------------------
+
+# puts stderr "HHH=$HHH"
+# puts stderr "compiler=$compiler"
+# puts stderr "APPS=$env(APPS)"
+
+# ---------------------------------------------------------------
+# set    --> will set the variable for the script, nothing more
+# setenv --> will export the variable to the user environment
+# ---------------------------------------------------------------
+set     url                        "http://user.cscs.ch/compiling_and_optimizing/performance_tools/vi_hps/"
+set     url2                       "http://www.vampir.eu"
+set     packageroot                "/apps/common/UES/vampir/9.3.0"
+
+# ============================================================================
+# module-info mode ==> load, remove, display, help, whatis, switch, switch1, switch2, or switch3.
+# load
+# ============================================================================
+# if { [ module-info mode load ] } {
+
+setenv          CSCS_VAMPIR     "$packageroot"
+prepend-path    PATH            "$packageroot/bin"
+# }
+
+# ============================================================================
+# Help message called by : module help ...
+# ============================================================================
+if { [ module-info mode help ] } {
+
+proc ModulesHelp {} {
+
+   global env url url2  packageroot
+
+         puts stderr "
+         \t Docs:
+         \t      $url
+         \t      $url2
+         \t      $packageroot/doc/"
+ 
+  return 0
+}
+}
+
+# ============================================================================
+# Short help message called by : module whatis ...
+# ============================================================================
+if { [ module-info mode whatis ] } {
+module-whatis "Set environment variables to enable the usage of the Vampir tool."
+}
+"""
+
+moduleclass = 'perf'
+

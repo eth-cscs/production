@@ -1,0 +1,38 @@
+# @author: gppezzi, marcelsc
+
+easyblock = 'Tarball'
+
+name = 'cuDNN'
+version = '7.4.2'
+
+homepage = 'https://developer.nvidia.com/cudnn'
+description = """Nvidias deep neural network library."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+cudamajor = '9.1'
+cudaminor = '85_3.18-6.0.7.0_5.1__g2eb7c52'
+cudaver = "%s.%s" % (cudamajor, cudaminor)
+
+versionsuffix = '-cuda-%s' % cudamajor
+
+builddependencies = [
+    ('cudatoolkit/%s' % cudaver, EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+sources = ['/apps/common/UES/easybuild/sources/c/cuDNN/cudnn-9.0-linux-x64-v%s.24.tgz' % version]
+
+checksums = [
+    'e3e72e9e2bf4c5e4cdd467aa6b824effc4566d230a2cda4153ad894d7d15cf73'
+]
+
+sanity_check_paths = {
+    'files': ['include/cudnn.h', 'lib64/libcudnn_static.a'],
+    'dirs': ['include', 'lib64'],
+}
+
+#moduleclass = 'numlib'

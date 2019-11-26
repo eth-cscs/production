@@ -1,0 +1,49 @@
+# @author Contributed by Guilherme Peretti Pezzi and Luca Marsella (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO'
+version = '5.0.3'
+plumedversion = '2.3.0'
+versionsuffix = '-PLUMED-%s' % plumedversion
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO  is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+sources = [
+    'espresso%2BPHonon-%(version)s.tar.gz',
+]
+
+source_urls = [
+    'http://www.qe-forge.org/gf/download/frsrelease/128/530/', # espresso-5.0.3.tar.gz
+]
+
+builddependencies = [ 
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+]
+
+dependencies = [ ('PLUMED', '%s' %plumedversion) ]
+
+preconfigopts = ' export LDFLAGS="$LDFLAGS -openmp " && '
+configopts = 'ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack'
+
+prebuildopts = ' plumed-patch -p --runtime --shared <<< 9 && '
+buildopts = 'all'
+maxparallel = 1
+
+postinstallcmds = [
+    'mkdir %(installdir)s/bin && cp %(builddir)s/espresso-%(version)s/bin/*.x %(installdir)s/bin'
+]
+
+sanity_check_paths = {
+      'files': ['bin/pw.x', 'bin/cp.x'],
+      'dirs': ['']
+}
+
+
+moduleclass = 'chem'

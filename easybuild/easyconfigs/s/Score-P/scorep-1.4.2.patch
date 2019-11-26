@@ -1,0 +1,18 @@
+--- scorep-1.4.2-ori/src/tools/instrumenter/scorep_instrumenter_cmd_line.cpp	2016-02-15 16:25:08.770693323 +0100
++++ scorep-1.4.2/src/tools/instrumenter/scorep_instrumenter_cmd_line.cpp	2016-02-15 16:30:28.348743095 +0100
+@@ -624,6 +624,15 @@
+         m_is_linking      = false;
+         m_is_compiling    = false;
+     }
++
++    else if ( current == "--cubin" )
++    {
++        // printf("CSCS: \n");
++        m_no_compile_link = true;
++        m_is_linking      = false;
++        m_is_compiling    = false;
++    }
++
+     else if ( current == "-l" )
+     {
+         if ( is_interposition_library( next ) )

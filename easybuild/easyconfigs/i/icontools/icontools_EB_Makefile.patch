@@ -1,0 +1,36 @@
+diff -Nru icontools-0.94.ORIG/Makefile icontools-0.94/Makefile
+--- icontools-0.94.ORIG/Makefile	2018-11-19 14:38:12.000000000 +0100
++++ icontools-0.94/Makefile	2019-02-18 22:46:16.000000000 +0100
+@@ -21,8 +21,8 @@
+ AR      = ar
+ 
+ # Library versions
+-netcdf_version         = 4.2.1.1
+-netcdf-fortran_version = 4.2
++netcdf_version         = 4.4.1.1
++netcdf-fortran_version = 4.4.4
+ 
+ # Define which hosts are Crays
+ crays = rosa,albis,lema,cca-login
+@@ -131,8 +131,8 @@
+ endif
+ 
+ # Dirs
+-lnetcdfdir        = ../../netcdf/netcdf-$(netcdf_version)/netcdf_$(compiler)/lib
+-lnetcdffortrandir = ../../netcdf/netcdf-fortran-$(netcdf-fortran_version)/netcdf-fortran_$(compiler)/lib
++lnetcdfdir        = ${EBROOTNETCDF}/lib
++lnetcdffortrandir = ${EBROOTNETCDFMINFORTRAN}/lib
+ 
+ # Archiver
+ 
+@@ -350,8 +350,8 @@
+ 	rm -f *.o *.L* *.G *.a *.mod *genmod.* openmp core
+ 
+ # Installation
+-LIBDIR = ./icontools_$(compiler)/lib
+-INCLUDEDIR = ./icontools_$(compiler)/include
++LIBDIR = ./install/lib
++INCLUDEDIR = ./install/include
+ install: 
+ 	@ if [ -n "$(lib_iconbase)" ] && [ -r "$(lib_iconbase)" ]; then \
+ 	   $(MKDIR) -p $(LIBDIR); \

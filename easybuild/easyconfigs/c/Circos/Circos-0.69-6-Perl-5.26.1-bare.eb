@@ -1,0 +1,32 @@
+easyblock = 'Tarball'
+
+name = 'Circos'
+version = '0.69-6'
+perlversion = '5.26.1'
+versionsuffix = '-Perl-5.26.1-bare'
+
+homepage = 'http://www.circos.ca/'
+description = """Circos is a software package for visualizing data and information.
+ It visualizes data in a circular layout - this makes Circos ideal for exploring
+ relationships between objects or positions."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['http://circos.ca/distribution/']
+sources = [SOURCELOWER_TGZ]
+
+dependencies = [
+    ('GD', '2.66-Perl-5.26.1-bare'),
+    ('Perl', '5.26.1-bare'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['lib/%(name)s'],
+}
+
+modextrapaths = {'PERL5LIB': 'lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi'}
+
+#needsPERL5LIB: sanity_check_commands = [('perl', '-e "use Circos"')]
+
+moduleclass = 'bio'

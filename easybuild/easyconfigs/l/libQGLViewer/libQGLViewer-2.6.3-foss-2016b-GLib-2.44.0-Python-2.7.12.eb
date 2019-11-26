@@ -1,0 +1,25 @@
+easyblock = 'libqglviewer'
+
+name = 'libQGLViewer'
+version = '2.6.3'
+versionsuffix = '-GLib-2.44.0-Python-2.7.12'
+
+homepage = 'http://libqglviewer.com/'
+description = "libQGLViewer is a C++ library based on Qt that eases the creation of OpenGL 3D viewers."
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+source_urls = ['http://www.libqglviewer.com/src/']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [('Qt', '4.8.5', versionsuffix)]
+
+preinstallopts = "export EBINSTALLPREFIX=%(installdir)s && "
+
+buildopts = '-j 1 sub-QGLViewer sub-designerPlugin'
+installopts = 'sub-QGLViewer sub-designerPlugin'
+
+sanity_check_paths={
+    'files': ['lib/libQGLViewer.prl', 'lib/libQGLViewer.so', 'lib/libQGLViewer.so.2'],
+    'dirs': ['include/QGLViewer'],
+}

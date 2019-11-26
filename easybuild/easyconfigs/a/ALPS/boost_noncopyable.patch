@@ -1,0 +1,11 @@
+diff -Nru alps-2.3.0-src-with-boost/alps/src/alps/hdf5/archive.cpp alps-2.3.0-src-with-boost.mod/alps/src/alps/hdf5/archive.cpp
+--- alps-2.3.0-src-with-boost/alps/src/alps/hdf5/archive.cpp	2017-01-13 08:59:45.000000000 +0100
++++ alps-2.3.0-src-with-boost.mod/alps/src/alps/hdf5/archive.cpp	2019-03-28 14:12:29.000000000 +0100
+@@ -33,6 +33,7 @@
+ 
+ #include <boost/scoped_array.hpp>
+ #include <boost/filesystem/operations.hpp>
++#include <boost/noncopyable.hpp>
+ 
+ #include <hdf5.h>
+

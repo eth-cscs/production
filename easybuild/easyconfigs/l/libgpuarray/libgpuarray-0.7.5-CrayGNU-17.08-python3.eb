@@ -1,0 +1,61 @@
+easyblock = 'CMakePythonPackage'
+
+name = 'libgpuarray'
+version = '0.7.5'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+
+req_py_majver = int(py_maj_ver)
+req_py_minver = int(py_min_ver)
+
+versionsuffix = '-python%s' % req_py_majver
+
+homepage = 'https://github.com/Theano/libgpuarray'
+description = """Libgpuarray: Make a common GPU ndarray(n dimensions array)
+that can be reused by all projects that is as future proof as possible,
+while keeping it easy to use for simple need/quick test."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/Theano/libgpuarray/archive/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+]
+
+builddependencies = [
+    ('CMake', '3.8.1', '', True),
+    ('PyExtensions', '%s.%s' % (py_maj_ver, py_min_ver)),
+]
+
+runtest = False
+configopts = "-DCMAKE_BUILD_TYPE=Release"
+
+postinstallcmds = [
+    'export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CRAY_CUDATOOLKIT_DIR/include:%(installdir)s/include',
+    'export LIBRARY_PATH=$LIBRARY_PATH:%(installdir)s/lib',
+    'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%(installdir)s/lib',
+    "python3 setup.py build_ext -L %(installdir)s/lib -I %(installdir)s/include",
+    "PYTHONUSERBASE=%(installdir)s python3 setup.py install --user"
+]
+
+#exts_filter = ('python3 -c "import pygpu"', "")
+exts_filter = ('', "")
+
+sanity_check_paths = {
+    'files': ['include/gpuarray/array.h'],
+    'dirs': ['lib', 'include'],
+}
+
+modextrapaths = {
+    'PYTHONPATH': 'lib/python%s.%s/site-packages' % (req_py_majver, req_py_minver),
+}
+
+skipsteps = ['test']
+
+moduleclass = 'lib'
+

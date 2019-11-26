@@ -1,0 +1,11 @@
+--- VTK/ThirdParty/hdf5/vtkhdf5/CMakeLists.txt.original	2017-06-07 09:15:05.181565000 +0200
++++ VTK/ThirdParty/hdf5/vtkhdf5/CMakeLists.txt	2017-06-07 09:15:17.596342237 +0200
+@@ -419,7 +419,7 @@
+       # timezone is not included in time.h on mingw if -std=c99
+       set (CMAKE_C_FLAGS "${CMAKE_ANSI_CFLAGS} ${CMAKE_C_FLAGS} -fomit-frame-pointer -finline-functions -fno-common")
+     else ()
+-      set (CMAKE_C_FLAGS "${CMAKE_ANSI_CFLAGS} ${CMAKE_C_FLAGS} -std=c99 -fomit-frame-pointer -finline-functions -fno-common")
++      set (CMAKE_C_FLAGS "${CMAKE_ANSI_CFLAGS} ${CMAKE_C_FLAGS} -std=gnu99 -fomit-frame-pointer -finline-functions -fno-common")
+     endif ()
+   endif (CMAKE_BUILD_TYPE MATCHES Debug)
+ endif (CMAKE_COMPILER_IS_GNUCC)

@@ -1,0 +1,40 @@
+easyblock = 'Bundle'
+
+name = 'influxdb'
+version = '4.1.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/influxdata/influxdb-python'
+description = """Python client for InfluxDB."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+# this is a bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+dependencies = [
+    ('Python', '3.5.2'),
+]
+
+exts_list = [
+    ('influxdb', '4.1.0', {
+    'source_urls': ['https://pypi.python.org/packages/source/i/influxdb'],
+    }),
+    ('inflow', '0.2.1', {
+    'source_urls': ['https://pypi.python.org/packages/source/i/inflow'],
+    'patches': ['inflow-0.2.1.patch'],
+    # patch needed to workaround the non-ascii character in README.rst
+    }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+# full_sanity_check = True
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+moduleclass = 'data'

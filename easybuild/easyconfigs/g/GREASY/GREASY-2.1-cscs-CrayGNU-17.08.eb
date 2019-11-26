@@ -1,0 +1,23 @@
+easyblock = 'ConfigureMake'
+
+name = 'GREASY'
+version = '2.1-cscs'
+
+homepage = 'https://github.com/jonarbo/GREASY'
+description = """Greasy is a tool designed to make easier the deployment of
+embarrassingly parallel simulations in any environment. It is able to run in
+parallel a list of different tasks."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = ['/apps/common/easybuild/sources/g/GREASY/greasy-%(version)s.tar.gz']
+
+preconfigopts = './autogen.sh && '
+
+sanity_check_paths = {
+    'files': ["bin/greasy"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

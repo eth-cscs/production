@@ -1,0 +1,26 @@
+easyblock = 'PythonPackage'
+
+name = 'pbr'
+version = '3.1.1'
+versionsuffix = '-python2'
+pyshortver = '2.7'
+
+homepage = 'https://pypi.python.org/pypi/pbr/'
+description = """PBR is a library that injects some useful and sensible default behaviors
+into your setuptools run."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': ['bin/pbr'],
+    'dirs': ['lib/python{0}/site-packages'.format(pyshortver)],
+}
+
+moduleclass = 'tools'

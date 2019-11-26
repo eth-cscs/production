@@ -1,0 +1,42 @@
+# jg (cscs)
+easyblock = 'PythonPackage'
+
+name = 'scorep_binding_python'
+version = 'b308ab7'
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.1'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'https://github.com/score-p/scorep_binding_python'
+description = """Allows tracing of python code using Score-P"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/score-p/%(name)s/archive']
+sources = ['master.zip']
+patches = ['%(name)s-%(version)s.patch']
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('Score-P','4.0','-cuda-9.1'),
+]
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('PyExtensions', '%s' % pyver),
+]
+
+options = {'modulename': 'scorep'}
+
+sanity_check_paths = {
+    'files': ['lib/python%(pv)s/site-packages/scorep/scorep_bindings_mpi.cpython-36m-x86_64-linux-gnu.so' % {'pv': pyshortver}],
+    'dirs': [''],
+}
+
+modextrapaths = {'PYTHONPATH': 'lib/python%s/site-packages' % pyshortver}
+
+moduleclass = 'lib'

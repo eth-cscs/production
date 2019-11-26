@@ -1,0 +1,127 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+def loginBash = '#!/bin/bash -l'
+def pullRequestMessage = env.ghprbPullTitle
+stage('Initialization') {
+    node('master') {
+        checkout scm
+        def rootDir = pwd()
+        methods = load("${rootDir}/jenkins/util.groovy")
+        machinesList = load("${rootDir}/jenkins/Machines.groovy")
+        if (methods.checkWorkInProgress(pullRequestMessage)) {
+            echo "Work in progress detected, aborting....."
+            currentBuild.result = 'ABORTED'
+            return
+        }
+    }
+}
+
+if (currentBuild.result == 'ABORTED')
+    return
+def machineConfigurations = []
+stage('Machine Selection') {
+    node('master') {
+        def machinesToRun = machinesList.findAll({methods.machineCheck(pullRequestMessage, it.name)})
+        if (!machinesToRun) {
+            println "No machines were specified. Aborting...."
+            currentBuild.result = "ABORTED"
+            return
+        }
+        for (mach in machinesToRun) {
+            machineConfigurations.add(
+                [machine:mach, architectures: methods.getMachineConfiguration(
+                        pullRequestMessage, mach.name, mach.archs as String[])])
+        }
+    }
+}
+
+if (currentBuild.result == 'ABORTED')
+    return
+def builds = [:]
+stage('Build Stage') {
+    for (mach in machineConfigurations) {
+        def machine = mach.machine
+        def architectures = mach.architectures
+        def cpus = machine.cpus
+        def machineName = machine.name
+        for (architecture in architectures) {
+            def arch = architecture
+            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def cpusPerTask = arch == "" ? cpus : cpus[arch]
+            builds[machineLabel] = {
+                node(machineName) {
+                    def scmVars = checkout scm
+                    def projectName = env.JOB_BASE_NAME.trim()
+                    def gitCommit = scmVars.GIT_COMMIT.trim()[0..6]
+                    def buildID = env.BUILD_ID
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def buildPath = "/tmp/jenscscs/${gitCommit}${arch}/"
+                    def prefix = "$scratch/$projectName/$machineLabel/$gitCommit-$buildID"
+                    def command = machineName in ['daint', 'dom'] ? "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=${projectName} --partition=cscsci --time=06:00:00" : ''
+                    def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --hide-deps --exit-on-error"
+                    if (arch)
+                        commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no --hide-deps --exit-on-error"
+                    def buildList = sh(returnStdout: true,
+                                    script: "echo \$(git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
+                    withEnv(["EASYBUILD_BUILDPATH=$buildPath",
+                             "EASYBUILD_TMPDIR=$prefix/tmp",
+                             "EASYBUILD_SOURCEPATH=$prefix/sources",
+                             "EB_CUSTOM_REPOSITORY=$workingDir/easybuild",
+                             "buildlist=$buildList"]) {
+                                 sh("""$loginBash
+                                       status=0
+                                       if [ -d $prefix ]; then
+                                           rm -rf $prefix/*
+                                       else
+                                           mkdir -p $prefix
+                                       fi
+
+                                       echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
+                                       git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
+                                       # if buildlist is empty, skip this build; otherwise, write .eb files to file
+                                       if [ -z \"\$buildlist\" ]; then
+                                           echo -e "\\n No EasyBuild recipe to build, skipping build \\n\"
+                                           exit 0
+                                       else
+                                           echo \$buildlist | tr \" \" \"\\n\" > \"$prefix/${projectName}.txt\"
+                                       fi
+
+                                       $commandComplete
+                                       status=\$[status+\$?]
+                                       if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
+                                        chmod -R o+r \$EASYBUILD_TMPDIR
+                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                                       fi
+                                       exit \$status""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting....."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting....."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting....."
+        }
+    }
+
+    methods.notifySlackFinish()
+}

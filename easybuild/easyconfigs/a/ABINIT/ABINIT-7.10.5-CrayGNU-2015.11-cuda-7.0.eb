@@ -1,0 +1,69 @@
+# Built with EasyBuild version 2.7.0.dev0-r0dfc64e099929811d322eb721da6d46f923a7e01 on 2016-03-15_00-20-44
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ABINIT'
+version = '7.10.5'
+cudaversion = '7.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://www.abinit.org/'
+description = """ABINIT is a package whose main program allows one to find the total energy, charge density and
+ electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional
+ Theory (DFT), using pseudopotentials and a planewave or wavelet basis."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2015.11'}
+
+source_urls = ['http://ftp.abinit.org/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = ' CFLAGS=-fopenmp CXXFLAGS=-fopenmp FCFLAGS="-fopenmp -ffree-line-length-none" ';
+
+configopts = ' --enable-gpu --with-gpu-prefix=$CUDATOOLKIT_HOME --enable-openmp --enable-mpi --enable-mpi-io --with-mpi-level=2 '
+configopts +='--with-linalg-flavor=custom --with-linalg-libs="-lsci_gnu_48_mpi -lgfortran -lm -lsci_gnu_48 -lmpich_gnu_48" '
+configopts +='--with-fft-flavor=fftw3 --with-fft-libs="-L$FFTW_DIR" --with-fft-incs="-I$FFTW_INC" '
+configopts +='--with-netcdf-incs="-I$NETCDF_DIR/include" --with-netcdf-libs="-L$NETCDF_DIR/lib" '
+configopts +='--with-libxc-libs="-L$EBROOTLIBXC/lib" --with-libxc-incs="-I$EBROOTLIBXC/include" '
+
+builddependencies = [ 
+    ('fftw/3.3.4.5', EXTERNAL_MODULE),
+    ('cray-netcdf-hdf5parallel/4.3.3.1', EXTERNAL_MODULE),
+    ('cudatoolkit/7.0.28-1.0502.10742.5.1', EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('libxc', '2.2.2'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['abinit', 'aim', 'cut3d', 'conducti', 'mrgddb', 'mrgscr', 'optic']],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'chem'
+modloadmsg = 'Switch to PrgEnv-gnu before loading this module'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.7.0.dev0-r0dfc64e099929811d322eb721da6d46f923a7e01",
+    "easybuild-easyblocks_version": "2.7.0.dev0-r561dc925c3f546e5f44515b49d82a6b0d95d8deb",
+    "timestamp": 1457997643,
+    "build_time": 240.19,
+    "install_size": 266905989,
+    "command_line": ['--buildpath=/dev/shm/lucamar', '--experimental', '--external-modules-metadata=/apps/common/easybuild/cray_external_modules_metadata.cfg', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS', '--installpath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild', '--optarch=sandybridge', '--packagepath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild/packages', '--prefix=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild', '--repositorypath=/apps/daint/UES/5.2.UP04/sandbox-lm/easybuild/ebfiles_repo/', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/daint:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', '/apps/common/easybuild/cscs_easyconfigs/a/ABINIT/ABINIT-7.10.5-CrayGNU-2015.11-cuda-7.0.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/opt/modules/3.2.10.3/bin/modulecmd', '3.2.10'),
+    "core_count": 16,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz",
+    "cpu_speed": 2600.037,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.9.3/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/opt/gcc/4.9.3/snos/libexec/gcc/x86_64-suse-linux/4.9.3/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../cray-gcc-4.9.3/configure --prefix=/opt/gcc/4.9.3/snos --disable-nls --libdir=/opt/gcc/4.9.3/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.9.3/snos/include/g++ --with-slibdir=/opt/gcc/4.9.3/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-ppl --with-cloog; Thread model: posix; gcc version 4.9.3 20150626 (Cray Inc.) (GCC) ; ",
+    "glibc_version": "2.11.3",
+    "hostname": "daint101",
+    "os_name": "SLES",
+    "os_type": "Linux",
+    "os_version": "11_SP3",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.9 (unknown, Apr  7 2015, 08:28:12) ; [GCC 4.3.4 [gcc-4_3-branch revision 152973]]",
+    "system_gcc_path": "/opt/gcc/4.9.3/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

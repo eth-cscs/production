@@ -1,0 +1,38 @@
+# created by Luca Marsella (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO'
+version = '6.4.1'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.06'}
+toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
+
+sources = ['https://github.com/QEF/q-e/archive/' + 'qe-%s.tar.gz' % version ]
+
+preconfigopts = ' module unload cray-libsci && module list && '
+preconfigopts += ' CC=cc FC=ftn '
+preconfigopts += ' SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" '
+preconfigopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" '
+preconfigopts += ' LDFLAGS="-L$MKLROOT/lib/intel64 -lpthread -lstdc++ -ldl -qopenmp" '
+preconfigopts += ' FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" F90FLAGS="$FFLAGS" CFLAGS="-O3"'
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
+
+prebuildopts = ' module unload cray-libsci && '
+prebuildopts += ' cat make.inc && '
+buildopts = 'all epw'
+
+# single make process: parallel builds fail for targets 'gwl' (included in target 'all') and 'epw'
+maxparallel = 1
+
+sanity_check_paths = {
+      'files': ['bin/pw.x'],
+      'dirs': ['']
+}
+
+moduleclass = 'chem'

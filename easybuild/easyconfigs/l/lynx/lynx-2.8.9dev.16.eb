@@ -1,0 +1,19 @@
+easyblock = 'ConfigureMake'
+
+name = 'lynx'
+version = '2.8.9dev.16'
+
+homepage = 'http://lynx.invisible-island.net/'
+description = "lynx is a text browser for the World Wide Web."
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['http://invisible-mirror.net/archives/lynx/tarballs/']
+sources = ['%(name)s%(version)s.tar.bz2']
+
+sanity_check_paths = {
+    'files': ['bin/lynx'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

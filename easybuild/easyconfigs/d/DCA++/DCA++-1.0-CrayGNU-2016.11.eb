@@ -1,0 +1,22 @@
+easyblock = 'Bundle'
+
+name = 'DCA++'
+version = '1.0'
+
+homepage = 'http://www.itp.phys.ethz.ch/research/comp/computation.html'
+
+description = """The DCA++ software project is a C++ implementation of the dynamical cluster 
+approximation (DCA) and its DCA+ extension. It aims to solve lattice models of strongly correlated 
+electron systems. This module bundles all the dependencies for the CPU-only version."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('CMake', '3.6.0'),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+]
+
+moduleclass = 'phys'
+
+modextravars = {'CRAYPE_LINK_TYPE': 'dynamic'}

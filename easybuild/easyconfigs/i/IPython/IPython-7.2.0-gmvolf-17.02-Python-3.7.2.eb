@@ -1,0 +1,118 @@
+# File modified by MKr - January 2019
+easyblock = 'Bundle'
+
+name = 'IPython'
+version = "7.2.0"
+
+py_maj_ver = '3'
+py_min_ver = '7'
+py_rev_ver = '2'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+
+versionsuffix = '-Python-%s' % pyver
+
+homepage = 'http://ipython.org/index.html'
+description = """
+    IPython provides a rich architecture for interactive computing with:
+    Powerful interactive shells (terminal and Qt-based).
+    A browser-based notebook with support for code, text, mathematical 
+    expressions, inline plots and other rich media. Support for interactive 
+    data visualization and use of GUI toolkits. Flexible, embeddable 
+    interpreters to load into your own projects. Easy to use, high performance 
+    tools for parallel computing.
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+dependencies = [
+    ('Python', pyver),
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+   ('parso', '0.3.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/p/parso/'],
+       'checksums': [('4b8f9ed80c3a4a3191aa3261505d868aa552dd25649cb13a7d73b6b'
+                      '7315edf2d')],
+   }),
+   ('wcwidth', '0.1.7', {
+       'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/'],
+       'checksums': [('3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998f'
+                      'aa96bc65e')],
+   }),
+   ('backcall', '0.1.0', {
+       'source_urls': ['https://pypi.python.org/packages/source/b/backcall/'],
+       'checksums': [('38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb90'
+                      '1196e01e4')],
+   }),
+   ('decorator', '4.3.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
+       'checksums': [('33cd704aea07b4c28b3eb2c97d288a06918275dac0ecebdaf1bc8a4'
+                      '8d98adb9e')],
+   }),
+   ('ipython_genutils', '0.2.0', {
+       'source_urls': [('https://pypi.python.org/packages/source/i/'
+                        'ipython_genutils/')],
+       'checksums': [('eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b8'
+                      '87c628ba8')],
+   }),
+   ('jedi', '0.13.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/j/jedi/'],
+       'checksums': [('571702b5bd167911fe9036e5039ba67f820d6502832285cde8c881a'
+                      'b2b2149fd')],
+   }),
+   ('pexpect', '4.6.0', {
+       'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
+       'checksums': [('2a8e88259839571d1251d278476f3eec5db26deb73a70be5ed5dc54'
+                      '35e418aba')],
+   }),
+   ('pickleshare', '0.7.5', {
+       'source_urls': [('https://pypi.python.org/packages/source/p/'
+                       'pickleshare/')],
+       'checksums': [('87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc'
+                      '2c683afca')],
+   }),
+   ('prompt_toolkit', '2.0.8', {
+       'source_urls': [('https://pypi.python.org/packages/source/p/'
+                       'prompt_toolkit/')],
+       'checksums': [('c6655a12e9b08edb8cf5aeab4815fd1e1bdea4ad73d3bbf269cf2e0'
+                      'c4eb75d5e')],
+   }),
+   ('ptyprocess', '0.6.0', {
+       'source_urls': [('https://pypi.python.org/packages/source/p/'
+                        'ptyprocess/')],
+       'checksums': [('923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc'
+                      '2476394c0')],
+   }),
+   ('Pygments', '2.3.1', {
+       'source_urls': ['https://pypi.python.org/packages/source/P/Pygments/'],
+       'checksums': [('5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e9'
+                      '9c03b284a')],
+   }),
+   ('traitlets', '4.3.2', {
+       'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
+       'checksums': [('9c4bd2d267b7153df9152698efb1050a5d84982d3384a37b2c1f772'
+                      '3ba3e7835')],
+   }),
+   ('ipython', version, {
+       'modulename': 'IPython',
+       'source_urls': ['https://pypi.python.org/packages/source/i/ipython/'],
+       'checksums': [('6a9496209b76463f1dec126ab928919aaf1f55b38beb9219af3fe20'
+                      '2f6bbdd12')],
+   }),
+]
+
+sanity_check_paths = {
+    'files': ['bin/ipython'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/IPython'],
+}
+
+sanity_check_commands = [
+    "ipython -h",
+]
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+moduleclass = 'tools'
+

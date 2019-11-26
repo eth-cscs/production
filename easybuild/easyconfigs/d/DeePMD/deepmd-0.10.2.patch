@@ -1,0 +1,12 @@
+diff -Nru deepmd-kit-0.10.2.orig/source/CMakeLists.txt deepmd-kit-0.10.2/source/CMakeLists.txt
+--- deepmd-kit-0.10.2.orig/source/CMakeLists.txt	2018-08-20 18:11:20.000000000 +0200
++++ deepmd-kit-0.10.2/source/CMakeLists.txt	2018-09-12 13:52:29.000000000 +0200
+@@ -2,7 +2,7 @@
+ project(DeePMD)
+ 
+ list (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
+-list (APPEND CMAKE_CXX_FLAGS "-std=c++11 -Wno-ignored-attributes")
++string (APPEND CMAKE_CXX_FLAGS " -std=c++11 -Wno-ignored-attributes")
+ 
+ # define the abi
+ if (NOT DEFINED TF_GOOGLE_BIN) 

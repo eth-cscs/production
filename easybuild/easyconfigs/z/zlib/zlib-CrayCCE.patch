@@ -1,0 +1,12 @@
+diff -ru zlib-1.2.8.orig/configure zlib-1.2.8/configure
+--- zlib-1.2.8.orig/configure	2013-03-24 06:30:09.000000000 +0100
++++ zlib-1.2.8/configure	2015-08-03 18:59:01.087104770 +0200
+@@ -382,7 +382,7 @@
+ if test $shared -eq 1; then
+   echo Checking for shared library support... | tee -a configure.log
+   # we must test in two steps (cc then ld), required at least on SunOS 4.x
+-  if try $CC -w -c $SFLAGS $test.c &&
++  if try $CC -c $SFLAGS $test.c &&
+      try $LDSHARED $SFLAGS -o $test$shared_ext $test.o; then
+     echo Building shared library $SHAREDLIBV with $CC. | tee -a configure.log
+   elif test -z "$old_cc" -a -z "$old_cflags"; then

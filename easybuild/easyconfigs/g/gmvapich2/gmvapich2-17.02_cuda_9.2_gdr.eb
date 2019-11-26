@@ -1,0 +1,25 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = "Toolchain"
+
+name = 'gmvapich2'
+version = '17.02_cuda_9.2_gdr'
+
+homepage = '(none)'
+description = """GNU Compiler Collection (GCC) based compiler toolchain,
+including MVAPICH2 for MPI support."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+compname = 'GCC'
+compver = '5.4.0-2.26'
+comp = (compname, compver)
+
+# compiler toolchain dependencies
+dependencies = [
+    comp,
+    ('MVAPICH2', '2.3-5.4.0-2.27_cuda_9.2_gdr'), 
+        # will load mvapich2gdr_gnu/2.3_cuda_9.2_gcc54
+            # will load cudatoolkit/9.2.148
+]
+
+moduleclass = 'toolchain'

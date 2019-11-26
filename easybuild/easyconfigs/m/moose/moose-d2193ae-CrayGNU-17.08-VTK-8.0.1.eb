@@ -1,0 +1,63 @@
+# contributed by @wsawyer and @gppezzi (CSCS)
+easyblock = "CmdCp"
+
+name = 'moose'
+version = 'd2193ae'
+vtkversion = '8.0.1'
+vtkshortversion = '8.0'
+versionsuffix = '-VTK-%s' % vtkversion
+
+homepage = 'http://www.mooseframework.org/'
+description = """Framework for Multiphysics Object Oriented Simulation Environment."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [
+    'https://github.com/idaholab/moose/archive/',
+    'https://github.com/libMesh/libmesh/archive/',
+]
+
+sources = [
+    'd2193aefff5d289a10c6b4f9c99e63705eee05b2.zip',
+    '9a3100a84c2d5f16126c6d8df57d068c19f15e45.zip',
+]
+
+dependencies = [
+    ('CMake', '3.9.1', '', True),
+    ('cray-tpsl/17.06.1', EXTERNAL_MODULE),
+    ('cray-petsc/3.7.6.0', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel/1.10.0.3', EXTERNAL_MODULE), # should not be necessary for --disable-hdf5 but seems to be
+    ('Boost', '1.65.0', '-python2'),
+    ('VTK', '%s' % vtkversion, '-python2'),
+    ('GSL', '2.4'),
+]
+
+buildcmd =  "cd %(installdir)s && export CRAY_ADD_RPATH=yes && "
+buildcmd += "cp -ra ./moose-d2193aefff5d289a10c6b4f9c99e63705eee05b2/* . && "
+buildcmd += "cp -ra ./libmesh-9a3100a84c2d5f16126c6d8df57d068c19f15e45/* libmesh/ && "
+buildcmd += "./scripts/update_and_rebuild_libmesh.sh --disable-hdf5 --with-vtk-include=$EBROOTVTK/include/vtk-%s --with-vtk-lib=$EBROOTVTK/lib  && " % vtkshortversion
+buildcmd += "cd framework && "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 && "
+buildcmd += "cd ../modules && "
+buildcmd += "METHOD='opt' make -j 16 && "
+buildcmd += "METHOD='dbg' make -j 16 && "
+buildcmd += "METHOD='oprof' make -j 16 "
+
+keepsymlinks = True
+buildininstalldir = True
+
+cmds_map = [('.*', buildcmd)]
+
+postinstallcmds = ["rm -rf %(installdir)s/libmesh-9a3100a84c2d5f16126c6d8df57d068c19f15e45",
+                   "rm -rf %(installdir)s/moose-d2193aefff5d289a10c6b4f9c99e63705eee05b2/*"]
+
+files_to_copy = []
+
+sanity_check_paths={
+    'files': ['modules/run_tests'],
+    'dirs': ['framework'],
+}
+
+moduleclass = 'lib'

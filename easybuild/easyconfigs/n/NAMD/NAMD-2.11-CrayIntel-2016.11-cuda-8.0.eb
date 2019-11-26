@@ -1,0 +1,35 @@
+# Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
+easyblock = 'MakeCp'
+
+name = 'NAMD'
+version = '2.11'
+versionsuffix = '-cuda-8.0'
+
+homepage = 'http://www.ks.uiuc.edu/Research/namd/'
+description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2016.11'}
+toolchainopts = {'dynamic': False}
+
+sources = ['NAMD_%(version)s_Source.tar.gz']
+
+prebuildopts = ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-fftw3 --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-smp --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
+prebuildopts += ' cd CRAY-XC-intel.cuda && '
+
+builddependencies = [
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('rca', EXTERNAL_MODULE),
+    ('cudatoolkit/8.0.44_GA_2.2.7_g4a6c213-2.1', EXTERNAL_MODULE), 
+    ('Charm++', '6.7.1'), 
+    ('Tcl', '8.5.9', '-namd',  True),
+]
+
+files_to_copy = [(['./CRAY-XC-intel.cuda/namd2'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/namd2'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

@@ -1,0 +1,29 @@
+diff -Nru ParaView-v5.5.2copy/Utilities/VisItBridge/databases/readers/Nek5000/avtNek5000FileFormat.C ParaView-v5.5.2/Utilities/VisItBridge/databases/readers/Nek5000/avtNek5000FileFormat.C
+--- ParaView-v5.5.2copy/Utilities/VisItBridge/databases/readers/Nek5000/avtNek5000FileFormat.C	2018-08-24 10:54:32.582090000 +0200
++++ ParaView-v5.5.2/Utilities/VisItBridge/databases/readers/Nek5000/avtNek5000FileFormat.C	2018-08-24 10:55:08.289394000 +0200
+@@ -1350,8 +1350,8 @@
+     int hexes_per_element = (iBlockSize[0]-1)*(iBlockSize[1]-1);
+     if (iDim == 3)
+         hexes_per_element *= (iBlockSize[2]-1);
+-    int total_hexes = hexes_per_element*num_elements;
+-    int total_size = (iDim == 3 ? 9*total_hexes : 5*total_hexes);
++    vtkIdType total_hexes = hexes_per_element*num_elements;
++    vtkIdType total_size = (iDim == 3 ? 9*total_hexes : 5*total_hexes);
+ 
+     vtkIdTypeArray *nlist = vtkIdTypeArray::New();
+     nlist->SetNumberOfValues(total_size);
+@@ -1365,11 +1365,11 @@
+     cellLocations->SetNumberOfValues(total_hexes);
+     vtkIdType *cl = cellLocations->GetPointer(0);
+ 
+-    int hexes_so_far = 0;
+-    int elements_so_far = 0;
++    vtkIdType hexes_so_far = 0;
++    vtkIdType elements_so_far = 0;
+     for (int i = 0 ; i < num_elements ; i++)
+     {
+-        int pt_start = pts_per_element * elements_so_far;
++        vtkIdType pt_start = pts_per_element * elements_so_far;
+         for (int ii = 0 ; ii < iBlockSize[0]-1 ; ii++)
+         {
+             for (int jj = 0 ; jj < iBlockSize[1]-1 ; jj++)

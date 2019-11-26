@@ -1,0 +1,37 @@
+# created by Anton Kozhevnikov (CSCS)
+easyblock = "ConfigureMake"
+
+name = 'QuantumESPRESSO-SIRIUS'
+version = '6.2'
+cudaversion = 8.0
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://github.com/electronic-structure/q-e-sirius/'
+description = """ SIRIUS-enabled version of Quantum ESPRESSO """
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+sources = ['https://github.com/electronic-structure/q-e-sirius/archive/' + 'v%(version)s-sirius.tar.gz']
+
+dependencies = [
+  ('SIRIUS', '5.5', '-cuda-%s' % cudaversion)
+]
+
+preconfigopts = ' module unload cray-libsci && module list && ' 
+preconfigopts += ' CC=cc FC=ftn '
+preconfigopts += ' LIBS="-lsirius_f -lxc -lsymspg -lgsl -lmagma_sparse -lmagma -lcufft -lcublas -L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl -qopenmp"'
+preconfigopts += ' LDFLAGS=$LIBS LD_LIBS=$LIBS'
+configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack --disable-xml '
+
+prebuildopts = ' module unload cray-libsci && cat make.inc && '
+buildopts = 'pw'
+# a single make process is required, since parallel builds fail
+#maxparallel = 1
+
+sanity_check_paths = {
+      'files': ['bin/pw.x'],
+      'dirs': ['']
+}
+
+moduleclass = 'chem'

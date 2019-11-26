@@ -1,0 +1,78 @@
+# @author: marcelsc, gppezzi, victorusu
+
+easyblock = "CmdCp"
+
+name = 'TensorFlow'
+version = '1.7.0'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = '-cc-python%s' % (py_maj_ver)
+depssuffix = '-python%s' % (py_maj_ver)
+
+homepage = 'https://www.tensorflow.org/'
+description = """An open-source software library for Machine Intelligence."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+
+builddependencies = [
+    ('wheel', '0.31.1', depssuffix),
+    ('Bazel', '0.11.1', depssuffix),
+]
+
+dependencies = [
+    ('SWIG', '3.0.12', depssuffix),
+    ('protobuf', '3.6.0', depssuffix),
+    ('backports.weakref', '1.0.post1', depssuffix),
+    ('Werkzeug', '0.14.1', depssuffix),
+    ('absl', '0.2.2', depssuffix),
+    ('dask', '0.18.1', depssuffix)
+]
+
+sources = ['v%(version)s.tar.gz']
+source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
+
+patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, py_maj_ver))]
+whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
+
+installdir = '%(installdir)s'
+
+with_configure = False
+
+build_str  = "export TEST_TMPDIR=/tmp/$USER/bazelout/ && "
+build_str += "export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s && " % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
+# Exporting CC breaks this build on Cray
+build_str += "unset CC && "
+build_str += "chmod +x configure-cscs.sh && "
+build_str += "./configure-cscs.sh && "
+build_str += "bazel build --verbose_failures --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "
+build_str += "-c opt //tensorflow/tools/pip_package:build_pip_package //tensorflow:libtensorflow_cc.so &&"
+build_str += "bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s &&"
+build_str += "pip install --no-deps --prefix  %(builddir)s %(builddir)s/" + whl_file
+
+cmds_map = [
+    ('v%(version)s.tar.gz', build_str),
+]
+
+files_to_copy = [
+    (['%(builddir)s/' + whl_file], '%(installdir)s'),
+	(['%(builddir)s/bin'], '%(installdir)s'),
+	(['%(builddir)s/lib'], '%(installdir)s'),
+	(['%(builddir)s/tensorflow-1.7.0/bazel-out/k8-py3-opt'], '%(installdir)s'),
+]
+
+sanity_check_paths={
+    'files': [whl_file],
+    'dirs': ['%s/lib/python%s/site-packages' % (installdir, pyshortver)],
+}
+
+postinstallcmds = [ 'rm -rf /dev/shm/$USER/bazelout/' ]
+
+modextrapaths = {                                                                  
+    'PYTHONPATH' : 'lib/python%s/site-packages' % pyshortver,
+}
+
+moduleclass = 'devel'

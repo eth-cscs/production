@@ -1,0 +1,39 @@
+easyblock = 'PythonPackage'
+
+name = 'mympingpong'
+version = '0.7.1'
+python = 'python'
+pyver = '2'
+versionsuffix = '-%s%s' % (python, pyver)
+# cray test_links is probably a better choice
+# scrrenshots on https://github.com/hpcugent/mympingpong/issues/14
+
+homepage = 'https://github.com/hpcugent/mympingpong'
+description = """A mpi4py based random pair pingpong network stress test."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = { 'verbose' : False }
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+patches = ['mympingpong-0.7.1.patch']
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('PyExtensions', '2.7'),
+    #('matplotlib', '2.0.2', versionsuffix),
+    #('six', '1.10.0', versionsuffix),
+    #('vsc-base', '2.5.8', versionsuffix),
+    ('vsc-mympirun', '4.0.1', '', True),
+    ('h5py', '2.7.0', versionsuffix),
+    ('mpi4py', '2.0.0', versionsuffix + '-timed-pingpong'),
+    #('lxml', '3.7.2', versionsuffix),
+    #('hwloc', '1.11.5', '', True),
+]
+
+options = {'modulename': 'vsc.mympingpong'}
+
+sanity_check_paths = {
+    'files': ['bin/mympingpong', 'bin/mympingponganalysis'],
+    'dirs': ['lib/python2.7/site-packages'],
+}
+
+moduleclass = 'perf'

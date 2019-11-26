@@ -1,0 +1,69 @@
+# Built with EasyBuild version 2.3.0 on 2015-11-05_10-02-22
+##
+# This is an easyconfig file for EasyBuild, see https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2013-2015 Juelich Supercomputing Centre, Germany
+# Authors::   Bernd Mohr <b.mohr@fz-juelich.de>
+#             Markus Geimer <m.geimer@fz-juelich.de>
+# License::   3-clause BSD
+#
+# This work is based on experiences from the UNITE project
+# http://apps.fz-juelich.de/unite/
+##
+# easyblock = 'EB_Score_minus_P'
+easyblock = 'ConfigureMake'
+
+name = "Cube"
+version = "4.3.2"
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Cube, which is used as performance report explorer for Scalasca and
+ Score-P, is a generic tool for displaying a multi-dimensional performance space
+ consisting of the dimensions (i) performance metric, (ii) call path, and (iii) system
+ resource. Each dimension can be represented as a tree, where non-leaf nodes of the tree
+ can be collapsed or expanded to achieve the desired level of granularity."""
+
+toolchain = {'name': 'gmvapich2', 'version': '15.11_cuda_7.0_gdr'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
+
+checksums = [
+    'a9119524df5a39e7a5bf6dee4de62e30',     # cube-4.3.2.tar.gz
+]
+
+# dependencies = [('Qt', '4.8.6')]
+#no: configopts = '--with-qt=/apps/common/qt/201511/5.5/gcc_64'
+configopts = 'CPPFLAGS=-fpermissive'
+
+sanity_check_paths = {
+    'files': ["bin/cube", ("lib/libcube4.a", "lib64/libcube4.a"), ("lib/libcube4.so", "lib64/libcube4.so")],
+    'dirs': ["include/cube", "include/cubew"],
+}
+
+moduleclass = 'perf'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.3.0",
+    "easybuild-easyblocks_version": "2.3.0",
+    "timestamp": 1446714142,
+    "build_time": 80.77,
+    "install_size": 188294005,
+    "command_line": ['--buildpath=/dev/shm/piccinal', '--group-writable-installdir', '--hide-deps=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons', '--installpath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild', '--packagepath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild/packages', '--prefix=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild', '--recursive-module-unload', '--repositorypath=/apps/escha/UES/RH6.6_PE15.09/sandbox//easybuild/ebfiles_repo/', '--robot=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.3.0/lib64/python2.6/site-packages/easybuild_easyconfigs-2.3.0-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/ebfiles_repo/keschln-:/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--try-toolchain="[\'gmvapich2\', \'15.11_cuda_7.0_gdr\']"', '--umask=002', 'Score-P-1.4.2-gmvapich2-15.11.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper; Target: x86_64-unknown-linux-gnu; Configured with: ../configure --enable-languages=c,c++,fortran --enable-lto --enable-checking=release --disable-multilib --enable-shared=yes --enable-static=yes --enable-threads=posix --enable-gold=default --enable-plugins --enable-ld --with-plugin-ld=ld.gold --enable-bootstrap --prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25 --with-local-prefix=/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25; Thread model: posix; gcc version 4.9.3 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0001",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/apps/escha/UES/RH6.6_PE15.09/easybuild/software/GCC/4.9.3-binutils-2.25/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

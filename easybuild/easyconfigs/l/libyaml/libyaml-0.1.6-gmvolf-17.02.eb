@@ -1,0 +1,20 @@
+# Recipe contributed by MaKra (CSCS) - August 2017
+easyblock = 'ConfigureMake'
+
+name = 'libyaml'
+version = '0.1.6'
+
+homepage = 'http://pyyaml.org/wiki/LibYAML'
+description = """LibYAML is a YAML 1.1 parser and emitter written in C."""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+sources = ['yaml-%(version)s.tar.gz']
+source_urls = ['http://pyyaml.org/download/libyaml/']
+
+sanity_check_paths = {
+    'files': ["include/yaml.h", "lib/libyaml.a", "lib/libyaml.%s" % SHLIB_EXT],
+    'dirs': ["lib/pkgconfig"]
+}
+
+moduleclass = 'lib'

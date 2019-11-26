@@ -1,0 +1,31 @@
+# contributed by Luca Marsella (CSCS)
+name = 'netcdf4-python'
+version = '1.3.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://unidata.github.io/netcdf4-python/'
+description = """Python/numpy interface to netCDF."""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
+sources = ['netCDF4-%(version)s.tar.gz']
+
+builddependencies = [
+    ('cURL', '7.56.0'),
+]
+
+dependencies = [
+    ('Python', '2.7.13'),
+    ('netCDF-Fortran', '4.4.4'),
+]
+
+
+sanity_check_paths = {
+   'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo',
+             'lib/python%(pyshortver)s/site-packages/netCDF4-%(version)s-py%(pyshortver)s-linux-x86_64.egg'],
+   'dirs': [],
+}
+
+moduleclass = 'data'

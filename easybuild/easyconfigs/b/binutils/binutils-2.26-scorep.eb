@@ -1,0 +1,32 @@
+easyblock = 'ConfigureMake'
+
+name = 'binutils'
+version = '2.26-scorep'
+#todo: add versionsuffix = "-scorep"
+
+homepage = 'http://directory.fsf.org/project/binutils/'
+description = "binutils: GNU binary utilities"
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = [ 'http://ftp.gnu.org/gnu/binutils/' ]
+sources = ['binutils-2.26.tar.gz']
+# source_urls = [GNU_SOURCE]
+# sources = [SOURCE_TAR_GZ]
+# zlib is build inside binutils
+
+configopts  = ' --with-sysroot=/'
+configopts += ' --enable-shared --with-pic' 
+configopts += ' LDFLAGS=-L../libiberty/pic'
+postinstallcmds = [ "cp libiberty/libiberty.a %(installdir)s/lib" ]
+
+binlist = ['addr2line', 'ar', 'as', 'c++filt', 'elfedit', 'gprof', 'ld', 'ld.bfd', 'nm',
+           'objcopy', 'objdump', 'ranlib', 'readelf', 'size', 'strings', 'strip' ]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in binlist] + ['lib/libbfd.a', 'lib/libopcodes.a'] +
+             ['include/%s' % x for x in ['ansidecl.h', 'bfd.h', 'bfdlink.h', 'dis-asm.h', 'symcat.h']],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

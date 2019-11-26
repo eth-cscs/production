@@ -1,0 +1,11 @@
+--- gcc-8.2.0.orig/configure	2018-07-26 11:48:58.000000000 +0200
++++ gcc-8.2.0/configure	2019-01-14 10:24:41.463182072 +0100
+@@ -5905,7 +5905,7 @@
+     _isl_saved_LIBS=$LIBS
+ 
+     CFLAGS="${_isl_saved_CFLAGS} ${islinc} ${gmpinc}"
+-    LDFLAGS="${_isl_saved_LDFLAGS} ${isllibs} ${gmplibs}"
++    LDFLAGS="${_isl_saved_LDFLAGS} ${isllibs}"
+     LIBS="${_isl_saved_LIBS} -lisl -lgmp"
+ 
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for isl 0.15 or later" >&5

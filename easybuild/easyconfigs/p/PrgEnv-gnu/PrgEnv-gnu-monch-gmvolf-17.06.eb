@@ -1,0 +1,13 @@
+# @author: gppezzi
+
+easyblock = 'Bundle'
+
+name = 'PrgEnv-gnu'
+version = 'monch'
+
+homepage = 'http://user.cscs.ch'
+description = """This bundle provides a meta module for the Programming Environment on monch"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.06'}
+
+moduleclass = 'devel'

@@ -1,0 +1,314 @@
+easyblock = 'Bundle'
+
+name = 'perftools-base-cscs'
+version = '645-cuda'
+
+homepage = 'http://user.cscs.ch/compiling_and_optimizing/performance_tools/craypat/'
+description = """CrayPat gives performance details of application code running on Cray systems."""
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """#%Module##############################################
+#
+#       (C) COPYRIGHT CRAY INC.
+#       UNPUBLISHED PROPRIETARY INFORMATION.
+#       ALL RIGHTS RESERVED.
+#
+
+set    PERFTOOLS_LEVEL		"6.4.5"
+set    PERFTOOLS_PREFIX     "/opt/cray/pe"
+set    PERFTOOLS_CURPATH	"/apps/common/UES/proposals/pug.git/perftools-lite/6.4.5/cuda"
+#ORI: ${PERFTOOLS_PREFIX}/perftools/${PERFTOOLS_LEVEL}
+set    LICENSE_PATH 		${PERFTOOLS_PREFIX}/perftools
+setenv PERFTOOLS_VERSION	${PERFTOOLS_LEVEL}
+
+module-whatis   "The Performance Tools module sets up environments for CrayPat, Apprentice2 and Reveal"
+if { [module-info mode whatis] } {
+    exit 0
+}
+
+proc is_avail {what} {
+   set trial_result_stdout ""
+   if { [info exists ::env(MODULESHOME)] } {
+      if { [ file executable $::env(MODULESHOME)/bin/modulecmd ] } {
+         set mcmd $::env(MODULESHOME)/bin/modulecmd
+      }
+   }
+   if { ! [ info exist mcmd] } {
+       set mcmd [ exec which modulecmd ]
+   }
+
+   set trial_load [open |[list $mcmd sh load $what ] "r"]
+   set trial_result_stdout [read -nonewline $trial_load]
+   catch {close $trial_load } trial_result_stderr
+   if {[string first "ERROR" $trial_result_stderr] >= 0} {
+     return false
+   }
+   return true
+}
+
+# Perftools/6.3.0 conflicts (may need to reduce)
+conflict perftools-base
+conflict perftools
+conflict perftools-nwpc
+conflict perftools-lite
+conflict perftools-lite-loops
+conflict perftools-lite-events
+conflict perftools-lite-gpu
+conflict perftools-lite-hbm
+
+conflict xt-mpich2
+conflict papi
+conflict craypat
+conflict cuda
+conflict cudatools
+
+# Procedure to determine if the system is running modules version
+# 3.2.10.2 or later.
+proc modules_compat {} {
+  global env
+  if {[info exists env(MODULESHOME)] } {
+    if { [info exists env(MODULE_VERSION)] } {
+    set MODULES_VERSION $env(MODULE_VERSION)
+    } else {
+      set rc [catch { exec modulecmd bash --version 2>@1 } cmd_output ]
+      foreach i ${cmd_output} {
+        set key [ lindex [ split $i '=' ]  0 ]
+        set value [ lindex [ split $i '=' ]  1 ]
+        if { $key == "VERSION" } {
+          set MODULES_VERSION [ string trim $value '"' ]
+          break
+        }
+      }
+    }
+    if {[expr [llength [split $MODULES_VERSION .]] > 3]} {
+      set needed_ver {3 2 10 2}
+      set module_ver "$MODULES_VERSION"
+      set module_ver [split $module_ver .]
+      for {set i 0} {$i < 4} {incr i} {
+        if {[expr [lindex $module_ver $i] > [lindex $needed_ver $i]]} {
+          return 1
+        }
+        if {[expr [lindex $module_ver $i] < [lindex $needed_ver $i]]} {
+          return 0
+        }
+      }
+      return 1
+    } else {
+      return 0
+    }
+  } else {
+      return 0
+  }
+}
+
+if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
+    if { [module-info mode] == "remove" } {
+        foreach perftools_sub_module [ glob -tails -directory $PERFTOOLS_CURPATH/modulefiles * ] {
+            if {[is-loaded $perftools_sub_module]} {
+                module unload $perftools_sub_module
+            }
+        }
+    }
+}
+
+# --- cscs:ok ---
+module use "$PERFTOOLS_CURPATH/modulefiles"
+# Will fail if perftools release is not installed.
+# --- cscs:ok ---
+
+if { ! [info exists env(DISABLE_AUTO_RM_SWAP)]} {
+    if {[info exists env(LOADEDMODULES)]} {
+        if {[modules_compat]} {
+          prepend-path  MODULEPATH $PERFTOOLS_CURPATH/modulefiles
+          if {[module-info mode switch2]} {
+            foreach module [split $env(LOADEDMODULES) :] {
+              if {[string match *perftools* $module]} {
+                set module_name [lindex [split $module /] [expr [llength [split $module /]] - 1]]
+                if { [file exists $PERFTOOLS_CURPATH/modulefiles/$module_name]} {
+                  module unload $module_name
+                  module load $module_name
+                } else {
+                  puts stderr "\nWarning: $module_name does not exist in perftools-base/$PERFTOOLS_LEVEL and is not being swapped."
+                  module unload $module_name
+                }
+              }
+            }
+          }
+        } else {
+            foreach module [split $env(LOADEDMODULES) :] {
+                if {[string match *perftools* $module]} {
+                    if { ![string match *perftools-base* $module] } {
+                        puts stderr [string match *perftools* $module]
+                        puts stderr "Warning: modules/3.2.10.2 or later is required to swap $module"
+                        puts stderr "Please unload and reload $module after swapping perftools-base"
+                    }
+                }
+            }
+        }
+    }
+}
+
+if { [is_avail rca] } {
+    if {[module-info mode load]} {
+        module load rca
+    }
+}
+
+# Determine OS type
+set OS_ID "generic"
+set VERSION_ID "NULL"
+set VERSION_ID_MAJOR "NULL"
+
+if { [ file exist /etc/os-release ] } {
+    set fsize [file size /etc/os-release ]
+    set fp [open /etc/os-release r]
+    set fp [open /etc/os-release r]
+    set OS_INFO [read $fp $fsize]
+    foreach i $OS_INFO {
+        set key [ lindex [ split $i '=' ]  0 ]
+        set value [ lindex [ split $i '=' ]  1 ]
+        if { $key == "ID" } {
+            set OS_ID [ string trim $value '"' ]
+        }
+        if { $key == "VERSION_ID" } {
+            set VERSION_ID [ string trim $value '"' ]
+            set VERSION_ID_MAJOR [ lindex [ split $VERSION_ID '.' ]  0 ]
+        }
+    }
+}
+
+# meset it to use the release_info_gpu in the next section
+# if the xtpe-accel-nvidia20 modulefile is loaded
+set release_info $PERFTOOLS_CURPATH/release_info
+if { [ file exists $release_info ] } {
+     set fsize [file size $release_info ]
+     set fp [open $release_info r]
+     set REL_INFO [read $fp $fsize]
+} else {
+    set REL_INFO ""
+}
+
+if { ! [ file exists /etc/SuSE-release ] } {
+    setenv PAT_BUILD_OPTIONS "-Dlink-instr=--copy-dt-needed-entries"
+}
+
+#This env var is read by the function provided by the performance tools group to the ALPS group. It provides analysis of the environment to determine if network performance counters are being requested by the job.
+# CRAYPAT_ALPS_CMD is set from this in the CRAYPAT_LITE module
+setenv CRAYPAT_ALPS_COMPONENT $PERFTOOLS_CURPATH/sbin/pat_alps
+ 
+#Pointer to correct version of papi
+set PAT_BUILD_PAPI_BASEDIR ${PERFTOOLS_PREFIX}/papi/5.5.0.2
+setenv PAT_BUILD_PAPI_BASEDIR $PAT_BUILD_PAPI_BASEDIR
+prepend-path MANPATH $PAT_BUILD_PAPI_BASEDIR/share/pdoc/man
+
+prepend-path PATH $PAT_BUILD_PAPI_BASEDIR/bin
+
+# Save this line, it is the test for running on Cray hardware
+# if { [ file exists /proc/cray_xt/nid ] } {
+
+#  Direct Chapel compiler to include line directives
+#  in generated C code that refer to Chapel source files.
+setenv CHPL_CG_CPP_LINES 1
+
+# Env var to list prefixes for function names to be pruned from reports.
+setenv PAT_REPORT_PRUNE_NAME [ join {
+	 _cray$mt_start_
+	__cray_hwpc_
+	f_cray_hwpc_
+	  cstart
+	__pat_
+	  pat_region_
+	  PAT_
+	  OMP.slave_loop
+	  slave_entry
+	 _new_slave_entry
+	  THREAD_POOL_join
+	__libc_start_main
+	 _start
+	__start
+	  start_thread
+	__wrap_
+	  UPC_ADIO_
+	 _upc_
+	  upc_
+	__caf_
+	__pgas_
+	syscall
+} "," ]
+
+# Environment variable to initialize the Intel MIC coprocessor before entry
+# into main(). Needed to work around sporadic aborts during coprocessor
+# initialization when sampling offload mode applications.
+setenv OFFLOAD_INIT on_start
+
+if { ! [ file exists /etc/SuSE-release ] } {
+    setenv LIBPFM_DISABLED_PMUS "knl"
+}
+
+# Environment variable that is prepended to LD_LIBRARY_PATH in the driver
+# scripts.  See bug 842533.
+setenv CRAYPAT_LD_LIBRARY_PATH /opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:$PERFTOOLS_CURPATH/lib64
+
+proc ModulesHelp { } {
+    global PERFTOOLS_LEVEL
+    global PERFTOOLS_CURPATH
+    global REL_INFO
+    puts stderr ""
+    puts stderr "==================================================================="
+    puts stderr "$REL_INFO"
+    puts stderr "==================================================================="
+    puts stderr "To re-display perftools-base/$PERFTOOLS_LEVEL release information,"
+    puts stderr "type:    less $PERFTOOLS_CURPATH/release_info"
+    puts stderr "===================================================================\n"
+}
+
+prepend-path  PATH              $PERFTOOLS_CURPATH/bin
+prepend-path  MANPATH           $PERFTOOLS_CURPATH/man
+
+#################################################################
+# CrayPat section
+
+set is_module_rm  [module-info mode remove]
+
+setenv        CRAYPAT_LICENSE_FILE $LICENSE_PATH/craypat.lic
+prepend-path  CRAYLMD_LICENSE_FILE $LICENSE_PATH/craypat.lic
+
+###
+# The following definitions support "dynamic" compiler options, as
+# supported by the XT compiler drivers in PrgEnv 1.3 and later.
+# They purposely defer the evaluation of $CRAYPAT_ROOT, so that setting 
+# CRAYPAT_ROOT to a different directory will cause the pat-opts under
+# that directory to be used.
+###
+
+setenv  CRAYPAT_OPTS_EXECUTABLE    "sbin/pat-opts"
+setenv  CRAYPAT_ROOT               $PERFTOOLS_CURPATH
+set     pat_opts                   {$CRAYPAT_ROOT/sbin/pat-opts}
+
+######################################################################
+# Apprentice2 section
+
+setenv APP2_STATE "${PERFTOOLS_LEVEL}"
+#setenv APP2_JMAN_PATH $PERFTOOLS_CURPATH/libexec64
+
+#Do not set PERFTOOLS_UTILS_VERSION stuff on centos7 or envoy
+set ENVOY [ file exist /scratch/pe-compute-image/lib/ld-linux-aarch64.so.1 ]
+set CS7 0
+if  { $OS_ID == "centos" || $OS_ID == "rhel" && $VERSION_ID_MAJOR >= 7 } {
+    set CS7 1
+}
+
+if { $ENVOY == 0 && $CS7 == 0 } {
+    set PERFTOOLS_UTILS_VERSION 1.0.0
+    set PERFTOOLS_UTILS_ROOT ${PERFTOOLS_PREFIX}/perftools-utils/$PERFTOOLS_UTILS_VERSION 
+#    setenv CRAY_GDK_PIXBUF_MODULE_FILE ${PERFTOOLS_UTILS_ROOT}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+}
+
+prepend-path  CRAY_LD_LIBRARY_PATH $PERFTOOLS_CURPATH/lib64
+
+# Put all the append-path at the end of the modulefile
+append-path   PE_PRODUCT_LIST   PERFTOOLS
+append-path   PE_PRODUCT_LIST   CRAYPAT"""
+
+moduleclass = 'perf'
+

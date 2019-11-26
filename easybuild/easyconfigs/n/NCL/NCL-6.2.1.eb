@@ -1,0 +1,41 @@
+easyblock = 'PackedBinary'
+name = 'NCL'
+version = '6.2.1'
+
+homepage = 'http://ncl.ucar.edu/'
+description = 'NCL is an interpreted language designed specifically for scientific analysis and visualisation'
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+ncl_prefix = '/apps/common/UES/easybuild/sources/n/NCL/'
+sources = [
+    ncl_prefix +
+    'ncl_ncarg-%(version)s.Linux_RHEL6.4_x86_64_nodap_gcc472.tar.gz',
+    ncl_prefix + 'rangs_0.zip',
+    ncl_prefix + 'rangs_1.zip',
+    ncl_prefix + 'rangs_2.zip',
+    ncl_prefix + 'rangs_3.zip',
+    ncl_prefix + 'rangs_4.zip',
+    ncl_prefix + 'gshhs_0.zip',
+    ncl_prefix + 'gshhs_1.zip',
+    ncl_prefix + 'gshhs_2.zip',
+    ncl_prefix + 'gshhs_3.zip',
+    ncl_prefix + 'examples.tgz',
+]
+
+preinstallopts = 'mkdir -p lib/ncarg/database/rangs examples;' + \
+                 '/bin/cp -t lib/ncarg/database/rangs/ rangs* gshhs*;' + \
+                 '/bin/cp coast_?.ncl examples/;'
+postinstallcmds = [
+    '/bin/rm -f %(installdir)s/rangs* %(installdir)s/gshhs* %(installdir)s/coast_?.ncl'
+]
+install_cmd = '/bin/cp -rt %(installdir)s bin/ include/ lib/ examples/'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs':  ['bin', 'include', 'lib'],
+}
+
+modextravars = {
+    'NCARG_ROOT': '%(installdir)s',
+}

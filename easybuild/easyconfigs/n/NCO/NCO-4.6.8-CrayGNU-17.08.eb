@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = "4.6.8"
+
+homepage = 'http://nco.sourceforge.net/'
+description = """The NCO toolkit manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://nco.sourceforge.net/src/']
+
+dependencies = [
+    # not using cray-netcdf/4.4.1 because it is compiled with cray-hdf5/1.10
+    # NCO: openmp support built by default, mpi is not yet supported
+    ('ANTLR', '2.7.7', '-python2'),
+    ('netCDF', '4.4.1.1'),
+    ('netCDF-Fortran', '4.4.4'),
+    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+    ('JasPer', '2.0.12'),
+    ('UDUNITS', '2.2.25', '', True),
+]
+
+sanity_check_paths = {
+    'files': ["bin/ncbo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

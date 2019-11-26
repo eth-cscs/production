@@ -1,0 +1,157 @@
+diff -Nru tensorflow-1.7.0-original/configure-cscs.sh tensorflow-1.7.0-modified/configure-cscs.sh
+--- tensorflow-1.7.0-original/configure-cscs.sh	1970-01-01 01:00:00.000000000 +0100
++++ tensorflow-1.7.0-modified/configure-cscs.sh	2018-04-12 16:38:35.404355000 +0200
+@@ -0,0 +1,39 @@
++#!/bin/bash
++
++sed -i s\@'$GCC_PATH'@"$GCC_PATH"@g third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl
++sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@"$CRAY_CUDATOOLKIT_DIR"@g third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl
++
++sed -i s\@'$GCC_PATH'@"$GCC_PATH"@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
++sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@"$CRAY_CUDATOOLKIT_DIR"@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
++
++CONF_IN="configure.in"+
++
++echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/bin/python"$PYMAJVER > $CONF_IN
++echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/lib/python"$PYMAJVER"."$PYMINVER"/site-packages" >> $CONF_IN
++echo "y" >> $CONF_IN # Do you wish to use jemalloc as the malloc implementation? [Y/n] y
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with Google Cloud Platform support? [y/N] n
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with Hadoop File System support? [y/N]
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with Amazon S3 File System support? [Y/n]:
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with Apache Kafka Platform support? [Y/n]:
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with the XLA just-in-time compiler (experimental)? [y/N]
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with GDR support? [y/N]:
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with VERBS support? [y/N]
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with OpenCL support? [y/N] n
++echo "y" >> $CONF_IN # Do you want CUDA support? [y/N] y
++echo "8.0" >> $CONF_IN # Please specify the CUDA SDK version you want to use
++echo $CRAY_CUDATOOLKIT_DIR >> $CONF_IN # Please specify the CUDA SDK version you want to use
++echo "7" >> $CONF_IN # Please specify the cuDNN version you want to use.
++echo $EBROOTCUDNN >> $CONF_IN # Please specify the location where cuDNN 5 library is installed.
++echo "n" >> $CONF_IN # Do you wish to build TensorFlow with TensorRT support? [y/N] n
++echo "6.0" >> $CONF_IN # Please specify a list of comma-separated Cuda compute capabilities you want to build with
++echo "n" >> $CONF_IN # Do you want to use clang as CUDA compiler? [y/N] n
++echo $GCC_PATH"/bin/gcc" >> $CONF_IN # Please specify which gcc should be used by nvcc as the host compiler 
++echo "n" >> $CONF_IN # MPI support?
++echo "-march=native" >> $CONF_IN # Please specify optimization flags "--config=opt" :
++
++
++cat $CONF_IN
++echo "---"
++./configure < $CONF_IN
++
++exit
+diff -Nru tensorflow-1.7.0-original/tensorflow/compiler/xla/service/gpu/llvm_gpu_backend/gpu_backend_lib.cc tensorflow-1.7.0-modified/tensorflow/compiler/xla/service/gpu/llvm_gpu_backend/gpu_backend_lib.cc
+--- tensorflow-1.7.0-original/tensorflow/compiler/xla/service/gpu/llvm_gpu_backend/gpu_backend_lib.cc	2018-03-29 06:18:40.000000000 +0200
++++ tensorflow-1.7.0-modified/tensorflow/compiler/xla/service/gpu/llvm_gpu_backend/gpu_backend_lib.cc	2018-04-13 13:54:37.159405535 +0200
+@@ -75,7 +75,7 @@
+ static string GetLibdeviceFilename(const string& libdevice_dir_path,
+                                    std::pair<int, int> compute_capability) {
+   // Since CUDA 9.0, all GPU versions are included in a single file
+-  const char* unified_libdevice_filename = "libdevice.10.bc";
++  const char* unified_libdevice_filename = "libdevice.compute_50.10.bc";
+   std::vector<string> unified_libdevice_files;
+   const tensorflow::Status status =
+     tensorflow::Env::Default()->GetMatchingPaths(
+diff -Nru tensorflow-1.7.0-original/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl tensorflow-1.7.0-modified/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
+--- tensorflow-1.7.0-original/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2018-03-29 06:18:40.000000000 +0200
++++ tensorflow-1.7.0-modified/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2018-04-12 14:08:43.079400000 +0200
+@@ -46,11 +46,14 @@
+ import pipes
+ 
+ # Template values set by cuda_autoconf.
+-CPU_COMPILER = ('%{cpu_compiler}')
+-GCC_HOST_COMPILER_PATH = ('%{gcc_host_compiler_path}')
++CPU_COMPILER = ('$GCC_PATH/snos/bin/gcc')
++GCC_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
+ 
+-NVCC_PATH = '%{nvcc_path}'
+-PREFIX_DIR = os.path.dirname(GCC_HOST_COMPILER_PATH)
++CURRENT_DIR = os.path.dirname(sys.argv[0])
++NVCC_PATH = ('$CRAY_CUDATOOLKIT_DIR/bin/nvcc')
++LLVM_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
++AS_PATH = ('/usr/bin/as')
++PREFIX_DIR = os.path.dirname(AS_PATH)
+ NVCC_VERSION = '%{cuda_version}'
+ 
+ def Log(s):
+@@ -194,7 +197,8 @@
+   srcs = ' '.join(src_files)
+   out = ' -o ' + out_file[0]
+ 
+-  supported_cuda_compute_capabilities = [ %{cuda_compute_capabilities} ]
++  #supported_cuda_compute_capabilities = [ %{cuda_compute_capabilities} ]
++  supported_cuda_compute_capabilities = ["6.0",]
+   nvccopts = '-D_FORCE_INLINES '
+   for capability in supported_cuda_compute_capabilities:
+     capability = capability.replace('.', '')
+diff -Nru tensorflow-1.7.0-original/third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl tensorflow-1.7.0-modified/third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl
+--- tensorflow-1.7.0-original/third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl	2018-03-29 06:18:40.000000000 +0200
++++ tensorflow-1.7.0-modified/third_party/gpus/crosstool/CROSSTOOL_nvcc.tpl	2018-04-12 14:08:26.212862000 +0200
+@@ -44,7 +44,7 @@
+ 
+   tool_path { name: "ar" path: "/usr/bin/ar" }
+   tool_path { name: "compat-ld" path: "/usr/bin/ld" }
+-  tool_path { name: "cpp" path: "/usr/bin/cpp" }
++  tool_path { name: "cpp" path: "$GCC_PATH/snos/bin/cpp" }
+   tool_path { name: "dwp" path: "/usr/bin/dwp" }
+   # As part of the TensorFlow release, we place some cuda-related compilation
+   # files in @local_config_cuda//crosstool/clang/bin, and this relative
+@@ -59,7 +59,12 @@
+   linker_flag: "-B/usr/bin/"
+ 
+ %{host_compiler_includes}
+-  tool_path { name: "gcov" path: "/usr/bin/gcov" }
++  tool_path { name: "gcov" path: "$GCC_PATH/snos/bin/gcov" }
++
++  cxx_builtin_include_directory: "$GCC_PATH/snos/include"
++  cxx_builtin_include_directory: "$GCC_PATH/snos/lib/gcc/x86_64-suse-linux/default/include-fixed/"
++  cxx_builtin_include_directory: "$GCC_PATH/snos/lib/gcc/x86_64-suse-linux/default/include/"
++  cxx_builtin_include_directory: "$CRAY_CUDATOOLKIT_DIR/include/"
+ 
+   # C(++) compiles invoke the compiler (as that is the one knowing where
+   # to find libraries), but we provide LD so other rules can invoke the linker.
+@@ -119,6 +124,7 @@
+   # Gold linker only? Can we enable this by default?
+   # linker_flag: "-Wl,--warn-execstack"
+   # linker_flag: "-Wl,--detect-odr-violations"
++  linker_flag: "-Wl,-rpath,$GCC_PATH/snos/lib64/"
+ 
+   # Include directory for cuda headers.
+ %{cuda_include_path}
+diff -Nru tensorflow-1.7.0-original/third_party/gpus/cuda_configure.bzl tensorflow-1.7.0-modified/third_party/gpus/cuda_configure.bzl
+--- tensorflow-1.7.0-original/third_party/gpus/cuda_configure.bzl	2018-03-29 06:18:40.000000000 +0200
++++ tensorflow-1.7.0-modified/third_party/gpus/cuda_configure.bzl	2018-04-13 13:54:31.960744066 +0200
+@@ -719,9 +719,9 @@
+   """
+   cuda_toolkit_path = cuda_config.cuda_toolkit_path
+   for relative_path in NVVM_LIBDEVICE_PATHS:
+-    if repository_ctx.path("%s/%slibdevice.10.bc" % (cuda_toolkit_path, relative_path)).exists:
++    if repository_ctx.path("%s/%slibdevice.compute_50.10.bc" % (cuda_toolkit_path, relative_path)).exists:
+       return ("%s/%s" % (cuda_toolkit_path, relative_path))[:-1]
+-  auto_configure_fail("Cannot find libdevice.10.bc under %s" % cuda_toolkit_path)
++  auto_configure_fail("Cannot find libdevice.compute_50.10.bc under %s" % cuda_toolkit_path)
+ 
+ 
+ def _cudart_static_linkopt(cpu_value):
+diff -Nru tensorflow-1.7.0-original/third_party/toolchains/gpus/cuda/BUILD tensorflow-1.7.0-modified/third_party/toolchains/gpus/cuda/BUILD
+--- tensorflow-1.7.0-original/third_party/toolchains/gpus/cuda/BUILD	2018-03-29 06:18:40.000000000 +0200
++++ tensorflow-1.7.0-modified/third_party/toolchains/gpus/cuda/BUILD	2018-04-13 13:54:25.788567209 +0200
+@@ -1196,7 +1196,7 @@
+         "cuda/nvvm/lib64/libnvvm.so",
+         "cuda/nvvm/lib64/libnvvm.so.3",
+         "cuda/nvvm/lib64/libnvvm.so.3.2.0",
+-        "cuda/nvvm/libdevice/libdevice.10.bc",
++        "cuda/nvvm/libdevice/libdevice.compute_50.10.bc",
+         "cuda/nvvm/libnvvm-samples/CMakeLists.txt",
+         "cuda/nvvm/libnvvm-samples/README.txt",
+         "cuda/nvvm/libnvvm-samples/build.bat",
+@@ -1217,7 +1217,7 @@
+         "cuda/nvvm/libnvvm-samples/simple/simple.c",
+     ],
+     cmd = """
+-if [ -d "$(@D)/extras" ]; then rm $(@D)/extras -drf; fi && if [ -d "$(@D)/include" ]; then rm $(@D)/include -drf; fi && if [ -d "$(@D)/lib" ]; then rm $(@D)/lib -drf; fi && if [ -d "$(@D)/nvvm" ]; then rm $(@D)/nvvm -drf; fi && cp "/usr/local/cuda-9.0/nvvm/bin/cicc" "$(@D)/cuda/nvvm/bin/cicc" && cp "/usr/local/cuda-9.0/nvvm/include/nvvm.h" "$(@D)/cuda/nvvm/include/nvvm.h" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so" "$(@D)/cuda/nvvm/lib64/libnvvm.so" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so.3" "$(@D)/cuda/nvvm/lib64/libnvvm.so.3" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so.3.2.0" "$(@D)/cuda/nvvm/lib64/libnvvm.so.3.2.0" && cp "/usr/local/cuda-9.0/nvvm/libdevice/libdevice.10.bc" "$(@D)/cuda/nvvm/libdevice/libdevice.10.bc" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/build.bat" "$(@D)/cuda/nvvm/libnvvm-samples/build.bat" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/build.sh" "$(@D)/cuda/nvvm/libnvvm-samples/build.sh" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/common/include/DDSWriter.h" "$(@D)/cuda/nvvm/libnvvm-samples/common/include/DDSWriter.h" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/common/include/drvapi_error_string.h" "$(@D)/cuda/nvvm/libnvvm-samples/common/include/drvapi_error_string.h" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/cuda-c-linking.cpp" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/cuda-c-linking.cpp" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/math-funcs.cu" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/math-funcs.cu" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/ptxgen.c" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/ptxgen.c" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/simple/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/simple/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple-gpu.ll" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple-gpu.ll" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple-gpu64.ll" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple-gpu64.ll" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple.c" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple.c"
++if [ -d "$(@D)/extras" ]; then rm $(@D)/extras -drf; fi && if [ -d "$(@D)/include" ]; then rm $(@D)/include -drf; fi && if [ -d "$(@D)/lib" ]; then rm $(@D)/lib -drf; fi && if [ -d "$(@D)/nvvm" ]; then rm $(@D)/nvvm -drf; fi && cp "/usr/local/cuda-9.0/nvvm/bin/cicc" "$(@D)/cuda/nvvm/bin/cicc" && cp "/usr/local/cuda-9.0/nvvm/include/nvvm.h" "$(@D)/cuda/nvvm/include/nvvm.h" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so" "$(@D)/cuda/nvvm/lib64/libnvvm.so" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so.3" "$(@D)/cuda/nvvm/lib64/libnvvm.so.3" && cp "/usr/local/cuda-9.0/nvvm/lib64/libnvvm.so.3.2.0" "$(@D)/cuda/nvvm/lib64/libnvvm.so.3.2.0" && cp "/usr/local/cuda-9.0/nvvm/libdevice/libdevice.compute_50.10.bc" "$(@D)/cuda/nvvm/libdevice/libdevice.compute_50.10.bc" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/build.bat" "$(@D)/cuda/nvvm/libnvvm-samples/build.bat" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/build.sh" "$(@D)/cuda/nvvm/libnvvm-samples/build.sh" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/common/include/DDSWriter.h" "$(@D)/cuda/nvvm/libnvvm-samples/common/include/DDSWriter.h" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/common/include/drvapi_error_string.h" "$(@D)/cuda/nvvm/libnvvm-samples/common/include/drvapi_error_string.h" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/cuda-c-linking.cpp" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/cuda-c-linking.cpp" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/cuda-c-linking/math-funcs.cu" "$(@D)/cuda/nvvm/libnvvm-samples/cuda-c-linking/math-funcs.cu" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/ptxgen/ptxgen.c" "$(@D)/cuda/nvvm/libnvvm-samples/ptxgen/ptxgen.c" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/CMakeLists.txt" "$(@D)/cuda/nvvm/libnvvm-samples/simple/CMakeLists.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/README.txt" "$(@D)/cuda/nvvm/libnvvm-samples/simple/README.txt" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple-gpu.ll" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple-gpu.ll" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple-gpu64.ll" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple-gpu64.ll" && cp "/usr/local/cuda-9.0/nvvm/libnvvm-samples/simple/simple.c" "$(@D)/cuda/nvvm/libnvvm-samples/simple/simple.c"
+    """,
+ )
+ 

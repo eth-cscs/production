@@ -1,0 +1,55 @@
+# contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Score-P'
+version = '3.1'
+
+homepage = 'http://www.score-p.org'
+description = """The Score-P measurement infrastructure is a highly scalable and
+ easy-to-use tool suite for profiling, event tracing, and online analysis of HPC
+ applications."""
+
+toolchain = {'name': 'gmvapich2', 'version': '17.02_cuda_8.0_gdr'}
+toolchainopts = {"usempi": True}
+
+source_urls = ['http://www.vi-hps.org/upload/packages/scorep/']
+sources = ["scorep-%(version)s.tar.gz"]
+checksums = [ '065bf8eb08398e8146c895718ddb9145' ]
+
+dependencies = [ 
+    ('libunwind', '1.2.1', '', True),
+    ('OPARI2', '2.0.2', '', True),
+    ('papi/5.5.1.2', EXTERNAL_MODULE),
+    ('Cube', '4.3.5'),
+    ('vampir', '9.3.0', '', True)
+]
+
+configopts  = ' --with-machine-name=kescha'
+# configopts += ' --with-binutils=$EBROOTBINUTILS/bin'
+# configopts += ' --with-libbfd-include=$EBROOTBINUTILS/include'
+# configopts += ' --with-libbfd-lib=$EBROOTBINUTILS/lib'
+# configopts += ' --with-otf2=$EBROOTOTF2/bin'
+# configopts += ' --with-opari2=$EBROOTOPARI2/bin'
+configopts += ' --with-cube=$EBROOTCUBE/bin'
+configopts += ' --with-papi=/opt/cray/papi/default'
+configopts += ' --with-papi-header=/opt/cray/papi/default/include'
+configopts += ' --with-papi-lib=/opt/cray/papi/default/lib64'
+configopts += ' --enable-shared'
+configopts += ' --enable-cuda'
+configopts += ' --with-libcuda-lib=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION/lib64/stubs'
+configopts += ' --with-libcuda-include=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION/include'
+configopts += ' --with-libcudart=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION'
+configopts += ' --with-cupti=/global/opt/nvidia/cudatoolkit/$cudatoolkit_VERSION/extras/CUPTI'
+
+sanity_check_paths = {
+    'files': ["bin/scorep", "include/scorep/SCOREP_User.h",
+             ("lib/backend/libscorep_adapter_mpi_event.a",
+              "lib/libscorep_adapter_mpi_event.%s" % SHLIB_EXT) ],
+    'dirs': [],
+}
+
+# Ensure that local metric documentation is found by Cube GUI
+modextrapaths = { 'CUBE_DOCPATH': 'share/doc/scorep/profile' }
+modextravars = { 'CRAYPE_LINK_TYPE' : 'dynamic' }
+
+moduleclass = 'perf'

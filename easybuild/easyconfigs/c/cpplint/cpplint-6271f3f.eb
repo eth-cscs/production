@@ -1,0 +1,21 @@
+# jg (cscs)
+easyblock = 'PackedBinary'
+name = 'cpplint'
+version = '6271f3f'
+
+homepage = 'https://github.com/google/styleguide/tree/gh-pages/cpplint'
+description = """This is automated checker to make sure a C++ file follows
+Google's C++ style guide (https://google.github.io/styleguide/cppguide.html)"""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://github.com/google/styleguide/archive']
+sources = ['gh-pages.zip']
+install_cmd = 'mkdir -p %(installdir)s/bin && ' + \
+    'cp styleguide-gh-pages/cpplint/cpplint.py %(installdir)s/bin'
+
+sanity_check_paths={
+    'files': ['bin/cpplint.py'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'tools'

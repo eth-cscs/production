@@ -1,0 +1,60 @@
+# @author: karakasv gppezzi
+# @author: victor holanda rusu
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+version = '16-2016.11'
+cudaversion = '8.0.54'
+versionsuffix = '-cuda-%s' % cudaversion
+amberversion = '16'
+
+homepage = 'http://ambermd.org/'
+description = 'Assisted Model Building with Energy Refinement'
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = { 'verbose' : False }
+#sources = ['Amber%(version)s.tar.bz2', 'AmberTools%(version)s.tar.bz2']
+sources = ['Amber%(version)s.tar.bz2']
+
+dependencies = [ ('bzip2', '1.0.6'),
+                 ('zlib', '1.2.8') ]
+
+builddependencies = [
+    ('cudatoolkit/8.0.54_2.2.8_ga620558-2.1', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1', EXTERNAL_MODULE),
+    ('flex', '2.6.0'),
+]
+
+buildininstalldir = True
+
+configopts = 'gnu'
+
+prebuildopts = 'cd .. && mv amber%s/* . && ' % amberversion
+prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HOME;'
+# Patching from David Case should be applied after updating
+# updating
+#prebuildopts += './update_amber --update && '
+# applying patch to Amber
+#prebuildopts += 'patch -p0 < update.6 && '
+# applying patch to AmberTools
+#prebuildopts += 'patch -p0 < update.20 && '
+prebuildopts += './configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu;'
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+
+buildopts = 'install'
+
+files_to_copy = []
+
+sanity_check_paths = {
+    'files' : [ 'bin/pmemd.cuda.MPI' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s',
+    'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)',
+}
+
+moduleclass = 'bio'

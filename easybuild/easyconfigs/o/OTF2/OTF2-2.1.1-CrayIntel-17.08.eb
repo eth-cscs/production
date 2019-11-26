@@ -1,0 +1,23 @@
+easyblock = 'ConfigureMake'
+
+name = 'OTF2'
+version = '2.1.1'
+
+homepage = 'http://www.score-p.org'
+description = """The Open Trace Format 2 is a highly scalable, memory efficient
+event trace data format plus support library. It is the new standard trace
+format for Scalasca, Vampir, and TAU and is open for other tools."""
+
+toolchain = {'name': 'CrayIntel', 'version': '17.08'}
+
+sources = ["otf2-%(version)s.tar.gz"]
+source_urls = ['http://www.vi-hps.org/upload/packages/otf2/']
+
+configopts = '--enable-shared CC=cc FC=ftn CXX=CC'
+
+sanity_check_paths = {
+    'files': ["bin/otf2-config", "include/otf2/otf2.h", ("lib/libotf2.a", "lib64/libotf2.a")],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

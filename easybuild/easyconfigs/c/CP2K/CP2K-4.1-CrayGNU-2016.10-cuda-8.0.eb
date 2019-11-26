@@ -1,0 +1,61 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'CP2K'
+version = "4.1"
+
+homepage = 'http://www.cp2k.org/'
+description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
+ simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different
+ methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and
+ classical pair and many-body potentials. """
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.10'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+sources = [SOURCELOWER_TAR_BZ2]
+source_urls = [SOURCEFORGE_SOURCE]
+
+cudaversion = '8.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+dependencies = [
+    ('Libint', '1.1.4'),
+    ('libxc', '3.0.0'),
+]
+
+builddependencies = [
+    ('cudatoolkit/%s.44_GA_2.2.7_g4a6c213-2.1' %cudaversion, EXTERNAL_MODULE),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('Python', '2.7.12'),
+    ('flex', '2.6.0'),
+    ('Bison', '3.0.4'),
+]
+
+# patch to ./src/dbcsr/libsmm_acc/libcusmm/kernels/cusmm_common.h needed with CUDA 8
+prebuildopts = " sed -i -e '/static/i #if (__CUDACC_VER_MAJOR__<8) || ( defined(__CUDA_ARCH__) && (__CUDA_ARCH__<600) )' -e '/#if defined/i #endif' ./src/dbcsr/libsmm_acc/libcusmm/kernels/cusmm_common.h && "
+# add define flags
+prebuildopts += " sed -i -e 's/^DFLAGS .*/& -D__CUDA_PROFILING -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN/' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# add includes
+prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# add libraries 
+prebuildopts += " sed -i -e '/LIBS     +=/a LIBS     += -lcudart -lcublas -lcufft -lrt $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc -lnvToolsExt' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+# delete reference to specific GPU architecture
+prebuildopts += " sed -i -e 's/-arch sm_35//' ./arch/CRAY-XC30-gfortran-cuda.psmp && "
+prebuildopts += " pushd makefiles && "
+
+# don't use parallel make, results in compilation failure
+# because Fortran module files aren't created before they are needed
+parallel = 1
+
+# build type
+buildopts = 'ARCH=CRAY-XC30-gfortran-cuda VERSION=psmp'
+ 
+files_to_copy = [(['./exe/CRAY-XC30-gfortran-cuda/cp2k.psmp'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/cp2k.psmp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

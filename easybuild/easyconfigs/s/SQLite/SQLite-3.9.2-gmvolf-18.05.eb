@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'SQLite'
+version = '3.9.2'
+
+homepage = 'http://www.sqlite.org/'
+description = 'SQLite: SQL Database Engine in a C Library'
+
+toolchain = {'name': 'gmvolf', 'version': '18.05'}
+
+# eg. http://www.sqlite.org/2014/sqlite-autoconf-3080600.tar.gz
+source_urls = ['http://www.sqlite.org/2015/']
+version_str = '%%(version_major)s%s00' % ''.join('%02d' % int(x) for x in version.split('.')[1:])
+sources = ['sqlite-autoconf-%s.tar.gz' % version_str]
+
+dependencies = [
+    ('libreadline', '7.0'),
+    ('Tcl', '8.6.7'),
+]
+
+parallel = 1
+
+sanity_check_paths = {
+    'files': ['bin/sqlite3', 'include/sqlite3ext.h', 'include/sqlite3.h', 'lib/libsqlite3.a', 'lib/libsqlite3.%s' % SHLIB_EXT],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'devel'

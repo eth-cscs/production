@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'libiberty'
+version = '5.3.0'
+versionsuffix = "-scorep"
+
+homepage = 'https://gcc.gnu.org/onlinedocs/libiberty/'
+description = """The libiberty library is a collection of subroutines used by various GNU programs"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+source_urls = [ 'http://ftpmirror.gnu.org/gcc/gcc-%(version)s' ]
+sources = [ 'gcc-%(version)s.tar.bz2' ]
+
+preconfigopts = 'cd libiberty && '
+configopts = "--enable-install-libiberty "
+prebuildopts = 'cd libiberty && '
+preinstallopts = 'cd libiberty && '
+
+sanity_check_paths = {
+    'files': [ "lib64/libiberty.a" ],
+    'dirs': [ "include/libiberty" ]
+}
+
+moduleclass = 'lib'

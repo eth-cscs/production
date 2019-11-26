@@ -1,0 +1,58 @@
+# jg (cscs)
+easyblock = "CMakeMake"
+
+name = 'otfprofile'
+version = '6e2022d'
+
+homepage = 'https://github.com/score-p/otf2_cli_profile.git'
+description = """Tool to read otf2 trace files
+otf-profiler --help
+otf-profiler --json -v 2 -i ./traces.otf2 
+
+> cat result.json 
+{"job id":0,"node count":1,"process count":2,"thread count":2,"hardware
+counters":[],"functions":{"Compiler":{"count":2,"time":12637267},"MPI":{"count":10,"time":162630091}},
+"parallel region time":175267358,"serial time":0,"total functions":6,"total calls":12}
+
+# no longer supported: 
+otf-profiler --cube -v 2 -i ./traces.otf2  # cube/4.4
+otf-profiler --circos -i ./traces.otf2
+otf-profiler --tex    -i ./traces.otf2
+otf-profiler --csv    -i ./traces.otf2
+
+## csv example:
+FUNCTION;Process;Function;Invocations;Excl. Time (s);Incl. Time (s)
+FUNCTION;Master thread:0;MPI_Allreduce;9;9.77346159e-06;9.77346159e-06
+FUNCTION;Master thread:0;MPI_Barrier;1;4.74423079e-05;4.74423079e-05
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'verbose': False, 'dynamic': True,}
+source_urls = ['https://github.com/score-p/otf2_cli_profile/archive']
+sources = ['master.zip']
+# The patch will fix the memory error detected in:
+# definitions::SystemTree::insert_node (definitions.h:147): read/write beyond 
+# end of allocation
+patches = ['%(name)s.patch']
+
+builddependencies = [ 
+    ('CMake', '3.12.0', '', True), 
+    ('OTF2', '2.1.1', '', True),
+    ('rapidjson', 'v1.1.0'),
+]
+separate_build_dir = 'True'
+#dependencies = [
+#    ('Cube', '4.3.5'),
+#    #('CubeGUI','4.4', '', True), 
+#no: ('CubeLib', '4.4'),
+#]
+
+configopts  = ['-DRAPIDJSON_INCLUDE_DIRS=$EBROOTRAPIDJSON/include ']
+
+sanity_check_paths = {
+    'files': ["bin/otf-profiler"],
+    'dirs': [],
+}
+
+
+moduleclass = 'perf'

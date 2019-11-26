@@ -1,0 +1,26 @@
+easyblock = 'PythonPackage'
+
+name = 'python-graph-dot'
+version = '1.8.2'
+versionsuffix = '-Python-2.7.13'
+
+homepage = 'https://github.com/pmatiello/python-graph'
+description = "python-graph-dot"
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['https://pypi.python.org/packages/2e/a1/447275b946338f0e5b9861f18be7a0423de7d405205dc515b40f7b2d91ba/']
+sources = ['python-graph-dot-%(version)s.tar.gz']
+
+dependencies = [
+    ('Python-bare', '2.7.13'),
+]
+
+options = {'modulename': 'pydot' }
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python2.7/site-packages'],
+}
+
+moduleclass = 'lib'

@@ -1,0 +1,36 @@
+easyblock = 'PythonPackage'
+
+name = 'ipyparallel'
+version = '6.2.3'
+
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.7'
+
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+versionsuffix = '-python%s' % (py_maj_ver)
+
+req_py_majver = py_maj_ver
+req_py_minver = py_min_ver
+
+homepage = 'https://pypi.org/project/ipyparallel'
+description = """Use multiple instances of IPython in parallel, interactively."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+use_pip = True
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('jupyter', '1.0.0')
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver)],
+}
+
+moduleclass = 'devel'

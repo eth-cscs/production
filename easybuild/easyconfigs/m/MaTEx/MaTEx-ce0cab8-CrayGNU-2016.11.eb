@@ -1,0 +1,39 @@
+# @author: maximem
+
+easyblock = "ConfigureMake"
+
+name = 'MaTEx'
+version = 'ce0cab8'
+pyver = '3.5.2'
+cudaver = '8.0'
+versionsuffix = '-cuda-%s-Python-%s' % (cudaver, pyver)
+
+homepage = 'https://www.tensorflow.org/ and https://github.com/abhinavvishnu/matex'
+description = """An open-source software library for Machine Intelligence."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('TensorFlow', '1.0.0', '-Python-%(pyver)s'),
+    ('Python', pyver),
+    ('parallel-netcdf', '1.8.1', '-shared')
+]
+
+sources = ['ce0cab82b2002ac8b2b802cbda8a93d652b75813.tar.gz']
+source_urls = ['https://github.com/abhinavvishnu/matex/archive/']
+unpack_options = '--strip 1'
+
+with_configure = True
+preconfigopts = "CFLAGS=-add-rpath CXXFLAGS=-add-rpath FFLAGS=-add-rpath"
+configopts = "--with-lapack --with-mpi"
+
+postinstallcmds = [ 'cp -r %(builddir)s/src/deeplearning/tensorflow/gpu/py3.x/py_scripts %(installdir)s/py_scripts' ]
+
+modextrapaths = { 'PYTHONPATH': 'py_scripts', 'TFMPIPATH': 'py_scripts' }
+
+sanity_check_paths={
+    'files': ['bin/matex_knn', 'py_scripts/datasets.py'],
+    'dirs': []
+}
+
+moduleclass = 'devel'

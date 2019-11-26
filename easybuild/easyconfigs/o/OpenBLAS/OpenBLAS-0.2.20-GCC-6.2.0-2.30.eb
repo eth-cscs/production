@@ -1,0 +1,51 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenBLAS'
+version = '0.2.20'
+
+homepage = 'http://xianyi.github.com/OpenBLAS/'
+description = "OpenBLAS is an optimized BLAS library based on GotoBLAS2 1.13 BSD version."
+
+toolchain = {'name': 'GCC', 'version': '6.2.0-2.30'}
+
+large_src = 'large.tgz'
+timing_src = 'timing.tgz'
+
+source_urls = [
+    # order matters, trying to download the large.tgz/timing.tgz LAPACK tarballs from GitHub causes trouble
+    'http://www.netlib.org/lapack/timing/',
+    'https://github.com/xianyi/OpenBLAS/archive/',
+]
+sources = ['v%(version)s.tar.gz']
+checksums = [
+    '48637eb29f5b492b91459175dcc574b1',  # v0.2.20.tar.gz (OpenBLAS)
+    '5d138a84f302fd6804e4fab4b338cb18',  # large.tgz
+    '2025bee0fecccc792938978d857472f4',  # timing.tgz
+    'a05fb41c3a407985a727ad7a401053fe',  # OpenBLAS-0.2.20_fix-Intel-L1-cache-size-detection.patch
+    '78f7914faa4b2ddef3ae788b324362ec',  # OpenBLAS-0.2.20_revert-honor-cpuset.patch
+]
+
+patches = [
+    (large_src, '.'),
+    (timing_src, '.'),
+    'OpenBLAS-%(version)s_fix-Intel-L1-cache-size-detection.patch',
+    'OpenBLAS-%(version)s_revert-honor-cpuset.patch',
+]
+
+skipsteps = ['configure']
+
+buildopts = 'BINARY=64 USE_THREAD=1 USE_OPENMP=1 CC="$CC" FC="$F77"'
+installopts = "USE_THREAD=1 USE_OPENMP=1 PREFIX=%(installdir)s"
+
+# extensive testing can be enabled by uncommenting the line below
+# runtest = 'PATH=.:$PATH lapack-timing'
+
+sanity_check_paths = {
+    'files': ['include/cblas.h', 'include/f77blas.h', 'include/lapacke_config.h', 'include/lapacke.h',
+              'include/lapacke_mangling.h', 'include/lapacke_utils.h', 'include/openblas_config.h',
+              'lib/libopenblas.a', 'lib/libopenblas.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'numlib'

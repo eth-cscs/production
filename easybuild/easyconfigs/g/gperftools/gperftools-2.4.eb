@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = "gperftools"
+version = "2.4"
+
+homepage = 'http://github.com/gperftools/gperftools'
+description = """gperftools are for use by developers so that they can create more robust applications.
+ Especially of use to those developing multi-threaded applications in C++ with templates.
+ Includes TCMalloc, heap-checker, heap-profiler and cpu-profiler."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+source_urls = ['https://github.com/gperftools/gperftools/releases/download/%(namelower)s-%(version)s']
+sources = [SOURCE_TAR_GZ]
+
+# builddependencies = [('libunwind', '1.1')]
+dependencies = [('libunwind', '1.1')]
+configopts = " --enable-libunwind CPPFLAGS=-I$EBROOTLIBUNWIND/include LDFLAGS=-L$EBROOTLIBUNWIND/lib"
+
+sanity_check_paths = {
+    'files': ["bin/pprof"],
+    'dirs': []
+}
+
+moduleclass = 'tools'

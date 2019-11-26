@@ -1,0 +1,15 @@
+diff -Nru llvmlite-0.25.0.orig/ffi/Makefile.linux llvmlite-0.25.0.patched/ffi/Makefile.linux
+--- llvmlite-0.25.0.orig/ffi/Makefile.linux	2018-09-21 21:31:30.000000000 +0200
++++ llvmlite-0.25.0.patched/ffi/Makefile.linux	2018-09-27 09:57:41.000000000 +0200
+@@ -5,9 +5,9 @@
+ CXX_FLTO_FLAGS ?= -flto
+ LD_FLTO_FLAGS ?= -flto -Wl,--exclude-libs=ALL
+ 
+-CXXFLAGS = $(LLVM_CXXFLAGS) $(CXX_FLTO_FLAGS)
++CXXFLAGS := $(CXXFLAGS) $(LLVM_CXXFLAGS) $(CXX_FLTO_FLAGS)
+ LDFLAGS := $(LDFLAGS) $(LLVM_LDFLAGS) $(LD_FLTO_FLAGS)
+-LIBS = $(LLVM_LIBS)
++LIBS := $(LIBS) $(LLVM_LIBS)
+ INCLUDE = core.h
+ SRC = assembly.cpp bitcode.cpp core.cpp initfini.cpp module.cpp value.cpp \
+ 	  executionengine.cpp transforms.cpp passmanagers.cpp targets.cpp dylib.cpp \

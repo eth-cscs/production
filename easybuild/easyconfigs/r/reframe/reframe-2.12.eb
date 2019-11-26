@@ -1,0 +1,30 @@
+# @author: gppezzi, vkarak, manitart
+
+easyblock = 'Tarball'
+
+name = 'reframe'
+version = '2.12'
+homepage = 'https://madra.cscs.ch/scs/reframe/'
+description = 'A regression framework for writing portable tests for HPC systems.'
+toolchain = {'name': 'dummy', 'version': ''}
+sources = [
+    {
+        'filename': 'v%(version)s.tar.gz',
+        'extract_cmd': 'tar xfz %s'
+    }
+]
+source_urls = ['https://github.com/eth-cscs/reframe/archive/']
+#patches = ['reframe-2.12-dev1-cscs-settings.patch']
+dependencies = [('Python-bare', '3.6.5')]
+keepsymlinks = True
+postinstallcmds = [
+    'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
+    'git clone --branch v%(version)s git@github.com:eth-cscs/reframe-tests.git',
+    'cp -r reframe-tests/checks %(installdir)s/cscs-checks/private',
+    'mv %(installdir)s/cscs-checks %(installdir)s/checks'
+]
+sanity_check_paths = {
+    'files': ['reframe.py', 'bin/reframe', 'config/cscs.py'],
+    'dirs':  ['bin', 'checks', 'checks/private', 'unittests'],
+}
+moduleclass = 'devel'

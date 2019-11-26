@@ -1,0 +1,9 @@
+diff -ur OpenFOAM-4.x-version-4.1.org/wmake/rules/General/CGAL OpenFOAM-4.x-version-4.1/wmake/rules/General/CGAL
+--- OpenFOAM-4.x-version-4.1.org/wmake/rules/General/CGAL       2016-10-16 16:11:45.000000000 +0200
++++ OpenFOAM-4.x-version-4.1/wmake/rules/General/CGAL   2017-06-02 15:02:18.194153062 +0200
+@@ -11,4 +11,5 @@
+     -L$(BOOST_ARCH_PATH)/lib \
+     -L$(CGAL_ARCH_PATH)/lib \
+     -lCGAL \
++    -L$(EBROOTMPFR)/lib \
+     -lmpfr

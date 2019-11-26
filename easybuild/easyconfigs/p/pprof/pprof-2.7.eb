@@ -1,0 +1,23 @@
+# @author: jg (cscs)
+easyblock = 'PackedBinary'
+name = 'pprof'
+version = '2.7'
+
+homepage = 'https://github.com/google/pprof'
+description = """pprof is a tool for visualization and analysis of profiling
+data (from gperftools for instance). It is based on the go language.
+module load graphviz if needed."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+source_urls = ['https://github.com/google/pprof/archive']
+sources = ['master.zip']
+builddependencies = [('go', '1.12.1.linux-amd64')]
+install_cmd = 'export GOPATH=%(installdir)s && ' + \
+              'go get -u github.com/google/pprof '
+
+sanity_check_paths = {
+    'files': ['bin/pprof'],
+    'dirs': ['src'],
+}
+
+moduleclass = 'tools'

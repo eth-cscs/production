@@ -1,0 +1,29 @@
+diff -Nru alps-2.3.0-src-with-boost/alps/src/boost/numeric/bindings/lapack/driver/gesvd.hpp alps-2.3.0-src-with-boost.mod/alps/src/boost/numeric/bindings/lapack/driver/gesvd.hpp
+--- alps-2.3.0-src-with-boost/alps/src/boost/numeric/bindings/lapack/driver/gesvd.hpp   2011-08-06 00:46:34.000000000 +0200
++++ alps-2.3.0-src-with-boost.mod/alps/src/boost/numeric/bindings/lapack/driver/gesvd.hpp       2019-03-14 11:56:04.000000000 +0100
+@@ -166,9 +166,9 @@
+         BOOST_ASSERT( bindings::size(s) >= std::min<
+                 std::ptrdiff_t >(bindings::size_row(a),
+                 bindings::size_column(a)) );
+-        BOOST_ASSERT( bindings::size(work.select(real_type())) >=
+-                min_size_work( jobu, jobvt, bindings::size_row(a),
+-                bindings::size_column(a) ));
++        //BOOST_ASSERT( bindings::size(work.select(real_type())) >=
++        //        min_size_work( jobu, jobvt, bindings::size_row(a),
++        //        bindings::size_column(a) ));
+         BOOST_ASSERT( bindings::size_column(a) >= 0 );
+         BOOST_ASSERT( bindings::size_minor(a) == 1 ||
+                 bindings::stride_minor(a) == 1 );
+@@ -305,9 +305,9 @@
+                 bindings::size_column(a)) );
+         BOOST_ASSERT( bindings::size(work.select(real_type())) >=
+                 min_size_rwork( minmn ));
+-        BOOST_ASSERT( bindings::size(work.select(value_type())) >=
+-                min_size_work( jobu, jobvt, bindings::size_row(a),
+-                bindings::size_column(a), minmn ));
++        //BOOST_ASSERT( bindings::size(work.select(value_type())) >=
++        //        min_size_work( jobu, jobvt, bindings::size_row(a),
++        //        bindings::size_column(a), minmn ));
+         BOOST_ASSERT( bindings::size_column(a) >= 0 );
+         BOOST_ASSERT( bindings::size_minor(a) == 1 ||
+                 bindings::stride_minor(a) == 1 );

@@ -1,0 +1,76 @@
+ abcpy-0.5.1-CrayGNU-17.12-python3.eb               --set-default-module
+ Amber-16-CrayGNU-17.08-parallel.eb                 --set-default-module
+ Amber-16-CrayGNU-17.08-serial.eb
+ Boost-1.65.0-CrayGNU-17.08-python2.eb
+ Boost-1.65.0-CrayGNU-17.08-python3.eb              --set-default-module
+ Boost-1.65.0-CrayGNU-17.08.eb
+ CMake-3.10.1.eb
+ CP2K-5.0r18043-CrayGNU-17.08.eb
+ CP2K-5.1-CrayGNU-17.08.eb                          --set-default-module
+ CDO-1.9.0-CrayGNU-17.08.eb                         --set-default-module
+ CDO-1.9.0-CrayIntel-17.08.eb
+ CDO-1.9.5-CrayGNU-17.08.eb
+ CDO-1.9.5-CrayIntel-17.08.eb
+ CPMD-4.1-CrayIntel-17.08g.eb                       --set-default-module
+ ddt-18.0.1.eb
+ ddt-18.1.1.eb                                      --set-default-module
+ Extrae-3.5.2-CrayGNU-17.08.eb                      --set-default-module
+ Extrae-3.5.2-CrayIntel-17.08.eb
+ GREASY-2.1-cscs-CrayGNU-17.08.eb                   --set-default-module
+ GROMACS-2016.3-CrayGNU-17.08.eb
+ GROMACS-2018-CrayGNU-17.08.eb                      --set-default-module
+ GROMACS-2018.3-CrayGNU-17.08.eb
+ GSL-2.4-CrayGNU-17.08.eb                           --set-default-module
+ GSL-2.4-CrayCCE-17.08.eb
+ GSL-2.4-CrayIntel-17.08.eb
+ h5py-2.7.0-CrayGNU-17.08-python2-parallel.eb
+ h5py-2.7.0-CrayGNU-17.08-python2-serial.eb
+ h5py-2.7.0-CrayGNU-17.08-python3-parallel.eb       --set-default-module
+ h5py-2.7.0-CrayGNU-17.08-python3-serial.eb
+ h5py-2.7.1-CrayGNU-17.08-python2-parallel.eb
+ h5py-2.7.1-CrayGNU-17.08-python2-serial.eb
+ h5py-2.7.1-CrayGNU-17.08-python3-parallel.eb       --set-default-module
+ h5py-2.7.1-CrayGNU-17.08-python3-serial.eb
+ HDFView-2.14.eb                                    --set-default-module
+ HPX-1.1.0-CrayGNU-17.08.eb                         --set-default-module
+ IDL-8.5.1.eb                                       --set-default-module
+ IPM-2.0.6-CrayCCE-17.08.eb
+ IPM-2.0.6-CrayGNU-17.08.eb                         --set-default-module
+ IPM-2.0.6-CrayIntel-17.08.eb
+ IPM-2.0.6-CrayPGI-17.08.eb
+ ipykernel-4.8.2-CrayGNU-17.08-python2.eb
+ jupyter-1.0.0-CrayGNU-17.08.eb
+ jupyterhub-0.9.0-CrayGNU-17.08.eb
+ LAMMPS-11Aug2017-CrayGNU-17.08.eb                  --set-default-module
+ Lmod-7.7.eb                                        --set-default-module --hidden
+ NCO-4.6.8-CrayGNU-17.08.eb                         --set-default-module
+ NAMD-2.12-CrayIntel-17.08.eb                       --set-default-module
+ NCL-6.4.0.eb                                       --set-default-module
+ ncview-2.1.7-CrayGNU-17.08.eb                      --set-default-module
+ netcdf-python-1.2.9-CrayGNU-17.08-python2.eb
+ netcdf-python-1.2.9-CrayGNU-17.08-python3.eb       --set-default-module
+ otfprofile-1.20.eb                                 --set-default-module
+ papi-wrap-1.0-CrayGNU-17.08.eb                     --set-default-module
+ papi-wrap-1.0-CrayCCE-17.08.eb
+ papi-wrap-1.0-CrayIntel-17.08.eb
+ perf-reports-7.1.eb                                --set-default-module
+ PLUMED-2.3.0-CrayGNU-17.08.eb
+ Python-bare-3.6.2.eb                               --hidden
+ PyExtensions-2.7.13.1-CrayGNU-17.08.eb
+ PyExtensions-3.6.1.1-CrayGNU-17.08.eb
+ QuantumESPRESSO-6.1.0-CrayIntel-17.08.eb --set-default-module
+ R-3.4.2-CrayGNU-17.08.eb                           --set-default-module
+ RDock-2013.1-CrayGNU-17.08.eb                      --set-default-module
+ Scalasca-2.3.1-CrayGNU-17.08.eb                    --set-default-module
+ Scalasca-2.3.1-CrayIntel-17.08.eb
+ Scalasca-2.3.1-CrayPGI-17.08.eb
+ Score-P-3.1-CrayGNU-17.08.eb                       --set-default-module
+ Score-P-3.1-CrayIntel-17.08.eb
+ Score-P-3.1-CrayPGI-17.08.eb
+ Spark-1.6.0.eb                                     --set-default-module
+ Spark-2.2.0-CrayGNU-17.08-Hadoop-2.6.eb
+ Understand-4.0.913.eb                              --set-default-module --hidden
+ vampir-9.4.0.eb                                    --set-default-module
+ VASP-5.4.4-CrayIntel-17.08.eb                      --set-default-module
+ Visit-2.12.3-CrayGNU-17.08.eb                      --set-default-module
+ Visit-2.13.0-CrayGNU-17.08.eb

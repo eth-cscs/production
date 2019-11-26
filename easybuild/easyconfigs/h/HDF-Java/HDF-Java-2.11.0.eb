@@ -1,0 +1,35 @@
+# @author: gppezzi
+# This recipe is not yet finished
+easyblock = 'CmdCp'
+
+name = 'HDF-Java'
+version = '2.11.0'
+
+homepage = 'https://www.hdfgroup.org/products/java/'
+description = """The HDF Java Products consist of HDFView (a Java browser for HDF4 and HDF5
+files) and the HDF-Java wrappers. """
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = [
+    'hdf-java-2.11.0.tar',
+    'SZip.tar.gz',
+    'ZLib.tar.gz',
+    'JPEG8b.tar.gz',
+    'HDF5.tar.gz',
+    'HDF4.tar.gz',
+    'HDFJAVALinuxCMake.cmake',
+]
+
+source_urls = ['http://www.hdfgroup.org/ftp/HDF5/hdf-java/current/src/'] 
+
+builddependencies = [ 
+    ('CMake', '3.6.0'),
+    ('java/jdk1.7.0_45', 'EXTERNAL_MODULE'), 
+]
+
+cmds_map = [('.*', "ctest -S HDFJAVALinuxCMake.cmake -C Release -V -O hdf-java.log ")]
+
+files_to_copy = [(['hdf-java/build/'], 'build')]
+
+moduleclass = 'system'

@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'Uncrustify'
+version = '0.61'
+
+homepage = 'http://uncrustify.sourceforge.net'
+description = """Banish crusty code with the Uncrustify C/C++/C#/D/Java/Pawn source code beautifier. It indents, adds newlines, aligns, etc, and is highly configurable."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015a'}
+
+source_urls = [
+    'http://downloads.sourceforge.net/project/uncrustify/uncrustify/uncrustify-%s' % version,
+]
+sources = [
+    '%(namelower)s-%(version)s.tar.gz',
+]
+#    'lapack-%s.tgz' % lapackver,
+# sources = [SOURCELOWER_TAR_GZ]
+# source_urls = [GNU_SOURCE]
+
+# builddependencies = [('M4', '1.4.17')]
+# 'files': ["bin/%s" % x for x in ["bison", "yacc"]] + ["lib/liby.a"],
+sanity_check_paths = {
+    'files': ["bin/uncrustify"],
+    'dirs': [],
+}
+
+moduleclass = 'lang'

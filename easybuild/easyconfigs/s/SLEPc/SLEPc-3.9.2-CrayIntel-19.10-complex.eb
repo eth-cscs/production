@@ -1,0 +1,41 @@
+# @author: gppezzi (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'SLEPc'
+version = "3.9.2"
+versionsuffix = '-complex'
+
+homepage = 'http://slepc.upv.es/'
+description = """SLEPc (Scalable Library for Eigenvalue Problem Computations) is a software library for the solution of
+ large scale sparse eigenvalue problems on parallel computers. It is an extension of PETSc and can be used for either
+ standard or generalized eigenproblems, with real or complex arithmetic. It can also be used for computing a partial
+ SVD of a large, sparse, rectangular matrix, and to solve quadratic eigenvalue problems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+#toolchainopts = {'usempi': True}
+
+source_urls = ['http://slepc.upv.es/download/distrib/']
+sources = [SOURCELOWER_TAR_GZ]
+
+# non default version of petsc as workaround for a bug in the slepc installation procedure, it expects petsc examples
+dependencies = [
+      ('cray-petsc-complex/3.9.3.0', EXTERNAL_MODULE),
+      ('cray-tpsl', EXTERNAL_MODULE),
+      ('cray-hdf5-parallel', EXTERNAL_MODULE),
+]
+
+preconfigopts = 'unset F90FLAGS FFLAGS CXXFLAGS CFLAGS &&'
+
+buildopts = 'SLEPC_DIR=$PWD PETSC_DIR=$PETSC_DIR'
+
+modextravars = { 'SLEPC_DIR':'$::env(EBROOTSLEPC)'}
+
+parallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libslepc.a'],
+    'dirs': [],
+}
+
+moduleclass = 'numlib'
+

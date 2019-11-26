@@ -1,0 +1,13 @@
+diff -Nru gromacs-2018.2.orig/CMakeLists.txt gromacs-2018.2/CMakeLists.txt
+--- gromacs-2018.2.orig/CMakeLists.txt	2018-06-12 15:31:10.000000000 +0200
++++ gromacs-2018.2/CMakeLists.txt	2018-08-28 12:02:35.103061649 +0200
+@@ -605,6 +605,9 @@
+         set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-isystem ")
+     endif()
+ endif()
++if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Intel" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
++    set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-I ")
++endif()
+ 
+ option(GMX_BUILD_UNITTESTS "Build unit tests with BUILD_TESTING" ON)
+ mark_as_advanced(GMX_BUILD_UNITTESTS)

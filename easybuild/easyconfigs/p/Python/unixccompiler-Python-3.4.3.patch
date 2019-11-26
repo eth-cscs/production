@@ -1,0 +1,11 @@
+--- Python-3.4.3/Lib/distutils.orig/unixccompiler.py	2015-06-15 16:51:23.000000000 +0200
++++ Python-3.4.3/Lib/distutils/unixccompiler.py	2015-06-15 16:53:53.000000000 +0200
+@@ -247,7 +247,7 @@
+                 # No idea how --enable-new-dtags would be passed on to
+                 # ld if this system was using GNU ld.  Don't know if a
+                 # system like this even exists.
+-                return "-R" + dir
++                return "-Wl,-R" + dir
+ 
+     def library_option(self, lib):
+         return "-l" + lib

@@ -1,0 +1,11 @@
+--- VTK/Utilities/KWSys/vtksys/DynamicLoader.orig.cxx	2017-01-19 09:19:54.222236768 +0100
++++ VTK/Utilities/KWSys/vtksys/DynamicLoader.cxx	2016-12-05 13:23:32.450722000 +0100
+@@ -385,7 +385,7 @@
+ // 5. Implementation for systems without dynamic libs
+ // __gnu_blrts__ is IBM BlueGene/L
+ // __LIBCATAMOUNT__ is defined on Catamount on Cray compute nodes
+-#if defined(__gnu_blrts__) || defined(__LIBCATAMOUNT__) || defined(__CRAYXT_COMPUTE_LINUX_TARGET)
++#if defined(__gnu_blrts__) || defined(__LIBCATAMOUNT__) || defined(__CRAYXT_COMPUTE_LINUX_TARGET__CSCS)
+ #include <string.h> // for strerror()
+ #define DYNAMICLOADER_DEFINED 1
+ 

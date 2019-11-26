@@ -1,0 +1,24 @@
+name = 'Perl'
+easyblock = 'ConfigureMake' 
+
+version = '5.26.1'
+versionsuffix = '-bare'
+
+homepage = 'http://www.perl.org/'
+description = """Larry Wall's Practical Extraction and Report Language"""
+
+toolchain = {'name': 'gmvolf', 'version': '17.02'}
+
+source_urls = ['http://www.cpan.org/src/%(version_major)s.0']
+sources = [SOURCELOWER_TAR_GZ]
+
+skipsteps = ['configure']
+
+prebuildopts  = ' ./Configure -de  -Dcc="gcc" -Dccflags="-fPIC -O2 -march=native" '
+prebuildopts += ' -Dinc_version_list=none -Dusethreads -Dnoextensions=ODBM_File '
+prebuildopts += ' -Dprefix="%(installdir)s" && '
+
+# bare, no extensions
+exts_list = []
+
+moduleclass = 'lang'

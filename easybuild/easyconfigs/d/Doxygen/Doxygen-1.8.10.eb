@@ -1,0 +1,28 @@
+# jgp (CSCS)
+easyblock = 'Tarball'
+name = 'Doxygen'
+version = '1.8.10'
+
+homepage = 'http://www.doxygen.org'
+description = """Doxygen is a documentation system for C++, C, Java, Objective-C, Python, 
+ IDL (Corba and Microsoft flavors), Fortran, VHDL, PHP, C#, and to some extent D."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+sources = ['%(namelower)s-%(version)s.linux.bin.tar.gz']
+source_urls = ['http://ftp.stack.nl/pub/users/dimitri/']
+
+#configopts = " CPPFLAGS=-g"
+
+builddependencies = [
+    ('flex', '2.6.0'),
+    ('Bison', '3.0.4'),
+    ('CMake', '3.4.1'),
+]
+
+sanity_check_paths = {
+    'files' : ['bin/%s' % x for x in ["doxygen"]] ,
+    'dirs' : ['bin']
+}
+
+
+moduleclass = 'devel'

@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'spectral'
+version = '3.4.1'
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """Signal processing techniques to select representative
+regions from Paraver traces."""
+
+toolchain = SYSTEM
+source_urls = ['https://ftp.tools.bsc.es/%(name)s']
+sources = ['%(name)s-%(version)s-Linux_x86_64.tar.bz2']
+keepsymlinks = True
+# The checksum check was removed, since the value for the sources kept changing.
+# The checksum value of the sources is reported in the log file of the module.
+
+sanity_check_paths={
+    'files': ['bin/trace-analysis'],
+    'dirs': ['include', 'lib64']
+}
+
+modextravars = {
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'

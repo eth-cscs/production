@@ -1,0 +1,53 @@
+# Built with EasyBuild version 2.1.1 on 2015-07-29_17-23-54
+easyblock = 'ConfigureMake'
+
+name = 'ncview'
+version = '2.1.5'
+
+homepage = 'http://meteora.ucsd.edu/~pierce/ncview_home_page.html'
+description = """Ncview is a visual browser for netCDF format files."""
+
+toolchain = {'name': 'gmvolf', 'version': '2015a'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['ftp://cirrus.ucsd.edu/pub/ncview/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('netCDF', '4.3.3.1'),
+    ('HDF5', '1.8.15'),
+    ('UDUNITS', '2.1.24'),
+]
+
+configopts = 'CC=/opt/cray/mvapich2_gnu/2.0.1/GNU/48/bin/mpicc'
+sanity_check_paths = {
+    'files': ['bin/ncview'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
+
+# Build statistics
+buildstats = [{
+    "easybuild-framework_version": "2.1.1",
+    "easybuild-easyblocks_version": "2.1.1",
+    "timestamp": 1438183430,
+    "build_time": 14.28,
+    "install_size": 2269534,
+    "command_line": ['--buildpath=/dev/shm/perettig', '--installpath=/apps/escha/easybuild', '--prefix=/apps/escha/easybuild', '--repository=GitRepository', '--repositorypath=git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/keschln-', '--robot=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/software/EasyBuild/2.1.1/lib64/python2.6/site-packages/easybuild_easyconfigs-2.1.1-py2.6.egg/easybuild/easyconfigs', '--robot-paths=/apps/common/easybuild/cscs_easyconfigs/:', '--set-gid-bit', '--sourcepath=/apps/common/easybuild/sources/', '--umask=002', './ncview-2.1.5-gmvapich2-2015a.eb'],
+    "modules_tool": ('EnvironmentModulesC', '/usr/Modules/3.2.10/bin/modulecmd', '3.2.10'),
+    "core_count": 24,
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz",
+    "cpu_speed": 2601.0,
+    "cpu_vendor": "Intel",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=/opt/gcc/4.8.2/bin/../snos/bin/gcc; COLLECT_LTO_WRAPPER=/global/opt/gcc/4.8.2/snos/bin/../libexec/gcc/x86_64-suse-linux/4.8.2/lto-wrapper; Target: x86_64-suse-linux; Configured with: ../gcc-4.8.2/configure --prefix=/opt/gcc/4.8.2/snos --disable-nls --libdir=/opt/gcc/4.8.2/snos/lib --enable-languages=c,c++,fortran --with-gxx-include-dir=/opt/gcc/4.8.2/snos/include/g++ --with-slibdir=/opt/gcc/4.8.2/snos/lib --with-system-zlib --enable-shared --enable-__cxa_atexit --build=x86_64-suse-linux --with-mpc=/opt/gcc/mpc/0.8.1 --with-mpfr=/opt/gcc/mpfr/2.4.2 --with-gmp=/opt/gcc/gmp/4.3.2 --disable-multilib; Thread model: posix; gcc version 4.8.2 (GCC) ; ",
+    "glibc_version": "2.12",
+    "hostname": "keschln-0001",
+    "os_name": "RHEL",
+    "os_type": "Linux",
+    "os_version": "6.6",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "2.6.6 (r266:84292, Nov 21 2013, 10:50:32) ; [GCC 4.4.7 20120313 (Red Hat 4.4.7-4)]",
+    "system_gcc_path": "/opt/gcc/4.8.2/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+}]

@@ -1,0 +1,23 @@
+easyblock = 'MakeCp'
+
+name = 'rstudio'
+version = '1.1.442'
+
+homepage = 'https://www.rstudio.com/products/rstudio/download/'
+description = """RStudio is a set of integrated tools designed to help you be
+more productive with R.""" 
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['http://download1.rstudio.org/']
+sources = ['rstudio-%(version)s-x86_64-fedora.tar.gz']
+skipsteps = ['build']
+
+files_to_copy = [ 'bin', 'resources', 'www', 'www-symbolmaps', 'R',
+"COPYING","INSTALL", "NOTICE", "SOURCE", "VERSION", "README.md", "rstudio.png" ]
+
+sanity_check_paths = {
+    'files': ["bin/rstudio"],
+    'dirs': [],
+}
+
+moduleclass = 'lang'

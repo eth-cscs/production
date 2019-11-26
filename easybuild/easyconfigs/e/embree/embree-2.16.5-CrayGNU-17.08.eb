@@ -1,0 +1,20 @@
+easyblock = "Tarball"
+
+name = 'embree'
+version = '2.16.5'
+
+homepage = 'https://embree.github.io/'
+description = """Embree is a collection of high-performance ray tracing
+kernels, developed at Intel."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+sources = ['embree-2.16.5.x86_64.linux.tar.gz']
+source_urls = ['https://github.com/embree/embree/releases/download/v2.16.5/']
+
+sanity_check_paths={
+    'files': [],
+    'dirs': ['include', 'lib']
+}
+
+moduleclass = 'devel'

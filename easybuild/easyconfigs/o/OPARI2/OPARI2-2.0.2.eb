@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'OPARI2'
+version = '2.0.2'
+
+homepage = 'http://www.score-p.org'
+description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
+ is a source-to-source instrumentation tool for OpenMP and hybrid codes.
+ It surrounds OpenMP directives and runtime library calls with calls to
+ the POMP2 measurement interface."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+configopts = ' --enable-shared'
+
+sources = ["opari2-%(version)s.tar.gz"]
+source_urls = ['http://www.vi-hps.org/upload/packages/opari2/']
+checksums = [ '70736e5592dd0d95a73f9b74ea625a88' ]
+
+sanity_check_paths = {
+    'files': ["bin/opari2", "include/opari2/pomp2_lib.h"],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

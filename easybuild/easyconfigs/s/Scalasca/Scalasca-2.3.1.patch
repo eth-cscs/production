@@ -1,0 +1,11 @@
+diff -Naur scalasca-2.3.1.ori/configure scalasca-2.3.1/configure
+--- scalasca-2.3.1.ori/configure	2016-05-20 15:50:46.357294210 +0200
++++ scalasca-2.3.1/configure	2017-08-21 15:32:21.260492103 +0200
+@@ -2779,6 +2779,7 @@
+   *) :
+     ac_scorep_platform="unknown" ;;
+ esac
++ac_scorep_platform="crayxc"
+ 
+      if test "x${ac_scorep_platform}" = "xunknown"; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_scorep_platform, please contact <scalasca@fz-juelich.de> if you encounter any problems." >&5

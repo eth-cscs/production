@@ -1,0 +1,138 @@
+#!/usr/local/bin/bash
+
+# Retrieve host name (excluding node number)
+hostName=${HOSTNAME//[0-9]/}
+
+# Special case for monch (compute nodes append "c" to the hostname) 
+if [[ $hostName =~ ^monch  ]]; then
+        hostName=monch
+fi
+if [[ $hostName =~ ^kesch  ]]; then
+        hostName=keschln-
+fi
+# Check host name
+case "$hostName" in
+  "daint" | "dora" | "santis" | "ela" |"castor" | "pilatus" | "brisi" | "monch" | "eschaln-" | "keschln-" | "leone" )
+  echo
+  echo "Configuring EasyBuild on `hostname` ..."
+  ;;
+
+  * )
+  echo "Not supported host name: ""$hostName"
+  exit
+esac
+
+# If argument is given, use it as path for easybuild and else use default (/scratch for jenkins or $APPS for the rest)
+if [[ -z "$1" ]]; then
+    if [[ $USER == "jenscscs" ]] ; then
+        if [[ "$hostName" == "daint" ]] ; then
+            export PROJ=/apps/daint/UES/jenkins/5.2.UP04
+        elif [[ "$hostName" == "dora" ]] ; then
+            export PROJ=/apps/dora/UES/jenkins/5.2.UP04
+        elif [[ "$hostName" == "santis" || "$hostName" == "brisi" || "$hostName" == "pilatus" || "$hostName" == "monch" || "$hostName" == "leone" ]] ; then
+           export PROJ=$SCRATCH"/"$hostName
+       elif [[ "$hostName" == "castor" ]] ; then
+           export PROJ="/users/jenscscs/sandbox/"$hostName
+           export SCRATCH="/tmp"
+       elif [[ "$hostName" == "ela" ]] ; then
+           export PROJ="/users/jenscscs/sandbox/"$hostName
+       elif [[ "$hostName" == "eschaln-" || "$hostName" == "keschln-" ]] ; then
+           export PROJ="/scratch/jenscscs/sandbox/"$hostName
+       fi
+    else # if installing on default apps path, then resulting easyconfig file needs to be pushed to github repository
+       if [[ "$hostName" == "eschaln-" || "$hostName" == "keschln-" ]] ; then
+         export PROJ=/apps/escha/UES/RH6.7
+       elif [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" ]] ; then
+         export PROJ=$UES/5.2.UP04
+       elif [[ "$hostName" == "leone" ]] ; then
+         export PROJ=$UES/RH6.7_PE15.12  
+       elif [[ "$hostName" == "monch" ]] ; then
+         export PROJ='/apps/monch/UES/RH6.7-16.04'
+       else
+         export PROJ=$APPS
+       fi
+       if [[ -z "$EASYBUILD_REPOSITORYPATH" ]]; then
+           export EASYBUILD_REPOSITORYPATH="git@github.com:eth-cscs/tools.git,easybuild/ebfiles_repo/"$hostName # if using private key
+#           export EASYBUILD_REPOSITORYPATH="https://github.com/eth-cscs/tools.git,easybuild/ebfiles_repo/"$hostName # will ask for github password
+       fi
+       export EASYBUILD_REPOSITORY=GitRepository
+    fi
+else
+    export PROJ=${1}
+    export EASYBUILD_REPOSITORYPATH=${1}/easybuild/ebfiles_repo/
+    export EASYBUILD_REPOSITORY=FileRepository
+fi
+
+# Switch environment modules (set PATH varible)
+echo "Switching to environment modules ..."
+if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" ]] ; then
+#    source /opt/modules/3.2.10.3/init/bash
+    export PATH=/opt/modules/3.2.10.3/bin/:$PATH
+elif [[ "$hostName" == "eschaln-" || "$hostName" == "keschln-" ]] ; then
+    source /usr/Modules/3.2.10/init/bash
+    export PATH=/usr/Modules/3.2.10/bin/:$PATH
+elif [[ "$hostName" == "pilatus" ]] ; then
+    export PATH=/usr/share/Modules/tcl/:$PATH
+    source /usr/share/Modules/tcl/init/bash
+elif [[ "$hostName" == "monch" ]] ; then
+    export PATH=/apps/monch/modules/3.2.10/bin/:$PATH
+    source /apps/monch/modules/3.2.10/init/bash
+elif [[ "$hostName" == "castor" ]] ; then
+    export PATH=/apps/castor/Modules/3.2.10/bin/:$PATH
+    source /apps/castor/Modules/3.2.10/init/bash
+elif [[ "$hostName" == "ela" ]] ; then
+    export PATH=/usr/share/Modules/tcl/:$PATH
+fi
+
+# Set EasyBuild variables
+if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "castor" || "$hostName" == "brisi" || "$hostName" == "monch" || "$hostName" == "eschaln-" || "$hostName" == "keschln-" || "$hostName" == "leone" ]] ; then
+    export EASYBUILD_MODULES_TOOL=Lmod
+elif [[ "$hostName" == "ela" || "$hostName" == "pilatus" ]] ; then
+    export EASYBUILD_MODULES_TOOL=EnvironmentModulesTcl
+fi
+
+export EASYBUILD_PREFIX=${PROJ}/easybuild
+export EASYBUILD_SET_GID_BIT=1
+export EASYBUILD_GROUP_WRITABLE_INSTALLDIR=1
+#export EASYBUILD_STICKY_BIT=1
+export EASYBUILD_UMASK=002
+export EASYBUILD_BUILDPATH=/dev/shm/$USER
+export EASYBUILD_ROBOT_PATHS=/apps/common/easybuild/cscs_easyconfigs/:/apps/common/easybuild/ebfiles_repo/${hostName}:
+export EASYBUILD_INCLUDE_EASYBLOCKS="/apps/common/easybuild/easyblocks/*.py"
+export EASYBUILD_IGNORE_OSDEPS=0
+export EASYBUILD_HIDE_DEPS=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,GCCcore,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring
+export EASYBUILD_RECURSIVE_MODULE_UNLOAD=1
+if [[ $USER == "jenscscs" ]] ; then
+    export EASYBUILD_BUILDPATH=${PROJ}
+else
+    export EASYBUILD_BUILDPATH=/dev/shm/$USER
+fi
+
+# Set up private repository for jenkins user (it doesnt belong to csstaff group, it is not supposed to write under /apps/common)
+if [[ -w /apps/common/easybuild/sources/ ]] ; then
+    export EASYBUILD_SOURCEPATH=/apps/common/easybuild/sources/
+elif [[ $USER == "jenscscs" ]] ; then
+    export EASYBUILD_SOURCEPATH=$HOME/sources #/scratch/jenscscs/sources/
+else
+    export EASYBUILD_SOURCEPATH=$HOME
+fi
+
+if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" ]] ; then
+    export EASYBUILD_EXTERNAL_MODULES_METADATA=/apps/common/easybuild/cray_external_modules_metadata.cfg
+    export EASYBUILD_OPTARCH=$CRAY_CPU_TARGET
+    export EASYBUILD_RECURSIVE_MODULE_UNLOAD=0 #recursive unload currently not working on Cray* toolchains
+fi
+
+# /apps/common = custom cscs easyblocks
+export PYTHONPATH=$PYTHONPATH:/apps/common/gitpython/lib/python2.7/site-packages/
+env | grep EASYBUILD
+echo PYTHONPATH=$PYTHONPATH
+#echo PATH=$PATH
+
+echo "Updating \$MODULEPATH..."
+#module use $EASYBUILD_PREFIX/modules/all
+export MODULEPATH=$EASYBUILD_PREFIX/modules/all:$MODULEPATH
+echo MODULEPATH=$MODULEPATH
+
+echo "Loading EasyBuild..."
+module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest 

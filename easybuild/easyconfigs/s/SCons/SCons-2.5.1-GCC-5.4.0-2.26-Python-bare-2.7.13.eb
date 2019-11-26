@@ -1,0 +1,28 @@
+easyblock = 'PythonPackage'
+
+name = 'SCons'
+version = '2.5.1'
+# module load Python/2.7.12
+python = 'Python-bare'
+pyver = '2.7.13'
+versionsuffix = '-%s-%s' % (python, pyver)
+
+homepage = 'http://www.scons.org/'
+description = "SCons is a software construction tool."
+
+toolchain = {'name': 'GCC', 'version': '5.4.0-2.26'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://prdownloads.sourceforge.net/%(namelower)s']
+
+dependencies = [(python, pyver)]
+
+sanity_check_paths = {
+    'files': ['bin/scons', 'bin/scons-time', 'bin/sconsign'],
+    'dirs': ['lib/%(namelower)s-%(version)s/%(name)s'],
+}
+
+options = {'modulename': False}
+
+moduleclass = 'devel'
+

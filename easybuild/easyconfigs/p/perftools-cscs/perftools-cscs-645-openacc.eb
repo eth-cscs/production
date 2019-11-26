@@ -1,0 +1,49 @@
+easyblock = 'Bundle'
+
+name = 'perftools-cscs'
+version = '645-openacc'
+
+homepage = 'http://user.cscs.ch/compiling_and_optimizing/performance_tools/craypat/'
+description = """CrayPat gives performance details of application code running on Cray systems."""
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [ ( 'perftools-base-cscs', '645-openacc' ), ]
+
+modtclfooter = """
+# HOSTNAME ------------------------------------------------------
+set H        "[exec uname -n]"
+set HH       "[string range $H 0 2]"
+set HHH      "[string tolower $HH]"
+# puts stderr "$H . $HH . $HHH"
+# ---------------------------------------------------------------
+if  { "$HHH" != "dai" && "$HHH" != "dom" } { 
+        puts stderr "perfcscs: You should be on PizDaint, please contact help@cscs.ch"
+        # exit 1
+}
+
+proc PrintPerftoolsError { } { 
+    puts stderr "--------------------------------------------------------------------------------"
+    puts stderr "CSCS perftools modulefile"
+    puts stderr "    - Provides access to Perftools man pages, Reveal and Cray Apprentice2"
+    puts stderr "    - Does not alter compiling or program behavior "
+    puts stderr "    - Makes the following instrumentation modules available: "
+    puts stderr ""
+    puts stderr "perftools                - full support, including pat_build and pat_report"
+    puts stderr "perftools-lite           - default CrayPat-lite profile"
+    puts stderr "perftools-lite-events    - CrayPat-lite event profile"
+    puts stderr "perftools-lite-gpu       - CrayPat-lite gpu kernel and data movement"
+    puts stderr "perftools-lite-loops     - CrayPat-lite loop estimates (for Reveal)"
+    puts stderr "perftools-lite-hbm       - CrayPat-lite memory bandwidth estimates (for Reveal)"
+    puts stderr "--------------------------------------------------------------------------------"
+}
+
+
+module load perftools-lite-gpu
+
+proc ModulesHelp { } {
+    PrintPerftoolsError
+}
+"""
+
+moduleclass = 'perf'
+

@@ -1,0 +1,26 @@
+# @author: marcelsc
+
+easyblock = 'PythonPackage'
+
+name = 'funcsigs'
+version = '1.0.2'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/funcsigs/'
+description = """Python function signatures from PEP362 for Python 2.6, 2.7 and 3.2+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '2.7.12'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'

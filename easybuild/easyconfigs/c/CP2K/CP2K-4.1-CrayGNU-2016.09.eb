@@ -1,0 +1,53 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'CP2K'
+version = "4.1"
+
+homepage = 'http://www.cp2k.org/'
+description = """CP2K is a freely available (GPL) program, written in Fortran 95, to perform atomistic and molecular
+ simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different
+ methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and
+ classical pair and many-body potentials. """
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.09'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+sources = [SOURCELOWER_TAR_BZ2]
+source_urls = [SOURCEFORGE_SOURCE]
+
+dependencies = [
+    ('Libint', '1.1.4'),
+    ('libxc', '2.2.2'),
+]
+
+builddependencies = [
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('Python', '2.7.12'),
+    ('flex', '2.6.0'),
+    ('Bison', '3.0.4'),
+]
+
+# add define flags
+prebuildopts = " sed -i -e 's/^DFLAGS .*/& -D__FFTSG -D__LIBINT -D__LIBXC -D__GFORTRAN/' ./arch/CRAY-XC30-gfortran.psmp && "
+# add includes
+prebuildopts += " sed -i -e 's#-ffree-form .*#& -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include#' ./arch/CRAY-XC30-gfortran.psmp && "
+# add libraries 
+prebuildopts += " sed -i -e '/LIBS    +=/a LIBS    += $(EBROOTLIBINT)/lib/libderiv.a $(EBROOTLIBINT)/lib/libint.a $(EBROOTLIBINT)/lib/libr12.a -lstdc++ -L$(EBROOTLIBXC)/lib -lxcf90 -lxc' ./arch/CRAY-XC30-gfortran.psmp && "
+prebuildopts += " pushd makefiles && "
+
+# don't use parallel make, results in compilation failure
+# because Fortran module files aren't created before they are needed
+parallel = 1
+
+# build type
+buildopts = 'ARCH=CRAY-XC30-gfortran VERSION=psmp'
+ 
+files_to_copy = [(['./exe/CRAY-XC30-gfortran/cp2k.psmp'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/cp2k.psmp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

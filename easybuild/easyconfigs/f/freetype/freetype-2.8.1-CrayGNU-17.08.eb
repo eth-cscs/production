@@ -1,0 +1,20 @@
+# Contributed by Luca Marsella (CSCS)
+name = 'freetype'
+version = "2.8.1"
+
+homepage = 'http://freetype.org'
+description = """FreeType is a freely available software library to render fonts."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = [GNU_SAVANNAH_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [('libpng', '1.6.30')]
+
+sanity_check_paths = {
+    'files': ['bin/freetype-config', 'lib/libfreetype.a', 'lib/libfreetype.so', 'lib/pkgconfig/freetype2.pc'],
+    'dirs': ['include/freetype2'],
+}
+
+moduleclass = 'vis'

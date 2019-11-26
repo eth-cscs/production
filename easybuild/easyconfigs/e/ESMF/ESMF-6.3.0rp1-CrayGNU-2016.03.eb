@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+name = 'ESMF'
+version = '6.3.0rp1'
+
+easyblock = 'esmfcray'
+
+homepage = 'http://sourceforge.net/projects/esmf'
+description = """The Earth System Modeling Framework (ESMF) is software for building and coupling weather,
+ climate, and related models."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.03'}
+toolchainopts = {'usempi': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%s_%s_src.tar.gz' % (name.lower(), '_'.join(version.split('.')))]
+
+mpicomm = 'user'
+
+dependencies = [
+    ('cray-netcdf/4.3.2', EXTERNAL_MODULE),
+]
+
+moduleclass = 'geo'
+

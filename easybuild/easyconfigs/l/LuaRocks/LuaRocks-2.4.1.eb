@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = "LuaRocks"
+version = "2.4.1"
+checksums = ['39ae81028259164e0a1aec5577fab065']
+
+homepage = "http://www.luarocks.org"
+description = """LuaRocks is a package manager for Lua modules."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+sources = ['luarocks-%(version)s.tar.gz']
+source_urls = ['http://luarocks.org/releases/']
+
+# module load Lua
+builddependencies = [ ('Lua', '5.3.3') ]
+
+# skipsteps = ['configure']
+configopts = ' --with-lua=$EBROOTLUA'
+# buildopts += ' INSTALL_TOP=%(installdir)s'
+# installopts = ' INSTALL_TOP=%(installdir)s'
+
+sanity_check_paths = {
+    'files': ["bin/luarocks"],
+    'dirs': ["etc/luarocks"]
+}
+
+moduleclass = "lang"

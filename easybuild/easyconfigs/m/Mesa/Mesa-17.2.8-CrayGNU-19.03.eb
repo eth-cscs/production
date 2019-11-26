@@ -1,0 +1,52 @@
+# contributed by Jean M. Favre (CSCS)
+
+# This configuration file builds Mesa for software rendering, not hardware rendering. 
+# This means using at least SSE4.2. It uses the following:
+# - llvmpipe: the high-performance Gallium LLVM driver
+# - swr: Intel's OpenSWR
+# It will try to use the llvmpipe by default. To select swr instead, set the following:
+# GALLIUM_DRIVER=swr
+# see also https://gallium.readthedocs.io/en/latest/drivers/openswr/usage.html
+#
+# The build options and the version number were inherited from the VisIt build (as a guarantee that it works there)
+
+easyblock = 'ConfigureMake'
+
+name = 'Mesa'
+version = '17.2.8'
+
+homepage = 'http://www.mesa3d.org/'
+description = """Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+# swr detects and builds parts specific for AVX and AVX2. If we use
+# -xHost, this always gets overwritten and will fail.
+#toolchainopts = {'optarch': False}
+
+sources = [SOURCELOWER_TAR_XZ]
+source_urls = [
+    'https://mesa.freedesktop.org/archive'
+]
+
+dependencies = [
+    ('LLVM', '5.0.0'),
+    ('cray-python/3.6.5.6', EXTERNAL_MODULE)
+]
+
+builddependencies = [('CMake', '3.14.1','', True)]
+
+configopts = " --with-platforms=x11 --disable-dri --disable-dri3 --disable-egl --disable-gbm"
+configopts += " --disable-gles1 --disable-gles2 --disable-xvmc --disable-vdpau --disable-omx --disable-va"
+configopts += " --enable-glx --enable-llvm --enable-gallium-osmesa --with-gallium-drivers='swrast,swr' "
+configopts += " --with-llvm-prefix=${EBROOTLLVM} "
+
+sanity_check_paths = {
+    'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/gl_mangle.h', 
+              'include/GL/glx.h', 'include/GL/glx_mangle.h', 'include/GL/osmesa.h', 
+              'lib/libGL.%s' % SHLIB_EXT, 'lib/libOSMesa.%s' % SHLIB_EXT, 
+              'lib/libswrAVX.%s' % SHLIB_EXT, 'lib/libswrAVX2.%s' %SHLIB_EXT ],
+    'dirs': ['include/GL']
+}
+
+moduleclass = 'vis'

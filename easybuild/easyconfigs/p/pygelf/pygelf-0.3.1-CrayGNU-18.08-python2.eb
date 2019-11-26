@@ -1,0 +1,42 @@
+# jg (CSCS)
+easyblock = 'Bundle'
+
+name = 'pygelf'
+version = '0.3.1'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '15.1'
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = "-python%s" % py_maj_ver
+
+homepage = 'https://pypi.org/project/pygelf/'
+description = """Python logging handlers with GELF (Graylog Extended Log
+Format) support."""
+
+toolchain = {'name': 'CrayGNU', 'version': '18.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python/%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver), EXTERNAL_MODULE),
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('pygelf', '0.3.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
+    }),
+]
+
+sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
+
+pythonpath = 'lib/python%s/site-packages' % pyver
+modextrapaths = {'PYTHONPATH': pythonpath}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [ pythonpath ]
+}
+
+moduleclass = 'tools'

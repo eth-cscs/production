@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'guile'
+version = "2.0.14"
+
+homepage = 'http://www.gnu.org/software/guile'
+description = """Guile is the GNU Ubiquitous Intelligent Language for Extensions,
+the official extension language for the GNU operating system."""
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = [GNU_SOURCE]
+
+dependencies = [
+    ('GMP', '6.1.2'),
+    ('gc', '7.6.0'),
+    ('libunistring', '0.9.10'),
+    ('libffi', '3.2.1'),
+    ('libreadline', '8.0'),
+    ('libtool', '2.4.6'),
+]
+
+preconfigopts = " export CC=gcc && unset CFLAGS && export CXX=g++ && unset CXXFLAGS &&"
+configopts = " --enable-error-on-warning=no"
+
+sanity_check_paths = {
+    'files': ["bin/%s" % x for x in ["guile", 'guile-config', 'guile-snarf', 'guile-tools']] + ["lib/libguile-%(version_major_minor)s.a", "include/guile/%(version_major_minor)s/libguile.h"],
+    'dirs': []
+}
+
+moduleclass = 'devel'

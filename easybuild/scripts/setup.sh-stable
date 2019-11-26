@@ -1,0 +1,120 @@
+#!/usr/local/bin/bash
+
+# Retrieve host name (excluding node number)
+if [[ -z $hostName ]] ; then
+    hostName=${HOSTNAME//[0-9]/}
+fi
+
+# Special case for monch (compute nodes append "c" to the hostname) 
+if [[ $hostName =~ ^monch  ]]; then
+        hostName=monch
+fi
+if [[ $hostName =~ ^kesch  ]]; then
+        hostName=keschln-
+fi
+# Check host name
+case "$hostName" in
+  "daint" | "dora" | "santis" | "ela" | "pilatus" | "brisi" | "monch" | "eschaln-" | "keschln-" | "leone" | "domgw" | "dom" )
+  echo
+  echo "Configuring EasyBuild on `hostname`: " "$hostName"
+  ;;
+
+  * )
+  echo "Not supported host name: ""$hostName"
+  return
+esac
+
+# If argument is given, use it as path for easybuild and else use default (/scratch for jenkins or $APPS for the rest)
+if [[ -z "$1" ]]; then
+    echo "Usage: source setup.sh <prefix> <production>"
+    echo " where "
+    echo "   <prefix> is where EasyBuild will install the software and module files"
+    echo "   <production> is the path to your production repository (if not specified, it will be cloned from github)"
+    return
+else
+    export PROJ=${1}
+    export EASYBUILD_REPOSITORYPATH=${1}/easybuild/ebfiles_repo/
+    export EASYBUILD_REPOSITORY=FileRepository
+fi
+
+if [[ -z "$2" ]]; then
+    PROD_DIR="$HOME/production"
+    if [[ -a "$PROD_DIR" ]]; then
+        echo "found local $HOME/production directory, make sure it is updated and run:"
+        echo "source setup.sh <prefix> $HOME/production" 
+        return
+    else
+        echo "Cloning production repo to $PROD_DIR"
+        git clone https://github.com/eth-cscs/production.git $PROD_DIR
+    fi
+else
+    PROD_DIR=$2
+fi
+
+# Switch environment modules (set PATH varible)
+echo "Switching to environment modules ..."
+if [[ "$hostName" == "brisi" ]] ; then
+    source /opt/cray/pe/modules/3.2.10.4/init/bash
+    export PATH=/opt/cray/pe/modules/3.2.10.4/bin/:$PATH
+    export CRAY_CPU_TARGET=broadwell
+elif [[ "$hostName" == "santis" ]] ; then
+    source /opt/cray/pe/modules/3.2.10.5/init/bash
+    export PATH=/opt/cray/pe/modules/3.2.10.5/bin/:$PATH
+    export CRAY_CPU_TARGET=sandybridge
+elif [[ "$hostName" == "eschaln-" || "$hostName" == "keschln-" ]] ; then
+    source /usr/Modules/3.2.10/init/bash
+    export PATH=/usr/Modules/3.2.10/bin/:$PATH
+elif [[ "$hostName" == "pilatus" ]] ; then
+    export PATH=/usr/share/Modules/tcl/:$PATH
+    source /usr/share/Modules/tcl/init/bash
+elif [[ "$hostName" == "monch" ]] ; then
+    export PATH=/apps/monch/modules/3.2.10/bin/:$PATH
+    source /apps/monch/modules/3.2.10/init/bash
+elif [[ "$hostName" == "ela" ]] ; then
+    export PATH=/usr/share/Modules/tcl/:$PATH
+fi
+
+# Set EasyBuild variables
+if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" || "$hostName" == "monch" || "$hostName" == "eschaln-" || "$hostName" == "keschln-" || "$hostName" == "leone" ]] ; then
+    export EASYBUILD_MODULES_TOOL=EnvironmentModulesC
+elif [[ "$hostName" == "ela" || "$hostName" == "pilatus" ]] ; then
+    export EASYBUILD_MODULES_TOOL=EnvironmentModulesTcl
+fi
+
+export EASYBUILD_PREFIX=${PROJ}/easybuild
+export EASYBUILD_TMPDIR=$EASYBUILD_PREFIX/tmp
+export EASYBUILD_BUILDPATH=/dev/shm/$USER
+export EASYBUILD_ROBOT_PATHS=$PROD_DIR/easybuild/easyconfigs/:
+export EASYBUILD_INCLUDE_EASYBLOCKS="$PROD_DIR/easybuild/easyblocks/*.py"
+export EASYBUILD_IGNORE_OSDEPS=0
+export EASYBUILD_HIDE_DEPS=Bison,Doxygen,JasPer,NASM,SQLite,Szip,Tcl,bzip2,cURL,flex,freetype,libjpeg-turbo,libpng,libreadline,libtool,libxml2,ncurses,zlib,M4,Serf,APR,APR-util,expat,SCons,binutils,Coreutils,GLib,Qt,SCOTCH,Tk,hwloc,libffi,libunwind,make,numactl,pkg-config,gettext,Autotools,Automake,Autoconf,OPARI2,OTF2,UDUNITS,ZeroMQ,OpenPGM,util-linux,libsodium,libQGLViewer,Eigen,GTS,GL2PS,PyGTS,PyQt,IPython,Python-Xlib,LOKI,SIP,NASM,PIL,libjpeg-turbo,libxcb,libX11,libXau,xproto,kbproto,inputproto,libpthread-stubs,xextproto,libXdmcp,xcb-proto,xtrans,LibTIFF,byacc,guile,libunistring,CMake,PCRE,XZ,PROJ,libutempter,libevent,libiberty,SIONlib,PDT,Cube
+export EASYBUILD_RECURSIVE_MODULE_UNLOAD=1
+export EASYBUILD_BUILDPATH=/dev/shm/$USER
+if [[ $USER == "jenscscs" ]] ; then
+   if ! [[ "$hostName" == "eschaln-" || "$hostName" == "keschln-" ]] ; then
+       export EASYBUILD_BUILDPATH=${PROJ}
+   fi
+fi
+
+# Set up private repository for jenkins user (it doesnt belong to csstaff group, it is not supposed to write under /apps/common)
+if [[ -w /apps/common/easybuild/sources/ ]] ; then
+    export EASYBUILD_SOURCEPATH=/apps/common/easybuild/sources/
+elif [[ $USER == "jenscscs" ]] ; then
+    export EASYBUILD_SOURCEPATH=$HOME/sources 
+else # non CSCS users
+    export EASYBUILD_SOURCEPATH=$HOME
+fi
+
+if [[ "$hostName" == "daint" || "$hostName" == "dora" || "$hostName" == "santis" || "$hostName" == "brisi" || "$hostName" =~ "dom" ]] ; then
+    export EASYBUILD_EXTERNAL_MODULES_METADATA=$PROD_DIR/easybuild/cray_external_modules_metadata.cfg
+    export EASYBUILD_OPTARCH=$CRAY_CPU_TARGET
+    export EASYBUILD_RECURSIVE_MODULE_UNLOAD=0 #recursive unload currently not working on Cray* toolchains
+fi
+
+echo "Updating \$MODULEPATH..."
+export MODULEPATH=$EASYBUILD_PREFIX/modules/all:$MODULEPATH
+echo MODULEPATH=$MODULEPATH
+
+echo "Loading EasyBuild..."
+module load /apps/common/UES/easybuild/modules/all/EasyBuild/latest 
+eb --show-config

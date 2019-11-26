@@ -1,0 +1,45 @@
+easyblock = 'CmdCp'
+
+name = 'c2sm-rcm'
+version = '1.00.00'
+system = 'kesch'
+
+versionsuffix = '-%s' % system
+
+homepage = 'https://github.com/C2SM-RCM/c2sm-rcm-env'
+description = 'C2SM Environment'
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+installdir = '%(installdir)s'
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/C2SM-RCM/c2sm-rcm-env/archive']
+
+skipsteps = ['build']
+
+files_to_copy = [
+    (["modules/%s" % system], '%(installdir)s')
+    ]
+
+add_to_module = """
+conflict %s
+module use %s/%s
+"""
+
+modtclfooter = add_to_module % (name, installdir, system) 
+
+sanity_check_paths = {
+    'files': ['%s/c2sm/base' % (system),
+              '%s/c2sm/cray-env/base' % (system),
+              '%s/c2sm/cray-env/gpu' % (system),
+              '%s/c2sm/gnu-env/base' % (system),
+              '%s/c2sm/gnu-env/gpu' % (system),
+              '%s/c2sm/pgi-env/base' % (system),
+              '%s/c2sm/pgi-env/gpu' % (system)],
+    'dirs':  ['%s/c2sm/cray-env' % (system),
+              '%s/c2sm/gnu-env' % (system),
+              '%s/c2sm/pgi-env' % (system)],
+}
+
+moduleclass = 'devel'

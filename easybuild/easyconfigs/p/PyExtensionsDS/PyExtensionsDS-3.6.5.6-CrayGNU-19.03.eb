@@ -1,0 +1,107 @@
+# contributed by mschoengens and sarafael (CSCS)
+easyblock = 'Bundle'
+
+name = 'PyExtensionsDS'
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '5.6'
+pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+version = '%s' % pyver
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.03'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('h5py', '2.8.0', '-python%s-serial' % py_maj_ver),
+    ('PyExtensions', pyver),
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('backports.weakref', '1.0.post1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/b/backports.weakref/'],
+    }),
+    ('Werkzeug', '0.14.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/w/werkzeug/'],
+    }),
+    ('absl-py', '0.6.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/a/absl-py/'],
+        'modulename': 'absl',
+    }),
+    ('Keras_Applications', '1.0.6', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/k/keras_applications'],
+    }),
+    ('Keras_Preprocessing', '1.0.5', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/k/keras_preprocessing'],
+    }),
+    ('gast', '0.2.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/g/gast'],
+    }),
+    ('astor', '0.7.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/a/astor'],
+    }),
+    ('termcolor', '1.1.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/termcolor'],
+    }),
+    ('chardet', '3.0.4', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
+    }),
+    ('certifi', '2018.8.24', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
+    }),
+    ('idna', '2.7', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
+    }),
+    ('urllib3', '1.23', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
+    }),
+    ('requests', '2.19.1', {
+            'req_py_majver': '3',
+            'req_py_minver': '6',
+            'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
+    }),
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+pythonpath = 'lib/python%s/site-packages' % pyshortver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [pythonpath]
+}
+
+modextrapaths = {'PYTHONPATH': pythonpath}
+
+moduleclass = 'tools'

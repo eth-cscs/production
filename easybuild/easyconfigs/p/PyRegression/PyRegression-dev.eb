@@ -1,0 +1,18 @@
+# @author: gppezzi
+easyblock = "Bundle"
+
+name = 'PyRegression'
+version = 'dev'
+
+homepage = 'https://madra.cscs.ch/scs/PyRegression/'
+description = "Awesome regression suite for CSCS systems."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [('Python-bare', '3.5.2')]
+
+modtclfooter = """
+prepend-path    PATH        /apps/daint/UES/jenkins/daint101/workspace/PyRegression-Nightly-production-dev/label/daint
+"""
+
+moduleclass = 'devel'

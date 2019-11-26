@@ -1,0 +1,67 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+name = 'PyExtensions'
+py_maj_ver = '3'
+py_min_ver = '6'
+py_rev_ver = '1.1'
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+version = '%s.%s' % (pyver, py_rev_ver)
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python/%s' % version, EXTERNAL_MODULE),
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('Cython', '0.28.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
+    }),
+    ('six', '1.11.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
+    }),
+    ('matplotlib', '2.2.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
+    }),
+    ('pandas', '0.22.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
+    }),
+    ('pygelf', '0.3.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pygelf/'],
+    }),
+    ('PyMySQL', '0.7.11', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pymysql/'],
+    })
+]
+
+# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
+full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python{0}/site-packages'.format(pyver)]}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyver]
+}
+
+moduleclass = 'tools'

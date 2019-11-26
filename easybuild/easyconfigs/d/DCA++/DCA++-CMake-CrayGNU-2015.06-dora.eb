@@ -1,0 +1,19 @@
+easyblock = 'Bundle'
+
+name = 'DCA++-dora'
+version = 'CMake'
+
+homepage = 'http://www.itp.phys.ethz.ch/people/schulthess'
+description = """This modules bundles all the dependencies for DCA++, the best DCA ever"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2015.06'}
+
+dependencies = [
+    ('CMake', '3.3.1'),
+    ('spglib', '1.7.3'), 
+    ('NFFT', '3.3.0'), 
+    ('gtest', '1.7.0'), 
+    ('cray-hdf5/1.8.13', EXTERNAL_MODULE),
+]
+
+moduleclass = 'phys'

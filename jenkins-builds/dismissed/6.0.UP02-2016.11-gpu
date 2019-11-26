@@ -1,0 +1,66 @@
+ abcpy-0.3.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Amber-16-2016.11-CrayGNU-2016.11-serial.eb
+ Amber-16-2016.11-CrayGNU-2016.11-parallel.eb
+ Amber-16-2016.11-CrayGNU-2016.11-cuda-8.0.54.eb
+ Boost-1.63.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Boost-1.62.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Boost-1.63.0-CrayGNU-2016.11-Python-2.7.12.eb
+ Boost-1.61.0-CrayGNU-2016.11-Python-2.7.12.eb
+ CDO-1.7.2-CrayGNU-2016.11.eb
+ CDO-1.8.1-CrayGNU-2016.11.eb
+ CMake-3.6.0.eb
+ CP2K-4.1-CrayGNU-2016.11-cuda-8.0.54.eb
+ CPMD-4.1-CrayIntel-2016.11.eb
+ ddt-7.0.5.eb --set-default-module
+ GROMACS-5.1.4-CrayGNU-2016.11-cuda-8.0.54.eb
+ GSL-2.1-CrayGNU-2016.11.eb
+ h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-parallel.eb
+ h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-parallel.eb
+ h5py-2.6.0-CrayGNU-2016.11-Python-2.7.12-serial.eb
+ h5py-2.6.0-CrayGNU-2016.11-Python-3.5.2-serial.eb
+ influxdb-4.1.1-CrayGNU-2016.11-Python-2.7.12.eb --hidden
+ influxdb-4.1.1-CrayGNU-2016.11-Python-3.5.2.eb --hidden
+ IPM-2.0.6-CrayGNU-2016.11.eb
+ IPM-2.0.6-CrayCCE-2016.11.eb
+ IPM-2.0.6-CrayIntel-2016.11.eb
+ IPM-2.0.6-CrayPGI-2016.11.eb
+ LAMMPS-30Jul16-CrayGNU-2016.11-cuda-8.0.54.eb
+ magma-2.2.0-CrayGNU-2016.11-cuda-8.0.54.eb
+ NAMD-2.11-CrayIntel-2016.11-cuda-8.0.54.eb
+ NCL-6.4.0.eb
+ NCL-6.3.0.eb
+ NCO-4.6.2-CrayGNU-2016.11.eb --set-default-module
+ NCO-4.6.7-CrayGNU-2016.11.eb
+ ncview-2.1.7-CrayGNU-2016.11.eb
+ netcdf-python-1.2.7-CrayGNU-2016.11-Python-2.7.12.eb
+ netcdf-python-1.2.7-CrayGNU-2016.11-Python-3.5.2.eb
+ Octave-4.2.0-CrayGNU-2016.11.eb
+ ParaView-5.3.0-EGL-CrayGNU-2016.11.eb
+ ParaView-5.4.0-EGL-CrayGNU-2016.11.eb
+ perftools-base-cscs-643-nogpu.eb
+ perftools-cscs-643-nogpu.eb
+ perftools-base-cscs-645-nogpu.eb
+ perftools-cscs-645-nogpu.eb
+ perftools-base-cscs-645-cuda.eb
+ perftools-cscs-645-cuda.eb
+ perftools-base-cscs-645-openacc.eb
+ perftools-cscs-645-openacc.eb
+ perftools-base-cscs-645-loops.eb
+ perftools-cscs-645-loops.eb
+ pycuda-2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54.eb
+ pycuda-2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0.54.eb
+ QuantumESPRESSO-6.1.0-CrayIntel-2016.11.eb
+ QuantumESPRESSO-5.4.0-CrayIntel-2016.11.eb
+ R-3.3.2-CrayGNU-2016.11.eb
+ Spark-1.6.0.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-2.7.12.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-cuda-8.0-Python-3.5.2.eb
+ TensorFlow-1.0.0-CrayGNU-2016.11-Python-3.5.2.eb
+ Theano-0.9.0-CrayGNU-2016.11-Python-3.5.2.eb
+ vampir-9.3.0.eb --set-default-module
+ VASP-5.4.1-CrayIntel-2016.11.eb
+ VASP-5.4.1-CrayIntel-2016.11-cuda-8.0.54.eb
+ Vim-8.0.eb
+ Visit-2.12.0-CrayGNU-2016.11.eb
+ VMD-1.9.3-egl.eb
+ VMD-1.9.3-ogl.eb

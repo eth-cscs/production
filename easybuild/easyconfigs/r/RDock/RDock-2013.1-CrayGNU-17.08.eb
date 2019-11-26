@@ -1,0 +1,45 @@
+easyblock = 'MakeCp'
+
+name = 'RDock'
+version = '2013.1'
+
+homepage = 'https://sourceforge.net/projects/rdock/'
+description = """rDock is a fast and versatile Open Source docking program that
+can be used to dock small molecules against proteins and nucleic acids. It is
+designed for High Throughput Virtual Screening (HTVS) campaigns and Binding Mode
+prediction studies. rDock is mainly written in C++ and accessory scripts and
+programs are written in C++, perl or python languages."""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://sourceforge.net/projects/rdock/files']
+sources = ['rDock_%(version)s_src.tar.gz']
+
+builddependencies = [
+    ('popt', '1.16'),
+]
+
+prebuildopts  = 'cd build && export LD_LIBRARY_PATH=$LIBRARY_PATH:%(builddir)s/build/linux-g++-64/release/lib && '
+prebuildopts += " perl -i -p -e 's/\/usr\/bin\/g\+\+/CC/g' Makefile && "
+prebuildopts += " perl -i -p -e 's/\/usr\/bin\/g\+\+/CC/g' makefile && "
+prebuildopts += " perl -i -p -e 's/\/usr\/bin\/g\+\+/CC/g' tmakelib/linux-g++-64/tmake.conf && "
+prebuildopts += " sed -i '/unit_test/d' Makefile && "
+buildopts = 'linux-g++-64 TMAKE_CXX=CC LINK=CC'
+
+runtest = False
+files_to_copy = [ (['build/linux-g++-64/release/exe/*'], 'bin'),
+                  (['build/linux-g++-64/release/lib/*'], 'lib'),
+                  (['data/*'], 'data'),
+                  (['docs/*'], 'docs') ]
+
+sanity_check_paths = {
+    'files': ['bin/rbcalcgrid', 'bin/rbcavity', 'bin/rbdock', 'bin/rblist', 'bin/rbmoegrid' ],
+    'dirs': ['bin', 'lib'],
+}
+
+modextravars = {
+    'RBT_ROOT' : '%(installdir)s'
+}
+
+moduleclass = 'bio'

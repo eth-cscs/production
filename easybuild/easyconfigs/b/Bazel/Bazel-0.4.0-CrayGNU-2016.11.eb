@@ -1,0 +1,30 @@
+# @author: gppezzi, marcelsc
+
+easyblock = "CmdCp"
+
+name = 'Bazel'
+version = '0.4.0'
+
+homepage = 'http://baze.io/'
+description = """Correct, reproducible, fast builds for everyone"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('SWIG', '3.0.10', '-Python-3.5.2'),
+    ('java/jdk1.8.0_51', EXTERNAL_MODULE),
+]
+
+sources = ['%(version)s.tar.gz']
+source_urls = ['https://github.com/bazelbuild/bazel/archive/']
+
+cmds_map = [('.*', "JAVA_VERSION=1.8 CC=gcc CXX=g++ ./compile.sh")]
+
+files_to_copy = [(['output/bazel'], 'bin')]
+
+sanity_check_paths={
+    'files': ['bin/bazel'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'

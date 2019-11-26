@@ -1,0 +1,50 @@
+#
+# Use --try-toolchain-version=2016.09-gcc-4.9.3
+#
+
+easyblock = 'MakeCp'
+name = 'Amber'
+version = '14'
+versionsuffix = '-parallel-cuda'
+amber_version='%(version)s'[:2]
+
+homepage = 'http://ambermd.org/'
+description = 'Assisted Model Building with Energy Refinement'
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.09-gcc-4.9.3' }
+toolchainopts = { 'verbose' : False }
+sources = ['Amber%(version)s.tar.gz', 'AmberTools15.tar.bz2']
+patches = ['amber-configure-forceupdate.patch']
+
+dependencies = [ ('bzip2', '1.0.6'),
+                 ('zlib', '1.2.8') ]
+
+builddependencies = [
+    ('cudatoolkit/7.5.18_2.0.3_ge574bd6-2.2', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1', EXTERNAL_MODULE),
+    ('flex', '2.6.0')
+]
+
+buildininstalldir = True
+configopts = 'gnu'
+prebuildopts = 'export CUDA_HOME=$CUDATOOLKIT_HOME; export AMBERHOME=%(builddir)s/amber%(version)s;'
+prebuildopts = prebuildopts + './configure -noX11 -mpi -crayxt5 -cuda --with-netcdf $EBROOTNETCDF gnu;'
+prebuildopts = prebuildopts + "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+buildopts = 'install'
+
+files_to_copy = []
+sanity_check_paths = {
+    'files' : [ 'amber%(version)s/bin/pmemd.cuda.MPI' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s/amber%(version)s',
+}
+
+modextrapaths = {
+    'PATH' : 'amber%(version)s/bin',
+}
+
+#sanity_check_commands = [('make', '-C amber%(version)s test')]

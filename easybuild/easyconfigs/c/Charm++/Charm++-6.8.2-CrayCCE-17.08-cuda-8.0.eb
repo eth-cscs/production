@@ -1,0 +1,41 @@
+# contributed by jg (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.8.2'
+cudaversion = '8.0'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://charm.cs.illinois.edu/research/charm/'
+description = """Charm++ is a machine independent parallel programming system.
+Programs written using this system will run unchanged on MIMD machines with or
+without a shared memory."""
+
+toolchain = {'name': 'CrayCCE', 'version': '17.08'}
+toolchainopts = {'dynamic': False}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib/']
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + 'charm-%(version)s.tar.gz']
+
+cmds_map = [('charm-%(version)s.tar.gz', 
+             './build ChaNGa gni-crayxc cuda hugepages smp --enable-lbuserdata --with-production -j12')]
+
+builddependencies = [ 
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+    # pmi-lib required by CrayNid.c (function getXTNodeID)
+    ('pmi/5.0.12', EXTERNAL_MODULE),
+    ('pmi-lib/5.0.12', EXTERNAL_MODULE),
+]
+dependencies = [ ('craype-accel-nvidia60', EXTERNAL_MODULE) ]
+
+files_to_copy = ['gni-crayxc-cuda-hugepages-smp'] 
+
+sanity_check_paths = {
+    'files': ['gni-crayxc-cuda-hugepages-smp/bin/charmrun'],
+    'dirs':  ['gni-crayxc-cuda-hugepages-smp/bin'],
+}
+
+modextrapaths = { 'PATH': 'gni-crayxc-cuda-hugepages-smp/bin' }
+modextravars  = { 'EBTYPECHARMPLUSPLUS': 'gni-crayxc-cuda-hugepages-smp/bin' }
+
+moduleclass = 'lib'

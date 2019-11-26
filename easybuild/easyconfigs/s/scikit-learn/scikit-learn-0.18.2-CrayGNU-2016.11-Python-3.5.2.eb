@@ -1,0 +1,33 @@
+easyblock = 'PythonPackage'
+
+name = 'scikit-learn'
+version = '0.18.2'
+versionsuffix= '-Python-%(pyver)s'
+
+homepage = 'https://pypi.python.org/pypi/scikit-learn/' 
+description = """Scikit-learn integrates machine learning algorithms in the tightly-knit
+scientific Python world, building upon numpy, scipy, and matplotlib. As a
+machine-learning module, it provides versatile tools for data mining and
+analysis in any field of science and engineering.  It strives to be simple and
+efficient, accessible to everybody, and reusable in various contexts."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+patches = [('scikit-learn-%(version)s.patch')]
+
+dependencies = [
+    ('Python', '3.5.2'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+exts_filter = ('python -c "import sklearn"', "")
+
+moduleclass = 'devel'
+

@@ -1,0 +1,54 @@
+easyblock = 'Bundle'
+
+name = 'texlive'
+version = '3.141592'
+
+homepage = 'http://tug.org/texlive/'
+description = """TeX Live is an easy way to get up and running with the TeX
+document production system."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+modtclfooter = """
+set     url                     "http://tug.org/texlive/"
+set     modulename              "texlive"
+set     packageroot             "/apps/common/UES/texlive/201703"
+
+# ============================================================================
+# module-info mode ==> load, remove, display, help, whatis, switch, switch1, switch2, or switch3.
+# load
+# ============================================================================
+#if { [ module-info mode load ] } {
+
+        prepend-path    PATH                  "$packageroot/bin/x86_64-linux"
+        prepend-path    MANPATH               "$packageroot/texmf-dist/doc/man"
+        prepend-path    INFOPATH              "$packageroot/texmf-dist/doc/info"
+#}
+
+# ============================================================================
+# Help message called by : module help ...
+# ============================================================================
+#if { [ module-info mode help ] } {
+proc ModulesHelp {} {
+  global url modulename packageroot
+  puts stderr "
+        \tmodulefile : [module-info name] [module-info mode]
+        \t$url
+        \t$packageroot"
+  return 0
+}
+#}
+# ============================================================================
+# Short help message called by : module whatis ...
+# ============================================================================
+if { [ module-info mode whatis ] } {
+module-whatis "Set environment variables to enable the usage of the $modulename $version debugger."
+}
+# ============================================================================
+# Help message called by : module display ...
+# ============================================================================
+# module display "[module-info name]"
+"""
+
+moduleclass = 'devel'
+

@@ -1,0 +1,213 @@
+# Contributed by Theofilos Manitaras (CSCS)
+easyblock = 'Bundle'
+
+name = 'IPython'
+version = '5.5.0'
+versionsuffix = '-python2'
+pyshortver = '2.7'
+
+homepage = 'http://ipython.org/index.html'
+description = """IPython provides a rich architecture for interactive computing 
+with: Powerful interactive shells (terminal and Qt-based). A browser-based 
+notebook with support for code, text, mathematical expressions, inline plots 
+and other rich media. Support for interactive data visualization and use of GUI 
+toolkits. Flexible, embeddable interpreters to load into your own projects.
+Easy to use, high performance tools for parallel computing."""
+
+toolchainopts = {'pic': True, 'verbose' : False }
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+dependencies = [
+    ('cray-python/17.06.1', EXTERNAL_MODULE),
+    ('PyExtensions', pyshortver),
+    ('mock', '2.0.0', versionsuffix),
+    ('PyZMQ', '17.0.0b1', '%s-zmq4' % versionsuffix),
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('requests', '2.13.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
+    }),
+    ('jsonschema', '2.6.0', {
+        'source_urls': ['https://pypi.python.org/packages/58/b9/171dbb07e18c'  \
+                        '6346090a37f03c7e74410a1a56123f847efed59af260a298/'],
+    }),
+    ('traitlets', '4.3.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
+    }),
+    ('ipython_genutils', '0.2.0', {
+        'source_urls': ['https://pypi.python.org/packages/e8/69/fbeffffc0523'  \
+                        '6398ebfcfb512b6d2511c622871dca1746361006da310399/'],
+    }),
+    ('nbformat', '4.4.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/n/nbformat/'],
+    }),
+    ('Pygments', '2.2.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/P/Pygments/'],
+    }),
+    ('simplegeneric', '0.8.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/s/simplegeneric/'],
+        'source_tmpl': 'simplegeneric-%(version)s.zip',
+    }),
+    ('pathlib2', '2.2.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pathlib2/'],
+    }),
+    ('pickleshare', '0.7.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/'],
+    }),
+    ('pexpect', '4.2.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
+    }),
+    ('ptyprocess', '0.5.2', {
+        'source_urls': ['https://pypi.python.org/packages/51/83/5d07dc35534640'\
+                        'b06f9d9f1a1d2bc2513fb9cc7595a1b0e28ae5477056ce/'],
+    }),
+    ('decorator', '4.0.11', {
+        'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
+    }),
+    ('Sphinx', '1.6.3', {
+        'source_urls': ['https://pypi.python.org/packages/10/91/ceb2e0d763e'   \
+                        '0c626f7afd7e3272a5bb76dd06eed1f0b908270ea31984062/'],
+    }),
+    ('jedi', '0.10.2', {
+        'source_urls': ['https://pypi.python.org/packages/80/b9/4e9b0b999'     \
+                        'deeec8a91cb84e567380853a842e6c387c9d39b8fc9a49953fa/'],
+    }),
+    ('typing', '3.6.2', {
+        'source_urls': ['https://pypi.python.org/packages/ca/38/16ba8d542e'    \
+                        '609997fdcd0214628421c971f8c395084085354b11ff4ac9c3/'],
+    }),
+    ('colorama', '0.3.9', {
+        'source_urls': ['https://pypi.python.org/packages/e6/76/257b53926889'  \
+                        'e2835355d74fec73d82662100135293e17d382e2b74d1669/'],
+    }),
+    ('win_unicode_console', '0.5', {
+        'source_urls': ['https://pypi.python.org/packages/89/8d/7aad74930380c' \
+                        '8972ab282304a2ff45f3d4927108bb6693cabcc9fc6a099/'],
+        'source_tmpl': '%(name)s-%(version)s.zip',
+    }),
+    ('testpath', '0.3.1', {
+        'source_urls': ['https://pypi.python.org/packages/f4/8b/b71e9ee10e5' \
+                        'f751e9d959bc750ab122ba04187f5aa52aabdc4e63b0e31a7/'], 
+    }),
+    ('entrypoints', '0.2.3', {
+        'source_urls': ['https://pypi.python.org/packages/27/e8/607697e6ab8a'  \
+                        '961fc0b141a97ea4ce72cd9c9e264adeb0669f6d194aa626/'],
+    }),
+    ('pandocfilters', '1.4.2', {
+        'source_urls': ['https://pypi.python.org/packages/4c/ea/236e2584af67'  \
+                        'bb6df960832731a6e5325fd4441de001767da328c33368ce/'],
+    }),
+    ('tornado', '4.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/df/42/a180ee540e12e2'\
+                        'ec1007ac82a42b09dd92e5461e09c98bf465e98646d187/'],
+    }),
+    ('terminado', '0.6', {
+        'source_urls': ['https://pypi.python.org/packages/58/59/aabe84fce2f45' \
+                        'da10165435cec204d982863e176f6849a4a4fe2652a20a8/'],
+    }),
+    ('jupyter_core', '4.3.0', {
+        'source_urls': ['https://pypi.python.org/packages/2f/39/5138f975100ce' \
+                         '14d150938df48a83cd852a3fd8e24b1244f4113848e69e2/'],
+    }),
+    ('prompt_toolkit', '1.0.15', {
+        'source_urls': ['https://pypi.python.org/packages/8a/ad/cf6b128866e78' \
+                        'ad6d7f1dc5b7f99885fb813393d9860778b2984582e81b5/'],
+    }),
+    ('mistune', '0.7.4', {
+        'source_urls': ['https://pypi.python.org/packages/25/a4/12a584c0c59c'  \
+                        '9fed529f8b3c47ca8217c0cf8bcc5e1089d3256410cfbdbc/'],
+    }),
+    ('bleach', '2.0.0', {
+        'source_urls': ['https://pypi.python.org/packages/1e/67/2562affb99e'   \
+                        '194cb4b0c0b88e661650d065fcf452d1108116a9530ed9cad/'],
+    }),
+    ('jupyter_client', '5.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/d4/51/09da9a18cd858' \
+                        'b28cee596a628660a8cbf9830bdd89fe94361bfe18a0bb4/'],
+    }),
+    ('jupyter_console', '5.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/cb/83/f96e41ddb29'   \
+                        'ad76f806d6412e87e64af3120482dc0d8b5decf5eb8d82b99/'],
+    }),
+    ('enum34', '1.1.6', {
+        'source_urls': ['https://pypi.python.org/packages/bf/3e/31d502c2530'  \
+                        '2814a7c2f1d3959d2a3b3f78e509002ba91aea64993936876/'],
+        'modulename': 'enum',
+    }),
+    ('dateutil', '2.6.1', {
+        'source_urls': ['https://pypi.python.org/packages/54/bb/f1db86504f7'  \
+                        'a49e1d9b9301531181b00a1c7325dc85a29160ee3eaa73a54/'],
+        'source_tmpl': 'python-dateutil-2.6.1.tar.gz',
+    }),
+    ('pysqlite2', '2.8.3', {
+        'source_urls': ['https://pypi.python.org/packages/42/02/981b6703e3c'  \
+                        '83c5b25a829c6e77aad059f9481b0bbacb47e6e8ca12bd731/'],
+        'source_tmpl': 'pysqlite-2.8.3.tar.gz',
+    }),
+    ('configparser', '3.5.0', {
+        'source_urls': ['https://pypi.python.org/packages/7c/69/c2ce7e91c89'  \
+                        'dc073eb1aa74c0621c3eefbffe8216b3f9af9d3885265c01c/'],  
+        'source_tmpl': 'configparser-3.5.0.tar.gz',
+    }),
+    ('ipython', version, {
+        'source_urls': ['https://pypi.python.org/packages/14/7c/bbc1e749e17'  \
+                        '39208324af3f05ac7256985e21fc5f24d3c8da20aae844ad0/'],
+        'modulename': 'IPython',
+    }),
+    ('ipykernel', '4.6.1', {
+        'source_urls': ['https://pypi.python.org/packages/0c/41/67e16b243b78'  \
+                        'b49f4b1650d045b63be187c27d20a76f0f7b8e61e0fcb966/'],
+    }),    
+    ('widgetsnbextension', '3.0.3', {
+        'source_urls': ['https://pypi.python.org/packages/fd/5c/49fbc33d936'
+                        '13b18bc8e330a6e9b324817269ca8d878f3a1ebcd2f85ad86/'],
+    }),
+    ('ipywidgets', '7.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/be/b5/a31dd45ec96'
+                        '6d07e6f1f833a31008b4af122c2555099c8e63b9f5b2d6c05/'],
+    }),
+    ('Jinja2', '2.9.6', {
+        'source_urls': ['https://pypi.python.org/packages/90/61/f820ff0076a'  \
+                        '2599dd39406dcb858ecb239438c02ce706c8e91131ab9c7f1/'],
+        'module_name': 'jinja2',        
+    }),  
+    ('notebook', '5.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/n/notebook/'],
+    }),
+    ('nbconvert', '5.3.1', {
+        'source_urls': ['https://pypi.python.org/packages/39/ea/280d6c0d92f8'  \
+                        'e3ca15fd798bbcc2ea141489f9539de7133d8fe10ea4b049/'], 
+        'source_tmpl': 'nbconvert-5.3.1-py2.py3-none-any.whl',
+        'unpack_sources': False,
+        'use_pip' : True,
+    }),
+
+]
+
+modextrapaths = {'PYTHONPATH': ['lib/python{0}/site-packages'.format(pyshortver)]}
+
+modextravars = {'LC_ALL' : 'en_US.UTF-8',
+                'LC_CTYPE' : 'en_US.UTF-8',
+                'LANG' : 'en_US.UTF-8'}
+
+sanity_check_paths = {
+    'files': ['bin/ipython'],
+    'dirs': ['lib/python{0}/site-packages/IPython'.format(pyshortver)],
+}
+
+iptest_groups = 'core extensions lib testing utils autoreload'
+
+sanity_check_commands = [
+    ('ipython -h', ''),
+    ('jupyter notebook -h', ''),
+    ('jupyter nbconvert -h', ''),
+    ('iptest {0}'.format(iptest_groups), ''),
+    ('iptest2 {0}'.format(iptest_groups), ''), 
+]
+
+
+moduleclass = 'tools'

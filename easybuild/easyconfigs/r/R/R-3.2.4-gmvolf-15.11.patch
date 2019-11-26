@@ -1,0 +1,11 @@
+--- R-3.2.4.orig/src/extra/xz/Makefile.in	2016-03-11 11:25:51.971053853 +0100
++++ R-3.2.4/src/extra/xz/Makefile.in	2016-03-11 11:26:08.161047998 +0100
+@@ -58,7 +58,7 @@
+ 	touch stamp
+ 
+ liblzma.a: $(liblzma_a_OBJECTS)
+-	$rm -f $@
++	rm -f $@
+ 	$(AR) -cr $@ $(liblzma_a_OBJECTS)
+ 	$(RANLIB) $@
+ 

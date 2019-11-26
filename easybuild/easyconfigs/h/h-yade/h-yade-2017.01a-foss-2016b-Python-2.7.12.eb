@@ -1,0 +1,80 @@
+# Author: @bignamic, @gppezzi
+
+easyblock = 'CMakeMake'
+
+name = 'h-yade'
+version = '2017.01a'
+versionsuffix = '-Python-2.7.12'
+
+homepage = 'http://yade-dem.org/doc/index.html#'
+description = "Yade is an extensible open-source framework for discrete numerical models, focused on Discrete Element Method."
+
+toolchain = {'name': 'foss', 'version': '2016b'}
+
+builddependencies = [('CMake', '3.4.1', '', True)]
+
+dependencies = [
+    ('Loki', '0.1.7'),
+    ('Qt', '4.8.5', '-GLib-2.44.0' + versionsuffix),
+    ('libQGLViewer', '2.6.3', '-GLib-2.44.0' + versionsuffix),
+    ('PyQt', '4.11.4', '-GLib-2.44.0' + versionsuffix),
+    ('Boost', '1.61.0', versionsuffix),
+    ('MPFR', '3.1.2', '-GMP-6.1.1'),
+    ('Eigen', '3.2.1'),
+    ('GTS', '0.7.6', versionsuffix),
+    ('GL2PS', '1.3.8'),
+    ('PyGTS', '0.3.1', versionsuffix),
+    ('IPython', '3.2.3', versionsuffix),
+    ('Python-Xlib', '0.15rc1', versionsuffix),
+    ('PIL', '1.1.7', versionsuffix),
+    ('minieigen', '0.5.3', versionsuffix) 
+]
+
+
+sources = ['yade-%(version)s.tar.gz']
+source_urls = ['https://launchpad.net/yade/trunk/yade-1.00.0/+download/']
+
+separate_build_dir = True
+
+preconfigopts = 'export EBINSTALLPREFIX=%(installdir)s && '
+preconfigopts += 'export CC=gcc && export CXX=g++ && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/brefcom-mm.hh %(builddir)s && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/cpm2_interface.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/CPM2.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/cpm3_interface.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+preconfigopts += 'cp /apps/leone/UES/jenkins/HILTI/CPM3.* %(builddir)s/trunk-2017.01a/pkg/dem && '
+
+configopts = '-DINSTALL_PREFIX=$EBINSTALLPREFIX '
+configopts += '-DLOKI_INCLUDE_DIR=$EBROOTLOKI/include/ '
+configopts += '-DLOKI_LIBRARY=$EBROOTLOKI/lib/ '
+configopts += '-DENABLE_VTK=OFF '
+configopts += '-DENABLE_CGAL=OFF '
+configopts += '-DENABLE_LINSOLV=OFF '
+configopts += '-DENABLE_PFVFLOW=OFF '
+configopts += '-DBoost_NO_SYSTEM_PATHS=ON '
+configopts += '-DBoost_INCLUDE_DIR=$EBROOTBOOST/include '
+configopts += '-DBOOST_LIBRARYDIR=$EBROOTLOKI/lib '
+configopts += '-DBoost_NO_BOOST_CMAKE=ON '
+configopts += '-DGL2PS_LIBRARY=$EBROOTGL2PS/lib '
+configopts += '-DGL2PS_INCLUDE_DIR=$EBROOTGL2P/include '
+configopts += '-DEIGEN3_INCLUDE_DIR=$EBROOTEIGEN/include/ '
+configopts += '-DPYTHON_EXECUTABLE=$EBROOTPYTHON/bin/python '
+configopts += '-DPYTHON_INCLUDE_DIR=$EBROOTPYTHON/include/python2.7 '
+configopts += '-DPYTHON_LIBRARY=$EBROOTPYTHON/lib '
+configopts += '-DQGLVIEWER_INCLUDE_DIR=$EBROOTLIBQGLVIEWER/include '
+configopts += '-DUSE_QT5=OFF '
+configopts += '-DCMAKE_CXX_FLAGS="-DYADE_CPM_FULL_MODEL_AVAILABLE" '
+
+modextravars = {'LD_PRELOAD': '%s' % '$::env(EBROOTGL2PS)/lib/libgl2ps.so'}
+
+modextrapaths = {
+    'LD_LIBRARY_PATH': ['lib64/yade-%(version)s'],
+    'LIBRARY_PATH': ['lib64/yade-%(version)s'],
+    'PYTHONPATH': ['lib64/yade-%(version)s/py'],
+}
+
+sanity_check_paths={
+    'files': ['bin/yade-%(version)s', 'bin/yade-%(version)s-batch',
+    'lib64/yade-%(version)s/libyade.so'],
+    'dirs': ['bin', 'lib64', 'share'],
+}

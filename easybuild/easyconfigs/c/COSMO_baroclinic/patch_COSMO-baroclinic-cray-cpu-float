@@ -1,0 +1,61 @@
+diff -Nru cosmo_pompa.ORIG/cosmo/Options cosmo_pompa/cosmo/Options
+--- cosmo_pompa.ORIG/cosmo/Options	2019-02-25 15:48:49.000000000 +0100
++++ cosmo_pompa/cosmo/Options	2019-03-05 12:41:59.564526000 +0100
+@@ -7,6 +7,6 @@
+ 
+ -include $(ROOT)/Options.$(COMPILER).cpu
+ 
+-#PFLAGS  += -DSINGLEPRECISION # run model in single precision
++PFLAGS  += -DSINGLEPRECISION # run model in single precision
+ 
+ -include $(ROOT)/Options.lib.cpu
+diff -Nru cosmo_pompa.ORIG/cosmo/Options.lib.cpu cosmo_pompa/cosmo/Options.lib.cpu
+--- cosmo_pompa.ORIG/cosmo/Options.lib.cpu	2019-02-25 15:48:50.000000000 +0100
++++ cosmo_pompa/cosmo/Options.lib.cpu	2019-03-05 11:50:12.854295000 +0100
+@@ -17,35 +17,35 @@
+ MPII     = -D__MPICH2
+ 
+ # Grib1 library
+-GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_$(COMPILER)
+ GRIBDWDI =
+ 
+ # Grib-API library
+ GRIBAPI_VERSION = 1.13.1
+-GRIBAPIL = -L$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/lib -lgrib_api_f90 -lgrib_api -L$(INSTALL_DIR)/libjasper/lib -ljasper
+-GRIBAPII = -I$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/include
++GRIBAPIL = -L${EBROOTGRIB_API}/lib -lgrib_api_f90 -lgrib_api -L${EBROOTJASPER}/lib -ljasper
++GRIBAPII = -I${EBROOTGRIB_API}/include
+ 
+ # NetCDF library
+-NETCDFL  =
+-NETCDFI  =
++NETCDFL  = -L${NETCDF_DIR}/lib
++NETCDFI  = -I${NETCDF_DIR}/include
+ 
+ # Synsat library
+-RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
++#RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
+ RTTOV7I  =
+ RTTOV10L =
+ RTTOV10I =
+ 
+ # Serialization library
+-SERFW    = $(STELLA_DIR)
++SERFW    = ${EBROOTSTELLA}
+ SERFWL   = -L$(SERFW)/lib -lSerializationFrameworkWrapper -lSerializationFramework -lStellaUtils -lSharedInfrastructure -lsha256 -ljson -lstdc++
+-SERFWI   = -I$(SERFW)/include
++SERFWI   = -I$(SERFW)/include/STELLA
+ 
+ # STELLA library
+-STELLA   = $(STELLA_DIR)
++STELLA   = ${EBROOTSTELLA}
+ STELLAL  = -L$(STELLA)/lib -lCommunicationFramework -ljson -lStella -lgcl -lStellaUtils -lSharedInfrastructure -lstdc++
+-STELLAI  =
++STELLAI  = -I$(STELLA)/include/STELLA
+ 
+ # Dycore library
+-DYCORE   = $(DYCORE_DIR)
++DYCORE   = ${EBROOTDYCORE}
+ DYCOREL  = -L$(DYCORE)/lib -lDycoreWrapper -lDycore
+ DYCOREI  =

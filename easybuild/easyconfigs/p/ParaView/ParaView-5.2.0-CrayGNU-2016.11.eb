@@ -1,0 +1,60 @@
+# CrayGNU version by Jean Favre (CSCS) and gppezzi (CSCS)
+# REMARK: VTK on Cray Fails to build on /dev/shm
+
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.2.0'
+# versionsuffix='-mpi'
+
+homepage = "http://www.paraview.org"
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
+sources = ["ParaView-v%(version)s.tar.gz"]
+
+#patches = ['%(name)s-%(version)s_missingheader.patch']
+
+python = 'Python'
+pyver = '2.7.12'
+pysuff = '-%s-%s' % (python, pyver)
+dependencies = [
+    ('Boost', '1.61.0', pysuff),
+    ('h5py', '2.6.0', pysuff + '-serial'),
+]
+
+patches = [ 'ParaView-5-2-0.patch' ]
+
+builddependencies = [('CMake', '3.6.0')]
+
+separate_build_dir = True
+
+maxparallel = 12
+
+configopts = '-DVTK_Group_MPI:BOOL=ON -DMPI_C_INCLUDE_PATH=${CRAY_MPICH_DIR}/include -DMPI_C_LIBRARIES=${CRAY_MPICH_DIR}/lib/libmpich.so '
+configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
+configopts += '-DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DPARAVIEW_ENABLE_CATALYST:BOOL=ON -DPARAVIEW_BUILD_PLUGIN_SierraPlotTools=OFF '
+configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
+configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python -DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_USE_CXX11_FEATURES:BOOL=ON '
+configopts += '-DVTK_RENDERING_BACKEND:STRING=OpenGL2 -DOPENGL_gl_LIBRARY=/opt/cray/nvidia/default/lib64/libGL.so '
+configopts += '-DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include '
+configopts += '-DPARAVIEW_ENABLE_XDMF3:BO0L=ON -DBoost_INCLUDE_DIR=${EBROOTBOOST}/include '
+configopts += '-DPARAVIEW_BUILD_QT_GUI:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF -DModule_vtkGeovisCore=ON -DModule_vtklibproj4=ON '
+# CSCS specific plugins for Users Projects
+configopts += '-DPARAVIEW_EXTERNAL_PLUGIN_DIRS:STRING="/users/jfavre/Projects/BioMedical2;/users/jfavre/Projects/Jackson/src;/users/jfavre/Projects/Tipsy" '
+
+# Or consult https://gitlab.kitware.com/vtk/vtk/blob/master/Documentation/dev/git/data.md
+# and download ExternalData to $EASYBUILD_SOURCEPATH and adjust -DExternalData_OBJECT_STORES accordingly
+# Without internet connection, comment the following two lines (configopts and prebuildopts)
+# configopts += '-DExternalData_OBJECT_STORES=%(builddir)s/ExternalData '
+# The ParaView server can be cranky, test downloads are quite often failing, especially in the case
+# of parallel downloads. Using ; insted of && gives a second chance to download the test files, if the
+# first serial attempt would fail.
+#prebuildopts = 'make VTKData ;'
+
+moduleclass = 'vis'

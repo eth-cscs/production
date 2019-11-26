@@ -1,0 +1,19 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayGNU'
+version = '2016.10'
+
+homepage = 'http://docs.cray.com/books/S-9408-1610/'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-gnu module (PE release: 10.2016).\n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest (default) version
+    ('PrgEnv-gnu', EXTERNAL_MODULE),
+    ('gcc/5.3.0', EXTERNAL_MODULE),
+    ('cray-libsci/16.09.1', EXTERNAL_MODULE),
+    ('cray-mpich/7.4.4', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'

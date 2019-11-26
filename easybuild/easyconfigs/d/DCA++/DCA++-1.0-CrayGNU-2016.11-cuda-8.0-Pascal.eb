@@ -1,0 +1,25 @@
+easyblock = 'Bundle'
+
+name = 'DCA++'
+version = '1.0'
+versionsuffix = '-cuda-8.0-Pascal'
+
+homepage = 'http://www.itp.phys.ethz.ch/research/comp/computation.html'
+
+description = """The DCA++ software project is a C++ implementation of the dynamical cluster 
+approximation (DCA) and its DCA+ extension. It aims to solve lattice models of strongly correlated 
+electron systems. This module bundles all the dependencies for the CPU+GPU version."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2016.11'}
+
+dependencies = [
+    ('CMake', '3.6.0'),
+    ('fftw/3.3.4.10', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.0', EXTERNAL_MODULE),
+    ('cudatoolkit/8.0.44_GA_2.2.7_g4a6c213-2.1', EXTERNAL_MODULE),
+    ('magma', '2.2.0','-cuda-8.0'),
+]
+
+moduleclass = 'phys'
+
+modextravars = {'CUDA_LIB_PATH': '/opt/cray/nvidia/default/lib64'}
