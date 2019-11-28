@@ -3,6 +3,7 @@ easyblock = 'Tarball'
 name = 'Buildah'
 version = '1.11.5'
 local_go_version = '1.13.4'
+local_runc_version = '1.0.0-rc9'
 
 homepage = 'https://buildah.io/'
 description = """Buildah is a tool that facilitates building OCI container images."""
@@ -13,14 +14,14 @@ sources = ['go%s.linux-amd64.tar.gz' % local_go_version]
 source_urls = ['https://storage.googleapis.com/golang/']
 checksums = ['692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c']
 
-modextravars = {'GOROOT': '%(installdir)s', 'GOPATH': '%(installdir)s/go_path'}
 
-postinstallcmds = ['mkdir %(installdir)s/go_path']
+postinstallcmds = ['mkdir %(builddir)s/go_path && export GOPATH=%(builddir)s/go_path']
 postinstallcmds += ['%(installdir)s/bin/go get github.com/opencontainers/runc']
 postinstallcmds += ['%(installdir)s/bin/go get github.com/containers/buildah']
 
 # Make-install runc
-postinstallcmds += ['cd $GOPATH/src/github.com/opencontainers/runc && '
+postinstallcmds += [('cd $GOPATH/src/github.com/opencontainers/runc && '
+                     'git checkout v%s && ') % local_runc_version +
                     'PATH=%(installdir)s/bin/:$PATH make BUILDTAGS="" && '
                     'make install PREFIX=%(installdir)s']
 
@@ -35,4 +36,5 @@ sanity_check_paths = {
     'dirs': ['api', 'doc', 'lib', 'pkg', 'src'],
 }
 
+modextravars = {'GOROOT': '%(installdir)s'}
 moduleclass = 'tools'
