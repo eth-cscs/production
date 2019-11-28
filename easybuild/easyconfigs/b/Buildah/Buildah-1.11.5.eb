@@ -15,15 +15,15 @@ source_urls = ['https://storage.googleapis.com/golang/']
 checksums = ['692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c']
 
 
-postinstallcmds = ['mkdir %(builddir)s/go_path && export GOPATH=%(builddir)s/go_path']
-postinstallcmds += ['%(installdir)s/bin/go get github.com/opencontainers/runc']
-postinstallcmds += ['%(installdir)s/bin/go get github.com/containers/buildah']
+postinstallcmds = ['mkdir %(builddir)s/go_path && export GOPATH=%(builddir)s/go_path && ']
+postinstallcmds += ['%(installdir)s/bin/go get github.com/opencontainers/runc && ']
+postinstallcmds += ['%(installdir)s/bin/go get github.com/containers/buildah && ']
 
 # Make-install runc
 postinstallcmds += [('cd $GOPATH/src/github.com/opencontainers/runc && '
                      'git checkout v%s && ') % local_runc_version +
                     'PATH=%(installdir)s/bin/:$PATH make BUILDTAGS="" && '
-                    'make install PREFIX=%(installdir)s']
+                    'make install PREFIX=%(installdir)s && ']
 
 # Make-install buildah
 postinstallcmds += ['cd $GOPATH/src/github.com/containers/buildah && '
