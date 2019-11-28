@@ -36,6 +36,7 @@
  ncview-2.1.7-CrayGNU-19.10.eb                      --set-default-module
  netcdf-python-1.4.1-CrayGNU-19.10-python2.eb
  netcdf-python-1.4.1-CrayGNU-19.10-python3.eb       --set-default-module
+ numpy-1.17.2-CrayGNU-19.10.eb                      --set-default-module
  oq-engine-3.2.0-CrayGNU-19.10.eb                   --hidden
  ParaView-5.7.0-OSMesa-CrayGNU-19.10.eb             --set-default-module
  PLUMED-2.5.1-CrayGNU-19.10.eb                      --set-default-module
