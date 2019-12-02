@@ -20,7 +20,7 @@ source_urls = ['http://icl.cs.utk.edu/projectsfiles/magma/downloads/']
 patches = [('make.inc-2.4.0', './')]
 
 dependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 
 files_to_copy = ["lib", "include", "testing",

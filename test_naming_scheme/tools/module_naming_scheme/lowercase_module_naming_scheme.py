@@ -1,7 +1,7 @@
 import os
 import re
 
-from easybuild.tools.module_naming_scheme import ModuleNamingScheme
+from easybuild.tools.module_naming_scheme.mns import ModuleNamingScheme
 from easybuild.tools.module_naming_scheme.utilities import det_full_ec_version
 
 class LowercaseModuleNamingScheme(ModuleNamingScheme):

@@ -12,7 +12,6 @@ The following dictionary keys are provided:
     * `buildPath`: the path used as EASYBUILD_BUILDPATH for production
     * `unusePath`: colon separated string containing the paths to unuse for regression (empty string if none)
     * `modulesProduction`: the modules path to use
-    * `modulesUnuseProduction`: the modules path to unuse
     * `prefixProduction`: the prefix path for EasyBuild
 
 * `util.groovy:` Contains a number of common methods used in the Jenkins pipelines.
