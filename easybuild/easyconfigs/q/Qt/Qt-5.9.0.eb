@@ -16,7 +16,7 @@ sources = ['%(namelower)s-everywhere-opensource-src-%(version)s.tar.xz']
 
 osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
-configopts  = ' -opensource -confirm-license -release -skip qtconnectivity -no-opengl '
+configopts  = ' -opensource -confirm-license -release -skip qtconnectivity '
 configopts += ' -skip qtgamepad -skip qtlocation -skip qtmultimedia -skip qtsensors '
 configopts += ' -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine '
 configopts += ' -skip qtwebsockets -nomake examples -nomake tests -no-dbus -qt-libjpeg '
