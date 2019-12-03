@@ -44,7 +44,7 @@ exts_list = [
         'repo_name': 'batchspawner',
         'commit': '68a1fcd3524f8990ba465fae4226da34f1e926b7',
         'recursive': True,
-        }]
+        }],
         }),   
     
 #jupyterlab packages besides ipython and its deps
