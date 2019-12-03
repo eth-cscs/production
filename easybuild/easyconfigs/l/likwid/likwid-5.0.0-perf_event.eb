@@ -36,6 +36,7 @@ prebuildopts += "sed -i 's-^TOPO_FILE_PATH = /-TOPO_FILE_PATH = $(PREFIX)/-'    
 prebuildopts += "sed -i 's-^BUILDFREQ = true-BUILDFREQ = false-'                 config.mk && "
 prebuildopts += "sed -i 's-^BUILDDAEMON = true-BUILDDAEMON = false-'             config.mk && "
 prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
+prebuildopts += "sed -i 's-^NVIDIA_INTERFACE = false-NVIDIA_INTERFACE = true-'   config.mk && "
 
 # --- make/include_GCC.mk:
 prebuildopts += "sed -i 's@^FC  = ifort@FC  = gfortran@'            make/include_GCC.mk && "
@@ -44,7 +45,7 @@ prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'           make/include
 
 skipsteps = ['configure']
 buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" ' \
-            'PREFIX=%(installdir)s'
+            'PREFIX=%(installdir)s CUDA_HOME=/opt/nvidia/cudatoolkit10/default'
 installopts = 'PREFIX=%(installdir)s'
 
 sanity_check_paths = {
