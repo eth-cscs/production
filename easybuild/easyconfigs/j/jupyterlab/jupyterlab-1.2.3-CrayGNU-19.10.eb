@@ -38,14 +38,13 @@ exts_list = [
         'req_py_minver': '6',
         'use_pip': True,
         'sources = [{
-        'filename': 'example-20180920.tar.gz',
+        'filename': 'batchy.tar.gz',
         'git_config': {
         'url': 'https://github.com/jupyterhub/',
         'repo_name': 'batchspawner',
         'commit': '68a1fcd3524f8990ba465fae4226da34f1e926b7',
         'recursive': True,
-    },
-}]
+        }]
         }),   
     
 #jupyterlab packages besides ipython and its deps
