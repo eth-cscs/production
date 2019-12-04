@@ -31,6 +31,22 @@ dependencies = [
 exts_defaultclass = 'PythonPackage'
 
 exts_list = [        
+
+    ('batchspawner', '0.15.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': False,
+        'unpack_sources': True,
+        'sources' = [{
+            'filename': 'test.tar.gz',
+            'git_config': {
+                'url': 'https://github.com/jupyterhub/',
+                'repo_name': 'batchspawner',
+                'commit': '68a1fcd3524f8990ba465fae4226da34f1e926b7' ,
+                'recursive': True,
+             }
+         }]
+    }),
         
 #jupyterlab packages besides ipython and its deps
     ('pyrsistent', '0.15.4', {
