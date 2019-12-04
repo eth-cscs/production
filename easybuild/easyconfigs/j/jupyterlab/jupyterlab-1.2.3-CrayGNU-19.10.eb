@@ -32,22 +32,6 @@ exts_defaultclass = 'PythonPackage'
 
 exts_list = [        
 
-    ('batchspawner', '0.15.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': False,
-        'unpack_sources': True,
-        'sources' = [{
-            'filename': 'test.tar.gz',
-            'git_config': {
-                'url': 'https://github.com/jupyterhub/',
-                'repo_name': 'batchspawner',
-                'commit': '68a1fcd3524f8990ba465fae4226da34f1e926b7' ,
-                'recursive': True,
-             }
-         }]
-    }),
-        
 #jupyterlab packages besides ipython and its deps
     ('pyrsistent', '0.15.4', {
         'req_py_majver': '3',
@@ -561,7 +545,13 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 #twr                   "julia -e \'using IJulia\';"
                    # adjust permissions of precompiled files
                    #'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
+                   #FIXME: Workaround for BATCHSPAWNER 0.15.4
+                   "git clone https://github.com/jupyterhub/batchspawner.git %(installdir)s/batchspawner && "
+                   "cd %(installdir)s/batchspawner && "
+                   "git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 && "
+                   "python setup.py install --prefix=%(installdir)s "
                    ]
+        
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%s/site-packages' % local_pyshortver,
