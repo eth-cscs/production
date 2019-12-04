@@ -37,7 +37,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
     ('cray-python/%s' % pyver, EXTERNAL_MODULE),
     ('DeePMD', deepmd_version),
 ]
