@@ -16,11 +16,13 @@ sources = ['%(namelower)s-everywhere-opensource-src-%(version)s.tar.xz']
 
 osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
-configopts  = ' -opensource -confirm-license -release -skip qtconnectivity '
-configopts += ' -skip qtgamepad -skip qtlocation -skip qtmultimedia -skip qtsensors '
-configopts += ' -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine '
-configopts += ' -skip qtwebsockets -nomake examples -nomake tests -no-dbus -qt-libjpeg '
-configopts += ' -qt-pcre -system-zlib -no-openssl -skip qtsvg -qt-xcb -system-libpng -fontconfig '
+configopts  = ' -opensource -confirm-license -release -fontconfig'
+configopts += ' -system-zlib -system-libpng -no-opengl -no-dbus -no-openssl'
+configopts += ' -nomake examples -nomake tests -qt-libjpeg -qt-pcre -qt-xcb'
+configopts += ' -skip qtgamepad -skip qtlocation -skip qtmultimedia -skip qtsvg'
+configopts += ' -skip qtsensors -skip qtserialport -skip qtwayland'
+configopts += ' -skip qtwebchannel -skip qtwebengine -skip qtwebsockets'
+configopts += ' -skip qtconnectivity'
 
 platform = 'linux-g++-64'
 
