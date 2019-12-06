@@ -20,7 +20,7 @@ configopts  = ' -opensource -confirm-license -release -skip qtconnectivity '
 configopts += ' -skip qtgamepad -skip qtlocation -skip qtmultimedia -skip qtsensors '
 configopts += ' -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine '
 configopts += ' -skip qtwebsockets -nomake examples -nomake tests -no-dbus -qt-libjpeg '
-configopts += ' -qt-pcre -system-zlib -no-openssl -skip qtsvg -no-xcb -system-libpng -fontconfig '
+configopts += ' -qt-pcre -system-zlib -no-openssl -skip qtsvg -qt-xcb -system-libpng -fontconfig '
 
 platform = 'linux-g++-64'
 
