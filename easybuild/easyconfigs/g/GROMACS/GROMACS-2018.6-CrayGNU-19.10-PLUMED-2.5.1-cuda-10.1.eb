@@ -35,10 +35,10 @@ builddependencies = [
 ]
 dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('PLUMED', '2.5.1'),
+    ('PLUMED', '2.5.1', '-mpi'),
 ]
 
-configopts = "-DGMX_CYCLE_SUBCOUNTERS=ON -DCMAKE_BUILD_TYPE=Release -DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256"
+configopts = "-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256"
 
 skipsteps = ['test']
 
