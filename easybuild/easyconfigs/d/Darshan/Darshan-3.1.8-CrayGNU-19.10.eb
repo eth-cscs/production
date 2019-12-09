@@ -1,0 +1,23 @@
+name = 'Darshan'
+version = '3.1.8'
+
+homepage = 'https://www.mcs.anl.gov/research/projects/darshan/'
+description = """Darshan is a scalable HPC I/O characterization tool, designed
+to capture an accurate picture of application I/O behavior, including
+properties such as patterns of access within files, with minimum overhead.
+"""
+
+toolchain = { 'name' : 'CrayGNU', 'version' : '19.10' }
+toolchainopts = { 'verbose' : False }
+
+source_urls = ['ftp://ftp.mcs.anl.gov/pub/darshan/releases/']
+sources = ['darshan-%(version)s.tar.gz']
+
+patches = ['darshan-pkgconfig-fix.patch']
+
+dependencies = [ ('zlib', '1.2.11') ]
+
+
+preconfigopts = 'DARSHAN_LOG_DIR_PATH=%(installdir)s/darshan-logs'
+
+moduleclass = 'perf'

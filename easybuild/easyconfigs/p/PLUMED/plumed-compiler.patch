@@ -1,0 +1,218 @@
+diff -Nru plumed2-2.5.1.orig/configure plumed2-2.5.1/configure
+--- plumed2-2.5.1.orig/configure	2019-04-01 10:20:16.000000000 +0200
++++ plumed2-2.5.1/configure	2019-11-25 12:23:50.078248798 +0100
+@@ -3268,8 +3268,8 @@
+ fi
+ 
+ # this is a list of common compilers
+-compilers="g++ c++ cxx icpc"
+-c_compilers="gcc cc icc"
++compilers="CC"
++c_compilers="cc"
+ 
+ # on OSX, prefer clang++
+ case `(uname)` in
+@@ -3281,7 +3281,7 @@
+ 
+ # if searching for MPI, try first mpi-like compilers
+ if test $mpi == true ; then
+-compilers="mpic++ mpicxx mpiicpc openmpic++ openmpicxx $compilers"
++compilers="CC"
+ fi
+ 
+ # do the actual search
+@@ -3382,7 +3382,7 @@
+ done
+ 
+   if test "x$ac_ct_CXX" = x; then
+-    CXX="g++"
++    CXX="CC"
+   else
+     case $cross_compiling:$ac_tool_warned in
+ yes:)
+diff -Nru plumed2-2.5.1.orig/configure.ac plumed2-2.5.1/configure.ac
+--- plumed2-2.5.1.orig/configure.ac	2019-04-01 10:20:16.000000000 +0200
++++ plumed2-2.5.1/configure.ac	2019-11-25 12:23:19.682063051 +0100
+@@ -110,7 +110,7 @@
+        AC_DEFINE([$3])
+        $3=yes
+     else
+-       AC_MSG_WARN([cannot enable $3]) 
++       AC_MSG_WARN([cannot enable $3])
+     fi
+ ])
+ 
+@@ -150,7 +150,7 @@
+       AC_DEFINE([$3])
+       $3=yes
+     else
+-      AC_MSG_WARN([cannot enable $3]) 
++      AC_MSG_WARN([cannot enable $3])
+       LIBS="$save_LIBS"
+     fi
+ ])
+@@ -285,8 +285,8 @@
+ fi
+ 
+ # this is a list of common compilers
+-compilers="g++ c++ cxx icpc"
+-c_compilers="gcc cc icc"
++compilers="CC"
++c_compilers="cc"
+ 
+ # on OSX, prefer clang++
+ case `(uname)` in
+@@ -298,7 +298,7 @@
+ 
+ # if searching for MPI, try first mpi-like compilers
+ if test $mpi == true ; then
+-compilers="mpic++ mpicxx mpiicpc openmpic++ openmpicxx $compilers"
++compilers="CC"
+ fi
+ 
+ # do the actual search
+@@ -306,7 +306,7 @@
+ AC_PROG_CC([$c_compilers])
+ 
+ # also setup Fortran compiler
+-# this is optional, and can be used in the late part of this 
++# this is optional, and can be used in the late part of this
+ # script to verify that fortran can indeed link properly the
+ # a c++ library
+ AC_PROG_FC
+@@ -518,7 +518,7 @@
+ AC_DEFINE([__PLUMED_HAS_EXTERNAL_LAPACK])
+ fi
+ 
+-fi 
++fi
+ 
+ # in case external blas have been found, take note of their underscoring
+ # notice that this applies also when external blas are used with internal lapack
+@@ -633,7 +633,7 @@
+   if test "$__PLUMED_HAS_MPI" = yes; then
+     mpi_found=ok
+   fi
+-else 
++else
+   mpi_found=ko
+ fi
+ 
+@@ -881,7 +881,7 @@
+       fi
+     else
+       AC_MSG_WARN([readelf not available, no way to set rpath])
+-    fi 
++    fi
+   fi
+   rm -f conftest.*
+ fi
+@@ -1042,9 +1042,9 @@
+ for test_LD_RO in "$($CXX --print-prog-name=ld) -r -o" "$CXX -Wl,-r -o" "ld -r -o"
+ do
+   AC_MSG_CHECKING([whether C++ objects can be grouped with $test_LD_RO])
+-  
++
+   rm -f conftest-*
+-  
++
+   cat << EOF > conftest-main.cpp
+   void f(void);
+   int main(int argc,char**argv){ f(); return 0; }
+@@ -1056,15 +1056,15 @@
+   cat << EOF > conftest-g.cpp
+   void g(void){ return; }
+ EOF
+-  
++
+   $CXX $CXXFLAGS -c conftest-main.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-f.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-g.cpp 1> /dev/null 2> /dev/null
+-  
++
+   $test_LD_RO conftest-both.o conftest-f.o conftest-g.o 1> /dev/null 2> /dev/null
+-  
++
+   $CXX $CXXFLAGS -o conftest.exe conftest-main.o conftest-both.o 1> /dev/null 2> /dev/null
+-  
++
+   if test -f conftest.exe
+   then
+     AC_MSG_RESULT([yes])
+@@ -1083,9 +1083,9 @@
+ for test_AR_CR in "$($CXX --print-prog-name=ar) cr" "ar cr"
+ do
+   AC_MSG_CHECKING([whether static libraries can be created with $test_AR_CR])
+-  
++
+   rm -f conftest-*
+-  
++
+   cat << EOF > conftest-main.cpp
+   void f(void);
+   int main(int argc,char**argv){ f(); return 0; }
+@@ -1097,15 +1097,15 @@
+   cat << EOF > conftest-g.cpp
+   void g(void){ return; }
+ EOF
+-  
++
+   $CXX $CXXFLAGS -c conftest-main.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-f.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-g.cpp 1> /dev/null 2> /dev/null
+-  
++
+   $test_AR_CR conftest-both.a conftest-f.o conftest-g.o 1> /dev/null 2> /dev/null
+-  
++
+   $CXX $CXXFLAGS -o conftest.exe conftest-main.o conftest-both.a 1> /dev/null 2> /dev/null
+-  
++
+   if test -f conftest.exe
+   then
+     AC_MSG_RESULT([yes])
+@@ -1115,7 +1115,7 @@
+     AC_MSG_RESULT([no])
+   fi
+ done
+- 
++
+ fi
+ 
+ make_static_archive=no
+@@ -1133,7 +1133,7 @@
+ 
+   magic_token=c1bc476d093a3a5c67b4530e6c54c633593fe9aa
+   rm -f conftest-*
+-  
++
+   cat << EOF > conftest-main.cpp
+   void f(void);
+   int main(int argc,char**argv){ f(); return 0; }
+@@ -1152,7 +1152,7 @@
+   $CXX $CXXFLAGS -c conftest-main.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-f.cpp 1> /dev/null 2> /dev/null
+   $CXX $CXXFLAGS -c conftest-g.cpp 1> /dev/null 2> /dev/null
+-  
++
+   $LD_RO conftest-both.o conftest-f.o conftest-g.o 1> /dev/null 2> /dev/null
+ # linking the previously merged objects should work:
+   $AR_CR conftest-both.a conftest-both.o 1> /dev/null 2> /dev/null
+@@ -1204,7 +1204,7 @@
+   std::cout<<"ciao";return;
+ }
+ EOF
+-    $CXX $CXXFLAGS -c conftest.cpp 
++    $CXX $CXXFLAGS -c conftest.cpp
+ # start search:
+     found=
+     if test "${libsearch}" == true ; then
+@@ -1321,7 +1321,7 @@
+ if test $mpi == true; then
+   if test $mpi_found == ok; then
+     AC_MSG_NOTICE([**** PLUMED will be compiled using MPI])
+-  else 
++  else
+     AC_MSG_WARN([**** PLUMED will NOT be compiled using MPI because MPI have not been found!])
+   fi
+ else

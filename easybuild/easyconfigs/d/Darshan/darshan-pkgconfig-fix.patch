@@ -1,0 +1,10 @@
+diff -Nru darshan-3.1.8.orig/darshan-runtime/lib/pkgconfig/darshan-runtime.pc.in darshan-3.1.8/darshan-runtime/lib/pkgconfig/darshan-runtime.pc.in
+--- darshan-3.1.8.orig/darshan-runtime/lib/pkgconfig/darshan-runtime.pc.in	2019-11-07 22:47:53.000000000 +0100
++++ darshan-3.1.8/darshan-runtime/lib/pkgconfig/darshan-runtime.pc.in	2019-12-05 17:36:46.947375000 +0100
+@@ -15,5 +15,5 @@
+ darshan_linkopts="-Wl,@${darshan_share}/ld-opts/darshan-base-ld-opts"
+ 
+ Cflags:
+-Libs:
++Libs: -ldarshan
+ Libs.private: ${darshan_linkopts} ${darshan_libdir} -lfmpich -lmpichcxx -Wl,--start-group -ldarshan -ldarshan-stubs -Wl,--end-group
