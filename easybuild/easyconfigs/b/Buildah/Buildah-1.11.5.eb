@@ -14,23 +14,20 @@ source_urls = ['https://storage.googleapis.com/golang/']
 checksums = ['692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c']
 
 postinstallcmds = ['mkdir %(builddir)s/go_path && export GOPATH=%(builddir)s/go_path && '
-                   '%(installdir)s/bin/go get github.com/opencontainers/runc && '
                    '%(installdir)s/bin/go get github.com/containers/buildah ']
-
-# Make-install runc v1.0.0-rc9
-postinstallcmds += [
-    'cd %(builddir)s/go_path/src/github.com/opencontainers/runc && '
-    'export PATH=%(installdir)s/bin/:$PATH && export GOPATH=%(builddir)s/go_path && '
-    'git checkout v1.0.0-rc9 && make BUILDTAGS="" && make install PREFIX=%(installdir)s']
 
 # Make-install buildah
 postinstallcmds += [
     'cd %(builddir)s/go_path/src/github.com/containers/buildah && '
     'export PATH=%(installdir)s/bin/:$PATH && export GOPATH=%(builddir)s/go_path && '
-    'git checkout v%(version)s && make BUILDTAGS="" && make install PREFIX=%(installdir)s']
+    'git checkout v%(version)s && '
+    'make runc STORAGETAGS="" SECURITYTAGS="" && '
+    'make install.runc PREFIX=%(installdir)s && '
+    'make BUILDTAGS="" && make install PREFIX=%(installdir)s'
+]
 
 sanity_check_paths = {
-    'files': ['bin/go', 'bin/gofmt', 'sbin/runc', 'bin/buildah'],
+    'files': ['bin/go', 'bin/gofmt', 'bin/runc', 'bin/buildah'],
     'dirs': ['api', 'doc', 'lib', 'pkg', 'src'],
 }
 
