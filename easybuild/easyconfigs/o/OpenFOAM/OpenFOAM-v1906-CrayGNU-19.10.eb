@@ -20,7 +20,7 @@ sources = [SOURCE_TGZ]
 patches = ['patch.%(name)s-%(version)s']
 
 builddependencies = [
-    ('CMake/3.14.5', EXTERNAL_MODULE),
+    ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
