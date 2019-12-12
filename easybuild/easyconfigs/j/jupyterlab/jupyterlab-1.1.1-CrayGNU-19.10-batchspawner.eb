@@ -4,6 +4,7 @@ easyblock = 'Bundle'
 
 name = 'jupyterlab'
 version = '1.1.1'
+versionsuffix = '-batchspawner'
 
 local_py_maj_ver = '3'
 local_py_min_ver = '6'
