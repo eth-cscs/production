@@ -23,7 +23,7 @@
 # along with EasyBuild.  If not, see <http://www.gnu.org/licenses/>.
 ##
 """
-EasyBuild support for building and installing XALT, implemented as an easyblockT
+EasyBuild support for building and installing XALT, implemented as an easyblock
 
 @author: Victor Holanda (CSCS)
 """
@@ -34,17 +34,22 @@ import shutil
 from easybuild.easyblocks.generic.configuremake import ConfigureMake
 
 
+# This class only exists because one needs to remove the pattern xalt/version
+# from the XALT configuration
+# If not, applications compiled with a version of XALT will not be tracked if
+# XALT is upgraded
 class EB_xalt(ConfigureMake):
     """
-    xalt runtime and util packages
+    XALT easyblock
     """
 
     def configure_step(self, util=False):
 
+        # change temporarily the installdir
         self.original_installdir = self.installdir
-        self.basedir, _ = os.path.split(self.installdir)
-        self.basedir, _ = os.path.split(self.basedir)
-        self.installdir = self.basedir
+        self.installdir = os.path.dirname(os.path.dirname(self.installdir))
 
         super(EB_xalt, self).configure_step()
+
+        # revert back to the original installdir
         self.installdir = self.original_installdir
