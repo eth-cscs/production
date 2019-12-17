@@ -34,5 +34,5 @@ OpenMPI-4.0.2-gcccuda-2019b-cuda-10.1.eb           --installpath=/apps/arolla/UE
 netCDF-C++-4.3.0-PGI-19.9-GCC-8.3.0.eb             --installpath=/apps/arolla/UES/jenkins/RH7.6-MKr/pgi/19.9/easybuild
 netCDF-Fortran-4.4.5-PGI-19.9-GCC-8.3.0.eb         --installpath=/apps/arolla/UES/jenkins/RH7.6-MKr/pgi/19.9/easybuild
 OpenMPI-4.0.2-PGI-19.9-GCC-8.3.0-cuda-10.1.eb      --installpath=/apps/arolla/UES/jenkins/RH7.6-MKr/pgi/19.9/easybuild
-PrgEnv-gnu-tsa-19.2.eb                             --module-naming-scheme=EasyBuildMNS
-PrgEnv-pgi-tsa-19.9.eb                             --module-naming-scheme=EasyBuildMNS
+PrgEnv-gnu-tsa-19.2.eb                             --module-naming-scheme=EasyBuildMNS --set-default-module
+PrgEnv-pgi-tsa-19.9.eb                             --module-naming-scheme=EasyBuildMNS --set-default-module
