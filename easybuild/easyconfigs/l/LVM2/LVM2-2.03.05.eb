@@ -1,0 +1,19 @@
+easyblock = 'ConfigureMake'
+
+name = 'LVM2'
+version = '2.03.05'
+
+homepage = 'https://sourceware.org/lvm2/'
+description = '''LVM2 refers to the userspace toolset that provide
+                 logical volume management facilities on linux'''
+
+toolchain = SYSTEM
+source_urls = ['ftp://sources.redhat.com/pub/lvm2/']
+sources = ['LVM2.%(version)s.tgz']
+checksums = [('sha512', '3b00f53771e99faa6459ae73353bff06ae37c64bd2659586ec25d0bb43bc3ff8ba5f713c68617fd7662a5f6cb65bca1ad0aea554819048d79c1cce20bf67c50a')]
+install_cmd = 'make install_device-mapper'
+
+sanity_check_paths = {
+    'files': ['lib/libdevmapper.so'],
+    'dirs': ['lib'],
+}
