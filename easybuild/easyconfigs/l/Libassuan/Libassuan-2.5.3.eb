@@ -13,4 +13,4 @@ description = '''Libassuan is a small library implementing the so-called Assuan 
 toolchain = SYSTEM
 source_urls = ['https://gnupg.org/ftp/gcrypt/libassuan']
 sources = ['libassuan-%(version)s.tar.bz2']
-checksums = ['6d81bf42fa91ed2894df8b65764ce899e39776f8']
+checksums = [('sha1', '6d81bf42fa91ed2894df8b65764ce899e39776f8')]

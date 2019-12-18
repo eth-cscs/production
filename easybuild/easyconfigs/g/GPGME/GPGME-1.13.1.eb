@@ -13,6 +13,6 @@ description = '''GnuPG Made Easy (GPGME) is a library designed to make
 toolchain = SYSTEM
 source_urls = ['https://gnupg.org/ftp/gcrypt/gpgme/']
 sources = ['gpgme-%(version)s.tar.bz2']
-checksums = ['f87f34e695e8d74ccc7c8f42864d50630afebb0e']
+checksums = [('sha1', 'f87f34e695e8d74ccc7c8f42864d50630afebb0e')]
 
 configopts = ['--enable-languages=""']

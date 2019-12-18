@@ -10,4 +10,4 @@ toolchain = SYSTEM
 source_urls = ['https://gnupg.org/ftp/gcrypt/libgpg-error/']
 sources = ['libgpg-error-%(version)s.tar.bz2']
 
-checksums = ['5245ce38b198cecd57775fb3c7b7328ec1a2a615']
+checksums = [('sha1', '5245ce38b198cecd57775fb3c7b7328ec1a2a615')]
