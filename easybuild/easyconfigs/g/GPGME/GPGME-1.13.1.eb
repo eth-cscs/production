@@ -1,0 +1,17 @@
+easyblock = 'ConfigureMake'
+
+name = 'GPGME'
+version = '1.13.1'
+
+builddependencies = [('Libpgp-error', '1.36'),
+                     ('Libassuan', '2.5.3')]
+
+homepage = 'https://gnupg.org/software/gpgme/index.html'
+description = '''GnuPG Made Easy (GPGME) is a library designed to make
+                 access to GnuPG easier for applications. '''
+
+toolchain = SYSTEM
+source_urls = ['https://gnupg.org/ftp/gcrypt/gpgme/']
+sources = ['gpgme-%(version)s.tar.bz2']
+
+configopts = ['--enable-languages=""']
