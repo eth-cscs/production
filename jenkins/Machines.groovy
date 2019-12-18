@@ -31,6 +31,6 @@ def tsa = [name: 'tsa',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.6-MKr/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
 
 return [tsa]
