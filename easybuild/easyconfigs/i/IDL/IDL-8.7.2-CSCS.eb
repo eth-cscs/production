@@ -20,11 +20,9 @@ sanity_check_paths = {
     'dirs': ['idl/bin']
 }
 
-local_idldir = '%(installdir)s/idl{}'.format(local_shortversion)
-
 modextravars = {
     'EXELIS_DIR': '%(installdir)s',
-    'IDL_DIR': '%(installdir)s/idl87',
+    'IDL_DIR': '%(installdir)s/idl{}'.format(local_shortversion),
     'IDL_LMGRD_LICENSE_FILE': '7070velan.cscs.ch',
     'LM_LICENSE_FILE': '7070@velan.cscs.ch',
 }
