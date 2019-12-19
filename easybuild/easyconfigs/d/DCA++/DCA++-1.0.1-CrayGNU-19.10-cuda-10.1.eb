@@ -1,0 +1,28 @@
+easyblock = 'Bundle'
+
+name = 'DCA++'
+version = '1.0.1'
+cudaversion = 10.1
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://github.com/CompFUSE/DCA'
+
+description = """The DCA++ project is a high-performance research software framework to solve
+quantum many-body problems with cutting edge quantum cluster algorithms. This
+module bundles all dependencies for the hybdrid CPU-GPU version."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+dependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
+    ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' % cudaversion , EXTERNAL_MODULE),
+    ('magma', '2.2.0', '-cuda-%s' % cudaversion),
+]
+
+modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
+
+prebuildopts = 'CUDADIR=$EBROOTCUDA'
+
+moduleclass = 'phys'

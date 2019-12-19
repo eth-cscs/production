@@ -236,6 +236,12 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
         chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
 # build other software on every system
+    elif [[ "$name" =~ "xalt" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+        module unload xalt
+        echo -e "eb ${eb_files[$i]} -r ${eb_args}"
+        eb ${eb_files[$i]} -r ${eb_args}
+        status=$[status+$?]
+        module load xalt
     else
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r ${eb_args}

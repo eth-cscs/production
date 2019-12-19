@@ -1,0 +1,22 @@
+easyblock = 'Bundle'
+
+name = 'DCA++'
+version = '1.0.1'
+
+homepage = 'https://github.com/CompFUSE/DCA'
+
+description = """The DCA++ project is a high-performance research software framework to solve
+quantum many-body problems with cutting edge quantum cluster algorithms. This
+module bundles all dependencies for the multicore version."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+dependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.5.1', EXTERNAL_MODULE),
+]
+
+moduleclass = 'phys'
+
+modextravars = {'CRAYPE_LINK_TYPE': 'dynamic'}

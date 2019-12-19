@@ -28,8 +28,7 @@ patches = ['%(namelower)s-%(version_major)s.2.patch']
 
 # CMake and libxml2 dependencies with dummy toolchain
 builddependencies = [
-    # NB: newer CMake versions are known to fail, see #1411
-    ('CMake', '3.12.0', '', True),
+    ('CMake', '3.14.5', '', True),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('libxml2', '2.9.7'),
@@ -39,7 +38,14 @@ dependencies = [
     ('PLUMED', '2.5.0'),
 ]
 
-configopts = "-DGMX_CYCLE_SUBCOUNTERS=ON -DGMX_BUILD_OWN_FFTW=ON"
+configopts = (
+    "-DGMX_CYCLE_SUBCOUNTERS=ON "
+    "-DCMAKE_BUILD_TYPE=Release "
+    "-DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME "
+    "-DGMX_BUILD_OWN_FFTW=ON "
+    "-DGMX_PREFER_STATIC_LIBS=ON "
+    "-DGMX_SIMD=AVX2_256"
+)
 
 skipsteps = ['test']
 

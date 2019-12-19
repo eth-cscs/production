@@ -1,0 +1,53 @@
+diff -Nru CrayCCE-19.08-cuda-10.0-crclim-double_orig/cosmo-pompa/cosmo/Options.lib.gpu /run/user/24345/easybuild/build/COSMO_pompa/31d7227/CrayCCE-19.08-cuda-10.0-crclim-double/cosmo-pompa/cosmo/Options.lib.gpu
+--- CrayCCE-19.08-cuda-10.0-crclim-double_orig/cosmo-pompa/cosmo/Options.lib.gpu	2019-11-21 15:46:12.000000000 +0100
++++ /run/user/24345/easybuild/build/COSMO_pompa/31d7227/CrayCCE-19.08-cuda-10.0-crclim-double/cosmo-pompa/cosmo/Options.lib.gpu	2019-11-21 16:04:04.156851378 +0100
+@@ -18,35 +18,34 @@
+ MPII     = -D__MPICH2
+ 
+ # Grib1 library
+-GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_cray
+ GRIBDWDI =
+ 
+ # Grib-API library
+-GRIBAPI_VERSION = v1.20.0.2
+-GRIBAPIL = -L$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/lib -lgrib_api_f90 -lgrib_api -L$(INSTALL_DIR)/libjasper/lib -ljasper
+-GRIBAPII = -I$(INSTALL_DIR)/libgrib_api/$(GRIBAPI_VERSION)/$(COMPILER)/include
++#GRIBAPI_VERSION = v1.20.0.2
++GRIBAPIL = -L${EBROOTGRIB_API}/lib -lgrib_api_f90 -lgrib_api -L${EBROOTJASPER}/lib -ljasper
++GRIBAPII = -I${EBROOTGRIB_API}/include
+ 
+ # NetCDF library
+-NETCDFL  = 
+-NETCDFI  = 
++NETCDFL  = -L${NETCDF_DIR}/lib
++NETCDFI  = -I${NETCDF_DIR}/include
+ 
+ # Synsat library
+-RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
++#RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
+ RTTOV7I  =
+ RTTOV10L =
+ RTTOV10I =
+ 
+ # Serialization library
+-SERIALBOX  =
+-SERIALBOXL =
+-SERIALBOXI =
++SERIALBOX  = ${EBROOTSERIALBOX}
++SERIALBOXL = -L${EBROOTSERIALBOX}/lib
+ 
+ # STELLA library
+-STELLA   = $(STELLA_DIR)
+-STELLAL  = -L$(STELLA)/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
+-STELLAI  =
++STELLA   = ${EBROOTSTELLA}
++STELLAL  = -L${EBROOTSTELLA}/lib -lCommunicationFrameworkCUDA -ljson -lStellaCUDA -lgcl -lStellaUtils -lSharedInfrastructureCUDA -lstdc++
++STELLAI  = -I${EBROOTSTELLA}/include/STELLA
+ 
+ # Dycore library
+-DYCORE   = $(DYCORE_DIR)
+-DYCOREL  = -L$(DYCORE)/lib -lDycoreWrapperCUDA -lDycoreCUDA
++DYCORE   = ${EBROOTDYCORE}
++DYCOREL  = -L${EBROOTDYCORE}/lib -lDycoreWrapperCUDA -lDycoreCUDA
+ DYCOREI  =
