@@ -11,7 +11,9 @@ toolchain = SYSTEM
 source_urls = ['ftp://sources.redhat.com/pub/lvm2/']
 sources = ['LVM2.%(version)s.tgz']
 checksums = [('sha512', '3b00f53771e99faa6459ae73353bff06ae37c64bd2659586ec25d0bb43bc3ff8ba5f713c68617fd7662a5f6cb65bca1ad0aea554819048d79c1cce20bf67c50a')]
+configopts = ['--enable-pkgconfig']
 install_cmd = 'make install_device-mapper'
+
 
 sanity_check_paths = {
     'files': ['lib/libdevmapper.so'],
