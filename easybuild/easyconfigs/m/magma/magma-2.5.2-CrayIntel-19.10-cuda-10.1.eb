@@ -35,19 +35,13 @@ prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && mo
 
 #modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
-#prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && mv make.inc-2.5.1 make.inc && CUDADIR=$EBROOTCUDA '
-
 preconfigopts = 'module unload cray-libsci && module unload cray-libsci_acc && module list && gcc --version && '
 
-configopts = ""
+configopts = "-DCMAKE_C_FLAGS='' -DCMAKE_CXX_FLAGS='' -DCMAKE_Fortran_FLAGS=''"
 
-#modextrapaths = {'CPATH': ['include/sirius']}
-
-#sanity_check_paths={
-#    'files': ['lib/libmagma.so', 'lib/libmagma.a'],
-#    'dirs': ['include', 'control'],
-#}
-
-maxparallel = 1
+sanity_check_paths={
+    'files': ['lib/libmagma.so', 'lib/libmagma.a'],
+    'dirs': ['include', 'control'],
+}
 
 moduleclass = 'math'
