@@ -214,34 +214,52 @@ status=0
 # loop over the list of EasyBuild files to build
 for((i=0; i<${#eb_files[@]}; i++)); do
     echo -e "\n===============================================================\n"
-# define name and version of the current build
-    name=$(echo ${eb_files[$i]} | cut -d'-' -f 1)
+# define name and version of the current build starting from the recipe name (obtained removing EasyBuild options from eb_files)
+    recipe=$(echo ${eb_files[$i]} | cut -d' ' -f 1)
+    name=$(echo $recipe | cut -d'-' -f 1)
 # build licensed software (CPMD, IDL, MATLAB, VASP) on Dom and Piz Daint
     if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+        version=$(echo $recipe | sed -e "s/^${name}-//" -e "s/.eb//")
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
         if [[ "$name" =~ "IDL" ]]; then
-            group="${name,,}ethz"
+        # check version of IDL
+            if [[ "$version" =~ "CSCS" ]]; then
+                group="${name,,}cscs"
+            else
+                group="${name,,}ethz"
+            fi
         else
             group=${name,,}
         fi
         footer="if { [lsearch [exec groups] \"${group}\"]==-1 && [module-info mode load] } {
- puts stderr \"WARNING: Only users belonging to group ${group} with a valid ${name} license are allowed to access ${name} executables and library files\"
+ puts stderr \"WARNING: Only users belonging to group ${group} with a valid ${name} license are allowed to access ${name}/${version} executables and library files\"
 }"
         (cat ${scriptdir%/*}/login/daint.footer; echo "$footer") > ${EASYBUILD_TMPDIR}/${name}.footer
         echo -e "eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer\n"
         eb ${eb_files[$i]} -r ${eb_args} --modules-footer=${EASYBUILD_TMPDIR}/${name}.footer
         status=$[status+$?]
-# change permissions for selected builds (note that $USER needs to be member of the group to use the command chgrp)
-        echo -e "\n Changing group ownership and permissions for ${name} folders:\n - ${EASYBUILD_PREFIX}/software/${name}"
-        chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}
-        chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/*
-# build other software on every system
+        # check current group ownership of the licensed software directory created by EasyBuild
+        checkgroup=$(stat -c "%G" ${EASYBUILD_INSTALLPATH}/software/${name}/${version})        
+        if [ "$checkgroup" != "$group" ]; then 
+        # change group ownership: note that $USER needs to be a member of the group to use the command chgrp
+            echo -e "\n Changing group ownership of the folder ${EASYBUILD_INSTALLPATH}/software/${name}/${version} to ${group}"
+            chgrp ${group} -R ${EASYBUILD_INSTALLPATH}/software/${name}/${version}
+        fi
+        # check current access rights of the licensed software directory created by EasyBuild: last digit must be 0 (no access rights for others)
+        checkrights=$(stat -c "%a" ${EASYBUILD_INSTALLPATH}/software/${name}/${version})        
+        if [ ${checkrights: -1} -ne 0 ]; then 
+        # change access rights: note that $USER needs to own the folder to use the command chmod
+            echo -e "\n Removing access rights to the folder ${EASYBUILD_INSTALLPATH}/software/${name}/${version} for others"
+            chmod -R o-rwx ${EASYBUILD_INSTALLPATH}/software/${name}/${version}
+        fi
+# build xalt on Dom and Piz Daint
     elif [[ "$name" =~ "xalt" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module unload xalt
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r
         status=$[status+$?]
         module load xalt
+# build other software on every system
     else
         echo -e "eb ${eb_files[$i]} -r ${eb_args}"
         eb ${eb_files[$i]} -r ${eb_args}
