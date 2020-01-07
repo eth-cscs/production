@@ -40,8 +40,8 @@ preconfigopts = 'module unload cray-libsci && module unload cray-libsci_acc && m
 configopts = "-DCMAKE_C_FLAGS='' -DCMAKE_CXX_FLAGS='' -DCMAKE_Fortran_FLAGS=''"
 
 sanity_check_paths={
-    'files': ['lib/libmagma.so', 'lib/libmagma.a'],
-    'dirs': ['include', 'control'],
+    'files': ['lib/libmagma.so'],
+    'dirs': ['lib', 'include'],
 }
 
 moduleclass = 'math'
