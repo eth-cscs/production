@@ -14,17 +14,20 @@ set gpulist [exec ls --color=none "${gpupath}"]
 set toolsgpulist [exec ls --color=none "${toolsgpupath}"]
 
 # checks for conflicts
-if { [is-loaded craype-broadwell] } {
- module unload craype-broadwell
- module unuse "${mcpath}"
- module unuse "${toolsmcpath}"
+if { [module-info mode load] || [module-info mode switch2]} {
+  if { [is-loaded craype-broadwell] } {
+    module switch craype-broadwell craype-haswell
+  } else {
+    module load craype-haswell
+  }
+    module unuse "${mcpath}"
+    module unuse "${toolsmcpath}"
 }
 # conflicts
-conflict craype-broadwell
 conflict daint-mc
 
 # module remove (unload) or switch (swap): unload dependencies
-if { [module-info mode remove] || [module-info mode switch] } {
+if { [module-info mode remove] || [module-info mode switch1] } {
  foreach module ${gpulist} {
    module unload ${module}
  }
@@ -34,9 +37,10 @@ if { [module-info mode remove] || [module-info mode switch] } {
 }
 
 # load dependency and update MODULEPATH
-module load craype-haswell
-module use "${gpupath}"
-module use "${toolsgpupath}"
+if {[module-info mode load] || [module-info mode switch2 ]} {
+  module use "${gpupath}"
+  module use "${toolsgpupath}"
+}
 
 # load additional modules
 #module load xalt
