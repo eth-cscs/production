@@ -14,20 +14,17 @@ set mclist [exec ls --color=none "${mcpath}"]
 set toolsmclist [exec ls --color=none "${toolsmcpath}"]
 
 # checks for conflicts
-if {[module-info mode load] || [module-info mode switch2]} {
-  if { [ is-loaded craype-haswell ] } {
-    module switch craype-haswell craype-broadwell
-  } else {
-    module load craype-broadwell
-  }
-    module unuse "${gpupath}"
-    module unuse "${toolsgpupath}"
+if { [ is-loaded craype-haswell ] } {
+ module unload craype-haswell
+ module unuse "${gpupath}"
+ module unuse "${toolsgpupath}"
 }
 # conflicts
+conflict craype-haswell
 conflict daint-gpu
 
 # module remove (unload) or switch (swap): unload dependencies
-if { [module-info mode remove] || [module-info mode switch1] } {
+if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${mclist} {
    module unload ${module}
  }
@@ -37,10 +34,9 @@ if { [module-info mode remove] || [module-info mode switch1] } {
 }
 
 # load dependency and update MODULEPATH
-if {[module-info mode load] || [module-info mode switch2]} {
-  module use "${mcpath}"
-  module use "${toolsmcpath}"
-}
+module load craype-broadwell
+module use "${mcpath}"
+module use "${toolsmcpath}"
 
 # load additional modules
 #module load xalt
