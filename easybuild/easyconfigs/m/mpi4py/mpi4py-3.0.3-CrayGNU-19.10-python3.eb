@@ -5,6 +5,8 @@ easyblock = 'PythonPackage'
 name = 'mpi4py'
 version = "3.0.3"
 versionsuffix = '-python3'
+req_py_majver = '3'
+req_py_minver = '6'
 
 homepage = 'https://bitbucket.org/mpi4py/mpi4py'
 description = """MPI for Python (mpi4py) provides bindings of the Message
@@ -23,12 +25,11 @@ dependencies = [
 # force rebuilding everything, including patched files
 buildopts = '--force'
 
-req_py_majver = '3'
-req_py_minver = '6'
-
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python3.6/site-packages/%(name)s'],
+    'dirs': [
+        'lib/python%s.%s/site-packages/%s' % (req_py_majver, req_py_minver, name)
+    ],
 }
 
 moduleclass = 'mpi'
