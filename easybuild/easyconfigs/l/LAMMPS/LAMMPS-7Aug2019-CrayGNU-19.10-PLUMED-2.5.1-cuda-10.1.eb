@@ -3,15 +3,15 @@ easyblock = 'MakeCp'
 
 name = 'LAMMPS'
 version = '7Aug19'
-release = 'stable_7Aug2019'
-cudaversion =  '10.1'
-plumedversion = '2.5.1'
-versionsuffix = '-PLUMED-%s-cuda-%s' % (plumedversion, cudaversion)
-py_maj_ver = '2'
-py_min_ver = '7'
-py_rev_ver = '15.7'
-pyshortver = "%s.%s" % (py_maj_ver, py_min_ver)
-pyver      = "%s.%s.%s" % (py_maj_ver, py_min_ver, py_rev_ver)
+local_release = 'stable_7Aug2019'
+local_cudaversion =  '10.1'
+local_plumedversion = '2.5.1'
+versionsuffix = '-PLUMED-%s-cuda-%s' % (local_plumedversion, local_cudaversion)
+local_py_maj_ver = '2'
+local_py_min_ver = '7'
+local_py_rev_ver = '15.7'
+local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
+local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -20,7 +20,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = { 'usempi': True, 'openmp': True }
 
 source_urls = ['https://github.com/lammps/lammps/archive']
-sources = ['%s.tar.gz' % (release)]
+sources = ['%s.tar.gz' % (local_release)]
 
 prebuildopts = ' cd ./src && '
 prebuildopts += ' make lib-plumed args="-p ${EBROOTPLUMED} -m runtime" && '
@@ -36,12 +36,12 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' %cudaversion, EXTERNAL_MODULE),
+    ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' %local_cudaversion, EXTERNAL_MODULE),
     ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
-    ('cray-python/%s' %pyver, EXTERNAL_MODULE),
+    ('cray-python/%s' %local_pyver, EXTERNAL_MODULE),
 ]
     
-dependencies = [ ('PLUMED', '%s' %plumedversion) ]
+dependencies = [ ('PLUMED', '%s' %local_plumedversion) ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
 
