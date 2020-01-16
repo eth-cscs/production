@@ -497,7 +497,7 @@ exts_list = [
         'req_py_majver': '3',
         'req_py_minver': '6',
         'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab-nvdashboard/'],
         }),
 
 
