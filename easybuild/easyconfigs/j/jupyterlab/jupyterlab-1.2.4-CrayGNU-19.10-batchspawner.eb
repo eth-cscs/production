@@ -375,16 +375,25 @@ exts_list = [
     ('itk-numerics', '5.0.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-numerics/'],
         }),
     ('itk-filtering', '5.0.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-filtering/'],
         }),
     ('itk-meshtopolydata', '0.5.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-meshtopolydata/'],
         }),
     ('ipydatawidgets', '4.0.1', {
