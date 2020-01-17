@@ -371,6 +371,7 @@ exts_list = [
         'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-core/'],
+        'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
         'req_py_majver': '3',
@@ -379,6 +380,7 @@ exts_list = [
         'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-numerics/'],
+        'modulename': 'itk'
         }),
     ('itk-filtering', '5.0.1', {
         'req_py_majver': '3',
@@ -387,6 +389,7 @@ exts_list = [
         'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-filtering/'],
+        'modulename': 'itk'
         }),
     ('itk-meshtopolydata', '0.5.1', {
         'req_py_majver': '3',
@@ -395,6 +398,7 @@ exts_list = [
         'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'source_urls': ['https://pypi.python.org/packages/source/i/itk-meshtopolydata/'],
+        'modulename': 'itk'
         }),
     ('ipydatawidgets', '4.0.1', {
         'req_py_majver': '3',
