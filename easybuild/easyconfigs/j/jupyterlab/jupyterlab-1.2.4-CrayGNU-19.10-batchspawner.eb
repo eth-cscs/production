@@ -399,6 +399,7 @@ exts_list = [
     ('ipydatawidgets', '4.0.1', {
         'req_py_majver': '3',
         'req_py_minver': '6',
+        'use_pip': True,
         'source_urls': ['https://pypi.python.org/packages/source/i/ipydatawidgets/'],
         }),
     ('itkwidgets', '0.25.0', {
