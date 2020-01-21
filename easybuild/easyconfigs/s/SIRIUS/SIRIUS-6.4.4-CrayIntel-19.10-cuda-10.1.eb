@@ -24,7 +24,7 @@ dependencies = [
   ('ELPA','2019.05.001'),
   ('cray-hdf5', EXTERNAL_MODULE),
   ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' % cudaversion , EXTERNAL_MODULE),
-  ('magma', '2.5.1', '-cuda-%s' % cudaversion),
+  ('magma', '2.5.2', '-cuda-%s' % cudaversion),
   ('SpFFT', '0.9.10', '-cuda-%s' % cudaversion)
 ]
 
