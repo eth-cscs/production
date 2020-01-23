@@ -2,8 +2,7 @@ easyblock = 'MakeCp'
 
 name = 'magma'
 version = '2.5.1'
-cudaversion = 10.1
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-10.1'
 
 homepage = 'http://icl.cs.utk.edu/magma/'
 description = """The MAGMA project aims to develop a dense linear algebra
@@ -28,7 +27,7 @@ files_to_copy = ["lib", "include", "testing", "docs", "README", (['control/*.h']
 
 modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
-prebuildopts = 'mv make.inc-gcc-2.5.1 make.inc && CUDADIR=$EBROOTCUDA '
+prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && mv make.inc-gcc-2.5.1 make.inc && CUDADIR=$EBROOTCUDA '
 
 sanity_check_paths={
     'files': ['lib/libmagma.so', 'lib/libmagma.a'],
