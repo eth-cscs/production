@@ -4,7 +4,7 @@ easyblock = 'CMakeMake'
 
 name = 'magma'
 version = '2.5.2'
-versionsuffix = '-cuda-10.1'
+versionsuffix = '-cuda-10.1-mkl'
 
 homepage = 'http://icl.cs.utk.edu/magma/'
 description = """The MAGMA project aims to develop a dense linear algebra
