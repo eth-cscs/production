@@ -3,7 +3,7 @@
 easyblock = 'Bundle'
 
 name = 'jupyterlab'
-version = '1.1.1'
+version = '1.2.4'
 versionsuffix = '-batchspawner'
 
 local_py_maj_ver = '3'
@@ -343,6 +343,76 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/i/ipympl/'],
         }),
 
+# itkwidgets
+    ('param', '1.9.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/param/'],
+        }),
+    ('pyct', '0.4.6', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pyct/'],
+        }),
+    ('colorcet', '2.0.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/c/colorcet/'],
+        }),
+    ('zstandard', '0.13.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/z/zstandard/'],
+        }),
+    ('itk-core', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-core/'],
+        'modulename': 'itk',
+        }),
+    ('itk-numerics', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-numerics/'],
+        'modulename': 'itk'
+        }),
+    ('itk-filtering', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-filtering/'],
+        'modulename': 'itk'
+        }),
+    ('itk-meshtopolydata', '0.5.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-meshtopolydata/'],
+        'modulename': 'itk'
+        }),
+    ('ipydatawidgets', '4.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/i/ipydatawidgets/'],
+        }),
+    ('itkwidgets', '0.25.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/i/itkwidgets/'],
+        }),
+    
+    
 # plotly, requires the lab extension below
     ('retrying', '1.3.3', {
         'req_py_majver': '3',
@@ -403,7 +473,7 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/n/nbresuse/'],
         }),
 
-# jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.0
+# jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.x
 #    ('jupyterlab_slurm', '0.1.1', {
 #        'req_py_majver': '3',
 #        'req_py_minver': '6',
@@ -484,7 +554,23 @@ exts_list = [
         'use_pip': True,        
         'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
         }),
-    
+
+# jupyterlab-nvdashboard, twr
+# A JupyterLab extension for displaying dashboards of GPU usage. From RAPIDS.
+   ('pynvml', '8.0.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/p/pynvml/'],
+        }),
+    ('jupyterlab-nvdashboard', '0.1.11', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,        
+        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab-nvdashboard/'],
+        }),
+
+
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
@@ -498,18 +584,6 @@ exts_list = [
         'req_py_minver': '6',
         'use_pip': True,
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
-        }),
-    ('ipyparallel', '6.2.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipyparallel/'],
-        }),
-    ('docopt', '0.6.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/d/docopt/'],
         }),
 ]
 
@@ -542,12 +616,14 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install jupyterlab-datawidgets itkwidgets --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
 #                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
                    "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard --no-build;"
 #                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
 #                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
 #                  "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
