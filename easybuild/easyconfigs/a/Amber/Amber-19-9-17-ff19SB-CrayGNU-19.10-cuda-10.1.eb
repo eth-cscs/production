@@ -13,7 +13,8 @@ description = """Amber (Assisted Model Building with Energy Refinement)
 is software for performing molecular dynamics and structure prediction"""
 whatis = [ "Amber 18 && AmberTools 19",
            "AmberTools patch level 9",
-           "Amber patch level 17"]
+           "Amber patch level 17",
+           "Contains the Ff19SB force field"]
 
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = { 'verbose': False }
