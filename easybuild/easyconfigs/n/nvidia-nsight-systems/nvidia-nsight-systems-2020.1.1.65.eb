@@ -1,7 +1,6 @@
 # jg (CSCS)
 easyblock = 'Binary'
 
-# /apps/common/UES/easybuild/sources/n/nvidia-nsight-systems/NVIDIA_Nsight_Systems_Linux_2020.1.1.65.run
 name = 'nvidia-nsight-systems'
 version = '2020.1.1.65'
 homepage = 'https://developer.nvidia.com/nsight-systems'
