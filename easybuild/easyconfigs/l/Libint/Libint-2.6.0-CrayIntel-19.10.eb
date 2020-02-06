@@ -1,0 +1,36 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Libint'
+version = '2.6.0'
+
+homepage = 'https://github.com/evaleev/libint'
+description = """Libint library is used to evaluate the traditional (electron repulsion) and certain novel two-body
+ matrix elements (integrals) over Cartesian Gaussian functions used in modern atomic and molecular theory."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = ['v%(version)s.tar.gz']
+source_urls = ['https://github.com/evaleev/%(nametolower)s/archive/']
+
+builddependencies = [
+    ('Boost', '1.72.0'),
+    ('GMP', '6.2.0')
+]
+
+osdependencies = [('autoconf', 'automake')]
+
+preconfigopts = " ./autogen.sh && "
+configopts = ' --enable-eri=1 --enable-eri2=1 --enable-eri3=1 '
+configopts += ' --with-max-am={0} --with-eri-max-am={0},{1} '.format(4, 3)
+configopts += ' --with-eri2-max-am={0},{1} --with-eri3-max-am={0},{1} '.format(6, 5)
+configopts += ' --with-opt-am=3 --enable-generic-code --disable-unrolling '
+
+sanity_check_paths = {
+    'files': ['include/libint2.h', 'include/libint2.hpp'] +
+             ['lib/libint2.a', 'lib/libint2.so'],
+    'dirs':  ['include/libint2'],
+}
+
+maxparallel = 1
+
+moduleclass = 'chem'
