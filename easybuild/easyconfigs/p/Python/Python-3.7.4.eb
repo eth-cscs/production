@@ -23,6 +23,8 @@ configure_cmd_prefix = (
     'CPPFLAGS="-I${EBROOTBZIP2}/include" '
 )
 
+parallel = 1
+
 # order is important! package versions updated July 2019
 exts_list = [
     ('setuptools', '41.0.1', {
