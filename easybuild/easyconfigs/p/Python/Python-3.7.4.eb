@@ -6,16 +6,22 @@ version = "3.7.4"
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 
-builddependencies = [
-    ('zlib', '1.2.11'),
+dependencies = [
+    ('bzip2', '1.0.8'),
+    #('zlib', '1.2.11'),
     ('libreadline', '8.0'),
     ('ncurses', '6.1'),
 ]
+
+configure_cmd_prefix = (
+    'LDFLAGS="-L${EBROOTBZIP2}/lib" '
+    'CPPFLAGS="-I${EBROOTBZIP2}/include" '
+)
 
 # order is important! package versions updated July 2019
 exts_list = [
