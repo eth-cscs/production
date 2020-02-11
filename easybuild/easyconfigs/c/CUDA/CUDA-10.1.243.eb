@@ -15,7 +15,7 @@ toolchain = SYSTEM
 source_urls = ['https://developer.download.nvidia.com/compute/%(namelower)s/%(version_major_minor)s/Prod/local_installers/']
 sources = ['%%(namelower)s_%%(version)s_%s_linux.run' % local_nv_version]
 checksums = []
-postinstallcmds = ['rm /tmp/cuda-installer.log']
+postinstallcmds = ['rm -f /tmp/cuda-installer.log']
 
 modtclfooter="""
     prepend-path LD_LIBRARY_PATH /cm/local/apps/cuda/libs/current/lib64
