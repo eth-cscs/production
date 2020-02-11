@@ -255,7 +255,7 @@ for((i=0; i<${#eb_files[@]}; i++)); do
 # build xalt on Dom and Piz Daint
     elif [[ "$name" =~ "xalt" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         module unload xalt
-        echo -e "eb ${eb_files[$i]} -r ${eb_args}"
+        echo -e "eb ${eb_files[$i]} -r"
         eb ${eb_files[$i]} -r
         status=$[status+$?]
         module load xalt
