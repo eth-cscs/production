@@ -4,7 +4,8 @@ easyblock = 'Bundle'
 
 name = 'jupyterlab'
 version = '1.2.4'
-versionsuffix = '-batchspawner'
+_cudaversion = '10.1'
+versionsuffix = '-cuda-%s-batchspawner' % _cudaversion
 
 _py_maj_ver = '3'
 _py_min_ver = '6'
@@ -30,7 +31,7 @@ dependencies = [
     ('libffi', '3.2.1', '', True),
     ('PyExtensions', _pyver),
     ('IPython', '7.7.0', '-python%s' % _py_maj_ver),
-    ('JuliaExtensions', _jlver),
+    ('JuliaExtensions', _jlver, '-cuda-%s' % _cudaversion),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % _py_maj_ver),
     ('graphviz', '2.40.1', '', True),
