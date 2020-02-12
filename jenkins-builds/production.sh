@@ -159,7 +159,6 @@ fi
 # --- BUILD ---
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
-module switch EasyBuild EasyBuild/4.0.0
 
 # add hidden flag
 if [ -n "${eb_lists}" ] && [ -n "${hidden_deps}" ]; then
