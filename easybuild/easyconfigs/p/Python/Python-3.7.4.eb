@@ -18,7 +18,7 @@ dependencies = [
     ('ncurses', '6.1'),
 ]
 
-optimized = false
+optimized = False
 
 configure_cmd_prefix = (
     'LDFLAGS="-L${EBROOTBZIP2}/lib" '
