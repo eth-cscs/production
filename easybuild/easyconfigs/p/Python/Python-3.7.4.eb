@@ -12,11 +12,13 @@ source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 
 dependencies = [
-    ('bzip2', '1.0.6'),
+    ('bzip2', '1.0.8'),
     #('zlib', '1.2.11'),
     ('libreadline', '8.0'),
     ('ncurses', '6.1'),
 ]
+
+optimized = false
 
 configure_cmd_prefix = (
     'LDFLAGS="-L${EBROOTBZIP2}/lib" '
