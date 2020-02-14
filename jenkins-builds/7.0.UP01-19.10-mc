@@ -15,9 +15,12 @@
  GSL-2.5-CrayCCE-19.10.eb
  GSL-2.5-CrayIntel-19.10.eb
  HDFView-2.14.eb                                    --set-default-module
- HPX-1.3.0-CrayGNU-19.10.eb                         --set-default-module
+ HPX-1.3.0-CrayGNU-19.10.eb
  HPX-1.3.0-CrayGNU-19.10-APEX.eb
  HPX-1.3.0-CrayGNU-19.10-nonetworking.eb
+ HPX-1.4.0-CrayGNU-19.10.eb                         --set-default-module
+ HPX-1.4.0-CrayGNU-19.10-APEX.eb
+ HPX-1.4.0-CrayGNU-19.10-nonetworking.eb
  h5py-2.8.0-CrayGNU-19.10-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.10-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.10-python3-parallel.eb       --set-default-module
