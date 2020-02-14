@@ -17,6 +17,10 @@ packages:
     automake:
         paths:
              automake@1.15.1: /usr
+    binutils:
+        variants: +gold~headers+libiberty+nls~plugin
+        paths:
+             binutils@2.31: /usr
     boost:
         variants: +atomic+chrono~clanglibcpp+date_time~debug+filesystem~graph~icu+iostreams+locale+log+math+mpi+multithreaded +program_options+python+random+regex+serialization+shared+signals~singlethreaded+system~taggedlayout+test+thread+timer~versionedlayout+wave
     bzip2:

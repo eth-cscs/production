@@ -1,0 +1,51 @@
+# kraushm, omlins (CSCS)
+easyblock = 'MakeCp'
+
+name = 'COSMO_pompa'
+version = 'f9916ba'
+versionsuffix = '-28.11.19-cuda-10.0-cordex-double'
+
+homepage = "https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)"
+description = """
+Performance On Massively Parallel Architectures: It is the goal of this project 
+to prepare the COSMO model code for these emerging massively parallel systems.
+
+see: http://www2.cosmo-model.org/content/tasks/priorityProjects/pompa/default.htm
+"""
+
+toolchain = {'name': 'CrayCCE', 'version': '19.08'}
+toolchainopts = {'verbose': False}
+
+# repo is private (+ no official release)
+sources = [{'filename': '/apps/common/UES/easybuild/sources/c/%(name)s/%(namelower)s_%(version)s.tar.gz'}]
+patches = ['patch_COSMO_%(version)s_daint_cray_gpu_CrayCCE-%(toolchain_version)s.patch']
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('libgrib1_crclim', 'a1e4271'),
+    ('cudatoolkit/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5', EXTERNAL_MODULE),
+    ('Dycore/551f6b4-CrayGNU-19.08-cuda-10.1-cordex-double', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('cray-netcdf/4.6.3.0', EXTERNAL_MODULE),
+    ('grib_api', '1.13.1'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+prebuildopts = """cd %(builddir)s/%(namelower)s/cosmo && module switch PrgEnv-gnu PrgEnv-cray && module swap cce cce/8.7.9 && module swap cray-mpich cray-mpich/7.7.6 && module swap cray-libsci cray-libsci/19.02.1 && module swap cray-libsci_acc cray-libsci_acc/19.03.1 && module swap cudatoolkit cudatoolkit/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5 && export EBROOTNETCDF=$NETCDF_DIR && export EBROOTNETCDFMINFORTRAN=$NETCDF_DIR && export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/netcdf\/4.6.3.0\/GNU\/8.2/netcdf\/4.6.3.0\/CRAY\/9.0/g') && export LDFLAGS=$(echo $LDFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/8.2/netcdf\/4.6.3.0\/CRAY\/9.0/g') && export CPPFLAGS=$(echo $CPPFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/8.2/netcdf\/4.6.3.0\/CRAY\/9.0/g') && export EBVARLDFLAGS=$(echo $EBVARLDFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/8.2/netcdf\/4.6.3.0\/CRAY\/9.0/g') && export EBVARCPPFLAGS=$(echo $EBVARCPPFLAGS | sed 's/netcdf\/4.6.3.0\/GNU\/8.2/netcdf\/4.6.3.0\/CRAY\/9.0/g') && mv Options.cray.gpu Options.cray.gpu.orig && cat Options.cray.gpu.orig | perl -pe "s/-hnosecond_underscore//g" > Options.cray.gpu &&"""
+buildopts = "ACCGPU=1 CPP_DYCORE=1 paropt "
+
+parallel = 6
+
+modtclfooter = """
+prepend-path PATH %(installdir)s
+"""
+postinstallcmds = ['cd %(installdir)s; ln -s cosmo cosmo_gpu_cordex']
+files_to_copy = [(['cosmo/cosmo'], '.')]
+
+sanity_check_paths = {
+    'files': ['cosmo', 'cosmo_gpu_cordex'],
+    'dirs': [],
+}
+
+moduleclass = 'geo'

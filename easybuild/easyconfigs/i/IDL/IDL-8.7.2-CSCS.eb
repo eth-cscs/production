@@ -1,0 +1,28 @@
+# This file is part of JSC's public easybuild repository 
+# (https://github.com/easybuilders/jsc)
+# adapted by Matthias Kraushaar and Luca Marsella (CSCS)
+name = "IDL"
+version = "8.7.2"
+local_shortversion = '87'
+versionsuffix = '-CSCS'
+
+homepage = 'http://www.harrisgeospatial.com/SoftwareandTechnology/IDL.aspx'
+description = """IDL (Interactive Data Language) is a scientific programming 
+                 language used across disciplines to extract meaningful 
+                 visualizations from complex numerical data """
+
+toolchain = SYSTEM
+# source package file provided under licence
+sources = ['/apps/common/easybuild/sources/i/IDL/' + 'idl872-linux.tar.gz']
+
+sanity_check_paths = {
+    'files': ['idl/bin/idl'],
+    'dirs': ['idl/bin']
+}
+
+modextravars = {
+    'EXELIS_DIR': '%(installdir)s',
+    'IDL_DIR': '%(installdir)s/idl{}'.format(local_shortversion),
+    'IDL_LMGRD_LICENSE_FILE': '7070velan.cscs.ch',
+    'LM_LICENSE_FILE': '7070@velan.cscs.ch',
+}

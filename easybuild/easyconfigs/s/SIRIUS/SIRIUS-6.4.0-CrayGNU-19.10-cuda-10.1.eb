@@ -23,7 +23,7 @@ dependencies = [
   ('spglib','1.14.1'),
   ('ELPA','2019.05.001'),
   ('cray-hdf5', EXTERNAL_MODULE),
-  ('cudatoolkit', EXTERNAL_MODULE),
+  ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
   ('magma', '2.5.1', '-cuda-%s' % cudaversion),
   ('SpFFT', '0.9.7', '-cuda-%s' % cudaversion)
 ]
