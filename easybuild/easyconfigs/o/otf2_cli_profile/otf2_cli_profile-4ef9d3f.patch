@@ -1,0 +1,38 @@
+diff -Naur otf2_cli_profile.ori/src/output/data_out.cpp otf2_cli_profile/src/output/data_out.cpp
+--- otf2_cli_profile.ori/src/output/data_out.cpp	2020-02-16 16:14:34.529056537 +0100
++++ otf2_cli_profile/src/output/data_out.cpp	2020-02-16 16:16:27.312153252 +0100
+@@ -360,7 +360,7 @@
+             writer.Key("packBufferSize");
+             writer.Uint64(alldata.metaData.packBufferSize);
+             writer.Key("packBuffer");
+-            writer.String(alldata.metaData.Buffer);
++            writer.String(alldata.metaData.packBuffer);
+         #endif
+     writer.EndObject();
+ }
+@@ -444,4 +444,4 @@
+                 display_system_node(child.second, alldata, writer);
+         writer.EndArray();
+     writer.EndObject();
+-}
+\ No newline at end of file
++}
+diff -Naur otf2_cli_profile.ori/src/reader/jsonreader.cpp otf2_cli_profile/src/reader/jsonreader.cpp
+--- otf2_cli_profile.ori/src/reader/jsonreader.cpp	2020-02-16 16:14:34.530700000 +0100
++++ otf2_cli_profile/src/reader/jsonreader.cpp	2020-02-16 16:15:58.560553285 +0100
+@@ -285,7 +285,7 @@
+     alldata.metaData.numRanks        = document["meta_data"]["numRanks"].GetUint();
+     #ifdef OTFPROFILER_MPI
+         alldata.metaData.packBufferSize = document["meta_data"]["packBufferSize"].GetUint64();
+-        alldata.metaData.Buffer         = document["meta_data"]["packBuffer"].GetUint64();
++        alldata.metaData.packBuffer     = document["meta_data"]["packBuffer"].GetUint64();
+     #endif
+     return true;
+ }
+@@ -311,4 +311,4 @@
+     uint64_t location_id   = node["data"]["location_id"].GetUint64();
+ 
+     readSystemNode(node, parent_id, 0, alldata);
+-}
+\ No newline at end of file
++}
