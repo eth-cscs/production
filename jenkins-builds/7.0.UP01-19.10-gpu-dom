@@ -2,7 +2,7 @@
  Boost-1.70.0-CrayGNU-19.10-python2.eb
  Boost-1.70.0-CrayGNU-19.10-python3.eb              --set-default-module
  Boost-1.70.0-CrayGNU-19.10.eb
- Buildah-1.13.1.eb                                  --set-default-module
+ Buildah-1.14.0.eb                                  --set-default-module
  CDO-1.9.5-CrayGNU-19.10.eb                         --set-default-module
  CDO-1.9.5-CrayIntel-19.10.eb
  CMake-3.14.5.eb                                    --set-default-module
@@ -16,9 +16,12 @@
  GSL-2.5-CrayCCE-19.10.eb
  GSL-2.5-CrayIntel-19.10.eb
  HDFView-2.14.eb                                    --set-default-module
- HPX-1.3.0-CrayGNU-19.10.eb                         --set-default-module
+ HPX-1.3.0-CrayGNU-19.10.eb
  HPX-1.3.0-CrayGNU-19.10-APEX.eb
  HPX-1.3.0-CrayGNU-19.10-nonetworking.eb
+ HPX-1.4.0-CrayGNU-19.10-cuda-10.1.eb               --set-default-module
+ HPX-1.4.0-CrayGNU-19.10-cuda-10.1-APEX.eb
+ HPX-1.4.0-CrayGNU-19.10-cuda-10.1-nonetworking.eb
  h5py-2.8.0-CrayGNU-19.10-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.10-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.10-python3-parallel.eb       --set-default-module
@@ -29,10 +32,11 @@
  IDL-8.7.2-CSCS.eb
  ipykernel-4.8.2-CrayGNU-19.10-python2.eb
  ipyparallel-6.2.4-CrayGNU-19.10-python3.eb
+ IPython-7.7.0-CrayGNU-19.10-python3                --set-default-module
  Julia-1.2.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module
- JuliaExtensions-1.2.0-CrayGNU-19.10-cuda-10.1.eb   --set-default-module
- jupyterlab-1.1.1-CrayGNU-19.10.eb                  --set-default-module
- jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb
+ JuliaExtensions-1.2.0-CrayGNU-19.10-cuda-10.1.eb   --set-default-module             
+ jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb     --set-default-module
+ jupyterlab-1.2.4-CrayGNU-19.10-cuda-10.1-batchspawner.eb    
  jupyterhub-1.0.0-CrayGNU-19.10.eb                  --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.10-cuda-10.1.eb        --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
@@ -84,6 +88,7 @@
  MUST-v1.6-rc1-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-systems-2020.1.1.65.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-compute-2019.4.0.12.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ otf2_cli_profile-4ef9d3f-CrayGNU-19.10.eb          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayCCE-19.10.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
