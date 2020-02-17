@@ -2,9 +2,10 @@
 easyblock = 'CMakeMake'
 
 name = 'HPX'
-version = '1.3.0'
-versionsuffix = '-APEX'
-checksums = ['cd34da674064c4cc4a331402edbd65c5a1f8058fb46003314ca18fa08423c5ad']
+version = '1.4.0'
+local_cudaversion = '10.1'
+versionsuffix = '-cuda-%s' % local_cudaversion
+checksums = ['241a1c47fafba751848fac12446e7bf4ad3d342d5eb2fa1ef94dd904acc329ed']
 
 homepage = 'http://stellar-group.org/libraries/hpx'
 description = """HPX (High Performance ParalleX) is a general purpose C++
@@ -14,18 +15,15 @@ the available resources to achieve unprecedented levels of scalability.
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
-toolchainopts = {'pic': True}
+toolchainopts = {'pic': True, 'verbose': False}
 
 builddependencies = [('CMake', '3.14.5', '', True)]
 
-patches = ['git_external.patch']
-
 dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('Boost', '1.70.0', '-python3'),
     ('hwloc', '2.0.3', '', True),
     ('jemalloc', '5.1.0'),
-    ('OTF2', '2.2', '', True),
-    # papi provided by perftools-base
 ]
 
 source_urls = ['https://github.com/STEllAR-GROUP/hpx/archive']
@@ -33,12 +31,8 @@ sources = ['%(version)s.tar.gz']
 
 separate_build_dir = True
 
-build_type = 'RelWithDebInfo'
+build_type = 'Release'
 
-local_commonopts = "-DHWLOC_ROOT=$EBROOTHWLOC -DHPX_WITH_MALLOC=JEMALLOC -DJEMALLOC_ROOT=$EBROOTJEMALLOC -DHPX_WITH_MAX_CPU_COUNT=128 -DHPX_WITH_PARCELPORT_MPI=ON -DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON"
-
-local_apexopts = "-DHPX_WITH_PAPI=ON -DHPX_WITH_APEX=ON -DHPX_WITH_APEX_TAG=v2.1.3 -DAPEX_WITH_PAPI=ON -DAPEX_WITH_OTF2=ON -DOTF2_ROOT=$EBROOTOTF2 -DPAPI_ROOT=$(dirname $PAT_BUILD_PAPI_LIBDIR)"
-
-configopts = local_commonopts + local_apexopts
+configopts = "-DHWLOC_ROOT=$EBROOTHWLOC -DHPX_WITH_MALLOC=JEMALLOC -DJEMALLOC_ROOT=$EBROOTJEMALLOC -DHPX_WITH_MAX_CPU_COUNT=128 -DHPX_WITH_PARCELPORT_MPI=ON -DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON -DHPX_WITH_CUDA=ON"
 
 moduleclass = 'tools'
