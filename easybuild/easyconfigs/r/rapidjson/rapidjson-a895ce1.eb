@@ -1,0 +1,26 @@
+# jg (cscs)
+easyblock = "CMakeMake"
+
+name = 'rapidjson'
+version = 'a895ce1'
+homepage = 'https://github.com/Tencent/rapidjson'
+description = """A fast JSON parser/generator for C++ with both SAX/DOM style
+API"""
+
+toolchain = SYSTEM
+sources = [{
+    'git_config': {
+        'url': 'https://github.com/Tencent',
+        'repo_name': '%s' % name,
+        'commit': '%s' % version,
+    },
+    'filename': '%s-%s.tar.gz' % (name, version),
+}]
+postinstallcmds = ['cp -a bin %(installdir)s']
+
+sanity_check_paths = {
+    'files': ['include/rapidjson/rapidjson.h'],
+    'dirs': ['share/doc/RapidJSON', 'bin']
+}
+
+moduleclass = 'devel'
