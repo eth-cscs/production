@@ -30,4 +30,5 @@ sanity_check_paths = {
     'files': ['lib64/libVisRTX.%s' % SHLIB_EXT],
     'dirs': [],
 }
+
 moduleclass = 'vis'
