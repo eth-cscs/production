@@ -32,7 +32,6 @@
  IDL-8.7.2-CSCS.eb
  ipykernel-4.8.2-CrayGNU-19.10-python2.eb
  ipyparallel-6.2.4-CrayGNU-19.10-python3.eb
- IPython-7.7.0-CrayGNU-19.10-python3                --set-default-module
  Julia-1.2.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module
  JuliaExtensions-1.2.0-CrayGNU-19.10-cuda-10.1.eb   --set-default-module             
  jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb     --set-default-module
