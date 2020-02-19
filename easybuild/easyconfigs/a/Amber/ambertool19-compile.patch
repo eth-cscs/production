@@ -1,0 +1,44 @@
+diff -Nru amber18.orig/AmberTools/src/cpptraj/configure amber18/AmberTools/src/cpptraj/configure
+--- amber18.orig/AmberTools/src/cpptraj/configure	2019-04-25 14:49:57.000000000 +0200
++++ amber18/AmberTools/src/cpptraj/configure	2019-11-13 11:22:35.573941106 +0100
+@@ -467,7 +467,7 @@
+   fi
+   return 0
+ }
+-    
++
+ TestMathlib() {
+   cat > testp.cpp <<EOF
+ #include <cstdio>
+@@ -922,7 +922,7 @@
+         *g++*     ) COMPILERS='gnu' ;;
+         *icpc*    ) COMPILERS='intel' ;;
+         *pgc++*   ) COMPILERS='pgi' ;;
+-        *CC*      ) COMPILERS='cray' ;;
++        *CC*      ) COMPILERS='gnu' ;;
+         * ) echo "Warning: Could not detect compiler type ($CXX); assuming GNU" > /dev/stderr;;
+       esac
+       # If compiler was also specified make sure it matches as a sanity check
+@@ -1383,7 +1383,7 @@
+ }
+ 
+ #-------------------------------------------------------------------------------
+-# Platform-specific tests 
++# Platform-specific tests
+ PlatformTests() {
+   # C++11 support
+   if [ "$C11_SUPPORT" = 'yes' ] ; then
+@@ -1637,11 +1637,11 @@
+     cmake_options="$cmake_options -DCMAKE_VERBOSE_MAKEFILE=TRUE"
+   fi
+   echo "  Cmake options: $WORKDIR $cmake_options"
+-  # Run cmake 
++  # Run cmake
+   $CMAKE $WORKDIR $cmake_options
+   exit $?
+ }
+- 
++
+ # ==============================================================================
+ # MAIN SCRIPT
+ 
