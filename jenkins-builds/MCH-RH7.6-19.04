@@ -1,22 +1,22 @@
-Anaconda3-2019.03.eb                                
-Autotools-20180311.eb                               
-CMake-3.14.5.eb                                    
+Anaconda3-2019.03.eb
+Autotools-20180311.eb
+CMake-3.14.5.eb
 CUDA-10.1.243.eb
 ddt-19.0.5-Redhat-7.0.eb                           --set-default-module
-git-2.22.0.eb                                      
+git-2.22.0.eb
 IDL-8.5.1-MCH.eb
 ImageMagick-6.7.6-10.eb                            --set-default-module
-ImageMagick-7.0.8-53.eb                             
+ImageMagick-7.0.8-53.eb
 NCL-6.2.1.eb                                       --set-default-module
-NCL-6.6.2.eb                                        
+NCL-6.6.2.eb
 Python-2.7.16.eb                                   --disable-rpath 
 Python-3.7.4.eb
-Python-3.7.4-r20.02.eb                                    
+Python-3.7.4-r20.02.eb
 rstudio-1.2.1335.eb                                --disable-rpath
 UCX-1.6.1-GCC-8.3.0-cuda-10.1.eb                   --hidden
-vampir-9.6.0.eb                                    
-Vim-8.1.eb 					    
-nmon-16g.eb                                        
+vampir-9.6.0.eb
+Vim-8.1.eb
+nmon-16g.eb
 reframe-2.18.eb
 Boost-1.70.0-fosscuda-2019b-python2.eb             --installpath=/apps/arolla/UES/jenkins/RH7.6_EB-4.1.1/gnu/19.2/easybuild
 Boost-1.70.0-fosscuda-2019b-python3.eb             --installpath=/apps/arolla/UES/jenkins/RH7.6_EB-4.1.1/gnu/19.2/easybuild
