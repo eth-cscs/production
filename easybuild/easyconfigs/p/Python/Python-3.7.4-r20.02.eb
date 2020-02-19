@@ -2,6 +2,7 @@
 # This version should be used only for replacing the system python, not for building scientific apps
 name = 'Python'
 version = "3.7.4"
+versionsuffix = "-r20.02"
 
 homepage = 'http://python.org/'
 description = "Python is a programming language that lets you work more quickly and integrate your systems more effectively."
