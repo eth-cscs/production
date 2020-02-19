@@ -38,7 +38,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('craype-hugepages64M', EXTERNAL_MODULE),
+    ('craype-hugepages8M', EXTERNAL_MODULE),
     ('cray-libsci', EXTERNAL_MODULE)
 ]
 
