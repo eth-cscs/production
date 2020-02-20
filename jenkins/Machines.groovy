@@ -22,4 +22,21 @@ def kesch = [name: 'kesch',
              modulesProduction: '',
              prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
 
-return [daint, dom, kesch]
+def tsa = [name: 'tsa',
+           archs: [],
+           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
+           unusePath: '/apps/arolla/UES/modulefiles',
+           modulesProduction: '',
+           modulesUnuseProduction: '',
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
+
+def tsaTDS = [name: 'tsaTDS',
+           archs: [],
+           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
+           unusePath: '/apps/arolla/UES/modulefiles',
+           modulesProduction: '',
+           modulesUnuseProduction: '',
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
+
+#return [daint, dom, kesch, tsa]
+return [tsaTDS]
