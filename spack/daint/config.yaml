@@ -10,12 +10,11 @@ config:
   template_dirs:
     - $spack/share/spack/templates
   # Default directory layout
-  install_path_scheme: "${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"
+  install_path_scheme: "${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}/${VERSION}"
   # Locations where different types of modules should be installed.
   module_roots:
     tcl:    "${HOME}/daint/spack/share/modules"
     lmod:   "${HOME}/daint/spack/share/lmod"
-    dotkit: "${HOME}/daint/spack/share/dotkit"
   # Temporary locations Spack can try to use for builds.
   # Spack will use the first one it finds that exists and is writable.
   # You can use $tempdir to refer to the system default temp directory

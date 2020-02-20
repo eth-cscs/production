@@ -63,7 +63,8 @@ stage('Build Stage') {
                         unuseFlag = ''
                     }
                     def listFile = "$workingDir/jenkins-builds/$machineLabel"
-                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $listFile > ${listFile}_stripped"
+                    // Remove "--installpath" command line option + remove Matlab recipe
+                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $listFile | sed -E '/\\bMatlab.*/Id' > ${listFile}_stripped"
                     def listFlag = "--list=${listFile}_stripped"
                     def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
                     if (arch != '')

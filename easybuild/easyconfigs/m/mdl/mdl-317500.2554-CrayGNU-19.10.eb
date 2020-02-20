@@ -19,4 +19,12 @@ sanity_check_paths={
     'dirs': ['include', 'linux-x86-64/lib']
 }
 
+# set custom LD_LIBRARY_PATH
+modextrapaths = {'LD_LIBRARY_PATH': 'linux-x86-64/lib'}
+
+postinstallcmds = [
+    ("chmod u+w -R %(installdir)s/include"),
+    ("chmod u+w -R %(installdir)s/linux-x86-64")
+]
+
 moduleclass = 'devel'
