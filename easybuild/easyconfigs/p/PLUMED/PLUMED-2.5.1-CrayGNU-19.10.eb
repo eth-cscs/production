@@ -19,6 +19,8 @@ toolchainopts = {'usempi': 'True'}
 source_urls = ['https://github.com/plumed/plumed2/archive/']
 sources = ['v%(version)s.tar.gz']
 
+patches = ['plumed-compiler.patch']
+
 dependencies = [
     ('zlib', '1.2.11'),
     ('GSL', '2.5'),
@@ -30,6 +32,7 @@ dependencies = [
 preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
 configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
 prebuildopts = " source sourceme.sh && "
+buildopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
 
 sanity_check_paths = {
     'files': ['bin/plumed', 'lib/libplumedKernel.%s' % SHLIB_EXT, 'lib/libplumed.%s' % SHLIB_EXT],

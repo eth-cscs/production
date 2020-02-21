@@ -1,0 +1,26 @@
+easyblock = 'PythonPackage'
+
+name = 'absl'
+version = '0.2.2'
+versionsuffix = '-python3'
+
+homepage = 'https://github.com/abseil/abseil-py'
+description = "Abseil Python Common Libraries."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = ['https://github.com/abseil/abseil-py/archive/']
+sources = ['pypi-v0.1.13.tar.gz']
+
+dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+]
+
+req_py_majver = 3
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.6/site-packages'],
+}
+
+moduleclass = 'devel'

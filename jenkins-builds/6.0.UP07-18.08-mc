@@ -29,6 +29,7 @@
  IDL-8.5.1.eb                                       --set-default-module
  ipykernel-4.8.2-CrayGNU-18.08-python2.eb
  ipyparallel-6.2.3-CrayGNU-18.08-python3.eb
+ ipyparallel-6.2.4-CrayGNU-18.08-python3.eb
  Julia-1.0.4-CrayGNU-18.08.eb
  JuliaExtensions-1.0.4-CrayGNU-18.08.eb
  jupyter-1.0.0-CrayGNU-18.08.eb

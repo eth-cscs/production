@@ -29,7 +29,8 @@ dependencies = [
 ]
 
 prebuildopts  = (
-    'python setup.py configure --mpi --hdf5-version=1.10.2 --hdf5=$HDF5_DIR && '
+    "HDF_VERSION=$(echo ${CRAY_HDF5_PARALLEL_VERSION} | awk -F . '{print $1\".\"$2\".\"$3}') && "
+    "python setup.py configure --mpi --hdf5-version=$HDF_VERSION --hdf5=$HDF5_DIR && "
 )
 
 # sanity checks (import h5py) fails on login nodes (MPI not available)
