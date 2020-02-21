@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'netCDF-C++'
+version = '4.3.0'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+toolchainopts = {'usempi': True, 'pic': True}
+
+source_urls = ['https://github.com/Unidata/netcdf-cxx4/archive/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('netCDF', '4.7.0'),
+]
+
+
+sanity_check_paths = {
+    'files': ['include/netcdf', 'include/ncDouble.h', 'bin/ncxx4-config', 'lib/pkgconfig/netcdf-cxx4.pc', 'lib/libnetcdf_c++4.a', 'lib/libnetcdf_c++4.so'],
+    'dirs': [],
+}
+
+moduleclass = 'data'

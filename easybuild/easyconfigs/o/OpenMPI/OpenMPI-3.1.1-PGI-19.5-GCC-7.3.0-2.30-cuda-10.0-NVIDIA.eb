@@ -1,0 +1,84 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = "3.1.1"
+cudaversion = '10.0'
+versionsuffix = '-cuda-%s-NVIDIA' % cudaversion
+
+homepage = 'https://www.open-mpi.org/'
+description = "The Open MPI Project is an open source MPI-3 implementation."
+
+toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.3.0-2.30'}
+toolchainopts = {'vectorize': False}
+
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = []
+builddependencies = [
+    ('cuda%s/toolkit/%s.130' % ( cudaversion, cudaversion), 
+     EXTERNAL_MODULE),
+]
+
+# needed for --with-verbs
+osdependencies = [(
+    'libibverbs-dev', 
+    'libibverbs-devel', 
+    'rdma-core-devel', 
+)]
+
+patches = ['OpenMPI_3.1-fix_ib_query.patch']
+
+configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgf90 "
+    "CFLAGS='-m64 -tp=px' "
+    "CXXFLAGS='-m64 -tp=px' "
+    "FCFLAGS='-m64 -tp=px' "
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--without-ucx "
+    "--without-mxm "
+    "--with-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--without-loadleveler "
+    "--disable-memchecker "
+    "--disable-getpwuid "
+    "--with-hwloc "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda "
+    "--without-lsf "
+    "--without-sge "
+    "--enable-orterun-prefix-by-default "
+)
+
+postinstallcmds = [
+    "sed -i -e '50 i btl_openib_allow_ib = 1' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '51 i btl_openib_warn_default_gid_prefix = 0' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '52 i btl_openib_cpc_include = rdmacm' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '53 i btl_openib_receive_queues = P, 65536,256,192,128' %(installdir)s/etc/openmpi-mca-params.conf",
+]
+
+sanity_check_paths = {
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 
+        'lib/libompitrace.so', 'lib/libopen-pal.so', 
+        'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 
+        'include/mpi.h', 'include/mpi_portable_platform.h'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

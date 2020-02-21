@@ -1,4 +1,5 @@
  Amber-18-14-14-CrayGNU-19.10.eb                    --set-default-module
+ Amber-19-9-17-ff19SB-CrayGNU-19.10.eb
  Boost-1.70.0-CrayGNU-19.10-python2.eb
  Boost-1.70.0-CrayGNU-19.10-python3.eb              --set-default-module
  Boost-1.70.0-CrayGNU-19.10.eb
@@ -11,6 +12,7 @@
  GREASY-19.03-cscs-CrayGNU-19.10.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.10.eb                    --set-default-module
  GROMACS-2019.1-CrayGNU-19.10.eb
+ GROMACS-2020-CrayGNU-19.10.eb
  GSL-2.5-CrayGNU-19.10.eb                           --set-default-module
  GSL-2.5-CrayCCE-19.10.eb
  GSL-2.5-CrayIntel-19.10.eb

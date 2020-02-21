@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'FFTW'
+version = '3.3.8'
+
+homepage = 'http://www.fftw.org'
+description = """FFTW is a C subroutine library for computing the discrete
+Fourier transform (DFT) in one or more dimensions, of arbitrary input size, and
+of both real and complex data."""
+
+toolchain = {'name': 'gompic', 'version': '2019b'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = [homepage]
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [
+    "--enable-threads --enable-openmp --with-pic --enable-single --enable-sse2 --enable-mpi",
+    "--enable-threads --enable-openmp --with-pic --enable-long-double --enable-mpi",
+    "--enable-threads --enable-openmp --with-pic --enable-quad-precision",
+    "--enable-threads --enable-openmp --with-pic --enable-sse2 --enable-mpi",
+]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-wisdom', 'bin/%(namelower)s-wisdom-to-conf', 'bin/fftwf-wisdom', 'bin/fftwl-wisdom', 'bin/fftwq-wisdom', 'include/fftw3-mpi.f03', 'include/fftw3-mpi.h', 'include/fftw3.f', 'include/fftw3.f03', 'include/fftw3.h', 'include/fftw3l-mpi.f03', 'include/fftw3l.f03', 'include/fftw3q.f03', 'lib/libfftw3.a', 'lib/libfftw3_mpi.a', 'lib/libfftw3_omp.a', 'lib/libfftw3_threads.a', 'lib/libfftw3f.a', 'lib/libfftw3f_mpi.a', 'lib/libfftw3f_omp.a', 'lib/libfftw3f_threads.a', 'lib/libfftw3l.a', 'lib/libfftw3l_mpi.a', 'lib/libfftw3l_omp.a', 'lib/libfftw3l_threads.a', 'lib/libfftw3q.a', 'lib/libfftw3q_omp.a'],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'numlib'

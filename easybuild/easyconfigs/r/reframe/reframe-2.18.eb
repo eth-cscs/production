@@ -17,7 +17,7 @@ sources = [
                     '%(name)s/reframe-tests-%(version)s.tar.gz'
     }
 ]
-dependencies = [('Python-bare', '3.7.3')]
+dependencies = [('Python-bare', '3.7.4')]
 keepsymlinks = True
 postinstallcmds = [
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
