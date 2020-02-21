@@ -29,4 +29,6 @@ sanity_check_paths = {
 
 modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s']}
 
+modextravars = {'ELPA_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s'}
+
 moduleclass = 'math'
