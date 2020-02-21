@@ -1,0 +1,30 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libX11'
+version = '1.6.7'
+
+homepage = 'http://www.freedesktop.org/wiki/Software/xlibs'
+description = "X11 client-side library"
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = [XORG_LIB_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('xextproto', '7.3.0'),
+    ('xcb-proto', '1.13', '', True),
+    ('inputproto', '2.3.2'),
+    ('xproto', '7.0.31'),
+    ('kbproto', '1.0.7'),
+    ('xtrans', '1.4.0'),
+    ('libxcb', '1.13'),
+]
+
+sanity_check_paths = {
+    'files': ['include/X11/cursorfont.h', 'include/X11/ImUtil.h', 'include/X11/Xcms.h', 'include/X11/XKBlib.h', 'include/X11/XlibConf.h', 'include/X11/Xlib.h', 'include/X11/Xlibint.h', 'include/X11/Xlib-xcb.h', 'include/X11/Xlocale.h', 'include/X11/Xregion.h', 'include/X11/Xresource.h', 'include/X11/Xutil.h'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

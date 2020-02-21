@@ -1,0 +1,39 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+prgenv = 'cce' 
+name = 'PrgEnv-%s' % prgenv
+version = '19.04'
+
+homepage = 'http://user.cscs.ch'
+description = """
+    The meta-module sets the MODULEPATH to access the following programming environment: 
+        - %s %s
+""" % (name, version) 
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (prgenv, version)
+
+modtclfooter = """
+set list [exec ls --color=none %s ]
+lappend list cray-libsci/18.07.1 PrgEnv-cray/1.0.5 shared
+
+if { [module-info mode remove] || [module-info mode switch] } {
+ foreach module ${list} {
+  if { [is-loaded ${module}] } {
+   module unload ${module}
+  }
+ }
+ module unuse %s
+}
+
+if { [module-info mode load] } {
+ module use %s
+ if { ![ is-loaded CrayCCE/.%s ] } {
+  module load CrayCCE/.%s
+ }
+}
+""" % (path, path, path, version, version)
+
+moduleclass = 'devel'
