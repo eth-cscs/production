@@ -34,7 +34,11 @@ import subprocess
 from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.build_log import EasyBuildError
 
-
+# This change addresses an issue with Modules versions 4.0 and 4.1:
+# On versions 4.0 and 4.1, unloading an unexistent modulefile generates an "Unable to locate modulefile" error. 
+# Starting with version 4.2, unloading a module only looks at loaded module list and does not trigger a modulefile search. 
+# So starting version 4.2 the same behavior than Modules compatibility version 3.2 is obtained.
+# See section unload in https://modules.readthedocs.io/en/latest/diff_v3_v4.html
 KNOWN_PRGENVS = ['PrgEnv-cray', 'PrgEnv-gnu', 'PrgEnv-intel', 'PrgEnv-pgi']
 AVAIL_PRGENVS=[]
 for prgenv in [prgenv for prgenv in KNOWN_PRGENVS]:
