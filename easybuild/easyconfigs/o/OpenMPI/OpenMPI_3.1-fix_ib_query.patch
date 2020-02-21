@@ -1,0 +1,11 @@
+diff -Nru openmpi-3.1.1_ORIG/opal/mca/btl/openib/btl_openib_component.c openmpi-3.1.1/opal/mca/btl/openib/btl_openib_component.c
+--- openmpi-3.1.1_ORIG/opal/mca/btl/openib/btl_openib_component.c	2018-06-29 18:08:13.000000000 +0200
++++ openmpi-3.1.1/opal/mca/btl/openib/btl_openib_component.c	2019-07-18 09:19:14.000000000 +0200
+@@ -1664,6 +1664,7 @@
+         goto error;
+     }
+ #if HAVE_DECL_IBV_EXP_QUERY_DEVICE
++    memset(&device->ib_exp_dev_attr, 0, sizeof(device->ib_exp_dev_attr));
+     device->ib_exp_dev_attr.comp_mask = IBV_EXP_DEVICE_ATTR_RESERVED - 1;
+     if(ibv_exp_query_device(device->ib_dev_context, &device->ib_exp_dev_attr)){
+         BTL_ERROR(("error obtaining device attributes for %s errno says %s",

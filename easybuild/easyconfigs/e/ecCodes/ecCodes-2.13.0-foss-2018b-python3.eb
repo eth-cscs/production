@@ -1,0 +1,40 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ecCodes'
+version = '2.13.0'
+py_maj_ver = '3'
+py_min_ver = '7'
+py_rev_ver = '4'
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+pyver = '%s.%s' % (pyshortver, py_rev_ver)
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'https://confluence.ecmwf.int/display/ECC/ecCodes+Home'
+description = """ecCodes is a package developed by ECMWF which provides an application programming interface 
+and a set of tools for decoding and encoding messages in the WMO GRIB and BUFR formats."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = ['https://confluence.ecmwf.int/download/attachments/45757960/']
+sources = ['%(namelower)s-%(version)s-Source.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('JasPer', '2.0.14'),
+    ('netCDF', '4.7.0'),
+    ('PyExtensions', pyver),
+]
+
+separate_build_dir = True
+
+configopts = '-DENABLE_JPG=ON -DENABLE_NETCDF=ON -DENABLE_PYTHON=ON'
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['bufr_copy', 'bufr_dump', 'bufr_filter', 'bufr_ls',
+                                     'codes_count', 'codes_info', 'codes_split_file',
+                                     'grib_copy', 'grib_dump', 'grib_filter', 'grib_ls']],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,49 @@
+# File modified by MKr - January 2019
+easyblock = 'Bundle'
+
+name = 'IPython'
+version = '7.6.1'
+versionsuffix = '-Python-3.7.3'
+
+homepage = 'http://ipython.org/index.html'
+description = """
+    IPython provides a rich architecture for interactive computing with:
+    Powerful interactive shells (terminal and Qt-based).
+    A browser-based notebook with support for code, text, mathematical 
+    expressions, inline plots and other rich media. Support for interactive 
+    data visualization and use of GUI toolkits. Flexible, embeddable 
+    interpreters to load into your own projects. Easy to use, high performance 
+    tools for parallel computing.
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+
+dependencies = [
+    ('Python', '3.7.3'),
+]
+
+exts_list = [
+    ('parso', '0.5.0', {'checksums': ['db5881df1643bf3e66c097bfd8935cf03eae73f4cb61ae4433c9ea4fb6613446'], 'source_urls': ['https://pypi.python.org/packages/source/p/parso/']}),
+    ('wcwidth', '0.1.7', {'checksums': ['3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e'], 'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/']}),
+    ('backcall', '0.1.0', {'checksums': ['38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb901196e01e4'], 'source_urls': ['https://pypi.python.org/packages/source/b/backcall/']}),
+    ('decorator', '4.4.0', {'checksums': ['86156361c50488b84a3f148056ea716ca587df2f0de1d34750d35c21312725de'], 'source_urls': ['https://pypi.python.org/packages/source/d/decorator/']}),
+    ('ipython_genutils', '0.2.0', {'checksums': ['eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8'], 'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/']}),
+    ('jedi', '0.14.0', {'checksums': ['49ccb782651bb6f7009810d17a3316f8867dde31654c750506970742e18b553d'], 'source_urls': ['https://pypi.python.org/packages/source/j/jedi/']}),
+    ('pexpect', '4.7.0', {'checksums': ['9e2c1fd0e6ee3a49b28f95d4b33bc389c89b20af6a1255906e90ff1262ce62eb'], 'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/']}),
+    ('pickleshare', '0.7.5', {'checksums': ['87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca'], 'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/']}),
+    ('prompt_toolkit', '2.0.9', {'checksums': ['2519ad1d8038fd5fc8e770362237ad0364d16a7650fb5724af6997ed5515e3c1'], 'source_urls': ['https://pypi.python.org/packages/source/p/prompt_toolkit/']}),
+    ('ptyprocess', '0.6.0', {'checksums': ['923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0'], 'source_urls': ['https://pypi.python.org/packages/source/p/ptyprocess/']}),
+    ('Pygments', '2.4.2', {'checksums': ['881c4c157e45f30af185c1ffe8d549d48ac9127433f2c380c24b84572ad66297'], 'source_urls': ['https://pypi.python.org/packages/source/P/Pygments/']}),
+    ('traitlets', '4.3.2', {'checksums': ['9c4bd2d267b7153df9152698efb1050a5d84982d3384a37b2c1f7723ba3e7835'], 'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/']}),
+    ('ipython', '7.6.1', {'checksums': ['11067ab11d98b1e6c7f0993506f7a5f8a91af420f7e82be6575fcb7a6ca372a0'], 'modulename': 'IPython', 'source_urls': ['https://pypi.python.org/packages/source/i/ipython/']}),
+]
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+exts_defaultclass = 'PythonPackage'
+sanity_check_commands = ['%(namelower)s -h']
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
+}
+
+moduleclass = 'tools'

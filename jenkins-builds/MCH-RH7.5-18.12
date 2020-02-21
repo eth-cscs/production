@@ -1,0 +1,8 @@
+CMake-3.14.3.eb
+git-2.21.0.eb
+Vim-8.1.eb
+netCDF-4.6.3-gmvolf-18.12.eb         --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+netCDF-C++-4.3.0-gmvolf-18.12.eb     --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+netCDF-Fortran-4.4.5-gmvolf-18.12.eb --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+IPython-7.6.1-gmvolf-18.12.eb        --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild
+Python-3.7.3-gmvolf-18.12.eb         --installpath=/apps/arolla/UES/jenkins/RH7.5/gnu/18.12/easybuild

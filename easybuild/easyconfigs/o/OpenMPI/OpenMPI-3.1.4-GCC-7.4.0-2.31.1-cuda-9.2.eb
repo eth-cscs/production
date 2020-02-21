@@ -1,0 +1,72 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '3.1.4'
+cudaversion = '9.2'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'https://www.open-mpi.org/'
+description = "The Open MPI Project is an open source MPI-3 implementation."
+
+toolchain = {'name': 'GCC', 'version': '7.4.0-2.31.1'}
+toolchainopts = {'vectorize': False}
+
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = [
+    'a7c34ad052ea8201ed9e7389994069fe6996403beabdd2d711caf0532808156c'
+]
+
+dependencies = [
+    ('zlib', '1.2.11', '', ('GCCcore', '7.4.0')),
+    ('cuda%s/toolkit/%s.88' % ( cudaversion.replace(".",""), cudaversion), 
+     EXTERNAL_MODULE),
+]
+
+# needed for --with-verbs
+osdependencies = [(
+    'libibverbs-dev', 
+    'libibverbs-devel', 
+    'rdma-core-devel', 
+)]
+
+configopts = (
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--without-ucx "
+    "--without-mxm "
+    "--with-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--without-loadleveler "
+    "--disable-memchecker "
+    "--with-hwloc "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda "
+    "--without-lsf "
+    "--without-sge "
+    "--enable-mpirun-prefix-by-default "
+)
+
+sanity_check_paths = {
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 
+        'lib/libompitrace.so', 'lib/libopen-pal.so', 
+        'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 
+        'include/mpi.h', 'include/mpi_portable_platform.h'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

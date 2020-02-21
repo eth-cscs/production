@@ -1,0 +1,32 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'JasPer'
+version = '2.0.14'
+
+homepage = 'http://www.ece.uvic.ca/~frodo/jasper/'
+description = """
+    gzip (GNU zip) is a popular data compression program as a replacement 
+    for compress
+"""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+toolchainopts = {'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['https://www.ece.uvic.ca/~frodo/jasper/software/']
+
+builddependencies = [
+    ('CMake', '3.14.3', '', True)
+]
+
+configopts = '-DJAS_ENABLE_DOC=FALSE'
+
+separate_build_dir = 'True'
+
+sanity_check_paths = {
+    'files': ['bin/jasper', 'lib64/libjasper.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'vis'
