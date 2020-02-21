@@ -22,11 +22,12 @@ builddependencies = [
 
 osdependencies = [('autoconf', 'automake')]
 
-configopts = ' --enable-eri=1 --enable-eri2=1 --enable-eri3=1 --enable-fortran '
+configopts = ' --enable-eri=1 --enable-eri2=1 --enable-eri3=1 '
 configopts += ' --with-max-am={0} --with-eri-max-am={0},{1} '.format(4, 3)
 configopts += ' --with-eri2-max-am={0},{1} --with-eri3-max-am={0},{1} '.format(6, 5)
 configopts += ' --with-opt-am=3 --enable-generic-code --disable-unrolling '
 configopts += ' --with-libint-exportdir=libint-v%(version)s-cp2k-lmax-4 '
+configopts += ' --enable-fortran --enable-shared '
 
 sanity_check_paths = {
     'files': ['include/libint2.h', 'include/libint2.hpp'] +
