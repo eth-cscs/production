@@ -38,5 +38,5 @@ def tsaTDS = [name: 'tsaTDS',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
 
-#return [daint, dom, kesch, tsa]
+// return [daint, dom, kesch, tsa]
 return [tsaTDS]
