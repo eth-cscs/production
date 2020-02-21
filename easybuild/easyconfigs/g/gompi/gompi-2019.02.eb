@@ -1,0 +1,21 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+easyblock = "Toolchain"
+
+name = 'gompi'
+version = '2019.02'
+
+homepage = '(none)'
+description = """GNU Compiler Collection (GCC) based compiler toolchain,
+ including OpenMPI for MPI support."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+gccver = '8.3.0-2.32'
+
+# compiler toolchain dependencies
+dependencies = [
+    ('GCC', gccver),  # includes both GCC and binutils
+    ('OpenMPI', '4.0.1', '-cuda-10.1', ('GCC', gccver)),
+]
+
+moduleclass = 'toolchain'

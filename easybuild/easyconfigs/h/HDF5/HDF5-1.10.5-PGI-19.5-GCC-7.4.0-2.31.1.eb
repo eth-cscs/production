@@ -1,0 +1,28 @@
+# @author: gppezzi
+
+easyblock = 'ConfigureMake'
+
+name = 'HDF5'
+version = "1.10.5"
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """HDF5 is a unique technology suite that makes possible the
+management of extremely large and complex data collections."""
+
+toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.4.0-2.31.1'}
+toolchainopts = {'optarch': True, 'pic': True}
+
+source_urls = ['https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-%(version_major_minor)s/hdf5-%(version)s/src']
+sources = [SOURCELOWER_TAR_GZ]
+
+# Add -noswitcherror to make PGI compiler ignore the unknown compiler option -pthread
+preconfigopts = 'export CXX="$CXX -noswitcherror" && '
+
+buildopts = '-l6'
+
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('Szip', '2.1.1'),
+]
+
+moduleclass = 'data'

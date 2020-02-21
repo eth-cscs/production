@@ -1,0 +1,28 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'xorg-macros'
+version = '1.19.2'
+
+homepage = 'http://cgit.freedesktop.org/xorg/util/macros'
+description = """X.org macros utilities."""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+
+source_urls = ['http://cgit.freedesktop.org/xorg/util/macros/snapshot']  # no slash ('/') at the end!
+sources = ['util-macros-%(version)s.tar.gz']
+
+builddependencies = [
+    # use same binutils version that was used when building GCC toolchain
+    ('binutils', '2.31.1'),
+    ('Autotools', '20180311', '', True),
+]
+
+preconfigopts = './autogen.sh && '
+
+sanity_check_paths = {
+    'files': ['share/pkgconfig/xorg-macros.pc'],
+    'dirs': [],
+}
+
+moduleclass = 'devel'

@@ -1,0 +1,50 @@
+# contributed by Luca Marsella (CSCS)
+name = 'MVAPICH2'
+version = '2.2'
+cudaversion = '9.2'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = 'http://mvapich.cse.ohio-state.edu/overview/mvapich2/'
+description = """OSU MVAPICH2 2.2 integrated and ABI compatible with MPICH-3.2"""
+
+toolchain = {'name': 'GCC', 'version': '7.4.0-2.31.1'}
+toolchainopts = {'vectorize': False}
+
+source_urls = ['http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/']
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = [(
+    "--enable-threads=multiple "
+    "--enable-rdma-cm "
+    "--with-rdma=gen2 "
+    "--enable-smpcoll "
+    "--disable-xrc "
+    "--with-device=ch3:mrail "
+    "--enable-mcast "
+    "--enable-g=dbg "
+    "--enable-debuginfo "
+    "--with-cluster-size=level "
+    "--enable-cuda "
+)]
+
+prebuildopts = [(
+    "sed -i '/NVCFLAGS = -cuda -arch sm_20 -maxrregcount 32/c "
+    "NVCFLAGS = -cuda -arch sm_70 -maxrregcount 32' Makefile && "
+)]
+
+withhwloc = 'True'
+
+builddependencies = [ 
+    ('Bison', '3.3.2', '', True),
+]
+dependencies = [
+    ('cuda92/toolkit/%s.88' % cudaversion, EXTERNAL_MODULE)
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['mpicc', 'mpic++', 'mpif90']] +
+             ['lib/lib%s' % y for x in ['mpi', 'mpicxx', 'mpifort'] for y in ['%s.so'%x, '%s.a'%x]],
+    'dirs': ['include']
+}
+
+moduleclass = 'mpi'

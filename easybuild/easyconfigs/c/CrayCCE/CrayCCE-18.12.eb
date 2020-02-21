@@ -10,7 +10,7 @@ description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module
 toolchain = {'name': 'dummy', 'version': ''}
 
 dependencies = [
-    # PrgEnv version is pinned to avoid conflicts, although Cray recommends to use the latest (default) version
+# PrgEnv version is pinned to avoid conflicts, although Cray recommends to use the latest (default) version
     ('PrgEnv-cray/1.0.4', EXTERNAL_MODULE),
     ('cce/8.7.7', EXTERNAL_MODULE),
     ('cray-libsci/18.07.1', EXTERNAL_MODULE),

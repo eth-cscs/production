@@ -1,0 +1,78 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '3.1.1'
+cudaversion = '10.0'
+versionsuffix = '-cuda-%s-UCX' % cudaversion
+
+homepage = 'https://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = {'name': 'GCC', 'version': '7.3.0-2.30'}
+toolchainopts = {'vectorize': False}
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+patches = [
+    'OpenMPI-3.1_fix-ib-query.patch',
+    '%(name)s-%(version)s-add_ompi_datatype_attribute_to_release_ucp_datatype.patch'
+]
+checksums = [
+#    '846bb7ed2aa0c96fc0594423e7b21904ee4f160dcfd62b8a0d1274256fbf25ce',  # openmpi-3.1.1.tar.gz
+#    '8031ff093788a750f30ec7b4b06573af008009e62ddfd558ecfe97cbe404d9d2',  # OpenMPI-3.1_fix-ib-query.patch
+#    # OpenMPI-3.1.1-add_ompi_datatype_attribute_to_release_ucp_datatype.patch
+#    '945d19eb583af1e4d2ddcb40bafe505352244635c812308d1c77ad1db2811538',
+]
+
+# needed for --with-verbs
+osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
+
+builddependencies = [
+    ('cuda%s/toolkit/%s.130' % (cudaversion, cudaversion), 
+     EXTERNAL_MODULE),
+    ('ucx/1.3.1-gcccore-7.3.0', EXTERNAL_MODULE),
+]
+
+patches = ['OpenMPI_3.1-fix_ib_query.patch']
+
+configopts = (
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--with-ucx=${EBROOTUCX} "
+    "--without-mxm "
+    "--with-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--without-loadleveler "
+    "--disable-memchecker "
+    "--with-hwloc "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda "
+    "--without-lsf "
+    "--without-sge "
+    "--enable-mpirun-prefix-by-default "
+)
+
+postinstallcmds = [
+    "sed -i -e '50 i btl_openib_allow_ib = 1' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '51 i btl_openib_warn_default_gid_prefix = 0' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '52 i btl_openib_cpc_include = rdmacm' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '53 i btl_openib_receive_queues = P, 65536,256,192,128' %(installdir)s/etc/openmpi-mca-params.conf",
+]
+
+libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

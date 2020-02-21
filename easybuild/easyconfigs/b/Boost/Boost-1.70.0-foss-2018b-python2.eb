@@ -1,0 +1,28 @@
+# contributed by Luca Marsella
+name = 'Boost'
+version = '1.70.0'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '16'
+pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
+pyver = '%s.%s' % (pyshortver, py_rev_ver)
+versionsuffix = '-python%s' % py_maj_ver
+
+homepage = 'http://www.boost.org/'
+description = """Boost provides free peer-reviewed portable C++ source libraries."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+toolchainopts = {'pic': True, 'usempi': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
+
+builddependencies = [
+    ('zlib', '1.2.11'),
+    ('Python', pyver, '', True),
+]
+
+# also build boost_mpi
+boost_mpi = True
+
+moduleclass = 'devel'

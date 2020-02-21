@@ -1,0 +1,39 @@
+# contributed by Luca Marsella (CSCS)
+name = 'netCDF'
+version = '4.7.0'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'foss', 'version': '2019.02'}
+toolchainopts = {'usempi': True, 'pic': True}
+
+source_urls = ['https://github.com/Unidata/%(namelower)s-c/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('cURL', '7.65.1'),
+    ('HDF5', '1.10.5'),
+]
+
+# make sure both static and shared libs are built
+configopts = [
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
+    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
+]
+
+maxparallel = 1
+
+postinstallcmds = ['ln -s %(installdir)s/lib64 %(installdir)s/lib']
+
+sanity_check_paths = {
+    'files': ['lib64/libnetcdf.so', 'lib64/libnetcdf.a'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
