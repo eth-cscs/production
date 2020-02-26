@@ -1,5 +1,5 @@
 # contributed by Luca Marsella (CSCS)
-import os
+import os 
 
 name = 'bzip2'
 version = '1.0.6'
@@ -12,7 +12,7 @@ description = """
     twice as fast at compression and six times faster at decompression.
 """
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 sources = [SOURCE_TAR_GZ]
 source_urls = [SOURCEFORGE_SOURCE]
