@@ -3,15 +3,23 @@ name = 'netCDF'
 version = '4.7.0'
 
 homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
-description = """NetCDF (network Common Data Form) is a set of software libraries 
- and machine-independent data formats that support the creation, access, and sharing of array-oriented 
- scientific data."""
+description = """
+    NetCDF (network Common Data Form) is a set of software libraries and
+    machine-independent data formats that support the creation, access, and
+    sharing of array-oriented scientific data.
+"""
 
 toolchain = {'name': 'foss', 'version': '2019b'}
 toolchainopts = {'usempi': True, 'pic': True}
 
-source_urls = ['https://github.com/Unidata/%(namelower)s-c/archive/']
-sources = ['v%(version)s.tar.gz']
+sources = [{
+    'filename': '%(namelower)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Unidata/netcdf-c',
+        'repo_name': '%(namelower)s-c',
+        'tag': 'v4.7.0'
+    }
+}]
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
@@ -23,8 +31,14 @@ dependencies = [
 
 # make sure both static and shared libs are built
 configopts = [
-    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=ON -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
-    "-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so -DCURL_INCLUDE_DIR=$EBROOTCURL/include -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS='-DHAVE_STRDUP'",
+    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
+     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+     "-DBUILD_SHARED_LIBS=ON "
+     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
+    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
+     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+     "-DBUILD_SHARED_LIBS=OFF "
+     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
 ]
 
 maxparallel = 1
