@@ -14,8 +14,14 @@ description = """
 toolchain = {'name': 'foss', 'version': '2019b'}
 toolchainopts = {'usempi': True, 'pic': True}
 
-source_urls = ['https://github.com/Unidata/netcdf-cxx4/archive/']
-sources = ['v%(version)s.tar.gz']
+sources = [{
+    'filename': '%(namelower)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Unidata',
+        'repo_name': 'netcdf-cxx4',
+        'tag': 'v%(version)s'
+    }
+}]
 
 dependencies = [
     ('netCDF', '4.7.0'),
