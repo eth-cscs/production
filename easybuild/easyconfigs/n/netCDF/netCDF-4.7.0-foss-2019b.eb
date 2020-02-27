@@ -17,7 +17,7 @@ sources = [{
     'git_config': {
         'url': 'https://github.com/Unidata',
         'repo_name': '%(namelower)s-c',
-        'tag': 'v4.7.0'
+        'tag': 'v%(version)s'
     }
 }]
 

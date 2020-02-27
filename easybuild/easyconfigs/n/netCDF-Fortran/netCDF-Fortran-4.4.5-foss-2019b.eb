@@ -12,11 +12,14 @@ description = """
 toolchain = {'name': 'foss', 'version': '2019b'}
 toolchainopts = {'pic': True}
 
-source_urls = [
-    'ftp://ftp.unidata.ucar.edu/pub/netcdf/',
-    'ftp://ftp.unidata.ucar.edu/pub/netcdf/old'
-]
-sources = [SOURCELOWER_TAR_GZ]
+sources = [{
+    'filename': '%(namelower)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Unidata',
+        'repo': '%(name)s',
+        'tag': 'v%(version)s',
+    }
+}]
 
 dependencies = [
     ('netCDF', '4.7.0'),
