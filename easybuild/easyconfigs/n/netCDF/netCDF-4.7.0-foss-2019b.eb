@@ -15,7 +15,7 @@ toolchainopts = {'usempi': True, 'pic': True}
 sources = [{
     'filename': '%(namelower)s-%(version)s.tar.gz',
     'git_config': {
-        'url': 'https://github.com/Unidata/netcdf-c',
+        'url': 'https://github.com/Unidata',
         'repo_name': '%(namelower)s-c',
         'tag': 'v4.7.0'
     }
