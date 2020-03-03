@@ -16,21 +16,14 @@ description = """
 
 toolchain = {'name': 'GCCcore', 'version': '8.3.0'}
 
-sources = [{
-    'filename': '%(name)s-%(version)s.tar.gz',
-    'git_config': {
-        'url': 'https://gitlab.freedesktop.org/pkg-config',
-        'repo_name': 'pkg-config',
-        'tag': '%(name)s-%(version)s'
-    }
-}]
-# checksums = ['bb3db4c61b46ceae17f694548329c50a60ab61682368fb75304d6725b760471c']
+sources = ['/apps/common/UES/easybuild/sources/p/pkg-config/pkg-config-0.29.2.tar.gz']
+checksums = ['dfa084f1772f91ed6745c3d364a8d95097bdb5cdf84393b7f071a4881543bd2d']
 patches = ['M4-patch_pkg-config.patch']
 
 builddependencies = [('binutils', '2.32')]
 
 # don't use PAX, it might break.
-# tar_config_opts = True
+tar_config_opts = True
 
 preconfigopts = "./autogen.sh && "
 configopts = " --with-internal-glib"
