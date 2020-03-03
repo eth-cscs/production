@@ -27,7 +27,7 @@ checksums = [
     # bzip2-1.0.8.tar.gz from sourceware.org/git
     #'7afb2e6893f0e4b135be78e72bb92b39c0b9691431bf07a9d6ab7c1f3e3389fb',
     # bzip2-1.0.6-pkgconfig.patch
-    '5a823e820b332eca3684416894f58edc125ac3dace9f46e62f98e45362aa8a6d',
+    #'5a823e820b332eca3684416894f58edc125ac3dace9f46e62f98e45362aa8a6d',
 ]
 
 builddependencies = [('binutils', '2.32')]
