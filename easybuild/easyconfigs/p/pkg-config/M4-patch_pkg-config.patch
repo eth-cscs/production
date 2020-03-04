@@ -1,0 +1,14 @@
+diff -Nru pkg-config.sources/glib/m4macros/glib-gettext.m4 pkg-config/glib/m4macros/glib-gettext.m4
+--- pkg-config.sources/glib/m4macros/glib-gettext.m4	2020-03-02 13:19:45.000000000 +0100
++++ pkg-config/glib/m4macros/glib-gettext.m4	2020-03-02 13:20:33.000000000 +0100
+@@ -36,8 +36,8 @@
+ dnl try to pull in the installed version of these macros
+ dnl when running aclocal in the glib directory.
+ dnl
+-m4_copy([AC_DEFUN],[glib_DEFUN])
+-m4_copy([AC_REQUIRE],[glib_REQUIRE])
++m4_copy_force([AC_DEFUN],[glib_DEFUN])
++m4_copy_force([AC_REQUIRE],[glib_REQUIRE])
+ dnl
+ dnl At the end, if we're not within glib, we'll define the public
+ dnl definitions in terms of our private definitions.

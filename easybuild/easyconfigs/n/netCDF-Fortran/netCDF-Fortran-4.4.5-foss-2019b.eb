@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+name = 'netCDF-Fortran'
+version = '4.4.5'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """
+    NetCDF (network Common Data Form) is a set of software libraries and
+    machine-independent data formats that support the creation, access, and
+    sharing of array-oriented scientific data.
+"""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+toolchainopts = {'pic': True}
+
+sources = [{
+    'filename': '%(namelower)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/Unidata',
+        'repo_name': '%(name)s',
+        'tag': 'v%(version)s',
+    }
+}]
+
+dependencies = [
+    ('netCDF', '4.7.0'),
+]
+
+moduleclass = 'data'
