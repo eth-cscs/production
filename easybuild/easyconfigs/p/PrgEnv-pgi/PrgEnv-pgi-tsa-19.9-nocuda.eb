@@ -15,7 +15,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s%s/easybuild/modules/all' %
+local_path='/apps/arolla/UES/jenkins/RH7.7/%s/%s%s/easybuild/modules/all' %
            (local_prgenv, version, versionsuffix)
 
 modtclfooter = """
