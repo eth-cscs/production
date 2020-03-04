@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'xextproto'
+version = '7.3.0'
+
+homepage = 'http://www.freedesktop.org/wiki/Software/xlibs'
+description = "XExtProto protocol headers."
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+
+source_urls = ['http://xorg.freedesktop.org/archive/individual/proto/']
+sources = [SOURCE_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/X11/extensions/agproto.h', 'include/X11/extensions/cupproto.h', 'include/X11/extensions/dbeproto.h', 'include/X11/extensions/dpmsproto.h', 'include/X11/extensions/EVIproto.h', 'include/X11/extensions/geproto.h', 'include/X11/extensions/lbxproto.h', 'include/X11/extensions/mitmiscproto.h', 'include/X11/extensions/multibufproto.h', 'include/X11/extensions/securproto.h', 'include/X11/extensions/shapeproto.h', 'include/X11/extensions/shm.h', 'include/X11/extensions/shmstr.h', 'include/X11/extensions/syncproto.h', 'include/X11/extensions/xtestconst.h', 'include/X11/extensions/xtestext1proto.h'],
+    'dirs': [],
+}
+
+moduleclass = 'devel'
