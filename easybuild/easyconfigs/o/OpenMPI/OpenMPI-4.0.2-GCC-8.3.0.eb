@@ -26,7 +26,6 @@ configopts = (
     "--without-alps "
     "--without-libfabric "
     "--without-lsf "
-    "--without-mxm "
     "--without-psm2 "
     "--without-sge "
     "--without-tm "
