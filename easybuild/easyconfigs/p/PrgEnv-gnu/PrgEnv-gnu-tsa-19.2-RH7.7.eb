@@ -1,9 +1,10 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-local_prgenv = 'pgi' 
+local_fossversion = '2019b'
+local_prgenv = 'gnu' 
 name = 'PrgEnv-%s' % local_prgenv
-version = '19.9'
+version = '19.2'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -14,7 +15,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (local_prgenv, version)
+local_path = '/apps/arolla/UES/jenkins/RH7.7/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -31,12 +32,10 @@ if { [module-info mode remove] || [module-info mode switch] } {
 
 if { [module-info mode load] } {
  module use %s
- if { ![ is-loaded %s/%s-gcc-8.3.0 ] } {
-  module load openmpi/4.0.2-%s-%s-gcc-8.3.0-cuda-10.1
-  module load cuda/10.1.243
+ if { ![ is-loaded fosscuda/.%s ] } {
+  module load fosscuda/.%s
  }
 }
-""" % (local_path, local_path, local_path, local_prgenv, version, local_prgenv,
-       version)
+""" % (local_path, local_path, local_path, local_fossversion, local_fossversion)
 
 moduleclass = 'devel'

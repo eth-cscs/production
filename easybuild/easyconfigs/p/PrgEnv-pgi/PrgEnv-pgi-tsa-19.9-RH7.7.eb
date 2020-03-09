@@ -14,7 +14,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.6/%s/%s/easybuild/modules/all' % (local_prgenv, version)
+local_path='/apps/arolla/UES/jenkins/RH7.7/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -26,6 +26,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
    module unload ${module}
   }
  }
+ module unload cuda/10.1.243
  module unuse %s
 }
 

@@ -16,10 +16,8 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
-]
-dependencies = [
     ('CUDA', '10.1.243', '', True),
+    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
 ]
 
 configopts = (
@@ -54,7 +52,11 @@ postinstallcmds = [
 ]
 
 modtclfooter = """
-    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+    if { [ string match *tsa-cn* $::env(HOSTNAME) ] } {
+        setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+    } else {
+        setenv UCX_TLS rc_x,ud_x,mm,shm,cma
+    }
 """
 
 local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
