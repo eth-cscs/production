@@ -1,13 +1,14 @@
 # Modified for Tsa/Arolla by MKr - July 2019
 name = 'OpenMPI'
 version = '4.0.2'
+versionsuffix = '-cuda-10.1-RH7.7'
 
 homepage = 'https://www.open-mpi.org/'
 description = """
     The Open MPI Project is an open source MPI-3 implementation.
 """
 
-toolchain = {'name': 'GCC', 'version': '8.3.0'}
+toolchain = {'name': 'gcccuda', 'version': '2019b'}
 
 source_urls = [
     'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
@@ -15,10 +16,12 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('UCX', '1.6.1', '', ('GCCcore', '8.3.0')),
+    ('CUDA', '10.1.243', '', True),
+    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
 ]
 
 configopts = (
+    "--with-cuda=${EBROOTCUDA} "
     "--with-hwloc=internal "
     "--with-pmi=/opt/slurm/default "
     "--with-ucx=${EBROOTUCX} "
@@ -49,7 +52,7 @@ postinstallcmds = [
 ]
 
 modtclfooter = """
-    setenv UCX_TLS rc_x,ud_x,mm,shm,cma
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
 """
 
 local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
