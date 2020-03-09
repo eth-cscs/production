@@ -1,0 +1,36 @@
+# Modified by MKr (CSCS), 02/03/2020
+easyblock = 'ConfigureMake'
+
+name = 'pkg-config'
+version = '0.29.2'
+
+homepage = 'https://www.freedesktop.org/wiki/Software/pkg-config/'
+
+description = """
+ pkg-config is a helper tool used when compiling applications and libraries.
+ It helps you insert the correct compiler options on the command line so an
+ application can use gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
+ for instance, rather than hard-coding values on where to find glib (or other
+ libraries).
+"""
+
+toolchain = {'name': 'GCCcore', 'version': '8.3.0'}
+
+sources = ['/apps/common/UES/easybuild/sources/p/pkg-config/pkg-config-0.29.2.tar.gz']
+checksums = ['dfa084f1772f91ed6745c3d364a8d95097bdb5cdf84393b7f071a4881543bd2d']
+patches = ['M4-patch_pkg-config.patch']
+
+builddependencies = [('binutils', '2.32')]
+
+# don't use PAX, it might break.
+tar_config_opts = True
+
+preconfigopts = "./autogen.sh && "
+configopts = " --with-internal-glib"
+
+sanity_check_paths = {
+    'files': ['bin/pkg-config'],
+    'dirs': [],
+}
+
+moduleclass = 'devel'
