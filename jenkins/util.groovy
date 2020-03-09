@@ -31,8 +31,8 @@ String[] getMachineConfiguration(String message, String machine, String[] archs)
 * @return A boolean indicating whether there is a match.
 */
 boolean machineCheck(String message, String machine) {
-    def patternStart = /.*\[.*/
-    def patternEnd = /.*\].*/
+    def patternStart = /.*\[.*(\b/
+    def patternEnd = /(-\S+)?\b).*\].*/
     def machinePattern = "$patternStart$machine$patternEnd"
     return message ==~ machinePattern
 }
