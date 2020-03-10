@@ -1,0 +1,31 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libXau'
+version = '1.0.9'
+
+homepage = 'http://www.freedesktop.org/wiki/Software/xlibs'
+description = """
+    The libXau package contains a library implementing the X11 Authorization
+    Protocol. This is useful for restricting client access to the display.
+"""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+toolchainopts = {'optarch': True}
+
+source_urls = ['http://xorg.freedesktop.org/archive/individual/lib/']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('xproto', '7.0.31'),
+]
+
+sanity_check_paths = {
+    'files': [
+        'lib/%(name)s.a',
+        'lib/%(name)s.so'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

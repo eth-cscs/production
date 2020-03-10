@@ -1,4 +1,5 @@
  Amber-18-14-14-CrayGNU-19.10.eb                    --set-default-module
+ Amber-19-9-17-ff19SB-CrayGNU-19.10.eb
  Boost-1.70.0-CrayGNU-19.10-python2.eb
  Boost-1.70.0-CrayGNU-19.10-python3.eb              --set-default-module
  Boost-1.70.0-CrayGNU-19.10.eb
@@ -12,6 +13,7 @@
  GREASY-19.03-cscs-CrayGNU-19.10.eb                 --set-default-module
  GROMACS-2018.6-CrayGNU-19.10.eb                    --set-default-module
  GROMACS-2019.1-CrayGNU-19.10.eb
+ GROMACS-2020-CrayGNU-19.10.eb
  GSL-2.5-CrayGNU-19.10.eb                           --set-default-module
  GSL-2.5-CrayCCE-19.10.eb
  GSL-2.5-CrayIntel-19.10.eb
@@ -54,7 +56,7 @@
  PyExtensions-3.6.5.6-CrayGNU-19.10.eb
  Python-bare-3.7.3.eb                               --hidden
  QuantumESPRESSO-6.4.1-CrayIntel-19.10.eb           --set-default-module
- singularity-3.5.2-daint.eb
+ singularity-3.5.3-daint.eb
  Spark-2.3.1-CrayGNU-19.10-Hadoop-2.7.eb            --set-default-module
  VASP-5.4.4-CrayIntel-19.10.eb                      --set-default-module
  Visit-3.1.0-CrayGNU-19.10.eb                       --set-default-module
