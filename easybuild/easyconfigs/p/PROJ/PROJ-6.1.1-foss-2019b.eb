@@ -1,0 +1,23 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'PROJ'
+version = '6.1.1'
+
+homepage = 'http://trac.osgeo.org/proj/'
+description = """Program proj is a standard Unix filter function which converts 
+geographic longitude and latitude coordinates into cartesian coordinates"""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True}
+
+source_urls = ['http://download.osgeo.org/%(namelower)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['bin/cs2cs', 'bin/geod', 'bin/invgeod', 'bin/invproj', 'bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
