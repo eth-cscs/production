@@ -18,11 +18,9 @@ configopts = 'FC="$F77" FCFLAGS="$FFLAGS" --enable-shared'
 
 sanity_check_paths = {
     'files': ['lib/libxc.a', 'lib/libxc.so', 
-              'lib/libxcf03.a', 'lib/libxcf03.so'
+              'lib/libxcf03.a', 'lib/libxcf03.so',
               'lib/libxcf90.a', 'lib/libxcf90.so'],
     'dirs': ['include'],
 }
-
-parallel = 1
 
 moduleclass = 'chem'
