@@ -25,6 +25,7 @@ prebuildopts += ' make no-latte no-voronoi no-reax no-poems no-meam no-kim no-ko
 prebuildopts += ' make package-update && '
 # go to folder ./lib/reax and make package reax
 # prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
+prebuildopts += ' make -f Makefile.gfortran && popd && '
 # create Makefile.omp and correct Makefile.mpi
 prebuildopts += ' sed -e \'s/mpicxx/CC -fopenmp/\' ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
 prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
