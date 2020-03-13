@@ -3,7 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'LAMMPS'
 version = '03Mar20'
-local_release = 'stable_03Mar2020'
+local_release = 'stable_3Mar2020'
 local_py_maj_ver = '2'
 local_py_min_ver = '7'
 local_py_rev_ver = '15.7'
