@@ -26,7 +26,7 @@ prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc 
 prebuildopts += ' make no-latte no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg && '
 prebuildopts += ' make package-update && '
 # go to folder ./lib/reax and make package reax
-prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
+# prebuildopts += ' pushd ../lib/reax && make -f Makefile.gfortran && popd && '
 # go to folder ./lib/gpu, create Makefile.gpu and correct file ./lib/gpu/geryon/nvd_device.h
 prebuildopts += ' pushd ../lib/gpu && sed -e "s/-march=bdver1//g" -e "s/sm_[0-9]*/sm_60/g" Makefile.xk7 > Makefile.gpu && '
 prebuildopts += ' make -f Makefile.gpu && popd && '
