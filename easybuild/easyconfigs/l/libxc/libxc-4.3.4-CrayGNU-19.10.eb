@@ -1,6 +1,5 @@
-# contributed by Simon Pintarelli (CSCS)
-
-easyblock = 'CMakeMake'
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
 
 name = 'libxc'
 version = "4.3.4"
@@ -13,20 +12,15 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'opt': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['https://gitlab.com/libxc/libxc/-/archive/%s/libxc-%s.tar.gz' % (version, version)]
+source_urls = ['http://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
 
-separate_build_dir = True
-preconfigopts = 'export FC="$F77" && export FCFLAGS="$FFLAGS" &&'
-configopts = '-DBUILD_SHARED_LIBS=On'
-builddependencies = [
-    ('CMake', '3.14.5', '', True),
-]
+configopts = 'FC="$F77" FCFLAGS="$FFLAGS" --enable-shared'
 
 sanity_check_paths = {
-    'files': ['lib64/libxc.so'],
+    'files': ['lib/libxc.a', 'lib/libxc.so', 
+              'lib/libxcf03.a', 'lib/libxcf03.so',
+              'lib/libxcf90.a', 'lib/libxcf90.so'],
     'dirs': ['include'],
 }
-
-parallel = 10
 
 moduleclass = 'chem'
