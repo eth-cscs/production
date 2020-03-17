@@ -17,13 +17,13 @@ source_urls = ['https://gitlab.com/libxc/libxc/-/archive/%s/libxc-%s.tar.gz' % (
 
 separate_build_dir = True
 preconfigopts = 'export FC="$F77" && export FCFLAGS="$FFLAGS" &&'
-configopts = '-DBUILD_SHARED_LIBS=On'
+configopts = '-DBUILD_SHARED_LIBS=On -DENABLE_FORTRAN=On -DENABLE_FORTRAN03=On'
 builddependencies = [
     ('CMake', '3.14.5', '', True),
 ]
 
 sanity_check_paths = {
-    'files': ['lib64/libxc.so'],
+    'files': ['lib64/libxc.so', 'lib64/libxcf90.a', 'lib64/libxcf90.so'],
     'dirs': ['include'],
 }
 
