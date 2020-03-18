@@ -12,12 +12,13 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'opt': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['http://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
+source_urls = ['https://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
+checksums = ['a8ee37ddc5079339854bd313272856c9d41a27802472ee9ae44b58ee9a298337']
 
 configopts = 'FC="$F77" FCFLAGS="$FFLAGS" --enable-shared'
 
 sanity_check_paths = {
-    'files': ['lib/libxc.a', 'lib/libxc.so', 
+    'files': ['lib/libxc.a', 'lib/libxc.so',
               'lib/libxcf03.a', 'lib/libxcf03.so',
               'lib/libxcf90.a', 'lib/libxcf90.so'],
     'dirs': ['include'],
