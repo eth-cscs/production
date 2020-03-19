@@ -21,8 +21,6 @@ sources = [
     }
 ]
 
-dependencies = [('setuptools', '41.0.1', '-py3'),
-                ('pip', '20.0.2', '-py3')]
 builddependencies = [('pip', '20.0.2', '-py3')]
 
 keepsymlinks = True
