@@ -32,7 +32,6 @@ postinstallcmds = [
 ]
 
 modtclfooter = '''
-prepend-path PATH %(installdir)s/installed_by_pip/bin
 prepend-path PYTHONPATH %(installdir)s/installed_by_pip/lib/python3.6/site-packages
 '''
 
@@ -41,5 +40,5 @@ sanity_check_paths = {
     'dirs':  ['bin', 'checks', 'checks/private', 'unittests'],
 }
 
-sanity_check_commands = ['reframe -V', 'pytest --version']
+sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
 moduleclass = 'devel'
