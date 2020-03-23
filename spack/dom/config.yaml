@@ -1,11 +1,11 @@
 # -------------------------------------------------------------------------
 # This is a per-user settings (overrides default and site settings):
-#  Should be copied to ~/.spack/cray/config.yaml on piz daint
+#  Should be copied to ~/.spack/cray/config.yaml on dom
 # -------------------------------------------------------------------------
 config:
   # This is the path to the root of the Spack install tree.
   # You can use $spack here to refer to the root of the spack instance.
-  install_tree: "${HOME}/daint/spack/opt"
+  install_tree: "${HOME}/dom/spack/opt"
   # Locations where templates should be found
   template_dirs:
     - $spack/share/spack/templates
@@ -13,8 +13,8 @@ config:
   install_path_scheme: "${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}/${VERSION}"
   # Locations where different types of modules should be installed.
   module_roots:
-    tcl:    "${HOME}/daint/spack/share/modules"
-    lmod:   "${HOME}/daint/spack/share/lmod"
+    tcl:    "${HOME}/dom/spack/share/modules"
+    lmod:   "${HOME}/dom/spack/share/lmod"
   # Temporary locations Spack can try to use for builds.
   # Spack will use the first one it finds that exists and is writable.
   # You can use $tempdir to refer to the system default temp directory
@@ -28,7 +28,7 @@ config:
     - $spack/var/spack/stage
   # Cache directory for already downloaded source tarballs and archived
   # repositories. This can be purged with `spack clean --downloads`.
-  source_cache: "${HOME}/daint/spack/var/cache"
+  source_cache: "${HOME}/dom/spack/var/cache"
   # Cache directory for miscellaneous files, like the package index.
   # This can be purged with `spack clean --misc-cache`
   misc_cache: ~/.spack/cache
