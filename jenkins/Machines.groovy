@@ -30,4 +30,12 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
 
-return [daint, dom, kesch, tsa]
+def TSAtds = [name: 'TSAtds',
+           archs: [],
+           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
+           unusePath: '/apps/arolla/UES/modulefiles',
+           modulesProduction: '',
+           modulesUnuseProduction: '',
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
+
+return [daint, dom, kesch, tsa, TSAtds]
