@@ -37,6 +37,7 @@
  jupyterlab-1.1.1-CrayGNU-19.10.eb                  --set-default-module
  jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb
  LAMMPS-22Aug2018-CrayGNU-19.10.eb                  --set-default-module
+ LAMMPS-03Mar2020-CrayGNU-19.10.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  MATLAB-R2019a.eb
  NAMD-2.13-CrayIntel-19.10.eb                       --set-default-module
