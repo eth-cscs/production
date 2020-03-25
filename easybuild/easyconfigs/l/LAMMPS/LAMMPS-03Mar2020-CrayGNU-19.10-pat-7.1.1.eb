@@ -10,7 +10,7 @@ local_py_rev_ver = '15.7'
 local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
 local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
 local_patversion = '7.1.1'
-versionsuffix = '-pat%s' % (local_patversion)
+versionsuffix = '-pat-%s' % (local_patversion)
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
