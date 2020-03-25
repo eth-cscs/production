@@ -4,9 +4,12 @@ easyblock = 'Tarball'
 
 name = 'reframe'
 version = '3.0-dev2'
-homepage = 'https://eth-cscs.github.io/reframe'
+
+homepage = 'https://github.com/eth-cscs/reframe'
 description = 'A regression framework for writing portable tests for HPC systems.'
+
 toolchain = SYSTEM
+
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
@@ -17,15 +20,25 @@ sources = [
                     '%(name)s/reframe-tests-%(version)s.tar.gz'
     }
 ]
-dependencies = [('Python-bare', '3.6.10')]
+
+builddependencies = [('pip', '20.0.2', '-py3')]
+
 keepsymlinks = True
 postinstallcmds = [
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
     'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
-    'mv %(installdir)s/cscs-checks %(installdir)s/checks'
+    'mv %(installdir)s/cscs-checks %(installdir)s/checks',
+    'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --user -r %(builddir)s/reframe-%(version)s/requirements.txt',
 ]
+
+modtclfooter = '''
+prepend-path PYTHONPATH %(installdir)s/installed_by_pip/lib/python3.6/site-packages
+'''
+
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py'],
     'dirs':  ['bin', 'checks', 'checks/private', 'unittests'],
 }
+
+sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
 moduleclass = 'devel'
