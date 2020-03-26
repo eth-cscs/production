@@ -1,0 +1,22 @@
+# jgp (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'cgdb'
+version = 'v0.7.1'
+homepage = 'http://cgdb.github.io'
+description = """cgdb: Curses-based interface to the GNU Debugger GDB """
+toolchain = SYSTEM
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+preconfigopts = './autogen.sh &&'
+checksums = ['1574ff7b666a27d470dded1daca94471'] 
+# deps no longer required: help2man, libreadline/ncurses, system libs are fine
+# configopts  = ' --with-readline=$EBROOTLIBREADLINE'
+# configopts += ' --with-ncurses=$EBROOTNCURSES'
+# configopts += ' HAS_HELP2MAN=yes'
+sanity_check_paths = {
+    'files': ['bin/cgdb'],
+    'dirs': ['share/info']
+}
+
+moduleclass = 'debugger'
