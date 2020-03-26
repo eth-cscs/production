@@ -1,0 +1,19 @@
+diff -Naur colordiff-1.0.18.ori/Makefile colordiff-1.0.18/Makefile
+--- colordiff-1.0.18.ori/Makefile	2016-11-12 13:12:14.000000000 +0100
++++ colordiff-1.0.18/Makefile	2020-03-25 15:20:27.094994000 +0100
+@@ -10,14 +10,7 @@
+ 
+ .PHONY: doc
+ doc: colordiff.xml cdiff.xml
+-	xmlto -vv man colordiff.xml
+-	xmlto -vv man cdiff.xml
+-	xmlto -vv txt colordiff.xml
+-	xmlto -vv html-nochunks colordiff.xml
+-	mv colordiff.txt README
+-	perl -p -i -e 's#<head>#<head><link rel=\"stylesheet\" type=\"text/css\" href=\"colordiff.css\">#' colordiff.html
+-	perl -p -i -e 's#</body>#</div></body>#' colordiff.html
+-	perl -p -i -e 's#<div class=\"refentry\"#<div id=\"content\"><div class=\"refentry\"#' colordiff.html
++	@echo cscs
+ 
+ .PHONY: install
+ install:

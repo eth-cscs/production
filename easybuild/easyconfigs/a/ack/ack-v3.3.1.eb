@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'Binary'
+
+name = 'ack'
+version = 'v3.3.1'
+homepage = 'https://beyondgrep.com/'
+description = """ack is a grep-like source code search tool."""
+
+toolchain = SYSTEM
+source_urls = ['https://beyondgrep.com']
+sources = ['%(namelower)s-%(version)s']
+checksums = ['5791e8910a0a56d65ef93bdee7a14e92']
+install_cmd = 'mkdir %(installdir)s/bin;' + \
+              'cp %(namelower)s-%(version)s %(installdir)s/bin'
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-%(version)s'],
+    'dirs': []
+}
+
+moduleclass = 'tools'
