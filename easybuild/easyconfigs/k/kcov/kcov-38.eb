@@ -17,6 +17,7 @@ configopts = '-DLIBDW_LIBRARY=$EBROOTELFUTILS/lib/libdw.so '
 configopts += '-DLIBDW_INCLUDE_DIR=$EBROOTELFUTILS/include '
 configopts += '-DDWARF_INCLUDE_DIR=$EBROOTELFUTILS/include '
 configopts += '-DCMAKE_CXX_FLAGS=-I$EBROOTELFUTILS/include '
+configopts += '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
 sanity_check_paths = {
     'files': ['bin/kcov'],
     'dirs': ['share/man/man1'],
