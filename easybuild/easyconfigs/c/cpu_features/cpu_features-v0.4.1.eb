@@ -1,7 +1,7 @@
 # jg (cscs)
 easyblock = 'CMakeMake'
 
-name = 'cpu-features'
+name = 'cpu_features'
 version = 'v0.4.1'
 homepage = 'https://github.com/google/cpu_features'
 description = """A cross platform C99 library to get cpu features at runtime."""
