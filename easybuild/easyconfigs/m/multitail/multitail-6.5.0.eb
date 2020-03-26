@@ -14,7 +14,7 @@ files_to_copy = [
     (['multitail.conf'], 'etc'),
 ]
 dependencies = [("ncurses", "6.1")]
-prebuildopts = 'DESTDIR=%(installdir)s '
+prebuildopts = 'DESTDIR=%(installdir)s CC=gcc '
 sanity_check_paths = {
     'files': ['bin/multitail'],
     'dirs': [],
