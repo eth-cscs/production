@@ -1,5 +1,4 @@
-# contributed by Simon Pintarelli (CSCS)
-
+# contributed by Simon Pintarelli, Anton Kozhevnikov and Luca Marsella (CSCS)
 easyblock = 'CMakeMake'
 
 name = 'libxc'
@@ -13,20 +12,24 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'opt': True}
 
 sources = [SOURCE_TAR_GZ]
-source_urls = ['https://gitlab.com/libxc/libxc/-/archive/%s/libxc-%s.tar.gz' % (version, version)]
+source_urls = ['https://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
+checksums = ['a8ee37ddc5079339854bd313272856c9d41a27802472ee9ae44b58ee9a298337']
 
-separate_build_dir = True
-preconfigopts = 'export FC="$F77" && export FCFLAGS="$FFLAGS" &&'
-configopts = '-DBUILD_SHARED_LIBS=On -DENABLE_FORTRAN=On -DENABLE_FORTRAN03=On'
 builddependencies = [
     ('CMake', '3.14.5', '', True),
 ]
 
+# the build fails if not using a separate folder
+separate_build_dir = True
+
+commonopts = ' -DENABLE_FORTRAN=ON -DENABLE_FORTRAN03=ON -DCMAKE_INSTALL_LIBDIR=lib '
+configopts = [ commonopts, commonopts+' -DBUILD_SHARED_LIBS=ON '] 
+
 sanity_check_paths = {
-    'files': ['lib64/libxc.so', 'lib64/libxcf90.so', 'lib64/libxcf90.so'],
+    'files': ['lib/libxc.a', 'lib/libxc.so',
+              'lib/libxcf03.a', 'lib/libxcf03.so',
+              'lib/libxcf90.a', 'lib/libxcf90.so'],
     'dirs': ['include'],
 }
-
-parallel = 10
 
 moduleclass = 'chem'
