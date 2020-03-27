@@ -7,7 +7,8 @@ CPP_OPTIONS= -DHOST=\"LinuxIFC\"\
              -Davoidalloc \
              -Duse_bse_te \
              -Dtbdyn \
-             -Duse_shmem
+             -Duse_shmem \
+             -DVASP2WANNIER90v2
 
 CPP        = fpp -f_com=no -free -w0  $*$(FUFFIX) $*$(SUFFIX) $(CPP_OPTIONS)
 
@@ -25,11 +26,12 @@ BLAS       = $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a
 LAPACK     = $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a
 BLACS      = -lmkl_blacs_intelmpi_lp64
 SCALAPACK  = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
 FFT_LIB    = -L$(FFTW_DIR) -lfftw3                                           
 INCS       = -I$(FFTW_INC)           
-LLIBS      = $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(FFT_LIB)
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(FFT_LIB)
 
 OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
 OBJECTS_O2 += fft3dlib.o
