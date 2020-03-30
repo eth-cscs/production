@@ -31,9 +31,9 @@ postinstallcmds = [
     'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --user -r %(builddir)s/reframe-%(version)s/requirements.txt',
 ]
 
-modtclfooter = '''
-prepend-path PYTHONPATH %(installdir)s/installed_by_pip/lib/python3.6/site-packages
-'''
+modextrapaths = {
+    'PYTHONPATH': 'installed_by_pip/lib/python3.6/site-packages'
+}
 
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py'],
