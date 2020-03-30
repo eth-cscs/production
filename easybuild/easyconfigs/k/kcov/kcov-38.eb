@@ -1,0 +1,25 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'kcov'
+version = '38'
+homepage = 'http://simonkagstrom.github.io/kcov/'
+description = """Kcov is a code coverage tester for compiled programs, Python
+scripts and shell scripts. It allows collecting code coverage information from
+executables without special command-line arguments, and continuously produces
+output from long-running applications."""
+toolchain = SYSTEM
+source_urls = ['https://github.com/SimonKagstrom/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+separate_build_dir = True
+dependencies = [('elfutils', '0.178')]
+configopts = '-DLIBDW_LIBRARY=$EBROOTELFUTILS/lib/libdw.so '
+configopts += '-DLIBDW_INCLUDE_DIR=$EBROOTELFUTILS/include '
+configopts += '-DDWARF_INCLUDE_DIR=$EBROOTELFUTILS/include '
+configopts += '-DCMAKE_CXX_FLAGS=-I$EBROOTELFUTILS/include '
+configopts += '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
+sanity_check_paths = {
+    'files': ['bin/kcov'],
+    'dirs': ['share/man/man1'],
+}
+moduleclass = 'devel'

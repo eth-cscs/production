@@ -82,7 +82,11 @@ if { [ string match *daint* $system ] } {
 } elseif { [ string match *arolla* $system ] || [ string match *tsa* $system ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
-    setenv EASYBUILD_MODULES_TOOL               EnvironmentModules
+    if { [ string match tsa-ln003 $::env(HOSTNAME) ] } {
+        setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
+    } else {
+        setenv EASYBUILD_MODULES_TOOL               EnvironmentModules
+    }
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
     setenv EASYBUILD_RPATH                      1
 } elseif { [ string match *fulen* $system ] } {

@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'multitime'
+version = '1.4'
+homepage = 'https://tratt.net/laurie/src/multitime'
+description = """multitime is, in essence, a simple extension to time which
+runs a command multiple times and prints the timing means, standard deviations,
+mins, medians, and maxes having done so. This can give a much better
+understanding of the command's performance."""
+toolchain = SYSTEM
+source_urls = ['https://tratt.net/laurie/src/%(name)s/releases']
+sources = ['%(name)s-%(version)s.tar.gz']
+checksums = ['dc9d24f8262e1093eb6180c7accbf699']
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'devel'
