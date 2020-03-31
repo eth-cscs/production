@@ -1,0 +1,17 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'cpu_features'
+version = 'v0.4.1'
+homepage = 'https://github.com/google/cpu_features'
+description = """A cross platform C99 library to get cpu features at runtime."""
+toolchain = SYSTEM
+source_urls = ['https://github.com/google/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+separate_build_dir = True
+configopts = '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
+sanity_check_paths = {
+    'files': ['bin/list_cpu_features'],
+    'dirs': ['include/cpu_features'],
+}
+moduleclass = 'devel'

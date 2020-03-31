@@ -3,7 +3,7 @@
 easyblock = 'Tarball'
 
 name = 'reframe'
-version = '3.0-dev2'
+version = '3.0-dev3'
 
 homepage = 'https://github.com/eth-cscs/reframe'
 description = 'A regression framework for writing portable tests for HPC systems.'
@@ -28,7 +28,7 @@ postinstallcmds = [
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
     'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
     'mv %(installdir)s/cscs-checks %(installdir)s/checks',
-    'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install '
+    'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --upgrade '
     '--user -r %(builddir)s/reframe-%(version)s/requirements.txt pygelf',
 ]
 

@@ -29,7 +29,6 @@
  h5py-2.8.0-CrayGNU-19.10-python3-serial.eb
  IDL-8.5.1.eb                                       --set-default-module
  IDL-8.7.2-CSCS.eb
- ipykernel-4.8.2-CrayGNU-19.10-python2.eb
  ipyparallel-6.2.4-CrayGNU-19.10-python3.eb
  Julia-1.2.0-CrayGNU-19.10.eb                       --set-default-module
  JuliaExtensions-1.2.0-CrayGNU-19.10.eb             --set-default-module
@@ -37,6 +36,7 @@
  jupyterlab-1.1.1-CrayGNU-19.10.eb                  --set-default-module
  jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb
  LAMMPS-22Aug2018-CrayGNU-19.10.eb                  --set-default-module
+ LAMMPS-03Mar2020-CrayGNU-19.10.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  MATLAB-R2019a.eb
  NAMD-2.13-CrayIntel-19.10.eb                       --set-default-module
@@ -62,6 +62,7 @@
  advisor_2020.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  CubeGUI-4.4.3.eb                                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  ddt-20.0-Suse-15.0.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
+ cgdb-v0.7.1.eb                                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  Extrae-3.7.1-CrayGNU-19.10.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  gperftools-2.7.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  inspector_2020.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
