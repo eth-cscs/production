@@ -28,7 +28,7 @@ postinstallcmds = [
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
     'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
     'mv %(installdir)s/cscs-checks %(installdir)s/checks',
-    'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install '
+    'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --upgrade '
     '--user -r %(builddir)s/reframe-%(version)s/requirements.txt pygelf',
 ]
 
