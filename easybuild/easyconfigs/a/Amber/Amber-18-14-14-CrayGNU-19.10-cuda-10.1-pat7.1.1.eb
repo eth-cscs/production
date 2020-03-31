@@ -29,6 +29,7 @@ dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('perftools-lite-gpu/%s' % local_patversion, EXTERNAL_MODULE)
 ]
 
 builddependencies = [
@@ -44,7 +45,8 @@ prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HO
 prebuildopts += './update_amber --update-to %s/%s && ' % ("AmberTools", local_patchlevels[0])
 prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", local_patchlevels[1])
 #
-prebuildopts += './configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< Y;'
+prebuildopts += 'module unload perftools-lite-gpu && ./configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< Y; module load perftools-lite-gpu/%s && ' % local_patversion
+#prebuildopts += './configure -mpi -cuda -noX11 -crayxt5 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< Y;'
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 
 buildopts = 'install'
