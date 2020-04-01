@@ -3,7 +3,7 @@
 easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO-SIRIUS'
-version = '6.5'
+version = '6.5-rc4'
 local_siriusversion='6.5.2'
 local_cudaversion = 10.1
 versionsuffix = '-SIRIUS-%s-cuda-%s' % (local_siriusversion, local_cudaversion)
