@@ -30,7 +30,7 @@ dependencies = [
 
 separate_build_dir = True
 
-common_prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && module list &&'
+local_common_prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && module list &&'
 
 prebuildopts = [ local_common_prebuildopts ]
 
