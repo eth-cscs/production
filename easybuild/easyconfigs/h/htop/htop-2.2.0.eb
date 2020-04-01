@@ -1,0 +1,18 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'htop'
+version = "2.2.0"
+homepage = 'http://hisham.hm/htop/'
+description = """An interactive process viewer for Unix"""
+toolchain = SYSTEM
+source_urls = ['http://hisham.hm/htop/releases/%(version)s/']
+sources = [SOURCE_TAR_GZ]
+dependencies = [('ncurses', '6.1')]
+preconfigopts = 'LIBS="$LIBS -ltinfo"'
+sanity_check_paths = {
+    'files': ['bin/htop'],
+    'dirs': ['share'],
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,19 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'fzf-bin'
+version = '0.21.0'
+versionsuffix = '-linux_amd64'
+homepage = 'https://github.com/junegunn/fzf'
+description = """fzf is a general-purpose command-line fuzzy finder."""
+toolchain = SYSTEM
+source_urls = ['https://github.com/junegunn/%(name)s/releases/download/%(version)s']
+sources = ['fzf-%(version)s%(versionsuffix)s.tgz']
+checksums = ['50b640a5c84d4fc89aa7ba418ddd973a']
+sanity_check_paths = {
+    'files': ['fzf'],
+    'dirs': [],
+}
+modextrapaths = {'PATH': '.'}
+
+moduleclass = 'tools'

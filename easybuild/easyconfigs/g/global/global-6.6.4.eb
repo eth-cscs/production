@@ -1,0 +1,17 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'global'
+version = '6.6.4'
+homepage = 'https://www.gnu.org/software/global/'
+description = """The Gnu Global tagging system."""
+toolchain = SYSTEM
+source_urls = ['https://ftp.gnu.org/pub/gnu/%(name)s']
+sources = ['%(name)s-%(version)s.tar.gz']
+checksums = ['7bad75f960e7971b0e4052b763361300']
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'devel'
