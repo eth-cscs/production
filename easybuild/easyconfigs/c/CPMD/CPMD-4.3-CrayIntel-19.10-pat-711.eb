@@ -20,9 +20,18 @@ sources = [
     '/apps/common/UES/easybuild/sources/c/CPMD/cpmd-v%s.tar.gz' %version
 ]
 
-patches = ['patch.to.4612', 'patch.to.4615', 'patch.to.4616', 'patch.to.4621', 'patch.to.4624', ('CRAY-XE6-INTEL', 'CPMD/configure')]
+patches = ['/apps/common/UES/easybuild/sources/c/CPMD/patch.to.4612',
+           '/apps/common/UES/easybuild/sources/c/CPMD/patch.to.4615',
+           '/apps/common/UES/easybuild/sources/c/CPMD/patch.to.4616',
+           '/apps/common/UES/easybuild/sources/c/CPMD/patch.to.4621',
+           '/apps/common/UES/easybuild/sources/c/CPMD/patch.to.4624',
+           ('/apps/common/UES/easybuild/sources/c/CPMD/CRAY-XE6-INTEL',
+            'CPMD/configure')
+]
 
-dependencies = [('cray-fftw', EXTERNAL_MODULE), ('perftools-lite', EXTERNAL_MODULE)]
+dependencies = [('cray-fftw', EXTERNAL_MODULE),
+                ('perftools-lite', EXTERNAL_MODULE)
+]
 
 skipsteps = ['configure']
 
