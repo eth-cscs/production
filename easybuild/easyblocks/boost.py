@@ -142,45 +142,14 @@ class EB_Boost(EasyBlock):
             txt = ''
             # Check if using a Cray toolchain and configure MPI accordingly
             if self.toolchain.toolchain_family() == toolchain.CRAYPE:
-                if self.toolchain.PRGENV_MODULE_NAME_SUFFIX == 'gnu':
-                    craympichdir = os.getenv('CRAY_MPICH2_DIR')
-                    craygccversion = os.getenv('GCC_VERSION')
-                    txt = '\n'.join([
-                        'local CRAY_MPICH2_DIR =  %s ;' % craympichdir,
-                        'using gcc ',
-                        ': %s' % craygccversion,
-                        ': CC ',
-                        ': <compileflags>-I$(CRAY_MPICH2_DIR)/include ',
-                        '  <linkflags>-L$(CRAY_MPICH2_DIR)/lib \ ',
-                        '; ',
-                        'using mpi ',
-                        ': CC ',
-                        ': <find-shared-library>mpich ',
-                        ': %s' % self.cfg['mpi_launcher'],
-                        ';',
-                        '',
-                    ])
-                elif self.toolchain.PRGENV_MODULE_NAME_SUFFIX == 'intel':
-                    craympichdir = os.getenv('CRAY_MPICH2_DIR')
-                    crayintelversion = os.getenv('INTEL_VERSION')
-                    txt = '\n'.join([
-                        'local CRAY_MPICH2_DIR = %s ;' % craympichdir,
-                        'using intel-linux ',
-                        ': %s '%crayintelversion,
-                        ': CC ',
-                        ': <compileflags>-I$(CRAY_MPICH2_DIR)/include ',
-                        '  <linkflags>-L$(CRAY_MPICH2_DIR)/lib \ ',
-                        '; ',
-                        'using mpi ',
-                        ': ',
-                        ': <find-shared-library>mpich ',
-                        ';',
-                        '',
-                    ])
-                    # rename project-config.jam to avoid conflicts with user-config.jam
-                    os.rename(r'project-config.jam',r'project-config.jam.bak')
-                else:
-                    raise EasyBuildError("Bailing out: only PrgEnv-gnu and PrgEng-intel supported for now")
+                craympichdir = os.getenv('CRAY_MPICH2_DIR')
+                txt = '\n'.join([
+                    'local CRAY_MPICH2_DIR = %s ;' % craympichdir,
+                    'using mpi : CC : ',
+                    ' <include>$(CRAY_MPICH2_DIR)/include ',
+                    ' <library-path>$(CRAY_MPICH2_DIR)/lib ',
+                    ';',
+                ])
             else:
                 txt = "using mpi : %s ;" % os.getenv("MPICXX")
 

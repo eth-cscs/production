@@ -33,7 +33,7 @@ dependencies = [
      EXTERNAL_MODULE),
 ]
 
-patches = ['Boost-1.67.0_python%s.patch' % local_py_maj_ver]
+patches = ['Boost-1.70.0-python%s.patch' % local_py_maj_ver]
 
 # CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
 #
