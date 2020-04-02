@@ -1,6 +1,6 @@
 # contributed by Luca Marsella (CSCS)
 name = 'Boost'
-version = '1.70.0'
+version = '1.72.0'
 
 homepage = 'http://www.boost.org/'
 description = """
