@@ -1,0 +1,26 @@
+diff -ruN configure/CRAY-XE6-INTEL configure/CRAY-XE6-INTEL
+--- configure/CRAY-XE6-INTEL	2018-12-20 15:13:34.000000000 +0100
++++ configure/CRAY-XE6-INTEL	2020-04-02 10:12:43.000000000 +0200
+@@ -10,7 +10,7 @@
+      FC='ftn'
+      CC='cc'
+      LD='ftn'
+-     CPP='/usr/bin/cpp -P -C -traditional'
++     CPP='fpp'
+      CPPFLAGS='-D__Linux  -D__HAS_FFT_DEFAULT -D__PARALLEL -D__HAS_SIZEOF -D__HASNT_F08_ISO_FORTRAN_ENV'
+      FFLAGS_GROMOS='$(FFLAGS) -fixed' 
+      FFLAGS_GROMOS_MODULES='$(FFLAGS)'
+diff -ruN configure/CRAY-XE6-INTEL-CUDA configure/CRAY-XE6-INTEL-CUDA
+--- configure/CRAY-XE6-INTEL-CUDA	2018-12-20 15:13:34.000000000 +0100
++++ configure/CRAY-XE6-INTEL-CUDA	2020-04-02 10:23:14.000000000 +0200
+@@ -11,8 +11,8 @@
+      CC='cc'
+      LD='ftn'
+      NVCC=${CUDA_PATH}'/bin/nvcc'
+-     NVCCFLAGS='--default-stream per-thread -O3 -m64 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37'
+-     CPP='/usr/bin/cpp -P -C -traditional'
++     NVCCFLAGS='--default-stream per-thread -O3 -m64 -gencode arch=compute_60,code=sm_60'
++     CPP='fpp'
+      CPPFLAGS='-D__Linux  -D__HAS_FFT_DEFAULT -D__PARALLEL -D__HAS_SIZEOF -D__HAS_CUDA -D__HASNT_F08_ISO_FORTRAN_ENV'
+      FFLAGS_GROMOS='$(FFLAGS) -fixed' 
+      FFLAGS_GROMOS_MODULES='$(FFLAGS)'
