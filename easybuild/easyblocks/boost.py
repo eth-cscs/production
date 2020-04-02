@@ -155,11 +155,12 @@ class EB_Boost(EasyBlock):
 
             write_file('user-config.jam', txt, append=True)
 
-    def build_boost_variant(self, bjamoptions, paracmd):
-        """Build Boost library with specified options for bjam."""
-        # only b2 is copied by bootstrap.sh to the current working directory
+        # If version > 1.70.0 only b2 is copied locally by bootstrap.sh
         if LooseVersion(self.version) > LooseVersion("1.70.0"):
            os.system("ln -s b2 bjam")
+
+    def build_boost_variant(self, bjamoptions, paracmd):
+        """Build Boost library with specified options for bjam."""
         # build with specified options
         cmd = "%s ./bjam %s %s %s" % (self.cfg['prebuildopts'], bjamoptions, paracmd, self.cfg['buildopts'])
         run_cmd(cmd, log_all=True, simple=True)
