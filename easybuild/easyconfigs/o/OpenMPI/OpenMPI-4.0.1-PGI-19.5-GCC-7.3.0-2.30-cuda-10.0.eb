@@ -1,0 +1,78 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+name = 'OpenMPI'
+version = "4.0.1"
+cudamajversion = '10'
+cudaminversion = '0'
+cudarevversion = '130'
+cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
+cudaversion = '%s.%s' % (cudarelease, cudarevversion)
+versionsuffix = '-cuda-%s' % cudarelease
+
+homepage = 'https://www.open-mpi.org/'
+description = """
+    The Open MPI Project is an open source MPI-3 implementation.
+"""
+
+toolchain = {'name': 'PGI', 'version': '19.5-GCC-7.3.0-2.30'}
+toolchainopts = {'vectorize': False}
+
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('cuda%s/toolkit/%s' % (cudarelease, cudaversion), EXTERNAL_MODULE),
+    ('UCX', '1.5.2', '-cuda-%s' % cudarelease, ('GCCcore', '7.3.0')),
+]
+
+configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgfortran "
+    "CFLAGS=-m64 "
+    "CXXFLAGS=-m64 "
+    "FCFLAGS=-m64 "
+    "--with-cuda=${EBROOTCUDA} "
+    "--with-hwloc=internal "
+    "--with-pmi=/opt/slurm/default "
+    "--with-ucx=${EBROOTUCX} "
+    "--with-zlib "
+    "--without-alps "
+    "--without-libfabric "
+    "--without-lsf "
+    "--without-mxm "
+    "--without-psm2 "
+    "--without-sge "
+    "--without-tm "
+    "--without-verbs "
+    "--enable-cxx-exceptions "
+    "--enable-dlopen "
+    "--enable-mca-no-build=btl-uct "
+    "--enable-mpi-cxx "
+    "--enable-mpirun-prefix-by-default "
+    "--enable-shared "
+    "--enable-static "
+    "--disable-memchecker "
+)
+
+parallel = 8
+
+postinstallcmds = [
+    "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
+    "sed -i -e '50 i pml=ucx' %(installdir)s/etc/%(namelower)s-mca-params.conf",
+]
+
+modtclfooter = """
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+"""
+
+libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

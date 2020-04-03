@@ -1,0 +1,22 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'colordiff'
+version = '1.0.18'
+homepage = 'https://www.colordiff.org'
+description = """Colorful diff utility."""
+toolchain = SYSTEM
+source_urls = ['https://www.colordiff.org']
+sources = ['%(namelower)s-%(version)s.tar.gz']
+checksums = ['07658f09a44f30a3b5c1cea9c132baed']
+patches = ['%(namelower)s-%(version)s.patch']
+skipsteps = ['configure']
+installopts = 'INSTALL_DIR=%(installdir)s/bin ' + \
+              'MAN_DIR=%(installdir)s/man ' + \
+              'ETC_DIR=%(installdir)s/etc '
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['etc']
+}
+
+moduleclass = 'tools'

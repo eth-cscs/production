@@ -9,7 +9,7 @@ description = """
     libtool
 """
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 dependencies = [
     ('Autoconf', '2.69'),

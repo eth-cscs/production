@@ -499,6 +499,18 @@ exts_list = [
         'use_pip': True,
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
         }),
+    ('ipyparallel', '6.2.4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/i/ipyparallel/'],
+        }),
+    ('docopt', '0.6.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/d/docopt/'],
+        }),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module

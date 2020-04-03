@@ -1,0 +1,51 @@
+# @author: gppezzi
+name = 'R'
+version = '3.4.2'
+
+homepage = 'http://www.r-project.org/'
+description = "R is a free software environment for statistical computing and graphics."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+source_urls = ['http://cran.us.r-project.org/src/base/R-%(version_major)s']
+sources = [SOURCE_TAR_GZ]  # -- Disabling Rmpi since it requires MPI_Comm_spawn (not implemented yet by Cray MPT)
+
+dependencies = [
+    ('libreadline', '8.0'),
+    ('ncurses', '6.1'),
+    ('bzip2', '1.0.6'),
+    ('XZ', '5.2.3'),
+    ('PCRE', '8.42'),
+    ('libpng', '1.6.34'),  # for plotting in R
+    ('libjpeg-turbo', '1.5.3'),  # for plottting in R
+    ('Tcl', '8.6.7'),
+    ('Tk', '8.6.7'),  # for tcltk
+    ('cURL', '7.61.1'),  # for RCurl
+    ('libxml2', '2.9.7'),  # for XML
+    ('GMP', '6.1.2'),  # for igraph
+]
+
+osdependencies = ['java', ('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
+
+preconfigopts = 'BLAS_LIBS="$LIBBLAS" LAPACK_LIBS="$LIBLAPACK" LDFLAGS="$LDFLAGS `pkg-config --libs AtpSigHandler`" '
+configopts = "--with-lapack --with-blas --with-pic --enable-threads --with-x=no --enable-R-shlib --with-recommended-packages=no"
+
+# !! order of packages is important !!
+exts_list = [
+    'base',
+    'datasets',
+    'graphics',
+    'grDevices',
+    'grid',
+    'methods',
+    'splines',
+    'stats',
+    'stats4',
+    'tools',
+    'utils',
+    ('lattice', '0.20-35', {'source_tmpl': '%(name)s_%(version)s.tar.gz', 'source_urls': ['http://cran.r-project.org/src/contrib/Archive/%(name)s', 'http://cran.r-project.org/src/contrib/', 'http://cran.freestatistics.org/src/contrib']}),
+    ('sp', '1.2-5', {'source_tmpl': '%(name)s_%(version)s.tar.gz', 'source_urls': ['http://cran.r-project.org/src/contrib/Archive/%(name)s', 'http://cran.r-project.org/src/contrib/', 'http://cran.freestatistics.org/src/contrib']}),
+    ('rJava', '0.9-9', {'source_tmpl': '%(name)s_%(version)s.tar.gz', 'source_urls': ['http://cran.r-project.org/src/contrib/Archive/%(name)s', 'http://cran.r-project.org/src/contrib/', 'http://cran.freestatistics.org/src/contrib']}),
+]
+
+moduleclass = 'lang'

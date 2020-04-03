@@ -1,0 +1,31 @@
+# Updated by @gppezzi @jgphpc and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '1.9.6'
+
+homepage = 'https://code.zmaw.de/projects/cdo'
+description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
+
+toolchain = {'name': 'gmvolf', 'version': '18.12'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/19299/']
+
+dependencies = [
+    ('HDF5', '1.10.5'),
+    ('netCDF-Fortran', '4.4.5'),
+    # CDO: OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
+    # No MPI support
+]
+
+preconfigopts = 'export NC_CONFIG=$EBROOTNETCDF/bin/nc-config && '
+configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
+
+sanity_check_paths = {
+    'files': ["bin/cdo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

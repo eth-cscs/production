@@ -1,0 +1,75 @@
+# Modified for Tsa/Arolla by MKr - July 2019
+name = 'OpenMPI'
+version = '4.0.2'
+versionsuffix = '-cuda-10.1-RH7.7'
+
+homepage = 'https://www.open-mpi.org/'
+description = """
+    The Open MPI Project is an open source MPI-3 implementation.
+"""
+
+toolchain = {'name': 'PGI', 'version': '19.9-GCC-8.3.0'}
+
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('CUDA', '10.1.243', '', True),
+    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
+]
+
+configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgfortran "
+    "CFLAGS=-m64 "
+    "CXXFLAGS=-m64 "
+    "FCFLAGS=-m64 "
+    "--with-cuda=${EBROOTCUDA} "
+    "--with-hwloc=internal "
+    "--with-pmi=/opt/slurm/default "
+    "--with-ucx=${EBROOTUCX} "
+    "--with-zlib "
+    "--without-alps "
+    "--without-libfabric "
+    "--without-lsf "
+    "--without-mxm "
+    "--without-psm2 "
+    "--without-sge "
+    "--without-tm "
+    "--without-verbs "
+    "--enable-cxx-exceptions "
+    "--enable-dlopen "
+    "--enable-mca-no-build=btl-uct "
+    "--enable-mpi-cxx "
+    "--enable-mpirun-prefix-by-default "
+    "--enable-shared "
+    "--enable-static "
+    "--disable-memchecker "
+)
+
+parallel = 8
+
+postinstallcmds = [
+    "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
+    "sed -i -e '50 i pml=ucx' %(installdir)s/etc/%(namelower)s-mca-params.conf",
+]
+
+modtclfooter = """
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+"""
+
+sanity_check_paths = {
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 'lib/libompitrace.so', 
+        'lib/libopen-pal.so', 'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 'include/mpi.h', 
+        'include/mpi_portable_platform.h'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

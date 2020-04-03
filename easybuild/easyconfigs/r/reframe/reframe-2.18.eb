@@ -5,8 +5,10 @@ easyblock = 'Tarball'
 name = 'reframe'
 version = '2.18'
 homepage = 'https://eth-cscs.github.io/reframe'
-description = 'A regression framework for writing portable tests for HPC systems.'
-toolchain = {'name': 'dummy', 'version': ''}
+description = """
+    A regression framework for writing portable tests for HPC systems.
+"""
+toolchain = SYSTEM
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
@@ -17,7 +19,7 @@ sources = [
                     '%(name)s/reframe-tests-%(version)s.tar.gz'
     }
 ]
-dependencies = [('Python-bare', '3.7.3')]
+dependencies = [('Python-bare', '3.7.4')]
 keepsymlinks = True
 postinstallcmds = [
     'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',

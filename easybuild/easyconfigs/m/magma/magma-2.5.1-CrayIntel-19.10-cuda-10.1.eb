@@ -27,7 +27,7 @@ files_to_copy = ["lib", "include", "testing", "docs", "README", (['control/*.h']
 
 modextravars = { 'LD_LIBRARY_PATH':'$::env(CRAY_LD_LIBRARY_PATH):$::env(LD_LIBRARY_PATH)'}
 
-prebuildopts = 'mv make.inc-2.5.1 make.inc && CUDADIR=$CRAY_CUDATOOLKIT_DIR '
+prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && mv make.inc-2.5.1 make.inc && CUDADIR=$EBROOTCUDA '
 
 sanity_check_paths={
     'files': ['lib/libmagma.so', 'lib/libmagma.a'],

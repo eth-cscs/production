@@ -10,6 +10,8 @@ description = """The Ncurses (new curses) library is a free software emulation o
 toolchain = SYSTEM
 toolchainopts = {'optarch': True, 'pic': True}
 
+configopts = " CFLAGS='-fPIC' CXXFLAGS='-fPIC' "
+
 source_urls = [GNU_SOURCE]
 sources = [SOURCE_TAR_GZ]
 

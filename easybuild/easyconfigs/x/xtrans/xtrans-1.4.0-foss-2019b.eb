@@ -1,0 +1,41 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'xtrans'
+version = '1.4.0'
+
+homepage = 'http://www.freedesktop.org/wiki/Software/xlibs'
+description = """
+    xtrans includes a number of routines to make X implementations
+    transport-independent; at time of writing, it includes support
+    for UNIX sockets, IPv4, IPv6, and DECnet.
+"""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+
+source_urls = [
+    'https://github.com/freedesktop/xorg-libxtrans/archive/'
+]
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('gettext', '0.20.1', '', ('GCCcore', '8.3.0')),
+    ('xorg-macros', '1.19.2'),
+]
+
+preconfigopts = " ./autogen.sh && "
+
+sanity_check_paths = {
+    'files': [
+        'include/X11/Xtrans/transport.c',
+        'include/X11/Xtrans/Xtrans.c',
+        'include/X11/Xtrans/Xtrans.h',
+        'include/X11/Xtrans/Xtransint.h',
+        'include/X11/Xtrans/Xtranslcl.c',
+        'include/X11/Xtrans/Xtranssock.c',
+        'include/X11/Xtrans/Xtransutil.c'
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'devel'

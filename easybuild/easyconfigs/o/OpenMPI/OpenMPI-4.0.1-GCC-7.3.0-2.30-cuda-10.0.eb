@@ -1,0 +1,69 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '4.0.1'
+cudamajversion = '10'
+cudaminversion = '0'
+cudarevversion = '130'
+cudarelease = '%s.%s' % (cudamajversion, cudaminversion)
+cudaversion = '%s.%s' % (cudarelease, cudarevversion)
+versionsuffix = '-cuda-%s' % cudarelease
+
+homepage = 'https://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = {'name': 'GCC', 'version': '7.3.0-2.30'}
+toolchainopts = {'vectorize': False}
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = []
+
+builddependencies = [
+    ('cuda%s/toolkit/%s' % (cudarelease, cudaversion), EXTERNAL_MODULE),
+    ('UCX', '1.5.2', '-cuda-%s' % cudarelease, ('GCCcore','7.3.0')),
+]
+
+configopts = (
+    "--enable-shared "
+    "--with-pmi=/opt/slurm/default "
+    "--enable-static "
+    "--enable-mpi-cxx "
+    "--with-zlib "
+    "--without-libfabric "
+    "--with-ucx=${EBROOTUCX} "
+    "--without-mxm "
+    "--without-verbs "
+    "--without-psm2 "
+    "--without-alps "
+    "--without-tm "
+    "--without-loadleveler "
+    "--disable-memchecker "
+    "--with-hwloc=${EBROOTHWLOC} "
+    "--enable-dlopen "
+    "--enable-cxx-exceptions "
+    "--with-cuda=${EBROOTCUDA} "
+    "--without-lsf "
+    "--without-sge "
+    "--enable-mpirun-prefix-by-default "
+)
+
+postinstallcmds = [
+    "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/openmpi-mca-params.conf",
+    "sed -i -e '50 i pml=ucx' %(installdir)s/etc/openmpi-mca-params.conf",
+]
+
+modtclfooter = """
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
+"""
+
+libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
