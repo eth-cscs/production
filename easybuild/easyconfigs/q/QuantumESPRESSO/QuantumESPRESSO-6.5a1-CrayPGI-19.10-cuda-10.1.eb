@@ -30,12 +30,15 @@ configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 '
 configopts += ' --with-cuda-runtime=10.1 '
 
 # experimental CUDA-Aware MPI: add -D__GPU_MPI in make.inc
-prebuildopts = " sed -i 's/^DFLAGS .*/& -D__GPU_MPI/' make.inc && "
-prebuildopts += "sed -i 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' make.inc && "
-prebuildopts += "sed -i 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/'  make.inc && "
-prebuildopts += "sed -i 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' make.inc && "
-prebuildopts += "sed -i 's/^FFLAGS .*/FFLAGS         = -fast -mp/' make.inc && "
-prebuildopts += "sed -i 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs  -mp -Mcuda=cc60,cuda10.1/' make.inc && "
+prebuildopts = """
+    sed -i -e 's/^DFLAGS .*/& -D__GPU_MPI/' \
+    -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' \
+    -e 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/' \
+    -e 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' \
+    -e 's/^FFLAGS .*/FFLAGS         = -fast -mp/' \
+    -e 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs  -mp -Mcuda=cc60,cuda10.1/' \
+    make.inc &&
+"""
 prebuildopts += " cat make.inc && "
 buildopts = 'pw'
 
