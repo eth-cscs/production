@@ -1,0 +1,42 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Bundle'
+
+local_prgenv = 'pgi' 
+name = 'PrgEnv-%s' % local_prgenv
+version = '19.9'
+versionsuffix = '-nocuda'
+
+homepage = 'http://user.cscs.ch'
+description = """
+    The meta-module sets the MODULEPATH to access the following programming
+    environment: 
+        - %s %s (%s)
+""" % (name, version, versionsuffix) 
+
+toolchain = SYSTEM
+
+local_path='/apps/arolla/UES/jenkins/RH7.7/%s/%s%s/easybuild/modules/all' % (local_prgenv, version, versionsuffix)
+
+modtclfooter = """
+set list [exec ls --color=none %s ]
+lappend list binutils gcccore
+
+if { [module-info mode remove] || [module-info mode switch] } {
+ foreach module ${list} {
+  if { [is-loaded ${module}] } {
+   module unload ${module}
+  }
+ }
+ module unuse %s
+}
+
+if { [module-info mode load] } {
+ module use %s
+ if { ![ is-loaded %s/%s-gcc-8.3.0%s ] } {
+  module load openmpi/4.0.2-%s-%s-gcc-8.3.0%s
+ }
+}
+""" % (local_path, local_path, local_path, local_prgenv, version, versionsuffix,
+       local_prgenv, version, versionsuffix)
+
+moduleclass = 'devel'
