@@ -3,20 +3,22 @@ easyblock = 'Tarball'
 
 name = 'vampir'
 version = '9.6.0'
-archsuffix = '-linux-x86_64-setup'
+local_archsuffix = '-linux-x86_64-setup'
 
 homepage = 'http://www.vampir.eu'
-description = """The VAMPIR software tool provides an easy-to-use framework
-that enables developers to quickly display and analyze arbitrary program
-behavior at any level of detail. The tool suite implements optimized event
-analysis algorithms and customizable displays that enable fast and interactive
-rendering of very complex performance monitoring data."""
+description = """
+    The VAMPIR software tool provides an easy-to-use framework that enables
+    developers to quickly display and analyze arbitrary program behavior at
+    any level of detail. The tool suite implements optimized event analysis
+    algorithms and customizable displays that enable fast and interactive
+    rendering of very complex performance monitoring data.
+"""
 site_contacts = 'service@vampir.eu'
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 sources = [{
-  'filename': '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/{}-{}{}.tar.gz'.format(name, version, archsuffix),
-  # tgz created with `{name}-{version}{archsuffix}.bin --create-tar`
+  'filename': '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/{}-{}{}.tar.gz'.format(name, version, local_archsuffix),
+  # tgz created with `{name}-{version}{local_archsuffix}.bin --create-tar`
   'extract_cmd': "tar xf %s",
 }]
 checksums = ['3193ae316b2747b639714b33d5f03487']

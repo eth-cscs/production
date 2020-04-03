@@ -9,7 +9,7 @@ description = """Git is a free and open source distributed version control
 system designed to handle everything from small to very large projects with
 speed and efficiency."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 source_urls = ['https://github.com/git/git/archive']
 sources = ['v%(version)s.tar.gz']
