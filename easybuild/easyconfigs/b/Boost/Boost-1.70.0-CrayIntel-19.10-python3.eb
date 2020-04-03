@@ -13,10 +13,10 @@ description = """
     Boost provides free peer-reviewed portable C++ source libraries.
 """
 
-toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchain = {'name': 'CrayIntel', 'version': '19.10'}
 toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
-sources = ['%%(namelower)s_%s.tar.gz' % '_'.join(version.split('.'))]
+sources = ['%%(namelower)s_%s.tar.bz2' % '_'.join(version.split('.'))]
 source_urls = [SOURCEFORGE_SOURCE]
 
 configopts  = (
@@ -50,7 +50,7 @@ sanity_check_paths = {
     'dirs': ['include/boost']
 }
 
-# also build boost_mpi
+# build boost_mpi
 boost_mpi = True
 
 moduleclass = 'devel'
