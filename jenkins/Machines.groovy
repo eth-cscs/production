@@ -38,4 +38,4 @@ def TSAtds = [name: 'TSAtds',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
 
-return [daint, dom, kesch, TSAtds]
+return [daint, dom, kesch, tsa, TSAtds]
