@@ -23,18 +23,21 @@ builddependencies = [
     ('intel/19.0.1.144', EXTERNAL_MODULE)
 ]
 
-preconfigopts = ' CC=cc F90=ftn MPIF90=ftn FFLAGS="-O3 -g" F90FLAGS="$FFLAGS" CFLAGS="-O3 -g" '
-preconfigopts += ' LAPACK_LIBS="/opt/intel/mkl/lib/intel64/libmkl_lapack95_lp64.a" ' 
-preconfigopts += ' BLAS_LIBS="/opt/intel/mkl/lib/intel64/libmkl_blas95_lp64.a" '
-preconfigopts += ' FFT_LIBS="/opt/intel/mkl/lib/intel64/libmkl_cdft_core.a" '
-configopts = ' --enable-openmp --enable-parallel --with-scalapack=no ' 
-configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 --with-cuda-runtime=10.1 '
+# Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
+configopts = ' CC=cc F77=pgf90 MPIF90=ftn '
+configopts += ' --enable-openmp --enable-parallel --with-scalapack=no ' 
+configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 '
+configopts += ' --with-cuda-runtime=10.1 '
 
-prebuildopts = ' cat make.inc && '
+# experimental CUDA-Aware MPI: add -D__GPU_MPI in make.inc
+prebuildopts = " sed -i 's/^DFLAGS .*/& -D__GPU_MPI/' make.inc && "
+prebuildopts += "sed -i 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' make.inc && "
+prebuildopts += "sed -i 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/'  make.inc && "
+prebuildopts += "sed -i 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' make.inc && "
+prebuildopts += "sed -i 's/^FFLAGS .*/FFLAGS         = -fast -mp/' make.inc && "
+prebuildopts += "sed -i 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs  -mp -Mcuda=cc60,cuda10.1/' make.inc && "
+prebuildopts += " cat make.inc && "
 buildopts = 'pw'
-
-# single make process: parallel builds fail for targets 'gwl' (included in target 'all') and 'epw'
-maxparallel = 1
 
 sanity_check_paths = {
       'files': ['bin/pw.x'],
