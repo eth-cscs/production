@@ -31,7 +31,6 @@ source_urls = [
 builddependencies = [
     ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
-    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE)
 ]
 
 dependencies = [
