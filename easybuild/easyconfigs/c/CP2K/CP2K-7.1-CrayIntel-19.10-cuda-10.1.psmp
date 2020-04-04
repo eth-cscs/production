@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+# modules: Bison CrayIntel cudatoolkit ELPA flex Libint libxc libxsmm
+GPUVER    = P100
+NVCC      = nvcc
+CC        = cc
+FC        = ftn
+LD        = ftn
+AR        = ar -r
+DFLAGS    = -D__ACC -D__DBCSR_ACC -D__FFTW3 -D__ELPA=201911 -D__LIBINT -D__LIBXC -D__LIBXSMM -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
+CFLAGS    = $(DFLAGS) -g -O2 
+FCFLAGS   = $(DFLAGS) -g -O2 -qopenmp -funroll-loops -fp-model precise -fpp -free -traceback
+FCFLAGS   += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules -I$(EBROOTLIBINT)/include -I$(EBROOTLIBXC)/include -I$(EBROOTLIBXSMM)/include
+LDFLAGS   = $(FCFLAGS)
+LDFLAGS_C = $(FCFLAGS) -nofor_main
+NVFLAGS   = $(DFLAGS) -O2 -arch sm_60
+LIBS   	  = -lfftw3 -lfftw3_threads -lcudart -lcublas -lcufft -lrt -lnvrtc
+LIBS      += -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS      += -L$(EBROOTLIBINT)/lib -lint2 -lstdc++ 
+LIBS      += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS      += -L$(EBROOTLIBXSMM)/lib -lxsmmf -lxsmm -ldl
+
+# Required due to memory leak that occurs if high optimisations are used
+mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
+			 $(FC) -c $(subst O2,O0,$(FCFLAGS)) $<
