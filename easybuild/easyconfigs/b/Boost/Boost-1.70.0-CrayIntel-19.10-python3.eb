@@ -17,7 +17,7 @@ toolchain = {'name': 'CrayIntel', 'version': '19.10'}
 toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 sources = ['%%(namelower)s_%s.tar.bz2' % '_'.join(version.split('.'))]
-source_urls = [SOURCEFORGE_SOURCE]
+source_urls = ['https://dl.bintray.com/boostorg/release/%(version)s/source/']
 
 configopts  = (
     ' --with-python=$(EBROOTPYTHON)/bin/python '
