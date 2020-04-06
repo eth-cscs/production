@@ -28,7 +28,7 @@ dependencies = [
 
 # Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
 configopts = ' CC=cc F77=pgf90 MPIF90=ftn '
-configopts += ' --enable-openmp --enable-parallel --with-scalapack=no ' 
+configopts += ' --enable-openmp --enable-parallel --with-scalapack=no '
 configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 '
 configopts += ' --with-cuda-runtime=10.1 '
 
