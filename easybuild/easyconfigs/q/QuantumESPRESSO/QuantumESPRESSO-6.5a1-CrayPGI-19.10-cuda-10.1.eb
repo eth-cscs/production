@@ -37,7 +37,8 @@ configopts += ' --with-cuda-runtime=10.1 '
 
 # the experimental CUDA-Aware MPI (-D__GPU_MPI) does not work!
 prebuildopts = """
-    sed -i -e 's#^IFLAGS .*#& -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw#' \
+    sed -i -e 's/FFTW3/DFTI/' \
+    -e 's#^IFLAGS .*#& -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw#' \
     -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' \
     -e 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/' \
     -e 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' \
@@ -47,6 +48,9 @@ prebuildopts = """
 """
 prebuildopts += " cat make.inc && "
 buildopts = 'pw'
+
+# single make process
+maxparallel = 1
 
 sanity_check_paths = {
       'files': ['bin/pw.x'],
