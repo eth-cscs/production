@@ -28,18 +28,21 @@ dependencies = [
 
 # Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
 configopts = ' CC=cc F77=pgf90 MPIF90=ftn '
+configopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" '
+configopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" '
+configopts += ' FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core" '
 configopts += ' --enable-openmp --enable-parallel --with-scalapack=no '
 configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 '
 configopts += ' --with-cuda-runtime=10.1 '
 
-# experimental CUDA-Aware MPI: add -D__GPU_MPI in make.inc
+# the experimental CUDA-Aware MPI (-D__GPU_MPI) does not work!
 prebuildopts = """
-    sed -i -e 's/^DFLAGS .*/& -D__GPU_MPI/' \
+    sed -i -e 's#^IFLAGS .*#& -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw#' \
     -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' \
     -e 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/' \
     -e 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' \
     -e 's/^FFLAGS .*/FFLAGS         = -fast -mp/' \
-    -e 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs  -mp -Mcuda=cc60,cuda10.1/' \
+    -e 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs -mp -Mcuda=cc60,cuda10.1/' \
     make.inc &&
 """
 prebuildopts += " cat make.inc && "
