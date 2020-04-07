@@ -7,7 +7,8 @@ homepage = 'https://github.com/opencontainers/runc'
 description = """CLI tool for spawning and running containers according to the OCI specification."""
 
 toolchain = SYSTEM
-builddependencies = [('go', '1.13.4.linux-amd64')]
+builddependencies = [('gcc', '8.3.0'),
+                     ('go', '1.13.4.linux-amd64')]
 
 sources = [{
     'filename': '%(name)s.tar.gz',
