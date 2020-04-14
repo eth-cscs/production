@@ -50,7 +50,7 @@ build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/c
 build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
 build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
 build_str += " && bash configure-cscs-v%s.sh" % version
-build_str += " && bazel build --local_ram_resources=60000 --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
+build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 build_str += "    --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 "  # don't use --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package //tensorflow:libtensorflow_cc.so"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
