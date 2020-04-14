@@ -29,17 +29,11 @@ dependencies = [
 ]
 
 local_skbuild_whl = 'scikit_build-0.10.0-py2.py3-none-any.whl'
-local_pyparsing_whl = 'pyparsing-2.4.7-py2.py3-none-any.whl'
 
 sources = [
     {
         'filename': local_skbuild_whl,
         'source_urls': ['https://pypi.python.org/packages/source/s/scikit_build/'],
-        'extract_cmd': "cp %s %(builddir)s",
-    },
-    {
-        'filename': local_pyparsing_whl,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyparsing/'],
         'extract_cmd': "cp %s %(builddir)s",
     },
     {
@@ -73,7 +67,6 @@ prepare_libs_dir += "ln -sf  {tf_k8_opt}/libtensorflow_framework.so $TF_LIB/libt
 
 build_str = "%s && " % prepare_libs_dir.format(tf_k8_opt=tf_k8_opt)
 build_str += "export PYTHONPATH=%(builddir)s/install/lib/python3.6/site-packages:$PYTHONPATH && "
-build_str += "pip install --prefix=%(builddir)s/install %(builddir)s/" + "%s && " % local_pyparsing_whl
 build_str += "pip install --prefix=%(builddir)s/install %(builddir)s/" + "%s && " % local_skbuild_whl
 build_str += "cd deepmd-kit-%(version)s && "
 build_str += "pip install --prefix=%(builddir)s/install . && "
@@ -85,7 +78,6 @@ build_str += "cd source/build; make lammps -j4"
 cmds_map = [
     ('deepmd-kit-%(version)s.tar.gz', build_str),
     (local_skbuild_whl, 'ls'),
-    (local_pyparsing_whl, 'ls'),
 ]
 
 files_to_copy = [
