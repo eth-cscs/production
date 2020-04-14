@@ -44,7 +44,7 @@ sources = [
     },
     {
         'filename': SOURCE_TAR_GZ,
-        'source_urls': PYPI_LOWER_SOURCE,
+        'source_urls': [PYPI_LOWER_SOURCE],
     }
 
 ]
