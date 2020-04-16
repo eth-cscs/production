@@ -1,0 +1,56 @@
+digraph D {
+// dot -Tpng -o 1.png 1.dot
+
+SYSTEM -> uncrustify
+SYSTEM -> cppcheck
+SYSTEM -> elfutils
+SYSTEM -> tbb
+SYSTEM -> papi
+SYSTEM -> cupti
+SYSTEM -> vtune
+SYSTEM -> unwind
+SYSTEM -> llnl_hires_timers
+SYSTEM -> libdwarf
+// SYSTEM ->
+
+adiak [fillcolor="hotpink" style=filled]
+uncrustify -> adiak
+cppcheck -> adiak
+CrayGNU -> adiak
+
+dyninst [fillcolor="hotpink" style=filled]
+CrayGNU -> Boost
+Boost -> dyninst
+elfutils -> dyninst
+tbb -> dyninst
+
+GOTCHA [fillcolor="hotpink" style=filled]
+Boost -> GOTCHA
+papi -> GOTCHA
+
+adept_utils [fillcolor="hotpink" style=filled]
+llnl_hires_timers [fillcolor="hotpink" style=filled]
+llnl_hires_timers -> adept_utils
+Boost -> adept_utils
+
+callpath [fillcolor="hotpink" style=filled]
+adept_utils -> callpath
+llnl_hires_timers  -> callpath
+libdwarf -> callpath
+Boost -> callpath
+elfutils -> callpath
+dyninst -> callpath
+
+caliper [fillcolor="green" style=filled]
+CrayGNU -> caliper
+cupti -> caliper
+adiak -> caliper
+dyninst -> caliper
+elfutils -> caliper
+callpath -> caliper
+unwind -> caliper
+GOTCHA -> caliper
+papi  -> caliper
+vtune -> caliper
+
+}
