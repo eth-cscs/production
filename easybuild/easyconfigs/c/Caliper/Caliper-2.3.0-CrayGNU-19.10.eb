@@ -18,7 +18,7 @@ dependencies = [
     ('profvis', 'fe18867'),
     ('vtune_profiler', '2020', '', True),
 ]
-source_urls = ['https://github.com/LLNL/%(name)s/%(name)s/archive/']
+source_urls = ['https://github.com/LLNL/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
 separate_build_dir = True
 configopts = '-DBUILD_DOCS=OFF '
