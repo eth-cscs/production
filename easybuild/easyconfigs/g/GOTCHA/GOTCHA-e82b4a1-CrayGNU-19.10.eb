@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'GOTCHA'
+version = 'e82b4a1'
+homepage = 'https://github.com/LLNL/GOTCHA'
+description = """C/C++ library for wrapping function calls in shared
+libraries"""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+local_repo = 'https://github.com/LLNL/GOTCHA.git'
+preconfigopts = 'git clone %s %s.git && ' % (local_repo, name)
+preconfigopts += 'cd %(name)s.git && git checkout %(version)s && '
+prebuildopts = 'cd %(name)s.git && '
+preinstallopts = 'cd %(name)s.git && '
+sanity_check_paths = {
+    'files': ['lib64/libgotcha.so'],
+    'dirs': ['include/gotcha'],
+}
+
+moduleclass = 'tools'
