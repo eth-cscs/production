@@ -15,6 +15,7 @@ dependencies = [
     ('libunwind', '1.4.0'),
     ('adiak', '0.2.0'),
     ('GOTCHA', 'e82b4a1'),
+    ('profvis', 'fe18867'),
     ('vtune_profiler', '2020', '', True),
 ]
 source_urls = ['https://github.com/LLNL/%(name)s/%(name)s/archive/']
