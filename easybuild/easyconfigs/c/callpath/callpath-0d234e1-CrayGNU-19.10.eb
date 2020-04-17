@@ -1,0 +1,33 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'callpath'
+version = '0d234e1'
+homepage = 'https://github.com/llnl/callpath'
+description = """Library for representing callpaths consistently in
+distributed-memory performance tools."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+dependencies = [
+    ('dyninst', '10.1.0'),
+    ('elfutils', '0.178'),
+    ('llnl-hires-timers', 'e6d8308'),
+    ('adept-utils', '606ebad'),
+    ('libdwarf', '20200114'),
+]
+local_repo = 'https://github.com/LLNL/callpath.git'
+preconfigopts = 'git clone %s %s.git && ' % (local_repo, name)
+preconfigopts += 'cd %(name)s.git && git checkout %(version)s && '
+prebuildopts = 'cd %(name)s.git && '
+preinstallopts = 'cd %(name)s.git && '
+configopts = '-DBUILD_SHARED=ON '
+configopts += '-DDyninst_DIR=$EBROOTDYNINST '
+configopts += '-Dadept_utils_DIR=$EBROOTADEPTMINUTILS/share/cmake/adept_utils '
+configopts += '-DCALLPATH_WALKER=dyninst '
+configopts += '-DDWARF_LIBRARY=$EBROOTLIBDWARF/lib64/libdwarf.a '
+configopts += '-DCMAKE_EXE_LINKER_FLAGS="-L$EBROOTLLNLMINHIRESMINTIMERS/lib -lhires-timers" '
+sanity_check_paths = {
+    'files': ['include/callpath-config.h', 'lib/libcallpath.so'],
+    'dirs': ['share/cmake/callpath'],
+}
+
+moduleclass = 'tools'
