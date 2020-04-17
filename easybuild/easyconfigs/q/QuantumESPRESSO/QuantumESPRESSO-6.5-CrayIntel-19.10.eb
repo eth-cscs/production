@@ -39,8 +39,8 @@ buildopts = 'all epw'
 maxparallel = 1
 
 sanity_check_paths = {
-      'files': ['bin/pw.x'],
-      'dirs': ['']
+    'files': ['bin/pw.x'],
+    'dirs': ['']
 }
 
 moduleclass = 'chem'
