@@ -24,7 +24,7 @@ configopts += ' LDFLAGS="-L$MKLROOT/lib/intel64 -lpthread -lstdc++ -ldl -qopenmp
 configopts += ' FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" F90FLAGS="$FFLAGS" CFLAGS="-O3"'
 configopts += ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack '
 
-# use MKL FFT instead of FFTW 
+# use MKL FFT instead of FFTW
 prebuildopts = """
     sed -i -e 's/FFTW3/DFTI/' \
     -e 's#^IFLAGS .*#& -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw#' \
