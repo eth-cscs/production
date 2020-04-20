@@ -1,0 +1,18 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'bash'
+version = '5.0'
+homepage = 'http://www.gnu.org/software/bash'
+description = """Bash is an sh-compatible command language interpreter that
+executes commands read from the standard input or from a file. Bash also
+incorporates useful features from the Korn and C shells (ksh and csh)."""
+toolchain = SYSTEM
+source_urls = ['http://ftp.gnu.org/gnu/%(namelower)s']
+sources = [SOURCELOWER_TAR_GZ]
+sanity_check_paths = {
+    'files': ["bin/bash"],
+    'dirs': []
+}
+
+moduleclass = 'tools'

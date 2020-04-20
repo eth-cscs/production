@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'hatchet'
+version = '1.0.1'
+req_py_majver = '3'
+req_py_minver = '6'
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (req_py_majver, req_py_minver)
+versionsuffix = '-python%s' % req_py_majver
+homepage = 'https://github.com/LLNL/hatchet'
+description = """Tree-indexed or Graph-indexed Pandas DataFrames for analyzing
+performance data: https://hatchet.readthedocs.io"""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = ['https://github.com/LLNL/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+dependencies = [
+    ('PyExtensions', '%s.%s' % (local_pyver, local_py_rev_ver)),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.6/site-packages/%(name)s-%(version)s-py3.6.egg/hatchet/'],
+}
+
+moduleclass = 'devel'

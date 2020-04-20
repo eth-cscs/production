@@ -15,4 +15,5 @@ source_urls = ['https://gnupg.org/ftp/gcrypt/gpgme/']
 sources = ['gpgme-%(version)s.tar.bz2']
 checksums = [('sha1', 'f87f34e695e8d74ccc7c8f42864d50630afebb0e')]
 
-configopts = ['--enable-languages=""']
+buildopts = 'CFLAGS="$CFLAGS -std=c99"'
+configopts = ['--enable-languages="" --disable-gpg-test']

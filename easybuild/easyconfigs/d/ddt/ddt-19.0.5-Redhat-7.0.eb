@@ -18,7 +18,7 @@ Non-MPI codes may need to add a dummy MPI_Init()/MPI_Finalize() call
 To avoid conflict, module unload Visit Cube darshan
 Licensing : http://velan:4241/status.html"""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['http://content.allinea.com/downloads/']
 sources = ['arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix)]
 

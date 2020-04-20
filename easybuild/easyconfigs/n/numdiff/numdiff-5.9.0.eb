@@ -1,0 +1,19 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'numdiff'
+version = '5.9.0'
+homepage = 'https://www.nongnu.org/numdiff'
+description = """Numdiff is a little program that can be used to compare
+putatively similar files line by line and field by field, ignoring small
+numeric differences or/and different numeric formats."""
+toolchain = SYSTEM
+source_urls = ['http://mirror.easyname.at/nongnu/%(name)s']
+sources = ['%(name)s-%(version)s.tar.gz']
+checksums = ['794461a7285d8b9b1f2c4a8149889ea6']
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'devel'
