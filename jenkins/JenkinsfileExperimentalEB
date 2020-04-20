@@ -17,7 +17,7 @@ def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
         def machinesToRun = machinesList.findAll({methods.machineCheck(userMessage, it.name)})
-        println "machinesToRun"
+        println "machinesToRun is ${machinesToRun}"
         //def machinesToRun = '[dom]'
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
