@@ -1,0 +1,161 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+def loginBash = '#!/bin/bash -l'
+stage('Initialization') {
+    node('master') {
+        checkout scm
+        def rootDir = pwd()
+        methods = load("${rootDir}/jenkins/util.groovy")
+        machinesList = load("${rootDir}/jenkins/Machines.groovy")
+    }
+}
+
+def userMessage = params.customMessage
+def machineConfigurations = []
+stage('Machine Selection') {
+    node('master') {
+        //def machinesToRun = machinesList.findAll({methods.machineCheck(userMessage, it.name)})
+        def machinesToRun = 'dom'
+        if (!machinesToRun) {
+            println "No machines were specified. Aborting...."
+            currentBuild.result = "FAILURE"
+            return
+        }
+        println "The user message is: $userMessage"
+        for (mach in machinesToRun) {
+            machineConfigurations.add(
+                [machine:mach, architectures: methods.getMachineConfiguration(
+                        userMessage, mach.name, mach.archs as String[])])
+        }
+    }
+}
+
+def builds = [:]
+stage('Build Stage') {
+    for (mach in machineConfigurations) {
+        def machine = mach.machine
+        def architectures = mach.architectures
+        def cpus = machine.cpus
+        def machineName = machine.name
+        for (architecture in architectures) {
+            def arch = architecture
+            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def cpusPerTask = arch == "" ? cpus : cpus[arch]
+            builds[machineLabel] = {
+                node(machineName) {
+                    checkout scm
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def buildPath = "/tmp/jenscscs/ExperimentalEB-${env.BUILD_ID}/"
+                    def prefix = "$scratch/$project_name/$machineLabel"
+                    def unuseFlag
+                    if (machine.unusePath != '') {
+                        println("The unuse path is: $machine.unusePath")
+                        unuseFlag = arch == '' ?  "--unuse=${machine.unusePath}" : "--unuse=${machine.unusePath}".replace('ARCH', arch)
+                    }
+                    else {
+                        println("The unuse path is empty")
+                        unuseFlag = ''
+                    }
+                    def listFile = "$workingDir/jenkins-builds/$machineLabel"
+                    // Remove "--installpath" command line option + remove Matlab recipe
+                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $listFile | sed -E '/\\bMatlab.*/Id' > ${listFile}_stripped"
+                    def listFlag = "--list=${listFile}_stripped"
+                    def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
+                    if (arch != '')
+                        //command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
+                        command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project_name --time=00:01:00 hostname"
+                    withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
+                             "EASYBUILD_TMPDIR=$prefix/tmp",
+                             "EASYBUILD_BUILDPATH=$buildPath"]) {
+                                 sh("""$loginBash
+                                       status=0
+                                       if [ -d $prefix ]; then
+                                           rm -rf $prefix/*
+                                       fi
+                                       $command
+                                       status=\$[status+\$?]
+                                       if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
+                                        chmod -R o+r \$EASYBUILD_TMPDIR
+                                        find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                                       fi
+                                       exit \$status""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting....."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting....."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting....."
+        }
+    }
+
+}
+
+archiveBuilds = [:]
+stage('Archive Logs') {
+    for (mach in machineConfigurations) {
+        def machine = mach.machine
+        def architectures = mach.architectures
+        def machineName = machine.name
+        for (architecture in architectures) {
+            def arch = architecture
+            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            archiveBuilds[machineLabel] = {
+                node(machineName) {
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def prefix = "${scratch}/${project_name}/${machineLabel}"
+                    def logDir = "${project_name}-${machineLabel}-logs"
+                    try {
+                        dir("$logDir") {
+                            sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
+                        }
+                        archiveArtifacts "${logDir}/*"
+                    }
+                    catch(err) {
+                        println "Failed to archive artifacts for $machineLabel"
+                    }
+                    finally {
+                       sh ("""$loginBash
+                              rm -rf $prefix
+                              rm -rf $logDir""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel archiveBuilds
+    } catch(err) {
+        println "Failed to archive artifacts"
+    }
+    finally {
+        methods.notifySlackFinish()
+    }
+}
