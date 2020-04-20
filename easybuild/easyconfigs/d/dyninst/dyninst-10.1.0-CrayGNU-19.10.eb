@@ -1,0 +1,32 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'dyninst'
+version = '10.1.0'
+homepage = 'https://github.com/dyninst/dyninst'
+description = """DyninstAPI: Tools for binary instrumentation, analysis, and
+modification."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = ['https://github.com/%(name)s/%(name)s/archive/']
+sources = ['v%(version)s.tar.gz']
+separate_build_dir = True
+dependencies = [
+    ('elfutils', '0.178'),
+    ('Boost', '1.70.0'),
+]
+configopts = '-DBUILD_DOCS=OFF '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+# Elf/Dwarf:
+configopts += '-DElfUtils_ROOT_DIR=$EBROOTELFUTILS '
+# Boost:
+configopts += '-DBOOST_ROOT=$EBROOTBOOST '
+# Intel TBB:
+configopts += '-DTBB_ROOT_DIR=/opt/intel/tbb/ '
+configopts += '-DTBB_INCLUDEDIR=/opt/intel/tbb/include/ '
+configopts += '-DTBB_LIBRARYDIR=/opt/intel/tbb/lib/intel64/gcc4.8/ '
+sanity_check_paths = {
+    'files': ['include/dyninstversion.h', 'lib/libdyninstAPI.so'],
+    'dirs': ['lib/cmake/Dyninst']
+}
+
+moduleclass = 'tools'

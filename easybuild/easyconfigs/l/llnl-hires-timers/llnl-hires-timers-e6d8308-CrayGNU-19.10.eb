@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'llnl-hires-timers'
+version = 'e6d8308'
+homepage = 'https://github.com/LLNL/llnl-hires-timers'
+description = """C library containing high resolution timer implementation for
+several platforms."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+local_repo = 'https://github.com/LLNL/llnl-hires-timers.git'
+preconfigopts = 'git clone %s %s.git && ' % (local_repo, name)
+preconfigopts += 'cd %(name)s.git && git checkout %(version)s && '
+prebuildopts = 'cd %(name)s.git && '
+preinstallopts = 'cd %(name)s.git && '
+sanity_check_paths = {
+    'files': ['lib/libhires-timers.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'tools'
