@@ -1,8 +1,8 @@
-# contributed by Matthias Kraushaar (CSCS)
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
 easyblock = 'CmdCp'
 
 name = 'DeePMD'
-version = '0.10.2'
+version = '1.1.4'
 
 homepage = 'https://github.com/deepmodeling/deepmd-kit/'
 description = """DeePMD-kit is a package written in Python/C++, designed to
@@ -14,7 +14,7 @@ toolchainopts = {'dynamic': True, 'verbose': False}
 
 source_urls = ['https://github.com/deepmodeling/%(namelower)s-kit/archive/']
 sources = ['v%(version)s.tar.gz']
-patches = ['%(namelower)s-%(version)s.patch']
+#patches = ['%(namelower)s-%(version)s.patch']
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
@@ -39,7 +39,7 @@ files_to_copy = [
 ]
 
 sanity_check_paths = {
-    'files': ['%(installdir)s/bin/dp_frz'],
+    'files': ['%(installdir)s/bin/dp_ipi'],
     'dirs': ['%(installdir)s/include/%(namelower)s'],
 }
 
