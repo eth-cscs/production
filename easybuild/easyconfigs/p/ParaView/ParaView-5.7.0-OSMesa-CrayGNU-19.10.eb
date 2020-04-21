@@ -78,6 +78,10 @@ configopts += ' -DPARAVIEW_BUILD_PLUGIN_pvNVIDIAIndeX:BOOL=OFF '
 
 modextravars = { 'LD_LIBRARY_PATH':'/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % local_pyver}
 
+modextrapaths = {'PYTHONPATH': 'lib64/python%s/site-packages'% local_pyshortver}
+
+
+
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
     'dirs': [],
