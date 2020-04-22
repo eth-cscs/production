@@ -8,7 +8,7 @@ description = """CLI tool for spawning and running containers according to the O
 
 toolchain = SYSTEM
 
-builddependencies = [('go', '1.13.4.linux-amd64')]
+builddependencies = [('go', '1.14.2.linux-amd64')]
 
 sources = [{
     'filename': '%(name)s.tar.gz',
