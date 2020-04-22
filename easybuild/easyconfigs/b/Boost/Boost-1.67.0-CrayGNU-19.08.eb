@@ -1,5 +1,3 @@
-easyblock = 'boostcray'
-
 name = 'Boost'
 version = '1.67.0'
 
