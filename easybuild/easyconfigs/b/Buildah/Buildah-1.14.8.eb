@@ -33,8 +33,7 @@ postinstallcmds= ['mkdir %(installdir)s/etc && '
                   'cd go_path/src/github.com/containers/buildah/tests && '
                   'cp registries.conf %(installdir)s/etc && '
                   'sed -i "12s/^registries =.*/registries = [\'docker.io\']/" %(installdir)s/etc/registries.conf && ' # Allow only Dockerhub by default
-                  'cp policy.json %(installdir)s/etc && '
-                  'printf \'[storage]\\n    driver="vfs"\\n    rootless_storage_path="/mnt/loopback_scratch/$USER/containers/storage"\' > %(installdir)s/etc/storage.conf']
+                  'cp policy.json %(installdir)s/etc && ']
 
 skipsteps = ['configure']
 modtclfooter = 'unsetenv XDG_RUNTIME_DIR'
