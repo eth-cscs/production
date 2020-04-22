@@ -1,0 +1,18 @@
+# jgp@cscs
+easyblock = 'ConfigureMake'
+
+name = 'gnuplot'
+version = '5.4.rc1'
+homepage = 'http://gnuplot.sourceforge.net/'
+description = """Portable interactive, function plotting utility"""
+toolchain = SYSTEM
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+preconfigopts = './prepare && '
+configopts = '--with-texdir=%(installdir)s/share/texmf '
+sanity_check_paths = {
+    'files': ['bin/gnuplot'],
+    'dirs': []
+}
+
+moduleclass = 'vis'
