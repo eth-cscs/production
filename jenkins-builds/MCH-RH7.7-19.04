@@ -1,5 +1,6 @@
 Anaconda3-2019.03.eb
 Autotools-20180311.eb
+Buildah-1.14.8.eb
 CMake-3.14.5.eb
 CUDA-10.1.243.eb
 ddt-19.0.5-Redhat-7.0.eb                               --set-default-module

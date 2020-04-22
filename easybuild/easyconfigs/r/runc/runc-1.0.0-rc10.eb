@@ -7,8 +7,8 @@ homepage = 'https://github.com/opencontainers/runc'
 description = """CLI tool for spawning and running containers according to the OCI specification."""
 
 toolchain = SYSTEM
-builddependencies = [('gcc', '8.3.0'),
-                     ('go', '1.13.4.linux-amd64')]
+
+builddependencies = [('go', '1.14.2.linux-amd64')]
 
 sources = [{
     'filename': '%(name)s.tar.gz',
@@ -26,6 +26,7 @@ prebuildopts = ('cd %(builddir)s && mkdir -p src/github.com/opencontainers && '
 
 preinstallopts = 'cd %(builddir)s/src/github.com/opencontainers/%(name)s && '
 
+build_cmd = 'CGO_LDFLAGS="$CGO_LDFLAGS -fuse-ld=gold" make'
 buildopts = ['BUILDTAGS=""']
 installopts = ['PREFIX=%(installdir)s']
 skipsteps = ['configure']
