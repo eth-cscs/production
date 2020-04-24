@@ -89,7 +89,8 @@
  mpiP-57fc864-CrayCCE-19.10-classic.eb                                   --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  mpiP-57fc864-CrayPGI-19.10.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
- nvidia-nsight-systems-2020.1.1.65.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ nvidia-nsight-systems-2020.2.1.71.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ nvidia-nsight-systems-2020.1.1.65.eb                                    --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-compute-2019.4.0.12.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  otf2_cli_profile-4ef9d3f-CrayGNU-19.10.eb          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
