@@ -484,7 +484,20 @@ exts_list = [
         'use_pip': True,        
         'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
         }),
-    
+# batchspawner compute side cscript components
+    ('batchspawner', '68a1fcd', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
+        }),
+# ipyparaview, not yet available in pypi and npm registry, 24 April 2020
+        ('ipyparaview', 'cf1c6f4', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/8dc2d1c'],
+        }),
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
@@ -492,12 +505,6 @@ exts_list = [
         'req_py_minver': '6',
         'use_pip': True,
         'source_urls': ['https://pypi.python.org/packages/source/b/bash_kernel/'],
-        }),
-     ('batchspawner', '68a1fcd', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,
-        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
         }),
     ('ipyparallel', '6.2.4', {
         'req_py_majver': '3',
@@ -558,19 +565,13 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
 #                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
 #                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
 #                  "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
-                   "cd %(installdir)s/ && "
-                   "git clone https://github.com/NVIDIA/ipyparaview && "
-                   "cd ipyparaview && "
+                   "cd %(installdir)s/ && git clone https://github.com/NVIDIA/ipyparaview && cd ipyparaview && git checkout 8dc2d1c &&"
                    "%(installdir)s/bin/jupyter labextension install js --no-build;"
+# now build the webpack                   
                    "%(installdir)s/bin/jupyter lab build --dev-build=False;"
                    "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
- # new batchspawner requires compute side components, TWR 121219
- #                   "git clone https://github.com/jupyterhub/batchspawner.git %(builddir)s/batchspawner && "
- #                  "cd %(builddir)s/batchspawner && "
- #                  "git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 && "
- #                  "pip install . --prefix=%(installdir)s "
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
                    #    'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
