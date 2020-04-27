@@ -564,7 +564,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "git checkout 8dc2d1c && "
                    "%(installdir)s/bin/jupyter labextension install js --no-build;"
 # now build the webpack                   
-                   "%(installdir)s/bin/jupyter lab build --dev-build=False;"
+                   "%(installdir)s/bin/jupyter lab build --debug --dev-build=False;"
                    "rm -r $YARN_CACHE_FOLDER;"
                    # Bash kernel - https://github.com/takluyver/bash_kernel
                    "python3 -m bash_kernel.install --prefix=%(installdir)s/;"
