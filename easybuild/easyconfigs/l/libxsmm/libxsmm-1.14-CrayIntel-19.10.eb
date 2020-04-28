@@ -3,7 +3,6 @@ easyblock = 'MakeCp'
 
 name = 'libxsmm'
 version = '1.14'
-local_release = '%s.0' % version
 
 homepage = 'https://readthedocs.org/projects/libxsmm'
 description = """
@@ -23,9 +22,9 @@ buildopts = 'PREFIX=%(installdir)s CXX=CC CC=cc FC=ftn MIC=0 AVX=2 OPT=3 OMP=1 J
 files_to_copy = []
 
 sanity_check_paths = {
-    'files': ['include/%s.f' % name, 'include/%s.h' % name,
-              'lib/libxsmm.%s.%s' % (SHLIB_EXT, local_release)],
-    'dirs': ['include', 'include/libxsmm', 'lib'],
+    'files': ['include/%(name)s.f', 'include/%(name)s.h', 
+              'lib/%s.%s.%s.0' % (name, SHLIB_EXT, version)],
+    'dirs': ['include', 'include/%(name)s', 'lib'],
 }
 
 moduleclass = 'chem'
