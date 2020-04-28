@@ -15,7 +15,6 @@ FCFLAGS   += -I$(EBROOTLIBINTMINCP2K)/include
 FCFLAGS   += -I$(EBROOTLIBXC)/include 
 FCFLAGS   += -I$(EBROOTLIBXSMM)/include
 LDFLAGS  = $(FCFLAGS)
-LDFLAGS_C = $(FCFLAGS) -nofor_main
 NVFLAGS  = $(DFLAGS) -O3 -arch sm_60
 LIBS   	 = -lfftw3 -lfftw3_threads -lcudart -lcublas -lcufft -lrt -lnvrtc
 LIBS      += -L$(EBROOTELPA)/lib -lelpa_openmp
