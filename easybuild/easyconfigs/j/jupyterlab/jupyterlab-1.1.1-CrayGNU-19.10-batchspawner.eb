@@ -492,7 +492,7 @@ exts_list = [
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
-        ('ipyparaview', '8dc2d1c', {
+        ('ipyparaview', 'cf1c6f4', {
         'req_py_majver': '3',
         'req_py_minver': '6',
         'use_pip': True,
@@ -561,7 +561,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "cd %(installdir)s/ && "
                    "git clone https://github.com/NVIDIA/ipyparaview && "
                    "cd ipyparaview && "
-                   "git checkout 8dc2d1c && "
+                   "git checkout cf1c6f4 && "
                    "%(installdir)s/bin/jupyter labextension install js --no-build;"
 # now build the webpack                   
                    "%(installdir)s/bin/jupyter lab build --debug --dev-build=False;"
