@@ -88,7 +88,7 @@ modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaVie
                  'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView',
                }
 
-postinstallcmds = ["export PYTHONPATH=%(installdir)s/lib64/python3.6/site-packages:$PYTHONPATH;"]
+modextrapaths = {'PYTHONPATH': 'lib64/python%s/site-packages'% local_pyshortver}
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],

@@ -1,3 +1,4 @@
+# boostcray still needed for older versions of boost 
 easyblock = 'boostcray'
 
 name = 'Boost'
