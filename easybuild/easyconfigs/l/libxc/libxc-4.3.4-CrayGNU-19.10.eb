@@ -22,8 +22,11 @@ builddependencies = [
 # the build fails if not using a separate folder
 separate_build_dir = True
 
-commonopts = ' -DENABLE_FORTRAN=ON -DENABLE_FORTRAN03=ON -DCMAKE_INSTALL_LIBDIR=lib '
-configopts = [ commonopts, commonopts+' -DBUILD_SHARED_LIBS=ON '] 
+local_commonopts = ' -DENABLE_FORTRAN=ON -DENABLE_FORTRAN03=ON -DCMAKE_INSTALL_LIBDIR=lib '
+configopts = [ local_commonopts, local_commonopts+' -DBUILD_SHARED_LIBS=ON '] 
+
+# add func_reference.c to CMakeLists.txt https://gitlab.com/libxc/libxc/-/issues/91
+prebuildopts = ' sed -i "/func_info.c/a func_reference.c" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
 
 sanity_check_paths = {
     'files': ['lib/libxc.a', 'lib/libxc.so',
