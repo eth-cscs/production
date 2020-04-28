@@ -496,7 +496,7 @@ exts_list = [
         'req_py_majver': '3',
         'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/8dc2d1c'],
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/cf1c6f4'],
         }),
 # kernels
 # bash kernel, requires kernel install below, twr
