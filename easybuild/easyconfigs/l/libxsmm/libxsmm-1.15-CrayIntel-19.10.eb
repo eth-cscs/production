@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'libxsmm'
-version = '1.14'
+version = '1.15'
 
 homepage = 'https://readthedocs.org/projects/libxsmm'
 description = """
