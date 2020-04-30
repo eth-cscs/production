@@ -16,7 +16,7 @@ from pathlib import Path
 if sys.version_info.minor < 5:
     print(f'{sys.argv[0]}: unsupported Python version: '
           f'found {sys.version_info.major}.{sys.version_info.minor}, '
-          f'required >= 3.5')
+          f'required >= 3.6')
     sys.exit(1)
 
 
