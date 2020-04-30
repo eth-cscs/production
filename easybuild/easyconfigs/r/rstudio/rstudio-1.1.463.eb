@@ -7,6 +7,7 @@ homepage = 'https://www.rstudio.com/products/rstudio/download/'
 description = """RStudio is a set of integrated tools designed to help you be
 more productive with R.""" 
 toolchain = SYSTEM
+toolchainopts = {'rpath': False}
 
 source_urls = ['http://download1.rstudio.org/']
 sources = ['rstudio-%(version)s-x86_64-fedora.tar.gz']
