@@ -39,7 +39,10 @@ exts_list = [
     ('itsdangerous', '1.1.0'),
     ('Jinja2', '2.11.2'),
     ('Werkzeug', '0.16.1'),
-    ('Brotli', '1.0.7'),
+    ('Brotli', '1.0.7', {
+       'source_tmpl': 'Brotli-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+       'unpack_sources': False,
+    }),
     ('python-socketio', '4.5.1', {
         'modulename': 'socketio',
     }),
@@ -54,6 +57,5 @@ sanity_check_paths = {
     'files': [],
     'dirs': [local_pythonpath]
 }
-# modextrapaths = {'PYTHONPATH': local_pythonpath}
 
 moduleclass = 'devel'
