@@ -25,7 +25,7 @@ def print_specs(matches, *args, **kwargs):
         print('no possible matching specs were found', *args, **kwargs)
         return
 
-    print('the following matching specs were found:', *args, **kwargs)
+    print('the following candidate specs were found:', *args, **kwargs)
     for m in matches:
         print(f'    - {m}', *args, **kwargs)
 
