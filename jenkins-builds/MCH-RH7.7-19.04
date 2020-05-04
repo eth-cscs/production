@@ -13,7 +13,7 @@ NCL-6.6.2.eb
 Python-2.7.16.eb                                       --disable-rpath 
 Python-3.7.4.eb
 Python-3.7.4-r20.02.eb
-rstudio-1.2.1335.eb                                    --disable-rpath
+rstudio-1.1.463.eb                                     --set-default-module
 UCX-1.6.1-GCC-8.3.0-cuda-10.1.eb                       --hidden
 vampir-9.6.0.eb
 Vim-8.1.eb
