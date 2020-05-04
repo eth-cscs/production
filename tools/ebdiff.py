@@ -17,7 +17,7 @@ if sys.version_info.minor < 5:
     print(f'{sys.argv[0]}: unsupported Python version: '
           f'found {sys.version_info.major}.{sys.version_info.minor}, '
           f'required >= 3.6')
-    sys.exit(1)
+    sys.exit(2)
 
 
 def print_specs(matches, *args, **kwargs):
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     if not options.robot_paths:
         print(f'{sys.argv[0]}: ERROR: no robot path defined', file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     ec1_base = f'{options.package}-{options.spec1}.eb'
     ec2_base = f'{options.package}-{options.spec2}.eb'
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         print_specs(matches, file=sys.stderr)
 
     if not do_diff:
-        sys.exit(1)
+        sys.exit(2)
 
     diff_cmd = os.getenv('EBDIFF_CMD', '/usr/bin/diff')
     completed = subprocess.run([diff_cmd, *diff_args, ec1, ec2],
