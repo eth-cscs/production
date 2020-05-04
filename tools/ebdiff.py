@@ -203,7 +203,11 @@ if __name__ == '__main__':
 
         # Sort matches based on similarity to the requested spec
         print_specs(
-            sort_by_similarity(matches, spec1.easyconfig()), file=sys.stderr
+            difflib.get_close_matches(
+                spec1.easyconfig(),
+                (os.path.basename(m) for m in matches),
+                n=options.num_matches,
+            ), file=sys.stderr
         )
 
     if ec2 is None:
