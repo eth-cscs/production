@@ -1,0 +1,52 @@
+# jg (CSCS)
+# PythonBundle instead of Bundle will define the PYTHONPATH automatically and
+# checks that no dependencies were installed with pip
+easyblock = 'PythonBundle'
+
+name = 'xarray'
+version = '0.15.1'
+versionsuffix = '-python3'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+homepage = 'https://github.com/pydata/xarray'
+description = 'N-D labeled arrays and datasets in Python: http://xarray.pydata.org'
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False, 'pic': True}
+dependencies = [
+    ('cray-python/%s.%s' % (local_pyver, local_py_rev_ver) , EXTERNAL_MODULE),
+    ('PyExtensions', '%s.%s' % (local_pyver, local_py_rev_ver)),
+]
+use_pip = True
+sanity_pip_check = True
+exts_default_options = {
+    'req_py_majver': '%s' % local_py_maj_ver,
+    'req_py_minver': '%s' % local_py_min_ver,
+    'source_urls': [PYPI_SOURCE],
+}
+# cray-python provides: setuptools-39.0.1, numpy-1.15.1, six-1.11.0
+# PyExtensions provides: pandas-0.23.3, python_dateutil-2.8.0, pytz-2019.3, six-1.11.0, Cython-0.28.4
+# xarray requires: them + these:
+exts_list = [
+    ('setuptools', '46.1.3', {
+       'source_tmpl': 'setuptools-%(version)s-py3-none-any.whl',
+       'unpack_sources': False,
+    }),
+    ('pandas', '1.0.3', {
+       'source_tmpl': 'pandas-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+       'unpack_sources': False,
+    }),
+    ('wheel', '0.34.2', {
+        'source_tmpl': 'wheel-%(version)s-py2.py3-none-any.whl',
+        'unpack_sources': False,
+    }),
+    (name, version),
+]
+local_pythonpath = 'lib/python%s/site-packages' % local_pyver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath]
+}
+
+moduleclass = 'data'
