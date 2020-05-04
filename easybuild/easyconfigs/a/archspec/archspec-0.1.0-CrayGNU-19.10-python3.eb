@@ -1,0 +1,33 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'archspec'
+version = '0.1.0'
+versionsuffix = '-python3'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+homepage = 'https://github.com/archspec/archspec'
+description = """A library for detecting, labeling, and reasoning about
+microarchitectures:
+https://github.com/archspec/archspec/blob/master/docs/source/microarchitectures.rst
+"""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = [PYPI_SOURCE]
+sources = ['archspec-%(version)s-py2.py3-none-any.whl']
+dependencies = [
+    ('cray-python/%s.%s' % (local_pyver, local_py_rev_ver), EXTERNAL_MODULE),
+]
+unpack_sources = False
+download_dep_fail = True
+use_pip = True
+local_pythonpath = 'lib/python%s/site-packages' % local_pyver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath],
+}
+sanity_check_commands = ["python -c 'from archspec.cpu import host; print(host())'"]
+sanity_pip_check = True
+
+moduleclass = 'tools'
