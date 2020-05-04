@@ -7,14 +7,15 @@ AR        = ar -r
 DFLAGS    = -D__MKL -D__FFTW3 -D__ELPA=201911 -D__LIBINT -D__LIBXC -D__LIBXSMM -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
 CFLAGS    = $(DFLAGS) -g -O2 
 FCFLAGS   = $(DFLAGS) -g -O2 -qopenmp -funroll-loops -fp-model precise -fpp -free -traceback
-FCFLAGS   += -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+FCFLAGS   += -I$(MKLROOT)/include -I$(FFTW_INC)
 FCFLAGS   += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
 FCFLAGS   += -I$(EBROOTLIBINT)/include 
 FCFLAGS   += -I$(EBROOTLIBXC)/include 
 FCFLAGS   += -I$(EBROOTLIBXSMM)/include
 LDFLAGS   = $(FCFLAGS)
 LDFLAGS_C = $(FCFLAGS) -nofor_main
-LIBS      = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl
+LIBS      = -lfftw3 -lfftw3_threads
+LIBS      += -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl
 LIBS      += -L$(EBROOTELPA)/lib -lelpa_openmp
 LIBS      += -L$(EBROOTLIBINT)/lib -lint2 -lstdc++ 
 LIBS      += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
