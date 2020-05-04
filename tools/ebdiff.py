@@ -228,7 +228,6 @@ if __name__ == '__main__':
     if args:
         diff_args = args + diff_args
 
-    print(diff_args)
     completed = subprocess.run([diff_cmd, *diff_args, ec1, ec2],
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                universal_newlines=True)
