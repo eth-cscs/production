@@ -3,8 +3,7 @@ easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
 version = '6.4.1'
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://www.quantum-espresso.org/'
 description = """Quantum ESPRESSO is an integrated suite of computer codes
@@ -17,7 +16,7 @@ toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 
 
 sources = ['https://github.com/QEF/q-e/archive/' + 'qe-%s.tar.gz' % version ]
 
-builddependencies = [
+dependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 

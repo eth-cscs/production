@@ -3,16 +3,15 @@ easyblock = "ConfigureMake"
 
 name = 'QuantumESPRESSO'
 version = '6.5a1'
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://www.quantum-espresso.org/'
 description = """Quantum ESPRESSO is an integrated suite of computer codes for
 electronic-structure calculations and materials modeling at the nanoscale. It
 is based on density-functional theory, plane waves, and pseudopotentials (both
-norm-conserving and ultrasoft). 
+norm-conserving and ultrasoft).
 
-Note: PGI Fortran gives the warning "ieee_inexact FORTRAN STOP" with QE GPU.  
+Note: PGI Fortran gives the warning "ieee_inexact FORTRAN STOP" with QE GPU.
 Set NO_STOP_MESSAGES=1 in your batch script to avoid the warning.
 More details on the PGI User Forum at https://www.pgroup.com/userforum
 """
@@ -23,22 +22,19 @@ toolchainopts = {'usempi': True, 'openmp': True, 'verbose': False}
 source_urls = ['https://gitlab.com/QEF/q-e-gpu/-/archive/qe-gpu-%s/' % version]
 sources = ['q-e-gpu-qe-gpu-%s.tar.bz2' % version]
 
-builddependencies = [
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
-]
-
 dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('intel/19.0.1.144', EXTERNAL_MODULE)
 ]
 
-# Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
+# Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one
 configopts = ' CC=cc F77=pgf90 MPIF90=ftn '
 configopts += ' LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a" '
 configopts += ' BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a" '
 configopts += ' FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core" '
 configopts += ' --enable-openmp --enable-parallel --with-scalapack=no '
 configopts += ' --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 '
-configopts += ' --with-cuda-runtime=10.1 '
+configopts += ' --with-cuda-runtime=%(cudashortver)s '
 
 # the experimental CUDA-Aware MPI (-D__GPU_MPI) does not work!
 prebuildopts = """
@@ -48,7 +44,7 @@ prebuildopts = """
     -e 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/' \
     -e 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' \
     -e 's/^FFLAGS .*/FFLAGS         = -fast -mp/' \
-    -e 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs -mp -Mcuda=cc60,cuda10.1/' \
+    -e 's/^LDFLAGS .*/LDFLAGS        = -pgf90libs -mp -Mcuda=cc60,cuda%(cudashortver)s/' \
     make.inc &&
 """
 prebuildopts += " cat make.inc && "
