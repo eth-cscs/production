@@ -1,0 +1,33 @@
+# jgp (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'gdb'
+version = '9.1'
+local_req_py_majver = '3'
+local_req_py_minver = '6'
+versionsuffix = '-python%s' % local_req_py_majver
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (local_req_py_majver, local_req_py_minver)
+homepage = 'http://www.gnu.org/software/gdb/gdb.html'
+description = "The GNU Project Debugger"
+source_urls = ['http://ftp.igh.cnrs.fr/pub/gnu/%(name)s']
+sources = [SOURCELOWER_TAR_XZ]
+toolchain = SYSTEM
+dependencies = [
+    ('cray-python/%s.%s' % (local_pyver, local_py_rev_ver), EXTERNAL_MODULE),
+]
+preconfigopts = "mkdir obj && cd obj && "
+configure_cmd_prefix = '../'
+prebuildopts = "cd obj && "
+preinstallopts = prebuildopts
+configopts = '--with-system-zlib --with-system-readline --enable-tui '
+configopts += '--enable-plugins --disable-install-libbfd '
+configopts += '--with-python=`which python` '
+configopts += 'LDFLAGS=-L/opt/python/%s.%s/lib ' % (local_pyver, local_py_rev_ver)
+parallel = 1
+sanity_check_paths = {
+    'files': ['bin/gdb', 'bin/gdbserver'],
+    'dirs': [],
+}
+
+moduleclass = 'debugger'

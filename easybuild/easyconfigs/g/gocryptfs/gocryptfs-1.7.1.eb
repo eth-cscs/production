@@ -1,0 +1,28 @@
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'gocryptfs'
+version = '1.7.1'
+
+homepage = 'https://nuetzlich.net/gocryptfs/'
+description = 'Encrypted overlay filesystem written in Go'
+
+toolchain = SYSTEM
+toolchainopts = {'pic': True, 'verbose': True}
+
+source_urls = ['https://github.com/rfjakob/gocryptfs/releases/download/v%(version)s/']
+sources = ['%(namelower)s_v%(version)s_linux-static_amd64.tar.gz']
+
+postinstallcmds = [
+"mkdir %(installdir)s/bin && " \
+"mkdir -p %(installdir)s/man/man1 && " \
+"cp %(installdir)s/%(namelower)s %(installdir)s/bin && " \
+"cp %(installdir)s/%(namelower)s.1 %(installdir)s/man/man1" \
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin', 'man/man1'],
+}
+
+moduleclass = 'tools'

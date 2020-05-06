@@ -2,6 +2,7 @@ easyblock = 'ConfigureMake'
 
 name = 'runc'
 version = '1.0.0-rc10'
+versionsuffix = '-daint'
 
 homepage = 'https://github.com/opencontainers/runc'
 description = """CLI tool for spawning and running containers according to the OCI specification."""
@@ -26,7 +27,6 @@ prebuildopts = ('cd %(builddir)s && mkdir -p src/github.com/opencontainers && '
 
 preinstallopts = 'cd %(builddir)s/src/github.com/opencontainers/%(name)s && '
 
-build_cmd = 'CGO_LDFLAGS="$CGO_LDFLAGS -fuse-ld=gold" make'
 buildopts = ['BUILDTAGS=""']
 installopts = ['PREFIX=%(installdir)s']
 skipsteps = ['configure']

@@ -1,3 +1,4 @@
+# contributed by Matthias Kraushaar (CSCS)
 easyblock = 'CmdCp'
 
 name = 'DeePMD'
@@ -16,7 +17,7 @@ sources = ['v%(version)s.tar.gz']
 patches = ['%(namelower)s-%(version)s.patch']
 
 builddependencies = [
-    ('CMake', '3.12.0', '', True),
+    ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
     ('TensorFlow', '1.7.0', '-cc-python3'),
@@ -29,6 +30,7 @@ postinstallcmds = [
     "mkdir -p %(installdir)s/tensorflow/include %(installdir)s/tensorflow/lib && export TF_INCLUDE=%(installdir)s/tensorflow/include && export TF_LIB=%(installdir)s/tensorflow/lib && ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/nsync/public/nsync* $TF_INCLUDE && ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/eigen_archive/Eigen $TF_INCLUDE && ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/eigen_archive/unsupported $TF_INCLUDE && ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/protobuf_archive/src/google $TF_INCLUDE && ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/tensorflow $TF_INCLUDE && ln -snf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/third_party $TF_INCLUDE && ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/libtensorflow_cc.so $TF_LIB && ln -sf $EBROOTTENSORFLOW/k8-py3-opt/bin/tensorflow/libtensorflow_framework.so $TF_LIB",
     "rm -rf /dev/shm/$USER/bazelout/",
 ]
+
 files_to_copy = [
     (['%(builddir)s/install/bin'], '%(installdir)s'),
     (['%(builddir)s/install/include'], '%(installdir)s'),

@@ -32,7 +32,7 @@ def tsa = [name: 'tsa',
 
 def TSAtds = [name: 'TSAtds',
            archs: [],
-           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
+           buildPath: '/tmp/$USER/easybuild/build',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
