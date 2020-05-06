@@ -4,11 +4,6 @@ easyblock = 'MakeCp'
 name = 'LAMMPS'
 version = '22Aug18'
 local_release = 'stable_22Aug2018'
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
-local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -32,7 +27,7 @@ buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cray-python/%s' %local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
