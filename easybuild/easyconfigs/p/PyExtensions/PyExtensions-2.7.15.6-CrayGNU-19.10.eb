@@ -1,12 +1,8 @@
 # contributed by Luca Marsella (CSCS)
-easyblock = 'Bundle'
+easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.6'
-local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-version = '%s.%s' % (local_pyver, local_py_rev_ver)
+version = '%(pyver)s'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -15,42 +11,33 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose' : False }
 
 dependencies = [
-    ('cray-python/%s' % version, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.6', EXTERNAL_MODULE),
 ]
 
-# bundle of Python packages
-exts_defaultclass = 'PythonPackage'
-
-exts_list = [
-     ('Cython', '0.28.4', {
-         'source_urls': ['https://pypi.python.org/packages/source/c/cython/'],
-     }),
-     ('six', '1.11.0', {
-         'source_urls': ['https://pypi.python.org/packages/source/s/six/'],
-     }),
-     ('subprocess32', '3.5.2', {
-         'source_urls': ['https://pypi.python.org/packages/source/s/subprocess32/'],
-     }),
-     ('matplotlib', '2.2.2', {
-         'source_urls': ['https://pypi.python.org/packages/source/m/matplotlib/'],
-     }),
-     ('pandas', '0.23.3', {
-         'source_urls': ['https://pypi.python.org/packages/source/p/pandas/'],
-     }),
-     ('virtualenv', '16.0.0', {
-         'source_urls': ['https://pypi.python.org/packages/source/v/virtualenv/'],
-     }),
- ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-local_full_sanity_check = True
-
-local_pythonpath = 'lib/python%s/site-packages' % local_pyver
-sanity_check_paths = {
-    'files': [],
-    'dirs': [local_pythonpath]
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE]
 }
 
-modextrapaths = {'PYTHONPATH': local_pythonpath}
+exts_list = [
+    ('Cython', '0.28.4'),
+    ('six', '1.11.0'),
+    ('pyparsing', '2.4.7'),
+    ('backports.functools_lru_cache', '1.6.1'),
+    ('subprocess32', '3.5.2'),
+    ('python-dateutil', '2.8.1', {
+        'modulename': 'dateutil',
+    }),
+    ('pytz', '2020.1'),
+    ('kiwisolver', '1.1.0'),
+    ('cycler', '0.10.0'),
+    ('matplotlib', '2.2.2'),
+    ('pandas', '0.23.3'),
+    ('virtualenv', '16.0.0'),
+ ]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
+}
 
 moduleclass = 'tools'
