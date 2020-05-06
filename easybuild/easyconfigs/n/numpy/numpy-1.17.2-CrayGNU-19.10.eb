@@ -3,13 +3,6 @@ easyblock = 'PythonPackage'
 name = 'numpy'
 version = '1.17.2'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-
 homepage = 'https://github.com/numpy/numpy'
 description = "Horovod is a distributed training framework for TensorFlow."
 
@@ -20,7 +13,7 @@ source_urls = ['https://github.com/numpy/numpy/releases/download/v%s' % version]
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
 ]
 
 patches = [('mkl-2019-sitecfg.patch', 1)]
@@ -31,7 +24,7 @@ modextravars = { 'LD_LIBRARY_PATH':'/opt/intel/compilers_and_libraries_2019/linu
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'tools'
