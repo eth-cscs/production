@@ -1,8 +1,7 @@
 # Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS)
 name = 'Julia'
 version = '1.2.0'
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 
 arch_name = 'gpu'
 
@@ -16,10 +15,8 @@ source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major
 sources = ['%(namelower)s-%(version)s-linux-x86_64.tar.gz']
 checksums = ['926ced5dec5d726ed0d2919e849ff084a320882fb67ab048385849f9483afc47']
 
-builddependencies = [
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
-]
 dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('craype-accel-nvidia60', EXTERNAL_MODULE)
 ]
 
