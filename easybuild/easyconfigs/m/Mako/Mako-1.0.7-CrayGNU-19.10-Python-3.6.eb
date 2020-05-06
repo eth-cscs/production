@@ -3,15 +3,15 @@ easyblock = 'PythonPackage'
 name = 'Mako'
 version = '1.0.7'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
+# local_py_maj_ver = '3'
+# local_py_min_ver = '6'
+# local_py_rev_ver = '5.7'
 
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-local_pysuff = '-python%s' % local_py_maj_ver
+# local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
+# local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+# local_pysuff = '-python%s' % local_py_maj_ver
 
-versionsuffix = '-Python-%s' % (local_pyshortver)
+versionsuffix = '-Python-%(pyshortver)s'
 
 homepage = 'http://www.makotemplates.org'
 description = """A super-fast templating language that borrows the best ideas from the existing templating languages"""
@@ -23,7 +23,7 @@ sources = [SOURCE_TAR_GZ]
 
 
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE)
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE)
 ]
 
 sanity_check_paths = {
