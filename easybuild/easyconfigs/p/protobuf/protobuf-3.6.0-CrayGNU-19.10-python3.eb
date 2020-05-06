@@ -3,15 +3,10 @@ easyblock = 'PythonPackage'
 name = 'protobuf'
 version = '3.6.0'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
+versionsuffix = '-python%(pymajver)s'
 
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-versionsuffix = '-python%s' % (local_py_maj_ver)
-
-req_py_majver = int(local_py_maj_ver)
-req_py_minver = int(local_py_min_ver)
+# req_py_majver = 3
+# req_py_minver = 6
 
 homepage = 'https://github.com/google/protobuf/'
 description = """Python Protocol Buffers runtime library."""
@@ -22,7 +17,8 @@ source_urls = ['https://github.com/google/protobuf/archive/v%(version)s']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', '%(pyver)s'),
     ('protobuf-core', version)
 ]
 
@@ -30,7 +26,7 @@ start_dir = 'python'
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s.%s/site-packages' % (local_py_maj_ver, local_py_min_ver)],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 options = {'modulename': 'google.protobuf'}
