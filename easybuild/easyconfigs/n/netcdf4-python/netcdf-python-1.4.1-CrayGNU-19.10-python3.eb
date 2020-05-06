@@ -1,4 +1,3 @@
-#
 name = 'netcdf-python'
 version = '1.4.1'
 
@@ -11,25 +10,18 @@ toolchainopts = {'verbose': False}
 source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
 sources = ['netCDF4-%(version)s.tar.gz']
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-local_pysuff = '-python%s' % local_py_maj_ver
-
-versionsuffix = local_pysuff
+versionsuffix = '-python%(pymajver)s'
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
-    ('PyExtensions', '%s' % local_pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', '%(pyver)s'),
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('cftime', '1.0.2.1', local_pysuff),
+    ('cftime', '1.0.2.1', '-python%(pymajver)s'),
 ]
 
 sanity_check_paths = {
     'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
-    'dirs': ['lib/python%(pv)s/site-packages/netCDF4-%%(version)s-py%(pv)s-linux-x86_64.egg' % {'pv': local_pyshortver}]
+    'dirs': ['lib/python%(pyshortver)s/site-packages/netCDF4-%(version)s-py%(pyshortver)s-linux-x86_64.egg']
 }
 
 moduleclass = 'data'
