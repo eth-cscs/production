@@ -1,19 +1,12 @@
 # @author: twrobinson, sarafael, gppezzi
 
-easyblock = 'Bundle'
+easyblock = 'PythonBundle'
 
 name = 'IPython'
-
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-
 version = '7.7.0'
 
-versionsuffix = '-python%s' % local_py_maj_ver
+_pyminver = '6'
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -22,80 +15,31 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', '%(pyver)s'),
 ]
 
-
-# bundle of Python packages
-exts_defaultclass = 'PythonPackage'
-
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%s' % _pyminver,
+    'source_urls': [PYPI_SOURCE]
+}
 
 exts_list = [
-    ('decorator', '4.4.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
-    }),
-    ('wcwidth', '0.1.7', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/'],
-    }),
-    ('prompt_toolkit', '2.0.9', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/prompt_toolkit/'],
-    }),
-    ('pickleshare', '0.7.5', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/'],
-    }),
-    ('parso', '0.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/parso/'],
-    }),
-    ('jedi', '0.14.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/j/jedi/'],
-    }),
-    ('ptyprocess', '0.6.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/ptyprocess/'],
-    }),
-    ('pexpect', '4.7.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/'],
-    }),
-    ('ipython_genutils', '0.2.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/'],
-    }),
-    ('traitlets', '4.3.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
-    }),
-    ('backcall', '0.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/backcall/'],
-    }),
-    ('Pygments', '2.4.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/Pygments/'],
-    }),
+    ('decorator', '4.4.0'),
+    ('wcwidth', '0.1.7'),
+    ('prompt_toolkit', '2.0.9'),
+    ('pickleshare', '0.7.5'),
+    ('parso', '0.5.1'),
+    ('jedi', '0.14.1'),
+    ('ptyprocess', '0.6.0'),
+    ('pexpect', '4.7.0'),
+    ('ipython_genutils', '0.2.0'),
+    ('traitlets', '4.3.2'),
+    ('backcall', '0.1.0'),
+    ('Pygments', '2.4.0'),
     ('ipython', version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'modulename': 'IPython',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipython/'],
         'patches': ['ipython-7.7.0-jupyter.patch'],
     }),
 ]
@@ -103,11 +47,9 @@ exts_list = [
 # specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
 local_full_sanity_check = True
 
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % local_pyshortver]}
-
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver]
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
 
 sanity_check_commands = [
