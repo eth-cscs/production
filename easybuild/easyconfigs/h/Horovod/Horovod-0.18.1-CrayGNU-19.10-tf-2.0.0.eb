@@ -3,14 +3,6 @@ easyblock = 'PythonPackage'
 name = 'Horovod'
 version = '0.18.1'
 
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-cudaver = '10.1.168'
 tfver = '2.0.0'
 versionsuffix = '-tf-%s' % tfver
 
@@ -25,9 +17,10 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['26a7751b090caabeba27808786b106cc672bc0aef3e7993361e99479c08beeb3']
 
 dependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('CUDA', '10.1.168', '', True),
     ('numpy', '1.17.2'),
-    ('TensorFlow', tfver, '-cuda-%s' % cudaver),
+    ('TensorFlow', tfver, '-cuda-%(cudaver)s'),
 ]
 
 skipsteps = ['build']
@@ -42,7 +35,7 @@ preinstallopts += "export HOROVOD_WITHOUT_PYTORCH=1 && "
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % pyshortver],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'tools'

@@ -3,14 +3,6 @@ easyblock = 'PythonPackage'
 name = 'Horovod'
 version = '0.16.4'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-
-local_cudaver = '10.1.168'
 local_tfver = '1.14.0'
 versionsuffix = '-tf-%s' % local_tfver
 
@@ -25,8 +17,9 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['871de9f0dfef7ddda637ee78ce7d95494340f7f8eb9fbd0c3cf13df7e68c5812']
 
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
-    ('TensorFlow', local_tfver, '-cuda-%s-python%s' % (local_cudaver, local_py_maj_ver)),
+    ('CUDA', '10.1.168', '', True),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('TensorFlow', local_tfver, '-cuda-%(cudaver)s-python%(pymajver)s'),
 ]
 
 skipsteps = ['build']
@@ -40,7 +33,7 @@ preinstallopts += "export HOROVOD_WITHOUT_PYTORCH=1 && "
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'tools'
