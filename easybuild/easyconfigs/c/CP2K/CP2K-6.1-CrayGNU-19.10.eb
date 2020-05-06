@@ -5,12 +5,6 @@ name = 'CP2K'
 version = '6.1'
 local_release = '%s.0' % version
 
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
-local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-
 homepage = 'http://www.cp2k.org/'
 description = """
     CP2K is a freely available (GPL) program, written in Fortran 95, to
@@ -30,7 +24,7 @@ source_urls = ['https://github.com/%(namelower)s/%(namelower)s/releases/download
 
 builddependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
 ]

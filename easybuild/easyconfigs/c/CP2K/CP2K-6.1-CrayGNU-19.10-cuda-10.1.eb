@@ -4,14 +4,7 @@ easyblock = 'MakeCp'
 name = 'CP2K'
 version = '6.1'
 local_release = '%s.0' % version
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
-
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
-local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://www.cp2k.org/'
 description = """
@@ -37,14 +30,14 @@ source_urls = [
 ]
 
 builddependencies = [
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
 ]
 
 dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('ELPA', '2016.11.001.pre'),
     ('Libint', '1.1.4'),
     ('libxc', '4.2.3'),
