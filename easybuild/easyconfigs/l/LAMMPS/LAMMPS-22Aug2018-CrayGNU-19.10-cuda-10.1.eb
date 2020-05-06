@@ -4,13 +4,7 @@ easyblock = 'MakeCp'
 name = 'LAMMPS'
 version = '22Aug18'
 local_release = 'stable_22Aug2018'
-local_cudaversion =  '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyshortver = "%s.%s" % (local_py_maj_ver, local_py_min_ver)
-local_pyver      = "%s.%s.%s" % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -35,10 +29,13 @@ prebuildopts += ' sed -e \'s/mpicxx/CC -fopenmp/\' ./MAKE/Makefile.mpi > ./MAKE/
 prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
+dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
+]
+
 builddependencies = [
-    (('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE)),
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cray-python/%s' %local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
