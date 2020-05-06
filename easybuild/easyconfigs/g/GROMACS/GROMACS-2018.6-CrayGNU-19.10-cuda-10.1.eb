@@ -14,8 +14,7 @@
 easyblock = 'CMakeMake'
 name = 'GROMACS'
 version = "2018.6"
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
@@ -36,9 +35,9 @@ skipsteps = ['test']
 # CMake dependency with dummy toolchain
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 dependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('craype-accel-nvidia60', EXTERNAL_MODULE)
 ]
 
