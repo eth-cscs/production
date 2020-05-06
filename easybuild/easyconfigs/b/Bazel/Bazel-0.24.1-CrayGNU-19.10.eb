@@ -3,17 +3,16 @@
 easyblock = "Binary"
 
 name = 'Bazel'
-version = '0.29.1'
-
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-versionsuffix = '-python%s' % (local_py_maj_ver)
+version = '0.24.1'
 
 homepage = 'http://baze.io/'
 description = """Correct, reproducible, fast builds for everyone"""
 
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+
+dependencies = [
+#    ('SWIG', '3.0.12', versionsuffix),
+]
 
 osdependencies = ['java']
 
