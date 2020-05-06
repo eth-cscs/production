@@ -1,14 +1,10 @@
-easyblock = 'Bundle'
+easyblock = 'PythonBundle'
 
 name = 'dask'
 version = '1.0.0'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-versionsuffix = '-python%s' % (local_py_maj_ver)
+versionsuffix = '-python%(pymajver)s'
+_pyminver = '6'
 
 homepage = 'http://github.com/dask/dask/'
 description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
@@ -17,97 +13,41 @@ description = """Dask provides multi-core execution on larger-than-memory datase
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'verbose': False}
 
-# this is a bundle of Python packages
-exts_defaultclass = 'PythonPackage'
-
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', '%(pyver)s'),
 ]
 
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%s' % _pyminver,
+    'source_urls': [PYPI_SOURCE]
+}
 
 exts_list = [
-    ('cloudpickle', '0.2.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/c/cloudpickle'],
-    }),
-    ('distributed', '1.24.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/d/distributed'],
-    }),
-    ('partd', '0.3.8', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/partd'],
-    }),
-    ('click', '6.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/c/click'],
-    }),
-    ('PyYAML', '3.13', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyyaml'],
+    ('HeapDict', '1.0.1'),
+    ('zict', '2.0.0'),
+    ('psutil', '5.7.0'),
+    ('tornado', '6.0.4'),
+    ('sortedcontainers', '2.1.0'),
+    ('msgpack', '1.0.0'),
+    ('tblib', '1.6.0'),
+    ('PyYAML', '5.3.1', {
         'modulename': 'yaml',
     }),
-    ('zict', '0.1.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/z/zict'],
-    }),
-    ('tornado', '4.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/tornado'],
-    }),
-    ('msgpack', '0.5.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/m/msgpack'],
-    }),
-    ('tblib', '1.3.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/tblib'],
-    }),
-    ('psutil', '5.4.8', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/psutil'],
-    }),
-    ('sortedcontainers', '2.0.5', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/s/sortedcontainers'],
-    }),
-    ('locket', '0.2.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/l/locket'],
-    }),
-    ('HeapDict', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/h/heapdict'],
-    }),
-   (name, version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/d/dask'],
+    ('click', '7.1.2'),
+    (name, version, {
         'checksums': ['a1fa4a3b2d7ce4dd0c68db4b68dadf2c283ff54d98bd72c556fc462000449ff7'],
     }),
+    ('cloudpickle', '1.4.1'),
+    ('distributed', '1.24.0'),
+    ('locket', '0.2.0'),
+    ('partd', '0.3.8'),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-local_full_sanity_check = True
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s.%s/site-packages' % (local_py_maj_ver, local_py_min_ver)],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
-
-modextrapaths = {'PYTHONPATH': ['lib/python%s.%s/site-packages' % (local_py_maj_ver, local_py_min_ver)]}
 
 moduleclass = 'data'
