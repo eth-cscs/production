@@ -8,7 +8,7 @@ LD        = ftn
 AR        = ar -r
 # LIBXSMM (-D__LIBXSMM) is slower than LIBSMM (-D__HAS_smm_dnn)
 DFLAGS    = -D__ACC -D__DBCSR_ACC -D__MKL -D__FFTW3 -D__ELPA=201911 -D__LIBINT -D__LIBXC -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK -D__HAS_smm_dnn
-CFLAGS    = $(DFLAGS) -g -O2
+CFLAGS    = $(DFLAGS) -g -O3
 # The compiler flag "-fp-model precise" slows down execution by ~25% 
 # See https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference-fp-model-fp 
 FCFLAGS   = $(DFLAGS) -g -O3 -qopenmp -funroll-loops -fpp -free
