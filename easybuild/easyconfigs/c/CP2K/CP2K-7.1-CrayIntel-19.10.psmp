@@ -1,5 +1,5 @@
 # contributed by Luca Marsella (CSCS)
-# modules: Bison CrayIntel cudatoolkit ELPA flex Libint libxc libxsmm
+# modules: Bison CrayIntel cudatoolkit ELPA flex Libint libxc
 CC        = cc
 FC        = ftn
 LD        = ftn
@@ -17,7 +17,7 @@ FCFLAGS   += -I$(EBROOTLIBINT)/include
 FCFLAGS   += -I$(EBROOTLIBXC)/include 
 LDFLAGS   = $(FCFLAGS)
 LDFLAGS_C = $(FCFLAGS) -nofor_main
-LIBS      += -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl
+LIBS      = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl
 LIBS      += -L$(EBROOTELPA)/lib -lelpa_openmp
 LIBS      += -L$(EBROOTLIBINT)/lib -lint2 -lstdc++ 
 LIBS      += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc

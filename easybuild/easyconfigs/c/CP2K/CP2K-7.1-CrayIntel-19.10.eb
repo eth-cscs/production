@@ -29,8 +29,8 @@ source_urls = [
 ]
 
 builddependencies = [
-    ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
+    ('flex', '2.6.4')
 ]
 
 dependencies = [
