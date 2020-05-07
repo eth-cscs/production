@@ -28,14 +28,13 @@ builddependencies = [
     ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
     ('cray-libsci/19.06.1', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
-    ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
+    ('flex', '2.6.4')
 ]
 dependencies = [
     ('ELPA', '2019.11.001'),
     ('Libint-CP2K', '2.6.0'),
-    ('libxc', '4.3.4'),
-    ('libxsmm', '1.15'),
+    ('libxc', '4.3.4')
 ]
 
 # build type

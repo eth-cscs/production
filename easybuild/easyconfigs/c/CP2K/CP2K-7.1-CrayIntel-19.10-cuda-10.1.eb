@@ -32,15 +32,14 @@ source_urls = [
 
 builddependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
-    ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
+    ('flex', '2.6.4')
 ]
 
 dependencies = [
     ('ELPA', '2019.11.001'),
     ('Libint-CP2K', '2.6.0'),
-    ('libxc', '4.3.4'),
-    ('libxsmm', '1.14'),
+    ('libxc', '4.3.4')
 ]
 
 # unload cray-libsci to link Intel MKL
