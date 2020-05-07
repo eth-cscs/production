@@ -5,8 +5,7 @@ easyblock = 'MakeCp'
 name = 'Amber'
 local_patchlevels = (9, 17) # (AmberTools, Amber)
 version = '19-%s-%s-ff19SB' % (local_patchlevels[0], local_patchlevels[1])
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'http://ambermd.org/'
 description = """Amber (Assisted Model Building with Energy Refinement)
@@ -31,10 +30,10 @@ dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 
 builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
 ]
