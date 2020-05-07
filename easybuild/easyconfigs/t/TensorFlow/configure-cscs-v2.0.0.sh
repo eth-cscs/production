@@ -2,8 +2,8 @@
 
 CONF_IN="configure.in"
 
-echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/bin/python"$PYMAJVER > $CONF_IN
-echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/lib/python"$PYMAJVER"."$PYMINVER"/site-packages" >> $CONF_IN
+echo "/opt/python/$PYVER/bin/python" > $CONF_IN
+echo "/opt/python/$PYVER/lib/python"$PYSHORTVER"/site-packages" >> $CONF_IN
 echo "n" >> $CONF_IN # Do you wish to build TensorFlow with XLA JIT support? [Y/n]:
 echo "n" >> $CONF_IN # Do you wish to build TensorFlow with OpenCL SYCL support? [y/N]:
 echo "n" >> $CONF_IN # Do you wish to build TensorFlow with ROCm support? [y/N]:

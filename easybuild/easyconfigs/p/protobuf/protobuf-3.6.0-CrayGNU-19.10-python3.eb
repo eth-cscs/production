@@ -5,9 +5,6 @@ version = '3.6.0'
 
 versionsuffix = '-python%(pymajver)s'
 
-# req_py_majver = 3
-# req_py_minver = 6
-
 homepage = 'https://github.com/google/protobuf/'
 description = """Python Protocol Buffers runtime library."""
 
