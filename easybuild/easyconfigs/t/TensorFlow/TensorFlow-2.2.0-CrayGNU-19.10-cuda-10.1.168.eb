@@ -3,8 +3,7 @@
 easyblock = "CmdCp"
 
 name = 'TensorFlow'
-version = '2.2.0-rc3'
-shortversion = '2.2.0rc3'
+version = '2.2.0'
 
 py_maj_ver = '3'
 py_min_ver = '6'
@@ -47,7 +46,7 @@ patches = [('tensorflow-v%s-cuda%s-cscs.patch' % (version, cudaversion)),
 
 with_configure = False
 
-whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (shortversion, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
+whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
 
 build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
 build_str += " && rm -rf $TEST_TMPDIR"

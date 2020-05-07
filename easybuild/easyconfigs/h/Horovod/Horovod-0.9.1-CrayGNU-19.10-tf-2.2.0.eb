@@ -11,7 +11,7 @@ pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
 pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
 
 cudaver = '10.1.168'
-tfver = '2.2.0-rc3'
+tfver = '2.2.0'
 versionsuffix = '-tf-%s' % tfver
 
 homepage = 'https://github.com/uber/horovod'
