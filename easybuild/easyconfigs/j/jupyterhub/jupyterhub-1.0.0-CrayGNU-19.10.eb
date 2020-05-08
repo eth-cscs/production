@@ -1,154 +1,64 @@
 # @author: robinson
 
-easyblock = 'Bundle'
+easyblock = 'PythonBundle'
 
 name = 'jupyterhub'
-
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-
 version = '1.0.0'
+_pyminver = '6'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
 
-
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
-
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', '%(pyver)s'),
     ('configurable-http-proxy', '3.1.1')
 ]
 
-# bundle of Python packages
-exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%s' % _pyminver,
+    'source_urls': [PYPI_SOURCE]
+}
 
 exts_list = [
-    ('pamela', '0.3.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pamela/'],
-    }),
-    ('tornado', '5.1.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/t/tornado/'],
-        }),
-    ('decorator', '4.3.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
-        }),
-    ('ipython_genutils', '0.2.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/'],
-        }),
-    ('traitlets', '4.3.2', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
-        }),
+    ('pamela', '0.3.0'),
+    ('tornado', '5.1.1'),
+    ('decorator', '4.3.0'),
+    ('ipython_genutils', '0.2.0'),
+    ('traitlets', '4.3.2'),
     ('python-oauth2', '1.1.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'modulename': 'oauth2',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-oauth2/'],
-        }),
-    ('SQLAlchemy', '1.2.12', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/s/SQLAlchemy/'],
-        }),
-    ('MarkupSafe', '1.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/m/MarkupSafe/'],
-        }),
-    ('Mako', '1.0.7', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/m/Mako/'],
-        }),
+        'modulename': 'oauth2',
+    }),
+    ('SQLAlchemy', '1.2.12'),
+    ('MarkupSafe', '1.0'),
+    ('Mako', '1.0.7'),
     ('python-editor', '1.0.3', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'modulename': 'editor',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-editor/'],
-        }),
+        'modulename': 'editor',
+    }),
     ('python-dateutil', '2.7.3', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'modulename': 'dateutil',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-dateutil/'],
-        }),
-    ('alembic', '1.0.0', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/a/alembic/'],
-        }),
-    ('prometheus_client', '0.4.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/p/prometheus_client/'],
-        }),
-    ('async_generator', '1.10', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/a/async_generator/'],
-        }),
-    ('chardet', '3.0.4', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
-        }),
-    ('certifi', '2018.8.24', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
-        }),
-    ('idna', '2.7', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
-        }),
-    ('urllib3', '1.23', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
-        }),
-    ('requests', '2.19.1', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
-        }),
-    ('Jinja2', '2.10', {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'source_urls': ['https://pypi.python.org/packages/source/j/Jinja2/'],
-        }),
+        'modulename': 'dateutil',
+    }),
+    ('alembic', '1.0.0'),
+    ('prometheus_client', '0.4.1'),
+    ('async_generator', '1.10'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2018.8.24'),
+    ('idna', '2.7'),
+    ('urllib3', '1.23'),
+    ('requests', '2.19.1'),
+    ('Jinja2', '2.10'),
     ('jupyterhub', version, {
-            'req_py_majver': '3',
-            'req_py_minver': '6',
-            'use_pip': True,
-            'source_urls': ['https://pypi.python.org/packages/source/j/jupyterhub/'],
-        }),
+        'use_pip': True,
+    }),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-local_full_sanity_check = True
-
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % local_pyshortver]}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver]
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
 
 moduleclass = 'tools'
