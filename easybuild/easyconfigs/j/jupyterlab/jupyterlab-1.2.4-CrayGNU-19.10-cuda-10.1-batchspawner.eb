@@ -1,18 +1,12 @@
 # @author: robinson (omlins and hvictor for IJulia)
 
-easyblock = 'Bundle'
+easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
 version = '1.2.4'
 _cudaversion = '10.1'
 versionsuffix = '-cuda-%s-batchspawner' % _cudaversion
-
-_py_maj_ver = '3'
-_py_min_ver = '6'
-_py_rev_ver = '5.7'
-
-_pyver = '%s.%s.%s' % (_py_maj_ver, _py_min_ver, _py_rev_ver)
-_pyshortver = '%s.%s' % (_py_maj_ver, _py_min_ver)
+_pyminver = '6'
 
 _jl_maj_ver = '1'
 _jl_min_ver = '2'
@@ -28,585 +22,309 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', _pyver),
-    ('IPython', '7.7.0', '-python%s' % _py_maj_ver),
+    ('PyExtensions', '%(pyver)s'),
+    ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('JuliaExtensions', _jlver, '-cuda-%s' % _cudaversion),
     ('configurable-http-proxy', '3.1.1'),
-    ('dask', '2.2.0', '-python%s' % _py_maj_ver),
+    ('dask', '2.2.0', '-python%(pymajver)s'),
     ('graphviz', '2.40.1', '', True),
 ]
 
-# bundle of Python packages
-exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%s' % _pyminver,
+    'source_urls': [PYPI_SOURCE]
+}
 
 exts_list = [
 
 #jupyterlab packages besides ipython and its deps
     ('pyrsistent', '0.15.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyrsistent/'],
         }),
     ('attrs', '19.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'modulename': 'attr',
-        'source_urls': ['https://pypi.python.org/packages/source/a/attrs/'],
         }),
     ('jsonschema', '3.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jsonschema/'],
         }),
     ('json5', '0.8.5', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/json5/'],
         }),
     ('Send2Trash', '1.5.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/s/Send2Trash/'],
         }),
     ('tornado', '6.0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/t/tornado/'],
         }),
     ('pyzmq', '18.0.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'modulename': 'zmq',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyzmq/'],
         }),
     ('python-dateutil', '2.8.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'modulename':  'dateutil',
-        'source_urls': ['https://pypi.python.org/packages/source/p/python-dateutil/'],
         }),
     ('jupyter_core', '4.5.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter_core/'],
         }),
     ('jupyter_client', '5.3.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter_client/'],
         }),
     ('MarkupSafe', '1.1.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/m/MarkupSafe/'],
         }),
     ('Jinja2', '2.10.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/Jinja2/'],
         }),
     ('webencodings', '0.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/w/webencodings/'],
         }),
     ('bleach', '3.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/b/bleach/'],
         }),
     ('defusedxml', '0.6.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/d/defusedxml/'],
         }),
     ('entrypoints', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoints/'],
         }),
     ('mistune', '0.8.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/m/mistune/'],
         }),
     ('nbformat', '4.4.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/n/nbformat/'],
         }),
     ('pandocfilters', '1.4.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pandocfilters/'],
         }),
     ('testpath', '0.4.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/t/testpath/'],
         }),
     ('nbconvert', '5.5.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/n/nbconvert/'],
         }),
     ('prometheus_client', '0.7.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/prometheus_client/'],
         }),
     ('terminado', '0.8.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/t/terminado/'],
         }),
     ('jupyterlab_server', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab_server/'],
         }),
     ('ipykernel', '5.1.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipykernel/'],
         }),
     ('notebook', '6.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/n/notebook/'],
         }),
     (name, version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'installopts': ' --install-option=--skip-npm ',
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab/'],
         }),
 
 # jupyterhub and its deps
     ('SQLAlchemy', '1.3.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/s/SQLAlchemy/'],
         }),
     ('Mako', '1.0.14', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/m/Mako/'],
         }),
     ('alembic', '1.0.11', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/alembic/'],
         }),
     ('python-editor', '1.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'modulename': 'editor',
-        'source_urls': ['https://pypi.python.org/packages/source/p/python-editor/'],
         }),
     ('async_generator', '1.10', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/async_generator/'],
         }),
     ('pycparser', '2.19', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pycparser/'],
         }),
     ('cffi', '1.12.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': False,
-        'source_urls': ['https://pypi.python.org/packages/source/c/cffi/'],
         }),
     ('asn1crypto', '0.24.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/a/asn1crypto/'],
         }),
     ('cryptography', '2.7', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/cryptography/'],
         }),
     ('pyOpenSSL', '19.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'modulename': "OpenSSL",
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyOpenSSL/'],
         }),
     ('certipy', '0.1.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/certipy/'],
         }),
     ('entrypoints', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoint/'],
         }),
     ('oauthlib', '3.0.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/o/oauthlib/'],
         }),
     ('pamela', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/p/pamela/'],
         }),
     ('urllib3', '1.25.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
         }),
     ('idna', '2.8', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
         }),
     ('chardet', '3.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
         }),
     ('certifi', '2019.6.16', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
         }),
     ('requests', '2.22.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
         }),
     ('jupyterhub', '1.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterhub/'],
         }),
 
 # widgets: note the lab extensions below
-    ('widgetsnbextension', '3.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/w/widgetsnbextension/'],
-        }),
-    ('ipywidgets', '7.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipywidgets/'],
-        }),
-# ipympl matplotlib widgets, requires lab extension 
-    ('ipympl', '0.3.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipympl/'],
-        }),
+    ('widgetsnbextension', '3.5.1'),
+    ('ipywidgets', '7.5.1'),
+# ipympl matplotlib widgets, requires lab extension
+    ('ipympl', '0.3.3'),
 
 # itkwidgets
-    ('param', '1.9.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/param/'],
-        }),
-    ('pyct', '0.4.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyct/'],
-        }),
-    ('colorcet', '2.0.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/c/colorcet/'],
-        }),
-    ('zstandard', '0.13.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/z/zstandard/'],
-        }),
+    ('param', '1.9.2'),
+    ('pyct', '0.4.6'),
+    ('colorcet', '2.0.2'),
+    ('zstandard', '0.13.0'),
     ('itk-core', '5.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
-        'source_urls': ['https://pypi.python.org/packages/source/i/itk-core/'],
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
-        'source_urls': ['https://pypi.python.org/packages/source/i/itk-numerics/'],
         'modulename': 'itk'
         }),
     ('itk-filtering', '5.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
-        'source_urls': ['https://pypi.python.org/packages/source/i/itk-filtering/'],
         'modulename': 'itk'
         }),
     ('itk-meshtopolydata', '0.5.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
         'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
-        'source_urls': ['https://pypi.python.org/packages/source/i/itk-meshtopolydata/'],
         'modulename': 'itk'
         }),
     ('ipydatawidgets', '4.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/i/ipydatawidgets/'],
         }),
-    ('itkwidgets', '0.25.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/i/itkwidgets/'],
-        }),
-    
-    
+    ('traittypes', '0.2.1'),
+    ('itkwidgets', '0.25.0'),
+
+
 # plotly, requires the lab extension below
-    ('retrying', '1.3.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/r/retrying/'],
-        }),
-    ('plotly', '4.0.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/plotly/'],
-        }),
+    ('retrying', '1.3.3'),
+    ('plotly', '4.0.0'),
 
 # bokeh, requires the labextension below
     ('PyYAML', '5.1.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'modulename': 'yaml',
-        'source_urls': ['https://pypi.python.org/packages/source/p/PyYAML/'],
         }),
-    ('bokeh', '1.3.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/bokeh/'],
-        }),
-    ('packaging', '19.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/packaging/'],
-        }),
+    ('bokeh', '1.3.4'),
+    ('packaging', '19.1'),
     ('Pillow', '6.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'modulename': 'PIL',
-        'source_urls': ['https://pypi.python.org/packages/source/p/Pillow/'],
-        }),    
-    
+        }),
+
 # bqplot: requires the labextension below
-    ('traittypes', '0.2.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/traittypes/'],
-        }),
-    ('bqplot', '0.11.6', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/b/bqplot/'],
-        }),
+    ('bqplot', '0.11.6'),
 
 # nbresuse for jupyterlab-system-monitor extension
-    ('psutil', '5.6.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/p/psutil/'],
-        }),
-    ('nbresuse', '0.3.2', {
-       'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/n/nbresuse/'],
-        }),
+    ('psutil', '5.6.3'),
+    ('nbresuse', '0.3.2'),
 
 # jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.x
-#    ('jupyterlab_slurm', '0.1.1', {
-#        'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab-slurm/'],
-#        }),
+#    ('jupyterlab_slurm', '0.1.1'),
 
 # qgrid widgets: note that 1.1.1 is not yet supported with JupyterLab 1.x - commented for now, twr
-#    ('qgrid', '1.1.1', {
-#        'req_py_majver': '3',
-#        'req_py_minver': '6',
-#        'source_urls': ['https://pypi.python.org/packages/source/q/qgrid/'],
-#        }),
+#    ('qgrid', '1.1.1'),
 
 # graphviz, for dask graph visualization
      ('graphviz', '0.12', {
-         'req_py_majver': '3',
-         'req_py_minver': '6',
-         'use_pip': True,
-         'source_urls': ['https://pypi.python.org/packages/source/g/graphviz/'],
-         'source_tmpl': 'graphviz-%(version)s.zip',
-         }),
+        'use_pip': True,
+        'source_tmpl': 'graphviz-%(version)s.zip',
+        }),
 
 # dask-labextension
-# This package provides a JupyterLab extension to manage Dask clusters, 
-# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+# This package provides a JupyterLab extension to manage Dask clusters,
+# as well as embed Dask's dashboard plots directly into JupyterLab panes
     ('simpervisor', '0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/s/simpervisor/'],
+        'use_pip': True,
         }),
     ('multidict', '4.5.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/m/multidict/'],
+        'use_pip': True,
         }),
     ('yarl', '1.3.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True, 
-        'source_urls': ['https://pypi.python.org/packages/source/y/yarl/'],
+        'use_pip': True,
         }),
     ('typing_extensions', '3.7.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/t/typing_extensions/'],
+        'use_pip': True,
         }),
     ('async-timeout', '3.0.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/a/async-timeout/'],
+        'use_pip': True,
         }),
     ('idna-ssl', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
+        'use_pip': True,
         'modulename': 'idna_ssl',
-        'source_urls': ['https://pypi.python.org/packages/source/i/idna-ssl/'],
         }),
    ('aiohttp', '3.5.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/a/aiohttp/'],
+        'use_pip': True,
         }),
    ('jupyter-server-proxy', '1.1.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyter-server-proxy/'],
+        'use_pip': True,
         }),
     ('dask_labextension', '1.0.3', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/d/dask-labextension/'],
+        'use_pip': True,
         }),
 
 # jupyterlab-nvdashboard, twr
 # A JupyterLab extension for displaying dashboards of GPU usage. From RAPIDS.
    ('pynvml', '8.0.4', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/p/pynvml/'],
+        'use_pip': True,
         }),
     ('jupyterlab-nvdashboard', '0.1.11', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'use_pip': True,        
-        'source_urls': ['https://pypi.python.org/packages/source/j/jupyterlab-nvdashboard/'],
+        'use_pip': True,
         }),
 
 
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://pypi.python.org/packages/source/b/bash_kernel/'],
         }),
      ('batchspawner', '68a1fcd', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
         'use_pip': True,
-        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
         }),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-_full_sanity_check = True
 
 # For Julia packages needed for Jupyter
 _ijulia_depot = "%(installdir)s/share/IJulia"
 _ijulia_projectdir = "%s/environments/$EBJULIA_ENV_NAME" % _ijulia_depot
 _ijulia_projectdir_tcl = "%s/environments/$::env(EBJULIA_ENV_NAME)" % _ijulia_depot
 
-
 modextrapaths = {
-    'PYTHONPATH': ['lib/python%s/site-packages' % _pyshortver],
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
     'JUPYTER_PATH': 'share/jupyter',
 }
 
@@ -652,10 +370,10 @@ rm -r $YARN_CACHE_FOLDER;
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%%(installdir)s/;
 # new batchspawner requires compute side components, TWR 121219
-#git clone https://github.com/jupyterhub/batchspawner.git %%(builddir)s/batchspawner && 
-#cd %%(builddir)s/batchspawner && 
-#git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 && 
-#pip install . --prefix=%%(installdir)s 
+#git clone https://github.com/jupyterhub/batchspawner.git %%(builddir)s/batchspawner &&
+#cd %%(builddir)s/batchspawner &&
+#git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 &&
+#pip install . --prefix=%%(installdir)s
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
 # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
 unset EBJULIA_USER_DEPOT_PATH;
@@ -670,7 +388,7 @@ file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json; cp $file ${file
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % _pyshortver,
+    'dirs': ['lib/python%(pyshortver)s/site-packages',
              'share/jupyter/lab/extensions',
              'share/jupyter/lab/schemas',
              'share/jupyter/lab/staging',
