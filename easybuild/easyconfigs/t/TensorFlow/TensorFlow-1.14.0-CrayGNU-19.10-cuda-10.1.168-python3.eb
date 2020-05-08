@@ -40,15 +40,15 @@ _whl_file = 'tensorflow-%%(version)s-cp%%(pymajver)s%s-cp%%(pymajver)s%sm-linux_
 
 build_str  = "export TEST_TMPDIR=%(builddir)s/../../../bazelout/"
 build_str += " && rm -rf $TEST_TMPDIR"
-build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
-build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += r" && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += r" && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
 build_str += " && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s" # required for configure-cscs scripts
 build_str += " && bash configure-cscs-v%(version)s.sh"
 build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
-build_str += " && pip%(pymajver)s install --no-deps --prefix  %(builddir)s %(builddir)s/" + _whl_file
+build_str += " && pip%(pymajver)s install --no-deps --prefix %(builddir)s %(builddir)s/" + _whl_file
 build_str += " && rm -rf $TEST_TMPDIR"
 
 cmds_map = [
