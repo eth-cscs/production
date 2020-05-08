@@ -24,6 +24,7 @@
  HPX-1.4.0-CrayGNU-19.10.eb                         --set-default-module
  HPX-1.4.0-CrayGNU-19.10-APEX.eb
  HPX-1.4.0-CrayGNU-19.10-nonetworking.eb
+ hub-2.14.2.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  h5py-2.8.0-CrayGNU-19.10-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.10-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.10-python3-parallel.eb       --set-default-module
