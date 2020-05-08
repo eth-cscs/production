@@ -42,13 +42,13 @@ exts_list = [
     ('requests', '2.22.0'),
     ('wrapt', '1.11.2'),
     ('setuptools', '41.2.0', {
-        'source_tmpl': 'setuptools-41.0.1.zip',
+        'source_tmpl': 'setuptools-%(version)s.zip',
     }),
     ('Markdown', '3.1.1'),
     ('wheel', '0.33.6'),
     ('astunparse', '1.6.3'),
     ('opt-einsum', '3.2.1', {
-        'source_tmpl': 'opt_einsum-3.2.1.tar.gz'
+        'source_tmpl': 'opt_einsum-%(version)s.tar.gz'
     }),
 ]
 

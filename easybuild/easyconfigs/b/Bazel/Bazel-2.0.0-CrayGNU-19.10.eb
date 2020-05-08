@@ -17,8 +17,6 @@ source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)
 
 install_cmd = 'chmod +x bazel-%(version)s-installer-linux-x86_64.sh && ./bazel-%(version)s-installer-linux-x86_64.sh --bin=%(installdir)s --base=%(installdir)s'
 
-local_files_to_copy = [(['output/bazel'], 'bin')]
-
 sanity_check_paths = {
     'files': ['bin/bazel'],
     'dirs': ['bin'],
