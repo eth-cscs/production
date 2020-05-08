@@ -2,8 +2,8 @@
 
 CONF_IN="configure.in"
 
-echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/bin/python"$PYMAJVER > $CONF_IN
-echo "/opt/python/$PYMAJVER.$PYMINVER.$PYREVVER/lib/python"$PYMAJVER"."$PYMINVER"/site-packages" >> $CONF_IN
+echo "/opt/python/$PYVER/bin/python" > $CONF_IN
+echo "/opt/python/$PYVER/lib/python"$PYSHORTVER"/site-packages" >> $CONF_IN
 echo "n" >> $CONF_IN # Do you wish to build TensorFlow with OpenCL SYCL support? [y/N]
 echo "n" >> $CONF_IN # Do you wish to build TensorFlow with ROCm support? [y/N]
 echo "y" >> $CONF_IN # Do you wish to build TensorFlow with CUDA support? [y/N]
@@ -11,7 +11,7 @@ echo "n" >> $CONF_IN # Do you wish to build TensorFlow with TensorRT support? [y
 # Asking for detailed CUDA configuration...
 echo "10.1" >> $CONF_IN   # Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 10]:
 echo "7.6.4" >> $CONF_IN  # Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 7]:
-echo "2.4.8" >> $CONF_IN  # Please specify the locally installed NCCL version you want to use. [Leave empty to use http://github.com/nvidia/nccl]:
+echo "2.6.4" >> $CONF_IN  # Please specify the locally installed NCCL version you want to use. [Leave empty to use http://github.com/nvidia/nccl]:
 echo "$EBROOTCUDA,$EBROOTCUDNN,$EBROOTNCCL" >> $CONF_IN # Please specify the comma-separated list of base paths to look for CUDA libraries and headers.
 echo "5.0" >> $CONF_IN # Please specify a list of comma-separated Cuda compute capabilities you want to build with.
 # echo "n" >> $CONF_IN   # Do you wish to download a fresh release of clang? (Experimental) [y/N]
