@@ -35,161 +35,78 @@ dependencies = [
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': '%s' % _pyminver,
-    'source_urls': [PYPI_SOURCE]
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True,
 }
 
 exts_list = [
 
 #jupyterlab packages besides ipython and its deps
-    ('pyrsistent', '0.15.4', {
-        'use_pip': True,
-        }),
+    ('pyrsistent', '0.15.4'),
     ('attrs', '19.1.0', {
-        'use_pip': True,
         'modulename': 'attr',
         }),
-    ('jsonschema', '3.0.1', {
-        'use_pip': True,
-        }),
-    ('json5', '0.8.5', {
-        'use_pip': True,
-        }),
-    ('Send2Trash', '1.5.0', {
-        'use_pip': True,
-        }),
-    ('tornado', '6.0.3', {
-        'use_pip': True,
-        }),
+    ('jsonschema', '3.0.1'),
+    ('json5', '0.8.5'),
+    ('Send2Trash', '1.5.0'),
+    ('tornado', '6.0.3'),
     ('pyzmq', '18.0.2', {
-        'use_pip': True,
         'modulename': 'zmq',
         }),
     ('python-dateutil', '2.8.0', {
-        'use_pip': True,
+
         'modulename':  'dateutil',
         }),
-    ('jupyter_core', '4.5.0', {
-        'use_pip': True,
-        }),
-    ('jupyter_client', '5.3.1', {
-        'use_pip': True,
-        }),
-    ('MarkupSafe', '1.1.1', {
-        'use_pip': True,
-        }),
-    ('Jinja2', '2.10.1', {
-        'use_pip': True,
-        }),
-    ('webencodings', '0.5.1', {
-        'use_pip': True,
-        }),
-    ('bleach', '3.1.0', {
-        'use_pip': True,
-        }),
-    ('defusedxml', '0.6.0', {
-        'use_pip': True,
-        }),
-    ('entrypoints', '0.3', {
-        'use_pip': True,
-        }),
-    ('mistune', '0.8.4', {
-        'use_pip': True,
-        }),
-    ('nbformat', '4.4.0', {
-        'use_pip': True,
-        }),
-    ('pandocfilters', '1.4.2', {
-        'use_pip': True,
-        }),
-    ('testpath', '0.4.2', {
-        'use_pip': True,
-        }),
-    ('nbconvert', '5.5.0', {
-        'use_pip': True,
-        }),
-    ('prometheus_client', '0.7.1', {
-        'use_pip': True,
-        }),
-    ('terminado', '0.8.2', {
-        'use_pip': True,
-        }),
-    ('jupyterlab_server', '1.0.0', {
-        'use_pip': True,
-        }),
-    ('ipykernel', '5.1.1', {
-        'use_pip': True,
-        }),
-    ('notebook', '6.0.0', {
-        'use_pip': True,
-        }),
+    ('jupyter_core', '4.5.0'),
+    ('jupyter_client', '5.3.1'),
+    ('MarkupSafe', '1.1.1'),
+    ('Jinja2', '2.10.1'),
+    ('webencodings', '0.5.1'),
+    ('bleach', '3.1.0'),
+    ('defusedxml', '0.6.0'),
+    ('entrypoints', '0.3'),
+    ('mistune', '0.8.4'),
+    ('nbformat', '4.4.0'),
+    ('pandocfilters', '1.4.2'),
+    ('testpath', '0.4.2'),
+    ('nbconvert', '5.5.0'),
+    ('prometheus_client', '0.7.1'),
+    ('terminado', '0.8.2'),
+    ('jupyterlab_server', '1.0.0'),
+    ('ipykernel', '5.1.1'),
+    ('notebook', '6.0.0'),
     (name, version, {
-        'use_pip': True,
         'installopts': ' --install-option=--skip-npm ',
         }),
 
 # jupyterhub and its deps
-    ('SQLAlchemy', '1.3.6', {
-        'use_pip': True,
-        }),
-    ('Mako', '1.0.14', {
-        'use_pip': True,
-        }),
-    ('alembic', '1.0.11', {
-        'use_pip': True,
-        }),
+    ('SQLAlchemy', '1.3.6'),
+    ('Mako', '1.0.14'),
+    ('alembic', '1.0.11'),
     ('python-editor', '1.0.4', {
-        'use_pip': True,
+
         'modulename': 'editor',
         }),
-    ('async_generator', '1.10', {
-        'use_pip': True,
-        }),
-    ('pycparser', '2.19', {
-        'use_pip': True,
-        }),
+    ('async_generator', '1.10'),
+    ('pycparser', '2.19'),
     ('cffi', '1.12.3', {
         'use_pip': False,
         }),
-    ('asn1crypto', '0.24.0', {
-        'use_pip': True,
-        }),
-    ('cryptography', '2.7', {
-        'use_pip': True,
-        }),
+    ('asn1crypto', '0.24.0'),
+    ('cryptography', '2.7'),
     ('pyOpenSSL', '19.0.0', {
-        'use_pip': True,
         'modulename': "OpenSSL",
         }),
-    ('certipy', '0.1.3', {
-        'use_pip': True,
-        }),
-    ('entrypoints', '0.3', {
-        'use_pip': True,
-        }),
-    ('oauthlib', '3.0.2', {
-        'use_pip': True,
-        }),
-    ('pamela', '1.0.0', {
-        'use_pip': True,
-        }),
-    ('urllib3', '1.25.3', {
-        'use_pip': True,
-        }),
-    ('idna', '2.8', {
-        'use_pip': True,
-        }),
-    ('chardet', '3.0.4', {
-        'use_pip': True,
-        }),
-    ('certifi', '2019.6.16', {
-        'use_pip': True,
-        }),
-    ('requests', '2.22.0', {
-        'use_pip': True,
-        }),
-    ('jupyterhub', '1.0.0', {
-        'use_pip': True,
-        }),
+    ('certipy', '0.1.3'),
+    ('entrypoints', '0.3'),
+    ('oauthlib', '3.0.2'),
+    ('pamela', '1.0.0'),
+    ('urllib3', '1.25.3'),
+    ('idna', '2.8'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2019.6.16'),
+    ('requests', '2.22.0'),
+    ('jupyterhub', '1.0.0'),
 
 # widgets: note the lab extensions below
     ('widgetsnbextension', '3.5.1'),
@@ -203,32 +120,26 @@ exts_list = [
     ('colorcet', '2.0.2'),
     ('zstandard', '0.13.0'),
     ('itk-core', '5.0.1', {
-        'use_pip': True,
         'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
-        'use_pip': True,
         'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-filtering', '5.0.1', {
-        'use_pip': True,
         'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-meshtopolydata', '0.5.1', {
-        'use_pip': True,
         'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
-    ('ipydatawidgets', '4.0.1', {
-        'use_pip': True,
-        }),
+    ('ipydatawidgets', '4.0.1'),
     ('traittypes', '0.2.1'),
     ('itkwidgets', '0.25.0'),
 
@@ -262,60 +173,34 @@ exts_list = [
 
 # graphviz, for dask graph visualization
      ('graphviz', '0.12', {
-        'use_pip': True,
         'source_tmpl': 'graphviz-%(version)s.zip',
         }),
 
 # dask-labextension
 # This package provides a JupyterLab extension to manage Dask clusters,
 # as well as embed Dask's dashboard plots directly into JupyterLab panes
-    ('simpervisor', '0.3', {
-        'use_pip': True,
-        }),
-    ('multidict', '4.5.2', {
-        'use_pip': True,
-        }),
-    ('yarl', '1.3.0', {
-        'use_pip': True,
-        }),
-    ('typing_extensions', '3.7.4', {
-        'use_pip': True,
-        }),
-    ('async-timeout', '3.0.1', {
-        'use_pip': True,
-        }),
+    ('simpervisor', '0.3'),
+    ('multidict', '4.5.2'),
+    ('yarl', '1.3.0'),
+    ('typing_extensions', '3.7.4'),
+    ('async-timeout', '3.0.1'),
     ('idna-ssl', '1.1.0', {
-        'use_pip': True,
         'modulename': 'idna_ssl',
         }),
-   ('aiohttp', '3.5.4', {
-        'use_pip': True,
-        }),
-   ('jupyter-server-proxy', '1.1.0', {
-        'use_pip': True,
-        }),
-    ('dask_labextension', '1.0.3', {
-        'use_pip': True,
-        }),
+    ('aiohttp', '3.5.4'),
+    ('jupyter-server-proxy', '1.1.0'),
+    ('dask_labextension', '1.0.3'),
 
 # jupyterlab-nvdashboard, twr
 # A JupyterLab extension for displaying dashboards of GPU usage. From RAPIDS.
-   ('pynvml', '8.0.4', {
-        'use_pip': True,
-        }),
-    ('jupyterlab-nvdashboard', '0.1.11', {
-        'use_pip': True,
-        }),
+    ('pynvml', '8.0.4'),
+    ('jupyterlab-nvdashboard', '0.1.11'),
 
 
 # kernels
 # bash kernel, requires kernel install below, twr
-    ('bash_kernel', '0.7.2', {
-        'use_pip': True,
-        }),
-     ('batchspawner', '68a1fcd', {
-        'use_pip': True,
-        }),
+    ('bash_kernel', '0.7.2'),
+    ('batchspawner', '68a1fcd'),
 ]
 
 # For Julia packages needed for Jupyter
