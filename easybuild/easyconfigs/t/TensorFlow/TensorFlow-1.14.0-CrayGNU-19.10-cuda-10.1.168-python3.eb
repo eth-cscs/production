@@ -5,20 +5,8 @@ easyblock = "CmdCp"
 name = 'TensorFlow'
 version = '1.14.0'
 
-py_maj_ver = '3'
-py_min_ver = '6'
-py_rev_ver = '5.7'
-pyver = '%s.%s.%s' % (py_maj_ver, py_min_ver, py_rev_ver)
-pyshortver = '%s.%s' % (py_maj_ver, py_min_ver)
-
-cudaversion = '10.1.168'
-
-ver_suffix_cuda = '-cuda-%s' % (cudaversion)
-ver_suffix_py = '-python%s' % (py_maj_ver)
-versionsuffix = '%s%s' % (ver_suffix_cuda, ver_suffix_py)
-
-installdir = '%(installdir)s'
-builddir = '%(builddir)s'
+versionsuffix = '-cuda-%(cudaver)s-python%(pymajver)s'
+_pyminver = '6'
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -26,40 +14,41 @@ description = """An open-source software library for Machine Intelligence."""
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 
 builddependencies = [
-    ('Bazel', '0.24.1', ver_suffix_py),
+    ('Bazel', '0.24.1'),
 ]
 
 dependencies = [
-    ('cuDNN', '7.6.1', '-cuda-%s' % cudaversion, True),
-    ('SWIG', '3.0.12', ver_suffix_py),
-    ('NCCL', '2.4.7', '-cuda-%s' % cudaversion, True),
-    ('protobuf', '3.6.0', ver_suffix_py),
-    ('dask', '1.0.0', '-python%s' % py_maj_ver),
-    ('PyExtensionsDS', pyver),
-    ('CUDA', cudaversion, '', True),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cuDNN', '7.6.1', '-cuda-%(cudaver)s', True),
+    ('SWIG', '3.0.12', '-python%(pymajver)s'),
+    ('NCCL', '2.4.7', '-cuda-%(cudaver)s', True),
+    ('protobuf', '3.6.0', '-python%(pymajver)s'),
+    ('dask', '1.0.0', '-python%(pymajver)s'),
+    ('PyExtensionsDS', '%(pyver)s'),
+    ('CUDA', '10.1.168', '', True),
 ]
 
 sources = ['v%(version)s.tar.gz']
 source_urls = ['https://github.com/tensorflow/tensorflow/archive/']
 
-patches = [('tensorflow-v%s-python%s-cscs.patch' % (version, py_maj_ver)),
-           ('configure-cscs-v%s.sh' % version, '%s/tensorflow-%s/' % (builddir, version))]
+patches = [('tensorflow-v%(version)s-python%(pymajver)s-cscs.patch'),
+           ('configure-cscs-v%(version)s.sh', '%(builddir)s/tensorflow-%(version)s/')]
 
 with_configure = False
 
-whl_file = 'tensorflow-%s-cp%s%s-cp%s%sm-linux_x86_64.whl' % (version, py_maj_ver, py_min_ver, py_maj_ver, py_min_ver)
+_whl_file = 'tensorflow-%%(version)s-cp%%(pymajver)s%s-cp%%(pymajver)s%sm-linux_x86_64.whl' % (_pyminver, _pyminver)
 
-build_str  = "export TEST_TMPDIR=%s/../../../bazelout/" % builddir
+build_str  = "export TEST_TMPDIR=%(builddir)s/../../../bazelout/"
 build_str += " && rm -rf $TEST_TMPDIR"
-build_str += r" && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
-build_str += r" && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
-build_str += " && export PYMAJVER=%s && export PYMINVER=%s && export PYREVVER=%s" % (py_maj_ver, py_min_ver, py_rev_ver)   # required for configure-cscs scripts
-build_str += " && bash configure-cscs-v%s.sh" % version
+build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+build_str += " && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s" # required for configure-cscs scripts
+build_str += " && bash configure-cscs-v%(version)s.sh"
 build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
 build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package"
 build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
-build_str += " && pip%s install --no-deps --prefix  %s %s/" % (py_maj_ver, builddir, builddir) + whl_file
+build_str += " && pip%(pymajver)s install --no-deps --prefix  %(builddir)s %(builddir)s/" + _whl_file
 build_str += " && rm -rf $TEST_TMPDIR"
 
 cmds_map = [
@@ -67,33 +56,30 @@ cmds_map = [
 ]
 
 files_to_copy = [
-    (['%(builddir)s/' + whl_file], '%(installdir)s'),
+    (['%(builddir)s/' + _whl_file], '%(installdir)s'),
     (['%(builddir)s/bin'], '%(installdir)s'),
     (['%(builddir)s/lib'], '%(installdir)s'),
 ]
 
 exts_defaultclass = 'PythonPackage'
 
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%s' % _pyminver,
+    'source_urls': [PYPI_SOURCE]
+}
+
 exts_list = [
     ('tensorflow-estimator', version, {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/tensorflow_estimator'],
         'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
         'modulename': 'tensorflow_estimator',
         'unpack_sources': False,
         'use_pip' : True,
     }),
     ('grpcio', '1.22.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/g/grpcio'],
         'modulename': 'grpc',
     }),
     ('tensorboard', '1.14.0', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/tensorboard'],
         'source_tmpl': 'tensorboard-1.14.0-py3-none-any.whl',
         'unpack_sources': False,
         'use_pip' : True,
@@ -101,12 +87,12 @@ exts_list = [
 ]
 
 sanity_check_paths = {
-    'files': [whl_file],
-    'dirs': ['%s/lib/python%s.%s/site-packages' % (installdir, py_maj_ver, py_min_ver)],
+    'files': [_whl_file],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 modextrapaths = {
-    'PYTHONPATH': 'lib/python%s.%s/site-packages' % (py_maj_ver, py_min_ver),
+    'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'
 }
 
 moduleclass = 'devel'
