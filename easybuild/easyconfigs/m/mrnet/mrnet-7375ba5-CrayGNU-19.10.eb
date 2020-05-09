@@ -15,7 +15,7 @@ preinstallopts = 'cd %(name)s.git && '
 builddependencies = [('Boost', '1.70.0', '-python3')]
 configopts = '--enable-shared CC=cc CXX=CC '
 configopts += 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTBOOST/lib" '
-parallel = 6
+parallel = 1
 sanity_check_paths = {
     'files': ['bin/mrnet_commnode', 'lib/libmrnet.so'],
     'dirs': ['']
