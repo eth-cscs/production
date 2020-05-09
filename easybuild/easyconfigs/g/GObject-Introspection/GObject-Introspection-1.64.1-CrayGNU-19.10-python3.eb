@@ -22,6 +22,7 @@ builddependencies = [
     ('cray-python/%s.%s.%s' %
      (local_py_maj_ver, local_py_min_ver, local_py_rev_ver), EXTERNAL_MODULE),
 ]
+parallel = 14
 preconfigopts = "env GI_SCANNER_DISABLE_CACHE=true "
 sanity_check_paths = {
     'files': ['bin/g-ir-%s' % x for x in ['annotation-tool', 'compiler', 'generate', 'scanner']] +
