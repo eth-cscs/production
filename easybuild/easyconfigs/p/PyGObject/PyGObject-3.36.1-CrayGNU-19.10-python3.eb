@@ -1,0 +1,36 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'PyGObject'
+version = '3.36.1'
+versionsuffix = '-python3'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+homepage = 'https://pygobject.readthedocs.io/en/latest'
+description = """PyGObject is a Python package which provides bindings for
+GObject based libraries such as GTK, GStreamer, WebKitGTK, GLib, GIO and many
+more."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False, 'pic': True}
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+builddependencies = [
+    ('GObject-Introspection', '1.64.1', versionsuffix),
+]
+dependencies = [
+    ('cray-python/%s.%s' % (local_pyver, local_py_rev_ver) , EXTERNAL_MODULE),
+    ('PyCairo', '1.19.1', versionsuffix),
+]
+use_pip = True
+sanity_pip_check = True
+download_dep_fail = True
+options = {'modulename': 'gi'}
+local_pythonpath = 'lib/python%s/site-packages' % local_pyver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath]
+}
+
+moduleclass = 'data'

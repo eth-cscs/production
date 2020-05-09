@@ -1,0 +1,23 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'launchmon'
+version = 'v1.0.2'
+homepage = 'https://github.com/LLNL/LaunchMON'
+description = """LaunchMON is a software infrastructure that enables HPC
+run-time tools to co-locate tool daemons with a parallel job. Its API allows a
+tool to identify all the remote processes of a job and to scalably launch
+daemons into the relevant nodes."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = ['https://github.com/LLNL/LaunchMON/releases/download/%(version)s/']
+sources = ['%(name)s-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
+builddependencies = [
+    ('Boost', '1.70.0', '-python3'),
+]
+sanity_check_paths = {
+    'files': ['bin/launchmon', 'lib/libmonfeapi.so'],
+    'dirs': ['etc', 'share/man/man3']
+}
+
+moduleclass = 'lib'

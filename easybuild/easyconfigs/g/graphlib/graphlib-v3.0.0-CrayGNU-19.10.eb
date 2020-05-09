@@ -1,0 +1,19 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'graphlib'
+version = 'v3.0.0'
+homepage = 'https://github.com/LLNL/graphlib'
+description = "Library to create, manipulate, and export graphs"
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/LLNL/graphlib/archive']
+sources = ['%(version)s.tar.gz']
+builddependencies = [('CMake', '3.14.5', '', True)]
+separate_build_dir = True
+sanity_check_paths = {
+    'files': ['bin/graphdemo'],
+    'dirs': ['lib/cmake/graphlib'],
+}
+
+moduleclass = 'tools'
