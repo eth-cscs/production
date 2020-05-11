@@ -8,14 +8,13 @@ CPP_OPTIONS= -DHOST=\"LinuxIFC\"\
              -Duse_bse_te \
              -Dtbdyn \
              -Dfock_dblbuf \
-             -D_OPENMP \
              -Duse_shmem \
              -DVASP2WANNIER90v2
 
 CPP        = fpp -f_com=no -free -w0  $*$(FUFFIX) $*$(SUFFIX) $(CPP_OPTIONS)
 
-FC         = ftn -qopenmp
-FCL        = ftn -mkl
+FC         = ftn
+FCL        = ftn -mkl=sequential
 
 FREE       = -free -names lowercase
 
