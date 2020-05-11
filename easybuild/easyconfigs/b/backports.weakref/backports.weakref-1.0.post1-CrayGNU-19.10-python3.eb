@@ -1,3 +1,4 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
 easyblock = 'PythonPackage'
 
 name = 'backports.weakref'
@@ -16,7 +17,7 @@ dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
 ]
 
-exts_filter = ('python3 -c "import %(name)s"', '')
+exts_filter = ('python3 -c "import %(ext_name)s"', '')
 req_py_majver = 3
 
 sanity_check_paths = {

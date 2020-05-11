@@ -7,6 +7,7 @@
  CDO-1.9.5-CrayIntel-19.10.eb
  CMake-3.14.5.eb                                    --set-default-module
  CP2K-6.1-CrayGNU-19.10.eb                          --set-default-module
+ CP2K-7.1-CrayGNU-19.10.eb
  CPMD-4.1-CrayIntel-19.10.eb                        --set-default-module
  CPMD-4.3-CrayIntel-19.10.eb
  dask-2.2.0-CrayGNU-19.10-python3.eb                --set-default-module
@@ -23,6 +24,7 @@
  HPX-1.4.0-CrayGNU-19.10.eb                         --set-default-module
  HPX-1.4.0-CrayGNU-19.10-APEX.eb
  HPX-1.4.0-CrayGNU-19.10-nonetworking.eb
+ hub-2.14.2.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  h5py-2.8.0-CrayGNU-19.10-python2-parallel.eb
  h5py-2.8.0-CrayGNU-19.10-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.10-python3-parallel.eb       --set-default-module
@@ -72,7 +74,7 @@
  IPM-2.0.6-CrayGNU-19.10.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  IPM-2.0.6-CrayIntel-19.10.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  IPM-2.0.6-CrayPGI-19.10.eb                                              --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
- likwid-4.3.4-perf_event.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
+ likwid-9c98fc5.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  line_profiler-2.1-CrayGNU-19.10-python3.eb         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  malt-1.0.0-CrayGNU-19.10.eb                        --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  mpiP-57fc864-CrayCCE-19.10.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
@@ -81,6 +83,7 @@
  mpiP-57fc864-CrayCCE-19.10-classic.eb                                   --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  mpiP-57fc864-CrayPGI-19.10.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  MUST-v1.6-rc1-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
+ njmon-v62-SLES15.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  otf2_cli_profile-4ef9d3f-CrayGNU-19.10.eb          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools
  papi-wrap-1.0-CrayCCE-19.10.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP01/mc/easybuild/tools

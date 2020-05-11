@@ -29,15 +29,14 @@ source_urls = [
 ]
 
 builddependencies = [
-    ('flex', '2.6.4'),
     ('Bison', '3.3.2'),
+    ('flex', '2.6.4')
 ]
 
 dependencies = [
     ('ELPA', '2019.11.001'),
     ('Libint-CP2K', '2.6.0'),
     ('libxc', '4.3.4'),
-    ('libxsmm', '1.14'),
 ]
 
 # unload cray-libsci to link Intel MKL

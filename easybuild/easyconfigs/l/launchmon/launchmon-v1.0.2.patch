@@ -1,0 +1,12 @@
+diff -Naur launchmon-v1.0.2.ori/launchmon/src/linux/lmon_api/lmon_coloc_spawner.cxx launchmon-v1.0.2/launchmon/src/linux/lmon_api/lmon_coloc_spawner.cxx
+--- launchmon-v1.0.2.ori/launchmon/src/linux/lmon_api/lmon_coloc_spawner.cxx	2016-05-24 05:11:41.000000000 +0200
++++ launchmon-v1.0.2/launchmon/src/linux/lmon_api/lmon_coloc_spawner.cxx	2020-05-06 15:04:48.800610157 +0200
+@@ -122,7 +122,7 @@
+       memcpy(lmonpl, (*iter).c_str(), (*iter).size() + 1);
+       lmonpl += (*iter).size() + 1;
+     }
+-  lmonpl = '\0'; /* ending null */
++  *lmonpl = '\0'; /* ending null */
+ 
+   if (write_lmonp_long_msg(m_be_master_sockfd, msg, msgsize) < 0)
+     {

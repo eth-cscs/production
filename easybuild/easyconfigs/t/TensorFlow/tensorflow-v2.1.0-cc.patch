@@ -1,0 +1,31 @@
+diff -Nru tensorflow-1.12.0.orig/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl tensorflow-1.12.0/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
+--- tensorflow-1.12.0.orig/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2018-11-02 02:35:10.000000000 +0100
++++ tensorflow-1.12.0/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2019-01-30 13:18:47.000000000 +0100
+@@ -46,11 +46,14 @@
+ import pipes
+ 
+ # Template values set by cuda_autoconf.
+-CPU_COMPILER = ('%{cpu_compiler}')
+-GCC_HOST_COMPILER_PATH = ('%{gcc_host_compiler_path}')
++CPU_COMPILER = ('$GCC_PATH/snos/bin/gcc')
++GCC_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
+ 
+-NVCC_PATH = '%{nvcc_path}'
+-PREFIX_DIR = os.path.dirname(GCC_HOST_COMPILER_PATH)
++CURRENT_DIR = os.path.dirname(sys.argv[0])
++NVCC_PATH = ('$EBROOTCUDA/bin/nvcc')
++LLVM_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
++AS_PATH = ('/usr/bin/as')
++PREFIX_DIR = os.path.dirname(AS_PATH)
+ NVCC_VERSION = '%{cuda_version}'
+ 
+ def Log(s):
+@@ -199,7 +202,7 @@
+   srcs = ' '.join(src_files)
+   out = ' -o ' + out_file[0]
+ 
+-  supported_cuda_compute_capabilities = [ %{cuda_compute_capabilities} ]
++  supported_cuda_compute_capabilities = ["6.0",]
+   nvccopts = '-D_FORCE_INLINES '
+   for capability in supported_cuda_compute_capabilities:
+     capability = capability.replace('.', '')

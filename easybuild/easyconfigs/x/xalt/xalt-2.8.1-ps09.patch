@@ -1,0 +1,101 @@
+diff -Nur xalt-xalt-2.8.1.orig/sh_src/xalt_helper_functions.sh xalt-xalt-2.8.1/sh_src/xalt_helper_functions.sh
+--- xalt-xalt-2.8.1.orig/sh_src/xalt_helper_functions.sh	2020-04-20 22:11:32.000000000 +0200
++++ xalt-xalt-2.8.1/sh_src/xalt_helper_functions.sh	2020-05-06 14:09:06.897688000 +0200
+@@ -7,16 +7,16 @@
+ # XALT: A tool that tracks users jobs and environments on a cluster.
+ # Copyright (C) 2013-2014 University of Texas at Austin
+ # Copyright (C) 2013-2014 University of Tennessee
+-# 
++#
+ # This library is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU Lesser General Public License as
+-# published by the Free Software Foundation; either version 2.1 of 
+-# the License, or (at your option) any later version. 
++# published by the Free Software Foundation; either version 2.1 of
++# the License, or (at your option) any later version.
+ #
+ # This library is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+-# Lesser  General Public License for more details. 
++# Lesser  General Public License for more details.
+ #
+ # You should have received a copy of the GNU Lesser General Public
+ # License along with this library; if not, write to the Free
+@@ -84,7 +84,7 @@
+ {
+   local my_path=$1
+   local exec_x=$2
+-  
++
+   local my_name=$(PATH=@xalt_system_path@ basename $my_path)
+   local my_cmd="unknown"
+ 
+@@ -96,12 +96,12 @@
+     my_cmd=$exec_x
+   elif [ -n "${BASH_VERSION:-}" ]; then
+     # If this is a bash script (and not a bash script in sh mode) then
+-    # use type to list all possible "ld" or "ibrun".  
++    # use type to list all possible "ld" or "ibrun".
+ 
+     check=0
+     for exe in $(type -p -a $my_name); do
+-      # Find the next executable down the line after the origin, then check. 
+-      # Needed for the case where there are multiple wrappers. 
++      # Find the next executable down the line after the origin, then check.
++      # Needed for the case where there are multiple wrappers.
+       if [ $exe == $my_path ]; then
+         check=1
+       fi
+@@ -114,6 +114,21 @@
+         fi
+       fi
+     done
++
++    # Fix for the cce/9.0.2 with > PS03
++    # We are capturing the cray linker which is not compatible with the system linker
++    XALT_LIBEXEC_DIR=$XALT_DIR/libexec
++    EXTRACT_LINKER=$XALT_LIBEXEC_DIR/xalt_extract_linker
++    COMP_T=$(PATH=/apps/daint/system/bin:/apps/dom/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 LD_LIBRARY_PATH= $EXTRACT_LINKER)
++    compilerPath=`echo ${COMP_T} | jq .compilerPath`
++    if [[ ${compilerPath} = \"/usr/bin/g* ]] || [[ ${compilerPath} = \"/usr/bin/cc* ]] || [[ ${compilerPath} = \"/usr/bin/c++* ]]; then
++      my_cmd='/usr/bin/ld'
++    elif [[ ${compilerPath} = \"/opt/nvidia/cudatoolkit* ]]; then
++      my_cmd='/usr/bin/ld'
++    elif [[ "x${CRAY_CCE_SHARE}" == "x/opt/cray/pe/cce/9.0.2/cce/x86_64/share" ]]; then
++      my_cmd='/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld'
++    fi
++
+   else
+     ###################################################################
+     # If this script is not treated as a bash script then do this the
+@@ -134,12 +149,28 @@
+       fi
+     done
+     IFS=$OLD_IFS
++
++    # Fix for the cce/9.0.2 with > PS03
++    # We are capturing the cray linker which is not compatible with the system linker
++    XALT_LIBEXEC_DIR=$XALT_DIR/libexec
++    EXTRACT_LINKER=$XALT_LIBEXEC_DIR/xalt_extract_linker
++    COMP_T=$(PATH=/apps/daint/system/bin:/apps/dom/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 LD_LIBRARY_PATH= $EXTRACT_LINKER)
++    compilerPath=`echo ${COMP_T} | jq .compilerPath`
++    if [[ ${compilerPath} = \"/usr/bin/g* ]] || [[ ${compilerPath} = \"/usr/bin/cc* ]] || [[ ${compilerPath} = \"/usr/bin/c++* ]]; then
++      # my_cmd='/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld'
++      my_cmd='/usr/bin/ld'
++    elif [[ ${compilerPath} = \"/opt/nvidia/cudatoolkit* ]]; then
++      my_cmd='/usr/bin/ld'
++    elif [[ "x${CRAY_CCE_SHARE}" == "x/opt/cray/pe/cce/9.0.2/cce/x86_64/share" ]]; then
++      my_cmd='/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld'
++    fi
++
+   fi
+   if [ "$my_cmd" = unknown ]; then
+     builtin echo -n "XALT Error: unable to find $my_name"
+     false
+     exit $?
+   fi
+-  MY_CMD=$my_cmd  
++  MY_CMD=$my_cmd
+   tracing_msg "find_real_command: found $MY_CMD"
+ }
