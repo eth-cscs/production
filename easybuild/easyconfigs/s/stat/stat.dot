@@ -1,0 +1,62 @@
+digraph D {
+// dot -Tpng -o 1.png 1.dot
+
+cray_python -> Ninja
+cray_python -> Meson
+Ninja -> Meson
+
+cray_python -> GObject_Introspection
+Ninja -> GObject_Introspection
+Meson -> GObject_Introspection
+
+cray_python -> PyCairo
+
+cray_python -> PyGObject
+GObject_Introspection -> PyGObject
+PyCairo -> PyGObject
+
+cray_python -> Boost
+
+cray_python -> launchmon
+Boost -> launchmon
+Boost -> mrnet
+
+cray_python -> dyninst
+elfutils -> dyninst
+Boost -> dyninst
+
+cray_python -> adept_utils
+Boost -> adept_utils
+llnl_hires_timers -> adept_utils
+
+cray_python -> callpath
+Boost -> callpath
+dyninst -> callpath
+elfutils -> callpath
+llnl_hires_timers -> callpath
+adept_utils -> callpath
+libdwarf -> callpath
+
+cray_python -> SWIG
+PCRE -> SWIG
+
+cray_python -> xdot
+PyGObject -> xdot
+PyCairo -> xdot
+graphviz -> xdot
+
+stat [fillcolor="green" style=filled]
+launchmon -> stat
+mrnet -> stat
+graphlib -> stat
+cray_python -> stat
+dyninst -> stat
+graphviz -> stat
+elfutils -> stat
+adept_utils -> stat
+callpath -> stat
+SWIG -> stat
+xdot -> stat
+Boost -> stat
+
+}

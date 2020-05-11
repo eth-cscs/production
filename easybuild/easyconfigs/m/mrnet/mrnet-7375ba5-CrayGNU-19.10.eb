@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'mrnet'
+version = '7375ba5'
+homepage = 'https://github.com/dyninst/mrnet'
+description = "The Multicast/Reduction Network library."
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False, 'pic': True}
+local_repo = 'https://github.com/dyninst/mrnet.git'
+preconfigopts = 'git clone %s %s.git && ' % (local_repo, name)
+preconfigopts += 'cd %(name)s.git && git checkout %(version)s && '
+prebuildopts = 'cd %(name)s.git && '
+preinstallopts = 'cd %(name)s.git && '
+builddependencies = [('Boost', '1.70.0', '-python3')]
+configopts = '--enable-shared CC=cc CXX=CC '
+configopts += 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTBOOST/lib" '
+parallel = 1
+sanity_check_paths = {
+    'files': ['bin/mrnet_commnode', 'lib/libmrnet.so'],
+    'dirs': ['']
+}
+
+moduleclass = 'lib'

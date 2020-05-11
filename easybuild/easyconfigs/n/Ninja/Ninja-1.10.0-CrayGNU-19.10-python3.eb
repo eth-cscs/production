@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Ninja'
+version = '1.10.0'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+versionsuffix = '-python%s' % (local_py_maj_ver)
+homepage = 'https://ninja-build.org/'
+description = "Ninja is a small build system with a focus on speed."
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = ['https://github.com/ninja-build/ninja/archive/']
+sources = ['v%(version)s.tar.gz']
+builddependencies = [
+    ('cray-python/%s.%s.%s' %
+     (local_py_maj_ver, local_py_min_ver, local_py_rev_ver), EXTERNAL_MODULE),
+]
+cmds_map = [('.*', "./configure.py --bootstrap")]
+files_to_copy = [(['ninja'], 'bin')]
+sanity_check_paths = {
+    'files': ['bin/ninja'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

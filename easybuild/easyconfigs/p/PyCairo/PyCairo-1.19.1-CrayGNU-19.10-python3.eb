@@ -1,0 +1,40 @@
+# jg (CSCS)
+# PythonBundle instead of Bundle will define the PYTHONPATH automatically and
+# checks that no dependencies were installed with pip
+easyblock = 'PythonBundle'
+
+name = 'PyCairo'
+version = '1.19.1'
+versionsuffix = '-python3'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+homepage = 'https://pycairo.readthedocs.io/en/latest/'
+description = """Pycairo is a Python module providing bindings for the cairo
+graphics library."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False, 'pic': True}
+dependencies = [
+    ('cray-python/%s.%s' % (local_pyver, local_py_rev_ver) , EXTERNAL_MODULE),
+]
+use_pip = True
+sanity_pip_check = True
+exts_default_options = {
+    'req_py_majver': '%s' % local_py_maj_ver,
+    'req_py_minver': '%s' % local_py_min_ver,
+    'source_urls': [PYPI_SOURCE],
+}
+# cray-python provides: setuptools-39.0.1, numpy-1.15.1, six-1.11.0
+exts_list = [
+    ('pycairo', version, {
+        'modulename': 'cairo',
+    }),
+]
+local_pythonpath = 'lib/python%s/site-packages' % local_pyver
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath]
+}
+
+moduleclass = 'data'

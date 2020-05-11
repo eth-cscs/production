@@ -1,0 +1,70 @@
+diff -Naur stat-4.0.2.ori/configure stat-4.0.2/configure
+--- stat-4.0.2.ori/configure	2020-02-28 20:00:34.000000000 +0100
++++ stat-4.0.2/configure	2020-05-06 21:20:55.786516122 +0200
+@@ -19158,7 +19158,7 @@
+         LIBBOOSTDIR=$with_boost_path/lib
+ 
+       fi
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+ 
+ $as_echo "#define HAVE_BOOST_TO 1" >>confdefs.h
+@@ -19169,7 +19169,7 @@
+ 
+       LIBBOOSTDIR=$with_boost_path/lib
+ 
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+ 
+ $as_echo "#define HAVE_BOOST_TO 1" >>confdefs.h
+@@ -19193,7 +19193,7 @@
+         LIBBOOSTDIR=$boost_dflt_dir/lib
+ 
+       fi
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+       boost_found="yes $LIBBOOSTDIR"
+     else
+@@ -19833,7 +19833,7 @@
+         LIBBOOSTDIR=$with_boost_path/lib
+ 
+       fi
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+ 
+ $as_echo "#define HAVE_BOOST_TO 1" >>confdefs.h
+@@ -19844,7 +19844,7 @@
+ 
+       LIBBOOSTDIR=$with_boost_path/lib
+ 
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+ 
+ $as_echo "#define HAVE_BOOST_TO 1" >>confdefs.h
+@@ -19868,7 +19868,7 @@
+         LIBBOOSTDIR=$boost_dflt_dir/lib
+ 
+       fi
+-      LIBBOOST="-lboost_date_time-mt -lboost_thread-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system -lboost_system-mt -lboost_wave-mt"
++      LIBBOOST="-lboost_date_time -lboost_thread -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_system -lboost_wave"
+ 
+       boost_found="yes $LIBBOOSTDIR"
+     else
+diff -Naur stat-4.0.2.ori/scripts/STATview.py stat-4.0.2/scripts/STATview.py
+--- stat-4.0.2.ori/scripts/STATview.py	2020-02-28 19:20:42.000000000 +0100
++++ stat-4.0.2/scripts/STATview.py	2020-05-09 10:44:21.218364566 +0200
+@@ -57,6 +57,9 @@
+ # Check for required modules
+ 
+ try:
++    import sys
++    sys.path.append(os.path.abspath(os.path.join(os.environ['EBROOTXDOT'], 'lib/python3.6/site-packages')))
++    sys.path.append(os.path.abspath(os.path.join(os.environ['EBROOTPYCAIRO'], 'lib/python3.6/site-packages')))
+     import xdot
+ except:
+     raise Exception('STATview requires xdot\nxdot can be downloaded from https://github.com/jrfonseca/xdot.py\n')

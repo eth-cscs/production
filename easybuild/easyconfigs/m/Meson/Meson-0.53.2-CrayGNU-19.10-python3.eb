@@ -1,0 +1,33 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Meson'
+version = '0.53.2'
+local_py_maj_ver = '3'
+local_py_min_ver = '6'
+local_py_rev_ver = '5.7'
+versionsuffix = '-python%s' % (local_py_maj_ver)
+homepage = 'https://mesonbuild.com'
+description = """Meson is a cross-platform build system designed to be both as
+fast and as user friendly as possible."""
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+source_urls = [PYPI_LOWER_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+dependencies = [
+    ('cray-python/%s.%s.%s' %
+     (local_py_maj_ver, local_py_min_ver, local_py_rev_ver), EXTERNAL_MODULE),
+    ('Ninja', '1.10.0', versionsuffix),
+]
+
+download_dep_fail = True
+use_pip = True
+sanity_pip_check = True
+
+options = {'modulename': 'mesonbuild'}
+
+sanity_check_paths = {
+    'files': ['bin/meson'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
