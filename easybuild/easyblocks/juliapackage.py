@@ -34,7 +34,6 @@ import shutil
 
 import easybuild.tools.toolchain as toolchain
 
-#from easybuild.easyblocks.r import EXTS_FILTER_R_PACKAGES, EB_R
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.framework.extensioneasyblock import ExtensionEasyBlock
 from easybuild.tools.build_log import EasyBuildError
@@ -112,11 +111,7 @@ class JuliaPackage(ExtensionEasyBlock):
         if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
           cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
           pre_cmd += ' && export JULIA_MPI_BINARY=system'
-          #pre_cmd += ' && export JULIA_MPI_ABI=MPICHABI'
           pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
-          #pre_cmd += ' && export JULIA_MPI_LIBRARY_PATH=%s/lib' % cray_mpich_dir
-          #pre_cmd += ' && export JULIA_MPI_INCLUDE_PATH=%s/include' % cray_mpich_dir
-          #pre_cmd += ' && export JULIA_MPI_CFLAGS="-lmpich"'
           pre_cmd += ' && export JULIA_MPICC="cc"'
 
         if self.cfg['mpiexec']:
@@ -160,9 +155,3 @@ class JuliaPackage(ExtensionEasyBlock):
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
 
-#    def make_module_extra(self, *args, **kwargs):
-#        txt = super(EB_JuliaPackages, self).make_module_extra(*args, **kwargs)
-#
-#        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.projectdir)
-#
-#        return txt
