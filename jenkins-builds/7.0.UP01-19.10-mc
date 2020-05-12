@@ -37,6 +37,7 @@
  jupyterhub-1.0.0-CrayGNU-19.10.eb                  --set-default-module
  jupyterlab-1.1.1-CrayGNU-19.10.eb                  --set-default-module
  jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb
+ jupyter-utils-0.1.eb                               --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.10.eb                  --set-default-module
  LAMMPS-03Mar2020-CrayGNU-19.10.eb
  Lmod-7.8.2.eb                                      --set-default-module --hidden
