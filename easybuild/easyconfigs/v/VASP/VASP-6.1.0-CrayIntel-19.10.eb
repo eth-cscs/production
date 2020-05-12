@@ -25,7 +25,7 @@ prebuildopts += ' module unload cray-libsci && module list && '
 parallel = 1
 
 # build type
-buildopts = ' all '
+buildopts = ' std gam ncl '
  
 files_to_copy = [(['./bin/vasp_*'],'bin')]
 
