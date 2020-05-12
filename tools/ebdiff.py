@@ -38,7 +38,7 @@ class Spec:
     The format is the following
     {pkg_name}@{pkg_version}^{tc_name}@{tc_version}^{suffix}
 
-    Example: GROMACS@2019.2^CrayGNU@19.09^cuda-10.1
+    Example: GROMACS@2019.2^CrayGNU@19.09^-cuda-10.1
 
     '''
 
