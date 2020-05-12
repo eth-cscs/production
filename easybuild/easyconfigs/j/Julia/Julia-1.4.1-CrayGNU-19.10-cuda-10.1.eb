@@ -28,7 +28,7 @@ exts_defaultclass = 'JuliaPackage'
 exts_list = [
     ('MPI.jl', '0.14.0', {
         'mpiexec': 'srun',
-        'mpiexec_args': "-C gpu",
+        'mpiexec_args': "-C %s" % arch_name,
         'source_tmpl': 'v0.14.0.tar.gz',
         'source_urls': ['https://github.com/JuliaParallel/MPI.jl/archive/'],
         'checksums': ['625cf412e2605fbb31467f04756fb503bb021da2ea8d05efbf831743891dc245'],
