@@ -111,6 +111,7 @@ class JuliaPackage(ExtensionEasyBlock):
 
         if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
           cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
+          pre_cmd += ' && export JULIA_MPI_BINARY=system'
           #pre_cmd += ' && export JULIA_MPI_ABI=MPICHABI'
           pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
           #pre_cmd += ' && export JULIA_MPI_LIBRARY_PATH=%s/lib' % cray_mpich_dir
