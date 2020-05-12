@@ -13,9 +13,11 @@ sources = ['v3.1.0.tar.gz']
 source_urls = ['https://github.com/wannier-developers/wannier90/archive/']
 
 # create make.inc with definition of compilers
-prebuildopts = ' echo -e "F90=ftn \nCOMMS=mpi \nMPIF90=ftn " > make.inc && '
+prebuildopts = ' echo -e "F90 = ftn \nCOMMS = mpi \nMPIF90 = ftn " > make.inc && '
 # append MKL library link line to make.inc
-prebuildopts += ' echo -e \'LIBS="-L$(MKLROOT)/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a"\' >> make.inc && '
+prebuildopts += ' echo "LIBS = -L\$(MKLROOT)/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_sequential" >> make.inc && cat make.inc && '
+# unload cray-libsci
+prebuildopts += ' module unload cray-libsci && module list && '
 
 # build program and library
 buildopts = 'all'
