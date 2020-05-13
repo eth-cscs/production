@@ -344,6 +344,10 @@ exts_list = [
         }),
 
 # itkwidgets
+    ('traittypes', '0.2.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/t/traittypes/'],
     ('param', '1.9.2', {
         'req_py_majver': '3',
         'req_py_minver': '6',
@@ -449,11 +453,6 @@ exts_list = [
         }),    
     
 # bqplot: requires the labextension below
-    ('traittypes', '0.2.1', {
-        'req_py_majver': '3',
-        'req_py_minver': '6',
-        'source_urls': ['https://pypi.python.org/packages/source/t/traittypes/'],
-        }),
     ('bqplot', '0.11.6', {
         'req_py_majver': '3',
         'req_py_minver': '6',
