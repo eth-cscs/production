@@ -16,12 +16,6 @@ dependencies = [
 requirements  = ' pytorch==1.5.0=py3.7_cuda10.1.243_cudnn7.6.3_0'
 requirements += ' torchvision==0.6.0=py37_cu101'
 requirements += ' cudatoolkit==10.1.243=h6bb024c_0'
-requirements += ' future'
-requirements += ' numpy'
-requirements += ' pyyaml'
-requirements += ' requests'
-requirements += ' setuptools'
-requirements += ' six'
 requirements += ' -c pytorch --yes'
 
 sanity_check_paths = {
