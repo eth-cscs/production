@@ -31,6 +31,4 @@ sanity_check_paths = {
 
 sanity_check_commands = ['python -c "import torch; assert torch.__version__ == \'1.5.0\'"']
 
-sanity_pip_check = True
-
 moduleclass = 'lib'
