@@ -30,6 +30,6 @@ sanity_check_paths = {
     'dirs': ['lib/python3.7/site-packages/torch'],
 }
 
-sanity_check_commands = ['python -c "import torch; assert torch.__version__ == \'1.5.0\'"']
+sanity_check_commands = ['python -c "import torch; assert torch.__version__ == \'%(version)s\'"']
 
 moduleclass = 'lib'
