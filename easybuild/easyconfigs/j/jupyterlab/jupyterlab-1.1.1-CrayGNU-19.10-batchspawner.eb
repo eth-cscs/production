@@ -343,6 +343,75 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/i/ipympl/'],
         }),
 
+# itkwidgets
+    ('param', '1.9.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/param/'],
+        }),
+    ('pyct', '0.4.6', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pyct/'],
+        }),
+    ('colorcet', '2.0.2', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/c/colorcet/'],
+        }),
+    ('zstandard', '0.13.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/z/zstandard/'],
+        }),
+    ('itk-core', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-core/'],
+        'modulename': 'itk',
+        }),
+    ('itk-numerics', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-numerics/'],
+        'modulename': 'itk'
+        }),
+    ('itk-filtering', '5.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-filtering/'],
+        'modulename': 'itk'
+        }),
+    ('itk-meshtopolydata', '0.5.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'source_urls': ['https://pypi.python.org/packages/source/i/itk-meshtopolydata/'],
+        'modulename': 'itk'
+        }),
+    ('ipydatawidgets', '4.0.1', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'use_pip': True,
+        'source_urls': ['https://pypi.python.org/packages/source/i/ipydatawidgets/'],
+        }),
+    ('itkwidgets', '0.25.0', {
+        'req_py_majver': '3',
+        'req_py_minver': '6',
+        'source_urls': ['https://pypi.python.org/packages/source/i/itkwidgets/'],
+        }),
+
 # plotly, requires the lab extension below
     ('retrying', '1.3.3', {
         'req_py_majver': '3',
@@ -522,6 +591,8 @@ exts_list = [
         'use_pip': True,
         'source_urls': ['https://pypi.python.org/packages/source/b/bash_kernel/'],
         }),
+ 
+#other    
     ('ipyparallel', '6.2.4', {
         'req_py_majver': '3',
         'req_py_minver': '6',
@@ -563,11 +634,11 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
                    "export JUPYTER=%(installdir)s/bin/jupyter;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
-                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 jupyterlab-datawidgets itkwidgets --no-build;"
-                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build;"
+                   "%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build;"
+                   "%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build;"
+                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib0.4.2 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build;"
-#                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build;"
                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build;"
