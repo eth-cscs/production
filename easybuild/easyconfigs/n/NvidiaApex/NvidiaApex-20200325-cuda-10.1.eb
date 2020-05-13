@@ -4,8 +4,6 @@ name = 'NvidiaApex'
 local_commit = '8fac3a7'
 version = '20200325'
 
-versionsuffix = '-cuda-%(cudashortver)s'
-
 req_py_majver = 3
 req_py_minver = 7
 
@@ -22,8 +20,7 @@ sources = [{
 checksums = ['5584ab0f5d395b063a64e15233ee576740db14b2aa9a6c289c512b7dc69b2d88']
 
 dependencies = [
-    ('CUDA', '10.1.168', '', True),
-    ('PyTorch', '1.5.0', versionsuffix),
+    ('PyTorch', '1.5.0-cuda-10.1'),
 ]
 
 use_pip = True

@@ -2,8 +2,6 @@ easyblock = 'Conda'
 
 name = 'PyTorch'
 version = '1.5.0'
-cudaversion = '10.1.168'
-versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'https://pytorch.org/'
 description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
@@ -12,7 +10,6 @@ PyTorch is a deep learning framework that puts Python first."""
 toolchain = SYSTEM
 
 dependencies = [
-    ('CUDA', cudaversion, '', True),
     ('Miniconda3', '4.7.10', '', True),
 ]
 
