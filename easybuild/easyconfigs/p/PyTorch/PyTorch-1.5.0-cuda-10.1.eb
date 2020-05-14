@@ -2,6 +2,7 @@ easyblock = 'Conda'
 
 name = 'PyTorch'
 version = '1.5.0'
+versionsuffix = '-cuda-10.1'
 
 homepage = 'https://pytorch.org/'
 description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
