@@ -18,13 +18,19 @@ requirements  = ' python==3.7.3=h0371630_0'
 requirements += ' pytorch==1.5.0=py3.7_cuda10.1.243_cudnn7.6.3_0'
 requirements += ' torchvision==0.6.0=py37_cu101'
 requirements += ' cudatoolkit==10.1.243=h6bb024c_0'
+requirements += ' cudatoolkit-dev==10.1.243=h516909a_3'
+
+## pytorch dependencies
 requirements += ' future==0.18.2=py37_0'
 requirements += ' numpy==1.18.1=py37h4f9e942_0'
 requirements += ' pyyaml==5.3.1=py37h7b6447c_0'
 requirements += ' requests==2.23.0=py37_0'
 requirements += ' setuptools==46.2.0'
 requirements += ' six==1.14.0=py37_0'
-requirements += ' -c pytorch --yes'
+
+requirements += ' -c pytorch'
+requirements += ' -c conda-forge'  # cudatoolkit-dev
+
 
 sanity_check_paths = {
     'files': [],
