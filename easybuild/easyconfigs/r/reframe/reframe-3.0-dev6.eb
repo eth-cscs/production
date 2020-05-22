@@ -30,6 +30,11 @@ postinstallcmds = [
     'mv %(installdir)s/cscs-checks %(installdir)s/checks',
     'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --upgrade '
     '--user -r %(builddir)s/reframe-%(version)s/requirements.txt pygelf',
+    'python3 -m venv docs_env && source docs_env/bin/activate && '
+    'pip install -r docs/requirements.txt && make -C docs man && deactivate && '
+    'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
+    'cp docs/man/reframe.1 %(installdir)s/share/man/man1 && '
+    'cp docs/man/reframe.settings.8 %(installdir)s/share/man/man8'
 ]
 
 modextrapaths = {
@@ -37,8 +42,10 @@ modextrapaths = {
 }
 
 sanity_check_paths = {
-    'files': ['reframe.py', 'bin/reframe', 'config/cscs.py'],
-    'dirs':  ['bin', 'checks', 'checks/private', 'unittests'],
+    'files': ['reframe.py', 'bin/reframe', 'config/cscs.py',
+              'share/man/man1/reframe.1',
+              'share/man/man8/reframe.settings.8'],
+    'dirs':  ['bin', 'checks', 'checks/private', 'unittests',],
 }
 
 sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
