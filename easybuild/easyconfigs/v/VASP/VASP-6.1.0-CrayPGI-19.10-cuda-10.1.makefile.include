@@ -1,0 +1,70 @@
+# Precompiler options
+CPP_OPTIONS= -DHOST=\"LinuxPGI\"\
+             -DMPI -DMPI_BLOCK=8000 -DMPI_INPLACE -Duse_collective\
+             -DscaLAPACK \
+             -DCACHE_SIZE=4000 \
+             -Davoidalloc \
+             -Dvasp6 \
+             -Duse_bse_te \
+             -Dtbdyn \
+             -Dqd_emulate \
+             -Dfock_dblbuf \
+             -Duse_shmem \
+             -D_OPENACC \
+             -DUSENCCL \
+             -DVASP2WANNIER90v2
+
+CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
+
+FC         = ftn -acc -ta=tesla:cc60,cuda10.1
+FCL        = ftn -acc -ta=tesla:cc60,cuda10.1 -pgc++libs
+
+FREE       = -Mfree -names lowercase
+
+FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
+OFLAG      = -fast
+DEBUG      = -Mfree -O0 -traceback
+
+#BLAS       = $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a
+#LAPACK     = $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a
+#BLACS      = -lmkl_blacs_intelmpi_lp64
+#SCALAPACK  = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+
+# Use PGI provided BLAS and LAPACK libraries
+BLAS       = -lblas
+LAPACK     = -llapack
+BLACS      =
+SCALAPACK  = -Mscalapack
+
+CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
+LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS) $(CUDA)
+
+# Software emulation of quadruple precsion
+LLIBS      += -L$(EBROOTQD)/lib -lqdmod -lqd
+INCS       += -I$(EBROOTQD)/include/qd
+
+# Use the FFTs from fftw
+OBJECTS    = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
+LLIBS      += -L$(FFTW_DIR) -lfftw3
+INCS       += -I$(FFTW_INC)
+
+# Redefine the standard list of O1 and O2 objects
+SOURCE_O1  := pade_fit.o
+SOURCE_O2  := pead.o
+
+# For what used to be vasp.5.lib
+CPP_LIB    = $(CPP)
+FC_LIB     = ftn
+CC_LIB     = cc
+CFLAGS_LIB = -O
+FFLAGS_LIB = -O1 -Mfixed
+FREE_LIB   = $(FREE)
+
+OBJECTS_LIB= linpack_double.o getshmem.o
+
+# For the parser library
+CXX_PARS   = CC --no_warnings
+
+# Normally no need to change this
+SRCDIR     = ../../src
+BINDIR     = ../../bin
