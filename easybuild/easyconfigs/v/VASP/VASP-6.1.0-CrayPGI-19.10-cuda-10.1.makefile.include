@@ -11,8 +11,8 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\"\
              -Dfock_dblbuf \
              -Duse_shmem \
              -D_OPENACC \
-             -DUSENCCL \
-             -DVASP2WANNIER90v2
+#             -DUSENCCL \
+#             -DVASP2WANNIER90v2
 
 CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
 
