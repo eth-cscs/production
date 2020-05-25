@@ -35,7 +35,7 @@ sanity_pip_check = True
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python3.7/site-packages/apex'],
+    'dirs': ['lib/python%s.%s/site-packages/apex' % (req_py_majver, req_py_minver)],
 }
 
 sanity_check_commands = ["python -c 'from apex import amp'"]
