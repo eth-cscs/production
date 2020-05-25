@@ -2,7 +2,6 @@ easyblock = 'ConfigureMake'
 
 name = 'runc'
 version = '1.0.0-rc10'
-versionsuffix = '-daint'
 
 homepage = 'https://github.com/opencontainers/runc'
 description = """CLI tool for spawning and running containers according to the OCI specification."""

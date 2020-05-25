@@ -2,7 +2,6 @@ easyblock = 'ConfigureMake'
 
 name = 'Buildah'
 version = '1.14.8'
-versionsuffix = '-daint'
 
 homepage = 'https://buildah.io/'
 description = """Buildah is a tool that facilitates building OCI container images."""
@@ -13,7 +12,7 @@ builddependencies = [('Libassuan', '2.5.3'),
                      ('GPGME', '1.13.1'),
                      ('go', '1.14.2.linux-amd64')]
 
-dependencies = [('runc', '1.0.0-rc10', '-daint', True)]
+dependencies = [('runc', '1.0.0-rc10')]
 
 # Make-install buildah
 prebuildopts = ('mkdir -p go_path && export GOPATH=$PWD/go_path && '
