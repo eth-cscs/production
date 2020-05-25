@@ -16,7 +16,7 @@ builddependencies = [('Libassuan', '2.5.3'),
 dependencies = [('runc', '1.0.0-rc10', '-daint', True)]
 
 # Make-install buildah
-prebuildopts = ('mkdir -p go_path && export GOPATH=$PWD/go_path && '
+prebuildopts = ('mkdir -p go_path go_cache && export GOCACHE=$PWD/go_cache && export GOPATH=$PWD/go_path && '
                 'go get -d github.com/containers/buildah && '
                 'cd $GOPATH/src/github.com/containers/buildah && '
                 'git checkout v%(version)s && '
