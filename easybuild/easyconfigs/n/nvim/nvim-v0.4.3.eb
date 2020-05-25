@@ -1,0 +1,17 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'nvim'
+version = 'v0.4.3'
+homepage = 'https://github.com/neovim/neovim'
+description = """Vim-fork focused on extensibility and usability:
+https://neovim.io"""
+source_urls = ['https://github.com/neovim/neovim/releases/download/%(version)s/']
+sources = ['%(name)s-linux64.tar.gz']
+toolchain = SYSTEM
+sanity_check_paths = {
+    'files': ['bin/nvim'],
+    'dirs': []
+}
+
+moduleclass = 'tools'
