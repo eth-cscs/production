@@ -13,14 +13,6 @@ are displayed as graphs."""
 toolchain = SYSTEM
 source_urls = ['https://ftp.gnu.org/gnu/ddd']
 sources = [SOURCE_TAR_GZ]
-# https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz
-# sources = ['%(version)s.tar.gz']
-## dependencies = [
-##     ('GLib', '2.49.5'),
-##     ('S-Lang', '2.3.1a'),
-## ]
-## builddependencies = [
-## preconfigopts = './autogen.sh && '
 sanity_check_paths = {
     'files': ['bin/ddd'],
     'dirs': ['share/man']
