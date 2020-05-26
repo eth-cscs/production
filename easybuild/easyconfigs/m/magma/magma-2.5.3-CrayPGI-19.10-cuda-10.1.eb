@@ -30,8 +30,6 @@ separate_build_dir = True
 
 configopts = ' -DCUDA_NVCC_FLAGS="-DHAVE_CUBLAS -gencode=arch=compute_60,code=compute_60" -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DCMAKE_C_FLAGS="" -DCMAKE_CXX_FLAGS="" -DCMAKE_Fortran_FLAGS="" ' 
 
-buildopts = " VERBOSE=1 " 
-
 sanity_check_paths={
     'files': ['lib/libmagma.so'],
     'dirs': ['lib', 'include'],
