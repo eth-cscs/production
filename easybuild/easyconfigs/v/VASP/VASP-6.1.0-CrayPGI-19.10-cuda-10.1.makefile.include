@@ -1,6 +1,6 @@
 # Precompiler options
-CPP_OPTIONS= -DHOST=\"LinuxPGI\"\
-             -DMPI -DMPI_BLOCK=8000 -DMPI_INPLACE -Duse_collective\
+CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
+             -DMPI -DMPI_BLOCK=8000 -DMPI_INPLACE -Duse_collective \
              -DscaLAPACK \
              -DCACHE_SIZE=4000 \
              -Davoidalloc \
@@ -8,45 +8,35 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\"\
              -Duse_bse_te \
              -Dtbdyn \
              -Dqd_emulate \
-             -Dfock_dblbuf \
-             -Duse_shmem \
-             -D_OPENACC \
-#             -DUSENCCL \
-#             -DVASP2WANNIER90v2
+             -Dfock_dblbuf
 
 CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
 
-FC         = ftn -acc -ta=tesla:cc60,cuda10.1
-FCL        = ftn -acc -ta=tesla:cc60,cuda10.1 -pgc++libs
+FC         = ftn
+FCL        = ftn -pgc++libs
 
-FREE       = -Mfree -names lowercase
-
+FREE       = -Mfree
 FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
 OFLAG      = -fast
-DEBUG      = -Mfree -O0 -traceback
+DEBUG      = -O0 -traceback
 
-#BLAS       = $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a
-#LAPACK     = $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a
-#BLACS      = -lmkl_blacs_intelmpi_lp64
-#SCALAPACK  = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+# Use Intel MKL libraries
+BLAS       = $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a
+LAPACK     = $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a
+BLACS      = -lmkl_blacs_intelmpi_lp64
+SCALAPACK  = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
 
-# Use PGI provided BLAS and LAPACK libraries
-BLAS       = -lblas
-LAPACK     = -llapack
-BLACS      =
-SCALAPACK  = -Mscalapack
-
-CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
-LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS) $(CUDA)
+LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS)
 
 # Software emulation of quadruple precsion
+QD         ?= $(EBROOTQD)
 LLIBS      += -L$(EBROOTQD)/lib -lqdmod -lqd
 INCS       += -I$(EBROOTQD)/include/qd
 
 # Use the FFTs from fftw
-OBJECTS    = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
 LLIBS      += -L$(FFTW_DIR) -lfftw3
 INCS       += -I$(FFTW_INC)
+OBJECTS    = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
 
 # Redefine the standard list of O1 and O2 objects
 SOURCE_O1  := pade_fit.o
@@ -63,8 +53,28 @@ FREE_LIB   = $(FREE)
 OBJECTS_LIB= linpack_double.o getshmem.o
 
 # For the parser library
-CXX_PARS   = CC --no_warnings
+CXX_PARS   = pgc++ --no_warnings
 
 # Normally no need to change this
 SRCDIR     = ../../src
 BINDIR     = ../../bin
+
+#================================================
+# GPU Stuff
+
+CPP_GPU    = -DCUDA_GPU -DRPROMU_CPROJ_OVERLAP -DCUFFT_MIN=28 -UscaLAPACK -Ufock_dblbuf # -DUSE_PINNED_MEMORY 
+
+OBJECTS_GPU= fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d_gpu.o fftmpiw_gpu.o
+
+CC         = cc
+CXX        = CC
+CFLAGS     = -fPIC -DADD_ -mp -DMAGMA_WITH_MKL -DMAGMA_SETAFFINITY -DGPUSHMEM=300 -DHAVE_CUBLAS
+
+CUDA_ROOT  ?= $(CUDATOOLKIT_HOME)
+NVCC       := $(CUDA_ROOT)/bin/nvcc
+CUDA_LIB   := -L$(CUDA_ROOT)/lib64 -lnvToolsExt -lcudart -lcuda -lcufft -lcublas
+
+GENCODE_ARCH    := -gencode=arch=compute_60,code=\"sm_60,compute_60\" 
+
+MAGMA_ROOT = $(EBROOTMAGMA)
+MPI_INC    = $(MPICH_DIR)/include
