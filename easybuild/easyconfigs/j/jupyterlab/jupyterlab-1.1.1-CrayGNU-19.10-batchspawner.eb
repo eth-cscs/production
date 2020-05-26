@@ -651,12 +651,12 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "git clone https://github.com/NVIDIA/ipyparaview && "
                    "cd ipyparaview && "
                    "git checkout cf1c6f4 && "
-                   "%(installdir)s/bin/jupyter labextension install js --no-build",
+                   "%(installdir)s/bin/jupyter labextension install js --no-build && "
 # now build the webpack                   
-                   "%(installdir)s/bin/jupyter lab build --debug --dev-build=False",
-                   "rm -r $YARN_CACHE_FOLDER",
+                   "%(installdir)s/bin/jupyter lab build --debug --dev-build=False && "
+                   "rm -r $YARN_CACHE_FOLDER && "
                    # Bash kernel - https://github.com/takluyver/bash_kernel
-                   "python3 -m bash_kernel.install --prefix=%(installdir)s/",
+                   "python3 -m bash_kernel.install --prefix=%(installdir)s/"
                    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
                    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
                    #    'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
