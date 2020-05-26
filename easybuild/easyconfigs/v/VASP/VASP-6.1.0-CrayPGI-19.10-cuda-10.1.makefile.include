@@ -8,7 +8,8 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
              -Duse_bse_te \
              -Dtbdyn \
              -Dqd_emulate \
-             -Dfock_dblbuf
+             -Dfock_dblbuf \
+             -DVASP2WANNIER90v2
 
 CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
 
@@ -25,8 +26,9 @@ BLAS       = $(MKLROOT)/lib/intel64/libmkl_blas95_lp64.a
 LAPACK     = $(MKLROOT)/lib/intel64/libmkl_lapack95_lp64.a
 BLACS      = -lmkl_blacs_intelmpi_lp64
 SCALAPACK  = -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
-LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS)
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(LAPACK) $(BLAS)
 
 # Software emulation of quadruple precsion
 QD         ?= $(EBROOTQD)
