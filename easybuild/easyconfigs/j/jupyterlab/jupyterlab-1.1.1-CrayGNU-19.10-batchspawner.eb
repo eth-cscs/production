@@ -626,27 +626,27 @@ modextravars = {
 
 # install extensions and batchspawner components
 # changed from semicolons to commas to catch npm build failures
-postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache",
-                   "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/",
-                   "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH",
-#                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
-                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/", 
-                   "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/",
-                   "export JUPYTER=%(installdir)s/bin/jupyter",
-                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build",
-                   "%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build",
-                   "%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build",
-                   "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build",
-                   "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build",
+postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
+                   "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ && "
+                   "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH && "
+#                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/ && "
+                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && "
+                   "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ && "
+                   "export JUPYTER=%(installdir)s/bin/jupyter && "
+                   "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build && "
+                   "%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && "
+                   "%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor --no-build && "
+                   "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && "
 #                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
 #                  "%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build;" #not ready for JLab 1.x, twr
 #                  "%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build;" #qgrid not yet working in JLab 1.x, twr
-                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-nvdashboard@0.2.1 --no-build",
+                   "%(installdir)s/bin/jupyter labextension install -y jupyterlab-nvdashboard@0.2.1 --no-build && "
                    "cd %(installdir)s/ && "
                    "git clone https://github.com/NVIDIA/ipyparaview && "
                    "cd ipyparaview && "
