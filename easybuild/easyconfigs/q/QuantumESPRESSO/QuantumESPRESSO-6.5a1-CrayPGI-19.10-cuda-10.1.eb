@@ -52,7 +52,9 @@ prebuildopts = """
     make.inc &&
 """
 prebuildopts += " cat make.inc && "
-buildopts = 'pw'
+
+# targets 'hp' and 'gwl' fail with release 6.5a1
+buildopts = ' pwall cp ld1 upf tddfpt xspectra '
 
 # single make process
 maxparallel = 1
