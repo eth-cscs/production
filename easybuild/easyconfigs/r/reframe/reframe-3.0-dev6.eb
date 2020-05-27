@@ -43,7 +43,6 @@ modextrapaths = {
     'RFM_CHECK_SEARCH_PATH': 'checks',
 }
 
-
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py',
               'share/man/man1/reframe.1',
