@@ -1,0 +1,37 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'Wannier90'
+version = '3.1.0'
+
+homepage = 'http://www.wannier.org'
+description = """A tool for obtaining maximally-localised Wannier functions"""
+
+toolchain = {'name': 'CrayPGI', 'version': '19.10'}
+
+sources = ['v3.1.0.tar.gz']
+source_urls = ['https://github.com/wannier-developers/wannier90/archive/']
+
+builddependencies = [
+  ('intel/19.0.1.144', EXTERNAL_MODULE)
+]
+
+# create make.inc with definition of compilers
+prebuildopts = ' echo -e "F90 = ftn \nCOMMS = mpi \nMPIF90 = ftn " > make.inc && '
+# append MKL library link line to make.inc
+prebuildopts += ' echo "LIBS = -L\$(MKLROOT)/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_sequential" >> make.inc && cat make.inc && '
+
+# build program and library
+buildopts = 'all'
+
+files_to_copy = [
+    (['postw90.x','wannier90.x'], 'bin'), 
+    (['libwannier.a'], 'lib')
+]
+
+sanity_check_paths = {
+    'files': ['bin/postw90.x', 'bin/wannier90.x', 'lib/libwannier.a'],
+    'dirs': []
+}
+
+moduleclass = 'chem'

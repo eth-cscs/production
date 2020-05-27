@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QD'
+version = "2.3.22"
+
+homepage = 'https://www.davidhbailey.com/dhbsoftware'
+description = """QD is a library for real double-double and quad-double arithmetic."""
+
+toolchain = {'name': 'CrayPGI', 'version': '19.10'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['https://www.davidhbailey.com/dhbsoftware/']
+
+configopts = ' CXX=CC FC=ftn FCFLAGS="-fPIC -m64" --enable-shared --with-pic '
+
+sanity_check_paths = {
+    'files': ['lib/libqd.a', 'lib/libqd_f_main.a', 'lib/libqdmod.a',
+              'lib/libqd.so', 'lib/libqd_f_main.so', 'lib/libqdmod.so'],
+    'dirs': ['include', 'lib']
+}
+
+moduleclass = 'chem'

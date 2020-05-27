@@ -1,0 +1,45 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'VASP'
+version = '6.1.0'
+local_cudaversion = '10.1'
+versionsuffix = '-cuda-%s' % local_cudaversion
+
+homepage = 'http://www.vasp.at'
+description = """The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. """
+
+toolchain = {'name': 'CrayPGI', 'version': '19.10'}
+toolchainopts = { 'usempi': True }
+
+patches = [('%(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')]
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_BZ2]
+
+builddependencies = [
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
+    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
+    ('Wannier90', '3.1.0')
+]
+
+dependencies = [
+    ('magma', '2.5.3', '-cuda-%s' % local_cudaversion),
+    ('QD', '2.3.22'),
+]
+
+prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s-%(toolchain_version)s%(versionsuffix)s.makefile.include makefile.include && '
+
+# don't use parallel make, results in compilation failure
+parallel = 1
+
+# build type
+buildopts = ' gpu gpu_ncl '
+
+files_to_copy = [(['./bin/vasp_*'],'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/vasp_gpu','bin/vasp_gpu_ncl'],
+    'dirs': [],
+}
+
+moduleclass = 'phys'
