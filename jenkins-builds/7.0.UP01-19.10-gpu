@@ -68,7 +68,7 @@
  Spark-2.3.1-CrayGNU-19.10-Hadoop-2.7.eb            --set-default-module
  TensorFlow-1.14.0-CrayGNU-19.10-cuda-10.1.168-python3.eb --set-default-module
  VASP-5.4.4-CrayIntel-19.10-cuda-10.1.eb            --set-default-module
- VASP-6.1.0-CrayPGI-19.10-cuda-10.1.eb
+ VASP-6.1.0-CrayIntel-19.10-cuda-10.1.eb
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VTK-8.2.0-EGL-CrayGNU-19.10-python3.eb
