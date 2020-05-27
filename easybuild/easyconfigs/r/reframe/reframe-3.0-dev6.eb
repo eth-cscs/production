@@ -38,8 +38,11 @@ postinstallcmds = [
 ]
 
 modextrapaths = {
-    'PYTHONPATH': 'installed_by_pip/lib/python3.6/site-packages'
+    'PYTHONPATH': 'installed_by_pip/lib/python3.6/site-packages',
+    'RFM_CONFIG_FILE': 'config/cscs.py',
+    'RFM_CHECK_SEARCH_PATH': 'checks',
 }
+
 
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py',
