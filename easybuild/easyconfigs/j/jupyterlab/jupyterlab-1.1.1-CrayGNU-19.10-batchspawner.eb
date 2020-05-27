@@ -111,8 +111,8 @@ exts_list = [
     ('colorcet', '2.0.2'),
     ('zstandard', '0.13.0'),
     ('itk-core', '5.0.1', {
+        'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
         'unpack_sources': False,
-        'source_urls': ['https://pypi.python.org/packages/source/i/itk-core/'],
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
