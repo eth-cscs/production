@@ -25,9 +25,7 @@ builddependencies = [('pip', '20.0.2', '-py3')]
 
 keepsymlinks = True
 postinstallcmds = [
-    'cp %(installdir)s/config/cscs.py %(installdir)s/reframe/settings.py',
     'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
-    'mv %(installdir)s/cscs-checks %(installdir)s/checks',
     'PYTHONUSERBASE=%(installdir)s/installed_by_pip pip install --upgrade '
     '--user -r %(builddir)s/reframe-%(version)s/requirements.txt pygelf',
     'python3 -m venv docs_env && source docs_env/bin/activate && '
@@ -38,14 +36,16 @@ postinstallcmds = [
 ]
 
 modextrapaths = {
-    'PYTHONPATH': 'installed_by_pip/lib/python3.6/site-packages'
+    'PYTHONPATH': 'installed_by_pip/lib/python3.6/site-packages',
+    'RFM_CONFIG_FILE': 'config/cscs.py',
+    'RFM_CHECK_SEARCH_PATH': 'cscs-checks',
 }
 
 sanity_check_paths = {
     'files': ['reframe.py', 'bin/reframe', 'config/cscs.py',
               'share/man/man1/reframe.1',
               'share/man/man8/reframe.settings.8'],
-    'dirs':  ['bin', 'checks', 'checks/private', 'unittests',],
+    'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests',],
 }
 
 sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
