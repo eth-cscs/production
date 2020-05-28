@@ -188,11 +188,11 @@ exts_list = [
     
 # batchspawner compute side cscript components
     ('batchspawner', '68a1fcd', {
-        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/68a1fcd'],
+        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
         ('ipyparaview', 'cf1c6f4', {
-        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/cf1c6f4'],
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
         }),
 # kernels
 # bash kernel, requires kernel install below, twr
