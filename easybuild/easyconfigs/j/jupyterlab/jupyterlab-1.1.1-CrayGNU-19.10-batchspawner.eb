@@ -198,9 +198,9 @@ exts_list = [
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2'),
  
-#other    
-    ('ipyparallel', '6.2.4'),
-    ('docopt', '0.6.2'),
+#other - these compoenents are now moved to IPCMagic
+#    ('ipyparallel', '6.2.4'),
+#    ('docopt', '0.6.2'),
 ]
 
 # For Julia packages needed for Jupyter
