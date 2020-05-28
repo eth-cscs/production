@@ -8,14 +8,7 @@ description = "Utilities for working with Jupyter at CSCS"
 
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 
-sources = [{
-    'filename': '%(name)s-%(version)s.tar.gz',
-    'git_config': {
-        'url': 'https://github.com/eth-cscs',
-        'repo_name': 'ipcluster_magic',
-        'tag': 'v%(version)s'
-    }
-}]
+sources = ['/apps/common/easybuild/sources/i/ipcmagic/ipcmagic-0.1.tar.gz']
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
