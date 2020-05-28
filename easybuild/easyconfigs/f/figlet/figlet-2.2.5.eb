@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'figlet'
+version = '2.2.5'
+homepage = 'https://github.com/cmatsuoka/figlet'
+description = """FIGlet is a program for making large letters out of ordinary
+text:
+ > figlet
+ > chkfont $EBROOTFIGLET/share/figlet/standard.flf
+ > figlist # -d $EBROOTFIGLET/share/figlet
+ > showfigfonts -d $EBROOTFIGLET/share/figlet"""
+toolchain = SYSTEM
+source_urls = ['https://github.com/cmatsuoka/figlet/archive']
+sources = ['%(version)s.tar.gz']
+skipsteps = ['configure']
+buildopts = 'prefix=%(installdir)s '
+installopts = 'prefix=%(installdir)s '
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['share/figlet']
+}
+
+moduleclass = 'tools'
