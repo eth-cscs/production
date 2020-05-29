@@ -2,7 +2,6 @@
 
 def methods
 def machinesList
-def loginBash = '#!/bin/bash -l'
 stage('Initialization') {
     node('master') {
         checkout scm
@@ -46,10 +45,6 @@ stage('Build Stage') {
                 node(machineName) {
                     checkout scm
                     def project = env.JOB_BASE_NAME.trim()
-//                    def scratch = sh(returnStdout: true,
-//                                     script: """$loginBash
-//                                               echo \$SCRATCH""").trim()
-                    def buildPath = "/tmp/jenscscs/$project-$env.BUILD_ID/"
                     def prefix = "\$SCRATCH/$project/$machineLabel"
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
@@ -59,8 +54,7 @@ stage('Build Stage') {
                         println("The unuse path is empty")
                     }
                     // Remove "--installpath" option and Matlab
-                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $WORKSPACE/jenkins-builds/$machineLabel | sed -E '/\\bMatlab.*/Id' > buildlist.txt"
-                    def listFlag = "--list=buildlist.txt"
+                    sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
                     def command = arch == "" ? "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 hostname" : "srun -u --constraint=$arch --ntasks=1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 hostname"
                     sh("""#!/bin/bash -l
                         status=0
@@ -71,7 +65,7 @@ stage('Build Stage') {
                         $command
                         export EASYBUILD_TMPDIR="$prefix/tmp"
                         export EASYBUILD_SOURCEPATH="$prefix/sources"
-                        export EASYBUILD_BUILDPATH="$buildPath"
+                        export EASYBUILD_BUILDPATH="/tmp/jenscscs/$project-$env.BUILD_ID"
                         echo -e "$prefix \n\$EASYBUILD_TMPDIR \n\$EASYBUILD_SOURCEPATH \n\$EASYBUILD_BUILDPATH"
                         status=\$[status+\$?]
                         if [ -d \$EASYBUILD_TMPDIR ]; then
