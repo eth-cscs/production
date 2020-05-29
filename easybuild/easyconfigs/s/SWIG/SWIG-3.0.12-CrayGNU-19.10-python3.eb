@@ -3,11 +3,7 @@
 name = 'SWIG'
 version = '3.0.12'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-versionsuffix = '-python%s' % (local_py_maj_ver)
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://www.swig.org/'
 description = """SWIG is a software development tool that connects programs written in C and C++ with
@@ -20,13 +16,13 @@ source_urls = [SOURCEFORGE_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('cray-python/%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver), EXTERNAL_MODULE),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('PCRE', '8.42'),
 ]
 
 configopts = 'LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"'
-configopts += ' --with-python=/opt/python/%s.%s.%s/bin/python' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-configopts += ' --with-python-version=%s.%s' % (local_py_maj_ver, local_py_min_ver)
-configopts += ' --with-python-root=/opt/python/%s.%s.%s/lib/python%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver, local_py_maj_ver, local_py_min_ver)
+configopts += ' --with-python=/opt/python/%(pyver)s/bin/python'
+configopts += ' --with-python-version=%(pyshortver)s'
+configopts += ' --with-python-root=/opt/python/%(pyver)s/lib/python%(pyshortver)s'
 
 moduleclass = 'devel'
