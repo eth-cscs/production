@@ -49,9 +49,11 @@ stage('Build Stage') {
                     }
                     // Remove "--installpath" option and Matlab
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
-                    def command = arch == "" ?\
-                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 hostname" :\ 
+
+                    def command = arch == "" ? 
+                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 hostname" :  
                         "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 hostname"
+
                     sh("""#!/bin/bash -l
                         if [ -d $prefix ]; then
                             rm -rf $prefix
