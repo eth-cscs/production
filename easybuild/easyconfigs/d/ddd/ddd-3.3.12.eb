@@ -1,0 +1,21 @@
+# @jgphpc (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ddd'
+version = '3.3.12'
+homepage = 'https://www.gnu.org/software/ddd'
+description = """GNU DDD is a graphical front-end for command-line debuggers
+such as GDB, DBX, WDB, Ladebug, JDB, XDB, the Perl debugger, the bash debugger
+bashdb, the GNU Make debugger remake, or the Python debugger pydb. Besides
+usual front-end features such as viewing source texts, DDD has become
+famous through its interactive graphical data display, where data structures
+are displayed as graphs."""
+toolchain = SYSTEM
+source_urls = ['https://ftp.gnu.org/gnu/ddd']
+sources = [SOURCE_TAR_GZ]
+sanity_check_paths = {
+    'files': ['bin/ddd'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'tools'

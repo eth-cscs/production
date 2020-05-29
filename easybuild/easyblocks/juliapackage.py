@@ -32,7 +32,8 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 import os
 import shutil
 
-#from easybuild.easyblocks.r import EXTS_FILTER_R_PACKAGES, EB_R
+import easybuild.tools.toolchain as toolchain
+
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.framework.extensioneasyblock import ExtensionEasyBlock
 from easybuild.tools.build_log import EasyBuildError
@@ -52,6 +53,8 @@ class JuliaPackage(ExtensionEasyBlock):
 
         extra_vars.update({
             'arch_name': [None, "Change julia's Project.toml pathname", CUSTOM],
+            'mpiexec':  [None, "Set the mpiexec command", CUSTOM],
+            'mpiexec_args':  [None, "Set the mpiexec command args", CUSTOM],
         })
         return ExtensionEasyBlock.extra_options(extra_vars=extra_vars)
 
@@ -97,6 +100,26 @@ class JuliaPackage(ExtensionEasyBlock):
             install_opts = "name=\"%s\", version=\"%s\"" % (self.package_name, self.version)
 
         pre_cmd = '%s unset EBJULIA_USER_DEPOT_PATH && export EBJULIA_ADMIN_DEPOT_PATH=%s && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.depot, self.projectdir)
+
+        has_mpi = False
+        if self.toolchain.options.get('usempi', None):
+            has_mpi = True
+
+        if (self.cfg['mpiexec'] or self.cfg['mpiexec_args']) and not has_mpi:
+            raise EasyBuildError("When enabling building with mpi, also enable the 'usempi' toolchain option.")
+
+        if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
+          cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
+          pre_cmd += ' && export JULIA_MPI_BINARY=system'
+          pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
+          pre_cmd += ' && export JULIA_MPICC="cc"'
+
+        if self.cfg['mpiexec']:
+            pre_cmd += ' && export JULIA_MPIEXEC="%s"' % self.cfg['mpiexec']
+
+        if self.cfg['mpiexec_args']:
+            pre_cmd += ' && export JULIA_MPIEXEC_ARGS="%s"' % self.cfg['mpiexec_args']
+
         if remove:
             cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
         else:
@@ -132,9 +155,3 @@ class JuliaPackage(ExtensionEasyBlock):
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
 
-#    def make_module_extra(self, *args, **kwargs):
-#        txt = super(EB_JuliaPackages, self).make_module_extra(*args, **kwargs)
-#
-#        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.projectdir)
-#
-#        return txt

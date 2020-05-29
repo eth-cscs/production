@@ -26,7 +26,6 @@ prebuildopts = ('cd %(builddir)s && mkdir -p src/github.com/opencontainers && '
 
 preinstallopts = 'cd %(builddir)s/src/github.com/opencontainers/%(name)s && '
 
-build_cmd = 'CGO_LDFLAGS="$CGO_LDFLAGS -fuse-ld=gold" make'
 buildopts = ['BUILDTAGS=""']
 installopts = ['PREFIX=%(installdir)s']
 skipsteps = ['configure']

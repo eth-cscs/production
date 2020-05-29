@@ -1,0 +1,43 @@
+easyblock = 'PythonPackage'
+
+name = 'NvidiaApex'
+local_commit = '8fac3a7'
+version = '20200325'
+versionsuffix = '-cuda-10.1'
+
+req_py_majver = 3
+req_py_minver = 7
+
+homepage = 'https://github.com/nvidia/apex'
+description = "A PyTorch Extension: Tools for easy mixed precision and distributed training in Pytorch"
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/NVIDIA/apex/archive/']
+sources = [{
+    'filename': SOURCE_TAR_GZ,
+    'download_filename': '%s.tar.gz' % local_commit,
+}]
+checksums = ['5584ab0f5d395b063a64e15233ee576740db14b2aa9a6c289c512b7dc69b2d88']
+
+dependencies = [
+    ('PyTorch', '1.5.0', versionsuffix),
+]
+
+use_pip = True
+
+preinstallopts = 'TORCH_CUDA_ARCH_LIST="6.0"'
+installopts = "--no-cache-dir --global-option='--cpp_ext' --global-option='--cuda_ext' --global-option='--pyprof'"
+
+options = {'modulename': 'apex'}
+
+sanity_pip_check = True
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s.%s/site-packages/apex' % (req_py_majver, req_py_minver)],
+}
+
+sanity_check_commands = ["python -c 'from apex import amp'"]
+
+moduleclass = 'tools'

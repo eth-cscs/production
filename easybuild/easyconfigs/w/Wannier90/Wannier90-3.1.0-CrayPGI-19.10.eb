@@ -7,17 +7,19 @@ version = '3.1.0'
 homepage = 'http://www.wannier.org'
 description = """A tool for obtaining maximally-localised Wannier functions"""
 
-toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+toolchain = {'name': 'CrayPGI', 'version': '19.10'}
 
 sources = ['v3.1.0.tar.gz']
 source_urls = ['https://github.com/wannier-developers/wannier90/archive/']
+
+builddependencies = [
+  ('intel/19.0.1.144', EXTERNAL_MODULE)
+]
 
 # create make.inc with definition of compilers
 prebuildopts = ' echo -e "F90 = ftn \nCOMMS = mpi \nMPIF90 = ftn " > make.inc && '
 # append MKL library link line to make.inc
 prebuildopts += ' echo "LIBS = -L\$(MKLROOT)/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_sequential" >> make.inc && cat make.inc && '
-# unload cray-libsci
-prebuildopts += ' module unload cray-libsci && module list && '
 
 # build program and library
 buildopts = 'all'
