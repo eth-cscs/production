@@ -33,19 +33,13 @@ stage('Machine Selection') {
 def builds = [:]
 stage('Build Stage') {
     for (system in machineConfigurations) {
-        def machine = system.machine
-        def architectures = system.architectures
-        def cpus = machine.cpus
-        def machineName = machine.name
-        for (architecture in architectures) {
-            def arch = architecture
+        def machineName = system.machine.name
+        for (arch in system.architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
-            def cpusPerTask = arch == "" ? cpus : cpus[arch]
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    def project = env.JOB_BASE_NAME.trim()
-                    def prefix = "\$SCRATCH/$project/$machineLabel"
+                    def prefix = "\$SCRATCH/$env.JOB_BASE_NAME/$machineLabel"
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
                         println("The unuse path is: $unusePath")
@@ -55,18 +49,19 @@ stage('Build Stage') {
                     }
                     // Remove "--installpath" option and Matlab
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
-                    def command = arch == "" ? "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 hostname" : "srun -u --constraint=$arch --ntasks=1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 hostname"
+                    def command = arch == "" ?\
+                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 hostname" :\ 
+                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 hostname"
                     sh("""#!/bin/bash -l
-                        status=0
                         if [ -d $prefix ]; then
                             rm -rf $prefix
                         fi
-                        echo "Running $command"
-                        $command
                         export EASYBUILD_TMPDIR="$prefix/tmp"
                         export EASYBUILD_SOURCEPATH="$prefix/sources"
-                        export EASYBUILD_BUILDPATH="/tmp/jenscscs/$project-$env.BUILD_ID"
-                        echo -e "$prefix \n\$EASYBUILD_TMPDIR \n\$EASYBUILD_SOURCEPATH \n\$EASYBUILD_BUILDPATH"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        echo "Running $command"
+                        status=0
+                        $command
                         status=\$[status+\$?]
                         if [ -d \$EASYBUILD_TMPDIR ]; then
                          chmod -R o+r \$EASYBUILD_TMPDIR
