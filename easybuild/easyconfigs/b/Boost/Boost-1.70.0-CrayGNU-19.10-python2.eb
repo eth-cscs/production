@@ -2,11 +2,8 @@
 name = 'Boost'
 version = '1.70.0'
 
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-
-versionsuffix = '-python%s' % local_py_maj_ver
+_pyminver = '7'
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://www.boost.org/'
 description = """
@@ -21,16 +18,14 @@ source_urls = [SOURCEFORGE_SOURCE]
 
 configopts  = (
     ' --with-python=$(EBROOTPYTHON)/bin/python '
-    ' --with-python-version={0}.{1}'
-    ' --with-python-root=$(EBROOTPYTHON)/lib/python{0}.{1}'
-    .format(local_py_maj_ver, local_py_min_ver)
+    ' --with-python-version=%(pyshortver)s'
+    ' --with-python-root=$(EBROOTPYTHON)/lib/python%(pyshortver)s'
 )
 
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('cray-python/%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver),
-     EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
 
 # CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
@@ -45,7 +40,7 @@ dependencies = [
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {
     'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
-              'lib/libboost_python%s%s.so' % (local_py_maj_ver, local_py_min_ver)],
+              'lib/libboost_python%%(pymajver)s%s.so' % _pyminver],
     'dirs': ['include/boost']
 }
 
