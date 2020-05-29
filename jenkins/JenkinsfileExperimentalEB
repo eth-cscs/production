@@ -72,11 +72,11 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="$prefix/tmp"
                         export EASYBUILD_SOURCEPATH="$prefix/sources"
                         export EASYBUILD_BUILDPATH="$buildPath"
-                        echo -e "$prefix \n$EASYBUILD_TMPDIR \n$EASYBUILD_SOURCEPATH \n$EASYBUILD_BUILDPATH"
+                        echo -e "$prefix \n\$EASYBUILD_TMPDIR \n\$EASYBUILD_SOURCEPATH \n\$EASYBUILD_BUILDPATH"
                         status=\$[status+\$?]
-                        if [ -d $EASYBUILD_TMPDIR ]; then
-                         chmod -R o+r $EASYBUILD_TMPDIR
-                         find $EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
+                        if [ -d \$EASYBUILD_TMPDIR ]; then
+                         chmod -R o+r \$EASYBUILD_TMPDIR
+                         find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
                         fi
                         exit \$status""")
                 }
