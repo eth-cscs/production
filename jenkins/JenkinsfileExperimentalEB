@@ -51,9 +51,6 @@ stage('Build Stage') {
 //                                               echo \$SCRATCH""").trim()
                     def buildPath = "/tmp/jenscscs/$project-$env.BUILD_ID/"
                     def prefix = "\$SCRATCH/$project/$machineLabel"
-                    def env.EASYBUILD_SOURCEPATH = "$prefix/sources"
-                    def env.EASYBUILD_TMPDIR = "$prefix/tmp"
-                    def env.EASYBUILD_BUILDPATH = "$buildPath"
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
                         println("The unuse path is: $unusePath")
@@ -70,8 +67,11 @@ stage('Build Stage') {
                         if [ -d $prefix ]; then
                             rm -rf $prefix
                         fi
-                         echo "Running $command"
+                        echo "Running $command"
                         $command
+                        export EASYBUILD_TMPDIR="$prefix/tmp"
+                        export EASYBUILD_SOURCEPATH="$prefix/sources"
+                        export EASYBUILD_BUILDPATH="$buildPath"
                         echo -e "$prefix \n$EASYBUILD_TMPDIR \n$EASYBUILD_SOURCEPATH \n$EASYBUILD_BUILDPATH"
                         status=\$[status+\$?]
                         if [ -d $EASYBUILD_TMPDIR ]; then
