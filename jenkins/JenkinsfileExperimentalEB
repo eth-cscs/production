@@ -12,22 +12,22 @@ stage('Initialization') {
     }
 }
 
-def userMessage = params.customMessage
+def customMachines = params.machines
 def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
-        def machinesToRun = machinesList.findAll({methods.machineCheck(userMessage, it.name)})
+        def machinesToRun = machinesList.findAll({methods.machineCheck(customMachines, it.name)})
         println "machinesToRun is ${machinesToRun}"
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
             currentBuild.result = "FAILURE"
             return
         }
-        println "The user selected the following systems: $userMessage"
-        for (mach in machinesToRun) {
+        println "Selected machines: $customMachines"
+        for (system in machinesToRun) {
             machineConfigurations.add(
-                [machine:mach, architectures: methods.getMachineConfiguration(
-                        userMessage, mach.name, mach.archs as String[])])
+                [machine:system, architectures: methods.getMachineConfiguration(
+                        customMachines, system.name, system.archs as String[])])
         }
     }
 }
@@ -98,15 +98,15 @@ stage('Build Stage') {
     } catch(err) {
         if (err.toString().contains('exit code 143')) {
             currentBuild.result = "ABORTED"
-            println "The Build step was cancelled. Aborting....."
+            println "The Build step was cancelled. Aborting..."
         }
         else if (err.toString().contains('Queue task was cancelled')) {
             currentBuild.result = "ABORTED"
-            println "The Queue task was cancelled. Aborting....."
+            println "The Queue task was cancelled. Aborting..."
         }
         else {
             currentBuild.result = "FAILURE"
-            println "The Build step failed. Exiting....."
+            println "The Build step failed. Exiting..."
         }
     }
 
