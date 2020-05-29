@@ -7,8 +7,8 @@ stage('Initialization') {
     node('master') {
         checkout scm
         def rootDir = pwd()
-        methods = load("${rootDir}/jenkins/util.groovy")
-        machinesList = load("${rootDir}/jenkins/Machines.groovy")
+        methods = load("$rootDir/jenkins/util.groovy")
+        machinesList = load("$rootDir/jenkins/Machines.groovy")
     }
 }
 
@@ -17,7 +17,7 @@ def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
         def machinesToRun = machinesList.findAll({methods.machineCheck(customMachines, it.name)})
-        println "machinesToRun is ${machinesToRun}"
+        println "machinesToRun is $machinesToRun"
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
             currentBuild.result = "FAILURE"
@@ -34,43 +34,42 @@ stage('Machine Selection') {
 
 def builds = [:]
 stage('Build Stage') {
-    for (mach in machineConfigurations) {
-        def machine = mach.machine
-        def architectures = mach.architectures
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
         def cpus = machine.cpus
         def machineName = machine.name
         for (architecture in architectures) {
             def arch = architecture
-            def machineLabel = arch == "" ? machineName : "${machineName}-${arch}"
+            def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             def cpusPerTask = arch == "" ? cpus : cpus[arch]
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    def project_name = env.JOB_BASE_NAME.trim()
+                    def project = env.JOB_BASE_NAME.trim()
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
+                    println("The working folder is $workingDir, the Workspace is $WORKSPACE")
                     def scratch = sh(returnStdout: true,
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
-                    def buildPath = "/tmp/jenscscs/ExperimentalEB-${env.BUILD_ID}/"
-                    def prefix = "$scratch/$project_name/$machineLabel"
+                    def buildPath = "/tmp/jenscscs/$project-$env.BUILD_ID/"
+                    def prefix = "$scratch/$project/$machineLabel"
                     def unuseFlag
                     if (machine.unusePath != '') {
-                        println("The unuse path is: $machine.unusePath")
-                        unuseFlag = arch == '' ?  "--unuse=${machine.unusePath}" : "--unuse=${machine.unusePath}".replace('ARCH', arch)
+                        unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
+                        unuseFlag = "--unuse=$unusePath"
+                        println("The unuse path is: $unusePath")
                     }
                     else {
-                        println("The unuse path is empty")
                         unuseFlag = ''
+                        println("The unuse path is empty")
                     }
-                    def listFile = "$workingDir/jenkins-builds/$machineLabel"
-                    // Remove "--installpath" command line option + remove Matlab recipe
-                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $listFile | sed -E '/\\bMatlab.*/Id' > ${listFile}_stripped"
-                    def listFlag = "--list=${listFile}_stripped"
-                    def command = "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag"
-                    if (arch != '')
-                        //command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project_name --time=24:00:00 $workingDir/jenkins-builds/production.sh --arch=$arch $listFlag --prefix=$prefix $unuseFlag --xalt=no"
-                        command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project_name --time=00:01:00 hostname"
+                    // Remove "--installpath" option and Matlab
+                    println("Remove the '--installpath' option and Matlab from the build list")
+                    sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' "$workingDir/jenkins-builds/$machineLabel" | sed -E '/\\bMatlab.*/Id' > buildlist.txt"
+                    def listFlag = "--list=buildlist.txt"
+                    def command = arch == "" ? "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag" : command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 env"
                     withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_BUILDPATH=$buildPath"]) {
@@ -79,6 +78,7 @@ stage('Build Stage') {
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
                                        fi
+                                        echo "command is $command"
                                        $command
                                        status=\$[status+\$?]
                                        if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
