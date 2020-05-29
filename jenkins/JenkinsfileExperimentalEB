@@ -69,7 +69,7 @@ stage('Build Stage') {
                     println("Remove the '--installpath' option and Matlab from the build list")
                     sh "awk '{sub(/--installpath=\\S+/, \"\"); print}' $workingDir/jenkins-builds/$machineLabel | sed -E '/\\bMatlab.*/Id' > buildlist.txt"
                     def listFlag = "--list=buildlist.txt"
-                    def command = arch == "" ? "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag" : command = "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 env"
+                    def command = arch == "" ? "$workingDir/jenkins-builds/production.sh $listFlag --prefix=$prefix $unuseFlag" : "srun -u --constraint=$arch -n1 --cpus-per-task=$cpusPerTask --job-name=$project --time=00:01:00 env"
                     withEnv(["EASYBUILD_SOURCEPATH=$prefix/sources",
                              "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_BUILDPATH=$buildPath"]) {
@@ -78,7 +78,7 @@ stage('Build Stage') {
                                        if [ -d $prefix ]; then
                                            rm -rf $prefix/*
                                        fi
-                                        echo "command is $command"
+                                        echo "Running $command"
                                        $command
                                        status=\$[status+\$?]
                                        if [ -d \"\$EASYBUILD_TMPDIR\" ]; then
