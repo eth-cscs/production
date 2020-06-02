@@ -51,17 +51,24 @@ stage('Build Stage') {
                     // Remove "--installpath" option and Matlab
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
+                    def loadeasybuild = arch == "" ?
+                        "module load EasyBuild-custom/cscs" :
+                        "module load daint-$arch EasyBuild-custom/cscs"
+
                     def command = arch == "" ? 
-                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 hostname" :  
-                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 hostname"
+                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
+                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config"
 
                     sh("""#!/bin/bash -l
                         if [ -d $prefix ]; then
                             rm -rf $prefix
                         fi
+                        export EASYBUILD_PREFIX="$prefix"
                         export EASYBUILD_TMPDIR="$prefix/tmp"
                         export EASYBUILD_SOURCEPATH="$prefix/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        echo "Loading $loadeasybuild (version will be $params.version)"
+                        $loadeasybuild
                         echo "Running $command"
                         status=0
                         $command
