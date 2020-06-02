@@ -2,6 +2,11 @@
 
 def methods
 def machinesList
+/* 
+ Initialization: checkout the production repository to load the files:
+ - "util.groovy" with the functions used in the pipeline scripts
+ - "Machines.groovy" with the list and properties of HPC systems
+*/
 stage('Initialization') {
     node('master') {
         checkout scm
@@ -10,7 +15,12 @@ stage('Initialization') {
     }
 }
 
-//def customMachines = params.machines
+/* 
+ Machine Selection: 
+ - filters the user defined parameter "machines", accessible though "params.machines"
+ - defines the runtime HPC systems of the project "machinesToRun" 
+ - defines the configuration of the runtime HPC systems "machinesConfiguration"
+*/
 def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
@@ -29,7 +39,12 @@ stage('Machine Selection') {
         }
     }
 }
-
+/* 
+ Build Stage: configures parallel builds for the different "machinesToRun"
+ - starts a loop over all systems in "machineConfigurations"
+  - if the machine has multiple architectures, starts a sub-loop over architectures
+  - EASYBUILD_PREFIX is the user defined parameter "prefix" ("params.prefix")
+*/
 def builds = [:]
 stage('Build Stage') {
     for (system in machineConfigurations) {
@@ -40,7 +55,7 @@ stage('Build Stage') {
             builds[machineLabel] = {
                 node(machineName) {
                     checkout scm
-                    def prefix = "\$SCRATCH/$env.JOB_BASE_NAME/$machineLabel"
+                    //def prefix = "\$SCRATCH/$env.JOB_BASE_NAME/$machineLabel"
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
                         println("The unuse path is: $unusePath")
@@ -58,20 +73,22 @@ stage('Build Stage') {
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
                         "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.version"
-
                     sh("""#!/bin/bash -l
-                        if [ -d $prefix ]; then
-                            rm -rf $prefix
-                        fi
-                        export EASYBUILD_PREFIX="$prefix"
-                        export EASYBUILD_TMPDIR="$prefix/tmp"
-                        export EASYBUILD_SOURCEPATH="$prefix/sources"
+                        export EASYBUILD_PREFIX="$params.prefix"
+                        export EASYBUILD_TMPDIR="\$EASYBUUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+
                         echo "Loading $loadeasybuild"
                         $loadeasybuild
+
+                        echo "Unuse $unusePath"
+                        module unuse $unusePath
+
                         echo "Running $command"
                         status=0
                         $command
+
                         status=\$[status+\$?]
                         if [ -d \$EASYBUILD_TMPDIR ]; then
                          chmod -R o+r \$EASYBUILD_TMPDIR
