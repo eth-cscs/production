@@ -43,7 +43,7 @@ stage('Machine Selection') {
  Build Stage: configures parallel builds for the different "machinesToRun"
  - starts a loop over all systems in "machineConfigurations"
   - if the machine has multiple architectures, starts a sub-loop over architectures
-  - EASYBUILD_PREFIX is the user defined parameter "eb_prefix" ("params.eb-prefix")
+  - the user parameter "eb_prepend_path" is pre-prended to EASYBUILD_PREFIX
   - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
   - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
@@ -56,7 +56,7 @@ stage('Build Stage') {
         for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             builds[machineLabel] = {
-                println("We are now building $machineLabel")
+                println("Building $machineLabel (arch is $arch)")
                 node(machineName) {
                     checkout scm
                     if (machine.unusePath != '') {
@@ -71,7 +71,7 @@ stage('Build Stage') {
 
                     def loadeasybuild = arch == "" ?
                         "module load EasyBuild-custom/cscs" :
-                        "module load daint-$arch EasyBuild-custom/cscs"
+                        "module load daint-$arch && module load EasyBuild-custom/cscs"
 
 //                    def switcheasybuild = 
 //                        "module switch EasyBuild EasyBuild/$eb_version"
@@ -81,11 +81,11 @@ stage('Build Stage') {
                         "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
                         echo -e "Define EasyBuild environment variables:"
-                        echo "export EASYBUILD_PREFIX=$params.eb_prefix"
+                        echo "export EASYBUILD_PREFIX=$params.eb_prepend_path"
                         echo "export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp"
                         echo "export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources"
                         echo "export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG"
-                        export EASYBUILD_PREFIX="$params.eb_prefix"
+                        export EASYBUILD_PREFIX="$params.eb_prepend_path"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
