@@ -33,7 +33,8 @@ stage('Machine Selection') {
 def builds = [:]
 stage('Build Stage') {
     for (system in machineConfigurations) {
-        def machineName = system.machine.name
+        def machine = system.machine
+        def machineName = machine.name
         for (arch in system.architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             builds[machineLabel] = {
