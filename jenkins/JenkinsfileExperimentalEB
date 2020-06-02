@@ -72,20 +72,22 @@ stage('Build Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load daint-$arch EasyBuild-custom/cscs"
 
+                    def switcheasybuild = 
+                        "module switch EasyBuild EasyBuild/$eb_version"
+
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
                         "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="$params.eb_prefix"
-                        export EASYBUILD_TMPDIR="\$EASYBUUILD_PREFIX/tmp"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
 
                         echo "Loading $loadeasybuild"
                         $loadeasybuild
 
-                        echo "Switching EasyBuild module":
-                        module switch EasyBuild EasyBuild/$eb_version
+                        eb --show-config
 
                         echo "Running $command"
                         status=0
