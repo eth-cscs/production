@@ -65,15 +65,15 @@ stage('Build Stage') {
                     else {
                         println("The unuse path is empty")
                     }
-                    // Remove "--installpath" option and Matlab
+                    /* Remove "--installpath" option and Matlab */
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = arch == "" ?
                         "module load EasyBuild-custom/cscs" :
                         "module load daint-$arch EasyBuild-custom/cscs"
 
-                    def switcheasybuild = 
-                        "module switch EasyBuild EasyBuild/$eb_version"
+//                    def switcheasybuild = 
+//                        "module switch EasyBuild EasyBuild/$eb_version"
 
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
