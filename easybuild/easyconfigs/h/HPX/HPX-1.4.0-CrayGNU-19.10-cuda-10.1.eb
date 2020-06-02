@@ -3,8 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'HPX'
 version = '1.4.0'
-local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-cuda-%(cudashortver)s'
 checksums = ['241a1c47fafba751848fac12446e7bf4ad3d342d5eb2fa1ef94dd904acc329ed']
 
 homepage = 'http://stellar-group.org/libraries/hpx'
