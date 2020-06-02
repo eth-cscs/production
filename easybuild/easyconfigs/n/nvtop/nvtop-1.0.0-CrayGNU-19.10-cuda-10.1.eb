@@ -3,7 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'nvtop'
 version = '1.0.0'
-versionsuffix = '-cuda-10.1'
+versionsuffix = '-cuda-%(cudashortver)s'
 
 homepage = 'https://github.com/Syllo/nvtop'
 description = 'htop-like GPU usage monitor'
@@ -14,6 +14,8 @@ sources = ['%(version)s.tar.gz']
 osdependencies = [('ncurses-devel')]
 builddependencies = [
     ('CMake', '3.14.5', '', True),
+]
+dependencies = [
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 separate_build_dir = True
