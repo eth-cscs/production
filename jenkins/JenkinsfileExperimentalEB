@@ -43,7 +43,9 @@ stage('Machine Selection') {
  Build Stage: configures parallel builds for the different "machinesToRun"
  - starts a loop over all systems in "machineConfigurations"
   - if the machine has multiple architectures, starts a sub-loop over architectures
-  - EASYBUILD_PREFIX is the user defined parameter "prefix" ("params.prefix")
+  - EASYBUILD_PREFIX is the user defined parameter "eb_prefix" ("params.eb-prefix")
+  - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
+  - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
 def builds = [:]
 stage('Build Stage') {
@@ -67,14 +69,14 @@ stage('Build Stage') {
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = arch == "" ?
-                        "module load EasyBuild-custom/cscs" :
-                        "module load daint-$arch EasyBuild-custom/cscs"
+                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/$eb_version" :
+                        "module load daint-$arch EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/$eb_version"
 
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
-                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.version"
+                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
-                        export EASYBUILD_PREFIX="$params.prefix"
+                        export EASYBUILD_PREFIX="$params.eb_prefix"
                         export EASYBUILD_TMPDIR="\$EASYBUUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
