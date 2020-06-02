@@ -55,6 +55,7 @@ stage('Build Stage') {
         def architectures = system.architectures
         for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
+            println("Building $machineLabel: machine name is $$machineName, architecture is $arch)")
             builds[machineLabel] = {
                 println("Building $machineLabel (arch is $arch)")
                 node(machineName) {
@@ -100,10 +101,6 @@ stage('Build Stage') {
                         $command
 
                         status=\$[status+\$?]
-                        if [ -d \$EASYBUILD_TMPDIR ]; then
-                         chmod -R o+r \$EASYBUILD_TMPDIR
-                         find \$EASYBUILD_TMPDIR -type d -exec chmod o+x '{}' \\;
-                        fi
                         exit \$status""")
                 }
             }
