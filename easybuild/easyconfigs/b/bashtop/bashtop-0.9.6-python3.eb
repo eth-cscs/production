@@ -3,17 +3,18 @@ easyblock = 'ConfigureMake'
 
 name = 'bashtop'
 version = '0.9.6'
-versionsuffix = '-python3'
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
+versionsuffix = '-python%(pymajver)s'
+# versionsuffix = '-python3'
+# local_py_maj_ver = '3'
+# local_py_min_ver = '6'
+# local_py_rev_ver = '5.7'
+# local_pyver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
 homepage = 'https://github.com/aristocratos/bashtop'
 description = """Linux/OSX/FreeBSD resource monitor"""
 toolchain = SYSTEM
 source_urls = ['https://github.com/aristocratos/bashtop/archive']
 sources = ['v%(version)s.tar.gz']
-builddependencies = [('psutil', '5.7.0', '-python3')]
+builddependencies = [('psutil', '5.7.0', versionsuffix)]
 skipsteps = ['configure']
 installopts = 'PREFIX=%(installdir)s '
 sanity_check_paths = {
