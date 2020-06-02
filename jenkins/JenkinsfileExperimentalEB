@@ -69,8 +69,8 @@ stage('Build Stage') {
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = arch == "" ?
-                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/$eb_version" :
-                        "module load daint-$arch EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/$eb_version"
+                        "module load EasyBuild-custom/cscs" :
+                        "module load daint-$arch EasyBuild-custom/cscs"
 
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
@@ -84,8 +84,8 @@ stage('Build Stage') {
                         echo "Loading $loadeasybuild"
                         $loadeasybuild
 
-                        echo "Unuse $unusePath"
-                        module unuse $unusePath
+                        echo "Switching EasyBuild module":
+                        module switch EasyBuild EasyBuild/$eb_version
 
                         echo "Running $command"
                         status=0
