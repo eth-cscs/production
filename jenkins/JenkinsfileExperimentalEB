@@ -52,12 +52,13 @@ stage('Build Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def machineName = machine.name
-        for (arch in system.architectures) {
+        def architectures = system.architectures
+        for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             builds[machineLabel] = {
+                println("We are now building $machineLabel")
                 node(machineName) {
                     checkout scm
-                    //def prefix = "\$SCRATCH/$env.JOB_BASE_NAME/$machineLabel"
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
                         println("The unuse path is: $unusePath")
@@ -79,17 +80,22 @@ stage('Build Stage') {
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
                         "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
+                        echo -e "Define EasyBuild environment variables:"
+                        echo "export EASYBUILD_PREFIX=$params.eb_prefix"
+                        echo "export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp"
+                        echo "export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources"
+                        echo "export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG"
                         export EASYBUILD_PREFIX="$params.eb_prefix"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
 
-                        echo "Loading $loadeasybuild"
+                        echo -e "Running command: \n$loadeasybuild"
                         $loadeasybuild
 
                         eb --show-config
 
-                        echo "Running $command"
+                        echo -e "Running command: \n$command"
                         status=0
                         $command
 
