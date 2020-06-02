@@ -10,22 +10,22 @@ stage('Initialization') {
     }
 }
 
-def customMachines = params.machines
+//def customMachines = params.machines
 def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
-        def machinesToRun = machinesList.findAll({methods.machineCheck(customMachines, it.name)})
+        def machinesToRun = machinesList.findAll({methods.machineCheck(params.machines, it.name)})
         println "machinesToRun is $machinesToRun"
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
             currentBuild.result = "FAILURE"
             return
         }
-        println "Selected machines: $customMachines"
+        println "Selected machines: $params.machines"
         for (system in machinesToRun) {
             machineConfigurations.add(
                 [machine:system, architectures: methods.getMachineConfiguration(
-                        customMachines, system.name, system.archs as String[])])
+                        params.machines, system.name, system.archs as String[])])
         }
     }
 }
@@ -57,7 +57,7 @@ stage('Build Stage') {
 
                     def command = arch == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
-                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config"
+                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.version"
 
                     sh("""#!/bin/bash -l
                         if [ -d $prefix ]; then
@@ -67,7 +67,7 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="$prefix/tmp"
                         export EASYBUILD_SOURCEPATH="$prefix/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
-                        echo "Loading $loadeasybuild (version will be $params.version)"
+                        echo "Loading $loadeasybuild"
                         $loadeasybuild
                         echo "Running $command"
                         status=0
