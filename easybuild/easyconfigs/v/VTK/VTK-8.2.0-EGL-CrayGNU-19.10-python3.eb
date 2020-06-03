@@ -78,7 +78,7 @@ prepend-path LD_LIBRARY_PATH "/opt/python/%(pyver)s/lib"
 
 sanity_check_paths = {
     'files': ['bin/vtkpython'],
-    'dirs': ['lib/python%s/site-packages/%(pyshortver)s', 'include/vtk-%(version_major_minor)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/', 'include/vtk-%(version_major_minor)s'],
 }
 
 sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
