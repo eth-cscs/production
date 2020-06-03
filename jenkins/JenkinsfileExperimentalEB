@@ -25,19 +25,16 @@ def machineConfigurations = []
 stage('Machine Selection') {
     node('master') {
         def machinesToRun = machinesList.findAll({methods.machineCheck(params.machines, it.name)})
-        println "machinesToRun is $machinesToRun"
         if (!machinesToRun) {
             println "No machines were specified. Aborting...."
             currentBuild.result = "FAILURE"
             return
         }
-        println "Selected machines: $params.machines"
         for (system in machinesToRun) {
             machineConfigurations.add(
                 [machine:system, architectures: methods.getMachineConfiguration(
                         params.machines, system.name, system.archs as String[])])
         }
-        println "machineConfigurations is $machineConfigurations"
     }
 }
 
@@ -51,18 +48,17 @@ stage('Machine Selection') {
 */
 def builds = [:]
 stage('Build Stage') {
-    println "machineConfigurations is $machineConfigurations"
     for (system in machineConfigurations) {
         def machine = system.machine
         def machineName = machine.name
         def architectures = system.architectures
-        println "System is $system, machine is $machine, machineName is $machineName, architectures is $architectures"
         for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             println("Building $machineLabel: machine name is $machineName, architecture is $arch)")
             builds[machineLabel] = {
-                println("Building $machineLabel (arch is $arch)")
+                println("Building $machineLabel: machine name is $machineName, architecture is $arch)")
                 node(machineName) {
+                    println("Building $machineLabel: machine name is $machineName, architecture is $arch)")
                     checkout scm
                     if (machine.unusePath != '') {
                         unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
