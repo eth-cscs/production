@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'bashtop'
+version = '0.9.6'
+versionsuffix = '-python3'
+homepage = 'https://github.com/aristocratos/bashtop'
+description = """Linux/OSX/FreeBSD resource monitor"""
+toolchain = SYSTEM
+source_urls = ['https://github.com/aristocratos/bashtop/archive']
+sources = ['v%(version)s.tar.gz']
+builddependencies = [('psutil', '5.7.0', versionsuffix)]
+skipsteps = ['configure']
+installopts = 'PREFIX=%(installdir)s '
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['share/doc']
+}
+
+moduleclass = 'tools'
