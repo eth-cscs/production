@@ -56,7 +56,7 @@ stage('Build Stage') {
         def architectures = system.architectures
         for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
-            println("Building $machineLabel: machine name is $$machineName, architecture is $arch)")
+            println("Building $machineLabel: machine name is $machineName, architecture is $arch)")
             builds[machineLabel] = {
                 println("Building $machineLabel (arch is $arch)")
                 node(machineName) {
