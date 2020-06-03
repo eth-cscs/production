@@ -39,6 +39,7 @@ stage('Machine Selection') {
         }
     }
 }
+
 /* 
  Build Stage: configures parallel builds for the different "machinesToRun"
  - starts a loop over all systems in "machineConfigurations"
