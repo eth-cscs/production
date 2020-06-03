@@ -37,6 +37,7 @@ stage('Machine Selection') {
                 [machine:system, architectures: methods.getMachineConfiguration(
                         params.machines, system.name, system.archs as String[])])
         }
+        println "machinesConfigurations is $machinesConfigurations"
     }
 }
 
@@ -54,6 +55,7 @@ stage('Build Stage') {
         def machine = system.machine
         def machineName = machine.name
         def architectures = system.architectures
+        println "System is $system, machine is $machine, machineName is $machineName, architectures is $architectures"
         for (arch in architectures) {
             def machineLabel = arch == "" ? machineName : "$machineName-$arch"
             println("Building $machineLabel: machine name is $machineName, architecture is $arch)")
