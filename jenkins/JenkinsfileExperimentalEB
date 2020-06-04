@@ -42,7 +42,7 @@ stage('Machine Selection') {
  Build Stage: configures parallel builds for the different "machinesToRun"
  - starts a loop over all systems in "machineConfigurations"
   - if the machine has multiple architectures, starts a sub-loop over architectures
-  - the user parameter "eb_prefix" is the environment variable EASYBUILD_PREFIX
+  - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
   - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
   - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
@@ -58,7 +58,7 @@ stage('Build Stage') {
                "$machineName-$architecture"
             println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
 
-            builds[machineLabel] = {
+            builds["$machineLabel"] = {
                 println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
 
                 node(machineName) {
@@ -92,7 +92,7 @@ stage('Build Stage') {
                         echo 'export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp'
                         echo 'export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources'
                         echo 'export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG'
-                        export EASYBUILD_PREFIX="$params.eb_prefix"
+                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
