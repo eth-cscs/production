@@ -222,11 +222,19 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         version=$(echo $recipe | sed -e "s/^${name}-//" -e "s/.eb//")
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
         if [[ "$name" =~ "IDL" ]]; then
-        # check version of IDL
+        # check IDL version
             if [[ "$version" =~ "CSCS" ]]; then
                 group="${name,,}cscs"
             else
                 group="${name,,}ethz"
+            fi
+        elif [[ "$name" =~ "VASP" ]]; then
+        # check VASP version
+            if [[ "$version" =~ "5.4" ]]; then
+                group="${name,,}"
+            else
+                # After June 30th 2020: group="${name,,}6"
+                group="${name,,}"
             fi
         else
             group=${name,,}

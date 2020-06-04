@@ -1,21 +1,14 @@
 diff -Nru boost_1_70_0-original/tools/build/src/tools/python.jam boost_1_70_0/tools/build/src/tools/python.jam
 --- boost_1_70_0-original/tools/build/src/tools/python.jam
 +++ boost_1_70_0/tools/build/src/tools/python.jam
-@@ -544,7 +544,16 @@
+@@ -544,7 +544,9 @@
      }
      else
      {
 -        includes ?= $(prefix)/include/python$(version) ;
-+        if  not($(prefix)/include/python$(version)m)
-+            {
-+               debug-message "Used include path: $(prefix)/include/python$(version)m" ;
-+               includes ?= $(prefix)/include/python$(version)m ;
-+            }
-+        else
-+            {
-+               debug-message "Used include path: $(prefix)/include/python$(version)" ;
-+               includes ?= $(prefix)/include/python$(version) ;
-+            }
- 
++        includes = [ GLOB $(prefix)/include : * ] ;
++        includes = $(includes[1]) ;
++        ECHO "Using include path:" $(includes) ;
+
          local lib = $(exec-prefix)/lib ;
          libraries ?= $(lib)/python$(version)/config $(lib) ;
