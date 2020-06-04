@@ -88,7 +88,7 @@ stage('Build Stage') {
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
                         echo -e "EasyBuild environment variables:"
-                        echo 'export EASYBUILD_PREFIX=$params.eb_prefix'
+                        echo 'export EASYBUILD_PREFIX=$params.eb_prefix/$machineLabel'
                         echo 'export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp'
                         echo 'export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources'
                         echo 'export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG'
