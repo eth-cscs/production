@@ -42,7 +42,7 @@ stage('Machine Selection') {
  Build Stage: configures parallel builds for the different "machinesToRun"
  - starts a loop over all systems in "machineConfigurations"
   - if the machine has multiple architectures, starts a sub-loop over architectures
-  - the user parameter "eb_prepend_path" is pre-prended to EASYBUILD_PREFIX
+  - the user parameter "eb_prefix" is the environment variable EASYBUILD_PREFIX
   - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
   - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
@@ -50,18 +50,24 @@ def builds = [:]
 stage('Build Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
-        def machineName = machine.name
         def architectures = system.architectures
-        for (arch in architectures) {
-            def machineLabel = arch == "" ? machineName : "$machineName-$arch"
-            println("Building $machineLabel: machine name is $machineName, architecture is $arch")
+        def machineName = machine.name
+        for (architecture in architectures) {
+            def machineLabel = architecture == "" ?
+               machineName : 
+               "$machineName-$architecture"
+            println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
+
             builds[machineLabel] = {
-                println("Building $machineLabel: machine name is $machineName, architecture is $arch")
+                println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
+
                 node(machineName) {
-                    println("Building $machineLabel: machine name is $machineName, architecture is $arch")
+                    println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
                     checkout scm
                     if (machine.unusePath != '') {
-                        unusePath = arch == '' ?  "$machine.unusePath" : "$machine.unusePath".replace('ARCH', arch)
+                        def unusePath = architecture == '' ?  
+                            "$machine.unusePath" : 
+                            "$machine.unusePath".replace('ARCH', architecture)
                         println("The unuse path is: $unusePath")
                     }
                     else {
@@ -70,23 +76,23 @@ stage('Build Stage') {
                     /* Remove "--installpath" option and Matlab */
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
-                    def loadeasybuild = arch == "" ?
+                    def loadeasybuild = architecture == "" ?
                         "module load EasyBuild-custom/cscs" :
-                        "module load daint-$arch EasyBuild-custom/cscs"
+                        "module load daint-$architecture EasyBuild-custom/cscs"
 
 //                    def switcheasybuild = 
 //                        "module switch EasyBuild EasyBuild/$eb_version"
 
-                    def command = arch == "" ? 
+                    def command = architecture == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
-                        "srun -u -C $arch -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
                         echo -e "Define EasyBuild environment variables:"
-                        echo 'export EASYBUILD_PREFIX=$params.eb_prepend_path/$machineLabel'
+                        echo 'export EASYBUILD_PREFIX=$params.eb_prefix'
                         echo 'export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp'
                         echo 'export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources'
                         echo 'export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG'
-                        export EASYBUILD_PREFIX="$params.eb_prepend_path/$machineLabel"
+                        export EASYBUILD_PREFIX="$params.eb_prefix"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
