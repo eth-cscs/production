@@ -16,12 +16,14 @@
 # VTK_OPENGL_HAS_EGL
 # EGL_INCLUDE_DIR
 # EGL_LIBRARY
+import os
 
 easyblock = 'CMakeMake'
 
 name = 'VTK'
 local_vtk_version = '8.2.0'
 version = '%s-EGL' % local_vtk_version
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://www.vtk.org'
 description = """The Visualization Toolkit (VTK) is an open-source, freely
@@ -47,15 +49,8 @@ separate_build_dir = True
 
 maxparallel = 16
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-local_pysuff = '-python%s' % local_py_maj_ver
-
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE)
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE)
 ]
 
 builddependencies = [ ('CMake', '3.14.1','', True), ]
@@ -71,19 +66,23 @@ configopts += "-DCMAKE_CXX_COMPILER:PATH=`which CC` "
 #
 configopts += "-DVTK_USE_X=OFF -DVTK_OPENGL_HAS_EGL:BOOL=ON "
 configopts += "-DEGL_INCLUDE_DIR:PATH=/users/jfavre/Projects/EGL/code-samples/posts/egl_OpenGl_without_Xserver "
-configopts += "-DEGL_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libEGL.so "
-configopts += "-DEGL_opengl_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libOpenGL.so "
 
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % local_pyshortver]}
-# a long discussion with Victor, Matthias and Rafael lead to the following hard-wired variable.
-# should the cray-python module be fixed?
+if os.path.isfile('/opt/cray/nvidia/default/lib64/libEGL.so'):
+    configopts += "-DEGL_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libEGL.so "
+    configopts += "-DEGL_opengl_LIBRARY:FILEPATH=/opt/cray/nvidia/default/lib64/libOpenGL.so "
+else:  # DOM
+    configopts += '-DEGL_LIBRARY:FILEPATH=/usr/lib64/libEGL.so '
+    configopts += '-DEGL_opengl_LIBRARY:FILEPATH=/usr/lib64/libOpenGL.so '
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
 modtclfooter = """
-prepend-path LD_LIBRARY_PATH "/opt/python/3.6.5.7/lib"
+prepend-path LD_LIBRARY_PATH "/opt/python/%(pyver)s/lib"
 """
 
 sanity_check_paths = {
     'files': ['bin/vtkpython'],
-    'dirs': ['lib/python%s/site-packages/' % local_pyshortver, 'include/vtk-%(version_major_minor)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/', 'include/vtk-%(version_major_minor)s'],
 }
 
 sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
