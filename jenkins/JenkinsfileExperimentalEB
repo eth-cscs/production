@@ -97,12 +97,9 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
 
-                        echo -e "Running command: \n$loadeasybuild"
                         $loadeasybuild
-
-                        echo -e "Running command: \n$switcheasybuild"
                         $switcheasybuild
-
+                        eb --version
                         eb --show-config
 
                         echo -e "Running command: \n$command"
