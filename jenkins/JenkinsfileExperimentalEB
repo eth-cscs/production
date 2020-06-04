@@ -68,7 +68,7 @@ stage('Build Stage') {
                             "$machine.unusePath" : 
                             "$machine.unusePath".replace('ARCH', architecture)
                     }
-                    /* remove "--installpath" option and Matlab */
+                    /* remove "--installpath" and MATLAB from file $machineLabel */
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = architecture == "" ?
@@ -81,6 +81,7 @@ stage('Build Stage') {
                     def command = architecture == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
+
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
