@@ -52,15 +52,14 @@ stage('Build Stage') {
         def machine = system.machine
         def architectures = system.architectures
         def machineName = machine.name
-        for (architecture in architectures) {
+        for (item in architectures) {
+            def architecture = item
             def machineLabel = architecture == "" ?
                machineName : 
                "$machineName-$architecture"
             println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
-
             builds["$machineLabel"] = {
                 println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
-
                 node(machineName) {
                     println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
                     checkout scm
