@@ -40,7 +40,7 @@ stage('Machine Selection') {
 
 /* 
  Build Stage: configures parallel builds for the different "machinesToRun"
- - starts a loop over all systems in "machineConfigurations"
+ Loop over all systems in "machineConfigurations":
   - if the machine has multiple architectures, starts a sub-loop over architectures
   - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
   - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
@@ -53,26 +53,22 @@ stage('Build Stage') {
         def architectures = system.architectures
         def machineName = machine.name
         for (item in architectures) {
+            /* define architecture and machineLabel 
+               to use them in parallel builds */
             def architecture = item
             def machineLabel = architecture == "" ?
                machineName : 
                "$machineName-$architecture"
-            println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
             builds["$machineLabel"] = {
-                println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
                 node(machineName) {
-                    println("Building $machineLabel: machine name is $machineName, architecture is $architecture")
                     checkout scm
+                    /* define unusePath */
                     if (machine.unusePath != '') {
                         def unusePath = architecture == '' ?  
                             "$machine.unusePath" : 
                             "$machine.unusePath".replace('ARCH', architecture)
-                        println("The unuse path is: $unusePath")
                     }
-                    else {
-                        println("The unuse path is empty")
-                    }
-                    /* Remove "--installpath" option and Matlab */
+                    /* remove "--installpath" option and Matlab */
                     sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = architecture == "" ?
@@ -86,11 +82,6 @@ stage('Build Stage') {
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
                     sh("""#!/bin/bash -l
-                        echo -e "EasyBuild environment variables:"
-                        echo 'export EASYBUILD_PREFIX=$params.eb_prefix/$machineLabel'
-                        echo 'export EASYBUILD_TMPDIR=\$EASYBUILD_PREFIX/tmp'
-                        echo 'export EASYBUILD_SOURCEPATH=\$EASYBUILD_PREFIX/sources'
-                        echo 'export EASYBUILD_BUILDPATH=/tmp/$env.BUILD_TAG'
                         export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
@@ -101,7 +92,7 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
-                        echo -e "Running command: \n$command"
+                        echo -e "\nRunning command: \n$command"
                         status=0
                         $command
 
