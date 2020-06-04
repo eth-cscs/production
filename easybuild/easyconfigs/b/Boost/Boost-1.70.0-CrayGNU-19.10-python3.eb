@@ -40,7 +40,8 @@ patches = ['Boost-1.70.0-python%(pymajver)s.patch']
 
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {
-    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
+    'files': ['lib/libboost_system.so',
+              'lib/libboost_mpi.so',
               'lib/libboost_python%%(pymajver)s%s.so' % _pyminver],
     'dirs': ['include/boost']
 }
