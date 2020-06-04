@@ -80,8 +80,8 @@ stage('Build Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load daint-$architecture EasyBuild-custom/cscs"
 
-//                    def switcheasybuild = 
-//                        "module switch EasyBuild EasyBuild/$eb_version"
+                    def switcheasybuild = 
+                        "module switch EasyBuild EasyBuild/$eb_version"
 
                     def command = architecture == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
