@@ -10,7 +10,7 @@ ImageMagick-6.7.6-10.eb                                --set-default-module
 ImageMagick-7.0.8-53.eb
 NCL-6.2.1.eb                                           --set-default-module
 NCL-6.6.2.eb
-Python-2.7.16.eb                                       --disable-rpath 
+Python-2.7.16.eb                                       --disable-rpath
 Python-3.7.4.eb
 Python-3.7.4-r20.02.eb
 rstudio-1.1.463.eb                                     --set-default-module
@@ -18,7 +18,6 @@ UCX-1.6.1-GCC-8.3.0-cuda-10.1.eb                       --hidden
 vampir-9.6.0.eb
 Vim-8.1.eb
 nmon-16g.eb
-reframe-2.18.eb
 Boost-1.70.0-foss-2019b-python2.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/gnu/19.2-nocuda/easybuild
 Boost-1.70.0-foss-2019b-python3.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/gnu/19.2-nocuda/easybuild
 CDO-1.9.7.1-foss-2019b.eb                              --installpath=/apps/arolla/UES/jenkins/RH7.7/gnu/19.2-nocuda/easybuild
