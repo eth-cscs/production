@@ -25,7 +25,7 @@ dependencies = [
     ('ELPA', '2019.11.001'),
     ('GSL', '2.5'),
     ('libxc', '4.3.4'),
-    ('magma', '2.5.2', '-cuda-%s' % local_cudaversion),
+    ('magma', '2.5.3', '-cuda-%s' % local_cudaversion),
     ('SpFFT', '0.9.10', '-cuda-%s' % local_cudaversion),
     ('spglib','1.14.1')
 ]
