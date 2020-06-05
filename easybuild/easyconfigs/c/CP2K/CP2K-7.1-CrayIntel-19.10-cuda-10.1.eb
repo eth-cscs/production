@@ -5,7 +5,6 @@ name = 'CP2K'
 version = '7.1'
 local_release = '%s.0' % version
 local_cudaversion = '10.1'
-local_siriusversion = '6.5.2'
 versionsuffix = '-cuda-%s' % local_cudaversion
 
 homepage = 'http://www.cp2k.org/'
@@ -40,8 +39,7 @@ builddependencies = [
 dependencies = [
     ('ELPA', '2019.11.001'),
     ('Libint-CP2K', '2.6.0'),
-    ('libxc', '4.3.4'),
-    ('SIRIUS', '6.5.3', '-cuda-%s' % local_cudaversion)
+    ('libxc', '4.3.4')
 ]
 
 # unload cray-libsci to link Intel MKL
