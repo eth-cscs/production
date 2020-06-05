@@ -15,11 +15,9 @@ toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 
 source_urls = ['https://github.com/eth-cscs/SpFFT/archive']
 sources = ['v%(version)s.tar.gz']
 
-builddependencies = [('CMake', '3.14.5', '', True)]
-
-dependencies = [
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
     ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' % local_cudaversion , EXTERNAL_MODULE),
-    ('intel/19.0.1.144', EXTERNAL_MODULE),
 ]
 
 separate_build_dir = True
