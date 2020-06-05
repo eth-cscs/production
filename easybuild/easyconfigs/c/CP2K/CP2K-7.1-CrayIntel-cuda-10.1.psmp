@@ -1,5 +1,6 @@
 # contributed by Luca Marsella (CSCS)
-# modules: Bison CrayIntel cudatoolkit ELPA flex Libint libxc
+# modules: Bison cray-hdf5 CrayIntel cudatoolkit ELPA 
+#          flex GSL Libint libxc SIRIUS SpFFT spglib
 GPUVER    = P100
 NVCC      = nvcc
 CC        = cc
