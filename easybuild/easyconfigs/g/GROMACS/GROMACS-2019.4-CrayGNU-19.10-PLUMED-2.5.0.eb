@@ -11,7 +11,8 @@
 #
 name = 'GROMACS'
 version = '2019.4'
-versionsuffix = '-PLUMED-2.5.0'
+local_plumedversion = '2.5.4'
+versionsuffix = '-PLUMED-%s' % local_plumedversion
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
