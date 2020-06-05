@@ -31,7 +31,7 @@ builddependencies = [
 ]
 dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('PLUMED', '2.5.4'),
+    ('PLUMED', '%s' % local_plumedversion),
 ]
 
 configopts = (
