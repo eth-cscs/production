@@ -92,66 +92,73 @@ def main():
         if args['debug']:
             print('Metadata:\n', modules)
 
+    successful = 0
     for filename in args['filenames']:
-        print(f"Processing EasyBuild config {filename} ...")
-        if args['debug']:
-            print("The new config will be placed in original directory.")
+        try:
+            print(f"Processing EasyBuild config {filename} ...")
+            if args['debug']:
+                print("The new config will be placed in original directory.")
 
-        with open(filename, "r") as originalconfig:
-            ec = originalconfig.read()  # contains newlines.
-        if args['debug']:
-            print("---- The original config was:\n", ec)
+            with open(filename, "r") as originalconfig:
+                ec = originalconfig.read()  # contains newlines.
+            if args['debug']:
+                print("---- The original config was:\n", ec)
 
-        toolchain, version = parse_tc(ec, args['debug'])
+            toolchain, version = parse_tc(ec, args['debug'])
 
-        if args['toolchain_prefix'] and not toolchain.startswith(args['toolchain_prefix']):
-            sys.exit(f"Invalid toolchain prefix in {filename}")
+            if args['toolchain_prefix'] and not toolchain.startswith(args['toolchain_prefix']):
+                raise RuntimeError(f"Invalid toolchain prefix in {filename}")
 
-        newecfilename = filename.replace(f"{toolchain}-{version}",
-                                         f"{toolchain}-{args['version']}")
-        if args['debug']:
-            print("New config file name will be: ", newecfilename)
+            newecfilename = filename.replace(f"{toolchain}-{version}",
+                                            f"{toolchain}-{args['version']}")
+            if args['debug']:
+                print("New config file name will be: ", newecfilename)
 
-        newec = re.sub(tc_pattern,
-                       f"toolchain = {{'name': '{toolchain}', 'version': '{args['version']}'}}",
-                       ec)
+            newec = re.sub(tc_pattern,
+                        f"toolchain = {{'name': '{toolchain}', 'version': '{args['version']}'}}",
+                        ec)
 
-        if args['metadata']:
-            # find all external dependencies
-            deps = re.findall(dep_pattern, newec)
-            if deps is not None:
-                if args['debug']:
-                    print("External Modules:\n", deps)
+            if args['metadata']:
+                # find all external dependencies
+                deps = re.findall(dep_pattern, newec)
+                if deps is not None:
+                    if args['debug']:
+                        print("External Modules:\n", deps)
 
-                for ws, dep in deps:
-                    mod = dep.split('/')[0]
-                    if mod in modules.keys():
-                        ver = modules[mod]
-                        if ver is not None:
-                            assert len(dep.split('/')) > 1,  f"Undefined version in external dependency '{dep}'"
-                            depver = dep.split('/')[1]
-                            majver = depver.split('.')[0]
-                            # get latest matching version
-                            ver = ver[majver] if majver in ver.keys() else ver.values()[-1]
-                            mod = f"{mod}/{ver}"
-                        if args['debug']:
-                            print(f"Replacing '{dep}' by '{mod}'")
-                            print(dep_regex(dep))
-                        newec = re.sub(dep_regex(dep), f"{ws}('{mod}', EXTERNAL_MODULE),", newec)
+                    for ws, dep in deps:
+                        mod = dep.split('/')[0]
+                        if mod in modules.keys():
+                            ver = modules[mod]
+                            if ver is not None:
+                                assert len(dep.split('/')) > 1,  f"Error: Undefined version in external dependency '{dep}'"
+                                depver = dep.split('/')[1]
+                                majver = depver.split('.')[0]
+                                # get latest matching version
+                                ver = ver[majver] if majver in ver.keys() else ver.values()[-1]
+                                mod = f"{mod}/{ver}"
+                            if args['debug']:
+                                print(f"Replacing '{dep}' by '{mod}'")
+                                print(dep_regex(dep))
+                            newec = re.sub(dep_regex(dep), f"{ws}('{mod}', EXTERNAL_MODULE),", newec)
 
-        if args['debug']:
-            print("---- New config will be:\n", newec)
+            if args['debug']:
+                print("---- New config will be:\n", newec)
 
-        ## Check new toolchain
-        _, version = parse_tc(newec, args['debug'])
-        if version != args['version']:
-            sys.exit("Failed to replace toolchain version.")
+            ## Check new toolchain
+            _, version = parse_tc(newec, args['debug'])
+            if version != args['version']:
+                raise RuntimeError("Error: Failed to replace toolchain version.")
 
-        with open(newecfilename, "w") as newconfig:
-            newconfig.write(newec)  # contains newlines.
+            with open(newecfilename, "w") as newconfig:
+                newconfig.write(newec)  # contains newlines.
 
-        print("Finished writing new config:", newecfilename)
+            print("Finished writing new config:", newecfilename)
+            successful += 1
+        except Exception as ex:
+            print(ex)
 
+    print(f"Upgrade succeeded for {successful} out of {len(args['filenames'])} files")
+    return len(args['filenames']) - successful
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
