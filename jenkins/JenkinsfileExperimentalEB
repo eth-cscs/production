@@ -78,7 +78,7 @@ stage('Build Stage') {
                     def switcheasybuild = 
                         "module switch EasyBuild EasyBuild/$eb_version"
 
-                    def toolchains = ['CrayGNU', 'CrayIntel', 'CrayPGI']  // , 'CrayCCE']
+                    def toolchains = ['CrayGNU', 'CrayIntel', 'CrayPGI', 'CrayCCE']
                     def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
                     sh "echo $current_tc"
 
@@ -110,14 +110,8 @@ stage('Build Stage') {
 
                         # build cdt for target version
                         echo -e "\nRunning command: \n$command"
-                        $command
-
-                        # build all new recipes
-                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs eb -r
-
-                        # TODO: remove to exit on error
                         status=0
-                        ls \$EASYBUILD_PREFIX/software/Cray*/${params.cdt_version}/easybuild/reprod/*.eb || true
+                        $command
 
                         status=\$[status+\$?]
                         exit \$status""")
@@ -126,9 +120,27 @@ stage('Build Stage') {
                     for (toolchain in toolchains) {
                         def source = "$params.eb_prefix/$machineLabel/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
                         def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain/${toolchain}-${params.cdt_version}.eb"
-                        sh "cp ${source} ${target}"
+                        sh "cp ${source} ${target} || true" //TODO
                     }
-                    sh "git -C $WORKSPACE status"
+
+                    sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+
+                        $loadeasybuild
+                        $switcheasybuild
+                        eb --version
+                        status=0
+
+                        # build all new recipes
+                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -r
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
+
+                        status=\$[status+\$?]
+                        exit \$status""")
                 }
             }
         }
