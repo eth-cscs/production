@@ -12,7 +12,6 @@ NCL-6.2.1.eb                                           --set-default-module
 NCL-6.6.2.eb
 Python-2.7.16.eb                                       --disable-rpath 
 Python-3.7.4.eb
-Python-3.7.4-r20.02.eb
 rstudio-1.1.463.eb                                     --set-default-module
 UCX-1.6.1-GCC-8.3.0-cuda-10.1.eb                       --hidden
 UDUNITS-2.2.26.eb
