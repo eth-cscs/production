@@ -70,18 +70,11 @@ stage('Build Stage') {
                     }
                     // /* remove "--installpath" and MATLAB from file $machineLabel */
                     // sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
-                    sh """awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel-$architecture | \
-                          xargs -IF eb F -Dr 1> /tmp/$env.BUILD_TAG/deps.out
 
-                          cat /tmp/$env.BUILD_TAG/deps.out | \
-                          grep ' \\* \\[.\\] \\$CFGS' | sed 's@.*\\$CFGS/@@g' | \
-                          awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | \
-                          sort | uniq | xargs -IF find $WORKSPACE -name F 1> /tmp/$env.BUILD_TAG/deps_clean.out
-
-                          cat /tmp/$env.BUILD_TAG/deps_clean.out
-                          cat /tmp/$env.BUILD_TAG/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py \
-                                --metadata easybuild/cray_external_modules_metadata-$params.cdt_version.cfg \
-                                --toolchain-prefix Cray --version $params.cdt_version --filenames"""
+                    // for (toolchain in ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']) {
+                    //     def path = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
+                    //     sh "cp $path/$toolchain-$params.cdt_current.eb $path/$toolchain-$params.cdt_version.eb"
+                    // }
 
                     def loadeasybuild = architecture == "" ?
                         "module load EasyBuild-custom/cscs" :
@@ -104,6 +97,13 @@ stage('Build Stage') {
                         $switcheasybuild
                         eb --version
                         eb --show-config
+
+                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
+                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] \$CFGS' | sed 's@.*\$CFGS/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+                        cat $WORKSPACE/deps_clean.out
+                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
 
                         echo -e "\nRunning command: \n$command"
                         status=0
