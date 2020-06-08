@@ -196,7 +196,7 @@ exts_list = [
         }),
     
 #code formatter
-    ('jupyterlab_code_formatter', '1.3.1'),
+    ('jupyterlab_code_formatter', '1.1.0'),
     
     
 # kernels
