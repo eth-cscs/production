@@ -128,6 +128,7 @@ def main():
                     if mod in modules.keys():
                         ver = modules[mod]
                         if ver is not None:
+                            assert len(dep.split('/')) > 1,  f"Undefined version in external dependency '{dep}'"
                             depver = dep.split('/')[1]
                             majver = depver.split('.')[0]
                             # get latest matching version
