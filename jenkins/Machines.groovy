@@ -36,6 +36,6 @@ def TSAtds = [name: 'TSAtds',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/r20.06/generic/easybuild']
 
 return [daint, dom, kesch, tsa, TSAtds]
