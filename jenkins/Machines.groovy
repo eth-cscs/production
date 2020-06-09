@@ -24,7 +24,7 @@ def kesch = [name: 'kesch',
 
 def tsa = [name: 'tsa',
            archs: [],
-           buildPath: '/tmp/$USER/easybuild/build',
+           buildPath: '/tmp/$USER/easybuild/tsa',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
