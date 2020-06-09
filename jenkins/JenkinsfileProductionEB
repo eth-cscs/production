@@ -80,7 +80,7 @@ stage('Build Stage') {
                                  """
                 }
 
-                withEnv(["EASYBUILD_BUILDPATH=$buildPathExpanded",
+                withEnv(["EASYBUILD_BUILDPATH=$buildPathExpanded/$env.BUILD_ID",
                          "EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                          "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                     sh("""$command
