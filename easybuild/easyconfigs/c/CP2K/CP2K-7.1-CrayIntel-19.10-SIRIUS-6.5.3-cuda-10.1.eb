@@ -4,8 +4,9 @@ easyblock = 'MakeCp'
 name = 'CP2K'
 version = '7.1'
 local_release = '%s.0' % version
+local_siriusversion = '6.5.3'
 local_cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % local_cudaversion
+versionsuffix = '-SIRIUS-%s-cuda-%s' % (local_siriusversion, local_cudaversion)
 
 homepage = 'http://www.cp2k.org/'
 description = """
@@ -39,7 +40,8 @@ builddependencies = [
 dependencies = [
     ('ELPA', '2019.11.001'),
     ('Libint-CP2K', '2.6.0'),
-    ('libxc', '4.3.4')
+    ('libxc', '4.3.4'),
+    ('SIRIUS', '%s' % local_siriusversion, '-cuda-%s' % local_cudaversion)
 ]
 
 # unload cray-libsci to link Intel MKL
