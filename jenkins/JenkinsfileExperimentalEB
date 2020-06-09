@@ -68,8 +68,8 @@ stage('Build Stage') {
                             "$machine.unusePath" : 
                             "$machine.unusePath".replace('ARCH', architecture)
                     }
-                    /* remove "--installpath" and MATLAB from file $machineLabel */
-                    sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
+                    // /* remove "--installpath" and MATLAB from file $machineLabel */
+                    // sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
 
                     def loadeasybuild = architecture == "" ?
                         "module load EasyBuild-custom/cscs" :
@@ -78,9 +78,13 @@ stage('Build Stage') {
                     def switcheasybuild = 
                         "module switch EasyBuild EasyBuild/$eb_version"
 
+                    def toolchains = ['CrayGNU', 'CrayIntel', 'CrayPGI', 'CrayCCE']
+                    def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
+                    sh "echo $current_tc"
+
                     def command = architecture == "" ? 
                         "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb CrayGNU-19.10.eb CrayIntel-19.10.eb CrayPGI-19.10.eb --hidden --try-software-version=$params.cdt_version"
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb -f $current_tc --hidden --try-toolchain-version=${params.cdt_version}"
 
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
@@ -93,9 +97,47 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
+                        # find production dependencies:
+                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
+                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] \$CFGS' | sed 's@.*\$CFGS/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+                        cat $WORKSPACE/deps_clean.out
+                        status=0
+
+                        # upgrade to new cdt_version
+                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
+
+                        # build cdt for target version
                         echo -e "\nRunning command: \n$command"
                         status=0
                         $command
+
+                        status=\$[status+\$?]
+                        exit \$status""")
+
+                    /* copy generated toolchains to workspace */
+                    for (toolchain in toolchains) {
+                        def source = "$params.eb_prefix/$machineLabel/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
+                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain/${toolchain}-${params.cdt_version}.eb"
+                        sh "cp ${source} ${target} || true" //TODO
+                    }
+
+                    sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+
+                        $loadeasybuild
+                        $switcheasybuild
+                        eb --version
+                        status=0
+
+                        # build all new recipes
+                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -r
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
 
                         status=\$[status+\$?]
                         exit \$status""")
