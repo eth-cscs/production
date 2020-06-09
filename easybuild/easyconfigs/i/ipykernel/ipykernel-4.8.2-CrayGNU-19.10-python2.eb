@@ -24,45 +24,16 @@ dependencies = [
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
 
-
 exts_list = [
-    ('tornado', '5.0.2', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/t/tornado/'
-            ],
-        }),
+    ('tornado', '5.0.2'),
     ('pyzmq', '17.0.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
             'modulename': 'zmq',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/pyzmq/'
-            ],
         }),
-    ('jupyter_core', '4.4.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/j/jupyter-core/'
-            ],
-        }),
+    ('jupyter_core', '4.4.0'),
     ('jupyter_client', '5.2.3', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
             'use_pip': True,
-            'source_urls': [
-                'https://pypi.python.org/packages/source/j/jupyter-client/'
-            ],
         }),
-    ('ipykernel', '4.8.2', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/i/ipykernel/'
-            ],
-        }),
+    ('ipykernel', '4.8.2'),
 ]
 
 # specify that Bundle easyblock should run a full sanity check, rather than

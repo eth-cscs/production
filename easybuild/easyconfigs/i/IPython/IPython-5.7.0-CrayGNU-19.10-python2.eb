@@ -20,101 +20,26 @@ dependencies = [
     ('PyExtensions', 'python%(pymajver)s'),
 ]
 
-
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
 
-
 exts_list = [
-    ('decorator', '4.3.0', {
-        'req_py_majver': '2',
-        'req_py_minver': '7',
-        'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
-    }),
-    ('wcwidth', '0.1.7', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/w/wcwidth/'
-            ],
-        }),
-    ('prompt_toolkit', '1.0.15', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/prompt_toolkit/'
-            ],
-        }),
-    ('pickleshare', '0.7.4', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/pickleshare/'
-            ],
-        }),
-    ('parso', '0.2.1', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': ['https://pypi.python.org/packages/source/p/parso/'],
-        }),
-    ('jedi', '0.12.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': ['https://pypi.python.org/packages/source/j/jedi/'],
-        }),
-    ('ptyprocess', '0.6.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/ptyprocess/'
-            ],
-        }),
-    ('pexpect', '4.6.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/pexpect/'
-            ],
-        }),
-    ('ipython_genutils', '0.2.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/i/ipython_genutils/'
-            ],
-        }),
-    ('traitlets', '4.3.2', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/t/traitlets/'
-            ],
-        }),
-    ('backcall', '0.1.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/b/backcall/'
-            ],
-        }),
+    ('decorator', '4.3.0'),
+    ('wcwidth', '0.1.7'),
+    ('prompt_toolkit', '1.0.15'),
+    ('pickleshare', '0.7.4'),
+    ('parso', '0.2.1'),
+    ('jedi', '0.12.0'),
+    ('ptyprocess', '0.6.0'),
+    ('pexpect', '4.6.0'),
+    ('ipython_genutils', '0.2.0'),
+    ('traitlets', '4.3.2'),
+    ('backcall', '0.1.0'),
     ('simplegeneric', '0.8.1', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/s/simplegeneric/'
-            ],
             'source_tmpl': 'simplegeneric-%(version)s.zip',
         }),
-    ('Pygments', '2.2.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/Pygments/'
-            ],
-        }),
-   ('enum34', '1.1.6', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
+    ('Pygments', '2.2.0'),
+    ('enum34', '1.1.6', {
             'source_urls': [
                 'https://pypi.python.org/packages/bf/3e/31d502c2530'           \
                 '2814a7c2f1d3959d2a3b3f78e509002ba91aea64993936876/'
@@ -122,12 +47,7 @@ exts_list = [
         'modulename': 'enum',
     }),
     ('ipython', version, {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
             'modulename': 'IPython',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/i/ipython/'
-            ],
             'patches': ['ipython-5.7.0-jupyter.patch'],
         }),
 ]
