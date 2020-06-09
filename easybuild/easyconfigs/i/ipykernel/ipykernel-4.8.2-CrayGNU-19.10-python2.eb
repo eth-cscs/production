@@ -23,6 +23,9 @@ dependencies = [
 
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+}
 
 exts_list = [
     ('tornado', '5.0.2'),
@@ -35,10 +38,6 @@ exts_list = [
         }),
     ('ipykernel', '4.8.2'),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than
-# just trying to load the module
-local_full_sanity_check = True
 
 modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 

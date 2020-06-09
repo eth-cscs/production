@@ -22,6 +22,9 @@ dependencies = [
 
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+}
 
 exts_list = [
     ('decorator', '4.3.0'),
@@ -51,10 +54,6 @@ exts_list = [
             'patches': ['ipython-5.7.0-jupyter.patch'],
         }),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than
-# just trying to load the module
-local_full_sanity_check = True
 
 modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 
