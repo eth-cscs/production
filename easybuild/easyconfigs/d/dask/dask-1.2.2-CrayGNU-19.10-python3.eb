@@ -21,7 +21,7 @@ toolchainopts = {'verbose': False}
 exts_defaultclass = 'PythonPackage'
 
 dependencies = [
-    ('PyExtensions', '%s' % pyver),
+    ('PyExtensions', '-python%(pymajver)s'),
 ]
 
 

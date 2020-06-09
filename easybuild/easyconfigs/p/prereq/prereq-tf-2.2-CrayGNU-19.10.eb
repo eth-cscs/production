@@ -15,7 +15,7 @@ dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('numpy', '1.17.2'),
     ('h5py', '2.8.0', '-python%(pymajver)s-serial'),
-    ('PyExtensions', '%(pyver)s'),
+    ('PyExtensions', '-python%(pymajver)s'),
 ]
 
 exts_default_options = {

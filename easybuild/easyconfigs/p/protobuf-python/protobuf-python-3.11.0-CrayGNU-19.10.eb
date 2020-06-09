@@ -13,7 +13,7 @@ sources = [SOURCE_TAR_GZ]
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('PyExtensions', '%(pyver)s'),
+    ('PyExtensions', '-python%(pymajver)s'),
     ('protobuf-core', version)
 ]
 

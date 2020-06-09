@@ -19,7 +19,7 @@ source_urls = [BITBUCKET_DOWNLOADS]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '3.6.5.7'),
+    ('PyExtensions', '-python%(pymajver)s'),
 ]
 
 # force rebuilding everything, including patched files

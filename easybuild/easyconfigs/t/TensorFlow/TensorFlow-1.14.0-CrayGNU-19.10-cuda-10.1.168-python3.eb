@@ -35,7 +35,7 @@ dependencies = [
     ('NCCL', '2.4.7', '-cuda-%s' % cudaversion, True),
     ('protobuf', '3.6.0', ver_suffix_py),
     ('dask', '1.0.0', '-python%s' % py_maj_ver),
-    ('PyExtensionsDS', pyver),
+    ('PyExtensionsDS', '-python%s' % py_maj_ver),
     ('CUDA', cudaversion, '', True),
 ]
 

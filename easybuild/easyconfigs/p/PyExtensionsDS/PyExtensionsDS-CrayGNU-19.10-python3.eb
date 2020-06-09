@@ -14,7 +14,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('h5py', '2.8.0', '-python%(pymajver)s-serial'),
-    ('PyExtensions', '%(pyver)s'),
+    ('PyExtensions', '-python%(pymajver)s'),
 ]
 
 exts_default_options = {
