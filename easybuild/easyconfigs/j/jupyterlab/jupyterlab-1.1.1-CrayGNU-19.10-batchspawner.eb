@@ -191,11 +191,17 @@ exts_list = [
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
-        ('ipyparaview', 'cf1c6f4', {
+    ('ipyparaview', 'cf1c6f4', {
         'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
         }),
     
-#code formatter
+#jupyterlab code formatter, requires a formatter e.g., black
+    ('pathspec', '0.8.0'),
+    ('typed_ast', '1.4.1'),
+    ('appdirs', '1.4.4'),
+    ('regex', '2020.6.8'),
+    ('toml', '0.10.1'),
+    ('black', '19.10b0'),
     ('jupyterlab_code_formatter', '1.1.0'),
     
     
