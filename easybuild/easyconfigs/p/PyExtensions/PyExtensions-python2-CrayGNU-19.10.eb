@@ -2,7 +2,7 @@
 easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
-version = '%(pyver)s'
+version = 'python%(pymajver)s'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""

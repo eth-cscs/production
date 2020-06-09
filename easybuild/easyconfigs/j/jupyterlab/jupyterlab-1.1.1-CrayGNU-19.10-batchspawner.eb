@@ -16,7 +16,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', '-python%(pymajver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),

@@ -17,7 +17,7 @@ sources = ['%(version)s.tar.gz']
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('PyExtensions', '-python%(pymajver)s')
+    ('PyExtensions', 'python%(pymajver)s')
 ] # Cython
 
 sanity_check_paths = {

@@ -15,7 +15,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 source_urls = ['https://github.com/LLNL/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
 dependencies = [
-    ('PyExtensions', '%s.%s' % (local_pyver, local_py_rev_ver)),
+    ('PyExtensions', 'python%s' % req_py_majver),
 ]
 
 sanity_check_paths = {

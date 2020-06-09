@@ -28,7 +28,7 @@ dependencies = [
 
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('PyExtensions', '-python%(pymajver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 exts_defaultclass = 'PythonPackage'

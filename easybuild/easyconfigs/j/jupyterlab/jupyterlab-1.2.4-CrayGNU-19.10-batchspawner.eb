@@ -28,7 +28,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', _pyver),
+    ('PyExtensions', 'python%s' % _py_maj_ver),
     ('IPython', '7.7.0', '-python%s' % _py_maj_ver),
     ('JuliaExtensions', _jlver),
     ('configurable-http-proxy', '3.1.1'),

@@ -18,7 +18,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('numpy', '1.17.2'),
     ('h5py', '2.8.0', '-python%s-serial' % py_maj_ver),
-    ('PyExtensions', '-python%(pymajver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 # bundle of Python packages

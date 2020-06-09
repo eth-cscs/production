@@ -20,7 +20,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', '%s' % local_pyver),
+    ('PyExtensions', 'python%s' % local_py_maj_ver),
     ('IPython', '7.7.0', '-python%s' % local_py_maj_ver),
     ('configurable-http-proxy', '3.1.1'),
     ('dask', '2.2.0', '-python%s' % local_py_maj_ver),

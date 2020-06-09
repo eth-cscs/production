@@ -22,7 +22,7 @@ source_urls = ['https://github.com/google/protobuf/archive/v%(version)s']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('PyExtensions', 'python%s' % local_py_maj_ver),
     ('protobuf-core', version)
 ]
 

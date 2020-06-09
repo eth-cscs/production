@@ -24,7 +24,7 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (local_pyver, local_py_rev_ver)),
+    ('PyExtensions', 'python%s' % req_py_majver),
     ('cray-hdf5', EXTERNAL_MODULE),
 ]
 

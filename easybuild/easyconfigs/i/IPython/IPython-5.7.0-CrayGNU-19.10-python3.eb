@@ -22,7 +22,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
+    ('PyExtensions', 'python%s' % local_py_maj_ver),
 ]
 
 
