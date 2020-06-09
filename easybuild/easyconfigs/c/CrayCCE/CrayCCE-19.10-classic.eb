@@ -6,7 +6,7 @@ versionsuffix = '-classic'
 
 homepage = 'https://pubs.cray.com/discover'
 description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
-(PE release: %s).\n""" %version
+(PE release: %s) and loading the Cray Classic compiler CCE%s.\n""" % (version, versionsuffix)
 
 toolchain = {'name': 'system', 'version': 'system'}
 
