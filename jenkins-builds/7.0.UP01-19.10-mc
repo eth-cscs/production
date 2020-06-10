@@ -56,7 +56,7 @@
  ParaView-5.8.0-OSMesa-CrayGNU-19.10.eb
  PLUMED-2.5.1-CrayGNU-19.10.eb                      --set-default-module
  PLUMED-2.5.1-CrayIntel-19.10.eb                    --set-default-module
- PyExtensions-2.7.15.6-CrayGNU-19.10.eb
+ PyExtensions-python2-CrayGNU-19.10.eb
  PyExtensions-3.6.5.6-CrayGNU-19.10.eb
  Python-bare-3.7.3.eb                               --hidden
  QuantumESPRESSO-6.4.1-CrayIntel-19.10.eb           --set-default-module
