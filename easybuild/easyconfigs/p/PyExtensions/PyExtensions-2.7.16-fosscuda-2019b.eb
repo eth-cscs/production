@@ -13,7 +13,7 @@ toolchain = {'name': 'fosscuda', 'version': '2019b'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('Python', '%(version)s', '', True),
+    ('Python', '2.7.16', '', True),
 ]
 
 exts_default_options = {
