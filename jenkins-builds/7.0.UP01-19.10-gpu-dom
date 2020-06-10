@@ -59,7 +59,7 @@
  pycuda-2018.1.1-CrayGNU-19.10-python2-cuda-10.1.eb
  pycuda-2018.1.1-CrayGNU-19.10-python3-cuda-10.1.eb --set-default-module
  PyExtensions-python2-CrayGNU-19.10.eb
- PyExtensions-3.6.5.6-CrayGNU-19.10.eb
+ PyExtensions-python3-CrayGNU-19.10.eb
  Python-bare-3.7.3.eb                               --hidden
  QuantumESPRESSO-6.4.1-CrayIntel-19.10-cuda-10.1.eb --set-default-module
  QuantumESPRESSO-6.5a1-CrayPGI-19.10-cuda-10.1.eb
