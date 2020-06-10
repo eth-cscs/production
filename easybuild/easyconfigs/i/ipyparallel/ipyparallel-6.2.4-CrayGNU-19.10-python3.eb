@@ -3,7 +3,7 @@ easyblock = 'PythonPackage'
 
 name = 'ipyparallel'
 version = '6.2.4'
-versionsuffix = '-python%(pyshortver)s'
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://pypi.org/project/ipyparallel'
 description = """Use multiple instances of IPython in parallel, interactively."""

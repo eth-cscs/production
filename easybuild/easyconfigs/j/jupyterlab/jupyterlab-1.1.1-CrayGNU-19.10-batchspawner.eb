@@ -5,7 +5,6 @@ easyblock = 'PythonBundle'
 name = 'jupyterlab'
 version = '1.1.1'
 versionsuffix = '-batchspawner'
-_pyminver = '6'
 
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
@@ -16,16 +15,14 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', '%(pyver)s'),
-    ('IPython', '7.7.0', '-python%(pymajver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
+#    ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
-    ('dask', '2.2.0', '-python%(pymajver)s'),
+#    ('dask', '2.2.0', '-python%(pymajver)s'),
     ('graphviz', '2.40.1', '', True),
 ]
 
 exts_default_options = {
-    'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
     'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
