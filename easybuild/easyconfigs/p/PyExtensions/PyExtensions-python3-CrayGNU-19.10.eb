@@ -2,7 +2,7 @@
 easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
-version = '%(pyver)s'
+version = 'python%(pymajver)s'
 _pyminver = '6'
 
 homepage = 'https://pypi.python.org/pypi'
