@@ -36,6 +36,7 @@ exts_list = [
     ('pandas', '0.23.3'),
 ]
 
+sanity_pip_check = True
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pyshortver)s/site-packages']
