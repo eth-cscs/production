@@ -1,0 +1,27 @@
+# contributed by Victor Holanda (CSCS)
+
+easyblock = 'Tarball'
+name = 'meadTools'
+version = "2.2"
+
+homepage = 'https://www.itqb.unl.pt/labs/molecular-simulation/in-house-software'
+description = """ This is a set of software tools useful to run binding
+simulations of electrons and protons, using proton tautomers or not, based on
+Poisson-Boltzmann (PB) calculations.
+"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://www.itqb.unl.pt/labs/molecular-simulation/files']
+sources = ['%(name)s-%(version)s.tar.gz']
+
+modextrapaths = {
+    'PATH' : '',
+}
+
+sanity_check_paths = {
+    'files' : ['addHtaut', 'convert', 'getst', 'makepqr', 'makesites', 'meadT', 'nulltit', 'renumbpqr', 'selectWacc', 'statepqr', 'stmodels'],
+    'dirs'  : ['cconvert', 'st-G43a1', 'st-G43a1_Fit', 'st-G53a6', 'st-G53a6_Fit', 'st-G54a7_Fit', 'tutorial'],
+}
+
+moduleclass = 'bio'
