@@ -3,7 +3,6 @@ easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
 version = 'python%(pymajver)s'
-_pyminver = '6'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -16,9 +15,9 @@ dependencies = [
     #('libffi', '3.2.1')
 ]
 
+use_pip = True
+
 exts_default_options = {
-    'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
     'source_urls': [PYPI_SOURCE]
 }
 
