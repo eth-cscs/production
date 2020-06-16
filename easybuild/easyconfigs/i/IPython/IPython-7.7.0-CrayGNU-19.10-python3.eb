@@ -12,7 +12,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('PyExtensions', 'python%(pymajver)s'),
+#    ('PyExtensions', 'python%(pymajver)s'),
 #    ('ipyparallel', '6.2.4', versionsuffix),
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
 ]

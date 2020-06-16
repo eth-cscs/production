@@ -17,7 +17,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('PyExtensions', 'python%(pymajver)s'),
+#    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 use_pip = True
