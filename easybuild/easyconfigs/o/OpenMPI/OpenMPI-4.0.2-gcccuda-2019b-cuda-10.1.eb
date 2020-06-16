@@ -1,7 +1,7 @@
 # Modified for Tsa/Arolla by MKr - July 2019
 name = 'OpenMPI'
 version = '4.0.2'
-versionsuffix = '-cuda-10.1'
+versionsuffix = '-cuda-10.1-RH7.7'
 
 homepage = 'https://www.open-mpi.org/'
 description = """
@@ -52,11 +52,7 @@ postinstallcmds = [
 ]
 
 modtclfooter = """
-    if { [ string match *tsa-cn* $::env(HOSTNAME) ] } {
-        setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
-    } else {
-        setenv UCX_TLS rc_x,ud_x,mm,shm,cma
-    }
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
 """
 
 local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
