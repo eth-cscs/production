@@ -1,0 +1,37 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayGNU'
+version = '20.06'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-gnu module
+(PE release: %s).\n""" % version
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest
+    # (default) version
+    ('cdt/%s' % version, EXTERNAL_MODULE),  # IMPORTANT: LOAD FIRST CDT TO ENSURE THAT RIGHT DEFAULT IS LOADED!
+    ('gcc/8.3.0', EXTERNAL_MODULE),
+    ('PrgEnv-gnu', EXTERNAL_MODULE),
+#    ('craype', EXTERNAL_MODULE),
+#    ('cray-mpich', EXTERNAL_MODULE),
+#    ('cray-libsci', EXTERNAL_MODULE),
+#    ('udreg', EXTERNAL_MODULE),
+#    ('ugni', EXTERNAL_MODULE),
+#    ('pmi', EXTERNAL_MODULE),
+#    ('dmapp', EXTERNAL_MODULE),
+#    ('gni-headers', EXTERNAL_MODULE),
+#    ('xpmem', EXTERNAL_MODULE),
+#    ('job', EXTERNAL_MODULE),
+#    ('dvs', EXTERNAL_MODULE),
+#    ('alps', EXTERNAL_MODULE),
+#    ('rca', EXTERNAL_MODULE),
+#    ('atp', EXTERNAL_MODULE),
+#     ('perftools-base ', EXTERNAL_MODULE),
+]
+
+# LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
+
+moduleclass = 'toolchain'

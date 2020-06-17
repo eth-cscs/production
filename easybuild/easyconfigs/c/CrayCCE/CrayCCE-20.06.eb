@@ -1,0 +1,22 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayCCE'
+version = '20.06'
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray module
+(PE release: %s).\n""" % version
+
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest
+    # (default) version
+    ('cdt/%(version)s', EXTERNAL_MODULE),
+    ('PrgEnv-cray', EXTERNAL_MODULE),
+]
+
+# LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
+
+moduleclass = 'toolchain'
