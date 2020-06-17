@@ -1,7 +1,7 @@
 # Modified for Tsa/Arolla by MKr - July 2019
 name = 'OpenMPI'
 version = '4.0.2'
-versionsuffix = '-cuda-10.1'
+versionsuffix = '-cuda-10.1-RH7.7'
 
 homepage = 'https://www.open-mpi.org/'
 description = """
