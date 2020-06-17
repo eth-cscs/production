@@ -27,6 +27,7 @@ dependencies = [
     ('NCCL', '2.4.7', _ver_suffix_cuda, True),
     ('protobuf', '3.6.0', _ver_suffix_py),
     ('dask', '1.0.0', _ver_suffix_py),
+    ('h5py', '2.8.0', _ver_suffix_py + '-serial'),
     ('PyExtensionsDS', 'python%(pymajver)s'),
     ('CUDA', '10.1.168', '', True),
 ]
@@ -67,7 +68,7 @@ files_to_copy = [
 exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'req_py_minver': _pyminver,
     'source_urls': [PYPI_SOURCE]
 }
 
@@ -81,7 +82,7 @@ exts_list = [
     ('grpcio', '1.22.0', {
         'modulename': 'grpc',
     }),
-    ('tensorboard', '1.14.0', {
+    ('tensorboard', version, {
         'source_tmpl': 'tensorboard-%(version)s-py3-none-any.whl',
         'unpack_sources': False,
         'use_pip' : True,
@@ -90,7 +91,7 @@ exts_list = [
 
 sanity_check_paths = {
     'files': [_whl_file],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+    'dirs': ['%(installdir)s/lib/python%(pyshortver)s/site-packages'],
 }
 
 modextrapaths = {
