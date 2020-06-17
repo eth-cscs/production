@@ -17,7 +17,7 @@ use_pip = True
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('jupyterlab', '1.1.1')
+    ('jupyterlab', '1.1.1', '-batchspawner')
 ]
 
 sanity_check_paths = {
