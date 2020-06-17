@@ -228,9 +228,38 @@ modextravars = {
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
+
+_kernel_file = '''{
+ "display_name": "Python 3 new",
+ "language": "python",
+ "argv": [
+  "%(installdir)s/share/jupyter/kernels/python3/launcher",
+  "-f",
+  "{connection_file}"
+ ]
+}'''
+
+_launcher_file = '''#!/usr/bin/env bash
+
+# export PYTHONPATH=''
+if [ "$SOURCE_JUPYTERHUBENV" == true ]; then
+    source $HOME/.jupyterhub.env
+fi
+
+python -m ipykernel_launcher $@'''
+
+_replace_kernel = ("rm -r %%(installdir)s/share/jupyter/kernels && "
+                   "mkdir -p %%(installdir)s/share/jupyter/kernels/python3 && "
+                   "echo '%s' > %%(installdir)s/share/jupyter/kernels/python3/kernel.json && " % _kernel_file + \
+                   "echo '%s' > %%(installdir)s/share/jupyter/kernels/python3/launcher && " % _launcher_file + \
+                   "chmod a+x %(installdir)s/share/jupyter/kernels/python3/launcher && "
+)
+
+
 # install extensions and batchspawner components
 # changed from semicolons to commas to catch npm build failures
-postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
+postinstallcmds = [_replace_kernel + \
+                   "export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ && "
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH && "
 #                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/ && "
