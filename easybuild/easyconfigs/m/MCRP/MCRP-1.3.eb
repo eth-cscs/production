@@ -1,0 +1,31 @@
+# contributed by Victor Holanda (CSCS)
+
+easyblock = 'MakeCp'
+name = 'MCRP'
+version = "1.3"
+
+homepage = 'https://www.itqb.unl.pt/labs/molecular-simulation/in-house-software'
+description = """
+This program is intended for systems with two-state sites only.
+It is much faster than PETIT in this particular case, because extensive
+optimizations can be done.
+"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://www.itqb.unl.pt/labs/molecular-simulation/files']
+sources = [SOURCELOWER_TAR_GZ]
+
+files_to_copy = [
+    (['mcrp-gcc'], 'bin'),
+    (['EXAMPLE'], 'example'),
+    (['sample.*'], 'example'),
+    (['LICENSE'], '')
+]
+
+sanity_check_paths = {
+    'files' : ['bin/mcrp-gcc'],
+    'dirs'  : ['bin', 'example']
+}
+
+moduleclass = 'bio'
