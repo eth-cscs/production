@@ -3,13 +3,7 @@ easyblock = "PythonPackage"
 
 name = 'pudb'
 version = '2018.1'
-
-req_py_majver = '3'
-req_py_minver = '6'
-local_py_rev_ver = '5.7'
-local_pyver = '%s.%s' % (req_py_majver, req_py_minver)
-
-versionsuffix = '-python%s' % req_py_majver
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://documen.tician.de/pudb/'
 description = """
@@ -23,14 +17,14 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('PyExtensions', '%s.%s' % (local_pyver, local_py_rev_ver)),
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 sanity_check_paths = {
     'files': ['bin/pudb3'],
     'dirs': [(
-        'lib/python%(pv)s/site-packages/%%(name)s-%%(version)s-py%(pv)s.egg' %
-        {'pv': local_pyver}
+        'lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s.egg'
     )],
 }
 
