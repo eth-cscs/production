@@ -241,7 +241,6 @@ _kernel_file = '''{
 
 _launcher_file = '''#!/usr/bin/env bash
 
-# export PYTHONPATH=''
 if [ "$SOURCE_JUPYTERHUBENV" == true ]; then
     source $HOME/.jupyterhub.env
 fi
