@@ -230,7 +230,7 @@ modextravars = {
 
 
 _kernel_file = '''{
- "display_name": "Python 3 new",
+ "display_name": "Python 3",
  "language": "python",
  "argv": [
   "%(installdir)s/share/jupyter/kernels/python3/launcher",
