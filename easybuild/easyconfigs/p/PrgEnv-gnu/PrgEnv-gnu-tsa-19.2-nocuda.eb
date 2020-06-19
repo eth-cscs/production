@@ -16,17 +16,16 @@ description = """
 
 toolchain = SYSTEM
 
-local_path = '/apps/arolla/UES/jenkins/RH7.7/%s/%s%s/easybuild/modules/all' % (local_prgenv, version, versionsuffix)
+#FIXME: automate injection of release tag into path
+local_path = '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/%s/%s%s/easybuild/modules/all' % (local_prgenv, version, versionsuffix)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
 lappend list binutils gcccore
 
 if { [module-info mode remove] || [module-info mode switch] } {
- foreach module ${list} {
-  if { [is-loaded ${module}] } {
-   module unload ${module}
-  }
+ if { [ is-loaded foss/.%s ] } {
+     module unload foss/.%s
  }
  module unuse %s
 }
@@ -37,6 +36,6 @@ if { [module-info mode load] } {
   module load foss/.%s
  }
 }
-""" % (local_path, local_path, local_path, local_fossversion, local_fossversion)
+""" % (local_path, local_fossversion, local_fossversion, local_path, local_path, local_fossversion, local_fossversion)
 
 moduleclass = 'devel'

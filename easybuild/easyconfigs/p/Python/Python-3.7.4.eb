@@ -12,6 +12,7 @@ source_urls = ['http://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 
 dependencies = [
+    ('bzip2', '1.0.8'),
     ('libreadline', '8.0'),
     ('ncurses', '6.1'),
 ]
@@ -20,6 +21,11 @@ dependencies = [
 # Python EasyBlock by default now adds optimization flags
 # related to: https://bugs.python.org/issue29712
 optimized = False
+
+configure_cmd_prefix = (
+    'LDFLAGS="-L${EBROOTBZIP2}/lib" '
+    'CPPFLAGS="-I${EBROOTBZIP2}/include" '
+)
 
 # order is important! package versions updated July 2019
 exts_list = [

@@ -3,17 +3,8 @@
 easyblock = 'Bundle'
 
 name = 'ipykernel'
-
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-
 version = '4.8.2'
-
-versionsuffix = '-python%s' % local_py_maj_ver
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """
@@ -25,63 +16,34 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('PyExtensions', '%s' % local_pyver),
-    ('IPython', '5.7.0', '-python2')
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('IPython', '5.7.0', versionsuffix)
 ]
 
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
-
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+}
 
 exts_list = [
-    ('tornado', '5.0.2', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/t/tornado/'
-            ],
-        }),
+    ('tornado', '5.0.2'),
     ('pyzmq', '17.0.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
             'modulename': 'zmq',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/p/pyzmq/'
-            ],
         }),
-    ('jupyter_core', '4.4.0', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/j/jupyter-core/'
-            ],
-        }),
+    ('jupyter_core', '4.4.0'),
     ('jupyter_client', '5.2.3', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
             'use_pip': True,
-            'source_urls': [
-                'https://pypi.python.org/packages/source/j/jupyter-client/'
-            ],
         }),
-    ('ipykernel', '4.8.2', {
-            'req_py_majver': '2',
-            'req_py_minver': '7',
-            'source_urls': [
-                'https://pypi.python.org/packages/source/i/ipykernel/'
-            ],
-        }),
+    ('ipykernel', '4.8.2'),
 ]
 
-# specify that Bundle easyblock should run a full sanity check, rather than
-# just trying to load the module
-local_full_sanity_check = True
-
-modextrapaths = {'PYTHONPATH': ['lib/python%s/site-packages' % local_pyshortver]}
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver]
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
 
 moduleclass = 'tools'

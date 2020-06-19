@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'psutil'
+version = '5.7.0'
+versionsuffix = '-python%(pymajver)s'
+homepage = 'https://github.com/giampaolo/psutil'
+description = """Cross-platform lib for process and system monitoring in
+Python"""
+toolchain = SYSTEM
+source_urls = [PYPI_SOURCE]
+sources = ['%(name)s-%(version)s.tar.gz']
+dependencies = [('cray-python/3.6.5.7', EXTERNAL_MODULE)]
+unpack_sources = True
+download_dep_fail = True
+use_pip = True
+local_pythonpath = 'lib/python%(pyshortver)s/site-packages'
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath],
+}
+sanity_pip_check = True
+
+moduleclass = 'tools'

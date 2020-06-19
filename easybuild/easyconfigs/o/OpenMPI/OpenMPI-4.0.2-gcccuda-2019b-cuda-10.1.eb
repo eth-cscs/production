@@ -52,11 +52,7 @@ postinstallcmds = [
 ]
 
 modtclfooter = """
-    if { [ string match *tsa-cn* $::env(HOSTNAME) ] } {
-        setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
-    } else {
-        setenv UCX_TLS rc_x,ud_x,mm,shm,cma
-    }
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cuda_copy,cuda_ipc,cma
 """
 
 local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
