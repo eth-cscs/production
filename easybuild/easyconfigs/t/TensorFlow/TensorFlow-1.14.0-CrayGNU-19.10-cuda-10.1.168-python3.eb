@@ -9,6 +9,7 @@ _ver_suffix_cuda = '-cuda-%(cudaver)s'
 _ver_suffix_py = '-python%(pymajver)s'
 versionsuffix = '%s%s' % (_ver_suffix_cuda, _ver_suffix_py)
 _pyminver = '6'
+_pyrevver = '5.7'
 
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
@@ -26,6 +27,7 @@ dependencies = [
     ('NCCL', '2.4.7', _ver_suffix_cuda, True),
     ('protobuf', '3.6.0', _ver_suffix_py),
     ('dask', '1.0.0', _ver_suffix_py),
+    ('h5py', '2.8.0', _ver_suffix_py + '-serial'),
     ('PyExtensionsDS', 'python%(pymajver)s'),
     ('CUDA', '10.1.168', '', True),
 ]
@@ -42,10 +44,9 @@ _whl_file = 'tensorflow-%%(version)s-cp%%(pymajver)s%s-cp%%(pymajver)s%sm-linux_
 
 _build_str  = "export TEST_TMPDIR=%(builddir)s/../../../bazelout/"
 _build_str += " && rm -rf $TEST_TMPDIR"
-_build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
-_build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
-_build_str += " && sed -i s\@'3.5,6.0'@6.0@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
-_build_str += " && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s"
+_build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+_build_str += " && sed -i s\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl" # this line in required for the patch to work
+_build_str += " && export PYMAJVER=%%(pymajver)s && export PYMINVER=%s && export PYREVVER=%s" % (_pyminver, _pyrevver)   # required for configure-cscs scripts
 _build_str += " && bash configure-cscs-v%(version)s.sh"
 _build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 _build_str += "    --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
@@ -67,7 +68,7 @@ files_to_copy = [
 exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'req_py_minver': _pyminver,
     'source_urls': [PYPI_SOURCE]
 }
 
@@ -81,7 +82,7 @@ exts_list = [
     ('grpcio', '1.22.0', {
         'modulename': 'grpc',
     }),
-    ('tensorboard', '1.14.0', {
+    ('tensorboard', version, {
         'source_tmpl': 'tensorboard-%(version)s-py3-none-any.whl',
         'unpack_sources': False,
         'use_pip' : True,
@@ -90,7 +91,7 @@ exts_list = [
 
 sanity_check_paths = {
     'files': [_whl_file],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+    'dirs': ['%(installdir)s/lib/python%(pyshortver)s/site-packages'],
 }
 
 modextrapaths = {

@@ -17,83 +17,42 @@ dependencies = [
     ('configurable-http-proxy', '3.1.1')
 ]
 
-use_pip = True
-
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True,
+}
 
 exts_list = [
-    ('pamela', '0.3.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pamela/'],
-    }),
-    ('tornado', '5.1.1', {
-            'source_urls': ['https://pypi.python.org/packages/source/t/tornado/'],
-        }),
-    ('decorator', '4.3.0', {
-            'source_urls': ['https://pypi.python.org/packages/source/d/decorator/'],
-        }),
-    ('ipython_genutils', '0.2.0', {
-            'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/'],
-        }),
-    ('traitlets', '4.3.2', {
-            'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/'],
-        }),
+    ('pamela', '0.3.0'),
+    ('tornado', '5.1.1'),
+    ('decorator', '4.3.0'),
+    ('ipython_genutils', '0.2.0'),
+    ('traitlets', '4.3.2'),
     ('python-oauth2', '1.1.0', {
             'modulename': 'oauth2',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-oauth2/'],
         }),
-    ('SQLAlchemy', '1.2.12', {
-            'source_urls': ['https://pypi.python.org/packages/source/s/SQLAlchemy/'],
-        }),
-    ('MarkupSafe', '1.0', {
-            'source_urls': ['https://pypi.python.org/packages/source/m/MarkupSafe/'],
-        }),
-    ('Mako', '1.0.7', {
-            'source_urls': ['https://pypi.python.org/packages/source/m/Mako/'],
-        }),
+    ('SQLAlchemy', '1.2.12'),
+    ('MarkupSafe', '1.0'),
+    ('Mako', '1.0.7'),
     ('python-editor', '1.0.3', {
             'modulename': 'editor',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-editor/'],
         }),
     ('python-dateutil', '2.7.3', {
             'modulename': 'dateutil',
-            'source_urls': ['https://pypi.python.org/packages/source/p/python-dateutil/'],
         }),
-    ('alembic', '1.0.0', {
-            'source_urls': ['https://pypi.python.org/packages/source/a/alembic/'],
-        }),
-    ('prometheus_client', '0.4.1', {
-            'source_urls': ['https://pypi.python.org/packages/source/p/prometheus_client/'],
-        }),
-    ('async_generator', '1.10', {
-            'source_urls': ['https://pypi.python.org/packages/source/a/async_generator/'],
-        }),
-    ('chardet', '3.0.4', {
-            'source_urls': ['https://pypi.python.org/packages/source/c/chardet/'],
-        }),
-    ('certifi', '2018.8.24', {
-            'source_urls': ['https://pypi.python.org/packages/source/c/certifi/'],
-        }),
-    ('idna', '2.7', {
-            'source_urls': ['https://pypi.python.org/packages/source/i/idna/'],
-        }),
-    ('urllib3', '1.23', {
-            'source_urls': ['https://pypi.python.org/packages/source/u/urllib3/'],
-        }),
-    ('requests', '2.19.1', {
-            'source_urls': ['https://pypi.python.org/packages/source/r/requests/'],
-        }),
-    ('Jinja2', '2.10', {
-            'source_urls': ['https://pypi.python.org/packages/source/j/Jinja2/'],
-        }),
-    ('jupyterhub', version, {
-            'use_pip': True,
-            'source_urls': ['https://pypi.python.org/packages/source/j/jupyterhub/'],
-        }),
+    ('alembic', '1.0.0'),
+    ('prometheus_client', '0.4.1'),
+    ('async_generator', '1.10'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2018.8.24'),
+    ('idna', '2.7'),
+    ('urllib3', '1.23'),
+    ('requests', '2.19.1'),
+    ('Jinja2', '2.10'),
+    ('jupyterhub', version),
 ]
-
-# specify that Bundle easyblock should run a full sanity check, rather than just trying to load the module
-local_full_sanity_check = True
 
 modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
 
