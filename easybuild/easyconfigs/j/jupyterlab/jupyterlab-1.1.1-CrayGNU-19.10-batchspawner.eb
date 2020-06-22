@@ -16,7 +16,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('PyExtensions', '%(pyver)s'),
+#    ('PyExtensions', 'python%(pymajver)s'), # already in IPython n dask
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
@@ -25,7 +25,7 @@ dependencies = [
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'req_py_minver': _pyminver,
     'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
