@@ -15,6 +15,7 @@ toolchainopts = {'usempi': True}
 
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
+checksums = ['49d575fca3fd3c95467c3b0fb51967ad17d0c4cc18e078a6748309af4de36a8d']
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),

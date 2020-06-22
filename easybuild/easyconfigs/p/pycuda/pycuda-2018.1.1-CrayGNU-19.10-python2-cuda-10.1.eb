@@ -16,8 +16,17 @@ toolchainopts = {'usempi': True}
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
-use_pip=True
-use_pip_for_deps=True
+patches = [
+    'pycuda-python2.patch'
+]
+
+checksums = [
+    '49d575fca3fd3c95467c3b0fb51967ad17d0c4cc18e078a6748309af4de36a8d',  # pycuda-2018.1.1.tar.gz
+    '034630dbfeb84008fc0fb22eec19a3301cdb78db8e808f96bbc2952b4add83d7',  # pycuda-python2.patch
+]
+
+use_pip = True
+use_pip_for_deps = True
 
 dependencies = [
     ('cray-python/2.7.15.7', EXTERNAL_MODULE),
