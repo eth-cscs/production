@@ -3,7 +3,7 @@
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
-version = '2.0'
+version = '2.0.0'
 versionsuffix = '-batchspawner'
 _pyminver = '6'
 
