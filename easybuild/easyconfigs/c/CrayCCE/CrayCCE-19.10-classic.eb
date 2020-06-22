@@ -1,11 +1,12 @@
 easyblock = 'CrayToolchain'
 
 name = 'CrayCCE'
-version = '19.10-classic'
+version = '19.10'
+versionsuffix = '-classic'
 
 homepage = 'https://pubs.cray.com/discover'
 description = """Toolchain using Cray compiler wrapper, using PrgEnv-cray
-(PE release: October 2019).\n"""
+(PE release: %s) and loading the Cray Classic compiler CCE%s.\n""" % (version, versionsuffix)
 
 toolchain = {'name': 'system', 'version': 'system'}
 
@@ -13,8 +14,8 @@ dependencies = [
     # PrgEnv version is not pinned, as Cray recommends to use the latest
     # (default) version
     ('PrgEnv-cray', EXTERNAL_MODULE),
-    ('cdt/19.10', EXTERNAL_MODULE),
-    ('cce/9.0.2-classic', EXTERNAL_MODULE),
+    ('cdt/%s' % version, EXTERNAL_MODULE),
+    ('cce/9.0.2%s' % versionsuffix, EXTERNAL_MODULE),
 ]
 
 # LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
