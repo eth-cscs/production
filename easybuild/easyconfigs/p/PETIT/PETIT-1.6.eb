@@ -1,0 +1,32 @@
+# contributed by Victor Holanda (CSCS)
+
+easyblock = 'MakeCp'
+name = 'PETIT'
+version = "1.6"
+
+homepage = 'https://www.itqb.unl.pt/labs/molecular-simulation/in-house-software'
+description = """ General program for systems with multiple-state sites.
+The typical use of the program is the treatment of proton configurations,
+which includes the protonation of sites with proton tautomerism, and the
+orientation of hydroxyl and thiol groups (Ser, Thr, Cys) and water molecules.
+"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://www.itqb.unl.pt/labs/molecular-simulation/files']
+sources = [SOURCELOWER_TAR_GZ]
+
+files_to_copy = [
+    (['petit-gcc'], 'bin'),
+    (['compilation.info'], 'compilation-info'),
+    (['EXAMPLE'], 'example'),
+    (['sample.*'], 'example'),
+    (['LICENSE'], '')
+]
+
+sanity_check_paths = {
+    'files' : ['bin/petit-gcc'],
+    'dirs'  : ['bin']
+}
+
+moduleclass = 'bio'

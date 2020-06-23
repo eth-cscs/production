@@ -1,17 +1,9 @@
+#
 easyblock = 'PythonPackage'
 
 name = 'ipyparallel'
 version = '6.2.4'
-
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-versionsuffix = '-python%s' % (local_py_maj_ver)
-
-req_py_majver = local_py_maj_ver
-req_py_minver = local_py_min_ver
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://pypi.org/project/ipyparallel'
 description = """Use multiple instances of IPython in parallel, interactively."""
@@ -24,13 +16,13 @@ sources = [SOURCE_TAR_GZ]
 use_pip = True
 
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
-    ('jupyterlab', '1.1.1')
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('jupyterlab', '1.1.1', '-batchspawner')
 ]
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%s.%s/site-packages' % (local_py_maj_ver, local_py_min_ver)],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'devel'
