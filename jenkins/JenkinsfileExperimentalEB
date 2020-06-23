@@ -95,10 +95,10 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
-                        export EASYBUILD_ROBOT_PATHS=$WORKSPACE/easybuild/easyconfigs/
+                        export EASYBUILD_ROBOT_PATHS="$WORKSPACE/easybuild/easyconfigs"
                         $loadeasybuild
                         $switcheasybuild
-                        export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
+                        export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
                         eb --version
                         eb --show-config
 
@@ -124,10 +124,10 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
-                        export EASYBUILD_ROBOT_PATHS=$WORKSPACE/easybuild/easyconfigs/
+                        export EASYBUILD_ROBOT_PATHS="$WORKSPACE/easybuild/easyconfigs"
                         $loadeasybuild
                         $switcheasybuild
-                        export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
+                        export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
                         eb --version
                         status=0
 
