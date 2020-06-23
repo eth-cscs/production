@@ -95,7 +95,7 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
-                        export EASYBUILD_ROBOT_PATHS="$WORKSPACE/easybuild/easyconfigs"
+                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $loadeasybuild
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
@@ -116,7 +116,7 @@ stage('Build Stage') {
                         sh "cp ${source} ${target} || true" //TODO:Open Pull Request
                     }
 
-/*
+                    /* build the software stack with the new toolchains */
                     def prod_file = "7.0.UP01-${params.cdt_version}-$machineLabel"
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
@@ -124,24 +124,23 @@ stage('Build Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
-                        export EASYBUILD_ROBOT_PATHS="$WORKSPACE/easybuild/easyconfigs"
+                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $loadeasybuild
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
                         eb --version
-                        status=0
 
                         # find production dependencies:
                         cat $WORKSPACE/jenkins-builds/$prod_file
                         awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
                         cat $WORKSPACE/deps.out
-                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*\/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
                         cat $WORKSPACE/deps_clean.out
                         status=0
 
                         # upgrade to new cdt_version
                         cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --debug=1 --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
-                        rm $WORKSPACE/*.out
+                        rm $WORKSPACE\/*.out
 
                         cd $WORKSPACE/jenkins-builds
                         sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
@@ -164,7 +163,7 @@ stage('Build Stage') {
                         git -C $WORKSPACE status
 
                         status=\$[status+\$?]
-                        exit \$status""")*/
+                        exit \$status""")
                 }
             }
         }
