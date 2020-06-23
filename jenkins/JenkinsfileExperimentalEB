@@ -1,0 +1,174 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+/* 
+ Initialization: checkout the production repository to load the files:
+ - "util.groovy" with the functions used in the pipeline scripts
+ - "Machines.groovy" with the list and properties of HPC systems
+*/
+stage('Initialization') {
+    node('master') {
+        checkout scm
+        methods = load("$WORKSPACE/jenkins/util.groovy")
+        machinesList = load("$WORKSPACE/jenkins/Machines.groovy")
+    }
+}
+
+/* 
+ Machine Selection: 
+ - filters the user defined parameter "machines", accessible though "params.machines"
+ - defines the runtime HPC systems of the project "machinesToRun" 
+ - defines the configuration of the runtime HPC systems "machinesConfiguration"
+*/
+def machineConfigurations = []
+stage('Machine Selection') {
+    node('master') {
+        def machinesToRun = machinesList.findAll({methods.machineCheck(params.machines, it.name)})
+        if (!machinesToRun) {
+            println "No machines were specified. Aborting...."
+            currentBuild.result = "FAILURE"
+            return
+        }
+        for (system in machinesToRun) {
+            machineConfigurations.add(
+                [machine:system, architectures: methods.getMachineConfiguration(
+                        params.machines, system.name, system.archs as String[])])
+        }
+    }
+}
+
+/* 
+ Build Stage: configures parallel builds for the different "machinesToRun"
+ Loop over all systems in "machineConfigurations":
+  - if the machine has multiple architectures, starts a sub-loop over architectures
+  - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
+  - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
+  - the target CDT version is selected by the user and stored in "params.cdt_version"
+*/
+def builds = [:]
+stage('Build Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            /* define architecture and machineLabel 
+               to use them in parallel builds */
+            def architecture = item
+            def machineLabel = architecture == "" ?
+               machineName : 
+               "$machineName-$architecture"
+            builds["$machineLabel"] = {
+                node(machineName) {
+                    checkout scm
+                    /* define unusePath */
+                    if (machine.unusePath != '') {
+                        def unusePath = architecture == '' ?  
+                            "$machine.unusePath" : 
+                            "$machine.unusePath".replace('ARCH', architecture)
+                    }
+                    // /* remove "--installpath" and MATLAB from file $machineLabel */
+                    // sh "sed -e '/MATLAB/d' -e 's/--installpath=.*//' $WORKSPACE/jenkins-builds/$machineLabel > buildlist.txt"
+
+                    def loadeasybuild = architecture == "" ?
+                        "module load EasyBuild-custom/cscs" :
+                        "module load daint-$architecture EasyBuild-custom/cscs"
+
+                    def switcheasybuild = 
+                        "module switch EasyBuild EasyBuild/${params.eb_version}"
+
+                    def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
+                    def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
+                    println "Current toolchains: $current_tc"
+
+                    def command = architecture == "" ? 
+                        "srun -u -J $env.JOB_BASE_NAME -t 00:01:00 eb --show-config" :  
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME -t 00:01:00 eb -f $current_tc --hidden --try-software-version=${params.cdt_version}"
+
+                    sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        export EASYBUILD_ROBOT_PATHS=$WORKSPACE/easybuild/easyconfigs/
+
+                        $loadeasybuild
+                        $switcheasybuild
+                        eb --version
+                        eb --show-config
+
+                        # find production dependencies:
+                        cat $WORKSPACE/jenkins-builds/$machineLabel
+                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
+                        cat $WORKSPACE/deps.out
+                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+                        cat $WORKSPACE/deps_clean.out
+                        status=0
+
+                        # upgrade to new cdt_version
+                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
+
+                        # build cdt for target version
+                        echo -e "\nRunning command: \n$command"
+                        status=0
+                        $command
+
+                        status=\$[status+\$?]
+                        exit \$status""")
+
+                    /* copy generated toolchains to workspace */
+                    for (toolchain in toolchains) {
+                        def source = "$params.eb_prefix/$machineLabel/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
+                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain/${toolchain}-${params.cdt_version}.eb"
+                        sh "cp ${source} ${target} || true" //TODO
+                    }
+
+                    sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        export EASYBUILD_ROBOT_PATHS=$WORKSPACE/easybuild/easyconfigs/
+
+                        $loadeasybuild
+                        $switcheasybuild
+                        eb --version
+                        status=0
+
+                        # dry run
+                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
+                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D F
+
+                        # build all new recipes
+                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -r F
+                        rm $WORKSPACE/*.out
+                        git -C $WORKSPACE status
+
+                        status=\$[status+\$?]
+                        exit \$status""")
+                }
+            }
+        }
+    }
+
+    try {
+        parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting..."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting..."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting..."
+        }
+    }
+}
