@@ -140,7 +140,7 @@ stage('Build Stage') {
 
                         # upgrade to new cdt_version
                         cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --debug=1 --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
-                        rm $WORKSPACE\/*.out
+                        rm $WORKSPACE/*.out
 
                         cd $WORKSPACE/jenkins-builds
                         sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
@@ -159,7 +159,7 @@ stage('Build Stage') {
 
                         # build all new recipes
                         find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -r F
-                        rm $WORKSPACE/\*.out
+                        rm $WORKSPACE/*.out
                         git -C $WORKSPACE status
 
                         status=\$[status+\$?]
