@@ -113,7 +113,7 @@ stage('Build Stage') {
 
                         cd $WORKSPACE/jenkins-builds
                         sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
-                        ln -s $prod_file $machineLabel
+                        ln -sf $prod_file $machineLabel
                         cat $machineLabel
                         cd -
                         git -C $WORKSPACE status
