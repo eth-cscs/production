@@ -120,7 +120,6 @@ stage('Build Stage') {
                     def prod_file = "7.0.UP01-${params.cdt_version}-$machineLabel"
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
-                        export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
@@ -128,7 +127,6 @@ stage('Build Stage') {
                         $loadeasybuild
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
-                        eb --version
 
                         # find production dependencies:
                         cat $WORKSPACE/jenkins-builds/$prod_file
