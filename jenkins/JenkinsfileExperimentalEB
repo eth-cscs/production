@@ -102,7 +102,7 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
-                        echo -e "\nRunning command: \n$command"
+                        echo -e "\nRunning command: \n$build_toolchains"
                         status=0
                         $build_toolchains
 
@@ -119,6 +119,7 @@ stage('Build Stage') {
 /*
                     def prod_file = "7.0.UP01-${params.cdt_version}-$machineLabel"
                     sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_PREFIX="$params.eb_prefix/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
