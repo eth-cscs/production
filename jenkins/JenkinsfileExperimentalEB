@@ -136,7 +136,7 @@ stage('Build Stage') {
                         #cat $WORKSPACE/deps_clean.out
 
                         # upgrade to new cdt_version
-                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --debug=1 --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
+                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
                         rm $WORKSPACE/*.out
 
                         cd $WORKSPACE/jenkins-builds
