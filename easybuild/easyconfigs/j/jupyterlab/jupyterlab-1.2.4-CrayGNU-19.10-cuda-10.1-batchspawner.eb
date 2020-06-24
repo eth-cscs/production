@@ -36,6 +36,7 @@ dependencies = [
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': _py_min_ver,
+    'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
 
