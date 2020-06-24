@@ -6,7 +6,7 @@ import re
 
 tc_pattern = re.compile("toolchain\s*=\s*\{\s*'name'\s*:\s*'(\S*)'\s*,\s*'version'\s*:\s*'(\S*)'\s*}")
 
-dep_regex = lambda mod: f"(\s*)\(\s*'({mod})'\s*,\s*EXTERNAL_MODULE\s*\),"
+dep_regex = lambda mod: f"\(\s*'({mod})'\s*,\s*EXTERNAL_MODULE\s*\)"
 dep_pattern = re.compile(dep_regex('\S*')) # any module
 
 
@@ -125,7 +125,7 @@ def main():
                     if args['debug']:
                         print("External Modules:\n", deps)
 
-                    for ws, dep in deps:
+                    for dep in deps:
                         mod = dep.split('/')[0]
                         if mod in modules.keys():
                             ver = modules[mod]
@@ -139,7 +139,7 @@ def main():
                             if args['debug']:
                                 print(f"Replacing '{dep}' by '{mod}'")
                                 print(dep_regex(dep))
-                            newec = re.sub(dep_regex(dep), f"{ws}('{mod}', EXTERNAL_MODULE),", newec)
+                            newec = re.sub(dep_regex(dep), f"('{mod}', EXTERNAL_MODULE)", newec)
 
             if args['debug']:
                 print("---- New config will be:\n", newec)
