@@ -127,7 +127,7 @@ stage('Build Stage') {
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
-                        build_list=$(awk -v cdt=${params.cdt_current} '{if(\$1~cdt) print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | grep -v classic)
+                        build_list=\$(awk -v cdt=${params.cdt_current} '{if(\$1~cdt) print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | grep -v classic)
                         for recipe in \${build_list}; do
                             status=0
                             srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb --try-toolchain-version=${params.cdt_version} -r \$recipe
