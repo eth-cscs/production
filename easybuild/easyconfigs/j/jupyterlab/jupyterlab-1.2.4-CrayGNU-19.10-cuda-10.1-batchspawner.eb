@@ -4,8 +4,9 @@ easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
 version = '1.2.4'
-_cudaversion = '10.1'
-versionsuffix = '-cuda-%s-batchspawner' % _cudaversion
+versionsuffix = '-cuda-%(cudashortver)s-batchspawner'
+
+_py_min_ver = '6'
 
 _jl_maj_ver = '1'
 _jl_min_ver = '2'
@@ -22,9 +23,10 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
 #    ('PyExtensions', 'python%(pymajver)s'), # already in IPython n dask
-    ('JuliaExtensions', _jlver, '-cuda-%s' % _cudaversion),
+    ('JuliaExtensions', _jlver, '-cuda-%(cudashortver)s'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
@@ -32,7 +34,8 @@ dependencies = [
 ]
 
 exts_default_options = {
-    'source_urls': [PYPI_SOURCE],
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': _py_min_ver,
     'use_pip': True,
 }
 
