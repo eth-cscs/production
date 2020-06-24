@@ -1,6 +1,6 @@
 # @author: sarafael, gppezzi
 
-easyblock = 'PythonBundle'
+easyblock = 'Bundle'
 
 name = 'oq-engine'
 version = '3.2.0'
@@ -21,6 +21,7 @@ dependencies = [
     ('h5py', '2.8.0', '-python%(pymajver)s-parallel')
 ]
 
+exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': _pyminver,
