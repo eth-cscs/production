@@ -15,7 +15,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('PyExtensions', 'python%(pymajver)s'),
+#    ('PyExtensions', 'python%(pymajver)s'), # already in h5py
     ('GEOS', '3.6.2'),
     ('libspatialindex', '1.8.5'),
     ('h5py', '2.8.0', '-python%(pymajver)s-parallel')
@@ -25,7 +25,6 @@ exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': _pyminver,
     'source_urls': [PYPI_SOURCE],
-    'use_pip': True,
 }
 
 exts_list = [
@@ -54,6 +53,7 @@ exts_list = [
     }),
     ('pyproj', '1.9.5.1'),
     ('basemap', '1.1.0', {
+        'source_urls': ['https://github.com/matplotlib/basemap/archive'],
         'source_tmpl': 'v1.1.0.tar.gz',
         'prebuildopts': 'export GEOS_DIR=$EBROOTGEOS; ',
         'preinstallopts': 'export GEOS_DIR=$EBROOTGEOS; ',
@@ -68,6 +68,7 @@ exts_list = [
         'modulename': 'os'
     }),
     (name, version, {
+        'source_urls': ['https://github.com/gem/oq-engine/archive/'],
         'source_tmpl': 'v%(version)s.tar.gz',
         'modulename': 'openquake'
     }),
