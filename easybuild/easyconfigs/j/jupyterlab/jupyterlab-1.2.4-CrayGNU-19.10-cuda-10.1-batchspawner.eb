@@ -115,7 +115,6 @@ exts_list = [
     ('ipympl', '0.3.3'),
 
 # itkwidgets
-    ('traittypes', '0.2.1'),
     ('param', '1.9.2'),
     ('pyct', '0.4.6'),
     ('colorcet', '2.0.2'),
