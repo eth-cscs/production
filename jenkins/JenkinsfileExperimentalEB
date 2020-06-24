@@ -72,8 +72,8 @@ stage('Build Stage') {
 
                     /* define command to load EasyBuild */
                     def loadeasybuild = architecture == "" ?
-                        "module load EasyBuild-custom/cscs" :
-                        "module load daint-$architecture EasyBuild-custom/cscs"
+                        "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
+                        "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
                     def switcheasybuild = 
@@ -86,8 +86,8 @@ stage('Build Stage') {
 
                     /* define command to build new toolchains */
                     def build_toolchains = architecture == "" ? 
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb -f $current_tc --hidden --try-software-version=${params.cdt_version}" :  
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb -f $current_tc --hidden --try-software-version=${params.cdt_version}"
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :  
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
 
                     /* build new toolchains */
                     sh("""#!/bin/bash -l
@@ -129,12 +129,11 @@ stage('Build Stage') {
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
                         # find production dependencies:
-                        cat $WORKSPACE/jenkins-builds/$prod_file
+                        #cat $WORKSPACE/jenkins-builds/$prod_file
                         awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
-                        cat $WORKSPACE/deps.out
-                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-19.10' | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
-                        cat $WORKSPACE/deps_clean.out
-                        status=0
+                        #cat $WORKSPACE/deps.out
+                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-'${params.cdt_current} | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+                        #cat $WORKSPACE/deps_clean.out
 
                         # upgrade to new cdt_version
                         cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --debug=1 --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
@@ -143,19 +142,20 @@ stage('Build Stage') {
                         cd $WORKSPACE/jenkins-builds
                         sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
                         ln -sf $prod_file $machineLabel
-                        cat $machineLabel
+                        #cat $machineLabel
                         cd -
-                        git -C $WORKSPACE status
+                        #git -C $WORKSPACE status
 
                         # dry run
-                        echo "Debug DryRun"
-                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb
-                        echo "Debug DryRun2"
-                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
-                        echo "Debug DryRun3"
-                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -D F
+                        #echo "Debug DryRun"
+                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb
+                        #echo "Debug DryRun2"
+                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
+                        #echo "Debug DryRun3"
+                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -D F
 
                         # build all new recipes
+                        status=0
                         find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -r F
                         rm $WORKSPACE/*.out
                         git -C $WORKSPACE status
