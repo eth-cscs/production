@@ -105,7 +105,6 @@ stage('Build Stage') {
                         echo -e "\nRunning command: \n$build_toolchains"
                         status=0
                         $build_toolchains
-
                         status=\$[status+\$?]
                         exit \$status""")
 
@@ -128,40 +127,42 @@ stage('Build Stage') {
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
-                        # find production dependencies:
-                        #cat $WORKSPACE/jenkins-builds/$prod_file
-                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
-                        #cat $WORKSPACE/deps.out
-                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-'${params.cdt_current} | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
-                        #cat $WORKSPACE/deps_clean.out
+                        awk -v cdt=${params.cdt_current} '{if(\$1~cdt) print \$1}' $machineLabel | grep -v classic | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb --try-toolchain-version=${params.cdt_version} -r F
 
-                        # upgrade to new cdt_version
-                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
-                        rm $WORKSPACE/*.out
-
-                        cd $WORKSPACE/jenkins-builds
-                        sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
-                        ln -sf $prod_file $machineLabel
-                        #cat $machineLabel
-                        cd -
-                        #git -C $WORKSPACE status
-
-                        # dry run
-                        #echo "Debug DryRun"
-                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb
-                        #echo "Debug DryRun2"
-                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
-                        #echo "Debug DryRun3"
-                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -D F
-
-                        # build all new recipes
-                        status=0
-                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -r F
-                        rm $WORKSPACE/*.out
-                        git -C $WORKSPACE status
-
-                        status=\$[status+\$?]
-                        exit \$status""")
+#                        # find production dependencies:
+#                        #cat $WORKSPACE/jenkins-builds/$prod_file
+#                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
+#                        #cat $WORKSPACE/deps.out
+#                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-'${params.cdt_current} | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
+#                        #cat $WORKSPACE/deps_clean.out
+#
+#                        # upgrade to new cdt_version
+#                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
+#                        rm $WORKSPACE/*.out
+#
+#                        cd $WORKSPACE/jenkins-builds
+#                        sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
+#                        ln -sf $prod_file $machineLabel
+#                        #cat $machineLabel
+#                        cd -
+#                        #git -C $WORKSPACE status
+#
+#                        # dry run
+#                        #echo "Debug DryRun"
+#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb
+#                        #echo "Debug DryRun2"
+#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
+#                        #echo "Debug DryRun3"
+#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -D F
+#
+#                        # build all new recipes
+#                        status=0
+#                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -r F
+#                        rm $WORKSPACE/*.out
+#                        git -C $WORKSPACE status
+#
+#                        status=\$[status+\$?]
+#                        exit \$status""")
                 }
             }
         }
