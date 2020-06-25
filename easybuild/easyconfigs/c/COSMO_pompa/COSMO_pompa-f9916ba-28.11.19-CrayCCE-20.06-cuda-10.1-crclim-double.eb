@@ -3,7 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'COSMO_pompa'
 version = 'f9916ba'
-versionsuffix = '-28.11.19-cuda-10.0-crclim-double'
+versionsuffix = '-28.11.19-cuda-10.1-crclim-double'
 
 homepage = "https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)"
 description = """
@@ -23,7 +23,7 @@ patches = ['patch_COSMO_%(version)s_daint_cray_gpu_CrayCCE-%(toolchain_version)s
 builddependencies = [
     ('CMake', '3.12.0', '', True),
     ('libgrib1_crclim', 'a1e4271'),
-    ('cudatoolkit/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5', EXTERNAL_MODULE),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('Dycore/551f6b4-CrayGNU-%(toolchain_version)s-cuda-10.1-crclim-double', EXTERNAL_MODULE),
 ]
 dependencies = [
@@ -32,7 +32,7 @@ dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
-prebuildopts = """cd %(builddir)s/%(namelower)s/cosmo && module switch PrgEnv-gnu PrgEnv-cray && module swap cray-libsci_acc cray-libsci_acc/20.03.1 && module swap cudatoolkit cudatoolkit/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5 && export EBROOTNETCDF=$NETCDF_DIR && export EBROOTNETCDFMINFORTRAN=$NETCDF_DIR && export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export LDFLAGS=$(echo $LDFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export CPPFLAGS=$(echo $CPPFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export EBVARLDFLAGS=$(echo $EBVARLDFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export EBVARCPPFLAGS=$(echo $EBVARCPPFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && mv Options.cray.gpu Options.cray.gpu.orig && cat Options.cray.gpu.orig | perl -pe "s/-hnosecond_underscore//g" > Options.cray.gpu &&"""
+prebuildopts = """cd %(builddir)s/%(namelower)s/cosmo && module switch PrgEnv-gnu PrgEnv-cray && export EBROOTNETCDF=$NETCDF_DIR && export EBROOTNETCDFMINFORTRAN=$NETCDF_DIR && export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export LDFLAGS=$(echo $LDFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export CPPFLAGS=$(echo $CPPFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export EBVARLDFLAGS=$(echo $EBVARLDFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && export EBVARCPPFLAGS=$(echo $EBVARCPPFLAGS | sed 's/netcdf\/4.7.3.3\/GNU\/8.2/netcdf\/4.7.3.3\/CRAY\/9.0/g') && mv Options.cray.gpu Options.cray.gpu.orig && cat Options.cray.gpu.orig | perl -pe "s/-hnosecond_underscore//g" > Options.cray.gpu &&"""
 buildopts = "ACCGPU=1 CPP_DYCORE=1 paropt "
 
 parallel = 6

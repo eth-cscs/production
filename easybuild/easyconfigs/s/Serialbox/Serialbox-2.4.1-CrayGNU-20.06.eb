@@ -20,8 +20,6 @@ builddependencies = [
 
 configopts = '-DSERIALBOX_ENABLE_FORTRAN=ON'
 
-prebuildopts = "module swap gcc gcc/8.3.0 &&"
-
 parallel = 4
 
 separate_build_dir = True
