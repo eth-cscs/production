@@ -2,6 +2,8 @@ easyblock = 'ConfigureMake'
 
 name = 'charmm'
 version = '44b2'
+cudaversion = '10.1'
+versionsuffix = '-cuda-%s' % cudaversion
 
 homepage = "http://www.charmm.org"
 description = """CHARMM (Chemistry at HARvard Macromolecular Mechanics) is a versatile
@@ -17,7 +19,7 @@ sources = ["charmm-c%(version)s.tar.gz"]
 
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE),
 ]
 
 dependencies = [
