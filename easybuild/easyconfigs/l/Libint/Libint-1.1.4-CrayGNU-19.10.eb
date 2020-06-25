@@ -9,8 +9,8 @@ description = """Libint library is used to evaluate the traditional (electron re
 toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'opt': True, 'pic': True}
 
-sources = [SOURCELOWER_TAR_GZ]
-source_urls = ('http://sourceforge.net/projects/libint/files/v1-releases/', 'download')
+sources = ['/apps/common/easybuild/sources/l/Libint/' + SOURCELOWER_TAR_GZ]
+#source_urls = ('http://sourceforge.net/projects/libint/files/v1-releases/', 'download')
 
 configopts = "--enable-deriv --enable-r12"
 
