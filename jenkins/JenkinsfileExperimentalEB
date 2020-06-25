@@ -136,7 +136,7 @@ stage('Build Stage') {
                             srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb --try-toolchain-version=${params.cdt_version} -r \$recipe
                             status=\$[status+\$?]
                             # save successful builds in production file 
-                            if [ $status -eq 0 ]; then 
+                            if [ \$status -eq 0 ]; then 
                                 echo \$recipe >> $WORKSPACE/jenkins-builds/${prod_file}
                                 # TO DO: add successful recipes to GitHub PR
                             else
