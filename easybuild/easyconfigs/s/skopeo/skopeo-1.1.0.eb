@@ -1,0 +1,33 @@
+# teojgo (cscs)
+
+easyblock = 'ConfigureMake'
+
+name = 'skopeo'
+version = '1.1.0'
+
+homepage = 'https://github.com/containers/skopeo'
+description = """Work with remote images registries - retrieving information, images, signing content."""
+
+builddependencies = [('go', '1.13.4.linux-amd64')]
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/containers/skopeo/archive']
+
+sources = [
+    'v%(version)s.tar.gz'
+]
+
+checksums = ['3bd3acc614514fc2261b89dc0ea85ac7a4dba64fb7dcef8676ae61849e8faeb4']
+
+
+build_cmd = 'make binary-local DISABLE_CGO=1'
+install_cmd = 'make install-binary PREFIX=%(installdir)s'
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': ['bin/skopeo'],
+    'dirs': ['']
+}
+
+moduleclass = 'tools'
