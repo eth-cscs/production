@@ -5,11 +5,6 @@ easyblock = "Binary"
 name = 'Bazel'
 version = '0.24.1'
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-versionsuffix = '-python%s' % (local_py_maj_ver)
-
 homepage = 'http://baze.io/'
 description = """Correct, reproducible, fast builds for everyone"""
 
