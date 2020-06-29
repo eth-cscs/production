@@ -13,22 +13,15 @@ source_urls = ['https://github.com/Unidata/cftime/archive/']
 sources = ['v%(version)s.tar.gz']
 checksums = ['2ec37b5e5126b70a3328a40fd903ff6303e232ec3bb2c5d7272580f6cd50e0d6']
 
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-local_pysuff = '-python%s' % local_py_maj_ver
-
-versionsuffix = local_pysuff
+versionsuffix = '-python%(pymajver)s'
 dependencies = [
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('cURL', '7.61.1'),
 ]
 
 sanity_check_paths = {
     'files':  [],
-    'dirs': ['lib/python%s/site-packages' % local_pyshortver],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'data'
