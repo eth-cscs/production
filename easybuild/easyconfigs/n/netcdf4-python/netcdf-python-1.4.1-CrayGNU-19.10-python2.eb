@@ -16,7 +16,7 @@ dependencies = [
     ('cray-python/2.7.15.7', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('cftime', '1.0.0', '-python%(pymajver)s'),
+    ('cftime', '1.0.0', versionsuffix),
 ]
 
 sanity_check_paths = {
