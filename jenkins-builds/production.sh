@@ -233,8 +233,8 @@ for((i=0; i<${#eb_files[@]}; i++)); do
             if [[ "$version" =~ "5.4" ]]; then
                 group="${name,,}"
             else
-                # After June 30th 2020: group="${name,,}6"
-                group="${name,,}"
+                # group vasp6 enforced after June 30th 2020"
+                group="${name,,}6"
             fi
         else
             group=${name,,}
