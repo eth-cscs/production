@@ -1,0 +1,40 @@
+easyblock = 'ConfigureMake'
+
+name = 'charmm'
+version = '44b2'
+cudaversion = '10.1'
+versionsuffix = '-cuda-%s' % cudaversion
+
+homepage = "http://www.charmm.org"
+description = """CHARMM (Chemistry at HARvard Macromolecular Mechanics) is a versatile
+and widely used molecular simulation program with broad application to many-particle systems.
+charmm provides all the functionality of CHARMM except its performance enhancements."""
+
+toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+toolchainopts = {'usempi': True, 'opt': True}
+
+# Request the download link from http://charmm.chemistry.harvard.edu/request_license.php?version=charmm
+# and rename the file with the latest version reported in the ChangeLogs directory
+sources = ["charmm-c%(version)s.tar.gz"]
+
+builddependencies = [
+    ('CMake', '3.14.1', '', True),
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+buildininstalldir = True
+
+prebuildopts = 'cd build/cmake && '
+preinstallopts = 'cd build/cmake && '
+
+
+sanity_check_paths = {
+    'files' : [ 'bin/charmm', 'bin/qchem'  ],
+    'dirs'  : [ 'bin', 'charmm', 'doc', 'source', 'test', 'tool' ]
+}
+
+moduleclass = 'chem'
