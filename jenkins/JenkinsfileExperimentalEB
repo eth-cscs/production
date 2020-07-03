@@ -112,7 +112,7 @@ stage('Build Stage') {
                     for (toolchain in toolchains) {
                         def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
                         def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
-                        sh "cp ${source} ${target} || true" //TODO:Open Pull Request
+                        sh "cp ${source} ${target} || true"
                     }
 
                     /* build the software stack with the new toolchains */
@@ -138,26 +138,24 @@ stage('Build Stage') {
                             # save successful builds in production file
                             if [ \$status -eq 0 ]; then
                                 success+=(\$recipe)
-                                echo eb success: \${#success[@]} \$recipe : \$success
+                                echo eb success: \${#success[@]} \$recipe : \${success[@]}
                                 new_eb=\$(echo \$recipe | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/')
                                 new_path=\$(echo \$new_eb | sed -E 's@-(.*)\\.eb@/\\1@')
                                 ls -lh ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
                                 find $WORKSPACE -name \$recipe | xargs dirname | xargs cp ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
                                 echo \$new_eb >> $WORKSPACE/jenkins-builds/$prod_file
-                                # TO DO: add successful recipes to GitHub PR
                             else
                                 failed+=(\$recipe)
-                                echo eb failed: \${#failed[@]} \$recipe : \$failed
+                                echo eb failed: \${#failed[@]} \$recipe : \${failed[@]}
                                 continue
-                                # TO DO: open Jira issue or GitHub WIP PR
                             fi
                         done
 
                         echo original: $WORKSPACE/jenkins-builds/$prod_file
                         cat $WORKSPACE/jenkins-builds/$prod_file
 
-#                        echo sed: $WORKSPACE/jenkins-builds/$prod_file
-#                        sed -E 's/Cray(.*)-${params.cdt_current}/Cray\1-${params.cdt_version}/g' $WORKSPACE/jenkins-builds/$prod_file
+                        echo \${failed[@]} > $SCRATCH/$env.JOB_BASE_NAME-$machineLabel-failed.log
+                        echo \${success[@]} > $SCRATCH/$env.JOB_BASE_NAME-$machineLabel-success.log
 
 #                        # find production dependencies:
 #                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
@@ -190,9 +188,12 @@ stage('Build Stage') {
 
                         rm $WORKSPACE/*.out
 
-                        echo $SCRATCH
                         chmod a+r -R $SCRATCH/ExperimentalEB/
                         git -C $WORKSPACE status
+
+                        echo $WORKSPACE
+                        echo $SCRATCH
+                        pwd
 
                         status=\$[status+\$?]
                         exit \$status
@@ -204,6 +205,30 @@ stage('Build Stage') {
 
     try {
         parallel builds
+
+        // merge workspaces and create PR's
+        node('dom') {
+            sh("""#!/bin/bash -l
+                git -C $WORKSPACE status
+
+                cp -rf \$SCRATCH/*/workspace/ExperimentalEB*/* $WORKSPACE
+                rm $WORKSPACE/*.out
+                git -C $WORKSPACE status
+                git -C $WORKSPACE --no-pager diff --stat
+                echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
+
+                echo $WORKSPACE
+                echo $SCRATCH
+                pwd
+
+                wc $SCRATCH/$env.JOB_BASE_NAME-*-failed.log
+                head $SCRATCH/$env.JOB_BASE_NAME-*-failed.log | sed 's@ @\\n@g'
+                wc $SCRATCH/$env.JOB_BASE_NAME-*-success.log
+                head $SCRATCH/$env.JOB_BASE_NAME-*-success.log | sed 's@ @\\n@g'
+                # TO DO: add successful recipes to GitHub PR
+                # TO DO: open Jira issue or GitHub WIP PR with failed recipes
+            """)
+        }
         currentBuild.result = "SUCCESS"
     } catch(err) {
         if (err.toString().contains('exit code 143')) {
