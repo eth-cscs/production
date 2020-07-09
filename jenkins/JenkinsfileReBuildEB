@@ -77,11 +77,15 @@ stage('Build Stage') {
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
 
-                    /* define unusePath */
+                    /* define unuse command */
                     if (machine.unusePath != '') {
-                        def unusePath = architecture == '' ?
-                            "$machine.unusePath" :
-                            "$machine.unusePath".replace('ARCH', architecture)
+                        def unuse_command = architecture == '' ?
+                            "module unuse $machine.unusePath" :
+                            "module unuse $machine.unusePath".replace('ARCH', architecture)
+                        println("The unuse command is: $unuse_command")
+                    }
+                    else {
+                        println("The unuse command is empty")
                     }
 
                     /* build the software stack using the build command */
@@ -93,7 +97,7 @@ stage('Build Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
-                        module unuse $unusePath
+                        $unuse_command
 
                         # read the target production list $machineLabel
                         build_list=\$(awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel)
