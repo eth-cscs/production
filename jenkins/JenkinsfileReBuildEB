@@ -91,7 +91,7 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        $loade_asybuild
+                        $load_easybuild
                         $switch_easybuild
                         module unuse $unusePath
 
