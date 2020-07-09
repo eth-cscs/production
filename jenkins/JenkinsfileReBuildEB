@@ -72,21 +72,16 @@ stage('Build Stage') {
                     def switch_easybuild =
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
+                    /* define unuse command */
+                    def unuse_command = architecture == '' ?
+                        "module unuse $machine.unusePath" :
+                        "module unuse $machine.unusePath".replace('ARCH', architecture)
+                        println("The unuse command is: $unuse_command")
+
                     /* define build command */
                     def build_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
-
-                    /* define unuse command */
-                    if (machine.unusePath != '') {
-                        def unuse_command = architecture == '' ?
-                            "module unuse $machine.unusePath" :
-                            "module unuse $machine.unusePath".replace('ARCH', architecture)
-                        println("The unuse command is: $unuse_command")
-                    }
-                    else {
-                        println("The unuse command is empty")
-                    }
 
                     /* build the software stack using the build command */
                     sh("""#!/bin/bash -l
