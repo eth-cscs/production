@@ -74,7 +74,7 @@ stage('Build Stage') {
 
                     /* define build command */
                     def build_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
 
                     /* define unusePath */
