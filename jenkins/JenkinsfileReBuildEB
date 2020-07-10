@@ -94,8 +94,30 @@ stage('Build Stage') {
                         $switch_easybuild
                         $unuse_command
 
-                        # read the target production list $machineLabel
-                        build_list=\$(awk '{print \$1}' $WORKSPACE/jenkins-builds/$machineLabel)
+                        # prints EasyBuild version and configuration
+                        echo -e "\n"
+                        eb --version
+                        eb --show-config
+                        echo -e "\n"
+
+                        # filter the target production list $machineLabel
+                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
+                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
+                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+
+                        # clean up prefix, initialise counters and lists
+                        if [ -d "\${EASYBUILD_PREFIX}" ]; then
+                            echo -e "\nRemoving existing folder \${EASYBUILD_PREFIX}"
+                            rm -rf "\${EASYBUILD_PREFIX}"
+                        fi  
+                        success = ""
+                        success_file = "\${EASYBUILD_PREFIX}/success.txt"
+                        echo "\$success" > "\${success_file}"
+                        failed = ""
+                        failed_file = "\${EASYBUILD_PREFIX}/failed.txt"
+                        echo "\$failed" > "\${failed_file}"
+
+                        # build recipes
                         for recipe in \${build_list}; do
                             status=0
                             echo -e "\nBuilding \$recipe"
@@ -105,16 +127,28 @@ stage('Build Stage') {
                             # keep track of successful and failed builds
                             if [ \$status -eq 0 ]; then
                                 success+=(\$recipe)
+                                echo "\$recipe" >> "\${success_file}"
+                                # remove folders 
+                                echo -e "\nRemoving modules and software folders of successful build \$recipe and its dependencies"
+                                rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
                             else
                                 failed+=(\$recipe)
-                                continue
+                                echo "\$recipe" >> "\${failed_file}"
+                                # archive folders
+                                echo -e "\nArchiving modules and software folders of failed build \$recipe and its dependencies"
+                                tar cjf \${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2 "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software" --remove-files
                             fi
                         done
 
-                        # print successful and failed recipes
-                        echo -e "Success: \${#success[@]} \n \${success[@]}"
-                        echo -e "Failed: \${#failed[@]} \n \${failed[@]}
+                        # change permission of tmp folders
+                        chmod -R o+r "\${EASYBUILD_TMPDIR}"
+                        find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
 
+                        # print successful and failed builds
+                        echo -e "\nSuccessful builds: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed builds: \${#failed[@]} \n\${failed[@]}"
+
+                        # return the number of failed builds
                         status=\${#failed[@]}
                         exit \$status
                     """)
