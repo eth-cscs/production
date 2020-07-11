@@ -115,7 +115,7 @@ stage('Build Stage') {
                         echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
                         echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
                         build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
-                        echo -e "\nSelected recipes to rebuild: \n$build_list"
+                        echo -e "\nSelected recipes to rebuild: \n\$build_list"
 
                         # build recipes
                         for recipe in \${build_list}; do
