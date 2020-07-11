@@ -69,8 +69,8 @@ stage('Build Stage') {
                         "module load daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
-                    def switch_easybuild = ${params.eb_version} == "" ?
-                        "module switch EasyBuild EasyBuild" :
+                    def switch_easybuild = params.eb_version == "" ?
+                        "continue" :
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
                     /* define unuse command */
