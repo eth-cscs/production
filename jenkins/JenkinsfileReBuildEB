@@ -118,8 +118,8 @@ stage('Build Stage') {
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            echo -e "\nCurrent recipe: \$recipe"
-                            eb \$recipe -Dr 2>&1 | grep -v "== temporary"
+                            echo -e "\nCurrent build: \$recipe"
+                            eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
 
                             echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
@@ -130,13 +130,13 @@ stage('Build Stage') {
                                 success+=(\$recipe)
                                 echo "\$recipe" >> "\${success_file}"
                                 # remove folders 
-                                echo -e "\nRemoving modules and software folders after successful build of \$recipe and its dependencies"
+                                echo -e "\nBuild of \$recipe SUCCESSFUL: removin modules and software folders"
                                 rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
                             else
                                 failed+=(\$recipe)
                                 echo "\$recipe" >> "\${failed_file}"
                                 # archive folders
-                                echo -e "\nArchiving modules and software folders after failed build of \$recipe and its dependencies"
+                                echo -e "\nBuild of \$recipe FAILED: archiving modules and software folders"
                                 tar cjf \${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2 "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software" --remove-files
                             fi
                         done
