@@ -96,10 +96,8 @@ stage('Build Stage') {
                         $unuse_command
 
                         # prints EasyBuild version and configuration
-                        echo -e "\n"
                         eb --version
                         eb --show-config
-                        echo -e "\n"
 
                         # clean up prefix, initialise counters and lists
                         if [ -d "\${EASYBUILD_PREFIX}" ]; then
@@ -120,8 +118,8 @@ stage('Build Stage') {
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            echo -e "\nCurrent \$recipe and dependencies to build:"
-                            eb \$recipe -Dr
+                            echo -e "\nCurrent recipe: \$recipe"
+                            eb \$recipe -Dr 2>&1 | grep -v "== temporary"
 
                             echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
