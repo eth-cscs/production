@@ -101,11 +101,6 @@ stage('Build Stage') {
                         eb --show-config
                         echo -e "\n"
 
-                        # filter the target production list $machineLabel
-                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
-                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
-                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
-
                         # clean up prefix, initialise counters and lists
                         if [ -d "\${EASYBUILD_PREFIX}" ]; then
                             echo -e "\nRemoving existing folder \${EASYBUILD_PREFIX}"
@@ -116,10 +111,19 @@ stage('Build Stage') {
                         unset failed
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
 
+                        # filter the target production list $machineLabel
+                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
+                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
+                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        echo -e "\nSelected recipes to rebuild: \n$build_list"
+
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            echo -e "\nBuilding \$recipe"
+                            echo -e "\nCurrent \$recipe and dependencies to build:"
+                            eb \$recipe -Dr
+
+                            echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
                             status=\$[status+\$?]
 
@@ -139,8 +143,8 @@ stage('Build Stage') {
                             fi
                         done
 
-                        # change permission of tmp folders
-                        if [ -d "\${EASYBUILD_TMPDIR}" ]; then
+                        # change permission of tmp folders if failed is not null
+                        if [ -n "\$failed" ]; then
                             chmod -R o+r "\${EASYBUILD_TMPDIR}"
                             find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
                         fi
