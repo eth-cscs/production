@@ -111,9 +111,9 @@ stage('Build Stage') {
                             echo -e "\nRemoving existing folder \${EASYBUILD_PREFIX}"
                             rm -rf "\${EASYBUILD_PREFIX}"
                         fi  
-                        success=""
+                        unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
-                        failed=""
+                        unset failed
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
 
                         # print successful and failed builds
