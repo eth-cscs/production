@@ -116,6 +116,10 @@ stage('Build Stage') {
                         failed=""
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
 
+                        # print successful and failed builds
+                        echo -e "\nSuccessful builds: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed builds: \${#failed[@]} \n\${failed[@]}"
+
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
@@ -137,6 +141,11 @@ stage('Build Stage') {
                                 echo -e "\nArchiving modules and software folders after failed build of \$recipe and its dependencies"
                                 tar cjf \${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2 "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software" --remove-files
                             fi
+
+                            # print successful and failed builds
+                            echo -e "\nSuccessful builds: \${#success[@]} \n\${success[@]}"
+                            echo -e "\nFailed builds: \${#failed[@]} \n\${failed[@]}"
+
                         done
 
                         # change permission of tmp folders
