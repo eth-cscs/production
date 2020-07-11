@@ -113,10 +113,8 @@ stage('Build Stage') {
                         fi  
                         success=""
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
-                        echo "\$success" > "\${success_file}"
                         failed=""
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
-                        echo "\$failed" > "\${failed_file}"
 
                         # build recipes
                         for recipe in \${build_list}; do
