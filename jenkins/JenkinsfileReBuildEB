@@ -142,8 +142,10 @@ stage('Build Stage') {
                         done
 
                         # change permission of tmp folders
-                        chmod -R o+r "\${EASYBUILD_TMPDIR}"
-                        find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
+                        if [ -d "\${EASYBUILD_TMPDIR}" ]; then
+                            chmod -R o+r "\${EASYBUILD_TMPDIR}"
+                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
+                        fi
 
                         # print successful and failed builds
                         echo -e "\nSuccessful builds: \${#success[@]} \n\${success[@]}"
@@ -160,30 +162,6 @@ stage('Build Stage') {
 
     try {
         parallel builds
-
-        // merge workspaces and create PR's
-        node('dom') {
-            sh("""#!/bin/bash -l
-                git -C $WORKSPACE status
-
-                cp -rf \$SCRATCH/*/workspace/ExperimentalEB*/* $WORKSPACE
-                rm $WORKSPACE/*.out
-                git -C $WORKSPACE status
-                git -C $WORKSPACE --no-pager diff --stat
-                echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
-
-                echo $WORKSPACE
-                echo $SCRATCH
-                pwd
-
-                wc $SCRATCH/$env.JOB_BASE_NAME-*-failed.log
-                head $SCRATCH/$env.JOB_BASE_NAME-*-failed.log | sed 's@ @\\n@g'
-                wc $SCRATCH/$env.JOB_BASE_NAME-*-success.log
-                head $SCRATCH/$env.JOB_BASE_NAME-*-success.log | sed 's@ @\\n@g'
-                # TO DO: add successful recipes to GitHub PR
-                # TO DO: open Jira issue or GitHub WIP PR with failed recipes
-            """)
-        }
         currentBuild.result = "SUCCESS"
     } catch(err) {
         if (err.toString().contains('exit code 143')) {
