@@ -130,7 +130,7 @@ stage('Build Stage') {
                                 success+=(\$recipe)
                                 echo "\$recipe" >> "\${success_file}"
                                 # remove folders 
-                                echo -e "\nBuild of \$recipe SUCCESSFUL: removin modules and software folders"
+                                echo -e "\nBuild of \$recipe SUCCESSFUL: removing modules and software folders"
                                 rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
                             else
                                 failed+=(\$recipe)
