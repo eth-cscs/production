@@ -191,7 +191,7 @@ exts_list = [
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
-    ('ipyparaview', 'f32ac3d', {
+    ('ipyparaview', '31be3bc', {
         'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
         }),
 
@@ -257,7 +257,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "cd %(installdir)s/ && "
                    "git clone https://github.com/NVIDIA/ipyparaview && "
                    "cd ipyparaview && "
-                   "git checkout f32ac3d && "
+                   "git checkout 31be3bc && "
                    "%(installdir)s/bin/jupyter labextension install js --no-build && "
 # now build the webpack                   
                    "%(installdir)s/bin/jupyter lab build --debug --dev-build=False && "
