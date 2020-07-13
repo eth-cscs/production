@@ -86,7 +86,7 @@ stage('Build Stage') {
 
                     /* build the software stack using the build command */
                     sh("""#!/bin/bash -l
-                        export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel"
+                        export EASYBUILD_PREFIX="\$SCRATCH/${params.eb_prefix}/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
