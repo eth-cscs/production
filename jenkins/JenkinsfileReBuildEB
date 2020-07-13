@@ -39,7 +39,7 @@ stage('Machine Selection') {
 }
 
 /*
- Build Stage: configures parallel builds for the different "machinesToRun"
+ ReBuild Stage: configures parallel builds for the different "machinesToRun"
  Loop over all systems in "machineConfigurations":
   - if the machine has multiple architectures, starts a sub-loop over architectures
   - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
@@ -47,7 +47,7 @@ stage('Machine Selection') {
   - the target production list is defined by the symbolic link "$machineLabel"
 */
 def builds = [:]
-stage('Build Stage') {
+stage('ReBuild Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
@@ -175,6 +175,12 @@ stage('Build Stage') {
         else {
             currentBuild.result = "FAILURE"
             println "The Build step failed. Exiting..."
+        }
+    }
+    
+    finally {
+        if (params.notifySlack) {
+            methods.notifySlackFinish()
         }
     }
 }
