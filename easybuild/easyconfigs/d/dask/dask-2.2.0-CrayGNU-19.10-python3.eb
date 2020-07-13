@@ -1,8 +1,8 @@
+#
 easyblock = 'PythonBundle'
 
 name = 'dask'
 version = '2.2.0'
-
 versionsuffix = '-python%(pymajver)s'
 _pyminver = '6'
 
@@ -15,12 +15,12 @@ toolchainopts = {'verbose': False}
 
 dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    ('PyExtensions', '%(pyver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'req_py_minver': _pyminver,
     'use_pip': True,
     'source_urls': [PYPI_SOURCE]
 }

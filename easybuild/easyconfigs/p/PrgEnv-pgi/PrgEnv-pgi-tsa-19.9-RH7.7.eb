@@ -14,7 +14,7 @@ description = """
 
 toolchain = SYSTEM
 
-local_path='/apps/arolla/UES/jenkins/RH7.7/%s/%s/easybuild/modules/all' % (local_prgenv, version)
+local_path='/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
@@ -33,7 +33,7 @@ if { [module-info mode remove] || [module-info mode switch] } {
 if { [module-info mode load] } {
  module use %s
  if { ![ is-loaded %s/%s-gcc-8.3.0 ] } {
-  module load openmpi/4.0.2-%s-%s-gcc-8.3.0-cuda-10.1
+  module load openmpi/4.0.2-%s-%s-gcc-8.3.0-cuda-10.1-rh7.7
   module load cuda/10.1.243
  }
 }

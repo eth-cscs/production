@@ -1,6 +1,6 @@
 Anaconda3-2019.03.eb
 Autotools-20180311.eb
-Buildah-1.14.8.eb
+Buildah-1.14.9.eb
 CMake-3.14.5.eb
 CUDA-10.1.243.eb
 ddt-20.0.3-Redhat-7.0.eb                               --set-default-module
@@ -45,7 +45,7 @@ Ruby-2.4.0-fosscuda-2019b.eb 			               --installpath=/apps/arolla/UES/je
 Ruby-2.6.5-fosscuda-2019b.eb 			               --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/gnu/19.2/easybuild
 netCDF-C++-4.3.0-fosscuda-2019b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/gnu/19.2/easybuild
 netCDF-Fortran-4.4.5-fosscuda-2019b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/gnu/19.2/easybuild
-OpenMPI-4.0.2-gcccuda-2019b-cuda-10.1-RH7.7.eb         --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/gnu/19.2/easybuild
+OpenMPI-4.0.2-gcccuda-2019b-cuda-10.1.eb               --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/gnu/19.2/easybuild
 netCDF-C++-4.3.0-PGI-19.9-GCC-8.3.0.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/pgi/19.9-nocuda/easybuild
 netCDF-Fortran-4.4.5-PGI-19.9-GCC-8.3.0.eb             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/pgi/19.9-nocuda/easybuild
 OpenMPI-4.0.2-PGI-19.9-GCC-8.3.0-nocuda.eb             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/pgi/19.9-nocuda/easybuild
