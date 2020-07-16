@@ -28,6 +28,6 @@ def tsa = [name: 'tsa',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/generic/easybuild']
 
 return [daint, dom, kesch, tsa]
