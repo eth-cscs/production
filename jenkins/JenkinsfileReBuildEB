@@ -184,7 +184,7 @@ stage('ReBuild Stage') {
         }
         
         if (params.notifyJira) {
-            def message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* [Build log|${env.BUILD_URL}]"
+            def message = "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* [Build log|${env.BUILD_URL}]"
             def issue = [fields: [ project: [key: 'UES'],
                                    summary: '${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                                    description: message,
