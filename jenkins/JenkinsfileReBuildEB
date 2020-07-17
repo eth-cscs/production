@@ -137,7 +137,7 @@ stage('ReBuild Stage') {
                                 echo "\$recipe" >> "\${failed_file}"
                                 # archive folders
                                 echo -e "\nBuild of \$recipe FAILED: archiving modules and software folders"
-                                tar cjf \${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2 "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software" --remove-files
+                                tar cjf "\${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2" --directory="\${EASYBUILD_PREFIX}" "modules" "software" --remove-files
                             fi
                         done
 
@@ -184,16 +184,13 @@ stage('ReBuild Stage') {
         }
         
         if (params.notifyJira) {
-            try {
-                error "Exception"
-            } catch(error) {
-                def issue = [fields: [ project: [key: 'UES'],
-                                       summary: 'ReBuildEB Jenkins projects',
-                                       description: 'Item created from Jenkins project ReBuildEB',
-                                       issuetype: [name: 'Task']]]
+            def message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* [Build log|${env.BUILD_URL}]"
+            def issue = [fields: [ project: [key: 'UES'],
+                                   summary: '${env.JOB_NAME} [${env.BUILD_NUMBER}]',
+                                   description: message,
+                                   issuetype: [name: 'Task']]]
                 def newIssue = jiraNewIssue issue: issue
                 echo newIssue.data.key
-            }
         }
     }
 }
