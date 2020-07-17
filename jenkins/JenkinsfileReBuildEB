@@ -182,5 +182,18 @@ stage('ReBuild Stage') {
         if (params.notifySlack) {
             methods.notifySlackFinish()
         }
+        
+        if (params.notifyJira) {
+            try {
+                error "Exception"
+            } catch(error) {
+                def issue = [fields: [ project: [key: 'UES'],
+                                       summary: 'ReBuildEB Jenkins projects',
+                                       description: 'Item created from Jenkins project ReBuildEB',
+                                       issuetype: [name: 'Task']]]
+                def newIssue = jiraNewIssue issue: issue
+                echo newIssue.data.key
+            }
+        }
     }
 }
