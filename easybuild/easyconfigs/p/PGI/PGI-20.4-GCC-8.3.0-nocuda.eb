@@ -1,0 +1,44 @@
+# contributed by Luca Marsella (CSCS)
+name = 'PGI'
+version = "20.4"
+local_version_major = '20'
+local_version_minor = '4'
+
+local_gccver = '8.3.0'
+local_binutilsver = '2.32'
+versionsuffix = '-GCC-%s-nocuda' % (local_gccver)
+
+homepage = 'http://www.pgroup.com/'
+description = "C, C++ and Fortran compilers from The Portland Group - PGI"
+
+toolchain = SYSTEM
+
+sources = [
+    '/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%s-%s%s-x86-64.tar.gz' 
+    % (local_version_major, local_version_major, local_version_minor)
+]
+checksums = ['70e8fb5ed906b12b07ee493801dd1c9b']
+
+install_amd = 'False'
+install_java = 'False'
+install_managed = 'False'
+install_nvidia = 'False'
+mpi_gpu_support = 'False'
+
+dependencies = [
+    ('GCCcore', local_gccver),
+    ('binutils', local_binutilsver, '', ('GCCcore', local_gccver)),
+]
+
+postinstallcmds = [
+    'mv %(installdir)s/linux86-64-llvm/{0}/lib/pgiloc.ld %(installdir)s/linux86-64-llvm/{0}/lib/pgiloc.ld.BAK'.format(version),
+    'mv %(installdir)s/linux86-64-nollvm/{0}/lib/pgiloc.ld %(installdir)s/linux86-64-nollvm/{0}/lib/pgiloc.ld.BAK'.format(version),
+]
+
+# license file
+license_file = '/apps/common/UES/licensesCSCS/pgi/license.dat'
+modtclfooter = """
+    setenv LM_LICENSE_FILE /apps/common/UES/licensesCSCS/pgi/license.dat
+"""
+
+moduleclass = 'compiler'

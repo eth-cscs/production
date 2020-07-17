@@ -7,7 +7,7 @@ description = """
     The Open MPI Project is an open source MPI-3 implementation.
 """
 
-toolchain = {'name': 'GCC', 'version': '8.3.0'}
+toolchain = {'name': 'PGI', 'version': '20.4-GCC-8.3.0-nocuda'}
 
 source_urls = [
     'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
@@ -19,6 +19,12 @@ builddependencies = [
 ]
 
 configopts = (
+    "CC=pgcc "
+    "CXX=pgc++ "
+    "FC=pgfortran "
+    "CFLAGS=-m64 "
+    "CXXFLAGS=-m64 "
+    "FCFLAGS=-m64 "
     "--with-hwloc=internal "
     "--with-pmi=/opt/slurm/default "
     "--with-ucx=${EBROOTUCX} "
@@ -26,6 +32,7 @@ configopts = (
     "--without-alps "
     "--without-libfabric "
     "--without-lsf "
+    "--without-mxm "
     "--without-psm2 "
     "--without-sge "
     "--without-tm "
@@ -52,14 +59,13 @@ modtclfooter = """
     setenv UCX_TLS rc_x,ud_x,mm,shm,cma
 """
 
-local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
     'files': [
-        ["bin/%s" % local_binfile 
-        for local_binfile in ["ompi_info","opal_wrapper","orterun"]] +
-        ["lib/lib%s.%s" % (local_libfile, SHLIB_EXT) for local_libfile in local_libs] +
-        ["include/%s.h" % local_x 
-        for local_x in ["mpi-ext","mpif-config","mpif","mpi","mpi_portable_platform"]]
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 'lib/libompitrace.so', 
+        'lib/libopen-pal.so', 'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 'include/mpi.h', 
+        'include/mpi_portable_platform.h'
     ],
     'dirs': [],
 }
