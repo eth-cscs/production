@@ -184,13 +184,13 @@ stage('ReBuild Stage') {
         }
         
         if (params.notifyJira) {
-            def message = "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* [Build log|${env.BUILD_URL}]"
+            def title = "${env.JOB_NAME} [${env.BUILD_NUMBER}]"
+            def content = "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}*"
             def issue = [fields: [ project: [key: 'UES'],
-                                   summary: '${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                                   description: message,
+                                   summary: title,
+                                   description: content,
                                    issuetype: [name: 'Task']]]
                 def newIssue = jiraNewIssue issue: issue, site: 'TDS'
-                echo newIssue.data.key
         }
     }
 }
