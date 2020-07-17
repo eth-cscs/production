@@ -189,7 +189,7 @@ stage('ReBuild Stage') {
                                    summary: '${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                                    description: message,
                                    issuetype: [name: 'Task']]]
-                def newIssue = jiraNewIssue issue: issue site: 'TDS'
+                def newIssue = jiraNewIssue issue: issue, site: 'TDS'
                 echo newIssue.data.key
         }
     }
