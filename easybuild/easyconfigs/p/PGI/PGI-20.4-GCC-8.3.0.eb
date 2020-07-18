@@ -1,8 +1,6 @@
 # contributed by Luca Marsella (CSCS)
 name = 'PGI'
 version = "20.4"
-local_version_major = '20'
-local_version_minor = '4'
 
 local_gccver = '8.3.0'
 local_binutilsver = '2.32'
@@ -15,7 +13,7 @@ toolchain = SYSTEM
 
 sources = [
     '/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%s-%s%s-x86-64.tar.gz' 
-    % (local_version_major, local_version_major, local_version_minor)
+    % (version_major, version_major, version_minor)
 ]
 checksums = []
 install_amd = 'False'
