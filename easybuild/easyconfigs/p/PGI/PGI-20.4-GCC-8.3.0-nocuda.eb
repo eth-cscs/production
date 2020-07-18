@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), modified by MKr (CSCS) - 07/2020
 name = 'PGI'
 version = "20.4"
 
