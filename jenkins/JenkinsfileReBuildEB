@@ -80,11 +80,13 @@ stage('ReBuild Stage') {
                         println("The unuse command is: $unuse_command")
 
                     /* define build command */
-                    def build_command = architecture == "" ?
+                    def rebuild_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
+                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
+                        "eb -r"
+                        println("The ReBuild command is: $rebuild_command")
 
-                    /* build the software stack using the build command */
+                    /* build the software stack using the rebuild command */
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="\$SCRATCH/${params.eb_prefix}/$machineLabel"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
@@ -112,17 +114,17 @@ stage('ReBuild Stage') {
                         # filter the target production list $machineLabel
                         echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
                         echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
-                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
-                        echo -e "\nSelected recipes to rebuild: \n\$build_list"
+                        rebuild_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        echo -e "\nSelected recipes to ReBuild: \n\$rebuild_list"
 
-                        # build recipes
+                        # rebuild recipes
                         for recipe in \${build_list}; do
                             status=0
                             echo -e "\nCurrent build: \$recipe"
                             eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
 
-                            echo -e "\nSubmitting job and building..."
-                            $build_command \$recipe
+                            echo -e "\nSubmitting job and ReBuilding..."
+                            $rebuild_command \$recipe
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
@@ -130,13 +132,13 @@ stage('ReBuild Stage') {
                                 success+=(\$recipe)
                                 echo "\$recipe" >> "\${success_file}"
                                 # remove folders 
-                                echo -e "\nBuild of \$recipe SUCCESSFUL: removing modules and software folders"
+                                echo -e "\nReBuild of \$recipe SUCCESSFUL: removing modules and software folders"
                                 rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
                             else
                                 failed+=(\$recipe)
                                 echo "\$recipe" >> "\${failed_file}"
                                 # archive folders
-                                echo -e "\nBuild of \$recipe FAILED: archiving modules and software folders"
+                                echo -e "\nReBuild of \$recipe FAILED: archiving modules and software folders"
                                 tar cjf "\${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2" --directory="\${EASYBUILD_PREFIX}" "modules" "software" --remove-files
                             fi
                         done
@@ -147,11 +149,11 @@ stage('ReBuild Stage') {
                             find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
                         fi
 
-                        # print successful and failed builds
-                        echo -e "\nSuccessful builds: \${#success[@]} \n\${success[@]}"
-                        echo -e "\nFailed builds: \${#failed[@]} \n\${failed[@]}"
+                        # print successful and failed rebuilds
+                        echo -e "\nSuccessful ReBuilds: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed ReBuilds: \${#failed[@]} \n\${failed[@]}"
 
-                        # return the number of failed builds
+                        # return the number of failed ReBuilds
                         status=\${#failed[@]}
                         exit \$status
                     """)
@@ -184,13 +186,7 @@ stage('ReBuild Stage') {
         }
         
         if (params.notifyJira) {
-            def title = "${env.JOB_NAME} [${env.BUILD_NUMBER}]"
-            def content = "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}*"
-            def issue = [fields: [ project: [key: 'UES'],
-                                   summary: title,
-                                   description: content,
-                                   issuetype: [name: 'Task']]]
-                def newIssue = jiraNewIssue issue: issue, site: 'TDS'
+            methods.failedJiraTask('UES', 'ncview', 'dom-gpu')
         }
     }
 }
