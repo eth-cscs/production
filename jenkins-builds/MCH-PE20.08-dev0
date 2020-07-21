@@ -55,3 +55,5 @@ netCDF-Fortran-4.4.5-PGI-20.4-GCC-8.3.0.eb             --installpath=/apps/aroll
 OpenMPI-4.0.2-PGI-20.4-GCC-8.3.0-cuda-10.1.eb          --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/pgi/20.4/easybuild
 PrgEnv-gnu-tsa-19.2-nocuda.eb                          --module-naming-scheme=EasyBuildMNS
 PrgEnv-gnu-tsa-19.2.eb                                 --module-naming-scheme=EasyBuildMNS --set-default-module
+PrgEnv-pgi-tsa-20.4-nocuda.eb                          --module-naming-scheme=EasyBuildMNS
+PrgEnv-pgi-tsa-20.4.eb                                 --module-naming-scheme=EasyBuildMNS --set-default-module
