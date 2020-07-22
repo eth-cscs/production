@@ -1,11 +1,9 @@
 # contributed by Luca Marsella (CSCS)
 easyblock = 'Bundle'
 
-local_fossversion = '2019b'
-local_prgenv = 'gnu' 
+local_prgenv = 'pgi' 
 name = 'PrgEnv-%s' % local_prgenv
-version = '19.2'
-versionsuffix = '-nocuda'
+version = '20.4'
 
 homepage = 'http://user.cscs.ch'
 description = """
@@ -16,26 +14,30 @@ description = """
 
 toolchain = SYSTEM
 
-#FIXME: automate injection of release tag into path
-local_path = '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/%s/%s%s/easybuild/modules/all' % (local_prgenv, version, versionsuffix)
+local_path='/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
 lappend list binutils gcccore
 
 if { [module-info mode remove] || [module-info mode switch] } {
- if { [ is-loaded foss/.%s ] } {
-     module unload foss/.%s
+ foreach module ${list} {
+  if { [is-loaded ${module}] } {
+   module unload ${module}
+  }
  }
+ module unload cuda/10.1.243
  module unuse %s
 }
 
 if { [module-info mode load] } {
  module use %s
- if { ![ is-loaded foss/.%s ] } {
-  module load foss/.%s
+ if { ![ is-loaded %s/%s-gcc-8.3.0 ] } {
+  module load openmpi/4.0.2-%s-%s-gcc-8.3.0-cuda-10.1
+  module load cuda/10.1.243
  }
 }
-""" % (local_path, local_fossversion, local_fossversion, local_path, local_path, local_fossversion, local_fossversion)
+""" % (local_path, local_path, local_path, local_prgenv, version, local_prgenv,
+       version)
 
 moduleclass = 'devel'
