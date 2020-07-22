@@ -223,8 +223,6 @@ if (params.notifyJira) {
     }
 }
 
-finally {
-    if (params.notifySlack) {
-        methods.notifySlackFinish()
-    }
+if (params.notifySlack) {
+    methods.notifySlackFinish()
 }
