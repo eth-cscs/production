@@ -63,21 +63,21 @@ stage('Build Stage') {
                 node(machineName) {
                     checkout scm
 
-                    /* define unusePath */
-                    if (machine.unusePath != '') {
-                        def unusePath = architecture == '' ?
-                            "$machine.unusePath" :
-                            "$machine.unusePath".replace('ARCH', architecture)
-                    }
-
                     /* define command to load EasyBuild */
                     def loadeasybuild = architecture == "" ?
                         "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
                         "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
-                    def switcheasybuild =
+                    def switch_easybuild = params.eb_version == "" ?
+                        "" :
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
+
+                    /* define unuse command */
+                    def unuse_command = architecture == '' ?
+                        "module unuse $machine.unusePath" :
+                        "module unuse $machine.unusePath".replace('ARCH', architecture)
+                        println("Unuse command: $unuse_command")
 
                     /* define toolchain names and corresponding EasyBuild recipes */
                     def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
@@ -99,6 +99,8 @@ stage('Build Stage') {
                         $loadeasybuild
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
+                        
+                        # print EasyBuild version and configuration
                         eb --version
                         eb --show-config
 
@@ -115,8 +117,14 @@ stage('Build Stage') {
                         sh "cp ${source} ${target} || true"
                     }
 
+                    /* define command to build the software stack */
+                    def build_command = architecture == "" ?
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb --try-toolchain-version=${params.cdt_version} -r" :
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb --try-toolchain-version=${params.cdt_version} -r"
+
                     /* build the software stack with the new toolchains */
-                    def prod_file = "7.0.UP01-${params.cdt_version}-$machineLabel"
+                    def prod_file = "7.0.UP02-${params.cdt_version}-$machineLabel"
+
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
@@ -126,77 +134,67 @@ stage('Build Stage') {
                         $loadeasybuild
                         $switcheasybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
+                        # print EasyBuild version and configuration
+                        eb --version
+                        eb --show-config
 
-                        # initialize production list
+                        echo -e "\nRunning command: \n$build_command"
+
+                        # initialise counters and lists
                         rm $WORKSPACE/jenkins-builds/$prod_file
-                        build_list=\$(awk -v cdt=${params.cdt_current} '{if(\$1~cdt) print \$1}' $WORKSPACE/jenkins-builds/$machineLabel | grep -v classic | grep -v Amber)
+                        unset success
+                        success_file="\${EASYBUILD_PREFIX}/success.txt"
+                        unset failed
+                        failed_file="\${EASYBUILD_PREFIX}/failed.txt"
+
+                        # filter the target production list $machineLabel
+                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
+                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
+                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        
+                        if [ -z "\$build_list" ]; then
+                         echo -e "\nThe list of recipes to build is empty. Exiting..."
+                         exit \$(wc -w <<< \$build_list)
+                        else   
+                         echo -e "\nSelected recipes to build: \n\$build_list"
+                        fi
+
+                        # build recipes
                         for recipe in \${build_list}; do
                             status=0
                             echo -e "\nBuilding \$recipe"
-                            srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb --try-toolchain-version=${params.cdt_version} -r \$recipe
+                            eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
+
+                            echo -e "\nSubmitting job and building..."
+                            $build_command \$recipe
                             status=\$[status+\$?]
-                            # save successful builds in production file
+
+                            # keep track of successful and failed builds
                             if [ \$status -eq 0 ]; then
                                 success+=(\$recipe)
-                                echo eb success: \${#success[@]} \$recipe : \${success[@]}
-                                new_eb=\$(echo \$recipe | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/')
-                                new_path=\$(echo \$new_eb | sed -E 's@-(.*)\\.eb@/\\1@')
-                                ls -lh ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
-                                find $WORKSPACE -name \$recipe | xargs dirname | xargs cp ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
-                                echo \$new_eb >> $WORKSPACE/jenkins-builds/$prod_file
+                                echo "\$recipe" >> "\${success_file}"
+                                # remove folders
+                                echo -e "\nBuild of \$recipe SUCCESSFUL"
                             else
                                 failed+=(\$recipe)
-                                echo eb failed: \${#failed[@]} \$recipe : \${failed[@]}
-                                continue
+                                echo "\$recipe" >> "\${failed_file}"
+                                # archive folders
+                                echo -e "\nBuild of \$recipe FAILED"
                             fi
                         done
 
-                        echo original: $WORKSPACE/jenkins-builds/$prod_file
-                        cat $WORKSPACE/jenkins-builds/$prod_file
+                        # change permission of tmp folders if failed is not null
+                        if [ -n "\$failed" ]; then
+                            chmod -R o+r "\${EASYBUILD_TMPDIR}"
+                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
+                        fi
 
-                        echo \${failed[@]} > $SCRATCH/$env.JOB_BASE_NAME-$machineLabel-failed.log
-                        echo \${success[@]} > $SCRATCH/$env.JOB_BASE_NAME-$machineLabel-success.log
+                        # print successful and failed builds
+                        echo -e "\nSuccessful Builds: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed Builds: \${#failed[@]} \n\${failed[@]}"
 
-#                        # find production dependencies:
-#                        awk '{print \$1}' $WORKSPACE/jenkins-builds/$prod_file | xargs -IF eb F -Dr 1> $WORKSPACE/deps.out || true
-#                        #cat $WORKSPACE/deps.out
-#                        cat $WORKSPACE/deps.out | grep ' \\* \\[.\\] ' | sed 's@^[^/]*/@@g' | awk '{print \$1}' | xargs basename -a | grep '\\-Cray.*-'${params.cdt_current} | sort | uniq | xargs -IF find $WORKSPACE -name F 1> $WORKSPACE/deps_clean.out
-#                        #cat $WORKSPACE/deps_clean.out
-#
-#                        # upgrade to new cdt_version
-#                        cat $WORKSPACE/deps_clean.out | xargs $WORKSPACE/easybuild/scripts/upgrade-tc.py --metadata easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg --toolchain-prefix Cray --version $params.cdt_version --filenames
-#                        rm $WORKSPACE/*.out
-#
-#                        cd $WORKSPACE/jenkins-builds
-#                        sed -i 's/-${params.cdt_current}/-${params.cdt_version}/g' $prod_file
-#                        ln -sf $prod_file $machineLabel
-#                        #cat $machineLabel
-#                        cd -
-#                        #git -C $WORKSPACE status
-#
-#                        # dry run
-#                        #echo "Debug DryRun"
-#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb
-#                        #echo "Debug DryRun2"
-#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs srun -u -C $architecture -J $env.JOB_BASE_NAME -t 01:00:00 eb -D
-#                        #echo "Debug DryRun3"
-#                        #find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -D F
-#
-#                        # build all new recipes
-#                        status=0
-#                        find $WORKSPACE/easybuild/easyconfigs -name *-Cray*-${params.cdt_version}*.eb | xargs -IF srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 01:00:00 eb -r F
-
-                        rm $WORKSPACE/*.out
-
-                        chmod a+r -R $SCRATCH/ExperimentalEB/
-                        git -C $WORKSPACE status
-
-                        echo $WORKSPACE
-                        echo $SCRATCH
-                        pwd
-
-                        status=\$[status+\$?]
-                        exit \$status
+                        # return the number of failed Builds
+                        exit \${#failed[@]}
                     """)
                 }
             }
@@ -206,29 +204,29 @@ stage('Build Stage') {
     try {
         parallel builds
 
-        // merge workspaces and create PR's
-        node('dom') {
-            sh("""#!/bin/bash -l
-                git -C $WORKSPACE status
+        //// merge workspaces and create PR's
+        //node('dom') {
+        //    sh("""#!/bin/bash -l
+        //        git -C $WORKSPACE status
 
-                cp -rf \$SCRATCH/*/workspace/ExperimentalEB*/* $WORKSPACE
-                rm $WORKSPACE/*.out
-                git -C $WORKSPACE status
-                git -C $WORKSPACE --no-pager diff --stat
-                echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
+        //        cp -rf \$SCRATCH/*/workspace/ExperimentalEB*/* $WORKSPACE
+        //        rm $WORKSPACE/*.out
+        //        git -C $WORKSPACE status
+        //        git -C $WORKSPACE --no-pager diff --stat
+        //        echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
 
-                echo $WORKSPACE
-                echo $SCRATCH
-                pwd
+        //        echo $WORKSPACE
+        //        echo $SCRATCH
+        //        pwd
 
-                wc $SCRATCH/$env.JOB_BASE_NAME-*-failed.log
-                head $SCRATCH/$env.JOB_BASE_NAME-*-failed.log | sed 's@ @\\n@g'
-                wc $SCRATCH/$env.JOB_BASE_NAME-*-success.log
-                head $SCRATCH/$env.JOB_BASE_NAME-*-success.log | sed 's@ @\\n@g'
-                # TO DO: add successful recipes to GitHub PR
-                # TO DO: open Jira issue or GitHub WIP PR with failed recipes
-            """)
-        }
+        //        wc $SCRATCH/$env.JOB_BASE_NAME-*-failed.log
+        //        head $SCRATCH/$env.JOB_BASE_NAME-*-failed.log | sed 's@ @\\n@g'
+        //        wc $SCRATCH/$env.JOB_BASE_NAME-*-success.log
+        //        head $SCRATCH/$env.JOB_BASE_NAME-*-success.log | sed 's@ @\\n@g'
+        //        # TO DO: add successful recipes to GitHub PR
+        //        # TO DO: open Jira issue or GitHub WIP PR with failed recipes
+        //    """)
+        //}
         currentBuild.result = "SUCCESS"
     } catch(err) {
         if (err.toString().contains('exit code 143')) {
@@ -245,3 +243,25 @@ stage('Build Stage') {
         }
     }
 }
+
+/* Needed in preparation of the GitHub pull request */
+//#/*
+//#                                new_eb=\$(echo \$recipe | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/')
+//#                                new_path=\$(echo \$new_eb | sed -E 's@-(.*)\\.eb@/\\1@')
+//#                                ls -lh ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
+//#                                find $WORKSPACE -name \$recipe | xargs dirname | xargs cp ${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_eb
+//#                                echo \$new_eb >> $WORKSPACE/jenkins-builds/$prod_file
+//#                        done
+//#
+//#                        echo original: $WORKSPACE/jenkins-builds/$prod_file
+//#                        cat $WORKSPACE/jenkins-builds/$prod_file
+//#
+//#
+//#                        rm $WORKSPACE/*.out
+//#
+//#                        chmod a+r -R $SCRATCH/ExperimentalEB/
+//#                        git -C $WORKSPACE status
+//#
+//#                        echo $WORKSPACE
+//#                        echo $SCRATCH
+//#*/
