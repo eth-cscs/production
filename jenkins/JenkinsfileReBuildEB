@@ -82,8 +82,7 @@ stage('ReBuild Stage') {
                     /* define build command */
                     def rebuild_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
-                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
-                        "eb -r"
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
@@ -184,14 +183,48 @@ stage('ReBuild Stage') {
             println "The Build step failed. Exiting..."
         }
     }
+}
     
-    finally {
-        if (params.notifySlack) {
-            methods.notifySlackFinish()
+if (params.notifyJira) {
+    JiraIssues = [:]
+    stage('Jira Stage') {
+        for (system in machineConfigurations) {
+            def machine = system.machine
+            def architectures = system.architectures
+            def machineName = machine.name
+            for (item in architectures) {
+                /* define architecture and machineLabel
+                   to use them in parallel builds */
+                def architecture = item
+                def machineLabel = architecture == "" ?
+                   machineName :
+                   "$machineName-$architecture"
+                JiraIssues["$machineLabel"] = {
+                    node(machineName) {
+                        /* retrieve list of failed rebuilds */
+                        def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                        def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/success.txt"
+                        new File(failed_file).eachLine { recipe ->
+                            println "Current line of $failed_file is: $recipe(EOL)"
+                            //methods.failedJiraTask(projkey, recipe, machineLabel)
+                        }
+                    }
+                }
+            }
         }
-        
-        if (params.notifyJira) {
-            methods.failedJiraTask('UES', 'ncview', 'dom-gpu')
+    
+        try {
+            parallel JiraIssues
+        } catch(err) {
+            println "Failed to create Jira Issues"
         }
+    }
+}
+
+finally {
+    if (params.notifySlack) {
+        methods.notifySlackFinish()
     }
 }
