@@ -77,14 +77,14 @@ stage('ReBuild Stage') {
                     def unuse_command = architecture == '' ?
                         "module unuse $machine.unusePath" :
                         "module unuse $machine.unusePath".replace('ARCH', architecture)
-                        println("The unuse command is: $unuse_command")
+                        println("Unuse command: $unuse_command")
 
                     /* define build command */
                     def rebuild_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
                         //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
                         "eb -r"
-                        println("The ReBuild command is: $rebuild_command")
+                        println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
                     sh("""#!/bin/bash -l
@@ -115,12 +115,18 @@ stage('ReBuild Stage') {
                         echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
                         echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
                         rebuild_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
-                        echo -e "\nSelected recipes to ReBuild: \n\$rebuild_list"
+                        
+                        if [ -z "\$rebuild_list" ]; then
+                         echo -e "\nThe list of recipes to ReBuild is empty. Exiting..."
+                         exit \$(wc -w <<< \$rebuild_list)
+                        else   
+                         echo -e "\nSelected recipes to ReBuild: \n\$rebuild_list"
+                        fi
 
                         # rebuild recipes
-                        for recipe in \${build_list}; do
+                        for recipe in \${rebuild_list}; do
                             status=0
-                            echo -e "\nCurrent build: \$recipe"
+                            echo -e "\nCurrent ReBuild: \$recipe"
                             eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
 
                             echo -e "\nSubmitting job and ReBuilding..."
@@ -154,8 +160,7 @@ stage('ReBuild Stage') {
                         echo -e "\nFailed ReBuilds: \${#failed[@]} \n\${failed[@]}"
 
                         # return the number of failed ReBuilds
-                        status=\${#failed[@]}
-                        exit \$status
+                        exit \${#failed[@]}
                     """)
                 }
             }
