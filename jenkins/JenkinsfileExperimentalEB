@@ -73,11 +73,11 @@ stage('Build Stage') {
                         "" :
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    ///* define unuse command */
-                    //def unuse_command = architecture == '' ?
-                    //    "module unuse $machine.unusePath" :
-                    //    "module unuse $machine.unusePath".replace('ARCH', architecture)
-                    //    println("Unuse command: $unuse_command")
+                    /* define unuse command */
+                    def unuse_command = architecture == '' ?
+                        "module unuse $machine.unusePath" :
+                        "module unuse $machine.unusePath".replace('ARCH', architecture)
+                        println("Unuse command: $unuse_command")
 
                     /* define toolchain names and corresponding EasyBuild recipes */
                     def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
@@ -98,9 +98,10 @@ stage('Build Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
+                        $unuse_command
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
                         export EASYBUILD_MODULES_TOOL=EnvironmentModules
-                        
+
                         # print EasyBuild version and configuration
                         eb --version
                         eb --show-config
@@ -135,6 +136,7 @@ stage('Build Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
+                        $unuse_command
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
                         export EASYBUILD_MODULES_TOOL=EnvironmentModules
 
