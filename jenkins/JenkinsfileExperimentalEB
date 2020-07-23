@@ -105,22 +105,18 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
+                        # build toolchains
                         status=0
-                        tcdir=\$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
-                        for dir in \$tcdir; do
-                         tcname=\$(basename \$dir) 
-                         sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/\$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
-                         status=\$[status+\$?]
-                         eb \$tcname-${params.cdt_version}.eb --hidden
-                        done
+                        $build_toolchains
+                        status=\$[status+\$?]
                         exit \$status""")
 
-//                    /* copy newly created toolchains to workspace */
-//                    for (toolchain in toolchains) {
-//                        def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
-//                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
-//                        sh "cp ${source} ${target} || true"
-//                    }
+                    /* copy newly created toolchains to workspace */
+                    for (toolchain in toolchains) {
+                        def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/${toolchain}-${params.cdt_version}.eb"
+                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
+                        sh "cp ${source} ${target} || true"
+                    }
 
                     /* define command to build the software stack */
                     def build_command = architecture == "" ?
@@ -270,3 +266,11 @@ stage('Build Stage') {
 //#                        echo $WORKSPACE
 //#                        echo $SCRATCH
 //#*/
+
+// alternative creation of toolchains without --try-...
+//#                        tcdir=\$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
+//#                        for dir in \$tcdir; do
+//#                         tcname=\$(basename \$dir) 
+//#                         sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/\$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
+//#                         eb \$tcname-${params.cdt_version}.eb --hidden
+//#                        done

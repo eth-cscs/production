@@ -1,4 +1,4 @@
-#
+# Contributed by Luca Marsella (CSCS)
 name = 'netcdf-python'
 version = '1.4.1'
 
@@ -13,7 +13,7 @@ sources = ['netCDF4-%(version)s.tar.gz']
 versionsuffix = '-python%(pymajver)s'
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('PyExtensions', 'python%(pymajver)s'),
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),

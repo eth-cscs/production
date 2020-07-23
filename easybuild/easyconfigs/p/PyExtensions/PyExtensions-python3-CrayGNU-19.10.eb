@@ -11,8 +11,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    #('libffi', '3.2.1')
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
 use_pip = True
