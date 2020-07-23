@@ -111,7 +111,7 @@ stage('Build Stage') {
                         tcdir=\$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
                         for dir in \$tcdir; do
                          tcname=\$(basename \$dir) 
-                         sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/q$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
+                         sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/\$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
                          status=\$[status+\$?]
                          eb \$tcname-${params.cdt_version}.eb --hidden
                         done
