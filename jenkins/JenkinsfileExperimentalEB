@@ -105,9 +105,9 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
-                        #echo -e "\nRunning command: \n$build_toolchains"
+                        #echo -e "\nRunning command: \nTOFIX$ build_toolchains"
                         status=0
-                        #$build_toolchains
+                        #TOFIX$ build_toolchains
                         tcdir=\$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
                         for dir in \$tcdir; do
                          tcname=\$(basename \$dir) 
