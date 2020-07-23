@@ -79,7 +79,7 @@ stage('ReBuild Stage') {
                         "module unuse $machine.unusePath".replace('ARCH', architecture)
                         println("Unuse command: $unuse_command")
 
-                    /* define build command */
+                    /* define rebuild command */
                     def rebuild_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
@@ -96,7 +96,7 @@ stage('ReBuild Stage') {
                         $switch_easybuild
                         $unuse_command
 
-                        # prints EasyBuild version and configuration
+                        # print EasyBuild version and configuration
                         eb --version
                         eb --show-config
 
