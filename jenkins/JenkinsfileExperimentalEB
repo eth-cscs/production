@@ -84,10 +84,11 @@ stage('Build Stage') {
 //                    def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
 //                    println "Current toolchains: $current_tc"
 //
-//                    /* define command to build new toolchains */
-//                    def build_toolchains = architecture == "" ?
-//                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
-//                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
+                    /* define command to build new toolchains */
+                    def build_toolchains = architecture == "" ?
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
+                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
+                        "eb \$tcname-${params.cdt_version}.eb --hidden"
 
                     /* build new toolchains */
                     sh("""#!/bin/bash -l
@@ -105,14 +106,14 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
-                        #echo -e "\nRunning command: \nTOFIX\$build_toolchains"
+                        echo -e "\nRunning command: \n $build_toolchains"
                         status=0
-                        #TOFIX\$build_toolchains
                         tcdir=\$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
                         for dir in \$tcdir; do
                          tcname=\$(basename \$dir) 
                          sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/\$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
                          status=\$[status+\$?]
+                         $build_toolchains
                          eb \$tcname-${params.cdt_version}.eb --hidden
                         done
                         exit \$status""")
