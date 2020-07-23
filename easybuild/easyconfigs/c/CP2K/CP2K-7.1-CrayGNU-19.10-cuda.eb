@@ -15,7 +15,7 @@ description = """
     many-body potentials.
 """
 
-toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
 source_urls = ['https://github.com/%(namelower)s/%(namelower)s/releases/download/v7.1.0']
