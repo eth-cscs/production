@@ -87,8 +87,7 @@ stage('Build Stage') {
                     /* define command to build new toolchains */
                     def build_toolchains = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
-                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
-                        "eb \$tcname-${params.cdt_version}.eb --hidden"
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
 
                     /* build new toolchains */
                     sh("""#!/bin/bash -l
@@ -97,10 +96,10 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
                         $load_easybuild
                         $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
+                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
                         
                         # print EasyBuild version and configuration
                         eb --version
@@ -113,7 +112,6 @@ stage('Build Stage') {
                          tcname=\$(basename \$dir) 
                          sed 's/${params.cdt_current}/${params.cdt_version}/' \$dir/\$tcname-${params.cdt_current}.eb > \$dir/\$tcname-${params.cdt_version}.eb 
                          status=\$[status+\$?]
-                         $build_toolchains
                          eb \$tcname-${params.cdt_version}.eb --hidden
                         done
                         exit \$status""")
@@ -132,7 +130,7 @@ stage('Build Stage') {
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
 
                     /* build the software stack with the new toolchains */
-                    def prod_file = "7.0.UP02-${params.cdt_version}-$machineLabel"
+                    //def prod_file = "7.0.UP02-${params.cdt_version}-$machineLabel"
 
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
@@ -140,18 +138,16 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
                         $load_easybuild
                         $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
+                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
+
                         # print EasyBuild version and configuration
                         eb --version
                         eb --show-config
 
-                        echo -e "\nRunning command: \n$build_command"
-
                         # initialise counters and lists
-                        rm $WORKSPACE/jenkins-builds/$prod_file
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
                         unset failed
