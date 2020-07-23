@@ -94,7 +94,7 @@ stage('Build Stage') {
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
-                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_SOURCEPATH="${params.eb_prefix}/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
@@ -133,7 +133,7 @@ stage('Build Stage') {
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
-                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_SOURCEPATH="${params.eb_prefix}/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
