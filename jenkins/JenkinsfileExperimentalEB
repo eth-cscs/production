@@ -64,7 +64,7 @@ stage('Build Stage') {
                     checkout scm
 
                     /* define command to load EasyBuild */
-                    def loadeasybuild = architecture == "" ?
+                    def load_easybuild = architecture == "" ?
                         "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
                         "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
@@ -96,8 +96,8 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        $loadeasybuild
-                        $switcheasybuild
+                        $load_easybuild
+                        $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
                         
                         # print EasyBuild version and configuration
@@ -131,8 +131,8 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        $loadeasybuild
-                        $switcheasybuild
+                        $load_easybuild
+                        $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
                         # print EasyBuild version and configuration
                         eb --version
