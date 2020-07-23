@@ -139,6 +139,7 @@ stage('Build Stage') {
                         $load_easybuild
                         $switch_easybuild
                         $unuse_command
+                        echo -e "\nMODULEPATH: $MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
                         export EASYBUILD_MODULES_TOOL=EnvironmentModules
 
