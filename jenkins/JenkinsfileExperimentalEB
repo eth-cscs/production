@@ -66,8 +66,7 @@ stage('Build Stage') {
                     /* define command to load EasyBuild */
                     def load_easybuild = architecture == "" ?
                         "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
-                        //"module load cdt/${params.cdt_version} \ndaint-$architecture \nEasyBuild-custom/cscs"
-                        "module load daint-$architecture EasyBuild-custom/cscs"
+                        "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
                     def switch_easybuild = params.eb_version == "" ?
@@ -80,15 +79,15 @@ stage('Build Stage') {
                     //    "module unuse $machine.unusePath".replace('ARCH', architecture)
                     //    println("Unuse command: $unuse_command")
 
-                    /* define toolchain names and corresponding EasyBuild recipes */
-                    def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
-                    def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
-                    println "Current toolchains: $current_tc"
-
-                    /* define command to build new toolchains */
-                    def build_toolchains = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
+//                    /* define toolchain names and corresponding EasyBuild recipes */
+//                    def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
+//                    def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
+//                    println "Current toolchains: $current_tc"
+//
+//                    /* define command to build new toolchains */
+//                    def build_toolchains = architecture == "" ?
+//                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
+//                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
 
                     /* build new toolchains */
                     sh("""#!/bin/bash -l
@@ -97,8 +96,7 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        module load cdt/${params.cdt_version}
-                        module load 
+                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
                         $load_easybuild
                         $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
@@ -107,23 +105,30 @@ stage('Build Stage') {
                         eb --version
                         eb --show-config
 
-                        echo -e "\nRunning command: \n$build_toolchains"
+                        #echo -e "\nRunning command: \n$build_toolchains"
                         status=0
-                        $build_toolchains
-                        status=\$[status+\$?]
+                        #$build_toolchains
+                        tcdir=$(find . -type f -name "Cray*-${params.cdt_current}.eb" -execdir pwd ';')
+                        for item in \$tcdir; do
+                         tcname=$(basename $dir) 
+                         sed 's/${params.cdt_current}/${params.cdt_version}/' $dir/$tcname-${params.cdt_current}.eb > $dir/$tcname-${params.cdt_version}.eb 
+                         status=\$[status+\$?]
+                         eb $tcname-${params.cdt_version}.eb --hidden
+                        done
                         exit \$status""")
 
-                    /* copy newly created toolchains to workspace */
-                    for (toolchain in toolchains) {
-                        def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
-                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
-                        sh "cp ${source} ${target} || true"
-                    }
+//                    /* copy newly created toolchains to workspace */
+//                    for (toolchain in toolchains) {
+//                        def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/reprod/${toolchain}-${params.cdt_version}.eb"
+//                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
+//                        sh "cp ${source} ${target} || true"
+//                    }
 
                     /* define command to build the software stack */
                     def build_command = architecture == "" ?
                         "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb --try-toolchain-version=${params.cdt_version} -r" :
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb --try-toolchain-version=${params.cdt_version} -r"
+                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb --try-toolchain-version=${params.cdt_version} -r"
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
 
                     /* build the software stack with the new toolchains */
                     def prod_file = "7.0.UP02-${params.cdt_version}-$machineLabel"
@@ -134,7 +139,7 @@ stage('Build Stage') {
                         export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        module load cdt/${params.cdt_version}
+                        export EASYBUILD_MODULES_TOOL=EnvironmentModules
                         $load_easybuild
                         $switch_easybuild
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
@@ -171,6 +176,7 @@ stage('Build Stage') {
 
                             echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
+                            
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
