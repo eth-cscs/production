@@ -85,9 +85,9 @@ stage('Build Stage') {
 //                    println "Current toolchains: $current_tc"
 //
                     /* define command to build new toolchains */
-                    def build_toolchains = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
+                    //def build_toolchains = architecture == "" ?
+                    //    "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}" :
+                    //    "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 00:05:00 eb $current_tc --hidden --try-software-version=${params.cdt_version}"
 
                     /* build new toolchains */
                     sh("""#!/bin/bash -l
