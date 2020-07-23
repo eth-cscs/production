@@ -109,6 +109,7 @@ stage('Build Stage') {
                         status=0
                         $build_toolchains
                         status=\$[status+\$?]
+
                         exit \$status""")
 
                     /* copy newly created toolchains to workspace */
@@ -162,8 +163,8 @@ stage('Build Stage') {
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            echo -e "\nBuilding \$recipe"
-                            eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
+                            echo -e "\nBuilding \$(echo \$recipe | sed 's/${params.cdt_current}/${params.cdt_version}
+                            eb \$recipe --try-toolchain-version=${params.cdt_version} -Dr 2>&1 | grep -iv "== temporary"
 
                             echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
