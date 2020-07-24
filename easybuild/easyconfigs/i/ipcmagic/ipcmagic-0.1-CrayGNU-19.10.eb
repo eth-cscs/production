@@ -1,3 +1,4 @@
+# contributed by Eirini Koutsaniti and Luca Marsella (CSCS)
 easyblock = "PythonPackage"
 
 name = 'ipcmagic'
@@ -11,13 +12,13 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 sources = ['/apps/common/easybuild/sources/i/ipcmagic/ipcmagic-0.1.tar.gz']
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('jupyterlab', '1.1.1', '-batchspawner')
 ]
+exts_defaultclass = 'PythonPackage'
 
 _pyminver = '6'
 
-exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': '%s' % _pyminver,
@@ -31,8 +32,7 @@ exts_list = [
     ('docopt', '0.6.2')
 ]
 
-# using this to avoid running `python -c 'import ipcmagic'`
-# it works only with ipython
+# use to avoid running `python -c 'import ipcmagic': it works only with ipython
 options = {'modulename': 'os'}
 sanity_check_commands = [("ipython -c 'import ipcmagic'")]
 

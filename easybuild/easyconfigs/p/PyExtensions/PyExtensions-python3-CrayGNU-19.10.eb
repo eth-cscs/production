@@ -11,23 +11,24 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
-    #('libffi', '3.2.1')
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
-use_pip = True
-
 exts_default_options = {
-    'source_urls': [PYPI_SOURCE]
+    'source_urls': [PYPI_SOURCE],
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
 }
 
 exts_list = [
+    ('zipp', '0.5.0'),
     ('Cython', '0.28.4'),
     ('six', '1.11.0'),
     ('pyparsing', '2.4.7'),
     ('kiwisolver', '1.2.0'),
     ('pytz', '2020.1'),
     ('cycler', '0.10.0'),
+    ('wheel', '0.34.2'),
     ('python-dateutil', '2.8.1', {
         'modulename': 'dateutil',
     }),
