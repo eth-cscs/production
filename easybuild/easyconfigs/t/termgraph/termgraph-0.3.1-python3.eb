@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'termgraph'
+version = '0.3.1'
+versionsuffix = '-python%(pymajver)s'
+homepage = 'https://github.com/mkaz/termgraph'
+description = """A python command-line tool which draws basic graphs in the
+terminal"""
+toolchain = SYSTEM
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+dependencies = [('cray-python/3.7.3.2', EXTERNAL_MODULE)]
+unpack_sources = True
+download_dep_fail = True
+use_pip = True
+local_pythonpath = 'lib/python%(pyshortver)s/site-packages'
+exts_filter = ('python3 -c "import %(ext_name)s"', '')
+req_py_majver = '%(pymajver)s'
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath],
+}
+sanity_pip_check = True
+
+moduleclass = 'tools'

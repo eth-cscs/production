@@ -24,8 +24,8 @@ patches = [
 ]
 
 builddependencies = [
-    ('cray-fftw/3.3.8.3', EXTERNAL_MODULE),
-    ('cray-libsci/19.06.1', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-libsci', EXTERNAL_MODULE),
     ('Bison', '3.3.2'),
     ('flex', '2.6.4')
 ]

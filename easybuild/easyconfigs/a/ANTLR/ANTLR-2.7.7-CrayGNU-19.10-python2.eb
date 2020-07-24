@@ -4,12 +4,7 @@ easyblock = 'ConfigureMake'
 name = 'ANTLR'
 version = "2.7.7"
 
-local_py_maj_ver = '2'
-local_py_min_ver = '7'
-local_py_rev_ver = '15.7'
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-
-versionsuffix = '-python%s' % local_py_maj_ver
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://www.antlr.org/'
 description = """
@@ -30,7 +25,7 @@ local_osdependency = ['java']
 dependencies = [
     # On DOM this dependency is provided as local_osdependency
     #('java', EXTERNAL_MODULE),
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE),
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
 ]
 
 configopts = '--disable-examples --disable-csharp '
