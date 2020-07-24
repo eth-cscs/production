@@ -1,11 +1,10 @@
-# @author: robinson 
+# @author: robinson
 
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
 version = '1.1.1'
 versionsuffix = '-batchspawner'
-_pyminver = '6'
 
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
@@ -25,7 +24,7 @@ dependencies = [
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
@@ -68,7 +67,7 @@ exts_list = [
     (name, version, {
         'installopts': ' --install-option=--skip-npm ',
         }),
-    
+
 # jupyterhub and its deps
     ('SQLAlchemy', '1.3.6'),
     ('Mako', '1.0.14'),
@@ -146,7 +145,7 @@ exts_list = [
     ('Pillow', '7.0.0', {
         'modulename': 'PIL',
         }),
-    
+
 # bqplot: requires the labextension below
     ('traittypes', '0.2.1'),
     ('bqplot', '0.11.6'),
@@ -167,8 +166,8 @@ exts_list = [
         }),
 
 # dask-labextension
-# This package provides a JupyterLab extension to manage Dask clusters, 
-# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+# This package provides a JupyterLab extension to manage Dask clusters,
+# as well as embed Dask's dashboard plots directly into JupyterLab panes
     ('simpervisor', '0.3'),
     ('multidict', '4.5.2'),
     ('yarl', '1.3.0'),
@@ -182,10 +181,10 @@ exts_list = [
     ('dask_labextension', '1.0.3'),
 
 #JupyterLab GPU Dashboard (nvdashboard)
-#JupyterLab extension for displaying dashboards of GPU usage.   
+#JupyterLab extension for displaying dashboards of GPU usage.
     ('pynvml', '8.0.4'),
     ('jupyterlab-nvdashboard', '0.2.1'),
-    
+
 # batchspawner compute side cscript components
     ('batchspawner', '68a1fcd', {
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
@@ -194,7 +193,7 @@ exts_list = [
     ('ipyparaview', 'cf1c6f4', {
         'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
         }),
-    
+
 #jupyterlab code formatter, requires a formatter e.g., black
     ('pathspec', '0.8.0'),
     ('typed_ast', '1.4.1'),
@@ -203,12 +202,12 @@ exts_list = [
     ('toml', '0.10.1'),
     ('black', '19.10b0'),
     ('jupyterlab_code_formatter', '1.1.0'),
-    
-    
+
+
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2'),
- 
+
 #other - these compoenents are now moved to IPCMagic
 #    ('ipyparallel', '6.2.4'),
 #    ('docopt', '0.6.2'),
@@ -245,7 +244,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build && "
                    "%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && "
                    "%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && "
-                   "%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && "                   
+                   "%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && "
                    "%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.4.0 jupyterlab-system-monitor@0.4.1 --no-build && "
                    "%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && "
 #                  "%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy;" #not ready for JLab 1.x
@@ -257,7 +256,7 @@ postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "cd ipyparaview && "
                    "git checkout cf1c6f4 && "
                    "%(installdir)s/bin/jupyter labextension install js --no-build && "
-# now build the webpack                   
+# now build the webpack
                    "%(installdir)s/bin/jupyter lab build --debug --dev-build=False && "
                    "rm -r $YARN_CACHE_FOLDER && "
                    # Bash kernel - https://github.com/takluyver/bash_kernel

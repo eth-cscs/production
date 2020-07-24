@@ -2,7 +2,6 @@
 name = 'Boost'
 version = '1.70.0'
 
-_pyminver = '6'
 versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://www.boost.org/'
@@ -40,7 +39,9 @@ patches = ['Boost-1.70.0-python%(pymajver)s.patch']
 
 # for python3 the corresponding lib is libboost_python36.so
 sanity_check_paths = {
-    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so'],
+    'files': ['lib/libboost_system.so',
+              'lib/libboost_mpi.so',
+              'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
     'dirs': ['include/boost']
 }
 
