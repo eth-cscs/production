@@ -14,7 +14,7 @@
 easyblock = 'CMakeMake'
 name = 'GROMACS'
 version = "2020.1"
-versionsuffix = '-cuda' % cudaversion
+versionsuffix = '-cuda'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
