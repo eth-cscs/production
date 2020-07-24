@@ -1,0 +1,5 @@
+
+CP2K-7.1-CrayGNU-19.10.eb
+dask-2.2.0-CrayGNU-19.10-python3.eb
+GROMACS-2019.1-CrayGNU-19.10.eb
+HPX-1.4.0-CrayGNU-19.10-nonetworking.eb
