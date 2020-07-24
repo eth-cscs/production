@@ -5,8 +5,6 @@ easyblock = 'Bundle'
 name = 'oq-engine'
 version = '3.2.0'
 
-_pyminver = '6'
-
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
 
@@ -24,7 +22,7 @@ dependencies = [
 exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE],
 }
 
