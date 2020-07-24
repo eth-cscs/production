@@ -160,7 +160,7 @@ stage('Build Stage') {
                          echo -e "\nThe list of recipes to build is empty. Exiting..."
                          exit \$(wc -w <<< \$build_list)
                         else   
-                         echo -e "\nSelected recipes to build: \n\$build_list"
+                         echo -e "\nSelected recipes to build: \n\$build_list" | sed 's/${params.cdt_current}/${params.cdt_version}/'
                         fi
 
                         # build recipes
