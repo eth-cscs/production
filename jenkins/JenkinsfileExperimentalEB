@@ -146,8 +146,10 @@ stage('Build Stage') {
                         # initialise counters and lists
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
+                        echo "" > \${success_file}
                         unset failed
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
+                        echo "" > \${failed_file}
 
                         # filter the target production list $machineLabel
                         echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
