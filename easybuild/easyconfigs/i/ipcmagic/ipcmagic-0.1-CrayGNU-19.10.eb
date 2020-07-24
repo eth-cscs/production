@@ -19,6 +19,8 @@ exts_defaultclass = 'PythonPackage'
 
 _pyminver = '6'
 
+exts_defaultclass = 'PythonPackage'
+
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': '%s' % _pyminver,

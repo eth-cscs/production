@@ -1,10 +1,9 @@
-# @author: robinson 
+# @author: robinson
 
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
 version = '1.1.1'
-_pyminver = '6'
 
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
@@ -24,7 +23,7 @@ dependencies = [
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
@@ -137,8 +136,8 @@ exts_list = [
         }),
 
 # dask-labextension
-# This package provides a JupyterLab extension to manage Dask clusters, 
-# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+# This package provides a JupyterLab extension to manage Dask clusters,
+# as well as embed Dask's dashboard plots directly into JupyterLab panes
     ('simpervisor', '0.3'),
     ('multidict', '4.5.2'),
     ('yarl', '1.3.0'),
@@ -151,7 +150,7 @@ exts_list = [
     ('jupyter-server-proxy', '1.1.0'),
     ('dask_labextension', '1.0.3'),
 
-    
+
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2'),
@@ -180,8 +179,8 @@ modextravars = {
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache;"
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/;"
                    "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH;"
-#                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/;" 
-                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;" 
+#                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/;"
+                   "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/;"
                    "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/;"
                    "export JUPYTER=%(installdir)s/bin/jupyter;"
                    "%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@1.0 --no-build;"
