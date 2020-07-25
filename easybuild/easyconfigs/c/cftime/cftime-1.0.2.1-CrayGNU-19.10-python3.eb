@@ -15,7 +15,7 @@ checksums = ['2c81d4879a2c1753961d647e55e0125039ddeda195944c3d526f2cf087dfb7bb']
 
 versionsuffix = '-python%(pymajver)s'
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('cURL', '7.61.1'),
 ]
 
