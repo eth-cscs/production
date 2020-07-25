@@ -166,25 +166,25 @@ stage('Build Stage') {
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            echo -e "\nBuilding \$(echo \$recipe | sed 's/${params.cdt_current}/${params.cdt_version}/')"
+                            new_recipe=$(echo \$recipe | sed 's/${params.cdt_current}/${params.cdt_version}/')
+                            echo -e "\nBuilding \$new_recipe"
                             eb \$recipe --try-toolchain-version=${params.cdt_version} -Dr 2>&1 | grep -iv "== temporary"
 
                             echo -e "\nSubmitting job and building..."
                             $build_command \$recipe
-                            
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
                             if [ \$status -eq 0 ]; then
-                                success+=(\$recipe)
-                                echo "\$recipe" >> "\${success_file}"
+                                success+=(\$new_recipe)
+                                echo "\$new_recipe" >> "\${success_file}"
                                 # remove folders
-                                echo -e "\nBuild of \$recipe SUCCESSFUL"
+                                echo -e "\nBuild of \$new_recipe SUCCESSFUL"
                             else
                                 failed+=(\$recipe)
-                                echo "\$recipe" >> "\${failed_file}"
+                                echo "\$new_recipe" >> "\${failed_file}"
                                 # archive folders
-                                echo -e "\nBuild of \$recipe FAILED"
+                                echo -e "\nBuild of \$new_recipe FAILED"
                             fi
                         done
 
