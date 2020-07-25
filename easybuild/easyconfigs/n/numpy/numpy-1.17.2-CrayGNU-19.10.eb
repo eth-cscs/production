@@ -17,7 +17,7 @@ source_urls = ['https://github.com/numpy/numpy/releases/download/v%s' % version]
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
 patches = [('mkl-2019-sitecfg.patch', 1)]
