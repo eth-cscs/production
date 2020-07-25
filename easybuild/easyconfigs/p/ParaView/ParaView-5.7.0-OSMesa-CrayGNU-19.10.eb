@@ -23,7 +23,7 @@ dependencies = [
     ('ospray', '1.8.5'),
     ('oidn', '0.9.0'),
     ('Mesa', '18.3.3'),
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE)
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 builddependencies = [('CMake', '3.14.5','', True)]
