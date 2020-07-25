@@ -23,8 +23,6 @@ sources = ["llvm-%(version)s.src.tar.xz"]
 builddependencies = [('CMake', '3.14.5', '', True)]
 separate_build_dir = True
 
-prebuildopts = 'module load gcc && module list &&'
-
 # required to install extra tools in bin/
 configopts  = " -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86 "
 configopts += " -DLLVM_TARGETS_TO_BUILD=X86 "
