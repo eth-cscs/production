@@ -73,11 +73,11 @@ stage('Build Stage') {
                         "" :
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define unuse command */
-                    def unuse_command = architecture == '' ?
-                        "module unuse $machine.unusePath" :
-                        "module unuse $machine.unusePath".replace('ARCH', architecture)
-                        println("Unuse command: $unuse_command")
+                    /* define list of unuse paths */
+                    def unuse_paths = architecture == '' ?
+                        machine.unusePath.replace(':', ' ') :
+                        machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
+                        println("List of unuse paths: $unuse_paths")
 
                     /* define toolchain names and corresponding EasyBuild recipes */
                     def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
@@ -98,7 +98,10 @@ stage('Build Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
-                        $unuse_command
+                        for path in $unuse_paths; do
+                         module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: $MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
 
                         # print EasyBuild version and configuration
@@ -126,8 +129,6 @@ stage('Build Stage') {
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $sw_flags"
 
                     /* build the software stack with the new toolchains */
-                    //def prod_file = "7.0.UP02-${params.cdt_version}-$machineLabel"
-
                     sh("""#!/bin/bash -l
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
@@ -135,7 +136,9 @@ stage('Build Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
-                        $unuse_command
+                        for path in $unuse_paths; do
+                         module unuse \$path
+                        done
                         echo -e "\nMODULEPATH: $MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
