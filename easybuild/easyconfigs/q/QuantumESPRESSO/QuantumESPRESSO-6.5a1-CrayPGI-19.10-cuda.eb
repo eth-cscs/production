@@ -27,7 +27,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('intel/19.0.1.144', EXTERNAL_MODULE)
+    ('intel', EXTERNAL_MODULE)
 ]
 
 # Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
