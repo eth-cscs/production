@@ -101,7 +101,7 @@ stage('Build Stage') {
                         for path in $unuse_paths; do
                          module unuse \$path
                         done
-                        echo -e "\nMODULEPATH: $MODULEPATH\n"
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA=$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg
 
                         # print EasyBuild version and configuration
@@ -139,7 +139,7 @@ stage('Build Stage') {
                         for path in $unuse_paths; do
                          module unuse \$path
                         done
-                        echo -e "\nMODULEPATH: $MODULEPATH\n"
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
                         # print EasyBuild version and configuration
@@ -169,7 +169,7 @@ stage('Build Stage') {
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            new_recipe=$(echo \$recipe | sed 's/${params.cdt_current}/${params.cdt_version}/')
+                            new_recipe=\$(echo \$recipe | sed 's/${params.cdt_current}/${params.cdt_version}/')
                             echo -e "\nBuilding \$new_recipe"
                             eb \$recipe --try-toolchain-version=${params.cdt_version} -Dr 2>&1 | grep -iv "== temporary"
 
@@ -184,7 +184,7 @@ stage('Build Stage') {
                                 # remove folders
                                 echo -e "\nBuild of \$new_recipe from \$recipe SUCCESSFUL"
                             else
-                                failed+=(\$recipe)
+                                failed+=(\$new_recipe)
                                 echo "\$new_recipe" >> "\${failed_file}"
                                 # archive folders
                                 echo -e "\nBuild of \$new_recipe from \$recipe FAILED"
