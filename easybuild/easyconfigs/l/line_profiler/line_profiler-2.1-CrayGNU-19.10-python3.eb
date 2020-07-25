@@ -3,7 +3,6 @@ easyblock = 'PythonPackage'
 
 name = 'line_profiler'
 version = '2.1'
-
 versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://github.com/rkern/line_profiler'
@@ -16,9 +15,9 @@ source_urls = ['https://github.com/rkern/%(name)s/archive']
 sources = ['%(version)s.tar.gz']
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('PyExtensions', 'python%(pymajver)s')
-] # Cython
+]
 
 sanity_check_paths = {
     'files': [],
