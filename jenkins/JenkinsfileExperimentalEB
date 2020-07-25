@@ -179,12 +179,12 @@ stage('Build Stage') {
                                 success+=(\$new_recipe)
                                 echo "\$new_recipe" >> "\${success_file}"
                                 # remove folders
-                                echo -e "\nBuild of \$new_recipe SUCCESSFUL"
+                                echo -e "\nBuild of \$new_recipe from \$recipe SUCCESSFUL"
                             else
                                 failed+=(\$recipe)
                                 echo "\$new_recipe" >> "\${failed_file}"
                                 # archive folders
-                                echo -e "\nBuild of \$new_recipe FAILED"
+                                echo -e "\nBuild of \$new_recipe from \$recipe FAILED"
                             fi
                         done
 
