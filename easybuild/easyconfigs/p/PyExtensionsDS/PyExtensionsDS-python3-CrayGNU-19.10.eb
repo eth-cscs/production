@@ -3,6 +3,7 @@ easyblock = 'PythonBundle'
 
 name = 'PyExtensionsDS'
 version = 'python%(pymajver)s'
+_pyminver = '6'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -16,7 +17,7 @@ dependencies = [
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%(pyminver)s',
+    'req_py_minver': _pyminver,
     'use_pip': True,
     'source_urls': [PYPI_SOURCE]
 }
