@@ -16,7 +16,7 @@ sources = [SOURCE_TAR_GZ]
 use_pip = True
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('jupyterlab', '1.1.1', '-batchspawner')
 ]
 
