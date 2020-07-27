@@ -8,7 +8,6 @@ version = '1.14.0'
 _ver_suffix_cuda = '-cuda-%(cudaver)s'
 _ver_suffix_py = '-python%(pymajver)s'
 versionsuffix = '%s%s' % (_ver_suffix_cuda, _ver_suffix_py)
-_pyminver = '6'
 _pyrevver = '5.7'
 
 homepage = 'https://www.tensorflow.org/'
@@ -40,7 +39,7 @@ patches = [('tensorflow-v%(version)s-python%(pymajver)s-cscs.patch'),
 
 with_configure = False
 
-_whl_file = 'tensorflow-%%(version)s-cp%%(pymajver)s%s-cp%%(pymajver)s%sm-linux_x86_64.whl' % (_pyminver, _pyminver)
+_whl_file = 'tensorflow-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)sm-linux_x86_64.whl'
 
 _build_str  = "export TEST_TMPDIR=%(builddir)s/../../../bazelout/"
 _build_str += " && rm -rf $TEST_TMPDIR"
@@ -68,7 +67,7 @@ files_to_copy = [
 exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE]
 }
 

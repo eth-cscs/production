@@ -41,8 +41,8 @@ source_urls = [
 
 dependencies = [
     ('LLVM', '8.0.0'),
-    ('Mako', '1.0.7', '-Python-3.6'),
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE)
+    ('Mako', '1.1.2', '-python%(pymajver)s'),
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 builddependencies = [('CMake', '3.14.1','', True)]

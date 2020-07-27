@@ -13,8 +13,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('PyExtensions', 'python%(pymajver)s'),
-#    ('ipyparallel', '6.2.4', versionsuffix),
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
 use_pip = True

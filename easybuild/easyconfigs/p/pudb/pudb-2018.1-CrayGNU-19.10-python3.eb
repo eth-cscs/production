@@ -17,7 +17,7 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('PyExtensions', 'python%(pymajver)s'),
 ]
 

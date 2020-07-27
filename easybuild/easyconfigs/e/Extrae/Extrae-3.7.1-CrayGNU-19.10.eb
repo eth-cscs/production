@@ -22,11 +22,8 @@ sources = ['extrae-%(version)s-src.tar.bz2']
 # The checksum value of the sources is reported in the log file of the module.
 
 dependencies = [
-    ('zlib', '1.2.11'),
     ('libunwind', '1.3.1'),
     ('libxml2', '2.9.8', '', True),
-    # use papi from perftools-base instead
-    # ('papi', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
     # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
     # ('Paraver', '4.7.2', '', True),
@@ -38,7 +35,6 @@ dependencies = [
 ]
 
 configopts  = ' '
-configopts += ' --with-libz=$EBROOTZLIB'
 configopts += ' --with-unwind=$EBROOTLIBUNWIND'
 configopts += ' --with-mpi=$CRAY_MPICH_DIR'
 configopts += ' --enable-openmp'

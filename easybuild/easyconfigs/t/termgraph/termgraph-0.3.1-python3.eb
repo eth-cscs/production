@@ -10,7 +10,7 @@ terminal"""
 toolchain = SYSTEM
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
-dependencies = [('cray-python/3.7.3.2', EXTERNAL_MODULE)]
+dependencies = [('cray-python', EXTERNAL_MODULE)]
 unpack_sources = True
 download_dep_fail = True
 use_pip = True

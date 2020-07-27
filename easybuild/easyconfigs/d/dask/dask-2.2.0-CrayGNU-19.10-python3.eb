@@ -4,7 +4,6 @@ easyblock = 'PythonBundle'
 name = 'dask'
 version = '2.2.0'
 versionsuffix = '-python%(pymajver)s'
-_pyminver = '6'
 
 homepage = 'http://github.com/dask/dask/'
 description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
@@ -14,13 +13,13 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'verbose': False}
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'use_pip': True,
     'source_urls': [PYPI_SOURCE]
 }

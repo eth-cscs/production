@@ -120,6 +120,9 @@ class JuliaPackage(ExtensionEasyBlock):
         if self.cfg['mpiexec_args']:
             pre_cmd += ' && export JULIA_MPIEXEC_ARGS="%s"' % self.cfg['mpiexec_args']
 
+        if self.cfg['arch_name'] == 'gpu':
+            pre_cmd += ' && export JULIA_CUDA_USE_BINARYBUILDER=false'
+
         if remove:
             cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
         else:
