@@ -262,7 +262,7 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && 
-%%(installdir)s/bin/jupyter labextension install -y bqplot0.4.6 --no-build && 
+%%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && 
 %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.4.0 jupyterlab-system-monitor@0.4.1 --no-build && 
 %%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && 
