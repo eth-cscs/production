@@ -3,6 +3,7 @@
 def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
+def deploymentMachines = params.machinesProduction.split()
 def forcelist = params.forcelist
 def unusePath = params.unusePath
 stage('Initialization') {
@@ -11,10 +12,10 @@ stage('Initialization') {
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
-        //disable exclusion of DOM from production for testing during CLE7 upgrade
-        //machinesList = machinesList.findAll({it.name != 'dom'})
     }
 }
+
+machinesList = machinesList.findAll({it.name in deploymentMachines})
 
 def machineConfigurations = []
 stage('Machine Force') {
@@ -80,7 +81,7 @@ stage('Build Stage') {
                                  """
                 }
 
-                withEnv(["EASYBUILD_BUILDPATH=$buildPathExpanded",
+                withEnv(["EASYBUILD_BUILDPATH=$buildPathExpanded/${env.BUILD_ID}",
                          "EASYBUILD_TMPDIR=$scratch/$project_name/tmp",
                          "EB_CUSTOM_REPOSITORY=$workingDir/easybuild"]) {
                     sh("""$command
