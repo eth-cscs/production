@@ -47,6 +47,7 @@ stage('Machine Selection') {
   - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
 def builds = [:]
+def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
 stage('Build Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
@@ -80,7 +81,6 @@ stage('Build Stage') {
                         println("List of unuse paths: $unuse_paths")
 
                     /* define toolchain names and corresponding EasyBuild recipes */
-                    def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
                     def current_tc = toolchains.collect{"$it-${params.cdt_current}.eb"}.join(' ')
                     println "Current toolchains: $current_tc"
 
@@ -114,13 +114,6 @@ stage('Build Stage') {
                         status=\$[status+\$?]
 
                         exit \$status""")
-
-                    /* copy newly created toolchains to workspace */
-                    for (toolchain in toolchains) {
-                        def source = "${params.eb_prefix}/$machineLabel/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/${toolchain}-${params.cdt_version}.eb"
-                        def target = "$WORKSPACE/easybuild/easyconfigs/c/$toolchain"
-                        sh "cp ${source} ${target} || true"
-                    }
 
                     /* define software flags and command to build software */
                     def sw_flags = "--ignore-locks --try-toolchain-version=${params.cdt_version} -r"
@@ -211,9 +204,20 @@ stage('Build Stage') {
 
         // merge workspaces and create PR's
         node('dom') {
+            /* clone master over ssh */
+            sh "git clone git@github.com:eth-cscs/production.git"
+
+            /* copy newly created toolchains to new workspace */
+            for (toolchain in toolchains) {
+                def source = "${params.eb_prefix}/*/${params.cdt_version}/software/${toolchain}/${params.cdt_version}/easybuild/${toolchain}-${params.cdt_version}.eb"
+                def target = "$WORKSPACE/production/easybuild/easyconfigs/c/$toolchain"
+                sh "cp -f ${source} ${target} || true"
+            }
+
             sh("""#!/bin/bash -l
                 module load daint-gpu
                 module load hub
+                cd production
 
                 echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
                 pwd
@@ -237,18 +241,19 @@ stage('Build Stage') {
                     old_recipe=\$(echo \$new_recipe | sed -E 's/(Cray.+)-${params.cdt_version}/\\1-${params.cdt_current}/')
                     new_path=\$(echo \$new_recipe | sed -E 's@-(.*)\\.eb@/\\1@')
                     ls -lh ${params.eb_prefix}/*/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_recipe
-                    find $WORKSPACE -name \$old_recipe
-                    find $WORKSPACE -name \$old_recipe | xargs dirname | xargs cp -f ${params.eb_prefix}/*/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_recipe
+                    find . -name \$old_recipe
+                    find . -name \$old_recipe | xargs dirname | xargs cp -f ${params.eb_prefix}/*/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_recipe
                 done
 
                 # TO DO: add successful recipes to GitHub PR
-                rm $WORKSPACE/*.out
-                git -C $WORKSPACE add easybuild/easyconfigs
-                git -C $WORKSPACE status
-                git -C $WORKSPACE --no-pager diff --stat
+                git add easybuild/easyconfigs
+                git status
                 git commit -m "Add recipes for cdt/${params.cdt_version}"
                 git push origin HEAD
-                # hub pull-request -m "WIP [dom] Add recipes for cdt/${params.cdt_version}"
+
+                if [ $createPR ]; then
+                    hub pull-request -m "WIP [dom] Add recipes for cdt/${params.cdt_version}"
+                fi
 
                 # return the number of failed Builds
                 exit \${#failed[@]}
