@@ -30,7 +30,7 @@ prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
 buildopts = [ ' mpi ', ' omp ' ]
 
 builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE)),
+    ('cudatoolkit', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
 ]
