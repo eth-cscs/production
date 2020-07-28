@@ -25,7 +25,6 @@ dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-#    ('PyExtensions', 'python%(pymajver)s'), # already in IPython n dask
     ('JuliaExtensions', _jlver, '-cuda-%(cudashortver)s'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
@@ -164,12 +163,6 @@ exts_list = [
     ('psutil', '5.6.3'),
     ('nbresuse', '0.3.2'),
 
-# jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.0
-#    ('jupyterlab_slurm', '0.1.1'),
-
-# qgrid widgets: note that 1.1.1 is not yet supported with JupyterLab 1.x - commented for now, twr
-#    ('qgrid', '1.1.1'),
-
 # graphviz, for dask graph visualization
     ('graphviz', '0.12', {
         'source_tmpl': 'graphviz-%(version)s.zip',
@@ -216,10 +209,6 @@ exts_list = [
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2'),
-
-#other - these compoenents are now moved to IPCMagic
-#    ('ipyparallel', '6.2.4'),
-#    ('docopt', '0.6.2'),
 ]
 
 # For Julia packages needed for Jupyter
@@ -246,7 +235,7 @@ prepend-path EBJULIA_ADMIN_LOAD_PATH "%s"
 """ % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir_tcl, _ijulia_projectdir_tcl)
 
 
-# install extensions and batchspawner components
+# install extensions 
 
 postinstallcmds = [
 """
@@ -267,9 +256,6 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && 
 %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.4.0 jupyterlab-system-monitor@0.4.1 --no-build && 
 %%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && 
-#%%(installdir)s/bin/jupyter labextension install jupyterlab-server-proxy && #not ready for JLab 1.x
-#%%(installdir)s/bin/jupyter labextension install -y jupyterlab-slurm --no-build && #not ready for JLab 1.x, twr
-#%%(installdir)s/bin/jupyter labextension install -y qgrid@1.1.1 --no-build && #qgrid not yet working in JLab 1.x, twr
 %%(installdir)s/bin/jupyter labextension install -y jupyterlab-nvdashboard@0.2.1 --no-build && 
 cd %%(installdir)s/ && 
 git clone https://github.com/NVIDIA/ipyparaview && 
@@ -279,16 +265,8 @@ git checkout cf1c6f4 &&
 %%(installdir)s/bin/jupyter lab build --debug --dev-build=False && 
 rm -r $YARN_CACHE_FOLDER && 
 
-#%%(installdir)s/bin/jupyter labextension install -y jupyterlab-chart-editor@1.2 --no-build;
-
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%%(installdir)s/ && 
-
-# new batchspawner requires compute side components, TWR 121219
-#git clone https://github.com/jupyterhub/batchspawner.git %%(builddir)s/batchspawner && 
-#cd %%(builddir)s/batchspawner && 
-#git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 && 
-#pip install . --prefix=%%(installdir)s 
 
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
 # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
