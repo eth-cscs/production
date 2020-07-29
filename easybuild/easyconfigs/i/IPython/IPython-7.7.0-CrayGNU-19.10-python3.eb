@@ -16,10 +16,13 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
 ]
 
-use_pip = True
-
 # bundle of Python packages
 exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': [PYPI_SOURCE]
+}
 
 
 exts_list = [
