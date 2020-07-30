@@ -262,7 +262,7 @@ stage('Build Stage') {
                 git commit -m "Add recipes for cdt/${params.cdt_version}"
                 git push origin HEAD
 
-                if [ $createPR ]; then
+                if $createPR ; then
                     hub pull-request -m "WIP [dom] Add recipes for cdt/${params.cdt_version}"
                 fi
 
