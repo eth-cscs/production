@@ -130,7 +130,7 @@ stage('Build Stage') {
                         $load_easybuild
                         $switch_easybuild
                         for path in $unuse_paths; do
-                         module unuse \$path
+                            module unuse \$path
                         done
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
@@ -153,10 +153,10 @@ stage('Build Stage') {
                         build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
                         
                         if [ -z "\$build_list" ]; then
-                         echo -e "\nThe list of recipes to build is empty. Exiting..."
-                         exit \$(wc -w <<< \$build_list)
+                            echo -e "\nThe list of recipes to build is empty. Exiting..."
+                            exit \$(wc -w <<< \$build_list)
                         else   
-                         echo -e "\nSelected recipes to build: \n\$build_list" | sed 's/${params.cdt_current}/${params.cdt_version}/'
+                            echo -e "\nSelected recipes to build: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
                         fi
 
                         # build recipes
@@ -171,16 +171,17 @@ stage('Build Stage') {
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
+                            folder=\$(find . -name \$recipe | xargs dirname)
                             if [ \$status -eq 0 ]; then
                                 success+=(\$new_recipe)
-                                echo "\$new_recipe" >> "\${success_file}"
+                                echo "\$folder/\$new_recipe" >> "\${success_file}"
                                 # remove folders
-                                echo -e "\nBuild of \$new_recipe from \$recipe SUCCESSFUL"
+                                echo -e "\nBuild of \$new_recipe from \$recipe SUCCESSFUL(\${#success[@]})"
                             else
                                 failed+=(\$new_recipe)
-                                echo "\$new_recipe" >> "\${failed_file}"
+                                echo "\$folder/\$new_recipe" >> "\${failed_file}"
                                 # archive folders
-                                echo -e "\nBuild of \$new_recipe from \$recipe FAILED"
+                                echo -e "\nBuild of \$new_recipe from \$recipe FAILED(\${#failed[@]})"
                             fi
                         done
 
@@ -204,8 +205,17 @@ stage('Build Stage') {
 
         // merge workspaces and create PR's
         node('dom') {
-            /* clone master over ssh */
-            sh "git clone git@github.com:eth-cscs/production.git"
+            /* setup github repo */
+            sh("""#!/bin/bash -l
+                ### clone master over ssh
+                git clone git@github.com:eth-cscs/production.git
+                cd  production
+
+                ### create git branch or update if exists
+                git checkout exp/${params.cdt_version} || git checkout -b exp/${params.cdt_version}
+                git status
+                git --no-pager diff origin/master --stat
+            """)
 
             /* copy newly created toolchains to new workspace */
             for (toolchain in toolchains) {
@@ -214,38 +224,39 @@ stage('Build Stage') {
                 sh "cp -f ${source} ${target} || true"
             }
 
+            /* create PR with new recipes */
             sh("""#!/bin/bash -l
                 module load daint-gpu
                 module load hub
-                cd production
-
-                echo \$SCRATCH/*/workspace/ExperimentalEB*/ | sed 's@ @\\n@g'
-                pwd
-
-                ## create git branch or update if exists
-                git checkout -b exp/${params.cdt_version} || (git checkout exp/${params.cdt_version} && git pull)
+                cd $WORKSPACE/production
 
                 failed_files="${params.eb_prefix}/*/${params.cdt_version}/failed.txt"
                 success_files="${params.eb_prefix}/*/${params.cdt_version}/success.txt"
 
                 wc \$failed_files
-                failed=\$(cat \$failed_files | sed 's@ @\\n@g' | sort | uniq)
-                echo \${failed[@]}
-                # TO DO: open Jira issue or GitHub WIP PR with failed recipes
+                failed=\$(cat \$failed_files | sort | uniq)
 
                 wc \$success_files
-                success=\$(cat \$success_files | sed 's@ @\\n@g' | sort | uniq)
-                echo \${success[@]}
+                success=\$(cat \$success_files | sort | uniq)
+
                 for new_recipe in \${success[@]}; do
-                    # copy new recipe onto the correct folder
-                    old_recipe=\$(echo \$new_recipe | sed -E 's/(Cray.+)-${params.cdt_version}/\\1-${params.cdt_current}/')
-                    new_path=\$(echo \$new_recipe | sed -E 's@-(.*)\\.eb@/\\1@')
-                    ls -lh ${params.eb_prefix}/*/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_recipe
-                    find . -name \$old_recipe
-                    find . -name \$old_recipe | xargs dirname | xargs cp -f ${params.eb_prefix}/*/${params.cdt_version}/software/\$new_path/easybuild/reprod/\$new_recipe
+                    echo \$new_recipe
+                    # check if recipe didn't fail somewhere else
+                    if fgrep -H \$new_recipe ${params.eb_prefix}/*/${params.cdt_version}/failed.txt; then
+                        echo -e "\$new_recipe found in failed builds"
+                    else
+                        # copy new recipe onto the correct folder
+                        folder=\$(dirname \$new_recipe)
+                        recipe=\$(basename \$new_recipe)
+                        echo \$folder \$recipe
+                        source="${params.eb_prefix}/*/${params.cdt_version}/software/*/*/easybuild/reprod/\$recipe"
+                        # expand pattern and copy first item found
+                        source=(\$source)
+                        ls -lh \$source
+                        cp \$source \$folder
+                    fi
                 done
 
-                # TO DO: add successful recipes to GitHub PR
                 git add easybuild/easyconfigs
                 git status
                 git commit -m "Add recipes for cdt/${params.cdt_version}"
@@ -254,6 +265,10 @@ stage('Build Stage') {
                 if [ $createPR ]; then
                     hub pull-request -m "WIP [dom] Add recipes for cdt/${params.cdt_version}"
                 fi
+
+                # print all failed builds
+                echo -e "\nFailed Builds: \${#failed[@]} \n\${failed[@]}"
+                # TO DO: open Jira issue or GitHub WIP PR with failed recipes
 
                 # return the number of failed Builds
                 exit \${#failed[@]}
