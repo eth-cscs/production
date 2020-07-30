@@ -19,9 +19,6 @@
  GSL-2.5-CrayCCE-20.06.eb
  GSL-2.5-CrayIntel-20.06.eb
  HDFView-2.14.eb                                     --set-default-module
- HPX-1.3.0-CrayGNU-20.06.eb
- HPX-1.3.0-CrayGNU-20.06-APEX.eb
- HPX-1.3.0-CrayGNU-20.06-nonetworking.eb
  HPX-1.4.0-CrayGNU-20.06-cuda.eb                     --set-default-module
  HPX-1.4.0-CrayGNU-20.06-cuda-APEX.eb
  HPX-1.4.0-CrayGNU-20.06-cuda-nonetworking.eb
