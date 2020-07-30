@@ -12,7 +12,7 @@ toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
 #    ('PyExtensions', 'python%(pymajver)s'), # already in h5py
     ('GEOS', '3.6.2'),
     ('libspatialindex', '1.8.5'),

@@ -24,7 +24,7 @@ configopts  = (
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
 patches = ['Boost-1.70.0-python%(pymajver)s.patch']

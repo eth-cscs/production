@@ -99,6 +99,8 @@
  MUST-v1.6-rc1-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  njmon-v62-SLES15.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-systems-2020.2.1.71.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ nvidia-nsight-systems-2020.1.1.65.eb                                    --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
+ nvidia-nsight-compute-2019.4.0.12.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  otf2_cli_profile-4ef9d3f-CrayGNU-19.10.eb          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
@@ -118,7 +120,6 @@
  Score-P-6.0-CrayIntel-19.10.eb                                          --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  Score-P-6.0-CrayPGI-19.10.eb                                            --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  scorep_binding_python-1.1-CrayGNU-19.10-python3.eb --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
- termgraph-0.3.1-python3.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  Understand-4.0.926.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  vtune_amplifier_2019_update4.eb                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  vtune_profiler_2020.eb                                                  --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools

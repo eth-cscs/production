@@ -16,7 +16,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
     ('cuDNN', '7.6.4', '-cuda-%(cudaver)s', True),
     ('SWIG', '3.0.12', '-python%(pymajver)s'),
     ('NCCL', '2.6.4', '-cuda-%(cudaver)s', True),

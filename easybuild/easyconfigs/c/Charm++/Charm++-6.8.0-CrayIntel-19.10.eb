@@ -29,7 +29,7 @@ builddependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
     # pmi-lib required by CrayNid.c (function getXTNodeID)
     ('pmi', EXTERNAL_MODULE),
-    ('pmi-lib/5.0.14', EXTERNAL_MODULE),
+    ('pmi-lib', EXTERNAL_MODULE),
 ]
 
 files_to_copy = ['gni-crayxc-hugepages-smp'] 

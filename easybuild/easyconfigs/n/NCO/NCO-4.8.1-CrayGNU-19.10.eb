@@ -13,7 +13,7 @@ toolchainopts = {'opt': True, 'pic': True}
 sources = ['https://github.com/nco/nco/archive/%s.tar.gz' % version]
 
 dependencies = [
-    ('ANTLR', '2.7.7', '-python2'),
+    ('ANTLR', '2.7.7', '-python3'),
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('JasPer', '2.0.14'),
