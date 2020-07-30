@@ -1,0 +1,24 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Libint'
+version = '1.1.4'
+
+homepage = 'https://sourceforge.net/p/libint/'
+description = """Libint library is used to evaluate the traditional (electron repulsion) and certain novel two-body
+ matrix elements (integrals) over Cartesian Gaussian functions used in modern atomic and molecular theory."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = ['/apps/common/easybuild/sources/l/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+#source_urls = ('http://sourceforge.net/projects/libint/files/v1-releases/', 'download')
+
+configopts = "--enable-deriv --enable-r12"
+
+
+sanity_check_paths = {
+    'files': ['include/libderiv/libderiv.h', 'include/%(namelower)s/%(namelower)s.h', 'include/libr12/libr12.h', 'include/%(namelower)s/hrr_header.h', 'include/%(namelower)s/vrr_header.h', 'lib/libderiv.a', 'lib/%(namelower)s.a', 'lib/libr12.a', 'lib/libderiv.so', 'lib/%(namelower)s.so', 'lib/libr12.so'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
