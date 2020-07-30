@@ -1,0 +1,53 @@
+# contributed by mschoengens and sarafael (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'PyExtensionsDS'
+version = 'python%(pymajver)s'
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+]
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'use_pip': True,
+    'source_urls': [PYPI_SOURCE]
+}
+
+exts_list = [
+    ('backports.weakref', '1.0.post1'),
+    ('Werkzeug', '0.14.1'),
+    ('absl-py', '0.6.1', {
+        'modulename': 'absl',
+    }),
+    ('Keras_Applications', '1.0.6'),
+    ('Keras_Preprocessing', '1.0.5'),
+    ('gast', '0.2.0'),
+    ('astor', '0.7.1'),
+    ('termcolor', '1.1.0'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2018.8.24'),
+    ('idna', '2.7'),
+    ('urllib3', '1.23'),
+    ('requests', '2.19.1'),
+    ('wrapt', '1.11.2'),
+    ('setuptools', '41.0.1', {
+        'source_tmpl': 'setuptools-41.0.1.zip',
+    }),
+    ('Markdown', '3.1.1'),
+    ('wheel', '0.33.4'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
+}
+
+moduleclass = 'tools'

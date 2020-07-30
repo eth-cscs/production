@@ -1,0 +1,28 @@
+# contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'backports.weakref'
+version = '1.0.post1'
+versionsuffix = '-python3'
+
+homepage = 'https://pypi.python.org/pypi/backports.weakref'
+description = "A built-package format for Python."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE),
+]
+
+exts_filter = ('python3 -c "import %(ext_name)s"', '')
+req_py_majver = 3
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.6/site-packages'],
+}
+
+moduleclass = 'tools'

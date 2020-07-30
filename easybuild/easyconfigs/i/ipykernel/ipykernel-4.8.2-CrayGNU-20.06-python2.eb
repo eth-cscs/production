@@ -1,0 +1,49 @@
+# @author: sarafael, gppezzi
+
+easyblock = 'Bundle'
+
+name = 'ipykernel'
+version = '4.8.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://pypi.python.org/pypi'
+description = """
+    This module is a bundle of Python packages on Cray systems based on the
+    module cray-python
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('IPython', '5.7.0', versionsuffix)
+]
+
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+}
+
+exts_list = [
+    ('tornado', '5.0.2'),
+    ('pyzmq', '17.0.0', {
+            'modulename': 'zmq',
+        }),
+    ('jupyter_core', '4.4.0'),
+    ('jupyter_client', '5.2.3', {
+            'use_pip': True,
+        }),
+    ('ipykernel', '4.8.2'),
+]
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
+}
+
+moduleclass = 'tools'

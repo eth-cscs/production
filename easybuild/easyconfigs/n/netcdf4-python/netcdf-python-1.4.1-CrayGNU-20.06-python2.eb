@@ -1,0 +1,27 @@
+#
+name = 'netcdf-python'
+version = '1.4.1'
+
+homepage = 'http://unidata.github.io/netcdf4-python/'
+description = """Python/numpy interface to netCDF."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
+sources = ['netCDF4-%(version)s.tar.gz']
+
+versionsuffix = '-python%(pymajver)s'
+dependencies = [
+    ('cray-python/2.7.15.7', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cftime', '1.0.0', versionsuffix),
+]
+
+sanity_check_paths = {
+    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo', 'lib/python%(pyshortver)s/site-packages/netCDF4-%(version)s-py%(pyshortver)s-linux-x86_64.egg'],
+    'dirs': []
+}
+
+moduleclass = 'data'
