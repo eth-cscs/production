@@ -52,14 +52,20 @@ exts_list = [
     ('webencodings', '0.5.1'),
     ('bleach', '3.1.0'),
     ('defusedxml', '0.6.0'),
-    ('entrypoints', '0.3'),
+    ('entrypoints', '0.3', {
+        'use_pip': False,
+        }),
     ('mistune', '0.8.4'),
     ('nbformat', '4.4.0'),
     ('pandocfilters', '1.4.2'),
-    ('testpath', '0.4.2'),
+    ('testpath', '0.4.2', {
+        'use_pip': False,
+        }),
     ('nbconvert', '5.5.0'),
     ('prometheus_client', '0.7.1'),
-    ('terminado', '0.8.2'),
+    ('terminado', '0.8.2', {
+        'use_pip': False,
+        }),
     ('jupyterlab_server', '1.0.0'),
     ('ipykernel', '5.1.1'),
     ('notebook', '6.0.0'),
@@ -85,7 +91,6 @@ exts_list = [
         'modulename': "OpenSSL",
         }),
     ('certipy', '0.1.3'),
-    ('entrypoints', '0.3'),
     ('oauthlib', '3.0.2'),
     ('pamela', '1.0.0'),
     ('urllib3', '1.25.3'),
@@ -109,22 +114,22 @@ exts_list = [
     ('colorcet', '2.0.2'),
     ('zstandard', '0.13.0'),
     ('itk-core', '5.0.1', {
-        'source_tmpl': 'itk_core-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_core-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
-        'source_tmpl': 'itk_numerics-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_numerics-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-filtering', '5.0.1', {
-        'source_tmpl': 'itk_filtering-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_filtering-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
-    ('itk-meshtopolydata', '0.5.1', {
-        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp36-cp36m-manylinux1_x86_64.whl',
+    ('itk-meshtopolydata', '0.6.0', {
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
@@ -152,12 +157,6 @@ exts_list = [
 # nbresuse for jupyterlab-system-monitor extension
     ('psutil', '5.6.3'),
     ('nbresuse', '0.3.2'),
-
-# jupyterlab-slrum extension to implement common slurm commands in the notebook, not yet supported with JLab 1.0
-#    ('jupyterlab_slurm', '0.1.1'),
-
-# qgrid widgets: note that 1.1.1 is not yet supported with JupyterLab 1.x - commented for now, twr
-#    ('qgrid', '1.1.1'),
 
 # graphviz, for dask graph visualization
     ('graphviz', '0.12', {
@@ -205,15 +204,14 @@ exts_list = [
 
 # kernels
 # bash kernel, requires kernel install below, twr
-    ('bash_kernel', '0.7.2'),
+    ('bash_kernel', '0.7.2', {
+        'use_pip': False,
+        }),
 
 #other - these compoenents are now moved to IPCMagic
 #    ('ipyparallel', '6.2.4'),
 #    ('docopt', '0.6.2'),
 ]
-
-# For Julia packages needed for Jupyter
-#twr julia_depot_path = "%(installdir)s/share/julia/site/"
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
@@ -222,7 +220,6 @@ modextrapaths = {
 
 modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
-#twr    'JULIA_DEPOT_PATH': julia_depot_path,
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
 
@@ -230,7 +227,7 @@ modextravars = {
 # changed from semicolons to commas to catch npm build failures
 postinstallcmds = ["export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && "
                    "export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ && "
-                   "export PYTHONPATH=%(installdir)s/lib/python3.6/site-packages:$PYTHONPATH && "
+                   "export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && "
 #                  "export JUPYTER_PATH=%(installdir)s/share/jupyter/ && "
                    "export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && "
                    "export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ && "
