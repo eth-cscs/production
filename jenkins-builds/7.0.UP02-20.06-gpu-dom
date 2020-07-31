@@ -26,6 +26,8 @@
  Julia-1.2.0-CrayGNU-20.06-cuda.eb                   --set-default-module
  JuliaExtensions-1.2.0-CrayGNU-20.06-cuda.eb         --set-default-module
  jupyterhub-1.0.0-CrayGNU-20.06.eb                   --set-default-module
+ LAMMPS-22Aug18-CrayGNU-20.06-cuda.eb                --set-default-module
+ LAMMPS-03Mar20-CrayGNU-20.06-cuda.eb
  Lmod-7.8.2.eb                                       --set-default-module --hidden
  magma-2.4.0-CrayIntel-20.06-cuda.eb                 --set-default-module
  NCL-6.4.0.eb                                        --set-default-module
