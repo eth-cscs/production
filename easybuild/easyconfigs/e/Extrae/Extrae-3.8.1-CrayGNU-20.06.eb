@@ -18,7 +18,7 @@ source_urls = ['https://github.com/bsc-performance-tools/%(namelower)s/archive']
 sources = ['%(version)s.tar.bz2']
 # The checksum value of the sources is reported in the log file of the module.
 dependencies = [
-    ('libunwind', '1.3.1'),
+    ('libunwind', '1.4.0'),
     ('libxml2', '2.9.8', '', True),
     ('cray-fftw', EXTERNAL_MODULE),
     # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
