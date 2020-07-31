@@ -15,7 +15,7 @@ his or her application."""
 toolchain = {'name': 'CrayGNU', 'version': '20.06'}
 toolchainopts = {'verbose': False}
 source_urls = ['https://github.com/bsc-performance-tools/%(namelower)s/archive']
-sources = ['%(version)s.tar.bz2']
+sources = ['%(version)s.tar.gz']
 # The checksum value of the sources is reported in the log file of the module.
 dependencies = [
     ('libunwind', '1.4.0'),
