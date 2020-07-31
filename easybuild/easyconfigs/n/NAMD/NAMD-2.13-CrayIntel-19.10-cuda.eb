@@ -16,7 +16,7 @@ sources = [
     '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' +
     'NAMD_%(version)s_Source.tar.gz'
 ]
-patches = ['NAMD-2.13.patch']
+patches = ['NAMD-2.13-20.06.patch']
 
 prebuildopts = ' module switch intel intel/18.0.2.199 && '
 prebuildopts += ' ./config CRAY-XC-intel.cuda Eos --with-cuda --with-cray-fftw'
