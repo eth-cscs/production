@@ -29,6 +29,7 @@ dependencies = [
     ('folding', '1', '', True),
     ('spectral', '3', '', True),
 ]
+preconfigopts = "./bootstrap && "
 configopts = " --with-unwind=$EBROOTLIBUNWIND --with-mpi=$CRAY_MPICH_DIR --enable-openmp --with-fft=$FFTW_DIR --with-papi=$PAT_BUILD_PAPI_LIBDIR/.. --with-binary-type=64 --enable-parallel-merge --enable-sampling --with-clustering=$EBROOTCLUSTERINGSUITE --with-spectral=$EBROOTSPECTRAL --without-dyninst --without-cuda"
 sanity_check_paths = {
     'files': ['include/extraef_user_events.h'],
