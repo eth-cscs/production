@@ -11,7 +11,7 @@ def dom = [name: 'dom',
            cpus: ['gpu': 12, 'mc': 36],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
            unusePath: '/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all',
-           modulesProduction: '/apps/common/UES/jenkins/production/login',
+           modulesProduction: '',
            prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
 
 def kesch = [name: 'kesch',
