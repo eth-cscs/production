@@ -2,13 +2,20 @@
 easyblock = 'MakeCp'
 
 name = 'papi-wrap'
-version = '1.0'
+version = '57150c8'
 homepage = 'https://github.com/bcumming/papi-wrap'
 description = "wrappers around papi hardware counters."
 toolchain = {'name': 'CrayGNU', 'version': '20.06'}
-source_urls = [' https://github.com/jgphpc/%(name)s/archive/']
-sources = ['%(version)s.tar.gz']
-checksums = ['e72a6c1d631ffb600e9cea1a0b4da947']
+# source_urls = [' https://github.com/jgphpc/%(name)s/archive/']
+# sources = ['%(version)s.tar.gz']
+sources = [{
+    'filename': '%s-%s.tar.gz' % (name, version),
+    'git_config': {
+        'url': 'https://github.com/jgphpc',
+        'repo_name': '%s' % name,
+        'commit': '%s' % version,
+    }
+}]
 # papi provided by perftools-base since 7.0.2, otherwise, use :
 # dependencies = [ ('papi', EXTERNAL_MODULE), ]
 # papi.h seems broken, building PAPI as a workaround
