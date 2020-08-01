@@ -124,23 +124,23 @@ exts_list = [
     ('colorcet', '2.0.2'),
     ('zstandard', '0.13.0'),
     ('itk-core', '5.0.1', {
-        'source_tmpl': 'itk_core-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.0.1', {
-        'source_tmpl': 'itk_numerics-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-filtering', '5.0.1', {
-        'source_tmpl': 'itk_filtering-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
 #bumped from 0.5.1 as it does not have a python 3.8 wheel,will need to be tested  twr
     ('itk-meshtopolydata', '0.6.0', {
-        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
