@@ -2,7 +2,7 @@
 easyblock = 'PackedBinary'
 
 name = 'pprof'
-version = '9daae4f'
+version = '1a94d86'
 homepage = 'https://github.com/google/pprof'
 description = """pprof is a tool for visualization and analysis of profiling
 data (from gperftools for instance). It is based on the go language; graphviz
