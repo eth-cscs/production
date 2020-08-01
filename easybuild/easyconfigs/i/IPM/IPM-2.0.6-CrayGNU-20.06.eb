@@ -16,7 +16,7 @@ patches = ['%(name)s-%(version)s-Cray-19.06.patch']
 checksums = ['c01207ca942bef74c7d48df965fca99f']
 dependencies = [
     ('libunwind', '1.4.0'),
-    ('mxml', '3.0'),
+    ('mxml', '3.1'),
     ('ploticus', '2.42-ipm', '', True),
 ]
 preconfigopts = "./bootstrap.sh && sed -i -e 's/-qversion/-qversion --version/g' configure && "

@@ -10,9 +10,7 @@ toolchainopts = {'verbose': False}
 sources = [
     {'git_config': {'url': 'https://github.com/LLNL', 'commit': '%(version)s', 'repo_name': '%(name)s'}, 'filename': SOURCE_TAR_GZ},
 ]
-dependencies = [
-    ('libunwind', '1.4.0', '', True),
-]
+dependencies = [('libunwind', '1.4.0')]
 configopts = " --with-libunwind=$EBROOTLIBUNWIND "
 prebuildopts = "cd %(name)s ;"
 buildopts = " CC=cc F77=ftn "
