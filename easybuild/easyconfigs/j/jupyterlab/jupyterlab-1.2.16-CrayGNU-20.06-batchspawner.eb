@@ -246,7 +246,7 @@ postinstallcmds = [
 """
 export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && 
 export JUPYTERLAB_DIR=%%(installdir)s/share/jupyter/lab/ && 
-export PYTHONPATH=%%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && 
+export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHONPATH && 
 #export JUPYTER_PATH=%%(installdir)s/share/jupyter/ && 
 export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
 export JULIA_DEPOT_PATH=%%(installdir)s/share/julia/site/ && 
