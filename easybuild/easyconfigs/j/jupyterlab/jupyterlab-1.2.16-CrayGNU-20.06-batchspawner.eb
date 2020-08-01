@@ -62,7 +62,7 @@ exts_list = [
     ('webencodings', '0.5.1'),
     ('bleach', '3.1.0'),
     ('defusedxml', '0.6.0'),
-    ('entrypoints', '0.3'{
+    ('entrypoints', '0.3', {
         'use_pip': False,
         }),
     ('mistune', '0.8.4'),
