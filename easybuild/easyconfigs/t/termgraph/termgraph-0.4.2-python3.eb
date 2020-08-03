@@ -1,0 +1,29 @@
+# jg (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'termgraph'
+version = '0.4.2'
+versionsuffix = '-python%(pymajver)s'
+homepage = 'https://github.com/mkaz/termgraph'
+description = """A python command-line tool which draws basic graphs in the 
+terminal. 
+Test with (from https://github.com/mkaz/termgraph/tree/main/data/):
+    termgraph ex4.dat --color {blue,red}
+Input data must be first argument."""
+toolchain = SYSTEM
+dependencies = [('cray-python', EXTERNAL_MODULE)]
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True,
+}
+exts_list = [
+    ('colorama', '0.4.3'),
+    (name, version),
+]
+local_pythonpath = 'lib/python%(pyshortver)s/site-packages',
+sanity_check_paths = {
+    'files': [],
+    'dirs': [local_pythonpath]
+}
+
+moduleclass = 'devel'
