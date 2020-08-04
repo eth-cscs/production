@@ -4,33 +4,26 @@ easyblock = 'PythonPackage'
 name = 'scorep_binding_python'
 version = '3.0'
 versionsuffix = '-python%(pymajver)s'
-
 homepage = 'https://github.com/score-p/scorep_binding_python'
 description = "Allows tracing of python code using Score-P"
-
 toolchain = {'name': 'CrayGNU', 'version': '20.06'}
 toolchainopts = {'pic': True, 'verbose': False}
-
 source_urls = ['https://github.com/score-p/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
-
 builddependencies = [
     ('CMake', '3.14.5', '', True),
     ('PyExtensions', 'python%(pymajver)s'),
 ]
-# https://github.com/score-p/scorep_binding_python/archive/v3.0.tar.gz
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('Score-P', '6.0', '-cuda'),
+    ('Score-P', '6.0'),
 ]
-
 options = {'modulename': 'scorep'}
-
 sanity_check_paths = {
-    'files': ['lib/python%(pyshortver)s/site-packages/scorep/scorep_bindings.cpython-%(pymajver)s%(pyminver)s-%(arch)s-linux-gnu.so'],
+    'files': ['lib/python%(pyshortver)s/site-packages/scorep/scorep_bindings.'
+              'cpython-%(pymajver)s%(pyminver)s-%(arch)s-linux-gnu.so'],
     'dirs': [''],
 }
-
 modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
 
-moduleclass = 'lib'
+moduleclass = 'perf'
