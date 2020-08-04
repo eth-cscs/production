@@ -8,8 +8,7 @@
  CPMD-4.3-CrayIntel-20.06.eb                        --set-default-module
  dask-2.2.0-CrayGNU-20.06-python3.eb                --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.06.eb                 --set-default-module
- GROMACS-2018.6-CrayGNU-20.06.eb                    --set-default-module
- GROMACS-2020.1-CrayGNU-20.06.eb
+ GROMACS-2020.1-CrayGNU-20.06.eb                    --set-default-module
  GSL-2.5-CrayGNU-20.06.eb                           --set-default-module
  GSL-2.5-CrayCCE-20.06.eb
  GSL-2.5-CrayIntel-20.06.eb
