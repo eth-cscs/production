@@ -28,6 +28,7 @@
  LAMMPS-03Mar20-CrayGNU-20.06-cuda.eb                --set-default-module
  Lmod-7.8.2.eb                                       --set-default-module --hidden
  magma-2.4.0-CrayIntel-20.06-cuda.eb                 --set-default-module
+ NAMD-2.13-CrayIntel-20.06-cuda.eb                   --set-default-module
  NCL-6.4.0.eb                                        --set-default-module
  NCO-4.8.1-CrayGNU-20.06.eb                          --set-default-module
  ncview-2.1.7-CrayGNU-20.06.eb                       --set-default-module
