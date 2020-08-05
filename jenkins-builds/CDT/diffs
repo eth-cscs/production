@@ -1,0 +1,5 @@
+module-version atp/2.1.3 default			      |	module-version atp/3.6.4 default
+module-version cray-ccdb/3.0.5 default			      |	module-version cray-ccdb/4.6.4 default
+module-version cray-cti/1.0.10 default			      |	module-version cray-cti/2.6.6 default
+module-version cray-snplauncher/7.7.14 default		      |	module-version cray-snplauncher/7.7.15.4 default
+module-version gdb4hpc/3.0.10 default			      |	module-version gdb4hpc/4.6.5 default
