@@ -37,9 +37,12 @@
  ipcmagic-0.1-CrayGNU-19.10.eb                      --set-default-module
  ipyparallel-6.2.4-CrayGNU-19.10-python3.eb
  Julia-1.2.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module
+ Julia-1.4.2-CrayGNU-19.10-cuda-10.1.eb             --umask=022
  JuliaExtensions-1.2.0-CrayGNU-19.10-cuda-10.1.eb   --set-default-module
+ JuliaExtensions-1.4.2-CrayGNU-19.10-cuda-10.1.eb   --umask=022
  jupyterlab-1.1.1-CrayGNU-19.10.eb                  --set-default-module
  jupyterlab-1.1.1-CrayGNU-19.10-batchspawner.eb
+ jupyterlab-1.2.16-CrayGNU-19.10-cuda-10.1-batchspawner.eb
  jupyterhub-1.0.0-CrayGNU-19.10.eb                  --set-default-module
  jupyter-utils-0.1.eb                               --set-default-module
  LAMMPS-22Aug2018-CrayGNU-19.10-cuda-10.1.eb        --set-default-module
@@ -61,7 +64,7 @@
  pycuda-2018.1.1-CrayGNU-19.10-python2-cuda-10.1.eb
  pycuda-2018.1.1-CrayGNU-19.10-python3-cuda-10.1.eb --set-default-module
  PyExtensions-python2-CrayGNU-19.10.eb
- PyExtensions-3.6.5.6-CrayGNU-19.10.eb
+ PyExtensions-python3-CrayGNU-19.10.eb
  Python-bare-3.7.3.eb                               --hidden
  QuantumESPRESSO-6.4.1-CrayIntel-19.10-cuda-10.1.eb --set-default-module
  QuantumESPRESSO-6.5a1-CrayPGI-19.10-cuda-10.1.eb
@@ -101,8 +104,6 @@
  MUST-v1.6-rc1-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  njmon-v62-SLES15.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvidia-nsight-systems-2020.2.1.71.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
- nvidia-nsight-systems-2020.1.1.65.eb                                    --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
- nvidia-nsight-compute-2019.4.0.12.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-19.10-cuda-10.1.eb             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  otf2_cli_profile-4ef9d3f-CrayGNU-19.10.eb          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools
  papi-wrap-1.0-CrayGNU-19.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP01/gpu/easybuild/tools

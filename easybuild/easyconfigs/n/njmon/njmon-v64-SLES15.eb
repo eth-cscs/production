@@ -1,0 +1,28 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'njmon'
+version = 'v64'
+local_osname = 'SLES15'
+versionsuffix = '-%s' % local_osname
+homepage = 'http://nmon.sourceforge.net/pmwiki.php?n=Site.Njmon'
+description = """njmon is like nmon but saving to JSON format - for modern
+performance stats tooling"""
+toolchain = SYSTEM
+source_urls = ['http://sourceforge.net/projects/nmon/files']
+sources = ['%(name)s_linux_binaries_%(version)s.zip']
+local_installdir = '%(installdir)s'
+postinstallcmds = [
+    'mkdir -p %(installdir)s/bin ',
+    'chmod 755 njmon_{}_x86_64_{} '.format(local_osname, version),
+    'chmod 755 nimon_{}_x86_64_{} '.format(local_osname, version),
+    'mv njmon_%s_x86_64_%s %s/bin/njmon' % (local_osname, version, local_installdir),
+    'mv nimon_%s_x86_64_%s %s/bin/nimon' % (local_osname, version, local_installdir),
+    'rm -f %(installdir)s/ninstall %(installdir)s/*mon**',
+]
+sanity_check_paths = {
+    'files': ['bin/njmon', 'bin/nimon'],
+    'dirs': ['bin']
+}
+
+moduleclass = 'tools'

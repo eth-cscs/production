@@ -17,7 +17,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
     ('CUDA', '10.1.243', '', True),
-    ('UCX', '1.6.1', '-cuda-10.1', ('GCC', '8.3.0')),
+    ('UCX', '1.8.1', '-cuda-10.1', ('GCC', '8.3.0')),
 ]
 
 configopts = (
