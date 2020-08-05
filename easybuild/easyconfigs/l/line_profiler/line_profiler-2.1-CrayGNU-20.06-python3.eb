@@ -1,0 +1,28 @@
+# jg (cscs)
+easyblock = 'PythonPackage'
+
+name = 'line_profiler'
+version = '2.1'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/rkern/line_profiler'
+description = "Line-by-line profiler for Python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/rkern/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+]
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-%(arch)s.egg'],
+}
+
+moduleclass = 'lang'

@@ -6,8 +6,6 @@ name = 'jupyterlab'
 version = '1.2.4'
 versionsuffix = '-cuda-%(cudashortver)s-batchspawner'
 
-_pyminver = '6'
-
 _jl_maj_ver = '1'
 _jl_min_ver = '2'
 _jl_rev_ver = '0'
@@ -35,7 +33,7 @@ dependencies = [
 
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE],
     'use_pip': True,
 }
@@ -78,7 +76,7 @@ exts_list = [
     (name, version, {
         'installopts': ' --install-option=--skip-npm ',
         }),
-    
+
 # jupyterhub and its deps
     ('SQLAlchemy', '1.3.6'),
     ('Mako', '1.0.14'),
@@ -155,7 +153,7 @@ exts_list = [
     ('Pillow', '7.0.0', {
         'modulename': 'PIL',
         }),
-    
+
 # bqplot: requires the labextension below
     ('traittypes', '0.2.1'),
     ('bqplot', '0.11.6'),
@@ -176,8 +174,8 @@ exts_list = [
         }),
 
 # dask-labextension
-# This package provides a JupyterLab extension to manage Dask clusters, 
-# as well as embed Dask's dashboard plots directly into JupyterLab panes    
+# This package provides a JupyterLab extension to manage Dask clusters,
+# as well as embed Dask's dashboard plots directly into JupyterLab panes
     ('simpervisor', '0.3'),
     ('multidict', '4.5.2'),
     ('yarl', '1.3.0'),
@@ -191,7 +189,7 @@ exts_list = [
     ('dask_labextension', '1.0.3'),
 
 #JupyterLab GPU Dashboard (nvdashboard)
-#JupyterLab extension for displaying dashboards of GPU usage.   
+#JupyterLab extension for displaying dashboards of GPU usage.
     ('pynvml', '8.0.4'),
     ('jupyterlab-nvdashboard', '0.2.1'),
 
@@ -258,10 +256,10 @@ rm -r $YARN_CACHE_FOLDER;
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%%(installdir)s/;
 # new batchspawner requires compute side components, TWR 121219
-#git clone https://github.com/jupyterhub/batchspawner.git %%(builddir)s/batchspawner && 
-#cd %%(builddir)s/batchspawner && 
-#git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 && 
-#pip install . --prefix=%%(installdir)s 
+#git clone https://github.com/jupyterhub/batchspawner.git %%(builddir)s/batchspawner &&
+#cd %%(builddir)s/batchspawner &&
+#git checkout 68a1fcd3524f8990ba465fae4226da34f1e926b7 &&
+#pip install . --prefix=%%(installdir)s
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
 # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
 unset EBJULIA_USER_DEPOT_PATH;
