@@ -21,7 +21,7 @@ source_urls = ['http://content.allinea.com/downloads/']
 sources = ['arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix)]
 postinstallcmds = [
     'bash ./textinstall.sh --accept-licence %(installdir)s && '
-    'echo -e "type=2\nserial_number=6784\nhostname=velan\nserverport=4241" > '
+    'echo -e "type=2\nserial_number=16250\nhostname=velan\nserverport=4241" > '
     '%(installdir)s/licences/License && '
     'cp %(installdir)s/licences/License %(installdir)s/licences/Licence']
 sanity_check_paths = {
