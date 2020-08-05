@@ -52,31 +52,31 @@ prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", local_patchle
 #
 # Setting updates to N, because we already have applied them
 # Compiling several times in order to consolidate the Amber installation into a single module
-prebuildopts += './configure      -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure      -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure      -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure      -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure      -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure      -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure -cuda -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure -cuda -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure -mpi -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure -mpi -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure -mpi -noX11         --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure -mpi -crayxt5 -noX11         --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
-prebuildopts += './configure -cuda -mpi -noX11   --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += './configure -cuda -mpi -crayxt5 -noX11   --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
 prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
 prebuildopts += 'make -j && make install && '
 
