@@ -50,9 +50,12 @@ sanity_check_paths = {
 # first serial attempt would fail.
 # prebuildopts = 'make VTKData ;'
 
-modextravars = {
-    'LD_LIBRARY_PATH': '/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)',
-    'PYTHONPATH': '%(installdir)s/lib64/python%(pyshortver)s/site-packages/:$::env(PYTHONPATH)',
+modextrapaths = {
+    'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages',
 }
+
+modtclfooter = """
+    prepend-path LD_LIBRARY_PATH /opt/python/%(pyver)s/lib
+"""
 
 moduleclass = 'vis'
