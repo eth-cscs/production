@@ -10,9 +10,9 @@ def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            cpus: ['gpu': 12, 'mc': 36],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
-           modulesProduction: '/apps/common/UES/jenkins/production/login',
-           prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
+           unusePath: '/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all',
+           modulesProduction: '',
+           prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
 
 def kesch = [name: 'kesch',
              archs: [],
@@ -24,18 +24,10 @@ def kesch = [name: 'kesch',
 
 def tsa = [name: 'tsa',
            archs: [],
-           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/arolla/UES/modulefiles',
-           modulesProduction: '',
-           modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.6/generic/easybuild']
-
-def TSAtds = [name: 'TSAtds',
-           archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
            unusePath: '/apps/arolla/UES/modulefiles',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/generic/easybuild']
 
-return [daint, dom, kesch, tsa, TSAtds]
+return [daint, dom, kesch, tsa]

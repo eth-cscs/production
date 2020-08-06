@@ -1,0 +1,23 @@
+easyblock = 'ConfigureMake'
+
+name = 'GEOS'
+version = '3.6.2'
+
+homepage = 'http://trac.osgeo.org/geos'
+description = """
+    GEOS (Geometry Engine - Open Source) is a C++ port of the Java Topology
+    Suite (JTS)
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+
+source_urls = ['http://download.osgeo.org/%(namelower)s/']
+sources = [SOURCELOWER_TAR_BZ2]
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-config', 'lib/libgeos.so', 'lib/libgeos.a', 'include/%(namelower)s.h'],
+    'dirs': [],
+}
+
+moduleclass = 'math'

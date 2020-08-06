@@ -1,0 +1,30 @@
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS)
+name = 'Julia'
+version = '1.2.0'
+versionsuffix = '-cuda'
+
+homepage = 'https://julialang.org'
+description = "Julia is a high-level general-purpose dynamic programming language that was originally designed to address the needs of high-performance numerical analysis and computational science, without the typical need of separate compilation to be fast, also usable for client and server web use, low-level systems programming or as a specification language (wikipedia.org). Julia provides ease and expressiveness for high-level numerical computing, in the same way as languages such as R, MATLAB, and Python, but also supports general programming. To achieve this, Julia builds upon the lineage of mathematical programming languages, but also borrows much from popular dynamic languages, including Lisp, Perl, Python, Lua, and Ruby (julialang.org)."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'pic': True, 'verbose': True}
+
+source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
+sources = ['%(namelower)s-%(version)s-linux-%(arch)s.tar.gz']
+checksums = ['926ced5dec5d726ed0d2919e849ff084a320882fb67ab048385849f9483afc47']
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+arch_name = 'gpu'
+exts_defaultclass = 'JuliaPackage'
+
+exts_list = [
+    ('MPI.jl', '0.9.0', {'source_tmpl': 'v0.9.0.tar.gz', 'source_urls': ['https://github.com/JuliaParallel/MPI.jl/archive/']}),
+    ('CUDAdrv.jl', '3.1.0', {'source_tmpl': 'v3.1.0.tar.gz', 'source_urls': ['https://github.com/JuliaGPU/CUDAdrv.jl/archive/']}),
+    ('CUDAnative.jl', '2.4.0', {'source_tmpl': 'v2.4.0.tar.gz', 'source_urls': ['https://github.com/JuliaGPU/CUDAnative.jl/archive/']}),
+    ('CuArrays.jl', '1.3.0', {'source_tmpl': 'v1.3.0.tar.gz', 'source_urls': ['https://github.com/JuliaGPU/CuArrays.jl/archive/']}),
+]
+
+moduleclass = 'lang'

@@ -3,7 +3,6 @@ easyblock = 'PythonBundle'
 
 name = 'prereq'
 version = 'tf-2.2'
-_pyminver = '6'
 
 homepage = 'https://pypi.python.org/pypi'
 description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
@@ -15,12 +14,11 @@ dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('numpy', '1.17.2'),
     ('h5py', '2.8.0', '-python%(pymajver)s-serial'),
-    ('PyExtensions', '%(pyver)s'),
+    ('PyExtensions', 'python%(pymajver)s'),
 ]
 
 exts_default_options = {
-    'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'use_pip': True,
     'source_urls': [PYPI_SOURCE]
 }
 

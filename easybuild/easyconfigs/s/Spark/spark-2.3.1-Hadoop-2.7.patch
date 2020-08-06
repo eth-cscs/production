@@ -28,7 +28,7 @@ diff -Nru spark-2.3.1-bin-hadoop2.7.orig/cscs-custom/start-all.sh spark-2.3.1-bi
 +# Start ssh
 +cat > $SPARK_WORKER_DIR/sshd_config << EOF
 +Port 2222
-+HostKey $HOME/.ssh/id_rsa
++HostKey $HOME/.ssh/id_ed25519
 +UsePrivilegeSeparation no
 +PermitUserEnvironment no
 +PidFile $HOME/sshd.pid

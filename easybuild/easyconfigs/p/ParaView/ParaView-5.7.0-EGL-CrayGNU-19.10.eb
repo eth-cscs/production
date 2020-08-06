@@ -16,20 +16,14 @@ local_download_suffix = 'download.php?submit=Download&version=v%(version_major_m
 source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_suffix]
 sources = ["ParaView-v%(version)s.tar.gz"]
 
-local_py_maj_ver = '3'
-local_py_min_ver = '6'
-local_py_rev_ver = '5.7'
-
-local_pyver = '%s.%s.%s' % (local_py_maj_ver, local_py_min_ver, local_py_rev_ver)
-local_pyshortver = '%s.%s' % (local_py_maj_ver, local_py_min_ver)
-local_pysuff = '-python%s' % local_py_maj_ver
+local_pysuff = '-python%(pymajver)s'
 
 dependencies = [
     ('h5py', '2.8.0', '%s-serial' % local_pysuff),
     ('ospray', '1.8.5'),
     ('oidn', '0.9.0'),
     ('VisRTX', '0.1.6'),
-    ('cray-python/%s' % local_pyver, EXTERNAL_MODULE)
+    ('cray-python/3.6.5.7', EXTERNAL_MODULE)
 ]
 
 builddependencies = [('CMake', '3.14.5','', True)]
@@ -42,7 +36,7 @@ configopts =  '-DPARAVIEW_USE_MPI:BOOL=ON '
 configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
 configopts += '-DBUILD_TESTING:BOOL=OFF -DPARAVIEW_ENABLE_CATALYST:BOOL=ON '
 configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
-configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 '
+configopts += '-DPARAVIEW_ENABLE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python%(pymajver)s '
 configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
 # use TBB for on-the-node parallelism
 configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
@@ -78,10 +72,10 @@ configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
 # first serial attempt would fail.
 #prebuildopts = 'make VTKData ;'
 
-modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:/opt/python/%s/lib:$::env(LD_LIBRARY_PATH)' % local_pyver, 
+modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)', 
                  'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView'}
 
-modextrapaths = {'PYTHONPATH': 'lib64/python%s/site-packages'% local_pyshortver}
+modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],

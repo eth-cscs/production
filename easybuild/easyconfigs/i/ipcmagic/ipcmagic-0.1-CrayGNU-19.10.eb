@@ -15,12 +15,10 @@ dependencies = [
     ('jupyterlab', '1.1.1', '-batchspawner')
 ]
 
-_pyminver = '6'
-
 exts_defaultclass = 'PythonPackage'
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
-    'req_py_minver': '%s' % _pyminver,
+    'req_py_minver': '%(pyminver)s',
     'source_urls': [PYPI_SOURCE],
     'use_pip': True
 }
