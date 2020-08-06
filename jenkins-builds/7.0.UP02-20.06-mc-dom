@@ -21,8 +21,11 @@
  h5py-2.8.0-CrayGNU-20.06-python3-serial.eb
  IDL-8.5.1.eb                                       --set-default-module
  IDL-8.7.2-CSCS.eb
+ ipcmagic-0.1-CrayGNU-20.06.eb                      --set-default-module
+ ipyparallel-6.2.4-CrayGNU-20.06-python3.eb
  Julia-1.2.0-CrayGNU-20.06.eb                       --set-default-module
  JuliaExtensions-1.2.0-CrayGNU-20.06.eb             --set-default-module
+ jupyter-utils-0.1.eb                               --set-default-module
  LAMMPS-03Mar20-CrayGNU-20.06.eb                    --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NAMD-2.13-CrayIntel-20.06.eb                       --set-default-module

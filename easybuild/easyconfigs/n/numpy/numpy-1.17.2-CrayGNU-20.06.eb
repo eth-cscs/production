@@ -15,7 +15,7 @@ toolchainopts = {'verbose': False}
 
 source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v1.17.2']
 sources = [SOURCELOWER_TAR_GZ]
-patches = [('mkl-2019-sitecfg.patch', 1)]
+patches = [('mkl-2020-sitecfg.patch', 1)]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
@@ -29,7 +29,7 @@ sanity_check_paths = {
 }
 
 modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries_2019/linux/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)',
+    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)',
 }
 
 moduleclass = 'tools'
