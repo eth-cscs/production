@@ -1,0 +1,16 @@
+diff -Nru numpy-1.16.4.orig/site.cfg numpy-1.16.4/site.cfg
+--- numpy-1.16.4.orig/site.cfg	1970-01-01 01:00:00.000000000 +0100
++++ numpy-1.16.4/site.cfg	2019-10-04 13:51:55.000000000 +0200
+@@ -0,0 +1,12 @@
++# MKL
++#----
++# Intel MKL is Intel's very optimized yet proprietary implementation of BLAS and
++# Lapack. Find the latest info on building numpy with Intel MKL in this article:
++# https://software.intel.com/en-us/articles/numpyscipy-with-intel-mkl
++# Assuming you installed the mkl in /opt/intel/compilers_and_libraries_2019/linux/mkl,
++# for 64 bits code at Linux:
++[mkl]
++library_dirs = /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64
++include_dirs = /opt/intel/compilers_and_libraries_2020/linux/mkl/include
++mkl_libs = mkl_rt
++lapack_libs = 
