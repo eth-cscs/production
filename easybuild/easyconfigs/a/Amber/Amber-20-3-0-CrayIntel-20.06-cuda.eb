@@ -45,7 +45,8 @@ buildininstalldir = True
 # when uncommenting the next line make sure to change all make -j to make -j1
 #maxparallel = 1
 
-prebuildopts = 'cd .. && mv amber20_src/* . && '
+prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && '
+prebuildopts += 'cd .. && mv amber20_src/* . && '
 prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HOME;'
 prebuildopts += './update_amber --update-to %s/%s && ' % ("AmberTools", local_patchlevels[0])
 prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", local_patchlevels[1])
