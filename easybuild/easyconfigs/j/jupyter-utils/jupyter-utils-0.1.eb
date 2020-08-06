@@ -1,15 +1,13 @@
+# modified by Luca Marsella (CSCS)
 easyblock = "PythonPackage"
 
 name = 'jupyter-utils'
 version = '0.1'
 
-pyshortver = '3.6'
-pyver = '%s.5.7' % pyshortver
-
 homepage = 'https://github.com/eth-cscs/jupyter-utils'
 description = "Utilities for working with Jupyter at CSCS"
 
-toolchain = {'name': 'system', 'version': ''}
+toolchain = SYSTEM
 
 sources = [{
     'filename': '%(name)s-%(version)s.tar.gz',
@@ -21,12 +19,12 @@ sources = [{
 }]
 
 builddependencies = [
-    ('cray-python/%s' % pyver, EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
 ]
 
 sanity_check_paths = {
     'files': ['bin/kernel-create'],
-    'dirs': ['lib/python%s/site-packages' % pyshortver],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
 moduleclass = 'tools'

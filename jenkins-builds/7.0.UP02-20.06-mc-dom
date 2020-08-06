@@ -23,6 +23,7 @@
  IDL-8.7.2-CSCS.eb
  Julia-1.2.0-CrayGNU-20.06.eb                       --set-default-module
  JuliaExtensions-1.2.0-CrayGNU-20.06.eb             --set-default-module
+ jupyter-utils-0.1.eb                               --set-default-module
  LAMMPS-03Mar20-CrayGNU-20.06.eb                    --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
  NAMD-2.13-CrayIntel-20.06.eb                       --set-default-module
