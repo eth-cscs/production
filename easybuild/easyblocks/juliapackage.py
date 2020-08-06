@@ -25,9 +25,8 @@
 """
 EasyBuild support for building and installing Julia packages, implemented as an easyblock
 
-@author: Kenneth Hoste (Ghent University)
-@author: Samuel Omlin (CSCS)
 @author: Victor Holanda (CSCS)
+@author: Samuel Omlin (CSCS)
 """
 import os
 import shutil

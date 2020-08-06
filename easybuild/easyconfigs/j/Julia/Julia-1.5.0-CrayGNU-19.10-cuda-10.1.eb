@@ -38,6 +38,11 @@ exts_list = [
 ]
 
 modextravars = {
+    'JULIA_MPI_BINARY': 'system',
+    'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
+    'JULIA_MPICC': 'cc',
+    'JULIA_MPIEXEC': 'srun',
+    'JULIA_MPIEXEC_ARGS': "-C %s" % arch_name,    
     'JULIA_CUDA_USE_BINARYBUILDER': 'false',
 }
 
