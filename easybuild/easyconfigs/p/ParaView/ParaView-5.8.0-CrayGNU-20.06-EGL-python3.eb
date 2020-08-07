@@ -1,0 +1,75 @@
+# CrayGNU version by Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.8.0'
+versionsuffix = '-EGL-python%(pymajver)s'
+
+homepage = "http://www.paraview.org"
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.06'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+local_download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_suffix]
+sources = ["ParaView-v%(version)s.tar.gz"]
+
+dependencies = [
+    ('h5py', '2.8.0', '-python%(pymajver)s-serial'),
+    ('ospray', '1.8.5'),
+    ('oidn', '1.1.0'),
+    ('VisRTX', '0.1.6', '-cuda'),
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+builddependencies = [('CMake', '3.14.5','', True)]
+
+separate_build_dir = True
+
+maxparallel = 16
+
+configopts =  '-DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
+configopts += '-DBUILD_TESTING:BOOL=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL '
+configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
+configopts += '-DPARAVIEW_USE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
+# use TBB for on-the-node parallelism
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbbmalloc.so '
+# for  CLE7.UP01.PS09 which includes a new NVIDIA driver
+configopts += '-DOPENGL_opengl_LIBRARY=/usr/lib64/libOpenGL.so '
+configopts += '-DOPENGL_egl_LIBRARY=/usr/lib64/libEGL.so '
+#
+configopts += '-DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include '
+configopts += '-DPARAVIEW_ENABLE_XDMF3:BO0L=OFF '
+configopts += '-DPARAVIEW_USE_VTKM:BO0L=OFF '
+configopts += '-DPARAVIEW_USE_QT:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF '
+# CSCS specific for EGL
+configopts += '-DVTK_OPENGL_HAS_EGL:BOOL=ON -DVTK_USE_X:BOOL=OFF '
+# CSCS specific for Raytracing (OSPRAY and/or OptiX)
+configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON '
+configopts += '-DVTK_ENABLE_OSPRAY:BOOL=ON '
+configopts += '-DVTK_ENABLE_VISRTX:BOOL=ON '
+configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
+configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
+configopts += '-DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" '
+configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" '
+# Using CSCS NVIDIA IndeX lib
+configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
+# for  CLE7.UP02 which includes the new NVIDIA driver
+modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)', 
+                 'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView',
+               }
+
+modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
+
+sanity_check_paths = {
+    'files': ['bin/pvbatch', 'bin/pvserver'],
+    'dirs': ['lib64/python%(pyshortver)s/site-packages',
+             'lib64/paraview-5.8/plugins'
+           ]
+}
+
+moduleclass = 'vis'

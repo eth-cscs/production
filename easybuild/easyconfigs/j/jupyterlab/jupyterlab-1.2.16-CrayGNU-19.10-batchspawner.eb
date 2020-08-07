@@ -9,8 +9,8 @@ versionsuffix = '-batchspawner'
 _pyminver = '6'
 
 _jl_maj_ver = '1'
-_jl_min_ver = '4'
-_jl_rev_ver = '2'
+_jl_min_ver = '5'
+_jl_rev_ver = '0'
 
 _jlver = '%s.%s.%s' % (_jl_maj_ver, _jl_min_ver, _jl_rev_ver)
 _jlshortver = '%s.%s' % (_jl_maj_ver, _jl_min_ver)
