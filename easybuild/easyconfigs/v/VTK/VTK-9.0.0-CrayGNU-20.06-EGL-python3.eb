@@ -26,8 +26,7 @@ sources = [SOURCE_TAR_GZ]
 
 separate_build_dir = True
 
-# avoid parallel make
-maxparallel = 1
+maxparallel = 16
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
@@ -60,7 +59,7 @@ configopts += "-DEGL_INCLUDE_DIR:PATH=/users/jfavre/Projects/EGL/code-samples/po
 configopts += "-DOPENGL_egl_LIBRARY:FILEPATH=/usr/lib64/libEGL.so "
 configopts += "-DOPENGL_opengl_LIBRARY:FILEPATH=/usr/lib64/libOpenGL.so "
 
-modextravars = { 'LD_LIBRARY_PATH':'/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:$::env(LD_LIBRARY_PATH)' 
+modextravars = { 'LD_LIBRARY_PATH':'$::env(PYTHONPATH)/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-x86_64-418.39:$::env(LD_LIBRARY_PATH)' 
                }
 modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
 
