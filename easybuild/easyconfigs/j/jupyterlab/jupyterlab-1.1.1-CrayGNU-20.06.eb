@@ -61,7 +61,7 @@ exts_list = [
     }),
     ('nbconvert', '5.5.0'),
     ('prometheus_client', '0.7.1'),
-    ('terminado', '0.8.2'), {
+    ('terminado', '0.8.2', {
         'use_pip': False,
     }),
     ('jupyterlab_server', '1.0.0'),
@@ -157,7 +157,7 @@ exts_list = [
 
 # kernels
 # bash kernel, requires kernel install below, twr
-    ('bash_kernel', '0.7.2'), {
+    ('bash_kernel', '0.7.2', {
         'use_pip': False,
     }),
 #other - these compoenents are now moved to IPCMagic
