@@ -48,6 +48,7 @@ exts_list = [
     ('python-dateutil', '2.7.2', {
         'modulename': 'dateutil'
     }),
+    ('Cython', '0.29.21'),
     ('pyproj', '1.9.5.1'),
     ('basemap', '1.1.0', {
         'source_urls': ['https://github.com/matplotlib/basemap/archive'],
