@@ -185,7 +185,7 @@ stage('ReBuild Stage') {
     }
 }
     
-if (params.notifyJira) {
+//if (params.notifyJira) {
     JiraIssues = [:]
     stage('Jira Stage') {
         for (system in machineConfigurations) {
@@ -206,6 +206,8 @@ if (params.notifyJira) {
                                      script: """$loginBash
                                                 echo \$SCRATCH""").trim()
                         def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/success.txt"
+                        println "Scratch folder is $scratch"
+                        println "Failed list of builds in $failed_file"
                         new File(failed_file).eachLine { recipe ->
                             println "Current line of $failed_file is: $recipe(EOL)"
                             //methods.failedJiraTask(projkey, recipe, machineLabel)
@@ -221,7 +223,7 @@ if (params.notifyJira) {
             println "Failed to create Jira Issues"
         }
     }
-}
+//}
 
 if (params.notifySlack) {
     methods.notifySlackFinish()
