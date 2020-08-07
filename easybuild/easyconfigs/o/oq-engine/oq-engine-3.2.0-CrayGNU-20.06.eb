@@ -49,7 +49,9 @@ exts_list = [
         'modulename': 'dateutil'
     }),
     ('Cython', '0.29.21'),
-    ('pyproj', '1.9.5.1'),
+    ('pyproj', '1.9.5.1', {
+        'setup_requires': ['cython=0.29.21'],
+    }),
     ('basemap', '1.1.0', {
         'source_urls': ['https://github.com/matplotlib/basemap/archive'],
         'source_tmpl': 'v1.1.0.tar.gz',
