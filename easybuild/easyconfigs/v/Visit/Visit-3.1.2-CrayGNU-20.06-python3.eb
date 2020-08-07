@@ -20,7 +20,7 @@ toolchainopts = {'usempi': True, 'verbose': False}
 # Below you will find the steps to create the SOURCELOWER_TAR_GZ file used in
 # this recipe.
 #
-# wget http://portal.nersc.gov/project/visit/releases/3.1.2/visit3.1.2.tar.gz
+# wget https://github.com/visit-dav/visit/releases/download/v3.1.2/visit3.1.2.tar.gz
 # tar xfz visit3.1.2.tar.gz
 # cd visit3.1.2
 # ./src/tools/dev/scripts/build_visit --console --no-visit --parallel \
