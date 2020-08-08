@@ -184,6 +184,53 @@ stage('ReBuild Stage') {
         }
     }
 }
+
+ArchiveBuilds = [:]
+stage('Archive Logs') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            def architecture = item
+            def machineLabel = architecture == "" ? 
+                machineName : 
+                "${machineName}-${architecture}"
+            ArchiveBuilds[machineLabel] = {
+                node(machineName) {
+                    def project_name = env.JOB_BASE_NAME.trim()
+                    def workingDir = sh(returnStdout: true,
+                                         script: 'echo $PWD').trim()
+                    def scratch = sh(returnStdout: true,
+                                     script: """$loginBash
+                                                echo \$SCRATCH""").trim()
+                    def prefix = "${scratch}/${project_name}/${machineLabel}"
+                    def logDir = "${project_name}-${machineLabel}-logs"
+                    try {
+                        dir("$logDir") {
+                            sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
+                        }
+                        archiveArtifacts "${logDir}/*"
+                    }
+                    catch(err) {
+                        println "Failed to archive artifacts for $machineLabel"
+                    }
+                    finally {
+                       sh ("""$loginBash
+                              rm -rf $prefix
+                              rm -rf $logDir""")
+                    }
+                }
+            }
+        }
+    }
+
+    try {
+        parallel ArchiveBuilds
+    } catch(err) {
+        println "Failed to archive artifacts"
+    }
+}
     
 //if (params.notifyJira) {
     JiraIssues = [:]
@@ -208,9 +255,9 @@ stage('ReBuild Stage') {
                         def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/success.txt"
                         println "Scratch folder is $scratch"
                         println "Failed list of builds in $failed_file"
-                        new File(failed_file).eachLine { recipe ->
-                            println "Current line of $failed_file is: $recipe(EOL)"
-                            //methods.failedJiraTask(projkey, recipe, machineLabel)
+                        //new File(failed_file).eachLine { recipe ->
+                        //    println "Current line of $failed_file is: $recipe(EOL)"
+                        //methods.failedJiraTask(projkey, recipe, machineLabel)
                         }
                     }
                 }
