@@ -207,11 +207,6 @@ stage('Archive Logs') {
                     def prefix = "${scratch}/${project_name}/${machineLabel}"
                     def logDir = "${project_name}-${machineLabel}-logs"
                     println "Working folder: \t $workingDir \nScratch folder: \t $scratch \n Prefix folder: \t $prefix \n Logs folder: \t $logDir"
-                    finally {
-                       sh ("""#!/bin/bash -l
-                              ls $prefix
-                              ls $logDir""")
-                    }
                 }
             }
         }
