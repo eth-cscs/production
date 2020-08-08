@@ -73,11 +73,11 @@ stage('ReBuild Stage') {
                         "" :
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define unuse command */
-                    def unuse_command = architecture == '' ?
-                        "module unuse $machine.unusePath" :
-                        "module unuse $machine.unusePath".replace('ARCH', architecture)
-                        println("Unuse command: $unuse_command")
+                    /* define list of unuse paths */
+                    def unuse_paths = architecture == '' ?
+                        machine.unusePath.replace(':', ' ') :
+                        machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
+                        println("List of unuse paths: $unuse_paths")
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
@@ -94,7 +94,10 @@ stage('ReBuild Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
-                        $unuse_command
+                        for path in $unuse_paths; do
+                         module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
 
                         # print EasyBuild version and configuration
                         eb --version
@@ -185,8 +188,8 @@ stage('ReBuild Stage') {
     }
 }
 
-ArchiveBuilds = [:]
-stage('Archive Logs') {
+JiraIssues = [:]
+stage('Jira Issues') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
@@ -196,68 +199,29 @@ stage('Archive Logs') {
             def machineLabel = architecture == "" ? 
                 machineName : 
                 "${machineName}-${architecture}"
-            ArchiveBuilds[machineLabel] = {
+            JiraIssues[machineLabel] = {
                 node(machineName) {
-                    def project_name = env.JOB_BASE_NAME.trim()
-                    def workingDir = sh(returnStdout: true,
-                                         script: 'echo $PWD').trim()
+                    /* retrieve list of failed rebuilds */
                     def scratch = sh(returnStdout: true,
                                      script: """#!/bin/bash -l
                                                 echo \$SCRATCH""").trim()
-                    def prefix = "${scratch}/${project_name}/${machineLabel}"
-                    def logDir = "${project_name}-${machineLabel}-logs"
-                    println "Working folder: \t $workingDir \nScratch folder: \t $scratch \n Prefix folder: \t $prefix \n Logs folder: \t $logDir"
+                    def failed_list = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
+                    println "\nScratch folder: \t $scratch \nFailed list of builds: \t $failed_list"
+                    //new File(failed_file).eachLine { recipe ->
+                    //    println "Current line of $failed_file is: $recipe(EOL)"
                 }
             }
         }
     }
 
-    try {
-        parallel ArchiveBuilds
-    } catch(err) {
-        println "Failed to archive artifacts"
-    }
+    if (params.notifyJira) {
+        try {
+            parallel JiraIssues
+        } catch(err) {
+            println "Failed to create Jira Issues"
+        }
+    }  
 }
-    
-//if (params.notifyJira) {
-//    JiraIssues = [:]
-//    stage('Jira Stage') {
-//        for (system in machineConfigurations) {
-//            def machine = system.machine
-//            def architectures = system.architectures
-//            def machineName = machine.name
-//            for (item in architectures) {
-//                /* define architecture and machineLabel
-//                   to use them in parallel builds */
-//                def architecture = item
-//                def machineLabel = architecture == "" ?
-//                   machineName :
-//                   "$machineName-$architecture"
-//                JiraIssues["$machineLabel"] = {
-//                    node(machineName) {
-//                        /* retrieve list of failed rebuilds */
-//                        def scratch = sh(returnStdout: true,
-//                                     script: """$loginBash
-//                                                echo \$SCRATCH""").trim()
-//                        def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/success.txt"
-//                        println "Scratch folder is $scratch"
-//                        println "Failed list of builds in $failed_file"
-//                        //new File(failed_file).eachLine { recipe ->
-//                        //    println "Current line of $failed_file is: $recipe(EOL)"
-//                        //methods.failedJiraTask(projkey, recipe, machineLabel)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    
-//        try {
-//            parallel JiraIssues
-//        } catch(err) {
-//            println "Failed to create Jira Issues"
-//        }
-//    }
-//}
 
 if (params.notifySlack) {
     methods.notifySlackFinish()
