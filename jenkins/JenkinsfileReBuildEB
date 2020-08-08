@@ -206,20 +206,11 @@ stage('Archive Logs') {
                                                 echo \$SCRATCH""").trim()
                     def prefix = "${scratch}/${project_name}/${machineLabel}"
                     def logDir = "${project_name}-${machineLabel}-logs"
-                    println "Working folder: \t $workingDir \nScratch folder: \t $scratch \n Prefix folder: \t $prefix \n Log folder: \t $logDir"
-                    try {
-                        dir("$logDir") {
-                            sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
-                        }
-                        archiveArtifacts "${logDir}/*"
-                    }
-                    catch(err) {
-                        println "Failed to archive artifacts for $machineLabel"
-                    }
+                    println "Working folder: \t $workingDir \nScratch folder: \t $scratch \n Prefix folder: \t $prefix \n Logs folder: \t $logDir"
                     finally {
-                       sh ("""$loginBash
-                              rm -rf $prefix
-                              rm -rf $logDir""")
+                       sh ("""#!/bin/bash -l
+                              ls $prefix
+                              ls $logDir""")
                     }
                 }
             }
