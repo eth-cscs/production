@@ -205,10 +205,11 @@ stage('Jira Issues') {
                     def scratch = sh(returnStdout: true,
                                      script: """#!/bin/bash -l
                                                 echo \$SCRATCH""").trim()
-                    def failed_list = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
-                    println "\nScratch folder: \t $scratch \nFailed list of builds: \t $failed_list"
-                    //new File(failed_file).eachLine { recipe ->
-                    //    println "Current line of $failed_file is: $recipe(EOL)"
+                    def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
+                    println "\nScratch folder: \t $scratch \nFailed builds: \t $failed_file"
+                    new File(failed_file).eachLine { recipe ->
+                        println "Current line of $failed_file is: $recipe(EOL)"
+                    }
                 }
             }
         }
