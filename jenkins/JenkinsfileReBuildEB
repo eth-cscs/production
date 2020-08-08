@@ -232,7 +232,7 @@ stage('Archive Logs') {
     }
 }
     
-//if (params.notifyJira) {
+if (params.notifyJira) {
     JiraIssues = [:]
     stage('Jira Stage') {
         for (system in machineConfigurations) {
@@ -270,7 +270,7 @@ stage('Archive Logs') {
             println "Failed to create Jira Issues"
         }
     }
-//}
+}
 
 if (params.notifySlack) {
     methods.notifySlackFinish()
