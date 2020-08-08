@@ -202,10 +202,11 @@ stage('Archive Logs') {
                     def workingDir = sh(returnStdout: true,
                                          script: 'echo $PWD').trim()
                     def scratch = sh(returnStdout: true,
-                                     script: """$loginBash
+                                     script: """#!/bin/bash -l
                                                 echo \$SCRATCH""").trim()
                     def prefix = "${scratch}/${project_name}/${machineLabel}"
                     def logDir = "${project_name}-${machineLabel}-logs"
+                    println "Working folder: \t $workingDir \nScratch folder: \t $scratch \n Prefix folder: \t $prefix \n Log folder: \t $logDir"
                     try {
                         dir("$logDir") {
                             sh "find ${prefix} -type f | grep -E 'easybuild.*\\.log' | xargs -i cp {} ."
