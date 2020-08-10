@@ -138,8 +138,9 @@ exts_list = [
         'unpack_sources': False,
         'modulename': 'itk'
         }),
-    ('itk-meshtopolydata', '5.0.1', {
-        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp37-cp37m-manylinux1_x86_64.whl',
+
+    ('itk-meshtopolydata', '0.6.0', {
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
