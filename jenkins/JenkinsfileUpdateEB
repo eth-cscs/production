@@ -108,8 +108,11 @@ stage('Update Stage') {
 
                         # create the new toolchains
                         for tc in $toolchains; do
-                            echo "Current toolchain: \$tc"
+                            echo -e "\nCurrent toolchain: \$tc"
                             find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+                            if [ $? -eq 0 ]; then
+                                echo -e "Updated toolchain: \$tc"
+                            fi
                         done
 
                         # initialise counters and lists
@@ -123,8 +126,8 @@ stage('Update Stage') {
                         echo "" > \${failed_file}
 
                         # filter the target production list $machineLabel
-                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
-                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
+                        echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
+                        echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
                         build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
                         
                         if [ -z "\$build_list" ]; then
