@@ -209,6 +209,7 @@ stage('Jira Stage') {
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
+                    methods = load("$WORKSPACE/jenkins/util.groovy")
                     /* retrieve list of failed rebuilds */
                     def failed_builds = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
@@ -224,12 +225,12 @@ stage('Jira Stage') {
                     else {
                         assert failed_builds.tokenize(' \n').each {
                             try {
-                                //failedJiraTask("UES", it, machineLabel)
-                                def issue = [fields: [ project: [key: "UES" ],
-                                             summary: "$it failed on $machneLabel",
-                                             description: "EasyBuild recipe $it failed to build on ${machineLabel} in Jenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)",
-                                             issuetype: [name: 'Task']]]
-                                def newIssue = jiraNewIssue issue: issue, site: 'TDS'
+                                failedJiraTask("UES", it, machineLabel)
+                                //def issue = [fields: [ project: [key: "UES" ],
+                                //             summary: "$it failed on $machneLabel",
+                                //             description: "EasyBuild recipe $it failed to build on ${machineLabel} in Jenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)",
+                                //             issuetype: [name: 'Task']]]
+                                //def newIssue = jiraNewIssue issue: issue, site: 'TDS'
 
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
