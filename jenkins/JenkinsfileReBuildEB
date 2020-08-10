@@ -213,7 +213,8 @@ stage('Jira Stage') {
                     def scratch = sh(returnStdout: true,
                                      script: """#!/bin/bash -l
                                                 echo \$SCRATCH""").trim()
-                    def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
+                    //def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
+                    def failed_file = "${scratch}/${JOB_BASE_NAME}/$machineLabel/failed.txt"
                     println "\nScratch folder: \t $scratch \nFailed builds: \t $failed_file(EOL)"
                     //new File(failed_file).eachLine { line ->
                     //    println "Current line of $failed_file is: ${line}(EOL)"
