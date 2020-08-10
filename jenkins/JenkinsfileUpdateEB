@@ -261,7 +261,7 @@ stage('Jira Stage') {
         }
     }
 
-    if (params.notifyJira) {
+    if (params.createJira) {
         try {
             parallel JiraIssues
         } catch(err) {
