@@ -131,7 +131,7 @@ stage('ReBuild Stage') {
                             echo -e "\nCurrent ReBuild: \$recipe"
                             
                             # dependencies with full path from dry run
-                            deps=\$(eb \$recipe -Dr | awk '\$1~/CFGS/{gsub(/\\w+=/,"",\$1); prepend=\$1} \$3~/\.eb/{gsub(/^\$\\w+/,"",\$3); printf"%s%s\n",prepend,\$3}')
+                            deps=\$(eb \$recipe -Dr | awk '\$1~/CFGS/{gsub(/\\w+=/,"",\$1); prepend=\$1} \$3~/\\.eb/{gsub(/^\$\\w+/,"",\$3); printf"%s%s\n",prepend,\$3}')
                             
                             # check status of dry run
                             if [ -n "\$deps" ]; then
