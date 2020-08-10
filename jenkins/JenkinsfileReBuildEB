@@ -220,6 +220,7 @@ stage('Jira Stage') {
                         new File(failed_file).eachLine { line ->
                             println "Current line of $failed_file is: ${line}(EOL)"
                             failedJiraTask("UES", line, machineLabel)
+                        }
                     } catch(err) {
                         println "Failed to read file $failed_file"
                     }
