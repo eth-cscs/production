@@ -135,7 +135,7 @@ stage('ReBuild Stage') {
                             
                             # check status of dry run
                             if [ -n "\$deps" ]; then
-                                echo \$deps | tr ' ' '\n'
+                                eb \$recipe -Dr | grep "\\["
                             else
                                 failed+=(\$recipe)
                                 echo "\$recipe" >> "\${failed_file}"
