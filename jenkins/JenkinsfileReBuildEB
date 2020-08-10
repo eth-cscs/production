@@ -219,7 +219,6 @@ stage('Jira Stage') {
                     //    println "Current line of $failed_file is: ${line}(EOL)"
                     //    failedJiraTask("UES", line, machineLabel)
                     //}
-                    }
                 }
             }
         }
