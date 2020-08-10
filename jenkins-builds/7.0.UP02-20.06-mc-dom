@@ -25,7 +25,8 @@
  ipcmagic-0.1-CrayGNU-20.06.eb                      --set-default-module
  Julia-1.5.0-CrayGNU-20.06.eb                       --set-default-module
  JuliaExtensions-1.5.0-CrayGNU-20.06.eb             --set-default-module
- jupyterlab-1.2.16-CrayGNU-20.06-batchspawner.eb    --set-default-module
+ jupyterlab-1.1.1-CrayGNU-20.06-batchspawner        --set-default-module
+ jupyterlab-1.2.16-CrayGNU-20.06-batchspawner.eb    
  jupyter-utils-0.1.eb                               --set-default-module
  LAMMPS-03Mar20-CrayGNU-20.06.eb                    --set-default-module
  Lmod-7.8.2.eb                                      --set-default-module --hidden
