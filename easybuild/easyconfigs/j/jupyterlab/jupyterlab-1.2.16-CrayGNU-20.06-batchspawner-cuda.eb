@@ -6,7 +6,6 @@ name = 'jupyterlab'
 version = '1.2.16'
 versionsuffix = '-batchspawner-cuda'
 
-
 _jl_maj_ver = '1'
 _jl_min_ver = '5'
 _jl_rev_ver = '0'
