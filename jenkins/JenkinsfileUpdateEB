@@ -81,7 +81,7 @@ stage('Update Stage') {
                         println("List of unuse paths: $unuse_paths")
 
                     /* define eb_flags and command to build software */
-                    def eb_flags = "--ignore-locks -r"
+                    def eb_flags = "--ignore-locks -r -f"
                     def tc_flags = "--try-toolchain-version=${params.cdt_version}"
                     //def build_command = architecture == "" ?
                         //"srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags" :
@@ -96,9 +96,9 @@ stage('Update Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
-                        for path in $unuse_paths; do
-                            module unuse \$path
-                        done
+                        #for path in $unuse_paths; do
+                        #    module unuse \$path
+                        #done
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
@@ -110,9 +110,13 @@ stage('Update Stage') {
                         for tc in $toolchains; do
                             echo -e "\nCurrent toolchain: \$tc"
                             find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+
+                            # build current toolchain
+                            $build_command --hidden \${tc}-${params.cdt_version}.eb
                             if [ \$? -eq 0 ]; then
-                                $build_command --hidden \${tc}-${params.cdt_version}.eb
-                                echo -e "Updated toolchain: \$tc"
+                                echo -e "Update of toolchain \$tc SUCCESSFUL"
+                            else 
+                                echo -e "Update of toolchain \$tc FAILED"
                             fi
                         done
 
