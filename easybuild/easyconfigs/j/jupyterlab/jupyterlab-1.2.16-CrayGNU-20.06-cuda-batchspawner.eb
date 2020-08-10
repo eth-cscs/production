@@ -212,8 +212,9 @@ exts_list = [
     ('jupyterlab_code_formatter', '1.1.0'),
 
 # kernels
-# bash kernel, requires kernel install below, twr
-    ('bash_kernel', '0.7.2'),
+    ('bash_kernel', '0.7.2', {
+        'use_pip': False,
+    }),
 ]
 
 # For Julia packages needed for Jupyter
