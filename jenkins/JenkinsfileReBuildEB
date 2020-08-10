@@ -131,7 +131,7 @@ stage('ReBuild Stage') {
                             echo -e "\nCurrent ReBuild: \$recipe"
                             
                             # get dependencies from dry run
-                            deps=\$(eb \$recipe -Dr | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\1",1)}')
+                            deps=\$(eb \$recipe -Dr | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\\1",1)}')
                             echo \$deps | tr ' ' '\n'
 
                             # check status of dry run
