@@ -158,9 +158,10 @@ stage('Update Stage') {
                             new_recipe=\$(echo \$recipe | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
                             echo -e "\nCurrent Update: \$new_recipe"
 
-                            # get dependencies from dry run
-                            deps=\$($build_command $tc_flags -D \$recipe | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\\\1",1)}')
-
+                            # get relative path of dependencies from dry run
+                            #deps=\$($build_command -D \$recipe | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\\\1",1)}')
+                            deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
+                            
                             # check status of dry run
                             if [ -n "\$deps" ]; then
                                 $build_command $tc_flags -D \$recipe | grep "\\["
@@ -180,16 +181,15 @@ stage('Update Stage') {
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
-                            folder=\$(find . -name \$recipe | xargs dirname)
                             if [ \$status -eq 0 ]; then
                                 success+=(\$new_recipe)
-                                echo "\$folder/\$new_recipe" >> "\${success_file}"
+                                echo "\$new_recipe" >> "\${success_file}"
                                 echo "\$deps" | tr ' ' '\n' >> "\${submit_file}"
-                                echo -e "\nBuild of \$new_recipe from \$recipe SUCCESSFUL(\${#success[@]})"
+                                echo -e "\nUpdate of \$new_recipe from \$recipe SUCCESSFUL(\${#success[@]})"
                             else
                                 failed+=(\$new_recipe)
                                 echo "\$folder/\$new_recipe" >> "\${failed_file}"
-                                echo -e "\nBuild of \$new_recipe from \$recipe FAILED(\${#failed[@]})"
+                                echo -e "\nUpdate of \$new_recipe from \$recipe FAILED(\${#failed[@]})"
                             fi
                         done
 
