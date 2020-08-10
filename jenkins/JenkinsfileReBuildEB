@@ -129,7 +129,7 @@ stage('ReBuild Stage') {
                         for recipe in \${rebuild_list}; do
                             status=0
                             echo -e "\nCurrent ReBuild: \$recipe"
-                            eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
+                            eb \$recipe -Dr 
                             status=\$[status+\$?]
                             
                             # check status of dry run
