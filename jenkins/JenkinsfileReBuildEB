@@ -207,7 +207,6 @@ stage('ReBuild Stage') {
   - loop over the lines of the file "failed.txt" (list of failed builds)
   - create a Jira Issue for each item in the list with the proper project key
 */
-
 JiraIssues = [:]
 stage('Jira Stage') {
     for (system in machineConfigurations) {
