@@ -111,12 +111,13 @@ stage('Update Stage') {
                             echo -e "\nCurrent toolchain: \$tc"
                             find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
                             if [ \$? -eq 0 ]; then
+                                $build_command --hidden \${tc}-${params.cdt_version}.eb
                                 echo -e "Updated toolchain: \$tc"
                             fi
                         done
 
                         # initialise counters and lists
-                        submit_file=\${EASYBUILD_PREFIX}/submit.txt"
+                        submit_file="\${EASYBUILD_PREFIX}/submit.txt"
                         echo "" > \${submit_file}
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
@@ -126,8 +127,6 @@ stage('Update Stage') {
                         echo "" > \${failed_file}
 
                         # filter the target production list $machineLabel
-                        echo -e "\nSelected recipes: ${params.select_recipes}"
-                        echo -e "\nDiscarded recipes: ${params.discard_recipes}"
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
                         build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
