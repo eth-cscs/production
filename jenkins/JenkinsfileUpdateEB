@@ -86,7 +86,7 @@ stage('Update Stage') {
                     //def build_command = architecture == "" ?
                         //"srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags" :
                         //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags"
-                    def build_command = "eb $eb_flags" :
+                    def build_command = "eb $eb_flags"
                         
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
