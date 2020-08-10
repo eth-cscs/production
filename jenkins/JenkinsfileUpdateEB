@@ -81,7 +81,7 @@ stage('Update Stage') {
                         println("List of unuse paths: $unuse_paths")
 
                     /* define eb_flags and command to build software */
-                    def eb_flags = "--ignore-locks -r -f"
+                    def eb_flags = "--ignore-locks -r"
                     def tc_flags = "--try-toolchain-version=${params.cdt_version}"
                     //def build_command = architecture == "" ?
                         //"srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags" :
@@ -90,16 +90,26 @@ stage('Update Stage') {
                         
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
+
+                        for path in $unuse_paths; do
+                            module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
+
                         export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
+
+                        # create symbolic link to EasyBuild-custom/cscs
+                        if [ ! -e "\$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+                            mkdir -p "\$EASYBUILD_PREFIX/modules/all"
+                            mkdir -p "\$EASYBUILD_PREFIX/tools/modules/all"
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom \$EASYBUILD_PREFIX/modules/all
+                        fi
+
                         $load_easybuild
                         $switch_easybuild
-                        #for path in $unuse_paths; do
-                        #    module unuse \$path
-                        #done
-                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
                         # print EasyBuild version and configuration
