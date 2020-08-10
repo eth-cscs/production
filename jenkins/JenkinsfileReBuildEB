@@ -81,8 +81,8 @@ stage('ReBuild Stage') {
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r" : 
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 02:00:00 eb -r"
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb -r" : 
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
@@ -188,8 +188,16 @@ stage('ReBuild Stage') {
     }
 }
 
+/*
+ Jira Stage: create Jira issues for failed builds on the different "machinesLabel"
+ Loop over all systems in "machineConfigurations":
+  - retrieve EASYBUILD_PREFIX path "${scratch}/${params.eb_prefix}/$machineLabel"
+  - loop over the lines of the file "failed.txt" (list of failed builds)
+  - create a Jira Issue for each item in the list with the proper project key
+*/
+
 JiraIssues = [:]
-stage('Jira Issues') {
+stage('Jira Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
@@ -205,10 +213,12 @@ stage('Jira Issues') {
                     def scratch = sh(returnStdout: true,
                                      script: """#!/bin/bash -l
                                                 echo \$SCRATCH""").trim()
-                    def failed_list = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
-                    println "\nScratch folder: \t $scratch \nFailed list of builds: \t $failed_list"
-                    //new File(failed_file).eachLine { recipe ->
-                    //    println "Current line of $failed_file is: $recipe(EOL)"
+                    def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
+                    println "\nScratch folder: \t $scratch \nFailed builds: \t $failed_file"
+                    //new File(failed_file).eachLine { line ->
+                    //    println "Current line of $failed_file is: ${line}(EOL)"
+                    //    failedJiraTask("UES", line, machineLabel)
+                    //}
                 }
             }
         }
