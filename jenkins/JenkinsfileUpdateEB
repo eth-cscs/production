@@ -107,7 +107,7 @@ stage('Update Stage') {
                         eb --show-config
 
                         # create the new toolchains
-                        for tc in "$toolchains"; do
+                        for tc in $toolchains; do
                             echo "Current toolchain: \$tc"
                             find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
                         done
