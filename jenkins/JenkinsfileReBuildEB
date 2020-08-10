@@ -209,6 +209,7 @@ stage('Jira Stage') {
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
+                    checkout scm
                     methods = load("$WORKSPACE/jenkins/util.groovy")
                     /* retrieve list of failed rebuilds */
                     def failed_builds = sh(returnStdout: true,
