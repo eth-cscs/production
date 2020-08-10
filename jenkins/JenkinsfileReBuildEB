@@ -218,20 +218,17 @@ stage('Jira Stage') {
                                         else
                                              echo "None"
                                         fi""").trim()  
-                    println "\nFailed builds: $failed_builds\n"
                     if ( failed_builds.equals( "None" ) ) {
-                        println "No failed build to address with Jira Issues"
+                        println "\nFailed builds: $failed_builds\n"
                     }
                     else {
                         assert failed_builds.tokenize(' \n').each {
-                            println it
-                        }
-                    //try {
-                    //    failedJiraTask("UES", line, machineLabel)
-                    //    }
-                    //} catch(err) {
-                    //    println "Failed to create Jira task"
-                    //}
+                            try {
+                                failedJiraTask("UES", it, machineLabel)
+                            } catch(err) {
+                                println "Failed to create Jira Issue for $it"
+                            }
+                       }
                     }
                 }
             }
