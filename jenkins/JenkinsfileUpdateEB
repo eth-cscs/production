@@ -47,7 +47,7 @@ stage('Machine Selection') {
   - the target CDT version is selected by the user and stored in "params.cdt_version"
 */
 def updates = [:]
-def toolchains = ['CrayCCE', 'CrayGNU', 'CrayIntel', 'CrayPGI']
+def toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
 stage('Update Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
