@@ -215,14 +215,24 @@ stage('Jira Stage') {
                                         failed_file="$SCRATCH/${params.eb_prefix}/$machineLabel/failed.txt"
                                         if [ -f "\$failed_file" ]; then
                                              cat \$failed_file
+                                        else
+                                             echo "None"
                                         fi""").trim()  
-                    println "\nFailed builds: \t $failed_builds"
+                    println "\nFailed builds: $failed_builds\n"
+                    if ( failed_builds.equals( "None" ) ) {
+                        println "No failed build to address with Jira Issues"
+                    }
+                    else {
+                        assert failed_builds.tokenize(' \n').each {
+                            println it
+                        }
                     //try {
                     //    failedJiraTask("UES", line, machineLabel)
                     //    }
                     //} catch(err) {
                     //    println "Failed to create Jira task"
                     //}
+                    }
                 }
             }
         }
