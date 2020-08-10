@@ -130,8 +130,18 @@ stage('ReBuild Stage') {
                             status=0
                             echo -e "\nCurrent ReBuild: \$recipe"
                             eb \$recipe -Dr 2>&1 | grep -iv "== temporary"
+                            status=\$[status+\$?]
+                            
+                            # check status of dry run
+                            if [ \$status -eq 0 ]; then
+                                echo -e "\nSubmitting job and ReBuilding..."
+                            else
+                                failed+=(\$recipe)
+                                echo "\$recipe" >> "\${failed_file}"
+                                echo -e "\nDry run of \$recipe FAILED: skipping build"
+                                continue
+                            fi
 
-                            echo -e "\nSubmitting job and ReBuilding..."
                             $rebuild_command \$recipe
                             status=\$[status+\$?]
 
@@ -225,12 +235,6 @@ stage('Jira Stage') {
                         assert failed_builds.tokenize(' \n').each {
                             try {
                                 methods.failedJiraTask("UES", it, machineLabel)
-                                //def issue = [fields: [ project: [key: "UES" ],
-                                //             summary: "$it failed on $machneLabel",
-                                //             description: "EasyBuild recipe $it failed to build on ${machineLabel} in Jenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)",
-                                //             issuetype: [name: 'Task']]]
-                                //def newIssue = jiraNewIssue issue: issue, site: 'TDS'
-
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
                             }
