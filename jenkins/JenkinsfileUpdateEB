@@ -126,10 +126,10 @@ stage('Update Stage') {
                         echo "" > \${failed_file}
 
                         # filter the target production list $machineLabel
-                        echo ${params.select_recipes}
-                        echo ${params.discard_recipes}
-                        echo "${params.select_recipes}" | tr ' ,' '\n' > select_recipes.txt
-                        echo "${params.discard_recipes}" | tr ' ,' '\n' > discard_recipes.txt
+                        echo -e "\nSelected recipes: ${params.select_recipes}"
+                        echo -e "\nDiscarded recipes: ${params.discard_recipes}"
+                        echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
+                        echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
                         build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
                         
                         if [ -z "\$build_list" ]; then
