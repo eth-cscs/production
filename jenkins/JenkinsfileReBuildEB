@@ -129,12 +129,13 @@ stage('ReBuild Stage') {
                         for recipe in \${rebuild_list}; do
                             status=0
                             echo -e "\nCurrent ReBuild: \$recipe"
-                            eb \$recipe -Dr 
-                            status=\$[status+\$?]
+                            
+                            # dependencies with full path from dry run
+                            deps=\$(eb \$recipe -Dr | awk '\$1~/CFGS/{gsub(/\w+=/,"",q$1); prepend=\$1} \$3~/\.eb/{gsub(/^\$\w+/,"",\$3); printf"%s%s\n",prepend,\$3}')
                             
                             # check status of dry run
-                            if [ \$status -eq 0 ]; then
-                                echo -e "\nSubmitting job and ReBuilding..."
+                            if [ -n "\$deps" ]; then
+                                echo \$deps | tr ' ' '\n'
                             else
                                 failed+=(\$recipe)
                                 echo "\$recipe" >> "\${failed_file}"
@@ -142,6 +143,7 @@ stage('ReBuild Stage') {
                                 continue
                             fi
 
+                            echo -e "\nSubmitting job and ReBuilding..."
                             $rebuild_command \$recipe
                             status=\$[status+\$?]
 
