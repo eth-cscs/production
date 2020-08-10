@@ -5,7 +5,6 @@ easyblock = 'MakeCp'
 name = 'Amber'
 local_patchlevels = (3, 0) # (AmberTools, Amber)
 version = '20-%s-%s' % (local_patchlevels[0], local_patchlevels[1])
-versionsuffix = '-cuda'
 
 homepage = 'http://ambermd.org/'
 description = """Amber (Assisted Model Building with Energy Refinement)
@@ -26,11 +25,9 @@ sources = [
 dependencies = [
     ('bzip2', '1.0.6'),
     ('zlib', '1.2.11'),
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
 builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
 ]
@@ -43,7 +40,7 @@ buildininstalldir = True
 
 prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && '
 prebuildopts += 'cd .. && mv amber20_src/* . && '
-prebuildopts += 'export AMBERHOME=%(builddir)s; export CUDA_HOME=$CUDATOOLKIT_HOME;'
+prebuildopts += 'export AMBERHOME=%(builddir)s;'
 prebuildopts += './update_amber --update-to %s/%s && ' % ("AmberTools", local_patchlevels[0])
 prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", local_patchlevels[1])
 #
