@@ -210,20 +210,19 @@ stage('Jira Stage') {
             JiraIssues[machineLabel] = {
                 node(machineName) {
                     /* retrieve list of failed rebuilds */
-                    def scratch = sh(returnStdout: true,
-                                     script: """#!/bin/bash -l
-                                                echo \$SCRATCH""").trim()
-                    //def failed_file = "${scratch}/${params.eb_prefix}/$machineLabel/failed.txt"
-                    def failed_file = "${scratch}/${JOB_BASE_NAME}/$machineLabel/failed.txt"
-                    println "\nScratch folder: \t $scratch \nFailed builds: \t $failed_file"
-                    try {
-                        new File(failed_file).eachLine { line ->
-                            println "Current line of $failed_file is: ${line}(EOL)"
-                            failedJiraTask("UES", line, machineLabel)
-                        }
-                    } catch(err) {
-                        println "Failed to read file $failed_file"
-                    }
+                    def failed_builds = sh(returnStdout: true,
+                                        script: """#!/bin/bash -l
+                                        failed_file="$SCRATCH/${params.eb_prefix}/$machineLabel/failed.txt"
+                                        if [ -f "\$failed_file" ]; then
+                                             cat \$failed_file
+                                        fi""").trim()  
+                    println "\nFailed builds: \t $failed_builds"
+                    //try {
+                    //    failedJiraTask("UES", line, machineLabel)
+                    //    }
+                    //} catch(err) {
+                    //    println "Failed to create Jira task"
+                    //}
                 }
             }
         }
