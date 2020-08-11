@@ -132,11 +132,11 @@ stage('ReBuild Stage') {
                             echo -e "\nCurrent ReBuild: \$recipe"
                             
                             # get relative path of dependencies from dry run
-                            deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}')
+                            deps=\$(eb -Dr \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}')
 
                             # check status of dry run
                             if [ -n "\$deps" ]; then
-                                eb \$recipe -Dr | grep "\\["
+                                eb -Dr \$recipe | grep "\\["
                             else
                                 failed+=(\$recipe)
                                 echo "\$recipe" >> "\${failed_file}"
