@@ -14,7 +14,7 @@
  GSL-2.5-CrayCCE-20.06.eb
  GSL-2.5-CrayIntel-20.06.eb
  HDFView-2.14.eb                                     --set-default-module
- Horovod-0.19.1-CrayGNU-20.06-tf-2.2.0.eb
+ Horovod-0.19.1-CrayGNU-20.06-tf-2.2.0.eb            --set-default-module
  HPX-1.4.0-CrayGNU-20.06-cuda.eb                     --set-default-module
  HPX-1.4.0-CrayGNU-20.06-APEX-cuda.eb
  HPX-1.4.0-CrayGNU-20.06-nonetworking-cuda.eb
@@ -24,10 +24,10 @@
  IDL-8.5.1.eb                                        --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.06.eb                       --set-default-module
- ipyparallel-6.2.4-CrayGNU-20.06-python3.eb
- Julia-1.2.0-CrayGNU-20.06-cuda.eb                   --set-default-module
- JuliaExtensions-1.2.0-CrayGNU-20.06-cuda.eb         --set-default-module
- jupyterhub-1.0.0-CrayGNU-20.06.eb                   --set-default-module
+ Julia-1.5.0-CrayGNU-20.06-cuda.eb                   --set-default-module
+ JuliaExtensions-1.5.0-CrayGNU-20.06-cuda.eb         --set-default-module
+ jupyterlab-1.1.1-CrayGNU-20.06-batchspawner.eb      --set-default-module
+ jupyterlab-1.2.16-CrayGNU-20.06-batchspawner-cuda.eb
  jupyter-utils-0.1.eb                                --set-default-module
  LAMMPS-03Mar20-CrayGNU-20.06-cuda.eb                --set-default-module
  Lmod-7.8.2.eb                                       --set-default-module --hidden

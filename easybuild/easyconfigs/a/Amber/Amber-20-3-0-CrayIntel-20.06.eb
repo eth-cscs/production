@@ -1,0 +1,82 @@
+# @author: Victor Holanda
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+local_patchlevels = (3, 0) # (AmberTools, Amber)
+version = '20-%s-%s' % (local_patchlevels[0], local_patchlevels[1])
+
+homepage = 'http://ambermd.org/'
+description = """Amber (Assisted Model Building with Energy Refinement)
+is software for performing molecular dynamics and structure prediction"""
+whatis = [ "Amber 20 && AmberTools 20",
+           "AmberTools patch level 3",
+           "Amber without any patches"
+]
+
+toolchain = {'name': 'CrayIntel', 'version': '20.06'}
+toolchainopts = { 'verbose': False }
+
+sources = [
+    '/apps/common/UES/easybuild/sources/a/Amber/Amber20.tar.bz2',
+    '/apps/common/UES/easybuild/sources/a/Amber/AmberTools20.tar.bz2'
+]
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+]
+
+builddependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+]
+
+buildininstalldir = True
+
+# single make process since parallel builds might fail
+# when uncommenting the next line make sure to change all make -j to make -j1
+#maxparallel = 1
+
+prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && '
+prebuildopts += 'cd .. && mv amber20_src/* . && '
+prebuildopts += 'export AMBERHOME=%(builddir)s;'
+prebuildopts += './update_amber --update-to %s/%s && ' % ("AmberTools", local_patchlevels[0])
+prebuildopts += './update_amber --update-to %s/%s && ' % ("Amber", local_patchlevels[1])
+#
+# Setting updates to N, because we already have applied them
+# Compiling several times in order to consolidate the Amber installation into a single module
+prebuildopts += './configure      -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+prebuildopts += './configure      -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+prebuildopts += './configure      -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+prebuildopts += './configure -mpi -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+prebuildopts += './configure -mpi -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF intel <<< N && '
+prebuildopts += "echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h;"
+prebuildopts += 'make -j && make install && '
+
+buildopts = 'install'
+
+files_to_copy = []
+
+sanity_check_paths = {
+    'files' : [ 'bin/pmemd.MPI', 'bin/pmemd' ],
+    'dirs'  : [],
+}
+
+modextravars = {
+    'AMBERHOME' : '%(builddir)s',
+}
+
+moduleclass = 'bio'
