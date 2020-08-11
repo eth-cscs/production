@@ -94,6 +94,7 @@ stage('ReBuild Stage') {
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         $load_easybuild
                         $switch_easybuild
+
                         for path in $unuse_paths; do
                          module unuse \$path
                         done
@@ -130,8 +131,8 @@ stage('ReBuild Stage') {
                             status=0
                             echo -e "\nCurrent ReBuild: \$recipe"
                             
-                            # get dependencies from dry run
-                            deps=\$(eb \$recipe -Dr | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\\\1",1)}')
+                            # get relative path of dependencies from dry run
+                            deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}')
 
                             # check status of dry run
                             if [ -n "\$deps" ]; then
@@ -201,10 +202,10 @@ stage('ReBuild Stage') {
 }
 
 /*
- Jira Stage: create Jira issues for failed builds on the different "machinesLabel"
+ Jira Stage: create Jira issues for failed rebuilds on the different "machinesLabel"
  Loop over all systems in "machineConfigurations":
   - retrieve EASYBUILD_PREFIX path "${scratch}/${params.eb_prefix}/$machineLabel"
-  - loop over the lines of the file "failed.txt" (list of failed builds)
+  - loop over the lines of the file "failed.txt" (list of failed rebuilds)
   - create a Jira Issue for each item in the list with the proper project key
 */
 JiraIssues = [:]
@@ -221,16 +222,14 @@ stage('Jira Stage') {
             JiraIssues[machineLabel] = {
                 node(machineName) {
                     /* retrieve list of failed rebuilds */
-                    def failed_builds = sh(returnStdout: true,
+                    def failed_rebuilds = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
                                         failed_file="$SCRATCH/${params.eb_prefix}/$machineLabel/failed.txt"
                                         if [ -f "\$failed_file" ]; then
                                              cat \$failed_file
-                                        else
-                                             echo "None"
                                         fi""").trim()  
-                    if ( failed_builds.equals( "None" ) ) {
-                        println "\nFailed builds: $failed_builds\n"
+                    if ( !failed_rebuilds?.trim() ) {
+                        println "\nFailed rebuilds: None\n"
                     }
                     else {
                         assert failed_builds.tokenize(' \n').each {
@@ -246,7 +245,7 @@ stage('Jira Stage') {
         }
     }
 
-    if (params.notifyJira) {
+    if (params.createJira) {
         try {
             parallel JiraIssues
         } catch(err) {
