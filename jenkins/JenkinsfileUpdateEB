@@ -39,7 +39,7 @@ stage('Machine Selection') {
 }
 
 /*
- Build Stage: configures parallel builds for the different "machinesToRun"
+ Update Stage: configures parallel builds for the different "machinesToRun"
  Loop over all systems in "machineConfigurations":
   - if the machine has multiple architectures, starts a sub-loop over architectures
   - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
