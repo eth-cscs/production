@@ -140,10 +140,13 @@ stage('Update Stage') {
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
                         echo "" > \${failed_file}
 
+                        # target production list
+                        prod_list=\$(list=$(ls $WORKSPACE/jenkins-builds/*${params.cdt_current}-${machineLabel} | tail -1)
+
                         # filter the target production list $machineLabel
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                        build_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        build_list=\$(grep -if select_recipes.txt \${prod_list} | grep -ivf discard_recipes.txt | awk '{print \$1}')
                         
                         if [ -z "\$build_list" ]; then
                             echo -e "\nThe list of recipes to build is empty. Exiting..."
@@ -254,12 +257,10 @@ stage('Jira Stage') {
                                         script: """#!/bin/bash -l
                                         failed_file="${params.eb_prefix}/$machineLabel/${params.cdt_version}/failed.txt"
                                         if [ -f "\$failed_file" ]; then
-                                             cat \$failed_file
-                                        else
-                                             echo "None"
+                                            cat \$failed_file
                                         fi""").trim()  
-                    if ( failed_updates.equals( "None" ) ) {
-                        println "\nFailed updates: $failed_updates\n"
+                    if ( !failed_updates?.trim() ) {
+                        println "\nFailed updates: None\n"
                     }
                     else {
                         assert failed_updates.tokenize(' \n').each {
