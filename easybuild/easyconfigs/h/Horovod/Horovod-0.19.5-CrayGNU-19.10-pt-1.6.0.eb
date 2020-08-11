@@ -13,27 +13,28 @@ req_py_minver = 8
 homepage = 'https://github.com/uber/horovod'
 description = "Horovod is a distributed deep learning training framework for TensorFlow, Keras, PyTorch, and Apache MXNet."
 
-toolchain = SYSTEM
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
 toolchainopts = {'verbose': False}
 
 source_urls = [PYPI_LOWER_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('PyTorch', _ptver),
+    ('PyTorch', _ptver, '', True),
 ]
 
 use_pip = True
 
 preinstallopts  = "module unload atp && "
-preinstallopts += "export HOROVOD_CUDA_HOME=$EASYBUILD_INSTALLPATH/software/PyTorch/%s/ && " % _ptver
-preinstallopts += "export HOROVOD_NCCL_HOME=$EASYBUILD_INSTALLPATH/software/PyTorch/%s/ && " % _ptver
+preinstallopts += "export HOROVOD_CUDA_HOME=$CONDA_PREFIX && "
+preinstallopts += "export HOROVOD_NCCL_HOME=$CONDA_PREFIX && "
 preinstallopts += "export HOROVOD_GPU_ALLREDUCE=NCCL && "
+preinstallopts += "export HOROVOD_NCCL_LINK=SHARED && "
 preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
 preinstallopts += "export HOROVOD_WITH_PYTORCH=1 && "
 preinstallopts += "export HOROVOD_WITHOUT_TENSORFLOW=1 && "
 
-preinstallopts += "export CPATH=$EBROOTCUDA/include:$CPATH && "
+preinstallopts += "export CPATH=$CONDA_PREFIX/include:$CPATH && "
 preinstallopts += "export CXX=CC && "
 
 installopts = "--no-cache-dir"
