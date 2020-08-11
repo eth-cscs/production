@@ -1,0 +1,74 @@
+# contributed by Victor Holanda (CSCS)
+
+name = 'xalt'
+version = "2.8.10"
+
+homepage = 'https://xalt.readthedocs.io/'
+description = """XALT is a lightweight software tool for any Linux cluster,
+workstation, or high-end supercomputer to track executable information and
+linkage of static shared and dynamically linked libraries. When the code is
+executed, wrappers intercept both GNU linker (ld) to capture linkage
+information and environmental variables."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/xalt/xalt/archive/']
+#source_urls = ['https://github.com/victorusu/xalt.git']
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = [
+    ('Daint_config.py', 'Config/'),
+    'xalt-2.8.10.bindata.patch'
+]
+
+local_transmission = "curl"
+
+# generic configurations
+preconfigopts = 'LDFLAGS="-L${EBROOTCUDA}/lib64" CPPFLAGS="-I${EBROOTCUDA}/include" '
+preconfigopts += "LINKER_X86_64=/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld  LINKER_AARCH64=/opt/cray/pe/cce/9.1.3/binutils/cross/x86_64-aarch64/bin/ld "
+
+configopts  = "--with-trackScalarPrgms=yes "
+configopts += "--with-computeSHA1=no "
+configopts += "--with-MySQL=no "
+configopts += "--with-tmpdir=${HOME}/.xalt.d/tmpdir "
+# system specific configurations
+configopts += "--with-trackGPU=yes "
+configopts += "--with-systemPath=/apps/daint/system/bin:/apps/dom/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 "
+configopts += "--with-config=Config/Daint_config.py "
+configopts += "--with-syshostConfig=read_file:/etc/xthostname "
+configopts += "--with-transmission=%s " % local_transmission
+# this is workaround to do not make public the logging_url data
+configopts += "--with-xaltLoggingUrl=`cat /apps/common/easybuild/sources/x/xalt/logging_url.txt` "
+# this is a limitation on EB
+prebuildopts  = 'LDFLAGS="-L${EBROOTCUDA}/lib64" CPPFLAGS="-I${EBROOTCUDA}/include" '
+prebuildopts += "LINKER_X86_64=/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld LINKER_AARCH64=/opt/cray/pe/cce/9.1.3/binutils/cross/x86_64-aarch64/bin/ld "
+
+preinstallopts  = 'LDFLAGS="-L${EBROOTCUDA}/lib64" CPPFLAGS="-I${EBROOTCUDA}/include" '
+preinstallopts += "LINKER_X86_64=/opt/cray/pe/cce/9.1.3/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld LINKER_AARCH64=/opt/cray/pe/cce/9.1.3/binutils/cross/x86_64-aarch64/bin/ld "
+
+modextravars = {
+    'XALT_EXECUTABLE_TRACKING': 'yes',
+    'XALT_SCALAR_SAMPLING': 'no',
+    'XALT_GPU_TRACKING': 'no',
+    'XALT_DIR': '%(installdir)s',
+    'XALT_ETC_DIR': '%(installdir)s/etc',
+    'XALT_TRANSMISSION_STYLE': '%s' % local_transmission,
+    #'XALT_LOGGING_URL': 'url to fulfill',
+    'SLURM_CSCS': 'yes',
+    # commented out because Cray environment is currently broken
+    'ALT_LINKER': '%(installdir)s/bin/ld'
+    # Need to test singularity support
+    #'SINGULARITYENV_LD_PRELOAD': '%(installdir)s/lib64/libxalt_init.so',
+    #'SINGULARITY_BINDPATH': '%(installdir)s'
+}
+
+modextrapaths = {
+    'LD_PRELOAD': 'lib64/libxalt_init.so',
+    'COMPILER_PATH': 'bin'
+}
+
+builddependencies = [
+    ('cudatoolkit/10.2.89_3.28-7.0.2.1_2.17__g52c0314', EXTERNAL_MODULE),
+]
+
+moduleclass = 'tools'
