@@ -324,12 +324,14 @@ stage('GitHub Stage') {
                         submit_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/submit.txt"
                         submit_list=\$(cat \$submit_file | sort | uniq)
 
+                        # initialise variables
+                        unset copied
+                        unset missing
+
                         # loop over list of successful updates and dependencies
-                        copies=0
-                        missing=0
-                        echo -e "\nCopying recipes to submit the pull request:"
                         for recipe in \$submit_list; do
-                            # check if recipe didn't fail elsewhere
+                            echo -e "\nCurrent update: \$recipe "
+                            # check if recipe did not fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
@@ -338,12 +340,12 @@ stage('GitHub Stage') {
                                 if [ -n "\$source" ]; then 
                                     echo -e " \t \$source -> \$recipe"
                                     cp \$source \$recipe
-                                    # update counter for copies
-                                    copies=\$[copies+1]              
+                                    # update variable
+                                    copied+=(\$recipe)
                                 else
-                                    echo -e "\nUpdated recipe not found for \$name"
-                                    # update counter for missing recipes
-                                    missing=\$[missing+1]              
+                                    echo -e " \t \$recipe not copied (update not found)"
+                                    # update variable
+                                    missing+=(\$recipe)
                                 fi
                             fi
                         done
@@ -353,11 +355,19 @@ stage('GitHub Stage') {
                         git add easyconfigs
                         git status
                         git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
-                        git push origin HEAD
-                        hub pull-request -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                        # check if the pull request is already open
+                        check_pr=\$(hub pr list --head ${machineLabel}/${params.cdt_version})
+                        if [ -n "\${check_pr}" ]; then
+                            git push origin HEAD
+                        else
+                            hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                        fi
 
-                        # return the number of missing copies
-                        exit \$missing
+                        # print copied and missing updates
+                        echo -e "\nCopied Updates: \${#copied[@]} \n\${copied[@]}"
+                        echo -e "\nMissing Updates: \${#missing[@]} \n\${missing[@]}"
+                        # return the number of missing updates
+                        exit \${#missing[@]}
                        """)
                 }
             }
