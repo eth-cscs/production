@@ -21,21 +21,17 @@ sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
     ('PyTorch', _ptver),
-    ('NCCL', '2.6.4', '-cuda-10.1.168'),
 ]
 
 use_pip = True
 
 preinstallopts  = "module unload atp && "
-preinstallopts += "export HOROVOD_CUDA_HOME=$EBROOTCUDA && "
-preinstallopts += "export HOROVOD_NCCL_HOME=$EBROOTNCCL && "
+preinstallopts += "export HOROVOD_CUDA_HOME=$EASYBUILD_INSTALLPATH/software/PyTorch/%s/ && " % _ptver
+preinstallopts += "export HOROVOD_NCCL_HOME=$EASYBUILD_INSTALLPATH/software/PyTorch/%s/ && " % _ptver
 preinstallopts += "export HOROVOD_GPU_ALLREDUCE=NCCL && "
 preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
 preinstallopts += "export HOROVOD_WITH_PYTORCH=1 && "
 preinstallopts += "export HOROVOD_WITHOUT_TENSORFLOW=1 && "
-
-preinstallopts += "echo OUTOUT $EBROOTCUDA  $CUDA_HOME   $EBROOTNCCL && "
-preinstallopts += "which pip && "
 
 preinstallopts += "export CPATH=$EBROOTCUDA/include:$CPATH && "
 preinstallopts += "export CXX=CC && "

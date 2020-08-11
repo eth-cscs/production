@@ -18,7 +18,8 @@ requirements  = ' python==3.8.5=h4d41432_2_cpython'
 requirements += ' pytorch==1.6.0=py3.8_cuda10.1.243_cudnn7.6.3_0'
 requirements += ' torchvision==0.7.0=py38_cu101'
 requirements += ' cudatoolkit==10.1.243=h6bb024c_0'
-requirements += ' cudatoolkit-dev=10.1.243=h516909a_3'
+requirements += ' cudatoolkit-dev==10.1.243=h516909a_3'
+requirements += ' nccl==2.5.7.1=h51cf6c1_0'
 
 ## 3rd party dependencies
 requirements += ' _libgcc_mutex==0.1=conda_forge'
