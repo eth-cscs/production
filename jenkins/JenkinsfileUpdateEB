@@ -333,7 +333,7 @@ stage('GitHub Stage') {
                                 echo -e "\n\$recipe found in failed list \$failed_file"
                             else
                                 name=\$(basename \$recipe)
-                                source=$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
+                                source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
                                 if [ -n "source" ]; then 
                                     echo -e "\nCopying \$source to \$recipe"
                                     cp \$source \$recipe
