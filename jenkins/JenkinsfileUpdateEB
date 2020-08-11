@@ -263,7 +263,7 @@ stage('Jira Stage') {
                         println "\nFailed updates: None\n"
                     }
                     else {
-                        assert failed_updates.tokenize(' \n').each {
+                        failed_updates.tokenize(' \n').each {
                             try {
                                 methods.failedJiraTask("UES", it, machineLabel)
                             } catch(err) {
@@ -327,15 +327,16 @@ stage('GitHub Stage') {
                         # loop over list of successful updates and dependencies
                         copies=0
                         missing=0
+                        echo -e "\nCopying recipes to submit the pull request:"
                         for recipe in \$submit_list; do
                             # check if recipe didn't fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
-                                echo -e "\n\$recipe found in failed list \$failed_file"
+                                echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
                                 name=\$(basename \$recipe)
                                 source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
-                                if [ -n "source" ]; then 
-                                    echo -e "\nCopying \$source to \$recipe"
+                                if [ -n "\$source" ]; then 
+                                    echo -e " \t \$source -> \$recipe"
                                     cp \$source \$recipe
                                     # update counter for copies
                                     copies=\$[copies+1]              
