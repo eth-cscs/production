@@ -159,7 +159,6 @@ stage('Update Stage') {
                             echo -e "\nCurrent Update: \$new_recipe"
 
                             # get relative path of dependencies from dry run
-                            #deps=\$($build_command -D \$recipe | awk '/\\.eb/{print gensub(/.*\\/(.*\\.eb).*/,"\\\\1",1)}')
                             deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
                             
                             # check status of dry run
@@ -289,8 +288,8 @@ stage('Jira Stage') {
  GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
  Loop over all systems in "machineConfigurations":
   - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
-  - loop over the lines of the file "submit.txt" (list of successful updates)
-  - submit a pull request on GitHub
+  - loop over the lines of the file "submit.txt" (list of successful updates and dependencies)
+  - submit a pull request on GitHub with "WIP [$machineLabel]" in the title
 */
 GitHubPR = [:]
 stage('GitHub Stage') {
@@ -313,7 +312,6 @@ stage('GitHub Stage') {
 
                         # create git branch or update if exists
                         git checkout ${machineLabel}/${params.cdt_version} || git checkout -b ${machineLabel}/${params.cdt_version}
-                        git status
                         git --no-pager diff origin/master --stat
 
                         # copy updated toolchains and recipes to workspace
