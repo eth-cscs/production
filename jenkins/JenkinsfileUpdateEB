@@ -141,7 +141,7 @@ stage('Update Stage') {
                         echo "" > \${failed_file}
 
                         # target production list
-                        prod_list=\$(list=$(ls $WORKSPACE/jenkins-builds/*${params.cdt_current}-${machineLabel} | tail -1)
+                        prod_list=\$(ls $WORKSPACE/jenkins-builds/*${params.cdt_current}-${machineLabel} | tail -1)
 
                         # filter the target production list $machineLabel
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
@@ -152,7 +152,7 @@ stage('Update Stage') {
                             echo -e "\nThe list of recipes to build is empty. Exiting..."
                             exit \$(wc -w <<< \$build_list)
                         else   
-                            echo -e "\nSelected recipes to build: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
+                            echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
                         fi
 
                         # build recipes
