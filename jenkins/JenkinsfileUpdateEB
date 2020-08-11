@@ -1,0 +1,388 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+/*
+ Initialization: checkout the production repository to load the files:
+ - "util.groovy" with the functions used in the pipeline scripts
+ - "Machines.groovy" with the list and properties of HPC systems
+*/
+stage('Initialization') {
+    node('master') {
+        checkout scm
+        methods = load("$WORKSPACE/jenkins/util.groovy")
+        machinesList = load("$WORKSPACE/jenkins/Machines.groovy")
+    }
+}
+
+/*
+ Machine Selection:
+ - filters the user defined parameter "machines", accessible though "params.machines"
+ - defines the runtime HPC systems of the project "machinesToRun"
+ - defines the configuration of the runtime HPC systems "machinesConfiguration"
+*/
+def machineConfigurations = []
+stage('Machine Selection') {
+    node('master') {
+        def machinesToRun = machinesList.findAll({methods.machineCheck(params.machines, it.name)})
+        if (!machinesToRun) {
+            println "No machines were specified. Aborting...."
+            currentBuild.result = "FAILURE"
+            return
+        }
+        for (system in machinesToRun) {
+            machineConfigurations.add(
+                [machine:system, architectures: methods.getMachineConfiguration(
+                        params.machines, system.name, system.archs as String[])])
+        }
+    }
+}
+
+/*
+ Update Stage: configures parallel builds for the different "machinesToRun"
+ Loop over all systems in "machineConfigurations":
+  - if the machine has multiple architectures, starts a sub-loop over architectures
+  - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
+  - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
+  - the target CDT version is selected by the user and stored in "params.cdt_version"
+*/
+def updates = [:]
+def toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
+stage('Update Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            /* define architecture and machineLabel
+               to use them in parallel builds */
+            def architecture = item
+            def machineLabel = architecture == "" ?
+               machineName :
+               "$machineName-$architecture"
+            updates["$machineLabel"] = {
+                node(machineName) {
+                    checkout scm
+
+                    /* define command to load EasyBuild */
+                    def load_easybuild = architecture == "" ?
+                        "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
+                        "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
+
+                    /* define command to switch EasyBuild version*/
+                    def switch_easybuild = params.eb_version == "" ?
+                        "" :
+                        "module switch EasyBuild EasyBuild/${params.eb_version}"
+
+                    /* define list of unuse paths */
+                    def unuse_paths = architecture == '' ?
+                        machine.unusePath.replace(':', ' ') :
+                        machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
+                        println("List of unuse paths: $unuse_paths")
+
+                    /* define eb_flags and command to build software */
+                    def eb_flags = "--ignore-locks -r"
+                    def tc_flags = "--try-toolchain-version=${params.cdt_version}"
+                    //def build_command = architecture == "" ?
+                        //"srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags" :
+                        //"srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb $eb_flags"
+                    def build_command = "eb $eb_flags"
+                        
+                    /* create the new toolchains and build the software stack */
+                    sh("""#!/bin/bash -l
+
+                        for path in $unuse_paths; do
+                            module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
+
+                        export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
+
+                        # create symbolic link to EasyBuild-custom/cscs
+                        if [ ! -e "\$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
+                            mkdir -p "\$EASYBUILD_PREFIX/modules/all"
+                            mkdir -p "\$EASYBUILD_PREFIX/tools/modules/all"
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom \$EASYBUILD_PREFIX/modules/all
+                        fi
+
+                        $load_easybuild
+                        $switch_easybuild
+                        export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
+
+                        # print EasyBuild version and configuration
+                        eb --version
+                        eb --show-config
+
+                        # create the new toolchains
+                        for tc in $toolchains; do
+                            echo -e "\nCurrent toolchain: \$tc"
+                            find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+
+                            # build current toolchain
+                            $build_command --hidden \${tc}-${params.cdt_version}.eb
+                            if [ \$? -eq 0 ]; then
+                                echo -e "Update of toolchain \$tc SUCCESSFUL"
+                            else 
+                                echo -e "Update of toolchain \$tc FAILED"
+                            fi
+                        done
+
+                        # initialise counters and lists
+                        submit_file="\${EASYBUILD_PREFIX}/submit.txt"
+                        echo "" > \${submit_file}
+                        unset success
+                        success_file="\${EASYBUILD_PREFIX}/success.txt"
+                        echo "" > \${success_file}
+                        unset failed
+                        failed_file="\${EASYBUILD_PREFIX}/failed.txt"
+                        echo "" > \${failed_file}
+
+                        # target production list
+                        prod_list=\$(ls $WORKSPACE/jenkins-builds/*${params.cdt_current}-${machineLabel} | tail -1)
+
+                        # filter the target production list $machineLabel
+                        echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
+                        echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
+                        build_list=\$(grep -if select_recipes.txt \${prod_list} | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        
+                        if [ -z "\$build_list" ]; then
+                            echo -e "\nThe list of recipes to build is empty. Exiting..."
+                            exit \$(wc -w <<< \$build_list)
+                        else   
+                            echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
+                        fi
+
+                        # build recipes
+                        for recipe in \${build_list}; do
+                            status=0
+                            new_recipe=\$(echo \$recipe | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
+                            echo -e "\nCurrent Update: \$new_recipe"
+
+                            # get relative path of dependencies from dry run
+                            deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
+                            
+                            # check status of dry run
+                            if [ -n "\$deps" ]; then
+                                $build_command $tc_flags -D \$recipe | grep "\\["
+                            else
+                                failed+=(\$new_recipe)
+                                echo "\$new_recipe" >> "\${failed_file}"
+                                echo -e "\nDry run of \$new_recipe FAILED: skipping build"
+                                continue
+                            fi
+
+                            echo -e "\nSubmitting job and building..."
+                            if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_current} ]]; then
+                                $build_command $tc_flags \$recipe
+                            else
+                                $build_command \$recipe
+                            fi
+                            status=\$[status+\$?]
+
+                            # keep track of successful and failed builds
+                            if [ \$status -eq 0 ]; then
+                                success+=(\$new_recipe)
+                                echo "\$new_recipe" >> "\${success_file}"
+                                echo "\$deps" | tr ' ' '\n' >> "\${submit_file}"
+                                echo -e "\nUpdate of \$new_recipe from \$recipe SUCCESSFUL(\${#success[@]})"
+                            else
+                                failed+=(\$new_recipe)
+                                echo "\$new_recipe" >> "\${failed_file}"
+                                echo -e "\nUpdate of \$new_recipe from \$recipe FAILED(\${#failed[@]})"
+                            fi
+                        done
+
+                        # change permission of tmp folders if failed is not null
+                        if [ -n "\$failed" ]; then
+                            chmod -R o+r "\${EASYBUILD_TMPDIR}"
+                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
+                        fi
+
+                        # print successful and failed updates
+                        echo -e "\nSuccessful Updates: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed Updates: \${#failed[@]} \n\${failed[@]}"
+
+                        # return the number of failed updates
+                        exit \${#failed[@]}
+                    """)
+                }
+            }
+        }
+    }
+
+    try {
+        parallel updates
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting..."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting..."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting..."
+        }
+    }
+}
+
+/*
+ Jira Stage: create Jira issues for failed updates on the different "machinesLabel"
+ Loop over all systems in "machineConfigurations":
+  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
+  - loop over the lines of the file "failed.txt" (list of failed updates)
+  - create a Jira Issue for each item in the list with the proper project key
+*/
+JiraIssues = [:]
+stage('Jira Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            def architecture = item
+            def machineLabel = architecture == "" ? 
+                machineName : 
+                "${machineName}-${architecture}"
+            JiraIssues[machineLabel] = {
+                node(machineName) {
+                    /* retrieve list of failed updates */
+                    def failed_updates = sh(returnStdout: true,
+                                        script: """#!/bin/bash -l
+                                        failed_file="${params.eb_prefix}/$machineLabel/${params.cdt_version}/failed.txt"
+                                        if [ -f "\$failed_file" ]; then
+                                            cat \$failed_file
+                                        fi""").trim()  
+                    if ( !failed_updates?.trim() ) {
+                        println "\nFailed updates: None\n"
+                    }
+                    else {
+                        failed_updates.tokenize(' \n').each {
+                            try {
+                                methods.failedJiraTask("UES", it, machineLabel)
+                            } catch(err) {
+                                println "Failed to create Jira Issue for $it"
+                            }
+                       }
+                    }
+                }
+            }
+        }
+    }
+
+    if (params.createJira) {
+        try {
+            parallel JiraIssues
+        } catch(err) {
+            println "Failed to create Jira Issues"
+        }
+    }  
+}
+
+/*
+ GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
+ Loop over all systems in "machineConfigurations":
+  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
+  - loop over the lines of the file "submit.txt" (list of successful updates and dependencies)
+  - submit a pull request on GitHub with "WIP [$machineLabel]" in the title
+*/
+GitHubPR = [:]
+stage('GitHub Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            def architecture = item
+            def machineLabel = architecture == "" ? 
+                machineName : 
+                "${machineName}-${architecture}"
+            GitHubPR[machineLabel] = {
+                node(machineName) {
+                    /* retrieve list of successful updates and submit pull request */
+                    sh("""#!/bin/bash -l
+                        # clone master over ssh
+                        git clone git@github.com:eth-cscs/production.git
+                        cd  production/easybuild
+
+                        # create git branch or update if exists
+                        git checkout ${machineLabel}/${params.cdt_version} || git checkout -b ${machineLabel}/${params.cdt_version}
+                        git --no-pager diff origin/master --stat
+
+                        # copy updated toolchains and recipes to workspace
+                        for tc in $toolchains; do
+                            find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+                        done
+
+                        failed_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/failed.txt"
+                        submit_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/submit.txt"
+                        submit_list=\$(cat \$submit_file | sort | uniq)
+
+                        # initialise variables
+                        unset copied
+                        unset missing
+
+                        # loop over list of successful updates and dependencies
+                        for recipe in \$submit_list; do
+                            echo -e "\nCurrent update: \$recipe "
+                            # check if recipe did not fail elsewhere
+                            if fgrep -H \$recipe \$failed_file; then
+                                echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
+                            else
+                                name=\$(basename \$recipe)
+                                source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
+                                if [ -n "\$source" ]; then 
+                                    echo -e " \t \$source -> \$recipe"
+                                    cp \$source \$recipe
+                                    # update variable
+                                    copied+=(\$recipe)
+                                else
+                                    echo -e " \t \$recipe not copied (update not found)"
+                                    # update variable
+                                    missing+=(\$recipe)
+                                fi
+                            fi
+                        done
+
+                        module load daint-gpu
+                        module load hub
+                        git add easyconfigs
+                        git status
+                        git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
+                        # check if the pull request is already open
+                        check_pr=\$(hub pr list --head ${machineLabel}/${params.cdt_version})
+                        if [ -n "\${check_pr}" ]; then
+                            git push origin HEAD
+                        else
+                            hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                        fi
+
+                        # print copied and missing updates
+                        echo -e "\nCopied Updates: \${#copied[@]} \n\${copied[@]}"
+                        echo -e "\nMissing Updates: \${#missing[@]} \n\${missing[@]}"
+                        # return the number of missing updates
+                        exit \${#missing[@]}
+                       """)
+                }
+            }
+        }
+    }
+
+    if (params.submitPR) {
+        try {
+            parallel GitHubPR
+        } catch(err) {
+            println "Failed to submit GitHub pull request"
+        }
+    }  
+}
+
+if (params.notifySlack) {
+    methods.notifySlackFinish()
+}
