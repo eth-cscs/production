@@ -318,6 +318,7 @@ stage('GitHub Stage') {
                         # copy updated toolchains and recipes to workspace
                         for tc in $toolchains; do
                             find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+                        done
 
                         failed_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/failed.txt"
                         submit_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/submit.txt"
