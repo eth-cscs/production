@@ -285,7 +285,93 @@ stage('Jira Stage') {
     }  
 }
 
+/*
+ GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
+ Loop over all systems in "machineConfigurations":
+  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
+  - loop over the lines of the file "submit.txt" (list of successful updates)
+  - submit a pull request on GitHub
+*/
+GitHubPR = [:]
+stage('GitHub Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            def architecture = item
+            def machineLabel = architecture == "" ? 
+                machineName : 
+                "${machineName}-${architecture}"
+            GitHubPR[machineLabel] = {
+                node(machineName) {
+                    /* retrieve list of successful updates and submit pull request */
+                    sh("""#!/bin/bash -l
+                        # clone master over ssh
+                        git clone git@github.com:eth-cscs/production.git
+                        cd  production/easybuild
+
+                        # create git branch or update if exists
+                        git checkout ${machineLabel}/${params.cdt_version} || git checkout -b ${machineLabel}/${params.cdt_version}
+                        git status
+                        git --no-pager diff origin/master --stat
+
+                        # copy updated toolchains and recipes to workspace
+                        for tc in $toolchains; do
+                            find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+
+                        failed_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/failed.txt"
+                        submit_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/submit.txt"
+                        submit_list=\$(cat \$submit_file | sort | uniq)
+
+                        # loop over list of successful updates and dependencies
+                        copies=0
+                        missing=0
+                        for recipe in \$submit_list; do
+                            # check if recipe didn't fail elsewhere
+                            if fgrep -H \$recipe \$failed_file; then
+                                echo -e "\n\$recipe found in failed list \$failed_file"
+                            else
+                                name=$(basename \$recipe)
+                                source=$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
+                                if [ -n "source" ]; then 
+                                    echo -e "\nCopying \$source to \$recipe"
+                                    cp \$source \$recipe
+                                    # update counter for copies
+                                    copies=\$[copies+1]              
+                                else
+                                    echo -e "\nUpdated recipe not found for \$name"
+                                    # update counter for missing recipes
+                                    missing=\$[missing+1]              
+                                fi
+                            fi
+                        done
+
+                        module load daint-gpu
+                        module load hub
+                        git add easyconfigs
+                        git status
+                        git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
+                        git push origin HEAD
+                        hub pull-request -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+
+                        # return the number of missing copies
+                        exit \$missing
+                       """)
+                }
+            }
+        }
+    }
+
+    if (params.submitPR) {
+        try {
+            parallel GitHubPR
+        } catch(err) {
+            println "Failed to submit GitHub pull request"
+        }
+    }  
+}
+
 if (params.notifySlack) {
     methods.notifySlackFinish()
 }
-
