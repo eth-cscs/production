@@ -97,5 +97,5 @@ void failedJiraTask(String projkey, String recipe, String machine) {
                           summary: title,
                           description: content,
                           issuetype: [name: 'Task']]]
-   def newIssue = jiraNewIssue issue: issue, site: 'TDS'
+   def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
 }
