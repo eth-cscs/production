@@ -258,11 +258,11 @@ stage('Jira Stage') {
                                         else
                                              echo "None"
                                         fi""").trim()  
-                    if ( failed_builds.equals( "None" ) ) {
+                    if ( failed_updates.equals( "None" ) ) {
                         println "\nFailed updates: $failed_updates\n"
                     }
                     else {
-                        assert failed_builds.tokenize(' \n').each {
+                        assert failed_updates.tokenize(' \n').each {
                             try {
                                 methods.failedJiraTask("UES", it, machineLabel)
                             } catch(err) {
