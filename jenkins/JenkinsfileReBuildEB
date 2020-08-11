@@ -232,7 +232,7 @@ stage('Jira Stage') {
                         println "\nFailed rebuilds: None\n"
                     }
                     else {
-                        assert failed_builds.tokenize(' \n').each {
+                        failed_rebuilds.tokenize(' \n').each {
                             try {
                                 methods.failedJiraTask("UES", it, machineLabel)
                             } catch(err) {
