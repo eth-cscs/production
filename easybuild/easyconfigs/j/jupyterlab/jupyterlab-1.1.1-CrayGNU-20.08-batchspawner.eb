@@ -1,0 +1,175 @@
+# @author: robinson
+
+easyblock = 'PythonBundle'
+
+name = 'jupyterlab'
+version = '1.1.1'
+versionsuffix = '-batchspawner'
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('libffi', '3.2.1', '', True),
+    ('IPython', '7.7.0', '-python%(pymajver)s'),
+    ('configurable-http-proxy', '4.2.1'),
+    ('dask', '2.2.0', '-python%(pymajver)s'),
+    ('graphviz', '2.40.1', '', True),
+]
+
+# install extensions and batchspawner components
+# changed from semicolons to commas to catch npm build failures
+postinstallcmds = [
+    "export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ && export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ && export JUPYTER=%(installdir)s/bin/jupyter && %(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/%(name)s-manager@1.0 --no-build && %(installdir)s/bin/jupyter-labextension install %(name)s-datawidgets@6.3.0 --no-build && %(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build && %(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && %(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && %(installdir)s/bin/jupyter labextension install -y %(name)s-plotly@1.0.0 --no-build && %(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && %(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && %(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && %(installdir)s/bin/jupyter labextension install %(name)s-topbar-extension@0.4.0 %(name)s-system-monitor@0.4.1 --no-build && %(installdir)s/bin/jupyter labextension install dask-labextension --no-build && %(installdir)s/bin/jupyter labextension install -y %(name)s-nvdashboard@0.2.1 --no-build && cd %(installdir)s/ && git clone https://github.com/NVIDIA/ipyparaview && cd ipyparaview && git checkout cf1c6f4 && %(installdir)s/bin/jupyter labextension install js --no-build && %(installdir)s/bin/jupyter lab build --debug --dev-build=False && rm -r $YARN_CACHE_FOLDER && python3 -m bash_kernel.install --prefix=%(installdir)s/",
+    # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
+    # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
+    # 'julia -e \'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")\';'
+    # to trigger the precompilation
+    # "julia -e \'using IJulia\';"
+    # adjust permissions of precompiled files
+    # 'for i in $(find %s); do chmod +r $i; done' % julia_depot_path;
+]
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    #jupyterlab packages besides ipython and its deps
+    ('pyrsistent', '0.15.4'),
+    ('attrs', '19.1.0', {'modulename': 'attr'}),
+    ('jsonschema', '3.0.1'),
+    ('json5', '0.8.5'),
+    ('Send2Trash', '1.5.0'),
+    ('tornado', '6.0.3'),
+    ('pyzmq', '18.0.2', {'modulename': 'zmq'}),
+    ('python-dateutil', '2.8.0', {'modulename': 'dateutil'}),
+    ('jupyter_core', '4.5.0'),
+    ('jupyter_client', '5.3.1'),
+    ('MarkupSafe', '1.1.1'),
+    ('Jinja2', '2.10.1'),
+    ('webencodings', '0.5.1'),
+    ('bleach', '3.1.0'),
+    ('defusedxml', '0.6.0'),
+    ('entrypoints', '0.3', {'use_pip': False}),
+    ('mistune', '0.8.4'),
+    ('nbformat', '4.4.0'),
+    ('pandocfilters', '1.4.2'),
+    ('testpath', '0.4.2', {'use_pip': False}),
+    ('nbconvert', '5.5.0'),
+    ('prometheus_client', '0.7.1'),
+    ('terminado', '0.8.2', {'use_pip': False}),
+    ('jupyterlab_server', '1.0.0'),
+    ('ipykernel', '5.1.1'),
+    ('notebook', '6.0.0'),
+    ('jupyterlab', '1.1.1', {'installopts': ' --install-option=--skip-npm '}),
+    # jupyterhub and its deps
+    ('SQLAlchemy', '1.3.6'),
+    ('Mako', '1.0.14'),
+    ('alembic', '1.0.11'),
+    ('python-editor', '1.0.4', {'modulename': 'editor'}),
+    ('async_generator', '1.10'),
+    ('pycparser', '2.19'),
+    ('cffi', '1.12.3', {'use_pip': False}),
+    ('asn1crypto', '0.24.0'),
+    ('cryptography', '2.7'),
+    ('pyOpenSSL', '19.0.0', {'modulename': 'OpenSSL'}),
+    ('certipy', '0.1.3'),
+    ('oauthlib', '3.0.2'),
+    ('pamela', '1.0.0'),
+    ('urllib3', '1.25.3'),
+    ('idna', '2.8'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2019.6.16'),
+    ('requests', '2.22.0'),
+    ('jupyterhub', '1.0.0'),
+    # widgets: note the lab extensions below
+    ('widgetsnbextension', '3.5.1'),
+    ('ipywidgets', '7.5.1'),
+    # ipympl matplotlib widgets, requires lab extension
+    ('ipympl', '0.3.3'),
+    # bqplot: requires the labextension below
+    ('traittypes', '0.2.1'),
+    ('param', '1.9.2'),
+    ('pyct', '0.4.6'),
+    ('colorcet', '2.0.2'),
+    ('zstandard', '0.13.0'),
+    ('itk-core', '5.0.1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-numerics', '5.0.1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-filtering', '5.0.1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-meshtopolydata', '0.6.0', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('ipydatawidgets', '4.0.1'),
+    ('itkwidgets', '0.25.0'),
+    # plotly, requires the lab extension below
+    ('retrying', '1.3.3'),
+    ('plotly', '4.0.0'),
+    ('PyYAML', '5.1.2', {'modulename': 'yaml'}),
+    ('bokeh', '1.3.4'),
+    ('packaging', '19.1'),
+    ('Pillow', '7.0.0', {'modulename': 'PIL'}),
+    # bqplot: requires the labextension below
+    ('traittypes', '0.2.1'),
+    ('bqplot', '0.11.6'),
+    # nbresuse for jupyterlab-system-monitor extension
+    ('psutil', '5.6.3'),
+    ('nbresuse', '0.3.2'),
+    ('graphviz', '0.12', {'source_tmpl': 'graphviz-%(version)s.zip'}),
+    # dask-labextension
+    # This package provides a JupyterLab extension to manage Dask clusters,
+    # as well as embed Dask's dashboard plots directly into JupyterLab panes
+    ('simpervisor', '0.3'),
+    ('multidict', '4.5.2'),
+    ('yarl', '1.3.0'),
+    ('typing_extensions', '3.7.4'),
+    ('async-timeout', '3.0.1'),
+    ('idna-ssl', '1.1.0', {'modulename': 'idna_ssl'}),
+    ('aiohttp', '3.5.4'),
+    ('jupyter-server-proxy', '1.1.0'),
+    ('dask_labextension', '1.0.3'),
+    #JupyterLab GPU Dashboard (nvdashboard)
+    # JupyterLab extension for displaying dashboards of GPU usage.
+    ('pynvml', '8.0.4'),
+    ('jupyterlab-nvdashboard', '0.2.1'),
+    ('batchspawner', '68a1fcd', {'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s']}),
+    ('ipyparaview', 'cf1c6f4', {'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s']}),
+    #jupyterlab code formatter, requires a formatter e.g., black
+    ('pathspec', '0.8.0'),
+    ('typed_ast', '1.4.1'),
+    ('appdirs', '1.4.4'),
+    ('regex', '2020.6.8'),
+    ('toml', '0.10.1'),
+    ('black', '19.10b0'),
+    ('jupyterlab_code_formatter', '1.1.0'),
+    ('bash_kernel', '0.7.2', {'use_pip': False}),
+    #other - these compoenents are now moved to IPCMagic
+    # ('ipyparallel', '6.2.4'),
+    # ('docopt', '0.6.2'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/extensions', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
+}
+
+# For Julia packages needed for Jupyter
+# twr julia_depot_path = "%(installdir)s/share/julia/site/"
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter',
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextravars = {
+    #twr    'JULIA_DEPOT_PATH': julia_depot_path,
+    'JUPYTER': '%(installdir)s/bin/jupyter',
+    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+}
+
+moduleclass = 'tools'

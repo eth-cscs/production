@@ -1,0 +1,44 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'PyExtensions'
+version = 'python%(pymajver)s'
+
+homepage = 'https://pypi.python.org/pypi'
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+sanity_pip_check = True
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+}
+
+exts_list = [
+    ('zipp', '0.5.0'),
+    ('Cython', '0.28.4'),
+    ('six', '1.11.0'),
+    ('pyparsing', '2.4.7'),
+    ('kiwisolver', '1.2.0'),
+    ('pytz', '2020.1'),
+    ('cycler', '0.10.0'),
+    ('wheel', '0.34.2'),
+    ('python-dateutil', '2.8.1', {'modulename': 'dateutil'}),
+    ('matplotlib', '2.2.2'),
+    ('pandas', '0.23.3'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'
