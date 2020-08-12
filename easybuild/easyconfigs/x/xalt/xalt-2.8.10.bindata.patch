@@ -1,0 +1,262 @@
+diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/extractXALTRecord.C
+--- xalt-xalt-2.8.10-orig/src/extractXALTRecord.C	2020-07-25 19:32:11.000000000 +0200
++++ xalt-xalt-2.8.10/src/extractXALTRecord.C	2020-08-11 15:47:34.459404000 +0200
+@@ -2,12 +2,13 @@
+ #include "capture.h"
+ #include "xalt_config.h"
+ 
++
+ bool extractXALTRecordString(std::string& exec, std::string& watermark)
+ {
+ 
+   std::string cmd;
+   Vstring     result;
+-  
++
+   // Capture the XALT record (if it exists) into result.
+   std::string execQ = exec;
+   std::string Q     = "\"";
+@@ -15,7 +16,7 @@
+   replace_all(execQ, Q, QQ);
+ 
+   cmd  = "XALT_EXECUTABLE_TRACKING=no PATH=" XALT_SYSTEM_PATH " objdump -s -j .xalt \"" + execQ + "\" 2> /dev/null";
+-    
++
+   capture(cmd, result);
+ 
+   int  i;
+@@ -31,7 +32,7 @@
+         }
+     }
+ 
+-  // If "Contents of section" was not found then exec doesn't have an XALT section => return 
++  // If "Contents of section" was not found then exec doesn't have an XALT section => return
+   if (! found)
+     {
+       watermark = "FALSE";
+@@ -64,7 +65,7 @@
+    *  0150 45706f63 683e2525 31343536 32343236  Epoch>%%14562426
+    *  0160 35352e39 34252500 00000000 00000058  55.94%%........X
+    *  0170 414c545f 4c696e6b 5f496e66 6f5f456e  ALT_Link_Info_En
+-   *  0180 6400                                 d.              
++   *  0180 6400                                 d.
+    */
+ 
+ 
+@@ -103,7 +104,7 @@
+       n  = watermark.substr(s1,s2-s1);
+ 
+       s3 = watermark.find("%%.",s2);
+-      
++
+       v = watermark.substr(s2+3,s3 - (s2+3));
+ 
+       s4 = 0;
+@@ -117,3 +118,105 @@
+       recordT[n] = v;
+     }
+ }
++
++bool extractBinaryData(std::string& exec, std::string& dataString)
++{
++
++  std::string cmd;
++  Vstring     result;
++
++  // Capture the XALT record (if it exists) into result.
++  std::string execQ = exec;
++  std::string Q     = "\"";
++  std::string QQ    = "\\\"";
++  replace_all(execQ, Q, QQ);
++
++  cmd  = "XALT_EXECUTABLE_TRACKING=no PATH=" XALT_SYSTEM_PATH " objdump -tC \"" + execQ + "\" 2> /dev/null";
++
++  capture(cmd, result);
++
++  int  i;
++  int  nlines = result.size();
++  bool found  = false;
++
++  for (i = 0; i < nlines; ++i)
++    {
++      if (result[i].find("SYMBOL TABLE:") != std::string::npos)
++        {
++          found = true;
++          break;
++        }
++    }
++
++  // If "Contents of section" was not found then exec doesn't have an XALT section => return
++  if (! found)
++    {
++      dataString = "FALSE";
++      return false;
++    }
++
++  /*
++   * The results of the objdump command looks like this (after the "SYMBOL TABLE ..." line)
++   * 0000000000400238 l    d  .interp	0000000000000000              .interp
++   * 0000000000400254 l    d  .note.ABI-tag	0000000000000000              .note.ABI-tag
++   * 0000000000400274 l    d  .note.xalt.info	0000000000000000              .note.xalt.info
++   * 0000000000400bd8 l    d  .hash	0000000000000000              .hash
++   * 0000000000400c70 l    d  .gnu.hash	0000000000000000              .gnu.hash
++   * 0000000000400cb0 l    d  .dynsym	0000000000000000              .dynsym
++   * 0000000000400e60 l    d  .dynstr	0000000000000000              .dynstr
++   * 0000000000401014 l    d  .gnu.version	0000000000000000              .gnu.version
++   * 0000000000401038 l    d  .gnu.version_r	0000000000000000              .gnu.version_r
++   * 0000000000401088 l    d  .rela.dyn	0000000000000000              .rela.dyn
++   * 00000000004010b8 l    d  .rela.plt	0000000000000000              .rela.plt
++   * 0000000000401190 l    d  .init	0000000000000000              .init
++   * 00000000004011b0 l    d  .plt	0000000000000000              .plt
++   * 0000000000401250 l    d  .text	0000000000000000              .text
++   * 0000000000401464 l    d  .fini	0000000000000000              .fini
++   * 0000000000401470 l    d  .rodata	0000000000000000              .rodata
++   * 00000000004014b8 l    d  .eh_frame_hdr	0000000000000000              .eh_frame_hdr
++   * 00000000004014f8 l    d  .eh_frame	0000000000000000              .eh_frame
++   * 0000000000401630 l    d  .gcc_except_table	0000000000000000              .gcc_except_table
++   * 0000000000601d70 l    d  .init_array	0000000000000000              .init_array
++   * 0000000000601d78 l    d  .fini_array	0000000000000000              .fini_array
++   * 0000000000601d80 l    d  .dynamic	0000000000000000              .dynamic
++   * 0000000000601ff0 l    d  .got	0000000000000000              .got
++   * 0000000000602000 l    d  .got.plt	0000000000000000              .got.plt
++   * 0000000000602060 l    d  .data	0000000000000000              .data
++   * 0000000000602070 l    d  .bss	0000000000000000              .bss
++   * 0000000000000000 l    d  .comment	0000000000000000              .comment
++   * 0000000000000000 l    d  .xalt	0000000000000000              .xalt
++   * 0000000000000000 l    d  .debug_aranges	0000000000000000              .debug_aranges
++   * 0000000000000000 l    d  .debug_info	0000000000000000              .debug_info
++   * 0000000000000000 l    d  .debug_abbrev	0000000000000000              .debug_abbrev
++   * 0000000000000000 l    d  .debug_line	0000000000000000              .debug_line
++   * 0000000000000000 l    d  .debug_str	0000000000000000              .debug_str
++   * 0000000000000000 l    d  .debug_loc	0000000000000000              .debug_loc
++   * 0000000000000000 l    d  .debug_ranges  0000000000000000              .debug_ranges
++   * 0000000000000000 l    df *ABS*  0000000000000000              init.c
++   * 0000000000000000 l    df *ABS*  0000000000000000              gmx.cpp
++   * 000000000040d480 l     F .text  0000000000000070              main.cold.1
++   * 0000000000000000 l    df *ABS*  0000000000000000              legacymodules.cpp
++   * 0000000000463650 l     F .text  0000000000000005              (anonymous namespace)::ObsoleteToolModule::name() const
++   * 0000000000463660 l     F .text  0000000000000003              (anonymous namespace)::ObsoleteToolModule::shortDescription() const
++   * 0000000000463670 l     F .text  0000000000000001              (anonymous namespace)::ObsoleteToolModule::init(gmx::CommandLineModuleSettings*)
++   * 0000000000463680 l     F .text  0000000000000001              (anonymous namespace)::ObsoleteToolModule::~ObsoleteToolModule()
++   * 0000000000463680 l     F .text  0000000000000001              (anonymous namespace)::ObsoleteToolModule::~ObsoleteToolModule()
++   */
++
++
++  // Take the output above and convert the string portion into a single line
++  std::string            xaltRecord;
++  std::string::size_type idx, len;
++  for (i = i + 1; i < nlines; i++)
++    {
++      std::string& line = result[i];
++      idx               = line.find_last_of("  ");
++      len               = line.size();
++      if (idx < len) {
++        xaltRecord       += line.substr(idx, len-idx-1);
++      }
++    }
++
++  dataString = xaltRecord;
++  return true;
++}
+diff -Nru xalt-xalt-2.8.10-orig/src/run_submission.h xalt-xalt-2.8.10/src/run_submission.h
+--- xalt-xalt-2.8.10-orig/src/run_submission.h	2020-07-25 19:32:11.000000000 +0200
++++ xalt-xalt-2.8.10/src/run_submission.h	2020-08-11 15:42:38.171785000 +0200
+@@ -12,11 +12,11 @@
+ void buildXALTRecordT(std::string& watermark, Table& recordT);
+ void parseProcMaps(pid_t pid, std::vector<Libpair>& libA, double& t_maps, double& t_sha1);
+ void pkgRecordTransmit(const char* uuid_str,const char* syshost, const char* transmission);
+-void run_direct2db(const char* confFn, std::string& usr_cmdline, std::string& hash_id, 
++void run_direct2db(const char* confFn, std::string& usr_cmdline, std::string& hash_id,
+                    Table& rmapT, Table& envT, Table& userT,
+                    Table& recordT, std::vector<Libpair>& lddA);
+ void translate(Table& envT, Table& userT, DTable& userDT);
+ 
+-
++bool extractBinaryData(std::string& exec, std::string& dataString);
+ 
+ #endif //RUN_SUBMISSION_H
+diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/xalt_run_submission.C
+--- xalt-xalt-2.8.10-orig/src/xalt_run_submission.C	2020-07-25 19:32:11.000000000 +0200
++++ xalt-xalt-2.8.10/src/xalt_run_submission.C	2020-08-11 15:45:11.714185000 +0200
+@@ -29,10 +29,10 @@
+   DTable      measureT;
+   bool        end_record = (options.endTime() > 0.0);
+   char        uuid_str[37];
+-  
++
+   const char* suffix = end_record ? ".zzz" : ".aaa";
+   DEBUG1(stderr,"\n  xalt_run_submission(%s) {\n",suffix);
+-  
++
+   if (options.buildUUID())
+     {
+       build_uuid(&uuid_str[0]);
+@@ -49,7 +49,7 @@
+   std::vector<ProcessTree> ptA;
+   walkProcessTree(options.ppid(), ptA);
+   measureT["04_WalkProcTree_"] = epoch() - t1;
+-    
++
+   //*********************************************************************
+   // Build the env table:
+   t1 = epoch();
+@@ -82,12 +82,19 @@
+   measureT["01_BuildUserT___"] = epoch() - t1;
+ 
+   //*********************************************************************
+-  // Filter envT 
++  // Filter envT
+   t1 = epoch();
+   filterEnvT(env, envT);
+   DEBUG0(stderr,"    Filter envT\n");
+   measureT["03_BuildEnvT____"] += epoch() - t1;
+-  
++
++
++  //*********************************************************************
++  // Extract the binary data
++  t1 = epoch();
++  extractBinaryData(options.exec(), watermark);
++  userT["binaryData"] = watermark;
++  measureT["07_ExtractXALTBinData_"] += epoch() - t1;
+ 
+   //*********************************************************************
+   // Take sha1sum of the executable
+@@ -96,7 +103,7 @@
+   compute_sha1(options.exec(), sha1_exec);
+ 
+   measureT["02_Sha1_exec____"] = epoch() - t1;
+-  
++
+   //*********************************************************************
+   // Parse the output of ldd for this executable (start record only)
+   std::vector<Libpair> libA;
+@@ -105,16 +112,16 @@
+ 
+   measureT["06_ParseProcMaps"] = t_maps;
+   measureT["06_SO_sha1_comp_"] = t_sha1;
+-  
++
+   const char * transmission = getenv("XALT_TRANSMISSION_STYLE");
+   if (transmission == NULL)
+     transmission = TRANSMISSION;
+-  
++
+   DEBUG1(stderr,"    Using XALT_TRANSMISSION_STYLE: %s\n",transmission);
+ 
+   //*********************************************************************
+   // If here then we need the json string.  So build it!
+-  measureT["07____total_____"] = epoch() - t0;
++  measureT["08____total_____"] = epoch() - t0;
+ 
+   Json json;
+   DEBUG1(stderr,"    cmdlineA: %s\n",options.userCmdLine().c_str());
+@@ -132,7 +139,7 @@
+   DEBUG0(stderr,"    Built json string\n");
+ 
+   char*       c_resultFn  = NULL;
+-  char*       c_resultDir = NULL;  
++  char*       c_resultDir = NULL;
+   std::string jsonStr     = json.result();
+   std::string fn;
+ 
