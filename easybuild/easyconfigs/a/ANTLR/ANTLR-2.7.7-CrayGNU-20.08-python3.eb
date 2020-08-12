@@ -1,0 +1,36 @@
+# contributed by Luca Marsella (CSCS), updated by Samuel Omlin (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ANTLR'
+version = '2.7.7'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://www.antlr.org/'
+description = """
+    ANTLR, ANother Tool for Language Recognition, (formerly PCCTS) is a
+    language tool that provides a framework for constructing recognizers,
+    compilers, and translators from grammatical descriptions containing
+    Java, C#, C++, or Python actions.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['http://www.antlr2.org/download/']
+sources = [SOURCELOWER_TAR_GZ]
+patches = ['%(name)s-%(version)s_includes.patch']
+
+dependencies = [
+    # On DOM this dependency is provided as local_osdependency
+    # ('java', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = "--disable-examples --disable-csharp "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'bin/%(namelower)s-config'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'tools'

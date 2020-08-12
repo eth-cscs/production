@@ -1,0 +1,25 @@
+# Built with EasyBuild version 3.8.1 on 2019-04-05_15-45-44
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'zlib'
+version = '1.2.11'
+
+homepage = 'http://www.zlib.net/'
+description = """zlib is designed to be a free, general-purpose, legally unencumbered -- that is,
+ not covered by any patents -- lossless data-compression library for use on virtually any
+ computer hardware and operating system."""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'pic': True, 'dynamic': True}
+
+source_urls = [('http://sourceforge.net/projects/libpng/files/%(name)s/%(version)s', 'download')]
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/zconf.h', 'include/%(name)s.h', 'lib/libz.a', 'lib/libz.so'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
