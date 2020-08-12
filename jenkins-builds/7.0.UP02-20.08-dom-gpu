@@ -1,1 +1,2 @@
 CMake-3.14.5.eb                                     --set-default-module
+nvhpc-2020_207-cuda-10.2.eb --set-default-module
