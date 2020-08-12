@@ -1,0 +1,35 @@
+# omlins, kraushm, jg, havogt (cscs)
+easyblock = 'CMakeMake'
+
+name = 'STELLA'
+version = '4a5f9c5'
+versionsuffix = '-crclim-double-cuda'
+
+homepage = "https://github.com/C2SM-RCM/stella (-b crclim)"
+description = 'STELLA'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+# c2sm repo is private (+ no official release)
+sources = [{'filename': '/apps/common/UES/easybuild/sources/s/%(name)s/%(namelower)s_%(version)s.tar.gz'}]
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('gcc/8.3.0', EXTERNAL_MODULE) # Ensure that this is loaded. Fails if not.
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('Serialbox', '2.4.1'),
+    ('Boost', '1.67.0'),
+]
+
+configopts = "-DBoost_INCLUDE_DIR=${EBROOTBOOST}/include -DCMAKE_BUILD_TYPE=Release -DX86_BACKEND=ON -DSINGLEPRECISION=OFF -DCUDA_BACKEND=ON -DCUDA_COMPUTE_CAPABILITY=sm_60 -DSTELLA_KSIZE=60 -DSTELLA_KFLAT=19 -DENABLE_OPENMP=OFF -DGCL=ON -DSTELLA_BITREPRO=OFF "
+
+# configopts += "-DSTELLA_ENABLE_SERIALIZATION=OFF"
+# configopts += "-D_GLIBCXX_USE_CXX11_ABI=1"
+# prebuildopts = """module swap gcc gcc/8.3.0 &&"""
+
+separate_build_dir = True
+
+moduleclass = 'devel'

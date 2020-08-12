@@ -1,0 +1,31 @@
+# omlins, kraushm, jg, havogt (cscs)
+easyblock = 'CMakeMake'
+
+name = 'Dycore'
+version = '551f6b4'
+versionsuffix = '-crclim-double-cuda'
+
+homepage = "https://github.com/C2SM-RCM/cosmo-pompa/tree/master/dycore (-b crclim)"
+description = 'cosmo-pompa-dycore'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+# repo is private (+ no official release)
+sources = [{'filename': '/apps/common/UES/easybuild/sources/d/%(name)s/%(name)s_%(version)s.tar.gz'}]
+
+builddependencies = [
+    ('CMake', '3.12.0', '', True),
+    ('gcc/8.3.0', EXTERNAL_MODULE),  # Ensure that this is loaded. Fails if not.
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('STELLA', '4a5f9c5', '-crclim-double-cuda'),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DSINGLEPRECISION=OFF -DCUDA_BACKEND=ON -DSTELLA_DIR=${EBROOTSTELLA} -DBITREPRO=OFF "
+
+srcdir = '%(namelower)s'
+separate_build_dir = True
+
+moduleclass = 'devel'
