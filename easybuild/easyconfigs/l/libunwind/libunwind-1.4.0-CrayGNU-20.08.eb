@@ -1,0 +1,27 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libunwind'
+version = '1.4.0'
+
+homepage = 'http://www.nongnu.org/libunwind/'
+description = """The primary goal of libunwind is to define a portable and
+efficient C programming interface (API) to determine the call-chain of a
+program. The API additionally provides the means to manipulate the preserved
+(callee-saved) state of each call-frame and to resume execution at any point in
+the call-chain (non-local goto). The API supports both local (same-process) and
+remote (across-process) operation. As such, the API is useful in a number of
+applications"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v%(version)s/']
+sources = [SOURCE_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/%(name)s.h', 'lib/%(name)s.so'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

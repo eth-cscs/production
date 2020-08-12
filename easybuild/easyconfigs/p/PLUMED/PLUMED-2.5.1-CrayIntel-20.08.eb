@@ -1,0 +1,50 @@
+# by Ward Poelmans <wpoely86@gmail.com>
+# Modified by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'PLUMED'
+version = '2.5.1'
+
+homepage = 'http://www.plumed-code.org'
+description = """PLUMED is an open source library for free energy calculations in molecular systems which
+ works together with some of the most popular molecular dynamics engines. Free energy calculations can be
+ performed as a function of many order parameters with a particular  focus on biological problems, using
+ state of the art methods such as metadynamics, umbrella sampling and Jarzynski-equation based steered MD.
+ The software, written in C++, can be easily interfaced with both fortran and C/C++ codes.
+"""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'usempi': 'True'}
+
+source_urls = ['https://github.com/%(namelower)s/plumed2/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('binutils', '2.32'),
+]
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('GSL', '2.5'),
+]
+
+# The following search options are activated by default in configure:
+# --enable-external-blas --enable-external-lapack --enable-gsl --enable-mpi --enable-python
+# Make sure to set the include and library paths accordingly: Cray wrappers set them here
+preconfigopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
+configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s "
+
+prebuildopts = " source sourceme.sh && "
+buildopts = 'LD_RO="ld.gold -r -o"'
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
+    'dirs': ['lib/%(namelower)s'],
+}
+
+modextrapaths = {
+    'PLUMED_KERNEL': 'lib/libplumedKernel.so',
+    'PLUMED_ROOT': 'lib/%(namelower)s',
+}
+
+moduleclass = 'chem'

@@ -1,0 +1,35 @@
+# created by Anton Kozhevnikov and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'magma'
+version = '2.5.3'
+versionsuffix = '-cuda'
+
+homepage = 'http://icl.cs.utk.edu/magma/'
+description = """The MAGMA project aims to develop a dense linear algebra
+library similar to LAPACK but for heterogeneous/hybrid architectures, starting
+with current Multicore+GPU systems."""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'openmp': True, 'pic': True, 'verbose': False}
+
+source_urls = ['http://icl.cs.utk.edu/projectsfiles/%(name)s/downloads/']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('gcc', EXTERNAL_MODULE),
+]
+
+configopts = ' -DCUDA_NVCC_FLAGS="-DHAVE_CUBLAS -gencode=arch=compute_60,code=compute_60" -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DCMAKE_C_FLAGS="" -DCMAKE_CXX_FLAGS="" -DCMAKE_Fortran_FLAGS="" '
+
+
+sanity_check_paths = {
+    'files': ['lib/libmagma.so'],
+    'dirs': ['lib', 'include'],
+}
+
+moduleclass = 'math'

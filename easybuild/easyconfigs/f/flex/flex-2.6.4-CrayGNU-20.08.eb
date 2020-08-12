@@ -1,0 +1,21 @@
+# contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'flex'
+version = '2.6.4'
+
+homepage = 'http://flex.sourceforge.net/'
+description = """Flex (Fast Lexical Analyzer) is a tool for generating scanners. A scanner,
+ sometimes called a tokenizer, is a program which recognizes lexical patterns in text."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://github.com/westes/%(name)s/releases/download/v%(version)s']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('Bison', '3.3.2'),
+]
+
+
+moduleclass = 'lang'

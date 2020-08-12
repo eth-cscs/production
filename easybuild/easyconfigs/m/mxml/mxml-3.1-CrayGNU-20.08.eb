@@ -1,0 +1,22 @@
+easyblock = 'ConfigureMake'
+
+name = 'mxml'
+version = '3.1'
+
+# versionsuffix = '-ipm'
+homepage = 'http://michaelrsweet.github.io/mxml/'
+description = """Mini-XML is a tiny XML library that you can use to read and
+write XML and XML-like data files"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://github.com/michaelrsweet/%(name)s/releases/download/v%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['include/%(name)s.h', 'lib/libmxml.so', 'lib/libmxml.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

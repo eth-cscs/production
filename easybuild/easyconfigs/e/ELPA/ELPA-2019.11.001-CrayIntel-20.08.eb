@@ -1,0 +1,31 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2019.11.001'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = "Eigenvalue SoLvers for Petaflop-Applications ."
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['http://%(namelower)s.mpcdf.mpg.de/html/Releases/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+preconfigopts = ' module unload cray-libsci && module list && CC=cc FC=ftn CPP=cpp FCPP=cpp  LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl"  FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
+configopts = "--enable-openmp --enable-static"
+
+prebuildopts = " module unload cray-libsci && make clean && "
+
+
+sanity_check_paths = {
+    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'include/elpa_openmp-%(version)s/%(namelower)s', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig'],
+}
+
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s']}
+
+modextravars = {'ELPA_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s'}
+
+moduleclass = 'math'

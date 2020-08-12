@@ -1,0 +1,29 @@
+easyblock = 'ConfigureMake'
+
+name = 'GREASY'
+version = '19.03-cscs'
+
+homepage = 'https://github.com/jonarbo/GREASY'
+description = """Greasy is a tool designed to make easier the deployment of
+embarrassingly parallel simulations in any environment. It is able to run in
+parallel a list of different tasks."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'opt': True, 'pic': True}
+
+#
+# GREASY source code modified by us in order to properly use SLURM scheduler
+# The original code was taken from https://github.com/jonarbo/GREASY
+# This version contains the current constraint options to use the GPU on Piz Daint
+#
+sources = ['https://github.com/eth-cscs/%(name)s/archive/%(version)s.tar.gz']
+
+
+#preconfigopts = './autogen.sh && '
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'

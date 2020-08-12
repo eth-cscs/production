@@ -1,0 +1,48 @@
+# @author: jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Score-P'
+version = '6.0'
+
+homepage = 'http://www.score-p.org'
+description = """The Score-P measurement infrastructure is a highly scalable
+and easy-to-use tool suite for profiling, event tracing, and online analysis of
+HPC applications."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.vi-hps.org/cms/upload/packages/scorep/']
+sources = ['scorep-%(version)s.tar.gz']
+checksums = ['71b11aa547cdffb8c31b4e70bf51511d']
+
+dependencies = [
+    # libiberty needed in older versions of scorep, keeping as a reminder
+    ('libunwind', '1.4.0'),
+    # ('CubeGUI', '4.4.4', '', True),
+    ('CubeLib', '4.5'),
+    ('CubeW', '4.5'),
+    ('OPARI2', '2.0.5', '', True),
+    ('PDT', '3.25', '', True),
+    ('SIONlib', '1.7.6l'),
+    ('vampir', '9.9.0', '', True),
+    # OTF2: will build with internal/scorep version of otf2, keeping as remind
+    # PR3501 ('OTF2', '2.0', '', True),
+    # PAPI: will build with papi from perftools-base, keeping as reminder
+]
+
+# plugins are needed, do not use this configopts = ' --disable-gcc-plugin'
+configopts = " --with-machine-name=daint --enable-shared --with-libpmi-include=/opt/cray/pe/pmi/default/include --with-libpmi-lib=/opt/cray/pe/pmi/default/lib64 --with-librca-include=/opt/cray/rca/default/include --with-librca-lib=/opt/cray/rca/default/lib64 --with-papi-header=/opt/cray/pe/papi/default/include --with-papi-lib=/opt/cray/pe/papi/default/lib64 --with-sionlib=$EBROOTSIONLIB --with-libunwind=$EBROOTLIBUNWIND --with-opari2=$EBROOTOPARI2/bin --with-cubew=$EBROOTCUBEW/bin --with-cubelib=$EBROOTCUBELIB/bin"
+
+
+sanity_check_paths = {
+    'files': ['bin/scorep', 'include/scorep/SCOREP_User.h', ('lib/backend/libscorep_adapter_mpi_event.a', 'lib/libscorep_adapter_mpi_event.so')],
+    'dirs': [],
+}
+
+# Ensure that local metric documentation is found by Cube GUI
+modextrapaths = {'CUBE_DOCPATH': 'share/doc/scorep/profile'}
+
+modextravars = {'CRAYPE_LINK_TYPE': 'dynamic'}
+
+moduleclass = 'perf'
