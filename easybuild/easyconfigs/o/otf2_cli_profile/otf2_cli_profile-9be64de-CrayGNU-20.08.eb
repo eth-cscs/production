@@ -1,0 +1,42 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'otf2_cli_profile'
+version = '9be64de'
+
+homepage = 'https://github.com/score-p/otf2_cli_profile.git'
+description = "Tool to read otf2 trace files"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'dynamic': True, 'verbose': False}
+
+sources = [
+    {'git_config': {'url': 'https://github.com/score-p', 'commit': '%(version)s', 'repo_name': '%(name)s'}, 'filename': SOURCE_TAR_GZ},
+]
+
+# patches = ['%(name)s-%(version)s.patch']
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('rapidjson', 'f56928d', '', True),
+    ('OTF2', '2.2', '', True),
+    ('CubeLib', '4.5'),
+]
+
+configopts = " -DUSE_JSON=ON -DUSE_MPI=ON -DRAPIDJSON_INCLUDE_DIRS=$EBROOTRAPIDJSON/include -DCUBE_INC_DIR=$EBROOTCUBELIB/include -DCUBE_LIB_DIR=$EBROOTCUBELIB/lib -DCUBE_LIB=$EBROOTCUBELIB/lib/libcube4.so -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_FLAGS=-fpermissive -DOTF2_INCLUDE_DIRS=$EBROOTOTF2/include"
+
+postinstallcmds = [
+    "cp -a otf-profiler-mpi %(installdir)s/bin",
+    "mkdir -p %(installdir)s/include",
+    "cp otf-profiler-config.h %(installdir)s/include",
+]
+# configopts += ' -DRAPIDJSON_INCLUDE_DIRS=`pkg-config --variable=includedir RapidJSON`'
+separate_build_dir = 'True'
+
+sanity_check_paths = {
+    'files': ['bin/otf-profiler', 'bin/otf-profiler-mpi'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'perf'

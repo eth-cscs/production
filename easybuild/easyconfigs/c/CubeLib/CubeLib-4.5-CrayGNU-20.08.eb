@@ -1,0 +1,25 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CubeLib'
+version = '4.5'
+
+homepage = 'http://www.scalasca.org/software/cube-4.x/download.html'
+description = """Cube Library is a general purpose library for reading and
+writing of a multi-dimensional performance space consisting of the dimensions
+(i) performance metric, (ii) call path, and (iii) system resource."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['bin/cube_info', 'lib/libcube4.a'],
+    'dirs': ['include/%(namelower)s'],
+}
+
+moduleclass = 'perf'

@@ -1,0 +1,46 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'IPM'
+version = '2.0.6'
+
+homepage = 'https://github.com/nerscadmin/IPM'
+description = """Integrated Performance Monitoring for High Performance
+Computing"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+# verbose=False avoids the configure step to fail (-craype-verbose error)
+source_urls = ['https://github.com/nerscadmin/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+# Forcing $IPM_LOGDIR to archive all reports in a shared dir:
+patches = ['%(name)s-%(version)s-Cray-19.06.patch']
+checksums = ['c01207ca942bef74c7d48df965fca99f']
+
+dependencies = [
+    ('libunwind', '1.4.0'),
+    ('mxml', '3.1'),
+    ('ploticus', '2.42-ipm', '', True),
+]
+
+preconfigopts = "./bootstrap.sh && sed -i -e 's/-qversion/-qversion --version/g' configure && "
+configopts = ' --with-papi=$PAT_BUILD_PAPI_LIBDIR/.. --with-libunwind=$EBROOTLIBUNWIND CPPFLAGS="-I$EBROOTMXML/include " LIBS="-L$EBROOTMXML/lib "'
+
+buildopts = " MPICC=cc MPIF77=ftn MPIFC=ftn FC=ftn "
+
+postinstallcmds = ['mv bin/ipm_parse %(installdir)s/bin/ipm_parse.pl ']
+
+sanity_check_paths = {
+    'files': ['bin/ipm_parse.pl', 'etc/ipm_key_mpi', 'lib/libipm.a'],
+    'dirs': [],
+}
+
+modextrapaths = {'IPM_KEYFILE': 'etc/ipm_key_mpi'}
+
+modextravars = {
+    '%(name)s': "-L%(installdir)s/lib -Wl,--whole-archive -lipmf -lipm -Wl,--no-whole-archive",
+    'IPM_HPM': 'PAPI_TOT_CYC',
+}
+
+moduleclass = 'perf'
