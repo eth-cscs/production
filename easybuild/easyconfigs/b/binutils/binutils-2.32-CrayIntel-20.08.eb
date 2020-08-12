@@ -1,0 +1,22 @@
+# contributed by Luca Marsella (CSCS)
+name = 'binutils'
+version = '2.32'
+
+homepage = 'http://directory.fsf.org/project/binutils/'
+description = "binutils: GNU binary utilities"
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('Bison', '3.3.2'),
+    ('flex', '2.6.4'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = " --enable-gold=yes "
+
+
+moduleclass = 'tools'

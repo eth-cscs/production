@@ -1,0 +1,30 @@
+# contributed by Jean Favre (CSCS)
+easyblock = 'Tarball'
+
+name = 'mdl'
+version = '317500.2554'
+
+homepage = 'https://developer.nvidia.com/mdl-sdk'
+description = "The NVIDIA MDL SDK is a set of tools to integrate MDL support into rendering applications"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+# NVIDIA MDL is behind a secure wall and one needs credentials to access it. I downloaded the package to
+# my desktop, re-tarred it, and placed it in /apps/common/UES/easybuild/sources/m/mdl
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(name)s-%(version)s.tar']
+
+postinstallcmds = [
+    "chmod u+w -R %(installdir)s/include",
+    "chmod u+w -R %(installdir)s/linux-x86-64",
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'linux-x86-64/lib'],
+}
+
+# set custom LD_LIBRARY_PATH
+modextravars = {'LD_LIBRARY_PATH': '%(installdir)s/linux-x86-64/lib:$::env(LD_LIBRARY_PATH)'}
+
+moduleclass = 'devel'

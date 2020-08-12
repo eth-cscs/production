@@ -1,0 +1,64 @@
+#
+easyblock = 'PythonPackage'
+
+name = 'Horovod'
+version = '0.19.5'
+
+_ptver = '1.6.0'
+versionsuffix = '-pt-' + _ptver
+
+req_py_majver = 3
+req_py_minver = 8
+
+homepage = 'https://github.com/uber/horovod'
+description = "Horovod is a distributed deep learning training framework for TensorFlow, Keras, PyTorch, and Apache MXNet."
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_LOWER_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('PyTorch', _ptver, '', True),
+]
+
+use_pip = True
+
+preinstallopts  = "module unload atp && "
+preinstallopts += "export HOROVOD_CUDA_HOME=$CONDA_PREFIX && "
+preinstallopts += "export HOROVOD_NCCL_HOME=$CONDA_PREFIX && "
+preinstallopts += "export HOROVOD_GPU_ALLREDUCE=NCCL && "
+preinstallopts += "export HOROVOD_NCCL_LINK=SHARED && "
+preinstallopts += "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
+preinstallopts += "export HOROVOD_WITH_PYTORCH=1 && "
+preinstallopts += "export HOROVOD_WITHOUT_TENSORFLOW=1 && "
+
+preinstallopts += "export CPATH=$CONDA_PREFIX/include:$CPATH && "
+preinstallopts += "export CXX=CC && "
+
+installopts = "--no-cache-dir"
+
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+}
+
+exts_list = [
+    ('cloudpickle', '1.5.0'),
+    ('psutil', '5.7.2'),
+    ('PyYAML', '5.3.1', {
+        'modulename': 'yaml',
+        }),
+    ('pycparser', '2.20'),
+    ('cffi', '1.14.1'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/horovodrun'],
+    'dirs' : ['lib/python%d.%d/site-packages' % (req_py_majver, req_py_minver)],
+}
+
+sanity_check_commands = ['python -c "import horovod.torch"']
+
+moduleclass = 'tools'

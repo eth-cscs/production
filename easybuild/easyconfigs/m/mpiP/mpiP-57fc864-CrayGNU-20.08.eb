@@ -1,0 +1,38 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'mpiP'
+version = '57fc864'
+
+homepage = 'https://github.com/LLNL/mpiP/releases'
+description = "A light-weight MPI profiler. http://llnl.github.io/mpiP"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+sources = [
+    {'filename': SOURCE_TAR_GZ, 'git_config': {'url': 'https://github.com/LLNL', 'commit': '%(version)s', 'repo_name': '%(name)s'}},
+]
+
+dependencies = [
+    ('libunwind', '1.4.0'),
+]
+
+configopts = " --with-libunwind=$EBROOTLIBUNWIND "
+
+prebuildopts = "cd %(name)s ;"
+buildopts = " CC=cc F77=ftn "
+
+preinstallopts = "cd %(name)s ;"
+
+
+sanity_check_paths = {
+    'files': ['lib/libmpiP.a'],
+    'dirs': [],
+}
+
+modextravars = {
+    'MPIPLD': "-L%(installdir)s/lib -Wl,--whole-archive -lmpiP -Wl,--no-whole-archive -lunwind -lbfd -liberty -ldl -lz",
+}
+
+moduleclass = 'perf'

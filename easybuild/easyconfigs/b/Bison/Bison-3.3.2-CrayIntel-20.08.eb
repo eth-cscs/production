@@ -1,0 +1,26 @@
+# Contributed by jg and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Bison'
+version = '3.3.2'
+
+homepage = 'http://www.gnu.org/software/bison'
+description = """Bison is a general-purpose parser generator that converts an annotated context-free grammar
+ into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables."""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+
+source_urls = [GNU_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('M4', '1.4.18'),
+]
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'bin/yacc', 'lib/liby.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lang'

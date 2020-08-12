@@ -82,3 +82,20 @@ void notifySlackFinish() {
              message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* (<${env.BUILD_URL}|Open>)")
 }
 
+/**
+* Create a Jira task for an EasyBuild recipe that failed to build.
+*
+* @param projkey Jira project key (only project members can create issues).
+* @param recipe EasyBuild recipe that failed to build.
+* @param machine Computing system where the recipe failed to build.
+*/
+void failedJiraTask(String projkey, String recipe, String machine) {
+
+   def title = "${recipe} failed on ${machine}"
+   def content = "EasyBuild recipe ${recipe} failed to build on ${machine} in Jenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def issue = [fields: [ project: [key: projkey ],
+                          summary: title,
+                          description: content,
+                          issuetype: [name: 'Task']]]
+   def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
+}

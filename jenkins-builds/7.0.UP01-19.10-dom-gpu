@@ -31,7 +31,8 @@
  h5py-2.8.0-CrayGNU-19.10-python2-serial.eb
  h5py-2.8.0-CrayGNU-19.10-python3-parallel.eb       --set-default-module
  h5py-2.8.0-CrayGNU-19.10-python3-serial.eb
- Horovod-0.19.1-CrayGNU-19.10-tf-2.2.0.eb
+ Horovod-0.19.1-CrayGNU-19.10-tf-2.2.0.eb           --set-default-module
+ Horovod-0.19.5-CrayGNU-19.10-pt-1.6.0.eb
  IDL-8.5.1.eb                                       --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-19.10.eb                      --set-default-module

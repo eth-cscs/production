@@ -1,0 +1,33 @@
+# created by Anton Kozhevnikov (CSCS)
+# modified by Simon Pintarelli (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QuantumESPRESSO-SIRIUS'
+version = '6.5-rc4'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/electronic-structure/q-e-sirius/'
+description = " SIRIUS-enabled version of Quantum ESPRESSO "
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
+
+sources = ['https://github.com/electronic-structure/q-e-sirius/archive/v%(version)s-sirius.tar.gz']
+
+dependencies = [
+    ('SIRIUS', '6.5.3', '-cuda'),
+]
+
+preconfigopts = "module unload cray-libsci && module load gcc/8.3.0 && module list &&  CC=cc FC=ftn CPP=cpp MPIF90=ftn "
+configopts = " --enable-parallel --with-scalapack "
+
+prebuildopts = 'module unload cray-libsci && module load gcc/8.3.0 && cat make.inc && sed -i -e "s/^DFLAGS\ *=\ *.*/DFLAGS = -D__MPI -D__SCALAPACK -D__DFTI/" make.inc && sed -i -e "s/^BLAS_LIBS\ *=\ *.*/BLAS_LIBS =/" make.inc && sed -i -e "s/^LAPACK_LIBS\ *=\ *.*/LAPACK_LIBS =/" make.inc && sed -i -e "s/LAPACK_LIBS_SWITCH = internal/LAPACK_LIBS_SWITCH = external/" make.inc &&sed -i -e "s/BLAS_LIBS_SWITCH = internal/BLAS_LIBS_SWITCH = external/" make.inc && sed -i -e "s/^LD_LIBS\ *=\ *.*/LD_LIBS = -lsirius -L\$MKLROOT\/lib\/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -qopenmp/" make.inc && cat make.inc && '
+buildopts = 'pw'
+
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'
