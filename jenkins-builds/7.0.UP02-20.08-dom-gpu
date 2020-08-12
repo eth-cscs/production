@@ -31,7 +31,7 @@
  netcdf-python-1.4.1-CrayGNU-20.08-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.08.eb                          --set-default-module
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
- PLUMED-2.5.1-CrayIntel-20.08.eb                    
+ PLUMED-2.5.1-CrayIntel-20.08.eb
  pycuda-2018.1.1-CrayGNU-20.08-python3-cuda-10.2.eb     --set-default-module
  PyExtensions-python3-CrayGNU-20.08.eb                  --set-default-module
  Python-bare-3.7.3.eb                                   --hidden
@@ -43,9 +43,9 @@
  VTK-9.0.0-CrayGNU-20.08-EGL-python3.eb                 --set-default-module
  xalt-2.8.10.eb                                         --set-default-module --installpath=$APPS/UES/xalt/xalt2
  Extrae-3.8.1-CrayGNU-20.08.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- IPM-2.0.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools     
+ IPM-2.0.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  MUST-v1.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- Scalasca-2.5-CrayGNU-20.08.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools                      
+ Scalasca-2.5-CrayGNU-20.08.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  Score-P-6.0-CrayGNU-20.08.eb                           --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  scorep_binding_python-3.0-CrayGNU-20.08-python3.eb     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  advisor_2020_update2.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
@@ -56,15 +56,15 @@
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  inspector_2020_update2.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  likwid-1d6636c.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- malt-1.2.0-CrayGb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolNU-20.08.eb
- mpiP-57fc864-Crab                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolyGNU-20.08.eb
- nvhpc-2020_205-cb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tooluda-10.2.eb
- nvidia-nsight-syb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolstems-2020.3.1.72.eb
- njmon-v64-SLES15b                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tool.eb
- nvtop-1.0.0-Crayb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolGNU-20.08-cuda.eb
- otf2_cli_profileb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tool-9be64de-CrayGNU-20.08.eb
- papi-wrap-57150cb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tool8-CrayGNU-20.08.eb
- pprof-1a94d86.ebb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tool
- pudb-2019.2-Crayb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolGNU-20.08-python3.eb
- termgraph-0.4.2-b                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/toolpython3.eb
- vtune_profiler_2b                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tool020_update2.eb
+ malt-1.2.0-CrayGNU-20.08.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ mpiP-57fc864-CrayGNU-20.08.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ nvhpc-2020_205-cuda-10.2.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ nvidia-nsight-systems-2020.3.1.72.eb                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ njmon-v64-SLES15.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ nvtop-1.0.0-CrayGNU-20.08-cuda.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ otf2_cli_profile-9be64de-CrayGNU-20.08.eb              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ papi-wrap-57150c8-CrayGNU-20.08.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ pprof-1a94d86.eb                                       --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ pudb-2019.2-CrayGNU-20.08-python3.eb                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ termgraph-0.4.2-python3.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ vtune_profiler_2020_update2.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
