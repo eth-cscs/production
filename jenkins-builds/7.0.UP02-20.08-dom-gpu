@@ -1,1 +1,2 @@
 CMake-3.14.5.eb                                     --set-default-module
+xalt-2.8.10.eb                                       --set-default-module --installpath=$APPS/UES/xalt/xalt2
