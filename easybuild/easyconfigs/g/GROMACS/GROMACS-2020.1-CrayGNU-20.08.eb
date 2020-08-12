@@ -1,0 +1,46 @@
+# contributed by Luca Marsella, Victor Holanda Rusu (CSCS)
+#
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2013 University of Luxembourg / LCSB, Cyprus Institute / CaSToRC, Ghent University
+# Authors::   Wiktor Jurkowski <wiktor.jurkowski@uni.lu>, Fotis Georgatos <fotis.georgatos@uni.lu>, \
+# George Tsouloupas <g.tsouloupas@cyi.ac.cy>, Kenneth Hoste
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
+#
+easyblock = 'CMakeMake'
+
+name = 'GROMACS'
+version = '2020.1'
+
+homepage = 'http://www.gromacs.org'
+description = """GROMACS is a versatile package to perform molecular dynamics,
+ i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
+
+source_urls = ['ftp://ftp.%(namelower)s.org/pub/%(namelower)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+# CMake dependency with dummy toolchain
+builddependencies = [
+    ('CMake', '3.14.1', '', True),
+]
+dependencies = [
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('cray-libsci', EXTERNAL_MODULE),
+]
+
+configopts = [
+    "-DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=OFF -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256 -DGMX_CYCLE_SUBCOUNTERS=ON  -DGMX_MPI=OFF ",
+    "-DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=OFF -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256 -DGMX_CYCLE_SUBCOUNTERS=ON  -DGMX_MPI=ON ",
+]
+
+skipsteps = ['test']
+onlytcmod = True
+
+moduleclass = 'bio'

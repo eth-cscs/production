@@ -1,0 +1,29 @@
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS)
+name = 'Julia'
+version = '1.5.0'
+
+homepage = 'https://julialang.org'
+description = "Julia is a high-level general-purpose dynamic programming language that was originally designed to address the needs of high-performance numerical analysis and computational science, without the typical need of separate compilation to be fast, also usable for client and server web use, low-level systems programming or as a specification language (wikipedia.org). Julia provides ease and expressiveness for high-level numerical computing, in the same way as languages such as R, MATLAB, and Python, but also supports general programming. To achieve this, Julia builds upon the lineage of mathematical programming languages, but also borrows much from popular dynamic languages, including Lisp, Perl, Python, Lua, and Ruby (julialang.org)."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': True}
+
+source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
+sources = ['%(namelower)s-%(version)s-linux-%(arch)s.tar.gz']
+
+arch_name = 'mc'
+exts_defaultclass = 'JuliaPackage'
+
+exts_list = [
+    ('MPI.jl', '0.15.1', {'mpiexec': 'srun', 'mpiexec_args': '-C mc', 'source_tmpl': 'v0.15.1.tar.gz', 'source_urls': ['https://github.com/JuliaParallel/MPI.jl/archive/']}),
+]
+
+modextravars = {
+    'JULIA_MPICC': 'cc',
+    'JULIA_MPIEXEC': 'srun',
+    'JULIA_MPIEXEC_ARGS': "-C mc",
+    'JULIA_MPI_BINARY': 'system',
+    'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
+}
+
+moduleclass = 'lang'
