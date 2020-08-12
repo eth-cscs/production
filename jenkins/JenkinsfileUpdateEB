@@ -161,10 +161,10 @@ stage('Update Stage') {
                             new_recipe=\$(echo \$recipe | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
                             echo -e "\nCurrent Update: \$new_recipe"
 
-                            # get relative path of dependencies from dry run
-                            deps=\$($build_command -D \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
+                            # relative deps path from full path dry run (--dry-run)
+                            deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
                             
-                            # check status of dry run
+                            # check status and print short dry run (-D)
                             if [ -n "\$deps" ]; then
                                 $build_command $tc_flags -D \$recipe | grep "\\["
                             else
@@ -308,11 +308,20 @@ stage('GitHub Stage') {
                     /* retrieve list of successful updates and submit pull request */
                     sh("""#!/bin/bash -l
                         # clone master over ssh
-                        git clone git@github.com:eth-cscs/production.git
-                        cd  production/easybuild
+                        repo="git@github.com:eth-cscs/production.git"
+                        git clone \$repo
+                        
+                        # go to easyconfigs folder to match relative path of deps
+                        cd production/easybuild/easyconfigs
 
-                        # create git branch or update if exists
-                        git checkout ${machineLabel}/${params.cdt_version} || git checkout -b ${machineLabel}/${params.cdt_version}
+                        # create git branch or update it if existing
+                        branch="${machineLabel}/${params.cdt_version}" 
+                        check=\$(git ls-remote --heads \$repo \$branch)
+                        if [ -n "\${check}" ]; then
+                            git checkout \$branch 
+                        else 
+                            git checkout -b \$branch
+                        fi
                         git --no-pager diff origin/master --stat
 
                         # copy updated toolchains and recipes to workspace
@@ -350,14 +359,15 @@ stage('GitHub Stage') {
                             fi
                         done
 
+                        # load hub tool to submit a pull request
                         module load daint-gpu
                         module load hub
-                        git add easyconfigs
+                        git add .
                         git status
                         git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
                         # check if the pull request is already open
-                        check_pr=\$(hub pr list --head ${machineLabel}/${params.cdt_version})
-                        if [ -n "\${check_pr}" ]; then
+                        check=\$(hub pr list --head \${branch})
+                        if [ -n "\${check}" ]; then
                             git push origin HEAD
                         else
                             hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
@@ -366,6 +376,7 @@ stage('GitHub Stage') {
                         # print copied and missing updates
                         echo -e "\nCopied Updates: \${#copied[@]} \n\${copied[@]}"
                         echo -e "\nMissing Updates: \${#missing[@]} \n\${missing[@]}"
+
                         # return the number of missing updates
                         exit \${#missing[@]}
                        """)
