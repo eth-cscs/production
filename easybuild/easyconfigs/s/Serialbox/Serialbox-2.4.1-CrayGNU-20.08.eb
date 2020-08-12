@@ -22,5 +22,4 @@ configopts = '-DSERIALBOX_ENABLE_FORTRAN=ON'
 
 parallel = 4
 
-
 moduleclass = 'devel'

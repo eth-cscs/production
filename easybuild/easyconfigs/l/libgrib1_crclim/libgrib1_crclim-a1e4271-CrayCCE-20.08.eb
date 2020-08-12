@@ -16,7 +16,7 @@ dependencies = [
     ('cray-netcdf', EXTERNAL_MODULE),
 ]
 
-prebuildopts = 'pwd; ls -l ;cd libgrib1_cosmo/source ; cat Makefile.daint.cray | perl -pe "s/-hnosecond_underscore//g" > Makefile &&'
+prebuildopts = 'cd libgrib1_cosmo/source ; cat Makefile.daint.cray | perl -pe "s/-hnosecond_underscore//g" > Makefile &&'
 
 preinstallopts = "cd libgrib1_cosmo/source && "
 installopts = " LIBDIR=%(installdir)s"
