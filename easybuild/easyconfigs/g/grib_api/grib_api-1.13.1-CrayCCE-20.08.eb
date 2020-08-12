@@ -11,7 +11,8 @@ description = """The ECMWF GRIB API is an application program interface accessib
 
 toolchain = {'name': 'CrayCCE', 'version': '20.08'}
 
-source_urls = ['https://confluence.ecmwf.int/download/attachments/3473437/']
+# ECMWF repository (https://confluence.ecmwf.int/download) now requires login 
+source_urls = ['/apps/common/UES/easybuild/sources/c/%(name)s/']
 sources = [SOURCE_TAR_GZ]
 
 dependencies = [
@@ -21,6 +22,5 @@ dependencies = [
 configopts = '--with-jasper=$EBROOTJASPER'
 
 parallel = 1
-
 
 moduleclass = 'data'
