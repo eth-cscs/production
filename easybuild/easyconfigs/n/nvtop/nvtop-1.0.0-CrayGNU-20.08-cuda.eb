@@ -1,0 +1,33 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'nvtop'
+version = '1.0.0'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/Syllo/nvtop'
+description = "htop-like GPU usage monitor"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://github.com/Syllo/%(name)s/archive/']
+sources = ['%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+
+osdependencies = ['ncurses-devel']
+
+configopts = "-DNVML_INCLUDE_DIRS=$EBROOTCUDA/include -DNVML_LIBRARIES=$EBROOTCUDA/lib64/stubs/libnvidia-ml.so "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

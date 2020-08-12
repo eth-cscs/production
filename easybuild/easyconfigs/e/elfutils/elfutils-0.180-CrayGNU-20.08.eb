@@ -1,0 +1,25 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'elfutils'
+version = '0.180'
+
+homepage = 'https://sourceware.org/elfutils/'
+description = """elfutils is a collection of utilities and libraries to read,
+create and modify ELF binary files, find and handle DWARF debug data, symbols,
+thread state and stacktraces for processes and core files on GNU/Linux."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://sourceware.org/%(name)s/ftp/%(version)s']
+sources = [SOURCE_TAR_BZ2]
+
+configopts = '--disable-debuginfod'
+
+
+sanity_check_paths = {
+    'files': ['include/%(name)s/libdw.h'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'devel'

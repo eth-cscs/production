@@ -1,0 +1,44 @@
+# modified by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'ipcmagic'
+version = '0.1'
+
+homepage = 'https://github.com/eth-cscs/jupyter-utils'
+description = "Utilities for working with Jupyter at CSCS"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+sources = ['/apps/common/easybuild/sources/i/%(name)s/%(name)s-%(version)s.tar.gz']
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('jupyterlab', '1.1.1', '-batchspawner'),
+]
+
+# using this to avoid running `python -c 'import ipcmagic'`
+# it works only with ipython
+options = {'modulename': 'os'}
+exts_defaultclass = 'PythonPackage'
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    ('pexpect', '4.8.0'),
+    ('ipyparallel', '6.3.0'),
+    ('docopt', '0.6.2'),
+]
+
+sanity_check_paths = {
+    'files': ['lib/python%(pyshortver)s/site-packages/%(name)s/__init__.py'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+sanity_check_commands = ["ipython -c 'import %(name)s'"]
+
+moduleclass = 'tools'

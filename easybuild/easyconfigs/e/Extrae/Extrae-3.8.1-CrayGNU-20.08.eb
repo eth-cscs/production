@@ -1,0 +1,46 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Extrae'
+version = '3.8.1'
+
+homepage = 'http://www.bsc.es/computer-sciences/performance-tools'
+description = """
+Extrae is the core instrumentation package developed by the Performance Tools
+group at BSC. Extrae is capable of instrumenting applications based on MPI,
+OpenMP, pthreads, CUDA1, OpenCL1, and StarSs1 using different instrumentation
+approaches. The information gathered by Extrae typically includes timestamped
+events of runtime calls, performance counters and source code references.
+Besides, Extrae provides its own API to allow the user to manually instrument
+his or her application."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/bsc-performance-tools/%(namelower)s/archive']
+sources = ['%(version)s.tar.gz']
+
+# The checksum value of the sources is reported in the log file of the module.
+dependencies = [
+    ('libunwind', '1.4.0'),
+    ('libxml2', '2.9.8', '', True),
+    ('cray-fftw', EXTERNAL_MODULE),
+    # Paraver and Dimemas will be loaded by basicanalysis, keeping as reminder:
+    # ('Paraver', '4.7.2', '', True),
+    # ('Dimemas', '5.3.6', '', True),
+    ('basicanalysis', '0', '', True),
+    ('clusteringsuite', '2', '', True),
+    ('folding', '1', '', True),
+    ('spectral', '3', '', True),
+]
+
+preconfigopts = "./bootstrap && "
+configopts = " --with-unwind=$EBROOTLIBUNWIND --with-mpi=$CRAY_MPICH_DIR --enable-openmp --with-fft=$FFTW_DIR --with-papi=$PAT_BUILD_PAPI_LIBDIR/.. --with-binary-type=64 --enable-parallel-merge --enable-sampling --with-clustering=$EBROOTCLUSTERINGSUITE --with-spectral=$EBROOTSPECTRAL --without-dyninst --without-cuda"
+
+
+sanity_check_paths = {
+    'files': ['include/extraef_user_events.h'],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

@@ -1,0 +1,87 @@
+easyblock = 'Tarball'
+
+name = 'Spark'
+version = '2.3.1'
+# Currently not needed due to the change to osdependencies
+# javaver = 'jdk1.8.0_51'
+
+versionsuffix = '-Hadoop-2.7'
+
+homepage = 'http://spark.apache.org'
+description = "Spark is Hadoop MapReduce done in memory"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = [
+    'http://apache.belnet.be/%(namelower)s/%(namelower)s-%(version)s/',
+    'http://www.eu.apache.org/dist/%(namelower)s/%(namelower)s-%(version)s/',
+    'http://www.us.apache.org/dist/%(namelower)s/%(namelower)s-%(version)s/',
+]
+sources = ['%(namelower)s-%(version)s-bin-hadoop2.7.tgz']
+patches = [('%(namelower)s-%(version)s-Hadoop-2.7.patch', 1)]
+checksums = ['e87499e5417a64341cbda25e087632dd9f6ce7ad249dfeba47d9d02a51305fc2']
+
+# On CLE7, java is no longer avail. as a stand-alone module
+# Therefore, `osdependencies` are used
+# dependencies = [
+# ('java/%s' % javaver, EXTERNAL_MODULE),
+# ]
+osdependencies = ['java']
+
+modtclfooter = """
+## Required internal variables
+set name     %(namelower)s
+set version  %(version)s
+set sparkbin  $root/cscs-custom
+
+## Required for SVN hook to generate SWDB entry
+set     fullname    %(name)s
+set     externalurl http://%(namelower)s.apache.org
+set     nerscurl    http://%(namelower)s.apache.org
+set     maincategory    applications
+set     subcategory debugging
+set     description "%(name)s data analytic framework"
+
+prepend-path PATH $sparkbin:$root
+if {! [info exists env(SLURM_JOBID) ] } {
+  puts stderr "SLURM_JOBID not set, please run this module inside of a batch job"
+  exit
+}
+
+set workerdir $env(PWD)/sparkjob.$env(SLURM_JOBID)
+set nodefile $env(SLURM_JOB_NODELIST)
+
+setenv SPARK_WORKER_DIR $workerdir
+setenv SPARK_SLAVES $workerdir/slaves
+setenv SPARK_LOG_DIR $workerdir/sparklogs
+setenv SPARK_LOCAL_DIRS "/tmp"
+setenv SPARK_PREFIX $root
+setenv SPARK_CONF_DIR $workerdir/conf
+
+if { [ module-info mode load ] } {
+    puts stderr "Creating Directory SPARK_WORKER_DIR $env(SPARK_WORKER_DIR)"
+    puts stderr "Creating $env(SPARK_WORKER_DIR)/slaves file"
+    puts stderr "Determining the master node name..."
+    set master [exec $sparkbin/getmaster.sh]
+    puts stderr "Master node is $master"
+
+    exec /bin/mkdir -p $env(SPARK_WORKER_DIR)
+    exec  $sparkbin/getslaves.sh $env(SPARK_WORKER_DIR)/slaves
+    setenv SPARKURL %(namelower)s://$master:7077
+    setenv SPARKMASTER $master
+}
+"""
+postinstallcmds = [
+    "chmod +x %(installdir)s/cscs-custom/getmaster.sh",
+    "chmod +x %(installdir)s/cscs-custom/getslaves.sh",
+    "chmod +x %(installdir)s/cscs-custom/start-all.sh",
+    "chmod +x %(installdir)s/cscs-custom/start-ssh.sh",
+    "chmod +x %(installdir)s/cscs-custom/stop-all.sh",
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-shell', 'bin/pyspark'],
+    'dirs': ['python'],
+}
+
+moduleclass = 'devel'

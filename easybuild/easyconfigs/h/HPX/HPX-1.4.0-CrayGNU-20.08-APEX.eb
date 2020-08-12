@@ -1,0 +1,37 @@
+# contributed by Mikael Simberg, John Biddiscombe and Victor Holanda Rusu (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'HPX'
+version = '1.4.0'
+versionsuffix = '-APEX'
+
+homepage = 'http://stellar-group.org/libraries/hpx'
+description = """HPX (High Performance ParalleX) is a general purpose C++
+runtime system for parallel and distributed applications of any scale. It
+strives to provide a unified programming model which transparently utilizes
+the available resources to achieve unprecedented levels of scalability.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://github.com/STEllAR-GROUP/%(namelower)s/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['241a1c47fafba751848fac12446e7bf4ad3d342d5eb2fa1ef94dd904acc329ed']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('Boost', '1.70.0', '-python3'),
+    ('hwloc', '2.0.3', '', True),
+    ('jemalloc', '5.1.0'),
+    ('OTF2', '2.2', '', True),
+    # papi provided by perftools-base
+]
+
+configopts = "-DHWLOC_ROOT=$EBROOTHWLOC -DHPX_WITH_MALLOC=JEMALLOC -DJEMALLOC_ROOT=$EBROOTJEMALLOC -DHPX_WITH_MAX_CPU_COUNT=128 -DHPX_WITH_PARCELPORT_MPI=ON -DHPX_WITH_PARCELPORT_MPI_MULTITHREADED=ON -DHPX_WITH_PAPI=ON -DHPX_WITH_APEX=ON -DAPEX_WITH_PAPI=ON -DAPEX_WITH_OTF2=ON -DOTF2_ROOT=$EBROOTOTF2 -DPAPI_ROOT=$(dirname $PAT_BUILD_PAPI_LIBDIR)"
+
+build_type = 'RelWithDebInfo'
+
+moduleclass = 'tools'
