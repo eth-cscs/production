@@ -316,17 +316,15 @@ stage('GitHub Stage') {
 
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.cdt_version}" 
-                        check=\$(git ls-remote --heads \$repo \$branch)
-                        if [ -n "\${check}" ]; then
+                        if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
                             git checkout \$branch 
                         else 
                             git checkout -b \$branch
                         fi
-                        git --no-pager diff origin/master --stat
 
-                        # copy updated toolchains and recipes to workspace
+                        # create updated toolchains in workspace
                         for tc in $toolchains; do
-                            find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+                            find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > ./c/\$tc/\${tc}-${params.cdt_version}.eb
                         done
 
                         failed_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/failed.txt"
@@ -363,14 +361,18 @@ stage('GitHub Stage') {
                         module load daint-gpu
                         module load hub
                         git add .
-                        git status
-                        git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
-                        # check if the pull request is already open
-                        check=\$(hub pr list --head \${branch})
-                        if [ -n "\${check}" ]; then
-                            git push origin HEAD
-                        else
-                            hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                        
+                        # check if there is anything to commit
+                        if [ -n "\$(git status --porcelain)" ]; then
+                            git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
+                            # check if a pull request is already open
+                            if [ -n "\$(hub pr list --head \${branch})" ]; then
+                                git push origin HEAD
+                            else
+                                hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                            fi
+                        else 
+                            echo -e "\nNothing to commit"
                         fi
 
                         # print copied and missing updates
