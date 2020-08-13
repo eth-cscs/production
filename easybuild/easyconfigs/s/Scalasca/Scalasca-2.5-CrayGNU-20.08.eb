@@ -36,6 +36,9 @@ sanity_check_paths = {
 }
 
 # Ensure that local metric documentation is found by Cube GUI
-modextrapaths = {'PATH': 'bin/backend'}
+modextrapaths = {
+    'PATH': 'bin/backend',
+    'CUBE_DOCPATH': 'share/doc/scalasca/patterns'
+}
 
 moduleclass = 'perf'
