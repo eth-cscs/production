@@ -1,0 +1,51 @@
+# contributed by Luca Marsella (CSCS), Theofilos Manitaras (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'h5py'
+version = '2.10.0'
+
+# FIXME: This is the latest commit as of 13/08/2020 which is needed
+#        in order to work with hdf5 version 1.12.0. The next stable
+#        release should replace this one.
+local_commit = '8cc8341'
+
+versionsuffix = '-python%(pymajver)s-serial'
+
+homepage = 'http://www.h5py.org/'
+description = """
+    HDF5 for Python (h5py) is a general-purpose Python interface to the
+    Hierarchical Data Format library, version 5. HDF5 is a versatile, mature
+    scientific software library designed for the fast, flexible storage of
+    enormous amounts of data.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+sources = [{
+    'filename': 'h5py-%s.tar.gz' % local_commit,
+    'git_config': {
+        'url': 'https://github.com/h5py',
+        'repo_name': 'h5py',
+        'commit': local_commit,
+        'recursive': True,
+        'keep_git_dir': True,
+    },
+}]
+
+dependencies = [
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+]
+
+prebuildopts = 'python setup.py configure && '
+
+# sanity checks (import h5py) fails on login nodes (MPI not available)
+options = {'modulename': 'os'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-%(arch)s.egg'],
+}
+
+moduleclass = 'data'
