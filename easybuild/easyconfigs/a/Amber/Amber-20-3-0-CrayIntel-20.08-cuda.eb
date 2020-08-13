@@ -10,18 +10,13 @@ versionsuffix = '-cuda'
 homepage = 'http://ambermd.org/'
 description = """Amber (Assisted Model Building with Energy Refinement)
 is software for performing molecular dynamics and structure prediction"""
-<<<<<<< HEAD
-whatis = [ "Amber 20 && AmberTools 20",
-           "AmberTools patch level 3",
-           "Amber without any patches"
-]
 
 toolchain = {'name': 'CrayIntel', 'version': '20.08'}
 toolchainopts = {'verbose': False}
 
 sources = [
-    '/apps/common/UES/easybuild/sources/a/Amber/Amber20.tar.bz2',
-    '/apps/common/UES/easybuild/sources/a/Amber/AmberTools20.tar.bz2'
+    '/apps/common/UES/easybuild/sources/a/%(name)s/Amber20.tar.bz2',
+    '/apps/common/UES/easybuild/sources/a/%(name)s/AmberTools20.tar.bz2',
 ]
 
 patches = [
@@ -40,17 +35,9 @@ dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
-builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
-    ('cray-hdf5', EXTERNAL_MODULE),
-    ('cray-netcdf', EXTERNAL_MODULE),
-]
-
-buildininstalldir = True
-
 # single make process since parallel builds might fail
 # when uncommenting the next line make sure to change all make -j to make -j1
-#maxparallel = 1
+# maxparallel = 1
 
 prebuildopts = 'module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && '
 prebuildopts += 'cd .. && mv amber20_src/* . && '
@@ -90,18 +77,16 @@ prebuildopts += 'make -j && make install && '
 
 buildopts = 'install'
 
+whatis = [
+    "%(name)s 20 && AmberTools 20",
+    "AmberTools patch level 3",
+    "%(name)s without any patches",
+]
 files_to_copy = []
-
-sanity_check_paths = {
-    'files' : [ 'bin/pmemd.cuda.MPI', 'bin/pmemd.MPI', 'bin/pmemd' ],
-    'dirs'  : [],
-}
 
 modextravars = {
     'AMBERHOME' : '%(builddir)s',
 }
-
-files_to_copy = []
 
 buildininstalldir = True
 
