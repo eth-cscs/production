@@ -1,4 +1,5 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), Theofilos Manitaras (CSCS)
+
 easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
@@ -19,7 +20,7 @@ sanity_pip_check = True
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
     'req_py_minver': '%(pyminver)s',
-    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'source_urls': [PYPI_SOURCE],
 }
 
 exts_list = [
@@ -34,6 +35,43 @@ exts_list = [
     ('python-dateutil', '2.8.1', {'modulename': 'dateutil'}),
     ('matplotlib', '2.2.2'),
     ('pandas', '0.23.3'),
+}
+
+exts_list = [
+    ('zipp', '0.5.0', {
+        'checksums': ['d7ac25f895fb65bff937b381353c14eb1fa23d35f40abd72a5342cd57eb57fd1'],
+    }),
+    ('Cython', '0.29.21', {
+        'checksums': ['e57acb89bd55943c8d8bf813763d20b9099cc7165c0f16b707631a7654be9cad'],
+    }),
+    ('six', '1.11.0', {
+        'checksums': ['70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9'],
+    }),
+    ('pyparsing', '2.4.7', {
+        'checksums': ['c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1'],
+    }),
+    ('kiwisolver', '1.2.0', {
+        'checksums': ['247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f'],
+    }),
+    ('pytz', '2020.1', {
+        'checksums': ['c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048'],
+    }),
+    ('cycler', '0.10.0', {
+        'checksums': ['cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8'],
+    }),
+    ('wheel', '0.34.2', {
+        'checksums': ['8788e9155fe14f54164c1b9eb0a319d98ef02c160725587ad60f14ddc57b6f96'],
+    }),
+    ('python-dateutil', '2.8.1', {
+        'modulename': 'dateutil',
+        'checksums': ['73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c'],
+    }),
+    ('matplotlib', '3.2.2', {
+        'checksums': ['3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d'],
+    }),
+    ('pandas', '1.1.0', {
+        'checksums': ['b39508562ad0bb3f384b0db24da7d68a2608b9ddc85b1d931ccaaa92d5e45273'],
+    }),
 ]
 
 sanity_check_paths = {
