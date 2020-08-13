@@ -28,11 +28,12 @@ sanity_check_paths = {
 allow_prepend_abs_path = 'True'
 modextrapaths = {
     'PATH': '%(name)s/bin64',
+    'INTEL_PYTHONPATH': '%(name)s/pythonapi',
     'PYTHONPATH': '%(name)s/pythonapi',
     'INTEL_LICENSE_FILE': '/opt/intel/licenses',
 }
 modextravars = {
-    'ADVISOR_2019_DIR': '%(installdir)s/%(name)s',
+    'ADVISOR_2020_DIR': '%(installdir)s/%(name)s',
 }
 docpaths = {
     'ADVISOR_DOC': '%(installdir)s/%(name)s/documentation/en',
