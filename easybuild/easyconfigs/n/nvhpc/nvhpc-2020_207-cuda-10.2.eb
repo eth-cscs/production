@@ -19,7 +19,7 @@ checksums = ['71ef81910ae00d2749a23bc1ca6e4a66']
 postinstallcmds = [
     'pwd && ls -la && '
     'export NVHPC_SILENT=true && '
-    'export NVHPC_DEFAULT_CUDA=10.2 && '
+    'export NVHPC_DEFAULT_CUDA=' + local_cudaversion + ' && '
     'export NVHPC_INSTALL_DIR=%(installdir)s && '
     './install && '
     'rm -fr %(installdir)s/install_components ']
