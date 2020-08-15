@@ -1,10 +1,10 @@
 diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 --- cosmo_pompa.orig/cosmo/Options	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options	2020-08-15 20:30:11.227045000 +0200
++++ cosmo_pompa/cosmo/Options	2020-08-15 20:45:32.092958000 +0200
 @@ -1,17 +1,12 @@
  # compiler
 -F90      = ftn -D__CRAY_FORTRAN__
-+F90      = ftn -add-rpath --cray-bypass-pkgconfig -D__CRAY_FORTRAN__
++F90      = ftn -add-rpath --craype-prepend-opt="-I/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/include -L/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/lib -lmpich -lmpichf90" -D__CRAY_FORTRAN__
  COMPILER = cray
  
  # linker
@@ -116,8 +116,8 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray
 -
 diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
 --- cosmo_pompa.orig/cosmo/Options.lib.gpu	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options.lib.gpu	2020-08-15 20:32:25.532040000 +0200
-@@ -1,11 +1,8 @@
++++ cosmo_pompa/cosmo/Options.lib.gpu	2020-08-15 20:46:49.905963000 +0200
+@@ -1,10 +1,7 @@
  # Options.lib.gpu
  
  # global libraries and includes
@@ -125,20 +125,18 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
 -#MED 26/11/2019>>
 -LIB     += -L/opt/nvidia/cudatoolkit10/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5/lib64 -lcudart -lcublas
 -#MED<<
--INC      = -I.
-+LIB      = -L/opt/cray/dmapp/default/lib64 -L/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/lib -L/opt/cray/rca/2.2.20-7.0.2.1_2.27__g8e3fb5b.ari/lib64 -L$(CUDATOOLKIT_HOME)/lib64 -L$(CUDATOOLKIT_HOME)/extras/CUPTI/lib64 -L$(CUDATOOLKIT_HOME)/nvvm/lib64 -L/opt/cray/nvidia/default/lib64 -L/opt/cray/pe/atp/3.7.4/lib -Wl,--as-needed,-lcupti,-lcudart,-lcublas,--no-as-needed -lcuda  -lAtpSigHandler -Wl,-rpath,/opt/cray/pe/atp/3.7.4/lib -Wl,--undefined=__libAtpSigHandler_ctor -lrca -Wl,--as-needed,-lsci_cray_mpi,--no-as-needed -Wl,--as-needed,-lsci_cray,--no-as-needed $(LDFLAGS)
-+INC      = -I. -I/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/include -I/opt/cray/pe/atp/3.7.4/include
++LIB      = $(LDFLAGS) -Wl,--as-needed,-lcublas,--no-as-needed
+ INC      = -I.
  INC     += -I$(ROOT)/$(SRCDIR)
  
- # optimized flags, libraries and includes
 @@ -17,39 +14,37 @@
  DBGI     =
  
  # MPI library
 -MPIL     =
 -MPII     = -D__MPICH2
-+MPIL     = -L/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/lib -Wl,--as-needed,-lmpich,--no-as-needed -Wl,--as-needed,-lmpichf90,--no-as-needed
-+MPII     = -I/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/include
++MPIL     = 
++MPII     = 
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
