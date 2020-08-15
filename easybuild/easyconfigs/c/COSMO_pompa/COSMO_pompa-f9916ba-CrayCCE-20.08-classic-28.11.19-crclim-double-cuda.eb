@@ -13,7 +13,7 @@ to prepare the COSMO model code for these emerging massively parallel systems.
 see: http://www2.cosmo-model.org/content/tasks/priorityProjects/pompa/default.htm
 """
 
-toolchain = {'name': 'CrayCCE', 'version': '20.08'}
+toolchain = {'name': 'CrayCCE', 'version': '20.08-classic'}
 toolchainopts = {'verbose': False}
 
 # c2sm repository is private and there is no official release
@@ -22,16 +22,17 @@ patches = ['patch_COSMO_%(version)s_daint_cray_gpu_CrayCCE-%(toolchain_version)s
 
 builddependencies = [
     ('CMake', '3.12.0', '', True),
-    ('libgrib1_crclim', 'a1e4271'),
-    ('Dycore', '551f6b4', '-crclim-double-cuda', ('CrayGNU','20.08'))
+    ('Dycore', '551f6b4', '-crclim-double-cuda', ('CrayGNU','20.08')),
+    ('libgrib1_crclim', 'a1e4271')
 ]
 dependencies = [
-    ('cray-netcdf', EXTERNAL_MODULE),
-    ('grib_api', '1.13.1'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('grib_api', '1.13.1')
 ]
 
-prebuildopts = """cd %(builddir)s/%(namelower)s/cosmo && module switch PrgEnv-gnu PrgEnv-cray && export EBROOTNETCDF=$NETCDF_DIR && export EBROOTNETCDFMINFORTRAN=$NETCDF_DIR && export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/netcdf\/4.7.4.0\/GNU\/8.2/netcdf\/4.7.4.0\/CRAYCLANG\/9.0/g') && export LDFLAGS=$(echo $LDFLAGS | sed 's/netcdf\/4.7.4.0\/GNU\/8.2/netcdf\/4.7.4.0\/CRAYCLANG\/9.0/g') && export CPPFLAGS=$(echo $CPPFLAGS | sed 's/netcdf\/4.7.4.0\/GNU\/8.2/netcdf\/4.7.4.0\/CRAYCLANG\/9.0/g') && export EBVARLDFLAGS=$(echo $EBVARLDFLAGS | sed 's/netcdf\/4.7.4.0\/GNU\/8.2/netcdf\/4.7.4.0\/CRAYCLANG\/9.0/g') && export EBVARCPPFLAGS=$(echo $EBVARCPPFLAGS | sed 's/netcdf\/4.7.4.0\/GNU\/8.2/netcdf\/4.7.4.0\/CRAYCLANG\/9.0/g') && """
+prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
+prebuildopts += " module switch PrgEnv-gnu PrgEnv-cray && "
 prebuildopts += " module unload cray-mpich && "
 buildopts = "ACCGPU=1 CPP_DYCORE=1 paropt "
 
@@ -40,6 +41,7 @@ parallel = 6
 modtclfooter = """
 prepend-path PATH %(installdir)s
 """
+
 postinstallcmds = ['cd %(installdir)s; ln -s cosmo cosmo_gpu_crclim']
 files_to_copy = [(['cosmo/cosmo'], '.')]
 
