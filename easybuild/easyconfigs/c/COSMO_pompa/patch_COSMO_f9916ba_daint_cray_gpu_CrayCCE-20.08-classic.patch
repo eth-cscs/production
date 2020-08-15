@@ -1,15 +1,14 @@
 diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 --- cosmo_pompa.orig/cosmo/Options	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options	2020-08-15 16:55:47.786166191 +0200
++++ cosmo_pompa/cosmo/Options	2020-08-15 20:30:11.227045000 +0200
 @@ -1,17 +1,12 @@
  # compiler
 -F90      = ftn -D__CRAY_FORTRAN__
-+F90      = ftn --cray-bypass-pkgconfig -D__CRAY_FORTRAN__ -homp -h system_alloc -add-rpath
++F90      = ftn -add-rpath --cray-bypass-pkgconfig -D__CRAY_FORTRAN__
  COMPILER = cray
  
  # linker
--LD       = $(F90)
-+LD       = ftn --cray-bypass-pkgconfig
+ LD       = $(F90)
  
 --include $(ROOT)/Options.$(COMPILER).cpu
 +-include $(ROOT)/Options.$(COMPILER).gpu
@@ -25,20 +24,29 @@ diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
 -CC = CC
 \ No newline at end of file
 +# ensure usage of cray c++ when compiling C/C++ 
-+CC = CC --cray-bypass-pkgconfig
++CC = CC 
 diff -Nru cosmo_pompa.orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray.gpu
 --- cosmo_pompa.orig/cosmo/Options.cray.gpu	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options.cray.gpu	2020-08-15 13:53:47.345711150 +0200
-@@ -8,15 +8,12 @@
++++ cosmo_pompa/cosmo/Options.cray.gpu	2020-08-15 20:30:20.851137000 +0200
+@@ -2,27 +2,24 @@
+ 
+ # global compilation flags
+ FFLAGS   = -ffree # free-form source format
+-FFLAGS   = -N255 # free-form source format
++FFLAGS  += -N255 # free-form source format
+ FFLAGS  += -ec # interface checking
+ FFLAGS  += -eC # standard call site checking
  FFLAGS  += -eI # treat all variables as if an implicit none is there
  FFLAGS  += -eF # control preprocessor expansion of macros
- #FFLAGS  += -hkeepfiles # keep .s files
+-#FFLAGS  += -hkeepfiles # keep .s files
 -FFLAGS  += -hnosecond_underscore # symbol names only have one underscore
 +FFLAGS  +=  # symbol names only have one underscore
  FFLAGS  += -hflex_mp=conservative # reasonably aggressive floating point optimizations
  FFLAGS  += -Ofp1 # require reasonably strong IEEE standard conformance
  FFLAGS  += -hadd_paren # automatically adds parenthesis to select associative operations
  FFLAGS  += -hacc # compile for GPU
++FFLAGS  += -homp # OpenMP support 
++FFLAGS  += -h system_alloc # malloc implementation
  FFLAGS  += -ra # generates listing
 -#MED 26/11/2019>>
 -FFLAGS  += -h system_alloc -add-rpath
@@ -46,18 +54,69 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray
  
  # verbose compilation flags
  VFLAGS   = -v # show compilation information
-@@ -69,7 +66,7 @@
- # RFLAGS += -O0 
+ VFLAGS  += -en # generate message for all nonstandard Fortran usage
+ VFLGAS  += -eo # display all optimization options used
+-#VFLAGS  += -eS # generate assembly language output
+ VFLAGS  += -hmsgs # display optimization messages
+ VFLAGS  += -hnegmsgs # display negative optimization messages
+ VFLAGS  += -m1 # high message level (error, warning, caution and note)
+@@ -36,13 +33,9 @@
+ PFLAGS  += -DCRAY_FIX_PARALLEL_OPTIONAL_LOGICAL
+ PFLAGS  += -DIEEE_INTR #required when using -Ofp1 for is_nan
+ 
+-#PFLAGS  += -DASSIM_WKARR_CLEANUP
+-#PFLAGS  += -DASSIM_MDARR_CLEANUP
+-
+ # ===============================================================
+ # CRCLIM FLAGS
+ # ===============================================================
+-
+ # reproducible flags for cray c++ compiler
+ CFLAGS  = -eZ 
+ CFLAGS += -ec 
+@@ -66,13 +59,11 @@
+ RFLAGS  = -ffree 
+ RFLAGS += -N1023 
+ RFLAGS += -eF 
+-# RFLAGS += -O0 
  RFLAGS += -O1
  RFLAGS += -eI 
 -RFLAGS += -hnosecond_underscore 
 +RFLAGS +=  
  RFLAGS += -hadd_paren 
  RFLAGS += -hfp0 
- # RFLAGS += -hflex_mp=intolerant 
+-# RFLAGS += -hflex_mp=intolerant 
+ RFLAGS += -hflex_mp=strict 
+ RFLAGS += -ra 
+ RFLAGS += -hnoaggress 
+@@ -94,24 +85,11 @@
+ # debugging flags
+ FDBG0    =
+ FDBG0   += -g # debugging support (== -G0)
+-#No other debugging option on GPU
+-#FDBG0   += -eD # turn on all debugging information (-O0 -g -m2 -R bcdspi -rl)
+-#FDBG0   += -Ra # compare number+types of arguments for calls
+-#FDBG0   += -Rb # array bound checking
+-#FDBG0   += -Rc # check conformance of array operands
+-#FDBG0   += -Rd # directives checking
+-#FDBG0   += -RC # subroutine argument checking
+-#FDBG0   += -RE # subroutine argument checking
+-#FDBG0   += -Rp # check NULL pointer references
+-#FDBG0   += -Rs # check string bounds
+-
+ FDBG1    = $(FDBG0)
+ FDBG1   += -G1 # debugging support
+-#FDBG1   += -O1 # -O0 disables OpenACC
+ FDBG1   += -O cache1
+ FDBG1   += -O thread1
+ FDBG2    = $(FDBG1)
+ 
+ # global linking flags
+ LFLAGS   = -frecord-marker=4 # length of record marker in bytes (for unformatted I/O)
+-
 diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
 --- cosmo_pompa.orig/cosmo/Options.lib.gpu	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options.lib.gpu	2020-08-15 17:16:44.784238000 +0200
++++ cosmo_pompa/cosmo/Options.lib.gpu	2020-08-15 20:32:25.532040000 +0200
 @@ -1,11 +1,8 @@
  # Options.lib.gpu
  
@@ -67,8 +126,8 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
 -LIB     += -L/opt/nvidia/cudatoolkit10/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5/lib64 -lcudart -lcublas
 -#MED<<
 -INC      = -I.
-+LIB      = -L/opt/cray/dmapp/default/lib64 -L/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/lib -L/opt/cray/rca/2.2.20-7.0.2.1_2.27__g8e3fb5b.ari/lib64 -L$(CUDATOOLKIT_HOME)/lib64 -L$(CUDATOOLKIT_HOME)/extras/CUPTI/lib64 -L$(CUDATOOLKIT_HOME)/nvvm/lib64 -L/opt/cray/nvidia/default/lib64 -L/opt/cray/pe/atp/3.7.4/lib -Wl,--as-needed,-lcupti,-lcudart,-lcublas,--no-as-needed -lcuda  -lAtpSigHandler -Wl,-rpath,/opt/cray/pe/atp/3.7.4/lib -Wl,--undefined=__libAtpSigHandler_ctor -lrca -Wl,--as-needed,-lsci_cray_mpi,--no-as-needed -Wl,--as-needed,-lsci_cray,--no-as-needed 
-+INC      = -I. -I/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/include -I/opt/cray/pe/atp/3.7.4/include 
++LIB      = -L/opt/cray/dmapp/default/lib64 -L/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/lib -L/opt/cray/rca/2.2.20-7.0.2.1_2.27__g8e3fb5b.ari/lib64 -L$(CUDATOOLKIT_HOME)/lib64 -L$(CUDATOOLKIT_HOME)/extras/CUPTI/lib64 -L$(CUDATOOLKIT_HOME)/nvvm/lib64 -L/opt/cray/nvidia/default/lib64 -L/opt/cray/pe/atp/3.7.4/lib -Wl,--as-needed,-lcupti,-lcudart,-lcublas,--no-as-needed -lcuda  -lAtpSigHandler -Wl,-rpath,/opt/cray/pe/atp/3.7.4/lib -Wl,--undefined=__libAtpSigHandler_ctor -lrca -Wl,--as-needed,-lsci_cray_mpi,--no-as-needed -Wl,--as-needed,-lsci_cray,--no-as-needed $(LDFLAGS)
++INC      = -I. -I/opt/cray/pe/libsci/20.06.1/CRAYCLANG/9.0/x86_64/include -I/opt/cray/pe/atp/3.7.4/include
  INC     += -I$(ROOT)/$(SRCDIR)
  
  # optimized flags, libraries and includes
@@ -78,8 +137,8 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
  # MPI library
 -MPIL     =
 -MPII     = -D__MPICH2
-+MPIL     = -L/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/lib -Wl,--as-needed,-lmpich,--no-as-needed -Wl,--as-needed,-lmpichf90,--no-as-needed 
-+MPII     = -D__MPICH2 -I/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/include
++MPIL     = -L/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/lib -Wl,--as-needed,-lmpich,--no-as-needed -Wl,--as-needed,-lmpichf90,--no-as-needed
++MPII     = -I/opt/cray/pe/mpt/7.7.15/gni/mpich-cray/9.0/include
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
