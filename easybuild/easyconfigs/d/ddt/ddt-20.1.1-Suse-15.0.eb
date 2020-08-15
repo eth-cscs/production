@@ -19,9 +19,15 @@ Licensing : http://velan:4241/status.html"""
 toolchain = SYSTEM
 source_urls = ['http://content.allinea.com/downloads/']
 sources = ['arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix)]
+local_licence = ('type=2\n'
+    'serial_number=16250\n'
+    'hostname=velan.cscs.ch\n'
+    'serverport=4241\n'
+    'features=ddt,cuda,remote-mic\n'
+    'hash2=457a9247b93e00c52941a8843471bac8e21cda8f')
 postinstallcmds = [
     'bash ./textinstall.sh --accept-licence %(installdir)s && '
-    'echo -e "type=2\nserial_number=16250\nhostname=velan\nserverport=4241" > '
+    'echo -e "' + local_licence + '" > '
     '%(installdir)s/licences/License && '
     'cp %(installdir)s/licences/License %(installdir)s/licences/Licence']
 sanity_check_paths = {
