@@ -17,7 +17,7 @@ source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_
 sources = ["ParaView-v%(version)s.tar.gz"]
 
 dependencies = [
-#    ('h5py', '2.8.0', '-python3-serial'),
+    ('h5py', '2.10.0', '-python%(pymajver)s-serial'),
     ('ospray', '1.8.5'),
     ('oidn', '1.2.2'),
     ('VisRTX', '0.1.6', '-cuda'),
@@ -34,8 +34,8 @@ configopts =  '-DPARAVIEW_USE_MPI:BOOL=ON '
 configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
 configopts += '-DBUILD_TESTING:BOOL=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL '
 configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" '
-configopts += '-DPARAVIEW_USE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python3 '
-configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
+configopts += '-DPARAVIEW_USE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python%(pymajver)s '
+configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON -DPARAVIEW_BUILD_WITH_KITS:BOOL=ON '
 # use TBB for on-the-node parallelism
 configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
 configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbbmalloc.so '
