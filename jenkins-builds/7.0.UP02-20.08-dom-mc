@@ -36,6 +36,7 @@
  netcdf-python-1.4.1-CrayGNU-20.08-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.08.eb                          --set-default-module
  oq-engine-3.9.0-CrayGNU-20.08.eb                       --hidden
+ ParaView-5.8.1-CrayGNU-20.08-OSMesa-python3.eb         --set-default-module
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
  PLUMED-2.5.1-CrayIntel-20.08.eb
  PyExtensions-python3-CrayGNU-20.08.eb
