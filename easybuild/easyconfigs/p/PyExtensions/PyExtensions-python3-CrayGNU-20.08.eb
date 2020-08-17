@@ -32,10 +32,6 @@ exts_list = [
         'source_tmpl': 'setuptools-%(version)s.zip',
         'checksums': ['a02a9dc226e11a1756f3b2409aa23ada12dc7f0b930b61ebd765a34fd89a1d79'],
     }),
-    ('cached-property', '1.5.1', {
-        'modulename': 'cached_property',
-        'checksums': ['9217a59f14a5682da7c4b8829deadbfc194ac22e9908ccf7c8820234e80a1504'],
-    }),
     ('wheel', '0.34.2', {
         'checksums': ['8788e9155fe14f54164c1b9eb0a319d98ef02c160725587ad60f14ddc57b6f96'],
     }),
