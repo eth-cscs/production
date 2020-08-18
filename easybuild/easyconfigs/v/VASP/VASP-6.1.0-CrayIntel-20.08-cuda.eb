@@ -20,7 +20,7 @@ builddependencies = [
     ('Wannier90', '3.1.0')
 ]
 
-prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s(versionsuffix)s.makefile.include makefile.include && '
+prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
 
 # don't use parallel make, results in compilation failure
 parallel = 1
