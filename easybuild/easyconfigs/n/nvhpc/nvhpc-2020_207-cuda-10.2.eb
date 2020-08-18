@@ -13,8 +13,9 @@ developer productivity and the performance and portability of HPC
 applications.
 """
 toolchain = SYSTEM
-source_urls = ['https://developer.download.nvidia.com/hpc-sdk']
-sources = ['%(name)s_%(version)s_Linux_x86_64_cuda_multi.tar.gz']
+# source_urls = ['https://developer.download.nvidia.com/hpc-sdk']
+sources = ['/apps/common/UES/easybuild/sources/n/%(name)s/'
+           '%(name)s_%(version)s_Linux_x86_64_cuda_multi.tar.gz']
 checksums = ['71ef81910ae00d2749a23bc1ca6e4a66']
 postinstallcmds = [
     'pwd && ls -la && '
