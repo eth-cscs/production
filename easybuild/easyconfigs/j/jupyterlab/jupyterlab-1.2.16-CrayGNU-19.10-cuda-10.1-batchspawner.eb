@@ -1,4 +1,4 @@
-# @author: robinson (omlins for IJulia)
+# @author: robinson (hvictor and omlins for IJulia)
 
 easyblock = 'PythonBundle'
 
