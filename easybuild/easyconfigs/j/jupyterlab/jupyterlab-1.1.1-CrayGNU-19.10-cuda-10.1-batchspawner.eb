@@ -23,7 +23,7 @@ dependencies = [
     ('cray-python/3.6.5.7', EXTERNAL_MODULE),
     ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-#    ('JuliaExtensions', _jlver, '-cuda-%(cudashortver)s'),
+    ('JuliaExtensions', _jlver, '-cuda-%(cudashortver)s'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
