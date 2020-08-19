@@ -13,7 +13,7 @@ description = """
     various system attributes such as cache and memory information as well as
     the locality of I/O devices such as network interfaces, InfiniBand HCAs or
     GPUs. It primarily aims at helping applications with gathering information
-    about modern computing hardware so as to exploit it accordingly and 
+    about modern computing hardware so as to exploit it accordingly and
     efficiently.
 """
 
@@ -27,5 +27,7 @@ sources = [SOURCE_TAR_GZ]
 dependencies = [('numactl', '2.0.12')]
 # configopts = "--enable-libnuma=$EBROOTNUMACTL --with-x"
 #configopts = "--with-x"
+
+modextravars = {'HWLOC_ROOT': '%(installdir)s'}
 
 moduleclass = 'system'
