@@ -15,11 +15,8 @@ toolchainopts = {'pic': True, 'verbose': True, 'usempi': True}
 source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
 sources = ['%(namelower)s-%(version)s-linux-x86_64.tar.gz']
 
-builddependencies = [
-    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
-]
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE)
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
 ]
 
 exts_defaultclass = 'JuliaPackage'
@@ -45,7 +42,5 @@ modextravars = {
     'JULIA_MPIEXEC_ARGS': "-C %s" % arch_name,    
     'JULIA_CUDA_USE_BINARYBUILDER': 'false',
 }
-
-modtclfooter = "module unload cray-libsci_acc"
 
 moduleclass = 'lang'
