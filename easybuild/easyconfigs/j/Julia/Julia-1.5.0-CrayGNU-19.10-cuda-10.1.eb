@@ -46,4 +46,6 @@ modextravars = {
     'JULIA_CUDA_USE_BINARYBUILDER': 'false',
 }
 
+modtclfooter = "module unload cray-libsci_acc"
+
 moduleclass = 'lang'

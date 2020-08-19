@@ -32,7 +32,7 @@ builddependencies = [
     ('flex', '2.6.4'),
 ]
 dependencies = [
-    ('ELPA', '2019.11.001'),
+    ('ELPA', '2019.11.001', '-cuda'),
     ('Libint-CP2K', '2.6.0'),
     ('libxc', '4.3.4'),
 ]
