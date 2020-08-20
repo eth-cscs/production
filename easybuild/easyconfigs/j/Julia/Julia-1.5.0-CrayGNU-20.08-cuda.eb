@@ -36,4 +36,6 @@ modextravars = {
     'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
 }
 
+modtclfooter = "module unload cray-libsci_acc"
+
 moduleclass = 'lang'
