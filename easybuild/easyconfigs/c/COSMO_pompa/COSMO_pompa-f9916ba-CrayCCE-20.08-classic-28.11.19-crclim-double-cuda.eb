@@ -32,9 +32,8 @@ dependencies = [
 ]
 
 prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
-prebuildopts += " module switch PrgEnv-gnu PrgEnv-cray && "
-prebuildopts += " module unload cray-mpich && "
-buildopts = "ACCGPU=1 CPP_DYCORE=1 paropt "
+prebuildopts += " module load CrayCCE/.%(toolchain_version)s && "
+buildopts = " ACCGPU=1 CPP_DYCORE=1 paropt "
 
 parallel = 6
 

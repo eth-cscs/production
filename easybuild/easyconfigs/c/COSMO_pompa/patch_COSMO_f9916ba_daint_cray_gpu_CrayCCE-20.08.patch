@@ -1,10 +1,10 @@
-diff -Nru cosmo_pompa_orig/cosmo/Options cosmo_pompa/cosmo/Options
---- cosmo_pompa_orig/cosmo/Options	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options	2019-11-29 16:38:58.000000000 +0100
-@@ -1,17 +1,18 @@
+diff -Nru cosmo_pompa.orig/cosmo/Options cosmo_pompa/cosmo/Options
+--- cosmo_pompa.orig/cosmo/Options	2019-11-29 09:56:39.000000000 +0100
++++ cosmo_pompa/cosmo/Options	2020-08-15 20:45:32.092958000 +0200
+@@ -1,17 +1,12 @@
  # compiler
 -F90      = ftn -D__CRAY_FORTRAN__
-+F90      = ftn -D__CRAY_FORTRAN__ -homp -h system_alloc -add-rpath -L$(CUDATOOLKIT_HOME)/lib64 -lcudart -lcublas
++F90      = ftn -add-rpath -D__CRAY_FORTRAN__
  COMPILER = cray
  
  # linker
@@ -12,28 +12,41 @@ diff -Nru cosmo_pompa_orig/cosmo/Options cosmo_pompa/cosmo/Options
  
 --include $(ROOT)/Options.$(COMPILER).cpu
 +-include $(ROOT)/Options.$(COMPILER).gpu
- 
- #PFLAGS  += -DSINGLEPRECISION # run model in single precision
- 
---include $(ROOT)/Options.lib.cpu
 +-include $(ROOT)/Options.lib.gpu
  
+-#PFLAGS  += -DSINGLEPRECISION # run model in single precision
+-
+--include $(ROOT)/Options.lib.cpu
+-
 -# bit-repro math
 -CMATH_DIR=/users/charpill/prg/mch/cmath
 -FMATH_DIR=/users/charpill/prg/mch/fmath
 -CC = CC
 \ No newline at end of file
-+INC     += -I$(MPICH_DIR)/include
-+
 +# ensure usage of cray c++ when compiling C/C++ 
-+#portable math functions
-+CC = CC
-diff -Nru cosmo_pompa_orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray.gpu
---- cosmo_pompa_orig/cosmo/Options.cray.gpu	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options.cray.gpu	2019-11-29 16:39:57.000000000 +0100
-@@ -14,9 +14,6 @@
++CC = CC 
+diff -Nru cosmo_pompa.orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray.gpu
+--- cosmo_pompa.orig/cosmo/Options.cray.gpu	2019-11-29 09:56:39.000000000 +0100
++++ cosmo_pompa/cosmo/Options.cray.gpu	2020-08-15 20:30:20.851137000 +0200
+@@ -2,27 +2,24 @@
+ 
+ # global compilation flags
+ FFLAGS   = -ffree # free-form source format
+-FFLAGS   = -N255 # free-form source format
++FFLAGS  += -N255 # free-form source format
+ FFLAGS  += -ec # interface checking
+ FFLAGS  += -eC # standard call site checking
+ FFLAGS  += -eI # treat all variables as if an implicit none is there
+ FFLAGS  += -eF # control preprocessor expansion of macros
+-#FFLAGS  += -hkeepfiles # keep .s files
+-FFLAGS  += -hnosecond_underscore # symbol names only have one underscore
++FFLAGS  +=  # symbol names only have one underscore
+ FFLAGS  += -hflex_mp=conservative # reasonably aggressive floating point optimizations
+ FFLAGS  += -Ofp1 # require reasonably strong IEEE standard conformance
  FFLAGS  += -hadd_paren # automatically adds parenthesis to select associative operations
  FFLAGS  += -hacc # compile for GPU
++FFLAGS  += -homp # OpenMP support 
++FFLAGS  += -h system_alloc # malloc implementation
  FFLAGS  += -ra # generates listing
 -#MED 26/11/2019>>
 -FFLAGS  += -h system_alloc -add-rpath
@@ -41,21 +54,89 @@ diff -Nru cosmo_pompa_orig/cosmo/Options.cray.gpu cosmo_pompa/cosmo/Options.cray
  
  # verbose compilation flags
  VFLAGS   = -v # show compilation information
-diff -Nru cosmo_pompa_orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
---- cosmo_pompa_orig/cosmo/Options.lib.gpu	2019-11-29 09:56:39.000000000 +0100
-+++ cosmo_pompa/cosmo/Options.lib.gpu	2019-11-29 16:37:34.000000000 +0100
-@@ -2,9 +2,6 @@
+ VFLAGS  += -en # generate message for all nonstandard Fortran usage
+ VFLGAS  += -eo # display all optimization options used
+-#VFLAGS  += -eS # generate assembly language output
+ VFLAGS  += -hmsgs # display optimization messages
+ VFLAGS  += -hnegmsgs # display negative optimization messages
+ VFLAGS  += -m1 # high message level (error, warning, caution and note)
+@@ -36,13 +33,9 @@
+ PFLAGS  += -DCRAY_FIX_PARALLEL_OPTIONAL_LOGICAL
+ PFLAGS  += -DIEEE_INTR #required when using -Ofp1 for is_nan
+ 
+-#PFLAGS  += -DASSIM_WKARR_CLEANUP
+-#PFLAGS  += -DASSIM_MDARR_CLEANUP
+-
+ # ===============================================================
+ # CRCLIM FLAGS
+ # ===============================================================
+-
+ # reproducible flags for cray c++ compiler
+ CFLAGS  = -eZ 
+ CFLAGS += -ec 
+@@ -66,13 +59,11 @@
+ RFLAGS  = -ffree 
+ RFLAGS += -N1023 
+ RFLAGS += -eF 
+-# RFLAGS += -O0 
+ RFLAGS += -O1
+ RFLAGS += -eI 
+-RFLAGS += -hnosecond_underscore 
++RFLAGS +=  
+ RFLAGS += -hadd_paren 
+ RFLAGS += -hfp0 
+-# RFLAGS += -hflex_mp=intolerant 
+ RFLAGS += -hflex_mp=strict 
+ RFLAGS += -ra 
+ RFLAGS += -hnoaggress 
+@@ -94,24 +85,11 @@
+ # debugging flags
+ FDBG0    =
+ FDBG0   += -g # debugging support (== -G0)
+-#No other debugging option on GPU
+-#FDBG0   += -eD # turn on all debugging information (-O0 -g -m2 -R bcdspi -rl)
+-#FDBG0   += -Ra # compare number+types of arguments for calls
+-#FDBG0   += -Rb # array bound checking
+-#FDBG0   += -Rc # check conformance of array operands
+-#FDBG0   += -Rd # directives checking
+-#FDBG0   += -RC # subroutine argument checking
+-#FDBG0   += -RE # subroutine argument checking
+-#FDBG0   += -Rp # check NULL pointer references
+-#FDBG0   += -Rs # check string bounds
+-
+ FDBG1    = $(FDBG0)
+ FDBG1   += -G1 # debugging support
+-#FDBG1   += -O1 # -O0 disables OpenACC
+ FDBG1   += -O cache1
+ FDBG1   += -O thread1
+ FDBG2    = $(FDBG1)
+ 
+ # global linking flags
+ LFLAGS   = -frecord-marker=4 # length of record marker in bytes (for unformatted I/O)
+-
+diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.gpu
+--- cosmo_pompa.orig/cosmo/Options.lib.gpu	2019-11-29 09:56:39.000000000 +0100
++++ cosmo_pompa/cosmo/Options.lib.gpu	2020-08-15 20:46:49.905963000 +0200
+@@ -1,10 +1,7 @@
+ # Options.lib.gpu
  
  # global libraries and includes
- LIB      = $(LDFLAGS)
+-LIB      = $(LDFLAGS)
 -#MED 26/11/2019>>
 -LIB     += -L/opt/nvidia/cudatoolkit10/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5/lib64 -lcudart -lcublas
 -#MED<<
++LIB      = $(LDFLAGS) -Wl,--as-needed,-lcublas,--no-as-needed
  INC      = -I.
  INC     += -I$(ROOT)/$(SRCDIR)
  
-@@ -21,35 +18,34 @@
- MPII     = -D__MPICH2
+@@ -17,39 +14,37 @@
+ DBGI     =
+ 
+ # MPI library
+-MPIL     =
+-MPII     = -D__MPICH2
++MPIL     = 
++MPII     = 
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
@@ -73,12 +154,11 @@ diff -Nru cosmo_pompa_orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
  # NetCDF library
 -NETCDFL  = 
 -NETCDFI  = 
-+NETCDFL  = -L${NETCDF_DIR}/lib
-+NETCDFI  = -I${NETCDF_DIR}/include
++NETCDFL  = -L/opt/cray/pe/netcdf/4.7.4.0/crayclang/9.0/lib -Wl,--as-needed,-lnetcdf,--no-as-needed -Wl,--as-needed,-lnetcdff,--no-as-needed
++NETCDFI  = -I/opt/cray/pe/netcdf/4.7.4.0/crayclang/9.0/include -I/opt/cray/pe/hdf5/1.12.0.0/crayclang/9.0/include
  
  # Synsat library
 -RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
-+#RTTOV7L  = -L$(INSTALL_DIR)/librttov7 -lrttov7_$(COMPILER)
  RTTOV7I  =
  RTTOV10L =
  RTTOV10I =
