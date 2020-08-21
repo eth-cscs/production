@@ -7,6 +7,7 @@
  CDO-1.9.5-CrayGNU-19.10.eb                         --set-default-module
  CDO-1.9.5-CrayIntel-19.10.eb
  CMake-3.14.5.eb                                    --set-default-module
+ CMake-3.18.1.eb
  CP2K-6.1-CrayGNU-19.10-cuda-10.1.eb                --set-default-module
  CP2K-7.1-CrayGNU-19.10-cuda-10.1.eb
  CPMD-4.1-CrayIntel-19.10.eb                        --set-default-module
