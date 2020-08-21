@@ -14,6 +14,10 @@ toolchainopts = {'usempi': True, 'openmp': True}
 source_urls = ['http://%(namelower)s.mpcdf.mpg.de/html/Releases/%(version)s/']
 sources = [SOURCELOWER_TAR_GZ]
 
+builddependencies = [
+    ("cudatoolkit", EXTERNAL_MODULE)
+]
+
 preconfigopts = ' module unload cray-libsci && module list && CC=cc FC=ftn CPP=cpp FCPP=cpp  LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lstdc++ -ldl"  FCFLAGS="-qopenmp -O3 -xAVX2" CFLAGS="-qopenmp -O3 -xAVX2" '
 configopts = " --enable-openmp --enable-static "
 configopts += " --enable-gpu --with-GPU-compute-capability=sm_60 "
