@@ -89,7 +89,7 @@ exts_list = [
     ('python-editor', '1.0.4', {
         'modulename': 'editor',
         }),
-    ('async_generator', '1.10'},
+    ('async_generator', '1.10'),
     ('pycparser', '2.19'),
     ('cffi', '1.12.3', {
         'use_pip': False,
