@@ -1,0 +1,22 @@
+# provided by mkra (CSCS), 2018
+name = 'SCOTCH'
+version = "6.0.9"
+
+homepage = 'http://gforge.inria.fr/projects/scotch/'
+description = """
+    Software package and libraries for sequential and parallel graph 
+    partitioning, static mapping, and sparse matrix block ordering, 
+    and sequential mesh and hypergraph partitioning.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://gforge.inria.fr/frs/download.php/latestfile/298']
+sources = ['%(namelower)s_%(version)s.tar.gz']
+
+dependencies = [
+    ('zlib', '1.2.11'),
+]
+
+moduleclass = 'math'
