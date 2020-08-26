@@ -1,4 +1,4 @@
-# mkra (CSCS), 2018
+# mkra (CSCS), 2020
 easyblock='Binary'
 name = 'OpenFOAM'
 version = "7.0"
@@ -31,7 +31,7 @@ builddependencies = [
      ('CMake/3.14.5', EXTERNAL_MODULE),
 ]
 dependencies = [
-     ('SCOTCH', '6.0.9'),
+     ('cray-tpsl', EXTERNAL_MODULE),
 ]
 
 extract_sources = 'True'
