@@ -1,0 +1,20 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'libtree'
+version = '1.2.0'
+homepage = 'https://github.com/haampie/libtree'
+description = """ldd as a tree with an option to bundle dependencies into a
+single folder"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/haampie/libtree/releases/download/v%(version)s']
+sources = ['sources.tar.gz']
+separate_build_dir = True
+configopts = '-DBUILD_TESTING=OFF '
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'devel'
