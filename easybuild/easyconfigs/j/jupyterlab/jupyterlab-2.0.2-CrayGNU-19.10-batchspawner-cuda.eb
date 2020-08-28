@@ -120,22 +120,22 @@ exts_list = [
     ('colorcet', '2.0.2'),
     ('zstandard', '0.13.0'),
     ('itk-core', '5.1.0', { #bumped from 5.0.1
-        'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)sm-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk',
         }),
     ('itk-numerics', '5.1.0', { #bumped from 5.0.1
-        'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)sm-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-filtering', '5.1.0', { #bumped from 5.0.1
-        'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)sm-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
     ('itk-meshtopolydata', '0.6.2', { #bumped from 0.5.1
-        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)sm-manylinux1_x86_64.whl',
         'unpack_sources': False,
         'modulename': 'itk'
         }),
