@@ -26,7 +26,9 @@
  Julia-1.5.0-CrayGNU-20.08.eb                           --set-default-module
  JuliaExtensions-1.5.0-CrayGNU-20.08.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
- jupyterlab-1.1.1-CrayGNU-20.08-batchspawner.eb
+ jupyterlab-1.1.1-CrayGNU-20.08-batchspawner.eb         --set-default-module
+ jupyterlab-1.2.16-CrayGNU-20.08-batchspawner.eb
+ jupyterlab-2.0.2-CrayGNU-20.08-batchspawner.eb
  LAMMPS-03Mar20-CrayGNU-20.08.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  NAMD-2.13-CrayIntel-20.08.eb                           --set-default-module
