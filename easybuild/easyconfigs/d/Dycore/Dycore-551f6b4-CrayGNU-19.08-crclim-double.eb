@@ -23,7 +23,7 @@ dependencies = [
 
 configopts = "-DCMAKE_BUILD_TYPE=Release -DSINGLEPRECISION=OFF -DCUDA_BACKEND=OFF -DSTELLA_DIR=${EBROOTSTELLA} -DBITREPRO=OFF "
 
-srcdir = '../%(namelower)s'
+srcdir = '%(namelower)s'
 separate_build_dir = True
 
 moduleclass = 'devel'
