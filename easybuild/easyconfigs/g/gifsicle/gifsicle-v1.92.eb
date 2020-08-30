@@ -1,0 +1,16 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'gifsicle'
+version = 'v1.92'
+homepage = 'https://github.com/kohler/gifsicle'
+description = "Create, manipulate, and optimize GIF images and animations"
+toolchain = SYSTEM
+source_urls = ['https://github.com/kohler/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+preconfigopts = "./bootstrap.sh && "
+sanity_check_paths = {
+    'files': ['bin/gifsicle'],
+    'dirs': ['share/man'],
+}
+moduleclass = 'vis'
