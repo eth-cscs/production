@@ -13,7 +13,7 @@ to prepare the COSMO model code for these emerging massively parallel systems.
 see: http://www2.cosmo-model.org/content/tasks/priorityProjects/pompa/default.htm
 """
 
-toolchain = {'name': 'CrayCCE', 'version': '20.08-classic'}
+toolchain = {'name': 'CrayCCE', 'version': '20.08'}
 toolchainopts = {'verbose': False}
 
 # c2sm repository is private and there is no official release
