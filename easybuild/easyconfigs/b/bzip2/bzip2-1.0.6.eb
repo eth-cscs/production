@@ -1,5 +1,5 @@
 # contributed by Luca Marsella (CSCS)
-import os 
+import os as local_os
 
 name = 'bzip2'
 version = '1.0.6'
@@ -17,8 +17,8 @@ toolchain = SYSTEM
 sources = [SOURCE_TAR_GZ]
 source_urls = [SOURCEFORGE_SOURCE]
 
-os.environ['CC'] = 'gcc'
-os.environ['CFLAGS'] = '-O3 -fPIC'
+local_os.environ['CC'] = 'gcc'
+local_os.environ['CFLAGS'] = '-O3 -fPIC'
 
 # create pkgconfig file
 postinstallcmds = [
