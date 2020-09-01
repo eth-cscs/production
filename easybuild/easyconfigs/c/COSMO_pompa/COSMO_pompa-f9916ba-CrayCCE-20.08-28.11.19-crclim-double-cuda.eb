@@ -22,7 +22,7 @@ patches = ['patch_COSMO_%(version)s_daint_cray_gpu_CrayCCE-%(toolchain_version)s
 
 builddependencies = [
     ('CMake', '3.12.0', '', True),
-    ('Dycore', '551f6b4', '-crclim-double-cuda', ('CrayGNU','20.08')),
+    ('Dycore', '551f6b4', '-crclim-double-cuda'),
     ('libgrib1_crclim', 'a1e4271')
 ]
 dependencies = [
@@ -32,7 +32,6 @@ dependencies = [
 ]
 
 prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
-prebuildopts += " module load CrayCCE/.%(toolchain_version)s && "
 buildopts = " ACCGPU=1 CPP_DYCORE=1 paropt "
 
 parallel = 6
