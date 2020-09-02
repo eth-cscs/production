@@ -1,11 +1,11 @@
 diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/extractXALTRecord.C
 --- xalt-xalt-2.8.10-orig/src/extractXALTRecord.C	2020-07-25 19:32:11.000000000 +0200
-+++ xalt-xalt-2.8.10/src/extractXALTRecord.C	2020-08-11 15:47:34.459404000 +0200
++++ xalt-xalt-2.8.10/src/extractXALTRecord.C	2020-09-02 19:37:52.660611000 +0200
 @@ -2,12 +2,13 @@
  #include "capture.h"
  #include "xalt_config.h"
  
-+
++#include <algorithm>
  bool extractXALTRecordString(std::string& exec, std::string& watermark)
  {
  
@@ -52,10 +52,16 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
        v = watermark.substr(s2+3,s3 - (s2+3));
  
        s4 = 0;
-@@ -117,3 +118,105 @@
+@@ -117,3 +118,160 @@
        recordT[n] = v;
      }
  }
++
++inline void rtrim(std::string &s) {
++    s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
++        return !std::isspace(ch);
++    }).base(), s.end());
++}
 +
 +bool extractBinaryData(std::string& exec, std::string& dataString)
 +{
@@ -144,16 +150,65 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
 +
 +  // Take the output above and convert the string portion into a single line
 +  std::string            xaltRecord;
-+  std::string::size_type idx, len;
-+  for (i = i + 1; i < nlines; i++)
-+    {
-+      std::string& line = result[i];
-+      idx               = line.find_last_of("  ");
-+      len               = line.size();
-+      if (idx < len) {
-+        xaltRecord       += line.substr(idx, len-idx-1);
++  std::string::size_type idx, len, start, end;
++  int count = 0;
++  // for (i = i + 1; i < nlines; i++)
++  //   {
++  //     std::string& line = result[i];
++  //     idx               = line.find_last_of("  ");
++  //     len               = line.size();
++  //     if (idx+2 < len and count < 400) {
++  //       if (line[idx+1] != '.' and line[idx+1] != '_' and line[idx+2] != '_') {
++  //         xaltRecord       += line.substr(idx, len-idx-1);
++  //         count++;
++  //       }
++  //     }
++  //   }
++
++  i = i + 1;
++  // const int max_characters = 10000;
++  // while(i < nlines and count < max_characters) {
++  //   std::string& line = result[i];
++  //   idx               = line.find_last_of("  ");
++  //   len               = line.size();
++  //   if (idx+2 < len) {
++  //     if (line[idx+1] != '.' and line[idx+1] != '_' and line[idx+2] != '_') {
++  //       xaltRecord       += line.substr(idx, len-idx-1);
++  //       count += len - idx;
++  //     }
++  //   }
++  //   i++;
++  // }
++  const int max_characters = 10000;
++  while(i < nlines and count < max_characters) {
++    rtrim(result[i]);
++    std::string& line = result[i];
++    idx               = line.rfind("  ");
++    len               = line.size();
++    // removing [clone .*] references from the function name
++    // these are compiler dependent
++    end               = line.rfind(" [clone .");
++    if (idx == std::string::npos) {
++      idx = 0;
++      start = 0;
++    } else {
++      start = idx + 2;
++    }
++
++    if (end == std::string::npos) {
++      end = len;
++    }
++
++    if (idx+3 < end) {
++      if (line[idx+2] == '.' or (line[idx+2] == '_' and line[idx+3] == '_')) {
++      }
++      else {
++        xaltRecord       += "?###?" + line.substr(start, end-idx-2);
++        count += end - idx - 1;
 +      }
 +    }
++    i++;
++  }
 +
 +  dataString = xaltRecord;
 +  return true;
