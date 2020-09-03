@@ -1,6 +1,4 @@
-# boostcray still needed for older versions of boost
-easyblock = 'boostcray'
-
+# contributed by Luca Marsella (CSCS)
 name = 'Boost'
 version = '1.70.0'
 
