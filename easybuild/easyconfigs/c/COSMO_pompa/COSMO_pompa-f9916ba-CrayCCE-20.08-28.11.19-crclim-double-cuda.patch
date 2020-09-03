@@ -140,7 +140,7 @@ diff -Nru cosmo_pompa.orig/cosmo/Options.lib.gpu cosmo_pompa/cosmo/Options.lib.g
  
  # Grib1 library
 -GRIBDWDL = -L$(INSTALL_DIR)/libgrib1 -lgrib1_$(COMPILER)
-+GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_cray
++GRIBDWDL = -L${EBROOTLIBGRIB1_CRCLIM} -lgrib1_$(COMPILER)
  GRIBDWDI =
  
  # Grib-API library
