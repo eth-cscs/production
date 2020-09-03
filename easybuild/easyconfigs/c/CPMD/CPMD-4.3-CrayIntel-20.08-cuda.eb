@@ -23,7 +23,9 @@ dependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
 ]
 
-prebuildopts = ['./configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-CUDA &&']
+prebuildopts = ['module switch intel intel/19.0.1.144;'
+                './configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-CUDA &&'
+]
 
 skipsteps = ['configure']
 files_to_copy = [(['bin/%(namelower)s*.x'], 'bin')]
