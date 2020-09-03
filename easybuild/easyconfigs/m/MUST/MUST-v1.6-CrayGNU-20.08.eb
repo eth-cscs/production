@@ -3,8 +3,6 @@ easyblock = 'CMakeMake'
 
 name = 'MUST'
 version = 'v1.6'
-versionsuffix = '-debug'
-
 homepage = 'https://www.i12.rwth-aachen.de/cms/Lehrstuhl-fuer-Informatik/' \
            'Forschung/Forschungsschwerpunkte/Lehrstuhl-fuer-Hochleistungs' \
            'rechnen/~nrbe/MUST/?lidx=1'
