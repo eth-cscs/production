@@ -1,4 +1,4 @@
-# kraushm, omlins (CSCS)
+# Contributed by Matthias Kraushaar, Samuel Omlin, Luca Marsella (CSCS)
 easyblock = 'MakeCp'
 
 name = 'COSMO_pompa'
@@ -18,7 +18,7 @@ toolchainopts = {'verbose': False}
 
 # c2sm repository is private and there is no official release
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s_%(version)s.tar.gz']
-patches = ['patch_COSMO_%(version)s_daint_cray_gpu_CrayCCE-%(toolchain_version)s.patch']
+patches = ['%(name)-%(version)s-%(toolchain_name)s-%(toolchain_version)s-%(versionsuffix)s.patch']
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
@@ -34,7 +34,7 @@ dependencies = [
 prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
 buildopts = " ACCGPU=1 CPP_DYCORE=1 paropt "
 
-postinstallcmds = ['cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim']
+postinstallcmds = 'cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim'
 files_to_copy = [(['cosmo/cosmo'], '.')]
 
 sanity_check_paths = {
