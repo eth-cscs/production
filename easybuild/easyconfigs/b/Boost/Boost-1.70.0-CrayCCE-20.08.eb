@@ -2,7 +2,7 @@
 easyblock = 'boostcray'
 
 name = 'Boost'
-version = '1.67.0'
+version = '1.70.0'
 
 homepage = 'http://www.boost.org/'
 description = """Boost provides free peer-reviewed portable C++ source
@@ -12,7 +12,7 @@ toolchain = {'name': 'CrayCCE', 'version': '20.08'}
 toolchainopts = {'usempi': True, 'pic': True}
 
 source_urls = [SOURCEFORGE_SOURCE]
-sources = ['%(namelower)s_1_67_0.tar.gz']
+sources = ['%(namelower)s_1_70_0.tar.gz']
 
 builddependencies = [
     ('gcc', 'EXTERNAL_MODULE')
