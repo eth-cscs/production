@@ -38,7 +38,7 @@ postinstallcmds = ['cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim']
 files_to_copy = [(['cosmo/cosmo'], '.')]
 
 sanity_check_paths = {
-    'files': ['cosmo_gpu', 'cosmo_gpu_crclim'],
+    'files': ['cosmo', 'cosmo_gpu_crclim'],
     'dirs': [],
 }
 
