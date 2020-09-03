@@ -34,7 +34,7 @@ dependencies = [
 prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
 buildopts = " ACCGPU=1 CPP_DYCORE=1 paropt "
 
-postinstallcmds = 'cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim'
+postinstallcmds = ['cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim']
 files_to_copy = [(['cosmo/cosmo'], '.')]
 
 sanity_check_paths = {
