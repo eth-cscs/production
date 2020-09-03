@@ -34,18 +34,16 @@ dependencies = [
 prebuildopts = " cd %(builddir)s/%(namelower)s/cosmo && "
 buildopts = " ACCGPU=1 CPP_DYCORE=1 paropt "
 
-parallel = 6
+postinstallcmds = ['cd %(installdir)s && ln -s cosmo cosmo_gpu_crclim']
+files_to_copy = [(['cosmo/cosmo'], '.')]
+
+sanity_check_paths = {
+    'files': ['cosmo_gpu', 'cosmo_gpu_crclim'],
+    'dirs': [],
+}
 
 modtclfooter = """
 prepend-path PATH %(installdir)s
 """
-
-postinstallcmds = ['cd %(installdir)s; ln -s cosmo cosmo_gpu_crclim']
-files_to_copy = [(['cosmo/cosmo'], '.')]
-
-sanity_check_paths = {
-    'files': ['cosmo', 'cosmo_gpu_crclim'],
-    'dirs': [],
-}
 
 moduleclass = 'geo'
