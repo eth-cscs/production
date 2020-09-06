@@ -47,6 +47,7 @@
  QuantumESPRESSO-6.5-CrayIntel-20.08.eb                 --set-default-module
  Spark-2.3.1-CrayGNU-20.08-Hadoop-2.7.eb                --set-default-module
  VASP-6.1.0-CrayIntel-20.08.eb                          --set-default-module
+ Visit-3.1.2-CrayGNU-20.08.eb                           --set-default-module
  advisor-2020_update2.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  Caliper-2.4.0-CrayGNU-20.08.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
