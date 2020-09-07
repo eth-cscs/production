@@ -1,4 +1,4 @@
-# contributed by Jean Favre (CSCS)
+# contributed by Jean Favre and Victor Holanda Rusu (CSCS)
 #
 easyblock = 'CMakeMake'
 
@@ -26,7 +26,7 @@ toolchainopts = {'usempi': True, 'verbose': False}
 # ./src/tools/dev/scripts/build_visit --console --no-visit --parallel \
 #                            --hdf5 --icet --llvm --mesagl \
 #                            --qt --qwt --silo --netcdf --vtk --system-python \
-#                            --openssl --download-only 
+#                            --openssl --download-only
 # cd ..
 
 # tar cfz  visit-3.1.2.tar.gz visit3.1.2
@@ -75,16 +75,26 @@ configopts += ' -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF '
 
 prebuildopts = ' pushd ../visit3.1.2/build; '
 prebuildopts += ' module swap gcc/9.3.0; '
-buildopts = 'install'
+#buildopts = 'install'
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
 ]
 
+modtclfooter = """
+if { [ is-loaded gcc ] } {
+    module swap gcc/9.3.0
+}
+"""
+
 parallel = 24
-skipsteps = ['install']
+#skipsteps = ['install']
 
 runtest = False
+
+preinstallopts = ' pushd ../visit3.1.2/build; '
+
+install_cmd = "make install && cp %(builddir)s/visit3.1.2/third_party/mesagl/17.2.8/linux-x86_64_gcc-9.3/lib/libswrAVX* %(installdir)s/current/linux-x86_64/lib"
 
 sanity_check_paths = {
     'files': [],
