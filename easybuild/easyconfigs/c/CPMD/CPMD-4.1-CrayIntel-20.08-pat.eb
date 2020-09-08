@@ -4,7 +4,7 @@ easyblock = 'MakeCp'
 name = 'CPMD'
 version = '4.1'
 local_patversion = '20.08.0'
-versionsuffix = '-pat-%s' % local_patversion
+versionsuffix = '-pat'
 
 homepage = 'http://www.cpmd.org/'
 description = """
