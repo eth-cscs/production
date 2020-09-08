@@ -1,6 +1,6 @@
 diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/extractXALTRecord.C
 --- xalt-xalt-2.8.10-orig/src/extractXALTRecord.C	2020-07-25 19:32:11.000000000 +0200
-+++ xalt-xalt-2.8.10/src/extractXALTRecord.C	2020-09-02 19:37:52.660611000 +0200
++++ xalt-xalt-2.8.10/src/extractXALTRecord.C	2020-09-07 10:29:25.224408000 +0200
 @@ -2,12 +2,13 @@
  #include "capture.h"
  #include "xalt_config.h"
@@ -52,7 +52,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
        v = watermark.substr(s2+3,s3 - (s2+3));
  
        s4 = 0;
-@@ -117,3 +118,160 @@
+@@ -117,3 +118,138 @@
        recordT[n] = v;
      }
  }
@@ -63,8 +63,12 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
 +    }).base(), s.end());
 +}
 +
-+bool extractBinaryData(std::string& exec, std::string& dataString)
++bool extractBinaryData(std::string& exec, std::string& dataString, int binarydata_size)
 +{
++  if (binarydata_size < 1) {
++    dataString = "FALSE";
++    return false;
++  }
 +
 +  std::string cmd;
 +  Vstring     result;
@@ -147,39 +151,13 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
 +   * 0000000000463680 l     F .text  0000000000000001              (anonymous namespace)::ObsoleteToolModule::~ObsoleteToolModule()
 +   */
 +
-+
-+  // Take the output above and convert the string portion into a single line
 +  std::string            xaltRecord;
 +  std::string::size_type idx, len, start, end;
 +  int count = 0;
-+  // for (i = i + 1; i < nlines; i++)
-+  //   {
-+  //     std::string& line = result[i];
-+  //     idx               = line.find_last_of("  ");
-+  //     len               = line.size();
-+  //     if (idx+2 < len and count < 400) {
-+  //       if (line[idx+1] != '.' and line[idx+1] != '_' and line[idx+2] != '_') {
-+  //         xaltRecord       += line.substr(idx, len-idx-1);
-+  //         count++;
-+  //       }
-+  //     }
-+  //   }
 +
++  // Take the output above and convert the string portion into a single line
 +  i = i + 1;
-+  // const int max_characters = 10000;
-+  // while(i < nlines and count < max_characters) {
-+  //   std::string& line = result[i];
-+  //   idx               = line.find_last_of("  ");
-+  //   len               = line.size();
-+  //   if (idx+2 < len) {
-+  //     if (line[idx+1] != '.' and line[idx+1] != '_' and line[idx+2] != '_') {
-+  //       xaltRecord       += line.substr(idx, len-idx-1);
-+  //       count += len - idx;
-+  //     }
-+  //   }
-+  //   i++;
-+  // }
-+  const int max_characters = 10000;
++  const int max_characters = binarydata_size;
 +  while(i < nlines and count < max_characters) {
 +    rtrim(result[i]);
 +    std::string& line = result[i];
@@ -203,7 +181,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
 +      if (line[idx+2] == '.' or (line[idx+2] == '_' and line[idx+3] == '_')) {
 +      }
 +      else {
-+        xaltRecord       += "?###?" + line.substr(start, end-idx-2);
++        xaltRecord       += line.substr(start, end-idx-2) + "?###?";
 +        count += end - idx - 1;
 +      }
 +    }
@@ -215,7 +193,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/extractXALTRecord.C xalt-xalt-2.8.10/src/ext
 +}
 diff -Nru xalt-xalt-2.8.10-orig/src/run_submission.h xalt-xalt-2.8.10/src/run_submission.h
 --- xalt-xalt-2.8.10-orig/src/run_submission.h	2020-07-25 19:32:11.000000000 +0200
-+++ xalt-xalt-2.8.10/src/run_submission.h	2020-08-11 15:42:38.171785000 +0200
++++ xalt-xalt-2.8.10/src/run_submission.h	2020-09-07 10:26:56.037087000 +0200
 @@ -12,11 +12,11 @@
  void buildXALTRecordT(std::string& watermark, Table& recordT);
  void parseProcMaps(pid_t pid, std::vector<Libpair>& libA, double& t_maps, double& t_sha1);
@@ -227,12 +205,12 @@ diff -Nru xalt-xalt-2.8.10-orig/src/run_submission.h xalt-xalt-2.8.10/src/run_su
  void translate(Table& envT, Table& userT, DTable& userDT);
  
 -
-+bool extractBinaryData(std::string& exec, std::string& dataString);
++bool extractBinaryData(std::string& exec, std::string& dataString, int binarydata_size);
  
  #endif //RUN_SUBMISSION_H
 diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/xalt_run_submission.C
 --- xalt-xalt-2.8.10-orig/src/xalt_run_submission.C	2020-07-25 19:32:11.000000000 +0200
-+++ xalt-xalt-2.8.10/src/xalt_run_submission.C	2020-08-11 15:45:11.714185000 +0200
++++ xalt-xalt-2.8.10/src/xalt_run_submission.C	2020-09-07 10:26:47.270047000 +0200
 @@ -29,10 +29,10 @@
    DTable      measureT;
    bool        end_record = (options.endTime() > 0.0);
@@ -255,7 +233,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/x
    //*********************************************************************
    // Build the env table:
    t1 = epoch();
-@@ -82,12 +82,19 @@
+@@ -82,12 +82,23 @@
    measureT["01_BuildUserT___"] = epoch() - t1;
  
    //*********************************************************************
@@ -271,13 +249,17 @@ diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/x
 +  //*********************************************************************
 +  // Extract the binary data
 +  t1 = epoch();
-+  extractBinaryData(options.exec(), watermark);
-+  userT["binaryData"] = watermark;
++  char * binarydata_size_ptr = getenv("XALT_BINARYDATA_SIZE");
++  if (binarydata_size_ptr) {
++    int binarydata_size = atoi(binarydata_size_ptr);
++    extractBinaryData(options.exec(), watermark, binarydata_size);
++    userT["binaryData"] = watermark;
++  }
 +  measureT["07_ExtractXALTBinData_"] += epoch() - t1;
  
    //*********************************************************************
    // Take sha1sum of the executable
-@@ -96,7 +103,7 @@
+@@ -96,7 +107,7 @@
    compute_sha1(options.exec(), sha1_exec);
  
    measureT["02_Sha1_exec____"] = epoch() - t1;
@@ -286,7 +268,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/x
    //*********************************************************************
    // Parse the output of ldd for this executable (start record only)
    std::vector<Libpair> libA;
-@@ -105,16 +112,16 @@
+@@ -105,16 +116,16 @@
  
    measureT["06_ParseProcMaps"] = t_maps;
    measureT["06_SO_sha1_comp_"] = t_sha1;
@@ -306,7 +288,7 @@ diff -Nru xalt-xalt-2.8.10-orig/src/xalt_run_submission.C xalt-xalt-2.8.10/src/x
  
    Json json;
    DEBUG1(stderr,"    cmdlineA: %s\n",options.userCmdLine().c_str());
-@@ -132,7 +139,7 @@
+@@ -132,7 +143,7 @@
    DEBUG0(stderr,"    Built json string\n");
  
    char*       c_resultFn  = NULL;

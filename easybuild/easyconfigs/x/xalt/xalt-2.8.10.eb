@@ -53,6 +53,7 @@ modextravars = {
     'XALT_DIR': '%(installdir)s',
     'XALT_ETC_DIR': '%(installdir)s/etc',
     'XALT_TRANSMISSION_STYLE': '%s' % local_transmission,
+    'XALT_BINARYDATA_SIZE': '5000',
     #'XALT_LOGGING_URL': 'url to fulfill',
     'SLURM_CSCS': 'yes',
     # commented out because Cray environment is currently broken
