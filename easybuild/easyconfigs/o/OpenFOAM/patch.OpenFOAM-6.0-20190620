@@ -40,8 +40,8 @@ diff -Nru OpenFOAM-6-20190620/etc/config.sh/scotch OpenFOAM-6.BAK/etc/config.sh/
  
 -export SCOTCH_VERSION=scotch_6.0.6
 -export SCOTCH_ARCH_PATH=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER$WM_PRECISION_OPTION$WM_LABEL_OPTION/$SCOTCH_VERSION
-+export SCOTCH_VERSION=${EBVERSIONSCOTCH}
-+export SCOTCH_ARCH_PATH=${EBROOTSCOTCH}
++#export SCOTCH_VERSION=${EBVERSIONSCOTCH}
++export SCOTCH_ARCH_PATH=${CRAY_TPSL_DIR}
  
  #------------------------------------------------------------------------------
 diff -Nru OpenFOAM-6-20190620/etc/config.sh/settings OpenFOAM-6.BAK/etc/config.sh/settings
