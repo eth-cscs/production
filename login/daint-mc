@@ -2,8 +2,8 @@
 
 # set environment
 set apps "$env(APPS)"
-set path "${apps}/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all"
-set toolspath "${apps}/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all"
+set path "${apps}/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all"
+set toolspath "${apps}/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all"
 # set gpupath and mcpath and corresponding toolspath
 set gpupath [ string map { ARCH gpu } "${path}" ]
 set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
