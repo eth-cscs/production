@@ -27,7 +27,7 @@ dependencies = [
     ('HDF5', '1.10.6', '-parallel'),
 ]
 
-prebuildopts = 'HDF5_MPI="ON" python setup.py configure && '
+prebuildopts = 'HDF5_MPI="ON" python setup.py configure --mpi && '
 
 # sanity checks (import h5py) fails on login nodes (MPI not available)
 options = {'modulename': 'os'}
