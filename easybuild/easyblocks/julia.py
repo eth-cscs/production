@@ -56,8 +56,9 @@ class EB_Julia(PackedBinary):
     def get_environment_folder(self):
         env_path = ''
 
-        hostname = socket.gethostname()
-        hostname_short = ''.join(c for c in hostname if not c.isdigit())
+        #hostname = socket.gethostname()
+        #hostname_short = ''.join(c for c in hostname if not c.isdigit())
+        hostname_short = "[string map {0 {} 1 {} 2 {} 3 {} 4 {} 5 {} 6 {} 7 {} 8 {} 9 {}} $::env(HOSTNAME)]"  #Insert TCL code to be evaluated dynamically at module load time.
 
         if self.cfg['arch_name']:
             env_path = '-'.join([hostname_short, self.cfg['arch_name']])
