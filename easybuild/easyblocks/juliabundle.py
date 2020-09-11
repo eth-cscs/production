@@ -61,11 +61,11 @@ class JuliaBundle(Bundle):
         extra_vars = Bundle.extra_options(extra_vars)
         return JuliaPackage.extra_options(extra_vars)
 
+
     def get_environment_folder(self):
         env_path = ''
 
-        hostname = socket.gethostname()
-        hostname_short = ''.join(c for c in hostname if not c.isdigit())
+        hostname_short = "[string map {0 {} 1 {} 2 {} 3 {} 4 {} 5 {} 6 {} 7 {} 8 {} 9 {}} $::env(HOSTNAME)]"  #Insert TCL code to be evaluated dynamically at module load time.
 
         if self.cfg['arch_name']:
             env_path = '-'.join([hostname_short, self.cfg['arch_name']])
@@ -80,11 +80,26 @@ class JuliaBundle(Bundle):
             env_path = '-'.join([hostname_short, cpu_family, arch])
         return env_path
 
+
+    def get_admin_environment_folder(self):
+        env_path = ''
+
+        if self.cfg['arch_name']:
+            env_path = self.cfg['arch_name']
+            return env_path
+
+        optarch = build_option('optarch') or None
+        if optarch:
+            env_path = optarch
+        else:
+            arch = systemtools.get_cpu_architecture()
+            cpu_family = systemtools.get_cpu_family()
+            env_path = '-'.join([cpu_family, arch])
+        return env_path
+
+
     def get_user_depot_path(self):
         user_depot_path = ''
-
-        hostname = socket.gethostname()
-        hostname_short = ''.join(c for c in hostname if not c.isdigit())
 
         optarch = build_option('optarch') or None
         if optarch:
@@ -120,7 +135,7 @@ class JuliaBundle(Bundle):
         self.user_depot = self.get_user_depot_path()
         self.extensions_depot = 'extensions'
 
-        self.admin_load_path = os.path.join(self.extensions_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
+        self.admin_load_path = os.path.join(self.extensions_depot, "environments", '-'.join([self.version, self.get_admin_environment_folder()]))
         #self.depot_path = ':'.join([user_depot, extensions_depot])
         # this is very important to remember the addition of the self.verion
         #self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))

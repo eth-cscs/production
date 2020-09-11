@@ -56,8 +56,6 @@ class EB_Julia(PackedBinary):
     def get_environment_folder(self):
         env_path = ''
 
-        #hostname = socket.gethostname()
-        #hostname_short = ''.join(c for c in hostname if not c.isdigit())
         hostname_short = "[string map {0 {} 1 {} 2 {} 3 {} 4 {} 5 {} 6 {} 7 {} 8 {} 9 {}} $::env(HOSTNAME)]"  #Insert TCL code to be evaluated dynamically at module load time.
 
         if self.cfg['arch_name']:
@@ -73,11 +71,26 @@ class EB_Julia(PackedBinary):
             env_path = '-'.join([hostname_short, cpu_family, arch])
         return env_path
 
+
+    def get_admin_environment_folder(self):
+	env_path = ''
+
+	if self.cfg['arch_name']:
+            env_path = self.cfg['arch_name']
+            return env_path
+
+        optarch = build_option('optarch') or None
+        if optarch:
+            env_path = optarch
+        else:
+            arch = systemtools.get_cpu_architecture()
+            cpu_family = systemtools.get_cpu_family()
+            env_path = '-'.join([cpu_family, arch])
+        return env_path
+
+
     def get_user_depot_path(self):
         user_depot_path = ''
-
-        hostname = socket.gethostname()
-        hostname_short = ''.join(c for c in hostname if not c.isdigit())
 
         optarch = build_option('optarch') or None
         if optarch:
@@ -102,7 +115,7 @@ class EB_Julia(PackedBinary):
         self.julia_project = os.path.join(self.user_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
 
         self.user_load_path = '@:@#.#.#-%s' % self.get_environment_folder()
-        self.admin_load_path = '%s:@stdlib' % os.path.join(extensions_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
+        self.admin_load_path = '%s:@stdlib' % os.path.join(extensions_depot, "environments", '-'.join([self.version, self.get_admin_environment_folder()]))
         self.julia_load_path = ':'.join([self.user_load_path, self.admin_load_path])
 
     def sanity_check_step(self):
@@ -180,7 +193,7 @@ LOAD_PATH .= [USER_LOAD_PATH; ADMIN_LOAD_PATH]
         txt += self.module_generator.set_environment('EBJULIA_USER_LOAD_PATH', self.user_load_path)
         txt += self.module_generator.set_environment('EBJULIA_ADMIN_LOAD_PATH', self.admin_load_path)
 
-        txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_folder()]))
+        txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_admin_environment_folder()]))
 
         return txt
 
