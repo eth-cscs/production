@@ -31,7 +31,7 @@ exts_list = [
     ('Keras_Applications', '1.0.8'),
     ('Keras_Preprocessing', '1.1.0'),
     ('gast', '0.3.3'),
-    ('astor', '0.8.0'),
+    ('astor', '0.8.1'),
     ('termcolor', '1.1.0'),
     ('chardet', '3.0.4'),
     ('certifi', '2019.9.11'),
