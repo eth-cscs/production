@@ -1,0 +1,34 @@
+# Contributed by Theofilos Manitaras (cscs)
+# Victor Holanda (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'mpi4py'
+version = "3.0.3"
+versionsuffix = '-python3'
+
+homepage = 'https://bitbucket.org/mpi4py/mpi4py'
+description = """MPI for Python (mpi4py) provides bindings of the Message
+Passing Interface (MPI) standard for the Python programming language, allowing
+any Python program to exploit multiple processors."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = [BITBUCKET_DOWNLOADS]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+]
+
+# force rebuilding everything, including patched files
+buildopts = '--force'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [
+        'lib/python%(pyshortver)s/site-packages/%(name)s' 
+    ],
+}
+
+moduleclass = 'mpi'
