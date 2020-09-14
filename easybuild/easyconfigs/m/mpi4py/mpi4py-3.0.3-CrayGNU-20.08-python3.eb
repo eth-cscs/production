@@ -4,7 +4,7 @@ easyblock = 'PythonPackage'
 
 name = 'mpi4py'
 version = "3.0.3"
-versionsuffix = '-python3'
+versionsuffix = '-python%pymajver)'
 
 homepage = 'https://bitbucket.org/mpi4py/mpi4py'
 description = """MPI for Python (mpi4py) provides bindings of the Message
