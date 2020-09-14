@@ -36,7 +36,7 @@ dependencies = [
     ('pmi', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
-    ('bzip2', EXTERNAL_MODULE),
+    ('bzip2', '1.0.6'),
     ('blosc', '1.20.1'),
 ]
 
