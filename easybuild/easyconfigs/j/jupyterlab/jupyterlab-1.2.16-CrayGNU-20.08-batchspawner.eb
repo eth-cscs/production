@@ -255,6 +255,7 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
 %%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build && 
 %%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && 
+%%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@1.0.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && 
