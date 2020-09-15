@@ -1,0 +1,24 @@
+# @author: sarafael
+easyblock = 'Tarball'
+
+name = 'NCCL'
+version = '2.7.8'
+
+homepage = 'https://developer.nvidia.com/cudnn'
+description = """The NVIDIA Collective Communications Library (NCCL) implements multi-GPU and multi-node
+collective communication primitives that are performance optimized for NVIDIA GPUs."""
+
+toolchain = {'name': 'system', 'version': ''}
+
+sources = ['/apps/common/UES/easybuild/sources/n/NCCL/nccl_%(version)s-1+cuda%(cudashortver)s_x86_64.txz']
+
+dependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE)
+]
+
+sanity_check_paths = {
+    'files': ['include/nccl.h', 'lib/libnccl.so.%(version)s', 'lib/libnccl_static.a'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'numlib'

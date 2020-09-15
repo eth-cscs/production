@@ -1,0 +1,21 @@
+easyblock = 'Tarball'
+
+name = 'oidn'
+version = '1.1.0'
+
+homepage = 'https://openimagedenoise.github.io'
+description = """Intel® Open Image Denoise is an open source library of high-performance,
+high-quality denoising filters for images rendered with ray tracing"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://github.com/OpenImageDenoise/%(name)s/releases/download/v%(version)s/']
+sources = ['%(name)s-%(version)s.%(arch)s.linux.tar.gz']
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'devel'

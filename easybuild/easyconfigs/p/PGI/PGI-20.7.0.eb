@@ -1,0 +1,25 @@
+# jg (CSCS)
+easyblock = 'Bundle'
+
+name = 'PGI'
+version = '20.7.0'
+homepage = 'https://developer.nvidia.com/hpc-sdk'
+description = "Dummy modulefile to set the PE for pgi/20.7"
+toolchain = SYSTEM
+dependencies = [('nvhpc', '2020_207-cuda-10.2')]
+modextravars = {
+    'PGI_VERSION': '20.7',
+    'PGI_VERS_STR': '20.7.0',
+    # 'PGI_PATH': 'Linux_x86_64/2020/compilers/bin',
+    # 'PGI': 'Linux_x86_64/2020/compilers/bin',
+    'PGI_PATH': '\$EBROOTNVHPC/Linux_x86_64/2020/compilers/bin',
+    'PGI': '\$EBROOTNVHPC/Linux_x86_64/2020/compilers/bin',
+    # 'CPP': 'cpp',
+    # 'CC': 'nvc',
+    # 'CXX': 'nvc++',
+    # 'FC': 'nvfortran',
+    # 'F90': 'nvfortran',
+    # 'F77': 'nvfortran',
+}
+
+moduleclass = 'devel'

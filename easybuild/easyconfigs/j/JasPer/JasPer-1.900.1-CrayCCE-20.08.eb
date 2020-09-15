@@ -1,0 +1,25 @@
+easyblock = 'ConfigureMake'
+
+name = 'JasPer'
+version = '1.900.1'
+
+homepage = 'http://www.ece.uvic.ca/~frodo/jasper/'
+description = """
+The JasPer Project is an open-source initiative to provide a free 
+software-based reference implementation of the codec specified in 
+the JPEG-2000 Part-1 standard.
+"""
+
+toolchain = {'name': 'CrayCCE', 'version': '20.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.ece.uvic.ca/~frodo/%(namelower)s/software/']
+sources = [SOURCELOWER_ZIP]
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'lib/libjasper.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'vis'

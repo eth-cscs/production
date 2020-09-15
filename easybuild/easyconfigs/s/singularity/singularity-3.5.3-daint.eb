@@ -22,9 +22,9 @@ if { ![ is-loaded PrgEnv-gnu ] } {
 
 # Swap the cray-mpich with the cray-mpich-abi
 if { [ is-loaded cray-mpich ] } {
-    module swap cray-mpich cray-mpich-abi/7.7.10
+    module swap cray-mpich cray-mpich-abi
 } else {
-    module load cray-mpich-abi/7.7.10
+    module load cray-mpich-abi
 }
 
 # Load the wlm_detect module
@@ -34,6 +34,6 @@ if { ![ is-loaded wlm_detect ] } {
 
 module load singularity/3.5.3
 
-setenv SINGULARITY_BIND /opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/8.3.0,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
+setenv SINGULARITY_BIND /opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/9.3.0,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
 setenv SINGULARITYENV_LD_LIBRARY_PATH "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/pe/lib64:/opt/cray/pe/gcc-libs:/lib64"
 """

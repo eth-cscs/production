@@ -1,0 +1,54 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'CP2K'
+version = '7.1'
+
+homepage = 'http://www.cp2k.org/'
+description = """
+    CP2K is a freely available (GPL) program, written in Fortran 95, to
+    perform atomistic and molecular simulations of solid state, liquid,
+    molecular and biological systems. It provides a general framework for
+    different methods such as e.g. density functional theory (DFT) using a
+    mixed Gaussian and plane waves approach (GPW), and classical pair and
+    many-body potentials.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/releases/download/v7.1.0']
+sources = [SOURCELOWER_TAR_BZ2]
+patches = [('%(name)s-%(version)s-%(toolchain_name)s.psmp', '%(builddir)s/%(namelower)s-%(version)s/arch')]
+
+builddependencies = [
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-libsci', EXTERNAL_MODULE),
+    ('Bison', '3.3.2'),
+    ('flex', '2.6.4'),
+]
+dependencies = [
+    ('ELPA', '2019.11.001'),
+    ('Libint-CP2K', '2.6.0'),
+    ('libxc', '4.3.4'),
+]
+
+# build type
+buildopts = "ARCH=%(name)s-%(version)s-%(toolchain_name)s VERSION=psmp"
+
+files_to_copy = [
+    (['./arch/%(name)s-%(version)s-%(toolchain_name)s.psmp'], 'arch'),
+    (['./exe/%(name)s-%(version)s-%(toolchain_name)s/*'], 'bin'),
+    (['./data'], '.'),
+    (['./tests'], '.'),
+]
+
+sanity_check_paths = {
+    'files': ['arch/%(name)s-%(version)s-%(toolchain_name)s.psmp', 'bin/%(namelower)s.psmp'],
+    'dirs': ['data', 'tests'],
+}
+
+# set custom CP2K_DATA_DIR
+modextravars = {'CP2K_DATA_DIR': '%(installdir)s/data'}
+
+moduleclass = 'chem'

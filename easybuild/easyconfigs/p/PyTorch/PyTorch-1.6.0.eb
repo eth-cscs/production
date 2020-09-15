@@ -1,0 +1,77 @@
+#
+easyblock = 'Conda'
+
+name = 'PyTorch'
+version = '1.6.0'
+
+homepage = 'https://pytorch.org/'
+description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
+PyTorch is a deep learning framework that puts Python first."""
+
+toolchain = SYSTEM
+
+dependencies = [
+    ('Miniconda3', '4.7.10', '', True),
+]
+
+requirements  = ' python==3.8.5=h4d41432_2_cpython'
+requirements += ' pytorch==1.6.0=py3.8_cuda10.1.243_cudnn7.6.3_0'
+requirements += ' torchvision==0.7.0=py38_cu101'
+requirements += ' cudatoolkit==10.1.243=h6bb024c_0'
+requirements += ' cudatoolkit-dev==10.1.243=h516909a_3'
+requirements += ' nccl==2.5.7.1=h51cf6c1_0'
+
+## 3rd party dependencies
+requirements += ' _libgcc_mutex==0.1=conda_forge'
+requirements += ' _openmp_mutex==4.5=1_llvm'
+requirements += ' blas==1.0=mkl'
+requirements += ' ca-certificates==2020.6.20=hecda079_0'
+requirements += ' certifi==2020.6.20=py38h32f6830_0'
+requirements += ' freetype==2.10.2=he06d7ca_0'
+requirements += ' jpeg==9d=h516909a_0'
+requirements += ' lcms2==2.11=hbd6801e_0'
+requirements += ' ld_impl_linux-64==2.34=hc38a660_9'
+requirements += ' libffi==3.2.1=he1b5a44_1007'
+requirements += ' libgcc-ng==9.3.0=h24d8f2e_14'
+requirements += ' libpng==1.6.37=hed695b0_1'
+requirements += ' libstdcxx-ng==9.3.0=hdf63c60_14'
+requirements += ' libtiff==4.1.0=hc7e4089_6'
+requirements += ' libwebp-base==1.1.0=h516909a_3'
+requirements += ' llvm-openmp==10.0.1=hc9558a2_0'
+requirements += ' lz4-c==1.9.2=he1b5a44_1'
+requirements += ' mkl==2019.5=281'
+requirements += ' mkl-service==2.3.0=py38h516909a_0'
+requirements += ' mkl_fft==1.1.0=py38hc1659b7_1'
+requirements += ' mkl_random==1.1.0=py38hb3f55d8_0'
+requirements += ' nccl==2.5.7.1=h51cf6c1_0'
+requirements += ' ncurses==6.2=he1b5a44_1'
+requirements += ' ninja==1.10.0=hc9558a2_0'
+requirements += ' numpy==1.19.1=py38hbc911f0_0'
+requirements += ' numpy-base==1.19.1=py38hfa32c7d_0'
+requirements += ' olefile==0.46=py_0'
+requirements += ' openssl==1.1.1g=h516909a_1'
+requirements += ' pillow==7.2.0=py38h9776b28_1'
+requirements += ' pip==20.2.1=py_0'
+requirements += ' python_abi==3.8=1_cp38'
+requirements += ' readline==8.0=he28a2e2_2'
+requirements += ' setuptools==49.3.0=py38h32f6830_0'
+requirements += ' six==1.15.0=pyh9f0ad1d_0'
+requirements += ' sqlite==3.32.3=hcee41ef_1'
+requirements += ' tk==8.6.10=hed695b0_0'
+requirements += ' wheel==0.34.2=py_1'
+requirements += ' xz==5.2.5=h516909a_1'
+requirements += ' zlib==1.2.11=h516909a_1007'
+requirements += ' zstd==1.4.5=h6597ccf_2'
+
+requirements += ' -c pytorch'
+requirements += ' -c conda-forge'
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python3.8/site-packages/torch'],
+}
+
+sanity_check_commands = ['python -c "import torch; assert torch.__version__ == \'%(version)s\'"']
+
+moduleclass = 'lib'

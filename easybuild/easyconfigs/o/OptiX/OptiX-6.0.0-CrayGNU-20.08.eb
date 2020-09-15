@@ -1,0 +1,23 @@
+# contributed by Jean Favre (CSCS)
+easyblock = 'Tarball'
+
+name = 'OptiX'
+version = '6.0.0'
+
+homepage = 'https://developer.nvidia.com/optix'
+description = "A software development kit for achieving high performance ray tracing on the GPU"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+# NVIDIA OptiX is behind a secure wall and one needs credentials to access it. I downloaded the package to
+# my desktop, re-tarred it, and placed it in /apps/common/UES/easybuild/sources/o/OptiX
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(name)s-%(version)s.tar.gz']
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib64'],
+}
+
+moduleclass = 'devel'

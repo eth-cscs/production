@@ -1,0 +1,55 @@
+#
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'VTK'
+version = '9.0.0'
+versionsuffix = '-EGL-python%(pymajver)s'
+
+homepage = 'http://www.vtk.org'
+description = """The Visualization Toolkit (VTK) is an open-source, freely
+available software system for 3D computer graphics, image processing and
+visualization. VTK consists of a C++ class library and several interpreted
+interface layers including Tcl/Tk, Java, and Python. VTK supports a wide
+variety of visualization algorithms including: scalar, vector, tensor, texture,
+and volumetric methods; and advanced modeling techniques such as: implicit
+modeling, polygon reduction, mesh smoothing, cutting, contouring, and Delaunay
+triangulation."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['http://www.%(namelower)s.org/files/release/%(version_major_minor)s']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('ospray', '1.8.5'),
+    ('oidn', '1.1.0'),
+    ('VisRTX', '0.1.6', '-cuda'),
+]
+
+configopts = '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_BUILD_TESTING:STRING=OFF -DVTK_PYTHON_VERSION:STRING=3 -DVTK_WRAP_PYTHON:BOOL=ON -DCMAKE_C_COMPILER:PATH=`which cc` -DCMAKE_CXX_COMPILER:PATH=`which CC` -DVTK_MODULE_ENABLE_VTK_RenderingRayTracing:STRING=YES -DVTK_ENABLE_OSPRAY:BOOL=ON -DVTK_ENABLE_VISRTX:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -Dospray_DIR="$EBROOTOSPRAY" -DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" -DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include -DTBB_LIBRARY_RELEASE:FILEPATH="$EBROOTOSPRAY/lib/libtbb.so" -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH="$EBROOTOSPRAY/lib/libtbbmalloc.so " -DVTK_USE_X=OFF -DVTK_OPENGL_HAS_EGL:BOOL=ON -DEGL_INCLUDE_DIR:PATH=/users/jfavre/Projects/EGL/code-samples/posts/egl_OpenGl_without_Xserver -DOPENGL_egl_LIBRARY:FILEPATH=/usr/lib64/libEGL.so -DOPENGL_opengl_LIBRARY:FILEPATH=/usr/lib64/libOpenGL.so '
+
+maxparallel = 16
+
+
+sanity_check_paths = {
+    'files': ['bin/vtkpython'],
+    'dirs': ['lib64/python%(pyshortver)s/site-packages/', 'include/%(namelower)s-%(version_major_minor)s'],
+}
+
+sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
+
+modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
+
+modextravars = {
+    'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-%(arch)s-418.39:$::env(LD_LIBRARY_PATH)',
+}
+
+moduleclass = 'vis'

@@ -1,0 +1,56 @@
+# @author: twrobinson, sarafael, gppezzi
+easyblock = 'PythonBundle'
+
+name = 'IPython'
+version = '7.7.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://pypi.python.org/pypi'
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+postinstallcmds = [
+    "mkdir %(installdir)s/startup && cp /apps/common/UES/easybuild/sources/i/%(name)s/00-detect-virtualenv-sitepackages.py %(installdir)s/startup && cp /apps/common/UES/easybuild/sources/i/%(name)s/01-ipcmagic-cscs.py %(installdir)s/startup",
+]
+# bundle of Python packages
+exts_defaultclass = 'PythonPackage'
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+}
+
+exts_list = [
+    ('decorator', '4.4.0', {'source_urls': ['https://pypi.python.org/packages/source/d/decorator/']}),
+    ('wcwidth', '0.1.7', {'source_urls': ['https://pypi.python.org/packages/source/w/wcwidth/']}),
+    ('prompt_toolkit', '2.0.9', {'source_urls': ['https://pypi.python.org/packages/source/p/prompt_toolkit/']}),
+    ('pickleshare', '0.7.5', {'source_urls': ['https://pypi.python.org/packages/source/p/pickleshare/']}),
+    ('parso', '0.5.1', {'source_urls': ['https://pypi.python.org/packages/source/p/parso/']}),
+    ('jedi', '0.14.1', {'source_urls': ['https://pypi.python.org/packages/source/j/jedi/']}),
+    ('ptyprocess', '0.6.0', {'source_urls': ['https://pypi.python.org/packages/source/p/ptyprocess/']}),
+    ('pexpect', '4.7.0', {'source_urls': ['https://pypi.python.org/packages/source/p/pexpect/']}),
+    ('ipython_genutils', '0.2.0', {'source_urls': ['https://pypi.python.org/packages/source/i/ipython_genutils/']}),
+    ('traitlets', '4.3.2', {'source_urls': ['https://pypi.python.org/packages/source/t/traitlets/']}),
+    ('backcall', '0.1.0', {'source_urls': ['https://pypi.python.org/packages/source/b/backcall/']}),
+    ('Pygments', '2.4.0', {'source_urls': ['https://pypi.python.org/packages/source/p/Pygments/']}),
+    ('ipython', '7.7.0', {'modulename': 'IPython', 'patches': ['ipython-7.7.0-jupyter.patch'], 'source_urls': ['https://pypi.python.org/packages/source/i/ipython/']}),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+sanity_check_commands = [('%(namelower)s -h', '')]
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+moduleclass = 'tools'

@@ -1,0 +1,30 @@
+# contributed by Simon Pintarelli (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SpFFT'
+version = '0.9.10'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/eth-cscs/SpFFT'
+description = "Sparse 3D FFT library with MPI, OpenMP, CUDA and ROCm support"
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
+
+source_urls = ['https://github.com/eth-cscs/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=RELEASE -DSPFFT_GPU_BACKEND=CUDA -DSPFFT_SINGLE_PRECISION=ON -DSPFFT_MPI=ON -DSPFFT_OMP=ON"
+
+
+sanity_check_paths = {
+    'files': ['lib/libspfft.so', 'include/%(namelower)s/config.h', 'include/%(namelower)s/%(namelower)s.hpp'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

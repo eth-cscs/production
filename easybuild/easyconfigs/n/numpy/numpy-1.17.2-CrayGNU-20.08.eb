@@ -1,0 +1,35 @@
+easyblock = 'PythonPackage'
+
+name = 'numpy'
+version = '1.17.2'
+
+homepage = 'https://github.com/numpy/numpy'
+description = """NumPy is the fundamental package for scientific computing with Python. It contains among other things:
+ a powerful N-dimensional array object, sophisticated (broadcasting) functions, tools for integrating C/C++ and Fortran
+ code, useful linear algebra, Fourier transform, and random number capabilities. Besides its obvious scientific uses,
+ NumPy can also be used as an efficient multi-dimensional container of generic data. Arbitrary data-types can be
+ defined. This allows NumPy to seamlessly and speedily integrate with a wide variety of databases."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v1.17.2']
+sources = [SOURCELOWER_TAR_GZ]
+patches = [('mkl-2020-sitecfg.patch', 1)]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+skipsteps = ['build']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextravars = {
+    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)',
+}
+
+moduleclass = 'tools'

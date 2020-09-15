@@ -1,0 +1,43 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.70.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_70_0.tar.gz']
+patches = ['%(name)s-%(version)s-python%(pymajver)s.patch']
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = " --with-python=$(EBROOTPYTHON)/bin/python  --with-python-version=%(pyshortver)s --with-python-root=$(EBROOTPYTHON)/lib/python%(pyshortver)s"
+
+# also build boost_mpi
+boost_mpi = True
+
+# CURRENTLY DISABLED, SINCE IT LEADS TO COMPATIBILITY ISSUES (e. g. with ParaView, HPX)
+#
+# postinstallcmds = ['module load craypkg-gen && craypkg-gen -p %(installdir)s']
+#
+# modtclfooter = """
+# setenv PE_PKGCONFIG_LIBS boost_python36
+# """
+
+# for python3 the corresponding lib is libboost_python36.so
+sanity_check_paths = {
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so', 'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
+    'dirs': ['include/%(namelower)s'],
+}
+
+moduleclass = 'devel'

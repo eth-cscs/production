@@ -1,0 +1,51 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QuantumESPRESSO'
+version = '6.5a1'
+versionsuffix = '-cuda'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes for
+electronic-structure calculations and materials modeling at the nanoscale. It
+is based on density-functional theory, plane waves, and pseudopotentials (both
+norm-conserving and ultrasoft). 
+
+Note: PGI Fortran gives the warning "ieee_inexact FORTRAN STOP" with QE GPU.  
+Set NO_STOP_MESSAGES=1 in your batch script to avoid the warning.
+More details on the PGI User Forum at https://www.pgroup.com/userforum
+"""
+
+toolchain = {'name': 'CrayPGI', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
+
+source_urls = ['https://gitlab.com/QEF/q-e-gpu/-/archive/qe-gpu-%(version)s/']
+sources = ['q-e-gpu-qe-gpu-%(version)s.tar.bz2']
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('intel', EXTERNAL_MODULE),
+]
+
+# Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
+configopts = ' CUDA_HOME=$CUDATOOLKIT_HOME CC=cc F77=pgf90 MPIF90=ftn  LAPACK_LIBS="$MKLROOT/lib/intel64/libmkl_lapack95_lp64.a"  BLAS_LIBS="$MKLROOT/lib/intel64/libmkl_blas95_lp64.a"  FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core"  --enable-openmp --enable-parallel --with-scalapack=no  --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60  --with-cuda-runtime=%(cudashortver)s '
+
+# the experimental CUDA-Aware MPI (-D__GPU_MPI) does not work!
+prebuildopts = """
+    sed -i -e 's/FFTW3/DFTI/'     -e 's#^IFLAGS .*#& -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw#'     -e 's/^CUDA_F90FLAGS=/CUDA_F90FLAGS  = CUDA_HOME=$(CUDATOOLKIT_HOME) /'     -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/'     -e 's/^CFLAGS .*/CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)/'     -e 's/^F90FLAGS .*/F90FLAGS       = -fast -Mcache_align -Mpreprocess -Mlarge_arrays -mp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/'     -e 's/^FFLAGS .*/FFLAGS         = $(F90FLAGS)/'     -e 's/^LDFLAGS .*/LDFLAGS        = CUDA_HOME=$(CUDATOOLKIT_HOME) -pgf90libs -mp -Mcuda=cc60/'     make.inc &&
+ OPTFLAGS=CUDA_HOME=$CUDATOOLKIT_HOME &&  cat make.inc && """
+# targets 'hp' and 'gwl' fail with release 6.5a1
+buildopts = " pwall cp ld1 upf tddfpt xspectra "
+
+# single make process
+maxparallel = 1
+
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'

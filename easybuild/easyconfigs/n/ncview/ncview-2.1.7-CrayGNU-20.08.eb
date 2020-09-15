@@ -1,0 +1,31 @@
+# built from previous software version
+easyblock = 'ConfigureMake'
+
+name = 'ncview'
+version = '2.1.7'
+
+homepage = 'http://meteora.ucsd.edu/~pierce/ncview_home_page.html'
+description = "Ncview is a visual browser for netCDF format files."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['ftp://cirrus.ucsd.edu/pub/%(name)s/']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('UDUNITS', '2.2.26', '', True),
+    ('libpng', '1.6.34', '', True),
+]
+
+configopts = 'CC=cc'
+
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
