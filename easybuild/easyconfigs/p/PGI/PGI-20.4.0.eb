@@ -1,0 +1,57 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'PGI'
+version = '20.4.0'
+# local_cudaversion = '10.2'
+# versionsuffix = '-cuda-%s' % local_cudaversion
+homepage = 'https://docs.nvidia.com/hpc-sdk/pgi-compilers/20.4/x86/pgi-release-notes/index.htm#what-is-new-204'
+description = """C, C++ and Fortran compilers from
+https://www.pgroup.com/support/release_archive.php?release=2020"""
+toolchain = SYSTEM
+sources = [(
+    '/apps/common/UES/easybuild/sources/p/PGI/pgilinux-20%(version_major)s-'
+    '%(version_major)s%(version_minor)s-x86-64.tar.gz' 
+)]
+# 'export PGI_INSTALL_MANAGED=false && '
+postinstallcmds = [
+    'pwd && ls -la && '
+    'export PGI_SILENT=true && '
+    'export PGI_ACCEPT_EULA=accept && '
+    'export PGI_INSTALL_DIR=%(installdir)s && '
+    'export PGI_INSTALL_JAVA=false && '
+    'export PGI_INSTALL_MPI=false && '
+    'export PGI_INSTALL_AMD=false && '
+    './install && '
+    'rm -fr %(installdir)s/install_components ']
+local_dir = 'linux86-64/2020'
+local_bins = ['pgc++', 'pgcc', 'pgf95']
+sanity_check_paths = {
+    'files': ['%s/bin/%s' % (local_dir, x) for x in local_bins],
+    'dirs': [local_dir],
+}
+modextravars = {
+    # 'PGI': '%(installdir)s',
+    'PGI_VERSION': '20.4',
+    'PGI_VERS_STR': '20.4.0',
+    'PGI_PATH': '%(installdir)s',
+    'PGI': '%(installdir)s',
+    # 'CPP': 'cpp',
+    # 'CC': 'nvc',
+    # 'CXX': 'nvc++',
+    # 'FC': 'nvfortran',
+    # 'F90': 'nvfortran',
+    # 'F77': 'nvfortran',
+}
+modextrapaths = {
+    'MANPATH': ['%s/man' % local_dir],
+    'PATH': [
+        '%s/bin/' % local_dir,
+        '%s/cuda/10.2/bin/' % local_dir,
+        '%s/share/llvm/bin/' % local_dir,
+    ],
+    'LD_LIBRARY_PATH': ['%s/lib/' % local_dir],
+    # 'MODULEPATH': 'modulefiles',
+}
+
+moduleclass = 'devel'
