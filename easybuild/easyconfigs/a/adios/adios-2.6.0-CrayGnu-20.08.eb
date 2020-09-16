@@ -30,6 +30,7 @@ configopts  += '-DADIOS2_USE_Python:BOOL=ON '
 configopts  += '-DADIOS2_USE_Fortran:BOOL=ON '
 configopts  += '-DADIOS2_USE_SST:BOOL=ON '
 configopts  += '-DADIOS2_USE_BZip2:BOOL=ON '
+configopts  += '-DADIOS2_USE_SZ:BOOL=ON '
 configopts  += '-DADIOS2_USE_Blosc:BOOL=ON '
 #configopts  = '-DCMAKE_BUILD_TYPE=RelWithDebInfo '
 
@@ -38,6 +39,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
     ('bzip2', '1.0.8'),
+    ('sz', '2.1.9'),
     ('blosc', '1.20.1'),
 ]
 
@@ -46,7 +48,7 @@ parallel = 16
 # create pkgconfig files
 postinstallcmds = [
     'mkdir %(installdir)s/lib/pkgconfig',
-    'echo -e "prefix=%(installdir)s \n\nName: adios2 \nDescription: ADIOS2 I/O library \nVersion: %(version)s \n\nRequires: bzip2, blosc \n\nLibs: $(%(installdir)s/bin/adios2-config --c-libs) \nCflags: $(%(installdir)s/bin/adios2-config --c-flags)" > %(installdir)s/lib/pkgconfig/adios2.pc',
+    'echo -e "prefix=%(installdir)s \n\nName: adios2 \nDescription: ADIOS2 I/O library \nVersion: %(version)s \n\nRequires: bzip2, sz, blosc \n\nLibs: $(%(installdir)s/bin/adios2-config --c-libs) \nCflags: $(%(installdir)s/bin/adios2-config --c-flags)" > %(installdir)s/lib/pkgconfig/adios2.pc',
     'echo -e "prefix=%(installdir)s \n\nName: adios2_cxx \nDescription: ADIOS2 I/O library (C++) \nVersion: %(version)s \n\nLibs: $(%(installdir)s/bin/adios2-config --cxx-libs) \nCXXflags: $(%(installdir)s/bin/adios2-config --cxx-flags)" > %(installdir)s/lib/pkgconfig/adios2_cxx.pc',
     'echo -e "prefix=%(installdir)s \n\nName: adios2_f \nDescription: ADIOS2 I/O library (Fortran) \nVersion: %(version)s \n\nLibs: $(%(installdir)s/bin/adios2-config --fortran-libs) \nCflags: $(%(installdir)s/bin/adios2-config --fortran-flags)" > %(installdir)s/lib/pkgconfig/adios2_f.pc',
 ]
