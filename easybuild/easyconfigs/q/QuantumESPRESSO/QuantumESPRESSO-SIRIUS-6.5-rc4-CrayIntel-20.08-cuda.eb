@@ -15,7 +15,7 @@ toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'op
 sources = ['https://github.com/electronic-structure/q-e-sirius/archive/v%(version)s-sirius.tar.gz']
 
 dependencies = [
-    ('SIRIUS', '6.5.3', '-cuda'),
+    ('SIRIUS', '6.5.6', '-cuda'),
 ]
 
 preconfigopts = "module unload cray-libsci && module load gcc/8.3.0 && module list &&  CC=cc FC=ftn CPP=cpp MPIF90=ftn "
