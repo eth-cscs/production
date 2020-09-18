@@ -4,7 +4,8 @@ easyblock = 'ConfigureMake'
 
 name = 'QuantumESPRESSO-SIRIUS'
 version = '6.5-rc4'
-versionsuffix = '-cuda'
+local_siriusversion = '6.5.6'
+versionsuffix = '-SIRIUS-%s-cuda' % local_siriusversion
 
 homepage = 'https://github.com/electronic-structure/q-e-sirius/'
 description = " SIRIUS-enabled version of Quantum ESPRESSO "
@@ -15,7 +16,7 @@ toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'op
 sources = ['https://github.com/electronic-structure/q-e-sirius/archive/v%(version)s-sirius.tar.gz']
 
 dependencies = [
-    ('SIRIUS', '6.5.6', '-cuda'),
+    ('SIRIUS', '%s' % local_siriusversion, '-cuda'),
 ]
 
 preconfigopts = "module unload cray-libsci && module load gcc/8.3.0 && module list &&  CC=cc FC=ftn CPP=cpp MPIF90=ftn "
