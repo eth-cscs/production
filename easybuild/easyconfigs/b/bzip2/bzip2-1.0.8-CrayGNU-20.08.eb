@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), Samuel Omlin (CSCS)
 name = 'bzip2'
 version = '1.0.8'
 
@@ -13,7 +13,7 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '20.08'}
 toolchainopts = {'pic': True}
 
-source_urls = [SOURCEFORGE_SOURCE]
+source_urls = ['https://sourceware.org/pub/%(namelower)s/']
 sources = [SOURCE_TAR_GZ]
 
 # create pkgconfig file
