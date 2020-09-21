@@ -1,14 +1,13 @@
 easyblock = 'CMakeMake'
 
 name = 'SpFFT'
-version = '0.9.9'
-cudaversion = '10.1'
-versionsuffix = '-cuda-%s' % cudaversion
+version = '0.9.10'
+versionsuffix = '-cuda-mkl'
 
 homepage = 'https://github.com/eth-cscs/SpFFT'
 description = """Sparse 3D FFT library with MPI, OpenMP, CUDA and ROCm support"""
 
-toolchain = {'name': 'CrayIntel', 'version': '19.10'}
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
 toolchainopts = {'usempi': True, 'openmp': True, 'pic': True, 'verbose': False, 'opt': True}
 
 source_urls = ['https://github.com/eth-cscs/SpFFT/archive']
@@ -17,8 +16,8 @@ sources = ['v%(version)s.tar.gz']
 builddependencies = [('CMake', '3.14.5', '', True)]
 
 dependencies = [
-  ('cudatoolkit/%s.105_3.27-7.0.1.1_4.1__ga311ce7' % cudaversion , EXTERNAL_MODULE),
-  ('intel/19.0.1.144', EXTERNAL_MODULE),
+  ('cudatoolkit', EXTERNAL_MODULE),
+  ('intel/19.1.1.217', EXTERNAL_MODULE),
 ]
 
 separate_build_dir = True
