@@ -35,11 +35,12 @@
  LAMMPS-03Mar20-CrayGNU-20.08-cuda.eb                   --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  magma-2.4.0-CrayIntel-20.08-cuda.eb                    --set-default-module
+ MATLAB-R2019a.eb                                       --set-default-module
  NAMD-2.13-CrayIntel-20.08-cuda.eb                      --set-default-module
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-20.08.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-20.08.eb                          --set-default-module
- netcdf-python-1.4.1-CrayGNU-20.08-python3.eb           --set-default-module
+ netcdf-python-1.5.4-CrayGNU-20.08-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.08.eb                          --set-default-module
  ParaView-5.8.1-CrayGNU-20.08-EGL-python3.eb            --set-default-module
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
