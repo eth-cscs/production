@@ -1,5 +1,4 @@
-# created by Anton Kozhevnikov (CSCS)
-# modified by Simon Pintarelli (CSCS)
+# created by Anton Kozhevnikov, modified by Simon Pintarelli (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'QuantumESPRESSO-SIRIUS'
@@ -15,7 +14,7 @@ toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'op
 sources = ['https://github.com/electronic-structure/q-e-sirius/archive/v%(version)s-sirius.tar.gz']
 
 dependencies = [
-    ('SIRIUS', '6.5.6', '-cuda'),
+    ('SIRIUS', '6.5.3', '-cuda'),
 ]
 
 preconfigopts = "module unload cray-libsci && module load gcc/8.3.0 && module list &&  CC=cc FC=ftn CPP=cpp MPIF90=ftn "
@@ -30,7 +29,6 @@ prebuildopts += 'sed -i -e "s/BLAS_LIBS_SWITCH = internal/BLAS_LIBS_SWITCH = ext
 prebuildopts += 'sed -i -e "s/^LD_LIBS\ *=\ *.*/LD_LIBS = -lsirius -L\$MKLROOT\/lib\/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -qopenmp/" make.inc && '
 prebuildopts += 'cat make.inc && '
 buildopts = 'pw'
-
 
 sanity_check_paths = {
     'files': ['bin/pw.x'],
