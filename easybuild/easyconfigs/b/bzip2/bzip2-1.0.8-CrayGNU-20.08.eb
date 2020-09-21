@@ -35,4 +35,4 @@ Cflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc""",
 # prepend PKG_CONFIG_PATH: EasyBuild does this automatically
 # modextrapaths = {'PKG_CONFIG_PATH': ['lib/pkgconfig']}
 
-moduleclass = 'tools'
+moduleclass = 'lib'
