@@ -91,4 +91,4 @@ modextravars = {
 
 
 # check other easyconfigs for possible options
-moduleclass = 'base'
+moduleclass = 'lib'
