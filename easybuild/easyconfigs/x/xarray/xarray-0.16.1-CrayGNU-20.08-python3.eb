@@ -1,0 +1,29 @@
+# jg (CSCS), teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'xarray'
+version = '0.16.1'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/pydata/xarray'
+description = 'N-D labeled arrays and datasets in Python: http://xarray.pydata.org'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('netcdf-python', '1.5.4', '-python%(pymajver)s'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s.egg']
+}
+
+moduleclass = 'data'
