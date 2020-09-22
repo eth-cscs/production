@@ -22,7 +22,6 @@ builddependencies = [
     ('Tcl', '8.6.7'),
     ('cray-fftw', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
-    ('perftools-base', EXTERNAL_MODULE),
     ('perftools-lite', EXTERNAL_MODULE)
 ]
 
