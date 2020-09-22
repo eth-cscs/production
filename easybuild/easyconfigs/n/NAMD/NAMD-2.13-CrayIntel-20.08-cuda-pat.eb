@@ -21,7 +21,6 @@ builddependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE),
-    ('perftools-base', EXTERNAL_MODULE),
     ('perftools-lite', EXTERNAL_MODULE)
 ]
 
