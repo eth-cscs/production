@@ -21,10 +21,8 @@ builddependencies = [
 ]
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
-    #('ELPA', '2019.11.001', '-cuda'),
     ('GSL', '2.5'),
     ('libxc', '4.3.4'),
-    #('magma', '2.5.3', '-cuda'),
     ('SpFFT', '0.9.10', '-cuda-mkl'),
     ('spglib', '1.16.0'),
 ]
