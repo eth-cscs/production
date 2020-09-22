@@ -28,6 +28,7 @@ dependencies = [
     ('spglib', '1.16.0'),
 ]
 
+preconfigopts = ' module unload perftools-lite && ' 
 configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=0 -DUSE_MAGMA=0 -DUSE_MKL=1 -DUSE_SCALAPACK=0 -DUSE_ELPA=0 -DGPU_MODEL='P100' -DSpFFT_DIR=$EBROOTSPFFT/lib64/cmake/SpFFT"
 
 prebuildopts = "module unload cray-libsci && module unload cray-libsci_acc && module load gcc/8.3.0 && module list &&"
