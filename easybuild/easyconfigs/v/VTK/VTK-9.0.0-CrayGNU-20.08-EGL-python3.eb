@@ -49,7 +49,7 @@ sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
 modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
 
 modextravars = {
-    'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:/project/g33/messmerp/cosmo/backup/vizlibs:/project/g33/messmerp/driver/NVIDIA-Linux-%(arch)s-418.39:$::env(LD_LIBRARY_PATH)',
+    'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:$::env(LD_LIBRARY_PATH)',
 }
 
 moduleclass = 'vis'
