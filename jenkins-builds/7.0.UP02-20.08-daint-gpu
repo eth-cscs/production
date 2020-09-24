@@ -49,6 +49,7 @@
  PyExtensions-python3-CrayGNU-20.08.eb                  --set-default-module
  Python-bare-3.7.3.eb                                   --hidden
  QuantumESPRESSO-6.5a1-CrayPGI-20.08-cuda.eb            --set-default-module
+ QuantumESPRESSO-6.6a2-CrayPGI-20.08-cuda.eb
  QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-20.08-cuda.eb   --set-default-module
  singularity-3.5.3-daint.eb
  Spark-2.3.1-CrayGNU-20.08-Hadoop-2.7.eb                --set-default-module
