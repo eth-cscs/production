@@ -265,7 +265,7 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter-labextension install itkwidgets@0.31.4 --no-build && #bumped to 0.31.4 from 0.25.3
 %%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.3 --no-build && #bumped to 0.7.3 from 0.4.2 
 %%(installdir)s/bin/jupyter labextension install -y plotlywidget@4.9.0 --no-build && #bumped from 1.0.0 to 4.9.0
-%%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly --no-build && #added for jlab 2
+%%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@4.10.0 --debug --no-build && #added for jlab 2
 %%(installdir)s/bin/jupyter labextension install -y @bokeh/jupyter_bokeh@2.0.3 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y bqplot@0.5.14 --no-build && 
 %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.5 --debug --no-build &&  #hard coded 1.3.5 to match pip python module above
