@@ -19,6 +19,9 @@
  HPX-1.4.0-CrayGNU-20.08.eb                             --set-default-module
  HPX-1.4.0-CrayGNU-20.08-APEX.eb
  HPX-1.4.0-CrayGNU-20.08-nonetworking.eb
+ HPX-1.5.0-CrayGNU-20.08.eb
+ HPX-1.5.0-CrayGNU-20.08-APEX.eb
+ HPX-1.5.0-CrayGNU-20.08-nonetworking.eb
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-serial.eb            --set-default-module
