@@ -25,7 +25,7 @@ dependencies = [
     ('CubeLib', '4.5'),
     ('CubeW', '4.5'),
     ('OPARI2', '2.0.5', '', True),
-    ('PDT', '3.25', '', True),
+    ('PDT', '3.25.1', '', True),
     ('SIONlib', '1.7.6l'),
     ('vampir', '9.9.0', '', True),
     # OTF2: will build with internal/scorep version of otf2, keeping as remind

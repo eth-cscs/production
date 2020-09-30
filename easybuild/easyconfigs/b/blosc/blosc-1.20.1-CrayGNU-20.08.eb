@@ -28,7 +28,7 @@ configopts += '-DBUILD_TESTS:BOOL=OFF '
 
 sanity_check_paths = {
     'files': ['include/blosc.h', 'include/blosc-export.h', 'lib64/libblosc.so'],
-    'dirs': [ 'lib64/pkgconfig' ]
+    'dirs': [ 'lib/pkgconfig' ]
 }
 
-moduleclass = 'vis'
+moduleclass = 'lib'

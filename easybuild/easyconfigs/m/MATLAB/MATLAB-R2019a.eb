@@ -7,18 +7,18 @@ description = """MATLAB is a high-level language and interactive environment
  that enables you to perform computationally intensive tasks faster than with
  traditional programming languages such as C, C++, and Fortran."""
 
-toolchain = {'name': 'dummy', 'version': ''}
+toolchain = SYSTEM
 
 sources = [ '/apps/common/UES/easybuild/sources/m/MATLAB/%s.tar' % version]
 
-# read configuration file: filename in local EASYBUILD_SOURCEPATH is "name"-"version".txt
-import re
-filename = '/apps/common/UES/easybuild/sources/m/MATLAB/' + '%s-%s.txt' % (name, version)
-with open (filename, 'r') as myfile:
-    text = myfile.read()
+# read configuration file: local_filename in local EASYBUILD_SOURCEPATH is "name"-"version".txt
+import re as local_re
+local_filename = '/apps/common/UES/easybuild/sources/m/MATLAB/' + '%s-%s.txt' % (name, version)
+with open (local_filename, 'r') as local_myfile:
+    local_text = local_myfile.read()
 # the file lists key, license_server and license_server_port
-key = re.search("key = \'(.+)\'", text).group(1)
-license_server = re.search("license_server = \'(.+)\'", text).group(1)
-license_server_port = re.search("license_server_port = \'(.+)\'", text).group(1)
+key = local_re.search("key = \'(.+)\'", local_text).group(1)
+license_server = local_re.search("license_server = \'(.+)\'", local_text).group(1)
+license_server_port = local_re.search("license_server_port = \'(.+)\'", local_text).group(1)
 
 moduleclass = 'math'
