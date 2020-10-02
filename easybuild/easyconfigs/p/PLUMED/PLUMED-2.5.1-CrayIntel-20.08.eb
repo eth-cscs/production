@@ -5,7 +5,7 @@ easyblock = 'ConfigureMake'
 name = 'PLUMED'
 version = '2.5.1'
 
-homepage = 'http://www.plumed-code.org'
+homepage = 'https://www.plumed.org'
 description = """PLUMED is an open source library for free energy calculations in molecular systems which
  works together with some of the most popular molecular dynamics engines. Free energy calculations can be
  performed as a function of many order parameters with a particular  focus on biological problems, using
