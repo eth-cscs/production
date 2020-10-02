@@ -18,7 +18,6 @@ toolchainopts = {'usempi': 'True'}
 
 source_urls = ['https://github.com/%(namelower)s/plumed2/archive/']
 sources = ['v%(version)s.tar.gz']
-patches = ['%(namelower)s-compiler.patch']
 
 dependencies = [
     ('zlib', '1.2.11'),
