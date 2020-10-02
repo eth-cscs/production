@@ -45,7 +45,7 @@ exts_list = [
     ('amqp', '2.2.2'),
     ('kombu', '4.1.0'),
     ('billiard', '3.5.0.3'),
-    ('celery', '4.1.0'),
+    ('celery', '5.0.0'),
     ('python-dateutil', '2.7.2', {
         'modulename': 'dateutil'
     }),
@@ -83,5 +83,7 @@ sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
+
+sanity_check_commands = ['oq engine --help']
 
 moduleclass = 'tools'
