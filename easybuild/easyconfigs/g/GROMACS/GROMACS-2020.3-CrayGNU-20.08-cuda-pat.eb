@@ -28,13 +28,12 @@ sources = [SOURCELOWER_TAR_GZ]
 
 # CMake dependency with dummy toolchain
 builddependencies = [
-    ('CMake', '3.14.1', '', True),
+    ('CMake', '3.14.5', '', True),
     ('perftools-lite', EXTERNAL_MODULE),
 ]
 
 dependencies = [
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
-    ('cray-libsci', EXTERNAL_MODULE)
 ]
 
 local_common_options = '-DCMAKE_BUILD_TYPE=Release -DCUDA_TOOLKIT_ROOT_DIR=$CUDATOOLKIT_HOME -DGMX_BUILD_OWN_FFTW=ON -DGMX_OPENMP=ON -DGMX_GPU=ON -DGMX_PREFER_STATIC_LIBS=ON -DGMX_SIMD=AVX2_256 -DGMX_CYCLE_SUBCOUNTERS=ON '
