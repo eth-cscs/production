@@ -14,8 +14,7 @@
 easyblock = 'CMakeMake'
 name = 'GROMACS'
 version = "2020.3"
-local_patversion = '7.1.1'
-versionsuffix = '-cuda-pat%s' % (local_patversion)
+versionsuffix = '-cuda-pat'
 
 homepage = 'http://www.gromacs.org'
 description = """GROMACS is a versatile package to perform molecular dynamics,
@@ -30,7 +29,7 @@ sources = [SOURCELOWER_TAR_GZ]
 # CMake dependency with dummy toolchain
 builddependencies = [
     ('CMake', '3.14.1', '', True),
-    ('perftools-lite/%s' % local_patversion, EXTERNAL_MODULE),
+    ('perftools-lite', EXTERNAL_MODULE),
 ]
 
 dependencies = [
