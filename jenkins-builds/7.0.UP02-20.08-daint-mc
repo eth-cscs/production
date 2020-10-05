@@ -12,6 +12,7 @@
  FFmpeg-4.2-CrayGNU-20.08.eb                            --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.08.eb                     --set-default-module
  GROMACS-2020.3-CrayGNU-20.08.eb                        --set-default-module
+ GROMACS-2018.6-CrayGNU-20.08.eb
  GSL-2.5-CrayGNU-20.08.eb                               --set-default-module
  GSL-2.5-CrayCCE-20.08.eb
  GSL-2.5-CrayIntel-20.08.eb

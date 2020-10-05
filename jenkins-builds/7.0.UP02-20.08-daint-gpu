@@ -11,6 +11,7 @@
  FFmpeg-4.2-CrayGNU-20.08.eb                            --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.08.eb                     --set-default-module
  GROMACS-2020.3-CrayGNU-20.08-cuda.eb                   --set-default-module
+ GROMACS-2018.6-CrayGNU-20.08-cuda.eb
  GSL-2.5-CrayGNU-20.08.eb                               --set-default-module
  GSL-2.5-CrayCCE-20.08.eb
  GSL-2.5-CrayIntel-20.08.eb
@@ -48,7 +49,7 @@
  ovito-3.2.0-CrayGNU-20.08.eb                           --set-default-module
  ParaView-5.8.1-CrayGNU-20.08-EGL-python3.eb            --set-default-module
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
- PLUMED-2.6.1-CrayGNU-20.08.eb                         
+ PLUMED-2.6.1-CrayGNU-20.08.eb
  PLUMED-2.5.1-CrayIntel-20.08.eb
  PLUMED-2.6.1-CrayIntel-20.08.eb
  pycuda-2018.1.1-CrayGNU-20.08-python3-cuda-10.2.eb     --set-default-module
