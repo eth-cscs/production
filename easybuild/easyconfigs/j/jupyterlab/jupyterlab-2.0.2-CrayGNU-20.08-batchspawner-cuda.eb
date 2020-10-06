@@ -223,7 +223,7 @@ exts_list = [
     ('ipyparallel', '6.3.0'),
     ('ipcmagic', '4bd1bb3', {
         'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s'],
-        'modulename': '',
+        'modulename': False,
 }),
     
 # kernels
