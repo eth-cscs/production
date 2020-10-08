@@ -81,8 +81,8 @@ stage('ReBuild Stage') {
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb -r" : 
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 06:00:00 eb -r"
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
+                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
