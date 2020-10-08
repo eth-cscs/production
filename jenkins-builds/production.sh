@@ -288,18 +288,18 @@ if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
     userid=$(id -u)
     echo "check if will run reverseMapD"
 # commands run by jenscscs user only
-    if [ $userid -eq 23395 ]; then
-        echo "running reverseMapD"
-        module load Lmod/.7.8.2
-        export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
-        export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
-        export XALTPROD=/apps/daint/UES/xalt/production
-        cd $XALTJENKINS/
-        rm -rf $XALTJENKINS/reverseMapD
-        ./cray_build_rmapT.sh .
-        cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
-        cd -
-    fi
+    #if [ $userid -eq 23395 ]; then
+    #    echo "running reverseMapD"
+    #    module load Lmod/.7.8.2
+    #    export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+    #    export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+    #    export XALTPROD=/apps/daint/UES/xalt/production
+    #    cd $XALTJENKINS/
+    #    rm -rf $XALTJENKINS/reverseMapD
+    #    ./cray_build_rmapT.sh .
+    #    cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+    #    cd -
+    #fi
 fi
 
 # end time
