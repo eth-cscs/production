@@ -1,0 +1,25 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'H5hut'
+version = '2.0.0rc6'
+versionsuffix = '-hdf5-1.12-parallel'
+homepage = 'https://gitlab.psi.ch/H5hut/src/-/wikis/home'
+description = """HDF5 Utility Toolkit: High-Performance I/O Library for
+Particle-based Simulations"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True}
+source_urls = ['https://gitlab.psi.ch/%(name)s/src/-/archive/%(name)s-%(version)s/']
+sources = ['src-%(name)s-%(version)s.tar.bz2']
+checksums = ['e752ced06fc4733fc8466d5ebad302af']
+dependencies = [('cray-hdf5-parallel/1.12.0.0', EXTERNAL_MODULE)]
+preconfigopts = "./autogen.sh && "
+configopts = "--enable-parallel --enable-shared --enable-fortran "
+configopts += "CPPFLAGS=-DH5_USE_110_API --with-hdf5=$HDF5_ROOT"
+parallel = 1
+sanity_check_paths = {
+    'files': ['lib/libH5hut.so', 'lib/libH5hutF.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'lib'
