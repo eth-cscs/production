@@ -1,0 +1,81 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'nvhpc'
+version = '2020_209'
+# this recipe installs cuda, do NOT change this line:
+local_cudaversion = '10.2'
+versionsuffix = '-cuda-%s' % local_cudaversion
+homepage = 'https://developer.nvidia.com/hpc-sdk'
+description = """The NVIDIA HPC Software Development Kit (SDK) includes the
+proven compilers, libraries and software tools essential to maximizing
+developer productivity and the performance and portability of HPC
+applications.
+"""
+toolchain = SYSTEM
+# source_urls = ['https://developer.download.nvidia.com/hpc-sdk']
+sources = ['/apps/common/UES/easybuild/sources/n/%(name)s/'
+           '%(name)s_%(version)s_Linux_x86_64_cuda_multi.tar.gz']
+checksums = ['96d8d6bcf5a1636895a62c42fce623c4']
+postinstallcmds = [
+    'pwd && ls -la && '
+    'export NVHPC_SILENT=true && '
+    'export NVHPC_DEFAULT_CUDA=' + local_cudaversion + ' && '
+    'export NVHPC_INSTALL_DIR=%(installdir)s && '
+    './install && '
+    'rm -fr %(installdir)s/install_components ']
+local_dir = 'Linux_x86_64/2020'
+local_bins = ['ncu', 'nsys', 'nvc', 'nvc++', 'nvcc', 'nvcpuid', 'nvprof',
+             'pgc++', 'pgcc', 'pgf95', 'localrc', 'cudarc']
+sanity_check_paths = {
+    'files': ['%s/compilers/bin/%s' % (local_dir, x) for x in local_bins] +
+             ['%s/math_libs/%s/lib64/libcublas.so' % (local_dir, local_cudaversion),
+              '%s/profilers/Nsight_Systems/bin/nsys' % local_dir,
+              '%s/cuda/%s/include/nvml.h' % (local_dir, local_cudaversion)],
+    'dirs': ['modulefiles', '%s/cuda/%s' % (local_dir, local_cudaversion)]
+}
+modextrapaths = {
+    'MANPATH': [
+        '%s/compilers/man' % local_dir,
+        '%s/comm_libs/mpi/share/man' % local_dir,
+    ],
+    'PATH': [
+        '%s/cuda/bin/' % local_dir,
+        '%s/compilers/bin/' % local_dir,
+        '%s/profilers/Nsight_Systems/bin/' % local_dir,
+        '%s/comm_libs/mpi/bin/' % local_dir,
+        '%s/compilers/share/llvm/bin/' % local_dir,
+    ],
+    'LD_LIBRARY_PATH': [
+        '%s/cuda/lib64/' % local_dir,
+        '%s/compilers/lib/' % local_dir,
+        '%s/math_libs/lib64/' % local_dir,
+        '%s/comm_libs/mpi/lib/' % local_dir,
+        '%s/comm_libs/nccl/lib/' % local_dir,
+        '%s/comm_libs/nvshmem/lib/' % local_dir,
+    ],
+    'CPATH': [
+        '%s/cuda/include/' % local_dir,
+        '%s/compilers/include/' % local_dir,
+        '%s/math_libs/include/' % local_dir,
+        '%s/comm_libs/mpi/include/' % local_dir,
+        '%s/comm_libs/nccl/include/' % local_dir,
+        '%s/comm_libs/nvshmem/include/' % local_dir,
+    ],
+    'PKG_CONFIG_PATH': [
+        '%s/comm_libs/mpi/lib/pkgconfig' % local_dir,
+        '%s/comm_libs/%s/nccl/lib/pkgconfig' % (local_dir, local_cudaversion),
+    ],
+    'MODULEPATH': 'modulefiles',
+}
+modextravars = {
+    # 'PGI': '%(installdir)s',
+    'NVHPC': '%(installdir)s',
+    'CPP': 'cpp',
+    'CC': 'nvc',
+    'CXX': 'nvc++',
+    'FC': 'nvfortran',
+    'F90': 'nvfortran',
+    'F77': 'nvfortran',
+}
+moduleclass = 'devel'

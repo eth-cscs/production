@@ -12,6 +12,7 @@
  FFmpeg-4.2-CrayGNU-20.08.eb                            --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.08.eb                     --set-default-module
  GROMACS-2020.3-CrayGNU-20.08.eb                        --set-default-module
+ GROMACS-2018.6-CrayGNU-20.08.eb
  GSL-2.5-CrayGNU-20.08.eb                               --set-default-module
  GSL-2.5-CrayCCE-20.08.eb
  GSL-2.5-CrayIntel-20.08.eb
@@ -19,6 +20,9 @@
  HPX-1.4.0-CrayGNU-20.08.eb                             --set-default-module
  HPX-1.4.0-CrayGNU-20.08-APEX.eb
  HPX-1.4.0-CrayGNU-20.08-nonetworking.eb
+ HPX-1.5.0-CrayGNU-20.08.eb
+ HPX-1.5.0-CrayGNU-20.08-APEX.eb
+ HPX-1.5.0-CrayGNU-20.08-nonetworking.eb
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-serial.eb            --set-default-module
@@ -33,19 +37,22 @@
  jupyterlab-2.0.2-CrayGNU-20.08-batchspawner.eb
  LAMMPS-03Mar20-CrayGNU-20.08.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
+ MATLAB-R2019a.eb                                       --set-default-module
  NAMD-2.13-CrayIntel-20.08.eb                           --set-default-module
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-20.08.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-20.08.eb                          --set-default-module
- netcdf-python-1.4.1-CrayGNU-20.08-python3.eb           --set-default-module
+ netcdf-python-1.5.4-CrayGNU-20.08-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.08.eb                          --set-default-module
- oq-engine-3.9.0-CrayGNU-20.08.eb                       --hidden
  ParaView-5.8.1-CrayGNU-20.08-OSMesa-python3.eb         --set-default-module
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
+ PLUMED-2.6.1-CrayGNU-20.08.eb
  PLUMED-2.5.1-CrayIntel-20.08.eb
+ PLUMED-2.6.1-CrayIntel-20.08.eb
  PyExtensions-python3-CrayGNU-20.08.eb
  Python-bare-3.7.3.eb                                   --hidden
  QuantumESPRESSO-6.5-CrayIntel-20.08.eb                 --set-default-module
+ QuantumESPRESSO-6.6-CrayIntel-20.08.eb
  singularity-3.5.3-daint.eb
  Spark-2.3.1-CrayGNU-20.08-Hadoop-2.7.eb                --set-default-module
  VASP-6.1.0-CrayIntel-20.08.eb                          --set-default-module

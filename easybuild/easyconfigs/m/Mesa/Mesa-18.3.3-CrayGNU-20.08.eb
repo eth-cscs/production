@@ -38,7 +38,7 @@ source_urls = ['https://%(namelower)s.freedesktop.org/archive']
 sources = ['/apps/common/UES/easybuild/sources/m/%(name)s/%(namelower)s-%(version)s.tar.xz']
 
 builddependencies = [
-    ('CMake', '3.14.1', '', True),
+    ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
     ('LLVM', '8.0.0'),

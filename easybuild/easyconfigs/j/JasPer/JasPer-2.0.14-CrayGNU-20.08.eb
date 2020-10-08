@@ -15,7 +15,7 @@ source_urls = ['http://www.ece.uvic.ca/~frodo/%(namelower)s/software/']
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('CMake', '3.14.1', '', True),
+    ('CMake', '3.14.5', '', True),
 ]
 
 configopts = '-DJAS_ENABLE_DOC=FALSE'

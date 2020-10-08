@@ -1,0 +1,57 @@
+# @omlins
+
+easyblock = 'CMakeMake'
+
+name = 'zfp'
+version = '0.5.5'
+
+homepage = "https://github.com/LLNL/zfp"
+description = "Optionally error-bounded lossy compressor for HPC data with high throughput read and write random access to individual array elements"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+source_urls = ['https://github.com/LLNL/zfp/releases/download/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [('CMake', '3.14.5','', True)]
+
+dependencies = []
+
+separate_build_dir = True
+
+maxparallel = 16
+
+configopts =  '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_CFP:BOOL=ON '
+configopts += '-DBUILD_ZFPY:BOOL=OFF ' # Python3 build fails as mixing in Python2.
+configopts += '-DBUILD_ZFORP:BOOL=ON '
+configopts += '-DBUILD_UTILITIES:BOOL=ON '
+configopts += '-DBUILD_EXAMPLES:BOOL=OFF '
+configopts += '-DBUILD_TESTING:BOOL=OFF '
+configopts += '-DBUILD_SHARED_LIBS:BOOL=ON '
+configopts += '-DZFP_WITH_OPENMP:BOOL=ON '
+configopts += '-DZFP_WITH_CUDA:BOOL=OFF '
+
+# create pkgconfig file
+postinstallcmds = [
+    "mkdir -p %(installdir)s/lib/pkgconfig",
+    """echo -e "prefix=%(installdir)s
+libdir=\${prefix}/lib64
+includedir=\${prefix}/include
+
+Name: %(name)s
+Description: %(name)s compression library
+Version: %(version)s
+
+Requires:
+Libs: -L\${libdir} -lzfp -lcfp
+Cflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc""",
+]
+
+sanity_check_paths = {
+    'files': ['lib64/libzfp.so', 'lib64/libcfp.so', 'include/zfp.h'],
+    'dirs': ['lib/pkgconfig' ]
+}
+
+moduleclass = 'lib'

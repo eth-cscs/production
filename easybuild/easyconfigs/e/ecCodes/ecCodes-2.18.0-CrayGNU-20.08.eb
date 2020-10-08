@@ -1,0 +1,31 @@
+# contributed by Sebastan Keller and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ecCodes'
+version = '2.18.0'
+
+homepage = 'https://software.ecmwf.int/wiki/display/GRIB/Home'
+description = """ecCodes is a package developed by ECMWF which provides an
+application programming interface and a set of tools for decoding and encoding
+messages in different formats"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['https://software.ecmwf.int/wiki/download/attachments/45757960/']
+sources = ['%(namelower)s-%(version)s-Source.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+
+dependencies = [
+    ('JasPer', '2.0.14'),
+    ('cray-netcdf', EXTERNAL_MODULE),
+]
+
+separate_build_dir = True
+configopts = '-DENABLE_JPG=ON -DENABLE_NETCDF=ON -DENABLE_PYTHON=OFF'
+
+parallel = 1
+
+moduleclass = 'data'
