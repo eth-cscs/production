@@ -1,0 +1,16 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'gc'
+version = '8.0.4'
+homepage = 'https://www.hboehm.info/gc'
+description = "A garbage collector for C and C++"
+toolchain = SYSTEM
+source_urls = ['https://www.hboehm.info/gc/gc_source']
+sources = [SOURCE_TAR_GZ]
+sanity_check_paths = {
+    'files': ['include/gc.h'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'lib'

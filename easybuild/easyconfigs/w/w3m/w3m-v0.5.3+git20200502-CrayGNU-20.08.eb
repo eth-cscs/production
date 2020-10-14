@@ -1,0 +1,18 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'w3m'
+version = 'v0.5.3+git20200502'
+homepage = 'https://github.com/tats/w3m'
+description = "Debian's w3m: WWW browsable pager"
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+source_urls = ['https://github.com/tats/w3m/archive']
+sources = ['%(version)s.tar.gz']
+dependencies = [('gc', '8.0.4', '', True)]
+configopts = ' --with-gc=$EBROOTGC LDFLAGS=/lib64/libtinfo.so.6.1 '
+sanity_check_paths = {
+    'files': ['bin/w3m'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
