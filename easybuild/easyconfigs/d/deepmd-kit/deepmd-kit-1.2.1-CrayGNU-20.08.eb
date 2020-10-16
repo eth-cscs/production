@@ -91,7 +91,7 @@ sanity_check_paths = {
 
 postinstallcmds = [_prepare_libs_dir.format(tf_k8_opt=_tf_k8_opt), 'rm -rf /dev/shm/$USER/bazelout/' ]
 
-modextrapaths = {                                                                  
+modextrapaths = {
     'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
 }
 
