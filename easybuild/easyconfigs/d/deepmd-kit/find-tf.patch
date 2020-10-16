@@ -1,0 +1,33 @@
+diff -Nru deepmd-kit-1.2.1.orig/setup.py deepmd-kit-1.2.1/setup.py
+--- deepmd-kit-1.2.1.orig/setup.py	2020-10-15 17:38:57.513954000 +0200
++++ deepmd-kit-1.2.1/setup.py	2020-10-16 09:22:18.347551000 +0200
+@@ -3,7 +3,7 @@
+ from skbuild.cmaker import get_cmake_version
+ from setuptools_scm import get_version
+ from packaging.version import LegacyVersion
+-from os import path, makedirs
++from os import environ, path, makedirs
+ import imp, sys, platform
+ 
+ def get_dp_install_path() :
+@@ -25,11 +25,7 @@
+     with open(readme_file) as f:
+         readme = f.read()
+ 
+-try:
+-    tf_install_dir = imp.find_module('tensorflow')[1] 
+-except ImportError:
+-    site_packages_path = path.join(path.dirname(path.__file__), 'site-packages')
+-    tf_install_dir = imp.find_module('tensorflow', [site_packages_path])[1]
++tf_install_dir = f"{environ['DEEPMD_INSTALLDIR']}/tensorflow"
+ 
+ install_requires=['numpy', 'scipy']
+ setup_requires=['setuptools_scm', 'scikit-build']
+@@ -72,6 +68,7 @@
+                 '-DFLOAT_PREC:STRING=high',
+                 '-DDP_PIP_INSTALL_PATH=%s' % dp_pip_install_path,
+                 '-DDP_SETUP_INSTALL_PATH=%s' % dp_setup_install_path,
++                '-DOP_CXX_ABI=1',
+     ],
+     cmake_source_dir='source',
+     cmake_minimum_required_version='3.0',

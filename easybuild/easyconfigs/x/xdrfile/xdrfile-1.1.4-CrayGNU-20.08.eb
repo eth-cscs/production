@@ -1,0 +1,18 @@
+# contributed by Luca Marsella (CSCS) 
+easyblock = 'ConfigureMake'
+
+name = 'xdrfile'
+version = '1.1.4'
+
+homepage = 'http://www.gromacs.org'
+description = """This library allows to read GROMACS trr and xtc files and also to
+convert from one format to another."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True}
+
+source_urls = ['ftp://ftp.gromacs.org/contrib/']
+sources = [SOURCE_TAR_GZ]
+
+
+moduleclass = 'tools'
