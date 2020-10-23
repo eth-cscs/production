@@ -15,7 +15,7 @@ dependencies = [
     ('GEOS', '3.6.2'),
     ('PROJ', '7.1.0'),
     ('libspatialindex', '1.8.5'),
-    ('h5py', '2.10.0', '-python%(pymajver)s-parallel')
+    ('h5py', '2.10.0', '-python%(pymajver)s-serial')
 ]
 
 exts_defaultclass = 'PythonPackage'
@@ -84,7 +84,6 @@ sanity_check_paths = {
     'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
 
-# The following command succeeds only when executing with mpi
-#sanity_check_commands = ['oq engine --help']
+sanity_check_commands = ['oq engine --help']
 
 moduleclass = 'tools'
