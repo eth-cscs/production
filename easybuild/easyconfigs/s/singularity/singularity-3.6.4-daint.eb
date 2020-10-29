@@ -1,0 +1,39 @@
+# @author: teojgo gppezzi
+easyblock = 'Bundle'
+
+name = 'singularity'
+version = '3.6.4'
+versionsuffix = '-daint'
+
+homepage = 'https://www.sylabs.io/'
+description = """Singularity is a portable application stack packaging and runtime utility."""
+
+toolchain = SYSTEM
+
+modtclfooter = """
+# Swap the programming environment
+module unload PrgEnv-cray
+module unload PrgEnv-intel
+module unload PrgEnv-pgi
+
+if { ![ is-loaded PrgEnv-gnu ] } {
+    module load PrgEnv-gnu
+}
+
+# Swap the cray-mpich with the cray-mpich-abi
+if { [ is-loaded cray-mpich ] } {
+    module swap cray-mpich cray-mpich-abi
+} else {
+    module load cray-mpich-abi
+}
+
+# Load the wlm_detect module
+if { ![ is-loaded wlm_detect ] } {
+     module load wlm_detect
+}
+
+module load singularity/3.6.4
+
+setenv SINGULARITY_BIND /opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/9.3.0,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
+setenv SINGULARITYENV_LD_LIBRARY_PATH "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/pe/lib64:/opt/gcc/9.3.0/snos/lib64:/lib64"
+"""
