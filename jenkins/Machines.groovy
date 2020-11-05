@@ -14,14 +14,6 @@ def dom = [name: 'dom',
            modulesProduction: '',
            prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
 
-def kesch = [name: 'kesch',
-             archs: [],
-             cpus: 24,
-             buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/escha/UES/easybuild/modulefiles',
-             modulesProduction: '',
-             prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
-
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
@@ -30,4 +22,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/generic/easybuild']
 
-return [daint, dom, kesch, tsa]
+return [daint, dom, tsa]
