@@ -32,7 +32,7 @@ dependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
     ('deepmd-kit', _deepmd_version),
-    ('PLUMED', '2.5.1', '-mpi')
+    ('PLUMED', '2.5.1')
 ]
 
 files_to_copy = [(['src/lmp*'], "bin")]
