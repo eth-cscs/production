@@ -1,0 +1,20 @@
+easyblock = 'cpeToolchain'
+
+name = 'cpeGNU'
+version = "20.10"
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper with cpe-gnu module
+(PE release: %s).\n""" % version
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+   ('cpe-gnu', EXTERNAL_MODULE),
+   ('cray-fftw', EXTERNAL_MODULE),
+   ('cray-libsci', EXTERNAL_MODULE),
+   ('cray-mpich', EXTERNAL_MODULE),
+   ('gcc', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'
