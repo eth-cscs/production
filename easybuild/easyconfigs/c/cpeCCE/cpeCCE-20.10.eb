@@ -1,0 +1,22 @@
+# Compiler toolchain for Shasta Cray Programming Environment CCE compiler (cpe-cce)
+easyblock = 'cpeToolchain'
+
+name = 'cpeCCE'
+version = "20.10"
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper with cpe-icray module
+(PE release: %s).\n""" % version
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+   ('cce/10.0.4', EXTERNAL_MODULE),
+   ('cpe-cray', EXTERNAL_MODULE),
+   ('cray-fftw/3.3.8.8', EXTERNAL_MODULE),
+   ('cray-libsci/20.10.1.2', EXTERNAL_MODULE),
+   ('cray-mpich/8.0.16', EXTERNAL_MODULE),
+   ('craype/2.7.2', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
