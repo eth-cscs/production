@@ -64,6 +64,8 @@ if { $status == 0 } {
 # current system name
 if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
+} elseif { [ string match *uan* $::env(HOSTNAME) ] } {
+ set system "eiger"
 } else {
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
@@ -74,6 +76,11 @@ if { [ string match *daint* $system ] } {
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *dom* $system ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-20.08.cfg
+    setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
+    setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
+} elseif { [ string match *eiger* $system ] } {
+    setenv EASYBUILD_MODULES_TOOL               Lmod
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-20.10.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
