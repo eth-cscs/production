@@ -14,6 +14,14 @@ def dom = [name: 'dom',
            modulesProduction: '',
            prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
 
+def eiger = [name: 'eiger',
+           archs: [],
+           cpus: 128,
+           buildPath: '$XDG_RUNTIME_DIR/build',
+           unusePath: '/apps/eiger/UES/jenkins/1.3.1/20.10',
+           modulesProduction: '',
+           prefixProduction: '/apps/eiger/UES/jenkins/1.3.1/20.10']
+
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
@@ -22,4 +30,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/generic/easybuild']
 
-return [daint, dom, tsa]
+return [daint, dom, eiger, tsa]
