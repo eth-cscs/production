@@ -59,11 +59,13 @@ class cpeToolchain(Bundle):
         swap_deps = []
         for dep in self.toolchain.dependencies:
             mod_name = dep['full_mod_name']
+            # determine versionless module name, e.g. 'fftw/3.3.4.1' => 'fftw'
+            dep_name = '/'.join(mod_name.split('/')[:-1])
 
             if mod_name.startswith('cpe'):
                 prgenv_mod = mod_name
             else:
-                swap_deps.append(self.module_generator.swap_module(mod_name, mod_name).lstrip())
+                swap_deps.append(self.module_generator.swap_module(dep_name, mod_name).lstrip())
 
         self.log.debug("Swap statements for dependencies of %s: %s", self.full_mod_name, swap_deps)
 
