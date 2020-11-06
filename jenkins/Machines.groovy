@@ -18,9 +18,9 @@ def eiger = [name: 'eiger',
            archs: [],
            cpus: 128,
            buildPath: '$XDG_RUNTIME_DIR/build',
-           unusePath: '/apps/eiger/UES/jenkins/1.3.1/20.08',
+           unusePath: '/apps/eiger/UES/jenkins/1.3.1/20.10',
            modulesProduction: '',
-           prefixProduction: '/apps/eiger/UES/jenkins/1.3.1/20.08']
+           prefixProduction: '/apps/eiger/UES/jenkins/1.3.1/20.10']
 
 def tsa = [name: 'tsa',
            archs: [],
