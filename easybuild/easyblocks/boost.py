@@ -141,13 +141,13 @@ class EB_Boost(EasyBlock):
 
             txt = ''
             # Check if using a Cray toolchain and configure MPI accordingly
-            if self.toolchain.toolchain_family() == toolchain.CRAYPE:
-                craympichdir = os.getenv('CRAY_MPICH2_DIR')
+            if self.toolchain.toolchain_family() == toolchain.CRAYPE or self.toolchain.toolchain_family() == toolchain.CPE:
+                craympichdir = os.getenv('CRAY_MPICH_DIR')
                 txt = '\n'.join([
-                    'local CRAY_MPICH2_DIR = %s ;' % craympichdir,
+                    'local CRAY_MPICH_DIR = %s ;' % craympichdir,
                     'using mpi : CC : ',
-                    ' <include>$(CRAY_MPICH2_DIR)/include ',
-                    ' <library-path>$(CRAY_MPICH2_DIR)/lib ',
+                    ' <include>$(CRAY_MPICH_DIR)/include ',
+                    ' <library-path>$(CRAY_MPICH_DIR)/lib ',
                     ';',
                 ])
             else:
