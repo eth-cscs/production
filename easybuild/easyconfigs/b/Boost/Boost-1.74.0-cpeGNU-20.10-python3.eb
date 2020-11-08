@@ -13,7 +13,6 @@ toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
 
 source_urls = [SOURCEFORGE_SOURCE]
 sources = ['%(namelower)s_1_74_0.tar.bz2']
-patches = ['%(name)s-%(version)s-python%(pymajver)s.patch']
 
 dependencies = [
     ('bzip2', '1.0.6'),
