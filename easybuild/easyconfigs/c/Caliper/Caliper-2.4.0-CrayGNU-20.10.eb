@@ -1,0 +1,38 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'Caliper'
+version = '2.4.0'
+
+homepage = 'https://github.com/LLNL/Caliper'
+description = "Caliper is an instrumentation and performance profiling library"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/LLNL/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('elfutils', '0.180'),
+    ('dyninst', '10.2.0', '-python3'),
+    ('llnl-hires-timers', 'e6d8308'),
+    ('adept-utils', '606ebad', '-python3'),
+    ('libunwind', '1.4.0'),
+    ('adiak', '0.2.1'),
+    ('GOTCHA', '1.0.3'),
+    ('profvis', 'fe18867'),
+    ('vtune_profiler', '2020_update2', '', True),
+]
+
+configopts = "-DBUILD_DOCS=OFF -DBUILD_SHARED_LIBS=ON -DBUILD_TESTING=OFF -DWITH_TOOLS=TRUE -DWITH_MPI=ON -DRUN_MPI_TESTS=FALSE -DWITH_ADIAK=ON -Dadiak_DIR=$EBROOTADIAK/lib/cmake/adiak -DWITH_DYNINST=ON -DDyninst_DIR=$EBROOTDYNINST/lib/cmake/Dyninst -DWITH_CALLPATH=ON -DLIBUNWIND_PREFIX=$EBROOTLIBUNWIND -DWITH_GOTCHA=ON -DUSE_EXTERNAL_GOTCHA=TRUE -Dgotcha_DIR=$EBROOTGOTCHA/lib64/cmake/gotcha -DWITH_PAPI=ON -DPAPI_PREFIX=/opt/cray/pe/papi/default/ -DWITH_LIBPFM=ON -DLIBPFM_INSTALL=/opt/cray/pe/papi/default/ -DWITH_SAMPLER=ON -DWITH_VTUNE=ON -DITT_PREFIX=$EBROOTVTUNE_PROFILER/vtune_profiler_2020 -DCMAKE_C_FLAGS=-I/opt/intel/tbb/include/ -DCMAKE_CXX_FLAGS=-I/opt/intel/tbb/include/ -DWITH_SOS=FALSE -DWITH_TAU=FALSE -DWITH_KOKKOS=FALSE "
+
+
+# EXPERIMENTAL:
+# configopts +='-DENABLE_HISTOGRAMS=TRUE '
+# configopts += '-DCMAKE_EXE_LINKER_FLAGS="-L$EBROOTLLNLMINHIRESMINTIMERS/lib -lhires-timers" '
+sanity_check_paths = {
+    'files': ['bin/cali-query', 'bin/mpi-caliquery', 'include/%(namelower)s/%(namelower)s-config.h', 'lib64/libcaliper.so'],
+    'dirs': ['share/cmake/%(namelower)s'],
+}
+
+moduleclass = 'tools'

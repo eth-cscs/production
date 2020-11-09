@@ -1,0 +1,50 @@
+# contributed by Luca Marsella (CSCS), Theofilos Manitaras (CSCS)
+
+easyblock = 'PythonBundle'
+
+name = 'PyExtensions'
+version = 'python%(pymajver)s'
+
+homepage = 'https://pypi.python.org/pypi'
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+sanity_pip_check = True
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+}
+
+exts_list = [
+    ('pip', '20.2.2', {'use_pip': False, 'checksums': ['58a3b0b55ee2278104165c7ee7bc8e2db6f635067f3c66cf637113ec5aa71584']}),
+    ('setuptools', '49.3.2', {'checksums': ['a02a9dc226e11a1756f3b2409aa23ada12dc7f0b930b61ebd765a34fd89a1d79'], 'source_tmpl': 'setuptools-%(version)s.zip'}),
+    ('wheel', '0.34.2', {'checksums': ['8788e9155fe14f54164c1b9eb0a319d98ef02c160725587ad60f14ddc57b6f96']}),
+    ('zipp', '3.1.0', {'checksums': ['c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96']}),
+    ('Cython', '0.29.21', {'checksums': ['e57acb89bd55943c8d8bf813763d20b9099cc7165c0f16b707631a7654be9cad']}),
+    ('six', '1.15.0', {'checksums': ['30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259']}),
+    ('pyparsing', '2.4.7', {'checksums': ['c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1']}),
+    ('kiwisolver', '1.2.0', {'checksums': ['247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f']}),
+    ('pytz', '2020.1', {'checksums': ['c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048']}),
+    ('cycler', '0.10.0', {'checksums': ['cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8']}),
+    ('python-dateutil', '2.8.1', {'checksums': ['73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c'], 'modulename': 'dateutil'}),
+    ('matplotlib', '3.2.2', {'checksums': ['3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d']}),
+    ('pandas', '1.1.0', {'checksums': ['b39508562ad0bb3f384b0db24da7d68a2608b9ddc85b1d931ccaaa92d5e45273']}),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+# need to add 'bin' subdir to $PATH explicitly to ensure right 'pip' command is used for installing extensions
+modextrapaths = {'PATH': 'bin'}
+
+moduleclass = 'tools'

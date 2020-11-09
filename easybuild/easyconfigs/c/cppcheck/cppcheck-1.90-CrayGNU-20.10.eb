@@ -1,0 +1,26 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'cppcheck'
+version = '1.90'
+
+homepage = 'https://github.com/danmar/cppcheck'
+description = """Cppcheck is a static analysis tool for C/C++ code. It provides
+unique code analysis to detect bugs and focuses on detecting undefined
+behaviour and dangerous coding constructs."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/danmar/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+
+configopts = "-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
