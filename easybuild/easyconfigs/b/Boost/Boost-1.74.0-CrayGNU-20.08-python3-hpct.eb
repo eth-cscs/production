@@ -37,7 +37,7 @@ modextravars = {
 }
 
 sanity_check_paths = {
-    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',],
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
               'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
     'dirs': ['include/%(namelower)s'],
 }
