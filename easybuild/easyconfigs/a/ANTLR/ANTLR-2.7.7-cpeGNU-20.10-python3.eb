@@ -20,13 +20,10 @@ sources = [SOURCELOWER_TAR_GZ]
 patches = ['%(name)s-%(version)s_includes.patch']
 
 dependencies = [
-    # On DOM this dependency is provided as local_osdependency
-    # ('java', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
 ]
 
 configopts = "--disable-examples --disable-csharp "
-
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'bin/%(namelower)s-config'],
