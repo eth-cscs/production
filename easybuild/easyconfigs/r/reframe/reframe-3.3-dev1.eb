@@ -1,0 +1,48 @@
+# @author: gppezzi, vkarak, manitart
+
+easyblock = 'Tarball'
+
+name = 'reframe'
+version = '3.3-dev1'
+
+homepage = 'https://github.com/eth-cscs/reframe'
+description = 'A regression framework for writing portable tests for HPC systems.'
+
+toolchain = SYSTEM
+
+sources = [
+    {
+        'filename': 'v%(version)s.tar.gz',
+        'source_urls': ['https://github.com/eth-cscs/reframe/archive/']
+    },
+    {
+        'filename': '/apps/common/easybuild/sources/%(nameletterlower)s/'
+                    '%(name)s/reframe-tests-%(version)s.tar.gz'
+    }
+]
+
+keepsymlinks = True
+postinstallcmds = [
+    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
+    './bootstrap.sh +docs +pygelf && '
+    'cp -r external %(installdir)s/external && '
+    'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
+    'cp docs/man/man1/reframe.1 %(installdir)s/share/man/man1 && '
+    'cp docs/man/man8/reframe.settings.8 %(installdir)s/share/man/man8'
+]
+
+modextrapaths = {
+    'PYTHONPATH': 'external/',
+    'RFM_CONFIG_FILE': 'config/cscs.py',
+    'RFM_CHECK_SEARCH_PATH': 'cscs-checks',
+}
+
+sanity_check_paths = {
+    'files': ['bin/reframe', 'config/cscs.py',
+              'share/man/man1/reframe.1',
+              'share/man/man8/reframe.settings.8'],
+    'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests',],
+}
+
+sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
+moduleclass = 'devel'
