@@ -1,3 +1,5 @@
+ Boost-1.74.0-cpeGNU-20.10.eb
+ Boost-1.74.0-cpeGNU-20.10-python3.eb                  --set-default-module
  Buildah-1.17.0.eb                                     --set-default-module
  CMake-3.18.4.eb                                       --set-default-module
  GREASY-19.03-cscs-cpeGNU-20.10.eb                     --set-default-module
