@@ -14,7 +14,7 @@ remote (across-process) operation. As such, the API is useful in a number of
 applications"""
 
 toolchain = {'name': 'CrayGNU', 'version': '20.08'}
-
+toolchainopts = {'optarch': True, 'pic': True}
 source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v%(version)s/']
 sources = [SOURCE_TAR_GZ]
 

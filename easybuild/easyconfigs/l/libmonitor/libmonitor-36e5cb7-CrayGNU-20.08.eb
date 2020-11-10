@@ -1,0 +1,21 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'libmonitor'
+version = '36e5cb7'
+homepage = 'https://github.com/HPCToolkit/libmonitor'
+description = """libmonitor - a substrate for monitoring tools - deps of
+hpctoolkit"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+sources = [
+    {'filename': SOURCE_TAR_GZ,
+     'git_config': {'url': 'https://github.com/HPCToolkit',
+                    'commit': '%(version)s', 'repo_name': '%(name)s'}},
+]
+sanity_check_paths = {
+    'files': ['bin/monitor-run', 'lib/libmonitor.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'perf'
