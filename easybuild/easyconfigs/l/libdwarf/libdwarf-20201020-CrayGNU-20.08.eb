@@ -1,0 +1,23 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'libdwarf'
+version = '20201020'
+homepage = 'https://www.prevanders.net/dwarf.html#releases'
+description = """The DWARF Debugging Information Format is of interest to
+programmers working on compilers and debuggers -- dep for hpctoolkit"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True}
+source_urls = ['https://www.prevanders.net']
+sources = ['%(name)s-%(version)s.tar.gz']
+postinstallcmds = [
+    'mkdir -p %(installdir)s/include ',
+    'cp -a %(builddir)s/%(name)s-%(version)s/libdwarf/*.h %(installdir)s/include/ ',
+    # 'ln -s %(installdir)s/lib64 %(installdir)s/lib ',
+]
+sanity_check_paths = {
+    'files': ['bin64/dwarfdump', 'lib64/libdwarf.a'],
+    'dirs': ['share/man/man1'],
+}
+
+moduleclass = 'tools'

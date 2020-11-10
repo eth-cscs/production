@@ -1,0 +1,28 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libiberty'
+version = '8.3.0'
+homepage = 'https://gcc.gnu.org/onlinedocs/libiberty/'
+description = """The libiberty library is a collection of subroutines used by
+various GNU programs"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'optarch': True, 'pic': True}
+# extracted from http://mirror.kumi.systems/gnu/gcc/gcc-8.3.0/gcc-8.3.0.tar.xz:
+# tar xf gcc-8.3.0.tar.xz gcc-8.3.0/libiberty/ gcc-8.3.0/install-sh \
+# gcc-8.3.0/config.sub gcc-8.3.0/config.guess gcc-8.3.0/include
+sources = ['/apps/common/UES/easybuild/sources/l/%(name)s/%(name)s-%(version)s.tar.bz2']
+preconfigopts = 'pwd && ls -l && cd libiberty && '
+prebuildopts = 'cd libiberty && '
+skipsteps = ['install']
+postinstallcmds = [
+    'cd libiberty ;cc -fPIC -shared *.o -o libiberty.so ;cd -;',
+    'mkdir -p %(installdir)s/lib ;cp libiberty/libiberty.{a,so} %(installdir)s/lib/;',
+    'mkdir -p %(installdir)s/include ;cp -a include %(installdir)s/include/libiberty;',
+]
+sanity_check_paths = {
+    'files': ["lib/libiberty.a", "include/libiberty/libiberty.h"],
+    'dirs': ["include"]
+}
+
+moduleclass = 'lib'

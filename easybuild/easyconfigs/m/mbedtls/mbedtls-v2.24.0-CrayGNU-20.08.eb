@@ -1,0 +1,18 @@
+# @author: jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'mbedtls'
+version = 'v2.24.0'
+homepage = 'https://github.com/ARMmbed/mbedtls'
+description = """An open source, portable, easy to use, readable and flexible
+SSL library - deps of hpctoolkit"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False, 'pic': True}
+source_urls = ['https://github.com/ARMmbed/mbedtls/archive']
+sources = ['%(version)s.tar.gz']
+sanity_check_paths = {
+    'files': ['lib/libmbedtls.a'],
+    'dirs': ['include', 'bin'],
+}
+
+moduleclass = 'perf'
