@@ -4,19 +4,14 @@ easyblock = 'Tarball'
 name = 'clang+llvm'
 version = '10.0.0'
 versionsuffix = '-x86_64-linux-sles11.3'
-
 homepage = 'http://clang.llvm.org/'
-description = """The Clang project provides a language front-end and tooling
-infrastructure for languages in the C language family (C, C++, Objective C/C++,
-OpenCL, CUDA, and RenderScript) for the LLVM project.
-The pre-built binaries include Clang, LLD, compiler-rt, various LLVM tools,
-etc. varying slightly between platforms.
-https://raw.githubusercontent.com/llvm/llvm-project/master/clang/LICENSE.TXT"""
+description = "The Clang project"
 toolchain = SYSTEM
 source_urls = ['https://github.com/llvm/llvm-project/releases/download/llvmorg-%(version)s']
 sources = ['{}-{}{}.tar.xz'.format(name, version, versionsuffix)]
 sanity_check_paths = {
-    'files': ['bin/llc', 'bin/lld', 'bin/clang', 'bin/llvm-cov', 'bin/llvm-config'],
+    'files': ['bin/llc', 'bin/lld', 'bin/clang', 'bin/llvm-cov',
+              'bin/llvm-config'],
     'dirs': ['include/c++', 'lib/clang']
 }
 modextrapaths = {

@@ -2,7 +2,7 @@
 easyblock = 'Tarball'
 
 name = 'clang+llvm'
-version = '8.0.1'
+version = '7.1.0'
 versionsuffix = '-x86_64-linux-sles11.3'
 homepage = 'http://clang.llvm.org/'
 description = "The Clang project"
