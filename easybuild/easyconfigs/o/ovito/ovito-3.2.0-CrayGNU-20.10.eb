@@ -1,0 +1,21 @@
+easyblock = 'Tarball'
+
+name = 'ovito'
+version = '3.2.0'
+
+homepage = 'https://www.ovito.org'
+description = """OVITO is a scientific visualization and analysis software for
+atomistic and particle simulation data"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://www.%(name)s.org/download/3106/']
+sources = ['%(name)s-basic-%(version)s-%(arch)s.tar.xz']
+
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share', 'lib'],
+}
+
+moduleclass = 'devel'

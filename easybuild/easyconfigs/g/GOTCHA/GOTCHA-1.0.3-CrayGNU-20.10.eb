@@ -1,0 +1,22 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'GOTCHA'
+version = '1.0.3'
+
+homepage = 'https://github.com/LLNL/GOTCHA'
+description = """C/C++ library for wrapping function calls in shared
+libraries"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/LLNL/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+
+
+sanity_check_paths = {
+    'files': ['lib64/libgotcha.so'],
+    'dirs': ['include/%(namelower)s'],
+}
+
+moduleclass = 'tools'
