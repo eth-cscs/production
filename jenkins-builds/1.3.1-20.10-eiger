@@ -8,3 +8,4 @@
  GSL-2.6-cpeCCE-20.10.eb                               --set-default-module
  GSL-2.6-cpeGNU-20.10.eb                               --set-default-module
  LAMMPS-29Oct20-cpeGNU-20.10.eb                        --set-default-module
+ NCO-4.9.5-cpeGNU-20.10.eb                             --set-default-module
