@@ -1,0 +1,11 @@
+--- hpctoolkit-release-2020.08.ori/configure	2020-08-04 04:56:09.000000000 +0200
++++ hpctoolkit-release-2020.08/configure	2020-11-11 16:25:59.624054914 +0100
+@@ -21913,7 +21913,7 @@
+     fi
+     TBB_IFLAGS="-I${TBB}/include"
+ 
+-    for lib in $multilib_path ; do
++    for lib in lib/intel64/gcc4.7 ; do
+       dir="${TBB}/$lib"
+       for f in "$dir"/libtbb*.so* ; do
+         if test -f "$f" ; then
