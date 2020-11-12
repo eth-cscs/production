@@ -213,27 +213,26 @@ exts_list = [
 ]
 
 modextrapaths = {
-    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+    'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages',
     'JUPYTER_PATH': 'share/jupyter',
 }
 
 modextravars = {
-    'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
+    'JUPYTER_DATA_DIR': '%(installdir)s/share/jupyter/',
+    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
     'JUPYTER' : '%(installdir)s/bin/jupyter',
+    'NODE_OPTIONS': '--max-old-space-size=4096',
+    'NODE_REPL_HISTORY': ''
 }
 
 postinstallcmds = [
-"""
-export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache && 
-export NODE_OPTIONS=--max-old-space-size=4096 &&
-export NODE_REPL_HISTORY=""
-export JUPYTERLAB_DIR=%%(installdir)s/share/jupyter/lab/ && 
-export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHONPATH && 
-export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
-export JUPYTER=%%(installdir)s/bin/jupyter &&
-python3 -m bash_kernel.install --prefix=%(installdir)s/ && 
-""" 
-]
+    'export JUPYTER="%(installdir)s/bin/jupyter"',
+    'export JUPYTER_DATA_DIR="%(installdir)s/share/jupyter"',
+    'export JUPYTERLAB_DIR="%(installdir)s/share/jupyter/lab"',
+    'export PYTHONPATH="%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH"',
+    'export YARN_CACHE_FOLDER="/tmp/$USER/yarn_cache"', 
+    'python3 -m bash_kernel.install --prefix=%(installdir)s'
+] 
 
 sanity_check_paths = {
     'files': [],
