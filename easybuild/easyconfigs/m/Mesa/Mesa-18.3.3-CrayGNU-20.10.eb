@@ -1,0 +1,57 @@
+# contributed by Jean M. Favre (CSCS)
+
+# This configuration file builds Mesa for software rendering, not hardware rendering.
+# This means using at least SSE4.2. It uses the following:
+# - llvmpipe: the high-performance Gallium LLVM driver
+# - swr: Intel's OpenSWR
+# It will try to use the llvmpipe by default. To select swr instead, set the following:
+# GALLIUM_DRIVER=swr
+# see also https://gallium.readthedocs.io/en/latest/drivers/openswr/usage.html
+#
+# The build options were inherited by a briliant post by Mathieu Westphal o fthe French Kitware Office
+# Read this:
+# https://discourse.paraview.org/t/building-paraview-with-gpu-accelerated-mesa/1317
+#
+# It basically says "Mesa download usually contains llvm-dependent preprocessed files.
+# We do not want that, as they may rely on another version of llvm
+# so we download a specific version without these."
+#
+# Thus, I proceeded following the tips given in the post to create a clean tar file
+# I made a symbolic link as such
+# ln -s mesa-mesa-18.3.3 mesa-18.3.3
+# to get the correct name for teh package, then I tar-ed it with
+# tar  -acf /apps/common/UES/easybuild/sources/m/Mesa/mesa-18.3.3.tar.xz mesa-18.3.3/*
+
+easyblock = 'ConfigureMake'
+
+name = 'Mesa'
+version = '18.3.3'
+
+homepage = 'http://www.mesa3d.org/'
+description = """Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://%(namelower)s.freedesktop.org/archive']
+# Using the patched tar version by @jfavre (as described above)
+sources = ['/apps/common/UES/easybuild/sources/m/%(name)s/%(namelower)s-%(version)s.tar.xz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('LLVM', '8.0.0'),
+    ('Mako', '1.1.2', '-python%(pymajver)s'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = " --with-platforms=x11 --disable-dri --disable-dri3 --disable-egl --disable-gbm --disable-gles1 --disable-gles2 --disable-xvmc --disable-vdpau --disable-va --enable-glx --enable-llvm --enable-gallium-osmesa --with-dri-drivers= --with-gallium-drivers='swrast,swr' --with-swr-archs=avx,avx2 --with-llvm-prefix=${EBROOTLLVM} "
+
+
+sanity_check_paths = {
+    'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/gl_mangle.h', 'include/GL/glx.h', 'include/GL/glx_mangle.h', 'include/GL/osmesa.h', 'lib/libGL.so', 'lib/libOSMesa.so', 'lib/libswrAVX.so', 'lib/libswrAVX2.so'],
+    'dirs': ['include/GL'],
+}
+
+moduleclass = 'vis'

@@ -12,7 +12,6 @@ toolchain = {'name': 'system', 'version': 'system'}
 
 dependencies = [
    ('cpe-gnu', EXTERNAL_MODULE),
-   ('cray-fftw/3.3.8.8', EXTERNAL_MODULE),
    ('cray-libsci/20.10.1.2', EXTERNAL_MODULE),
    ('cray-mpich/8.0.16', EXTERNAL_MODULE),
    ('craype/2.7.2', EXTERNAL_MODULE),
