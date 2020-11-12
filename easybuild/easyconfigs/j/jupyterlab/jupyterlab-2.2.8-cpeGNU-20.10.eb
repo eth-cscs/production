@@ -231,7 +231,7 @@ export JUPYTERLAB_DIR=%%(installdir)s/share/jupyter/lab/ &&
 export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHONPATH && 
 export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
 export JUPYTER=%%(installdir)s/bin/jupyter &&
-python3 -m bash_kernel.install --prefix=%(installdir)s/ && 
+python3 -m bash_kernel.install --prefix=%%(installdir)s/ && 
 """ 
 ]
 
