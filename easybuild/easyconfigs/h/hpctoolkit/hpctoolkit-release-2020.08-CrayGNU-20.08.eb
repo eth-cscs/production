@@ -24,11 +24,11 @@ builddependencies = [
     ('libmonitor', '36e5cb7'),
     ('libunwind', '1.4.0'),
     ('mbedtls', 'v2.24.0'),
-    ('xerces-c', '3.2.3', '', True),
     ('xz', '5.2.5',),
     ('zlib', '1.2.11'),
 ]
 dependencies = [
+    ('xerces-c', '3.2.3', '', True),
     ('PAPI', '6-0-0-1'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
