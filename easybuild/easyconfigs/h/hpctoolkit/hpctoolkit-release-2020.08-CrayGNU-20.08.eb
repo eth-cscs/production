@@ -29,11 +29,9 @@ builddependencies = [
     ('zlib', '1.2.11'),
 ]
 dependencies = [
+    ('PAPI', '6-0-0-1'),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
-# dependencies = [('HDF5', '1.10.6', '-parallel')]
-# preconfigopts = "./autogen.sh && "
-# configopts = "--enable-parallel --enable-shared --enable-fortran --with-hdf5=$EBROOTHDF5"
 preconfigopts = "CXX=CC CC=cc FC=ftn MPICXX=CC MPICC=cc MPIF77=ftn "
 configopts = (
     "--enable-mpi-search=cray "
@@ -48,12 +46,13 @@ configopts = (
     "--with-libmonitor=$EBROOTLIBMONITOR "
     "--with-libunwind=$EBROOTLIBUNWIND "
     "--with-mbedtls=$EBROOTMBEDTLS "
+    "--with-papi=$EBROOTPAPI "
     "--with-xerces=$EBROOTXERCESMINC "
     "--with-lzma=$EBROOTXZ "
     "--with-zlib=$EBROOTZLIB "
     #
     "--with-binutils=/usr "
-    "--with-papi=/opt/cray/pe/papi/default/ "
+    # "--with-papi=/opt/cray/pe/papi/default/ "
     "--with-tbb=/opt/intel/compilers_and_libraries/linux/tbb "
     "--with-valgrind=/opt/cray/pe/valgrind4hpc/default "
     "--with-cuda=$CUDATOOLKIT_HOME "
