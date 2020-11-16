@@ -1,0 +1,68 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'hpctoolkit'
+version = 'release-2020.08'
+homepage = 'https://github.com/HPCToolkit/hpctoolkit'
+description = """HPCToolkit performance tools: measurement and analysis
+components"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True}
+source_urls = ['https://github.com/HPCToolkit/hpctoolkit/archive']
+sources = ['%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
+# Boost-hpct needed because of https://github.com/spack/spack/pull/11801
+# TODO: https://github.com/Jokeren/hpctoolkit-gpu-samples
+builddependencies = [
+    ('Boost', '1.74.0', '-python3-hpct'),
+    ('GOTCHA', '1.0.3'),
+    ('dyninst', '10.2.0', '-python3-hpct'),
+    ('elfutils', '0.180'),
+    ('intel-xed', '12.0.1'),
+    ('libdwarf', '20201020'),
+    ('libiberty', '8.3.0'),
+    ('libmonitor', '36e5cb7'),
+    ('libunwind', '1.4.0'),
+    ('mbedtls', 'v2.24.0'),
+    ('xz', '5.2.5',),
+    ('zlib', '1.2.11'),
+]
+dependencies = [
+    ('xerces-c', '3.2.3', '', True),
+    ('PAPI', '6-0-0-1'),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+preconfigopts = "CXX=CC CC=cc FC=ftn MPICXX=CC MPICC=cc MPIF77=ftn "
+configopts = (
+    "--enable-mpi-search=cray "
+    "--with-bzip=/usr "
+    "--with-boost=$EBROOTBOOST "
+    "--with-gotcha=$EBROOTGOTCHA "
+    "--with-dyninst=$EBROOTDYNINST "
+    "--with-elfutils=$EBROOTELFUTILS "
+    "--with-xed=$EBROOTINTELMINXED "
+    "--with-libdwarf=$EBROOTLIBDWARF "
+    "--with-libiberty=$EBROOTLIBIBERTY "
+    "--with-libmonitor=$EBROOTLIBMONITOR "
+    "--with-libunwind=$EBROOTLIBUNWIND "
+    "--with-mbedtls=$EBROOTMBEDTLS "
+    "--with-papi=$EBROOTPAPI "
+    "--with-xerces=$EBROOTXERCESMINC "
+    "--with-lzma=$EBROOTXZ "
+    "--with-zlib=$EBROOTZLIB "
+    #
+    "--with-binutils=/usr "
+    # "--with-papi=/opt/cray/pe/papi/default/ "
+    "--with-tbb=/opt/intel/compilers_and_libraries/linux/tbb "
+    "--with-valgrind=/opt/cray/pe/valgrind4hpc/default "
+    "--with-cuda=$CUDATOOLKIT_HOME "
+    "--with-cupti=$CUDATOOLKIT_HOME/extras/CUPTI "
+)
+parallel = 15
+sanity_check_paths = {
+    'files': ['bin/hpcprof-mpi', 'include/hpctoolkit.h',
+              'lib/hpctoolkit/libhpctoolkit.so'],
+    'dirs': ['share/man/man1', 'share/doc/hpctoolkit'],
+}
+
+moduleclass = 'perf'
