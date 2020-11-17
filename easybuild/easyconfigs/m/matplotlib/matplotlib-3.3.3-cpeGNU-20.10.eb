@@ -13,7 +13,6 @@ toolchain = {'name': 'cpeGNU', 'version': '20.10'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
-    ('cray-mpich', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
     ('freetype', '2.10.4'),
     ('libjpeg-turbo', '2.0.5'),
