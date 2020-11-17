@@ -1,0 +1,43 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QuantumESPRESSO'
+version = '6.6'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version)s.tar.gz']
+
+dependencies = [
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('libxc', '5.0.0')
+]
+
+preconfigopts = " module list && "
+#configopts = ' CC=cc FC=gfortran F77=gfortran MPIF90=ftn SCALAPACK_LIBS="$CRAY_LIBSCI_PREFIX_DIR/lib" FFT_LIBS="-L$EBROOTFFTW/lib" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --enable-openmp --enable-parallel --with-scalapack '
+configopts = ' CC=cc FC=gfortran F77=gfortran MPIF90=ftn FFT_LIBS="-L$EBROOTFFTW/lib" --enable-openmp --enable-parallel --with-scalapack '
+
+# use FFTW and HDF5
+#prebuildopts = """
+#    sed -i -e 's#^HDF5_LIBS.*#& -L$EBROOTHDF5/lib -lhdf5_hl -lhdf5 -lhdf5hl_fortran -lhdf5_fortran#' make.inc &&
+#    cat make.inc && """
+buildopts = "all epw"
+
+# single make process: parallel builds fail for target 'epw'
+maxparallel = 1
+
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'
