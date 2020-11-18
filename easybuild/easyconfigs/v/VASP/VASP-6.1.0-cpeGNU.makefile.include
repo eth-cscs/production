@@ -32,9 +32,9 @@ WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
 
-INCS       = -I$(FFTW_INC)
+INCS       = -I$(EBROOTFFTW)/include
 
-LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) -L$(EBROOTFFTW)
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) -L$(EBROOTFFTW)/lib
 
 OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
 OBJECTS_O2 += fft3dlib.o
@@ -57,4 +57,4 @@ LLIBS      += -lstdc++
 SRCDIR     = ../../src
 BINDIR     = ../../bin
 
-MPI_INC    = $(MPICH_DIR)/include
+MPI_INC    = $(CRAY_MPICH_DIR)/include

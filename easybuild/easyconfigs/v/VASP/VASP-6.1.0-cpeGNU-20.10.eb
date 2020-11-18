@@ -18,6 +18,7 @@ patches = [
 ]
 
 builddependencies = [
+    ('cray-fftw' EXTERNAL_MODULE),
     ('Wannier90', '3.1.0'),
 ]
 
