@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'graphviz'
+version = '2.44.1'
+
+homepage = 'http://www.graphviz.org/Download_source.php'
+description = """Graphviz is open source graph visualization software."""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://www2.graphviz.org/Packages/stable/portable_source']
+sources = [SOURCELOWER_TAR_GZ]
+
+sanity_check_paths = {
+    'files': ['bin/dot'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
