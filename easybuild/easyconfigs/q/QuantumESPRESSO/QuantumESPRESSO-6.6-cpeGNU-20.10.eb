@@ -22,8 +22,7 @@ dependencies = [
 ]
 
 preconfigopts = " module list && "
-#configopts = ' CC=cc FC=gfortran F77=gfortran MPIF90=ftn SCALAPACK_LIBS="$CRAY_LIBSCI_PREFIX_DIR/lib" FFT_LIBS="-L$EBROOTFFTW/lib" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --enable-openmp --enable-parallel --with-scalapack '
-configopts = ' CC=cc FC=gfortran F77=gfortran MPIF90=ftn FFT_LIBS="-L$EBROOTFFTW/lib" --enable-openmp --enable-parallel --with-scalapack '
+configopts = ' CC=cc FC=gfortran F77=gfortran MPIF90=ftn SCALAPACK_LIBS="-L$EBROOTCRAYLIBSCI/lib" FFT_LIBS="-L$EBROOTFFTW/lib" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --enable-openmp --enable-parallel --with-scalapack '
 
 # use FFTW and HDF5
 #prebuildopts = """
