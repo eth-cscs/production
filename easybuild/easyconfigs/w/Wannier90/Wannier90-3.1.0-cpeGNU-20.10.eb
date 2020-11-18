@@ -15,7 +15,9 @@ sources = ['v3.1.0.tar.gz']
 # create make.inc with definition of compilers
 prebuildopts = """ echo -e "F90 = ftn 
 COMMS = mpi 
-MPIF90 = ftn " > make.inc &&  echo "LIBS = -L\\$(EBROOTCRAYLIBSCI)/lib" >> make.inc && cat make.inc && module list && """
+MPIF90 = ftn 
+FCOPTS=-fallow-argument-mismatch
+" > make.inc &&  echo "LIBS = -L\\$(EBROOTCRAYLIBSCI)/lib" >> make.inc && cat make.inc && module list && """
 # build program and library
 buildopts = 'all'
 
