@@ -24,10 +24,10 @@ OFLAG_IN   = $(OFLAG)
 DEBUG      = -O0
 
 LIBDIR     = $(EBROOTGCC)/snos/lib64
-BLAS       = $(EBROOTCRAYLIBSCI)/lib/libsci_gnu_82.a
-LAPACK     = $(EBROOTCRAYLIBSCI)/lib/libsci_gnu_82.a
-BLACS      = -L$(EBROOTCRAYLIBSCI)/lib
-SCALAPACK  = -L$(EBROOTCRAYLIBSCI)/lib
+BLAS       = 
+LAPACK     =
+BLACS      =
+SCALAPACK  =
 WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
