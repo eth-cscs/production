@@ -1,19 +1,19 @@
+# jg (CSCS)
 easyblock = 'ConfigureMake'
+
 name = 'OPARI2'
 version = '2.0.5'
-
 homepage = 'http://www.score-p.org'
 description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
  is a source-to-source instrumentation tool for OpenMP and hybrid codes.
  It surrounds OpenMP directives and runtime library calls with calls to
  the POMP2 measurement interface."""
-
 toolchain = SYSTEM
 configopts = ' --enable-shared'
 source_urls = ['http://www.vi-hps.org/cms/upload/packages/opari2/']
 sources = [SOURCELOWER_TAR_GZ]
+patches = ['%(name)s-%(version)s.patch']
 checksums = ['9f79ad4d3427dc0ccfe726509163ff34']
-
 # issue: cray/cs platform not detected (but 2.0.2 ok)
 sanity_check_paths = {
     'files': ["bin/opari2", "include/opari2/pomp2_lib.h"],
