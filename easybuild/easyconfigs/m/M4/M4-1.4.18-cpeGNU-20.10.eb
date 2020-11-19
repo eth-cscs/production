@@ -16,7 +16,6 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configopts = '--enable-c++'
 
-
 sanity_check_paths = {
     'files': ['bin/m4'],
     'dirs': [],
