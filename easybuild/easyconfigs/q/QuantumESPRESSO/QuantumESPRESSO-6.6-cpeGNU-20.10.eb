@@ -30,7 +30,7 @@ prebuildopts += """
     sed -i -e 's/^DFLAGS .*/& -D__FFTW3 -D__HDF5/' -e 's#^IFLAGS.*#& -I$(EBROOTFFTW)/include -I$(EBROOTHDF5)/include#' -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' -e 's/^F90FLAGS .*/F90FLAGS       = $(FFLAGS) -cpp -fopenmp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' -e 's/^FFLAGS .*/FFLAGS         = -O3 -g -fallow-argument-mismatch -fopenmp/' -e 's/^LDFLAGS .*/LDFLAGS        = -g -pthread -fopenmp/' make.inc && 
     cat make.inc && 
 """
-buildopts = "all"
+buildopts = "all epw"
 
 # single make process: parallel builds fail for target 'epw'
 maxparallel = 1
