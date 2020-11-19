@@ -22,7 +22,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.2.2'),
     ('libffi', '3.3', '', True),
-    ('JuliaExtensions', _jlver),
+#    ('JuliaExtensions', _jlver),
     ('graphviz', '2.40.1', '', True),
 ]
 
