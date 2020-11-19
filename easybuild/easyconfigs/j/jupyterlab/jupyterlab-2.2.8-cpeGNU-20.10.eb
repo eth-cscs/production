@@ -21,7 +21,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.2.2'),
-#    ('JuliaExtensions', _jlver),
+    ('JuliaExtensions', _jlver),
     ('graphviz', '2.44.1'),
     ('libffi', '3.3'),
 ]
@@ -343,7 +343,7 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 #twr %%(installdir)s/bin/jupyter labextension install -y bqplot@0.5.17 --no-build && 
 #twr %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
 #twr %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0  --no-build &&
-#twr %%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
+%%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
 #twr %%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
 #twr %%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.4.0 --no-build && 
 #twr cd %%(installdir)s/ && 
@@ -352,8 +352,8 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 #twr git checkout 074d548 && 
 #twr %%(installdir)s/bin/jupyter labextension install js --no-build && 
 #twr now finally do the JupyterLab build
-#twr %%(installdir)s/bin/jupyter lab build --dev-build=False  && 
-#twr rm -r $YARN_CACHE_FOLDER && 
+%%(installdir)s/bin/jupyter lab build --dev-build=False  && 
+rm -r $YARN_CACHE_FOLDER && 
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%%(installdir)s/ && 
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
@@ -371,10 +371,10 @@ file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json && cp $file ${fi
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pyshortver)s/site-packages',
-#             'share/jupyter/lab/extensions',
+             'share/jupyter/lab/extensions',
              'share/jupyter/lab/schemas',
-#             'share/jupyter/lab/staging',
-#             'share/jupyter/lab/static',
+             'share/jupyter/lab/staging',
+             'share/jupyter/lab/static',
              'share/jupyter/lab/themes',
              ]
 }
