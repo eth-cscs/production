@@ -11,3 +11,4 @@
  matplotlib-3.3.3-cpeGNU-20.10.eb                      --set-default-module
  NCO-4.9.5-cpeGNU-20.10.eb                             --set-default-module
  VASP-6.1.0-cpeGNU-20.10.eb                            --set-default-module
+ jupyterlab-2.2.8-cpeGNU-20.10.eb
