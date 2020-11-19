@@ -30,7 +30,7 @@ dependencies = [
     # PAPI: will build with papi from perftools-base, keeping as reminder
 ]
 # plugins are needed, do not use this configopts = ' --disable-gcc-plugin'
-configopts = (" --with-machine-name=daint --enable-shared "
+configopts = (" --with-machine-name=alps --enable-shared "
               "--with-libpmi-include=/opt/cray/pe/pmi/default/include "
               "--with-libpmi-lib=/opt/cray/pe/pmi/default/lib64 "
               # "--with-librca-include=/opt/cray/rca/default/include "
