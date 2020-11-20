@@ -28,7 +28,6 @@ configopts = [
 # add func_reference.c to CMakeLists.txt https://gitlab.com/libxc/libxc/-/issues/91
 prebuildopts = ' sed -i "/func_info.c/a func_reference.c" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
 
-
 sanity_check_paths = {
     'files': ['lib/%(name)s.a', 'lib/%(name)s.so', 'lib/libxcf03.a', 'lib/libxcf03.so', 'lib/libxcf90.a', 'lib/libxcf90.so'],
     'dirs': ['include'],
