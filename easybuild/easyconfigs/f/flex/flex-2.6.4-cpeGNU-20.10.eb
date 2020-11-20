@@ -17,5 +17,4 @@ builddependencies = [
     ('Bison', '3.7'),
 ]
 
-
 moduleclass = 'lang'
