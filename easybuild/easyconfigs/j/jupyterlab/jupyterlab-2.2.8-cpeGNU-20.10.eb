@@ -364,7 +364,7 @@ export JULIA_DEPOT_PATH=%s &&
 export JULIA_PROJECT=%s &&
 julia -e 'using Pkg; Pkg.add(\"IJulia\");' &&
 chmod -R +rX %s &&  # Adjust permissions of IJulia files
-file=%%(installdir)s/share/jupyter/kernels/julia-%s/.kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
+file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file && mv $file .${file} # Remove IJulia specific project configuration
 """ % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir, _ijulia_depot, _jlshortver)
 ]
 
