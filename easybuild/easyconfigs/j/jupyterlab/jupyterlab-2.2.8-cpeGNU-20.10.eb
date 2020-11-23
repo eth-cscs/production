@@ -260,9 +260,9 @@ exts_list = [
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
-#twr    ('ipyparaview', '074d548', { #bump from cf1c6f4 to 074d548 for jlab 2.0
-#twr        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
-#twr        }),
+    ('ipyparaview', '074d548', { #bump from cf1c6f4 to 074d548 for jlab 2.0
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
+        }),
     
 #jupyterlab code formatter, requires a formatter e.g., black and isort
     ('pathspec', '0.8.0'),
@@ -342,11 +342,11 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.4.0 --no-build && 
-#twr cd %%(installdir)s/ && 
-#twr git clone https://github.com/NVIDIA/ipyparaview && 
-#twr cd ipyparaview && 
-#twr git checkout 074d548 && 
-#twr %%(installdir)s/bin/jupyter labextension install js --no-build && 
+cd %%(installdir)s/ && 
+git clone https://github.com/NVIDIA/ipyparaview && 
+cd ipyparaview && 
+git checkout 074d548 && 
+%%(installdir)s/bin/jupyter labextension install js --no-build && 
 #twr now finally do the JupyterLab build
 %%(installdir)s/bin/jupyter lab build --dev-build=False  && 
 rm -r $YARN_CACHE_FOLDER && 
