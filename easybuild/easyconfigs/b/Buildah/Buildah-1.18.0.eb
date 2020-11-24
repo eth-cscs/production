@@ -7,9 +7,9 @@ homepage = 'https://buildah.io/'
 description = """Buildah is a tool that facilitates building OCI container images."""
 
 toolchain = SYSTEM
-builddependencies = [('Libassuan', '2.5.3'),
+builddependencies = [('Libassuan', '2.5.4'),
                      ('Libpgp-error', '1.39'),
-                     ('GPGME', '1.14.0'),
+                     ('GPGME', '1.15.0'),
                      ('go', '1.15.2.linux-amd64')]
 
 dependencies = [('runc', '1.0.0-rc92')]
