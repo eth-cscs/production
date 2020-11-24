@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'AMDuProf'
+version = '3.3.462'
+homepage = 'https://developer.amd.com/amd-uprof/'
+description = """AMD uProf is a performance analysis tool for applications
+running on Windows and Linux operating systems. It allows developers to better
+understand the runtime performance of their application and to identify ways to
+improve its performance."""
+toolchain = SYSTEM
+_srcpath = '/apps/common/UES/easybuild/sources/a/amd-uprof'
+sources = ['{}/{}_Linux_x64_{}.tar.bz2'.format(_srcpath, name, version)]
+checksums = ['d3463cce390acbd9174dea8b2ae2b8c1']
+sanity_check_paths = {
+    'files': ['bin/%(name)s', 'Help/User_Guide.pdf'],
+    'dirs': ['lib/x64', 'include']
+}
+
+moduleclass = 'perf'
