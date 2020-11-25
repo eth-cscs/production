@@ -1,5 +1,5 @@
 # contributed by Luca Marsella (CSCS), Theofilos Manitaras (CSCS)
-
+#comment
 easyblock = 'PythonBundle'
 
 name = 'PyExtensions'
