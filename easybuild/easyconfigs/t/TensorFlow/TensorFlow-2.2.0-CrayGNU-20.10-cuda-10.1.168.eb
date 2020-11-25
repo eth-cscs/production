@@ -1,0 +1,63 @@
+# @author: sarafael, mschoengens, victorusu, gppezzi
+easyblock = 'CmdCp'
+
+name = 'TensorFlow'
+version = '2.2.0'
+versionsuffix = '-cuda-%(cudaver)s'
+
+homepage = 'https://www.tensorflow.org/'
+description = "An open-source software library for Machine Intelligence."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive/']
+sources = ['v%(version)s.tar.gz']
+patches = [
+    '%(namelower)s-v%(version)s-cuda%(cudaver)s-cscs.patch',
+    ('configure-cscs-v%(version)s.sh', '%(builddir)s/%(namelower)s-%(version)s/'),
+]
+
+builddependencies = [
+    ('Bazel', '2.0.0'),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cuDNN', '7.6.4', '-cuda-%(cudaver)s', True),
+    ('SWIG', '3.0.12', '-python%(pymajver)s'),
+    ('NCCL', '2.6.4', '-cuda-%(cudaver)s', True),
+    ('protobuf-python', '3.11.0'),
+    ('dask', '2.2.0', '-python%(pymajver)s'),
+    ('prereq', 'tf-2.2'),
+    ('CUDA', '10.1.168', '', True),
+]
+
+cmds_map = [
+    ('v%(version)s.tar.gz', "export TEST_TMPDIR=%(builddir)s/../../../bazelout/ && rm -rf $TEST_TMPDIR && sed -i s\\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl && sed -i s\\@'$EBROOTCUDA'@$EBROOTCUDA@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl && sed -i s\\@'3.5,6.0'@6.0@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s && bash configure-cscs-v%(version)s.sh && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH    --config=v2 --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1 --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'    -c opt //%(namelower)s/tools/pip_package:build_pip_package && bazel-bin/%(namelower)s/tools/pip_package/build_pip_package %(builddir)s && pip%(pymajver)s install --no-deps --prefix  %(builddir)s %(builddir)s/%(namelower)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl && rm -rf $TEST_TMPDIR"),
+]
+files_to_copy = [
+    (['%(builddir)s/%(namelower)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'], '%(installdir)s'),
+    (['%(builddir)s/bin'], '%(installdir)s'),
+    (['%(builddir)s/lib'], '%(installdir)s'),
+]
+exts_defaultclass = 'PythonPackage'
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+}
+
+exts_list = [
+    ('tensorflow-estimator', '2.2.0', {'use_pip': True, 'unpack_sources': False, 'modulename': 'tensorflow_estimator', 'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl'}),
+    ('grpcio', '1.24.0', {'modulename': 'grpc'}),
+    ('tensorboard', '2.2.1', {'use_pip': True, 'unpack_sources': False, 'source_tmpl': 'tensorboard-%(version)s-py3-none-any.whl'}),
+]
+
+sanity_check_paths = {
+    'files': ['%(namelower)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
+
+moduleclass = 'devel'
