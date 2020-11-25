@@ -1,0 +1,35 @@
+# Contributed by Luca Marsella (CSCS)
+name = 'netcdf-python'
+version = '1.5.4'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://unidata.github.io/netcdf4-python/'
+description = "Python/numpy interface to netCDF."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://pypi.python.org/packages/source/n/netCDF4/']
+sources = ['netCDF4-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s-%(toolchain_name)s-20.08-python3.patch']
+checksums = [
+    '941de6f3623b6474ecb4d043be5990690f7af4cf0d593b31be912627fe5aad03',  # netCDF4-%(version)s.tar.gz
+    # %(name)s-%(version)s-%(toolchain_name)s-20.08-python3.patch
+    'c77c799ca64b4e5007c04de80459bb3d35f7bd95f05bfa9657ccfb6b0dfb771c',
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cftime', '1.0.2.1', '-python%(pymajver)s'),
+]
+
+
+sanity_check_paths = {
+    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/netCDF4-%(version)s-py%(pyshortver)s-linux-%(arch)s.egg'],
+}
+
+moduleclass = 'data'
