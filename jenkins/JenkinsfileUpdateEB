@@ -196,7 +196,7 @@ stage('Update Stage') {
                         # change permission of tmp folders if failed is not null
                         if [ -n "\$failed" ]; then
                             chmod -R +r "\${EASYBUILD_TMPDIR}"
-                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod 755 '{}' \\;
+                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod +x '{}' \\;
                         fi
 
                         # print successful and failed updates
