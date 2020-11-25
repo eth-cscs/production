@@ -1,0 +1,53 @@
+# contributed by sarafael (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'prereq'
+version = 'tf-2.2'
+
+homepage = 'https://pypi.python.org/pypi'
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('numpy', '1.17.2'),
+    ('h5py', '2.10.0', '-python%(pymajver)s-serial'),
+    ('PyExtensions', 'python%(pymajver)s'),
+]
+
+
+exts_default_options = {
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    ('backports.weakref', '1.0.post1'),
+    ('Werkzeug', '0.16.0'),
+    ('absl-py', '0.8.0', {'modulename': 'absl'}),
+    ('Keras_Applications', '1.0.8'),
+    ('Keras_Preprocessing', '1.1.0'),
+    ('gast', '0.3.3'),
+    ('astor', '0.8.1'),
+    ('termcolor', '1.1.0'),
+    ('chardet', '3.0.4'),
+    ('certifi', '2019.9.11'),
+    ('idna', '2.8'),
+    ('urllib3', '1.25.6'),
+    ('requests', '2.22.0'),
+    ('wrapt', '1.11.2'),
+    ('setuptools', '41.2.0', {'source_tmpl': 'setuptools-%(version)s.zip'}),
+    ('Markdown', '3.1.1'),
+    ('wheel', '0.33.6'),
+    ('astunparse', '1.6.3'),
+    ('opt-einsum', '3.2.1', {'source_tmpl': 'opt_einsum-%(version)s.tar.gz'}),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'
