@@ -21,7 +21,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.2.2'),
-#    ('JuliaExtensions', _jlver),
+    ('JuliaExtensions', _jlver),
     ('graphviz', '2.44.1'),
     ('libffi', '3.3'),
 ]
@@ -41,7 +41,7 @@ exts_list = [
         'use_pip': False,
     }),
     ('wheel', '0.35.1'),
-    ('Cython', '0.29.21', { #otherwise pandas complains
+    ('Cython', '0.29.21', { 
     }),
     
 #jupyterlab packages including ipython and its dependencies
@@ -123,9 +123,6 @@ exts_list = [
         'modulename': 'argon2',
         }),
     ('nest_asyncio', '1.4.1'),
-#    (name, version, {
-#        'installopts': ' --install-option=--skip-npm ',
-#        }),
     (name, version),    
 
 # jupyterhub and its dependencies
@@ -246,7 +243,7 @@ exts_list = [
     ('multidict', '4.7.6'),
     ('yarl', '1.5.1'), 
     ('async-timeout', '3.0.1'),
-    ('aiohttp', '3.6.3'), #bumped twr, also result in yarl < 1.6.0 so downgraded to 1.5.1!
+    ('aiohttp', '3.6.3'),
     ('jupyter-server-proxy', '1.5.0'),  
     ('dask_labextension', '3.0.0'),
 
@@ -263,9 +260,9 @@ exts_list = [
         'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
         }),
 # ipyparaview, not yet available in pypi and npm registry, 24 April 2020
-#twr    ('ipyparaview', '074d548', { #bump from cf1c6f4 to 074d548 for jlab 2.0
-#twr        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
-#twr        }),
+    ('ipyparaview', '074d548', { #bump from cf1c6f4 to 074d548 for jlab 2.0
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
+        }),
     
 #jupyterlab code formatter, requires a formatter e.g., black and isort
     ('pathspec', '0.8.0'),
@@ -332,28 +329,27 @@ export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHO
 export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
 export JULIA_DEPOT_PATH=%%(installdir)s/share/julia/site/ &&
 export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe others)
-#twr labextensions are not being installed for now ENOTSUP
-#twr %%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
-#twr %%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
-#twr %%(installdir)s/bin/jupyter-labextension install itkwidgets@0.32.0 --no-build &&
-#twr %%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.4 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install -y plotlywidget@4.11.0 --no-build &&
-#twr %%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@4.11.0 --no-build &&
-#twr %%(installdir)s/bin/jupyter labextension install -y @bokeh/jupyter_bokeh@2.0.3 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install -y bqplot@0.5.17 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0  --no-build &&
-#twr %%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
-#twr %%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.4.0 --no-build && 
-#twr cd %%(installdir)s/ && 
-#twr git clone https://github.com/NVIDIA/ipyparaview && 
-#twr cd ipyparaview && 
-#twr git checkout 074d548 && 
-#twr %%(installdir)s/bin/jupyter labextension install js --no-build && 
+%%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
+%%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
+%%(installdir)s/bin/jupyter-labextension install itkwidgets@0.32.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.4 --no-build && 
+%%(installdir)s/bin/jupyter labextension install -y plotlywidget@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install -y @bokeh/jupyter_bokeh@2.0.3 --no-build && 
+%%(installdir)s/bin/jupyter labextension install -y bqplot@0.5.17 --no-build && 
+%%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
+%%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0  --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
+%%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
+%%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.4.0 --no-build && 
+cd %%(installdir)s/ && 
+git clone https://github.com/NVIDIA/ipyparaview && 
+cd ipyparaview && 
+git checkout 074d548 && 
+%%(installdir)s/bin/jupyter labextension install js --no-build && 
 #twr now finally do the JupyterLab build
-#twr %%(installdir)s/bin/jupyter lab build --dev-build=False  && 
-#twr rm -r $YARN_CACHE_FOLDER && 
+%%(installdir)s/bin/jupyter lab build --dev-build=False  && 
+rm -r $YARN_CACHE_FOLDER && 
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%%(installdir)s/ && 
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
@@ -364,17 +360,17 @@ export JULIA_DEPOT_PATH=%s &&
 export JULIA_PROJECT=%s &&
 julia -e 'using Pkg; Pkg.add(\"IJulia\");' &&
 chmod -R +rX %s &&  # Adjust permissions of IJulia files
-file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
+file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file && mv $file ${file}.hidden # Remove IJulia specific project configuration
 """ % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir, _ijulia_depot, _jlshortver)
 ]
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pyshortver)s/site-packages',
-#             'share/jupyter/lab/extensions',
+             'share/jupyter/lab/extensions',
              'share/jupyter/lab/schemas',
-#             'share/jupyter/lab/staging',
-#             'share/jupyter/lab/static',
+             'share/jupyter/lab/staging',
+             'share/jupyter/lab/static',
              'share/jupyter/lab/themes',
              ]
 }
