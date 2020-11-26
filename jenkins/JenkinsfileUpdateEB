@@ -106,6 +106,8 @@ stage('Update Stage') {
 
                         $load_easybuild
                         $switch_easybuild
+                        # correct buildpath and metadata
+                        export EASYBUILD_BUILDPATH=\$EASYBUILD_BUILDPATH/$machineLabel
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
                         # print EasyBuild version and configuration
@@ -118,6 +120,8 @@ stage('Update Stage') {
                             find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
 
                             # build current toolchain
+                            echo -e "\nBuilding with the following command:"
+                            echo "$build_command --hidden \${tc}-${params.cdt_version}.eb"
                             $build_command --hidden \${tc}-${params.cdt_version}.eb
                             if [ \$? -eq 0 ]; then
                                 echo -e "Update of toolchain \$tc SUCCESSFUL"
@@ -155,7 +159,7 @@ stage('Update Stage') {
                         for recipe in \${build_list}; do
                             status=0
                             new_recipe=\$(echo \$recipe | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
-                            echo -e "\nCurrent Update: \$new_recipe"
+                            echo -e "\nCurrent target: \$new_recipe"
 
                             # relative deps path from full path dry run (--dry-run)
                             deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
@@ -170,7 +174,8 @@ stage('Update Stage') {
                                 continue
                             fi
 
-                            echo -e "\nBuilding using the following command:"
+                            echo -e "\nBuilding with the following command:"
+                            # check if recipe matches Cray cdt 
                             if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_current} ]]; then
                                 echo "$build_command $tc_flags \$recipe"
                                 $build_command $tc_flags \$recipe
@@ -307,13 +312,16 @@ stage('GitHub Stage') {
                     sh("""#!/bin/bash -l
                         # clone master over ssh
                         repo="git@github.com:eth-cscs/production.git"
-                        git clone \$repo
+                        echo -e "\nCloning CSCS GitHub production repository:"
+                        echo "git clone --quiet \$repo"
+                        git clone --quiet \$repo
                         
                         # go to easyconfigs folder to match relative path of deps
                         cd production/easybuild/easyconfigs
 
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.cdt_version}" 
+                        echo -e "\nSwitch to branch ${machineLabel}/${params.cdt_version}:"
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
                             git checkout \$branch 
                         else 
@@ -334,23 +342,28 @@ stage('GitHub Stage') {
                         unset missing
 
                         # loop over list of successful updates and dependencies
+                        echo -e "\nCopy successful updates for commit:"
                         for recipe in \$submit_list; do
-                            echo -e "\nCurrent update: \$recipe "
                             # check if recipe did not fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
-                                name=\$(basename \$recipe)
-                                source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
-                                if [ -n "\$source" ]; then 
-                                    echo -e " \t \$source -> \$recipe"
-                                    cp \$source \$recipe
-                                    # update variable
-                                    copied+=(\$recipe)
+                                # check if recipe matches Cray cdt
+                                if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]
+                                    name=\$(basename \$recipe)
+                                    source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
+                                    if [ -n "\$source" ]; then 
+                                        echo -e " \t \$source -> \$recipe"
+                                        cp \$source \$recipe
+                                        # update variable
+                                        copied+=(\$recipe)
+                                    else
+                                        echo -e " \t \$recipe not copied (update not found)"
+                                        # update variable
+                                        missing+=(\$recipe)
+                                    fi
                                 else
-                                    echo -e " \t \$recipe not copied (update not found)"
-                                    # update variable
-                                    missing+=(\$recipe)
+                                    echo -e " \t \$recipe does not match ${params.cdt_version} (skipped)"
                                 fi
                             fi
                         done
@@ -362,6 +375,7 @@ stage('GitHub Stage') {
                         
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
+                            echo -e "\nCommit successul updates:"
                             git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
                             # check if a pull request is already open
                             if [ -n "\$(hub pr list --head \${branch})" ]; then
