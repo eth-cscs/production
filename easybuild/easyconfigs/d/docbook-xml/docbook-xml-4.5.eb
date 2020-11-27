@@ -1,0 +1,21 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'dockbook-xml'
+version = '4.5'
+homepage = 'https://www.oasis-open.org/docbook/xml'
+description = """The DocBook Technical Committee maintains the DocBook schema.
+DocBook V4.5 and earlier versions are officially available as Document Type
+Definitions (DTDs) for both XML and SGML."""
+toolchain = SYSTEM
+source_urls = ['https://www.oasis-open.org/docbook/xml/4.5']
+sources = ['docbook-xml-4.5.zip']
+sanity_check_paths = {
+    'files': ['catalog.xml'],
+    'dirs': [],
+}
+modextravars = {
+    'XML_CATALOG_FILES_XML': "%(installdir)s/catalog.xml",
+}
+
+moduleclass = 'devel'

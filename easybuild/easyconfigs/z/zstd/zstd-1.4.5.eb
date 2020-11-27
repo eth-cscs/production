@@ -1,0 +1,14 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'zstd'
+version = '1.4.5'
+homepage = 'https://github.com/facebook/zstd'
+description = "Zstandard - Fast real-time compression algorithm"
+toolchain = SYSTEM
+source_urls = ['https://github.com/facebook/zstd/archive']
+sources = ['v%(version)s.tar.gz']
+separate_build_dir = True
+srcdir = 'build/cmake'
+
+moduleclass = 'devel'
