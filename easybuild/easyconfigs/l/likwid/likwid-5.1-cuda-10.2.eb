@@ -21,7 +21,7 @@ toolchain = SYSTEM
 toolchainopts = {'pic': True}
 source_urls = ['https://github.com/RRZE-HPC/likwid/archive']
 sources = ['v%(version)s.tar.gz']
-builddependencies = ['craype-accel-nvidia60']
+builddependencies = [('craype-accel-nvidia60', EXTERNAL_MODULE)]
 # --- config.mk:
 prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-'                     config.mk && "
 prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
