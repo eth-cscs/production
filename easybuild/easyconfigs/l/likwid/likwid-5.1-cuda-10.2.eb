@@ -21,6 +21,7 @@ toolchain = SYSTEM
 toolchainopts = {'pic': True}
 source_urls = ['https://github.com/RRZE-HPC/likwid/archive']
 sources = ['v%(version)s.tar.gz']
+builddependencies = ['craype-accel-nvidia60']
 # --- config.mk:
 prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-'                     config.mk && "
 prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
@@ -32,7 +33,8 @@ prebuildopts += "sed -i 's-^INSTALL_CHOWN-#INSTALL_CHOWN-'                      
 prebuildopts += "sed -i 's-^CFG_FILE_PATH = /-CFG_FILE_PATH = $(PREFIX)/-'       config.mk && "
 prebuildopts += "sed -i 's-^TOPO_FILE_PATH = /-TOPO_FILE_PATH = $(PREFIX)/-'     config.mk && "
 # nvidia:
-local_cuda = '/opt/nvidia/cudatoolkit10.2/10.2.89_3.29-7.0.2.1_3.5__g67354b4'
+# local_cuda = '/opt/nvidia/cudatoolkit10.2/10.2.89_3.29-7.0.2.1_3.5__g67354b4'
+local_cuda = '$CUDATOOLKIT_HOME'
 prebuildopts += "sed -i 's-^NVIDIA_INTERFACE = false-NVIDIA_INTERFACE = true-'   config.mk && "
 # prebuildopts += "sed -i '@^$(CUDA_HOME)/include@%s/include@'                     config.mk && " % local_cuda
 # prebuildopts += "sed -i '@^$(CUDA_HOME)/extras/CUPTI/include@%s/extras/CUPTI/include@' config.mk && " % local_cuda
