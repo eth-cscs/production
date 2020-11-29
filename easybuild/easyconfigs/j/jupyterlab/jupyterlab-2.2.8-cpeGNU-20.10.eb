@@ -1,16 +1,9 @@
-# @author: robinson (omlins and hvictor for ijulia)
+# @author: robinson 
 
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
 version = '2.2.8'
-
-_jl_maj_ver = '1'
-_jl_min_ver = '5'
-_jl_rev_ver = '0'
-
-_jlver = '%s.%s.%s' % (_jl_maj_ver, _jl_min_ver, _jl_rev_ver)
-_jlshortver = '%s.%s' % (_jl_maj_ver, _jl_min_ver)
 
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
@@ -21,7 +14,6 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.2.2'),
-    ('JuliaExtensions', _jlver),
     ('graphviz', '2.44.1'),
     ('libffi', '3.3'),
 ]
@@ -66,7 +58,7 @@ exts_list = [
     ('pickleshare', '0.7.5'),
     ('ipython', '7.18.1', {
         'modulename': 'IPython',
-#        'patches': ['ipython-7.18.1-jupyter.patch'],  
+        'patches': ['ipython-7.18.1-jupyter.patch'],  
        }),
     ('pyrsistent', '0.17.3'),
     ('jsonschema', '3.2.0', {
@@ -292,11 +284,6 @@ exts_list = [
         }),
 ]
 
-# For Julia packages needed for Jupyter
-_ijulia_depot = "%(installdir)s/share/IJulia"
-_ijulia_projectdir = "%(installdir)s/share/IJulia/environments/1.5.0-eiger" 
-_ijulia_projectdir_tcl = "%(installdir)s/share/IJulia/environments/1.5.0-eiger" 
-
 
 modextrapaths = {
     'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
@@ -307,13 +294,6 @@ modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
-#twr in the following, both cases of ijulia_projectdir_tcl changed to ijulia_projectdir, to be fixed?
-modtclfooter = """
-prepend-path JULIA_DEPOT_PATH "%s"
-prepend-path EBJULIA_ADMIN_DEPOT_PATH "%s"
-prepend-path JULIA_LOAD_PATH "%s"
-prepend-path EBJULIA_ADMIN_LOAD_PATH "%s"
-""" % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir, _ijulia_projectdir)
 
 
 # install extensions and batchspawner components
@@ -325,19 +305,17 @@ export NODE_OPTIONS=--max-old-space-size=4096 &&
 export NODE_REPL_HISTORY="" &&
 export JUPYTERLAB_DIR=%%(installdir)s/share/jupyter/lab/ && 
 export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHONPATH && 
-#export JUPYTER_PATH=%%(installdir)s/share/jupyter/ && 
 export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
-export JULIA_DEPOT_PATH=%%(installdir)s/share/julia/site/ &&
-export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe others)
-%%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
+export JUPYTER=%%(installdir)s/bin/jupyter &&   
+%%(installdir)s/bin/jupyter-labextension install @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
 %%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
 %%(installdir)s/bin/jupyter-labextension install itkwidgets@0.32.0 --no-build &&
 %%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.4 --no-build && 
-%%(installdir)s/bin/jupyter labextension install -y plotlywidget@4.11.0 --no-build &&
-%%(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly@4.11.0 --no-build &&
-%%(installdir)s/bin/jupyter labextension install -y @bokeh/jupyter_bokeh@2.0.3 --no-build && 
-%%(installdir)s/bin/jupyter labextension install -y bqplot@0.5.17 --no-build && 
-%%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
+%%(installdir)s/bin/jupyter labextension install plotlywidget@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyterlab-plotly@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install @bokeh/jupyter_bokeh@2.0.3 --no-build && 
+%%(installdir)s/bin/jupyter labextension install bqplot@0.5.17 --no-build && 
+%%(installdir)s/bin/jupyter labextension install @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
 %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0  --no-build &&
 %%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
 %%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
@@ -351,17 +329,8 @@ git checkout 074d548 &&
 %%(installdir)s/bin/jupyter lab build --dev-build=False  && 
 rm -r $YARN_CACHE_FOLDER && 
 # Bash kernel - https://github.com/takluyver/bash_kernel
-python3 -m bash_kernel.install --prefix=%%(installdir)s/ && 
-# IJulia kernel - https://github.com/JuliaLang/IJulia.jl
-# installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
-unset EBJULIA_USER_DEPOT_PATH &&
-export EBJULIA_ADMIN_DEPOT_PATH=%s &&
-export JULIA_DEPOT_PATH=%s &&
-export JULIA_PROJECT=%s &&
-julia -e 'using Pkg; Pkg.add(\"IJulia\");' &&
-chmod -R +rX %s &&  # Adjust permissions of IJulia files
-file=%%(installdir)s/share/jupyter/kernels/julia-%s/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file && mv $file ${file}.hidden # Remove IJulia specific project configuration
-""" % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir, _ijulia_depot, _jlshortver)
+python3 -m bash_kernel.install --prefix=%%(installdir)s/ 
+""" % ()
 ]
 
 sanity_check_paths = {
