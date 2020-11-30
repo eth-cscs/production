@@ -7,8 +7,6 @@
  GROMACS-2020.4-cpeGNU-20.10.eb                        --set-default-module
  GSL-2.6-cpeCCE-20.10.eb                               --set-default-module
  GSL-2.6-cpeGNU-20.10.eb                               --set-default-module
- Julia-1.5.0-cpeGNU-20.10.eb                           --set-default-module
- JuliaExtensions-1.5.0-cpeGNU-20.10.eb                 --set-default-module
  jupyterlab-2.2.8-cpeGNU-20.10.eb                      --set-default-module
  LAMMPS-29Oct20-cpeGNU-20.10.eb                        --set-default-module
  matplotlib-3.3.3-cpeGNU-20.10.eb                      --set-default-module
