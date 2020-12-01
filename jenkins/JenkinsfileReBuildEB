@@ -81,7 +81,7 @@ stage('ReBuild Stage') {
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" :
+                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
                         "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
@@ -108,7 +108,7 @@ stage('ReBuild Stage') {
                         if [ -d "\${EASYBUILD_PREFIX}" ]; then
                             echo -e "\nRemoving existing folder \${EASYBUILD_PREFIX}"
                             rm -rf "\${EASYBUILD_PREFIX}"
-                        fi
+                        fi  
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
                         unset failed
@@ -118,11 +118,11 @@ stage('ReBuild Stage') {
                         echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
                         echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
                         rebuild_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
-
+                        
                         if [ -z "\$rebuild_list" ]; then
                          echo -e "\nThe list of recipes to ReBuild is empty. Exiting..."
                          exit \$(wc -w <<< \$rebuild_list)
-                        else
+                        else   
                          echo -e "\nSelected recipes to ReBuild: \n\$rebuild_list"
                         fi
 
@@ -130,7 +130,7 @@ stage('ReBuild Stage') {
                         for recipe in \${rebuild_list}; do
                             status=0
                             echo -e "\nCurrent ReBuild: \$recipe"
-
+                            
                             # get relative path of dependencies from dry run
                             deps=\$(eb -Dr \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}')
 
@@ -152,7 +152,7 @@ stage('ReBuild Stage') {
                             if [ \$status -eq 0 ]; then
                                 success+=(\$recipe)
                                 echo "\$recipe" >> "\${success_file}"
-                                # remove folders
+                                # remove folders 
                                 echo -e "\nReBuild of \$recipe SUCCESSFUL: removing modules and software folders"
                                 rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
                             else
@@ -182,8 +182,22 @@ stage('ReBuild Stage') {
         }
     }
 
-    catchError(stageResult: 'FAILURE') {
+    try {
         parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting..."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting..."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting..."
+        }
     }
 }
 
@@ -202,8 +216,8 @@ stage('Jira Stage') {
         def machineName = machine.name
         for (item in architectures) {
             def architecture = item
-            def machineLabel = architecture == "" ?
-                machineName :
+            def machineLabel = architecture == "" ? 
+                machineName : 
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
@@ -213,7 +227,7 @@ stage('Jira Stage') {
                                         failed_file="$SCRATCH/${params.eb_prefix}/$machineLabel/failed.txt"
                                         if [ -f "\$failed_file" ]; then
                                              cat \$failed_file
-                                        fi""").trim()
+                                        fi""").trim()  
                     if ( !failed_rebuilds?.trim() ) {
                         println "\nFailed rebuilds: None\n"
                     }
@@ -237,7 +251,7 @@ stage('Jira Stage') {
         } catch(err) {
             println "Failed to create Jira Issues"
         }
-    }
+    }  
 }
 
 if (params.notifySlack) {
