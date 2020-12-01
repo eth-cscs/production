@@ -84,7 +84,7 @@ stage('Update Stage') {
                     def eb_flags = "--ignore-locks -r"
                     def tc_flags = "--try-toolchain-version=${params.cdt_version}"
                     def build_command = "eb $eb_flags"
-                        
+
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
 
@@ -125,7 +125,7 @@ stage('Update Stage') {
                             $build_command --hidden \${tc}-${params.cdt_version}.eb
                             if [ \$? -eq 0 ]; then
                                 echo -e "Update of toolchain \$tc SUCCESSFUL"
-                            else 
+                            else
                                 echo -e "Update of toolchain \$tc FAILED"
                             fi
                         done
@@ -147,11 +147,11 @@ stage('Update Stage') {
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
                         build_list=\$(grep -if select_recipes.txt \${prod_list} | grep -ivf discard_recipes.txt | awk '{print \$1}')
-                        
+
                         if [ -z "\$build_list" ]; then
                             echo -e "\nThe list of recipes to build is empty. Exiting..."
                             exit \$(wc -w <<< \$build_list)
-                        else   
+                        else
                             echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
                         fi
 
@@ -163,7 +163,7 @@ stage('Update Stage') {
 
                             # relative deps path from full path dry run (--dry-run)
                             deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
-                            
+
                             # check status and print short dry run (-D)
                             if [ -n "\$deps" ]; then
                                 $build_command $tc_flags -D \$recipe | grep "\\["
@@ -175,7 +175,7 @@ stage('Update Stage') {
                             fi
 
                             echo -e "\nBuilding with the following command:"
-                            # check if recipe matches Cray cdt 
+                            # check if recipe matches Cray cdt
                             if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_current} ]]; then
                                 echo "$build_command $tc_flags \$recipe"
                                 $build_command $tc_flags \$recipe
@@ -216,22 +216,8 @@ stage('Update Stage') {
         }
     }
 
-    try {
-        parallel updates
-        currentBuild.result = "SUCCESS"
-    } catch(err) {
-        if (err.toString().contains('exit code 143')) {
-            currentBuild.result = "ABORTED"
-            println "The Build step was cancelled. Aborting..."
-        }
-        else if (err.toString().contains('Queue task was cancelled')) {
-            currentBuild.result = "ABORTED"
-            println "The Queue task was cancelled. Aborting..."
-        }
-        else {
-            currentBuild.result = "FAILURE"
-            println "The Build step failed. Exiting..."
-        }
+    catchError(stageResult: 'FAILURE') {
+        parallel builds
     }
 }
 
@@ -250,8 +236,8 @@ stage('Jira Stage') {
         def machineName = machine.name
         for (item in architectures) {
             def architecture = item
-            def machineLabel = architecture == "" ? 
-                machineName : 
+            def machineLabel = architecture == "" ?
+                machineName :
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
@@ -261,7 +247,7 @@ stage('Jira Stage') {
                                         failed_file="${params.eb_prefix}/$machineLabel/${params.cdt_version}/failed.txt"
                                         if [ -f "\$failed_file" ]; then
                                             cat \$failed_file
-                                        fi""").trim()  
+                                        fi""").trim()
                     if ( !failed_updates?.trim() ) {
                         println "\nFailed updates: None\n"
                     }
@@ -285,7 +271,7 @@ stage('Jira Stage') {
         } catch(err) {
             println "Failed to create Jira Issues"
         }
-    }  
+    }
 }
 
 /*
@@ -303,8 +289,8 @@ stage('GitHub Stage') {
         def machineName = machine.name
         for (item in architectures) {
             def architecture = item
-            def machineLabel = architecture == "" ? 
-                machineName : 
+            def machineLabel = architecture == "" ?
+                machineName :
                 "${machineName}-${architecture}"
             GitHubPR[machineLabel] = {
                 node(machineName) {
@@ -315,16 +301,16 @@ stage('GitHub Stage') {
                         echo -e "\nCloning CSCS GitHub production repository:"
                         echo "git clone --quiet \$repo"
                         git clone --quiet \$repo
-                        
+
                         # go to easyconfigs folder to match relative path of deps
                         cd production/easybuild/easyconfigs
 
                         # create git branch or update it if existing
-                        branch="${machineLabel}/${params.cdt_version}" 
+                        branch="${machineLabel}/${params.cdt_version}"
                         echo -e "\nSwitch to branch ${machineLabel}/${params.cdt_version}:"
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
-                            git checkout \$branch 
-                        else 
+                            git checkout \$branch
+                        else
                             git checkout -b \$branch
                         fi
 
@@ -352,7 +338,7 @@ stage('GitHub Stage') {
                                 if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]
                                     name=\$(basename \$recipe)
                                     source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
-                                    if [ -n "\$source" ]; then 
+                                    if [ -n "\$source" ]; then
                                         echo -e " \t \$source -> \$recipe"
                                         cp \$source \$recipe
                                         # update variable
@@ -372,7 +358,7 @@ stage('GitHub Stage') {
                         module load daint-gpu
                         module load hub
                         git add .
-                        
+
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
@@ -383,7 +369,7 @@ stage('GitHub Stage') {
                             else
                                 hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
                             fi
-                        else 
+                        else
                             echo -e "\nNothing to commit"
                         fi
 
@@ -405,7 +391,7 @@ stage('GitHub Stage') {
         } catch(err) {
             println "Failed to submit GitHub pull request"
         }
-    }  
+    }
 }
 
 if (params.notifySlack) {
