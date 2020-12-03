@@ -14,7 +14,7 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
 CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
 
 FC         = ftn
-FCL        = ftn -pgc++libs -mp
+FCL        = ftn -pgc++libs
 
 FREE       = -Mfree
 FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays

@@ -17,7 +17,6 @@ sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + 
 
 builddependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
-    ('cray-fftw', EXTERNAL_MODULE),
     ('Wannier90', '3.1.0')
 ]
 
