@@ -16,7 +16,7 @@ description = """
 toolchain = SYSTEM
 
 #FIXME: automate injection of release tag into path
-local_path = '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/%s/%s/easybuild/modules/all' % (local_prgenv, version)
+local_path = '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/%s/%s/easybuild/modules/all' % (local_prgenv, version)
 
 modtclfooter = """
 set list [exec ls --color=none %s ]
