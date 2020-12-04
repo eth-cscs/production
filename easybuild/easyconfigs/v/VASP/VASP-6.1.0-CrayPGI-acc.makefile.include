@@ -1,0 +1,70 @@
+# Precompiler options
+CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
+             -DMPI -DMPI_BLOCK=8000 -DMPI_INPLACE -Duse_collective \
+             -DscaLAPACK \
+             -DCACHE_SIZE=4000 \
+             -Davoidalloc \
+             -Dvasp6 \
+             -Duse_bse_te \
+             -Dtbdyn \
+             -Dqd_emulate \
+             -Dfock_dblbuf \
+             -D_OPENACC \
+             -DVASP2WANNIER90v2
+
+CPP        = pgfortran -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
+
+FC         = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc30,cc35,cc50,cc60,cc70,cuda10.1
+FCL        = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc30,cc35,cc50,cc60,cc70,cuda10.1 -pgc++libs
+
+FREE       = -Mfree
+
+FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
+
+OFLAG      = -fast
+
+DEBUG      = -Mfree -O0 -traceback
+
+# Use Intel MKL libraries
+MKL_PATH   = $(MKLROOT)/lib/intel64
+BLAS       = $(MKL_PATH)/libmkl_blas95_lp64.a
+LAPACK     = $(MKL_PATH)/libmkl_lapack95_lp64.a
+BLACS      = -lmkl_blacs_intelmpi_lp64
+SCALAPACK  = -L$(MKL_PATH) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
+
+OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
+
+INCS       = -I$(MKLROOT)/include/fftw
+
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS)
+
+OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
+OBJECTS_O2 += fft3dlib.o
+
+# Software emulation of quadruple precsion
+QD         ?= $(EBROOTQD)
+LLIBS      += -L$(EBROOTQD)/lib -lqdmod -lqd
+INCS       += -I$(EBROOTQD)/include/qd
+
+# Redefine the standard list of O1 and O2 objects
+SOURCE_O1  := pade_fit.o
+SOURCE_O2  := pead.o
+
+# For what used to be vasp.5.lib
+CPP_LIB    = $(CPP)
+FC_LIB     = pgfortran
+CC_LIB     = pgcc
+CFLAGS_LIB = -O
+FFLAGS_LIB = -O1 -Mfixed
+FREE_LIB   = $(FREE)
+
+OBJECTS_LIB= linpack_double.o getshmem.o
+
+# For the parser library
+CXX_PARS   = pgc++ --no_warnings
+LLIBS      += -lstdc++
+
+# Normally no need to change this
+SRCDIR     = ../../src
+BINDIR     = ../../bin
