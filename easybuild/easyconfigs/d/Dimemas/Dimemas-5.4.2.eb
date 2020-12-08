@@ -1,0 +1,25 @@
+# jg (CSCS)
+easyblock = "Tarball"
+name = 'Dimemas'
+version = "5.4.2"
+
+homepage = 'https://tools.bsc.es/downloads'
+description = """High-abstracted network simulator for message-passing
+programs."""
+
+toolchain = SYSTEM
+source_urls = ['https://ftp.tools.bsc.es/dimemas']
+sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
+checksums = ['2fd834eba3267c53944ac85a6e8c285c']
+osdependencies = ['java']
+
+sanity_check_paths={
+    'files': ['bin/Dimemas', 'include/extern_comm_model.h',],
+    'dirs': ['include', 'lib64']
+}
+
+modextravars = {
+    '%(name)s_installed_version': '%(version)s',
+}
+
+moduleclass = 'perf'
