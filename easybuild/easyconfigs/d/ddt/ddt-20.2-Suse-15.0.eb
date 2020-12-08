@@ -2,9 +2,8 @@
 easyblock = 'Tarball'
 
 name = 'ddt'
-version = '20.0'
+version = '20.2'
 versionsuffix = '-Suse-15.0'
-
 homepage = 'https://developer.arm.com/products/software-development-tools/' \
            'hpc/downloads/download-arm-forge'
 description = """Arm DDT is a cross-platform debugger for C, C++, Fortran
@@ -17,26 +16,24 @@ Youtube channel:
 Non-MPI codes may need to add a dummy MPI_Init()/MPI_Finalize() call
 To avoid conflict, module unload Visit Cube darshan
 Licensing : http://velan:4241/status.html"""
-
 toolchain = SYSTEM
 source_urls = ['http://content.allinea.com/downloads/']
 sources = ['arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix)]
-checksums = ['5c636626e87d20920837db46caf3577f']
 local_licence = ('type=2\n'
-    'serial_number=6784\n'
+    'serial_number=16250\n'
     'hostname=velan.cscs.ch\n'
-    'serverport=4241\n')
+    'serverport=4241\n'
+    'features=ddt,cuda,remote-mic\n'
+    'hash2=457a9247b93e00c52941a8843471bac8e21cda8f')
 postinstallcmds = [
     'bash ./textinstall.sh --accept-licence %(installdir)s && '
     'echo -e "' + local_licence + '" > '
     '%(installdir)s/licences/License && '
     'cp %(installdir)s/licences/License %(installdir)s/licences/Licence']
-
 sanity_check_paths = {
     'files': ['bin/ddt'],
     'dirs': ['bin', 'licences']
 }
-
 modextrapaths = {
     'PATH': 'bin',
     'PATH': 'libexec',
@@ -45,7 +42,6 @@ modextrapaths = {
     # setting MODULEPATH here conflicts with lmod, removing as only for map
     # 'MODULEPATH': ['share/modules/cray'],
 }
-
 modextravars = {
     'CRAY_ACC_NO_EARLY_INIT': '1',
     'DDT_NO_TIMEOUT': '1',
