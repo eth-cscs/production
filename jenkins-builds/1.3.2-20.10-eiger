@@ -8,6 +8,7 @@
  GSL-2.6-cpeCCE-20.10.eb                               --set-default-module
  GSL-2.6-cpeGNU-20.10.eb                               --set-default-module
  jupyterlab-2.2.8-cpeGNU-20.10.eb                      --set-default-module
+ jupyter-utils-0.1.eb                                  --set-default-module
  LAMMPS-29Oct20-cpeGNU-20.10.eb                        --set-default-module
  matplotlib-3.3.3-cpeGNU-20.10.eb                      --set-default-module
  NCO-4.9.5-cpeGNU-20.10.eb                             --set-default-module
