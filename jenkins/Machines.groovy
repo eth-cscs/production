@@ -25,9 +25,9 @@ def eiger = [name: 'eiger',
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
-           unusePath: '/apps/arolla/UES/modulefiles',
+           unusePath: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/generic/easybuild/modules/all',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08-dev0/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/generic/easybuild']
 
 return [daint, dom, eiger, tsa]
