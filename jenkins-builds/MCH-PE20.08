@@ -1,0 +1,59 @@
+Anaconda3-2019.03.eb
+Autotools-20180311.eb
+Buildah-1.14.9.eb
+CMake-3.14.5.eb
+CUDA-10.1.243.eb
+ddt-20.0.3-Redhat-7.0.eb                               --set-default-module
+git-2.22.0.eb
+IDL-8.5.1-MCH.eb
+ImageMagick-6.7.6-10.eb                                --set-default-module
+ImageMagick-7.0.8-53.eb
+NCL-6.2.1.eb                                           --set-default-module
+NCL-6.6.2.eb
+Python-2.7.16.eb                                       --disable-rpath 
+Python-3.7.4.eb
+rstudio-1.1.463.eb                                     --set-default-module
+UCX-1.8.1-GCC-8.3.0.eb                                 --hidden
+UCX-1.8.1-GCC-8.3.0-cuda-10.1.eb                       --hidden
+UDUNITS-2.2.26.eb
+vampir-9.6.0.eb
+Vim-8.1.eb
+nmon-16g.eb
+Boost-1.70.0-foss-2019b-python2.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+Boost-1.70.0-foss-2019b-python3.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+CDO-1.9.7.1-foss-2019b.eb                              --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+NCO-4.8.1-foss-2019b.eb                                --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+ncview-2.1.7-foss-2019b.eb                             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+PyExtensions-2.7.16-foss-2019b.eb                      --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+PyExtensions-3.7.4-foss-2019b.eb                       --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+R-3.5.2-foss-2019b.eb 			                       --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild --set-default-module
+R-3.6.1-foss-2019b.eb 			                       --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+Ruby-2.4.0-foss-2019b.eb 			                   --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild --set-default-module
+Ruby-2.6.5-foss-2019b.eb 			                   --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+netCDF-C++-4.3.0-foss-2019b.eb                         --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+netCDF-Fortran-4.4.5-foss-2019b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+OpenMPI-4.0.2-GCC-8.3.0.eb                             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2-nocuda/easybuild
+Boost-1.70.0-fosscuda-2019b-python2.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+Boost-1.70.0-fosscuda-2019b-python3.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+CDO-1.9.7.1-fosscuda-2019b.eb                          --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+NCO-4.8.1-fosscuda-2019b.eb                            --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+ncview-2.1.7-fosscuda-2019b.eb                         --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+PyExtensions-2.7.16-fosscuda-2019b.eb                  --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+PyExtensions-3.7.4-fosscuda-2019b.eb                   --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+R-3.5.2-fosscuda-2019b.eb 			                   --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild --set-default-module
+R-3.6.1-fosscuda-2019b.eb 			                   --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+Ruby-2.4.0-fosscuda-2019b.eb 			               --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild --set-default-module
+Ruby-2.6.5-fosscuda-2019b.eb 			               --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+netCDF-C++-4.3.0-fosscuda-2019b.eb                     --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+netCDF-Fortran-4.4.5-fosscuda-2019b.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+OpenMPI-4.0.2-gcccuda-2019b-cuda-10.1.eb               --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/gnu/19.2/easybuild
+netCDF-C++-4.3.0-PGI-20.4-GCC-8.3.0.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4-nocuda/easybuild
+netCDF-Fortran-4.4.5-PGI-20.4-GCC-8.3.0.eb             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4-nocuda/easybuild
+OpenMPI-4.0.2-PGI-20.4-GCC-8.3.0-nocuda.eb             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4-nocuda/easybuild
+netCDF-C++-4.3.0-PGI-20.4-GCC-8.3.0.eb                 --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4/easybuild
+netCDF-Fortran-4.4.5-PGI-20.4-GCC-8.3.0.eb             --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4/easybuild
+OpenMPI-4.0.2-PGI-20.4-GCC-8.3.0-cuda-10.1.eb          --installpath=/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/pgi/20.4/easybuild
+PrgEnv-gnu-tsa-19.2-nocuda.eb                          --module-naming-scheme=EasyBuildMNS
+PrgEnv-gnu-tsa-19.2.eb                                 --module-naming-scheme=EasyBuildMNS --set-default-module
+PrgEnv-pgi-tsa-20.4-nocuda.eb                          --module-naming-scheme=EasyBuildMNS
+PrgEnv-pgi-tsa-20.4.eb                                 --module-naming-scheme=EasyBuildMNS --set-default-module
