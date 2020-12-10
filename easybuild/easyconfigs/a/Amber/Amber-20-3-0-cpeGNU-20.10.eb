@@ -31,23 +31,23 @@ prebuildopts = """
     export AMBERHOME=%(builddir)s && 
     ./update_amber --update-to AmberTools/3 && 
     ./update_amber --update-to %(name)s/0 && 
-    ./configure -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
+    FCFLAGS="-fallow-argument-mismatch" ./configure -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h &&
     make -j && 
     make install && 
-    ./configure -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
+    FCFLAGS="-fallow-argument-mismatch" ./configure -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h &&
     make -j && 
     make install && 
-    ./configure -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
+    FCFLAGS="-fallow-argument-mismatch" ./configure -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make -j && 
     make install && 
-    ./configure -mpi -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
+    FCFLAGS="-fallow-argument-mismatch" ./configure -crayxt5 -mpi -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make -j && 
     make install && 
-    ./configure -mpi -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
+    FCFLAGS="-fallow-argument-mismatch" ./configure -crayxt5 -mpi -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make -j &&
     make install && 
