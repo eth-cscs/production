@@ -1,0 +1,34 @@
+# contributed by Luca Marsella and Jean-Guillaume Piccinali (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.10.2'
+
+homepage = 'http://charm.cs.illinois.edu/research/charm/'
+description = """
+    Charm++ is a machine independent parallel programming system. Programs
+    written using this system will run unchanged on MIMD machines with or
+    without a shared memory.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'dynamic': False}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib/']
+sources = ['charm-%(version)s.tar.gz']
+
+cmds_map = [
+    ('charm-%(version)s.tar.gz', './build ChaNGa ofi-linux-x86_64 slurmpmi smp --incdir=/opt/cray/libfabric/1.11.0.0.233/include --libdir=/opt/cray/libfabric/1.11.0.0.233/lib64 --enable-lbuserdata --with-production -j12'),
+]
+files_to_copy = ['ofi-linux-x86_64-slurmpmi-smp']
+
+sanity_check_paths = {
+    'files': ['ofi-linux-x86_64-slurmpmi-smp/bin/charmc'],
+    'dirs': ['ofi-linux-x86_64-slurmpmi-smp/bin', 'ofi-linux-x86_64-slurmpmi-smp/lib', 'ofi-linux-x86_64-slurmpmi-smp/include'],
+}
+
+modextrapaths = {'PATH': 'ofi-linux-x86_64-slurmpmi-smp/bin'}
+
+modextravars = {'EBTYPECHARMPLUSPLUS': 'ofi-linux-x86_64-slurmpmi-smp'}
+
+moduleclass = 'lib'
