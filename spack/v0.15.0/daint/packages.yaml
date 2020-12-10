@@ -1,0 +1,205 @@
+# Based on NERSC Cori config
+# These package should be upgraded whenever there is a CDT or PE upgrade
+packages:
+    all:
+        # default compilers defined by the system
+        # these reflect the current installed PE
+        compiler: [gcc@8.3.0, cce@9.0.2, intel/19.0.1.144, pgi/19.7.0]
+        providers:
+            mpi: [mpich]
+            mkl: [intel-mkl]
+            blas: [cray-libsci_acc, cray-libsci, intel-mkl]
+            scalapack: [cray-libsci_acc, cray-libsci, intel-mkl]
+            pkgconfig: [pkg-config]
+    autoconf:
+        paths:
+             autoconf@2.69: /usr
+    automake:
+        paths:
+             automake@1.15.1: /usr
+    binutils:
+        variants: +gold~headers+libiberty+nls~plugin
+        paths:
+             binutils@2.31: /usr
+    boost:
+        variants: +atomic+chrono~clanglibcpp+date_time~debug+filesystem~graph~icu+iostreams+locale+log+math+mpi+multithreaded +program_options+python+random+regex+serialization+shared+signals~singlethreaded+system~taggedlayout+test+thread+timer~versionedlayout+wave
+    bzip2:
+        paths:
+             bzip2@1.0.6: /usr
+    cmake:
+        variants: ~doc+ncurses+openssl~ownlibs~qt
+    cp2k:
+        variants: blas=mkl ~elpa+libxc+mpi+openmp~pexsi~plumed smm=libxsmm
+    cray-libsci:
+        buildable: false
+        modules:
+            cray-libsci@19.06.1%gcc:   cray-libsci/19.06.1
+            cray-libsci@19.06.1%intel: cray-libsci/19.06.1
+            cray-libsci@19.06.1%cce:   cray-libsci/19.06.1
+            cray-libsci@19.06.1%pgi:   cray-libsci/19.06.1
+    cray-libsci_acc:
+        buildable: false
+        modules:
+            cray-libsci_acc@19.10.1%gcc:   cray-libsci_acc/19.10.1
+            cray-libsci_acc@19.10.1%intel: cray-libsci_acc/19.10.1
+            cray-libsci_acc@19.10.1%cce:   cray-libsci_acc/19.10.1
+            cray-libsci_acc@19.10.1%pgi:   cray-libsci_acc/19.10.1
+    cuda:
+        modules:
+          cuda@10.0: cudatoolkit/10.0.130_3.22-7.0.1.0_5.2__gdfb4ce5
+          cuda@10.1: cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7
+        version: ['10.1']
+    curl:
+        paths:
+             curl@7.60.0: /usr
+    diffutils:
+        paths:
+             diffutils@3.6: /usr
+    elpa:
+        variants: +openmp +optflags
+
+    fftw:
+        buildable: false
+        modules:
+            fftw@3.3.8.3%gcc+openmp:   cray-fftw/3.3.8.3
+            fftw@3.3.8.3%intel+openmp: cray-fftw/3.3.8.3
+            fftw@3.3.8.3%cce+openmp:   cray-fftw/3.3.8.3
+            fftw@3.3.8.3%pgi+openmp:   cray-fftw/3.3.8.3
+    gawk:
+        paths:
+             gawk@4.2.1: /usr
+    gettext:
+        paths:
+             gettext@0.19.8.1: /usr
+    gromacs:
+        variants: build_type=Release +mpi +cuda
+    hdf5:
+        buildable: false
+        modules:
+            hdf5@1.10.5.1%intel~mpi+hl: cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%gcc~mpi+hl:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%cce~mpi+hl:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%pgi~mpi+hl:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%intel+mpi+hl: cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%gcc+mpi+hl:   cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%cce+mpi+hl:   cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%pgi+mpi+hl:   cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%intel~mpi+hl+fortran: cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%gcc~mpi+hl+fortran:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%cce~mpi+hl+fortran:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%pgi~mpi+hl+fortran:   cray-hdf5/1.10.5.1
+            hdf5@1.10.5.1%intel+mpi+hl+fortran: cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%gcc+mpi+hl+fortran:   cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%cce+mpi+hl+fortran:   cray-hdf5-parallel/1.10.5.1
+            hdf5@1.10.5.1%pgi+mpi+hl+fortran:   cray-hdf5-parallel/1.10.5.1
+    hwloc:
+        variants: +cuda
+    intel-mkl:
+        buildable: false
+        paths:
+            intel-mkl@2019.1.144%intel+ilp64 threads=tbb:  /opt/intel
+            intel-mkl@2019.1.144%gcc+ilp64 threads=tbb:    /opt/intel
+            intel-mkl@2019.1.144%cce+ilp64 threads=tbb:    /opt/intel
+            intel-mkl@2019.1.144%intel+ilp64 threads=openmp:  /opt/intel
+            intel-mkl@2019.1.144%gcc+ilp64 threads=openmp:    /opt/intel
+            intel-mkl@2019.1.144%cce+ilp64 threads=openmp:    /opt/intel
+            intel-mkl@2019.1.144%intel~ilp64 threads=none: /opt/intel
+            intel-mkl@2019.1.144%gcc~ilp64 threads=none:   /opt/intel
+            intel-mkl@2019.1.144%cce~ilp64 threads=none:   /opt/intel
+    libtool:
+        paths:
+             libtool@2.4.6: /usr
+    lz4:
+        paths:
+             lz4@1.8.0: /usr
+    m4:
+        paths:
+             m4@1.4.18: /usr
+    mpich:
+        buildable: false
+        modules:
+            mpich@3.2%gcc:   cray-mpich/7.7.10
+            mpich@3.2%intel: cray-mpich/7.7.10
+            mpich@3.2%cce:   cray-mpich/7.7.10
+            mpich@3.2%pgi:   cray-mpich/7.7.10
+    netcdf:
+        buildable: false
+        modules:
+            netcdf@4.6.3.1%gcc+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf@4.6.3.1%intel+parallel-netcdf+mpi: cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf@4.6.3.1%cce+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf@4.6.3.1%pgi+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf@4.6.3.1%gcc~parallel-netcdf~mpi:   cray-netcdf/4.6.3.1
+            netcdf@4.6.3.1%intel~parallel-netcdf~mpi: cray-netcdf/4.6.3.1
+            netcdf@4.6.3.1%cce~parallel-netcdf~mpi:   cray-netcdf/4.6.3.1
+            netcdf@4.6.3.1%pgi~parallel-netcdf~mpi:   cray-netcdf/4.6.3.1
+    netcdf-fortran:
+        buildable: false
+        modules:
+            netcdf-fortran@4.6.3.1%gcc+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf-fortran@4.6.3.1%intel+parallel-netcdf+mpi: cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf-fortran@4.6.3.1%cce+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+            netcdf-fortran@4.6.3.1%pgi+parallel-netcdf+mpi:   cray-netcdf-hdf5parallel/4.6.3.1
+    netlib-scalapack:
+        variants: build_type=Release
+    netlib-lapack:
+        variants: build_type=Release +external-blas+lapacke
+    openblas:
+        variants: +pic +shared threads=openmp ~virtual_machine
+    openssl:
+        paths:
+             openssl@1.1.0i: /usr
+    papi:
+        buildable: false
+        modules:
+            papi@5.7.0.2%gcc:   papi/5.7.0.2
+            papi@5.7.0.2%intel: papi/5.7.0.2
+            papi@5.7.0.2%cce:   papi/5.7.0.2
+            papi@5.7.0.2%pgi:   papi/5.7.0.2
+    perl:
+        paths:
+             perl@5.26.1: /usr
+    pkg-config:
+        paths:
+             pkg-config@0.29.2: /usr
+    petsc:
+         buildable: false
+         modules:
+            petsc@3.11.2.0%gcc~complex~int64:    cray-petsc/3.11.2.0
+            petsc@3.11.2.0%intel~complex~int64:  cray-petsc/3.11.2.0
+            petsc@3.11.2.0%cce~complex~int64:    cray-petsc/3.11.2.0
+            petsc@3.11.2.0%pgi~complex~int64:    cray-petsc/3.11.2.0
+            petsc@3.11.2.0%gcc+complex~int64:    cray-petsc-complex/3.11.2.0
+            petsc@3.11.2.0%intel+complex~int64:  cray-petsc-complex/3.11.2.0
+            petsc@3.11.2.0%cce+complex~int64:    cray-petsc-complex/3.11.2.0
+            petsc@3.11.2.0%pgi+complex~int64:    cray-petsc-complex/3.11.2.0
+            petsc@3.11.2.0%gcc~complex+int64:    cray-petsc-64/3.11.2.0
+            petsc@3.11.2.0%intel~complex+int64:  cray-petsc-64/3.11.2.0
+            petsc@3.11.2.0%cce~complex+int64:    cray-petsc-64/3.11.2.0
+            petsc@3.11.2.0%pgi~complex+int64:    cray-petsc-64/3.11.2.0
+            petsc@3.11.2.0%gcc+complex+int64:    cray-petsc-complex-64/3.11.2.0
+            petsc@3.11.2.0%intel+complex+int64:  cray-petsc-complex-64/3.11.2.0
+            petsc@3.11.2.0%cce+complex+int64:    cray-petsc-complex-64/3.11.2.0
+            petsc@3.11.2.0%pgi+complex+int64:    cray-petsc-complex-64/3.11.2.0
+    quantum-espresso:
+        variants: ~elpa +mpi +openmp
+    readline:
+        paths:
+            readline@7.0: /usr
+    tar:
+        paths:
+             tar@1.30.0: /bin
+    trilinos:
+        buildable: false
+        modules:
+            trilinos@12.14.1.0%gcc:   cray-trilinos/12.14.1.0
+            trilinos@12.14.1.0%intel: cray-trilinos/12.14.1.0
+            trilinos@12.14.1.0%cce:   cray-trilinos/12.14.1.0
+            trilinos@12.14.1.0%pgi:   cray-trilinos/12.14.1.0
+    xz:
+        paths:
+             xz@5.2.3: /usr
+    zlib:
+        paths:
+             zlib@1.2.11: /usr
+
