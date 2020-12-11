@@ -1,4 +1,4 @@
-# Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
+# Contributed by Guilherme Peretti Pezzi, Luca Marsella and Christopher Bignamini (CSCS)
 easyblock = 'MakeCp'
 
 name = 'NAMD'
@@ -18,6 +18,8 @@ sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD
 builddependencies = [
     ('Charm++', '6.10.2'),
     ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-pmi', EXTERNAL_MODULE),
+    ('cray-pmi-lib', EXTERNAL_MODULE),
     ('Tcl', '8.6.10')
 ]
 
@@ -25,8 +27,8 @@ prebuildopts = """
     touch arch/CRAY-EX.base &&
     sed 's/8\.5/8\.6/' arch/CRAY-XE.tcl > arch/CRAY-EX.tcl &&
     sed 's#/lib##' arch/CRAY-XE.fftw3 > arch/CRAY-EX.fftw3 &&
-    echo -e "NAMD_ARCH = CRAY-EX \nCHARMARCH = ofi-linux-x86_64-slurmpmi-smp \nCXX = CC -std=c++11 -DNOHOSTNAME -DNO_GETPWUID \nCXXOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer \nCC = cc \nCOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer" > arch/CRAY-EX-gnu.arch &&
-    ./config CRAY-EX-gnu Eos --with-fftw3 --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch ofi-linux-x86_64-slurmpmi-smp --cxx-opts "-L/opt/cray/libfabric/1.11.0.0.233/lib64" && 
+    echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = ofi-linux-x86_64-slurmpmi2-smp \nCXX = CC -std=c++11 -DNOHOSTNAME -DNO_GETPWUID \nCXXOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer \nCC = cc \nCOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer' > arch/CRAY-EX-gnu.arch &&
+    ./config CRAY-EX-gnu Eos --with-fftw3 --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch ofi-linux-x86_64-slurmpmi2-smp --cxx-opts "-L/opt/cray/libfabric/1.11.0.0.233/lib64 -L/opt/cray/pe/pmi/6.0.7/lib" && 
     cd CRAY-EX-gnu && 
     sed -i '/CHARM =/a NAMD_ARCH = CRAY-EX' Make.config &&
 """

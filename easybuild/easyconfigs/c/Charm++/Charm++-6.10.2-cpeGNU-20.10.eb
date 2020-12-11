@@ -17,18 +17,23 @@ toolchainopts = {'dynamic': False}
 source_urls = ['http://charm.cs.illinois.edu/distrib/']
 sources = ['charm-%(version)s.tar.gz']
 
-cmds_map = [
-    ('charm-%(version)s.tar.gz', './build ChaNGa ofi-linux-x86_64 slurmpmi smp --incdir=/opt/cray/libfabric/1.11.0.0.233/include --libdir=/opt/cray/libfabric/1.11.0.0.233/lib64 --enable-lbuserdata --with-production -j12'),
+builddependencies = [
+    ('cray-pmi', EXTERNAL_MODULE),
+    ('cray-pmi-lib', EXTERNAL_MODULE)
 ]
-files_to_copy = ['ofi-linux-x86_64-slurmpmi-smp']
+
+cmds_map = [
+    ('charm-%(version)s.tar.gz', './build ChaNGa ofi-linux-x86_64 slurmpmi2 smp --incdir=/opt/cray/libfabric/1.11.0.0.233/include --incdir=/opt/cray/pe/pmi/6.0.7/include --libdir=/opt/cray/libfabric/1.11.0.0.233/lib64 --libdir=/opt/cray/pe/pmi/6.0.7/lib --enable-error-checking --enable-lbuserdata --with-production -j12'),
+]
+files_to_copy = ['ofi-linux-x86_64-slurmpmi2-smp']
 
 sanity_check_paths = {
-    'files': ['ofi-linux-x86_64-slurmpmi-smp/bin/charmc'],
-    'dirs': ['ofi-linux-x86_64-slurmpmi-smp/bin', 'ofi-linux-x86_64-slurmpmi-smp/lib', 'ofi-linux-x86_64-slurmpmi-smp/include'],
+    'files': ['ofi-linux-x86_64-slurmpmi2-smp/bin/charmc'],
+    'dirs': ['ofi-linux-x86_64-slurmpmi2-smp/bin', 'ofi-linux-x86_64-slurmpmi2-smp/lib', 'ofi-linux-x86_64-slurmpmi2-smp/include'],
 }
 
-modextrapaths = {'PATH': 'ofi-linux-x86_64-slurmpmi-smp/bin'}
+modextrapaths = {'PATH': 'ofi-linux-x86_64-slurmpmi2-smp/bin'}
 
-modextravars = {'EBTYPECHARMPLUSPLUS': 'ofi-linux-x86_64-slurmpmi-smp'}
+modextravars = {'EBTYPECHARMPLUSPLUS': 'ofi-linux-x86_64-slurmpmi2-smp'}
 
 moduleclass = 'lib'
