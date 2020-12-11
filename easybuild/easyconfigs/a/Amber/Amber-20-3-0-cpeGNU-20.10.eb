@@ -34,15 +34,15 @@ prebuildopts = """
     FCFLAGS="-fallow-argument-mismatch" FFLAGS=$FCFLAGS ./configure -crayxt5 -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h &&
     make install &&
-    make clean &&
+    make distclean &&
     FCFLAGS="-fallow-argument-mismatch" FFLAGS=$FCFLAGS ./configure -crayxt5 -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make install && 
-    make clean &&
+    make distclean &&
     FCFLAGS="-fallow-argument-mismatch" FFLAGS=$FCFLAGS ./configure -crayxt5 -mpi -noX11 -openmp --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make install && 
-    make clean &&
+    make distclean &&
     FCFLAGS="-fallow-argument-mismatch" FFLAGS=$FCFLAGS ./configure -crayxt5 -mpi -noX11 --skip-python --with-netcdf $EBROOTNETCDF gnu <<< N && 
     echo 'PMEMD_CU_INCLUDES += -I$(MPICH_DIR)/include' >> config.h && 
     make install && 
