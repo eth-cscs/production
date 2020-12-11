@@ -1,0 +1,62 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'likwid'
+version = '5.1'
+versionsuffix = '-cuda-10.2'
+homepage = 'https://github.com/RRZE-HPC/likwid.git'
+description = """Likwid stands for Like I knew what I am doing. This project
+contributes easy to use command line tools for Linux to support programmers in
+developing high performance multi threaded programs.
+
+## compile your code with -dynamic
+## then run with:
+##   srun -n1 -C"gpu&perf" -t1 likwid-perfctr --execpid -g MEM ./my.exe
+
+## Requirements for 'ACCESSMODE = perf_event':
+## srun -n1 -C"gpu&perf" cat /proc/sys/kernel/perf_event_paranoid # must return 0
+"""
+toolchain = SYSTEM
+# = gcc/7.5.0
+toolchainopts = {'pic': True}
+source_urls = ['https://github.com/RRZE-HPC/likwid/archive']
+sources = ['v%(version)s.tar.gz']
+builddependencies = [('craype-accel-nvidia60', EXTERNAL_MODULE)]
+# --- config.mk:
+prebuildopts  = "sed -i 's-^PREFIX = /-PREFIX = $(PREFIX)/-'                     config.mk && "
+prebuildopts += "sed -i 's-ACCESSMODE = accessdaemon-ACCESSMODE = perf_event-'   config.mk && "
+prebuildopts += "sed -i 's-^FORTRAN_INTERFACE = false-FORTRAN_INTERFACE = true-' config.mk && "
+prebuildopts += "sed -i 's-^BUILDDAEMON = true-BUILDDAEMON = false-'             config.mk && "
+prebuildopts += "sed -i 's-^BUILDFREQ = true-BUILDFREQ = false-'                 config.mk && "
+prebuildopts += "sed -i 's-^INSTALL_CHOWN-#INSTALL_CHOWN-'                       config.mk && "
+# prebuildopts += "sed -i 's-^DEBUG = false-DEBUG = true-'                         config.mk && "
+prebuildopts += "sed -i 's-^CFG_FILE_PATH = /-CFG_FILE_PATH = $(PREFIX)/-'       config.mk && "
+prebuildopts += "sed -i 's-^TOPO_FILE_PATH = /-TOPO_FILE_PATH = $(PREFIX)/-'     config.mk && "
+# nvidia:
+# local_cuda = '/opt/nvidia/cudatoolkit10.2/10.2.89_3.29-7.0.2.1_3.5__g67354b4'
+local_cuda = '$CUDATOOLKIT_HOME'
+prebuildopts += "sed -i 's-^NVIDIA_INTERFACE = false-NVIDIA_INTERFACE = true-'   config.mk && "
+# prebuildopts += "sed -i '@^$(CUDA_HOME)/include@%s/include@'                     config.mk && " % local_cuda
+# prebuildopts += "sed -i '@^$(CUDA_HOME)/extras/CUPTI/include@%s/extras/CUPTI/include@' config.mk && " % local_cuda
+prebuildopts += "grep -v '^#' config.mk |sort && "
+# --- make/include_GCC.mk:
+prebuildopts += "sed -i 's@^FC  = ifort@FC  = gfortran@'            make/include_GCC.mk && "
+prebuildopts += "sed -i 's@FCFLAGS  = -module@#FCFLAGS  = -module@' make/include_GCC.mk && "
+prebuildopts += "sed -i 's@#FCFLAGS  = -J@FCFLAGS  = -J@'           make/include_GCC.mk && "
+prebuildopts += "echo make/include_GCC.mk: ; cat                    make/include_GCC.mk && "
+# --- opts:
+skipsteps = ['configure']
+buildopts = 'COMPILER="GCC" CC=gcc CFLAGS="$CFLAGS -g -fPIC -std=c99" '
+buildopts += 'PREFIX=%(installdir)s '
+buildopts += "CUDA_HOME=%s " % local_cuda
+installopts = 'PREFIX=%(installdir)s'
+sanity_check_paths = {
+    'files': ["bin/likwid-memsweeper", "bin/likwid-mpirun", "bin/likwid-perfctr",
+              "bin/likwid-perfscope", "bin/likwid-pin", "bin/likwid-powermeter",
+              "bin/likwid-topology",
+              "lib/liblikwidpin.%s" % SHLIB_EXT, "lib/liblikwid.%s" % SHLIB_EXT],
+    'dirs': ["man/man1"]
+}
+maxparallel = 1
+
+moduleclass = 'devel'

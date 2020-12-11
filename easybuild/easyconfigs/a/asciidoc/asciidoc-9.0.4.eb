@@ -1,0 +1,16 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'asciidoc'
+version = '9.0.4'
+homepage = 'https://asciidoc.org/INSTALL.html'
+description = "Text based document generation"
+toolchain = SYSTEM
+source_urls = ['https://github.com/asciidoc/asciidoc-py3/releases/download/%(version)s']
+sources = ['%(name)s-%(version)s.tar.gz']
+sanity_check_paths = {
+    'files': ["bin/%(name)s"],
+    'dirs': []
+}
+
+moduleclass = 'system'

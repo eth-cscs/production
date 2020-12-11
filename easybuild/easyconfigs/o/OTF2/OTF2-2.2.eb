@@ -8,14 +8,12 @@ description = """The Open Trace Format 2 is a highly scalable, memory efficient
 event trace data format plus support library. It is the new standard trace
 format for Scalasca, Vampir, and TAU and is open for other tools.
 python3-bindings are supported too."""
-
 toolchain = SYSTEM
-
 source_urls = ['http://www.vi-hps.org/cms/upload/packages/otf2']
 sources = ["otf2-%(version)s.tar.gz"]
-checksums = ['d0519af93839dc778eddca2ce1447b1ee23002c41e60beac41ea7fe43117172d']
+checksums = ['cfedf583bf000e98ce0c86e663e5ded0']
+patches = ['%(name)s-%(version)s.patch']
 configopts = '--enable-shared --with-nocross-compiler-suite=gcc CC=gcc '
-
 sanity_check_paths = {
     'files': ["bin/otf2-config", "include/otf2/otf2.h",
               ("lib/libotf2.a", "lib64/libotf2.a")],

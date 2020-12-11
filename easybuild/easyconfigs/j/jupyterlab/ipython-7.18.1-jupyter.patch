@@ -1,0 +1,13 @@
+--- ipython-7.18.1/IPython/core/application.py.orig	2020-10-16 09:38:42.827852000 +0200
++++ ipython-7.18.1/IPython/core/application.py	2020-10-16 09:30:44.083224000 +0200
+@@ -42,7 +42,9 @@
+         "/usr/local/etc/ipython",
+         "/etc/ipython",
+     ]
+-
++ebroot=os.environ.get('EBROOTJUPYTERLAB', None)
++if ebroot:
++        SYSTEM_CONFIG_DIRS.append(ebroot)
+ 
+ ENV_CONFIG_DIRS = []
+ _env_config_dir = os.path.join(sys.prefix, 'etc', 'ipython')

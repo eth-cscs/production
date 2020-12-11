@@ -1,0 +1,25 @@
+# @author: sarafael, gppezzi, marcelsc
+
+easyblock = 'Binary'
+
+name = 'Bazel'
+version = '2.0.0'
+
+homepage = 'http://baze.io/'
+description = "Correct, reproducible, fast builds for everyone"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/bazelbuild/%(namelower)s/releases/download/%(version)s']
+sources = ['%(namelower)s-%(version)s-installer-linux-%(arch)s.sh']
+
+osdependencies = ['java']
+
+install_cmd = "chmod +x %(namelower)s-%(version)s-installer-linux-%(arch)s.sh && ./%(namelower)s-%(version)s-installer-linux-%(arch)s.sh --bin=%(installdir)s --base=%(installdir)s"
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'devel'

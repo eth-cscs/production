@@ -9,6 +9,6 @@ programs."""
 
 toolchain = SYSTEM
 
-dependencies = [('%(name)s', '%(version)s.4.1')]
+dependencies = [('%(name)s', '%(version)s.4.2')]
 
 moduleclass = 'perf'

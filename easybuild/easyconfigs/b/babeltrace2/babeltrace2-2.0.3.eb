@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'babeltrace2'
+version = '2.0.3'
+homepage = 'https://babeltrace.org/'
+description = """Babeltrace, an EfficiOS project, is an open-source trace
+manipulation toolkit."""
+toolchain = SYSTEM
+source_urls = ['https://www.efficios.com/files/babeltrace']
+sources = [SOURCE_TAR_BZ2]
+builddependencies = [('elfutils', '0.182')]
+# asciidoc broken:
+prebuildopts = 'echo -e "all:\n\t\ninstall:\n\t" > doc/man/Makefile &&'
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['include/%(name)s', 'lib/%(name)s'],
+}
+
+moduleclass = 'tools'
