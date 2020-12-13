@@ -10,6 +10,9 @@ toolchain = {'name': 'CrayGNU', 'version': '20.08'}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('jupyterlab', '2.0.2', '-batchspawner-cuda'),
+    # needed only at runtime:
+    ('Paraver', '4', '', True),
+    ('Dimemas', '5', '', True),
 ]
 exts_default_options = {
     'req_py_majver': '%(pymajver)s',
@@ -69,5 +72,7 @@ sanity_check_paths = {
     'files': [],
     'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
+modextravars = {'PARAVER_HOME': '$::env(EBROOTPARAVER)',
+                'DIMEMAS_HOME': '$::env(EBROOTDIMEMAS)'}
 
 moduleclass = 'perf'
