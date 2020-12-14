@@ -1,0 +1,23 @@
+# author: jg (CSCS)
+easyblock = "PythonPackage"
+
+name = "gprof2dot"
+version = "2019.11.30"
+versionsuffix = "-python%(pymajver)s"
+req_py_majver = 3
+homepage = "https://pypi.org/project/gprof2dot"
+description = """Generate a dot graph from the output of several profilers, in
+particular python: https://github.com/jrfonseca/gprof2dot"""
+toolchain = SYSTEM
+toolchainopts = {"verbose": False}
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+use_pip = True
+builddependencies = [("cray-python", EXTERNAL_MODULE),
+                     ("graphviz", "2.44.0")]
+sanity_check_paths = {
+    "files": [],
+    "dirs": ["lib/python%(pymajver)s.%(pyminver)s/site-packages"],
+}
+
+moduleclass = "perf"
