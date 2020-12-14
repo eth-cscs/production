@@ -17,8 +17,8 @@ sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD
 patches = ['%(name)s-%(version)s.patch']
 
 builddependencies = [
-    ('Charm++', '6.8.0'),
-    ('Tcl', '8.6.7'),
+    ('Charm++', '6.10.2'),
+    ('Tcl', '8.6.10'),
     ('cray-fftw', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
 ]
