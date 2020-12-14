@@ -1,4 +1,3 @@
-# Built with EasyBuild version 4.3.1 on 2020-12-04_16-04-26
 # Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
 easyblock = 'MakeCp'
 
@@ -18,8 +17,8 @@ sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD
 patches = ['%(name)s-%(version)s.patch']
 
 builddependencies = [
-    ('Charm++', '6.8.0'),
-    ('Tcl', '8.6.7'),
+    ('Charm++', '6.10.2'),
+    ('Tcl', '8.6.10'),
     ('cray-fftw', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
 ]
@@ -34,31 +33,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'chem'
-
-# Build statistics
-buildstats = [{
-    "build_time": 68.92,
-    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild,xalt'", "--buildpath='/run/user/23271/easybuild/build'", "--containerpath='/scratch/snx3000tds/bignamic/EB_INSTALL/containers'", "--external-modules-metadata='/scratch/snx3000tds/bignamic/production/easybuild//cray_external_modules_metadata-20.08.cfg'", "--hide-deps='absl,ANTLR,APR,APR-util,Autoconf,Automake,Autotools,Bison,Bazel,cloudpickle,configurable-http-proxy,Coreutils,Cube,CUDA,Doxygen,Eigen,FLTK,GCCcore,GL2PS,glmnet,GLPK,GLib,GPGME,GTS,GraphicsMagick,help2man,IPython,JasPer,LLVM,LOKI,LVM2,Loki,Libassuan,LibTIFF,Libpgp-error,M4,Mako,Mesa,NASM,NASM,OPARI2,OpenPGM,PCRE,PDT,PIL,Pillow,PyGTS,PyQt,PyYAML,PyZMQ,Python-Xlib,Python-bare,Qhull,Qt,SCOTCH,SCons,SIP,SQLite,SWIG,Serf,Szip,Tcl,Tk,UDUNITS,X11,XZ,ZeroMQ,arpack-ng,backports.weakref,binutils,bokeh,byacc,bzip2,cairo,cURL,cuDNN,expat,flex,fontconfig,freetype,funcsigs,gc,gettext,gnuplot,go,gperf,guile,hwloc,inputproto,jemalloc,kbproto,libGLU,libgpuarray,libQGLViewer,libspatialindex,libX11,libXau,libXdmcp,libXext,libXrender,libcerf,libdrm,libevent,libffi,libgd,libiberty,libjpeg-turbo,libjpeg-turbo,libpng,libpthread-stubs,libreadline,libsodium,libtool,libunistring,libunwind,libutempter,libxcb,libxml2,libxshmfence,libyaml,make,minieigen,mock,mxml,ncurses,nettle,networkx,nodejs,nose-parameterized,numactl,parameterized,pixman,pkg-config,ploticus,popt,prereq,protobuf,protobuf-core,qrupdate,renderproto,runc,scikit-image,scikit-learn,util-linux,Werkzeug,wheel,xcb-proto,xextproto,xorg-macros,xproto,xtrans,zlib'", "--hide-toolchains='cpeCCE,cpeGNU,CrayCCE,CrayGNU,CrayIntel,CrayPGI,GCCcore,gmvapich2,gmvolf,foss,fosscuda,gompi'", "--include-easyblocks='/scratch/snx3000tds/bignamic/production/easybuild//easyblocks/*.py'", "--installpath='/scratch/snx3000tds/bignamic/EB_INSTALL'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='broadwell'", "--packagepath='/scratch/snx3000tds/bignamic/EB_INSTALL/packages'", "--prefix='/scratch/snx3000tds/bignamic/EB_INSTALL'", "--repositorypath='/scratch/snx3000tds/bignamic/EB_INSTALL/ebfiles_repo'", "--robot='/scratch/snx3000tds/bignamic/production/easybuild/easyconfigs:/scratch/snx3000tds/bignamic/production/easybuild/easyconfigs:/apps/common/UES/easybuild/software/EasyBuild/4.3.1/easybuild/easyconfigs'", "--robot-paths='/scratch/snx3000tds/bignamic/production/easybuild/easyconfigs:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/run/user/23271/easybuild/tmp'", "--try-toolchain='CrayIntel,20.10'", 'NAMD-2.14-CrayIntel-20.08.eb'],
-    "core_count": 20,
-    "cpu_arch": "x86_64",
-    "cpu_arch_name": "UNKNOWN",
-    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
-    "cpu_speed": 3000.0,
-    "cpu_vendor": "Intel",
-    "easybuild-easyblocks_version": "4.3.1",
-    "easybuild-framework_version": "4.3.1",
-    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper; OFFLOAD_TARGET_NAMES=hsa:nvptx-none; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none=/usr/nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 7.5.0 (SUSE Linux) ; ",
-    "glibc_version": "2.26",
-    "hostname": "dom101",
-    "install_size": 21937574,
-    "modules_tool": ('Environment Modules v3', '/opt/cray/pe/modules/3.2.11.4/bin/modulecmd', '3.2.11'),
-    "os_name": "UNKNOWN",
-    "os_type": "Linux",
-    "os_version": "UNKNOWN",
-    "platform_name": "x86_64-unknown-linux",
-    "python_version": "2.7.17 (default, Nov 04 2019, 16:08:54) [GCC]",
-    "system_gcc_path": "/usr/bin/gcc",
-    "system_python_path": "/usr/bin/python",
-    "timestamp": 1607094265,
-    "total_memory": 257488,
-}]
