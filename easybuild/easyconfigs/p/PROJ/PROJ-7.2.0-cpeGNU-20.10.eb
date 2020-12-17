@@ -1,0 +1,28 @@
+# Contributed by Theofilos Manitaras and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'PROJ'
+version = '7.2.0'
+
+homepage = 'https://proj.org'
+description = """PROJ is a generic coordinate transformation software that
+transforms geospatial coordinates from one coordinate reference system (CRS) to another."""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'pic': True, 'usempi': True}
+
+source_urls = ['http://download.osgeo.org/proj/']
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('LibTIFF', '4.1.0'),
+    ('SQLite', '3.34.0')
+]
+
+sanity_check_paths = {
+    'files': ['bin/cs2cs', 'bin/geod', 'bin/invgeod', 
+              'bin/invproj', 'bin/proj'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
