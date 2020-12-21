@@ -38,6 +38,7 @@
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  MATLAB-R2019a.eb                                       --set-default-module
  NAMD-2.13-CrayIntel-20.08.eb                           --set-default-module
+ NAMD-2.14-CrayIntel-20.08.eb
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-20.08.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-20.08.eb                          --set-default-module
@@ -61,12 +62,14 @@
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  ddt-20.0-Suse-15.0.eb                                                       --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
- ddt-20.2-Suse-15.0.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ ddt-20.2-Suse-15.0.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  Extrae-3.8.1-CrayGNU-20.08.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ gprof2dot-2019.11.30-python3.eb                        --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  inspector-2020_update2.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  IPM-2.0.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  likwid-1d6636c.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ linux-perf-5.9.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  malt-1.2.0-CrayGNU-20.08.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  mpiP-3.5-CrayGNU-20.08.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  MUST-v1.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools

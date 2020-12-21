@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'tipsy'
+version = '7331bc0'
+homepage = 'https://github.com/N-BodyShop/tipsy'
+description = """The Theoretical Image Processing SYstem for
+visualizing/analyzing n-body simulations."""
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+sources = [
+    {'git_config': {'url': 'https://github.com/N-BodyShop',
+                    'commit': '%(version)s',
+                    'repo_name': '%(name)s'},
+     'filename': SOURCE_TAR_GZ},
+]
+preconfigopts = "cd code && "
+prebuildopts = "cd code && "
+preinstallopts = "cd code && mkdir -p %(installdir)s/bin && "
+installopts = "prefix=%(installdir)s"
+postinstallcmds = ['cp -a man %(installdir)s']
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['man/man1'],
+}
+
+moduleclass = 'vis'
