@@ -23,17 +23,16 @@ builddependencies = [
 ]
 
 cmds_map = [
-    ('charm-%(version)s.tar.gz', './build ChaNGa ofi-linux-x86_64 slurmpmi2 smp --incdir=/opt/cray/libfabric/1.11.0.0.233/include --incdir=/opt/cray/pe/pmi/6.0.7/include --libdir=/opt/cray/libfabric/1.11.0.0.233/lib64 --libdir=/opt/cray/pe/pmi/6.0.7/lib --enable-error-checking --enable-lbuserdata --with-production -j12'),
+    ('charm-%(version)s.tar.gz', './build ChaNGa mpi-linux-amd64 gcc smp --incdir=${CRAY_MPICH_DIR}/include --libdir=${CRAY_MPICH_DIR}/lib --enable-lbuserdata --with-production -j12')
 ]
-files_to_copy = ['ofi-linux-x86_64-slurmpmi2-smp']
+files_to_copy = ['mpi-linux-amd64-smp-gcc']
 
 sanity_check_paths = {
-    'files': ['ofi-linux-x86_64-slurmpmi2-smp/bin/charmc'],
-    'dirs': ['ofi-linux-x86_64-slurmpmi2-smp/bin', 'ofi-linux-x86_64-slurmpmi2-smp/lib', 'ofi-linux-x86_64-slurmpmi2-smp/include'],
+    'files': ['mpi-linux-amd64-smp-gcc/bin/charmc'],
+    'dirs': ['mpi-linux-amd64-smp-gcc/bin', 'mpi-linux-amd64-smp-gcc/lib', 'mpi-linux-amd64-smp-gcc/include'],
 }
 
-modextrapaths = {'PATH': 'ofi-linux-x86_64-slurmpmi2-smp/bin'}
+modextrapaths = {'PATH': 'mpi-linux-amd64-smp-gcc/bin'}
 
-modextravars = {'EBTYPECHARMPLUSPLUS': 'ofi-linux-x86_64-slurmpmi2-smp'}
-
+modextravars = {'EBTYPECHARMPLUSPLUS': 'mpi-linux-amd64-smp-gcc'}
 moduleclass = 'lib'
