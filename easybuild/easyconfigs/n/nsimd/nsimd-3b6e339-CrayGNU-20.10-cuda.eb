@@ -19,12 +19,13 @@ sources = [
 ]
 builddependencies = [
     ('Ninja', '1.10.2', '-python3', True),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
     # 'googlebenchmark, sleef and MIPP are required when benchmarking (reframe)
 ]
 local_nstools = sources[0]['git_config']['url'] + '/nstools'
 local_buildcmd = 'git clone %s' % local_nstools
-cmds_map = [('.*', "%s && bash scripts/build.sh for cpu/sse2/sse42/avx/avx2" % local_buildcmd)]
-local_solibs = ['cpu', 'sse2', 'sse42', 'avx', 'avx2']
+cmds_map = [('.*', "%s && bash scripts/build.sh for cpu/sse2/sse42/avx/avx2/cuda" % local_buildcmd)]
+local_solibs = ['cpu', 'sse2', 'sse42', 'avx', 'avx2', 'cuda']
 files_to_copy = [
     (['build-avx2-gcc/libnsimd_avx2.so'], 'lib'),
 ]
