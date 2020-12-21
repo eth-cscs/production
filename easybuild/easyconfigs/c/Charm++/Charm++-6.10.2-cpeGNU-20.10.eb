@@ -35,5 +35,4 @@ sanity_check_paths = {
 modextrapaths = {'PATH': 'mpi-linux-amd64-smp-gcc/bin'}
 
 modextravars = {'EBTYPECHARMPLUSPLUS': 'mpi-linux-amd64-smp-gcc'}
-
 moduleclass = 'lib'
