@@ -8,7 +8,7 @@
  CP2K-7.1-CrayGNU-20.08-cuda.eb                         --set-default-module
  CPMD-4.1-CrayIntel-20.08.eb                            --set-default-module
  CPMD-4.3-CrayIntel-20.08-cuda.eb
- FFmpeg-4.2-CrayGNU-20.08.eb                            --set-default-module
+ FFmpeg-4.2.2-CrayGNU-20.08.eb                          --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.08.eb                     --set-default-module
  GROMACS-2020.3-CrayGNU-20.08-cuda.eb                   --set-default-module
  GROMACS-2018.6-CrayGNU-20.08-cuda.eb
