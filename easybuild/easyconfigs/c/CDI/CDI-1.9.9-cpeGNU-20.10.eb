@@ -24,6 +24,8 @@ dependencies = [
     ('ecCodes', '2.19.1')
 ]
 
+osdependencies = ['libtool']
+
 configopts = '--enable-iso-c-interface --with-eccodes=$EBROOTECCODES --with-netcdf=$EBROOTNETCDF'
 prebuildopts = ' ln -fs $(which libtool) && '
 
