@@ -18,10 +18,6 @@ source_urls = ['https://code.mpimet.mpg.de/attachments/download/22867/']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['93904f4021e602f1e35bce3c9983879b37395b38842957f24d2766ffabb8f5e2']
 
-builddependencies = [
-    ('libtool', '2.4.6')
-]
-
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
@@ -29,6 +25,7 @@ dependencies = [
 ]
 
 configopts = '--enable-iso-c-interface --with-eccodes=$EBROOTECCODES --with-netcdf=$EBROOTNETCDF'
+prebuildopts = ' ln -fs $(which libtool) && '
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s'],
