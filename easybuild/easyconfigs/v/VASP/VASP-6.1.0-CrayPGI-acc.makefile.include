@@ -31,13 +31,14 @@ BLAS       = $(MKL_PATH)/libmkl_blas95_lp64.a
 LAPACK     = $(MKL_PATH)/libmkl_lapack95_lp64.a
 BLACS      = -lmkl_blacs_intelmpi_lp64
 SCALAPACK  = -L$(MKL_PATH) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
 WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
 
 INCS       = -I$(MKLROOT)/include/fftw
 
-LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS)
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
 
 OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
 OBJECTS_O2 += fft3dlib.o

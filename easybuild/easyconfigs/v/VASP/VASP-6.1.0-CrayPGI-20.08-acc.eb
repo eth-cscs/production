@@ -22,6 +22,7 @@ builddependencies = [
 
 dependencies = [
     ('QD', '2.3.22'),
+    ('intel', EXTERNAL_MODULE)
 ]
 
 prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
