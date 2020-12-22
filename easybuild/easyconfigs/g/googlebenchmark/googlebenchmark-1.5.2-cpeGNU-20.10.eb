@@ -1,0 +1,29 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'googlebenchmark'
+version = '1.5.2'
+homepage = 'https://github.com/google/benchmark'
+description = """A library to benchmark code.
+https://raw.githubusercontent.com/google/benchmark/master/LICENSE"""
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False, 'dynamic': True}
+source_urls = ['https://github.com/google/benchmark/archive']
+sources = ['v%(version)s.tar.gz']
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+separate_build_dir = True
+preconfigopts = ' pwd && cd ../benchmark-%(version)s &&'
+preconfigopts += ' wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz &&'
+preconfigopts += ' tar xf release-*.tar.gz &&'
+preconfigopts += ' ln -s googletest-release-* googletest &&'
+preconfigopts += ' cd - &&'
+configopts = '-DCMAKE_BUILD_TYPE=RELEASE '
+
+sanity_check_paths = {
+    'files': ['include/benchmark/benchmark.h'],
+    'dirs': ['lib64'],
+}
+
+moduleclass = 'tools'

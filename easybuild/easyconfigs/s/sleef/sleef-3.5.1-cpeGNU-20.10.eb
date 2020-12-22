@@ -1,0 +1,30 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'sleef'
+version = '3.5.1'
+homepage = 'https://github.com/shibatch/sleef'
+description = """SIMD Library for Evaluating Elementary Functions, vectorized
+libm and DFT.
+https://raw.githubusercontent.com/shibatch/sleef/master/LICENSE.txt"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/shibatch/%(name)s/archive']
+sources = ['%(version)s.tar.gz']
+builddependencies = [('CMake', '3.14.5', '', True)]
+separate_build_dir = True
+
+configopts  = '-DBUILD_TESTS:BOOL=OFF '
+configopts += '-DLIBM=/usr/lib64/libm.so '
+configopts += '-DLIBRT=/usr/lib64/librt.so '
+configopts += '-DLIBGMP=/opt/gcc/gmp/6.1.1/lib/libgmp.so '
+configopts += '-DMPFR_INCLUDE_DIR=/opt/gcc/mpfr/3.1.4/include '
+configopts += '-DLIB_MPFR=/opt/gcc/mpfr/3.1.4/lib/libmpfr.so '
+
+sanity_check_paths = {
+    'files': ['lib/libsleef.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'devel'

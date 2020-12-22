@@ -8,7 +8,7 @@
  CP2K-7.1-CrayGNU-20.10-cuda.eb                         --set-default-module
  CPMD-4.1-CrayIntel-20.10.eb                            --set-default-module
  CPMD-4.3-CrayIntel-20.10-cuda.eb
- FFmpeg-4.2-CrayGNU-20.10.eb                            --set-default-module
+ FFmpeg-4.3.1-CrayGNU-20.10.eb                          --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.10.eb                     --set-default-module
  GROMACS-2020.3-CrayGNU-20.10-cuda.eb                   --set-default-module
  GSL-2.5-CrayGNU-20.10.eb                               --set-default-module
@@ -40,6 +40,7 @@
  magma-2.4.0-CrayIntel-20.10-cuda.eb                    --set-default-module
  MATLAB-R2019a.eb                                       --set-default-module
  NAMD-2.13-CrayIntel-20.10-cuda.eb                      --set-default-module
+ NAMD-2.14-CrayIntel-20.10-cuda.eb
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-20.10.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-20.10.eb                          --set-default-module
@@ -51,7 +52,7 @@
  PLUMED-2.6.1-CrayGNU-20.10.eb
  PLUMED-2.5.1-CrayIntel-20.10.eb
  PLUMED-2.6.1-CrayIntel-20.10.eb
- pycuda-2018.1.1-CrayGNU-20.10-python3-cuda-10.2.eb     --set-default-module
+ pycuda-2018.1.1-CrayGNU-20.10-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-20.10.eb                  --set-default-module
  Python-bare-3.7.3.eb                                   --hidden
  QuantumESPRESSO-6.5a1-CrayPGI-20.10-cuda.eb            --set-default-module
@@ -69,7 +70,7 @@
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  ddt-20.0-Suse-15.0.eb                                                       --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- ddt-20.1.1-Suse-15.0.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ ddt-20.2-Suse-15.0.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  Extrae-3.8.1-CrayGNU-20.10.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  inspector-2020_update2.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
@@ -79,7 +80,7 @@
  mpiP-57fc864-CrayGNU-20.10.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  MUST-v1.6-CrayGNU-20.10.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  njmon-v64-SLES15.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- nvhpc-2020_209-cuda-10.2.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ nvhpc-2020_209-cuda-11.0.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  nvidia-nsight-systems-2020.4.1.126.eb                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  nvtop-1.0.0-CrayGNU-20.10-cuda.eb                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  otf2_cli_profile-9be64de-CrayGNU-20.10.eb              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
