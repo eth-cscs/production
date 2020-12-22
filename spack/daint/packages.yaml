@@ -6,7 +6,7 @@ packages:
     # these reflect the current installed PE
     compiler: [gcc@8.3.0.20.08, gcc@9.3.0.20.08, cce@10.0.2.20.08, intel/19.1.1.217.20.08, intel/19.0.1.144.20.08, pgi/20.1.1.20.08]
     providers:
-      mpi: [mpich]
+      mpi: [cray-mpich]
       mkl: [intel-mkl]
       fftw: [fftw, intel-mkl]
       blas: [cray-libsci, intel-mkl]
@@ -75,14 +75,6 @@ packages:
       prefix: /usr
   fftw:
     variants: +mpi +openmp precision=long_double,double,float
-
-    # fftw:
-    #     buildable: false
-    #     modules:
-    #         fftw@3.3.8.3%gcc+openmp:   cray-fftw/3.3.8.3
-    #         fftw@3.3.8.3%intel+openmp: cray-fftw/3.3.8.3
-    #         fftw@3.3.8.3%cce+openmp:   cray-fftw/3.3.8.3
-    #         fftw@3.3.8.3%pgi+openmp:   cray-fftw/3.3.8.3
   gawk:
     externals:
     - spec: gawk@4.2.1
@@ -212,28 +204,28 @@ packages:
   #         c: /usr/bin/x86_64-redhat-linux-gcc
   #         cxx: /usr/bin/g++
   #         fortran: /usr/bin/gfortran
-  mpich:
+  cray-mpich:
     buildable: false
     externals:
-    - spec: mpich@3.2%gcc@8.3.0.20.08
+    - spec: cray-mpich@7.7.15%gcc@8.3.0.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%gcc@9.3.0.20.08
+    - spec: cray-mpich@7.7.15%gcc@9.3.0.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%cce@10.0.2.20.08
+    - spec: cray-mpich@7.7.15%cce@10.0.2.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%intel@19.0.1.144.20.08
+    - spec: cray-mpich@7.7.15%intel@19.0.1.144.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%intel@19.0.1.217.20.08
+    - spec: cray-mpich@7.7.15%intel@19.0.1.217.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%pgi@20.1.0.20.08
+    - spec: cray-mpich@7.7.15%pgi@20.1.0.20.08
       modules:
       - cray-mpich/7.7.15
-    - spec: mpich@3.2%pgi@20.1.1.20.08
+    - spec: cray-mpich@7.7.15%pgi@20.1.1.20.08
       modules:
       - cray-mpich/7.7.15
   ncurses:

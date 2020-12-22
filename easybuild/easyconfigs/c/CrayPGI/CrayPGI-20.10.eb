@@ -13,7 +13,7 @@ dependencies = [
     # PrgEnv version is not pinned, as Cray recommends to use the latest
     # (default) version
     ('PrgEnv-pgi', EXTERNAL_MODULE),
-    ('cdt/%s' % version, EXTERNAL_MODULE),
+    ('cdt-cuda/%s' % version, EXTERNAL_MODULE),
 ]
 
 # LD_LIBRARY_PATH is now updated by production.git/login/daint.footer

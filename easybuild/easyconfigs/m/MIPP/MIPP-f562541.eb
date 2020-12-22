@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'MIPP'
+version = 'f562541'
+homepage = 'https://github.com/aff3ct/MIPP'
+description = """MIPP is a portable wrapper for SIMD instructions written in
+C++11: https://raw.githubusercontent.com/aff3ct/MIPP/master/LICENSE"""
+toolchain = SYSTEM
+sources = [
+    {'git_config': {'url': 'https://github.com/aff3ct',
+                    'commit': '%(version)s',
+                    'repo_name': '%(name)s'},
+     'filename': SOURCE_TAR_GZ},
+]
+postinstallcmds = [
+    'cd %(installdir)s && ln -s src include'
+]
+sanity_check_paths = {
+    'files': ['include/mipp.h', 'LICENSE'],
+    'dirs': ['examples']
+}
+
+moduleclass = 'devel'
