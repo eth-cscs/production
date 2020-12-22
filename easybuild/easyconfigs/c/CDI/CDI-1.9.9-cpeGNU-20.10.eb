@@ -1,0 +1,37 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CDI'
+version = '1.9.9'
+
+homepage = 'https://code.mpimet.mpg.de/projects/cdi'
+description = """
+    CDI is a C and Fortran Interface to access Climate and NWP model Data. 
+    Supported data formats are GRIB, netCDF, SERVICE, EXTRA and IEG. 
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'opt': True, 'pic': True}
+
+# Files visible at https://code.mpimet.mpg.de/projects/cdi/files: different link for each version!
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/22867/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['93904f4021e602f1e35bce3c9983879b37395b38842957f24d2766ffabb8f5e2']
+
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('ecCodes', '2.19.1')
+]
+
+osdependencies = ['libtool']
+
+configopts = '--enable-iso-c-interface --with-eccodes=$EBROOTECCODES --with-netcdf=$EBROOTNETCDF'
+prebuildopts = ' ln -fs $(which libtool) && '
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
