@@ -30,7 +30,7 @@ builddependencies = [
     ('libxml2', '2.9.7'),
 ]
 dependencies = [
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE),
     ('PLUMED', '%s' % local_plumedversion),
 ]
 
