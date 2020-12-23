@@ -31,7 +31,7 @@
  jupyterlab-1.2.16-CrayGNU-20.10-batchspawner-cuda.eb
  jupyterlab-2.0.2-CrayGNU-20.10-batchspawner-cuda.eb
  jupyter-utils-0.1.eb                                   --set-default-module
- LAMMPS-03Mar20-CrayGNU-20.10-cuda.eb                   --set-default-module
+ LAMMPS-29Oct20-CrayGNU-20.10-cuda.eb                   --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  magma-2.5.4-CrayIntel-20.10-cuda.eb                    --set-default-module
  MATLAB-R2019a.eb                                       --set-default-module
