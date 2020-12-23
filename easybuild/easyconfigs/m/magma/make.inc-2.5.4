@@ -1,0 +1,77 @@
+#//////////////////////////////////////////////////////////////////////////////
+#   -- MAGMA (version 2.4.0) --
+#      Univ. of Tennessee, Knoxville
+#      Univ. of California, Berkeley
+#      Univ. of Colorado, Denver
+#      @date June 2018
+#//////////////////////////////////////////////////////////////////////////////
+
+# GPU_TARGET contains one or more of Fermi, Kepler, Maxwell, Pascal, Volta
+# to specify for which GPUs you want to compile MAGMA:
+#     Fermi   - NVIDIA compute capability 2.x cards
+#     Kepler  - NVIDIA compute capability 3.x cards
+#     Maxwell - NVIDIA compute capability 5.x cards
+#     Pascal  - NVIDIA compute capability 6.x cards
+#     Volta   - NVIDIA compute capability 7.x cards
+# The default is "Kepler Maxwell Pascal".
+# Note that NVIDIA no longer supports 1.x cards, as of CUDA 6.5.
+# See http://developer.nvidia.com/cuda-gpus
+#
+GPU_TARGET ?= Pascal
+
+# --------------------
+# programs
+
+CC        = icc
+CXX       = icpc
+NVCC      = nvcc
+FORT      = ifort
+
+ARCH      = ar
+ARCHFLAGS = cr
+RANLIB    = ranlib
+
+
+# --------------------
+# flags
+
+# Use -fPIC to make shared (.so) and static (.a) library;
+# can be commented out if making only static library.
+FPIC      = -fPIC
+
+CFLAGS    = -O3 $(FPIC) -qopenmp -DNDEBUG -DADD_ -Wall -Wshadow -DMAGMA_WITH_MKL
+FFLAGS    = -O3 $(FPIC)          -DNDEBUG -DADD_ -warn all -warn nounused -nogen-interfaces
+F90FLAGS  = -O3 $(FPIC)          -DNDEBUG -DADD_ -warn all -warn nounused
+NVCCFLAGS = -O3                  -DNDEBUG -DADD_ -Xcompiler "$(FPIC) -Wall -Wno-unused-function"
+LDFLAGS   =     $(FPIC) -qopenmp
+
+# C++11 (icc >= 13) is not required, but has benefits like atomic operations
+CXXFLAGS := $(CFLAGS) -std=c++11
+CFLAGS   += -std=c99
+
+
+# --------------------
+# libraries
+
+# see MKL Link Advisor at http://software.intel.com/sites/products/mkl/
+# icc/ifort with MKL 10.3, Intel OpenMP threads
+LIB       = -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lsvml -lpthread -lstdc++ -lm
+
+LIB      += -lcublas -lcusparse -lcudart -lcudadevrt
+
+
+# --------------------
+# directories
+
+# define library directories preferably in your environment, or here.
+# for MKL run, e.g.: source /opt/intel/composerxe/mkl/bin/mklvars.sh intel64
+#MKLROOT ?= /opt/intel/composerxe/mkl
+#CUDADIR ?= /usr/local/cuda
+-include make.check-mkl
+-include make.check-cuda
+
+LIBDIR    = -L$(CUDADIR)/lib64 \
+            -L$(MKLROOT)/lib/intel64
+
+INC       = -I$(CUDADIR)/include \
+            -I$(MKLROOT)/include
