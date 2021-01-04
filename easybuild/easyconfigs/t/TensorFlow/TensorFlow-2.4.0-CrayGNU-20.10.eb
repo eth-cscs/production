@@ -19,9 +19,8 @@ dependencies = [
     ('cuDNN', '8.0.5.39', '', True),
     ('NCCL', '2.8.3', '', True),
     ('SWIG', '3.0.12', '-python%(pymajver)s'),
-    ('protobuf-python', '3.11.0'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
-    ('prereq', 'tf-2.2'),
+    ('prereq', 'tf-2.4'),
 ]
 
 sources = ['v%(version)s.tar.gz']
@@ -35,7 +34,7 @@ with_configure = False
 _whl_file = 'tensorflow-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
 
 _build_str  = "export TEST_TMPDIR=%(builddir)s/../../../bazelout/"
-_build_str += " && rm -rf $TEST_TMPDIR"
+_build_str += " && chmod -R ug+rw $TEST_TMPDIR; rm -rf $TEST_TMPDIR"   # bazel now creates some read-only files
 _build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
 _build_str += " && sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@$CRAY_CUDATOOLKIT_DIR@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
 _build_str += " && sed -i s\@'3.5,6.0'@6.0@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
@@ -46,9 +45,9 @@ _build_str += "    --config=v2 --config=cuda --copt=-mavx --copt=-mavx2 --copt=-
 _build_str += "    -c opt //tensorflow/tools/pip_package:build_pip_package //tensorflow:libtensorflow_cc.so"
 _build_str += " && bazel-bin/tensorflow/tools/pip_package/build_pip_package %(builddir)s"
 _build_str += " && pip%(pymajver)s install --no-deps --prefix  %(builddir)s %(builddir)s/" + _whl_file
-# _build_str += " && rm -rf $TEST_TMPDIR"
 
-postinstallcmds = ['rm -rf %(builddir)s/../../../bazelout/']
+postinstallcmds = ['chmod -R ug+rw %(builddir)s/../../../bazelout/',
+                   'rm -rf %(builddir)s/../../../bazelout/']
 
 cmds_map = [
     ('v%(version)s.tar.gz', _build_str),
@@ -72,14 +71,6 @@ exts_list = [
     ('tensorflow-estimator', version, {
         'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
         'modulename': 'tensorflow_estimator',
-        'unpack_sources': False,
-        'use_pip' : True,
-    }),
-    ('grpcio', '1.34.0', {
-        'modulename': 'grpc',
-    }),
-    ('tensorboard', version, {
-        'source_tmpl': 'tensorboard-%(version)s-py3-none-any.whl',
         'unpack_sources': False,
         'use_pip' : True,
     }),
