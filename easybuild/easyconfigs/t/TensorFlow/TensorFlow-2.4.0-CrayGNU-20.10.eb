@@ -16,7 +16,7 @@ builddependencies = [
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE),
-    ('cuDNN', '8.0.5.39', '', True),
+    ('cuDNN', '8.0.5', '', True),
     ('NCCL', '2.8.3', '', True),
     ('SWIG', '3.0.12', '-python%(pymajver)s'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
@@ -38,7 +38,7 @@ _build_str += " && chmod -R ug+rw $TEST_TMPDIR; rm -rf $TEST_TMPDIR"   # bazel n
 _build_str += " && sed -i s\@'$GCC_PATH'@$GCC_PATH@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
 _build_str += " && sed -i s\@'$CRAY_CUDATOOLKIT_DIR'@$CRAY_CUDATOOLKIT_DIR@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
 _build_str += " && sed -i s\@'3.5,6.0'@6.0@g third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl"
-_build_str += " && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s"
+_build_str += " && export PYVER=%(pyver)s && export PYSHORTVER=%(pyshortver)s && export CUDATOOLKITVER=%(cudashortver)s"
 _build_str += " && bash configure-cscs-v%(version)s.sh"
 _build_str += " && bazel build --verbose_failures --distinct_host_configuration=false --action_env=PYTHONPATH=$PYTHONPATH"
 _build_str += "    --config=v2 --config=cuda --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --copt=-msse4.1"  # --cxxopt='-D_GLIBCXX_USE_CXX11_ABI=0'"
