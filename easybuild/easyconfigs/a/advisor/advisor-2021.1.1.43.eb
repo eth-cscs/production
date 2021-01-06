@@ -35,7 +35,7 @@ modextrapaths = {
 }
 modextravars = {
     'ADVISOR_2021_DIR': '%(installdir)s',
-    'ADVISOR_%(version)s_DIR': '%(installdir)s',
+    # 'ADVISOR_%(version)s_DIR': '%(installdir)s',
 }
 docpaths = {
     'ADVISOR_DOC': '%(installdir)s/%(name)s/documentation/en',
