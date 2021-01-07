@@ -1,0 +1,46 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'inspector'
+version = '2021.1.1.42'
+homepage = 'https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/inspector.html'
+description = "Intel's dynamic memory and threading error checking tool"
+toolchain = SYSTEM
+sources = ['/apps/common/UES/easybuild/sources/i/%(name)s/'
+           'l_%(name)s_oneapi_p_%(version)s_offline.sh.tar']
+checksums = ['13e8f18519511683194f9ae4d5c42599']
+postinstallcmds = [
+  'rm -fr ~/.intel ~/intel',
+  './l_%(name)s_oneapi_p_%(version)s_offline.sh '
+  '-s -a -s --eula accept --remove-extracted-files yes --install-dir %(installdir)s ',
+  # no comma:
+  'cd %(installdir)s ;'
+  'rm -fr etc logs modulefiles-setup.sh support.txt common.sh licensing;'
+  'rm -fr l_%(name)s_oneapi_p_%(version)s_offline.sh setvars.sh sys_check.sh;'
+  'mv %(name)s/latest/* . ;rm -fr %(name)s ;'
+  'ln -s inspxe-vars.sh %(name)s-vars.sh; '
+  'cd -',
+]
+sanity_check_paths = {
+    'files': ['%(name)s-vars.sh'],
+    'dirs': ['bin64']
+}
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': 'bin64',
+    'INTEL_PYTHONPATH': 'pythonapi',
+    'PYTHONPATH': 'pythonapi',
+    'APM': 'perfmodels',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+    'PKG_CONFIG_PATH': 'include/pkgconfig/lib64',
+}
+modextravars = {
+    'INSPECTOR_2021_DIR': '%(installdir)s',
+    # 'INSPECTOR_%(version)s_DIR': '%(installdir)s',
+}
+docpaths = {
+    'INSPECTOR_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'INSPECTOR_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'
