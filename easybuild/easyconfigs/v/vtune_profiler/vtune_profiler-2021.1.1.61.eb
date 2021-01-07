@@ -1,0 +1,46 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'vtune_profiler'
+version = '2021.1.1.61'
+homepage = 'https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/vtune-profiler.html'
+description = "Intel's performance profiler for C/C++, Fortran, Assembly and Python."
+toolchain = SYSTEM
+sources = ['/apps/common/UES/easybuild/sources/v/%(name)s/'
+           'l_oneapi_vtune_p_2021.1.1.61_offline.sh.tar']
+checksums = ['66fbf36e66b023f885502bb5655fefb8']
+postinstallcmds = [
+  'rm -fr ~/.intel ~/intel',
+  './l_oneapi_vtune_p_2021.1.1.61_offline.sh '
+  '-s -a -s --eula accept --remove-extracted-files yes --install-dir %(installdir)s ',
+  # no comma:
+  'cd %(installdir)s ;'
+  'rm -fr etc logs modulefiles-setup.sh support.txt common.sh licensing;'
+  'rm -fr l_oneapi_vtune_p_2021.1.1.61_offline.sh setvars.sh sys_check.sh;'
+  'mv vtune/latest/* . ;rm -fr %(name)s ;'
+  'cd -',
+]
+sanity_check_paths = {
+    'files': ['env/vars.sh'],
+    'dirs': ['bin64']
+}
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': 'bin64',
+    'INTEL_PYTHONPATH': 'pythonapi',
+    'PYTHONPATH': 'pythonapi',
+    'APM': 'perfmodels',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+    'PKG_CONFIG_PATH': 'include/pkgconfig/lib64',
+}
+modextravars = {
+    'VTUNE_PROFILER_2021_DIR': '%(installdir)s',
+    'VTUNE_AMPLIFIER_2021_DIR': '%(installdir)s',
+    # 'VTUNE_PROFILER_%(version)s_DIR': '%(installdir)s',
+}
+docpaths = {
+    'VTUNE_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'VTUNE_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'
