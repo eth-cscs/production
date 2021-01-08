@@ -23,7 +23,6 @@ dependencies = [
 ]
 
 preconfigopts = ' sed -i "s/sm_30/sm_60/g" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
-prebuildopts = " module switch gcc/9.3.0; "
 
 configopts = "-DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
 
