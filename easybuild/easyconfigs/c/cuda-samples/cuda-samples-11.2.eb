@@ -1,0 +1,18 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'cuda-samples'
+version = '11.2'
+homepage = 'https://developer.nvidia.com/cuda-code-samples'
+# homepage = 'https://github.com/NVIDIA/cuda-samples/releases/tag/v11.2'
+description = "Samples for CUDA Developers which demonstrates features in CUDA Toolkit"
+toolchain = SYSTEM
+source_urls = ['https://github.com/NVIDIA/cuda-samples/archive']
+sources = ['v%(version)s.tar.gz']
+checksums = ['06541e5a984e94e0b5f378c5ada55c42']
+sanity_check_paths = {
+    'files': ['Common/helper_cuda.h'],
+    'dirs': ['Samples']
+}
+
+moduleclass = 'tools'
