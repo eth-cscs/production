@@ -15,7 +15,7 @@
  GSL-2.5-CrayCCE-20.10.eb
  GSL-2.5-CrayIntel-20.10.eb
  HDFView-2.14.eb                                        --set-default-module
- Horovod-0.19.1-CrayGNU-20.10-tf-2.2.0.eb               --set-default-module
+ Horovod-0.21.0-CrayGNU-20.10-tf-2.4.0.eb               --set-default-module
  Horovod-0.19.5-CrayGNU-20.10-pt-1.6.0.eb
  HPX-1.5.0-CrayGNU-20.10-cuda.eb                        --set-default-module
  HPX-1.5.0-CrayGNU-20.10-APEX-cuda.eb
