@@ -1,0 +1,16 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'cscope'
+version = '15.9'
+homepage = 'http://cscope.sourceforge.net'
+description = "Efficient, text-only browser for C/C++ sources"
+toolchain = SYSTEM
+source_urls = ['https://sourceforge.net/projects/cscope/files/cscope/v%(version)s']
+sources = [SOURCE_TAR_GZ]
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['share/man/man1'],
+}
+
+moduleclass = 'tools'

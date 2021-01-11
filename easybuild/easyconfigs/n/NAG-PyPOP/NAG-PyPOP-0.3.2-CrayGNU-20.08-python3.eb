@@ -1,0 +1,78 @@
+# jg (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'NAG-PyPOP'
+version = '0.3.2'
+versionsuffix = '-python%(pymajver)s'
+homepage = 'https://github.com/numericalalgorithmsgroup/pypop'
+description = "Python Scripts and Notebooks for the POP Metrics"
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('jupyterlab', '2.0.2', '-batchspawner-cuda'),
+    # needed only at runtime:
+    ('Paraver', '4', '', True),
+    ('Dimemas', '5', '', True),
+]
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+exts_list = [
+    ('tqdm', '4.54.1', {
+        'source_tmpl': 'tqdm-%(version)s-py2.py3-none-any.whl',
+        'unpack_sources': False,
+        'modulename': 'tqdm',
+        }),
+    ('tables', '3.6.1', {
+        'source_tmpl': 'tables-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'tables',
+        }),
+    ('numexpr', '2.7.1', {
+        'source_tmpl': 'numexpr-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'numexpr',
+        }),
+    ('python_dateutil', '2.8.1', {
+        'source_tmpl': 'python_dateutil-%(version)s-py2.py3-none-any.whl',
+        'unpack_sources': False,
+        'modulename': 'dateutil',
+        }),
+    ('qtconsole', '5.0.1', {
+        'source_tmpl': 'qtconsole-%(version)s-py3-none-any.whl',
+        'unpack_sources': False,
+        'modulename': 'qtconsole',
+        }),
+    ('PyQt5', '5.15.2-5.15.2', {
+        'source_tmpl': 'PyQt5-%(version)s-cp35.cp36.cp37.cp38.cp39-abi3-manylinux2014_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'PyQt5',
+        }),
+    ('PyQt5_sip', '12.8.1', {
+        'source_tmpl': 'PyQt5_sip-%(version)s-cp38-cp38-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'PyQt5',
+        }),
+    ('QtPy', '1.9.0', {
+        'source_tmpl': 'QtPy-%(version)s-py2.py3-none-any.whl',
+        'unpack_sources': False,
+        'modulename': 'qtpy',
+        }),
+    ('argon2_cffi', '20.1.0', {
+        'source_tmpl': 'argon2_cffi-%(version)s-cp35-abi3-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'argon2',
+        }),
+    (name, version, {'modulename': 'pypop',}),
+]
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+modextravars = {'PARAVER_HOME': '$::env(EBROOTPARAVER)',
+                'DIMEMAS_HOME': '$::env(EBROOTDIMEMAS)'}
+
+moduleclass = 'perf'

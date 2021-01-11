@@ -10,7 +10,7 @@ description = """Spack is a package manager for supercomputers, Linux, and macOS
  software easy. With Spack, you can build a package with multiple versions, configurations, platforms, and compilers,
  and all of these builds can coexist on the same machine."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = SYSTEM
 
 # This source is useless
 # Due to reproducibility issues EB removes the .git folder from installation dir
@@ -21,20 +21,19 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 # tar xzf /apps/common/easybuild/sources/s/Spack/spack-master.tar.gz
 # Note: We're actually using the develop branch in the postinstallcmds
 sources = [{
-        'filename': 'spack-master.tar.gz',
+        'filename': 'spack-develop.tar.gz',
         'git_config': {
             'url': 'https://github.com/spack',
             'repo_name': 'spack',
-            'tag': 'master',
+            'tag': 'develop',
         },
     },
 ]
 
+# remove offending folder from Spack
+preinstall_cmd = 'rm %(builddir)s/spack/lib/spack/docs/_spack_root'
+
 postinstallcmds = [
-# Removing the files that EB has previously downloaded
-# and cloning the branch ourselves
-    'cd %(installdir)s && find . -mindepth 1 -delete ',
-    'cd %(installdir)s && git clone https://github.com/spack/spack.git .',
 # copying specific Spack config files for daint
     'cp -r /apps/common/UES/jenkins/production/spack/daint %(installdir)s/etc/spack/cray',
 # generating the initial compiler list on the system
@@ -54,6 +53,10 @@ sanity_check_commands = [
     "spack list",
     "spack versions gcc",
 ]
+
+modextravars = {
+    'SPACK_ROOT' : '%(installdir)s'
+}
 
 modtclfooter="""
 set username $::env(USER)

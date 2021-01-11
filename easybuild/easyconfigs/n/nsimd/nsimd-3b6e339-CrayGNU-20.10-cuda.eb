@@ -1,0 +1,39 @@
+# jg (cscs)
+easyblock = 'CmdCp'
+
+name = 'nsimd'
+version = '3b6e339'
+homepage = 'https://github.com/agenium-scale/nsimd'
+description = """NSIMD is a vectorization library that abstracts SIMD
+programming.
+https://raw.githubusercontent.com/agenium-scale/nsimd/master/LICENSE"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False}
+
+sources = [
+    {'git_config': {'url': 'https://github.com/agenium-scale',
+                    'commit': '%(version)s',
+                    'repo_name': '%(name)s'},
+     'filename': SOURCE_TAR_GZ},
+]
+builddependencies = [
+    ('Ninja', '1.10.2', '-python3', True),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    # 'googlebenchmark, sleef and MIPP are required when benchmarking (reframe)
+]
+local_nstools = sources[0]['git_config']['url'] + '/nstools'
+local_buildcmd = 'git clone %s' % local_nstools
+cmds_map = [('.*', "%s && bash scripts/build.sh for cpu/sse2/sse42/avx/avx2/cuda" % local_buildcmd)]
+local_solibs = ['cpu', 'sse2', 'sse42', 'avx', 'avx2', 'cuda']
+files_to_copy = [
+    (['build-avx2-gcc/libnsimd_avx2.so'], 'lib'),
+]
+postinstallcmds = ['cp -a include %(installdir)s/',
+                   'cp build-*/libnsimd_*.so %(installdir)s/lib']
+sanity_check_paths = {
+    'files': ['lib/libnsimd_%s.so' % x for x in local_solibs],
+    'dirs': ['include/nsimd'],
+}
+
+moduleclass = 'devel'

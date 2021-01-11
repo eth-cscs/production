@@ -12,7 +12,6 @@ toolchain = {'name': 'system', 'version': 'system'}
 dependencies = [
    ('cpe-cray', EXTERNAL_MODULE),
    ('craype/2.7.2', EXTERNAL_MODULE),
-   ('craype-x86-rome/1.0.0', EXTERNAL_MODULE),
    ('cray-dsmml/0.1.3', EXTERNAL_MODULE),
    ('xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta', EXTERNAL_MODULE),
    ('cray-libsci/20.10.1.2', EXTERNAL_MODULE),
