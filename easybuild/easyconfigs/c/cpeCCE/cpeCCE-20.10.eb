@@ -11,84 +11,14 @@ toolchain = {'name': 'system', 'version': 'system'}
 
 dependencies = [
    ('cpe-cray', EXTERNAL_MODULE),
-#   ('craype/2.7.2', EXTERNAL_MODULE),
-#   ('craype-x86-rome/1.0.0', EXTERNAL_MODULE),
-#   ('cray-dsmml/0.1.3', EXTERNAL_MODULE),
-#   ('xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta', EXTERNAL_MODULE),
-#   ('cray-libsci/20.10.1.2', EXTERNAL_MODULE),
-#   ('cray-mpich/8.0.16', EXTERNAL_MODULE),
-#   ('cce/10.0.4', EXTERNAL_MODULE),
-#   ('libfabric/1.11.0.0.233', EXTERNAL_MODULE),
-#   ('perftools-base/20.10.0', EXTERNAL_MODULE)
+   ('craype/2.7.2', EXTERNAL_MODULE),
+   ('cray-dsmml/0.1.3', EXTERNAL_MODULE),
+   ('xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta', EXTERNAL_MODULE),
+   ('cray-libsci/20.10.1.2', EXTERNAL_MODULE),
+   ('cray-mpich/8.0.16', EXTERNAL_MODULE),
+   ('cce/10.0.4', EXTERNAL_MODULE),
+   ('libfabric/1.11.0.0.233', EXTERNAL_MODULE),
+   ('perftools-base/20.10.0', EXTERNAL_MODULE)
 ]
-
-modluafooter = """
-if not ( isloaded("craype-network-ofi") ) then
-    load("craype-network-ofi")
-end
-
-if not ( isloaded("craype/2.7.2") ) then
-    if ( isloaded("craype") ) then
-        unload("craype")
-    end
-    load("craype/2.7.2")
-end
-
-if not ( isloaded("craype-x86-rome/1.0.0") ) then
-    if ( isloaded("craype-x86-rome") ) then
-        unload("craype-x86-rome")
-    end
-    load("craype-x86-rome/1.0.0")
-end
-
-if not ( isloaded("cray-dsmml/0.1.3") ) then
-    if ( isloaded("cray-dsmml") ) then
-        unload("cray-dsmml")
-    end
-    load("cray-dsmml/0.1.3")
-end
-
-if not ( isloaded("xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta") ) then
-    if ( isloaded("xpmem") ) then
-        unload("xpmem")
-    end
-    load("xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta")
-end
-
-if not ( isloaded("cray-libsci/20.10.1.2") ) then
-    if ( isloaded("cray-libsci") ) then
-        unload("cray-libsci")
-    end
-    load("cray-libsci/20.10.1.2")
-end
-
-if not ( isloaded("cray-mpich/8.0.16") ) then
-    if ( isloaded("cray-mpich") ) then
-        unload("cray-mpich")
-    end
-    load("cray-mpich/8.0.16")
-end
-
-if not ( isloaded("cce/10.0.4") ) then
-    if ( isloaded("cce") ) then
-        unload("cce")
-    end
-    load("cce/10.0.4")
-end
-
-if not ( isloaded("libfabric/1.11.0.0.233") ) then
-    if ( isloaded("libfabric") ) then
-        unload("libfabric")
-    end
-    load("libfabric/1.11.0.0.233")
-end
-
-if not ( isloaded("perftools-base/20.10.0") ) then
-    if ( isloaded("perftools-base") ) then
-        unload("perftools-base")
-    end
-    load("perftools-base/20.10.0")
-end
-"""
 
 moduleclass = 'toolchain'
