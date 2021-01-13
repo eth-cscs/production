@@ -44,14 +44,12 @@
  numpy-1.17.2-CrayGNU-20.10.eb                          --set-default-module
  ovito-3.2.0-CrayGNU-20.10.eb                           --set-default-module
  ParaView-5.8.1-CrayGNU-20.10-EGL-python3.eb            --set-default-module
- PLUMED-2.5.1-CrayGNU-20.10.eb                          --set-default-module
- PLUMED-2.6.1-CrayGNU-20.10.eb
- PLUMED-2.5.1-CrayIntel-20.10.eb
+ PLUMED-2.6.1-CrayGNU-20.10.eb                          --set-default-module
  PLUMED-2.6.1-CrayIntel-20.10.eb
  pycuda-2018.1.1-CrayGNU-20.10-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-20.10.eb                  --set-default-module
  Python-bare-3.7.3.eb                                   --hidden
- QuantumESPRESSO-6.7-CrayPGI-20.10-cuda.eb              --set-default-module
+ QuantumESPRESSO-6.6a2-CrayPGI-20.10-cuda.eb            --set-default-module
  QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-20.10-cuda.eb   --set-default-module
  singularity-3.6.4-daint.eb
  Spark-2.3.1-CrayGNU-20.10-Hadoop-2.7.eb                --set-default-module
