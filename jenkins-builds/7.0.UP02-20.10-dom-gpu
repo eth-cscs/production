@@ -44,9 +44,7 @@
  numpy-1.17.2-CrayGNU-20.10.eb                          --set-default-module
  ovito-3.2.0-CrayGNU-20.10.eb                           --set-default-module
  ParaView-5.8.1-CrayGNU-20.10-EGL-python3.eb            --set-default-module
- PLUMED-2.5.1-CrayGNU-20.10.eb                          --set-default-module
- PLUMED-2.6.1-CrayGNU-20.10.eb
- PLUMED-2.5.1-CrayIntel-20.10.eb
+ PLUMED-2.6.1-CrayGNU-20.10.eb                          --set-default-module
  PLUMED-2.6.1-CrayIntel-20.10.eb
  pycuda-2018.1.1-CrayGNU-20.10-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-20.10.eb                  --set-default-module
