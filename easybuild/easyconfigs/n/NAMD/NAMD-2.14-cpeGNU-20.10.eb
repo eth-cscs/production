@@ -27,9 +27,9 @@ prebuildopts = """
     touch arch/CRAY-EX.base &&
     sed 's/8\.5/8\.6/' arch/CRAY-XE.tcl > arch/CRAY-EX.tcl &&
     sed 's#/lib##' arch/CRAY-XE.fftw3 > arch/CRAY-EX.fftw3 &&
-    echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = mpi-linux-amd64-smp-gcc \nCXX = CC -std=c++11 -DNOHOSTNAME -DNO_GETPWUID \nCXXOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer \nCC = cc \nCOPTS = -O3 $(GCCFIX) -ffast-math -fexpensive-optimizations -fomit-frame-pointer' > arch/CRAY-EX-gnu.arch &&
-    ./config CRAY-EX-gnu Eos --with-fftw3 --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-smp-gcc --cxx-opts "-L/opt/cray/libfabric/1.11.0.0.233/lib64 -L/opt/cray/pe/pmi/6.0.7/lib" && 
-    cd CRAY-EX-gnu && 
+    echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = mpi-linux-amd64-smp-gcc \nCXX = CC -std=c++11 \nCXXOPTS = -O3 -ffast-math -fexpensive-optimizations \nCC = cc \nCOPTS = -O3 -ffast-math -fexpensive-optimizations ' > arch/CRAY-EX-gnu.arch &&
+    ./config CRAY-EX-gnu --tcl-prefix $EBROOTTCL --with-fftw3 --fftw-prefix $EBROOTFFTW --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-smp-gcc &&
+    cd CRAY-EX-gnu &&
     sed -i '/CHARM =/a NAMD_ARCH = CRAY-EX' Make.config &&
 """
 
