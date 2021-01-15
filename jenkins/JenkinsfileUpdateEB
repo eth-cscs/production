@@ -66,8 +66,8 @@ stage('Update Stage') {
 
                     /* define command to load EasyBuild */
                     def load_easybuild = architecture == "" ?
-                        "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
-                        "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
+                        "module load cdt-cuda/${params.cdt_version} EasyBuild-custom/cscs" :
+                        "module load cdt-cuda/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
                     def switch_easybuild = params.eb_version == "" ?
