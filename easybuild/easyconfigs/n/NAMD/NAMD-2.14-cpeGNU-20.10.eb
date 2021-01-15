@@ -28,7 +28,7 @@ prebuildopts = """
     sed 's/8\.5/8\.6/' arch/CRAY-XE.tcl > arch/CRAY-EX.tcl &&
     sed 's#/lib##' arch/CRAY-XE.fftw3 > arch/CRAY-EX.fftw3 &&
     echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = mpi-linux-amd64-smp-gcc \nCXX = CC -std=c++11 \nCXXOPTS = -O3 -ffast-math -fexpensive-optimizations \nCC = cc \nCOPTS = -O3 -ffast-math -fexpensive-optimizations ' > arch/CRAY-EX-gnu.arch &&
-    ./config CRAY-EX-gnu --tcl-prefix $EBROOTTCL --with-fftw3 --fftw-prefix /opt/cray/pe/fftw/3.3.8.8/x86_rome --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-smp-gcc &&
+    ./config CRAY-EX-gnu --tcl-prefix $EBROOTTCL --with-fftw3 --fftw-prefix $EBROOTFFTW --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-smp-gcc &&
     cd CRAY-EX-gnu &&
     sed -i '/CHARM =/a NAMD_ARCH = CRAY-EX' Make.config &&
 """
