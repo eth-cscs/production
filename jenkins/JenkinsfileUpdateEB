@@ -348,7 +348,7 @@ stage('GitHub Stage') {
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
-                                # check if recipe matches Cray cdt versoin
+                                # check if recipe matches Cray cdt version
                                 if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]; then
                                     name=\$(basename \$recipe)
                                     source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
