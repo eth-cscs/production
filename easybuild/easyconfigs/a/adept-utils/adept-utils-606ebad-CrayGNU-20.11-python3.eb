@@ -1,0 +1,32 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'adept-utils'
+version = '606ebad'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/LLNL/adept-utils'
+description = "LLNL Utility Libraries"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('llnl-hires-timers', 'e6d8308'),
+    ('Boost', '1.70.0', '-python3'),
+]
+
+preconfigopts = "git clone https://github.com/LLNL/%(name)s.git %(name)s.git && cd %(name)s.git && git checkout %(version)s && "
+
+prebuildopts = "cd %(name)s.git && "
+
+preinstallopts = "cd %(name)s.git && "
+
+separate_build_dir = False
+
+sanity_check_paths = {
+    'files': ['share/cmake/adept_utils/adept_utils-config.cmake'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'tools'

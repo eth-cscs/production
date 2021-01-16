@@ -1,0 +1,26 @@
+# @author: gppezzi, manitart
+
+easyblock = 'ConfigureMake'
+
+name = 'HDF5'
+version = '1.10.6'
+versionsuffix = '-serial'
+
+homepage = 'http://www.hdfgroup.org/HDF5/'
+description = """HDF5 is a unique technology suite that makes possible the management of
+ extremely large and complex data collections."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'optarch': True, 'usempi': True, 'pic': True}
+
+source_urls = [
+    'https://support.hdfgroup.org/ftp/%(name)s/releases/%(namelower)s-%(version_major_minor)s/%(namelower)s-%(version)s/src',
+]
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = "--disable-silent-rules --disable-sharedlib-rpath --enable-fortran --enable-static --with-pic --enable-shared --with-zlib=/usr/include,/usr/lib64 --enable-cxx --enable-unsupported "
+
+buildopts = '-l6'
+
+
+moduleclass = 'data'

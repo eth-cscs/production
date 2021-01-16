@@ -1,0 +1,34 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'profvis'
+version = 'fe18867'
+
+homepage = 'https://github.com/mrzv/profvis.git'
+description = """Profile visualizer for Caliper:
+// https://github.com/LLNL/Caliper/issues/226
+// CC 0.cpp `pkg-config --libs caliper`
+// CALI_SERVICES_ENABLE=event,recorder,trace,mpi,timestamp CALI_TIMER_OFFSET=true ./a.out
+// cali-query -e 0.cali > 0.prf
+// profvis -c 0.prf
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+preconfigopts = "git clone https://github.com/mrzv/%(name)s.git %(name)s.git && cd %(name)s.git && git checkout %(version)s && git submodule update --init --recursive && "
+configopts = "-DX11_X11_LIB=/usr/lib64/libX11.so -DX11_Xrandr_LIB=/usr/lib64/libXrandr.so -DX11_Xinerama_LIB=/usr/lib64/libXinerama.so -DX11_Xcursor_LIB=/usr/lib64/libXcursor.so -DCMAKE_BUILD_TYPE=DEBUG "
+
+prebuildopts = "cd %(name)s.git && "
+
+preinstallopts = "cd %(name)s.git && "
+
+postinstallcmds = ['mkdir -p %(installdir)s/bin && cp %(name)s.git/%(name)s %(installdir)s/bin']
+skipsteps = ['install']
+separate_build_dir = False
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': [''],
+}
+
+moduleclass = 'tools'
