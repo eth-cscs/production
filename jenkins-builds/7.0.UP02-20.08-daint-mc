@@ -6,6 +6,7 @@
  CDO-1.9.5-CrayIntel-20.08.eb
  CMake-3.14.5.eb                                        --set-default-module
  CP2K-7.1-CrayGNU-20.08.eb                              --set-default-module
+ CP2K-8.1-CrayGNU-20.08.eb
  CPMD-4.1-CrayIntel-20.08.eb                            --set-default-module
  CPMD-4.3-CrayIntel-20.08.eb
  dask-2.2.0-CrayGNU-20.08-python3.eb                    --set-default-module
