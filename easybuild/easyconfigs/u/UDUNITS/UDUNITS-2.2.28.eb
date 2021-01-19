@@ -11,7 +11,7 @@ description = """UDUNITS supports conversion of unit specifications between form
 toolchain = SYSTEM
 toolchainopts = {'opt': True, 'pic': True}
 
-source_urls = ['ftp://ftp.unidata.ucar.edu/pub/udunits']
+source_urls = ['ftp://ftp.unidata.ucar.edu/pub/%(namelower)s']
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
