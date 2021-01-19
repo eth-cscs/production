@@ -17,7 +17,7 @@ dependencies = [
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('JasPer', '2.0.14'),
-    ('UDUNITS', '2.2.26', '', True),
+    ('UDUNITS', '2.2.28', '', True),
 ]
 
 
