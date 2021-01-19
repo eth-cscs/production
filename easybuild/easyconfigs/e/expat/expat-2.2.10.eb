@@ -13,6 +13,6 @@ toolchainopts = {'pic': True}
 
 # http://downloads.sourceforge.net/project/expat/expat/2.2.10/expat-2.2.10.tar.xz
 source_urls = [ 'http://downloads.sourceforge.net/project/%(name)s/%(name)s/%(version)s' ]
-sources = [SOURCELOWER_TAR_GZ]
+sources = [SOURCELOWER_TAR_XZ]
 
 moduleclass = 'tools'
