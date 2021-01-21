@@ -3,6 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'NAMD'
 version = '2.14'
+versionsuffix = '-smp'
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """
@@ -16,7 +17,7 @@ toolchainopts = {'dynamic': False}
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
 
 builddependencies = [
-    ('Charm++', '6.10.2'),
+    ('Charm++', '6.10.2', versionsuffix),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-pmi', EXTERNAL_MODULE),
     ('cray-pmi-lib', EXTERNAL_MODULE),
@@ -27,8 +28,8 @@ prebuildopts = """
     touch arch/CRAY-EX.base &&
     sed 's/8\.5/8\.6/' arch/CRAY-XE.tcl > arch/CRAY-EX.tcl &&
     sed 's#/lib##' arch/CRAY-XE.fftw3 > arch/CRAY-EX.fftw3 &&
-    echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = mpi-linux-amd64-pthreads-gcc \nCXX = CC -std=c++11 \nCXXOPTS = -O3 -ffast-math -fexpensive-optimizations \nCC = cc \nCOPTS = -O3 -ffast-math -fexpensive-optimizations ' > arch/CRAY-EX-gnu.arch &&
-    ./config CRAY-EX-gnu --tcl-prefix $EBROOTTCL --with-fftw3 --fftw-prefix $EBROOTFFTW --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-pthreads-gcc &&
+    echo -e 'NAMD_ARCH = CRAY-EX \nCHARMARCH = mpi-linux-amd64-smp-gcc \nCXX = CC -std=c++11 \nCXXOPTS = -O3 -ffast-math -fexpensive-optimizations \nCC = cc \nCOPTS = -O3 -ffast-math -fexpensive-optimizations ' > arch/CRAY-EX-gnu.arch &&
+    ./config CRAY-EX-gnu --tcl-prefix $EBROOTTCL --with-fftw3 --fftw-prefix $EBROOTFFTW --charm-base $EBROOTCHARMPLUSPLUS --charm-arch mpi-linux-amd64-smp-gcc &&
     cd CRAY-EX-gnu &&
     sed -i '/CHARM =/a NAMD_ARCH = CRAY-EX' Make.config &&
 """

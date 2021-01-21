@@ -15,6 +15,7 @@
  LAMMPS-29Oct20-cpeGNU-20.10.eb       --set-default-module
  matplotlib-3.3.3-cpeGNU-20.10.eb     --set-default-module
  NAMD-2.14-cpeGNU-20.10.eb            --set-default-module
+ NAMD-2.14-cpeGNU-20.10-smp.eb
  NCO-4.9.5-cpeGNU-20.10.eb            --set-default-module
  QuantumESPRESSO-6.6-cpeGNU-20.10.eb  --set-default-module
  VASP-6.1.0-cpeGNU-20.10.eb           --set-default-module
