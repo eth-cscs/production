@@ -55,12 +55,18 @@ exts_list = [
     ('typing_extensions', '3.7.4.3'),
 
     ('torch', '1.7.1+cu110', {
-        'source_tmpl': 'cu110/%(name)s-1.7.1%2Bcu110-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'}),
+        'source_tmpl': 'cu110/%(name)s-1.7.1%2Bcu110-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
     ('torchaudio', '0.7.2', {
-        'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'}),
+        'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
     ('torchvision', '0.8.2+cu110', {
-        'source_tmpl': 'cu110/%(name)s-0.8.2%2Bcu110-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'}),
-    ('horovod', '0.21.1', {'installopts': '--no-cache-dir', 'unpack_sources': True}),
+        'source_tmpl': 'cu110/%(name)s-0.8.2%2Bcu110-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
+    ('horovod', '0.21.1', {
+        'installopts': '--no-cache-dir',
+        'unpack_sources': True
+    }),
 ]
 
 sanity_check_paths = {
