@@ -23,16 +23,16 @@ builddependencies = [
 ]
 
 cmds_map = [
-    ('charm-%(version)s.tar.gz', './build ChaNGa mpi-linux-amd64 gcc smp --incdir=${CRAY_MPICH_DIR}/include --libdir=${CRAY_MPICH_DIR}/lib --enable-lbuserdata --with-production -j12')
+    ('charm-%(version)s.tar.gz', './build ChaNGa mpi-linux-amd64 pthreads gcc --incdir=${CRAY_MPICH_DIR}/include --libdir=${CRAY_MPICH_DIR}/lib --enable-lbuserdata --with-production -j12')
 ]
-files_to_copy = ['mpi-linux-amd64-smp-gcc']
+files_to_copy = ['mpi-linux-amd64-pthreads-gcc']
 
 sanity_check_paths = {
-    'files': ['mpi-linux-amd64-smp-gcc/bin/charmc'],
-    'dirs': ['mpi-linux-amd64-smp-gcc/bin', 'mpi-linux-amd64-smp-gcc/lib', 'mpi-linux-amd64-smp-gcc/include'],
+    'files': ['mpi-linux-amd64-pthreads-gcc/bin/charmc'],
+    'dirs': ['mpi-linux-amd64-pthreads-gcc/bin', 'mpi-linux-amd64-pthreads-gcc/lib', 'mpi-linux-amd64-pthreads-gcc/include'],
 }
 
-modextrapaths = {'PATH': 'mpi-linux-amd64-smp-gcc/bin'}
+modextrapaths = {'PATH': 'mpi-linux-amd64-pthreads-gcc/bin'}
 
-modextravars = {'EBTYPECHARMPLUSPLUS': 'mpi-linux-amd64-smp-gcc'}
+modextravars = {'EBTYPECHARMPLUSPLUS': 'mpi-linux-amd64-pthreads-gcc'}
 moduleclass = 'lib'

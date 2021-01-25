@@ -13,7 +13,6 @@ FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules
 FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include 
 FCFLAGS  += -I$(EBROOTLIBXC)/include 
 LDFLAGS  = $(FCFLAGS)
-NVFLAGS  = $(DFLAGS) -O3 -arch sm_60
 LIBS   	 = -lfftw3 -lfftw3_threads
 LIBS     += -L$(EBROOTELPA)/lib -lelpa_openmp
 LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2 -lstdc++

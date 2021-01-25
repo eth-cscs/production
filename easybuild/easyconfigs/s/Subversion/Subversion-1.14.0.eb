@@ -1,0 +1,24 @@
+easyblock = 'ConfigureMake'
+
+name = 'Subversion'
+version = '1.14.0'
+homepage = 'http://subversion.apache.org/'
+description = " Subversion is an open source version control system."
+toolchain = SYSTEM
+source_urls = ['https://downloads.apache.org/%(namelower)s']
+sources = [SOURCELOWER_TAR_BZ2]
+dependencies = [
+    ('APR', '1.7.0'),
+    ('APR-util', '1.6.1'),
+    ('SQLite', '3340100'),
+]
+configopts = "--with-apr=$EBROOTAPR "
+configopts += "--with-apr-util=$EBROOTAPRMINUTIL "
+configopts += "--with-sqlite=$EBROOTSQLITE "
+configopts += "--with-lz4=internal --with-utf8proc=internal"
+sanity_check_paths = {
+    'files': ["bin/svn", "bin/svnversion"],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
