@@ -8,7 +8,7 @@ versionsuffix = '-pip'
 homepage = 'https://www.tensorflow.org/'
 description = """An open-source software library for Machine Intelligence."""
 
-toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),

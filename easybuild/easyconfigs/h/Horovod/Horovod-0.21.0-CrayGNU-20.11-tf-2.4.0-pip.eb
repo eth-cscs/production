@@ -7,7 +7,7 @@ versionsuffix = '-tf-2.4.0-pip'
 homepage = 'https://github.com/uber/horovod'
 description = "Horovod is a distributed training framework for TensorFlow."
 
-toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 toolchainopts = {'verbose': False}
 
 source_urls = [PYPI_LOWER_SOURCE]
