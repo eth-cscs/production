@@ -50,6 +50,7 @@
  numpy-1.17.2-CrayGNU-20.08.eb                          --set-default-module
  ovito-3.2.0-CrayGNU-20.08.eb                           --set-default-module
  ParaView-5.8.1-CrayGNU-20.08-EGL-python3.eb            --set-default-module
+ ParaView-5.9.0-CrayGNU-20.08-EGL-python3.eb
  PLUMED-2.5.1-CrayGNU-20.08.eb                          --set-default-module
  PLUMED-2.6.1-CrayGNU-20.08.eb
  PLUMED-2.5.1-CrayIntel-20.08.eb
