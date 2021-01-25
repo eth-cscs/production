@@ -16,7 +16,7 @@
  GSL-2.5-CrayIntel-20.11.eb
  HDFView-2.14.eb                                        --set-default-module
  Horovod-0.21.0-CrayGNU-20.11-tf-2.4.0.eb               --set-default-module
- Horovod-0.19.5-CrayGNU-20.11-pt-1.6.0.eb
+ PyTorch-1.7.1-CrayGNU-20.11.eb                         --set-default-module
  HPX-1.5.0-CrayGNU-20.11-cuda.eb                        --set-default-module
  HPX-1.5.0-CrayGNU-20.11-APEX-cuda.eb
  HPX-1.5.0-CrayGNU-20.11-nonetworking-cuda.eb
