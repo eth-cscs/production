@@ -1,0 +1,44 @@
+# @author: sarafael, mschoengens, victorusu, gppezzi
+easyblock = "PythonBundle"
+
+name = 'TensorFlow'
+version = '2.4.0'
+versionsuffix = '-pip'
+
+homepage = 'https://www.tensorflow.org/'
+description = """An open-source software library for Machine Intelligence."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cuDNN', '8.0.5', '', True),
+    ('NCCL', '2.8.3', '', True),
+    ('SWIG', '3.0.12', '-python%(pymajver)s'),
+    ('dask', '2.2.0', '-python%(pymajver)s'),
+    ('prereq', 'tf-2.4'),
+]
+
+exts_default_options = {
+    'source_urls': [PYPI_SOURCE],
+    'unpack_sources': False,
+    'use_pip': True,
+}
+
+exts_list = [
+    ('tensorflow', version, {
+        'source_tmpl': 'tensorflow-%(version)s-cp38-cp38-manylinux2010_x86_64.whl',
+    }),
+    ('tensorflow-estimator', version, {
+        'source_tmpl': 'tensorflow_estimator-%(version)s-py2.py3-none-any.whl',
+        'modulename': 'tensorflow_estimator',
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['lib/python%(pyshortver)s/site-packages/tensorflow/libtensorflow_framework.so.2'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/tensorflow_estimator'],
+}
+
+moduleclass = 'devel'
