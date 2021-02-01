@@ -160,7 +160,7 @@ if !( isempty(LOAD_PATH) || isempty(DEPOT_PATH) || (length(LOAD_PATH)==1 && LOAD
     user_load_path = []
     std_load_path = []
     while !isempty(LOAD_PATH)
-        entry = pop!(LOAD_PATH)
+        entry = popfirst!(LOAD_PATH)
         if entry in STD_LOAD_PATH
             push!(std_load_path, entry)
         else
@@ -170,19 +170,19 @@ if !( isempty(LOAD_PATH) || isempty(DEPOT_PATH) || (length(LOAD_PATH)==1 && LOAD
 
     # Add user load path to LOAD_PATH
     while !isempty(user_load_path)
-        entry = pop!(user_load_path)
+        entry = popfirst!(user_load_path)
         push!(LOAD_PATH, entry)
     end
 
     # Add admin load path to LOAD_PATH
     while !isempty(ADMIN_LOAD_PATH)
-        entry = pop!(ADMIN_LOAD_PATH)
+        entry = popfirst!(ADMIN_LOAD_PATH)
         push!(LOAD_PATH, entry)
     end
 
     # Add std load path to LOAD_PATH
     while !isempty(std_load_path)
-        entry = pop!(std_load_path)
+        entry = popfirst!(std_load_path)
         push!(LOAD_PATH, entry)
     end
 
@@ -193,7 +193,7 @@ if !( isempty(LOAD_PATH) || isempty(DEPOT_PATH) || (length(LOAD_PATH)==1 && LOAD
     user_depot_path = []
     std_depot_path = []
     while !isempty(DEPOT_PATH)
-        depot = pop!(DEPOT_PATH)
+        depot = popfirst!(DEPOT_PATH)
         if depot in STD_DEPOT_PATH
             push!(std_depot_path, depot)
         else
@@ -203,19 +203,19 @@ if !( isempty(LOAD_PATH) || isempty(DEPOT_PATH) || (length(LOAD_PATH)==1 && LOAD
 
     # Add user depots to DEPOT_PATH
     while !isempty(user_depot_path)
-        depot = pop!(user_depot_path)
+        depot = popfirst!(user_depot_path)
         push!(DEPOT_PATH, depot)
     end
 
     # Add admin depots to DEPOT_PATH
     while !isempty(ADMIN_DEPOT_PATH)
-        depot = pop!(ADMIN_DEPOT_PATH)
+        depot = popfirst!(ADMIN_DEPOT_PATH)
         push!(DEPOT_PATH, depot)
     end
 
     # Add std depots to DEPOT_PATH
     while !isempty(std_depot_path)
-        depot = pop!(std_depot_path)
+        depot = popfirst!(std_depot_path)
         push!(DEPOT_PATH, depot)
     end
 
