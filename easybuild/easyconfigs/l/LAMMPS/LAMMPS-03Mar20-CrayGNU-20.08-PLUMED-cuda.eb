@@ -4,7 +4,7 @@ easyblock = 'MakeCp'
 name = 'LAMMPS'
 version = '03Mar20'
 local_plumedversion = '2.5.1'
-versionsuffix = '-PLUMED-cuda'
+versionsuffix = '-PLUMED-%s-cuda' % local_plumedversion
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
