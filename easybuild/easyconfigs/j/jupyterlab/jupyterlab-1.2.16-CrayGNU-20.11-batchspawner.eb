@@ -1,5 +1,5 @@
 # @author: robinson (omlins and hvictor for IJulia)
-
+# comment to be removed
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
