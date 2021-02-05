@@ -8,7 +8,7 @@ versionsuffix = '-batchspawner'
 
 _jl_maj_ver = '1'
 _jl_min_ver = '5'
-_jl_rev_ver = '0'
+_jl_rev_ver = '3'
 
 _jlver = '%s.%s.%s' % (_jl_maj_ver, _jl_min_ver, _jl_rev_ver)
 _jlshortver = '%s.%s' % (_jl_maj_ver, _jl_min_ver)
@@ -233,11 +233,9 @@ modextravars = {
 }
 
 modtclfooter = """
-prepend-path JULIA_DEPOT_PATH "%s"
 prepend-path EBJULIA_ADMIN_DEPOT_PATH "%s"
-prepend-path JULIA_LOAD_PATH "%s"
 prepend-path EBJULIA_ADMIN_LOAD_PATH "%s"
-""" % (_ijulia_depot, _ijulia_depot, _ijulia_projectdir_tcl, _ijulia_projectdir_tcl)
+""" % (_ijulia_depot, _ijulia_projectdir_tcl)
 
 
 # install extensions and batchspawner components
