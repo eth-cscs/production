@@ -5,7 +5,7 @@ FC       = ftn
 LD       = ftn
 AR       = ar -r
 # LIBXSMM (-D__LIBXSMM) is slower than LIBSMM (-D__HAS_smm_dnn)
-DFLAGS   = -D__FFTW3 -D__GFORTRAN -D__ELPA=201911 -D__LIBINT -D__LIBXC -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK -D__HAS_smm_dnn
+DFLAGS   = -D__FFTW3 -D__GFORTRAN -D__ELPA=202011 -D__LIBINT -D__LIBXC -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK -D__HAS_smm_dnn
 CFLAGS   = $(DFLAGS) -g -O2 -fopenmp
 CXXFLAGS = $(CFLAGS)
 FCFLAGS  = $(DFLAGS) -g -O3 -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
