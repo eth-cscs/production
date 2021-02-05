@@ -78,6 +78,7 @@ packages:
     - spec: mpich@3.2
       modules:
       - cray-mpich/8.0.16
+      - libfabric/1.11.0.0.233
   perl:
     buildable: false
     externals:
