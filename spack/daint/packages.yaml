@@ -40,7 +40,7 @@ packages:
     - spec: cray-libsci@20.06.1%gcc@9.3.0.20.08
       modules:
       - cray-libsci@20.06.1
-    - spec: cray-libsci@20.06.1%intel@19.1.1.144.20.08
+    - spec: cray-libsci@20.06.1%intel@19.0.1.144.20.08
       modules:
       - cray-libsci@20.06.1
     - spec: cray-libsci@20.06.1%intel@19.1.1.217.20.08
