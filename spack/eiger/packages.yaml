@@ -4,6 +4,7 @@ packages:
     # these reflect the current installed PE
     compiler: [gcc@10.2.0]
     providers:
+      fftw-api@3: [cray-fftw]
       mpi: [mpich]
       blas: [cray-libsci]
       lapack: [cray-libsci]
@@ -124,10 +125,10 @@ packages:
 #    - spec: cray-libsci@20.06.1
 #      modules:
 #      - cray-libsci/20.06.1
-  fftw:
+  cray-fftw:
     buildable: false
     externals:
-    - spec: fftw@3.3.8.+openmp
+    - spec: cray-fftw@3.3.8
       modules:
       - cray-fftw/3.3.8.8
 #  hdf5:
