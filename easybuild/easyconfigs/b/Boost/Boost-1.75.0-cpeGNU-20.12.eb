@@ -1,0 +1,27 @@
+# Contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.75.0'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.12'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_75_0.tar.bz2']
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11')
+]
+
+configopts = '--without-libraries=python'
+
+boost_mpi = True
+
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
+moduleclass = 'devel'
