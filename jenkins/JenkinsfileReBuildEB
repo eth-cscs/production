@@ -230,7 +230,7 @@ stage('Jira Stage') {
                                         fi""").trim()  
                     if ( !failed_rebuilds?.trim() ) {
                         println "\nFailed rebuilds: None\n"
-                        methods.createJiraSD("Test ReBuildEB", machineLabel, "This is a test", "UES")
+                        method.createJiraSD("Test ReBuildEB", machineLabel, "This is a test", "Blocker", "UES")
                     }
                     else {
                         failed_rebuilds.tokenize(' \n').each {
