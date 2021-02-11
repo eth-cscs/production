@@ -17,5 +17,6 @@
  NAMD-2.14-cpeGNU-20.10.eb            --set-default-module
  NAMD-2.14-cpeGNU-20.10-smp.eb
  NCO-4.9.5-cpeGNU-20.10.eb            --set-default-module
+ ParaView-5.9.0-cpeCCE-20.10-OSMesa-python3.eb --set-default-module
  QuantumESPRESSO-6.6-cpeGNU-20.10.eb  --set-default-module
  VASP-6.1.0-cpeGNU-20.10.eb           --set-default-module

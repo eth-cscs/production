@@ -99,3 +99,23 @@ void failedJiraTask(String projkey, String recipe, String machine) {
                           issuetype: [name: 'Task']]]
    def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
 }
+
+/**
+* Create a Jira Service Desk ticket with custom message
+*
+* @param subject Subject of the Jira Service Desk ticket appended to [${machine}].
+* @param machine Computing system where the build took place.
+* @param message Content of the Jira Service Desk ticket prepended to Jenkins job details.
+* @param queue Queue where the Jira Service Desk ticket will be dispatched.
+*/
+void createJiraSD(String subject, String machine, String message, String queue) {
+
+   def title = "[${machine}] ${subject}"
+   def content = "${message} \n Jenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def issue = [fields: [ project: [key: 'SD' ],
+                          summary: title,
+                          description: content,
+                          issuetype: [name: 'Service Request'],
+                          customfield_10802 : [value : "${queue}"]]]
+   def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
+}
