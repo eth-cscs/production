@@ -114,14 +114,14 @@ void failedJiraTask(String projkey, String recipe, String machine) {
 * @param priority Priority of the ticket: Blocker, High, Medium, Low
 * @param queue Queue where the Jira Service Desk ticket will be dispatched
 */
-void createJifraSD(String subject, String machine, String message, String priority, String queue){
+void createJiraSD(String subject, String machine, String message, String priority, String queue){
 
    def system
    def systems = [
        [name:"Alps", label:"eiger"],
        [name:"Dom", label:"dom"],
        [name:"Piz Daint", label:"daint"], 
-       [name:"Tsa", label: "tsa"]
+       [name:"Tsa", label:"tsa"]
    ]
    systems.each { item ->
        if(machine.contains(item.label)) system = item.name
