@@ -234,7 +234,8 @@ stage('Jira Stage') {
                     else {
                         failed_rebuilds.tokenize(' \n').each {
                             try {
-                                methods.failedJiraTask("UES", it, machineLabel)
+                                //methods.failedJiraTask("UES", it, machineLabel)
+                                methods.createJiraSD(it, machineLabel, "This is a test with $it", "UES")
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
                             }
