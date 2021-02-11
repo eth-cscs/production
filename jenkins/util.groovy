@@ -139,6 +139,6 @@ void createJifraSD(String subject, String machine, String message, String priori
                           customfield_11103: system,
                           //assignee: [name:'null'],
                           //customfield_10401: [[name:'null'], [name:'null']]
-   ]
-   def response = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
+   ]]
+   def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
 }
