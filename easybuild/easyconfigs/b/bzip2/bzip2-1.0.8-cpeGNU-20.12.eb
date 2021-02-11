@@ -13,7 +13,7 @@ description = """
 toolchain = {'name': 'cpeGNU', 'version': '20.12'}
 toolchainopts = {'pic': True}
 
-source_urls = [SOURCEFORGE_SOURCE]
+source_urls = ['https://sourceware.org/pub/bzip2/']
 sources = [SOURCE_TAR_GZ]
 
 # create pkgconfig file
