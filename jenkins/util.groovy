@@ -103,9 +103,10 @@ void failedJiraTask(String projkey, String recipe, String machine) {
 /**
 * Create a Jira Service Desk ticket with custom message
 *
-* @param projkey Jira project key (only project members can create issues).
-* @param recipe EasyBuild recipe that failed to build.
+* @param title Subject of the Jira Service Desk ticket appended to [${machine}] 
 * @param machine Computing system where the recipe failed to build.
+* @param message Content of the Jira Service Desk ticket prepended to Jenkins job details
+* @param queue Queue where the Jira Service Desk ticket will be dispatched
 */
 void createJiraSD(String title, String machine, String message, String queue) {
 
