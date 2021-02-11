@@ -1,0 +1,24 @@
+# Compiler toolchain for Shasta Cray Programming Environment GNU compiler (cpe-gnu)
+easyblock = 'cpeToolchain'
+
+name = 'cpeGNU'
+version = "20.12"
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE release: %s).\n""" % version
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+   ('cpe-gnu', EXTERNAL_MODULE),
+   ('craype/2.7.4', EXTERNAL_MODULE),
+   ('cray-dsmml/0.1.3', EXTERNAL_MODULE),
+   ('xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta', EXTERNAL_MODULE),
+   ('cray-libsci/20.12.1.2', EXTERNAL_MODULE),
+   ('cray-mpich/8.1.1', EXTERNAL_MODULE),
+   ('gcc/10.2.0', EXTERNAL_MODULE),
+   ('libfabric/1.11.0.0.233', EXTERNAL_MODULE),
+   ('perftools-base/20.12.0', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'
