@@ -63,6 +63,8 @@ compilers:
     modules:
     - PrgEnv-intel
     - intel/19.0.1.144
+    - cdt/20.08
+    - intel/19.0.1.144
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -77,6 +79,8 @@ compilers:
     target: any
     modules:
     - PrgEnv-intel
+    - intel/19.1.1.217
+    - cdt/20.08
     - intel/19.1.1.217
     environment: {}
     extra_rpaths: []
@@ -93,6 +97,8 @@ compilers:
     modules:
     - PrgEnv-pgi
     - pgi/20.1.0
+    - cdt/20.08
+    - pgi/20.1.0
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -107,6 +113,8 @@ compilers:
     target: any
     modules:
     - PrgEnv-pgi
+    - pgi/20.1.1
+    - cdt/20.08
     - pgi/20.1.1
     environment: {}
     extra_rpaths: []
