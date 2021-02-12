@@ -51,17 +51,20 @@ stage('ReBuild Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
+        def cpus = system.cpus
+        println("Machine cpus: $machine.cpus, System cpus: $system.cpus")
         def machineName = machine.name
         for (item in architectures) {
             /* define architecture and machineLabel
                to use them in parallel builds */
             def architecture = item
-            def machineLabel = architecture == "" ?
-               machineName :
-               "$machineName-$architecture"
+            def machineLabel = architecture == "" ? machineName : "$machineName-$architecture"
+            def cpusPerTask = architecture == "" ? cpus : cpus[architecture]
+            println("cpusPerTask: $cpusPerTask")
             builds["$machineLabel"] = {
                 node(machineName) {
                     checkout scm
+                    println("cpusPerTask: $cpusPerTask")
 
                     /* define command to load EasyBuild */
                     def load_easybuild = architecture == "" ?
@@ -81,8 +84,8 @@ stage('ReBuild Stage') {
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
