@@ -54,18 +54,15 @@ stage('ReBuild Stage') {
         /* cpus and name are defined for machine only */
         def cpus = machine.cpus
         def machineName = machine.name
-        println("Machine name: $machine.name, System name: $system.name")
         for (item in architectures) {
             /* define architecture and machineLabel
                to use them in parallel builds */
             def architecture = item
             def machineLabel = architecture == "" ? machineName : "$machineName-$architecture"
             def cpusPerTask = architecture == "" ? cpus : cpus[architecture]
-            println("cpusPerTask: $cpusPerTask")
             builds["$machineLabel"] = {
                 node(machineName) {
                     checkout scm
-                    println("cpusPerTask: $cpusPerTask")
 
                     /* define command to load EasyBuild */
                     def load_easybuild = architecture == "" ?
