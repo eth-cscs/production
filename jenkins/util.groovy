@@ -133,11 +133,11 @@ void createJiraSD(String subject, String machine, String message, String priorit
                           summary: title,
                           description: content,
                           issuetype: [name:'Incident'],
-                          priority: [name:"${priority}"],
-                          customfield_10802: [value:"${queue}"],
+                          priority: [name:priority],
+                          customfield_10802: [value:queue],
                           customfield_11102: 'Compute at Piz Daint',
                           customfield_11103: system,
-                          assignee: [name:"$assignee"],
-                          customfield_10401: [[name:"$watchers[0]"],[name:"$watchers[1]"]]]
+                          assignee: [name:assignee],
+                          customfield_10401: [[name:watchers[0]],[name:watchers[1]]]]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
 }
