@@ -51,9 +51,10 @@ stage('ReBuild Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
-        def cpus = system.cpus
-        println("Machine cpus: $machine.cpus, System cpus: $system.cpus")
+        /* cpus and name are defined for machine only */
+        def cpus = machine.cpus
         def machineName = machine.name
+        println("Machine name: $machine.name, System name: $system.name")
         for (item in architectures) {
             /* define architecture and machineLabel
                to use them in parallel builds */
