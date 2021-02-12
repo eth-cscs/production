@@ -231,12 +231,14 @@ stage('Jira Stage') {
                                         fi""").trim()  
                     if ( !failed_rebuilds?.trim() ) {
                         println "\nFailed rebuilds: None\n"
-                        methods.createJiraSD('Test ReBuildEB', machineLabel, 'This is a test', 'High', 'UES')
+                        def it = "HUB"
+                        methods.createJiraSD("$it ReBuild failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
                     }
                     else {
                         failed_rebuilds.tokenize(' \n').each {
                             try {
-                                methods.failedJiraTask("UES", it, machineLabel)
+                                //methods.failedJiraTask("UES", it, machineLabel)
+                                methods.createJiraSD("$it ReBuild failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
                             }
