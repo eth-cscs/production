@@ -231,8 +231,8 @@ stage('Jira Stage') {
                                         fi""").trim()  
                     if ( !failed_rebuilds?.trim() ) {
                         println "\nFailed rebuilds: None\n"
-                        def it = "HUB"
-                        methods.createJiraSD("$it ReBuild failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
+                        def myrecipe = "hub-2.14.2.eb"
+                        methods.createJiraSD("$myrecipe ReBuild failed", machineLabel, "EasyBuild recipe $myrecipe failed: logs at Build URL", 'High', 'UES')
                     }
                     else {
                         failed_rebuilds.tokenize(' \n').each {
