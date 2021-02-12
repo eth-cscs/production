@@ -51,14 +51,15 @@ stage('ReBuild Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
         def architectures = system.architectures
+        /* cpus and name are defined for machine only */
+        def cpus = machine.cpus
         def machineName = machine.name
         for (item in architectures) {
             /* define architecture and machineLabel
                to use them in parallel builds */
             def architecture = item
-            def machineLabel = architecture == "" ?
-               machineName :
-               "$machineName-$architecture"
+            def machineLabel = architecture == "" ? machineName : "$machineName-$architecture"
+            def cpusPerTask = architecture == "" ? cpus : cpus[architecture]
             builds["$machineLabel"] = {
                 node(machineName) {
                     checkout scm
@@ -81,8 +82,8 @@ stage('ReBuild Stage') {
 
                     /* define rebuild command */
                     def rebuild_command = architecture == "" ?
-                        "srun -u -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
-                        "srun -u -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
                         println("ReBuild command: $rebuild_command")
 
                     /* build the software stack using the rebuild command */
@@ -234,7 +235,8 @@ stage('Jira Stage') {
                     else {
                         failed_rebuilds.tokenize(' \n').each {
                             try {
-                                methods.failedJiraTask("UES", it, machineLabel)
+                                //methods.failedJiraTask("UES", it, machineLabel)
+                                methods.createJiraSD("$it ReBuild failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
                             }
