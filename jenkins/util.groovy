@@ -118,10 +118,10 @@ void createJiraSD(String subject, String machine, String message, String priorit
 
    def system
    def systems = [
-       [name:"Alps", label:"eiger"],
-       [name:"Dom", label:"dom"],
-       [name:"Piz Daint", label:"daint"], 
-       [name:"Tsa", label:"tsa"]
+       [name:'Alps', label:'eiger'],
+       [name:'Dom', label:'dom'],
+       [name:'Piz Daint', label:'daint'], 
+       [name:'Tsa', label:'tsa']
    ]
    systems.each { item ->
        if(machine.contains(item.label)) system = item.name
@@ -136,9 +136,6 @@ void createJiraSD(String subject, String machine, String message, String priorit
                           priority: [name:"${priority}"],
                           customfield_10802: [value:"${queue}"],
                           customfield_11102: 'Compute at Piz Daint',
-                          customfield_11103: system,
-                          //assignee: [name:'null'],
-                          //customfield_10401: [[name:'null'], [name:'null']]
-   ]]
+                          customfield_11103: system]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
 }
