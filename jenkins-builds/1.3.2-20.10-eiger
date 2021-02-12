@@ -6,6 +6,7 @@
  CDO-1.9.9-cpeGNU-20.10.eb            --set-default-module
  CMake-3.19.1.eb                      --set-default-module
  CP2K-7.1-cpeGNU-20.10.eb             --set-default-module
+ CP2K-8.1-cpeGNU-20.10.eb             
  GREASY-19.03-cscs-cpeGNU-20.10.eb    --set-default-module
  GROMACS-2020.4-cpeGNU-20.10.eb       --set-default-module
  GSL-2.6-cpeCCE-20.10.eb              --set-default-module
