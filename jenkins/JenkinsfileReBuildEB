@@ -231,7 +231,8 @@ stage('Jira Stage') {
                                         fi""").trim()  
                     if ( !failed_rebuilds?.trim() ) {
                         println "\nFailed rebuilds: None\n"
-                        methods.createJiraSD('Test ReBuildEB', machineLabel, 'This is a test', 'High', 'UES', 'lucamar', ['bignamic','manitart'])
+                        def staff = ['lucamar','bignamic','manitart']
+                        methods.createJiraSD('Test ReBuildEB', machineLabel, 'This is a test', 'High', 'UES', staff)
                     }
                     else {
                         failed_rebuilds.tokenize(' \n').each {
