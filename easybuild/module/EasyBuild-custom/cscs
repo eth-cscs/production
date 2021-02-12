@@ -64,7 +64,7 @@ if { $status == 0 } {
 # current system name
 if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
-} elseif { [ string match *uan0[1-3]* $::env(HOSTNAME) ] } {
+} elseif { [ string match *uan0\[1-3\]* $::env(HOSTNAME) ] } {
  set system "eiger"
 } elseif { [ string match *uan04* $::env(HOSTNAME) ] } {
  set system "pilatus"
