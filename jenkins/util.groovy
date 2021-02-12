@@ -114,7 +114,7 @@ void failedJiraTask(String projkey, String recipe, String machine) {
 * @param priority Priority of the ticket: Blocker, High, Medium, Low
 * @param queue Queue where the Jira Service Desk ticket will be dispatched
 */
-void createJiraSD(String subject, String machine, String message, String priority, String queue, String[] staff){
+void createJiraSD(String subject, String machine, String message, String priority, String queue){
 
    def system
    def systems = [
@@ -136,9 +136,6 @@ void createJiraSD(String subject, String machine, String message, String priorit
                           priority: [name:priority],
                           customfield_10802: [value:queue],
                           customfield_11102: 'Compute at Piz Daint',
-                          customfield_11103: system,
-                          assignee: [name:staff[0]],
-                          customfield_10401: [[name:staff[1]],[name:staff[2]]]
-   ]]
+                          customfield_11103: system]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
 }
