@@ -45,7 +45,6 @@
  ovito-3.2.0-CrayGNU-20.11.eb                           --set-default-module
  ParaView-5.8.1-CrayGNU-20.11-EGL-python3.eb            --set-default-module
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
- PLUMED-2.6.1-CrayIntel-20.11.eb
  pycuda-2018.1.1-CrayGNU-20.11-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-20.11.eb                  --set-default-module
  Python-bare-3.7.3.eb                                   --hidden
