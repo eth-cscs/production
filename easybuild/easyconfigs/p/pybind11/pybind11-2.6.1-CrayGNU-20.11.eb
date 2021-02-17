@@ -15,7 +15,7 @@ source_urls = ['https://github.com/pybind/pybind11/archive/']
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', EXTERNAL_MODULE),
+    ('CMake', '3.14.5', '', True),
 ]
 
 dependencies = [
