@@ -11,6 +11,8 @@ toolchain = {'name': 'system', 'version': 'system'}
 
 dependencies = [
    ('cpe-gnu', EXTERNAL_MODULE),
+   ('craype-x86-rome', EXTERNAL_MODULE),
+   ('craype-network-ofi', EXTERNAL_MODULE),
 #   ('craype/2.7.5', EXTERNAL_MODULE),
 #   ('cray-dsmml/0.1.3', EXTERNAL_MODULE),
 #   ('xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta', EXTERNAL_MODULE),
