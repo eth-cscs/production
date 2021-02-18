@@ -22,14 +22,10 @@ builddependencies = [
 
 osdependencies = [('autoconf', 'automake')]
 
-preconfigopts = " module unload cray-libsci && "
-configopts = " --enable-fortran --enable-shared "
-
-prebuildopts = " module unload cray-libsci && "
+configopts = ' CC=cc CXX=CC FC=ftn --with-cxx="$CXX" --with-cxx-optflags="-O2 -Wno-error" --enable-fortran --enable-shared '
 
 # https://github.com/evaleev/libint/issues/173 and https://gcc.gnu.org/onlinedocs/gcc-10.1.0/cpp/_005f_005fhas_005finclude.html
 preinstallopts = ' sed -i "s/__has_include(<libint2_params.h>)/defined(__COMPILING_LIBINT2)/" ./include/libint2/util/generated/libint2_params.h && '
-
 
 sanity_check_paths = {
     'files': ['include/libint2.h', 'include/libint2.hpp', 'lib/libint2.a', 'lib/libint2.so'],
