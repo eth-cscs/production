@@ -33,8 +33,6 @@ dependencies = [
     ('libxsmm', '1.16.1'),
 ]
 
-# fix DEFAULT(NONE) in dbcsr (see https://github.com/cp2k/dbcsr/issues/351)
-# prebuildopts = " sed -i -e '/SHARED/d' -e 's/(NONE) &/(SHARED)/' exts/dbcsr/src/dist/dbcsr_dist_methods.F && "
 # build type
 buildopts = "ARCH=%(name)s-%(version)s-%(toolchain_name)s VERSION=psmp"
 
