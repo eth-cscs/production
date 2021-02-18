@@ -1,4 +1,4 @@
-# Compiler toolchain for Shasta Cray Programming Environment GNU compiler (cpe-gnu)
+# Compiler toolchain for Cray EX Programming Environment GNU compiler (cpe-gnu)
 easyblock = 'cpeToolchain'
 
 name = 'cpeGNU'
