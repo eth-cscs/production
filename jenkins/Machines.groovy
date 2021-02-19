@@ -15,12 +15,20 @@ def dom = [name: 'dom',
            prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
 
 def eiger = [name: 'eiger',
-           archs: [],
-           cpus: 128,
-           buildPath: '$XDG_RUNTIME_DIR/build',
-           unusePath: '/apps/eiger/UES/jenkins/1.3.2/20.10',
-           modulesProduction: '',
-           prefixProduction: '/apps/eiger/UES/jenkins/1.3.2/20.10']
+             archs: [],
+             cpus: 128,
+             buildPath: '$XDG_RUNTIME_DIR/build',
+             unusePath: '/apps/eiger/UES/jenkins/1.3.2/20.10',
+             modulesProduction: '',
+             prefixProduction: '/apps/eiger/UES/jenkins/1.3.2/20.10']
+
+def pilatus = [name: 'pilatus',
+               archs: [],
+               cpus: 128,
+               buildPath: '$XDG_RUNTIME_DIR/build',
+               unusePath: '/apps/pilatus/UES/jenkins/1.3.2',
+               modulesProduction: '',
+               prefixProduction: '/apps/pilatus/UES/jenkins/1.3.2']
 
 def pilatus = [name: 'pilatus',
            archs: [],
