@@ -56,7 +56,7 @@ exts_list = [
     ('jupyter_core', '4.5.0'),
     ('jupyter_client', '5.3.1'),
     ('MarkupSafe', '1.1.1'),
-    ('Jinja2', '2.10.1'),
+    ('Jinja2', '2.11.3'), #bumped from 2.10.1 to support jupyterhub 1.3.0, 01Feb21
     ('webencodings', '0.5.1'),
     ('bleach', '3.1.0'),
     ('defusedxml', '0.6.0'),
@@ -106,7 +106,17 @@ exts_list = [
     ('chardet', '3.0.4'),
     ('certifi', '2019.6.16'),
     ('requests', '2.22.0'),
-    ('jupyterhub', '1.0.0'),
+    ('jupyter_telemetry', '0.1.0'), #added to support jupyterhub 1.3.0, 01Feb21
+    ('ruamel.yaml', '0.16.12', { #added to support jupyterhub 1.3.0, 01Feb21
+        'modulename': "ruamel",
+        }),
+    ('ruamel.yaml.clib', '0.2.2', { #added to support jupyterhub 1.3.0, 01Feb21
+        'modulename': "ruamel",
+        }),
+    ('python-json-logger', '2.0.1', { #added to support jupyterhub 1.3.0, 01Feb21
+        'modulename': "pythonjsonlogger",
+        }),
+    ('jupyterhub', '1.3.0'), #bumped from 1.0.0, 01Feb21
 
 # widgets: note the lab extensions below
     ('widgetsnbextension', '3.5.1'),
