@@ -18,6 +18,7 @@ FCL        = ftn -mkl=sequential
 
 FREE       = -free -names lowercase
 
+# -xHOST fails on AMD EPYC 7742: use -march=core-avx2 instead
 FFLAGS     = -assume byterecl -w -march=core-avx2
 OFLAG      = -O2
 OFLAG_IN   = $(OFLAG)
