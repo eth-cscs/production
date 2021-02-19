@@ -64,8 +64,10 @@ if { $status == 0 } {
 # current system name
 if { [ string match *esch* $::env(HOSTNAME) ] } {
  set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
-} elseif { [ string match *uan* $::env(HOSTNAME) ] } {
+} elseif { [ string match *uan0\[1-3\]* $::env(HOSTNAME) ] } {
  set system "eiger"
+} elseif { [ string match *uan04* $::env(HOSTNAME) ] } {
+ set system "pilatus"
 } else {
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
@@ -83,6 +85,13 @@ if { [ string match *daint* $system ] } {
     setenv EASYBUILD_MODULES_TOOL               Lmod
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-20.10.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
+    setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
+} elseif { [ string match *pilatus* $system ] } {
+    setenv EASYBUILD_MODULE_SYNTAX              Lua
+    setenv EASYBUILD_MODULES_TOOL               Lmod
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-21.02.cfg
+    setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
+    setenv EASYBUILD_MODULE_NAMING_SCHEME       HierarchicalMNS
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *esch* $system ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
