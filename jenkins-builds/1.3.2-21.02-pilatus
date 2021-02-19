@@ -1,5 +1,6 @@
+ Amber-20-11-7-cpeIntel-21.02.eb
  Buildah-1.19.0.eb                    --set-default-module
- CMake-3.19.1.eb                      --set-default-module
+ CMake-3.19.5.eb                      --set-default-module
  GSL-2.6-cpeCCE-21.02.eb              
  GSL-2.6-cpeGNU-21.02.eb
  GSL-2.6-cpeIntel-21.02.eb
