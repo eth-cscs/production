@@ -226,7 +226,7 @@ exts_list = [
         'modulename': False,
 }),
 # nglview, requires labextension
-    ('nglview', 'nglview'),
+    ('nglview', '2.7.7'),
     
     
 # kernels
