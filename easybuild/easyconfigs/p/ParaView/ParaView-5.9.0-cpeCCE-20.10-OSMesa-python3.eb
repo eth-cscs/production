@@ -69,9 +69,7 @@ modextravars = {
     'GALLIUM_DRIVER': 'swr'
 }
 
-modluafooter = """
-    prepend-path LD_LIBRARY_PATH ${CRAY_PYTHON_PREFIX}/lib
-"""
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
