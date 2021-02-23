@@ -28,7 +28,8 @@ postinstallcmds = [
     'cp -r external %(installdir)s/external && '
     'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
     'cp docs/man/man1/reframe.1 %(installdir)s/share/man/man1 && '
-    'cp docs/man/man8/reframe.settings.8 %(installdir)s/share/man/man8'
+    'cp docs/man/man8/reframe.settings.8 %(installdir)s/share/man/man8 && '
+    'cp -r share/completions %(installdir)s/share/completions'
 ]
 
 modextrapaths = {
@@ -38,9 +39,11 @@ modextrapaths = {
 }
 
 sanity_check_paths = {
-    'files': ['bin/reframe', 'config/cscs.py',
-              'share/man/man1/reframe.1',
-              'share/man/man8/reframe.settings.8'],
+    'files': ['bin/reframe', 'config/cscs.py', 'share/man/man1/reframe.1',
+              'share/man/man8/reframe.settings.8'
+              'share/completions/reframe.bash',
+              'share/completions/reframe.fish',
+              'share/completions/reframe.tcsh'],
     'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests',],
 }
 
