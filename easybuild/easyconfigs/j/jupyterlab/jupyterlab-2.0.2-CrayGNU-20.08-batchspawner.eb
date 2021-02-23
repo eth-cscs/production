@@ -225,6 +225,9 @@ exts_list = [
         'modulename': False,
 }),
     
+# nglview, requires labextension
+    ('nglview', '2.7.7'),
+    
 # kernels
 # bash kernel, requires kernel install below, twr
     ('bash_kernel', '0.7.2', {
@@ -279,6 +282,7 @@ export JUPYTER=%%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe o
 %%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter@1.3.5 --debug --no-build &&  #hard coded 1.3.5 to match pip python module above
 %%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0 jupyterlab-system-monitor@0.6.0  --no-build && #bumped from 0.4.0 to 0.5.0 and 0.4.1 to 0.6.0
 %%(installdir)s/bin/jupyter labextension install dask-labextension@2.0.0  --no-build && 
+%%(installdir)s/bin/jupyter labextension install nglview-js-widgets@2.7.7  --no-build &&
 %%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.3.1 --debug --no-build &&  #bumped to 0.3.1 from 0.2.1
 cd %%(installdir)s/ && 
 git clone https://github.com/NVIDIA/ipyparaview && 
