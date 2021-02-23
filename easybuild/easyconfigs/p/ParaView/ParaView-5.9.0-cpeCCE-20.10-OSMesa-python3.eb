@@ -28,7 +28,7 @@ builddependencies = [('CMake', '3.19.1','', True)]
 
 separate_build_dir = True
 
-maxparallel = 24
+maxparallel = 64
 
 configopts = '-DVTK_Group_MPI:BOOL=ON '
 configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
@@ -65,22 +65,18 @@ modextrapaths = {
     'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages',
 }
 
-modtclfooter = """
-    prepend-path LD_LIBRARY_PATH /opt/python/%(pyver)s/lib
-"""
+modextravars = {
+    'GALLIUM_DRIVER': 'llvmpipe'
+}
 
-postinstallcmds = [ "export GALLIUM_DRIVER=swr;"
-                  ]
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
     'dirs': ['lib64/python%(pyshortver)s/site-packages',
-             'lib64/paraview-5.9/plugins'
-           ]
+             'lib64/paraview-5.9/plugins']
 }
 
 postinstallcmds = ['mkdir -p %(installdir)s/share/paraview-%(version_major_minor)s && cd %(installdir)s/share/paraview-%(version_major_minor)s && git clone https://gitlab.kitware.com/paraview/materials']
-
-
 
 moduleclass = 'vis'
