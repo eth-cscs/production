@@ -1,0 +1,50 @@
+# Compiler toolchain for Cray EX Programming Environment Cray compiler (cpe-cray)
+easyblock = 'cpeToolchain'
+
+name = 'cpeCray'
+version = "21.02"
+
+homepage = 'https://pubs.cray.com'
+description = """Toolchain using Cray compiler wrapper with cpe-cray module (CPE release: %s).\n""" % version
+
+toolchain = SYSTEM
+
+dependencies = [
+   ('cpe-cray', EXTERNAL_MODULE)
+]
+
+modluafooter = '''
+if not ( isloaded("cce/11.0.2") ) then
+    load("cce/11.0.2")
+end
+if not ( isloaded("cray-dsmml/0.1.3") ) then
+    load("cray-dsmml/0.1.3")
+end
+if not ( isloaded("cray-libsci/20.12.1.2") ) then
+    load("cray-libsci/20.12.1.2")
+end
+if not ( isloaded("cray-mpich/8.1.2") ) then
+    load("cray-mpich/8.1.2")
+end
+if not ( isloaded("craype/2.7.5") ) then
+    load("craype/2.7.5")
+end
+if not ( isloaded("craype-x86-rome") ) then
+    load("craype-x86-rome")
+end
+if not ( isloaded("craype-network-ofi") ) then
+    load("craype-network-ofi")
+end
+if not ( isloaded("libfabric/1.11.0.0.233") ) then
+    load("libfabric/1.11.0.0.233")
+end
+if not ( isloaded("perftools-base/21.02.0") ) then
+    load("perftools-base/21.02.0")
+end
+if not ( isloaded("xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta") ) then
+    load("xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta")
+end
+prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
+''' 
+
+moduleclass = 'toolchain'
