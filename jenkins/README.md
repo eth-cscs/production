@@ -21,3 +21,5 @@ The following dictionary keys are provided:
 * `JenkinsfileTestingEB:` This is the Jenkins pipeline script used for the testing Jenkins project.
 
 * `JenkinsfileProductionEB:` This is the Jenkins pipeline script used for the production Jenkins project.
+
+* `JenkinsfileUpdateEB:` This is the Jenkins pipeline script used for the update Jenkins project.
