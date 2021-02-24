@@ -283,7 +283,6 @@ exts_list = [
         }),
 ]
 
-
 modextrapaths = {
     'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
     'JUPYTER_PATH': 'share/jupyter',
@@ -293,7 +292,6 @@ modextravars = {
     'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
     'JUPYTER' : '%(installdir)s/bin/jupyter',
 }
-
 
 # install extensions and batchspawner components
 
@@ -342,6 +340,5 @@ sanity_check_paths = {
              'share/jupyter/lab/themes',
              ]
 }
-
 
 moduleclass = 'tools'
