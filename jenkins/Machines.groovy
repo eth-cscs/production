@@ -30,14 +30,6 @@ def pilatus = [name: 'pilatus',
                modulesProduction: '',
                prefixProduction: '/apps/pilatus/UES/jenkins/1.3.2']
 
-def pilatus = [name: 'pilatus',
-           archs: [],
-           cpus: 128,
-           buildPath: '$XDG_RUNTIME_DIR/build',
-           unusePath: '/apps/pilatus/UES/jenkins/1.3.2',
-           modulesProduction: '',
-           prefixProduction: '/apps/pilatus/UES/jenkins/1.3.2']
-
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
