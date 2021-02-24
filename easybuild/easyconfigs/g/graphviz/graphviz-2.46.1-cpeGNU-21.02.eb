@@ -10,7 +10,8 @@ description = """Graphviz is open source graph visualization software."""
 toolchain = {'name': 'cpeGNU', 'version': '21.02'}
 toolchainopts = {'pic': True}
 
-source_urls = ['https://www2.graphviz.org/Packages/stable/portable_source']
+# https://gitlab.com/graphviz/graphviz/-/package_files/7097035/download
+source_urls = ['https://gitlab.com/%(name)s/%(name)s/-/package_files/7097035/download']
 sources = [SOURCELOWER_TAR_GZ]
 
 sanity_check_paths = {
