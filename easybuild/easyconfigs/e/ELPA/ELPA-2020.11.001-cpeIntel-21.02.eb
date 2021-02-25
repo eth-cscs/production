@@ -1,0 +1,30 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2020.11.001'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = "Eigenvalue SoLvers for Petaflop-Applications ."
+
+toolchain = {'name': 'cpeIntel', 'version': '21.02'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+# download from http://%(namelower)s.mpcdf.mpg.de/html/Releases/%(version)s often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+configopts = 'FCFLAGS="-fallow-argument-mismatch $FCFLAGS" -disable-avx512 --enable-openmp --enable-static'
+
+prebuildopts = " make clean && "
+
+
+sanity_check_paths = {
+    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'include/elpa_openmp-%(version)s/%(namelower)s', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig'],
+}
+
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s']}
+
+modextravars = {'ELPA_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s'}
+
+moduleclass = 'math'
