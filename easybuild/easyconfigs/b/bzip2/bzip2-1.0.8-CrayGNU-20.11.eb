@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS), Samuel Omlin (CSCS)
 name = 'bzip2'
 version = '1.0.8'
 
@@ -13,25 +13,25 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 toolchainopts = {'pic': True}
 
-source_urls = [SOURCEFORGE_SOURCE]
+source_urls = ['https://sourceware.org/pub/%(namelower)s/']
 sources = [SOURCE_TAR_GZ]
 
 # create pkgconfig file
 postinstallcmds = [
     "mkdir %(installdir)s/lib/pkgconfig",
     """echo -e "prefix=%(installdir)s 
-libdir=\\${prefix}/lib 
-includedir=\\${prefix}/include 
+libdir=\${prefix}/lib 
+includedir=\${prefix}/include 
 
 Name: %(name)s 
 Description: %(name)s compression library 
 Version: %(version)s 
 
 Requires: 
-Libs: -L\\${libdir} -lbz2 
-Cflags: -I\\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc""",
+Libs: -L\${libdir} -lbz2 
+Cflags: -I\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc""",
 ]
 
 # prepend PKG_CONFIG_PATH: EasyBuild does this automatically
 # modextrapaths = {'PKG_CONFIG_PATH': ['lib/pkgconfig']}
-moduleclass = 'tools'
+moduleclass = 'lib'
