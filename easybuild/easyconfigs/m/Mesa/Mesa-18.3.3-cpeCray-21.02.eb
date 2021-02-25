@@ -38,8 +38,9 @@ source_urls = ['https://%(namelower)s.freedesktop.org/archive']
 sources = ['/apps/common/UES/easybuild/sources/m/%(name)s/%(namelower)s-%(version)s.tar.xz']
 
 builddependencies = [
-    ('CMake', '3.19.6', '', True),
+    ('CMake', '3.19.6', '', True)
 ]
+
 dependencies = [
     ('LLVM', '8.0.0'),
     ('Mako', '1.1.2', '-python%(pymajver)s'),
@@ -49,7 +50,6 @@ dependencies = [
 configopts = " --with-platforms=x11 --disable-dri --disable-dri3 --disable-egl --disable-gbm --disable-gles1 --disable-gles2 --disable-xvmc --disable-vdpau --disable-va --enable-glx --enable-llvm --enable-gallium-osmesa --with-dri-drivers= --with-gallium-drivers='swrast,swr' --with-swr-archs=avx,avx2 "
 
 parallel = 8
-
 
 sanity_check_paths = {
     'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/gl_mangle.h', 'include/GL/glx.h', 'include/GL/glx_mangle.h', 'include/GL/osmesa.h', 'lib/libGL.so', 'lib/libOSMesa.so', 'lib/libswrAVX.so', 'lib/libswrAVX2.so'],
