@@ -12,11 +12,11 @@ toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
 
 source_urls = [SOURCEFORGE_SOURCE]
-sources = ['%(namelower)s_1_70_0.tar.gz']
+sources = ['%(namelower)s_1_75_0.tar.gz']
 patches = ['%(name)s-%(version)s-python%(pymajver)s.patch']
 
 dependencies = [
-    ('bzip2', '1.0.6'),
+    ('bzip2', '1.0.8'),
     ('zlib', '1.2.11'),
     ('cray-python', EXTERNAL_MODULE),
 ]
