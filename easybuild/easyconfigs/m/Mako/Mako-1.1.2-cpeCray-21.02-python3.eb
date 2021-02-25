@@ -18,7 +18,6 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
 ]
 
-
 sanity_check_paths = {
     'files': ['bin/%(namelower)s-render'],
     'dirs': [],
