@@ -11,4 +11,4 @@
  jupyterlab-2.2.8-cpeGNU-21.02.eb
  matplotlib-3.3.4-cpeGNU-21.02.eb
  GSL-2.6-cpeIntel-21.02.eb
- VASP-6.1.0-cpeIntel-21.02.eb
+ VASP-6.2.0-cpeIntel-21.02.eb
