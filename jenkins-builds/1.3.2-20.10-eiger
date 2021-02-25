@@ -1,5 +1,3 @@
- cpeCCE-20.10.eb                      --hidden --module-syntax=Tcl
- cpeGNU-20.10.eb                      --hidden --module-syntax=Tcl
  Boost-1.74.0-cpeGNU-20.10.eb
  Boost-1.74.0-cpeGNU-20.10-python3.eb --set-default-module
  Buildah-1.19.0.eb                    --set-default-module
