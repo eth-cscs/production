@@ -1,5 +1,4 @@
 # CrayGNU version by Jean Favre (CSCS)
-
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
