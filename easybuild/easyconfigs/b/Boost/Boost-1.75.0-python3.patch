@@ -1,0 +1,23 @@
+diff -Naur boost_1_74_0.ori/tools/build/src/tools/python.jam boost_1_74_0/tools/build/src/tools/python.jam
+--- boost_1_74_0.ori/tools/build/src/tools/python.jam	2020-08-11 16:57:21.000000000 +0200
++++ boost_1_74_0/tools/build/src/tools/python.jam	2020-11-10 10:12:42.002540188 +0100
+@@ -548,6 +548,9 @@
+     else
+     {
+         includes ?= $(prefix)/include/python$(version) ;
++        includes = [ GLOB $(prefix)/include : * ] ;
++        includes = $(includes[1]) ;
++        ECHO "Using include path:" $(includes) ;
+ 
+         local lib = $(exec-prefix)/lib ;
+         libraries ?= $(lib)/python$(version)/config $(lib) ;
+diff -Naur boost_1_74_0.ori/user-config.jam boost_1_74_0/user-config.jam
+--- boost_1_74_0.ori/user-config.jam	1970-01-01 01:00:00.000000000 +0100
++++ boost_1_74_0/user-config.jam	2020-11-10 10:22:37.673600000 +0100
+@@ -0,0 +1,5 @@
++local CRAY_MPICH_DIR = /opt/cray/pe/mpt/7.7.15/gni/mpich-gnu/8.2 ;
++using mpi : CC : 
++ <include>$(CRAY_MPICH_DIR)/include 
++ <library-path>$(CRAY_MPICH_DIR)/lib 
++;
++
