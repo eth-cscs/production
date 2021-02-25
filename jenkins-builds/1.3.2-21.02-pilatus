@@ -5,4 +5,5 @@
  GSL-2.6-cpeCray-21.02.eb              
  GSL-2.6-cpeGNU-21.02.eb
  GSL-2.6-cpeIntel-21.02.eb
+ NAMD-2.14-cpeIntel-20.10.eb            --set-default-module
  VASP-6.1.0-cpeIntel-21.02.eb
