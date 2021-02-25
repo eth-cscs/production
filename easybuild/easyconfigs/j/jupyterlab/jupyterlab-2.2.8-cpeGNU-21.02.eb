@@ -238,10 +238,6 @@ exts_list = [
     ('jupyter-server-proxy', '1.5.0'),  
     ('dask_labextension', '3.0.0'),
 
-#JupyterLab GPU Dashboard (nvdashboard)
-    ('pynvml', '8.0.4'),
-    ('jupyterlab-nvdashboard', '0.4.0'), 
-
 # xarray and seaborn
     ('xarray', '0.16.1'),
     ('seaborn', '0.11.0'),
