@@ -1,0 +1,48 @@
+# CrayGNU version by Jean Favre (CSCS)
+
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.8.1'
+versionsuffix = '-EGL-python%(pymajver)s'
+
+homepage = 'http://www.paraview.org'
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+
+source_urls = [
+    'http://www.%(namelower)s.org/%(namelower)s-downloads/download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile=',
+]
+sources = ['%(name)s-v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+dependencies = [
+    ('h5py', '2.10.0', '-python%(pymajver)s-serial'),
+    ('ospray', '1.8.5'),
+    ('oidn', '1.2.2'),
+    ('VisRTX', '0.1.6', '-cuda'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = '-DPARAVIEW_USE_MPI:BOOL=ON -DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC -DBUILD_TESTING:BOOL=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL -DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,/opt/cray/nvidia/default/lib64 -L/opt/cray/nvidia/default/lib64" -DPARAVIEW_USE_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=${EBROOTPYTHON}/bin/python%(pymajver)s -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON -DPARAVIEW_BUILD_WITH_KITS:BOOL=ON -DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include -DTBB_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=${EBROOTOSPRAY}/lib/libtbbmalloc.so -DOPENGL_opengl_LIBRARY=/usr/lib64/libOpenGL.so -DOPENGL_egl_LIBRARY=/usr/lib64/libEGL.so -DOPENGL_INCLUDE_DIR=/opt/cray/nvidia/default/include -DPARAVIEW_ENABLE_XDMF3:BO0L=OFF -DPARAVIEW_USE_VTKM:BO0L=OFF -DPARAVIEW_USE_QT:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF -DVTK_OPENGL_HAS_EGL:BOOL=ON -DVTK_USE_X:BOOL=OFF -DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON -DVTK_ENABLE_OSPRAY:BOOL=ON -DVTK_ENABLE_VISRTX:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" -DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" -DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" -DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
+
+maxparallel = 16
+
+
+sanity_check_paths = {
+    'files': ['bin/pvbatch', 'bin/pvserver'],
+    'dirs': ['lib64/python%(pyshortver)s/site-packages', 'lib64/%(namelower)s-%(version_major_minor)s/plugins'],
+}
+
+modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
+
+modextravars = {
+    'LD_LIBRARY_PATH': '/apps/common/UES/easybuild/sources/p/%(name)s/nvindex_default/linux-x86-64/lib:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)',
+    'NVINDEX_PVPLUGIN_HOME': '/apps/common/UES/easybuild/sources/p/%(name)s',
+}
+
+moduleclass = 'vis'

@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'graphviz'
+version = '2.46.1'
+
+homepage = 'http://www.graphviz.org/Download_source.php'
+description = """Graphviz is open source graph visualization software."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.02'}
+toolchainopts = {'pic': True}
+
+# download from https://gitlab.com/graphviz/graphviz/-/package_files/7097035/download is slow
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
+
+sanity_check_paths = {
+    'files': ['bin/dot'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

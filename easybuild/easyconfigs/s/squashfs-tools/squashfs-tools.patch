@@ -1,0 +1,30 @@
+diff -Naur squashfs-tools-4.4-git.1.ori/squashfs-tools/Makefile squashfs-tools-4.4-git.1/squashfs-tools/Makefile
+--- squashfs-tools-4.4-git.1.ori/squashfs-tools/Makefile	2020-10-30 12:13:56.000000000 +0100
++++ squashfs-tools-4.4-git.1/squashfs-tools/Makefile	2021-02-15 13:33:47.000000000 +0100
+@@ -30,7 +30,7 @@
+ # To build install the library and uncomment
+ # the XZ_SUPPORT line below.
+ #
+-#XZ_SUPPORT = 1
++XZ_SUPPORT = 1
+ 
+ 
+ ############ Building LZO support ##############
+@@ -140,7 +140,7 @@
+ # work) - download and unpack it, uncomment and set LZMA_DIR to unpacked source,
+ # and uncomment the LZMA_SUPPORT line below.
+ #
+-#LZMA_XZ_SUPPORT = 1
++LZMA_XZ_SUPPORT = 1
+ #LZMA_SUPPORT = 1
+ #LZMA_DIR = ../../../../LZMA/lzma465
+ 
+@@ -148,7 +148,7 @@
+ #        End of BUILD options section         #
+ ###############################################
+ 
+-INCLUDEDIR = -I.
++INCLUDEDIR = -I. -I$(EBROOTXZ)/include
+ INSTALL_DIR = /usr/local/bin
+ 
+ MKSQUASHFS_OBJS = mksquashfs.o read_fs.o action.o swap.o pseudo.o compressor.o \

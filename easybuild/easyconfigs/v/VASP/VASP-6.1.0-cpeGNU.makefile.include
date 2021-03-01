@@ -18,7 +18,7 @@ FCL        = ftn
 
 FREE       = -ffree-form -ffree-line-length-none
 
-FFLAGS     = -w -fallow-argument-mismatch -march=native
+FFLAGS     = -w -fallow-argument-mismatch -march=znver2
 OFLAG      = -O2
 OFLAG_IN   = $(OFLAG)
 DEBUG      = -O0
