@@ -35,7 +35,7 @@ dependencies = [
 
 configopts = ' --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR '
 configopts += ' --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC '
-configopts += ' --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX --disable-cdi-app '
+configopts += ' --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX '
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s'],
