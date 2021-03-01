@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'ecCodes'
-version = '2.19.1'
+version = '2.20.0'
 
 homepage = 'https://confluence.ecmwf.int/display/ECC/ecCodes+Home'
 description = """ecCodes is a package developed by ECMWF which provides an
