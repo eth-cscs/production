@@ -1,0 +1,30 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libffi'
+version = '3.3'
+
+homepage = 'http://sourceware.org/libffi'
+description = """The libffi library provides a portable, high level programming interface to various calling conventions.
+This allows a programmer to call any function specified by a call interface description at run-time.
+
+FFI stands for Foreign Function Interface. A foreign function interface is the popular name for the interface that
+allows code written in one language to call code written in another language."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.02'}
+
+source_urls = [
+    'https://github.com/%(name)s/%(name)s/releases/download/v%(version)s/',
+    'ftp://sourceware.org/pub/%(name)s/',
+]
+sources = [SOURCELOWER_TAR_GZ]
+
+configopts = ' --disable-dependency-tracking '
+prebuildopts = "find -name Makefile -exec sed -i '/^gcc/d' '{}' \; && "
+
+sanity_check_paths = {
+    'files': ['lib64/%(name)s.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

@@ -1,0 +1,39 @@
+# contributed by Luca Marsella and Jean-Guillaume Piccinali (CSCS)
+easyblock = 'CmdCp'
+
+name = 'Charm++'
+version = '6.10.2'
+
+homepage = 'http://charm.cs.illinois.edu/research/charm/'
+description = """
+    Charm++ is a machine independent parallel programming system. Programs
+    written using this system will run unchanged on MIMD machines with or
+    without a shared memory.
+"""
+
+toolchain = {'name': 'cpeIntel', 'version': '21.02'}
+toolchainopts = {'dynamic': False}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib/']
+sources = ['charm-%(version)s.tar.gz']
+
+builddependencies = [
+    ('cray-pmi', EXTERNAL_MODULE),
+    ('cray-pmi-lib', EXTERNAL_MODULE),
+]
+
+cmds_map = [
+    ('charm-%(version)s.tar.gz', './build "ChaNGa ckloop" mpi-linux-amd64 pthreads icc --incdir=${CRAY_MPICH_DIR}/include --libdir=${CRAY_MPICH_DIR}/lib --enable-lbuserdata --with-production -j12'),
+]
+files_to_copy = ['mpi-linux-amd64-pthreads-icc']
+
+sanity_check_paths = {
+    'files': ['mpi-linux-amd64-pthreads-icc/bin/charmc'],
+    'dirs': ['mpi-linux-amd64-pthreads-icc/bin', 'mpi-linux-amd64-pthreads-icc/lib', 'mpi-linux-amd64-pthreads-icc/include'],
+}
+
+modextrapaths = {'PATH': 'mpi-linux-amd64-pthreads-icc/bin'}
+
+modextravars = {'EBTYPECHARMPLUSPLUS': 'mpi-linux-amd64-pthreads-icc'}
+
+moduleclass = 'lib'

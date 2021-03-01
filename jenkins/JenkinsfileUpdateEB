@@ -66,8 +66,8 @@ stage('Update Stage') {
 
                     /* define command to load EasyBuild */
                     def load_easybuild = architecture == "" ?
-                        "module load cdt/${params.cdt_version} EasyBuild-custom/cscs" :
-                        "module load cdt/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
+                        "module load cdt-cuda/${params.cdt_version} EasyBuild-custom/cscs" :
+                        "module load cdt-cuda/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
 
                     /* define command to switch EasyBuild version*/
                     def switch_easybuild = params.eb_version == "" ?
@@ -348,8 +348,8 @@ stage('GitHub Stage') {
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
-                                # check if recipe matches Cray cdt
-                                if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]
+                                # check if recipe matches Cray cdt version
+                                if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]; then
                                     name=\$(basename \$recipe)
                                     source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
                                     if [ -n "\$source" ]; then 

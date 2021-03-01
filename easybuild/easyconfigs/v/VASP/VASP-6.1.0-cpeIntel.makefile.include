@@ -1,0 +1,61 @@
+# Precompiler options
+CPP_OPTIONS= -DHOST=\"LinuxIFC\"\
+             -DMPI -DMPI_BLOCK=8000 -Duse_collective \
+             -DscaLAPACK \
+             -DCACHE_SIZE=4000 \
+             -Davoidalloc \
+             -Dvasp6 \
+             -Duse_bse_te \
+             -Dtbdyn \
+             -Dfock_dblbuf \
+             -Duse_shmem \
+             -DVASP2WANNIER90v2
+
+CPP        = fpp -f_com=no -free -w0  $*$(FUFFIX) $*$(SUFFIX) $(CPP_OPTIONS)
+
+FC         = ftn
+FCL        = ftn -mkl=sequential
+
+FREE       = -free -names lowercase
+
+# -xHOST fails on AMD EPYC 7742: use -march=core-avx2 instead
+FFLAGS     = -assume byterecl -w -march=core-avx2
+OFLAG      = -O2
+OFLAG_IN   = $(OFLAG)
+DEBUG      = -O0
+
+MKL_PATH   = $(MKLROOT)/lib/intel64
+BLAS       = $(MKL_PATH)/libmkl_blas95_lp64.a
+LAPACK     = $(MKL_PATH)/libmkl_lapack95_lp64.a
+BLACS      = -lmkl_blacs_intelmpi_lp64
+SCALAPACK  = -L$(MKL_PATH) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
+
+OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
+
+INCS       = -I$(MKLROOT)/include/fftw
+
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS)
+
+OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
+OBJECTS_O2 += fft3dlib.o
+
+# For what used to be vasp.5.lib
+CPP_LIB    = $(CPP)
+FC_LIB     = $(FC)
+CC_LIB     = cc
+CFLAGS_LIB = -O
+FFLAGS_LIB = -O1
+FREE_LIB   = $(FREE)
+
+OBJECTS_LIB= linpack_double.o getshmem.o
+
+# For the parser library
+CXX_PARS   = CC
+LLIBS      += -lstdc++
+
+# Normally no need to change this
+SRCDIR     = ../../src
+BINDIR     = ../../bin
+
+MPI_INC    = $(MPICH_DIR)/include

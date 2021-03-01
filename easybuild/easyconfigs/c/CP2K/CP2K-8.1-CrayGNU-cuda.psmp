@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+# modules: Bison CrayGNU cray-fftw cudatoolkit ELPA flex Libint libxc
+GPUVER   = P100
+NVCC     = nvcc
+CC       = cc
+FC       = ftn
+LD       = ftn
+AR       = ar -r
+# LIBXSMM (-D__LIBXSMM) is slower than LIBSMM (-D__HAS_smm_dnn)
+DFLAGS   = -D__ACC -D__DBCSR_ACC -D__FFTW3 -D__GFORTRAN -D__ELPA=202011 -D__LIBINT -D__LIBXC -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK -D__HAS_smm_dnn
+CFLAGS   = $(DFLAGS) -I$(CRAY_CUDATOOLKIT_DIR)/include -g -O3 -mavx -fopenmp 
+CXXFLAGS = $(CFLAGS)
+FCFLAGS  = $(DFLAGS) -g -O3 -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
+FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
+FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include 
+FCFLAGS  += -I$(EBROOTLIBXC)/include 
+LDFLAGS  = $(FCFLAGS)
+NVFLAGS  = $(DFLAGS) -O3 -arch sm_60
+LIBS   	 = -lfftw3 -lfftw3_threads -lcudart -lcublas -lcufft -lrt -lnvrtc
+LIBS     += -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2 -lstdc++
+LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS     += /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a
+
+# Required due to memory leak that occurs if high optimisations are used
+mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
+			 $(FC) -c $(subst O2,O0,$(FCFLAGS)) $<

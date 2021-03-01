@@ -1,0 +1,42 @@
+diff -Nru tensorflow-2.4.0.orig/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl tensorflow-2.4.0/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl
+--- tensorflow-2.4.0.orig/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2020-12-22 10:19:57.000000000 +0100
++++ tensorflow-2.4.0/third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc.tpl	2020-12-22 10:33:39.000000000 +0100
+@@ -46,11 +46,14 @@
+ import pipes
+ 
+ # Template values set by cuda_autoconf.
+-CPU_COMPILER = ('%{cpu_compiler}')
+-GCC_HOST_COMPILER_PATH = ('%{gcc_host_compiler_path}')
++CPU_COMPILER = ('$GCC_PATH/snos/bin/gcc')
++GCC_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
+ 
+-NVCC_PATH = '%{nvcc_path}'
+-PREFIX_DIR = os.path.dirname(GCC_HOST_COMPILER_PATH)
++CURRENT_DIR = os.path.dirname(sys.argv[0])
++NVCC_PATH = '$CRAY_CUDATOOLKIT_DIR/bin/nvcc'
++LLVM_HOST_COMPILER_PATH = ('$GCC_PATH/snos/bin/gcc')
++AS_PATH = ('/usr/bin/as')
++PREFIX_DIR = os.path.dirname(AS_PATH)
+ NVCC_VERSION = '%{cuda_version}'
+ 
+ def Log(s):
+@@ -221,13 +224,13 @@
+   out = ' -o ' + out_file[0]
+ 
+   nvccopts = '-D_FORCE_INLINES '
+-  for capability in GetOptionValue(argv, "--cuda-gpu-arch"):
+-    capability = capability[len('sm_'):]
+-    nvccopts += r'-gencode=arch=compute_%s,\"code=sm_%s\" ' % (capability,
++  # for capability in GetOptionValue(argv, "--cuda-gpu-arch"):
++  capability = '60'   #capability[len('sm_'):]
++  nvccopts += r'-gencode=arch=compute_%s,\"code=sm_%s\" ' % (capability,
+                                                                capability)
+-  for capability in GetOptionValue(argv, '--cuda-include-ptx'):
+-    capability = capability[len('sm_'):]
+-    nvccopts += r'-gencode=arch=compute_%s,\"code=compute_%s\" ' % (capability,
++  # for capability in GetOptionValue(argv, '--cuda-include-ptx'):
++  capability = '60'  #capability[len('sm_'):]
++  nvccopts += r'-gencode=arch=compute_%s,\"code=compute_%s\" ' % (capability,
+                                                                     capability)
+   nvccopts += nvcc_compiler_options
+   nvccopts += undefines

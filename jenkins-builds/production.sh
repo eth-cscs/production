@@ -184,8 +184,8 @@ fi
 # print EasyBuild configuration, module list, production file(s), list of builds
 echo -e "\n EasyBuild version and configuration ('eb --version' and 'eb --show-config'): "
 echo -e " $(eb --version) \n $(eb --show-config) \n"
-echo -e " Modules loaded ('module list -t'): "
-echo -e " $(module list -t)"
+echo -e " Modules loaded ('module --terse list'): "
+echo -e " $(module --terse list)"
 echo -e " Production file(s): ${eb_lists[@]} \n"
 echo -e " List of builds (including options):"
 for ((i=0; i<${#eb_files[@]}; i++)); do

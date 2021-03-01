@@ -83,11 +83,11 @@ void notifySlackFinish() {
 }
 
 /**
-* Create a Jira task for an EasyBuild recipe that failed to build.
+* Create a Jira task for an EasyBuild recipe that failed to build:
 *
-* @param projkey Jira project key (only project members can create issues).
-* @param recipe EasyBuild recipe that failed to build.
-* @param machine Computing system where the recipe failed to build.
+* @param projkey Jira project key (only project members can create issues)
+* @param recipe EasyBuild recipe that failed to build
+* @param machine Computing system where the recipe failed to build (machineLabel)
 */
 void failedJiraTask(String projkey, String recipe, String machine) {
 
@@ -98,4 +98,44 @@ void failedJiraTask(String projkey, String recipe, String machine) {
                           description: content,
                           issuetype: [name: 'Task']]]
    def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
+}
+
+/**
+* Create a Jira Service Desk ticket with custom message:
+* - issuetype: 'Service Request' or 'Incident'
+* - customfield_11102 (Service): 'Atlassian', 'Compute at Piz Daint', 'JFrog', 'JupyterHub' or 'KeyCloak'
+* - customfield_11103 (System): 'Alps', 'Dom', 'Piz Daint', 'Tsa' or other services of the JIRA_SITE
+* - assignee: list with information of the person in charge, like [name:'lucamar']
+* - customfield_10401 (Watchers): list with information of watchers, like [[name:'bignamic'], [name:'manitart']]
+* 
+* @param subject Subject of the Jira Service Desk ticket appended to [${machine}]
+* @param machine Computing system where the build took place (machineLabel)
+* @param message Content of the Jira Service Desk ticket prepended to Jenkins job details
+* @param priority Priority of the ticket: Blocker, High, Medium, Low
+* @param queue Queue where the Jira Service Desk ticket will be dispatched
+*/
+void createJiraSD(String subject, String machine, String message, String priority, String queue){
+
+   def system
+   def systems = [
+       [name:'Alps', label:'eiger'],
+       [name:'Dom', label:'dom'],
+       [name:'Piz Daint', label:'daint'], 
+       [name:'Tsa', label:'tsa']
+   ]
+   systems.each { item ->
+       if(machine.contains(item.label)) system = item.name
+   }
+
+   def title = "[${machine}] ${subject}"
+   def content = "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def ticket = [fields: [ project: [key:'SD'],
+                          summary: title,
+                          description: content,
+                          issuetype: [name:'Incident'],
+                          priority: [name:priority],
+                          customfield_10802: [value:queue],
+                          customfield_11102: 'Compute at Piz Daint',
+                          customfield_11103: system]]
+   def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
 }
