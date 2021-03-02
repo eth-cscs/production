@@ -1,6 +1,8 @@
  Amber-20-3-0-CrayIntel-20.08.eb                        --set-default-module
  Boost-1.70.0-CrayGNU-20.08-python3.eb                  --set-default-module
  Boost-1.70.0-CrayGNU-20.08.eb
+ Boost-1.75.0-CrayGNU-20.08.eb
+ Boost-1.75.0-CrayIntel-20.08.eb
  Buildah-1.14.9.eb                                      --set-default-module
  CDO-1.9.5-CrayGNU-20.08.eb                             --set-default-module
  CDO-1.9.5-CrayIntel-20.08.eb
@@ -26,7 +28,7 @@
  HPX-1.5.0-CrayGNU-20.08-nonetworking.eb
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-parallel.eb          --set-default-module
- h5py-2.10.0-CrayGNU-20.08-python3-serial.eb            --set-default-module
+ h5py-2.10.0-CrayGNU-20.08-python3-serial.eb
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.08.eb                          --set-default-module

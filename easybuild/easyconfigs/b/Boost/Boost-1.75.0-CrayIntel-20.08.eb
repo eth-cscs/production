@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.75.0'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+sources = ['%%(namelower)s_%s.tar.bz2' % '_'.join(version.split('.'))]
+source_urls = ['https://dl.bintray.com/boostorg/release/%(version)s/source/']
+
+dependencies = [
+    ('bzip2', '1.0.6'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = '--without-libraries=python'
+boost_mpi = True
+
+modextravars = {
+    'BOOST_ROOT' : "%(installdir)s",
+}
+
+moduleclass = 'devel'
