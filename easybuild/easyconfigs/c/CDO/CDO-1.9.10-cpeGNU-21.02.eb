@@ -1,4 +1,4 @@
-# Contributed by Guilherme Peretti-Pezzi, Jean-Guillaume Piccinali, Samuel Omlin and Luca Marsella (CSCS)
+# Contributed by Guilherme Peretti Pezzi, Jean-Guillaume Piccinali, Samuel Omlin and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
