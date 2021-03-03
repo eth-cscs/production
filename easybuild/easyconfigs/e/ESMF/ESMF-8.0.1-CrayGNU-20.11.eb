@@ -14,7 +14,7 @@ toolchainopts = {'usempi': True}
 source_urls = ['https://github.com/esmf-org/esmf/archive/']
 sources = ['%s_%s.tar.gz' % (name.upper(), '_'.join(version.split('.')))]
 
-mpicomm = 'user'
+mpicomm = 'mpiuni'
 
 dependencies = [
     ('cray-netcdf', EXTERNAL_MODULE),
