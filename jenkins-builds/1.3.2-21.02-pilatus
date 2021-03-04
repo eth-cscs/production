@@ -5,6 +5,9 @@
  GSL-2.6-cpeAMD-21.02.eb
  GSL-2.6-cpeCray-21.02.eb              
  ParaView-5.9.0-cpeCray-21.02-OSMesa-python3.eb
+ Boost-1.75.0-cpeGNU-21.02.eb
+ Boost-1.75.0-cpeGNU-21.02-python3.eb
+ CP2K-8.1-cpeGNU-21.02.eb
  GREASY-19.03-cscs-cpeGNU-21.02.eb
  GROMACS-2020.5-cpeGNU-21.02.eb
  GSL-2.6-cpeGNU-21.02.eb
