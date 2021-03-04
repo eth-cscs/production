@@ -2,7 +2,6 @@
  Boost-1.74.0-cpeGNU-20.10-python3.eb --set-default-module
  Buildah-1.19.0.eb                    --set-default-module
  CDI-1.9.9-cpeGNU-20.10.eb            --set-default-module
- CDO-1.9.9-cpeGNU-20.10.eb            --set-default-module
  CMake-3.19.1.eb                      --set-default-module
  CP2K-7.1-cpeGNU-20.10.eb             --set-default-module
  CP2K-8.1-cpeGNU-20.10.eb             
