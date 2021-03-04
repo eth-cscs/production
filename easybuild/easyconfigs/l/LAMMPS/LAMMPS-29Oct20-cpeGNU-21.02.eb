@@ -10,22 +10,27 @@ description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator
 toolchain = {'name': 'cpeGNU', 'version': '21.02'}
 toolchainopts = {'verbose': False, 'usempi': True, 'openmp': True}
 
-local_filename = 'stable_%(version)s20'
+local_filename = 'stable_%s20' % version
 source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive']
 sources = ['%s.tar.gz' % local_filename]
 
 builddependencies = [
     ('CMake', '3.19.6', '', True),
-    ('cray-fftw', EXTERNAL_MODULE),
     ('cray-python', EXTERNAL_MODULE),
-    ('FFmpeg', '4.3.2')
+    ('FFmpeg', '4.3.2'),
+    ('zstd', '1.4.9')
 ]
 
-local_cmakedir = '%(builddir)s/%(namelower)s-%(local_filename)s/cmake'
-configopts = ' {0} -C {0}/presets/gcc.cmake -C {0}/presets/nolib.cmake '.format(local_cmakedir)
-configopts += ' -DBUILD_MPI=Yes -DBUILD_OMP=Yes -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF '
-
 separate_build_dir = True
+# folder with CMakeLists.txt relative to the separate build dir
+local_cmakedir = '../lammps-{0}/cmake'.format(local_filename)
+# folder with CMakeLists.txt relative to the unpacked tarball
+srcdir = 'cmake'
+
+# see https://lammps.sandia.gov/doc/Build_package.html#cmake-presets
+configopts = ' -C {0}/presets/nolib.cmake '.format(local_cmakedir)
+configopts += ' -DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DLAMMPS_MACHINE=mpi -DMPICXX=CC ' 
+configopts += ' -DPKG_COMPRESS=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF '
 
 sanity_check_paths = {
     'files': ['bin/lmp_mpi'],
