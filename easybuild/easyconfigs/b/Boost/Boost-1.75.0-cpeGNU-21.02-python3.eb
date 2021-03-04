@@ -31,4 +31,6 @@ sanity_check_paths = {
     'dirs': ['include/%(namelower)s'],
 }
 
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
 moduleclass = 'devel'

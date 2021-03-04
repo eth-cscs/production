@@ -23,10 +23,6 @@ configopts = '--without-libraries=python'
 # also build boost_mpi
 boost_mpi = True
 
-# for python3 the corresponding lib is libboost_python%(pymajver)s%(pyminver)s.so
-sanity_check_paths = {
-    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so', 'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
-    'dirs': ['include/%(namelower)s'],
-}
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
 
 moduleclass = 'devel'
