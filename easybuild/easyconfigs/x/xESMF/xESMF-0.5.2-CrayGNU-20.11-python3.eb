@@ -18,9 +18,9 @@ checksums = ['af3c96a43467608aade69ff1f679b4d3e7bc56d6eb2b3532552290266a758cd2']
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('Shapely', '1.7.1', '-python%(pymajver)s'),
-    ('ESMPy', '8.0.1', '-python%(pymajver)s'),
-    ('xarray', '0.17.0', '-python%(pymajver)s')
+    ('Shapely', '1.7.1', versionsuffix),
+    ('ESMPy', '8.0.1', versionsuffix),
+    ('xarray', '0.17.0', versionsuffix)
 ]
 
 exts_defaultclass = 'PythonPackage'
@@ -42,4 +42,4 @@ sanity_check_paths = {
     'dirs': [],
 }
 
-moduleclass = 'data'
+moduleclass = 'geo'
