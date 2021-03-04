@@ -16,9 +16,12 @@ sources = ['%s.tar.gz' % local_filename]
 
 builddependencies = [
     ('CMake', '3.19.6', '', True),
+]
+
+dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('FFmpeg', '4.3.2'),
-    ('zstd', '1.4.9')
+    ('zstd', '1.4.9')   
 ]
 
 separate_build_dir = True
@@ -36,5 +39,8 @@ sanity_check_paths = {
     'files': ['bin/lmp_mpi'],
     'dirs': [],
 }
+
+# fix missing cray-python lib in LD_LIBRARY_PATH
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
 
 moduleclass = 'chem'
