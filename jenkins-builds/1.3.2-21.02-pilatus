@@ -1,5 +1,6 @@
  Buildah-1.19.0.eb                    --set-default-module
  CMake-3.19.6.eb                      --set-default-module
+ hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
  reframe-3.4.2.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.02.eb
@@ -19,4 +20,3 @@
  GSL-2.6-cpeIntel-21.02.eb
  NAMD-2.14-cpeIntel-21.02.eb
  VASP-6.2.0-cpeIntel-21.02.eb
- affinity-7d4d426.eb --set-default-module
