@@ -11,6 +11,7 @@
  GREASY-19.03-cscs-cpeGNU-21.02.eb
  GROMACS-2020.5-cpeGNU-21.02.eb
  GSL-2.6-cpeGNU-21.02.eb
+ hwloc-2.4.1.eb                       --set-default-module
  jupyterlab-2.2.8-cpeGNU-21.02.eb
  LAMMPS-29Oct20-cpeGNU-21.02.eb
  matplotlib-3.3.4-cpeGNU-21.02.eb
@@ -19,4 +20,3 @@
  GSL-2.6-cpeIntel-21.02.eb
  NAMD-2.14-cpeIntel-21.02.eb
  VASP-6.2.0-cpeIntel-21.02.eb
- affinity-7d4d426.eb --set-default-module

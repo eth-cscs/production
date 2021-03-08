@@ -29,6 +29,7 @@
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.08-python3-serial.eb
+ hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.08.eb                          --set-default-module
@@ -64,7 +65,6 @@
  Spark-2.3.1-CrayGNU-20.08-Hadoop-2.7.eb                --set-default-module
  VASP-6.1.0-CrayIntel-20.08.eb                          --set-default-module
  Visit-3.1.2-CrayGNU-20.08.eb                           --set-default-module
- affinity-7d4d426.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  Caliper-2.4.0-CrayGNU-20.08.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
