@@ -12,8 +12,6 @@ sources = [
                     'commit': '%(version)s'},
      'filename': SOURCE_TAR_GZ},
 ]
-#buildopts = "MPI=1 "
-#parallel = 1
 cmds_map = [('.*', "CC -g -O3 -fopenmp -std=c++11 -Iinclude -D_GNU_SOURCE -DNDEBUG -DUSE_MPI src/affinity.cpp -o affinity")]
 files_to_copy = [ (['affinity'], 'bin') ]
 sanity_check_paths = {
