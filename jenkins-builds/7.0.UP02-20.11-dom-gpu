@@ -53,7 +53,7 @@
  QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-20.11-cuda.eb   --set-default-module
  singularity-3.6.4-daint.eb
  Spark-2.4.7-CrayGNU-20.11-Hadoop-2.7.eb                --set-default-module
- VASP-6.1.0-CrayIntel-20.11-cuda.eb                     --set-default-module
+ VASP-6.2.0-CrayIntel-20.11-cuda.eb                     --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VMD-1.9.4.eb                                           --set-default-module
