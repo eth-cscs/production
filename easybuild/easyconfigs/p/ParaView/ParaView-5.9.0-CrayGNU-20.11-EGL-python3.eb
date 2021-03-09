@@ -3,7 +3,7 @@
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
-version = '5.9.0-RC4'
+version = '5.9.0'
 versionsuffix = '-EGL-python%(pymajver)s'
 
 homepage = "http://www.paraview.org"
