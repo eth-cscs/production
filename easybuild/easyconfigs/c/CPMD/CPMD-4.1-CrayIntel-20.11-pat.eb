@@ -3,8 +3,6 @@ easyblock = 'MakeCp'
 
 name = 'CPMD'
 version = '4.1'
-local_patversion = '20.10.0'
-versionsuffix = '-pat-%s' % local_patversion
 
 homepage = 'http://www.cpmd.org/'
 description = """
@@ -21,7 +19,7 @@ patches = [('CRAY-XE6-INTEL-MKL', '%(name)s/configure')]
 
 dependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
-    ('perftools-lite/%s' % local_patversion, EXTERNAL_MODULE)
+    ('perftools-lite', EXTERNAL_MODULE)
 ]
 
 prebuildopts = ['export LC_CTYPE=en_US.UTF-8 && ./configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&']
