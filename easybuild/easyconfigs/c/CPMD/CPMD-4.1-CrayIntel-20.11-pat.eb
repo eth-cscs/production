@@ -3,6 +3,7 @@ easyblock = 'MakeCp'
 
 name = 'CPMD'
 version = '4.1'
+versionsuffix = '-pat'
 
 homepage = 'http://www.cpmd.org/'
 description = """
