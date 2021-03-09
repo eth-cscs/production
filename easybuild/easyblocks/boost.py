@@ -157,7 +157,7 @@ class EB_Boost(EasyBlock):
 
         # If version > 1.70.0 only b2 is copied locally by bootstrap.sh
         if LooseVersion(self.version) > LooseVersion("1.70.0"):
-           os.system("ln -s b2 bjam")
+            os.system("ln -s b2 bjam")
 
     def build_boost_variant(self, bjamoptions, paracmd):
         """Build Boost library with specified options for bjam."""
