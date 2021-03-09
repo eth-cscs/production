@@ -18,7 +18,7 @@ source_urls = [
 sources = ['%(name)s-v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.18.4', '', True),
+    ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
     ('h5py', '2.10.0', '-python3-serial'),
