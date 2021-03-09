@@ -2,9 +2,9 @@
  CMake-3.19.6.eb                      --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
- reframe-3.4.2.eb                     --set-default-module
+ reframe-3.5.0.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.02.eb
- GSL-2.6-cpeCray-21.02.eb              
+ GSL-2.6-cpeCray-21.02.eb
  ParaView-5.9.0-cpeCray-21.02-OSMesa-python3.eb
  Boost-1.75.0-cpeGNU-21.02.eb
  Boost-1.75.0-cpeGNU-21.02-python3.eb --set-default-module
