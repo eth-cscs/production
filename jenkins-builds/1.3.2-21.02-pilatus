@@ -21,3 +21,4 @@
  GSL-2.6-cpeIntel-21.02.eb
  NAMD-2.14-cpeIntel-21.02.eb
  VASP-6.2.0-cpeIntel-21.02.eb
+ Vc-1.4.1-cpeGNU-21.02.eb           --set-default-module
