@@ -51,6 +51,7 @@
  singularity-3.6.4-daint.eb
  Spark-2.4.7-CrayGNU-20.11-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-20.11.eb                          --set-default-module
+ Vc-1.4.1-CrayGNU-20.11.eb                              --set-default-module
  Visit-3.1.2-CrayGNU-20.11.eb                           --set-default-module
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
  Caliper-2.4.0-CrayGNU-20.11.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
