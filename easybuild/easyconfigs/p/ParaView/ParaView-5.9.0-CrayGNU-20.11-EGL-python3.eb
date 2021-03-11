@@ -63,7 +63,7 @@ configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" 
 #configopts += '-DHDF5_hdf5_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5.so -DHDF5_hdf5_hl_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5_hl.so '
 # Using CSCS NVIDIA IndeX lib
 configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
-
+configopts += '-DPARAVIEW_PLUGIN_AUTOLOAD_pvNVIDIAIndeX:BOOL=ON '
 modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)', 
                  'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView',
                }
