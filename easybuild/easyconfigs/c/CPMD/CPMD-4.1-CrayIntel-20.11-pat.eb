@@ -26,7 +26,7 @@ builddependencies = [
     ('perftools-lite', EXTERNAL_MODULE)
 ]
 
-prebuildopts = ['export LC_CTYPE=en_US.UTF-8 && ./configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&']
+prebuildopts = 'module swap perftools-base/20.08.0 && module add perftools-lite && export LC_CTYPE=en_US.UTF-8 && ./configure.sh PREFIX=%(installdir)s CRAY-XE6-INTEL-MKL &&'
 
 skipsteps = ['configure']
 files_to_copy = [(['bin/%(namelower)s*.x'], 'bin')]
