@@ -66,7 +66,7 @@
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  ddt-20.0-Suse-15.0.eb                                                       --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- ddt-20.2-Suse-15.0.eb                                  --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ ddt-21.0-linux-x86_64.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  Extrae-3.8.1-CrayGNU-20.11.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  inspector-2021.1.1.42.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools

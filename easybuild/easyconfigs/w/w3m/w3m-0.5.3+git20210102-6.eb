@@ -1,0 +1,18 @@
+# @author: jg (cscs)
+easyblock = 'ConfigureMake'
+
+name = 'w3m'
+version = '0.5.3+git20210102-6'
+homepage = 'https://github.com/tats/w3m'
+description = "Debian's w3m: WWW browsable pager"
+toolchain = SYSTEM
+source_urls = ['https://github.com/tats/w3m/archive/debian']
+sources = ['%(version)s.tar.gz']
+dependencies = [('gc', '8.0.4')]
+configopts = ' --with-gc=$EBROOTGC LDFLAGS=/lib64/libtinfo.so.6.1 '
+sanity_check_paths = {
+    'files': ['bin/w3m'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
