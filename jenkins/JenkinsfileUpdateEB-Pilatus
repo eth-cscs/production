@@ -75,10 +75,10 @@ stage('Update Stage') {
                         "module switch EasyBuild EasyBuild/${params.eb_version}"
 
                     /* define list of unuse paths */
-                    def unuse_paths = architecture == '' ?
-                        machine.unusePath.replace(':', ' ') :
-                        machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
-                        println("List of unuse paths: $unuse_paths")
+                    //def unuse_paths = architecture == '' ?
+                    //    machine.unusePath.replace(':', ' ') :
+                    //    machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
+                    //    println("List of unuse paths: $unuse_paths")
 
                     /* define eb_flags and command to build software */
                     def eb_flags = "--ignore-locks -r"
@@ -88,9 +88,9 @@ stage('Update Stage') {
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
 
-                        #for path in $unuse_paths; do
-                        #    module unuse \$path
-                        #done
+                        ##for path in $unuse_paths; do
+                        ##    module unuse \$path
+                        ##done
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
 
                         export EASYBUILD_PREFIX="${params.eb_prefix}"
