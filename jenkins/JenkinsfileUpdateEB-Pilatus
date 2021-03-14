@@ -88,11 +88,7 @@ stage('Update Stage') {
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
 
-                        ##for path in $unuse_paths; do
-                        ##    module unuse \$path
-                        ##done
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
-
                         export EASYBUILD_PREFIX="${params.eb_prefix}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
