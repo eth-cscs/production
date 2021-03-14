@@ -10,7 +10,6 @@ description = """Toolchain using Cray compiler wrapper with cpe-aocc module (CPE
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe/%(version)s', EXTERNAL_MODULE),
    ('cpe-aocc', EXTERNAL_MODULE)
 ]
 
@@ -44,6 +43,9 @@ if not ( isloaded("perftools-base") ) then
 end
 if not ( isloaded("xpmem") ) then
     load("xpmem")
+end
+if not ( isloaded("cpe/%(version)s") ) then
+    load("cpe/%(version)s")
 end
 prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
 ''' 

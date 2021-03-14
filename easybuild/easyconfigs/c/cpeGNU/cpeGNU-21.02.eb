@@ -2,7 +2,7 @@
 easyblock = 'cpeToolchain'
 
 name = 'cpeGNU'
-version = "21.02"
+version = "21.03"
 
 homepage = 'https://pubs.cray.com'
 description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE release: %s).\n""" % version
@@ -10,7 +10,6 @@ description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe/%(version)s', EXTERNAL_MODULE),
    ('cpe-gnu', EXTERNAL_MODULE)
 ]
 
@@ -45,7 +44,11 @@ end
 if not ( isloaded("xpmem") ) then
     load("xpmem")
 end
+if not ( isloaded("cpe/%(version)s") ) then
+    load("cpe/%(version)s")
+end
 prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
 ''' 
 
 moduleclass = 'toolchain'
+#execute {cmd="ml restore PrgEnv-gnu",modeA={"load"}}
