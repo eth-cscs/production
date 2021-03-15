@@ -92,8 +92,6 @@ stage('Update Stage') {
                         export EASYBUILD_PREFIX="${params.eb_prefix}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-                        # DEBUG EASYBUILD_PREFIX issue - MKr
-                        echo \$EASYBUILD_PREFIX
 
                         # create symbolic link to EasyBuild-custom/cscs
                         if [ ! -e "\$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
@@ -107,6 +105,11 @@ stage('Update Stage') {
                         # correct buildpath and metadata
                         export EASYBUILD_BUILDPATH=\$EASYBUILD_BUILDPATH/$machineLabel
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cpe_target}.cfg"
+                        #FIXME: Work around for PILATUS not recognizing EASYBUILD_PREFIX upon loading the EB module
+                        if [ \$CLUSTER_NAME == "pilatus" ]; then
+                          export EASYBUILD_PREFIX="${params.eb_prefix}"                   
+                          export EASYBUILD_INSTALLPATH=${params.eb_prefix}"
+                        fi
 
                         # print EasyBuild version and configuration
                         eb --version
