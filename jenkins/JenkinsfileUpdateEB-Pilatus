@@ -108,7 +108,7 @@ stage('Update Stage') {
                         #FIXME: Work around for PILATUS not recognizing EASYBUILD_PREFIX upon loading the EB module
                         if [ \$CLUSTER_NAME == "pilatus" ]; then
                           export EASYBUILD_PREFIX="${params.eb_prefix}"                   
-                          export EASYBUILD_INSTALLPATH=${params.eb_prefix}"
+                          export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
                         fi
 
                         # print EasyBuild version and configuration
