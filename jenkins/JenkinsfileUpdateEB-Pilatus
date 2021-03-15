@@ -93,7 +93,7 @@ stage('Update Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
                         # DEBUG EASYBUILD_PREFIX issue - MKr
-                        println(${params.eb_prefix})
+                        println("${params.eb_prefix}")
                         echo \$EASYBUILD_PREFIX
 
                         # create symbolic link to EasyBuild-custom/cscs
