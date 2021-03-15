@@ -369,9 +369,13 @@ stage('GitHub Stage') {
                             fi
                         done
 
-                        # load hub tool to submit a pull request
-                        module load daint-gpu
-                        module load hub
+                        # load hub tool to submit a pull request depending on the machine
+                        if [ \$CLUSTER_NAME == "pilatus" ]; then
+                          module load hub
+                        else
+                          module load daint-gpu
+                          module load hub
+                        fi
                         git add .
                         
                         # check if there is anything to commit
