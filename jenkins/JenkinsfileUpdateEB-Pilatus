@@ -105,12 +105,11 @@ stage('Update Stage') {
                         # correct buildpath and metadata
                         export EASYBUILD_BUILDPATH=\$EASYBUILD_BUILDPATH/$machineLabel
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cpe_target}.cfg"
+                        
                         #FIXME: Work around for PILATUS not recognizing EASYBUILD_PREFIX upon loading the EB module
-                        if [ \$CLUSTER_NAME == "pilatus" ]; then
-                          export EASYBUILD_PREFIX="${params.eb_prefix}"                   
-                          export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
-                        fi
-
+                        export EASYBUILD_PREFIX="${params.eb_prefix}"                   
+                        export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
+                        
                         # print EasyBuild version and configuration
                         eb --version
                         eb --show-config
@@ -373,13 +372,14 @@ stage('GitHub Stage') {
                         done
 
                         # load hub tool to submit a pull request depending on the machine
-                        if [ \$CLUSTER_NAME == "pilatus" ]; then
-                          module load hub
-                        else
-                          module load daint-gpu
-                          module load hub
-                        fi
+                        module load hub
                         git add .
+                        
+                        #FIXME: Remove cpeXXX-21.02 from PR
+                        git restore --staged c/cpeCray/cpeCray-21.02.eb
+                        git restore --staged c/cpeGNU/cpeGNU-21.02.eb
+                        git restore --staged c/cpeIntel/cpeIntel-21.02.eb
+                        git restore --staged c/cpeAMD/cpeAMD-21.02.eb
                         
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
