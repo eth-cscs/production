@@ -354,7 +354,7 @@ stage('GitHub Stage') {
                                 # check if recipe matches a cpe
                                 if [[ \$recipe =~ cpe[a-zA-Z]+-${params.cpe_target} ]]; then
                                     name=\$(basename \$recipe)
-                                    source=\$(find ${params.eb_prefix}/software -type f -name \$name | grep easybuild/\$name)
+                                    source=\$(find ${params.eb_prefix}/software/*/*/easybuild -type f -name \$name | grep easybuild/\$name)
                                     if [ -n "\$source" ]; then 
                                         echo -e " \t \$source -> \$recipe"
                                         cp \$source \$recipe
