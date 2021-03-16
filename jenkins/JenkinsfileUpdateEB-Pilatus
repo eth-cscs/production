@@ -375,12 +375,6 @@ stage('GitHub Stage') {
                         module load hub
                         git add .
                         
-                        #FIXME: Remove cpeXXX-21.02 from PR
-                        git restore --staged c/cpeCray/cpeCray-21.02.eb
-                        git restore --staged c/cpeGNU/cpeGNU-21.02.eb
-                        git restore --staged c/cpeIntel/cpeIntel-21.02.eb
-                        git restore --staged c/cpeAMD/cpeAMD-21.02.eb
-                        
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
@@ -389,7 +383,7 @@ stage('GitHub Stage') {
                             if [ -n "\$(hub pr list --head \${branch})" ]; then
                                 git push origin HEAD
                             else
-                                hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cpe/${params.cpe_target}"
+                                hub pull-request -b update-pilatus -p -m "WIP [${machineLabel}] Updated recipes for cpe/${params.cpe_target}"
                             fi
                         else 
                             echo -e "\nNothing to commit"
