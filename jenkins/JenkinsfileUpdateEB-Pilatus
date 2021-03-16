@@ -320,6 +320,9 @@ stage('GitHub Stage') {
                         # go to easyconfigs folder to match relative path of deps
                         cd production/easybuild/easyconfigs
 
+                        #FIXME: switching to branch "update-pilatus"
+                        git checkout update-pilatus
+
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.cpe_target}" 
                         echo -e "\nSwitch to branch ${machineLabel}/${params.cpe_target}:"
