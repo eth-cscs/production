@@ -88,12 +88,6 @@ stage('Update Stage') {
                     /* create the new toolchains and build the software stack */
                     sh("""#!/bin/bash -l
 
-                        if [ \$CLUSTER_NAME == "pilatus" ]; then
-                          tc_root="cpe"
-                        else
-                          tc_root="Cray"
-                        fi
- 
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
                         export EASYBUILD_PREFIX="${params.eb_prefix}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
@@ -159,17 +153,17 @@ stage('Update Stage') {
                             echo -e "\nThe list of recipes to build is empty. Exiting..."
                             exit \$(wc -w <<< \$build_list)
                         else   
-                            echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(\${tc_root}.+)-${params.cpe_current}/\\1-${params.cpe_target}/'
+                            echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(cpe.+)-${params.cpe_current}/\\1-${params.cpe_target}/'
                         fi
 
                         # build recipes
                         for recipe in \${build_list}; do
                             status=0
-                            new_recipe=\$(echo \$recipe | sed -E 's/(\${tc_root}[a-zA-Z]+)-${params.cpe_current}/\\1-${params.cpe_target}/')
+                            new_recipe=\$(echo \$recipe | sed -E 's/(cpe[a-zA-Z]+)-${params.cpe_current}/\\1-${params.cpe_target}/')
                             echo -e "\nCurrent target: \$new_recipe"
 
                             # relative deps path from full path dry run (--dry-run)
-                            deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(\${tc_root}[a-zA-Z]+)-${params.cpe_current}/\\1-${params.cpe_target}/')
+                            deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(cpe[a-zA-Z]+)-${params.cpe_current}/\\1-${params.cpe_target}/')
                             
                             # check status and print short dry run (-D)
                             if [ -n "\$deps" ]; then
