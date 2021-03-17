@@ -141,7 +141,7 @@ exts_list = [
     ('ruamel.yaml.clib', '0.2.2', {
         'modulename': "ruamel",
         }),
-    ('jupyterhub', '1.1.0'),
+    ('jupyterhub', '1.3.0'),
 
 # widgets: note the lab extensions below
     ('widgetsnbextension', '3.5.1'),
