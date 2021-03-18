@@ -61,9 +61,9 @@ configopts += '-DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" 
 #configopts += '-DVTK_MODULE_USE_EXTERNAL_VTK_hdf5:BOOL=ON -DHDF5_DIR=$HDF5_DIR '
 #configopts += '-DHDF5_C_INCLUDE_DIR="$HDF5_DIR"/include '
 #configopts += '-DHDF5_hdf5_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5.so -DHDF5_hdf5_hl_LIBRARY_RELEASE="$HDF5_DIR"/lib/libhdf5_hl.so '
-# Using CSCS NVIDIA IndeX lib
+# Using CSCS NVIDIA IndeX lib. Auto-load cannot be turned on. See https://jira.cscs.ch/browse/SD-51595
 configopts += '-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX:BOOL=ON '
-configopts += '-DPARAVIEW_PLUGIN_AUTOLOAD_pvNVIDIAIndeX:BOOL=ON '
+configopts += '-DPARAVIEW_PLUGIN_AUTOLOAD_pvNVIDIAIndeX:BOOL=OFF '
 modextravars = { 'LD_LIBRARY_PATH':'/apps/common/UES/easybuild/sources/p/ParaView/nvindex_default/linux-x86-64/lib:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)', 
                  'NVINDEX_PVPLUGIN_HOME':'/apps/common/UES/easybuild/sources/p/ParaView',
                }
