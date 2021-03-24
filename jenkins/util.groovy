@@ -97,7 +97,7 @@ void failedJiraTask(String projkey, String recipe, String machine) {
                           summary: title,
                           description: content,
                           issuetype: [name: 'Task']]]
-   def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE'
+   def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE', failOnError: false
 }
 
 /**
@@ -137,5 +137,5 @@ void createJiraSD(String subject, String machine, String message, String priorit
                           customfield_10802: [value:queue],
                           customfield_11102: 'Compute at Piz Daint',
                           customfield_11103: system]]
-   def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE'
+   def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
