@@ -123,10 +123,16 @@ stage('Update Stage') {
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
 
-                        # create symbolic link to EasyBuild-custom/cscs
-                        if [ ! -e "${eb_modulespath}/EasyBuild-custom/cscs" ]; then
-                            mkdir -p "${eb_modulespath} ${eb_toolspath}"
-                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom ${eb_modulespath}
+                        # create module folders and symbolic link to EasyBuild-custom/cscs
+                        if [ ! -d "${eb_modulespath}" ]; then
+                            mkdir -p ${eb_modulespath} ${eb_toolspath}
+                            pushd ${eb_modulespath}
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                            popd
+                        elif [ ! -L "${eb_modulespath}/EasyBuild-custom" ]; then
+                            pushd ${eb_modulespath}
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                            popd
                         fi
 
                         # load Cray PE module and EasyBuild
