@@ -94,7 +94,7 @@ stage('Update Stage') {
                         installpath = "${params.eb_prefix}"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        load_pe = "module load cpe/${pe_target}" :
+                        load_pe = "module load cpe/${pe_target}"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
