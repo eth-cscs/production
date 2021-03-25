@@ -195,7 +195,7 @@ stage('Update Stage') {
                             echo -e "\nBuilding with the following command:"
                             # check if recipe matches target Cray PE  
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
-                                recipe_current=\${recipe_target/-[a-zA-Z]+-${params.pe_target}/-[a-zA-Z]+-${params.current}}
+                                recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
 
                                 # relative path of dependencies retrieved from full path dry run (--dry-run)
                                 deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
