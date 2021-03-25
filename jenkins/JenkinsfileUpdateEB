@@ -79,7 +79,7 @@ stage('Update Stage') {
                        - toolchains: toolchain names 
                     */
                     def eb_installpath
-                    def eb_modulepath
+                    def eb_modulespath
                     def load_pe
                     def toolchains
                     if(machineName == "daint" || machineName == "dom"){
@@ -103,7 +103,7 @@ stage('Update Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define general flags (eb_flags), update flags (tc_flags) and build command */
+                    /* define general flags (eb_flags), toolchain version flags (tc_flags) and build command */
                     def eb_flags = "--ignore-locks -r"
                     def tc_flags = "--try-toolchain-version=${params.pe_target}"
                     def build_command = "eb $eb_flags"
@@ -159,13 +159,13 @@ stage('Update Stage') {
 
                         # initialise counters and lists
                         submit_file="\${EASYBUILD_PREFIX}/submit.txt"
-                        echo "" > \${submit_file}
+                        > \${submit_file}
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
-                        echo "" > \${success_file}
+                        > \${success_file}
                         unset failed
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
-                        echo "" > \${failed_file}
+                        > \${failed_file}
 
                         # filename of current production list
                         list_current=\$(ls $WORKSPACE/jenkins-builds/*${params.pe_current}-${machineLabel} | tail -1)
@@ -197,15 +197,17 @@ stage('Update Stage') {
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
                                 recipe_current=\${recipe_target/-[a-zA-Z]+-${params.pe_target}/-[a-zA-Z]+-${params.current}}
 
-                                # relative dependencies path from full path dry run (--dry-run)
+                                # relative path of dependencies retrieved from full path dry run (--dry-run)
                                 deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
-                                # check status and print short dry run (-D)
+
+                                # check status and print short dry run (-D) on screen
                                 if [ -n "\$deps" ]; then
                                     $build_command $tc_flags -D \$recipe_current | grep "\\["
                                 else
                                     failed+=(\$recipe_target)
                                     echo "\$recipe_target" >> "\${failed_file}"
-                                    echo -e "\nDry run of \$recipe_target FAILED: skipping build"
+                                    echo -e "\nDry run of \$recipe_target FAILED: removing recipe from production list"
+                                    sed -i "/\$recipe_target/d" \$list_target
                                     continue
                                 fi
                                 echo "$build_command $tc_flags \$flags_target \$recipe_current"
@@ -225,7 +227,8 @@ stage('Update Stage') {
                             else
                                 failed+=(\$recipe_target)
                                 echo "\$recipe_target" >> "\${failed_file}"
-                                echo -e "\nBuild of \$recipe_target FAILED(\${#failed[@]})"
+                                echo -e "\nBuild of \$recipe_target FAILED(\${#failed[@]}): removing recipe from production list"
+                                sed -i "/\$recipe_target/d" \$list_target
                             fi
 
                         done < \$list_target
@@ -270,7 +273,7 @@ stage('Update Stage') {
 /*
  Jira Stage: create Jira issues for failed updates on the different "machinesLabel"
  Loop over all systems in "machineConfigurations":
-  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.pe_target}"
+  - retrieve path to file with failed recipes ("failed.txt")
   - loop over the lines of the file "failed.txt" (list of failed updates)
   - create a Jira Issue for each item in the list with the proper project key
 */
@@ -287,10 +290,22 @@ stage('Jira Stage') {
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
+
+                    /* 
+                       define machine dependent environment variable:
+                       - eb_installpath: EasyBuild installpath
+                    */
+                    def eb_installpath
+                    if(machineName == "daint" || machineName == "dom"){
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
+                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                        installpath = "${params.eb_prefix}"
+                    }
+
                     /* retrieve list of failed updates */
                     def failed_updates = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
-                                        failed_file="${params.eb_prefix}/$machineLabel/${params.pe_target}/failed.txt"
+                                        failed_file="${eb_installpath}/failed.txt"
                                         if [ -f "\$failed_file" ]; then
                                             cat \$failed_file
                                         fi""").trim()  
@@ -323,9 +338,9 @@ stage('Jira Stage') {
 /*
  GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
  Loop over all systems in "machineConfigurations":
-  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.pe_target}"
-  - loop over the lines of the file "submit.txt" (list of successful updates and dependencies)
-  - submit a pull request on GitHub with "WIP [$machineLabel]" in the title
+  - retrieve path to file with recipes to submit on GitHub ("submit.txt")
+  - loop over the lines of the file "submit.txt" (successful updates and dependencies with relative path
+  - submit a pull request on GitHub using the hub tool with "WIP [$machineLabel]" in the title
 */
 GitHubPR = [:]
 stage('GitHub Stage') {
@@ -340,6 +355,23 @@ stage('GitHub Stage') {
                 "${machineName}-${architecture}"
             GitHubPR[machineLabel] = {
                 node(machineName) {
+
+                    /* 
+                       define machine dependent environment variable:
+                       - eb_installpath: EasyBuild installpath
+                       - load_hub: command to load hub module
+                    */
+                    def eb_installpath
+                    if(machineName == "daint" || machineName == "dom"){
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
+                        load_hub = architecture == "" ?
+                            "module load hub" :
+                            "module load daint-$architecture hub"
+                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                        eb_installpath = "${params.eb_prefix}"
+                        load_hub = "module load hub"
+                    }
+
                     /* retrieve list of successful updates and submit pull request */
                     sh("""#!/bin/bash -l
                         # clone master over ssh
@@ -365,8 +397,8 @@ stage('GitHub Stage') {
                             find . -type f -name \${tc}-${params.pe_current}.eb -exec sed "s/${params.pe_current}/${params.pe_target}/" {} \\; > ./c/\$tc/\${tc}-${params.pe_target}.eb
                         done
 
-                        failed_file="${params.eb_prefix}/${machineLabel}/${params.pe_target}/failed.txt"
-                        submit_file="${params.eb_prefix}/${machineLabel}/${params.pe_target}/submit.txt"
+                        failed_file="${eb_installpath}/failed.txt"
+                        submit_file="${eb_installpath}/submit.txt"
                         submit_list=\$(cat \$submit_file | sort | uniq)
 
                         # initialise variables
@@ -383,7 +415,7 @@ stage('GitHub Stage') {
                                 # check if recipe matches Cray PE
                                 if [[ \$recipe =~ -[a-zA-Z]+-${params.pe_target} ]]; then
                                     name=\$(basename \$recipe)
-                                    source=\$(find ${params.eb_prefix}/${machineLabel}/${params.pe_target}/software -type f -name \$name | grep easybuild/\$name)
+                                    source=\$(find ${eb_installpath}/software -type f -name \$name | grep easybuild/\$name)
                                     if [ -n "\$source" ]; then 
                                         echo -e " \t \$source -> \$recipe"
                                         cp \$source \$recipe
@@ -400,9 +432,8 @@ stage('GitHub Stage') {
                             fi
                         done
 
-                        # load hub tool to submit a pull request
-                        module load daint-gpu
-                        module load hub
+                        # load hub tool and add recipes to submit a pull request
+                        $load_hub
                         git add .
                         
                         # check if there is anything to commit
