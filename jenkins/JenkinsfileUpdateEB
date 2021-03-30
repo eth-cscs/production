@@ -176,7 +176,7 @@ stage('Update Stage') {
                         # filename of current production list
                         list_current=\$(ls $WORKSPACE/jenkins-builds/*${params.pe_current}-${machineLabel} | tail -1)
                         # filename of target production list (tentative: failed updates will be removed from the target list)
-                        list_target=\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
+                        list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
 
                         # filter current production list to create the target production list
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
@@ -184,7 +184,7 @@ stage('Update Stage') {
                         grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > \$list_target
 
                         if [ -s "\$list_target" ]; then
-                            echo -e "\nUpdating production list \${list_current} to \${list_target}: \n\n\$(cat \${list_target})"
+                            echo -e "\nFiltering production list \$(basename \${list_current}) to \$(basename \${list_target}): \n\$(cat \${list_target})"
                         else   
                             echo -e "\nThe target list of recipes to build is empty. Exiting...\n"
                             exit 1
