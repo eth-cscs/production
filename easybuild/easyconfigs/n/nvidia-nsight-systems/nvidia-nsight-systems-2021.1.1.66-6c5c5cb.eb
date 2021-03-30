@@ -1,0 +1,31 @@
+# jg (CSCS)
+easyblock = 'Binary'
+
+name = 'nvidia-nsight-systems'
+version = '2021.1.1.66-6c5c5cb'
+homepage = 'https://developer.nvidia.com/nsight-systems'
+description = """NVIDIA Nsight Systems is a system-wide performance analysis
+tool"""
+toolchain = SYSTEM
+local_srcpath = '/apps/common/UES/easybuild/sources'
+local_source = '%s/n/%s/NsightSystems-linux-public-%s.run' % \
+               (local_srcpath, name, version)
+checksums = ['ecc154da810bdeb1d01317e3c4d43743']
+install_cmd = local_source + ' --accept --nox11 --nochown ' + \
+    '--target %(installdir)s -- -targetpath=%(installdir)s -noprompt'
+postinstallcmds = ['pwd ;cd %(installdir)s ;rm -fr pkg install-linux.pl ;cd - ;']
+skipsteps = ['source']
+sanity_check_paths = {
+    'files': ['bin/nsys'],
+    'dirs': ['target-linux-x64', 'host-linux-x64']
+}
+docpaths = {'NSIGHT_DOC': '%(installdir)s/documentation/nsys-exporter'}
+
+moduleclass = 'tools'
+# Keeping as reminder:
+# builddependencies = [('Perl', '5.32.0')]
+# local_incpath = '$EBROOTPERL/lib/perl5/$EBVERSIONPERL:$EBROOTPERL/lib/perl5/$EBVERSIONPERL/CPAN/LWP'
+# install_cmd = 'export PERL5LIB=' + local_incpath + ':$PERL5LIB && ' + \
+#     'echo PERL5LIB=$PERL5LIB && ' + \
+# local_perl_tsa = 'export PERL5LIB=/users/piccinal/perl5/lib/perl5 ;'
+# install_cmd = local_perl_tsa + local_source + ' --accept --nox11 --nochown ' + \
