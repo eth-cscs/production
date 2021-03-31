@@ -177,7 +177,6 @@ stage('Update Stage') {
                         list_current=\$(ls $WORKSPACE/jenkins-builds/*${params.pe_current}-${machineLabel} | tail -1)
                         # filename of target production list (tentative: failed updates will be removed from the target list)
                         list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
-
                         # filter current production list to create the target production list
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
@@ -193,12 +192,10 @@ stage('Update Stage') {
                         # loop over recipes to be updated
                         while IFS= read -r line || [[ -n "\$line" ]]; do 
                             status=0
-
                             recipe_target=\$(echo \$line | awk '{print \$1}')
                             flags_target=\${line/\$recipe_target/}
                             echo -e "\nCurrent target: \$recipe_target"
 
-                            echo -e "\nBuilding with the following command:"
                             # check if recipe matches target Cray PE  
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
                                 recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
@@ -208,6 +205,7 @@ stage('Update Stage') {
 
                                 # check status and print short dry run (-D) on screen
                                 if [ -n "\$deps" ]; then
+                                    echo -e "\nDry run of \$recipe_target with dependencies:"
                                     $build_command $tc_flags -D \$recipe_current | grep "\\["
                                 else
                                     failed+=(\$recipe_target)
@@ -216,9 +214,12 @@ stage('Update Stage') {
                                     sed -i "/\$recipe_target/d" \$list_target
                                     continue
                                 fi
+
+                                echo -e "\nBuilding with the following command:"
                                 echo "$build_command $tc_flags \$flags_target \$recipe_current"
                                 $build_command $tc_flags \$flags_target \$recipe_current
                             else
+                                echo -e "\nBuilding with the following command:"
                                 echo "$build_command \$flags_target \$recipe_target"
                                 $build_command \$flags_target \$recipe_target
                             fi
@@ -344,7 +345,7 @@ stage('Jira Stage') {
 /*
  GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
  Loop over all systems in "machineConfigurations":
-  - retrieve path to file with recipes to submit on GitHub ("submit.txt")
+  - retrieve path to file with recipes to submit on GitHub ("submit.txt") and target production list
   - loop over the lines of the file "submit.txt" (successful updates and dependencies with relative path
   - submit a pull request on GitHub using the hub tool with "WIP [$machineLabel]" in the title
 */
@@ -378,7 +379,7 @@ stage('GitHub Stage') {
                         load_hub = "module load hub"
                     }
 
-                    /* retrieve list of successful updates and submit pull request */
+                    /* retrieve list of successful updates and target production list to submit pull request */
                     sh("""#!/bin/bash -l
                         # clone master over ssh
                         repo="git@github.com:eth-cscs/production.git"
@@ -398,11 +399,6 @@ stage('GitHub Stage') {
                             git checkout -b \$branch
                         fi
 
-                        # create updated toolchains in workspace
-                        for tc in $toolchains; do
-                            find . -type f -name \${tc}-${params.pe_current}.eb -exec sed "s/${params.pe_current}/${params.pe_target}/" {} \\; > ./c/\$tc/\${tc}-${params.pe_target}.eb
-                        done
-
                         failed_file="${eb_installpath}/failed.txt"
                         submit_file="${eb_installpath}/submit.txt"
                         submit_list=\$(cat \$submit_file | sort | uniq)
@@ -412,7 +408,7 @@ stage('GitHub Stage') {
                         unset missing
 
                         # loop over list of successful updates and dependencies
-                        echo -e "\nCopy successful updates for commit:"
+                        echo -e "\nCopy successful updates and dependencies for commit:"
                         for recipe in \$submit_list; do
                             # check if recipe did not fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
@@ -438,6 +434,17 @@ stage('GitHub Stage') {
                             fi
                         done
 
+                        # update production list
+                        list_target=$(ls ${eb_installpath}/*${params.pe_target}-${machineLabel} | tail -1)
+                        list_production=$WORKSPACE/jenkins-builds/$(basename \$list_target)
+                        if [ -f "\$list_production" ]; then
+                            # updated items of target list are appended to production list
+                            echo "$(grep -v -f $list_production $list_target)" >> $list_production 
+                        else
+                            # target list is copied to production list
+                            cp \$list_target \$list_production
+                        fi
+
                         # load hub tool and add recipes to submit a pull request
                         $load_hub
                         git add .
@@ -457,8 +464,8 @@ stage('GitHub Stage') {
                         fi
 
                         # print copied and missing updates
-                        echo -e "\nCopied Updates: \${#copied[@]} \n\${copied[@]}"
-                        echo -e "\nMissing Updates: \${#missing[@]} \n\${missing[@]}"
+                        echo -e "\nCopied updates: \${#copied[@]} \n\${copied[@]}"
+                        echo -e "\nMissing updates: \${#missing[@]} \n\${missing[@]}"
 
                         # return the number of missing updates
                         exit \${#missing[@]}
