@@ -200,10 +200,10 @@ stage('Update Stage') {
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
                                 recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
 
-                                # relative path of dependencies retrieved from full path dry run (--dry-run)
+                                # relative path of dependencies retrieved from full path dry run (--dry-run) of current recipe
                                 deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
 
-                                # check status and print short dry run (-D) on screen
+                                # check status and print short dry run (-D) on screen of target recipe
                                 if [ -n "\$deps" ]; then
                                     echo -e "\nDry run of \$recipe_target with dependencies:"
                                     $build_command $tc_flags -D \$recipe_current | grep "\\["
