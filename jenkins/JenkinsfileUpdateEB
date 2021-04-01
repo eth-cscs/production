@@ -107,9 +107,9 @@ stage('Update Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define toolchain version flags (tc_flags) and build command */
-                    def tc_flags = "--try-toolchain-version=${params.pe_target}"
+                    /* define build command and toolchain version flags (tc_flags) */
                     def build_command = "eb $eb_flags"
+                    def tc_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
                     sh("""#!/bin/bash -l
@@ -160,9 +160,9 @@ stage('Update Stage') {
                             echo "$build_command --hidden \${tc}-${params.pe_target}.eb"
                             $build_command --hidden \${tc}-${params.pe_target}.eb
                             if [ \$? -eq 0 ]; then
-                                echo -e "Update of toolchain \$tc SUCCESSFUL"
+                                echo -e "\nBuild of toolchain \$tc SUCCESSFUL"
                             else 
-                                echo -e "Update of toolchain \$tc FAILED"
+                                echo -e "\nBuild of toolchain \$tc FAILED"
                             fi
                         done
 
@@ -197,7 +197,7 @@ stage('Update Stage') {
                             status=0
                             recipe_target=\$(echo \$line | awk '{print \$1}')
                             flags_target=\${line/\$recipe_target/}
-                            echo -e "\nCurrent target: \$recipe_target"
+                            echo -e "\nCurrent target: \$recipe_target \n"
 
                             # check if recipe matches target Cray PE  
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
@@ -206,10 +206,10 @@ stage('Update Stage') {
                                 # relative path of dependencies retrieved from full path dry run (--dry-run) of current recipe
                                 deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
 
-                                # check status and print short dry run (-D) on screen of target recipe
+                                # check status and print short dry run (-D) of target recipe
                                 if [ -n "\$deps" ]; then
                                     echo -e "\nDry run of \$recipe_target with dependencies:"
-                                    $build_command $tc_flags -D \$recipe_current | grep "\\["
+                                    $build_command $tc_flags -D \$recipe_current | grep "\\*\\s\\["
                                 else
                                     failed+=(\$recipe_target)
                                     echo "\$recipe_target" >> "\${failed_file}"
@@ -446,6 +446,15 @@ stage('GitHub Stage') {
                         else
                             # target list is copied to production list
                             cp \$list_target \$list_production
+                        fi
+
+                        # update architecture modulefile
+                        if [[ $machineName == "daint" || $machineName == "dom" ]]; then
+                            modulefile_current="$WORKSPACE/login/$machineLabel/${params.pe_current}"
+                            modulefile_target="$WORKSPACE/login/$machineLabel/${params.pe_target}"
+                            if [ ! -f "\$modulefile_target" ]; then  
+                                sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
+                            fi
                         fi
 
                         # load hub tool and add recipes to submit a pull request
