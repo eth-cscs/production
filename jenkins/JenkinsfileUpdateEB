@@ -160,9 +160,9 @@ stage('Update Stage') {
                             echo "$build_command --hidden \${tc}-${params.pe_target}.eb"
                             $build_command --hidden \${tc}-${params.pe_target}.eb
                             if [ \$? -eq 0 ]; then
-                                echo -e "\nBuild of toolchain \$tc SUCCESSFUL"
+                                echo -e "\nBuild of toolchain \$tc SUCCESSFUL\n"
                             else 
-                                echo -e "\nBuild of toolchain \$tc FAILED"
+                                echo -e "\nBuild of toolchain \$tc FAILED\n"
                             fi
                         done
 
@@ -233,11 +233,11 @@ stage('Update Stage') {
                                 success+=(\$recipe_target)
                                 echo "\$recipe_target" >> "\${success_file}"
                                 echo "\$deps" | tr ' ' '\n' >> "\${submit_file}"
-                                echo -e "\nBuild of \$recipe_target SUCCESSFUL(\${#success[@]})"
+                                echo -e "\nBuild of \$recipe_target SUCCESSFUL(\${#success[@]})\n"
                             else
                                 failed+=(\$recipe_target)
                                 echo "\$recipe_target" >> "\${failed_file}"
-                                echo -e "\nBuild of \$recipe_target FAILED(\${#failed[@]}): removing recipe from production list"
+                                echo -e "\nBuild of \$recipe_target FAILED(\${#failed[@]}): removing recipe from production list\n"
                                 sed -i "/\$recipe_target/d" \$list_target
                             fi
 
