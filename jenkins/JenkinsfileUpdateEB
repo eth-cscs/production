@@ -197,7 +197,7 @@ stage('Update Stage') {
                             status=0
                             recipe_target=\$(echo \$line | awk '{print \$1}')
                             flags_target=\${line/\$recipe_target/}
-                            echo -e "\nCurrent target: \$recipe_target \n"
+                            echo -e "\nCurrent target: \$recipe_targe"
 
                             # check if recipe matches target Cray PE  
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
