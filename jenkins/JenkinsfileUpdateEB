@@ -72,17 +72,20 @@ stage('Update Stage') {
 
                     /* 
                        define machine dependent commands and environment variables:
+                       - eb_flags: EasyBuild flags
                        - eb_installpath: EasyBuild installpath
                        - eb_modulespath: EasyBuild modules path 
                        - eb_toolspath: tools modules path 
                        - load_pe: command to load PE target module 
                        - toolchains: toolchain names 
                     */
+                    def eb_flags
                     def eb_installpath
                     def eb_modulespath
                     def load_pe
                     def toolchains
                     if(machineName == "daint" || machineName == "dom"){
+                        eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                         eb_modulespath = "${eb_installpath}/modules/all"
                         eb_toolspath = "${eb_installpath}/tools/modules/all"
@@ -91,7 +94,8 @@ stage('Update Stage') {
                             "module load cdt-cuda/${pe_target} daint-$architecture"
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
-                        installpath = "${params.eb_prefix}"
+                        eb_flags = "--ignore-locks -r"
+                        eb_installpath = "${params.eb_prefix}"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
                         load_pe = "module load cpe/${pe_target}"
@@ -103,8 +107,7 @@ stage('Update Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define general flags (eb_flags), toolchain version flags (tc_flags) and build command */
-                    def eb_flags = "--ignore-locks -r"
+                    /* define toolchain version flags (tc_flags) and build command */
                     def tc_flags = "--try-toolchain-version=${params.pe_target}"
                     def build_command = "eb $eb_flags"
                         
