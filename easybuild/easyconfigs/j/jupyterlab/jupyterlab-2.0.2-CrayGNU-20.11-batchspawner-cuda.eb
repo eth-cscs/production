@@ -58,7 +58,7 @@ export JUPYTER=%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe ot
 
 %(installdir)s/bin/jupyter labextension install %(name)s-topbar-extension@0.5.0 %(name)s-system-monitor@0.6.0  --no-build && #bumped from 0.4.0 to 0.5.0 and 0.4.1 to 0.6.0
 %(installdir)s/bin/jupyter labextension install dask-labextension@%(version_major_minor)s.0  --no-build && 
-
+%(installdir)s/bin/jupyter labextension install nglview-js-widgets@2.7.7  --no-build &&
 %(installdir)s/bin/jupyter labextension install %(name)s-nvdashboard@0.3.1 --debug --no-build &&  #bumped to 0.3.1 from 0.2.1
 cd %(installdir)s/ && 
 git clone https://github.com/NVIDIA/ipyparaview && 
@@ -203,6 +203,7 @@ exts_list = [
     ('docopt', '0.6.2'),
     ('ipyparallel', '6.3.0'),
     ('ipcmagic', '4bd1bb3', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
+    ('nglview', '2.7.7'),
     ('bash_kernel', '0.7.2', {'use_pip': False}),
 ]
 

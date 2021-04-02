@@ -23,7 +23,7 @@ dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('GSL', '2.5'),
     ('libxc', '4.3.4'),
-    ('SpFFT', '0.9.10', '-cuda-mkl'),
+    ('SpFFT', '1.0.1', '-cuda-mkl'),
     ('spglib', '1.16.0'),
 ]
 

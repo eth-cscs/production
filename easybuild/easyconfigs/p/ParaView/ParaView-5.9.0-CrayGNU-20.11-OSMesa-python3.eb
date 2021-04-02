@@ -35,7 +35,7 @@ maxparallel = 24
 modtclfooter = """
     prepend-path LD_LIBRARY_PATH /opt/python/%(pyver)s/lib
 """
-postinstallcmds = ['export GALLIUM_DRIVER=swr;']
+postinstallcmds = ['export GALLIUM_DRIVER=swr; mkdir -p %(installdir)s/share/paraview-5.9 && cd %(installdir)s/share/paraview-5.9 && git clone https://gitlab.kitware.com/paraview/materials']
 
 sanity_check_paths = {
     'files': ['bin/pvbatch', 'bin/pvserver'],
