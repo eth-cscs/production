@@ -18,17 +18,17 @@ def eiger = [name: 'eiger',
              archs: [],
              cpus: 128,
              buildPath: '$XDG_RUNTIME_DIR/build',
-             unusePath: '/apps/eiger/UES/jenkins/1.3.2/20.10',
+             unusePath: '/apps/eiger/UES/jenkins/1.4.0',
              modulesProduction: '',
-             prefixProduction: '/apps/eiger/UES/jenkins/1.3.2/20.10']
+             prefixProduction: '/apps/eiger/UES/jenkins/1.4.0']
 
 def pilatus = [name: 'pilatus',
                archs: [],
                cpus: 128,
                buildPath: '$XDG_RUNTIME_DIR/build',
-               unusePath: '/apps/pilatus/UES/jenkins/1.3.2',
+               unusePath: '/apps/pilatus/UES/jenkins/1.4.0',
                modulesProduction: '',
-               prefixProduction: '/apps/pilatus/UES/jenkins/1.3.2']
+               prefixProduction: '/apps/pilatus/UES/jenkins/1.4.0']
 
 def tsa = [name: 'tsa',
            archs: [],
