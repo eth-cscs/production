@@ -241,7 +241,7 @@ packages:
     variants: +mpi +openmp precision=long_double,double,float
   findutils:
     externals:
-    - prefix: /usr
+    - prefix: /
       spec: findutils@4.6.0
   flex:
     externals:
@@ -253,7 +253,7 @@ packages:
         compilers:
           c: /usr/bin/gcc-7
           cxx: /usr/bin/g++
-          fortran: /usr/bin/gfortran-7
+          fortran: /usr/bin/gfortran
       prefix: /usr
       spec: gcc@7.5.0 languages=c,c++,fortran
   ghostscript:
