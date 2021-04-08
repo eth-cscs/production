@@ -74,9 +74,9 @@ PE_DEPENDENT_PKGS = {
     },
     'cray-netcdf-hdf5parallel-fortran': {
         'buildable' : True,
-        'name': 'netcdt-fortran',
+        'name': 'netcdf-fortran',
         'variants': "+parallel-netcdf+mpi",
-        'modules' : 'cray-hdf5-parallel'
+        'modules' : 'cray-netcdf-hdf5parallel'
     },
     'cray-petsc': {
         'buildable' : True,

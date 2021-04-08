@@ -38,7 +38,7 @@ SPACK_CUDA_TEST_PKGS = [
     # # petsc cannot detect the NVCC compiler if it doesn't have the ^cuda
     # # I think this is due to the module mapping generated in the packages.yaml file
     # # r'petsc %gcc +cuda ^cuda', # this takes ~20 min to run
-    r'gromacs %gcc +cuda ^fftw',
+    # r'gromacs %gcc +cuda ^fftw',
 
     # # using COSMA master because version < 2.3.0 doesn't support the CCE compiler
     # r'cosma@master %gcc',
@@ -49,7 +49,8 @@ SPACK_CUDA_TEST_PKGS = [
 SPACK_TEST_PKGS = [
     # r'petsc %gcc ~cuda',
     # r'gromacs %gcc ~cuda ^fftw',
-    r'zlib',
+    r'zlib %gcc',
+    r'zlib %cce',
     # r'pkg-config',
     # r'cosma@master ~cuda cuda_arch=none %gcc',
     # r'cosma@master ~cuda cuda_arch=none %cce',
