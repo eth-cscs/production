@@ -1,6 +1,9 @@
  Amber-20-11-7-CrayIntel-20.11-cuda.eb                  --set-default-module
  Boost-1.70.0-CrayGNU-20.11-python3.eb                  --set-default-module
  Boost-1.70.0-CrayGNU-20.11.eb
+ Boost-1.75.0-CrayCCE-20.11.eb
+ Boost-1.75.0-CrayGNU-20.11.eb
+ Boost-1.75.0-CrayIntel-20.11.eb
  Buildah-1.14.9.eb
  CDO-1.9.5-CrayGNU-20.11.eb                             --set-default-module
  CDO-1.9.5-CrayIntel-20.11.eb
