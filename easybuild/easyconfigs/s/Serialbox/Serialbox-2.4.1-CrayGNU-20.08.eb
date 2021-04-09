@@ -14,7 +14,7 @@ source_urls = ['https://github.com/eth-cscs/serialbox2/archive/']
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.12.0', '', True),
+    ('CMake', '3.14.5', '', True),
     ('Boost', '1.67.0'),
 ]
 
