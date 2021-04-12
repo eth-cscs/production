@@ -29,8 +29,10 @@
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.08.eb                          --set-default-module
- Julia-1.5.0-CrayGNU-20.08-cuda.eb                      --set-default-module
- JuliaExtensions-1.5.0-CrayGNU-20.08-cuda.eb            --set-default-module
+ Julia-1.5.0-CrayGNU-20.08-cuda.eb
+ Julia-1.5.3-CrayGNU-20.08-cuda.eb                      --set-default-module
+ JuliaExtensions-1.5.0-CrayGNU-20.08-cuda.eb
+ JuliaExtensions-1.5.3-CrayGNU-20.08-cuda.eb            --set-default-module
  jupyterlab-1.1.1-CrayGNU-20.08-batchspawner.eb         --set-default-module
  jupyterlab-1.2.16-CrayGNU-20.08-batchspawner-cuda.eb
  jupyterlab-2.0.2-CrayGNU-20.08-batchspawner-cuda.eb
@@ -75,7 +77,7 @@
  NAG-PyPOP-0.3.2-CrayGNU-20.08-python3.eb               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  gprof2dot-2019.11.30-python3.eb                        --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- inspector-2020_update2.eb                              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ inspector-2021.1.1.42.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  IPM-2.0.6-CrayGNU-20.08.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  likwid-5.1-cuda-10.2.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  linux-perf-5.9.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
@@ -95,4 +97,4 @@
  Score-P-6.0-CrayGNU-20.08-cuda.eb                                           --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  scorep_binding_python-3.0-CrayGNU-20.08-python3.eb     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
- vtune_profiler-2020_update2.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools
+ vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/gpu/easybuild/tools

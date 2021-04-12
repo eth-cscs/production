@@ -14,7 +14,7 @@ toolchain = {'name': 'cpeGNU', 'version': '20.10'}
 toolchainopts = {'verbose': False}
 source_urls = ['https://github.com/VcDevel/Vc/releases/download/%(version)s']
 sources = [SOURCE_TAR_GZ]
-builddependencies = [('CMake', '3.14.5', '', True)]
+builddependencies = [('CMake', '3.19.1', '', True)]
 separate_build_dir = True
 postinstallcmds = ['cp ../%(name)s-%(version)s/LICENSE %(installdir)s']
 

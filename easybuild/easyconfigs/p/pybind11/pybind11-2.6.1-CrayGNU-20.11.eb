@@ -1,0 +1,36 @@
+#
+easyblock = 'CMakeMake'
+
+name = 'pybind11'
+version = '2.6.1'
+
+homepage = 'https://pybind11.readthedocs.io'
+description = """pybind11 is a lightweight header-only library that exposes C++ types in Python and vice versa,
+ mainly to create Python bindings of existing C++ code."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/pybind/pybind11/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+installopts = " && PYBIND11_USE_CMAKE=1 pip install --prefix %(installdir)s %(builddir)s/%(name)s-%(version)s "
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include/pybind11', 'lib/python%(pyshortver)s/site-packages/pybind11', 'share/cmake/pybind11'],
+}
+
+sanity_check_commands = ["python -c 'import pybind11'"]
+
+modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
+
+moduleclass = 'lib'

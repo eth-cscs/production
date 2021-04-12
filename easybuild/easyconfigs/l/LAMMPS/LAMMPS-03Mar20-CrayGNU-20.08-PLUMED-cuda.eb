@@ -1,0 +1,46 @@
+# Contributed by TWR (CSCS)
+easyblock = 'MakeCp'
+
+name = 'LAMMPS'
+version = '03Mar20'
+local_plumedversion = '2.5.1'
+versionsuffix = '-PLUMED-%s-cuda' % local_plumedversion
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = { 'usempi': True, 'openmp': True }
+
+source_urls = ['https://github.com/lammps/lammps/archive']
+sources = ['stable_3Mar2020.tar.gz']
+
+prebuildopts = ' cd ./src && '
+prebuildopts += ' make lib-plumed args="-p ${EBROOTPLUMED} -m runtime" && '
+prebuildopts += ' make yes-standard yes-user-cg-cmm yes-user-omp yes-user-reaxc yes-gpu yes-k-space yes-molecule yes-mpiio yes-rigid yes-misc yes-user-misc yes-user-plumed && '
+prebuildopts += ' make no-latte no-voronoi no-reax no-poems no-meam no-kim no-kokkos no-mscg no-message && '
+prebuildopts += ' make package-update && '
+# go to folder ./lib/gpu, create Makefile.gpu and correct file ./lib/gpu/geryon/nvd_device.h
+prebuildopts += ' pushd ../lib/gpu && sed -e "s/-march=bdver1//g" -e "s/sm_[0-9]*/sm_60/g" Makefile.xk7 > Makefile.gpu && '
+prebuildopts += ' make -f Makefile.gpu && popd && '
+#create Makefile.omp and correct Makefile.mpi
+prebuildopts += ' sed -e \'s/mpicxx/CC -fopenmp/\' ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
+prebuildopts += ' sed -i -e \'s/mpicxx/CC/\' ./MAKE/Makefile.mpi && '
+buildopts = [ ' mpi ', ' omp ' ]
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+dependencies = [ ('PLUMED', '%s' %local_plumedversion) ]
+
+files_to_copy = [(['src/lmp*'], "bin")]
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi','bin/lmp_omp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

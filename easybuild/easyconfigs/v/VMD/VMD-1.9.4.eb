@@ -1,0 +1,44 @@
+# @author: jfavre
+
+easyblock = "CmdCp"
+
+name = 'VMD'
+version = '1.9.4'
+versionsuffix = 'a51'
+
+homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
+description = """
+    VMD is a molecular visualization program for displaying, animating, and
+    analyzing large biomolecular systems using 3-D graphics and built-in
+    scripting.
+"""
+
+toolchain = SYSTEM
+
+sources = [(
+    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/'
+    '%(namelower)s-%(version)s%(versionsuffix)s.tar.gz'
+)]
+
+local_vmd_buildcmd = (
+    ' sed -i \'s#install_bin_dir=\"/usr/local/bin"#install_bin_dir='
+    '"%(installdir)s/bin"#g\' configure && '
+    ' sed -i \'s#install_library_dir="/usr/local/lib/#install_library_dir='
+    '"%(installdir)s/lib/#g\' configure && '
+    ' ./configure && cd src && make install '
+)
+
+buildininstalldir = True
+
+cmds_map = [('.*', local_vmd_buildcmd)]
+
+files_to_copy = [] 
+
+unpack_options = '--strip 1'
+
+sanity_check_paths={
+    'files': ['lib/vmd/vmd_LINUXAMD64'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'vis'

@@ -1,0 +1,340 @@
+# @author: robinson 
+easyblock = 'PythonBundle'
+
+name = 'jupyterlab'
+version = '2.2.8'
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'cpeGNU', 'version': '21.02'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('configurable-http-proxy', '4.2.3'),
+    ('graphviz', '2.46.1'),
+    ('libffi', '3.3'),
+]
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True,
+}
+
+exts_list = [
+
+#set up tools
+    ('setuptools', '50.3.2', {
+        'source_tmpl': 'setuptools-%(version)s.zip',
+        'use_pip': False,
+    }),
+    ('wheel', '0.35.1'),
+    ('Cython', '0.29.21', { 
+    }),
+    
+#jupyterlab packages including ipython and its dependencies
+    ('ptyprocess', '0.6.0', {
+        'use_pip': False,
+        }),
+    ('pexpect', '4.8.0'),
+    ('ipython_genutils', '0.2.0'),
+    ('traitlets', '5.0.4', {
+        'use_pip': False,
+        }),
+    ('parso', '0.7.1'),
+    ('jedi', '0.17.2'),
+    ('backcall', '0.2.0', {
+        'use_pip': False,
+        }),
+    ('Pygments', '2.7.1'),
+    ('decorator', '4.4.2'),
+    ('prompt_toolkit', '3.0.8', { #bumped twr
+        'use_pip': False,
+        }),
+    ('pickleshare', '0.7.5'),
+    ('ipython', '7.18.1', {
+        'modulename': 'IPython',
+        'patches': ['ipython-7.18.1-jupyter.patch'],  
+       }),
+    ('pyrsistent', '0.17.3'),
+    ('jsonschema', '3.2.0', {
+        'use_pip': False,
+        }),
+    ('json5', '0.9.5'),
+    ('Send2Trash', '1.5.0'),
+    ('tornado', '6.0.4'),
+    ('pyzmq', '19.0.2', {
+        'modulename': 'zmq',
+        }),
+    ('python-dateutil', '2.8.1', {
+    'use_pip': False,
+    'modulename':  'dateutil',
+        }),
+    ('jupyter_core', '4.6.3'),
+    ('jupyter_client', '6.1.7'),
+    ('MarkupSafe', '1.1.1'),
+    ('Jinja2', '2.11.2'),
+    ('webencodings', '0.5.1'),
+    ('bleach', '3.2.1'),
+    ('defusedxml', '0.6.0'),
+    ('entrypoints', '0.3', {
+        'use_pip': False,
+        }),
+    ('mistune', '0.8.4'),
+    ('nbformat', '5.0.8'), 
+    ('pandocfilters', '1.4.2'),
+    ('testpath', '0.4.4', {
+        'use_pip': False,
+        }),
+    ('nbconvert', '6.0.7'),
+    ('prometheus_client', '0.8.0'),
+    ('terminado', '0.9.1', {
+        'use_pip': False,
+        }),
+    ('jupyterlab_server', '1.2.0'),
+    ('ipykernel', '5.3.4', {
+        }),
+    ('requests', '2.24.0'),
+    ('notebook', '6.1.4'),
+    ('nbclient', '0.5.1'), 
+    ('pycparser', '2.20'),
+    ('cffi', '1.14.3', {
+        'use_pip': False,
+        }),
+    ('chardet', '3.0.4'),
+    ('idna', '2.10'),
+    ('certifi', '2020.6.20'),
+    ('urllib3', '1.25.11'), 
+    ('async_generator', '1.10'),
+    ('jupyterlab_pygments', '0.1.2'),
+    ('argon2-cffi', '20.1.0', {
+        'modulename': 'argon2',
+        }),
+    ('nest_asyncio', '1.4.1'),
+    (name, version),    
+
+# jupyterhub and its dependencies
+    ('SQLAlchemy', '1.3.20'), 
+    ('Mako', '1.1.3'),
+    ('alembic', '1.4.3'),
+    ('python-editor', '1.0.4', {
+        'modulename': 'editor',
+        }),
+    ('cryptography', '3.1.1'),
+    ('jupyter_telemetry', '0.1.0'),
+    ('pyOpenSSL', '19.1.0', {
+        'modulename': "OpenSSL",
+        }),
+    ('certipy', '0.1.3'),
+    ('oauthlib', '3.1.0'),
+    ('pamela', '1.0.0'),
+    ('python-json-logger', '2.0.1', { 
+        'modulename': "pythonjsonlogger",
+        }),
+    ('ruamel.yaml', '0.16.12', {
+        'modulename': "ruamel",
+        }),
+    ('ruamel.yaml.clib', '0.2.2', {
+        'modulename': "ruamel",
+        }),
+    ('jupyterhub', '1.1.0'),
+
+# widgets: note the lab extensions below
+    ('widgetsnbextension', '3.5.1'),
+    ('ipywidgets', '7.5.1'),
+
+# ipympl matplotlib widgets, requires lab extension
+    ('Pillow', '8.0.0', {     
+        'modulename': 'PIL', 
+        'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'use_pip': True,
+        }),
+    ('cycler', '0.10.0'), 
+    ('kiwisolver', '1.2.0'),
+    ('matplotlib', '3.3.2'), 
+    ('ipympl', '0.5.8'),
+
+# plotly, requires the lab extension below
+    ('retrying', '1.3.3'),
+    ('plotly', '4.11.0'),  
+
+# bokeh, requires the labextension below
+    ('PyYAML', '5.3.1', {
+        'modulename': 'yaml',
+        }),
+    ('bokeh', '2.2.3'),  
+    ('typing_extensions', '3.7.4.3'),
+
+# pandas: required if no pyextensions
+    ('pytz', '2020.1'),
+    ('pandas', '1.1.3'),
+
+# bqplot: requires the labextension below
+    ('bqplot', '0.12.18'), 
+    ('traittypes', '0.2.1'),
+
+# itkwidgets
+    ('param', '1.9.3'),
+    ('pyct', '0.4.8'),
+    ('colorcet', '2.0.2'),
+    ('zstandard', '0.14.0'),
+    ('itk-core', '5.1.1', { 
+        'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'itk',
+        }),
+    ('itk-numerics', '5.1.1', { 
+        'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'itk',
+        }),
+    ('itk-filtering', '5.1.1', { 
+        'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'itk',
+        }),
+    ('itk-meshtopolydata', '0.6.2', { 
+        'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl',
+        'unpack_sources': False,
+        'modulename': 'itk',
+        }),
+    ('ipydatawidgets', '4.1.0'),
+    ('itkwidgets', '0.32.0'), 
+
+# nbresuse for jupyterlab-system-monitor extension
+    ('psutil', '5.7.2'),
+    ('nbresuse', '0.3.6'),  
+
+# dask distributed and dataframe and jobqueue to match cray provided
+    ('dask', '2.30.0'),
+    ('click', '7.1.2'),
+    ('cloudpickle', '1.6.0'),
+    ('distributed', '2.30.0'), 
+    ('HeapDict', '1.0.1'),
+    ('msgpack', '1.0.0'),
+    ('sortedcontainers', '2.2.2'), 
+    ('tblib', '1.7.0'),
+    ('zict', '2.0.0'),
+    ('fsspec', '0.8.4'), #bumped twr
+    ('locket', '0.2.0'),
+    ('partd', '1.1.0'),
+    ('dask-jobqueue', '0.7.1'),
+
+# graphviz, for dask graph visualization
+    ('graphviz', '0.14.2', {
+        'source_tmpl': 'graphviz-%(version)s.zip',
+        }),
+
+# dask-labextension
+    ('simpervisor', '0.3'),
+    ('multidict', '4.7.6'),
+    ('yarl', '1.5.1'), 
+    ('async-timeout', '3.0.1'),
+    ('aiohttp', '3.6.3'),
+    ('jupyter-server-proxy', '1.5.0'),  
+    ('dask_labextension', '3.0.0'),
+
+# xarray and seaborn
+    ('xarray', '0.16.1'),
+    ('seaborn', '0.11.0'),
+
+# batchspawner compute side cscript components
+    ('batchspawner', '68a1fcd', {
+        'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s'],
+        }),
+# ipyparaview, not yet available in pypi and npm registry, 24 April 2020
+    ('ipyparaview', '074d548', { #bump from cf1c6f4 to 074d548 for jlab 2.0
+        'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s'],
+        }),
+    
+#jupyterlab code formatter, requires a formatter e.g., black and isort
+    ('pathspec', '0.8.0'),
+    ('typed_ast', '1.4.1'),
+    ('appdirs', '1.4.4'),
+    ('regex', '2020.10.15'), #bumped 11->15 twr
+    ('toml', '0.10.1'),
+    ('isort', '5.6.4', { #bumped twr
+        'use_pip': False,
+        }),
+    ('mypy_extensions', '0.4.3'),
+    ('black', '20.8b1'),
+    ('jupyterlab_code_formatter', '1.3.6'), 
+
+# ipcluster magics and ipyparallel
+    ('docopt', '0.6.2'),
+    ('ipyparallel', '6.3.0'),
+    ('ipcmagic', '4bd1bb3', {
+        'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s'],
+        'modulename': False,
+}),
+
+# kernels
+# bash kernel, requires kernel install below, twr
+    ('bash_kernel', '0.7.2', {
+        'use_pip': False,
+        }),
+]
+
+modextrapaths = {
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+    'JUPYTER_PATH': 'share/jupyter',
+}
+
+modextravars = {
+    'JUPYTERLAB_DIR': "%(installdir)s/share/jupyter/lab/",
+    'JUPYTER' : '%(installdir)s/bin/jupyter',
+}
+
+# install extensions and batchspawner components
+
+postinstallcmds = [
+"""
+export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache_clean && 
+export NODE_OPTIONS=--max-old-space-size=4096 &&
+export NODE_REPL_HISTORY="" &&
+export JUPYTERLAB_DIR=%%(installdir)s/share/jupyter/lab/ && 
+export PYTHONPATH=%%(installdir)s/lib/python%%(pyshortver)s/site-packages:$PYTHONPATH && 
+export JUPYTER_DATA_DIR=%%(installdir)s/share/jupyter/ && 
+export JUPYTER=%%(installdir)s/bin/jupyter &&   
+%%(installdir)s/bin/jupyter-labextension install @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
+%%(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
+%%(installdir)s/bin/jupyter-labextension install itkwidgets@0.32.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.4 --no-build && 
+%%(installdir)s/bin/jupyter labextension install plotlywidget@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyterlab-plotly@4.11.0 --no-build &&
+%%(installdir)s/bin/jupyter labextension install @bokeh/jupyter_bokeh@2.0.3 --no-build && 
+%%(installdir)s/bin/jupyter labextension install bqplot@0.5.17 --no-build && 
+%%(installdir)s/bin/jupyter labextension install @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build && 
+%%(installdir)s/bin/jupyter labextension install jupyterlab-topbar-extension@0.5.0  --no-build &&
+%%(installdir)s/bin/jupyter labextension install jupyterlab-system-monitor@0.6.0 --no-build && 
+%%(installdir)s/bin/jupyter labextension install dask-labextension@3.0.0 --no-build && 
+%%(installdir)s/bin/jupyter labextension install jupyterlab-nvdashboard@0.4.0 --no-build && 
+cd %%(installdir)s/ && 
+git clone https://github.com/NVIDIA/ipyparaview && 
+cd ipyparaview && 
+git checkout 074d548 && 
+%%(installdir)s/bin/jupyter labextension install js --no-build && 
+#twr now finally do the JupyterLab build
+%%(installdir)s/bin/jupyter lab build --dev-build=False  && 
+rm -r $YARN_CACHE_FOLDER && 
+# Bash kernel - https://github.com/takluyver/bash_kernel
+python3 -m bash_kernel.install --prefix=%%(installdir)s/ 
+""" % ()
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages',
+             'share/jupyter/lab/extensions',
+             'share/jupyter/lab/schemas',
+             'share/jupyter/lab/staging',
+             'share/jupyter/lab/static',
+             'share/jupyter/lab/themes',
+             ]
+}
+
+moduleclass = 'tools'

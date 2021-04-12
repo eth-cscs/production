@@ -18,11 +18,13 @@ builddependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
 ]
 dependencies = [
-    ('OptiX', '6.0.0'),
+    ('OptiX', '6.5.0'),
     ('mdl', '317500.2554'),
 ]
 
-configopts = "-DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
+preconfigopts = ' sed -i "s/sm_30/sm_60/g" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
 
 
 sanity_check_paths = {

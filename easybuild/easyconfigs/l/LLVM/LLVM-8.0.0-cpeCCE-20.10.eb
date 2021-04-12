@@ -1,0 +1,39 @@
+# jf (cscs)
+easyblock = 'CMakeMake'
+
+name = 'LLVM'
+version = '8.0.0'
+
+homepage = 'http://llvm.org/'
+description = """The LLVM Core libraries provide a modern source- and
+target-independent optimizer, along with code generation support for many
+popular CPUs (as well as some less common ones!) These libraries are built
+around a well specified code representation known as the LLVM intermediate
+representation ("LLVM IR"). The LLVM Core libraries are well documented, and it
+is particularly easy to invent your own language (or port an existing compiler)
+to use LLVM as an optimizer and code generator."""
+
+toolchain = {'name': 'cpeCCE', 'version': '20.10'}
+toolchainopts = {'dynamic': True}
+
+source_urls = ['http://%(namelower)s.org/releases/%(version)s']
+sources = ['%(namelower)s-%(version)s.src.tar.xz']
+
+builddependencies = [
+    ('CMake', '3.19.1', '', True),
+]
+
+#preconfigopts = " module swap cray-mpich/8.1.0 cray-mpich/8.0.16; module swap gcc/9.3.0;"
+
+# required to install extra tools in bin/
+configopts = " -DCMAKE_C_COMPILER='cc' -DCMAKE_CXX_COMPILER='CC' -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86  -DLLVM_TARGETS_TO_BUILD=X86  -DLLVM_ENABLE_RTTI:BOOL=ON  -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON  -DLLVM_ENABLE_ZLIB=ON  -DCMAKE_BUILD_TYPE=Release  -DBUILD_SHARED_LIBS=ON "
+
+
+parallel = 24
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-ar', 'bin/FileCheck'],
+    'dirs': ['include/%(namelower)s', 'include/%(namelower)s-c'],
+}
+
+moduleclass = 'compiler'

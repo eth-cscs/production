@@ -96,7 +96,6 @@ class JuliaBundle(Bundle):
         return user_depot_path
 
     def __init__(self, *args, **kwargs):
-        """Initliaze RPackage-specific class variables."""
         super(JuliaBundle, self).__init__(*args, **kwargs)
         self.cfg['exts_defaultclass'] = 'JuliaPackage'
 
@@ -139,10 +138,8 @@ class JuliaBundle(Bundle):
     def make_module_extra(self, *args, **kwargs):
         txt = super(Bundle, self).make_module_extra(*args, **kwargs)
 
-        txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.extensions_depot)
         txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_DEPOT_PATH', self.extensions_depot)
 
-        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.admin_load_path)
         txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_LOAD_PATH', self.admin_load_path)
 
         return txt

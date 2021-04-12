@@ -1,0 +1,27 @@
+easyblock = 'SCons'
+
+name = 'Serf'
+version = '1.3.9'
+versionsuffix = '-openssl-111i'
+homepage = 'http://serf.apache.org/'
+description = """The serf library is a high performance C-based HTTP client
+library built upon the Apache Portable Runtime (APR) library"""
+toolchain = SYSTEM
+source_urls = ['https://archive.apache.org/dist/%(namelower)s']
+sources = [SOURCELOWER_TAR_BZ2]
+patches = ['Serf-1.3.9_python3_scons.patch']
+builddependencies = [
+    ('SCons', '4.1.0', '-python3'),
+    # openssl-dev not installed by ops
+    ('OpenSSL', '1.1.1i'),
+    ('APR', '1.7.0'),
+    ('APR-util', '1.6.1'),
+]
+buildopts = "APR=$EBROOTAPR/bin/apr-1-config APU=$EBROOTAPRMINUTIL/bin/apu-1-config"
+sanity_check_paths = {
+    'files': ['include/serf-1/serf.h'] +
+             ['lib/libserf-1.%s' % x for x in ['a', 'so']],
+    'dirs': [],
+}
+
+moduleclass = 'tools'

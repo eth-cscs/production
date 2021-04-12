@@ -34,7 +34,7 @@ from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.build_log import EasyBuildError
 
 
-KNOWN_PRGENVS = ['cpe-cray', 'cpe-gnu']
+KNOWN_PRGENVS = ['cpe-aocc', 'cpe-cray', 'cpe-gnu', 'cpe-intel']
 
 
 class cpeToolchain(Bundle):
