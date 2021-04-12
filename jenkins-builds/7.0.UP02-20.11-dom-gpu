@@ -6,7 +6,7 @@
  CDO-1.9.5-CrayIntel-20.11.eb
  CMake-3.14.5.eb                                        --set-default-module
  CP2K-7.1-CrayGNU-20.11-cuda.eb                         --set-default-module
- CP2K-8.1-CrayGNU-20.11-cuda.eb                        
+ CP2K-8.1-CrayGNU-20.11-cuda.eb
  CPMD-4.1-CrayIntel-20.11.eb                            --set-default-module
  CPMD-4.3-CrayIntel-20.11-cuda.eb
  FFmpeg-4.3.1-CrayGNU-20.11.eb                          --set-default-module
@@ -52,7 +52,7 @@
  Python-bare-3.7.3.eb                                   --hidden
  QuantumESPRESSO-6.6a2-CrayPGI-20.11-cuda.eb            --set-default-module
  QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-20.11-cuda.eb   --set-default-module
- singularity-3.6.4-daint.eb
+ singularity-3.7.3-daint.eb
  Spark-2.4.7-CrayGNU-20.11-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-20.11-cuda.eb                     --set-default-module
  Vc-1.4.1-CrayGNU-20.11.eb                              --set-default-module
