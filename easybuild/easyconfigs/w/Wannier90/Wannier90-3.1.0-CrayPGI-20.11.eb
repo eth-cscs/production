@@ -7,7 +7,7 @@ version = '3.1.0'
 homepage = 'http://www.wannier.org'
 description = """A tool for obtaining maximally-localised Wannier functions"""
 
-toolchain = {'name': 'CrayPGI', 'version': '20.08'}
+toolchain = {'name': 'CrayPGI', 'version': '20.11'}
 
 sources = ['v3.1.0.tar.gz']
 source_urls = ['https://github.com/wannier-developers/wannier90/archive/']
