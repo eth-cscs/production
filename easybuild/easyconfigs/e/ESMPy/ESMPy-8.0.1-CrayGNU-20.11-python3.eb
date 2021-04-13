@@ -1,0 +1,36 @@
+# teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'ESMPy'
+version = '8.0.1'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/esmf/'
+description = ('ESMPy is a Python interface to the Earth System Modeling '
+               'Framework (ESMF) regridding utility')
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/esmf-org/esmf/archive/']
+sources = ['%s_%s.tar.gz' % ('ESMF', '_'.join(version.split('.')))]
+
+options = {'modulename': 'ESMF'}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('xarray', '0.17.0', versionsuffix),
+    ('ESMF', '8.0.1'),
+]
+
+prebuildopts = preinstallopts = 'cd %(builddir)s/esmf-ESMF_8_0_1/src/addon/ESMPy && '
+buildopts = '--ESMFMKFILE=$EBROOTESMF/lib/esmf.mk'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/ESMF']
+}
+
+moduleclass = 'geo'
