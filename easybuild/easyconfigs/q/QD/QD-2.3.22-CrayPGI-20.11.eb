@@ -7,7 +7,7 @@ version = "2.3.22"
 homepage = 'https://www.davidhbailey.com/dhbsoftware'
 description = """QD is a library for real double-double and quad-double arithmetic."""
 
-toolchain = {'name': 'CrayPGI', 'version': '20.08'}
+toolchain = {'name': 'CrayPGI', 'version': '20.11'}
 toolchainopts = {'opt': True, 'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
