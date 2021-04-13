@@ -2,13 +2,13 @@
 easyblock = 'MakeCp'
 
 name = 'VASP'
-version = '6.1.0'
+version = '6.2.0'
 versionsuffix = '-acc'
 
 homepage = 'http://www.vasp.at'
 description = """The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. """
 
-toolchain = {'name': 'CrayPGI', 'version': '20.08'}
+toolchain = {'name': 'CrayPGI', 'version': '20.11'}
 toolchainopts = { 'usempi': True }
 
 patches = [('%(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')]
@@ -27,7 +27,7 @@ dependencies = [
 
 prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
 
-# don't use parallel make, results in compilation failure
+# parallel make tend to fail
 parallel = 1
 
 # build type
@@ -36,7 +36,7 @@ buildopts = ' all '
 files_to_copy = [(['./bin/vasp_*'],'bin')]
 
 sanity_check_paths = {
-    'files': ['bin/vasp_gpu','bin/vasp_gpu_ncl'],
+    'files': ['bin/vasp_std','bin/vasp_ncl', 'bin/vasp_gam'],
     'dirs': [],
 }
 

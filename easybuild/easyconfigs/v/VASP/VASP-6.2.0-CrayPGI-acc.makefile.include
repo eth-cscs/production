@@ -12,17 +12,12 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
              -D_OPENACC \
              -DVASP2WANNIER90v2
 
-CPP        = pgfortran -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
-
-FC         = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc30,cc35,cc50,cc60,cc70,cuda10.1
-FCL        = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc30,cc35,cc50,cc60,cc70,cuda10.1 -pgc++libs
-
+CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
+FC         = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc60,cuda11.0
+FCL        = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc60,cuda11.0 -pgc++libs
 FREE       = -Mfree
-
 FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
-
 OFLAG      = -fast
-
 DEBUG      = -Mfree -O0 -traceback
 
 # Use Intel MKL libraries
@@ -35,9 +30,7 @@ CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
 WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
-
 INCS       = -I$(MKLROOT)/include/fftw
-
 LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
 
 OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
@@ -45,8 +38,8 @@ OBJECTS_O2 += fft3dlib.o
 
 # Software emulation of quadruple precsion
 QD         ?= $(EBROOTQD)
-LLIBS      += -L$(EBROOTQD)/lib -lqdmod -lqd
-INCS       += -I$(EBROOTQD)/include/qd
+LLIBS      += -L$(QD)/lib -lqdmod -lqd
+INCS       += -I$(QD)/include/qd
 
 # Redefine the standard list of O1 and O2 objects
 SOURCE_O1  := pade_fit.o
@@ -54,8 +47,8 @@ SOURCE_O2  := pead.o
 
 # For what used to be vasp.5.lib
 CPP_LIB    = $(CPP)
-FC_LIB     = pgfortran
-CC_LIB     = pgcc
+FC_LIB     = ftn
+CC_LIB     = cc
 CFLAGS_LIB = -O
 FFLAGS_LIB = -O1 -Mfixed
 FREE_LIB   = $(FREE)
@@ -63,7 +56,7 @@ FREE_LIB   = $(FREE)
 OBJECTS_LIB= linpack_double.o getshmem.o
 
 # For the parser library
-CXX_PARS   = pgc++ --no_warnings
+CXX_PARS   = iCC --no_warnings
 LLIBS      += -lstdc++
 
 # Normally no need to change this
