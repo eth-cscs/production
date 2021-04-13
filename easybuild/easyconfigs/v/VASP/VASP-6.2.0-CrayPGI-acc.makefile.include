@@ -14,8 +14,8 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
              -DVASP2WANNIER90v2
 
 CPP        = pgfortran -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
-FC         = ftn -acc -ta=tesla:cc60,cuda10.2
-FCL        = ftn -acc -ta=tesla:cc60,cuda10.2 -pgc++libs
+FC         = ftn CUDA_HOME=$(CUDA_HOME) -acc -Mcuda -ta=tesla:cc60,cuda10.2
+FCL        = ftn CUDA_HOME=$(CUDA_HOME) -acc -Mcuda -ta=tesla:cc60,cuda10.2 -pgc++libs
 FREE       = -Mfree
 FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
 OFLAG      = -fast
