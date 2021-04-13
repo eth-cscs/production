@@ -36,7 +36,7 @@ LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
 OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
 OBJECTS_O2 += fft3dlib.o
 
-# Software emulation of quadruple precsion
+# Software emulation of quadruple precision
 QD         ?= $(EBROOTQD)
 LLIBS      += -L$(QD)/lib -lqdmod -lqd
 INCS       += -I$(QD)/include/qd
@@ -56,7 +56,7 @@ FREE_LIB   = $(FREE)
 OBJECTS_LIB= linpack_double.o getshmem.o
 
 # For the parser library
-CXX_PARS   = iCC --no_warnings
+CXX_PARS   = CC --no_warnings
 LLIBS      += -lstdc++
 
 # Normally no need to change this
