@@ -16,7 +16,7 @@ source_urls = ['https://github.com/NVIDIA/%(namelower)s/archive/refs/tags']
 sources = ['v%(version)s{0}.tar.gz'.format(local_revision)]
 
 builddependencies = [
-    ('cudatoolkit/10.2.89_3.29-7.0.2.1_3.5__g67354b4', EXTERNAL_MODULE)
+    ('cudatoolkit', EXTERNAL_MODULE)
 ]
 
 prebuildopts = ' sed -i -e "s/-Wno-unused-function -Wno-sign-compare//" -e "s/-Wvla//" makefiles/common.mk && ' 
