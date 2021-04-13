@@ -26,11 +26,12 @@ dependencies = [
     ('QD', '2.3.22'),
 ]
 
-prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
-
 # parallel make tend to fail
 parallel = 1
 
+prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
+# remove call to CUDA_AWARE_SUPPORT() invoking MPIX_Query_cuda_support() not available in cray-mpich
+prebuildopts += ' sed -i "118,120d" src/openacc.F && '
 # build type
 buildopts = ' all '
 
