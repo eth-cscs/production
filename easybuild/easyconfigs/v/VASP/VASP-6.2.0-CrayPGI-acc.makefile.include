@@ -10,9 +10,10 @@ CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
              -Dqd_emulate \
              -Dfock_dblbuf \
              -D_OPENACC \
+             -DUSENCCL -DUSENCCLP2P \
              -DVASP2WANNIER90v2
 
-CPP        = ftn -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
+CPP        = pgfortran -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
 FC         = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc60,cuda11.0
 FCL        = ftn CUDA_HOME=$(CRAY_CUDATOOLKIT_DIR) -acc -ta=tesla:cc60,cuda11.0 -pgc++libs
 FREE       = -Mfree
@@ -20,26 +21,33 @@ FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
 OFLAG      = -fast
 DEBUG      = -Mfree -O0 -traceback
 
-# Use Intel MKL libraries
-MKL_PATH   = $(MKLROOT)/lib/intel64
-BLAS       = $(MKL_PATH)/libmkl_blas95_lp64.a
-LAPACK     = $(MKL_PATH)/libmkl_lapack95_lp64.a
-BLACS      = -lmkl_blacs_intelmpi_lp64
-SCALAPACK  = -L$(MKL_PATH) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
-CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
+# Wannier90 library
 WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
-OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
-INCS       = -I$(MKLROOT)/include/fftw
+# Use Intel MKL libraries for BLAS, (sca)LAPACK and FFT
+MKL_LIB    = $(MKLROOT)/lib/intel64
+BLAS       = $(MKL_LIB)/libmkl_blas95_lp64.a
+LAPACK     = $(MKL_LIB)/libmkl_lapack95_lp64.a
+BLACS      = -lmkl_blacs_intelmpi_lp64
+SCALAPACK  = -L$(MKL_LIB) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+# MKL FFT
+INCS       = -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+OBJECTS    = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
+
+# CUDA libraries
+CUDA       = -Mcudalib=cublas -Mcudalib=cufft -Mcudalib=cusolver -Mcuda
+
 LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
 
-OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
-OBJECTS_O2 += fft3dlib.o
+# NVIDIA Collective Communication Library (NCCL) 
+NCCL       ?= $(EBROOTNCCL)
+INCS       += -I$(NCCL)/include
+LLIBS      += -L$(NCCL) -lnccl
 
-# Software emulation of quadruple precision
+# QD library (software emulation of quadruple precision)
 QD         ?= $(EBROOTQD)
-LLIBS      += -L$(QD)/lib -lqdmod -lqd
 INCS       += -I$(QD)/include/qd
+LLIBS      += -L$(QD)/lib -lqdmod -lqd
 
 # Redefine the standard list of O1 and O2 objects
 SOURCE_O1  := pade_fit.o
@@ -47,8 +55,8 @@ SOURCE_O2  := pead.o
 
 # For what used to be vasp.5.lib
 CPP_LIB    = $(CPP)
-FC_LIB     = ftn
-CC_LIB     = cc
+FC_LIB     = pgfortran
+CC_LIB     = pgcc
 CFLAGS_LIB = -O
 FFLAGS_LIB = -O1 -Mfixed
 FREE_LIB   = $(FREE)
@@ -56,8 +64,7 @@ FREE_LIB   = $(FREE)
 OBJECTS_LIB= linpack_double.o getshmem.o
 
 # For the parser library
-CXX_PARS   = CC --no_warnings
-LLIBS      += -lstdc++
+CXX_PARS   = pgc++ --no_warnings
 
 # Normally no need to change this
 SRCDIR     = ../../src
