@@ -42,7 +42,7 @@ LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
 # NVIDIA Collective Communication Library (NCCL) 
 NCCL       ?= $(EBROOTNCCL)
 INCS       += -I$(NCCL)/include
-LLIBS      += -L$(NCCL) -lnccl
+LLIBS      += -L$(NCCL)/lib -lnccl
 
 # QD library (software emulation of quadruple precision)
 QD         ?= $(EBROOTQD)
