@@ -36,8 +36,8 @@ dependencies = [
 parallel = 1
 
 prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
-# remove calls to MPIX_Query_cuda_support() not available in cray-mpich
-prebuildopts += ' sed -i "149,152d;158,160d;165d" src/openacc.F && '
+# remove calls to MPIX_Query_cuda_support() (not available in cray-mpich) and fix CUDA_AWARE_SUPPORT detection
+prebuildopts += ' sed -i -e "149,152d;158,160d;165d" -e "/INTEGER :: ENVVAR_STAT/a\       CUDA_AWARE_SUPPORT = .TRUE." src/openacc.F && '
 # make "std", "gam" and "ncl" targets
 buildopts = ' gam ncl std '
 
