@@ -6,7 +6,13 @@ version = '6.2.0'
 versionsuffix = '-acc'
 
 homepage = 'http://www.vasp.at'
-description = """The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. """
+description = """
+The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles.
+
+Note: PGI Fortran might give the warning "ieee_inexact FORTRAN STOP".
+Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
+More details on the PGI User Forum at https://www.pgroup.com/userforum
+"""
 
 toolchain = {'name': 'CrayPGI', 'version': '20.11'}
 toolchainopts = { 'usempi': True }
@@ -30,8 +36,8 @@ dependencies = [
 parallel = 1
 
 prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
-# remove call to CUDA_AWARE_SUPPORT() invoking MPIX_Query_cuda_support() not available in cray-mpich
-prebuildopts += ' sed -i "118,120d" src/openacc.F && '
+# remove calls to MPIX_Query_cuda_support() not available in cray-mpich
+prebuildopts += ' sed -i "149,152d;158,160d;165d" vasp-6.2.0.orig/src/openacc.F && '
 # build type
 buildopts = ' all '
 
