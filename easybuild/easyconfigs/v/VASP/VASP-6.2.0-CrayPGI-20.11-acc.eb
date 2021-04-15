@@ -12,6 +12,7 @@ The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic 
 Note: PGI Fortran might give the warning "ieee_inexact FORTRAN STOP".
 Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
 More details on the PGI User Forum at https://www.pgroup.com/userforum
+MPICH_RDMA_ENABLED_CUDA must be set to 1 to enable CUDA-aware MPI.
 """
 
 toolchain = {'name': 'CrayPGI', 'version': '20.11'}
