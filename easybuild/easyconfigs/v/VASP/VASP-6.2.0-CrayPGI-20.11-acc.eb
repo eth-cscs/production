@@ -37,7 +37,7 @@ parallel = 1
 
 prebuildopts = ' mv %(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include makefile.include && '
 # remove calls to MPIX_Query_cuda_support() (not available in cray-mpich) and fix CUDA_AWARE_SUPPORT detection
-prebuildopts += ' sed -i -e "149,152d;158,160d;165d" -e "/INTEGER :: ENVVAR_STAT/a\       CUDA_AWARE_SUPPORT = .TRUE." src/openacc.F && '
+prebuildopts += ' sed -i -e "149,152d;158,160d;165d" -e "/INTEGER :: ENVVAR_STAT/a\       CUDA_AWARE_SUPPORT = .FALSE." -e "s/IF (ENVVAR_STAT==0 .AND. ENVVAR_VALUE==\'0\') CUDA_AWARE_SUPPORT = .FALSE./IF (ENVVAR_STAT==0) CUDA_AWARE_SUPPORT =(ENVVAR_VALUE == \'1\')/" src/openacc.F && '
 # make "std", "gam" and "ncl" targets
 buildopts = ' gam ncl std '
 
@@ -47,5 +47,8 @@ sanity_check_paths = {
     'files': ['bin/vasp_gam','bin/vasp_ncl', 'bin/vasp_std'],
     'dirs': [],
 }
+
+# define MPICH_RDMA_ENABLED_CUDA to enable CUDA-aware MPI
+modextravars = {'MPICH_RDMA_ENABLED_CUDA': '1'}
 
 moduleclass = 'phys'
