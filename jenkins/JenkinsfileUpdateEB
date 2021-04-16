@@ -198,7 +198,7 @@ stage('Update Stage') {
                             status=0
                             recipe_target=\$(echo \$line | awk '{print \$1}')
                             flags_target=\${line/\$recipe_target/}
-                            echo -e "\nCurrent target: \$recipe_targe"
+                            echo -e "\nCurrent target: \$recipe_target"
 
                             # check if recipe matches target Cray PE  
                             if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
@@ -240,7 +240,7 @@ stage('Update Stage') {
                                 for name in $licensed_software; do 
                                     if [[ "\$recipe_target" =~ "\$name" ]]; then 
                                         version=\$(echo "\$recipe_target" | sed -e "s/^\${name}-//" -e "s/.eb//")
-                                        echo -e "\nAdjusting permissions of licensed software \$name (module version: \$version):"; 
+                                        echo -e "Adjusting permissions of licensed software \$name (module version: \$version):"; 
                                         # define allowed group
                                         if [[ "\$name" =~ "IDL" ]]; then
                                             # check IDL module version
@@ -264,14 +264,14 @@ stage('Update Stage') {
                                         checkgroup=\$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ "\$checkgroup" != "\$group" ]; then
                                         # change group ownership (current user must be member of the group to use chgrp)
-                                            echo -e "\nChanging group ownership of the folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} to \${group}"
+                                            echo -e " \t- changing group ownership of the folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} to \${group}"
                                             chgrp \${group} -R \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
                                         fi
                                         # check access rights of licensed software folder: last digit must be 0 (no access for others)
                                         checkrights=\$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ \${checkrights: -1} -ne 0 ]; then
                                             # change access rights (current user must own the folder to use the command chmod)
-                                            echo -e "\nRemoving access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
+                                            echo -e " \t- removing access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
                                             chmod -R o-rwx \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
                                         fi
                                     fi
