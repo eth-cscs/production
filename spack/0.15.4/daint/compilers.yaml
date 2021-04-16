@@ -138,10 +138,10 @@ compilers:
     modules: []
     operating_system: sles15
     paths:
-      cc: /opt/pgi/20.1.0/linux86-64/20.1/bin/pgcc
-      cxx: /opt/pgi/20.1.0/linux86-64/20.1/bin/pgc++
-      f77: /opt/pgi/20.1.0/linux86-64/20.1/bin/pgfortran
-      fc: /opt/pgi/20.1.0/linux86-64/20.1/bin/pgf90
+      cc: /opt/pgi/20.1.1/linux86-64/20.1/bin/pgcc
+      cxx: /opt/pgi/20.1.1/linux86-64/20.1/bin/pgc++
+      f77: /opt/pgi/20.1.1/linux86-64/20.1/bin/pgfortran
+      fc: /opt/pgi/20.1.1/linux86-64/20.1/bin/pgfortran
     spec: pgi@20.1
     target: x86_64
 - compiler:

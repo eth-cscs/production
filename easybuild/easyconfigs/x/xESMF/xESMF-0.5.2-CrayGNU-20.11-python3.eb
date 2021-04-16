@@ -1,0 +1,45 @@
+# teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'xESMF'
+version = '0.5.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/pangeo-data/xESMF'
+description = 'xESMF is a Python package for regridding'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/pangeo-data/xESMF/releases/download/v%(version)s/']
+sources = ['%(namelower)s-%(version)s.tar.gz']
+checksums = ['af3c96a43467608aade69ff1f679b4d3e7bc56d6eb2b3532552290266a758cd2']
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('Shapely', '1.7.1', versionsuffix),
+    ('ESMPy', '8.0.1', versionsuffix),
+    ('xarray', '0.17.0', versionsuffix)
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('cf-xarray', '0.5.1', {
+        'modulename': 'cf_xarray',
+        'req_py_majver': '3',
+        'req_py_minver': '8',
+        'source_urls': ['https://pypi.python.org/packages/source/c/cf_xarray'],
+        'sources': ['cf_xarray-%(version)s.tar.gz'],
+        'use_pip': True,
+        'checksums': ['dae4d393782249adc330457b20206f1d5b2361660dff2ac7556db0f4ea277bac'],
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['lib/python%(pyshortver)s/site-packages/%(namelower)s-%(version)s-py%(pyshortver)s.egg'],
+    'dirs': [],
+}
+
+moduleclass = 'geo'

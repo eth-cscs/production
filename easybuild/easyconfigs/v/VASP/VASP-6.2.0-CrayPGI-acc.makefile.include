@@ -1,0 +1,71 @@
+# Precompiler options
+CPP_OPTIONS= -DHOST=\"LinuxPGI\" \
+             -DMPI -DMPI_BLOCK=8000 -DMPI_INPLACE -Duse_collective \
+             -DscaLAPACK \
+             -DCACHE_SIZE=4000 \
+             -Davoidalloc \
+             -Dvasp6 \
+             -Duse_bse_te \
+             -Dtbdyn \
+             -Dqd_emulate \
+             -Dfock_dblbuf \
+             -D_OPENACC \
+             -DUSENCCL -DUSENCCLP2P \
+             -DVASP2WANNIER90v2
+
+CPP        = pgfortran -Mpreprocess -Mfree -Mextend -E $(CPP_OPTIONS) $*$(FUFFIX)  > $*$(SUFFIX)
+FC         = ftn CUDA_HOME=$(CUDA_HOME) -acc -Mcuda -ta=tesla:cc60,cuda10.2
+FCL        = ftn CUDA_HOME=$(CUDA_HOME) -acc -Mcuda -ta=tesla:cc60,cuda10.2 -pgc++libs
+FREE       = -Mfree
+FFLAGS     = -Mnoupcase -Mbackslash -Mlarge_arrays
+OFLAG      = -fast
+DEBUG      = -Mfree -O0 -traceback
+
+# Wannier90 library
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
+
+# Use Intel MKL libraries for BLAS, (sca)LAPACK and FFT
+MKL_LIB    = $(MKLROOT)/lib/intel64
+BLAS       = $(MKL_LIB)/libmkl_blas95_lp64.a
+LAPACK     = $(MKL_LIB)/libmkl_lapack95_lp64.a
+BLACS      = -lmkl_blacs_intelmpi_lp64
+SCALAPACK  = -L$(MKL_LIB) -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64
+# MKL FFT
+INCS       = -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+OBJECTS    = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
+
+# CUDA libraries
+CUDA       = -Mcudalib=cublas,cufft,cusolver,cusparse -Mcuda
+
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) $(CUDA)
+
+# NVIDIA Collective Communication Library (NCCL) 
+NCCL       ?= $(EBROOTNCCL)
+INCS       += -I$(NCCL)/include
+LLIBS      += -L$(NCCL)/lib -lnccl
+
+# QD library (software emulation of quadruple precision)
+QD         ?= $(EBROOTQD)
+INCS       += -I$(QD)/include/qd
+LLIBS      += -L$(QD)/lib -lqdmod -lqd
+
+# Redefine the standard list of O1 and O2 objects
+SOURCE_O1  := pade_fit.o
+SOURCE_O2  := pead.o
+
+# For what used to be vasp.5.lib
+CPP_LIB    = $(CPP)
+FC_LIB     = pgfortran
+CC_LIB     = pgcc
+CFLAGS_LIB = -O
+FFLAGS_LIB = -O1 -Mfixed
+FREE_LIB   = $(FREE)
+
+OBJECTS_LIB= linpack_double.o getshmem.o
+
+# For the parser library
+CXX_PARS   = pgc++ --no_warnings
+
+# Normally no need to change this
+SRCDIR     = ../../src
+BINDIR     = ../../bin

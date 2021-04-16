@@ -314,3 +314,173 @@ compilers:
       fc: ftn
     spec: cce@11.0.0.20.11
     target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-gnu
+    - gcc/8.1.0
+    - cdt/21.02
+    - gcc/8.1.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: gcc@8.1.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-gnu
+    - gcc/9.3.0
+    - cdt/21.02
+    - gcc/9.3.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: gcc@9.3.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-gnu
+    - gcc/10.2.0
+    - cdt/21.02
+    - gcc/10.2.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: gcc@10.2.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-gnu
+    - gcc/8.3.0
+    - cdt/21.02
+    - gcc/8.3.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: gcc@8.3.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-gnu
+    - gcc/10.1.0
+    - cdt/21.02
+    - gcc/10.1.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: gcc@10.1.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-intel
+    - intel/19.0.1.144
+    - cdt/21.02
+    - intel/19.0.1.144
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: intel@19.0.1.144.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-intel
+    - intel/19.1.1.217
+    - cdt/21.02
+    - intel/19.1.1.217
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: intel@19.1.1.217.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-pgi
+    - pgi/20.1.0
+    - cdt/21.02
+    - pgi/20.1.0
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: pgi@20.1.0.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-pgi
+    - pgi/20.1.1
+    - cdt/21.02
+    - pgi/20.1.1
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: pgi@20.1.1.21.02
+    target: any
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules:
+    - PrgEnv-cray
+    - cce/11.0.2
+    - cdt/21.02
+    - cce/11.0.2
+    operating_system: cnl7
+    paths:
+      cc: cc
+      cxx: CC
+      f77: ftn
+      fc: ftn
+    spec: cce@11.0.2.21.02
+    target: any
