@@ -1,19 +1,22 @@
-# Compiler toolchain for Cray EX Programming Environment Intel compiler (cpe-intel)
+# Compiler toolchain for Cray EX Programming Environment Cray compiler (cpe-cray)
 easyblock = 'cpeToolchain'
 
-name = 'cpeIntel'
-version = "21.02"
+name = 'cpeCray'
+version = "21.03"
 
 homepage = 'https://pubs.cray.com'
-description = """Toolchain using Cray compiler wrapper with cpe-intel module (CPE release: %s).\n""" % version
+description = """Toolchain using Cray compiler wrapper with cpe-cray module (CPE release: %s).\n""" % version
 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-intel', EXTERNAL_MODULE)
+   ('cpe-cray', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''
+if not ( isloaded("cce") ) then
+    load("cce")
+end
 if not ( isloaded("cray-dsmml") ) then
     load("cray-dsmml")
 end
@@ -31,9 +34,6 @@ if not ( isloaded("craype-x86-rome") ) then
 end
 if not ( isloaded("craype-network-ofi") ) then
     load("craype-network-ofi")
-end
-if not ( isloaded("intel") ) then
-    load("intel")
 end
 if not ( isloaded("libfabric") ) then
     load("libfabric")

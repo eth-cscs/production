@@ -1,16 +1,16 @@
-# Compiler toolchain for Cray EX Programming Environment Intel compiler (cpe-intel)
+# Compiler toolchain for Cray EX Programming Environment GNU compiler (cpe-gnu)
 easyblock = 'cpeToolchain'
 
-name = 'cpeIntel'
-version = "21.02"
+name = 'cpeGNU'
+version = "21.03"
 
 homepage = 'https://pubs.cray.com'
-description = """Toolchain using Cray compiler wrapper with cpe-intel module (CPE release: %s).\n""" % version
+description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE release: %s).\n""" % version
 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-intel', EXTERNAL_MODULE)
+   ('cpe-gnu', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''
@@ -32,8 +32,8 @@ end
 if not ( isloaded("craype-network-ofi") ) then
     load("craype-network-ofi")
 end
-if not ( isloaded("intel") ) then
-    load("intel")
+if not ( isloaded("gcc") ) then
+    load("gcc")
 end
 if not ( isloaded("libfabric") ) then
     load("libfabric")
@@ -51,3 +51,4 @@ prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
 ''' 
 
 moduleclass = 'toolchain'
+#execute {cmd="ml restore PrgEnv-gnu",modeA={"load"}}
