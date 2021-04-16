@@ -115,12 +115,6 @@ stage('Update Stage') {
                     /* create the new toolchains and update the software stack */
                     sh("""#!/bin/bash -l
 
-                        # unuse paths
-                        for path in $unuse_paths; do
-                            module unuse \$path
-                        done
-                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
-
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
                         export EASYBUILD_PREFIX="${eb_installpath}"
@@ -146,6 +140,12 @@ stage('Update Stage') {
                         # update buildpath and metadata file for external modules
                         export EASYBUILD_BUILDPATH="\$EASYBUILD_BUILDPATH/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="\$EB_CUSTOM_REPOSITORY/cray_external_modules_metadata-${params.pe_target}.cfg"
+
+                        # unuse paths
+                        for path in $unuse_paths; do
+                            module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
 
                         # print EasyBuild version and configuration
                         eb --version
