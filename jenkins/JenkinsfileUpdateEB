@@ -47,7 +47,8 @@ stage('Machine Selection') {
   - the target Cray PE version is selected by the user and stored in "params.pe_target"
 */
 def updates = [:]
-
+def licensed_software = "CPMD IDL MATLAB VASP"
+"
 stage('Update Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
@@ -234,6 +235,47 @@ stage('Update Stage') {
                                 echo "\$recipe_target" >> "\${success_file}"
                                 echo "\$deps" | tr ' ' '\n' >> "\${submit_file}"
                                 echo -e "\nBuild of \$recipe_target SUCCESSFUL(\${#success[@]})\n"
+
+                                # adjust access rights of licensed software
+                                for name in $licensed_software; do 
+                                    if [[ "\$recipe_target" =~ "\$name" ]]; then 
+                                        version=\$(echo "\$recipe_target" | sed -e "s/^\${name}-//" -e "s/.eb//")
+                                        echo -e "\nAdjusting permissions of licensed software \$name (module version: \$version):"; 
+                                        # define allowed group
+                                        if [[ "\$name" =~ "IDL" ]]; then
+                                            # check IDL module version
+                                            if [[ "\$version" =~ "CSCS" ]]; then
+                                                group="\${name,,}cscs"
+                                            else
+                                                group="\${name,,}ethz"
+                                            fi
+                                        elif [[ "\$name" =~ "VASP" ]]; then
+                                            # check VASP module version
+                                            if [[ "\$version" =~ "5.4" ]]; then
+                                                group="\${name,,}"
+                                            else
+                                                # group vasp6 enforced after June 30th 2020"
+                                                group="\${name,,}6"
+                                            fi
+                                        else
+                                            group=${name,,}
+                                        fi
+                                        # check group ownership of licensed software folder
+                                        checkgroup=$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        if [ "\$checkgroup" != "\$group" ]; then
+                                        # change group ownership (current user must be member of the group to use chgrp)
+                                            echo -e "\nChanging group ownership of the folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} to \${group}"
+                                            chgrp \${group} -R \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
+                                        fi
+                                        # check access rights of licensed software folder: last digit must be 0 (no access for others)
+                                        checkrights=$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        if [ \${checkrights: -1} -ne 0 ]; then
+                                            # change access rights (current user must own the folder to use the command chmod)
+                                            echo -e "\n Removing access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
+                                            chmod -R o-rwx \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
+                                        fi
+                                    fi
+                                done
                             else
                                 failed+=(\$recipe_target)
                                 echo "\$recipe_target" >> "\${failed_file}"
