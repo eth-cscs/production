@@ -26,8 +26,6 @@ dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE)
 ]
 
-#prebuildopts = 'python setup.py configure && '
-
 # sanity checks (import h5py) fails on login nodes (MPI not available)
 options = {'modulename': 'os'}
 
