@@ -48,7 +48,7 @@ stage('Machine Selection') {
 */
 def updates = [:]
 def licensed_software = "CPMD IDL MATLAB VASP"
-"
+
 stage('Update Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
