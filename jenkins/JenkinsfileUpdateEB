@@ -261,14 +261,14 @@ stage('Update Stage') {
                                             group=${name,,}
                                         fi
                                         # check group ownership of licensed software folder
-                                        checkgroup=$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        checkgroup=\$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ "\$checkgroup" != "\$group" ]; then
                                         # change group ownership (current user must be member of the group to use chgrp)
                                             echo -e "\nChanging group ownership of the folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} to \${group}"
                                             chgrp \${group} -R \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
                                         fi
                                         # check access rights of licensed software folder: last digit must be 0 (no access for others)
-                                        checkrights=$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        checkrights=\$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ \${checkrights: -1} -ne 0 ]; then
                                             # change access rights (current user must own the folder to use the command chmod)
                                             echo -e "\n Removing access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
