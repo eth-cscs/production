@@ -258,7 +258,7 @@ stage('Update Stage') {
                                                 group="\${name,,}6"
                                             fi
                                         else
-                                            group=${name,,}
+                                            group=\${name,,}
                                         fi
                                         # check group ownership of licensed software folder
                                         checkgroup=\$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
@@ -271,7 +271,7 @@ stage('Update Stage') {
                                         checkrights=\$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ \${checkrights: -1} -ne 0 ]; then
                                             # change access rights (current user must own the folder to use the command chmod)
-                                            echo -e "\n Removing access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
+                                            echo -e "\nRemoving access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
                                             chmod -R o-rwx \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
                                         fi
                                     fi
