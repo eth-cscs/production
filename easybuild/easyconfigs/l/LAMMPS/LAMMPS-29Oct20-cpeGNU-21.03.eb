@@ -14,7 +14,7 @@ source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive']
 sources = ['stable_29Oct2020.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.19.6', '', True),
+    ('CMake', '3.20.1', '', True)
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),

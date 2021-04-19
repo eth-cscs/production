@@ -17,7 +17,7 @@ checksums = ['a8ee37ddc5079339854bd313272856c9d41a27802472ee9ae44b58ee9a298337']
 
 builddependencies = [
     ('bzip2', '1.0.8'),
-    ('CMake', '3.19.4', '', True),
+    ('CMake', '3.20.1', '', True)
 ]
 
 configopts = [
