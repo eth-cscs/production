@@ -88,7 +88,7 @@ stage('Update Stage') {
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
-                        eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg
+                        eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all"
                         eb_toolspath = "${eb_installpath}/tools/modules/all"
                         load_pe = architecture == "" ?
@@ -98,7 +98,7 @@ stage('Update Stage') {
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
                         eb_installpath = "${params.eb_prefix}"
-                        eb_metadata="$WORKSPACE/easybuild/alps-external_modules_metadata-${pe_target}.cfg
+                        eb_metadata="$WORKSPACE/easybuild/alps-external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
                         load_pe = "module use /apps/eiger/UES/modulefiles && module load cpe/${pe_target}"
