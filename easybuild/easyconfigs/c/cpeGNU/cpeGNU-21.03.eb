@@ -10,7 +10,7 @@ description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-gnu', EXTERNAL_MODULE)
+   ('PrgEnv-gnu', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''

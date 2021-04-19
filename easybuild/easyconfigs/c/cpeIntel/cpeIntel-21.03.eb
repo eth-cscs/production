@@ -10,7 +10,7 @@ description = """Toolchain using Cray compiler wrapper with cpe-intel module (CP
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-intel', EXTERNAL_MODULE)
+   ('PrgEnv-intel', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''

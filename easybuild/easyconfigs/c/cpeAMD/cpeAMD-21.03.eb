@@ -10,7 +10,7 @@ description = """Toolchain using Cray compiler wrapper with cpe-aocc module (CPE
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-aocc', EXTERNAL_MODULE)
+   ('PrgEnv-aocc', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''
