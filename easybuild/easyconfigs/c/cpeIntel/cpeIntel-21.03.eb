@@ -2,7 +2,7 @@
 easyblock = 'cpeToolchain'
 
 name = 'cpeIntel'
-version = "21.02"
+version = "21.03"
 
 homepage = 'https://pubs.cray.com'
 description = """Toolchain using Cray compiler wrapper with cpe-intel module (CPE release: %s).\n""" % version

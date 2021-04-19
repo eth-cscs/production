@@ -26,10 +26,13 @@
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-serial.eb
+ h5py-3.2.1-CrayGNU-20.11-python3-parallel.eb
+ h5py-3.2.1-CrayGNU-20.11-python3-serial.eb
  hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.11.eb                          --set-default-module
+ ipcmagic-1.0.1-CrayGNU-20.11.eb 
  Julia-1.5.0-CrayGNU-20.11.eb                           --set-default-module
  JuliaExtensions-1.5.0-CrayGNU-20.11.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
