@@ -119,7 +119,7 @@ stage('Update Stage') {
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
@@ -189,8 +189,12 @@ stage('Update Stage') {
                         list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
                         # filter current production list to create the target production list
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
-                        echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                        grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                        if [ -n "${params.discard_recipes}" ]; then 
+                            echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
+                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                        else 
+                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                        fi
 
                         if [ -s "\$list_target" ]; then
                             echo -e "\nFiltering production list \$(basename \${list_current}) to \$(basename \${list_target}): \n\$(cat \${list_target})"
