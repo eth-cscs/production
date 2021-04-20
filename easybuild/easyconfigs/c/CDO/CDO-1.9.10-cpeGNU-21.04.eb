@@ -11,7 +11,7 @@ description = """
 """
 
 toolchain = {'name': 'cpeGNU', 'version': '21.04'}
-toolchainopts = {'opt': True, 'pic': True}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'verbose': False}
 
 # Files visible at https://code.mpimet.mpg.de/projects/cdo/files: different link for each version!
 source_urls = ['https://code.mpimet.mpg.de/attachments/24638/']
@@ -33,7 +33,11 @@ dependencies = [
     ('util-linux', '2.36.2')
 ]
 
-configopts = ' --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR '
+osdependencies = ['libtool']
+
+preconfigopts = ' ln -fs $(which libtool) libcdi/libtool && ' 
+configopts = ' --disable-static --enable-cdi-lib '
+configopts += ' --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR '
 configopts += ' --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC '
 configopts += ' --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX '
 
