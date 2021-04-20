@@ -28,7 +28,7 @@ sources = [SOURCELOWER_TAR_GZ]
 
 # CMake dependency with SYSTEM toolchain
 builddependencies = [
-    ('CMake', '3.19.6', '', True),
+    ('CMake', '3.20.1', '', True),
 ]
 dependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
