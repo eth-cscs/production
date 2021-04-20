@@ -2,7 +2,7 @@
 easyblock = 'JuliaBundle'
 
 name = 'JuliaExtensions'
-version = '1.5.3'
+version = '1.6.0'
 
 homepage = 'https://julialang.org'
 description = "Extensions for julia"
