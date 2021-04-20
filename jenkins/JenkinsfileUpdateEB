@@ -489,10 +489,13 @@ stage('GitHub Stage') {
                             fi
                         done
 
+                        # add recipes under current path (production/easybuild/easyconfigs)
+                        git add .
+
                         # update production list
                         list_target=\$(ls ${eb_installpath}/*${params.pe_target}-${machineLabel} | tail -1)
                         list_production=$WORKSPACE/jenkins-builds/\$(basename \$list_target)
-                        if [ -f "\$list_production" ]; then
+                        if [ -s "\$list_production" ]; then
                             # updated items of target list are appended to production list
                             echo "\$(grep -v -f \$list_production \$list_target)" >> \$list_production 
                         else
@@ -500,19 +503,22 @@ stage('GitHub Stage') {
                             cp \$list_target \$list_production
                         fi
 
+                        # add production list
+                        git add \$list_production
+
                         # update architecture modulefile
                         if [[ $machineName == "daint" || $machineName == "dom" ]]; then
-                            modulefile_current="$WORKSPACE/login/$machineLabel/${params.pe_current}"
-                            modulefile_target="$WORKSPACE/login/$machineLabel/${params.pe_target}"
+                            modulefile_current="$WORKSPACE/login/daint-$architecture/${params.pe_current}"
+                            modulefile_target="$WORKSPACE/login/daint-$architecture/${params.pe_target}"
                             if [ ! -f "\$modulefile_target" ]; then  
                                 sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
+                                # add architecture modulefile
+                                git add \$modulefile_target
                             fi
                         fi
 
-                        # load hub tool and add recipes to submit a pull request
+                        # load hub tool to submit a pull request with recently added files
                         $load_hub
-                        git add .
-                        
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
