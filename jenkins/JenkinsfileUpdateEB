@@ -74,6 +74,7 @@ stage('Update Stage') {
                     /* 
                        define machine dependent commands and environment variables:
                        - eb_flags: EasyBuild flags
+                       - eb_tcflags: EasyBuild toolchain flags
                        - eb_installpath: EasyBuild installpath
                        - eb_modulespath: EasyBuild modules path 
                        - eb_toolspath: tools modules path 
@@ -81,12 +82,14 @@ stage('Update Stage') {
                        - toolchains: toolchain names 
                     */
                     def eb_flags
+                    def eb_tcflags
                     def eb_installpath
                     def eb_modulespath
                     def load_pe
                     def toolchains
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
+                        eb_tcflags = "--ignore-locks --hidden"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                         eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all"
@@ -97,6 +100,7 @@ stage('Update Stage') {
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
+                        eb_tcflags = "--ignore-locks"
                         eb_installpath = "${params.eb_prefix}"
                         eb_metadata="$WORKSPACE/easybuild/alps-external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
@@ -110,12 +114,12 @@ stage('Update Stage') {
                         "module load EasyBuild-custom/cscs" :
                         "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
-                    /* define build command and toolchain version flags (tc_flags) */
+                    /* define build command and PE target flags (pe_flags) */
                     def build_command = "eb $eb_flags"
-                    def tc_flags = "--try-toolchain-version=${params.pe_target}"
+                    def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -l
+                    sh("""#!/bin/bash -lx
 
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
@@ -160,8 +164,8 @@ stage('Update Stage') {
 
                             # build current toolchain
                             echo -e "\nBuilding with the following command:"
-                            echo "$build_command --hidden \${tc}-${params.pe_target}.eb"
-                            $build_command --hidden \${tc}-${params.pe_target}.eb
+                            echo "$build_command $eb_tcflags \${tc}-${params.pe_target}.eb"
+                            $build_command $eb_tcflags \${tc}-${params.pe_target}.eb
                             if [ \$? -eq 0 ]; then
                                 echo -e "\nBuild of toolchain \$tc SUCCESSFUL\n"
                             else 
@@ -186,7 +190,7 @@ stage('Update Stage') {
                         # filter current production list to create the target production list
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                        grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > \$list_target
+                        grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
 
                         if [ -s "\$list_target" ]; then
                             echo -e "\nFiltering production list \$(basename \${list_current}) to \$(basename \${list_target}): \n\$(cat \${list_target})"
@@ -212,7 +216,7 @@ stage('Update Stage') {
                                 # check status and print short dry run (-D) of target recipe
                                 if [ -n "\$deps" ]; then
                                     echo -e "\nDry run of \$recipe_target with dependencies:"
-                                    $build_command $tc_flags -D \$recipe_current | grep "\\*\\s\\["
+                                    $build_command $pe_flags -D \$recipe_current | grep "\\*\\s\\["
                                 else
                                     failed+=(\$recipe_target)
                                     echo "\$recipe_target" >> "\${failed_file}"
@@ -222,8 +226,8 @@ stage('Update Stage') {
                                 fi
 
                                 echo -e "\nBuilding with the following command:"
-                                echo "$build_command $tc_flags \$flags_target \$recipe_current"
-                                $build_command $tc_flags \$flags_target \$recipe_current
+                                echo "$build_command $pe_flags \$flags_target \$recipe_current"
+                                $build_command $pe_flags \$flags_target \$recipe_current
                             else
                                 echo -e "\nBuilding with the following command:"
                                 echo "$build_command \$flags_target \$recipe_target"
