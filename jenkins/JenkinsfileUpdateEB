@@ -89,7 +89,7 @@ stage('Update Stage') {
                     def toolchains
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
-                        eb_tcflags = "--ignore-locks --hidden"
+                        eb_tcflags = "--hidden"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                         eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all"
@@ -100,7 +100,7 @@ stage('Update Stage') {
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
-                        eb_tcflags = "--ignore-locks"
+                        eb_tcflags = ""
                         eb_installpath = "${params.eb_prefix}"
                         eb_metadata="$WORKSPACE/easybuild/alps-external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
