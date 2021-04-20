@@ -30,7 +30,7 @@ dependencies = [
     ('libaec', '1.0.4'),
     ('PROJ', '8.0.0'),
     ('UDUNITS', '2.2.28'),
-    ('util-linux', '2.36.1')
+    ('util-linux', '2.36.2')
 ]
 
 configopts = ' --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR '
