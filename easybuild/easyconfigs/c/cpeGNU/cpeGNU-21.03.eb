@@ -5,12 +5,12 @@ name = 'cpeGNU'
 version = "21.03"
 
 homepage = 'https://pubs.cray.com'
-description = """Toolchain using Cray compiler wrapper with cpe-gnu module (CPE release: %s).\n""" % version
+description = """Toolchain using Cray compiler wrapper with gcc module (CPE release: %s).\n""" % version
 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-gnu', EXTERNAL_MODULE)
+   ('PrgEnv-gnu', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''
