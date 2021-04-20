@@ -15,7 +15,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('JuliaExtensions', '1.5.3'),
+    ('JuliaExtensions', '1.6.0'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
@@ -66,7 +66,7 @@ export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME && 
 julia -e 'using Pkg; Pkg.add("IJulia");' && 
 chmod -R +rX %(installdir)s/share/IJulia &&  # Adjust permissions of IJulia files
-file=%(installdir)s/share/jupyter/kernels/julia-1.5/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
 """,
 ]
 
