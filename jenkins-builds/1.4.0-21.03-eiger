@@ -1,10 +1,11 @@
  Buildah-1.19.0.eb                    --set-default-module
- CMake-3.19.6.eb                      --set-default-module
+ CMake-3.20.1.eb                      --set-default-module
  ddt-21.0-linux-x86_64.eb             --set-default-module
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
- reframe-3.5.0.eb                     --set-default-module
+ reframe-3.5.3.eb                     --set-default-module
+ xalt-2.8.10.eb                       --set-default-module
  GSL-2.6-cpeAMD-21.03.eb
  GSL-2.6-cpeCray-21.03.eb
  ParaView-5.9.0-cpeCray-21.03-OSMesa-python3.eb
@@ -17,10 +18,10 @@
  jupyterlab-2.2.8-cpeGNU-21.03.eb
  LAMMPS-29Oct20-cpeGNU-21.03.eb
  matplotlib-3.3.4-cpeGNU-21.03.eb
- NCO-4.9.7-cpeGNU-21.01.eb
+ NCO-4.9.8-cpeGNU-21.03.eb
  QuantumESPRESSO-6.7.0-cpeGNU-21.03.eb
+ Vc-1.4.1-cpeGNU-21.03.eb           
  Amber-20-15-9-cpeIntel-21.03.eb
  GSL-2.6-cpeIntel-21.03.eb
  NAMD-2.14-cpeIntel-21.03.eb
  VASP-6.2.0-cpeIntel-21.03.eb
- Vc-1.4.1-cpeGNU-21.03.eb           --set-default-module
