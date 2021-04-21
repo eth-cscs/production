@@ -13,9 +13,8 @@ description = """
 toolchain = {'name': 'cpeGNU', 'version': '21.04'}
 toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'verbose': False}
 
-# Files visible at https://code.mpimet.mpg.de/projects/cdo/files: different link for each version!
-source_urls = ['https://code.mpimet.mpg.de/attachments/24638/']
-sources = [SOURCELOWER_TAR_GZ]
+# download from https://code.mpimet.mpg.de/projects/cdo/files often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
 
 # No MPI support, OpenMP support for compute intensive operators (https://code.mpimet.mpg.de/projects/cdo/wiki/OpenMP_support)
 builddependencies = [
