@@ -32,7 +32,6 @@ import os
 import easybuild.tools.environment as env
 from easybuild.easyblocks.generic.pythonpackage import PythonPackage
 from easybuild.tools.modules import get_software_root
-from easybuild.tools.run import run_cmd
 
 
 class EB_netcdf_minus_python(PythonPackage):

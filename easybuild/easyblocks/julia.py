@@ -29,15 +29,11 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 @author: Samuel Omlin (CSCS)
 """
 import os
-import shutil
 import socket
 
 from easybuild.tools.config import build_option
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.easyblocks.generic.packedbinary import PackedBinary
-from easybuild.tools.build_log import EasyBuildError
-from easybuild.tools.filetools import mkdir
-from easybuild.tools.run import run_cmd, parse_log_for_error
 from easybuild.tools import systemtools
 
 
@@ -244,4 +240,3 @@ end
         txt += self.module_generator.set_environment('EBJULIA_ENV_NAME', '-'.join([self.version, self.get_environment_folder()]))
 
         return txt
-
