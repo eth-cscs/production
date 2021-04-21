@@ -134,7 +134,7 @@ class JuliaPackage(ExtensionEasyBlock):
         cmderrors = parse_log_for_error(cmdttdouterr, regExp="^ERROR:")
         if cmderrors:
             cmd = self.make_julia_cmd(remove=True)
-            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=stdin, regexp=False)
+            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=sys.stdin, regexp=False)
             raise EasyBuildError("Errors detected during installation of Julia package %s!", self.name)
 
         self.log.info("Julia package %s installed succesfully" % self.name)
