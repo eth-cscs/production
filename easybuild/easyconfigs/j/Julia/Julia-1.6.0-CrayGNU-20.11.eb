@@ -24,6 +24,7 @@ modextravars = {
     'JULIA_MPIEXEC_ARGS': "-C mc",
     'JULIA_MPI_BINARY': 'system',
     'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
+    'JULIA_PKG_SERVER': '',
 }
 
 moduleclass = 'lang'
