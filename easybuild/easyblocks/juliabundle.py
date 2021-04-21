@@ -35,7 +35,7 @@ from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.config import build_option
 from easybuild.tools import systemtools
 #from easybuild.easyblocks.generic.pythonpackage import PythonPackage, det_pylibdir
-from juliapackage import JuliaPackage
+from .juliapackage import JuliaPackage
 
 
 class JuliaBundle(Bundle):
