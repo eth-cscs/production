@@ -29,6 +29,7 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 @author: Samuel Omlin (CSCS)
 """
 import os
+import sys
 
 import easybuild.tools.toolchain as toolchain
 
