@@ -16,7 +16,6 @@ toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'verbose': False}
 # Files visible at https://code.mpimet.mpg.de/projects/cdo/files: different link for each version!
 source_urls = ['https://code.mpimet.mpg.de/attachments/24638/']
 sources = [SOURCELOWER_TAR_GZ]
-checksums = ['cc39c89bbb481d7b3945a06c56a8492047235f46ac363c4f0d980fccdde6677e']
 
 # No MPI support, OpenMP support for compute intensive operators (https://code.mpimet.mpg.de/projects/cdo/wiki/OpenMP_support)
 builddependencies = [
