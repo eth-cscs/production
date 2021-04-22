@@ -23,7 +23,7 @@ builddependencies = [
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('GSL', '2.6'),
-    ('libxc', '5.1.2'),
+    ('libxc', '5.1.3'),
     ('SpFFT', '1.0.1', '-cuda-mkl'),
     ('spglib', '1.16.0'),
     ('SPLA', '1.4.0', '-cuda-mkl')
