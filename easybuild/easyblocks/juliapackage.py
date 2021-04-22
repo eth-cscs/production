@@ -29,14 +29,13 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 @author: Samuel Omlin (CSCS)
 """
 import os
-import shutil
+import sys
 
 import easybuild.tools.toolchain as toolchain
 
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.framework.extensioneasyblock import ExtensionEasyBlock
 from easybuild.tools.build_log import EasyBuildError
-from easybuild.tools.filetools import mkdir
 from easybuild.tools.run import run_cmd, parse_log_for_error
 
 
@@ -65,8 +64,8 @@ class JuliaPackage(ExtensionEasyBlock):
             self.package_name = ''.join(names[:-1])
 
         julia_env_name = os.getenv('EBJULIA_ENV_NAME', '')
-        self.depot=os.path.join(self.installdir, 'extensions')
-        self.projectdir=os.path.join(self.depot, 'environments', julia_env_name)
+        self.depot = os.path.join(self.installdir, 'extensions')
+        self.projectdir = os.path.join(self.depot, 'environments', julia_env_name)
         self.log.info("Depot for package installations: %s" % self.depot)
 
     def patch_step(self, beginpath=None):
@@ -106,10 +105,10 @@ class JuliaPackage(ExtensionEasyBlock):
             raise EasyBuildError("When enabling building with mpi, also enable the 'usempi' toolchain option.")
 
         if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
-          cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
-          pre_cmd += ' && export JULIA_MPI_BINARY=system'
-          pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
-          pre_cmd += ' && export JULIA_MPICC="cc"'
+            cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
+            pre_cmd += ' && export JULIA_MPI_BINARY=system'
+            pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
+            pre_cmd += ' && export JULIA_MPICC="cc"'
 
         if self.cfg['mpiexec']:
             pre_cmd += ' && export JULIA_MPIEXEC="%s"' % self.cfg['mpiexec']
@@ -136,10 +135,10 @@ class JuliaPackage(ExtensionEasyBlock):
         cmderrors = parse_log_for_error(cmdttdouterr, regExp="^ERROR:")
         if cmderrors:
             cmd = self.make_julia_cmd(remove=True)
-            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=stdin, regexp=False)
+            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=sys.stdin, regexp=False)
             raise EasyBuildError("Errors detected during installation of Julia package %s!", self.name)
-        else:
-            self.log.info("Julia package %s installed succesfully" % self.name)
+
+        self.log.info("Julia package %s installed succesfully" % self.name)
 
     def run(self):
         """Install Julia package as an extension."""
@@ -154,4 +153,3 @@ class JuliaPackage(ExtensionEasyBlock):
         cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
-
