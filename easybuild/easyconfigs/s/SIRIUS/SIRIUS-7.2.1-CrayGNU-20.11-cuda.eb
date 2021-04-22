@@ -17,7 +17,7 @@ sources = ['v%(version)s.tar.gz']
 builddependencies = [
     ('CMake', '3.14.5', '', True),
     ('cudatoolkit', EXTERNAL_MODULE),
-    ('intel/19.1.1.217', EXTERNAL_MODULE)
+    ('intel', EXTERNAL_MODULE)
 ]
 
 dependencies = [
