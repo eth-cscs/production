@@ -191,9 +191,9 @@ stage('Update Stage') {
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         if [ -n "${params.discard_recipes}" ]; then 
                             echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
                         else 
-                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
                         fi
 
                         if [ -s "\$list_target" ]; then
@@ -211,11 +211,11 @@ stage('Update Stage') {
                             echo -e "\nCurrent target: \$recipe_target"
 
                             # check if recipe matches target Cray PE  
-                            if [[ \$recipe_target =~ -[a-zA-Z]+-${params.pe_target} ]]; then
+                            if [[ \$recipe_target =~ [a-zA-Z]+-${params.pe_target} ]]; then
                                 recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
 
                                 # relative path of dependencies retrieved from full path dry run (--dry-run) of current recipe
-                                deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(-[a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
+                                deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
 
                                 # check status and print short dry run (-D) of target recipe
                                 if [ -n "\$deps" ]; then
@@ -361,14 +361,14 @@ stage('Jira Stage') {
                     if(machineName == "daint" || machineName == "dom"){
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
-                        installpath = "${params.eb_prefix}"
+                        eb_installpath = "${params.eb_prefix}"
                     }
 
                     /* retrieve list of failed updates */
                     def failed_updates = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
                                         failed_file="${eb_installpath}/failed.txt"
-                                        if [ -f "\$failed_file" ]; then
+                                        if [ -s "\$failed_file" ]; then
                                             cat \$failed_file
                                         fi""").trim()  
                     if ( !failed_updates?.trim() ) {
@@ -438,12 +438,13 @@ stage('GitHub Stage') {
                     sh("""#!/bin/bash -l
                         # clone master over ssh
                         repo="git@github.com:eth-cscs/production.git"
-                        echo -e "\nCloning CSCS GitHub production repository:"
-                        echo "git clone --quiet \$repo"
-                        git clone --quiet \$repo
+                        #echo -e "\nCloning CSCS GitHub production repository:"
+                        #echo "git clone --quiet \$repo"
+                        #git clone --quiet \$repo
                         
                         # go to easyconfigs folder to match relative path of deps
-                        cd production/easybuild/easyconfigs
+                        #cd production/easybuild/easyconfigs
+                        cd easybuild/easyconfigs
 
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.pe_target}" 
@@ -470,7 +471,7 @@ stage('GitHub Stage') {
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
                                 # check if recipe matches Cray PE
-                                if [[ \$recipe =~ -[a-zA-Z]+-${params.pe_target} ]]; then
+                                if [[ \$recipe =~ [a-zA-Z]+-${params.pe_target} ]]; then
                                     name=\$(basename \$recipe)
                                     source=\$(find ${eb_installpath}/software -type f -name \$name | grep easybuild/\$name)
                                     if [ -n "\$source" ]; then 
@@ -509,11 +510,13 @@ stage('GitHub Stage') {
                         # update architecture modulefile
                         if [[ $machineName == "daint" || $machineName == "dom" ]]; then
                             modulefile_current="$WORKSPACE/login/daint-$architecture/${params.pe_current}"
-                            modulefile_target="$WORKSPACE/login/daint-$architecture/${params.pe_target}"
-                            if [ ! -f "\$modulefile_target" ]; then  
-                                sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
-                                # add architecture modulefile
-                                git add \$modulefile_target
+                            if [ -s \$modulefile_current ]; then
+                                modulefile_target="$WORKSPACE/login/daint-$architecture/${params.pe_target}"
+                                if [ ! -f "\$modulefile_target" ]; then  
+                                    sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
+                                    # add architecture modulefile
+                                    git add \$modulefile_target
+                                fi
                             fi
                         fi
 
