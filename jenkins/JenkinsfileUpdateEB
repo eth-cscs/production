@@ -438,9 +438,6 @@ stage('GitHub Stage') {
                     sh("""#!/bin/bash -l
                         # clone master over ssh
                         repo="git@github.com:eth-cscs/production.git"
-                        #echo -e "\nCloning CSCS GitHub production repository:"
-                        #echo "git clone --quiet \$repo"
-                        #git clone --quiet \$repo
                         
                         # go to easyconfigs folder to match relative path of deps
                         #cd production/easybuild/easyconfigs
