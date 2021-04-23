@@ -436,19 +436,16 @@ stage('GitHub Stage') {
 
                     /* retrieve list of successful updates and target production list to submit pull request */
                     sh("""#!/bin/bash -l
-                        # clone master over ssh
+
+                        # define repository
                         repo="git@github.com:eth-cscs/production.git"
-                        #echo -e "\nCloning CSCS GitHub production repository:"
-                        #echo "git clone --quiet \$repo"
-                        #git clone --quiet \$repo
                         
                         # go to easyconfigs folder to match relative path of deps
-                        #cd production/easybuild/easyconfigs
                         cd easybuild/easyconfigs
 
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.pe_target}" 
-                        echo -e "\nSwitch to branch ${machineLabel}/${params.pe_target}:"
+                        echo -e "\nSwitching to branch ${machineLabel}/${params.pe_target}:"
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
                             git checkout \$branch 
                         else 
