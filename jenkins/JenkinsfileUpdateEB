@@ -439,13 +439,15 @@ stage('GitHub Stage') {
 
                         # define repository
                         repo="git@github.com:eth-cscs/production.git"
+                        # define submit folder 
+                        submit_folder="$WORKSPACE/submit"
+                        # clone master over ssh to submit_folder
+                        echo -e "\nCloning CSCS GitHub production repository to \$submit_folder:"
+                        echo "git clone --quiet \$repo \$submit_folder"
+                        git clone --quiet \$repo \$submit_folder
                         
-                        # go to easyconfigs folder to match relative path of deps
-                        cd easybuild/easyconfigs
-
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.pe_target}" 
-                        echo -e "\nSwitching to branch ${machineLabel}/${params.pe_target}:"
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
                             git checkout \$branch 
                         else 
@@ -460,6 +462,10 @@ stage('GitHub Stage') {
                         unset copied
                         unset missing
 
+                        # go to easyconfigs folder to match relative path of deps
+                        echo -e "\nGo to folder \$submit_folder/easybuild/easyconfigs"
+                        cd \$submit_folder/easybuild/easyconfigs
+                        
                         # loop over list of successful updates and dependencies
                         echo -e "\nCopy successful updates and dependencies for commit:"
                         for recipe in \$submit_list; do
@@ -487,12 +493,12 @@ stage('GitHub Stage') {
                             fi
                         done
 
-                        # add recipes under current path (production/easybuild/easyconfigs)
+                        # add recipes under current path "\$submit_folder/easybuild/easyconfig"
                         git add .
 
                         # update production list
                         list_target=\$(ls ${eb_installpath}/*${params.pe_target}-${machineLabel} | tail -1)
-                        list_production=$WORKSPACE/jenkins-builds/\$(basename \$list_target)
+                        list_production=\$submit_folder/jenkins-builds/\$(basename \$list_target)
                         if [ -s "\$list_production" ]; then
                             # updated items of target list are appended to production list
                             echo "\$(grep -v -f \$list_production \$list_target)" >> \$list_production 
@@ -508,7 +514,7 @@ stage('GitHub Stage') {
                         if [[ $machineName == "daint" || $machineName == "dom" ]]; then
                             modulefile_current="$WORKSPACE/login/daint-$architecture/${params.pe_current}"
                             if [ -s \$modulefile_current ]; then
-                                modulefile_target="$WORKSPACE/login/daint-$architecture/${params.pe_target}"
+                                modulefile_target="\$submit_folder/login/daint-$architecture/${params.pe_target}"
                                 if [ ! -f "\$modulefile_target" ]; then  
                                     sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
                                     # add architecture modulefile
