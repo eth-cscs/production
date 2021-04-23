@@ -1,12 +1,13 @@
 from easybuild.easyblocks.generic.configuremake import ConfigureMake
+from easybuild.tools.build_log import EasyBuildError
 from easybuild.tools.run import run_cmd
 from easybuild.tools.modules import get_software_root
 
 class libqglviewer(ConfigureMake):
 
-   def configure_step(self):
+    def configure_step(self):
         """
-        Configure and 
+        Configure and
         Test if Qt module is loaded
         """
         if not get_software_root('Qt'):

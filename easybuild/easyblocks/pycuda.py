@@ -42,7 +42,6 @@ except ImportError:
     from vsc.utils import fancylogger
 
 import easybuild.tools.environment as env
-from easybuild.easyblocks.python import EXTS_FILTER_PYTHON_PACKAGES
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.framework.extensioneasyblock import ExtensionEasyBlock
 from easybuild.tools.build_log import EasyBuildError
@@ -163,16 +162,16 @@ class pycuda(ExtensionEasyBlock):
         """Build Python package using setup.py"""
 
 
-	cmd = "python configure.py --cudadrv-lib-dir=/opt/cray/nvidia/default/lib64/"
+        cmd = "python configure.py --cudadrv-lib-dir=/opt/cray/nvidia/default/lib64/"
         run_cmd(cmd, log_all=True, simple=True)
 
-	cmd = "%s python setup.py build %s" % (self.cfg['prebuildopts'], self.cfg['buildopts'])
+        cmd = "%s python setup.py build %s" % (self.cfg['prebuildopts'], self.cfg['buildopts'])
         run_cmd(cmd, log_all=True, simple=True)
 
     def test_step(self):
         """Test the built Python package."""
 
-        if isinstance(self.cfg['runtest'], basestring):
+        if isinstance(self.cfg['runtest'], str):
             self.testcmd = self.cfg['runtest']
 
         if self.cfg['runtest'] and not self.testcmd is None:
@@ -185,7 +184,7 @@ class pycuda(ExtensionEasyBlock):
                 try:
                     testinstalldir = tempfile.mkdtemp()
                     mkdir(os.path.join(testinstalldir, self.pylibdir), parents=True)
-                except OSError, err:
+                except OSError as err:
                     raise EasyBuildError("Failed to create test install dir: %s", err)
 
                 run_cmd("python -c 'import sys; print(sys.path)'")  # print Python search path (debug)
@@ -202,7 +201,7 @@ class pycuda(ExtensionEasyBlock):
             if testinstalldir:
                 try:
                     rmtree2(testinstalldir)
-                except OSError, err:
+                except OSError as err:
                     raise EasyBuildError("Removing testinstalldir %s failed: %s", testinstalldir, err)
 
     def install_step(self):

@@ -29,13 +29,11 @@ EasyBuild support for building and installing HPL, implemented as an easyblock
 """
 
 import os
-import shutil
 
 import easybuild.tools.toolchain as toolchain
 from easybuild.easyblocks.generic.configuremake import ConfigureMake
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.tools.build_log import EasyBuildError
-from easybuild.tools.config import get_module_syntax
 
 
 class EB_Darshan(ConfigureMake):
@@ -60,7 +58,7 @@ class EB_Darshan(ConfigureMake):
 
         # environment variable may be defined but empty
         if os.getenv('MPICC', None) is None:
-            raise EasyBuildError("Required environment variable %s not found (no toolchain used?).", envvar)
+            raise EasyBuildError("Required environment variable MPICC not found (no toolchain used?).")
 
         # compilers
         extra_configopts = 'CC="%(mpicc)s" ' % {'mpicc': os.getenv('MPICC')}
@@ -121,7 +119,7 @@ class EB_Darshan(ConfigureMake):
                 'bin/dxt_analyzer.py',
                 'lib/libdarshan-util.a',
             ],
-            'dirs'  : [ 'bin', 'lib', 'share' ],
+            'dirs'  : ['bin', 'lib', 'share'],
         }
 
         super(EB_Darshan, self).sanity_check_step(custom_paths)

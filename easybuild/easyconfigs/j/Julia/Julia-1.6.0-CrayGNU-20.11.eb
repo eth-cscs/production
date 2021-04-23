@@ -24,6 +24,15 @@ modextravars = {
     'JULIA_MPIEXEC_ARGS': "-C mc",
     'JULIA_MPI_BINARY': 'system',
     'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
+    'JULIA_PKG_SERVER': '',
 }
 
 moduleclass = 'lang'
+
+# Julia 1.6.0+ uses Downloads.jl with a vendored libcurl.so that's dlopen'ed.
+# See https://julialang.org/blog/2021/03/julia-1.6-highlights/#downloads_networkingoptions
+# xalt hijacks libcurl.so by setting LD_LIBRARY_PATH, which should be avoided,
+# as it is incompatible with the API Julia expects.
+modtclfooter = """
+module unload xalt
+"""

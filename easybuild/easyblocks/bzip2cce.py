@@ -54,10 +54,10 @@ class bzip2cce(ConfigureMake):
         """Custom sanity check for bzip2."""
 
         custom_paths = {
-                        'files': ["bin/%s" % x for x in ["bunzip2", "bzcat", "bzdiff", "bzgrep",
-                                                         "bzip2", "bzip2recover", "bzmore"]] +
-                                 ['lib/libbz2.a', 'include/bzlib.h'],
-                         'dirs': []
-                        }
+            'files': ["bin/%s" % x for x in ["bunzip2", "bzcat", "bzdiff", "bzgrep",
+                                             "bzip2", "bzip2recover", "bzmore"]] +
+                     ['lib/libbz2.a', 'include/bzlib.h'],
+            'dirs': []
+        }
 
         super(bzip2cce, self).sanity_check_step(custom_paths=custom_paths)
