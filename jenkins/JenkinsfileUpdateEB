@@ -446,6 +446,10 @@ stage('GitHub Stage') {
                         echo "git clone --quiet \$repo \$submit_folder"
                         git clone --quiet \$repo \$submit_folder
                         
+                        # go to submit folder to checkout branch and match relative path of deps
+                        echo -e "\nGo to folder \$submit_folder/easybuild/easyconfigs"
+                        cd \$submit_folder/easybuild/easyconfigs
+                        
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.pe_target}" 
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
@@ -462,10 +466,6 @@ stage('GitHub Stage') {
                         unset copied
                         unset missing
 
-                        # go to easyconfigs folder to match relative path of deps
-                        echo -e "\nGo to folder \$submit_folder/easybuild/easyconfigs"
-                        cd \$submit_folder/easybuild/easyconfigs
-                        
                         # loop over list of successful updates and dependencies
                         echo -e "\nCopy successful updates and dependencies for commit:"
                         for recipe in \$submit_list; do
