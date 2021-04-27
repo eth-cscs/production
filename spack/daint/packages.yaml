@@ -46,7 +46,7 @@ packages:
       spec: automake@1.15.1
   bash:
     externals:
-    - prefix: /usr/local
+    - prefix: /
       spec: bash@4.4.23
   bison:
     externals:
@@ -255,9 +255,9 @@ packages:
     externals:
     - extra_attributes:
         compilers:
-          c: /usr/bin/gcc-7
+          c: /usr/bin/gcc
           cxx: /usr/bin/g++-7
-          fortran: /usr/bin/gfortran-7
+          fortran: /usr/bin/gfortran
       prefix: /usr
       spec: gcc@7.5.0 languages=c,c++,fortran
   ghostscript:
@@ -409,7 +409,7 @@ packages:
   ncurses:
     externals:
     - prefix: /usr
-      spec: ncurses@6.1.20180317+termlib
+      spec: ncurses@6.1.20180317+termlib abi=6
   netcdf:
     buildable: true
     externals:
@@ -464,60 +464,216 @@ packages:
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %cce@11.0.0.20.11
-  netcdt-fortran:
+  netcdf-c:
     buildable: true
     externals:
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %cce@10.0.2.20.08
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@10.0.2.20.08
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11
     - modules:
-      - cray-hdf5-parallel/1.12.0.0
-      spec: netcdt-fortran@1.12.0.0 +parallel-netcdf+mpi %cce@11.0.0.20.11
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@10.0.2.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.0.20.11
+  netcdf-fortran:
+    buildable: true
+    externals:
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@10.0.2.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@10.0.2.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.0.20.11
   netlib-lapack:
     variants: build_type=Release
   netlib-scalapack:
@@ -586,6 +742,60 @@ packages:
     - modules:
       - papi/6.0.0.4
       spec: papi@6.0.0.4 %cce@11.0.0.20.11
+  parallel-netcdf:
+    buildable: true
+    externals:
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.1.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@9.3.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.3.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.1.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %cce@10.0.2.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@9.3.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.3.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@10.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.1.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %cce@11.0.0.20.11
   perl:
     externals:
     - prefix: /usr
@@ -865,7 +1075,7 @@ packages:
       spec: ruby@2.5.8
   tar:
     externals:
-    - prefix: /usr
+    - prefix: /
       spec: tar@1.30
   texinfo:
     externals:
