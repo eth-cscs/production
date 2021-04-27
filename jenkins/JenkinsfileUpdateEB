@@ -207,7 +207,7 @@ stage('Update Stage') {
                         while IFS= read -r line || [[ -n "\$line" ]]; do 
                             status=0
                             recipe_target=\$(echo \$line | awk '{print \$1}')
-                            flags_target=\${line/\$recipe_target/}
+                            flags_target=\$(echo \${line/\$recipe_target/} | xargs)
                             echo -e "\nCurrent target: \$recipe_target"
 
                             # check if recipe matches target Cray PE  
@@ -270,6 +270,7 @@ stage('Update Stage') {
                                         else
                                             group=\${name,,}
                                         fi
+
                                         # check group ownership of licensed software folder
                                         checkgroup=\$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
                                         if [ "\$checkgroup" != "\$group" ]; then
