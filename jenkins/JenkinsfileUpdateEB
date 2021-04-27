@@ -191,9 +191,9 @@ stage('Update Stage') {
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                         if [ -n "${params.discard_recipes}" ]; then 
                             echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
                         else 
-                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
                         fi
 
                         if [ -s "\$list_target" ]; then
@@ -211,11 +211,11 @@ stage('Update Stage') {
                             echo -e "\nCurrent target: \$recipe_target"
 
                             # check if recipe matches target Cray PE  
-                            if [[ \$recipe_target =~ [a-zA-Z]+-${params.pe_target} ]]; then
+                            if [[ \$recipe_target =~ (cpe.*|Cray.*)-${params.pe_target} ]]; then
                                 recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
 
                                 # relative path of dependencies retrieved from full path dry run (--dry-run) of current recipe
-                                deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/([a-zA-Z]+)-${params.pe_current}/\\1-${params.pe_target}/')
+                                deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/')
 
                                 # check status and print short dry run (-D) of target recipe
                                 if [ -n "\$deps" ]; then
@@ -474,7 +474,7 @@ stage('GitHub Stage') {
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
                                 # check if recipe matches Cray PE
-                                if [[ \$recipe =~ [a-zA-Z]+-${params.pe_target} ]]; then
+                                if [[ \$recipe =~ (cpe.*|Cray.*)-${params.pe_target} ]]; then
                                     name=\$(basename \$recipe)
                                     source=\$(find ${eb_installpath}/software -type f -name \$name | grep easybuild/\$name)
                                     if [ -n "\$source" ]; then 
@@ -529,7 +529,7 @@ stage('GitHub Stage') {
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
                             git commit -m "Updated recipes on ${machineLabel} for PE ${params.pe_target}"
-                            # check if a pull request is already open
+                            # check if a pull request from ${branch} is already open
                             if [ -n "\$(hub pr list --head \${branch})" ]; then
                                 git push origin HEAD
                             else
