@@ -31,15 +31,14 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${toolsgpulist} {
    module unload ${module}
  }
+# unload cdt and cdt-cuda
+ module unload cdt cdt-cuda
 }
 
 # load dependency and update MODULEPATH
 module load craype-haswell
 module use "${gpupath}"
 module use "${toolsgpupath}"
-
-# load additional modules
-#module load xalt
 
 # print help screen
 if { [module-info mode help] } {
