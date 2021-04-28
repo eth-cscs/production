@@ -12,7 +12,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('numpy', '1.17.2'),
+    ('numpy', '1.18.5'),
     ('h5py', '2.10.0', '-python%(pymajver)s-serial'),
     ('PyExtensions', 'python%(pymajver)s'),
 ]
