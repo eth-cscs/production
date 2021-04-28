@@ -27,9 +27,7 @@ EasyBuild support for building and installing HPCG, implemented as an easyblock
 
 @author: Kenneth Hoste (Ghent University)
 """
-import glob
 import os
-import re
 import shutil
 
 from easybuild.easyblocks.generic.configuremake import ConfigureMake
@@ -47,7 +45,7 @@ class hpcg3(ConfigureMake):
         mkdir("obj")
         # configure with most generic configuration available, i.e. hybrid
         # this is not specific to GCC or OpenMP, we take full control over that via $CXX and $CXXFLAGS
-        cmd = "../configure MPI_GCC_OMP" 
+        cmd = "../configure MPI_GCC_OMP"
         run_cmd(cmd, log_all=True, simple=True, log_ok=True, path='obj')
 
     def build_step(self):
@@ -63,7 +61,7 @@ class hpcg3(ConfigureMake):
         bindir = os.path.join(self.installdir, 'bin')
         try:
             shutil.copytree(objbindir, bindir)
-        except OSError, err:
+        except OSError as err:
             raise EasyBuildError("Failed to copy HPCG files to %s: %s", bindir, err)
 
     def sanity_check_step(self):

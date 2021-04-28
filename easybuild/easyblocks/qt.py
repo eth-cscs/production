@@ -47,8 +47,8 @@ class EB_Qt(ConfigureMake):
     @staticmethod
     def extra_options():
         extra_vars = {
-             'platform': [None, "Target platform to build for (e.g. linux-g++-64, linux-icc-64)", CUSTOM],
-             'prefix_opt': [None, "Prefix command line option for configure script ('--prefix=' if None)", CUSTOM],
+            'platform': [None, "Target platform to build for (e.g. linux-g++-64, linux-icc-64)", CUSTOM],
+            'prefix_opt': [None, "Prefix command line option for configure script ('--prefix=' if None)", CUSTOM],
         }
         return ConfigureMake.extra_options(extra_vars)
 
@@ -72,18 +72,18 @@ class EB_Qt(ConfigureMake):
                 # fix -fPIC flag (-KPIC is not correct for recent Intel compilers)
                 qmake_conf = os.path.join('mkspecs', platform, 'qmake.conf')
                 apply_regex_substitutions(qmake_conf, [('-KPIC', '-fPIC')])
-                
+
         if platform:
             self.cfg.update('configopts', "-platform %s" % platform)
         else:
             raise EasyBuildError("Don't know which platform to set based on compiler family.")
 
         if self.cfg['prefix_opt']:
-           cmd = "%s ./configure %s%s %s" % (self.cfg['preconfigopts'], self.cfg['prefix_opt'], self.installdir, self.cfg['configopts'])
+            cmd = "%s ./configure %s%s %s" % (self.cfg['preconfigopts'], self.cfg['prefix_opt'], self.installdir, self.cfg['configopts'])
         elif LooseVersion(self.version) >= LooseVersion('5.8'):
-           cmd = "%s ./configure -prefix %s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
+            cmd = "%s ./configure -prefix %s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
         else:
-           cmd = "%s ./configure --prefix=%s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
+            cmd = "%s ./configure --prefix=%s %s" % (self.cfg['preconfigopts'], self.installdir, self.cfg['configopts'])
 
         qa = {
             "Type 'o' if you want to use the Open Source Edition.": 'o',

@@ -7,7 +7,7 @@ AR       = ar -r
 DFLAGS   = -D__FFTW3 -D__GFORTRAN -D__ELPA=202011 -D__LIBINT -D__LIBXC -D__LIBXSMM -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
 CFLAGS   = $(DFLAGS) -g -O3 -w -fopenmp -funroll-loops
 CXXFLAGS = $(CFLAGS)
-FCFLAGS  = $(DFLAGS) -g -O3 -w -fallow-argument-mismatch -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
+FCFLAGS  = $(DFLAGS) -g -O3 -w -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
 FCFLAGS  += -I$(EBROOTFFTW)/include
 FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
 FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include 

@@ -1,8 +1,8 @@
 config:
   build_jobs: 8
   build_stage:
-  - ${XDG_RUNTIME_DIR}/${RANDOM}
-  - $spack/.spack/var/stage/${RANDOM}
+  - ${XDG_RUNTIME_DIR}
+  - $spack/.spack/var/stage
   db_lock_timeout: 20
   misc_cache: $spack/.spack/var/cache/misc
   source_cache: $spack/.spack/var/cache/source

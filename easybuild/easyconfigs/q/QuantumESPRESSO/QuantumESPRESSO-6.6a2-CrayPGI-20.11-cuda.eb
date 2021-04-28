@@ -12,7 +12,7 @@ is based on density-functional theory, plane waves, and pseudopotentials (both
 norm-conserving and ultrasoft). 
 
 Note: PGI Fortran gives the warning "ieee_inexact FORTRAN STOP" with QE GPU.  
-Set NO_STOP_MESSAGES=1 in your batch script to avoid the warning.
+Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
 More details on the PGI User Forum at https://www.pgroup.com/userforum
 """
 
