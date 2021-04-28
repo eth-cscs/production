@@ -104,7 +104,7 @@ class JuliaPackage(ExtensionEasyBlock):
         if (self.cfg['mpiexec'] or self.cfg['mpiexec_args']) and not has_mpi:
             raise EasyBuildError("When enabling building with mpi, also enable the 'usempi' toolchain option.")
 
-        if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
+        if self.toolchain.toolchain_family() in [toolchain.CPE, toolchain.CRAYPE] and has_mpi:
             cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
             pre_cmd += ' && export JULIA_MPI_BINARY=system'
             pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
