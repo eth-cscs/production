@@ -1,0 +1,27 @@
+easyblock = 'CMakeMake'
+
+name = 'freeglut'
+version = '3.2.1'
+
+homepage = 'http://freeglut.sourceforge.net/'
+description = "freeglut is a completely OpenSourced alternative to the OpenGL Utility Toolkit (GLUT) library."
+
+toolchain = SYSTEM
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['d4000e02102acaf259998c870e25214739d1f16f67f99cb35e4f46841399da68']
+
+builddependencies = [
+    ('CMake', '3.14.5'),
+]
+
+osdependencies = [('xorg-x11-devel'), ('libOSMesa-devel'), ('glu-devel')]
+
+
+sanity_check_paths = {
+    'files': [('lib/libglut.a', 'lib64/libglut.a'), ('lib/libglut.%s' % SHLIB_EXT, 'lib64/libglut.%s' % SHLIB_EXT)],
+    'dirs': ['include/GL'],
+}
+
+moduleclass = 'lib'
