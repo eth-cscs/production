@@ -16,6 +16,8 @@
  GROMACS-2020.5-cpeGNU-21.04.eb
  GSL-2.6-cpeGNU-21.04.eb
  jupyterlab-2.2.8-cpeGNU-21.04.eb
+ Julia-1.6.0-cpeGNU-21.04.eb
+ JuliaExtensions-1.6.0-cpeGNU-21.04.eb
  LAMMPS-29Oct20-cpeGNU-21.04.eb
  matplotlib-3.3.4-cpeGNU-21.04.eb
  NCO-4.9.8-cpeGNU-21.04.eb
