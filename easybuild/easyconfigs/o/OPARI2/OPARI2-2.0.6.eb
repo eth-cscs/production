@@ -10,7 +10,7 @@ description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
  the POMP2 measurement interface."""
 toolchain = SYSTEM
 configopts = ' --enable-shared'
-source_urls = ['http://www.vi-hps.org/cms/upload/packages/opari2/']
+source_urls = ['http://perftools.pages.jsc.fz-juelich.de/cicd/opari2/tags/opari2-2.0.6']
 sources = [SOURCELOWER_TAR_GZ]
 patches = ['%(name)s-%(version)s.patch']
 checksums = ['7bbfa02e182d9f622b2cc2de966904a3']
