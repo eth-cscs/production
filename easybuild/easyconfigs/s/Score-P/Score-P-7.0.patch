@@ -1,0 +1,12 @@
+diff -Naur scorep-7.0.ori/configure scorep-7.0/configure
+--- scorep-7.0.ori/configure	2021-04-30 13:56:41.696400111 +0200
++++ scorep-7.0/configure	2021-04-30 13:58:02.572206898 +0200
+@@ -3440,6 +3440,8 @@
+ elif test -L /opt/cray/pe/pmi/default; then :
+   if test -d /opt/cray/ari/modulefiles; then :
+   ac_scorep_platform="crayxc"
++elif test -d /opt/cray/pe/lmod/modulefiles/net/ofi; then :
++  ac_scorep_platform="crayxc"
+ fi
+ fi
+                          if test "x${ac_scorep_platform}" = "xcrayunknown"; then :
