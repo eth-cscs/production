@@ -11,7 +11,7 @@ toolchain = {'name': 'cpeGNU', 'version': '21.04'}
 toolchainopts = {'pic': True}
 
 source_urls = ['http://perftools.pages.jsc.fz-juelich.de/cicd/scorep/tags/scorep-7.0']
-sources = [SOURCELOWER_TAR_GZ]
+sources = ['scorep-7.0.tar.gz']
 patches = ['%(name)s-%(version)s.patch']
 
 dependencies = [
