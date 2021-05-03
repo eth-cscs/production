@@ -1,0 +1,12 @@
+diff -Naur cubew-4.6.ori/configure cubew-4.6/configure
+--- cubew-4.6.ori/configure	2021-04-30 14:12:53.350457000 +0200
++++ cubew-4.6/configure	2021-04-30 14:13:39.135772805 +0200
+@@ -3475,6 +3475,8 @@
+ elif test -L /opt/cray/pe/pmi/default; then :
+   if test -d /opt/cray/ari/modulefiles; then :
+   ac_scorep_platform="crayxc"
++elif test -d /opt/cray/pe/lmod/modulefiles/net/ofi; then :
++  ac_scorep_platform="crayxc"
+ fi
+ fi
+                          if test "x${ac_scorep_platform}" = "xcrayunknown"; then :

@@ -10,6 +10,6 @@ tools. PDT implements a standard program representation, the program database
 (PDB), that can be accessed in a uniform way through a class library supporting
 common PDB operations."""
 toolchain = SYSTEM
-sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/pdtoolkit-%(version)s.tar.gz']
+sources = ['/apps/common/UES/easybuild/sources/p/PDT/pdt_lite-3.25.1.tgz']
 
 moduleclass = 'perf'
