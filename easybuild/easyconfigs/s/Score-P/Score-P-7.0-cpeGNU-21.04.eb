@@ -9,10 +9,11 @@ and easy-to-use tool suite for profiling, event tracing, and online analysis of
 HPC applications."""
 toolchain = {'name': 'cpeGNU', 'version': '21.04'}
 toolchainopts = {'pic': True}
-source_urls = ['http://www.vi-hps.org/cms/upload/packages/scorep/']
-sources = ['scorep-%(version)s.tar.gz']
-checksums = ['3fbd9f37f8a5685454cdb26d076b12be']
+
+source_urls = ['http://perftools.pages.jsc.fz-juelich.de/cicd/scorep/tags/scorep-7.0']
+sources = [SOURCELOWER_TAR_GZ]
 patches = ['%(name)s-%(version)s.patch']
+
 dependencies = [
     ('CubeLib', '4.6'),
     ('CubeW', '4.6'),
