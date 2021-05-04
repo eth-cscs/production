@@ -15,7 +15,13 @@ dependencies = [
     ('configurable-http-proxy', '4.2.3'),
     ('graphviz', '2.46.1'),
     ('libffi', '3.3'),
+    ('JuliaExtensions', '1.6.0'),
 ]
+
+modluafooter = '''
+prepend_path("EBJULIA_ADMIN_DEPOT_PATH", "%(installdir)s/share/IJulia")
+prepend_path("EBJULIA_ADMIN_LOAD_PATH", pathJoin("%(installdir)s/share/IJulia/environments/",os.getenv("EBJULIA_ENV_NAME")))
+'''
 
 # install extensions and batchspawner components
 
@@ -51,6 +57,13 @@ git checkout 074d548 &&
 rm -r $YARN_CACHE_FOLDER && 
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%(installdir)s/ 
+unset EBJULIA_USER_DEPOT_PATH && 
+export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia && 
+export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia && 
+export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME && 
+julia -e 'using Pkg; Pkg.add("IJulia");' && 
+chmod -R +rX %(installdir)s/share/IJulia &&  # Adjust permissions of IJulia files
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
 """,
 ]
 

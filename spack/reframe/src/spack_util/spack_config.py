@@ -78,6 +78,30 @@ PE_DEPENDENT_PKGS = {
         'variants': "+parallel-netcdf+mpi",
         'modules' : 'cray-netcdf-hdf5parallel'
     },
+    'cray-netcdf-hdf5parallel-c': {
+        'buildable' : True,
+        'name': 'netcdf-c',
+        'variants': "+parallel-netcdf+mpi",
+        'modules' : 'cray-netcdf-hdf5parallel'
+    },
+    'cray-netcdf-parallel': {
+        'buildable' : True,
+        'name': 'parallel-netcdf',
+        'variants': "+cxx+fortran",
+        'modules' : 'cray-netcdf-hdf5parallel'
+    },
+    'cray-netcdf-fortran': {
+        'buildable' : True,
+        'name': 'netcdf-fortran',
+        'variants': "~parallel-netcdf+mpi",
+        'modules' : 'cray-netcdf'
+    },
+    'cray-netcdf-c': {
+        'buildable' : True,
+        'name': 'netcdf-c',
+        'variants': "~parallel-netcdf+mpi",
+        'modules' : 'cray-netcdf'
+    },
     'cray-petsc': {
         'buildable' : True,
         'name': 'petsc',
