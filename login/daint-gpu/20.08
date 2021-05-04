@@ -2,8 +2,8 @@
 
 # set environment
 set apps "$env(APPS)"
-set path "${apps}/UES/jenkins/7.0.UP02-20.11/ARCH/easybuild/modules/all"
-set toolspath "${apps}/UES/jenkins/7.0.UP02-20.11/ARCH/easybuild/tools/modules/all"
+set path "${apps}/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all"
+set toolspath "${apps}/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all"
 # set gpupath and mcpath and corresponding toolspath
 set gpupath [string map { ARCH gpu } "${path}"]
 set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
@@ -31,15 +31,14 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${toolsgpulist} {
    module unload ${module}
  }
+# unload cdt and cdt-cuda
+ module unload cdt cdt-cuda
 }
 
 # load dependency and update MODULEPATH
 module load craype-haswell
 module use "${gpupath}"
 module use "${toolsgpupath}"
-
-# load additional modules
-#module load xalt
 
 # print help screen
 if { [module-info mode help] } {
