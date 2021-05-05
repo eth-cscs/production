@@ -39,7 +39,6 @@ dependencies = [
 
 configopts = " --with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDF --with-python=$EBROOTPYTHON/bin/python  --with-expat=$EBROOTEXPAT --with-geos=$EBROOTGEOS/bin/geos-config  --with-hdf=$EBROOTHDF --with-jasper=$EBROOTJASPER --with-jpeg=$EBROOTLIBJPEGMINTURBO  --with-png=$EBROOTLIBPNG --with-libtiff=$EBROOTLIBTIFF --with-xml2=yes  --with-pcre=$EBROOTPCRE --with-sqlite3=$EBROOTSQLITE --with-libz=$EBROOTLIBZ "
 
-
 sanity_check_paths = {
     'files': ['lib/libgdal.a', 'lib/libgdal.so'],
     'dirs': ['bin', 'include', 'lib/python%(pyshortver)s/site-packages'],
