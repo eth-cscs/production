@@ -19,7 +19,6 @@ sources = [SOURCELOWER_TAR_GZ]
 
 osdependencies = [('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
 
-
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libcurl.a', 'lib/libcurl.so'],
     'dirs': ['lib/pkgconfig'],
