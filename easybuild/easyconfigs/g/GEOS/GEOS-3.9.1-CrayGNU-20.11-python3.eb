@@ -17,11 +17,10 @@ source_urls = ['http://download.osgeo.org/%(namelower)s/']
 sources = [SOURCELOWER_TAR_BZ2]
 
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
+    ('CMake', '3.14.5', '', True),
     ('cray-python', EXTERNAL_MODULE),
     ('SWIG', '4.0.2', '-python%(pymajver)s'),
 ]
-
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s-config', 'include/geos_c.h', 'lib/libgeos.so'],

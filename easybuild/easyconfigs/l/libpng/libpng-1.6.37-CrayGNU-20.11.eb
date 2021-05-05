@@ -19,7 +19,6 @@ dependencies = [
 
 configopts = '--disable-static'
 
-
 sanity_check_paths = {
     'files': ['lib/%(name)s.so', 'include/png.h'],
     'dirs': ['lib/pkgconfig'],

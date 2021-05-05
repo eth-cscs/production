@@ -23,7 +23,6 @@ dependencies = [
 
 configopts = " --with-jpeg=$EBROOTLIBJPEGMINTURBO --with-libtiff=$EBROOTLIBTIFF  --with-proj=$EBROOTPROJ --with-zlib=$EBROOTZLIB "
 
-
 sanity_check_paths = {
     'files': ['bin/listgeo', 'lib/%(name)s.a', 'lib/%(name)s.so'],
     'dirs': ['include', 'share'],

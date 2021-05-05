@@ -30,7 +30,6 @@ toolchainopts = {'pic': 'True'}
 source_urls = ['https://gitlab.dkrz.de/k202009/%(name)s/uploads/ea0b7d197a950b0c110da8dfdecbb71f/']
 sources = [SOURCELOWER_TAR_GZ]
 
-
 sanity_check_paths = {
     'files': ['lib/libsz.a'],
     'dirs': ['lib', 'include'],
