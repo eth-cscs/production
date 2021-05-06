@@ -22,7 +22,7 @@ builddependencies = [
     ('cURL', '7.65.1'),
 ]
 
-configopts = 'CC=`which mpicc`'
+configopts = 'CC=mpicc'
 
 sanity_check_paths = {
     'files': ['bin/ncview'],
