@@ -35,7 +35,7 @@ configopts = (
     "--without-cuda "
     "--without-gdrcopy "
     "--without-rocm "
-    "--without-ugni"
+    "--without-ugni "
     "--without-verbs "
     "--without-xpmem "
 )
