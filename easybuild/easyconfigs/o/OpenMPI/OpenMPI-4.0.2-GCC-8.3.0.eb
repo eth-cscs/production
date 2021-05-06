@@ -49,7 +49,7 @@ postinstallcmds = [
 ]
 
 modtclfooter = """
-    setenv UCX_TLS rc_x,ud_x,mm,shm,cma
+    setenv UCX_TLS rc,ud,mm,shm,cma
 """
 
 local_libs = ["mpif_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
