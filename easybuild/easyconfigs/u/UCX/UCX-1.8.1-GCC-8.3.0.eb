@@ -20,7 +20,24 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configure_cmd = "./contrib/./configure-release"
 configopts = (
+    "--enable-cma "
+    "--enable-mt "
+    "--disable-assertions "
+    "--disable-debug "
+    "--disable-dependency-tracking "
     "--disable-doxygen-doc "
+    "--disable-logging "
+    "--disable-optimizations "
+    "--disable-params-check "
+    "--with-cm "
+    "--with-knem "
+    "--with-rdmacm "
+    "--without-cuda "
+    "--without-gdrcopy "
+    "--without-rocm "
+    "--without-ugni"
+    "--without-verbs "
+    "--without-xpmem "
 )
 
 buildopts = 'V=1'
