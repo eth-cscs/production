@@ -28,8 +28,8 @@
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-1.0.1-CrayGNU-20.11.eb                        --set-default-module
- Julia-1.6.0-CrayGNU-20.11-cuda.eb                      --set-default-module
- JuliaExtensions-1.6.0-CrayGNU-20.11-cuda.eb            --set-default-module
+ Julia-1.6.1-CrayGNU-20.11-cuda.eb                      --set-default-module
+ JuliaExtensions-1.6.1-CrayGNU-20.11-cuda.eb            --set-default-module
  jupyterlab-1.1.1-CrayGNU-20.11-batchspawner.eb         --set-default-module
  jupyterlab-1.2.16-CrayGNU-20.11-batchspawner-cuda.eb
  jupyterlab-2.0.2-CrayGNU-20.11-batchspawner-cuda.eb
