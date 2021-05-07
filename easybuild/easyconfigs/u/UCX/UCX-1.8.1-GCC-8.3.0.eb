@@ -29,7 +29,7 @@ configopts = (
     "--disable-logging "
     "--disable-optimizations "
     "--disable-params-check "
-    "--with-cm "
+    "--with-cm=/usr/lib64 "
     "--with-knem "
     "--with-rdmacm "
     "--with-verbs "
