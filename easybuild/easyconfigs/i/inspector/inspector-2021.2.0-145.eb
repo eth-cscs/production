@@ -12,14 +12,14 @@ postinstallcmds = [
   'rm -fr ~/.intel ~/intel',
   './l_HPCKit_p_2021.2.0.2997.sh -a --cli --eula accept '
   '--components intel.oneapi.lin.inspector '
-  '--intel-sw-improvement-program-consent accept -s --r yes '
+  '--intel-sw-improvement-program-consent accept -s '
   '--install-dir %(installdir)s ',
   # no comma:
-  'cd %(installdir)s ; ls -la; '
+  'cd %(installdir)s ;'
   'ln -s inspector/latest/env/vars.sh . ;'
   'ln -s inspector/latest/env/vars.sh inspector-vars.sh ;'
   'ln -s inspector/latest/env/vars.csh . ;'
-  'cd -',
+  'ls -la ;cd -',
 ]
 cmds_map = [('.*', "pwd ;ls -l")]
 files_to_copy = []
