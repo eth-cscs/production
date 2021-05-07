@@ -1,0 +1,22 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OPARI2'
+version = '2.0.6'
+homepage = 'http://www.score-p.org'
+description = """OPARI2, the successor of Forschungszentrum Juelich's OPARI,
+ is a source-to-source instrumentation tool for OpenMP and hybrid codes.
+ It surrounds OpenMP directives and runtime library calls with calls to
+ the POMP2 measurement interface."""
+toolchain = SYSTEM
+configopts = ' --enable-shared'
+source_urls = ['http://perftools.pages.jsc.fz-juelich.de/cicd/opari2/tags/opari2-2.0.6']
+sources = [SOURCELOWER_TAR_GZ]
+patches = ['%(name)s-%(version)s.patch']
+checksums = ['7bbfa02e182d9f622b2cc2de966904a3']
+sanity_check_paths = {
+    'files': ["bin/opari2", "include/opari2/pomp2_lib.h"],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

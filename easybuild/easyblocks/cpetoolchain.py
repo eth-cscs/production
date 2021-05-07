@@ -34,7 +34,7 @@ from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.build_log import EasyBuildError
 
 
-KNOWN_PRGENVS = ['cpe-aocc', 'cpe-cray', 'cpe-gnu', 'cpe-intel']
+KNOWN_PRGENVS = ['PrgEnv-aocc', 'PrgEnv-cray', 'PrgEnv-gnu', 'PrgEnv-intel']
 
 
 class cpeToolchain(Bundle):
@@ -62,7 +62,7 @@ class cpeToolchain(Bundle):
             # determine versionless module name, e.g. 'fftw/3.3.4.1' => 'fftw'
             dep_name = '/'.join(mod_name.split('/')[:-1])
 
-            if mod_name.startswith('cpe'):
+            if mod_name.startswith('PrgEnv'):
                 prgenv_mod = mod_name
             else:
                 swap_deps.append(self.module_generator.swap_module(dep_name, mod_name).lstrip())
@@ -70,7 +70,7 @@ class cpeToolchain(Bundle):
         self.log.debug("Swap statements for dependencies of %s: %s", self.full_mod_name, swap_deps)
 
         if prgenv_mod is None:
-            raise EasyBuildError("Could not find a cpe-* module listed as dependency: %s",
+            raise EasyBuildError("Could not find a PrgEnv-* module listed as dependency: %s",
                                  self.toolchain.dependencies)
 
         # unload statements for other PrgEnv modules

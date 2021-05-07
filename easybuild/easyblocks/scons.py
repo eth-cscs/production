@@ -42,7 +42,7 @@ class SCons(EasyBlock):
 
     def build_step(self, verbose=False):
         """
-        Build with SCons 
+        Build with SCons
         """
         cmd = "%s scons %s PREFIX=%s" % (self.cfg['prebuildopts'], self.cfg['buildopts'], self.installdir)
         (out, _) = run_cmd(cmd, log_all=True, log_output=verbose)
@@ -51,7 +51,7 @@ class SCons(EasyBlock):
 
     def test_step(self):
         """
-        Test with SCons 
+        Test with SCons
         """
         if self.cfg['runtest']:
             cmd = "scons %s" % (self.cfg['runtest'])

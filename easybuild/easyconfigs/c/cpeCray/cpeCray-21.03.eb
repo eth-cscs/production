@@ -5,12 +5,12 @@ name = 'cpeCray'
 version = "21.03"
 
 homepage = 'https://pubs.cray.com'
-description = """Toolchain using Cray compiler wrapper with cpe-cray module (CPE release: %s).\n""" % version
+description = """Toolchain using Cray compiler wrapper with cce module (CPE release: %s).\n""" % version
 
 toolchain = SYSTEM
 
 dependencies = [
-   ('cpe-cray', EXTERNAL_MODULE)
+   ('PrgEnv-cray', EXTERNAL_MODULE)
 ]
 
 modluafooter = '''

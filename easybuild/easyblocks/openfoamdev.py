@@ -53,14 +53,14 @@ from easybuild.tools.run import run_cmd, run_cmd_qa
 class OpenFOAMdev(EasyBlock):
     """Support for building and installing OpenFOAM."""
 
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
         """Specify that OpenFOAM should be built in install dir."""
 
         super(OpenFOAMdev, self).__init__(*args, **kwargs)
 
         self.build_in_installdir = True
 
-        self.wm_compiler= None
+        self.wm_compiler = None
         self.wm_mplib = None
         self.openfoamdir = None
         self.thrdpartydir = None
@@ -91,7 +91,7 @@ class OpenFOAMdev(EasyBlock):
                         self.log.debug("Moving %s to %s" % (source, target))
                         shutil.move(source, target)
                 os.chdir(openfoam_installdir)
-            except OSError, err:
+            except OSError as err:
                 raise EasyBuildError("Failed to move all files to %s: %s", openfoam_installdir, err)
 
     def configure_step(self):
