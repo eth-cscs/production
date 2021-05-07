@@ -40,6 +40,7 @@
  pycuda-2018.1.1-CrayGNU-21.02-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-21.02.eb                  --set-default-module
  singularity-3.7.3-daint.eb
+ Scalasca-2.6-CrayGNU-21.02.eb                          --set-default-module
  Spark-2.4.7-CrayGNU-21.02-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-21.02-cuda.eb                     --set-default-module
  VMD-1.9.3-egl.eb
