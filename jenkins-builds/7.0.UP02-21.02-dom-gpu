@@ -1,3 +1,4 @@
+ advisor-2021.2.0.eb                                    --set-default-module
  GSL-2.5-CrayIntel-21.02.eb
  Boost-1.70.0-CrayGNU-21.02-python3.eb                  --set-default-module
  Boost-1.70.0-CrayGNU-21.02.eb
@@ -19,6 +20,7 @@
  hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
+ inspector-2021.2.0-145.eb                              --set-default-module
  ipcmagic-1.0.1-CrayGNU-21.02.eb                        --set-default-module
  Julia-1.6.0-CrayGNU-21.02-cuda.eb                      --set-default-module
  JuliaExtensions-1.6.0-CrayGNU-21.02-cuda.eb            --set-default-module
@@ -46,3 +48,4 @@
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VMD-1.9.4.eb                                           --set-default-module
+ vtune_profiler-2021.2.0.eb                             --set-default-module
