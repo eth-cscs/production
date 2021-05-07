@@ -1,3 +1,4 @@
+ advisor-2021.2.0.eb                                    --set-default-module
  GSL-2.5-CrayIntel-21.02.eb
  Boost-1.70.0-CrayGNU-21.02-python3.eb                  --set-default-module
  Boost-1.70.0-CrayGNU-21.02.eb
@@ -17,9 +18,10 @@
  h5py-3.2.1-CrayGNU-21.02-python3-parallel.eb           --set-default-module
  h5py-3.2.1-CrayGNU-21.02-python3-serial.eb
  hwloc-2.4.1.eb                                         --set-default-module
+ inspector-2021.2.0-145.eb                              --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
- ipcmagic-1.0.1-CrayGNU-21.02.eb                       --set-default-module
+ ipcmagic-1.0.1-CrayGNU-21.02.eb                        --set-default-module
  Julia-1.6.0-CrayGNU-21.02.eb                           --set-default-module
  JuliaExtensions-1.6.0-CrayGNU-21.02.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
@@ -42,3 +44,4 @@
  singularity-3.7.3-daint.eb
  Spark-2.4.7-CrayGNU-21.02-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-21.02.eb                          --set-default-module
+ vtune_profiler-2021.2.0.eb                             --set-default-module
