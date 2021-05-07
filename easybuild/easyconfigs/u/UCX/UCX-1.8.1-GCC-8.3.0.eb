@@ -29,14 +29,14 @@ configopts = (
     "--disable-logging "
     "--disable-optimizations "
     "--disable-params-check "
+    "--with-cm "
     "--with-knem "
     "--with-rdmacm "
-    "--without-cm "
+    "--with-verbs "
     "--without-cuda "
     "--without-gdrcopy "
     "--without-rocm "
     "--without-ugni "
-    "--without-verbs "
     "--without-xpmem "
 )
 
