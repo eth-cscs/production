@@ -29,7 +29,6 @@ EasyBuild support for building and installing XALT, implemented as an easyblock
 """
 
 import os
-import shutil
 
 from easybuild.easyblocks.generic.configuremake import ConfigureMake
 

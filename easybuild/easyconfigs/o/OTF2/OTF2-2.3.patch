@@ -1,0 +1,12 @@
+diff -Naur otf2-2.3.ori/configure otf2-2.3/configure
+--- otf2-2.3.ori/configure	2021-03-26 15:42:29.439632842 +0100
++++ otf2-2.3/configure	2021-05-04 20:48:49.755273398 +0200
+@@ -3295,6 +3295,8 @@
+ elif test -L /opt/cray/pe/pmi/default; then :
+   if test -d /opt/cray/ari/modulefiles; then :
+   ac_scorep_platform="crayxc"
++elif test -d /opt/cray/pe/lmod/modulefiles/net/ofi; then :
++  ac_scorep_platform="crayxc"
+ fi
+ fi
+                          if test "x${ac_scorep_platform}" = "xcrayunknown"; then :

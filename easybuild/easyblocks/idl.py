@@ -1,15 +1,11 @@
-# This file is part of JSC's public easybuild repository 
+# This file is part of JSC's public easybuild repository
 # (https://github.com/easybuilders/jsc)
 # adapted by Luca Marsella (CSCS)
 """
 EasyBlock for IDL installation
 @author: Sebastian Luehrs (FZJ)
 """
-import os
-import shutil
-
 from easybuild.framework.easyblock import EasyBlock
-from easybuild.tools.build_log import EasyBuildError
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.tools.run import run_cmd
 
@@ -41,7 +37,7 @@ class EB_IDL(EasyBlock):
         """
 
         if self.cfg['answer_file'] is None:
-            file_handle = open('idl_answer_file',"w")
+            file_handle = open('idl_answer_file', "w")
             file_handle.write("""y
 """)
             file_handle.write("""%s

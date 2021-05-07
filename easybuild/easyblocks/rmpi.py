@@ -33,11 +33,10 @@ EasyBuild support for building and installing the Rmpi R library, implemented as
 @author: Balazs Hajgato (Vrije Universiteit Brussel)
 @author: Guilherme Peretti-Pezzi (CSCS)
 """
-import easybuild.tools.toolchain as toolchain
-from distutils.version import LooseVersion
+import os
+
 from easybuild.easyblocks.generic.rpackage import RPackage
 
-import os
 
 def make_R_install_option(opt, values, cmdline=False):
     """

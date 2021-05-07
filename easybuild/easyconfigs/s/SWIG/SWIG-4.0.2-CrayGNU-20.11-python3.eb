@@ -1,0 +1,24 @@
+# Contributed by Guilherme Peretti Pezzi, Marcel Schoengens, Jean-Guillaume Piccinali and Luca Marsella (CSCS)
+name = 'SWIG'
+version = '4.0.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://www.swig.org/'
+description = """SWIG is a software development tool that connects programs
+written in C and C++ with a variety of high-level programming languages."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'opt': True, 'optarch': True, 'pic': True}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PCRE', '8.44'),
+]
+
+configopts = ' LDFLAGS="$LDFLAGS -Wl,--rpath=$EBROOTPCRE/lib"  --with-python=$EBROOTPYTHON/bin/python  --with-python-version=%(pyshortver)s  --with-python-root=$EBROOTPYTHON '
+
+
+moduleclass = 'devel'
