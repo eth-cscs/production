@@ -8,6 +8,8 @@
  CPMD-4.1-CrayIntel-21.02.eb                            --set-default-module
  CPMD-4.3-CrayIntel-21.02.eb
  dask-2.2.0-CrayGNU-21.02-python3.eb                    --set-default-module
+ ddt-20.0-Suse-15.0.eb
+ ddt-21.0.2-linux-x86_64.eb                             --set-default-module
  FFmpeg-4.3.1-CrayGNU-21.02.eb                          --set-default-module
  GREASY-19.03-cscs-CrayGNU-21.02.eb                     --set-default-module
  GROMACS-2020.4-CrayGNU-21.02.eb                        --set-default-module
