@@ -36,6 +36,7 @@
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-21.02.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-21.02.eb                          --set-default-module
+ nvidia-nsight-systems-2021.2.1.58-642947b.eb           --set-default-module
  numpy-1.17.2-CrayGNU-21.02.eb                          --set-default-module
  ovito-3.2.0-CrayGNU-21.02.eb                           --set-default-module
  PLUMED-2.6.1-CrayGNU-21.02.eb                          --set-default-module
