@@ -42,7 +42,6 @@
  NCO-4.8.1-CrayGNU-21.02.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-21.02.eb                          --set-default-module
  numpy-1.17.2-CrayGNU-21.02.eb                          --set-default-module
- nvtop-1.0.0-cuda.eb                                    --set-default-module
  otf2_cli_profile-cd4e452-CrayGNU-21.02.eb              --set-default-module
  PLUMED-2.6.1-CrayGNU-21.02.eb                          --set-default-module
  PyExtensions-python3-CrayGNU-21.02.eb
