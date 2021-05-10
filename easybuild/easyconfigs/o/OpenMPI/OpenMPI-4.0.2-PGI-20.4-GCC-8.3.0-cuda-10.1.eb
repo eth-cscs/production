@@ -10,7 +10,9 @@ description = """
 
 toolchain = {'name': 'PGI', 'version': '20.4-GCC-8.3.0'}
 
-source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+source_urls = [
+    'https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads'
+]
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
@@ -30,7 +32,8 @@ configopts = (
     "--with-hwloc=internal "
     "--with-pmi=/opt/slurm/default "
     "--with-ucx=${EBROOTUCX} "
-    "--with-zlib --without-alps "
+    "--with-zlib "
+    "--without-alps "
     "--without-libfabric "
     "--without-lsf "
     "--without-mxm "
@@ -59,7 +62,13 @@ postinstallcmds = [
 ]
 
 sanity_check_paths = {
-    'files': ['bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 'lib/libmpi_mpifh.so', 'lib/libmpi.so', 'lib/libompitrace.so', 'lib/libopen-pal.so', 'lib/libopen-rte.so', 'include/mpi-ext.h', 'include/mpif-config.h', 'include/mpif.h', 'include/mpi.h', 'include/mpi_portable_platform.h'],
+    'files': [
+        'bin/ompi_info', 'bin/opal_wrapper', 'bin/orterun', 
+        'lib/libmpi_mpifh.so', 'lib/libmpi.so', 'lib/libompitrace.so', 
+        'lib/libopen-pal.so', 'lib/libopen-rte.so', 'include/mpi-ext.h', 
+        'include/mpif-config.h', 'include/mpif.h', 'include/mpi.h', 
+        'include/mpi_portable_platform.h'
+    ],
     'dirs': [],
 }
 
