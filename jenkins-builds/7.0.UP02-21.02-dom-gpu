@@ -9,7 +9,9 @@
  CPMD-4.3-CrayIntel-21.02-cuda.eb
  ddt-20.0-Suse-15.0.eb
  ddt-21.0.2-linux-x86_64.eb                             --set-default-module
+ Extrae-3.8.3-CrayGNU-21.02.eb                          --set-default-module
  FFmpeg-4.3.1-CrayGNU-21.02.eb                          --set-default-module
+ gperftools-2.9.1.eb                                    --set-default-module
  GREASY-19.03-cscs-CrayGNU-21.02.eb                     --set-default-module
  GROMACS-2020.4-CrayGNU-21.02-cuda.eb                   --set-default-module
  GSL-2.5-CrayGNU-21.02.eb                               --set-default-module
@@ -35,17 +37,20 @@
  magma-2.5.4-CrayIntel-21.02-cuda.eb                    --set-default-module
  MATLAB-R2019a.eb                                       --set-default-module
  NAMD-2.14-CrayIntel-21.02-cuda.eb                      --set-default-module
+ mpiP-a2cd232-CrayGNU-21.02.eb                          --set-default-module
  NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-21.02.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-21.02.eb                          --set-default-module
  nvidia-nsight-systems-2021.2.1.58-642947b.eb           --set-default-module
  numpy-1.17.2-CrayGNU-21.02.eb                          --set-default-module
+ nvtop-1.0.0-cuda.eb                                    --set-default-module
  ovito-3.2.0-CrayGNU-21.02.eb                           --set-default-module
  PLUMED-2.6.1-CrayGNU-21.02.eb                          --set-default-module
  pycuda-2018.1.1-CrayGNU-21.02-python3-cuda.eb          --set-default-module
  PyExtensions-python3-CrayGNU-21.02.eb                  --set-default-module
  singularity-3.7.3-daint.eb
  Scalasca-2.6-CrayGNU-21.02.eb                          --set-default-module
+ scorep_binding_python-3.3.1-CrayGNU-21.02-python3.eb   --set-default-module
  Spark-2.4.7-CrayGNU-21.02-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-21.02-cuda.eb                     --set-default-module
  VMD-1.9.3-egl.eb
