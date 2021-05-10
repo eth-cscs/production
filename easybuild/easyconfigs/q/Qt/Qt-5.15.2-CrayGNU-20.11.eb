@@ -1,0 +1,26 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Qt'
+version_major_minor = '5.15'
+version = '5.15.2'
+
+homepage = 'http://qt-project.org/'
+description = "Qt is a comprehensive cross-platform C++ application framework."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+source_urls = [
+    'http://master.qt-project.org/archive/qt/%(version_major_minor)s/%(version)s/single/'
+]
+sources = ['%(namelower)s-everywhere-src-%(version)s.tar.xz']
+
+#prefix_opt = ' -prefix '
+configopts = '-opensource -confirm-license'
+
+dependencies = [
+    ('SQLite', '3.9.2'),
+]
+
+# building sometimes fails if make parallelism is too high
+maxparallel = 8
+
+moduleclass = 'devel'
