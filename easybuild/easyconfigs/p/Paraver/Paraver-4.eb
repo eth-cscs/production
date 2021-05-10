@@ -9,7 +9,7 @@ based on traces that can be used to analyse any information that is expressed
 on its input trace format. Traces for parallel MPI, OpenMP and other programs
 can be genereated with Extrae."""
 
-toolchain = SYSTEM 
-dependencies = [('%(name)s', '%(version)s.8.2')]
+toolchain = SYSTEM
+dependencies = [('%(name)s', '%(version)s.9.2')]
 
 moduleclass = 'perf'

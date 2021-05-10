@@ -1,0 +1,35 @@
+# jg (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'scorep_binding_python'
+version = '3.3.1'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/score-p/scorep_binding_python'
+description = "Allows tracing of python code using Score-P"
+
+toolchain = {'name': 'CrayGNU', 'version': '21.02'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+source_urls = ['https://github.com/score-p/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+    # ('Score-P-Python', 'python%(pymajver)s'),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('Score-P', '7.0'),
+]
+
+options = {'modulename': 'scorep'}
+
+sanity_check_paths = {
+    'files': ['lib/python%(pyshortver)s/site-packages/scorep/_bindings.cpython-%(pymajver)s%(pyminver)s-%(arch)s-linux-gnu.so'],
+    'dirs': [''],
+}
+
+modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
+
+moduleclass = 'perf'
