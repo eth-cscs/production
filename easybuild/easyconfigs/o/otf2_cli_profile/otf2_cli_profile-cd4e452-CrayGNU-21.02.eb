@@ -16,7 +16,7 @@ sources = [
 
 # patches = ['%(name)s-%(version)s.patch']
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
+    ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
     ('rapidjson', '17aa824', '', True),
