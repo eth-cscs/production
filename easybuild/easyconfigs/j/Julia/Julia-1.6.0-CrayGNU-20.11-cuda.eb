@@ -34,8 +34,7 @@ modextravars = {
     'JULIA_MPIEXEC_ARGS': "-C gpu",
     'JULIA_MPI_BINARY': 'system',
     'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
-    'JULIA_MPI_TEST_ARRAYTYPE': 'CuArray',
-    'JULIA_PKG_SERVER': '',
+    'JULIA_MPI_TEST_ARRAYTYPE': 'CuArray'
 }
 
 moduleclass = 'lang'

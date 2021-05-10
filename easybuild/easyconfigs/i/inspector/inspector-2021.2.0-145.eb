@@ -1,0 +1,48 @@
+# jg (CSCS)
+easyblock = 'CmdCp'
+
+name = 'inspector'
+version = '2021.2.0-145'
+homepage = 'https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/inspector.html'
+description = "Intel's dynamic memory and threading error checking tool"
+toolchain = SYSTEM
+sources = [{'filename': '/apps/common/UES/easybuild/sources/i/intel-oneapi/l_HPCKit_p_2021.2.0.2997.sh',
+            'extract_cmd': "cp %s ."}]
+postinstallcmds = [
+  'rm -fr ~/.intel ~/intel',
+  # line above requires 2 separate pull requests (dom-mc then dom-gpu)
+  './l_HPCKit_p_2021.2.0.2997.sh -a --cli --eula accept '
+  '--components intel.oneapi.lin.inspector '
+  '--intel-sw-improvement-program-consent accept -s '
+  '--install-dir %(installdir)s ',
+  # no comma:
+  'cd %(installdir)s ;'
+  'ln -s inspector/latest/env/vars.sh . ;'
+  'ln -s inspector/latest/env/vars.sh inspector-vars.sh ;'
+  'ln -s inspector/latest/env/vars.csh . ;'
+  'ls -la ;cd -',
+]
+cmds_map = [('.*', "pwd ;ls -l")]
+files_to_copy = []
+sanity_check_paths = {
+    'files': ['%(name)s-vars.sh'],
+    'dirs': ['inspector/latest/bin64']
+}
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': 'inspector/latest/bin64',
+    'PKG_CONFIG_PATH': 'inspector/latest/include/pkgconfig/lib64',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+    # 'INTEL_PYTHONPATH': 'pythonapi',
+    # 'PYTHONPATH': 'pythonapi',
+    # 'APM': 'perfmodels',
+}
+modextravars = {
+    'INSPECTOR_2021_DIR': '%(installdir)s/inspector/latest',
+}
+docpaths = {
+    'INSPECTOR_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'INSPECTOR_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'
