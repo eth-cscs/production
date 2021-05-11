@@ -533,7 +533,7 @@ stage('GitHub Stage') {
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
                             git commit -m "Updated recipes on ${machineLabel} for PE ${params.pe_target}"
-                            # check if a pull request from ${branch} is already open
+                            # check if a pull request from selected branch is already open
                             if [ -n "\$(hub pr list --head \${branch})" ]; then
                                 git push origin HEAD
                             else
