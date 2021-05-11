@@ -360,7 +360,7 @@ stage('Jira Stage') {
                     */
                     def eb_installpath
                     if(machineName == "daint" || machineName == "dom"){
-                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/${machineLabel}"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_installpath = "${params.eb_prefix}"
                     }
@@ -442,6 +442,17 @@ stage('GitHub Stage') {
                     /* retrieve list of successful updates and target production list to submit pull request */
                     sh("""#!/bin/bash -l
 
+                        failed_file="${eb_installpath}/failed.txt"
+                        submit_file="${eb_installpath}/submit.txt"
+                        # check if submit file is not empty
+                        if [ -s "\$submit_file" ]; then
+                            submit_list=\$(cat \$submit_file | sort | uniq)
+                            echo -e "List of items to submit from \$submit_file: \n\$submit_list"
+                        else
+                            echo -e "List of items to submit from \$submit_file: empty (exiting)"
+                            exit
+                        fi
+
                         # define repository
                         repo="git@github.com:eth-cscs/production.git"
                         # define submit folder 
@@ -463,10 +474,6 @@ stage('GitHub Stage') {
                         else 
                             git checkout -b \$branch
                         fi
-
-                        failed_file="${eb_installpath}/failed.txt"
-                        submit_file="${eb_installpath}/submit.txt"
-                        submit_list=\$(cat \$submit_file | sort | uniq)
 
                         # initialise variables
                         unset copied
@@ -520,12 +527,12 @@ stage('GitHub Stage') {
                         git add \$list_production
 
                         # update architecture modulefile
-                        if [[ $machineName == "daint" || $machineName == "dom" ]]; then
-                            modulefile_current="$WORKSPACE/login/daint-$architecture/${params.pe_current}"
+                        if [[ ${machineName} == "daint" || ${machineName} == "dom" ]]; then
+                            modulefile_current="${WORKSPACE}/login/daint-${architecture}/${params.pe_current}"
                             if [ -s \$modulefile_current ]; then
                                 modulefile_target="\$submit_folder/login/daint-$architecture/${params.pe_target}"
                                 if [ ! -f "\$modulefile_target" ]; then  
-                                    sed "s/$params.pe_current/$params.pe_target/" \$modulefile_current > \$modulefile_target
+                                    sed "s/${params.pe_current}/${params.pe_target}/" \$modulefile_current > \$modulefile_target
                                     # add architecture modulefile
                                     git add \$modulefile_target
                                 fi
@@ -533,7 +540,7 @@ stage('GitHub Stage') {
                         fi
 
                         # load hub tool to submit a pull request with recently added files
-                        $load_hub
+                        ${load_hub}
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
