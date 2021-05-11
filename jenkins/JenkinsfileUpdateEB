@@ -436,12 +436,13 @@ stage('GitHub Stage') {
                     }
 
                     /* retrieve list of successful updates and target production list to submit pull request */
-                    sh("""#!/bin/bash -l
+                    sh("""#!/bin/bash -lx
 
                         # define repository
                         repo="git@github.com:eth-cscs/production.git"
                         # define submit folder 
                         submit_folder="$WORKSPACE/submit"
+                        
                         # clone master over ssh to submit_folder
                         echo -e "\nCloning CSCS GitHub production repository to \$submit_folder:"
                         echo "git clone --quiet \$repo \$submit_folder"
@@ -449,7 +450,7 @@ stage('GitHub Stage') {
                         
                         # go to submit folder to checkout branch and match relative path of deps
                         echo -e "\nGo to folder \$submit_folder/easybuild/easyconfigs"
-                        cd \$submit_folder/easybuild/easyconfigs
+                        pushd \$submit_folder/easybuild/easyconfigs
                         
                         # create git branch or update it if existing
                         branch="${machineLabel}/${params.pe_target}" 
