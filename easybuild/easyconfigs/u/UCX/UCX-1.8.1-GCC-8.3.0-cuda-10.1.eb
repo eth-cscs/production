@@ -25,24 +25,8 @@ builddependencies = [
 
 configure_cmd = "./contrib/./configure-release"
 configopts = (
-    "--enable-cma "
-    "--enable-mt "
-    "--disable-assertions "
-    "--disable-debug "
-    "--disable-dependency-tracking "
-    "--disable-doxygen-doc "
-    "--disable-logging "
-    "--disable-optimizations "
-    "--disable-params-check "
-    "--with-cm=/usr/lib64 "
     "--with-cuda=${EBROOTCUDA} "
-    "--with-knem "
-    "--with-rdmacm "
-    "--with-verbs "
-    "--without-gdrcopy "
-    "--without-rocm "
-    "--without-ugni "
-    "--without-xpmem "
+    "--disable-doxygen-doc "
 )
 
 buildopts = 'V=1'
