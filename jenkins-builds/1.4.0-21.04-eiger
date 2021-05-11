@@ -22,6 +22,7 @@
  matplotlib-3.3.4-cpeGNU-21.04.eb
  NAMD-2.14-cpeGNU-21.04.eb
  NCO-4.9.8-cpeGNU-21.04.eb
+ Scalasca-2.6-cpeGNU-21.04.eb       --set-default-module
  Vc-1.4.1-cpeGNU-21.04.eb           
  Amber-20-15-9-cpeIntel-21.04.eb
  GSL-2.6-cpeIntel-21.04.eb
