@@ -435,13 +435,15 @@ stage('GitHub Stage') {
                         load_hub = "module load hub"
                     }
 
+                    println "\nEasyBuild installpath: ${eb_installpath}\n"
+
                     /* retrieve list of successful updates and target production list to submit pull request */
                     sh("""#!/bin/bash -lx
 
                         # define repository
                         repo="git@github.com:eth-cscs/production.git"
                         # define submit folder 
-                        submit_folder="$WORKSPACE/submit"
+                        submit_folder="${WORKSPACE}/submit"
                         
                         # clone master over ssh to submit_folder
                         echo -e "\nCloning CSCS GitHub production repository to \$submit_folder:"
@@ -547,7 +549,7 @@ stage('GitHub Stage') {
 
                         # return the number of missing updates
                         exit \${#missing[@]}
-                       """)
+                    """)
                 }
             }
         }
