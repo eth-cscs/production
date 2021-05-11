@@ -1,6 +1,5 @@
 # contributed by Luca Marsella (CSCS)
 name = 'Qt'
-version_major_minor = '5.15'
 version = '5.15.2'
 
 homepage = 'http://qt-project.org/'
