@@ -164,6 +164,6 @@ void createJiraIssue(String subject, String machine, String message, String prio
                           issuetype: [name:'Task'],
                           priority: [name:priority],
                           components:[[name:'Software Installation']],
-                          labels: ['Production','Software']]
+                          labels: ['Production','Software']]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
