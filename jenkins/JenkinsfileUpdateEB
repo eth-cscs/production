@@ -380,7 +380,8 @@ stage('Jira Stage') {
                     else {
                         failed_updates.tokenize(' \n').each {
                             try {
-                                methods.failedJiraTask("UES", it, machineLabel)
+                                // methods.failedJiraTask("UES", it, machineLabel)
+                                methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
                             } catch(err) {
                                 println "Failed to create Jira Issue for $it"
                             }

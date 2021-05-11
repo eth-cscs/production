@@ -139,3 +139,31 @@ void createJiraSD(String subject, String machine, String message, String priorit
                           customfield_11103: system]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
+
+/**
+* Create a Jira Issue with custom message:
+* - issuetype: 'Task' or 'Epic'
+* - assignee: list with information of the person in charge, like [name:'lucamar']
+* - customfield_10401 (Watchers): list with information of watchers, like [[name:'bignamic'], [name:'manitart']]
+* - customfield_10101: Epic link (only for issuetype 'Task')
+* - customfield_10103: Epic name (only for issuetype 'Epic')
+* 
+* @param subject Subject of the Jira Issue appended to [${machine}]
+* @param machine Computing system where the build took place (machineLabel)
+* @param message Content of the Jira Issue prepended to Jenkins job details
+* @param priority Priority of the issue: Blocker, High, Medium, Low
+* @param project Project where the Jira Issue will be created
+*/
+void createJiraIssue(String subject, String machine, String message, String priority, String project){
+
+   def title = "[${machine}] ${subject}"
+   def content = "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def ticket = [fields: [ project: [key: project],
+                          summary: title,
+                          description: content,
+                          issuetype: [name:'Task'],
+                          priority: [name:priority],
+                          components:[[name:'Software Installation']],
+                          labels: ['Production','Software']]
+   def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
+}
