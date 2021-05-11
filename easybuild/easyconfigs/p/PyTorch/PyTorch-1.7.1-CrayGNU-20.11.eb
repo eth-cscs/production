@@ -17,7 +17,7 @@ dependencies = [
     ('NCCL', '2.8.3', '', True),
     ('libffi', '3.2.1', '', True),
     ('pybind11', '2.6.1'),  # required by scipy
-    ('numpy', '1.18.5'),  # max for cray-python/3.8.5.0
+    ('numpy', '1.17.2'),
     ('Boost', '1.70.0'),
 ]
 
@@ -74,7 +74,8 @@ sanity_check_paths = {
     'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
 
-sanity_check_commands = ['python -c "import torch; assert torch.__version__.startswith(\'%(version)s\')"',
-                         'python -c "import horovod.torch"']
+sanity_check_commands = [
+    'python -c "import horovod.torch"',
+]
 
 moduleclass = 'lib'
