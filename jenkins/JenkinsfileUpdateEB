@@ -365,6 +365,8 @@ stage('Jira Stage') {
                         eb_installpath = "${params.eb_prefix}"
                     }
 
+                    println "\nEasyBuild installpath: ${eb_installpath}\n"
+
                     /* retrieve list of failed updates */
                     def failed_updates = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
@@ -438,7 +440,7 @@ stage('GitHub Stage') {
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
 
                     /* retrieve list of successful updates and target production list to submit pull request */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         # define repository
                         repo="git@github.com:eth-cscs/production.git"
