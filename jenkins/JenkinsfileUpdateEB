@@ -472,18 +472,21 @@ stage('GitHub Stage') {
 
                         # loop over list of successful updates and dependencies
                         echo -e "\nCopy successful updates and dependencies for commit:"
-                        for recipe in \$submit_list; do
-                            # check if recipe did not fail elsewhere
+                        for item in \$submit_list; do
+                            # EasyBuild file name of current update
+                            recipe=\$(basename \$item)
+                            # check if current update did not fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
                                 # check if recipe matches Cray PE
                                 if [[ \$recipe =~ (cpe.*|Cray.*)-${params.pe_target} ]]; then
-                                    name=\$(basename \$recipe)
-                                    source=\$(find ${eb_installpath}/software -type f -name \$name | grep easybuild/\$name)
+                                    name=\$(echo \${item%/*} | tr -d [a-z]/)
+                                    version=\$(expr "\$item" : "./\$name/\$name-\(.*\).eb")
+                                    source=${eb_installpath}/software/\$name/\$version/easybuild/\$recipe
                                     if [ -n "\$source" ]; then 
-                                        echo -e " \t \$source -> \$recipe"
-                                        cp \$source \$recipe
+                                        echo -e " \t \$source -> \$item"
+                                        cp \$source \$item
                                         # update variable
                                         copied+=(\$recipe)
                                     else
