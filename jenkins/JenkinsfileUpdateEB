@@ -449,7 +449,7 @@ stage('GitHub Stage') {
                             submit_list=\$(cat \$submit_file | sort | uniq)
                             echo -e "List of items to submit from \$submit_file: \n\$submit_list"
                         else
-                            echo -e "List of items to submit from \$submit_file: empty (exiting)"
+                            echo -e "The list of items to submit from \$submit_file is empty. Exiting..."
                             exit
                         fi
 
