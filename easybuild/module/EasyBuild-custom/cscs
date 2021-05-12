@@ -142,16 +142,12 @@ setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 #
 if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
     setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
-} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
-    setenv EASYBUILD_TMPDIR                     /tmp/$::env(USER)/easybuild/tmp
 } else {
     setenv EASYBUILD_TMPDIR                     $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
 
 if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
     setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
-} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
-    setenv EASYBUILD_BUILDPATH                  /tmp/$::env(USER)/easybuild/build
 } else {
     setenv EASYBUILD_BUILDPATH                  $::env(XDG_RUNTIME_DIR)/easybuild/build
 }
