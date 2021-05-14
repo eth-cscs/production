@@ -516,11 +516,19 @@ stage('GitHub Stage') {
                         # update production list
                         list_target=\$(ls ${eb_installpath}/*${params.pe_target}-${machineLabel} | tail -1)
                         list_production=\$submit_folder/jenkins-builds/\$(basename \$list_target)
+                        list_append=\${eb_installpath}/\$(basename \$list_target).append"
                         if [ -s "\$list_production" ]; then
+                            # copy updated items of target list to file "\$list_append"
+                            grep -v -f \$list_production \$list_target > \$list_append
                             # updated items of target list are appended to production list
-                            echo "\$(grep -v -f \$list_production \$list_target)" >> \$list_production 
+                            if [ -s "\$list_append" ]; then
+                                echo -e "\nAppending \$list_append to \$list_production"
+                                cat \$list_append >> \$list_production
+                            else
+                                echo -e "\nNothing to append to \$list_production"
                         else
                             # target list is copied to production list
+                            echo -e "\nCopying \$list_target -> \$list_production
                             cp \$list_target \$list_production
                         fi
 
