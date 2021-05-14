@@ -167,3 +167,23 @@ void createJiraIssue(String subject, String machine, String message, String prio
                           labels: ['Production','Software']]]
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
+
+/**
+* Search a Jira Issue:
+* 
+* @param subject Subject of the Jira Issue appended to [${machine}]
+* @param machine Computing system where the build took place (machineLabel)
+* @param project Project where the Jira Issue has been be created
+* @param key Key of the Jira Issue matched by the search
+* @param status Status of the Jira issues matched by the search 
+*/
+void searchJiraIssue(String subject, String machine, String project, String key, String status){
+
+   def title = "[${machine}] ${subject}"
+   def search = jiraJqlSearch jql: "project = $project AND summary ~ $title", fields: ['status'], maxResults: 1, site: 'JIRA_SITE'
+
+   if(search.successful) {
+       key = search.data.issues[0].key
+       status = search.data.issues.fields.status[0].name
+   }
+}

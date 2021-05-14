@@ -367,6 +367,28 @@ stage('Jira Stage') {
 
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
 
+                    /* key and status of Jira issues matching search */
+                    def key
+                    def status
+
+                    /* retrieve list of successful  updates */
+                    def success_updates = sh(returnStdout: true,
+                                        script: """#!/bin/bash -l
+                                        success_file="${eb_installpath}/success.txt"
+                                        if [ -s "\$success_file" ]; then
+                                            cat \$success_file
+                                        fi""").trim()  
+                    if ( !success_updates?.trim() ) {
+                        println "\nSuccessful updates: None\n"
+                    }
+                    else {
+                        success_updates.tokenize(' \n').each {
+                            /* search existing Jira issues for current successful update */
+                            methods.searchJiraIssue(it, machineLabel, 'UES', key, status)
+                            println "${key} matches $it with status ${status}"
+                        }
+                    }
+
                     /* retrieve list of failed updates */
                     def failed_updates = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
@@ -379,12 +401,15 @@ stage('Jira Stage') {
                     }
                     else {
                         failed_updates.tokenize(' \n').each {
-                            try {
-                                // methods.failedJiraTask("UES", it, machineLabel)
-                                methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
-                            } catch(err) {
-                                println "Failed to create Jira Issue for $it"
-                            }
+                            /* search existing Jira issues for current failed update */
+                            methods.searchJiraIssue(it, machineLabel, 'UES', key, status)
+                            println "${key} matches $it with status ${status}"
+                            /* create new Jira issues for current failed update */
+                            //try {
+                            //    methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
+                            //} catch(err) {
+                            //    println "Failed to create Jira Issue for $it"
+                            //}
                        }
                     }
                 }
