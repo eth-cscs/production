@@ -4,7 +4,7 @@
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
- reframe-3.5.3.eb                     --set-default-module
+ reframe-3.6.0.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.04.eb
  GSL-2.6-cpeCray-21.04.eb
  ParaView-5.9.0-cpeCray-21.04-OSMesa-python3.eb
@@ -23,7 +23,7 @@
  NAMD-2.14-cpeGNU-21.04.eb
  NCO-4.9.8-cpeGNU-21.04.eb
  Scalasca-2.6-cpeGNU-21.04.eb       --set-default-module
- Vc-1.4.1-cpeGNU-21.04.eb           
+ Vc-1.4.1-cpeGNU-21.04.eb
  Amber-20-15-9-cpeIntel-21.04.eb
  GSL-2.6-cpeIntel-21.04.eb
  QuantumESPRESSO-6.7.0-cpeIntel-21.04.eb
