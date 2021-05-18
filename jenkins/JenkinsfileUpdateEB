@@ -486,7 +486,7 @@ stage('GitHub Stage') {
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
 
                     /* retrieve list of successful updates and target production list to submit pull request */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         failed_file="${eb_installpath}/failed.txt"
                         submit_file="${eb_installpath}/submit.txt"
@@ -574,7 +574,7 @@ stage('GitHub Stage') {
                             fi
                         else
                             # target list is copied to production list
-                            echo -e "\nCopying \$list_target -> \$list_production
+                            echo -e "\nCopying \$list_target -> \$list_production"
                             cp \$list_target \$list_production
                         fi
 
