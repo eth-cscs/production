@@ -179,10 +179,12 @@ void createJiraIssue(String subject, String machine, String message, String prio
 */
 void searchJiraIssue(String subject, String machine, String project){
 
-   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE'
+   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
 
-   key = search.data.issues[0].key
-   status = search.data.issues.fields.status[0].name
-
-   return [key, status]
+   if(search.successful && search.data.issues) {
+       def key = search.data.issues[0].key
+       def status = search.data.issues.fields.status[0].name
+       return [key, status]
+   else
+       return null
 }
