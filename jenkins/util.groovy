@@ -208,9 +208,8 @@ void commentJiraIssue(String message, String key){
 * @param transID Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done' 
 * @param key     Jira Issue key
 */
-void transitionJiraIssue(Integer transID, String key){
+void transJiraIssue(Integer transID, String key){
 
    def transInput = [transition:[id:transID]]
    def transIssue = jiraTransitionIssue idOrKey: key, input: transInput, site: 'JIRA_SITE', failOnError: false
 }
-
