@@ -200,15 +200,3 @@ void commentJiraIssue(String message, String key){
    def content = [body: "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"]
    def commentIssue = jiraAddComment idOrKey: key, input: content, site: 'JIRA_SITE', failOnError: false
 }
-
-/*
-* Transition a Jira Issue:
-* 
-* @param transID Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done' 
-* @param key     Jira Issue key
-*/
-void transJiraIssue(Integer transID, String key){
-
-   def transInput = [transition:[id:transID]]
-   def transIssue = jiraTransitionIssue idOrKey: key, input: transInput, site: 'JIRA_SITE', failOnError: false
-}
