@@ -177,12 +177,12 @@ void createJiraIssue(String subject, String machine, String message, String prio
 * @param key Key of the Jira Issue matched by the search
 * @param status Status of the Jira issues matched by the search 
 */
-void searchJiraIssue(String subject, String machine, String project, String key, String status){
+void searchJiraIssue(String subject, String machine, String project){
 
    def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE'
 
-   if(search.successful) {
-       key = search.data.issues[0].key
-       status = search.data.issues.fields.status[0].name
-   }
+   key = search.data.issues[0].key
+   status = search.data.issues.fields.status[0].name
+
+   return [key, status]
 }

@@ -367,9 +367,8 @@ stage('Jira Stage') {
 
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
 
-                    /* key and status of Jira issues matching search */
-                    def key
-                    def status
+                    /* issue = [key, status] of Jira issues matching search */
+                    def String[] issue
 
                     /* retrieve list of successful  updates */
                     def success_updates = sh(returnStdout: true,
@@ -384,8 +383,8 @@ stage('Jira Stage') {
                     else {
                         success_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current successful update */
-                            methods.searchJiraIssue(it, machineLabel, 'UES', key, status)
-                            println "${key} matches $it with status ${status}"
+                            issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                            if( issue[0] && issue[1]) println "${issue[0]} matches $it with status ${issue[1]}"
                         }
                     }
 
@@ -402,8 +401,9 @@ stage('Jira Stage') {
                     else {
                         failed_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current failed update */
-                            methods.searchJiraIssue(it, machineLabel, 'UES', key, status)
-                            println "${key} matches $it with status ${status}"
+                            methods.searchJiraIssue(it, machineLabel, 'UES')
+                            issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                            if( issue[0] && issue[1]) println "${issue[0]} matches $it with status ${issue[1]}"
                             /* create new Jira issues for current failed update */
                             //try {
                             //    methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
