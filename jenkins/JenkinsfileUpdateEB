@@ -391,7 +391,8 @@ stage('Jira Stage') {
                                     if(issue[1]!='Done'){
                                         methods.commentJiraIssue("Update of $it successful on $machineLabel", issue[0])
                                         // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
-                                        methods.transJiraIssue('31', issue[0])
+                                        jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'31']], site: 'JIRA_SITE'
+                                        //methods.transJiraIssue('31', issue[0])
                                     }
                                 } else println "No issue matching $it"
                             } catch(err) {
@@ -420,7 +421,8 @@ stage('Jira Stage') {
                                     println "${issue[0]} matches $it with status ${issue[1]}"
                                     methods.commentJiraIssue("Update of $it failed on $machineLabel", issue[0])
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
-                                    methods.transJiraIssue('21', issue[0])
+                                    jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
+                                    //methods.transJiraIssue('21', issue[0])
                                 } else println "No issue matching $it"
                             } catch(err) {    
                                 println "Failed to update Jira issues for $it"
