@@ -384,7 +384,8 @@ stage('Jira Stage') {
                         success_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current successful update */
                             issue = methods.searchJiraIssue(it, machineLabel, 'UES')
-                            if( issue[0] && issue[1]) println "${issue[0]} matches $it with status ${issue[1]}"
+                            if(issue) println "${issue[0]} matches $it with status ${issue[1]}"
+                            else println "No issue matching $it}"
                         }
                     }
 
@@ -403,7 +404,8 @@ stage('Jira Stage') {
                             /* search existing Jira issues for current failed update */
                             methods.searchJiraIssue(it, machineLabel, 'UES')
                             issue = methods.searchJiraIssue(it, machineLabel, 'UES')
-                            if( issue[0] && issue[1]) println "${issue[0]} matches $it with status ${issue[1]}"
+                            if(issue) println "${issue[0]} matches $it with status ${issue[1]}"
+                            else println "No issue matching $it}"
                             /* create new Jira issues for current failed update */
                             //try {
                             //    methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')

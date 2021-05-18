@@ -185,6 +185,7 @@ void searchJiraIssue(String subject, String machine, String project){
        def key = search.data.issues[0].key
        def status = search.data.issues.fields.status[0].name
        return [key, status]
-   else
+   else {
        return null
+   }
 }
