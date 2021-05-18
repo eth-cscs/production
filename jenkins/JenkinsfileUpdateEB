@@ -486,7 +486,7 @@ stage('GitHub Stage') {
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
 
                     /* retrieve list of successful updates and target production list to submit pull request */
-                    sh("""#!/bin/bash -l
+                    sh("""#!/bin/bash -lx
 
                         failed_file="${eb_installpath}/failed.txt"
                         submit_file="${eb_installpath}/submit.txt"
