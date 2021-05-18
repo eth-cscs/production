@@ -1,5 +1,5 @@
 #
-easyblock = 'CMakeMake'
+easyblock = 'CMakePythonPackage'
 
 name = 'pybind11'
 version = '2.6.1'
@@ -13,6 +13,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 
 source_urls = ['https://github.com/pybind/pybind11/archive/']
 sources = ['v%(version)s.tar.gz']
+runtest = 'check'
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
@@ -23,6 +24,7 @@ dependencies = [
 ]
 
 installopts = " && PYBIND11_USE_CMAKE=1 pip install --prefix %(installdir)s %(builddir)s/%(name)s-%(version)s "
+pretestopts = " LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$EBROOTPYTHON/lib "
 
 sanity_check_paths = {
     'files': [],
