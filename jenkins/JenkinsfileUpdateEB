@@ -415,19 +415,20 @@ stage('Jira Stage') {
                             try {
                                 methods.searchJiraIssue(it, machineLabel, 'UES')
                                 issue = methods.searchJiraIssue(it, machineLabel, 'UES')
-                                if(issue[1]=='Done'){
+                                if(issue){
                                     methods.commentJiraIssue("Update of $it failed on $machineLabel", issue[0])
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
-                                    jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
-                                } else println "No issue matching $it"
+                                    //if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
+                                } else {
+                                    /* create new Jira issues for current failed update */
+                                    try {
+                                        methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
+                                    } catch(err) {
+                                        println "Failed to create Jira Issue for $it"
+                                    }
+                                }
                             } catch(err) {    
                                 println "Failed to update Jira issues for $it"
-                            }
-                            /* create new Jira issues for current failed update */
-                            try {
-                                methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
-                            } catch(err) {
-                                println "Failed to create Jira Issue for $it"
                             }
                        }
                     }
@@ -570,6 +571,7 @@ stage('GitHub Stage') {
                                 cat \$list_append >> \$list_production
                             else
                                 echo -e "\nNothing to append to \$list_production"
+                            fi
                         else
                             # target list is copied to production list
                             echo -e "\nCopying \$list_target -> \$list_production
