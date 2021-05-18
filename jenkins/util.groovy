@@ -198,7 +198,7 @@ String[] searchJiraIssue(String subject, String machine, String project){
 void commentJiraIssue(String message, String key){
 
    println("Adding comment $message to issue $key")
-   def content = "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def content = [body: "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"]
    def commentIssue = jiraAddComment idOrKey: key, input: content, site: 'JIRA_SITE', failOnError: false
 }
 

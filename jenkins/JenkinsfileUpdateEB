@@ -395,7 +395,7 @@ stage('Jira Stage') {
                                     }
                                 } else println "No issue matching $it"
                             } catch(err) {
-                                println "Failed to search Jira issues for $it"
+                                println "Failed to update Jira issues for $it"
                             }
                         }
                     }
@@ -423,7 +423,7 @@ stage('Jira Stage') {
                                     methods.transitionJiraIssue('21', issue[0])
                                 } else println "No issue matching $it"
                             } catch(err) {    
-                                println "Failed to search Jira issues for $it"
+                                println "Failed to update Jira issues for $it"
                             }
                             /* create new Jira issues for current failed update */
                             //try {
