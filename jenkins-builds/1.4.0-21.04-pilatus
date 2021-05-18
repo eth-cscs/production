@@ -26,5 +26,5 @@
  Vc-1.4.1-cpeGNU-21.04.eb
  Amber-20-15-9-cpeIntel-21.04.eb
  GSL-2.6-cpeIntel-21.04.eb
- QuantumESPRESSO-6.7.0-cpeGNU-21.04.eb
+ QuantumESPRESSO-6.7.0-cpeIntel-21.04.eb
  VASP-6.2.0-cpeIntel-21.04.eb
