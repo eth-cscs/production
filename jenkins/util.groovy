@@ -1,4 +1,4 @@
-/**
+/*
 * Extracts the machine configurations from the given message.
 * If no architectures are specified, the method returns an array
 * containing only an empty string. In case no valid configurations
@@ -23,7 +23,7 @@ String[] getMachineConfiguration(String message, String machine, String[] archs)
     return validArchs.isEmpty() ? archs : validArchs
 }
 
-/**
+/*
 * Checks if as message contains a given machine.
 *
 * @param message The actual message.
@@ -37,7 +37,7 @@ boolean machineCheck(String message, String machine) {
     return message ==~ machinePattern
 }
 
-/**
+/*
 * Checks if the given message contains the WIP abbreviation.
 *
 * @param message The actual message.
@@ -51,7 +51,7 @@ boolean checkWorkInProgress(String message) {
     return false
 }
 
-/**
+/*
 * Checks if the filename is valid for any of the given toolkits.
 *
 * @param toolkits An array of Strings containing the toolkit name-version.
@@ -68,7 +68,7 @@ boolean checkToolkits(String[] toolkits, String filename) {
 }
 return this
 
-/**
+/*
 * Notifies Slack about the result of the current build.
 */
 void notifySlackFinish() {
@@ -82,7 +82,7 @@ void notifySlackFinish() {
              message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* (<${env.BUILD_URL}|Open>)")
 }
 
-/**
+/*
 * Create a Jira task for an EasyBuild recipe that failed to build:
 *
 * @param projkey Jira project key (only project members can create issues)
@@ -100,7 +100,7 @@ void failedJiraTask(String projkey, String recipe, String machine) {
    def newIssue = jiraNewIssue issue: issue, site: 'JIRA_SITE', failOnError: false
 }
 
-/**
+/*
 * Create a Jira Service Desk ticket with custom message:
 * - issuetype: 'Service Request' or 'Incident'
 * - customfield_11102 (Service): 'Atlassian', 'Compute at Piz Daint', 'JFrog', 'JupyterHub' or 'KeyCloak'
@@ -140,7 +140,7 @@ void createJiraSD(String subject, String machine, String message, String priorit
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
 
-/**
+/*
 * Create a Jira Issue with custom message:
 * - issuetype: 'Task' or 'Epic'
 * - assignee: list with information of the person in charge, like [name:'lucamar']
@@ -168,20 +168,19 @@ void createJiraIssue(String subject, String machine, String message, String prio
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
 
-/**
+/*
 * Search a Jira Issue:
 * 
 * @param subject Subject of the Jira Issue appended to [${machine}]
 * @param machine Computing system where the build took place (machineLabel)
 * @param project Project where the Jira Issue has been be created
-* @param key Key of the Jira Issue matched by the search
-* @param status Status of the Jira issues matched by the search 
 */
-void searchJiraIssue(String subject, String machine, String project){
+String[] searchJiraIssue(String subject, String machine, String project){
 
    def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
 
    if(search.successful && search.data.issues) {
+       //  key and status of the Jira issues matched by the search 
        def key = search.data.issues[0].key
        def status = search.data.issues.fields.status[0].name
        return [key, status]
@@ -189,3 +188,28 @@ void searchJiraIssue(String subject, String machine, String project){
        return null
    }
 }
+
+/*
+* Add comment to a Jira Issue:
+* 
+* @param message Comment to the Jira Issue prepended to Jenkins job details
+* @param key     Jira Issue key
+*/
+void commentJiraIssue(String message, String key){
+
+   def content = "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
+   def commentIssue = jiraAddComment idOrKey: key, input: content, site: 'JIRA_SITE', failOnError: false
+}
+
+/*
+* Transition a Jira Issue:
+* 
+* @param transID Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done' 
+* @param key     Jira Issue key
+*/
+void transitionJiraIssue(Integer transID, String key){
+
+   def transInput = [transition:[id:transID]]
+   def transIssue = jiraTransitionIssue idOrKey: key, input: transInput, site: 'JIRA_SITE', failOnError: false
+}
+

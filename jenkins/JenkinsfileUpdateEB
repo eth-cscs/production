@@ -383,9 +383,20 @@ stage('Jira Stage') {
                     else {
                         success_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current successful update */
-                            issue = methods.searchJiraIssue(it, machineLabel, 'UES')
-                            if(issue) println "${issue[0]} matches $it with status ${issue[1]}"
-                            else println "No issue matching $it}"
+                            try {
+                                methods.searchJiraIssue(it, machineLabel, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                                if(issue){
+                                    println "${issue[0]} matches $it with status ${issue[1]}"
+                                    if(issue[1]!='Done'){
+                                        commentJiraIssue("Update of $it successful on $machineLabel", issue[0])
+                                        // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
+                                        transitionJiraIssue('31', issue[0])
+                                    }
+                                } else println "No issue matching $it"
+                            } catch(err) {
+                                println "Failed to search Jira issues for $it"
+                            }
                         }
                     }
 
@@ -402,10 +413,18 @@ stage('Jira Stage') {
                     else {
                         failed_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current failed update */
-                            methods.searchJiraIssue(it, machineLabel, 'UES')
-                            issue = methods.searchJiraIssue(it, machineLabel, 'UES')
-                            if(issue) println "${issue[0]} matches $it with status ${issue[1]}"
-                            else println "No issue matching $it}"
+                            try {
+                                methods.searchJiraIssue(it, machineLabel, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                                if(issue[1]=='Done'){
+                                    println "${issue[0]} matches $it with status ${issue[1]}"
+                                    commentJiraIssue("Update of $it failed on $machineLabel", issue[0])
+                                    // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
+                                    transitionJiraIssue('21', issue[0])
+                                } else println "No issue matching $it"
+                            } catch(err) {    
+                                println "Failed to search Jira issues for $it"
+                            }
                             /* create new Jira issues for current failed update */
                             //try {
                             //    methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
