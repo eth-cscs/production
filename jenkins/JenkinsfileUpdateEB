@@ -384,11 +384,10 @@ stage('Jira Stage') {
                         success_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current successful update */
                             try {
-                                methods.searchJiraIssue(it, machineLabel, 'UES')
-                                issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
                                 if(issue){
                                     if(issue[1]!='Done'){
-                                        methods.commentJiraIssue("Update of $it successful on $machineLabel", issue[0])
+                                        methods.commentJiraIssue("Update of $it successful on $machineLabel with PE $params.pe_target", issue[0])
                                         // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
                                         jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'31']], site: 'JIRA_SITE'
                                     }
@@ -413,16 +412,15 @@ stage('Jira Stage') {
                         failed_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current failed update */
                             try {
-                                methods.searchJiraIssue(it, machineLabel, 'UES')
-                                issue = methods.searchJiraIssue(it, machineLabel, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
                                 if(issue){
-                                    methods.commentJiraIssue("Update of $it failed on $machineLabel", issue[0])
+                                    methods.commentJiraIssue("Update of $it failed on $machineLabel with PE $params.pe_target", issue[0])
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
                                     //if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
                                 } else {
                                     /* create new Jira issue for current failed update */
                                     try {
-                                        methods.createJiraIssue("Task", machineLabel, "$it Update failed", "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES','')
+                                        methods.createJiraIssue("Task", machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES','')
                                     } catch(err) {
                                         println "Failed to create Jira Issue for $it"
                                     }

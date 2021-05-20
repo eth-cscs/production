@@ -185,11 +185,12 @@ void createJiraIssue(String issuetype, String machine, String subject, String me
 * 
 * @param subject Subject of the Jira Issue appended to [${machine}]
 * @param machine Computing system where the build took place (machineLabel)
+* @param pe Target Programming Environment of the build (params.pe_target)
 * @param project Project where the Jira Issue has been be created
 */
-String[] searchJiraIssue(String subject, String machine, String project){
+String[] searchJiraIssue(String subject, String machine, String pe, String project){
 
-   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '*$subject*' AND summary ~ '*$machine*'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
+   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '*$subject*' AND summary ~ '*$machine*' AND summary ~ '*$pe*'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
 
    if(search.successful && search.data.issues) {
        //  key and status of the Jira issues matched by the search 
