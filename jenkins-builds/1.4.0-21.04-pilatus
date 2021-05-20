@@ -4,6 +4,7 @@
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
+ NCL-6.6.2.eb                         --set-default-module
  reframe-3.6.0.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.04.eb
  GSL-2.6-cpeCray-21.04.eb
