@@ -420,9 +420,9 @@ stage('Jira Stage') {
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
                                     //if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
                                 } else {
-                                    /* create new Jira issues for current failed update */
+                                    /* create new Jira issue for current failed update */
                                     try {
-                                        methods.createJiraIssue("$it Update failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
+                                        methods.createJiraIssue("Task", machineLabel, "$it Update failed", "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES','')
                                     } catch(err) {
                                         println "Failed to create Jira Issue for $it"
                                     }

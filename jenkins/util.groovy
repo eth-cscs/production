@@ -142,29 +142,41 @@ void createJiraSD(String subject, String machine, String message, String priorit
 
 /*
 * Create a Jira Issue with custom message:
-* - issuetype: 'Task' or 'Epic'
 * - assignee: list with information of the person in charge, like [name:'lucamar']
 * - customfield_10401 (Watchers): list with information of watchers, like [[name:'bignamic'], [name:'manitart']]
 * - customfield_10101: Epic link (only for issuetype 'Task')
 * - customfield_10103: Epic name (only for issuetype 'Epic')
 * 
-* @param subject Subject of the Jira Issue appended to [${machine}]
+* @param issuetype Type of Jira issue ('Epic' or 'Task')
 * @param machine Computing system where the build took place (machineLabel)
+* @param subject Subject of the Jira Issue appended to [${machine}]
 * @param message Content of the Jira Issue prepended to Jenkins job details
 * @param priority Priority of the issue: Blocker, High, Medium, Low
 * @param project Project where the Jira Issue will be created
+* @param epickey Key of the Epic related to the Jira issue (null string if none)
 */
-void createJiraIssue(String subject, String machine, String message, String priority, String project){
+void createJiraIssue(String issuetype, String machine, String subject, String message, String priority, String project, String epickey){
 
    def title = "[${machine}] ${subject}"
    def content = "${message} \nJenkins job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (job result: *${currentBuild.result}*)"
-   def ticket = [fields: [ project: [key: project],
-                          summary: title,
-                          description: content,
-                          issuetype: [name:'Task'],
-                          priority: [name:priority],
-                          components:[[name:'Software Installation']],
-                          labels: ['Production','Software']]]
+   if(epickey) {
+       def ticket = [fields: [ project: [key: project],
+                              summary: title,
+                              description: content,
+                              issuetype: [name:issuetype],
+                              priority: [name:priority],
+                              components:[[name:'Software Installation']],
+                              labels: ['Production','Software'],
+                              customfield_10101:epickey]]
+   } else {
+       def ticket = [fields: [ project: [key: project],
+                              summary: title,
+                              description: content,
+                              issuetype: [name:issuetype],
+                              priority: [name:priority],
+                              components:[[name:'Software Installation']],
+                              labels: ['Production','Software']]]
+   }
    def newIssue = jiraNewIssue issue: ticket, site: 'JIRA_SITE', failOnError: false
 }
 
@@ -177,7 +189,7 @@ void createJiraIssue(String subject, String machine, String message, String prio
 */
 String[] searchJiraIssue(String subject, String machine, String project){
 
-   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
+   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '*$subject*' AND summary ~ '*$machine*'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
 
    if(search.successful && search.data.issues) {
        //  key and status of the Jira issues matched by the search 
