@@ -1,0 +1,54 @@
+# Compiler toolchain for Cray EX Programming Environment GNU compiler (cpe-gnu)
+easyblock = 'cpeToolchain'
+
+name = 'cpeGNU'
+version = "21.05"
+
+homepage = 'https://pubs.cray.com'
+description = """Toolchain using Cray compiler wrapper with gcc module (CPE release: %s).\n""" % version
+
+toolchain = SYSTEM
+
+dependencies = [
+   ('PrgEnv-gnu', EXTERNAL_MODULE)
+]
+
+modluafooter = '''
+if not ( isloaded("cray-dsmml") ) then
+    load("cray-dsmml")
+end
+if not ( isloaded("cray-libsci") ) then
+    load("cray-libsci")
+end
+if not ( isloaded("cray-mpich") ) then
+    load("cray-mpich")
+end
+if not ( isloaded("craype") ) then
+    load("craype")
+end
+if not ( isloaded("craype-x86-rome") ) then
+    load("craype-x86-rome")
+end
+if not ( isloaded("craype-network-ofi") ) then
+    load("craype-network-ofi")
+end
+if not ( isloaded("gcc") ) then
+    load("gcc")
+end
+if not ( isloaded("libfabric") ) then
+    load("libfabric")
+end
+if not ( isloaded("perftools-base") ) then
+    load("perftools-base")
+end
+if not ( isloaded("xpmem") ) then
+    load("xpmem")
+end
+if not ( isloaded("cpe/%(version)s") ) then
+    load("cpe/%(version)s")
+end
+prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
+''' 
+
+moduleclass = 'toolchain'
+#execute {cmd="ml restore PrgEnv-gnu",modeA={"load"}}
