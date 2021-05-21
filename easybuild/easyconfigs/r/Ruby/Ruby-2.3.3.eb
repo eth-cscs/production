@@ -9,14 +9,15 @@ name = 'Ruby'
 version = '2.3.3'
 
 homepage = 'https://www.ruby-lang.org'
-description = """Ruby is a dynamic, open source programming language with 
- a focus on simplicity and productivity. It has an elegant syntax that is 
+description = """Ruby is a dynamic, open source programming language with
+ a focus on simplicity and productivity. It has an elegant syntax that is
  natural to read and easy to write."""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = SYSTEM
 
-sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://cache.ruby-lang.org/pub/ruby/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['241408c8c555b258846368830a06146e4849a1d58dcaf6b14a3b6a73058115b7']
 
 sanity_check_paths = {
     'files': ['bin/ruby', 'bin/rake', 'bin/gem', 'bin/erb',
