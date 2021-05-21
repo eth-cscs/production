@@ -47,17 +47,30 @@ packages:
       cray-fftw@3.3.8.7 %gcc@9.3.0.20.08: cray-fftw/3.3.8.7
       cray-fftw@3.3.8.7 %intel@19.0.1.144.20.08: cray-fftw/3.3.8.7
       cray-fftw@3.3.8.7 %intel@19.1.1.217.20.08: cray-fftw/3.3.8.7
+      cray-fftw@3.3.8.7 %intel@19.1.3.304.20.08: cray-fftw/3.3.8.7
       cray-fftw@3.3.8.7 %pgi@20.1.0.20.08: cray-fftw/3.3.8.7
       cray-fftw@3.3.8.7 %pgi@20.1.1.20.08: cray-fftw/3.3.8.7
       cray-fftw@3.3.8.8 %cce@11.0.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %cce@11.0.2.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %gcc@10.1.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %gcc@10.1.0.21.02: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %gcc@10.2.0.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %gcc@8.1.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %gcc@8.1.0.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %gcc@8.3.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %gcc@8.3.0.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %gcc@9.3.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %gcc@9.3.0.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %intel@19.0.1.144.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %intel@19.0.1.144.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %intel@19.1.1.217.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %intel@19.1.1.217.21.02: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %intel@19.1.3.304.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %intel@19.1.3.304.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %pgi@20.1.0.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %pgi@20.1.0.21.02: cray-fftw/3.3.8.8
       cray-fftw@3.3.8.8 %pgi@20.1.1.20.11: cray-fftw/3.3.8.8
+      cray-fftw@3.3.8.8 %pgi@20.1.1.21.02: cray-fftw/3.3.8.8
   cray-libsci:
     buildable: false
     modules:
@@ -67,17 +80,30 @@ packages:
       cray-libsci@20.06.1 +mpi+openmp %gcc@9.3.0.20.08: cray-libsci/20.06.1
       cray-libsci@20.06.1 +mpi+openmp %intel@19.0.1.144.20.08: cray-libsci/20.06.1
       cray-libsci@20.06.1 +mpi+openmp %intel@19.1.1.217.20.08: cray-libsci/20.06.1
+      cray-libsci@20.06.1 +mpi+openmp %intel@19.1.3.304.20.08: cray-libsci/20.06.1
       cray-libsci@20.06.1 +mpi+openmp %pgi@20.1.0.20.08: cray-libsci/20.06.1
       cray-libsci@20.06.1 +mpi+openmp %pgi@20.1.1.20.08: cray-libsci/20.06.1
       cray-libsci@20.09.1 +mpi+openmp %cce@11.0.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %cce@11.0.2.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %gcc@10.1.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %gcc@10.1.0.21.02: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %gcc@10.2.0.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %gcc@8.1.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %gcc@8.1.0.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %gcc@8.3.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %gcc@8.3.0.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %gcc@9.3.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %gcc@9.3.0.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %intel@19.0.1.144.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %intel@19.0.1.144.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.21.02: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.0.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.0.21.02: cray-libsci/20.09.1
       cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.1.20.11: cray-libsci/20.09.1
+      cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.1.21.02: cray-libsci/20.09.1
   cray-mpich:
     buildable: false
     modules:
@@ -87,22 +113,37 @@ packages:
       cray-mpich@7.7.15 %gcc@9.3.0.20.08: cray-mpich/7.7.15
       cray-mpich@7.7.15 %intel@19.0.1.144.20.08: cray-mpich/7.7.15
       cray-mpich@7.7.15 %intel@19.1.1.217.20.08: cray-mpich/7.7.15
+      cray-mpich@7.7.15 %intel@19.1.3.304.20.08: cray-mpich/7.7.15
       cray-mpich@7.7.15 %pgi@20.1.0.20.08: cray-mpich/7.7.15
       cray-mpich@7.7.15 %pgi@20.1.1.20.08: cray-mpich/7.7.15
       cray-mpich@7.7.16 %cce@11.0.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %cce@11.0.2.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %gcc@10.1.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %gcc@10.1.0.21.02: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %gcc@10.2.0.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %gcc@8.1.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %gcc@8.1.0.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %gcc@8.3.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %gcc@8.3.0.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %gcc@9.3.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %gcc@9.3.0.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %intel@19.0.1.144.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %intel@19.0.1.144.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %intel@19.1.1.217.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %intel@19.1.1.217.21.02: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %intel@19.1.3.304.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %intel@19.1.3.304.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %pgi@20.1.0.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %pgi@20.1.0.21.02: cray-mpich/7.7.16
       cray-mpich@7.7.16 %pgi@20.1.1.20.11: cray-mpich/7.7.16
+      cray-mpich@7.7.16 %pgi@20.1.1.21.02: cray-mpich/7.7.16
   cuda:
     buildable: false
     modules:
-      cuda@10.2.89_3.29-7.0.2.1_3.5__g67354b4: cudatoolkit/10.2.89_3.29-7.0.2.1_3.5__g67354b4
-      cuda@11.0.2_3.33-7.0.2.1_3.1__g1ba0366: cudatoolkit/11.0.2_3.33-7.0.2.1_3.1__g1ba0366
+      cuda@10.2.89_3.29-7.0.2.1_3.27__g67354b4: cudatoolkit/10.2.89_3.29-7.0.2.1_3.27__g67354b4
+      cuda@11.0.2_3.34-7.0.2.1_4.6__g017096a: cudatoolkit/11.0.2_3.34-7.0.2.1_4.6__g017096a
+      cuda@11.1.0_3.35-7.0.2.1_3.6__g62b8859: cudatoolkit/11.1.0_3.35-7.0.2.1_3.6__g62b8859
+      cuda@11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1: cudatoolkit/11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1
   fftw:
     variants: +mpi +openmp precision=long_double,double,float
   gromacs:
@@ -112,38 +153,64 @@ packages:
     modules:
       hdf5@1.12.0.0 +mpi+hl+fortran %cce@10.0.2.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %cce@11.0.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %cce@11.0.2.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@10.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %gcc@10.1.0.21.02: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %gcc@10.2.0.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.1.0.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.1.0.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.3.0.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.3.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.3.0.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@9.3.0.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %gcc@9.3.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %gcc@9.3.0.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.21.02: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.08: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.1.20.08: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.1.20.11: cray-hdf5-parallel/1.12.0.0
+      hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.1.21.02: cray-hdf5-parallel/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %cce@10.0.2.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %cce@11.0.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %cce@11.0.2.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@10.1.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@10.1.0.21.02: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@10.2.0.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.1.0.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.1.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.1.0.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.3.0.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.3.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@8.3.0.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@9.3.0.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@9.3.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %gcc@9.3.0.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.21.02: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.08: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.21.02: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.1.20.08: cray-hdf5/1.12.0.0
       hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.1.20.11: cray-hdf5/1.12.0.0
+      hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.1.21.02: cray-hdf5/1.12.0.0
   mpich:
     buildable: false
     modules:
@@ -153,111 +220,189 @@ packages:
       mpich@3.1.4 %gcc@9.3.0.20.08: cray-mpich/3.1.4
       mpich@3.1.4 %intel@19.0.1.144.20.08: cray-mpich/3.1.4
       mpich@3.1.4 %intel@19.1.1.217.20.08: cray-mpich/3.1.4
+      mpich@3.1.4 %intel@19.1.3.304.20.08: cray-mpich/3.1.4
       mpich@3.1.4 %pgi@20.1.0.20.08: cray-mpich/3.1.4
       mpich@3.1.4 %pgi@20.1.1.20.08: cray-mpich/3.1.4
       mpich@3.2.1 %cce@11.0.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %cce@11.0.2.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %gcc@10.1.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %gcc@10.1.0.21.02: cray-mpich/3.2.1
+      mpich@3.2.1 %gcc@10.2.0.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %gcc@8.1.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %gcc@8.1.0.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %gcc@8.3.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %gcc@8.3.0.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %gcc@9.3.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %gcc@9.3.0.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %intel@19.0.1.144.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %intel@19.0.1.144.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %intel@19.1.1.217.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %intel@19.1.1.217.21.02: cray-mpich/3.2.1
+      mpich@3.2.1 %intel@19.1.3.304.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %intel@19.1.3.304.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %pgi@20.1.0.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %pgi@20.1.0.21.02: cray-mpich/3.2.1
       mpich@3.2.1 %pgi@20.1.1.20.11: cray-mpich/3.2.1
+      mpich@3.2.1 %pgi@20.1.1.21.02: cray-mpich/3.2.1
   netcdf:
     buildable: true
     modules:
       netcdf@1.12.0.0 +parallel-netcdf+mpi %cce@10.0.2.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %cce@11.0.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %cce@11.0.2.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@10.1.0.21.02: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@10.2.0.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.1.0.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@8.3.0.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %gcc@9.3.0.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08: cray-hdf5-parallel/1.12.0.0
       netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11: cray-hdf5-parallel/1.12.0.0
+      netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.1.21.02: cray-hdf5-parallel/1.12.0.0
   netcdf-c:
     buildable: true
     modules:
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@10.0.2.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.2.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@10.2.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@10.0.2.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.2.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.21.02: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.2.0.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.21.02: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.08: cray-netcdf/4.7.4.0
       netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.11: cray-netcdf/4.7.4.0
+      netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.21.02: cray-netcdf/4.7.4.0
   netcdf-fortran:
     buildable: true
     modules:
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@10.0.2.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.2.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.2.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@10.0.2.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.2.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.1.0.21.02: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@10.2.0.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.3.0.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@9.3.0.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.21.02: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.08: cray-netcdf/4.7.4.0
       netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.20.11: cray-netcdf/4.7.4.0
+      netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.1.21.02: cray-netcdf/4.7.4.0
   netlib-lapack:
     variants: build_type=Release
   netlib-scalapack:
@@ -273,6 +418,7 @@ packages:
       papi@6.0.0.2 %gcc@9.3.0.20.08: papi/6.0.0.2
       papi@6.0.0.2 %intel@19.0.1.144.20.08: papi/6.0.0.2
       papi@6.0.0.2 %intel@19.1.1.217.20.08: papi/6.0.0.2
+      papi@6.0.0.2 %intel@19.1.3.304.20.08: papi/6.0.0.2
       papi@6.0.0.2 %pgi@20.1.0.20.08: papi/6.0.0.2
       papi@6.0.0.2 %pgi@20.1.1.20.08: papi/6.0.0.2
       papi@6.0.0.4 %cce@11.0.0.20.11: papi/6.0.0.4
@@ -282,99 +428,176 @@ packages:
       papi@6.0.0.4 %gcc@9.3.0.20.11: papi/6.0.0.4
       papi@6.0.0.4 %intel@19.0.1.144.20.11: papi/6.0.0.4
       papi@6.0.0.4 %intel@19.1.1.217.20.11: papi/6.0.0.4
+      papi@6.0.0.4 %intel@19.1.3.304.20.11: papi/6.0.0.4
       papi@6.0.0.4 %pgi@20.1.0.20.11: papi/6.0.0.4
       papi@6.0.0.4 %pgi@20.1.1.20.11: papi/6.0.0.4
+      papi@6.0.0.6 %cce@11.0.2.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %gcc@10.1.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %gcc@10.2.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %gcc@8.1.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %gcc@8.3.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %gcc@9.3.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %intel@19.0.1.144.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %intel@19.1.1.217.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %intel@19.1.3.304.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %pgi@20.1.0.21.02: papi/6.0.0.6
+      papi@6.0.0.6 %pgi@20.1.1.21.02: papi/6.0.0.6
   parallel-netcdf:
     buildable: true
     modules:
       parallel-netcdf@4.7.4.0 +cxx+fortran %cce@10.0.2.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %cce@11.0.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %cce@11.0.2.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@10.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@10.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@10.2.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@8.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@9.3.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@9.3.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %gcc@9.3.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.21.02: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.08: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.21.02: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.1.20.08: cray-netcdf-hdf5parallel/4.7.4.0
       parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.1.20.11: cray-netcdf-hdf5parallel/4.7.4.0
+      parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.1.21.02: cray-netcdf-hdf5parallel/4.7.4.0
   petsc:
     buildable: true
     modules:
       petsc@3.13.3.0 +int64+complex~cuda %cce@10.0.2.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %cce@11.0.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %cce@11.0.2.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@10.1.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %gcc@10.1.0.21.02: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %gcc@10.2.0.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@8.1.0.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@8.1.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %gcc@8.1.0.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@8.3.0.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@8.3.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %gcc@8.3.0.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@9.3.0.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %gcc@9.3.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %gcc@9.3.0.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.21.02: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.08: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.1.20.08: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.1.20.11: cray-petsc-complex-64/3.13.3.0
+      petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.1.21.02: cray-petsc-complex-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %cce@10.0.2.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %cce@11.0.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %cce@11.0.2.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@10.1.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %gcc@10.1.0.21.02: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %gcc@10.2.0.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@8.1.0.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@8.1.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %gcc@8.1.0.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@8.3.0.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@8.3.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %gcc@8.3.0.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@9.3.0.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %gcc@9.3.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %gcc@9.3.0.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.21.02: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.08: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.1.20.08: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.1.20.11: cray-petsc-64/3.13.3.0
+      petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.1.21.02: cray-petsc-64/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %cce@10.0.2.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %cce@11.0.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %cce@11.0.2.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.1.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.1.0.21.02: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.2.0.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.1.0.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.1.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.1.0.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.3.0.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.3.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.3.0.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@9.3.0.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %gcc@9.3.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %gcc@9.3.0.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.21.02: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.08: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.1.20.08: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.1.20.11: cray-petsc-complex/3.13.3.0
+      petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.1.21.02: cray-petsc-complex/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %cce@10.0.2.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %cce@11.0.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %cce@11.0.2.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.1.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.1.0.21.02: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.2.0.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.1.0.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.1.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.1.0.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.3.0.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.3.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.3.0.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@9.3.0.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %gcc@9.3.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %gcc@9.3.0.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.21.02: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.08: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.21.02: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.1.20.08: cray-petsc/3.13.3.0
       petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.1.20.11: cray-petsc/3.13.3.0
+      petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.1.21.02: cray-petsc/3.13.3.0
   python:
     buildable: true
     modules:
@@ -384,34 +607,60 @@ packages:
       python@3.8.2.1 %gcc@9.3.0.20.08: cray-python/3.8.2.1
       python@3.8.2.1 %intel@19.0.1.144.20.08: cray-python/3.8.2.1
       python@3.8.2.1 %intel@19.1.1.217.20.08: cray-python/3.8.2.1
+      python@3.8.2.1 %intel@19.1.3.304.20.08: cray-python/3.8.2.1
       python@3.8.2.1 %pgi@20.1.0.20.08: cray-python/3.8.2.1
       python@3.8.2.1 %pgi@20.1.1.20.08: cray-python/3.8.2.1
       python@3.8.5.0 %cce@11.0.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %cce@11.0.2.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %gcc@10.1.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %gcc@10.1.0.21.02: cray-python/3.8.5.0
+      python@3.8.5.0 %gcc@10.2.0.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %gcc@8.1.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %gcc@8.1.0.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %gcc@8.3.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %gcc@8.3.0.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %gcc@9.3.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %gcc@9.3.0.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %intel@19.0.1.144.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %intel@19.0.1.144.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %intel@19.1.1.217.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %intel@19.1.1.217.21.02: cray-python/3.8.5.0
+      python@3.8.5.0 %intel@19.1.3.304.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %intel@19.1.3.304.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %pgi@20.1.0.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %pgi@20.1.0.21.02: cray-python/3.8.5.0
       python@3.8.5.0 %pgi@20.1.1.20.11: cray-python/3.8.5.0
+      python@3.8.5.0 %pgi@20.1.1.21.02: cray-python/3.8.5.0
   trilinos:
     buildable: true
     modules:
       trilinos@12.18.1.1 build_type=Release %cce@10.0.2.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %cce@11.0.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %cce@11.0.2.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@10.1.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %gcc@10.1.0.21.02: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %gcc@10.2.0.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@8.1.0.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@8.1.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %gcc@8.1.0.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@8.3.0.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@8.3.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %gcc@8.3.0.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@9.3.0.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %gcc@9.3.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %gcc@9.3.0.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.21.02: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.08: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.21.02: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %pgi@20.1.1.20.08: cray-trilinos/12.18.1.1
       trilinos@12.18.1.1 build_type=Release %pgi@20.1.1.20.11: cray-trilinos/12.18.1.1
+      trilinos@12.18.1.1 build_type=Release %pgi@20.1.1.21.02: cray-trilinos/12.18.1.1
