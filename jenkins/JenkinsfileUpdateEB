@@ -146,6 +146,9 @@ stage('Update Stage') {
                         # update buildpath and metadata file for external modules
                         export EASYBUILD_BUILDPATH="\$EASYBUILD_BUILDPATH/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
+                        #FIXME: workaround for pilatus not taking EASYBUILD_PREFIX upon loading EasyBuild
+                        export EASYBUILD_PREFIX="${params.eb_prefix}"                   
+                        export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
 
                         # unuse paths
                         for path in $unuse_paths; do
@@ -420,7 +423,7 @@ stage('Jira Stage') {
                                 } else {
                                     /* create new Jira issue for current failed update */
                                     try {
-                                        methods.createJiraIssue("Task", machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES','')
+                                        methods.createJiraIssue('Task', machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES','')
                                     } catch(err) {
                                         println "Failed to create Jira Issue for $it"
                                     }
