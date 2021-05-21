@@ -15,7 +15,7 @@ description = """Ruby is a dynamic, open source programming language with
 
 toolchain = SYSTEM
 
-source_urls = ['http://cache.ruby-lang.org/pub/ruby/']
+source_urls = ['https://cache.ruby-lang.org/pub/ruby/2.7/']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['8925a95e31d8f2c81749025a52a544ea1d05dad18794e6828709268b92e55338']
 
