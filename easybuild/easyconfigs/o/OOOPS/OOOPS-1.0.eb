@@ -1,0 +1,49 @@
+# @author: Victor Holanda
+
+easyblock = 'MakeCp'
+
+name = 'OOOPS'
+version = '1.0'
+
+homepage = 'https://github.com/TACC/ooops'
+description = """OOOPS, short for Optimal Overloaded IO Protection System,
+is an innovative IO workload managing system that optimally throttles the
+IO workload from the users' side. Thank Si Liu for coming up the name of
+this tool!"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/TACC/ooops/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+
+buildopts = ''
+
+patches = ['ooops-1.0-daint.patch']
+
+files_to_copy = [
+    (['t_open_stat'], 'bin'),
+    (['cal_threshhold.sh'], 'bin'),
+    (['set_io_param'], 'bin'),
+    (['test_open'], 'bin'),
+    (['test_stat'], 'bin'),
+    (['wrapper.so'], 'lib'),
+    (['config'], 'etc')
+]
+
+modextrapaths = {
+    'LD_PRELOAD': 'lib/wrapper.so',
+    'IO_LIMIT_CONFIG': 'etc/config',
+}
+
+sanity_check_paths = {
+    'files': [
+        'bin/t_open_stat',
+        'bin/cal_threshhold.sh',
+        'bin/set_io_param',
+        'bin/test_open',
+        'bin/test_stat',
+        'lib/wrapper.so' ],
+    'dirs': ['bin', 'lib'],
+}
+
+moduleclass = 'tools'
