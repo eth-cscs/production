@@ -8,7 +8,7 @@
  reframe-3.6.0.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.04.eb
  GSL-2.6-cpeCray-21.04.eb
- ParaView-5.9.0-cpeCray-21.04-OSMesa-python3.eb
+ ParaView-5.9.1-cpeCray-21.04-OSMesa-python3.eb
  Boost-1.75.0-cpeGNU-21.04.eb
  Boost-1.75.0-cpeGNU-21.04-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.04.eb
