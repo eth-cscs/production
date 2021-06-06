@@ -148,8 +148,6 @@ if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
 
 if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
     setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
-} elseif { ! [ info exists ::env(XDG_RUNTIME_DIR) ] } {
-    setenv EASYBUILD_BUILDPATH                  /tmp/$::env(USER)/easybuild/build
 } else {
     setenv EASYBUILD_BUILDPATH                  $::env(XDG_RUNTIME_DIR)/easybuild/build
 }

@@ -8,6 +8,6 @@ description = """Automatic extraction of fundamental factors for Paraver
 traces."""
 
 toolchain = SYSTEM
-dependencies = [('%(name)s', '%(version)s.3.6')]
+dependencies = [('%(name)s', '%(version)s.3.8')]
 
 moduleclass = 'perf'

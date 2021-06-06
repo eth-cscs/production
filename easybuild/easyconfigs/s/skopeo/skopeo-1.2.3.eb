@@ -1,0 +1,36 @@
+# teojgo (cscs)
+
+easyblock = 'ConfigureMake'
+
+name = 'skopeo'
+version = '1.2.3'
+
+homepage = 'https://github.com/containers/skopeo'
+description = """Work with remote images registries - retrieving information, images, signing content."""
+
+builddependencies = [
+    ('Libassuan', '2.5.4'),
+    ('Libpgp-error', '1.39'),
+    ('GPGME', '1.15.0'),
+    ('go', '1.16.3.linux-amd64')
+]
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/containers/skopeo/archive']
+sources = [
+    'v%(version)s.tar.gz'
+]
+checksums = ['bb62a226ad9427aaa0789c429e7f91de9caa8e284ed9227709751cc7d76a0591']
+
+preinstallopts = 'mkdir -p go_cache && export GOCACHE=$PWD/go_cache && '
+install_cmd = 'BUILDTAGS="btrfs_noversion exclude_graphdriver_btrfs exclude_graphdriver_devicemapper" make install-binary PREFIX=%(installdir)s'
+
+skipsteps = ['build', 'configure']
+
+sanity_check_paths = {
+    'files': ['bin/skopeo'],
+    'dirs': ['']
+}
+
+moduleclass = 'tools'

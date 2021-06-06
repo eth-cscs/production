@@ -44,10 +44,11 @@ stage('Machine Selection') {
   - if the machine has multiple architectures, starts a sub-loop over architectures
   - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
   - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
-  - the target CDT version is selected by the user and stored in "params.cdt_version"
+  - the target Cray PE version is selected by the user and stored in "params.pe_target"
 */
 def updates = [:]
-def toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
+def licensed_software = "CPMD IDL MATLAB VASP"
+
 stage('Update Stage') {
     for (system in machineConfigurations) {
         def machine = system.machine
@@ -64,51 +65,96 @@ stage('Update Stage') {
                 node(machineName) {
                     checkout scm
 
-                    /* define command to load EasyBuild */
-                    def load_easybuild = architecture == "" ?
-                        "module load cdt-cuda/${params.cdt_version} EasyBuild-custom/cscs" :
-                        "module load cdt-cuda/${params.cdt_version} daint-$architecture EasyBuild-custom/cscs"
-
-                    /* define command to switch EasyBuild version*/
-                    def switch_easybuild = params.eb_version == "" ?
-                        "" :
-                        "module switch EasyBuild EasyBuild/${params.eb_version}"
-
                     /* define list of unuse paths */
                     def unuse_paths = architecture == '' ?
                         machine.unusePath.replace(':', ' ') :
                         machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
                         println("List of unuse paths: $unuse_paths")
 
-                    /* define eb_flags and command to build software */
-                    def eb_flags = "--ignore-locks -r"
-                    def tc_flags = "--try-toolchain-version=${params.cdt_version}"
+                    /* 
+                       define machine dependent commands and environment variables:
+                       - eb_flags: EasyBuild flags
+                       - eb_tcflags: EasyBuild toolchain flags
+                       - eb_installpath: EasyBuild installpath
+                       - eb_modulespath: EasyBuild modules path 
+                       - eb_toolspath: tools modules path 
+                       - load_pe: command to load PE target module 
+                       - toolchains: toolchain names 
+                    */
+                    def eb_flags
+                    def eb_tcflags
+                    def eb_installpath
+                    def eb_modulespath
+                    def load_pe
+                    def toolchains
+                    if(machineName == "daint" || machineName == "dom"){
+                        eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
+                        eb_tcflags = "--hidden"
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
+                        eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
+                        eb_modulespath = "${eb_installpath}/modules/all"
+                        eb_toolspath = "${eb_installpath}/tools/modules/all"
+                        load_pe = architecture == "" ?
+                            "module load cdt-cuda/${pe_target}" :
+                            "module load cdt-cuda/${pe_target} daint-$architecture"
+                        toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
+                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                        eb_flags = "--ignore-locks -r"
+                        eb_tcflags = ""
+                        eb_installpath = "${params.eb_prefix}"
+                        eb_metadata="$WORKSPACE/easybuild/alps-external_modules_metadata-${pe_target}.cfg"
+                        eb_modulespath = "${eb_installpath}/modules/all/Core"
+                        eb_toolspath = "${eb_installpath}/modules/all/Core"
+                        load_pe = "module load cpe/${pe_target}"
+                        toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
+                    }
+
+                    /* define command to load EasyBuild */
+                    def load_easybuild = params.eb_version == "" ?
+                        "module load EasyBuild-custom/cscs" :
+                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
+
+                    /* define build command and PE target flags (pe_flags) */
                     def build_command = "eb $eb_flags"
+                    def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
-                    /* create the new toolchains and build the software stack */
+                    /* create the new toolchains and update the software stack */
                     sh("""#!/bin/bash -l
 
+                        # EasyBuild paths
+                        export EASYBUILD_INSTALLPATH="${eb_installpath}"
+                        export EASYBUILD_PREFIX="${eb_installpath}"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
+
+                        # create module folders and symbolic link to EasyBuild-custom/cscs
+                        if [ ! -d "${eb_modulespath}" ]; then
+                            mkdir -p ${eb_modulespath} ${eb_toolspath}
+                            pushd ${eb_modulespath}
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                            popd
+                        elif [ ! -L "${eb_modulespath}/EasyBuild-custom" ]; then
+                            pushd ${eb_modulespath}
+                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                            popd
+                        fi
+
+                        # load Cray PE module and EasyBuild
+                        $load_pe
+                        $load_easybuild
+
+                        # update buildpath and metadata file for external modules
+                        export EASYBUILD_BUILDPATH="\$EASYBUILD_BUILDPATH/$machineLabel"
+                        export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
+                        #FIXME: workaround for pilatus not taking EASYBUILD_PREFIX upon loading EasyBuild
+                        export EASYBUILD_PREFIX="${params.eb_prefix}"                   
+                        export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
+
+                        # unuse paths
                         for path in $unuse_paths; do
                             module unuse \$path
                         done
                         echo -e "\nMODULEPATH: \$MODULEPATH\n"
-
-                        export EASYBUILD_PREFIX="${params.eb_prefix}/$machineLabel/${params.cdt_version}"
-                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
-                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
-
-                        # create symbolic link to EasyBuild-custom/cscs
-                        if [ ! -e "\$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
-                            mkdir -p "\$EASYBUILD_PREFIX/modules/all"
-                            mkdir -p "\$EASYBUILD_PREFIX/tools/modules/all"
-                            ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom \$EASYBUILD_PREFIX/modules/all
-                        fi
-
-                        $load_easybuild
-                        $switch_easybuild
-                        # correct buildpath and metadata
-                        export EASYBUILD_BUILDPATH=\$EASYBUILD_BUILDPATH/$machineLabel
-                        export EASYBUILD_EXTERNAL_MODULES_METADATA="$WORKSPACE/easybuild/cray_external_modules_metadata-${params.cdt_version}.cfg"
 
                         # print EasyBuild version and configuration
                         eb --version
@@ -117,86 +163,141 @@ stage('Update Stage') {
                         # create the new toolchains
                         for tc in $toolchains; do
                             echo -e "\nCurrent toolchain: \$tc"
-                            find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.cdt_version}.eb
+                            find \$EB_CUSTOM_REPOSITORY -type f -name \${tc}-${params.pe_current}.eb -exec sed "s/${params.pe_current}/${params.pe_target}/" {} \\; > \$EB_CUSTOM_REPOSITORY/easyconfigs/c/\$tc/\${tc}-${params.pe_target}.eb
 
                             # build current toolchain
                             echo -e "\nBuilding with the following command:"
-                            echo "$build_command --hidden \${tc}-${params.cdt_version}.eb"
-                            $build_command --hidden \${tc}-${params.cdt_version}.eb
+                            echo "$build_command $eb_tcflags \${tc}-${params.pe_target}.eb"
+                            $build_command $eb_tcflags \${tc}-${params.pe_target}.eb
                             if [ \$? -eq 0 ]; then
-                                echo -e "Update of toolchain \$tc SUCCESSFUL"
+                                echo -e "\nBuild of toolchain \$tc SUCCESSFUL\n"
                             else 
-                                echo -e "Update of toolchain \$tc FAILED"
+                                echo -e "\nBuild of toolchain \$tc FAILED\n"
                             fi
                         done
 
                         # initialise counters and lists
                         submit_file="\${EASYBUILD_PREFIX}/submit.txt"
-                        echo "" > \${submit_file}
+                        > \${submit_file}
                         unset success
                         success_file="\${EASYBUILD_PREFIX}/success.txt"
-                        echo "" > \${success_file}
+                        > \${success_file}
                         unset failed
                         failed_file="\${EASYBUILD_PREFIX}/failed.txt"
-                        echo "" > \${failed_file}
+                        > \${failed_file}
 
-                        # target production list
-                        prod_list=\$(ls $WORKSPACE/jenkins-builds/*${params.cdt_current}-${machineLabel} | tail -1)
-
-                        # filter the target production list $machineLabel
+                        # filename of current production list
+                        list_current=\$(ls $WORKSPACE/jenkins-builds/*${params.pe_current}-${machineLabel} | tail -1)
+                        # filename of target production list (tentative: failed updates will be removed from the target list)
+                        list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
+                        # filter current production list to create the target production list
                         echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
-                        echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
-                        build_list=\$(grep -if select_recipes.txt \${prod_list} | grep -ivf discard_recipes.txt | awk '{print \$1}')
-                        
-                        if [ -z "\$build_list" ]; then
-                            echo -e "\nThe list of recipes to build is empty. Exiting..."
-                            exit \$(wc -w <<< \$build_list)
-                        else   
-                            echo -e "\nUpdating recipes filtered from \${prod_list}: \n\$build_list" | sed -E 's/(Cray.+)-${params.cdt_current}/\\1-${params.cdt_version}/'
+                        if [ -n "${params.discard_recipes}" ]; then 
+                            echo ${params.discard_recipes} | tr ' ,' '\n' > discard_recipes.txt
+                            grep -if select_recipes.txt \${list_current} | grep -ivf discard_recipes.txt | sed -E -e 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
+                        else 
+                            grep -if select_recipes.txt \${list_current} | sed -E -e 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/' -e 's#--installpath=.*#--installpath=${eb_installpath}/tools#' > "\$list_target"
                         fi
 
-                        # build recipes
-                        for recipe in \${build_list}; do
+                        if [ -s "\$list_target" ]; then
+                            echo -e "\nFiltering production list \$(basename \${list_current}) to \$(basename \${list_target}): \n\$(cat \${list_target})"
+                        else   
+                            echo -e "\nThe target list of recipes to build is empty. Exiting...\n"
+                            exit 1
+                        fi
+
+                        # loop over recipes to be updated
+                        while read -r line; do 
                             status=0
-                            new_recipe=\$(echo \$recipe | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
-                            echo -e "\nCurrent target: \$new_recipe"
+                            recipe_target=\$(echo \$line | awk '{print \$1}')
+                            flags_target=\$(echo \${line/\$recipe_target/} | xargs)
+                            echo -e "\nCurrent target: \$recipe_target"
 
-                            # relative deps path from full path dry run (--dry-run)
-                            deps=\$($build_command --dry-run \$recipe | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(Cray[a-zA-Z]+)-${params.cdt_current}/\\1-${params.cdt_version}/')
-                            
-                            # check status and print short dry run (-D)
-                            if [ -n "\$deps" ]; then
-                                $build_command $tc_flags -D \$recipe | grep "\\["
-                            else
-                                failed+=(\$new_recipe)
-                                echo "\$new_recipe" >> "\${failed_file}"
-                                echo -e "\nDry run of \$new_recipe FAILED: skipping build"
-                                continue
-                            fi
+                            # check if recipe matches target Cray PE  
+                            if [[ \$recipe_target =~ (cpe.*|Cray.*)-${params.pe_target} ]]; then
+                                recipe_current=\${recipe_target/${params.pe_target}/${params.pe_current}}
 
-                            echo -e "\nBuilding with the following command:"
-                            # check if recipe matches Cray cdt 
-                            if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_current} ]]; then
-                                echo "$build_command $tc_flags \$recipe"
-                                $build_command $tc_flags \$recipe
+                                # relative path of dependencies retrieved from full path dry run (--dry-run) of current recipe
+                                deps=\$($build_command --dry-run \$recipe_current | awk '/\\.eb/{printf"%s\\n",gensub(/.*\\/(\\w\\/.*\\.eb).*/,"\\\\1",1)}' | sed -E 's/(cpe.*|Cray.*)-${params.pe_current}/\\1-${params.pe_target}/')
+
+                                # check status and print short dry run (-D) of target recipe
+                                if [ -n "\$deps" ]; then
+                                    echo -e "\nDry run of \$recipe_target with dependencies:"
+                                    $build_command $pe_flags -D \$recipe_current | grep "\\*\\s\\["
+                                else
+                                    failed+=(\$recipe_target)
+                                    echo "\$recipe_target" >> "\${failed_file}"
+                                    echo -e "\nDry run of \$recipe_target FAILED: removing recipe from production list"
+                                    sed -i "/\$recipe_target/d" \$list_target
+                                    continue
+                                fi
+
+                                echo -e "\nBuilding with the following command:"
+                                echo "$build_command $pe_flags \$flags_target \$recipe_current"
+                                $build_command $pe_flags \$flags_target \$recipe_current
                             else
-                                echo "$build_command \$recipe"
-                                $build_command \$recipe
+                                echo -e "\nBuilding with the following command:"
+                                echo "$build_command \$flags_target \$recipe_target"
+                                $build_command \$flags_target \$recipe_target
                             fi
                             status=\$[status+\$?]
 
                             # keep track of successful and failed builds
                             if [ \$status -eq 0 ]; then
-                                success+=(\$new_recipe)
-                                echo "\$new_recipe" >> "\${success_file}"
+                                success+=(\$recipe_target)
+                                echo "\$recipe_target" >> "\${success_file}"
                                 echo "\$deps" | tr ' ' '\n' >> "\${submit_file}"
-                                echo -e "\nUpdate of \$new_recipe from \$recipe SUCCESSFUL(\${#success[@]})"
+                                echo -e "\nBuild of \$recipe_target SUCCESSFUL(\${#success[@]})\n"
+
+                                # adjust access rights of licensed software
+                                for name in $licensed_software; do 
+                                    if [[ "\$recipe_target" =~ "\$name" ]]; then 
+                                        version=\$(echo "\$recipe_target" | sed -e "s/^\${name}-//" -e "s/.eb//")
+                                        echo -e "Adjusting permissions of licensed software \$name (module version: \$version):"; 
+                                        # define allowed group
+                                        if [[ "\$name" =~ "IDL" ]]; then
+                                            # check IDL module version
+                                            if [[ "\$version" =~ "CSCS" ]]; then
+                                                group="\${name,,}cscs"
+                                            else
+                                                group="\${name,,}ethz"
+                                            fi
+                                        elif [[ "\$name" =~ "VASP" ]]; then
+                                            # check VASP module version
+                                            if [[ "\$version" =~ "5.4" ]]; then
+                                                group="\${name,,}"
+                                            else
+                                                # group vasp6 enforced after June 30th 2020"
+                                                group="\${name,,}6"
+                                            fi
+                                        else
+                                            group=\${name,,}
+                                        fi
+
+                                        # check group ownership of licensed software folder
+                                        checkgroup=\$(stat -c "%G" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        if [ "\$checkgroup" != "\$group" ]; then
+                                        # change group ownership (current user must be member of the group to use chgrp)
+                                            echo -e " \t- changing group ownership of the folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} to \${group}"
+                                            chgrp \${group} -R \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
+                                        fi
+                                        # check access rights of licensed software folder: last digit must be 0 (no access for others)
+                                        checkrights=\$(stat -c "%a" \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version})
+                                        if [ \${checkrights: -1} -ne 0 ]; then
+                                            # change access rights (current user must own the folder to use the command chmod)
+                                            echo -e " \t- removing access rights to folder \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version} for others"
+                                            chmod -R o-rwx \${EASYBUILD_INSTALLPATH}/software/\${name}/\${version}
+                                        fi
+                                    fi
+                                done
                             else
-                                failed+=(\$new_recipe)
-                                echo "\$new_recipe" >> "\${failed_file}"
-                                echo -e "\nUpdate of \$new_recipe from \$recipe FAILED(\${#failed[@]})"
+                                failed+=(\$recipe_target)
+                                echo "\$recipe_target" >> "\${failed_file}"
+                                echo -e "\nBuild of \$recipe_target FAILED(\${#failed[@]}): removing recipe from production list\n"
+                                sed -i "/\$recipe_target/d" \$list_target
                             fi
-                        done
+
+                        done < \$list_target
 
                         # change permission of tmp folders if failed is not null
                         if [ -n "\$failed" ]; then
@@ -238,7 +339,7 @@ stage('Update Stage') {
 /*
  Jira Stage: create Jira issues for failed updates on the different "machinesLabel"
  Loop over all systems in "machineConfigurations":
-  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
+  - retrieve path to file with failed recipes ("failed.txt")
   - loop over the lines of the file "failed.txt" (list of failed updates)
   - create a Jira Issue for each item in the list with the proper project key
 */
@@ -255,11 +356,56 @@ stage('Jira Stage') {
                 "${machineName}-${architecture}"
             JiraIssues[machineLabel] = {
                 node(machineName) {
+
+                    /* 
+                       define machine dependent environment variable:
+                       - eb_installpath: EasyBuild installpath
+                    */
+                    def eb_installpath
+                    if(machineName == "daint" || machineName == "dom"){
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/${machineLabel}"
+                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                        eb_installpath = "${params.eb_prefix}"
+                    }
+
+                    println "\nEasyBuild installpath: ${eb_installpath}\n"
+
+                    /* issue = [key, status] of Jira issues matching search */
+                    def String[] issue
+
+                    /* retrieve list of successful  updates */
+                    def success_updates = sh(returnStdout: true,
+                                        script: """#!/bin/bash -l
+                                        success_file="${eb_installpath}/success.txt"
+                                        if [ -s "\$success_file" ]; then
+                                            cat \$success_file
+                                        fi""").trim()  
+                    if ( !success_updates?.trim() ) {
+                        println "\nSuccessful updates: None\n"
+                    }
+                    else {
+                        success_updates.tokenize(' \n').each {
+                            /* search existing Jira issues for current successful update */
+                            try {
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
+                                if(issue){
+                                    if(issue[1]!='Done'){
+                                        methods.commentJiraIssue("Update of $it successful on $machineLabel with PE $params.pe_target", issue[0])
+                                        // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
+                                        jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'31']], site: 'JIRA_SITE'
+                                    }
+                                } else println "No issue matching $it"
+                            } catch(err) {
+                                println "Failed to update Jira issues for $it"
+                            }
+                        }
+                    }
+
                     /* retrieve list of failed updates */
                     def failed_updates = sh(returnStdout: true,
                                         script: """#!/bin/bash -l
-                                        failed_file="${params.eb_prefix}/$machineLabel/${params.cdt_version}/failed.txt"
-                                        if [ -f "\$failed_file" ]; then
+                                        failed_file="${eb_installpath}/failed.txt"
+                                        if [ -s "\$failed_file" ]; then
                                             cat \$failed_file
                                         fi""").trim()  
                     if ( !failed_updates?.trim() ) {
@@ -267,10 +413,23 @@ stage('Jira Stage') {
                     }
                     else {
                         failed_updates.tokenize(' \n').each {
+                            /* search existing Jira issues for current failed update */
                             try {
-                                methods.failedJiraTask("UES", it, machineLabel)
-                            } catch(err) {
-                                println "Failed to create Jira Issue for $it"
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
+                                if(issue){
+                                    methods.commentJiraIssue("Update of $it failed on $machineLabel with PE $params.pe_target", issue[0])
+                                    // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
+                                    //if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
+                                } else {
+                                    /* create new Jira issue for current failed update */
+                                    try {
+                                        methods.createJiraIssue('Task', machineLabel, "$it failed in $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES')
+                                    } catch(err) {
+                                        println "Failed to create Jira Issue for $it"
+                                    }
+                                }
+                            } catch(err) {    
+                                println "Failed to update Jira issues for $it"
                             }
                        }
                     }
@@ -291,9 +450,9 @@ stage('Jira Stage') {
 /*
  GitHub Stage: submit a pull request for successful updates on the "machinesLabel"
  Loop over all systems in "machineConfigurations":
-  - retrieve EASYBUILD_PREFIX path "${params.eb_prefix}/$machineLabel/${params.cdt_version}"
-  - loop over the lines of the file "submit.txt" (list of successful updates and dependencies)
-  - submit a pull request on GitHub with "WIP [$machineLabel]" in the title
+  - retrieve path to file with recipes to submit on GitHub ("submit.txt") and target production list
+  - loop over the lines of the file "submit.txt" (successful updates and dependencies with relative path
+  - submit a pull request on GitHub using the hub tool with "WIP [$machineLabel]" in the title
 */
 GitHubPR = [:]
 stage('GitHub Stage') {
@@ -308,53 +467,82 @@ stage('GitHub Stage') {
                 "${machineName}-${architecture}"
             GitHubPR[machineLabel] = {
                 node(machineName) {
-                    /* retrieve list of successful updates and submit pull request */
-                    sh("""#!/bin/bash -l
-                        # clone master over ssh
-                        repo="git@github.com:eth-cscs/production.git"
-                        echo -e "\nCloning CSCS GitHub production repository:"
-                        echo "git clone --quiet \$repo"
-                        git clone --quiet \$repo
-                        
-                        # go to easyconfigs folder to match relative path of deps
-                        cd production/easybuild/easyconfigs
 
+                    /* 
+                       define machine dependent environment variable:
+                       - eb_installpath: EasyBuild installpath
+                       - load_hub: command to load hub module
+                    */
+                    def eb_installpath
+                    if(machineName == "daint" || machineName == "dom"){
+                        eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
+                        load_hub = architecture == "" ?
+                            "module load hub" :
+                            "module load daint-$architecture hub"
+                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                        eb_installpath = "${params.eb_prefix}"
+                        load_hub = "module load hub"
+                    }
+
+                    println "\nEasyBuild installpath: ${eb_installpath}\n"
+
+                    /* retrieve list of successful updates and target production list to submit pull request */
+                    sh("""#!/bin/bash -l
+
+                        failed_file="${eb_installpath}/failed.txt"
+                        submit_file="${eb_installpath}/submit.txt"
+                        # check if submit file is not empty
+                        if [ -s "\$submit_file" ]; then
+                            submit_list=\$(cat \$submit_file | sort | uniq)
+                            echo -e "List of items to submit from \$submit_file: \n\$submit_list"
+                        else
+                            echo -e "The list of items to submit from \$submit_file is empty. Exiting..."
+                            exit
+                        fi
+
+                        # define repository
+                        repo="git@github.com:eth-cscs/production.git"
+                        # define submit folder 
+                        submit_folder="${WORKSPACE}/submit"
+                        
+                        # clone master over ssh to submit_folder
+                        echo -e "\nCloning CSCS GitHub production repository to \$submit_folder:"
+                        echo "git clone --quiet \$repo \$submit_folder"
+                        git clone --quiet \$repo \$submit_folder
+                        
+                        # go to submit folder to checkout branch and match relative path of deps
+                        echo -e "\nGo to folder \$submit_folder/easybuild/easyconfigs"
+                        pushd \$submit_folder/easybuild/easyconfigs
+                        
                         # create git branch or update it if existing
-                        branch="${machineLabel}/${params.cdt_version}" 
-                        echo -e "\nSwitch to branch ${machineLabel}/${params.cdt_version}:"
+                        branch="${machineLabel}/${params.pe_target}" 
                         if [ -n "\$(git ls-remote --heads \$repo \$branch)" ]; then
                             git checkout \$branch 
                         else 
                             git checkout -b \$branch
                         fi
 
-                        # create updated toolchains in workspace
-                        for tc in $toolchains; do
-                            find . -type f -name \${tc}-${params.cdt_current}.eb -exec sed "s/${params.cdt_current}/${params.cdt_version}/" {} \\; > ./c/\$tc/\${tc}-${params.cdt_version}.eb
-                        done
-
-                        failed_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/failed.txt"
-                        submit_file="${params.eb_prefix}/${machineLabel}/${params.cdt_version}/submit.txt"
-                        submit_list=\$(cat \$submit_file | sort | uniq)
-
                         # initialise variables
                         unset copied
                         unset missing
 
                         # loop over list of successful updates and dependencies
-                        echo -e "\nCopy successful updates for commit:"
-                        for recipe in \$submit_list; do
-                            # check if recipe did not fail elsewhere
+                        echo -e "\nCopy successful updates and dependencies for commit:"
+                        for item in \$submit_list; do
+                            # EasyBuild file name of current update
+                            recipe=\$(basename \$item)
+                            # check if current update did not fail elsewhere
                             if fgrep -H \$recipe \$failed_file; then
                                 echo -e " \t \$recipe found in failed list \$failed_file (skipped)"
                             else
-                                # check if recipe matches Cray cdt version
-                                if [[ \$recipe =~ Cray[a-zA-Z]+-${params.cdt_version} ]]; then
-                                    name=\$(basename \$recipe)
-                                    source=\$(find ${params.eb_prefix}/${machineLabel}/${params.cdt_version}/software -type f -name \$name | grep easybuild/\$name)
+                                # check if recipe matches Cray PE
+                                if [[ \$recipe =~ (cpe.*|Cray.*)-${params.pe_target} ]]; then
+                                    name=\$(expr "\$item" : "./\\(.*\\)/.*")
+                                    version=\$(expr "\$item" : "./\$name/\$name-\\(.*\\).eb")
+                                    source=${eb_installpath}/software/\$name/\$version/easybuild/\$recipe
                                     if [ -n "\$source" ]; then 
-                                        echo -e " \t \$source -> \$recipe"
-                                        cp \$source \$recipe
+                                        echo -e " \t \$source -> \$item"
+                                        cp \$source \$item
                                         # update variable
                                         copied+=(\$recipe)
                                     else
@@ -363,37 +551,73 @@ stage('GitHub Stage') {
                                         missing+=(\$recipe)
                                     fi
                                 else
-                                    echo -e " \t \$recipe does not match ${params.cdt_version} (skipped)"
+                                    echo -e " \t \$recipe does not match ${params.pe_target} (skipped)"
                                 fi
                             fi
                         done
 
-                        # load hub tool to submit a pull request
-                        module load daint-gpu
-                        module load hub
+                        # add recipes under current path "\$submit_folder/easybuild/easyconfig"
                         git add .
-                        
+
+                        # update production list
+                        list_target=\$(ls ${eb_installpath}/*${params.pe_target}-${machineLabel} | tail -1)
+                        list_production=\$submit_folder/jenkins-builds/\$(basename \$list_target)
+                        list_append=${eb_installpath}/\$(basename \$list_target).append
+                        if [ -s "\$list_production" ]; then
+                            # copy updated items of target list to file list_append
+                            grep -v -f \$list_production \$list_target > \$list_append
+                            # updated items of target list are appended to production list
+                            if [ -s "\$list_append" ]; then
+                                echo -e "\nAppending \$list_append to \$list_production"
+                                cat \$list_append >> \$list_production
+                            else
+                                echo -e "\nNothing to append to \$list_production"
+                            fi
+                        else
+                            # target list is copied to production list
+                            echo -e "\nCopying \$list_target -> \$list_production"
+                            cp \$list_target \$list_production
+                        fi
+
+                        # add production list
+                        git add \$list_production
+
+                        # update architecture modulefile
+                        if [[ ${machineName} == "daint" || ${machineName} == "dom" ]]; then
+                            modulefile_current="${WORKSPACE}/login/daint-${architecture}/${params.pe_current}"
+                            if [ -s \$modulefile_current ]; then
+                                modulefile_target="\$submit_folder/login/daint-$architecture/${params.pe_target}"
+                                if [ ! -f "\$modulefile_target" ]; then  
+                                    sed "s/${params.pe_current}/${params.pe_target}/" \$modulefile_current > \$modulefile_target
+                                    # add architecture modulefile
+                                    git add \$modulefile_target
+                                fi
+                            fi
+                        fi
+
+                        # load hub tool to submit a pull request with recently added files
+                        ${load_hub}
                         # check if there is anything to commit
                         if [ -n "\$(git status --porcelain)" ]; then
                             echo -e "\nCommit successul updates:"
-                            git commit -m "Updated recipes on ${machineLabel} for cdt/${params.cdt_version}"
-                            # check if a pull request is already open
+                            git commit -m "Updated recipes on ${machineLabel} for PE ${params.pe_target}"
+                            # check if a pull request from selected branch is already open
                             if [ -n "\$(hub pr list --head \${branch})" ]; then
                                 git push origin HEAD
                             else
-                                hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for cdt/${params.cdt_version}"
+                                hub pull-request -p -m "WIP [${machineLabel}] Updated recipes for PE ${params.pe_target}"
                             fi
                         else 
                             echo -e "\nNothing to commit"
                         fi
 
                         # print copied and missing updates
-                        echo -e "\nCopied Updates: \${#copied[@]} \n\${copied[@]}"
-                        echo -e "\nMissing Updates: \${#missing[@]} \n\${missing[@]}"
+                        echo -e "\nCopied updates: \${#copied[@]} \n\${copied[@]}"
+                        echo -e "\nMissing updates: \${#missing[@]} \n\${missing[@]}"
 
                         # return the number of missing updates
                         exit \${#missing[@]}
-                       """)
+                    """)
                 }
             }
         }
