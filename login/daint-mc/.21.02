@@ -1,0 +1,56 @@
+#%Module
+
+# set environment
+set machine "dom"
+set apps "/apps/${machine}"
+#set apps "$env(APPS)"
+set path "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/modules/all"
+set toolspath "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/tools/modules/all"
+# set gpupath and mcpath and corresponding toolspath
+set gpupath [ string map { ARCH gpu } "${path}" ]
+set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
+set mcpath [ string map { ARCH mc } "${path}" ]
+set toolsmcpath [string map { ARCH mc } "${toolspath}"]
+# list of modulefiles in mcpath and toolsmcpath
+set mclist [exec ls --color=none "${mcpath}"]
+set toolsmclist [exec ls --color=none "${toolsmcpath}"]
+
+# checks for conflicts
+if { [ is-loaded craype-haswell ] } {
+ module unload craype-haswell
+ module unuse "${gpupath}"
+ module unuse "${toolsgpupath}"
+}
+# conflicts
+conflict craype-haswell
+conflict daint-gpu
+
+# module remove (unload) or switch (swap): unload dependencies
+if { [module-info mode remove] || [module-info mode switch] } {
+ foreach module ${mclist} {
+   module unload ${module}
+ }
+ foreach module ${toolsmclist} {
+   module unload ${module}
+ }
+# unload cdt and cdt-cuda
+ module unload cdt cdt-cuda
+}
+
+# load dependency and update MODULEPATH
+module load craype-broadwell
+module use "${mcpath}"
+module use "${toolsmcpath}"
+
+# print help screen
+if { [ module-info mode help ] } {
+proc ModulesHelp { } {
+ global apps mcpath
+ puts stderr "\t Set environment for mc broadwell compute nodes:
+  \t - module load craype-broadwell
+  \t - module use ${mcpath}
+  \t - module use ${toolsmcpath}
+ "
+ return 0
+}
+}
