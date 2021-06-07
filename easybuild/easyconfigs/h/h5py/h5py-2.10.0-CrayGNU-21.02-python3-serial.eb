@@ -14,10 +14,7 @@ description = """
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '21.02'}
-
 sources = [SOURCE_TAR_GZ]
-checksums = ['84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d']
-
 dependencies = [
     ('PyExtensions', 'python%(pymajver)s'),
     ('cray-python', EXTERNAL_MODULE),
