@@ -81,3 +81,4 @@
  scorep_binding_python-3.0-CrayGNU-21.02-python3.eb     --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
+ netcdf-python-1.5.4-CrayGNU-21.02-python3.eb           --set-default-module
