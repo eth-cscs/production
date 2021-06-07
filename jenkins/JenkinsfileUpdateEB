@@ -419,7 +419,7 @@ stage('Jira Stage') {
                                 if(issue){
                                     methods.commentJiraIssue("Update of $it failed on $machineLabel with PE $params.pe_target", issue[0])
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
-                                    //if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
+                                    if(issue[1]=='Done') jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'21']], site: 'JIRA_SITE'
                                 } else {
                                     /* create new Jira issue for current failed update */
                                     try {
