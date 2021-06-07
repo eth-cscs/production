@@ -1,0 +1,27 @@
+# contributed by Jean Favre
+easyblock = 'ConfigureMake'
+
+name = 'vorbis'
+version = '1.3.3'
+
+homepage = 'https://www.theora.org/'
+description = "Support library for Theora, a free and open video compression format from the Xiph.org Foundation. "
+
+toolchain = {'name': 'CrayGNU', 'version': '21.02'}
+
+source_urls = ['http://downloads.xiph.org/releases/%(namelower)s/']
+sources = ['libvorbis-%(version)s.tar.gz']
+
+dependencies = [
+    ('ogg', '1.3.1'),
+]
+
+configopts = "--with-ogg=${EBROOTOGG} "
+
+
+sanity_check_paths = {
+    'files': ['include/%(namelower)s/codec.h', 'include/%(namelower)s/vorbisenc.h', 'lib/libvorbis.so'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
