@@ -147,8 +147,8 @@ stage('Update Stage') {
                         export EASYBUILD_BUILDPATH="\$EASYBUILD_BUILDPATH/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
                         #FIXME: workaround for pilatus not taking EASYBUILD_PREFIX upon loading EasyBuild
-                        export EASYBUILD_PREFIX="${params.eb_prefix}"                   
-                        export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
+                        #export EASYBUILD_PREFIX="${params.eb_prefix}"                   
+                        #export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
 
                         # unuse paths
                         for path in $unuse_paths; do
