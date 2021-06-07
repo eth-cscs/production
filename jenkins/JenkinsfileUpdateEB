@@ -394,7 +394,7 @@ stage('Jira Stage') {
                                         // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
                                         jiraTransitionIssue idOrKey: issue[0], input: [transition:[id:'31']], site: 'JIRA_SITE'
                                     }
-                                } else println "No issue matching $it"
+                                } else println "No issue matching $it on $machineLabel with PE $params.pe_target"
                             } catch(err) {
                                 println "Failed to update Jira issues for $it"
                             }
@@ -423,7 +423,7 @@ stage('Jira Stage') {
                                 } else {
                                     /* create new Jira issue for current failed update */
                                     try {
-                                        methods.createJiraIssue('Task', machineLabel, "$it failed in $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES')
+                                        methods.createJiraIssue('Task', machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES')
                                     } catch(err) {
                                         println "Failed to create Jira Issue for $it"
                                     }
