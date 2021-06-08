@@ -76,10 +76,10 @@ packages:
   mpich:
     buildable: false
     externals:
-    - spec: mpich@3.2
+    - spec: mpich@3.4
       modules:
-      - cray-mpich/8.0.16
-      - libfabric/1.11.0.0.233
+      - cray-mpich/8.1.4
+      - libfabric/1.11.0.4.67
   perl:
     buildable: false
     externals:
@@ -130,7 +130,7 @@ packages:
     externals:
     - spec: cray-fftw@3.3.8
       modules:
-      - cray-fftw/3.3.8.8
+      - cray-fftw/3.3.8.9
 #  hdf5:
 #    buildable: false
 #    version: [1.10.5.1, 1.1.0.5.0, 1.10.2.0]
@@ -210,7 +210,7 @@ packages:
   jemalloc:
     buildable: false
     externals:
-    - spec: jemalloc@5.1.0.1
+    - spec: jemalloc@5.1.0.4
       modules:
       - cray-jemalloc/5.1.0.4
   hpx:
