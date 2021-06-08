@@ -45,7 +45,7 @@
  netcdf-python-1.5.4-CrayGNU-20.11-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.11.eb                          --set-default-module
  OOOPS-1.0.eb
- ParaView-5.9.0-CrayGNU-20.11-OSMesa-python3.eb         --set-default-module
+ ParaView-5.9.1-CrayGNU-20.11-OSMesa-python3.eb         --set-default-module
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
  PyExtensions-python3-CrayGNU-20.11.eb
  QuantumESPRESSO-6.7.0-CrayIntel-20.11.eb               --set-default-module
