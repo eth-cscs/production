@@ -90,3 +90,4 @@
  OOOPS-1.0.eb
  ddt-21.0.2-linux-x86_64.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
  ParaView-5.9.1-CrayGNU-21.02-EGL-python3.eb            --set-default-module
+ QuantumESPRESSO-6.6a2-CrayPGI-21.02-cuda.eb            --set-default-module
