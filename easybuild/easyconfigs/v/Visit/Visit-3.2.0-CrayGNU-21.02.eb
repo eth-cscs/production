@@ -9,7 +9,7 @@ homepage = 'https://visit-dav.github.io/visit-website/'
 description = """VisIt is an Open Source, interactive, scalable, visualization,
 animation and analysis tool."""
 
-toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchain = {'name': 'CrayGNU', 'version': '21.02'}
 toolchainopts = {'usempi': True, 'verbose': False}
 
 #
