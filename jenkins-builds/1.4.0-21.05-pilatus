@@ -5,7 +5,7 @@
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
- reframe-3.6.1.eb                     --set-default-module
+ reframe-3.6.2.eb                     --set-default-module
  GSL-2.6-cpeAMD-21.05.eb
  GSL-2.6-cpeCray-21.05.eb
  ParaView-5.9.0-cpeCray-21.05-OSMesa-python3.eb
