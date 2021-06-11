@@ -9,12 +9,12 @@ Production EasyBuild @ CSCS
 
 More information
 ================
- - Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild
+ - Homepage: https://github.com/eth-cscs/production/wiki
     }
 }
 
 module-whatis {Description: Production EasyBuild @ CSCS }
-module-whatis {Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild}
+module-whatis {Homepage: https://github.com/eth-cscs/production/wiki}
 
 set root /apps/common/UES/jenkins/easybuild/software/EasyBuild-custom/cscs
 
