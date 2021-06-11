@@ -101,7 +101,7 @@ stage('Update Stage') {
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
                         eb_tcflags = ""
-                        eb_installpath = "${params.eb_prefix}"
+                        eb_installpath = "${params.eb_prefix}/"
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
@@ -119,7 +119,7 @@ stage('Update Stage') {
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -l
+                    sh("""#!/bin/bash -lx
 
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
@@ -144,7 +144,7 @@ stage('Update Stage') {
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules
-                        export EASYBUILD_BUILDPATH="\$EASYBUILD_BUILDPATH/$machineLabel"
+                        export EASYBUILD_BUILDPATH="/dev/shm/$USER/easybuild/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
                         #FIXME: workaround for pilatus not taking EASYBUILD_PREFIX upon loading EasyBuild
                         #export EASYBUILD_PREFIX="${params.eb_prefix}"                   
