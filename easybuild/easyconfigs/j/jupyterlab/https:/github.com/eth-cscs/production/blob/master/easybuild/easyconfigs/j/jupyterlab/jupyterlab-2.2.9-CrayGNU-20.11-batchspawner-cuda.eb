@@ -43,8 +43,8 @@ export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
 export JUPYTER=%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe others)
 %(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager --debug --no-build && 
 %(installdir)s/bin/jupyter-labextension install jupyterlab-datawidgets@6.3.0 --no-build && 
-%(installdir)s/bin/jupyter-labextension install itkwidgets -debug --no-build && 
-%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --no-build && 
+%(installdir)s/bin/jupyter-labextension install itkwidgets --debug --no-build && 
+%(installdir)s/bin/jupyter labextension install jupyter-matplotlib --debug --no-build && 
 %(installdir)s/bin/jupyter labextension install -y plotlywidget --debug --no-build &&
 %(installdir)s/bin/jupyter labextension install -y jupyterlab-plotly --debug --no-build &&
 %(installdir)s/bin/jupyter labextension install -y @bokeh/jupyter_bokeh --debug --no-build && 
