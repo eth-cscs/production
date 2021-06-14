@@ -9,12 +9,12 @@ Production EasyBuild @ CSCS
 
 More information
 ================
- - Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild
+ - Homepage: https://github.com/eth-cscs/production/wiki
     }
 }
 
 module-whatis {Description: Production EasyBuild @ CSCS }
-module-whatis {Homepage: https://github.com/eth-cscs/production/wiki/User-instructions-for-EasyBuild}
+module-whatis {Homepage: https://github.com/eth-cscs/production/wiki}
 
 set root /apps/common/UES/jenkins/easybuild/software/EasyBuild-custom/cscs
 
@@ -27,7 +27,6 @@ setenv	EBDEVELEASYBUILDMINCUSTOM		"$root/easybuild/EasyBuild-custom-cscs-easybui
 # COMMON SETUP #
 ################
 # Local variables
-set ebmodule               /apps/common/UES/easybuild/software/EasyBuild/latest
 set eb_config_dir          /apps/common/UES/jenkins/production/easybuild
 #
 # EB_CUSTOM_REPOSITORY
@@ -71,6 +70,7 @@ if { [ string match *esch* $::env(HOSTNAME) ] } {
 } else {
  set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
 }
+
 # system specific setup
 if { [ string match *daint* $system ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata-20.11.cfg
@@ -83,14 +83,14 @@ if { [ string match *daint* $system ] } {
 } elseif { [ string match *eiger* $system ] } {
     setenv EASYBUILD_MODULE_SYNTAX              Lua
     setenv EASYBUILD_MODULES_TOOL               Lmod
-    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/alps-external_modules_metadata-21.04.cfg
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cpe_external_modules_metadata-21.04.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_MODULE_NAMING_SCHEME       HierarchicalMNS
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
 } elseif { [ string match *pilatus* $system ] } {
     setenv EASYBUILD_MODULE_SYNTAX              Lua
     setenv EASYBUILD_MODULES_TOOL               Lmod
-    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/alps-external_modules_metadata-21.04.cfg
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cpe_external_modules_metadata-21.05.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_MODULE_NAMING_SCHEME       HierarchicalMNS
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
@@ -132,23 +132,17 @@ if { ! [ info exists ::env(EASYBUILD_PREFIX) ] } {
     } else {
         setenv EASYBUILD_PREFIX                 $::env(HOME)/easybuild/$system
     }
-} else {
-    setenv EASYBUILD_PREFIX                     $::env(EASYBUILD_PREFIX)
 }
 setenv EASYBUILD_INSTALLPATH                    $::env(EASYBUILD_PREFIX)
 
 #
 # If not set, EASYBUILD_BUILDPATH and EASYBUILD_TMPDIR will point to $XDG_RUNTIME_DIR/easybuild
 #
-if { [ info exists ::env(EASYBUILD_TMPDIR) ] } {
-    setenv EASYBUILD_TMPDIR                     $::env(EASYBUILD_TMPDIR)
-} else {
+if { ! [ info exists ::env(EASYBUILD_TMPDIR) ] } {
     setenv EASYBUILD_TMPDIR                     $::env(XDG_RUNTIME_DIR)/easybuild/tmp
 }
 
-if { [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
-    setenv EASYBUILD_BUILDPATH                  $::env(EASYBUILD_BUILDPATH)
-} else {
+if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
     setenv EASYBUILD_BUILDPATH                  $::env(XDG_RUNTIME_DIR)/easybuild/build
 }
 #
@@ -167,13 +161,5 @@ if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
 # Adding easybuild installed software to the list of modules
 prepend-path MODULEPATH                         $::env(EASYBUILD_INSTALLPATH)/modules/all
 # Loading easybuild module
-if { [module-info mode] == "load" } {
-        module use /apps/common/UES/easybuild/modules/all
-}
-
+prepend-path MODULEPATH                         /apps/common/UES/easybuild/modules/all
 module load EasyBuild
-
-if { [module-info mode] == "remove" || [module-info mode] == "unload" } {
-        module unuse /apps/common/UES/easybuild/modules/all
-}
-# Built with EasyBuild version 3.6.2
