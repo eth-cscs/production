@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 # Scalapack disabled: the GPU eigensolver can outperform the parallel CPU one 
-configopts = ' CUDA_HOME=$CUDATOOLKIT_HOME CC=cc FC=ftn MPIF90=ftn FCFLAGS="CUDA_HOME=$CUDATOOLKIT_HOME" FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 --with-cuda-runtime=%(cudashortver)s --enable-openmp --enable-parallel --with-scalapack=no '
+configopts = ' CUDA_HOME=$CUDATOOLKIT_HOME CC=cc FC=ftn MPIF90=ftn FCFLAGS="CUDA_HOME=$CUDATOOLKIT_HOME" FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --with-cuda=$CUDATOOLKIT_HOME --with-cuda-cc=60 --with-cuda-runtime=%(cudashortver)s --enable-openmp --enable-parallel --with-scalapack=no '
 
 # the experimental CUDA-Aware MPI (-D__GPU_MPI) does not work! 
 # use MKL FFT instead of FFTW and add HDF5
