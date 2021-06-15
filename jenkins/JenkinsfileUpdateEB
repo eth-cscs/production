@@ -119,7 +119,7 @@ stage('Update Stage') {
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
@@ -144,11 +144,8 @@ stage('Update Stage') {
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules
-                        export EASYBUILD_BUILDPATH="/dev/shm/$USER/easybuild/$machineLabel"
+                        export EASYBUILD_BUILDPATH="/dev/shm/$USER/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
-                        #FIXME: workaround for pilatus not taking EASYBUILD_PREFIX upon loading EasyBuild
-                        #export EASYBUILD_PREFIX="${params.eb_prefix}"                   
-                        #export EASYBUILD_INSTALLPATH="${params.eb_prefix}"
 
                         # unuse paths
                         for path in $unuse_paths; do
