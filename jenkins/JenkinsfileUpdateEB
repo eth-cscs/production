@@ -144,7 +144,7 @@ stage('Update Stage') {
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules
-                        export EASYBUILD_BUILDPATH="/dev/shm/$USER/$machineLabel"
+                        export EASYBUILD_BUILDPATH="/dev/shm/\$USER/$machineLabel"
                         export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
 
                         # unuse paths
