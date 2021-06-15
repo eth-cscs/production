@@ -28,12 +28,16 @@ setenv("EBDEVELEASYBUILDMINCUSTOM", pathJoin(eb_root_dir, "/easybuild/EasyBuild-
  * XDG_CONFIG_DIRS
  * EASYBUILD_ROBOT_PATHS
  * EASYBUILD_INCLUDE_EASYBLOCKS
+ * EASYBUILD_INCLUDE_MODULE_NAMING_SCHEMES
+ * EASYBUILD_INCLUDE_TOOLCHAINS
  * EASYBUILD_EXTERNAL_MODULES_METADATA (see section SYSTEM SPECIFIC)
 --]]
 local eb_custom_repository=os.getenv("EB_CUSTOM_REPOSITORY") or eb_config_dir
 setenv("XDG_CONFIG_DIRS", eb_custom_repository)
 setenv("EASYBUILD_ROBOT_PATHS", pathJoin(eb_custom_repository, "easyconfigs/:"))
 setenv("EASYBUILD_INCLUDE_EASYBLOCKS", pathJoin(eb_custom_repository, "easyblocks/*.py"))
+setenv("EASYBUILD_INCLUDE_MODULE_NAMING_SCHEMES", pathJoin(eb_custom_repository, "tools/module_naming_scheme/*.py"))
+setenv("EASYBUILD_INCLUDE_TOOLCHAINS", pathJoin(eb_custom_repository, "toolchains/*.py,", eb_custom_repository, "toolchains/compiler/*.py"))
 
 --[[ 
  XDG_RUNTIME_DIR defines the following variables:
