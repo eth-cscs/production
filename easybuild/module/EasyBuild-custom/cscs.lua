@@ -58,7 +58,7 @@ if not os.getenv("EASYBUILD_SOURCEPATH") then
 end
 
 -- SYSTEM SPECIFIC (Cray with Lmod)
-local system=os.getenv("LMOD_SYSTEM_NAME")
+local system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
 if system == "eiger" then
 	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.04.cfg"))
 elseif system == "pilatus" then
