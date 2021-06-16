@@ -36,8 +36,7 @@ builddependencies = [
 dependencies = [
     ('ELPA', '2020.11.001'),
     ('Libint-CP2K', '2.6.0'),
-    ('libxc', '4.3.4'),
-    ('libxsmm', '1.16.1')
+    ('libxc', '4.3.4')
 ]
 
 # unload cray-libsci to link Intel MKL
