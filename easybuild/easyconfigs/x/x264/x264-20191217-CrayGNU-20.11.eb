@@ -1,0 +1,31 @@
+# contributed by Jean Favre 
+easyblock = 'ConfigureMake'
+
+name = 'x264'
+version = '20191217'
+
+homepage = 'http://www.videolan.org/developers/x264.html'
+description = """x264 is a free software library and application for encoding video streams into the H.264/MPEG-4
+ AVC compression format, and is released under the terms of the GNU GPL."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+source_urls = [
+    'https://download.videolan.org/pub/videolan/x264/snapshots/'
+]
+sources = ['x264-snapshot-%(version)s-2245-stable.tar.bz2']
+
+preconfigopts = "unset CC && unset CFLAGS &&"
+
+dependencies = [
+    ('NASM', '2.15.05')
+]
+
+configopts = '--enable-static --enable-pic  '
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'include/x264_config.h', 'include/x264.h', 'lib/libx264.a'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
