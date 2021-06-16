@@ -17,7 +17,6 @@ configopts = 'FCFLAGS="-fallow-argument-mismatch $FCFLAGS" -disable-avx512 --ena
 
 prebuildopts = " make clean && "
 
-
 sanity_check_paths = {
     'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
     'dirs': ['bin', 'include/elpa_openmp-%(version)s/%(namelower)s', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig'],
