@@ -16,10 +16,11 @@ dependencies = [
     ('NASM', '2.15.05'),
     ('theora', '1.2.0alpha1'),
     ('x264', '20191217'),
+    ('x265', '3.2.1'),
 ]
 
 configopts = '--enable-pic --enable-shared --enable-gpl --disable-x86asm --enable-version3 --enable-nonfree --enable-libtheora --cc="$CC" --cxx="$CXX" '
-configopts += ' --enable-libx264 '
+configopts += ' --enable-libx264 --enable-libx265 '
 
 
 sanity_check_paths = {
