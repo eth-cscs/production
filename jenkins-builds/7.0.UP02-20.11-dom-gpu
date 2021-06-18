@@ -1,5 +1,5 @@
  Amber-20-11-7-CrayIntel-20.11-cuda.eb                  --set-default-module
- Boost-1.75.0-CrayCCE-20.11.eb                          
+ Boost-1.75.0-CrayCCE-20.11.eb
  Boost-1.75.0-CrayGNU-20.11.eb
  Boost-1.75.0-CrayGNU-20.11-python3.eb                  --set-default-module
  Boost-1.75.0-CrayIntel-20.11.eb
@@ -54,7 +54,7 @@
  PyExtensions-python3-CrayGNU-20.11.eb                  --set-default-module
  QuantumESPRESSO-6.6a2-CrayPGI-20.11-cuda.eb            --set-default-module
  QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-20.11-cuda.eb   --set-default-module
- singularity-3.7.3-daint.eb
+ singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-20.11-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-20.11-cuda.eb                     --set-default-module
  Vc-1.4.1-CrayGNU-20.11.eb                              --set-default-module
