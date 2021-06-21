@@ -42,7 +42,7 @@
  NCO-4.8.1-CrayGNU-21.02.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-21.02.eb                          --set-default-module
  numpy-1.17.2-CrayGNU-21.02.eb                          --set-default-module
- ovito-3.2.0-CrayGNU-21.02.eb                           --set-default-module
+ ovito-3.5.2-CrayGNU-21.02.eb                           --set-default-module
  ParaView-5.9.0-CrayGNU-21.02-EGL-python3.eb            --set-default-module
  PLUMED-2.6.1-CrayGNU-21.02.eb                          --set-default-module
  pycuda-2018.1.1-CrayGNU-21.02-python3-cuda.eb          --set-default-module

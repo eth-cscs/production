@@ -9,7 +9,7 @@ description = """
 Library targeting Intel Architecture for specialized dense and sparse matrix operations, and deep learning primitives.
 """
 
-toolchain = {'name': 'cpeGNU', 'version': '21.04'}
+toolchain = {'name': 'cpeIntel', 'version': '21.04'}
 toolchainopts = {'usempi': True, 'openmp': True}
 
 source_urls = ['https://github.com/hfp/%(name)s/archive/']

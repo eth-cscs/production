@@ -1,0 +1,32 @@
+# contributed by Jean Favre 
+easyblock = 'CMakeMake'
+
+name = 'x265'
+version = '3.2.1'
+
+homepage = 'http://www.videolan.org/developers/x264.html'
+description = """x265 is a free software library and application for encoding video streams into the H.265/MPEG-H
+  HEVC compression format, and is released under the terms of the GNU GPL. """
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+source_urls = [
+    'https://download.videolan.org/pub/videolan/x265/'
+]
+sources = ['x265_%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('NASM', '2.15.05')
+]
+
+preconfigopts = "unset CC && unset CFLAGS && "
+
+srcdir = "source"
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'include/x265_config.h', 'include/x265.h', 'lib/libx265.so'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

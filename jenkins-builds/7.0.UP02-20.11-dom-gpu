@@ -19,7 +19,7 @@
  GSL-2.5-CrayIntel-20.11.eb
  HDFView-2.14.eb                                        --set-default-module
  Horovod-0.21.0-CrayGNU-20.11-tf-2.4.0.eb               --set-default-module
- PyTorch-1.7.1-CrayGNU-20.11.eb                         --set-default-module
+ PyTorch-1.9.0-CrayGNU-20.11.eb                         --set-default-module
  HPX-1.5.0-CrayGNU-20.11-cuda.eb                        --set-default-module
  HPX-1.5.0-CrayGNU-20.11-APEX-cuda.eb
  HPX-1.5.0-CrayGNU-20.11-nonetworking-cuda.eb
@@ -47,7 +47,7 @@
  netcdf-python-1.5.4-CrayGNU-20.11-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.11.eb                          --set-default-module
  OOOPS-1.0.eb
- ovito-3.2.0-CrayGNU-20.11.eb                           --set-default-module
+ ovito-3.5.2-CrayGNU-20.11.eb                           --set-default-module
  ParaView-5.9.1-CrayGNU-20.11-EGL-python3.eb            --set-default-module
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
  pycuda-2018.1.1-CrayGNU-20.11-python3-cuda.eb          --set-default-module
