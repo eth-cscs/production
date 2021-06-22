@@ -24,7 +24,6 @@
  NAMD-2.14-cpeGNU-21.05.eb
  NCO-4.9.8-cpeGNU-21.05.eb
  Scalasca-2.6-cpeGNU-21.05.eb       --set-default-module
- Vc-1.4.1-cpeGNU-21.05.eb
  GSL-2.6-cpeIntel-21.05.eb
  QuantumESPRESSO-6.7.0-cpeIntel-21.05.eb
  VASP-6.2.0-cpeIntel-21.05.eb
