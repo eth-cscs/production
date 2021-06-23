@@ -57,7 +57,7 @@ if not os.getenv("EASYBUILD_SOURCEPATH") then
 	if subprocess("test -w " .. eb_source_dir .. " ; echo $?") < "1" then
 		setenv("EASYBUILD_SOURCEPATH", eb_source_dir)
 	else
-		setenv("EASYBUILD_SOURCEPATH", pathJoin(os.getenv("HOME"),"sources"))
+		setenv("EASYBUILD_SOURCEPATH", pathJoin(os.getenv("HOME"), "sources"))
 	end
 end
 
@@ -78,11 +78,11 @@ setenv("EASYBUILD_RECURSIVE_MODULE_UNLOAD", "0")
 
 -- EASYBUILD_PREFIX
 if not os.getenv("EASYBUILD_PREFIX") then
-	setenv("EASYBUILD_PREFIX", pathJoin(os.getenv("HOME"),"easybuild", system))
+	setenv("EASYBUILD_PREFIX", pathJoin(os.getenv("HOME"), "easybuild", system))
 end
 -- EASYBUILD_INSTALLPATH
 if not os.getenv("EASYBUILD_INSTALLPATH") then
-        local eb_installpath=os.getenv("EASYBUILD_PREFIX") or pathJoin(os.getenv("HOME"),"easybuild", system)
+        local eb_installpath=os.getenv("EASYBUILD_PREFIX") or pathJoin(os.getenv("HOME"), "easybuild", system)
         setenv("EASYBUILD_INSTALLPATH", eb_installpath)
 end
 
