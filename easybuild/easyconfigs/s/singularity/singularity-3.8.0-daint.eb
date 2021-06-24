@@ -15,6 +15,7 @@ modtclfooter = """
 module unload PrgEnv-cray
 module unload PrgEnv-intel
 module unload PrgEnv-pgi
+module unload PrgEnv-nvidia
 
 if { ![ is-loaded PrgEnv-gnu ] } {
     module load PrgEnv-gnu
