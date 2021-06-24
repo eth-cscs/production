@@ -49,7 +49,7 @@
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
  PyExtensions-python3-CrayGNU-20.11.eb
  QuantumESPRESSO-6.7.0-CrayIntel-20.11.eb               --set-default-module
- singularity-3.7.3-daint.eb
+ singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-20.11-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-20.11.eb                          --set-default-module
  Vc-1.4.1-CrayGNU-20.11.eb                              --set-default-module
