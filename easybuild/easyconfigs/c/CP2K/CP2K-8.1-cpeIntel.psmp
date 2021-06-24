@@ -1,0 +1,26 @@
+# contributed by Luca Marsella (CSCS)
+# modules: cpeIntel ELPA flex Libint libxc
+CC        = cc
+FC        = ftn
+LD        = ftn
+AR        = ar -r
+DFLAGS    = -D__MKL -D__FFTW3 -D__ELPA=202011 -D__LIBINT -D__LIBXC -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
+# The compiler flag "-fp-model precise" slows down execution by ~25% 
+CFLAGS    = -g -O3 -fopenmp -fp-model precise -funroll-loops -qopenmp-simd -traceback
+CXXFLAGS  = $(CFLAGS)
+FCFLAGS   = $(CFLAGS) $(DFLAGS) -diag-disable=8291 -diag-disable=8293 -fpp -free
+# MKL FFT is faster than FFTW3
+FCFLAGS   += -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+FCFLAGS   += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
+FCFLAGS   += -I$(EBROOTLIBINTMINCP2K)/include
+FCFLAGS   += -I$(EBROOTLIBXC)/include 
+LDFLAGS   = $(FCFLAGS)
+LDFLAGS_C = $(FCFLAGS) -nofor_main
+LIBS      = -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64 -lm -ldl
+LIBS      += -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS      += -L$(EBROOTLIBINTMINCP2K)/lib -lint2 -lstdc++
+LIBS      += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+
+# Required due to memory leak that occurs if high optimisations are used
+mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
+			 $(FC) -c $(subst O2,O0,$(FCFLAGS)) $<
