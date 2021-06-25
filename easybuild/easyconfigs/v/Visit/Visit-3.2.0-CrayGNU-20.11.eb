@@ -68,6 +68,7 @@ preconfigopts += ' --openssl --qwt --qt --silo --hdf5 --system-cmake --icet --os
 preconfigopts += ' sed -i "s/gcc TYPE/cc TYPE/g" `hostname`.cmake;  sed -i "s/g++/CC/g" `hostname`.cmake;  cp `hostname`.cmake ./src/config-site;  mkdir build; cd build; '
 
 configopts = " -DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC -DCMAKE_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo -DVISIT_ENABLE_MANUALS=FALSE -DVISIT_DATA_MANUAL_EXAMPLES:BOOL=ON  -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON  -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF "
+configopts += " -DVISIT_ENABLE_LIBSIM:BOOL=OFF "
 
 prebuildopts = " pushd ../visit3.2.0/build;  module swap gcc/9.3.0; "
 

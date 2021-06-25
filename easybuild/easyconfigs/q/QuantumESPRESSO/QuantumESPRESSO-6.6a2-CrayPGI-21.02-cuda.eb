@@ -16,7 +16,7 @@ Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
 More details on the PGI User Forum at https://www.pgroup.com/userforum
 """
 
-toolchain = {'name': 'CrayPGI', 'version': '20.11'}
+toolchain = {'name': 'CrayPGI', 'version': '21.02'}
 toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
 
 source_urls = ['https://gitlab.com/QEF/q-e-gpu/-/archive/qe-gpu-%(version)s/']

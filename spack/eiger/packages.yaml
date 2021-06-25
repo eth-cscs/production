@@ -5,7 +5,7 @@ packages:
     compiler: [gcc@10.2.0]
     providers:
       fftw-api@3: [cray-fftw]
-      mpi: [mpich]
+      mpi: [cray-mpich]
       blas: [cray-libsci]
       lapack: [cray-libsci]
       scalapack: [cray-libsci]
@@ -15,12 +15,10 @@ packages:
       write: group
       group: csstaff
   autoconf:
-    buildable: false
     externals:
     - spec: autoconf@2.69
       prefix: /usr
   automake:
-    buildable: false
     externals:
     - spec: automake@1.15.1
       prefix: /usr
@@ -30,7 +28,6 @@ packages:
     - spec: binutils@2.31
       prefix: /usr
   bzip2:
-    buildable: false
     externals:
     - spec: bzip2@1.0.6
       prefix: /usr
@@ -38,26 +35,12 @@ packages:
     externals:
     - spec: curl@7.60.0
       prefix: /usr
-#  go:
-#    buildable: false
-#    externals:
-#    - spec: go@1.11.5
-#      modules:
-#      - go/1.11.5
-#    - spec: go@1.12.9
-#      modules:
-#      - go/1.12.9
-#    - spec: go@1.13.5
-#      modules:
-#      - go/1.13.5
   python:
-    buildable: false
     externals:
     - spec: python@3.8.5
       modules:
       - cray-python/3.8.5.0
   git:
-    buildable: false
     externals:
     - spec: git@2.26.2
       prefix: /usr
@@ -73,15 +56,7 @@ packages:
     externals:
     - spec: m4@1.4.18
       prefix: /usr
-  mpich:
-    buildable: false
-    externals:
-    - spec: mpich@3.2
-      modules:
-      - cray-mpich/8.0.16
-      - libfabric/1.11.0.0.233
   perl:
-    buildable: false
     externals:
     - spec: perl@5.26.1
       prefix: /usr
@@ -89,12 +64,7 @@ packages:
     externals:
     - spec: pkg-config@0.29.2
       prefix: /usr
-#  readline:
-#    externals:
-#    - spec: readline@7.0
-#      prefix: /usr
   tar:
-    buildable: false
     externals:
     - spec: tar@1.30.0
       prefix: /bin
@@ -119,98 +89,22 @@ packages:
     variants: ~elpa +mpi +openmp
   elpa:
     variants: +openmp +optflags
-#  cray-libsci:
-#    buildable: false
-#    externals:
-#    - spec: cray-libsci@20.06.1
-#      modules:
-#      - cray-libsci/20.06.1
   cray-fftw:
     buildable: false
     externals:
-    - spec: cray-fftw@3.3.8
+    - spec: cray-fftw@3.3.8.9
       modules:
-      - cray-fftw/3.3.8.8
-#  hdf5:
-#    buildable: false
-#    version: [1.10.5.1, 1.1.0.5.0, 1.10.2.0]
-#    externals:
-#    - spec: hdf5@1.10.5.1%intel~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.1
-#    - spec: hdf5@1.10.5.1%gcc~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.1
-#    - spec: hdf5@1.10.5.1%cce~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.1
-#    - spec: hdf5@1.10.5.1%pgi~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.1
-#    - spec: hdf5@1.10.5.1%intel+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.1
-#    - spec: hdf5@1.10.5.1%gcc+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.1
-#    - spec: hdf5@1.10.5.1%cce+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.1
-#    - spec: hdf5@1.10.5.1%pgi+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.1
-#    - spec: hdf5@1.10.5.0%intel~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.0
-#    - spec: hdf5@1.10.5.0%gcc~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.0
-#    - spec: hdf5@1.10.5.0%cce~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.0
-#    - spec: hdf5@1.10.5.0%pgi~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.5.0
-#    - spec: hdf5@1.10.5.0%intel+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.0
-#    - spec: hdf5@1.10.5.0%gcc+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.0
-#    - spec: hdf5@1.10.5.0%cce+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.0
-#    - spec: hdf5@1.10.5.0%pgi+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.5.0
-#    - spec: hdf5@1.10.2.0%intel~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.2.0
-#    - spec: hdf5@1.10.2.0%gcc~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.2.0
-#    - spec: hdf5@1.10.2.0%cce~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.2.0
-#    - spec: hdf5@1.10.2.0%pgi~mpi+hl+fortran
-#      modules:
-#      - cray-hdf5/1.10.2.0
-#    - spec: hdf5@1.10.2.0%intel+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.2.0
-#    - spec: hdf5@1.10.2.0%gcc+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.2.0
-#    - spec: hdf5@1.10.2.0%cce+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.2.0
-#    - spec: hdf5@1.10.2.0%pgi+mpi+hl+fortran
-#      modules:
-#      - cray-hdf5-parallel/1.10.2.0
-  jemalloc:
+      - cray-fftw/3.3.8.9
+  cray-mpich:
     buildable: false
     externals:
-    - spec: jemalloc@5.1.0.1
+    - spec: cray-mpich@8.1.4
+      modules:
+      - cray-mpich/8.1.4
+      - libfabric/1.11.0.4.67
+  jemalloc:
+    externals:
+    - spec: jemalloc@5.1.0.4
       modules:
       - cray-jemalloc/5.1.0.4
   hpx:
