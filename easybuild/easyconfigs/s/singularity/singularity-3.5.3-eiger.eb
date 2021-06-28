@@ -1,0 +1,32 @@
+# @author: teojgo gppezzi
+easyblock = 'Bundle'
+
+name = 'singularity'
+version = '3.5.3'
+versionsuffix = '-eiger'
+
+homepage = 'https://www.sylabs.io/'
+description = """Singularity is a portable application stack packaging and runtime utility."""
+
+toolchain = SYSTEM
+
+modluafooter = """
+unload("cpeCray")
+unload("cpeIntel")
+unload("cpeAMD")
+
+if not ( isloaded("cpeGNU") ) then
+    load("cpeGNU")
+end
+
+if isloaded("cray-mpich") then
+    unload("cray-mpich")
+    load("cray-mpich-abi")
+else
+    load("cray-mpich-abi")
+end
+
+setenv("SINGULARITY_BIND", "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/10.2.0,/var/lib/hugetlbfs")
+setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/opt/cray/libfabric/1.11.0.4.71/lib64:/opt/cray/pe/lib64:/opt/gcc/10.2.0/snos/lib64:/lib64")
+prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+"""
