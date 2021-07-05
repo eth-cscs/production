@@ -11,11 +11,11 @@ toolchainopts = {'usempi': True, 'pic': True, 'verbose': True}
 source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
 sources = ['%(namelower)s-%(version)s-linux-%(arch)s.tar.gz']
 
-exts_defaultclass = 'JuliaPackage'
 arch_name = 'mc'
+exts_defaultclass = 'JuliaPackage'
 
 exts_list = [
-    ('MPI.jl', '0.17.2', {'mpiexec': 'srun', 'source_tmpl': 'v0.17.2.tar.gz', 'source_urls': ['https://github.com/JuliaParallel/MPI.jl/archive/']}),
+    ('MPI.jl', '0.18.1', {'mpiexec': 'srun', 'source_tmpl': 'v0.18.1.tar.gz', 'source_urls': ['https://github.com/JuliaParallel/MPI.jl/archive/']}),
 ]
 
 modextravars = {
