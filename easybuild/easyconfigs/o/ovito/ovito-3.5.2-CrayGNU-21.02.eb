@@ -1,3 +1,4 @@
+# contributed by Jean Favre (CSCS)
 easyblock = 'Tarball'
 
 name = 'ovito'
