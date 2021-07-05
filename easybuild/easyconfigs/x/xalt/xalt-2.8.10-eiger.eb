@@ -28,7 +28,7 @@ configopts += "--with-MySQL=no "
 configopts += "--with-tmpdir=${HOME}/.xalt.d/tmpdir "
 # system specific configurations
 configopts += "--with-trackGPU=no "
-configopts += "--with-systemPath=/apps/daint/system/bin:/apps/dom/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 "
+configopts += "--with-systemPath=/apps/eiger/system/bin:/apps/pilatus/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 "
 configopts += "--with-config=Config/Daint_config.py "
 configopts += "--with-syshostConfig=read_file:/etc/xthostname "
 configopts += "--with-transmission=%s " % local_transmission
