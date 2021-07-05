@@ -6,6 +6,7 @@
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
  reframe-3.6.3.eb                     --set-default-module
+ singularity-3.5.3-eiger.eb
  GSL-2.6-cpeAMD-21.05.eb
  GSL-2.6-cpeCray-21.05.eb
  ParaView-5.9.0-cpeCray-21.05-OSMesa-python3.eb
@@ -24,7 +25,7 @@
  NAMD-2.14-cpeGNU-21.05.eb
  NCO-4.9.8-cpeGNU-21.05.eb
  Scalasca-2.6-cpeGNU-21.05.eb       --set-default-module
+ Amber-20-15-9-cpeIntel-21.05.eb
  GSL-2.6-cpeIntel-21.05.eb
  QuantumESPRESSO-6.7.0-cpeIntel-21.05.eb
  VASP-6.2.0-cpeIntel-21.05.eb
- Amber-20-15-9-cpeIntel-21.05.eb
