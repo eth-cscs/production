@@ -105,23 +105,21 @@ stage('Update Stage') {
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        load_pe = "module load cpe/${pe_target} && module load cpe/${pe_target} && module list"
+                        load_pe = "module load cpe/${pe_target} && module list"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
                     /* define command to load EasyBuild */
                     def load_easybuild = params.eb_version == "" ?
-                        "\$LMOD_CMD bash load EasyBuild-custom/cscs" :
-                        "\$LMOD_CMD bash load EasyBuild-custom/cscs && ml EasyBuild/${params.eb_version}"
-                        //"module load EasyBuild-custom/cscs" :
-                        //"module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
+                        "module load EasyBuild-custom/cscs" :
+                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
                     /* define build command and PE target flags (pe_flags) */
                     def build_command = "eb $eb_flags"
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         # EasyBuild paths
                         export EASYBUILD_INSTALLPATH="${eb_installpath}"
@@ -142,10 +140,8 @@ stage('Update Stage') {
                         fi
 
                         # load Cray PE module and EasyBuild
-                        export LMOD_TRACING=yes
                         $load_pe
                         ml use \$PWD/easybuild/module
-                        echo -e "\nLoading local module in \$PWD/easybuild/module: \n\$(\$LMOD_CMD bash avail EasyBuild-custom)\n"
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules

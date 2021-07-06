@@ -80,9 +80,9 @@ setenv("EASYBUILD_RECURSIVE_MODULE_UNLOAD", "0")
 if not os.getenv("EASYBUILD_PREFIX") then
 	setenv("EASYBUILD_PREFIX", pathJoin(os.getenv("HOME"), "easybuild", system))
 end
+setenv("EASYBUILD_INSTALLPATH", os.getenv("EASYBUILD_PREFIX"))
 -- EASYBUILD_INSTALLPATH
 --[[
-setenv("EASYBUILD_INSTALLPATH", os.getenv("EASYBUILD_PREFIX"))
 if not os.getenv("EASYBUILD_INSTALLPATH") then
         local eb_installpath=os.getenv("EASYBUILD_PREFIX") or pathJoin(os.getenv("HOME"), "easybuild", system)
         setenv("EASYBUILD_INSTALLPATH", eb_installpath)
