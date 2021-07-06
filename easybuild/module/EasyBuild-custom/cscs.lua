@@ -83,11 +83,11 @@ end
 -- EASYBUILD_INSTALLPATH
 --[[
 setenv("EASYBUILD_INSTALLPATH", os.getenv("EASYBUILD_PREFIX"))
+]]--
 if not os.getenv("EASYBUILD_INSTALLPATH") then
         local eb_installpath=os.getenv("EASYBUILD_PREFIX") or pathJoin(os.getenv("HOME"), "easybuild", system)
         setenv("EASYBUILD_INSTALLPATH", eb_installpath)
 end
-]]--
 
 -- add folder with already installed modules to the MODULEPATH
 prepend_path("MODULEPATH", pathJoin(os.getenv("EASYBUILD_INSTALLPATH"), "modules/all"))

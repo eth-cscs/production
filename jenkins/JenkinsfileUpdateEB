@@ -121,10 +121,10 @@ stage('Update Stage') {
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    sh("""#!/bin/bash -lx
+                    sh("""#!/bin/bash -l
 
                         # EasyBuild paths
-                        export EASYBUILD_INSTALLPATH="${eb_installpath}"
+                        #export EASYBUILD_INSTALLPATH="${eb_installpath}"
                         export EASYBUILD_PREFIX="${eb_installpath}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
