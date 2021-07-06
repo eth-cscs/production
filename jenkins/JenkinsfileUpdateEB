@@ -95,8 +95,8 @@ stage('Update Stage') {
                         eb_modulespath = "${eb_installpath}/modules/all"
                         eb_toolspath = "${eb_installpath}/tools/modules/all"
                         load_pe = architecture == "" ?
-                            "module load cdt-cuda/${pe_target}" :
-                            "module load cdt-cuda/${pe_target} daint-$architecture"
+                            "module load cdt-cuda/${pe_target} && module list" :
+                            "module load cdt-cuda/${pe_target} daint-$architecture && module list"
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
@@ -105,8 +105,7 @@ stage('Update Stage') {
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        //load_pe = "module load cpe/${pe_target}"
-                        load_pe = "module list"
+                        load_pe = "module load cpe/${pe_target} && module list"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
