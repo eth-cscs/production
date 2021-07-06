@@ -111,7 +111,8 @@ stage('Update Stage') {
 
                     /* define command to load EasyBuild */
                     def load_easybuild = params.eb_version == "" ?
-                        "$LMOD_CMD bash load EasyBuild-custom/cscs 
+                        "\$LMOD_CMD bash load EasyBuild-custom/cscs" :
+                        "\$LMOD_CMD bash load EasyBuild-custom/cscs && ml EasyBuild/${params.eb_version}"
                         //"module load EasyBuild-custom/cscs" :
                         //"module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
@@ -141,6 +142,7 @@ stage('Update Stage') {
                         fi
 
                         # load Cray PE module and EasyBuild
+                        export LMOD_TRACING=yes
                         $load_pe
                         $load_easybuild
 
