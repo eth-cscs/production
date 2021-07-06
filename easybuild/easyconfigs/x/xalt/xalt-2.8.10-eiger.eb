@@ -1,0 +1,60 @@
+# contributed by Victor Holanda (CSCS)
+
+name = 'xalt'
+version = "2.8.10"
+
+homepage = 'https://xalt.readthedocs.io/'
+description = """XALT is a lightweight software tool for any Linux cluster,
+workstation, or high-end supercomputer to track executable information and
+linkage of static shared and dynamically linked libraries. When the code is
+executed, wrappers intercept both GNU linker (ld) to capture linkage
+information and environmental variables."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/xalt/xalt/archive/']
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = [
+    ('Daint_config.py', 'Config/'),
+    'xalt-2.8.10.bindata.patch'
+]
+
+local_transmission = "curl"
+
+configopts  = "--with-trackScalarPrgms=yes "
+configopts += "--with-computeSHA1=no "
+configopts += "--with-MySQL=no "
+configopts += "--with-tmpdir=${HOME}/.xalt.d/tmpdir "
+# system specific configurations
+configopts += "--with-trackGPU=no "
+configopts += "--with-systemPath=/apps/eiger/system/bin:/apps/pilatus/system/bin:/apps/common/system/bin::/usr/local/bin:/usr/bin:/bin:/usr/bin/X11 "
+configopts += "--with-config=Config/Daint_config.py "
+configopts += "--with-syshostConfig=read_file:/etc/xthostname "
+configopts += "--with-transmission=%s " % local_transmission
+# this is workaround to do not make public the logging_url data
+configopts += "--with-xaltLoggingUrl=`cat /apps/common/easybuild/sources/x/xalt/logging_url.txt` "
+
+modextravars = {
+    'XALT_EXECUTABLE_TRACKING': 'yes',
+    'XALT_SCALAR_SAMPLING': 'no',
+    'XALT_GPU_TRACKING': 'no',
+    'XALT_DIR': '%(installdir)s',
+    'XALT_ETC_DIR': '%(installdir)s/etc',
+    'XALT_TRANSMISSION_STYLE': '%s' % local_transmission,
+    'XALT_BINARYDATA_SIZE': '5000',
+    #'XALT_LOGGING_URL': 'url to fulfill',
+    'SLURM_CSCS': 'yes',
+    # commented out because Cray environment is currently broken
+    'ALT_LINKER': '%(installdir)s/bin/ld'
+    # Need to test singularity support
+    #'SINGULARITYENV_LD_PRELOAD': '%(installdir)s/lib64/libxalt_init.so',
+    #'SINGULARITY_BINDPATH': '%(installdir)s'
+}
+
+modextrapaths = {
+    'LD_PRELOAD': 'lib64/libxalt_init.so',
+    'COMPILER_PATH': 'bin'
+}
+
+moduleclass = 'tools'
