@@ -144,7 +144,8 @@ stage('Update Stage') {
                         # load Cray PE module and EasyBuild
                         export LMOD_TRACING=yes
                         $load_pe
-                        ml use /users/lucamar/GitHub/lucamar/production/easybuild/module
+                        ml use \$PWD/easybuild/module
+                        echo -e "\nLoading local module in \$PWD/easybuild/module: \n\$(\$LMOD_CMD bash avail EasyBuild-custom)\n"
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules
