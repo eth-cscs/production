@@ -61,7 +61,7 @@
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VMD-1.9.4.eb                                           --set-default-module
- VTK-9.0.0-CrayGNU-21.02-EGL-python3.eb                 --set-default-module
+ VTK-9.0.3-CrayGNU-21.02-EGL-python3.eb                 --set-default-module
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP02/21.02/dom-gpu/tools
