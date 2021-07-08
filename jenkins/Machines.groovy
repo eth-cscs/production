@@ -30,12 +30,12 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/generic/easybuild']
 
-def mch_upgrade_rh79 = [name: 'mch_upgrade_rh79',
+def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
-           unusePath: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild/modules/all',
+           unusePath: '',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01-lc_old/generic/easybuild']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild/modules/all']
 
-return [daint, dom, kesch, tsa, mch_upgrade_rh79]
+return [daint, dom, kesch, tsa]
