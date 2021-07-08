@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'NCCL'
+version = '2.8.4'
+local_revision = '-1'
+versionsuffix = '-cuda'
+
+homepage = 'https://developer.nvidia.com/cudnn'
+description = """The NVIDIA Collective Communications Library (NCCL) implements multi-GPU and multi-node
+collective communication primitives that are performance optimized for NVIDIA GPUs."""
+
+toolchain = {'name': 'CrayPGI', 'version': '20.11'}
+
+source_urls = ['https://github.com/NVIDIA/%(namelower)s/archive/refs/tags']
+sources = ['v%(version)s{0}.tar.gz'.format(local_revision)]
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE)
+]
+
+prebuildopts = ' sed -i -e "s/-Wno-unused-function -Wno-sign-compare//" -e "s/-Wvla//" makefiles/common.mk && ' 
+buildopts = ' src.build CUDA_HOME=$CUDA_HOME NVCC_GENCODE="-gencode=arch=compute_60,code=sm_60" ' 
+
+files_to_copy = [
+    (['./build/include'], '.'),
+    (['./build/lib'], '.'),
+]   
+
+sanity_check_paths = {
+    'files': ['include/nccl.h', 'lib/libnccl.so.%(version)s', 'lib/libnccl_static.a'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'numlib'

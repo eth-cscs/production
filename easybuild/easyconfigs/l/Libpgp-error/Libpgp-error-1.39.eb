@@ -1,0 +1,12 @@
+easyblock = 'ConfigureMake'
+
+name = 'Libpgp-error'
+version = '1.39'
+
+homepage = 'https://gnupg.org/software/libgpg-error/index.html'
+description = 'Libgpg-error is a small library that originally defined common error values for all GnuPG components'
+
+toolchain = SYSTEM
+source_urls = ['https://gnupg.org/ftp/gcrypt/libgpg-error/']
+sources = ['libgpg-error-%(version)s.tar.bz2']
+checksums = ['4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f']

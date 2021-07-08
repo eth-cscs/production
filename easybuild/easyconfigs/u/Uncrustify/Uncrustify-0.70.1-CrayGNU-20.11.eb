@@ -1,0 +1,23 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'Uncrustify'
+version = '0.70.1'
+
+homepage = 'http://uncrustify.sourceforge.net'
+description = """Banish crusty code with the Uncrustify C/C++/C#/D/Java/Pawn
+source code beautifier. It indents, adds newlines, aligns, etc, and is highly
+configurable."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
+sources = [SOURCELOWER_TAR_GZ]
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'lang'

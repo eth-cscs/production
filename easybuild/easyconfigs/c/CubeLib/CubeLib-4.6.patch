@@ -1,0 +1,12 @@
+diff -Naur cubelib-4.6.ori/configure cubelib-4.6/configure
+--- cubelib-4.6.ori/configure	2021-04-30 14:08:43.175990503 +0200
++++ cubelib-4.6/configure	2021-04-30 14:08:47.900766000 +0200
+@@ -3490,6 +3490,8 @@
+ elif test -L /opt/cray/pe/pmi/default; then :
+   if test -d /opt/cray/ari/modulefiles; then :
+   ac_scorep_platform="crayxc"
++elif test -d /opt/cray/pe/lmod/modulefiles/net/ofi; then :
++  ac_scorep_platform="crayxc"
+ fi
+ fi
+                          if test "x${ac_scorep_platform}" = "xcrayunknown"; then :

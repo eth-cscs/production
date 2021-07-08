@@ -1,0 +1,111 @@
+packages:
+  all:
+    # default compilers defined by the system
+    # these reflect the current installed PE
+    compiler: [gcc@10.2.0]
+    providers:
+      fftw-api@3: [cray-fftw]
+      mpi: [cray-mpich]
+      blas: [cray-libsci]
+      lapack: [cray-libsci]
+      scalapack: [cray-libsci]
+      pkgconfig: [pkg-config]
+    # Permissions for shared instance
+    permissions:
+      write: group
+      group: csstaff
+  autoconf:
+    externals:
+    - spec: autoconf@2.69
+      prefix: /usr
+  automake:
+    externals:
+    - spec: automake@1.15.1
+      prefix: /usr
+  binutils:
+    variants: +gold~headers+libiberty+nls~plugin
+    externals:
+    - spec: binutils@2.31
+      prefix: /usr
+  bzip2:
+    externals:
+    - spec: bzip2@1.0.6
+      prefix: /usr
+  curl:
+    externals:
+    - spec: curl@7.60.0
+      prefix: /usr
+  python:
+    externals:
+    - spec: python@3.8.5
+      modules:
+      - cray-python/3.8.5.0
+  git:
+    externals:
+    - spec: git@2.26.2
+      prefix: /usr
+  libtool:
+    externals:
+    - spec: libtool@2.4.6
+      prefix: /usr
+  lz4:
+    externals:
+    - spec: lz4@1.8.0
+      prefix: /usr
+  m4:
+    externals:
+    - spec: m4@1.4.18
+      prefix: /usr
+  perl:
+    externals:
+    - spec: perl@5.26.1
+      prefix: /usr
+  pkg-config:
+    externals:
+    - spec: pkg-config@0.29.2
+      prefix: /usr
+  tar:
+    externals:
+    - spec: tar@1.30.0
+      prefix: /bin
+  xz:
+    externals:
+    - spec: xz@5.2.3
+      prefix: /usr
+  zlib:
+    externals:
+    - spec: zlib@1.2.11
+      prefix: /usr
+
+  # other libraries
+
+  netlib-scalapack:
+    variants: build_type=Release
+  netlib-lapack:
+    variants: build_type=Release +external-blas+lapacke
+  openblas:
+    variants: +pic +shared threads=openmp ~virtual_machine
+  quantum-espresso:
+    variants: ~elpa +mpi +openmp
+  elpa:
+    variants: +openmp +optflags
+  cray-fftw:
+    buildable: false
+    externals:
+    - spec: cray-fftw@3.3.8.9
+      modules:
+      - cray-fftw/3.3.8.9
+  cray-mpich:
+    buildable: false
+    externals:
+    - spec: cray-mpich@8.1.4
+      modules:
+      - cray-mpich/8.1.4
+      - libfabric/1.11.0.4.67
+  jemalloc:
+    externals:
+    - spec: jemalloc@5.1.0.4
+      modules:
+      - cray-jemalloc/5.1.0.4
+  hpx:
+    variants: max_cpu_count=256

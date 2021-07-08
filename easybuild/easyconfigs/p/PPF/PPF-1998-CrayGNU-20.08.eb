@@ -1,0 +1,26 @@
+# jgp@cscs
+easyblock = 'MakeCp'
+
+name = 'PPF'
+version = '1998'
+homepage = 'https://computing.llnl.gov/casc/ppf/ppf.html'
+description = """The Parallel Print Function (PPF_Print) merges and identifies
+the output from multiple nodes in a parallel program. It has both a C interface
+and a Fortran interface, and it uses MPI."""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+sources = ['/apps/common/UES/easybuild/sources/p/%(name)s/%(name)s-%(version)s.tar.Z']
+with_configure = 'True'
+configopts = ["--with-cc=cc --with-f77=ftn"]
+files_to_copy = [
+    (['ADOPTERS_GUIDE', 'COPYRIGHT-LLNL', 'COPYRIGHT-MPICH', 'README'], 'doc'),
+    (['ClosedSet.h', 'ptools_ppf.h'], 'include'),
+    (['testfortran.f', 'testprint.c'], 'examples'),
+    (['testfortran', 'testprint'], 'bin'),
+    (['libptools_ppf.a'], 'lib'),
+]
+sanity_check_paths = {
+    'files': ['lib/libptools_ppf.a'],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'

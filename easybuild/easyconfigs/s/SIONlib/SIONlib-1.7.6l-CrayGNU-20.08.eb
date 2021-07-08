@@ -1,0 +1,34 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'SIONlib'
+version = '1.7.6l'
+
+homepage = 'http://www.fz-juelich.de/ias/jsc/EN/Expertise/Support/Software/SIONlib/_node.html'
+description = """SIONlib is a scalable I/O library for parallel access to
+task-local files. The library not only supports writing and reading binary
+data to or from several thousands of processors into a single or a small number
+of physical files, but also provides global open and close functions to access
+SIONlib files in parallel. This package provides a stripped-down installation
+of SIONlib for use with performance tools (e.g., Score-P), with renamed symbols
+to avoid conflicts when an application using SIONlib itself is linked against a
+tool requiring a different SIONlib version."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'pic': True}
+
+sources = ['/apps/common/UES/easybuild/sources/s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
+checksums = ['1e0a81b56474f1ac3b78de42fa0caaf2']
+
+configopts = "--disable-cxx --disable-fortran --disable-ompi --disable-mic"
+
+buildopts = ' SION_PLATFORM=" -D_SION_XT -fPIC"'
+
+
+sanity_check_paths = {
+    'files': ['bin/sionconfig', 'lib/liblsionser_64.a', 'lib/liblsiongen_64.a', 'lib/liblsioncom_64.a'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

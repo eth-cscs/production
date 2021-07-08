@@ -1,0 +1,26 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'intel-xed'
+version = '12.0.1'
+homepage = 'https://github.com/intelxed/xed.git'
+description = """The Intel X86 Encoder Decoder library for encoding and
+decoding x86 machine instructions (64- and 32-bit). Also includes libxed-ild,
+a lightweight library for decoding the length of an instruction. -- dep for
+hpctoolkit"""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+source_urls = ['https://github.com/intelxed/xed/archive']
+sources = ['%(version)s.tar.gz']
+postinstallcmds = [
+    'git clone https://github.com/intelxed/mbuild.git mbuild ;'
+    'cd xed-12.0.1/ ;./mfile.py --shared install ;'
+    'rm -fr %(installdir)s/* ;cp -a kits/*/* %(installdir)s/ ;'
+    'mv %(installdir)s/include/xed/* %(installdir)s/include/ ;'
+    # 'cp -a kits/*/*/lib/*.a %(installdir)s/lib/ ;'
+]
+sanity_check_paths = {
+    'files': ['lib/libxed.so'],
+    'dirs': ['include']
+}
+
+moduleclass = 'lib'

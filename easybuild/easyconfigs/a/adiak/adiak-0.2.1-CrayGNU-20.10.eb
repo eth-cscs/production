@@ -1,0 +1,28 @@
+# jg (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'adiak'
+version = '0.2.1'
+
+homepage = 'https://github.com/LLNL/Adiak'
+description = "Standard interface for collecting HPC run metadata."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/LLNL/Adiak/releases/download/v%(version)s']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Uncrustify', '0.70.1'),
+    ('cppcheck', '1.90'),
+]
+
+configopts = "-DENABLE_FIND_MPI=OFF -DENABLE_MPI=ON -DENABLE_OPENMP=ON -DENABLE_TESTS=ON -DBUILD_SHARED_LIBS=ON"
+
+
+sanity_check_paths = {
+    'files': ['include/%(name)s.hpp', 'lib/libadiak.so'],
+    'dirs': ['lib/cmake/%(name)s'],
+}
+
+moduleclass = 'tools'

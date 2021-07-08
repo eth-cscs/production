@@ -1,0 +1,41 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'VASP'
+version = '6.1.0'
+
+homepage = 'http://www.vasp.at'
+description = "The Vienna Ab initio Simulation Package (VASP) is a computer program for atomic scale materials modelling, e.g. electronic structure calculations and quantum-mechanical molecular dynamics, from first principles. "
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'usempi': True}
+
+sources = [
+    '/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.bz2',
+]
+# VASP 6.1.0 does not officially support GCC > 7 (https://vasp.at/forum/viewtopic.php?f=2&t=17831)
+patches = [
+    ('%(name)s-%(version)s-%(toolchain_name)s.patch'),
+    ('%(name)s-%(version)s-%(toolchain_name)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')
+]
+
+builddependencies = [
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('Wannier90', '3.1.0'),
+]
+
+prebuildopts = " mv %(name)s-%(version)s-%(toolchain_name)s.makefile.include makefile.include && module list && "
+# build type
+buildopts = " std gam ncl "
+
+# don't use parallel make, results in compilation failure
+parallel = 1
+
+files_to_copy = [(['./bin/vasp_*'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/vasp_gam', 'bin/vasp_ncl', 'bin/vasp_std'],
+    'dirs': [],
+}
+
+moduleclass = 'phys'

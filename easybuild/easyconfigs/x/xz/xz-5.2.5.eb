@@ -1,0 +1,23 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'xz'
+version = '5.2.5'
+homepage = 'http://tukaani.org/xz/'
+description = """LZMA Utils are legacy data compression software with high
+compression ratio. LZMA Utils are no longer developed, although critical bugs
+may be fixed as long as fixing them doesn't require huge changes to the code.
+Users of LZMA Utils should move to XZ Utils. XZ Utils support the legacy .lzma
+format used by LZMA Utils, and can also emulate the command line tools of LZMA
+Utils. This should make transition from LZMA Utils to XZ Utils relatively
+easy."""
+toolchain = SYSTEM
+toolchainopts = {'optarch': True, 'pic': True}
+source_urls = ['http://tukaani.org/xz/']
+sources = [SOURCE_TAR_XZ]
+sanity_check_paths = {
+    'files': ['include/lzma.h', 'lib/liblzma.so'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

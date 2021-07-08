@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'Binary'
+
+name = 'nvidia-nsight-systems'
+version = '2020.4.1.126'
+homepage = 'https://developer.nvidia.com/nsight-systems'
+description = """NVIDIA Nsight Systems is a system-wide performance analysis
+tool"""
+toolchain = SYSTEM
+local_srcpath = '/apps/common/UES/easybuild/sources'
+local_source = '%s/n/%s/NVIDIA_Nsight_Systems_Linux_%s.run' % \
+               (local_srcpath, name, version)
+checksums = ['9580ad08fc42cad68ed3c0ba4aff8019']
+install_cmd = local_source + \
+              " --accept --nox11 --nochown --target %(installdir)s" + \
+              " -- -targetpath=%(installdir)s -noprompt"
+skipsteps = ['source']
+sanity_check_paths = {
+    'files': ['bin/nsys'],
+    'dirs': ['target-linux-x64', 'host-linux-x64']
+}
+docpaths = {'NSIGHT_DOC': '%(installdir)s/documentation/nsys-exporter'}
+
+moduleclass = 'tools'

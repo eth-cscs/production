@@ -1,0 +1,77 @@
+ Amber-20-11-7-CrayIntel-20.10.eb                       --set-default-module
+ Boost-1.70.0-CrayGNU-20.10-python3.eb                  --set-default-module
+ Boost-1.70.0-CrayGNU-20.10.eb
+ Buildah-1.14.9.eb                                      --set-default-module
+ CDO-1.9.5-CrayGNU-20.10.eb                             --set-default-module
+ CDO-1.9.5-CrayIntel-20.10.eb
+ CMake-3.14.5.eb                                        --set-default-module
+ CP2K-7.1-CrayGNU-20.10.eb                              --set-default-module
+ CPMD-4.1-CrayIntel-20.10.eb                            --set-default-module
+ CPMD-4.3-CrayIntel-20.10.eb
+ dask-2.2.0-CrayGNU-20.10-python3.eb                    --set-default-module
+ FFmpeg-4.3.1-CrayGNU-20.10.eb                          --set-default-module
+ GREASY-19.03-cscs-CrayGNU-20.10.eb                     --set-default-module
+ GROMACS-2020.4-CrayGNU-20.10.eb                        --set-default-module
+ GSL-2.5-CrayGNU-20.10.eb                               --set-default-module
+ GSL-2.5-CrayCCE-20.10.eb
+ GSL-2.5-CrayIntel-20.10.eb
+ HDFView-2.14.eb                                        --set-default-module
+ HPX-1.5.0-CrayGNU-20.10.eb                             --set-default-module
+ HPX-1.5.0-CrayGNU-20.10-APEX.eb
+ HPX-1.5.0-CrayGNU-20.10-nonetworking.eb
+ hub-2.14.2.eb                                          --set-default-module
+ h5py-2.10.0-CrayGNU-20.10-python3-parallel.eb          --set-default-module
+ h5py-2.10.0-CrayGNU-20.10-python3-serial.eb            --set-default-module
+ IDL-8.5.1.eb                                           --set-default-module
+ IDL-8.7.2-CSCS.eb
+ ipcmagic-0.1-CrayGNU-20.10.eb                          --set-default-module
+ Julia-1.5.0-CrayGNU-20.10.eb                           --set-default-module
+ JuliaExtensions-1.5.0-CrayGNU-20.10.eb                 --set-default-module
+ jupyter-utils-0.1.eb                                   --set-default-module
+ jupyterlab-1.1.1-CrayGNU-20.10-batchspawner.eb         --set-default-module
+ jupyterlab-1.2.16-CrayGNU-20.10-batchspawner.eb
+ jupyterlab-2.0.2-CrayGNU-20.10-batchspawner.eb
+ LAMMPS-29Oct20-CrayGNU-20.10.eb                        --set-default-module
+ Lmod-7.8.2.eb                                          --set-default-module --hidden
+ MATLAB-R2019a.eb                                       --set-default-module
+ NAMD-2.13-CrayIntel-20.10.eb                           --set-default-module
+ NAMD-2.14-CrayIntel-20.10.eb
+ NCL-6.4.0.eb                                           --set-default-module
+ NCO-4.8.1-CrayGNU-20.10.eb                             --set-default-module
+ ncview-2.1.7-CrayGNU-20.10.eb                          --set-default-module
+ netcdf-python-1.5.4-CrayGNU-20.10-python3.eb           --set-default-module
+ numpy-1.17.2-CrayGNU-20.10.eb                          --set-default-module
+ ParaView-5.8.1-CrayGNU-20.10-OSMesa-python3.eb         --set-default-module
+ PLUMED-2.6.1-CrayGNU-20.10.eb
+ PLUMED-2.6.1-CrayIntel-20.10.eb
+ PyExtensions-python3-CrayGNU-20.10.eb
+ Python-bare-3.7.3.eb                                   --hidden
+ QuantumESPRESSO-6.7.0-CrayIntel-20.10.eb               --set-default-module
+ singularity-3.6.4-daint.eb
+ Spark-2.3.1-CrayGNU-20.10-Hadoop-2.7.eb                --set-default-module
+ VASP-6.1.0-CrayIntel-20.10.eb                          --set-default-module
+ Visit-3.1.2-CrayGNU-20.10.eb                           --set-default-module
+ advisor-2021.1.1.43.eb                                 --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ Caliper-2.4.0-CrayGNU-20.10.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ ddd-3.3.12.eb                                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ ddt-20.0-Suse-15.0.eb                                                       --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ ddt-20.2-Suse-15.0.eb                                --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ Extrae-3.8.1-CrayGNU-20.10.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ inspector-2021.1.1.42.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ IPM-2.0.6-CrayGNU-20.10.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ likwid-1d6636c.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ malt-1.2.0-CrayGNU-20.10.eb                            --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ mpiP-57fc864-CrayGNU-20.10.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ MUST-v1.6-CrayGNU-20.10.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ njmon-v64-SLES15.eb                                    --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ otf2_cli_profile-9be64de-CrayGNU-20.10.eb              --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ papi-wrap-57150c8-CrayGNU-20.10.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ pprof-1a94d86.eb                                       --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ pudb-2019.2-CrayGNU-20.10-python3.eb                   --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ Scalasca-2.5-CrayGNU-20.10.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ Score-P-6.0-CrayGNU-20.10.eb                           --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ scorep_binding_python-3.0-CrayGNU-20.10-python3.eb     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ termgraph-0.4.2-python3.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools
+ vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02/mc/easybuild/tools

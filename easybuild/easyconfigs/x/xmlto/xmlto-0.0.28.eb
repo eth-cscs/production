@@ -1,0 +1,17 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'xmlto'
+version = '0.0.28'
+homepage = 'https://pagure.io/xmlto'
+description = """ xmlto is a simple shell script for converting XML files to
+various formats"""
+toolchain = SYSTEM
+source_urls = ['https://releases.pagure.org/xmlto']
+sources = [SOURCE_TAR_BZ2]
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['share/man']
+}
+
+moduleclass = 'tools'

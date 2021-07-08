@@ -1,0 +1,31 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'PAPI'
+version = '6-0-0-1'
+homepage = 'http://icl.cs.utk.edu/projects/papi/'
+description = """PAPI provides the tool designer and application engineer with
+a consistent interface and methodology for use of the performance counter
+hardware found in most major microprocessors. PAPI enables software engineers
+to see, in near real time, the relation between software performance and
+processor events.  In addition Component PAPI provides access to a collection
+of components that expose performance measurement opportunites across the
+hardware and software stack."""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+source_urls = ['https://bitbucket.org/icl/papi/get']
+sources = ['%(namelower)s-%(version)s-t.tar.bz2']
+start_dir = 'src'
+# parallel build doesn't always work
+parallel = 1
+# disabled test until next kernel upgrade
+# runtest = 'fulltest'
+sanity_check_paths = {
+    'files': ["bin/papi_%s" % x for x in [
+        "avail", "clockres", "command_line", "component_avail",
+        "cost", "decode", "error_codes", "event_chooser",
+        "mem_info", "multiplex_cost", "native_avail", "version",
+        "xml_event_info"]],
+    'dirs': [],
+}
+
+moduleclass = 'perf'

@@ -1,0 +1,17 @@
+# @author: jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'xerces-c'
+version = '3.2.3'
+homepage = 'http://xerces.apache.org/xerces-c'
+description = """Xerces-C++ is a validating XML parser written in a portable
+subset of C++ - deps of hpctoolkit"""
+toolchain = SYSTEM
+source_urls = ['https://downloads.apache.org/xerces/c/3/sources']
+sources = [SOURCE_TAR_BZ2]
+sanity_check_paths = {
+    'files': ['lib64/libxerces-c.so'],
+    'dirs': ['include', 'bin'],
+}
+
+moduleclass = 'perf'

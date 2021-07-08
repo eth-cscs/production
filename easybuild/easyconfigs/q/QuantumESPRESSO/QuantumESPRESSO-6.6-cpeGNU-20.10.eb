@@ -1,0 +1,44 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QuantumESPRESSO'
+version = '6.6'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version)s.tar.gz']
+
+dependencies = [
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+    ('cray-libsci', EXTERNAL_MODULE),
+    ('libxc', '5.0.0')
+]
+
+preconfigopts = " module list && sed -i 's#\/xc_version.h#\/include/xc_version.h#p' install/configure && "
+configopts = ' CC=gcc FC=gfortran F77=gfortran MPIF90=ftn SCALAPACK_LIBS="-L$CRAY_LIBSCI_PREFIX_DIR/lib" LAPACK_LIBS="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_gnu_82_mpi_mp.a" BLAS_LIBS="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_gnu_82_mpi_mp.a" FFT_LIBS="-L$FFTW_DIR" --with-hdf5=yes --with-hdf5-include="$CRAY_HDF5_PREFIX/include" --with-hdf5-libs="-L$CRAY_HDF5_PREFIX/lib" --with-libxc=yes --with-libxc-prefix="$EBROOTLIBXC" --with-libxc-include="$EBROOTLIBXC/include" --enable-openmp --enable-parallel --with-scalapack '
+
+# fix FLAGS, add FFTW and HDF5 include PATH, adapt to libxc version 5 Fortran interface
+prebuildopts = ' sed -i -e "s/xc_f03/xc_f90/" $(grep -lR "xc_f03") && '
+prebuildopts += """ 
+    sed -i -e 's/^DFLAGS .*/& -D__FFTW3 -D__HDF5/' -e 's#^IFLAGS.*#& -I$(FFTW_INC) -I$(CRAY_HDF5_PREFIX)/include#' -e 's/^CPPFLAGS .*/CPPFLAGS       = -P -traditional -Uvector $(DFLAGS) $(IFLAGS)/' -e 's/^F90FLAGS .*/F90FLAGS       = $(FFLAGS) -cpp -fopenmp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $(MODFLAGS)/' -e 's/^FFLAGS .*/FFLAGS         = -O3 -g -fallow-argument-mismatch -fopenmp/' -e 's/^LDFLAGS .*/LDFLAGS        = -g -pthread -fopenmp/' make.inc && 
+    cat make.inc && 
+"""
+buildopts = "all epw"
+
+# single make process: parallel builds fail for target 'epw'
+maxparallel = 1
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'

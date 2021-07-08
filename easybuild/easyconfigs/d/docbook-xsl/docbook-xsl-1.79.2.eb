@@ -1,0 +1,20 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'dockbook-xsl'
+version = '1.79.2'
+homepage = 'https://github.com/docbook/xslt10-stylesheets'
+description = "XSLT 1.0 Stylesheets for DocBook"
+toolchain = SYSTEM
+source_urls = ['https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F1.79.2']
+sources = ['docbook-xsl-%(version)s.tar.bz2']
+patches = ['docbook-xsl-%(version)s.patch']
+sanity_check_paths = {
+    'files': ['catalog.xml'],
+    'dirs': [],
+}
+modextravars = {
+    'XML_CATALOG_FILES_XSL': "%(installdir)s/catalog.xml",
+}
+
+moduleclass = 'devel'

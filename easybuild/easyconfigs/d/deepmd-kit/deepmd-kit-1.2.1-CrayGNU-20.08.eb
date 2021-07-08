@@ -1,0 +1,98 @@
+easyblock = "CmdCp"
+
+name = 'deepmd-kit'
+version = '1.2.1'
+
+homepage = 'https://github.com/deepmodeling/deepmd-kit/'
+description = """DeePMD-kit is a package written in Python/C++, designed to
+minimize the effort required to build deep learning based model of interatomic
+potential energy and force field and to perform molecular dynamics."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'dynamic': True, 'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('TensorFlow', '2.2.1', '-cc-cuda-10.1.168'),
+    ('xdrfile', '1.1.4'),
+]
+
+local_skbuild_whl = 'scikit_build-0.10.0-py2.py3-none-any.whl'
+
+sources = [
+    {
+        'filename': local_skbuild_whl,
+        'source_urls': ['https://pypi.python.org/packages/source/s/scikit_build/'],
+        'extract_cmd': "cp %s %(builddir)s",
+    },
+    {
+        'filename': SOURCE_TAR_GZ,
+        'source_urls': [PYPI_LOWER_SOURCE],
+    }
+
+]
+
+patches = ['find-tf.patch',
+           'pr276.patch'    # from https://github.com/deepmodeling/deepmd-kit/pull/276#pullrequestreview-506649942
+]
+
+with_configure = False
+
+_tf_k8_opt = '$EBROOTTENSORFLOW/k8-opt/bin/tensorflow/'
+
+_prepare_libs_dir = "mkdir -p %(installdir)s/tensorflow/include %(installdir)s/tensorflow/lib && "
+_prepare_libs_dir += "export TF_INCLUDE=%(installdir)s/tensorflow/include && "
+_prepare_libs_dir += "export TF_LIB=%(installdir)s/tensorflow/lib && "
+_prepare_libs_dir += "export LD_LIBRARY_PATH=$TF_LIB:$LD_LIBRARY_PATH && "
+_prepare_libs_dir += "export LIBRARY_PATH=$TF_LIB:$LIBRARY_PATH && "
+_prepare_libs_dir += "ln -sf  {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/nsync/public/nsync* $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/eigen_archive/Eigen $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/eigen_archive/unsupported $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/org_tensorflow/external/com_google_protobuf/src/google $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/org_tensorflow/external/com_google_absl/absl $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/org_tensorflow/tensorflow $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {tf_k8_opt}/tools/pip_package/build_pip_package.runfiles/org_tensorflow/third_party $TF_INCLUDE && "
+_prepare_libs_dir += "ln -sf  {tf_k8_opt}/libtensorflow_cc.so $TF_LIB && "
+_prepare_libs_dir += "ln -sf  {tf_k8_opt}/libtensorflow_cc.so $TF_LIB/libtensorflow_cc.so.2 && "
+_prepare_libs_dir += "ln -sf  {tf_k8_opt}/libtensorflow_framework.so $TF_LIB && "
+_prepare_libs_dir += "ln -sf  {tf_k8_opt}/libtensorflow_framework.so $TF_LIB/libtensorflow_framework.so.2"
+
+_build_str = "%s && " % _prepare_libs_dir.format(tf_k8_opt=_tf_k8_opt)
+_build_str += "export DEEPMD_INSTALLDIR=%(installdir)s && "
+_build_str += "export PYTHONPATH=%(builddir)s/install/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && "
+_build_str += "pip install --prefix=%(builddir)s/install %(builddir)s/" + "%s && " % local_skbuild_whl
+_build_str += "cd deepmd-kit-%(version)s && "
+_build_str += "pip install --prefix=%(builddir)s/install . && "
+_build_str += "mkdir source/build && "
+_build_str += "cd source/build; CC=/opt/gcc/8.3.0/bin/gcc CXX=/opt/gcc/8.3.0/bin/g++ cmake -DXDRFILE_ROOT=$EBROOTXDRFILE -DTENSORFLOW_ROOT=%(installdir)s/tensorflow -DCMAKE_INSTALL_PREFIX=%(builddir)s/install --debug-trycompile .. && "
+_build_str += "cd source/build; make install -j4 && "
+_build_str += "cd source/build; make lammps -j4"
+
+cmds_map = [
+    ('deepmd-kit-%(version)s.tar.gz', _build_str),
+    (local_skbuild_whl, 'ls'),
+]
+
+files_to_copy = [
+	(['%(builddir)s/install/bin'], '%(installdir)s'),
+	(['%(builddir)s/install/include'], '%(installdir)s'),
+	(['%(builddir)s/install/lib'], '%(installdir)s'),
+	(['%(builddir)s/deepmd-kit-%(version)s/source/build/USER-DEEPMD'], '%(installdir)s'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/dp_ipi', 'bin/dp'],
+    'dirs': ['include/deepmd'],
+}
+
+postinstallcmds = [_prepare_libs_dir.format(tf_k8_opt=_tf_k8_opt), 'rm -rf /dev/shm/$USER/bazelout/' ]
+
+modextrapaths = {
+    'PYTHONPATH' : 'lib/python%(pyshortver)s/site-packages',
+}
+
+moduleclass = 'devel'

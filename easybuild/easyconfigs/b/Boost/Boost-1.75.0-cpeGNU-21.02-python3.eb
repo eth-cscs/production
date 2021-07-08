@@ -1,0 +1,36 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.75.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.02'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_%(version_major)s_%(version_minor)s_0.tar.bz2']
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = " --with-python=$(EBROOTPYTHON)/bin/python  --with-python-version=%(pyshortver)s --with-python-root=$(EBROOTPYTHON)/lib/python%(pyshortver)s"
+
+# also build boost_mpi
+boost_mpi = True
+
+# for python3 the corresponding lib is libboost_python%(pymajver)s%(pyminver)s.so
+sanity_check_paths = {
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so', 'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
+    'dirs': ['include/%(namelower)s'],
+}
+
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
+moduleclass = 'devel'

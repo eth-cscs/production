@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'libxsmm'
+version = '1.16.1'
+
+homepage = 'https://readthedocs.org/projects/libxsmm'
+description = """
+Library targeting Intel Architecture for specialized dense and sparse matrix operations, and deep learning primitives.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.12'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/hfp/%(name)s/archive/']
+sources = ['%(version)s.tar.gz']
+
+builddependencies = [
+    ('binutils', '2.36.1'),
+]
+
+buildopts = "PREFIX=%(installdir)s CXX=g++ CC=gcc FC=gfortran AVX=2 DBG=0 JIT=1 MALLOC=0 MIC=0 OPT=3 OMP=1 PREFETCH=1 STATIC=0 install"
+
+skipsteps = [
+    'configure',
+    'install',
+]
+files_to_copy = []
+
+sanity_check_paths = {
+    'files': ['include/%(name)s.f', 'include/%(name)s.h', 'lib/%(name)s.so'],
+    'dirs': ['include', 'include/%(name)s', 'lib'],
+}
+
+moduleclass = 'chem'

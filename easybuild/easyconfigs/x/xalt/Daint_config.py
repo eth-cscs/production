@@ -13,6 +13,7 @@ hostname_patterns = [
   ['KEEP', '^nid.*'],
   ['KEEP', '^daint.*'],
   ['KEEP', '^dom.*'],
+  ['KEEP', '^uan.*'],
   ['KEEP', '.*']
   ]
 

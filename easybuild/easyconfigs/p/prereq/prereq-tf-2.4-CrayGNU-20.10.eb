@@ -1,0 +1,66 @@
+# contributed by sarafael (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'prereq'
+version = 'tf-2.4'
+
+homepage = 'https://pypi.python.org/pypi'
+description = "This module is a bundle of Python packages on Cray systems based on the module cray-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('numpy', '1.17.2'),
+    ('h5py', '2.10.0', '-python%(pymajver)s-serial'),
+    ('PyExtensions', 'python%(pymajver)s'),
+]
+
+
+exts_default_options = {
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    ('opt_einsum', '3.3.0'),
+    ('wheel', '0.33.6'),
+    ('typing_extensions', '3.7.4'),
+    ('google-pasta', '0.2.0', {'modulename': 'pasta'}),
+    ('astunparse', '1.6.3'),
+    ('protobuf', '3.14.0', {'modulename': 'google.protobuf'}),
+    ('absl-py', '0.11.0', {'modulename': 'absl'}),
+    ('termcolor', '1.1.0'),
+    ('gast', '0.3.3'),
+    ('grpcio', '1.32.0', {'modulename': 'grpc'}),
+    ('wrapt', '1.12.1'),
+    ('tensorboard_plugin_wit', '1.7.0', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl', 'unpack_sources': False}),
+    ('pyasn1', '0.4.8'),
+    ('rsa', '3.1.4'),
+    ('cachetools', '2.0.0'),
+    ('pyasn1-modules', '0.2.1'),
+    ('google-auth', '1.6.3', {'modulename': 'google.auth'}),
+    ('Werkzeug', '1.0.1'),
+    ('urllib3', '1.25.6'),
+    ('certifi', '2019.9.11'),
+    ('chardet', '3.0.4'),
+    ('idna', '2.8'),
+    ('requests', '2.22.0'),
+    ('zipp', '3.4.0'),
+    ('importlib_metadata', '3.3.0'),
+    ('Markdown', '3.3.3'),
+    ('oauthlib', '3.0.0'),
+    ('requests-oauthlib', '0.7.0'),
+    ('google-auth-oauthlib', '0.4.2', {'modulename': 'google_auth_oauthlib'}),
+    ('tensorboard', '2.4.0', {'source_tmpl': 'tensorboard-%(version)s-py3-none-any.whl', 'unpack_sources': False}),
+    ('Keras_Preprocessing', '1.1.2'),
+    ('flatbuffers', '1.12'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'

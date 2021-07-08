@@ -1,0 +1,24 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'clang+llvm'
+version = '7.1.0'
+versionsuffix = '-x86_64-linux-sles11.3'
+homepage = 'http://clang.llvm.org/'
+description = "The Clang project"
+toolchain = SYSTEM
+source_urls = ['https://github.com/llvm/llvm-project/releases/download/llvmorg-%(version)s']
+sources = ['{}-{}{}.tar.xz'.format(name, version, versionsuffix)]
+sanity_check_paths = {
+    'files': ['bin/llc', 'bin/lld', 'bin/clang', 'bin/llvm-cov',
+              'bin/llvm-config'],
+    'dirs': ['include/c++', 'lib/clang']
+}
+modextrapaths = {
+    'PATH': 'bin',
+    'PATH': 'libexec',
+    'LD_LIBRARY_PATH': 'lib',
+    'MANPATH': 'share/man/man1',
+}
+
+moduleclass = 'compiler'

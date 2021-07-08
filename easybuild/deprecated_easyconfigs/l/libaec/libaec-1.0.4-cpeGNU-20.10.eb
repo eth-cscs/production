@@ -1,0 +1,38 @@
+# Contributed by Matthias Kraushaar and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libaec'
+version = '1.0.4'
+
+homepage = 'https://gitlab.dkrz.de/k202009/libaec'
+description = """
+    libaec - Adaptive Entropy Coding library
+
+    Libaec provides fast lossless compression of 1 up to 32 bit wide
+    signed or unsigned integers (samples). The library achieves best
+    results for low entropy data as often encountered in space imaging
+    instrument data or numerical model output from weather or climate
+    simulations. While floating point representations are not directly
+    supported, they can also be efficiently coded by grouping exponents
+    and mantissa.
+
+    *****************  SZIP compatibility *********************** 
+    Libaec includes a free drop-in replacement for the SZIP library (http://www.hdfgroup.org/doc_resource/SZIP). 
+    Just replace SZIP's shared library libsz.so* with libaec.so* and libsz.so* from libaec. 
+    Code which is dynamically linked with SZIP such as HDF5 should continue to work with libaec. 
+    No re-compilation required. HDF5 files which contain SZIP encoded data can be decoded by HDF5 
+    using libaec and vice versa.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'pic': 'True'}
+
+source_urls = ['https://gitlab.dkrz.de/k202009/libaec/uploads/ea0b7d197a950b0c110da8dfdecbb71f/']
+sources = [SOURCELOWER_TAR_GZ]
+
+sanity_check_paths = {
+    'files': ['lib/libsz.a'],
+    'dirs': ['lib', 'include']
+}
+
+moduleclass = 'data'

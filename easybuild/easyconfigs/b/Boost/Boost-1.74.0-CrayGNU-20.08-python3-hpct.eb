@@ -1,0 +1,45 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'Boost'
+version = '1.74.0'
+versionsuffix = '-python%(pymajver)s-hpct'
+homepage = 'http://www.boost.org/'
+description = """Boost provides free peer-reviewed portable C++ source
+libraries."""
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(namelower)s_1_74_0.tar.gz']
+patches = ['%(name)s-%(version)s-python%(pymajver)s.patch']
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+local_bjam = ("--prefix=$PWD/obj cxxflags='-O2 -fno-math-errno -fPIC' "
+              "linkflags='-L/opt/python/default/lib -L$EBROOTZLIB/lib "
+              "-L$EBROOTBZIP2/lib -L$CRAY_LIBSCI_PREFIX_DIR/lib' "
+              '-sBZIP2_INCLUDE=$EBROOTBZIP2/include -sBZIP2_LIBPATH=$EBROOTBZIP2/lib '
+              '-sZLIB_INCLUDE=$EBROOTZLIB/include -sZLIB_LIBPATH=$EBROOTZLIB/lib -j 20 ')
+postinstallcmds = [
+    'cd boost_1_74_0 ;mkdir -p $PWD/obj ; ls -l ;pwd ;'
+    './bootstrap.sh --with-toolset=gcc --prefix=$PWD/obj '
+    '--with-python=$EBROOTPYTHON/bin/python --with-python-version=3.8 '
+    '--with-python-root=$EBROOTPYTHON/lib/python3.8 ;'
+    'ln -s b2 bjam ;',
+    'cd boost_1_74_0 ;./bjam %s visibility=global install ;' % local_bjam,
+    'cd boost_1_74_0 ;./bjam %s --user-config=user-config.jam --with-mpi visibility=global threading=multi install ;' % local_bjam,
+    'cd boost_1_74_0 ;rm -fr %(installdir)s/* ;cp -a obj/* %(installdir)s/ ;'
+]
+modextravars = {
+    'BOOST_ROOT': "%(installdir)s",
+}
+
+sanity_check_paths = {
+    'files': ['lib/libboost_system.so', 'lib/libboost_mpi.so',
+              'lib/libboost_python%(pymajver)s%(pyminver)s.so'],
+    'dirs': ['include/%(namelower)s'],
+}
+
+moduleclass = 'devel'

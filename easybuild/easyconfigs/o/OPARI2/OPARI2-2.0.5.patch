@@ -1,0 +1,12 @@
+diff -Naur opari2-2.0.5.ori/configure opari2-2.0.5/configure
+--- opari2-2.0.5.ori/configure	2019-07-26 11:16:14.489178674 +0200
++++ opari2-2.0.5/configure	2020-11-19 14:00:55.930629892 +0100
+@@ -2919,6 +2919,8 @@
+ elif test -L /opt/cray/pe/pmi/default; then :
+   if test -d /opt/cray/ari/modulefiles; then :
+   ac_scorep_platform="crayxc"
++elif test -d /opt/cray/pe/lmod/modulefiles/net/ofi; then :
++  ac_scorep_platform="crayxc"
+ fi
+ fi
+                        if test "x${ac_scorep_platform}" = "x"; then :

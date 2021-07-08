@@ -1,0 +1,30 @@
+# jg (CSCS), teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'Shapely'
+version = '1.7.1'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/Toblerity/Shapely'
+description = 'Manipulation and analysis of geometric objects in the Cartesian plane.'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['1641724c1055459a7e2b8bbe47ba25bdc89554582e62aec23cb3f3ca25f9b129']
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+    ('GEOS', '3.6.2'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-x86_64.egg']
+}
+
+moduleclass = 'math'

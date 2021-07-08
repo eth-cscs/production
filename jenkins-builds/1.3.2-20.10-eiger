@@ -1,0 +1,24 @@
+ Boost-1.74.0-cpeGNU-20.10.eb
+ Boost-1.74.0-cpeGNU-20.10-python3.eb --set-default-module
+ Buildah-1.19.0.eb                    --set-default-module
+ CDI-1.9.9-cpeGNU-20.10.eb            --set-default-module
+ CMake-3.19.1.eb                      --set-default-module
+ CP2K-7.1-cpeGNU-20.10.eb             --set-default-module
+ CP2K-8.1-cpeGNU-20.10.eb             
+ ddt-21.0-linux-x86_64.eb             --set-default-module
+ GREASY-19.03-cscs-cpeGNU-20.10.eb    --set-default-module
+ GROMACS-2020.4-cpeGNU-20.10.eb       --set-default-module
+ GSL-2.6-cpeCCE-20.10.eb              --set-default-module
+ GSL-2.6-cpeGNU-20.10.eb              --set-default-module
+ hwloc-2.4.1.eb                       --set-default-module
+ jupyterlab-2.2.8-cpeGNU-20.10.eb     --set-default-module
+ jupyter-utils-0.1.eb                 --set-default-module
+ LAMMPS-29Oct20-cpeGNU-20.10.eb       --set-default-module
+ matplotlib-3.3.3-cpeGNU-20.10.eb     --set-default-module
+ NAMD-2.14-cpeGNU-20.10.eb            --set-default-module
+ NAMD-2.14-cpeGNU-20.10-smp.eb
+ NCO-4.9.5-cpeGNU-20.10.eb            --set-default-module
+ ParaView-5.9.0-cpeCCE-20.10-OSMesa-python3.eb --set-default-module
+ QuantumESPRESSO-6.6-cpeGNU-20.10.eb  --set-default-module
+ VASP-6.1.0-cpeGNU-20.10.eb           --set-default-module
+ Vc-1.4.1-cpeGNU-20.10.eb             --set-default-module

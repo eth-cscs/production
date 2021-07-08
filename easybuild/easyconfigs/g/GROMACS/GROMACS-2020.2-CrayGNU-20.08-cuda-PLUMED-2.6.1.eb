@@ -1,0 +1,47 @@
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2013 University of Luxembourg / LCSB, Cyprus Institute / CaSToRC, Ghent University
+# Authors::   Wiktor Jurkowski <wiktor.jurkowski@uni.lu>, Fotis Georgatos <fotis.georgatos@uni.lu>, \
+#             George Tsouloupas <g.tsouloupas@cyi.ac.cy>, Kenneth Hoste
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
+#
+name = 'GROMACS'
+version = '2020.2'
+local_plumedversion = '2.6.1'
+versionsuffix = '-cuda-PLUMED-%s' % local_plumedversion
+
+homepage = 'http://www.gromacs.org'
+description = """GROMACS is a versatile package to perform molecular dynamics,
+ i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
+
+source_urls = ['http://ftp.gromacs.org/pub/gromacs']
+sources = [SOURCELOWER_TAR_GZ]
+
+# CMake and libxml2 dependencies with dummy toolchain
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('libxml2', '2.9.7'),
+]
+dependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('PLUMED', '%s' % local_plumedversion),
+]
+
+configopts = (
+    "-DGMX_CYCLE_SUBCOUNTERS=ON "
+    "-DCMAKE_BUILD_TYPE=Release "
+    "-DGMX_BUILD_OWN_FFTW=ON "
+    "-DGMX_PREFER_STATIC_LIBS=ON "
+    "-DGMX_SIMD=AVX2_256"
+)
+
+skipsteps = ['test']
+
+moduleclass = 'bio'

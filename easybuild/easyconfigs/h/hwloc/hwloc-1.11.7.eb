@@ -28,4 +28,6 @@ sources = [SOURCE_TAR_GZ]
 #configopts = "--enable-libnuma=$EBROOTNUMACTL --with-x"
 configopts = "--enable-libnuma --with-x"
 
+modextravars = {'HWLOC_ROOT': '%(installdir)s'}
+
 moduleclass = 'system'

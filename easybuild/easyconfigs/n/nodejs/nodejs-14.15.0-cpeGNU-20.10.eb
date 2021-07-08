@@ -1,0 +1,32 @@
+# contributed by Tim Robinson and Luca Marsella (CSCS) 
+easyblock = 'ConfigureMake'
+
+name = 'nodejs'
+version = '14.15.0'
+
+homepage = 'http://nodejs.org'
+description = """Node.js is a platform built on Chrome's JavaScript runtime 
+ for easily building fast, scalable network applications. Node.js uses an 
+ event-driven, non-blocking I/O model that makes it lightweight and efficient, 
+ perfect for data-intensive real-time applications that run across distributed devices."""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'lowopt': True}
+
+source_urls = ['http://%(name)s.org/dist/v%(version)s/']
+sources = ['node-v%(version)s.tar.gz']
+checksums = ['a5cf57a18833bd122eca200a7d5e22d9']
+
+# Needed for shasta DVS implementation (until libuv patch is upstreamed)
+# Patch by Mark Klein (CSCS)
+patches = ['libuv.patch']
+
+# Python is required (only) as build dependency
+allow_system_deps = [('Python', '2.7.17')]
+
+sanity_check_paths = {
+    'files': ['bin/node', 'bin/npm'],
+    'dirs': ['lib/node_modules', 'include/node'],
+}
+
+moduleclass = 'lang'

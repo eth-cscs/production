@@ -1,0 +1,21 @@
+# jg (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'hpcviewer'
+version = 'linux.gtk.x86_64'
+# hpctraceviewer-linux.gtk.x86_64.tgz
+homepage = 'http://hpctoolkit.org/download/hpcviewer/'
+description = "Binary releases of HPCToolkit GUI interfaces %(name)s."
+toolchain = SYSTEM
+source_urls = ['http://hpctoolkit.org/download/hpcviewer/latest']
+sources = ['%(name)s-%(version)s.tgz']
+osdependencies = ['java']
+postinstallcmds = [
+    'cd %(name)s ;rm -fr %(installdir)s/* ;./install %(installdir)s;'
+]
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['libexec/%(name)s'],
+}
+
+moduleclass = 'perf'

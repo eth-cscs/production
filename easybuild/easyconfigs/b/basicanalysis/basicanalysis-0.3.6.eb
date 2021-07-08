@@ -25,8 +25,9 @@ dependencies = [
 
 modextrapaths = {'PATH': '.', }
 modextravars = {
-    'PARAVER_HOME': '$::env(EBROOTPARAVER)',
-    'DIMEMAS_HOME': '$::env(EBROOTDIMEMAS)',
+    # removing because of lmod:
+    # 'PARAVER_HOME': '$::env(EBROOTPARAVER)',
+    # 'DIMEMAS_HOME': '$::env(EBROOTDIMEMAS)',
     '%(name)s_installed_version': '%(version)s',
 }
 

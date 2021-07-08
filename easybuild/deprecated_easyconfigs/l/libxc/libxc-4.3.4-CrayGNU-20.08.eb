@@ -1,0 +1,36 @@
+# contributed by Simon Pintarelli, Anton Kozhevnikov and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'libxc'
+version = '4.3.4'
+
+homepage = 'http://www.tddft.org/programs/octopus/wiki/index.php/Libxc'
+description = """Libxc is a library of exchange-correlation functionals for density-functional theory.
+ The aim is to provide a portable, well tested and reliable set of exchange and correlation functionals."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'opt': True}
+
+source_urls = ['https://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
+sources = [SOURCE_TAR_GZ]
+checksums = ['a8ee37ddc5079339854bd313272856c9d41a27802472ee9ae44b58ee9a298337']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+]
+
+configopts = [
+    " -DENABLE_FORTRAN=ON -DENABLE_FORTRAN03=ON -DCMAKE_INSTALL_LIBDIR=lib ",
+    " -DENABLE_FORTRAN=ON -DENABLE_FORTRAN03=ON -DCMAKE_INSTALL_LIBDIR=lib  -DBUILD_SHARED_LIBS=ON ",
+]
+
+# add func_reference.c to CMakeLists.txt https://gitlab.com/libxc/libxc/-/issues/91
+prebuildopts = ' sed -i "/func_info.c/a func_reference.c" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a', 'lib/%(name)s.so', 'lib/libxcf03.a', 'lib/libxcf03.so', 'lib/libxcf90.a', 'lib/libxcf90.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'chem'

@@ -25,19 +25,17 @@
 """
 EasyBuild support for building and installing Julia packages, implemented as an easyblock
 
-@author: Kenneth Hoste (Ghent University)
-@author: Samuel Omlin (CSCS)
 @author: Victor Holanda (CSCS)
+@author: Samuel Omlin (CSCS)
 """
 import os
-import shutil
+import sys
 
 import easybuild.tools.toolchain as toolchain
 
 from easybuild.framework.easyconfig import CUSTOM
 from easybuild.framework.extensioneasyblock import ExtensionEasyBlock
 from easybuild.tools.build_log import EasyBuildError
-from easybuild.tools.filetools import mkdir
 from easybuild.tools.run import run_cmd, parse_log_for_error
 
 
@@ -59,8 +57,6 @@ class JuliaPackage(ExtensionEasyBlock):
         return ExtensionEasyBlock.extra_options(extra_vars=extra_vars)
 
     def __init__(self, *args, **kwargs):
-        """Initliaze RPackage-specific class variables."""
-
         super(JuliaPackage, self).__init__(*args, **kwargs)
         self.package_name = self.name
         names = self.package_name.split('.')
@@ -68,8 +64,8 @@ class JuliaPackage(ExtensionEasyBlock):
             self.package_name = ''.join(names[:-1])
 
         julia_env_name = os.getenv('EBJULIA_ENV_NAME', '')
-        self.depot=os.path.join(self.installdir, 'extensions')
-        self.projectdir=os.path.join(self.depot, 'environments', julia_env_name)
+        self.depot = os.path.join(self.installdir, 'extensions')
+        self.projectdir = os.path.join(self.depot, 'environments', julia_env_name)
         self.log.info("Depot for package installations: %s" % self.depot)
 
     def patch_step(self, beginpath=None):
@@ -99,7 +95,7 @@ class JuliaPackage(ExtensionEasyBlock):
         else:
             install_opts = "name=\"%s\", version=\"%s\"" % (self.package_name, self.version)
 
-        pre_cmd = '%s unset EBJULIA_USER_DEPOT_PATH && export EBJULIA_ADMIN_DEPOT_PATH=%s && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.depot, self.projectdir)
+        pre_cmd = '%s unset EBJULIA_USER_DEPOT_PATH && unset EBJULIA_ADMIN_DEPOT_PATH && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s' % (self.cfg['preinstallopts'], self.depot, self.projectdir)
 
         has_mpi = False
         if self.toolchain.options.get('usempi', None):
@@ -108,17 +104,20 @@ class JuliaPackage(ExtensionEasyBlock):
         if (self.cfg['mpiexec'] or self.cfg['mpiexec_args']) and not has_mpi:
             raise EasyBuildError("When enabling building with mpi, also enable the 'usempi' toolchain option.")
 
-        if self.toolchain.toolchain_family() == toolchain.CRAYPE and has_mpi:
-          cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
-          pre_cmd += ' && export JULIA_MPI_BINARY=system'
-          pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
-          pre_cmd += ' && export JULIA_MPICC="cc"'
+        if self.toolchain.toolchain_family() in [toolchain.CPE, toolchain.CRAYPE] and has_mpi:
+            cray_mpich_dir = os.getenv('CRAY_MPICH_DIR', '')
+            pre_cmd += ' && export JULIA_MPI_BINARY=system'
+            pre_cmd += ' && export JULIA_MPI_PATH="%s"' % cray_mpich_dir
+            pre_cmd += ' && export JULIA_MPICC="cc"'
 
         if self.cfg['mpiexec']:
             pre_cmd += ' && export JULIA_MPIEXEC="%s"' % self.cfg['mpiexec']
 
         if self.cfg['mpiexec_args']:
             pre_cmd += ' && export JULIA_MPIEXEC_ARGS="%s"' % self.cfg['mpiexec_args']
+
+        if self.cfg['arch_name'] == 'gpu':
+            pre_cmd += ' && export JULIA_CUDA_USE_BINARYBUILDER=false'
 
         if remove:
             cmd = ' && '.join([pre_cmd, "julia --eval 'using Pkg; Pkg.rm(PackageSpec(%s))'" % install_opts])
@@ -136,10 +135,10 @@ class JuliaPackage(ExtensionEasyBlock):
         cmderrors = parse_log_for_error(cmdttdouterr, regExp="^ERROR:")
         if cmderrors:
             cmd = self.make_julia_cmd(remove=True)
-            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=stdin, regexp=False)
+            run_cmd(cmd, log_all=False, log_ok=False, simple=False, inp=sys.stdin, regexp=False)
             raise EasyBuildError("Errors detected during installation of Julia package %s!", self.name)
-        else:
-            self.log.info("Julia package %s installed succesfully" % self.name)
+
+        self.log.info("Julia package %s installed succesfully" % self.name)
 
     def run(self):
         """Install Julia package as an extension."""
@@ -150,8 +149,7 @@ class JuliaPackage(ExtensionEasyBlock):
         Custom sanity check for Julia packages
         """
         #NOTE: we don't use Pkg.status with arguments as only supported for Julia >=v1.1
-        cmd = "unset EBJULIA_USER_DEPOT_PATH && export EBJULIA_ADMIN_DEPOT_PATH=%s && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.depot, self.projectdir)
+        cmd = "unset EBJULIA_USER_DEPOT_PATH && unset EBJULIA_ADMIN_DEPOT_PATH && export JULIA_DEPOT_PATH=%s && export JULIA_PROJECT=%s && julia --eval 'using Pkg; Pkg.status()'" % (self.depot, self.projectdir)
         cmdttdouterr, _ = run_cmd(cmd, log_all=True, simple=False, regexp=False)
         self.log.error("Julia package %s sanity returned %s" % (self.name, cmdttdouterr))
         return len(parse_log_for_error(cmdttdouterr, regExp="%s\s+v%s" % (self.package_name, self.version))) != 0
-

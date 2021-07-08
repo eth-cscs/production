@@ -1,0 +1,60 @@
+# Precompiler options
+CPP_OPTIONS= -DHOST=\"LinuxGNU\"\
+             -DMPI -DMPI_BLOCK=8000 -Duse_collective \
+             -DscaLAPACK \
+             -DCACHE_SIZE=4000 \
+             -Davoidalloc \
+             -Dvasp6 \
+             -Duse_bse_te \
+             -Dtbdyn \
+             -Dfock_dblbuf \
+             -Duse_shmem \
+             -DVASP2WANNIER90v2
+
+CPP        = gcc -E -P -C -w $*$(FUFFIX) >$*$(SUFFIX) $(CPP_OPTIONS)
+
+FC         = ftn
+FCL        = ftn
+
+FREE       = -ffree-form -ffree-line-length-none
+
+FFLAGS     = -w -fallow-argument-mismatch -march=znver2
+OFLAG      = -O2
+OFLAG_IN   = $(OFLAG)
+DEBUG      = -O0
+
+LIBDIR     = $(EBROOTGCC)/snos/lib64
+BLAS       = 
+LAPACK     =
+BLACS      =
+SCALAPACK  =
+WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
+
+OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
+
+INCS       = -I$(EBROOTFFTW)/include
+
+LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS) -L$(EBROOTFFTW)/lib
+
+OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
+OBJECTS_O2 += fft3dlib.o
+
+# For what used to be vasp.5.lib
+CPP_LIB    = $(CPP)
+FC_LIB     = $(FC)
+CC_LIB     = cc
+CFLAGS_LIB = -O
+FFLAGS_LIB = -O1
+FREE_LIB   = $(FREE)
+
+OBJECTS_LIB= linpack_double.o getshmem.o
+
+# For the parser library
+CXX_PARS   = CC
+LLIBS      += -lstdc++
+
+# Normally no need to change this
+SRCDIR     = ../../src
+BINDIR     = ../../bin
+
+MPI_INC    = $(CRAY_MPICH_DIR)/include

@@ -1,0 +1,17 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'graphviz'
+version = '2.47.0'
+homepage = 'http://www.graphviz.org/Download_source.php'
+description = "Graphviz is open source graph visualization software"
+toolchain = SYSTEM
+source_urls = ['https://gitlab.com/graphviz/graphviz/-/archive/%(version)s']
+sources = [SOURCELOWER_TAR_GZ]
+preconfigopts = "./autogen.sh &&"
+sanity_check_paths = {
+    'files': ['bin/dot'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

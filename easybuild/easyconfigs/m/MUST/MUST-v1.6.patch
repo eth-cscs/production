@@ -1,0 +1,52 @@
+diff -Naur MUST-v1.6.ori/externals/GTI/cmakemodules/InstallationConfiguration.cmake.in MUST-v1.6/externals/GTI/cmakemodules/InstallationConfiguration.cmake.in
+--- MUST-v1.6.ori/externals/GTI/cmakemodules/InstallationConfiguration.cmake.in	2019-12-06 10:02:16.000000000 +0100
++++ MUST-v1.6/externals/GTI/cmakemodules/InstallationConfiguration.cmake.in	2020-09-03 07:43:15.772427000 +0200
+@@ -42,9 +42,9 @@
+ SET (MPI_Fortran_LINK_FLAGS "@MPI_Fortran_LINK_FLAGS@" CACHE PATH "" FORCE)
+ SET (MPI_Fortran_LIBRARIES @MPI_Fortran_LIBRARIES@ CACHE PATH "" FORCE)
+ 
+-SET (CMAKE_CXX_FLAGS @CMAKE_CXX_FLAGS@ CACHE STRING "" FORCE)
+-SET (CMAKE_C_FLAGS @CMAKE_C_FLAGS@ CACHE STRING "" FORCE)
+-SET (CMAKE_Fortran_FLAGS @CMAKE_Fortran_FLAGS@ CACHE STRING "" FORCE)
++SET (CMAKE_CXX_FLAGS "@CMAKE_CXX_FLAGS@" CACHE STRING "" FORCE)
++SET (CMAKE_C_FLAGS "@CMAKE_C_FLAGS@" CACHE STRING "" FORCE)
++SET (CMAKE_Fortran_FLAGS "@CMAKE_Fortran"_FLAGS@ CACHE STRING "" FORCE)
+ STRING(REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+ 
+ SET (MPIEXEC "@MPIEXEC@" CACHE PATH "" FORCE)
+@@ -52,7 +52,7 @@
+ SET (MPIEXEC_PREFLAGS "@MPIEXEC_PREFLAGS@" CACHE PATH "" FORCE)
+ SET (MPIEXEC_POSTFLAGS "@MPIEXEC_POSTFLAGS@" CACHE PATH "" FORCE)
+ 
+-SET (MPI_CXX_SKIP_FLAGS @MPI_CXX_SKIP_FLAGS@ CACHE STRING "" FORCE)
++SET (MPI_CXX_SKIP_FLAGS "@MPI_CXX_SKIP_FLAGS@" CACHE STRING "" FORCE)
+ 
+ SET (HAVE_MPI_NO_CONST_CORRECTNESS @HAVE_MPI_NO_CONST_CORRECTNESS@ CACHE INTERNAL "" FORCE)
+ SET (HAVE_MPI_ADDRESS_CONST_CORRECT @HAVE_MPI_ADDRESS_CONST_CORRECT@ CACHE INTERNAL "" FORCE)
+diff -Naur MUST-v1.6.ori/externals/GTI/system-builder/buildgen/BuildGen.cpp MUST-v1.6/externals/GTI/system-builder/buildgen/BuildGen.cpp
+--- MUST-v1.6.ori/externals/GTI/system-builder/buildgen/BuildGen.cpp	2019-12-06 10:02:16.000000000 +0100
++++ MUST-v1.6/externals/GTI/system-builder/buildgen/BuildGen.cpp	2020-09-02 11:52:31.255157823 +0200
+@@ -142,7 +142,7 @@
+ 		<< "##" << std::endl
+ 		<< std::endl
+ 		<< "CMAKE_MINIMUM_REQUIRED(VERSION 2.6)" << std::endl
+-		<< "PROJECT (MUST_INTERMEDIATE CXX C)" << std::endl
++		<< "PROJECT (MUST_INTERMEDIATE C CXX)" << std::endl
+         << "IF(NOT CMAKE_BUILD_TYPE)" << std::endl
+         << "  SET(CMAKE_BUILD_TYPE \"RelWithDebInfo\" CACHE STRING \"Choose the type of build, options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.\" FORCE)" << std::endl
+         << "ENDIF(NOT CMAKE_BUILD_TYPE)" << std::endl
+diff -Naur MUST-v1.6.ori/utility/mustrun2.sh MUST-v1.6/utility/mustrun2.sh
+--- MUST-v1.6.ori/utility/mustrun2.sh	2019-12-06 09:58:37.000000000 +0100
++++ MUST-v1.6/utility/mustrun2.sh	2020-09-03 11:47:04.025243644 +0200
+@@ -403,9 +403,9 @@
+     local switch
+     for switch in $np_arg
+     do
+-      local pTemp=`echo " $input" | sed -e "s/.*[[:space:]]${switch}[[:space:]]\([^[:space:]]\{1,\}\).*/\1/"`
++      local pTemp=`echo " $input" | sed -e "s/[[:space:]]${switch}[[:space:]]\([^[:space:]]\{1,\}\).*\|./\1/g"`
+       
+-      if [ "$pTemp" != " $input" ]
++      if [ -n "$pTemp" ]
+       then
+           p=$pTemp
+           switchToUse=$switch

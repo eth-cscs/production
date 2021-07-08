@@ -1,0 +1,47 @@
+easyblock = 'ConfigureMake'
+
+name = 'Buildah'
+version = '1.16.4'
+
+homepage = 'https://buildah.io/'
+description = """Buildah is a tool that facilitates building OCI container images."""
+
+toolchain = SYSTEM
+builddependencies = [('Libassuan', '2.5.3'),
+                     ('Libpgp-error', '1.39'),
+                     ('GPGME', '1.14.0'),
+                     ('go', '1.15.2.linux-amd64')]
+
+dependencies = [('runc', '1.0.0-rc92')]
+
+# Make-install buildah
+# Patch the installation in order to run without xattrs support
+prebuildopts = ('mkdir -p go_path go_cache && export GOCACHE=$PWD/go_cache && export GOPATH=$PWD/go_path && '
+                'go get -d github.com/containers/buildah && '
+                'cd $GOPATH/src/github.com/containers/buildah && '
+                'git checkout v%(version)s && '
+                'sed -i "s#^// +build linux netbsd freebsd darwin#// +build !linux netbsd freebsd darwincopiercopier/xattrs.go#" copier/xattrs.go && '
+                'sed -i "s#^// +build !linux,!netbsd,!freebsd,!darwin#// +build linux,!netbsd,!freebsd,!darwin#" copier/xattrs_unsupported.go && '
+                'sed -i "s#^LDFLAGS :=.*'
+                '#LDFLAGS := -ldflags \'-X main.GitCommit=\$(GIT_COMMIT) -X main.buildInfo=\$(SOURCE_DATE_EPOCH) -X main.cniVersion=\$(CNI_COMMIT) -X copier.xattrsSupported=false '
+                '-X github.com/containers/image/v5/pkg/sysregistriesv2.systemRegistriesConfPath=%(installdir)s/etc/registries.conf '
+                '-X github.com/containers/image/v5/signature.systemDefaultPolicyPath=%(installdir)s/etc/policy.json\' \$(EXTRALDFLAGS)#" Makefile && ')
+
+buildopts = ['BUILDTAGS="btrfs_noversion exclude_graphdriver_btrfs exclude_graphdriver_devicemapper"']
+installopts = ['PREFIX=%(installdir)s']
+preinstallopts = 'cd go_path/src/github.com/containers/buildah && '
+postinstallcmds= ['mkdir %(installdir)s/etc && '
+                  'cd go_path/src/github.com/containers/buildah/tests && '
+                  'cp registries.conf %(installdir)s/etc && '
+                  'sed -i "12s/^registries =.*/registries = [\'docker.io\']/" %(installdir)s/etc/registries.conf && ' # Allow only Dockerhub by default
+                  'cp policy.json %(installdir)s/etc']
+
+skipsteps = ['configure']
+modtclfooter = 'unsetenv XDG_RUNTIME_DIR'
+
+sanity_check_paths = {
+    'files': ['bin/buildah'],
+    'dirs': ['etc']
+}
+
+moduleclass = 'tools'

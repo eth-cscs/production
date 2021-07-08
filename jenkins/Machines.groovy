@@ -2,33 +2,33 @@ def daint = [name: 'daint',
              archs: ['gpu', 'mc'],
              cpus: ['gpu': 12, 'mc': 36],
              buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/daint/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/daint/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
+             unusePath: '/apps/daint/UES/jenkins/7.0.UP02-20.11/ARCH/easybuild/tools/modules/all:/apps/daint/UES/jenkins/7.0.UP02-20.11/ARCH/easybuild/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all',
              modulesProduction: '/apps/common/UES/jenkins/production/login',
-             prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
+             prefixProduction: '$APPS/UES/jenkins/7.0.UP02-20.11/ARCH/easybuild']
 
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            cpus: ['gpu': 12, 'mc': 36],
            buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP01/ARCH/easybuild/modules/all',
-           modulesProduction: '/apps/common/UES/jenkins/production/login',
-           prefixProduction: '$APPS/UES/jenkins/7.0.UP01/ARCH/easybuild']
-
-def kesch = [name: 'kesch',
-             archs: [],
-             cpus: 24,
-             buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-             unusePath: '/apps/escha/UES/easybuild/modulefiles',
-             modulesProduction: '',
-             prefixProduction: '/apps/escha/UES/jenkins/RH7.5/generic/easybuild']
-
-def tsa = [name: 'tsa',
-           archs: [],
-           buildPath: '/tmp/$USER/easybuild/build',
-           unusePath: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.06/generic/easybuild/modules/all',
+           unusePath: '/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all',
            modulesProduction: '',
-           modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.7/MCH-PE20.08/generic/easybuild']
+           prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
+
+def eiger = [name: 'eiger',
+             archs: [],
+             cpus: 128,
+             buildPath: '$XDG_RUNTIME_DIR/build',
+             unusePath: '/apps/eiger/UES/jenkins/1.4.0',
+             modulesProduction: '',
+             prefixProduction: '/apps/eiger/UES/jenkins/1.4.0']
+
+def pilatus = [name: 'pilatus',
+               archs: [],
+               cpus: 128,
+               buildPath: '$XDG_RUNTIME_DIR/build',
+               unusePath: '/apps/pilatus/UES/jenkins/1.4.0',
+               modulesProduction: '',
+               prefixProduction: '/apps/pilatus/UES/jenkins/1.4.0']
 
 def tsa = [name: 'tsa',
            archs: [],
@@ -38,4 +38,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild/modules/all']
 
-return [daint, dom, kesch, tsa]
+return [daint, dom, eiger, pilatus, tsa]

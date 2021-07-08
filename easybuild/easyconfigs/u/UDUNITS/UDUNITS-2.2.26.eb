@@ -1,4 +1,4 @@
-# jgp@cscs
+# Contributed by Jean-Guillaume Piccinali and Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'UDUNITS'
@@ -11,8 +11,8 @@ description = """UDUNITS supports conversion of unit specifications between form
 toolchain = SYSTEM
 toolchainopts = {'opt': True, 'pic': True}
 
-source_urls = ['ftp://ftp.unidata.ucar.edu/pub/udunits']
-sources = [SOURCELOWER_TAR_GZ]
+# Version 2.2.26 is no longer available for download from ftp://ftp.unidata.ucar.edu/pub/udunits
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/' + SOURCELOWER_TAR_GZ]
 
 dependencies = [('expat', '2.2.5')]
 

@@ -1,0 +1,45 @@
+# jg (CSCS)
+easyblock = 'Tarball'
+
+name = 'advisor'
+version = '2021.1.1.43'
+homepage = 'https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/advisor.html'
+description = "Design Code for Efficient Vectorization, Threading, Memory Usage"
+toolchain = SYSTEM
+sources = ['/apps/common/UES/easybuild/sources/a/%(name)s/'
+           'l_oneapi_%(name)s_p_%(version)s_offline.sh.tar']
+checksums = ['f37908e89e28702f56a65fd79084b887']
+postinstallcmds = [
+  'rm -fr ~/.intel ~/intel',
+  './l_oneapi_%(name)s_p_%(version)s_offline.sh '
+  '-s -a -s --eula accept --remove-extracted-files yes --install-dir %(installdir)s ',
+  # no comma:
+  'cd %(installdir)s ;'
+  'rm -fr etc logs modulefiles-setup.sh support.txt common.sh licensing;'
+  'rm -fr l_oneapi_advisor_p_2021.1.1.43_offline.sh setvars.sh sys_check.sh;'
+  'mv advisor/latest/* . ;rm -fr advisor ;'
+  'cd -',
+]
+sanity_check_paths = {
+    'files': ['%(name)s-vars.sh'],
+    'dirs': ['bin64']
+}
+allow_prepend_abs_path = 'True'
+modextrapaths = {
+    'PATH': 'bin64',
+    'INTEL_PYTHONPATH': 'pythonapi',
+    'PYTHONPATH': 'pythonapi',
+    'APM': 'perfmodels',
+    'INTEL_LICENSE_FILE': '/opt/intel/licenses',
+    'PKG_CONFIG_PATH': 'include/pkgconfig/lib64',
+}
+modextravars = {
+    'ADVISOR_2021_DIR': '%(installdir)s',
+    # 'ADVISOR_%(version)s_DIR': '%(installdir)s',
+}
+docpaths = {
+    'ADVISOR_DOC': '%(installdir)s/%(name)s/documentation/en',
+    'ADVISOR_SAMPLES': '%(installdir)s/%(name)s/samples/en',
+}
+
+moduleclass = 'tools'

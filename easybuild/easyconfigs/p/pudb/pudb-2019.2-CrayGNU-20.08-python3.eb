@@ -1,0 +1,29 @@
+# jg (cscs)
+easyblock = 'PythonPackage'
+
+name = 'pudb'
+version = '2019.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://documen.tician.de/pudb/'
+description = """PuDB is a full-screen, console-based visual debugger for Python.
+https://pypi.org/project/pudb/#description"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PyExtensions', 'python%(pymajver)s'),
+]
+
+
+sanity_check_paths = {
+    'files': ['bin/pudb3'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s.egg'],
+}
+
+moduleclass = 'data'

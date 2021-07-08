@@ -29,19 +29,13 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 @author: Samuel Omlin (CSCS)
 """
 import os
-import shutil
 import socket
 
 from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.config import build_option
-from easybuild.framework.easyconfig import CUSTOM
-from easybuild.easyblocks.generic.packedbinary import PackedBinary
-from easybuild.tools.build_log import EasyBuildError
-from easybuild.tools.filetools import mkdir
-from easybuild.tools.run import run_cmd, parse_log_for_error
 from easybuild.tools import systemtools
 #from easybuild.easyblocks.generic.pythonpackage import PythonPackage, det_pylibdir
-from juliapackage import JuliaPackage
+from .juliapackage import JuliaPackage
 
 
 class JuliaBundle(Bundle):
@@ -96,7 +90,6 @@ class JuliaBundle(Bundle):
         return user_depot_path
 
     def __init__(self, *args, **kwargs):
-        """Initliaze RPackage-specific class variables."""
         super(JuliaBundle, self).__init__(*args, **kwargs)
         self.cfg['exts_defaultclass'] = 'JuliaPackage'
 
@@ -130,20 +123,17 @@ class JuliaBundle(Bundle):
         """Custom sanity check for Julia."""
 
         custom_paths = {
-                # extensions/environments/1.0.4-daint-gpu/Manifest.toml
+            # extensions/environments/1.0.4-daint-gpu/Manifest.toml
             'files': [],
             'dirs': ['extensions'],
         }
-        super(Bundle, self).sanity_check_step(custom_paths=custom_paths)
+        super(JuliaBundle, self).sanity_check_step(custom_paths=custom_paths)
 
     def make_module_extra(self, *args, **kwargs):
-        txt = super(Bundle, self).make_module_extra(*args, **kwargs)
+        txt = super(JuliaBundle, self).make_module_extra(*args, **kwargs)
 
-        txt += self.module_generator.prepend_paths('JULIA_DEPOT_PATH', self.extensions_depot)
         txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_DEPOT_PATH', self.extensions_depot)
 
-        txt += self.module_generator.prepend_paths('JULIA_LOAD_PATH', self.admin_load_path)
         txt += self.module_generator.prepend_paths('EBJULIA_ADMIN_LOAD_PATH', self.admin_load_path)
 
         return txt
-

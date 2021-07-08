@@ -1,0 +1,37 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Libint-CP2K'
+version = '2.6.0'
+
+homepage = 'https://github.com/cp2k/libint-cp2k'
+description = """Provides tarballs of CP2K-configured libint releases for different maximum angular momenta. 
+Libint library is used to evaluate the traditional (electron repulsion) and certain novel two-body
+ matrix elements (integrals) over Cartesian Gaussian functions used in modern atomic and molecular theory."""
+
+toolchain = {'name': 'cpeIntel', 'version': '21.02'}
+toolchainopts = {'opt': True, 'pic': True}
+
+source_urls = ['https://github.com/cp2k/%(namelower)s/releases/download/v%(version)s']
+sources = ['libint-v%(version)s-cp2k-lmax-5.tgz']
+
+builddependencies = [
+    #('Boost', '1.75.0', '-python3'),
+    ('GMP', '6.2.1'),
+]
+
+osdependencies = [('autoconf', 'automake')]
+
+preconfigopts = ' module unload cray-libsci && '
+configopts = ' --enable-fortran --enable-shared '
+prebuildopts = ' module unload cray-libsci && '
+
+# https://github.com/evaleev/libint/issues/173 and https://gcc.gnu.org/onlinedocs/gcc-10.1.0/cpp/_005f_005fhas_005finclude.html
+preinstallopts = ' sed -i "s/__has_include(<libint2_params.h>)/defined(__COMPILING_LIBINT2)/" ./include/libint2/util/generated/libint2_params.h && '
+
+sanity_check_paths = {
+    'files': ['include/libint2.h', 'include/libint2.hpp', 'lib/libint2.a', 'lib/libint2.so'],
+    'dirs': ['include/libint2'],
+}
+
+moduleclass = 'chem'

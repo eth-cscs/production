@@ -1,0 +1,45 @@
+# jg (CSCS)
+easyblock = 'MakeCp'
+
+name = 'linux-perf'
+version = '5.9'
+homepage = 'https://perf.wiki.kernel.org/index.php/Main_Page'
+description = """the Linux perf command, also called perf_events can instrument
+CPU performance counters, tracepoints, kprobes, and uprobes (dynamic
+tracing). Can use gprof2dot to visualize calltree"""
+toolchain = SYSTEM
+source_urls = ['https://github.com/torvalds/linux/archive']
+sources = ['v%(version)s.tar.gz']
+builddependencies = [
+   ('asciidoc', '9.0.4'),
+   ('xmlto', '0.0.28'),
+]
+dependencies = [
+    ('elfutils', '0.182'),
+    ('libunwind', '1.4.0'),
+    ('zstd', '1.4.5'),
+    ('babeltrace', '1.5.8'),
+    ('S-Lang', '2.3.2'),
+]
+prebuildopts = "cd tools && "
+buildopts = ('perf '
+    'LIBDW_DIR=$EBROOTELFUTILS '
+    'LIBUNWIND_DIR=$EBROOTLIBUNWIND '
+    'LIBZSTD_DIR=$EBROOTZSTD '
+    'LIBBABELTRACE_DIR=$EBROOTBABELTRACE && '
+    'cd ../tools/perf/Documentation && '
+    'make html && ls '
+)
+files_to_copy = [
+    (['tools/perf/perf'], 'bin'),
+    (['tools/perf/Documentation/*.html'], 'doc'),
+]
+sanity_check_paths = {
+    'files': ['bin/perf'],
+    'dirs': ['doc']
+}
+modextravars = {
+    'LINUXPERF_DOC': '%(installdir)s/doc',
+}
+
+moduleclass = 'perf'

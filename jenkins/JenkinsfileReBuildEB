@@ -1,0 +1,261 @@
+#!/usr/bin/env groovy
+
+def methods
+def machinesList
+/*
+ Initialization: checkout the production repository to load the files:
+ - "util.groovy" with the functions used in the pipeline scripts
+ - "Machines.groovy" with the list and properties of HPC systems
+*/
+stage('Initialization') {
+    node('master') {
+        checkout scm
+        methods = load("$WORKSPACE/jenkins/util.groovy")
+        machinesList = load("$WORKSPACE/jenkins/Machines.groovy")
+    }
+}
+
+/*
+ Machine Selection:
+ - filters the user defined parameter "machines", accessible though "params.machines"
+ - defines the runtime HPC systems of the project "machinesToRun"
+ - defines the configuration of the runtime HPC systems "machinesConfiguration"
+*/
+def machineConfigurations = []
+stage('Machine Selection') {
+    node('master') {
+        def machinesToRun = machinesList.findAll({methods.machineCheck(params.machines, it.name)})
+        if (!machinesToRun) {
+            println "No machines were specified. Aborting...."
+            currentBuild.result = "FAILURE"
+            return
+        }
+        for (system in machinesToRun) {
+            machineConfigurations.add(
+                [machine:system, architectures: methods.getMachineConfiguration(
+                        params.machines, system.name, system.archs as String[])])
+        }
+    }
+}
+
+/*
+ ReBuild Stage: configures parallel builds for the different "machinesToRun"
+ Loop over all systems in "machineConfigurations":
+  - if the machine has multiple architectures, starts a sub-loop over architectures
+  - the user parameter "eb_prefix" is prepended to the variable EASYBUILD_PREFIX
+  - EBVERSIONEASYBUILD stores the version of EasyBuild ("params.eb_version")
+  - the target production list is defined by the symbolic link "$machineLabel"
+*/
+def builds = [:]
+stage('ReBuild Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        /* cpus and name are defined for machine only */
+        def cpus = machine.cpus
+        def machineName = machine.name
+        for (item in architectures) {
+            /* define architecture and machineLabel
+               to use them in parallel builds */
+            def architecture = item
+            def machineLabel = architecture == "" ? machineName : "$machineName-$architecture"
+            def cpusPerTask = architecture == "" ? cpus : cpus[architecture]
+            builds["$machineLabel"] = {
+                node(machineName) {
+                    checkout scm
+
+                    /* define command to load EasyBuild */
+                    def load_easybuild = architecture == "" ?
+                        "module load EasyBuild-custom/cscs" :
+                        "module load daint-$architecture EasyBuild-custom/cscs"
+
+                    /* define command to switch EasyBuild version*/
+                    def switch_easybuild = params.eb_version == "" ?
+                        "" :
+                        "module switch EasyBuild EasyBuild/${params.eb_version}"
+
+                    /* define list of unuse paths */
+                    def unuse_paths = architecture == '' ?
+                        machine.unusePath.replace(':', ' ') :
+                        machine.unusePath.replace(':', ' ').replace('ARCH', architecture)
+                        println("List of unuse paths: $unuse_paths")
+
+                    /* define rebuild command */
+                    def rebuild_command = architecture == "" ?
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r" : 
+                        "srun -u --ntasks=1 --cpus-per-task=$cpusPerTask -C $architecture -J $env.JOB_BASE_NAME --account=${params.account} -t 12:00:00 eb -r"
+                        println("ReBuild command: $rebuild_command")
+
+                    /* build the software stack using the rebuild command */
+                    sh("""#!/bin/bash -l
+                        export EASYBUILD_PREFIX="\$SCRATCH/${params.eb_prefix}/$machineLabel"
+                        export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
+                        export EASYBUILD_SOURCEPATH="\$EASYBUILD_PREFIX/sources"
+                        export EASYBUILD_BUILDPATH="/tmp/$env.BUILD_TAG"
+                        export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
+                        $load_easybuild
+                        $switch_easybuild
+
+                        for path in $unuse_paths; do
+                         module unuse \$path
+                        done
+                        echo -e "\nMODULEPATH: \$MODULEPATH\n"
+
+                        # print EasyBuild version and configuration
+                        eb --version
+                        eb --show-config
+
+                        # clean up prefix, initialise counters and lists
+                        if [ -d "\${EASYBUILD_PREFIX}" ]; then
+                            echo -e "\nRemoving existing folder \${EASYBUILD_PREFIX}"
+                            rm -rf "\${EASYBUILD_PREFIX}"
+                        fi  
+                        unset success
+                        success_file="\${EASYBUILD_PREFIX}/success.txt"
+                        unset failed
+                        failed_file="\${EASYBUILD_PREFIX}/failed.txt"
+
+                        # filter the target production list $machineLabel
+                        echo ${params.select_recipes} | tr " ," "\n" > select_recipes.txt
+                        echo ${params.discard_recipes} | tr " ," "\n" > discard_recipes.txt
+                        rebuild_list=\$(grep -if select_recipes.txt $WORKSPACE/jenkins-builds/$machineLabel | grep -ivf discard_recipes.txt | awk '{print \$1}')
+                        
+                        if [ -z "\$rebuild_list" ]; then
+                         echo -e "\nThe list of recipes to ReBuild is empty. Exiting..."
+                         exit \$(wc -w <<< \$rebuild_list)
+                        else   
+                         echo -e "\nSelected recipes to ReBuild: \n\$rebuild_list"
+                        fi
+
+                        # rebuild recipes
+                        for recipe in \${rebuild_list}; do
+                            status=0
+                            echo -e "\nCurrent ReBuild: \$recipe"
+                            
+                            # get relative path of dependencies from dry run
+                            deps=\$(eb -Dr \$recipe | awk '/\\.eb/{printf"%s%s\\n","easyconfigs",gensub(/.*(\\/\\w\\/.*\\.eb).*/,"\\\\1",1)}')
+
+                            # check status of dry run
+                            if [ -n "\$deps" ]; then
+                                eb -Dr \$recipe | grep "\\["
+                            else
+                                failed+=(\$recipe)
+                                echo "\$recipe" >> "\${failed_file}"
+                                echo -e "\nDry run of \$recipe FAILED: skipping build"
+                                continue
+                            fi
+
+                            echo -e "\nSubmitting job and ReBuilding..."
+                            $rebuild_command \$recipe
+                            status=\$[status+\$?]
+
+                            # keep track of successful and failed builds
+                            if [ \$status -eq 0 ]; then
+                                success+=(\$recipe)
+                                echo "\$recipe" >> "\${success_file}"
+                                # remove folders 
+                                echo -e "\nReBuild of \$recipe SUCCESSFUL: removing modules and software folders"
+                                rm -rf "\${EASYBUILD_PREFIX}/modules" "\${EASYBUILD_PREFIX}/software"
+                            else
+                                failed+=(\$recipe)
+                                echo "\$recipe" >> "\${failed_file}"
+                                # archive folders
+                                echo -e "\nReBuild of \$recipe FAILED: archiving modules and software folders"
+                                tar cjf "\${EASYBUILD_PREFIX}/\$(basename \$recipe .eb).tar.bz2" --directory="\${EASYBUILD_PREFIX}" "modules" "software" --remove-files
+                            fi
+                        done
+
+                        # change permission of tmp folders if failed is not null
+                        if [ -n "\$failed" ]; then
+                            chmod -R o+r "\${EASYBUILD_TMPDIR}"
+                            find "\${EASYBUILD_TMPDIR}" -type d -exec chmod o+x '{}' \\;
+                        fi
+
+                        # print successful and failed rebuilds
+                        echo -e "\nSuccessful ReBuilds: \${#success[@]} \n\${success[@]}"
+                        echo -e "\nFailed ReBuilds: \${#failed[@]} \n\${failed[@]}"
+
+                        # return the number of failed ReBuilds
+                        exit \${#failed[@]}
+                    """)
+                }
+            }
+        }
+    }
+
+    try {
+        parallel builds
+        currentBuild.result = "SUCCESS"
+    } catch(err) {
+        if (err.toString().contains('exit code 143')) {
+            currentBuild.result = "ABORTED"
+            println "The Build step was cancelled. Aborting..."
+        }
+        else if (err.toString().contains('Queue task was cancelled')) {
+            currentBuild.result = "ABORTED"
+            println "The Queue task was cancelled. Aborting..."
+        }
+        else {
+            currentBuild.result = "FAILURE"
+            println "The Build step failed. Exiting..."
+        }
+    }
+}
+
+/*
+ Jira Stage: create Jira issues for failed rebuilds on the different "machinesLabel"
+ Loop over all systems in "machineConfigurations":
+  - retrieve EASYBUILD_PREFIX path "${scratch}/${params.eb_prefix}/$machineLabel"
+  - loop over the lines of the file "failed.txt" (list of failed rebuilds)
+  - create a Jira Issue for each item in the list with the proper project key
+*/
+JiraIssues = [:]
+stage('Jira Stage') {
+    for (system in machineConfigurations) {
+        def machine = system.machine
+        def architectures = system.architectures
+        def machineName = machine.name
+        for (item in architectures) {
+            def architecture = item
+            def machineLabel = architecture == "" ? 
+                machineName : 
+                "${machineName}-${architecture}"
+            JiraIssues[machineLabel] = {
+                node(machineName) {
+                    /* retrieve list of failed rebuilds */
+                    def failed_rebuilds = sh(returnStdout: true,
+                                        script: """#!/bin/bash -l
+                                        failed_file="$SCRATCH/${params.eb_prefix}/$machineLabel/failed.txt"
+                                        if [ -f "\$failed_file" ]; then
+                                             cat \$failed_file
+                                        fi""").trim()  
+                    if ( !failed_rebuilds?.trim() ) {
+                        println "\nFailed rebuilds: None\n"
+                    }
+                    else {
+                        failed_rebuilds.tokenize(' \n').each {
+                            try {
+                                //methods.failedJiraTask("UES", it, machineLabel)
+                                methods.createJiraSD("$it ReBuild failed", machineLabel, "EasyBuild recipe $it failed: logs at Build URL", 'High', 'UES')
+                            } catch(err) {
+                                println "Failed to create Jira Issue for $it"
+                            }
+                       }
+                    }
+                }
+            }
+        }
+    }
+
+    if (params.createJira) {
+        try {
+            parallel JiraIssues
+        } catch(err) {
+            println "Failed to create Jira Issues"
+        }
+    }  
+}
+
+if (params.notifySlack) {
+    methods.notifySlackFinish()
+}

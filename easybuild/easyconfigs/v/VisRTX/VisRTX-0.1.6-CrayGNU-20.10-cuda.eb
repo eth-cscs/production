@@ -1,0 +1,35 @@
+# by Jean M. Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'VisRTX'
+version = '0.1.6'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/NVIDIA/VisRTX'
+description = "VisRTX is a C++ rendering framework developed by the HPC Visualization Developer Technology team at NVIDIA"
+
+toolchain = {'name': 'CrayGNU', 'version': '20.10'}
+
+source_urls = ['https://github.com/NVIDIA/%(name)s/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('OptiX', '6.5.0'),
+    ('mdl', '317500.2554'),
+]
+
+preconfigopts = ' sed -i "s/sm_30/sm_60/g" %(builddir)s/%(name)s-%(version)s/CMakeLists.txt && '
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DMDL_INSTALL_DIR=$EBROOTMDL -DOptiX_INSTALL_DIR=$EBROOTOPTIX -DVISRTX_BUILD_SAMPLE:BOOL=OFF  "
+
+
+sanity_check_paths = {
+    'files': ['lib64/libVisRTX.so'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'

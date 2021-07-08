@@ -1,0 +1,23 @@
+name = 'Darshan'
+version = '3.2.1'
+
+homepage = 'https://www.mcs.anl.gov/research/projects/darshan/'
+description = """Darshan is a scalable HPC I/O characterization tool, designed
+to capture an accurate picture of application I/O behavior, including
+properties such as patterns of access within files, with minimum overhead.
+"""
+
+toolchain = { 'name' : 'CrayGNU', 'version' : '20.08' }
+toolchainopts = { 'verbose' : False }
+
+source_urls = ['ftp://ftp.mcs.anl.gov/pub/darshan/releases/']
+sources = ['darshan-%(version)s.tar.gz']
+
+builddependencies = [ ('cray-hdf5-parallel', EXTERNAL_MODULE) ]
+
+dependencies = [ ('zlib', '1.2.11') ]
+
+configopts  = '--enable-hdf5-mod=$CRAY_HDF5_PARALLEL_PREFIX '
+configopts += '--with-log-path-by-env '
+
+moduleclass = 'perf'

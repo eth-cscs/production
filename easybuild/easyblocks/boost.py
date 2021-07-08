@@ -141,13 +141,13 @@ class EB_Boost(EasyBlock):
 
             txt = ''
             # Check if using a Cray toolchain and configure MPI accordingly
-            if self.toolchain.toolchain_family() == toolchain.CRAYPE:
-                craympichdir = os.getenv('CRAY_MPICH2_DIR')
+            if self.toolchain.toolchain_family() == toolchain.CRAYPE or self.toolchain.toolchain_family() == toolchain.CPE:
+                craympichdir = os.getenv('CRAY_MPICH_DIR')
                 txt = '\n'.join([
-                    'local CRAY_MPICH2_DIR = %s ;' % craympichdir,
+                    'local CRAY_MPICH_DIR = %s ;' % craympichdir,
                     'using mpi : CC : ',
-                    ' <include>$(CRAY_MPICH2_DIR)/include ',
-                    ' <library-path>$(CRAY_MPICH2_DIR)/lib ',
+                    ' <include>$(CRAY_MPICH_DIR)/include ',
+                    ' <library-path>$(CRAY_MPICH_DIR)/lib ',
                     ';',
                 ])
             else:
@@ -157,7 +157,7 @@ class EB_Boost(EasyBlock):
 
         # If version > 1.70.0 only b2 is copied locally by bootstrap.sh
         if LooseVersion(self.version) > LooseVersion("1.70.0"):
-           os.system("ln -s b2 bjam")
+            os.system("ln -s b2 bjam")
 
     def build_boost_variant(self, bjamoptions, paracmd):
         """Build Boost library with specified options for bjam."""

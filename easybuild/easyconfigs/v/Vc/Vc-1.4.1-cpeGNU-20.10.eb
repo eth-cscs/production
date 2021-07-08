@@ -1,0 +1,26 @@
+# jg (cscs)
+easyblock = 'CMakeMake'
+
+name = 'Vc'
+version = '1.4.1'
+homepage = 'https://github.com/VcDevel/Vc'
+description = """SIMD Vector Classes for C++: https://vcdevel.github.io/Vc-1.4.1/
+Tests/Examples can be build with:
+    export CRAYPE_LINK_TYPE=dynamic
+    git clone https://github.com/VcDevel/Vc.git Vc.git
+    git submodule update --init"""
+
+toolchain = {'name': 'cpeGNU', 'version': '20.10'}
+toolchainopts = {'verbose': False}
+source_urls = ['https://github.com/VcDevel/Vc/releases/download/%(version)s']
+sources = [SOURCE_TAR_GZ]
+builddependencies = [('CMake', '3.19.1', '', True)]
+separate_build_dir = True
+postinstallcmds = ['cp ../%(name)s-%(version)s/LICENSE %(installdir)s']
+
+sanity_check_paths = {
+    'files': ['include/Vc/Vc', 'LICENSE'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'devel'

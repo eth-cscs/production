@@ -1,0 +1,43 @@
+# jgp@cscs
+easyblock = 'MakeCp'
+
+name = 'papi-wrap'
+version = '57150c8'
+
+homepage = 'https://github.com/bcumming/papi-wrap'
+description = "wrappers around papi hardware counters."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+# source_urls = [' https://github.com/jgphpc/%(name)s/archive/']
+# sources = ['%(version)s.tar.gz']
+sources = [
+    {'git_config': {'url': 'https://github.com/jgphpc', 'commit': '%(version)s', 'repo_name': '%(name)s'}, 'filename': SOURCE_TAR_GZ},
+]
+
+# papi provided by perftools-base since 7.0.2, otherwise, use :
+# dependencies = [ ('papi', EXTERNAL_MODULE), ]
+# papi.h seems broken, building PAPI as a workaround
+dependencies = [
+    ('PAPI', '6-0-0-1', '', True),
+]
+
+prebuildopts = " ln -fs cscs/makefile . ;"
+buildopts = "PAPI_PATH=$EBROOTPAPI "
+
+parallel = 1
+
+files_to_copy = [
+    (['libpapi_wrap.a'], 'lib'),
+    'include',
+    (['*.mod'], 'include'),
+]
+
+sanity_check_paths = {
+    'files': ['lib/libpapi_wrap.a'],
+    'dirs': [],
+}
+
+modextravars = {'CSCSPERF_EVENTS': 'PAPI_TOT_CYC|PAPI_TOT_INS'}
+
+moduleclass = 'perf'

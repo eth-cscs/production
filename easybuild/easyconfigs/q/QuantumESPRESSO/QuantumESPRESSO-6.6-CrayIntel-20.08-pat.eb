@@ -1,0 +1,48 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'QuantumESPRESSO'
+version = '6.6'
+versionsuffix = '-pat'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'CrayIntel', 'version': '20.08'}
+toolchainopts = {'opt': True, 'usempi': True, 'pic': True, 'verbose': False, 'openmp': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version)s.tar.gz']
+
+builddependencies = [
+    ('perftools-lite', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('libxc', '4.3.4')
+]
+
+preconfigopts = ' module unload perftools-lite && module unload cray-libsci && module list && '
+
+configopts = ' CC=cc FC=ifort F77=ifort MPIF90=ftn SCALAPACK_LIBS="-L$MKLROOT/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64" FFT_LIBS="-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core" LDFLAGS="-L$MKLROOT/lib/intel64 -lpthread -lstdc++ -ldl -qopenmp" FFLAGS="-O3 -g -assume byterecl -traceback -qopenmp" F90FLAGS="$FFLAGS" CFLAGS="-O3" --with-libxc=yes --with-libxc-prefix=$EBROOTLIBXC --with-libxc-include=$EBROOTLIBXC/include --enable-openmp --enable-parallel --with-scalapack '
+
+# use MKL FFT instead of FFTW and add HDF5
+prebuildopts = """
+    sed -i -e '/^DFLAGS/ s/$/ -D__DFTI/' -e '/^IFLAGS/ s#$# -I${MKLROOT}/include -I$(MKLROOT)/include/fftw#' -e '/^HDF5_LIBS/ s#$# -L$HDF5_ROOT/lib -lhdf5_hl -lhdf5 -lhdf5hl_fortran -lhdf5_fortran#' make.inc &&
+    module unload cray-libsci && cat make.inc && """
+buildopts = 'all epw'
+
+# single make process: parallel builds fail for target 'epw'
+maxparallel = 1
+
+modextravars = {'PAT_RT_MPI_THREAD_REQUIRED': '3'}
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'

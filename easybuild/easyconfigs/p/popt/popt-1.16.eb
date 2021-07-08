@@ -1,0 +1,17 @@
+# jg (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'popt'
+version = '1.16'
+homepage = 'http://www.linuxfromscratch.org/blfs/view/8.0/general/popt.html'
+description = """The popt package contains the popt libraries which are used by
+some programs to parse command-line options."""
+toolchain = SYSTEM
+source_urls = ['https://launchpad.net/popt/head/1.16/+download']
+sources = [SOURCE_TAR_GZ]
+sanity_check_paths = {
+    'files': ['lib/libpopt.la', 'lib/libpopt.so'],
+    'dirs': []
+}
+
+moduleclass = 'tools'

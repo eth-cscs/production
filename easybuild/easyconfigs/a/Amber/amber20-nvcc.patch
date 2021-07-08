@@ -1,0 +1,49 @@
+diff -Nru amber20_src.org/AmberTools/src/configure2 amber20_src/AmberTools/src/configure2
+--- amber20_src.org/AmberTools/src/configure2	2020-04-28 03:19:43.000000000 +0200
++++ amber20_src/AmberTools/src/configure2	2020-08-04 15:22:59.000000000 +0200
+@@ -104,7 +104,7 @@
+                      for debugging purposes.
+                      (Note: Set CUDA_HOME to your cuda build tools installation
+                      path; this is typically /usr/local/cuda.)
+-      -nccl          Use NCCL for inter-GPU communications. 
++      -nccl          Use NCCL for inter-GPU communications.
+                      (Note: Set NCCL_HOME to your NCCL install path.)
+       -afe           Build alternative AFE implementation of Free Energy Methods
+                      (for debugging purposes)
+@@ -1270,7 +1270,7 @@
+       echo "       Amber requires CUDA version 7.5, 8.0, 9.0-9.2, or 10.0-10.2"
+       exit 1
+     fi
+-    nvcc="$nvcc $nvccflags"
++    nvcc="$nvcc $nvccflags -D__NV_NO_HOST_COMPILER_CHECK"
+ 
+ fi
+ #------------------------------------------------------------------------------
+@@ -1280,15 +1280,15 @@
+     if [ "$cuda" != 'yes' ]; then
+         echo "Error: NCCL requires setting -cuda"
+         exit 1
+-    fi 
++    fi
+     if [ "$mpi" != 'yes' ]; then
+         echo "Error: NCCL requires setting -mpi"
+         exit 1
+-    fi 
++    fi
+     if [ -z "$NCCL_HOME" ]; then
+         echo "Error: NCCL_HOME is not set. This must point to your NCCL installation"
+         exit 1
+-    fi 
++    fi
+ fi
+ 
+ #------------------------------------------------------------------------------
+@@ -1519,7 +1519,7 @@
+         pmemd_cu_includes="$pmemd_cu_includes -I\$(NCCL_HOME)/include"
+         pmemd_cu_defines="$pmemd_cu_defines -DNCCL"
+         pmemd_cu_libs="$pmemd_cu_libs -L\$(NCCL_HOME)/lib -Wl,-rpath=\$(NCCL_HOME)/lib -lnccl"
+-      fi 
++      fi
+     fi
+     ;;
+ 

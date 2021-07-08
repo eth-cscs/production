@@ -16,8 +16,10 @@ The following dictionary keys are provided:
 
 * `util.groovy:` Contains a number of common methods used in the Jenkins pipelines.
 
-* `JenkinsfileRegressionEB:` This is the Jenkins pipeline script used for the regression Jenkins project.
+* `JenkinsfileReBuildEB:` This is the Jenkins pipeline script used for the regression Jenkins project.
 
 * `JenkinsfileTestingEB:` This is the Jenkins pipeline script used for the testing Jenkins project.
 
 * `JenkinsfileProductionEB:` This is the Jenkins pipeline script used for the production Jenkins project.
+
+* `JenkinsfileUpdateEB:` This is the Jenkins pipeline script used for the update Jenkins project.

@@ -1,0 +1,24 @@
+easyblock = 'PythonPackage'
+
+name = 'SCons'
+version = '4.1.0'
+versionsuffix = '-python3'
+homepage = 'http://www.scons.org/'
+description = "SCons is a software construction tool."
+toolchain = SYSTEM
+source_urls = ['http://prdownloads.sourceforge.net/%(namelower)s']
+sources = [SOURCELOWER_TAR_GZ]
+builddependencies = [('cray-python', EXTERNAL_MODULE)]
+preinstallopts = [
+    'mkdir -p build/doc/man/ && '
+    'cp scons.1 build/doc/man/ && '
+    'cp scons-time.1 build/doc/man/ && '
+    'cp sconsign.1 build/doc/man/ && '
+]
+sanity_check_paths = {
+    'files': ['bin/scons', 'bin/sconsign'],
+    'dirs': ['lib'],
+}
+options = {'modulename': False}
+
+moduleclass = 'devel'

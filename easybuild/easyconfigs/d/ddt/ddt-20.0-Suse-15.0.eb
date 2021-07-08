@@ -22,10 +22,13 @@ toolchain = SYSTEM
 source_urls = ['http://content.allinea.com/downloads/']
 sources = ['arm-forge-{}{}-x86_64.tar'.format(version, versionsuffix)]
 checksums = ['5c636626e87d20920837db46caf3577f']
-
+local_licence = ('type=2\n'
+    'serial_number=6784\n'
+    'hostname=velan.cscs.ch\n'
+    'serverport=4241\n')
 postinstallcmds = [
     'bash ./textinstall.sh --accept-licence %(installdir)s && '
-    'echo -e "type=2\nserial_number=6784\nhostname=velan\nserverport=4241" > '
+    'echo -e "' + local_licence + '" > '
     '%(installdir)s/licences/License && '
     'cp %(installdir)s/licences/License %(installdir)s/licences/Licence']
 
@@ -39,7 +42,8 @@ modextrapaths = {
     'PATH': 'libexec',
     'LD_LIBRARY_PATH': 'lib',
     'LD_LIBRARY_PATH': 'lib/64',
-    'MODULEPATH': 'share/modules/cray',
+    # setting MODULEPATH here conflicts with lmod, removing as only for map
+    # 'MODULEPATH': ['share/modules/cray'],
 }
 
 modextravars = {
