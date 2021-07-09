@@ -1,0 +1,35 @@
+easyblock = 'ConfigureMake'
+
+name = 'GREASY'
+version = '2.2.3'
+_commit_version = 'cf87548e7eef4cc900de892015a4931f513154e4'
+versionsuffix = '-serial-%s' % _commit_version[:6]
+
+homepage = 'https://github.com/jonarbo/GREASY'
+description = """Greasy is a tool designed to make easier the deployment of
+embarrassingly parallel simulations in any environment. It is able to run in
+parallel a list of different tasks."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = [{
+    'git_config': {
+        'url': 'https://github.com/BSC-Support-Team/',
+        'repo_name': '%s' % name,
+        'commit': '%s' % _commit_version,
+    },
+    'filename': '%s-%s-%s.tar.gz' % (name, version, _commit_version),
+}]
+configopts = '--enable-mpi-engine'
+
+patches = [
+    'cscs-config.patch'
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
