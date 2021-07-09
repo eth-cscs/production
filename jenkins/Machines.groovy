@@ -36,6 +36,6 @@ def tsa = [name: 'tsa',
            unusePath: '',
            modulesProduction: '',
            modulesUnuseProduction: '',
-           prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild/modules/all']
+           prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild']
 
 return [daint, dom, eiger, pilatus, tsa]
