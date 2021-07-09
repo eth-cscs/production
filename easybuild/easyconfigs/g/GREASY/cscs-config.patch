@@ -4,11 +4,11 @@ diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/bin/bash
-
+ 
  # Some setup parameters
  COMMAND=`echo $_ | rev | cut -d"/" -f1 | rev`
 @@ -8,9 +8,12 @@
-
+ 
  # Check if the script is launched using any kind of spawner
  if [ "$COMMAND" != "greasy" ]; then
 -  echo "Usage: greasy <taskfile.txt>"
@@ -21,12 +21,12 @@ diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
 +    echo "====================================================="
 +    exit
  fi
-
+ 
  # Decide which type of launcher to use depending on the engine selected.
 @@ -18,76 +21,172 @@
    GREASY_ENGINE=`cat $GREASY_CONFDIR/greasy.conf | grep "^[[:blank:]]*Engine=.*$"| tail -n1 | cut -d= -f 2 | cut -d" " -f1`
  fi
-
+ 
 -if [[ "$GREASY_ENGINE" = "mpi" || "$GREASY_ENGINE" = "MPI" ]]; then
 -  MPIRUN=@machine_mpirun@
 -	#this avoid 100% cpu usage for the master
@@ -58,13 +58,13 @@ diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
 +    echo "Defining GREASY_NODELIST is deprecated. Please use GREASY_NWORKERS or GREASY_NWORKERS_PER_NODE"
 +    exit
  fi
-
+ 
  # If running inside a slurm job, append the jobid to the log.
  if [ -z "$GREASY_LOGFILE" ]; then
 - if [ -n "$LSB_BATCH_JID" ];
 -	then
 -		export GREASY_LOGFILE=greasy-$LSB_BATCH_JID.log
--	else
+-	else 
 -		if [ -n "$SLURM_JOBID" ]; then
 -			export GREASY_LOGFILE=greasy-$SLURM_JOBID.log
 -		fi
@@ -244,7 +244,7 @@ diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
 +    echo "============================================================"
 +    exit
  fi
-
+ 
 +# echo "Inside GREASY.in"
 +# echo "GREASY_ENGINE: $GREASY_ENGINE"
 +# echo "GREASY_LAUNCHER: $GREASY_LAUNCHER"
@@ -252,9 +252,9 @@ diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
 +# echo "GREASY_NWORKERS: $GREASY_NWORKERS"
 +# echo "GREASY_NWORKERS_PER_NODE: $GREASY_NWORKERS_PER_NODE"
 +# echo "GREASY_NTASKS_PER_WORKER: $GREASY_NTASKS_PER_WORKER"
-
+ 
  # Run Greasy
 -echo $MPIRUN $EXE $@
  $MPIRUN $EXE $@
--
+- 
 +
