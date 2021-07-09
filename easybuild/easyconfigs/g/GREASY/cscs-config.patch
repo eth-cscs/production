@@ -1,0 +1,260 @@
+diff -Nru GREASY.orig/bin/greasy.in GREASY/bin/greasy.in
+--- GREASY.orig/bin/greasy.in	2021-07-08 21:33:04.763562000 +0200
++++ GREASY/bin/greasy.in	2021-07-09 11:01:07.662156000 +0200
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Some setup parameters
+ COMMAND=`echo $_ | rev | cut -d"/" -f1 | rev`
+@@ -8,9 +8,12 @@
+ 
+ # Check if the script is launched using any kind of spawner
+ if [ "$COMMAND" != "greasy" ]; then
+-  echo "Usage: greasy <taskfile.txt>"
+-  echo "Please rerun greasy without putting $COMMAND before"
+-  exit
++    echo "====================================================="
++    echo "Error in usage"
++    echo "Usage: greasy <taskfile.txt>"
++    echo "Please rerun GREASY without putting $COMMAND before"
++    echo "====================================================="
++    exit
+ fi
+ 
+ # Decide which type of launcher to use depending on the engine selected.
+@@ -18,76 +21,172 @@
+   GREASY_ENGINE=`cat $GREASY_CONFDIR/greasy.conf | grep "^[[:blank:]]*Engine=.*$"| tail -n1 | cut -d= -f 2 | cut -d" " -f1`
+ fi
+ 
+-if [[ "$GREASY_ENGINE" = "mpi" || "$GREASY_ENGINE" = "MPI" ]]; then
+-  MPIRUN=@machine_mpirun@
+-	#this avoid 100% cpu usage for the master
+-#	export I_MPI_WAIT_MODE=1
+-	export I_MPI_PIN="disable"
+-#	export OMPI_MCA_mpi_yield_when_idle=1
+-	export OMPI_MCA_mpi_warn_on_fork=0
+-else
+-  MPIRUN=""
++# Decide which type of launcher to use depending on the engine selected.
++if [ -z "$GREASY_LAUNCHER" ]; then
++  GREASY_LAUNCHER=`cat $GREASY_CONFDIR/greasy.conf | grep "^[[:blank:]]*BasicRemoteMethod=.*$"| tail -n1 | cut -d= -f 2 | cut -d" " -f1`
++fi
++
++# We only support to run GREASY within a SLURM allocation
++if [ -z "$SLURM_JOBID" ]; then
++    echo "========================================================="
++    echo "Error in usage"
++    echo "Attempting to run GREASY outside of SLURM"
++    echo "Please rerun within a SLURM allocation"
++    echo "========================================================="
++    exit
++fi
++
++# We do not read GREASY_NODELIST, we only set it
++# Thus, if the users set it, probably there is an intetion to control GREASY using it
++# Therefore we quit as fast as possible in order to avoid execution that do not match expectations
++if [[ -n "$GREASY_NODELIST" && -z "$GREASY_NWORKERS" && -z "$GREASY_NWORKERS_PER_NODE" ]]; then
++    echo "Defining GREASY_NODELIST is deprecated. Please use GREASY_NWORKERS or GREASY_NWORKERS_PER_NODE"
++    exit
+ fi
+ 
+ # If running inside a slurm job, append the jobid to the log.
+ if [ -z "$GREASY_LOGFILE" ]; then
+- if [ -n "$LSB_BATCH_JID" ];
+-	then
+-		export GREASY_LOGFILE=greasy-$LSB_BATCH_JID.log
+-	else 
+-		if [ -n "$SLURM_JOBID" ]; then
+-			export GREASY_LOGFILE=greasy-$SLURM_JOBID.log
+-		fi
+-	fi
+-fi
+-
+-if [[ -n "$MPIRUN" && -n "$LSB_BATCH_JID" ]]; then
+-  if [[ -n "$GREASY_NWORKERS" && -n "$GREASY_TASKS_PER_NODE" && $GREASY_TASKS_PER_NODE -ne 16 ]]; then
+-    GREASY_NNODES=$((($GREASY_NWORKERS + $GREASY_TASKS_PER_NODE -1) / $GREASY_TASKS_PER_NODE))
+-    echo "GREASY NWORKERS AND GREASY TASKS PER NODE DETECTED:"
+-    echo "TOTAL_NODES=$GREASY_NNODES"
+-    echo "GREASY_NWORKERS=$GREASY_NWORKERS"
+-    echo "GREASY_TASKS_PER_NODE=$GREASY_TASKS_PER_NODE"
+-    n=0;
+-    node="";
+-		if [ -f $TMPDIR/hostfile.txt ]; then
+-			rm $TMPDIR/hostfile.txt
+-		fi
+-    for i in `cat $LSB_DJOB_HOSTFILE`;do
+-      if [ "$i" == "$node" ];then
+-        continue
+-      fi
+-      node=$i;
+-      if [ $n -eq 0 ];then
+-        for j in `seq 1 $(($GREASY_TASKS_PER_NODE+1))`;do
+-          echo $node >> $TMPDIR/hostfile.txt
+-        done
+-      else
+-        for j in `seq 1 $GREASY_TASKS_PER_NODE`;do
+-          echo $node >> $TMPDIR/hostfile.txt
+-        done
+-      fi
+-      let n=$n+1
++    export GREASY_LOGFILE=greasy-$SLURM_JOBID.log
++fi
++
++get_slurm_ntasks_per_node() {
++    __tmp_ntasks_per_node=1
++    if [[ -n $SLURM_NTASKS_PER_NODE ]]; then
++        __tmp_ntasks_per_node=$SLURM_NTASKS_PER_NODE
++    elif [[ -n $SLURM_TASKS_PER_NODE ]]; then
++        __tmp_ntasks_per_node=`echo $SLURM_TASKS_PER_NODE | awk -F'(' '{print $1}'`
++    fi
++
++   echo ${__tmp_ntasks_per_node}
++   unset __tmp_ntasks_per_node
++}
++
++get_slurm_ntasks() {
++    __tmp_ntasks=1
++    if [[ -n $SLURM_NTASKS ]]; then
++        __tmp_ntasks=$SLURM_NTASKS
++    fi
++    echo ${__tmp_ntasks}
++    unset __tmp_ntasks
++}
++
++gen_greasy_nodelist() {
++    __tmp_num_greasy_workers_per_node=$1
++
++    if [[ -n $SLURM_NODELIST ]]; then
++        __tmp_slurm_nodelist=$SLURM_NODELIST
++    elif [[ -n $SLURM_JOB_NODELIST ]]; then
++        __tmp_slurm_nodelist=$SLURM_JOB_NODELIST
++    else
++        echo "====================================================="
++        echo "Internal Error"
++        echo "SLURM nodelist not defined"
++        echo "====================================================="
++        exit
++    fi
++
++    __tmp_nodelist=()
++    for i in {1..${__tmp_num_greasy_workers_per_node}}; do
++        __tmp_nodelist+="`scontrol show hostname ${__tmp_slurm_nodelist}`"
+     done
+-    MPIRUN="$MPIRUN -machine $TMPDIR/hostfile.txt -np $(($GREASY_NWORKERS + 1))"
+-    #export GREASY_NODELIST=`$MPIRUN hostname | tr "\n" ","`
+-    export GREASY_NODELIST=`cat $TMPDIR/hostfile.txt | tr "\n" ","`
+-  else
+-	  echo "NOTE: List provided by resource manager"
+-	export GREASY_NWORKERS=$(($LSB_DJOB_NUMPROC+1))
+-	MPIRUN="$MPIRUN -n $GREASY_NWORKERS";
+-        #export GREASY_NODELIST=`$MPIRUN hostname | tr "\n" ","`
+-   fi
++
++    echo ${__tmp_nodelist} | tr ' ' '\n' | sort | tr '\n' ',' | sed 's/.$//'
++
++    unset __tmp_slurm_nodelist
++    unset __tmp_num_greasy_workers_per_node
++    unset __tmp_nodelist
++}
++
++get_slurm_nnodes() {
++    __tmp_nnodes=1
++    if [[ -n $SLURM_NNODES ]]; then
++        __tmp_nnodes=$SLURM_NNODES
++    else
++        __tmp_nnodes=`gen_greasy_nodelist 1 | awk -F',' '{print NF}'`
++    fi
++    echo ${__tmp_nnodes}
++    unset __tmp_nnodes
++}
++
++# Use MPI engine and srun as launcher
++# We do not support MPI engine without srun launcher
++if [[ "$GREASY_ENGINE" = "mpi" || "$GREASY_ENGINE" = "MPI" ]]; then
++    #MPIRUN=@machine_mpirun@
++    MPIRUN="srun"
++    if [[ -n "$GREASY_NWORKERS" ]]; then
++        echo "Resetting GREASY_NWORKERS based on the SLURM allocation"
++    fi
++
++    if [[ -n "$GREASY_NWORKERS_PER_NODE" ]]; then
++        echo "Resetting GREASY_NWORKERS_PER_NODE based on the SLURM allocation"
++    fi
++
++    # The MPI engine is meant to be used with serial or OpenMP enabled tasks
++    __ntasks_per_node=`get_slurm_ntasks_per_node`
++    export GREASY_NODELIST=`gen_greasy_nodelist ${__ntasks_per_node}`
++    export GREASY_NWORKERS=`echo $GREASY_NODELIST | awk -F',' '{print NF}'`
++    export GREASY_NTASKS_PER_WORKER=1
++
++# Use basic engine with srun launcher
++elif [ "$GREASY_ENGINE" = "basic" ] && [ "$GREASY_LAUNCHER" = "srun" ]; then
++    export MPIRUN=""
++    __nnodes=`get_slurm_nnodes`
++    __ntasks=`get_slurm_ntasks`
++    __ntasks_per_node=`get_slurm_ntasks_per_node`
++
++    # Check if user has defined GREASY_NWORKERS_PER_NODE
++    # In this case, the user is giving us full control over the number of workers and on the nodelist
++    # This option should be the prefered one for distributed (MPI) and shared memory (OpenMP) applications
++    if [[ -n "$GREASY_NWORKERS_PER_NODE" ]]; then
++        if [ $GREASY_NWORKERS_PER_NODE -gt ${__ntasks_per_node} ]; then
++            export GREASY_NWORKERS_PER_NODE=${__ntasks_per_node}
++        elif [ $GREASY_NWORKERS_PER_NODE -lt 1 ]; then
++            export GREASY_NWORKERS_PER_NODE=1
++        fi
++        export GREASY_NODELIST=`gen_greasy_nodelist ${GREASY_NWORKERS_PER_NODE}`
++        export GREASY_NWORKERS=`echo $GREASY_NODELIST | awk -F',' '{print NF}'`
++    fi
++
++    if [[ -n "$GREASY_NWORKERS" && -z "$GREASY_NWORKERS_PER_NODE" ]]; then
++        if [ $GREASY_NWORKERS -gt ${__ntasks} ]; then
++            export GREASY_NWORKERS=${__ntasks}
++        elif [ $GREASY_NWORKERS -lt ${__nnodes} ]; then
++            export GREASY_NWORKERS=${__nnodes}
++        fi
++        export GREASY_NWORKERS_PER_NODE=`echo "$GREASY_NWORKERS / ${__nnodes}" | bc`
++        export GREASY_NODELIST=`gen_greasy_nodelist ${GREASY_NWORKERS_PER_NODE}`
++    fi
++
++    if [[ -z "$GREASY_NWORKERS_PER_NODE" ]]; then
++        export GREASY_NWORKERS_PER_NODE=${__ntasks_per_node}
++    fi
++
++    if [[ -z "$GREASY_NWORKERS" ]]; then
++        export GREASY_NODELIST=`gen_greasy_nodelist ${GREASY_NWORKERS_PER_NODE}`
++        export GREASY_NWORKERS=`echo $GREASY_NODELIST | awk -F',' '{print NF}'`
++    fi
++
++    export GREASY_NTASKS_PER_WORKER=`echo "${__ntasks_per_node} / ${GREASY_NWORKERS_PER_NODE}" | bc`
++    # TODO: We do not check if there is any resource waste, because one can have integer rounding
++    # GREASY_NWORKERS * GREASY_NTASKS_PER_WORKER should always be equal to __ntasks_per_node * __nnodes
++
+ else
+-	if [[ -n "$MPIRUN" && -n "$SLURM_NPROCS" ]]; then
+-		export GREASY_NWORKERS=$(($SLURM_NPROCS+1))
+-	#	export GREASY_NODELIST=`srun hostname | tr "\n" ","`
+-		MPIRUN="$MPIRUN -n $GREASY_NWORKERS -O"
+-	fi
++    echo "============================================================"
++    echo "Error in usage"
++    echo "Attempting to run GREASY in an unsupported mode"
++    echo "Please contact the support"
++    echo "============================================================"
++    exit
+ fi
+ 
++# echo "Inside GREASY.in"
++# echo "GREASY_ENGINE: $GREASY_ENGINE"
++# echo "GREASY_LAUNCHER: $GREASY_LAUNCHER"
++# echo "GREASY_NODELIST: $GREASY_NODELIST"
++# echo "GREASY_NWORKERS: $GREASY_NWORKERS"
++# echo "GREASY_NWORKERS_PER_NODE: $GREASY_NWORKERS_PER_NODE"
++# echo "GREASY_NTASKS_PER_WORKER: $GREASY_NTASKS_PER_WORKER"
+ 
+ # Run Greasy
+-echo $MPIRUN $EXE $@
+ $MPIRUN $EXE $@
+- 
++
