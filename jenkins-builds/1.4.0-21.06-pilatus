@@ -9,7 +9,7 @@
  singularity-3.5.3-eiger.eb
  GSL-2.6-cpeAMD-21.06.eb
  GSL-2.6-cpeCray-21.06.eb
- ParaView-5.9.0-cpeCray-21.06-OSMesa-python3.eb
+ ParaView-5.9.1-cpeCray-21.06-OSMesa-python3.eb
  Boost-1.75.0-cpeGNU-21.06.eb
  Boost-1.75.0-cpeGNU-21.06-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.06.eb
