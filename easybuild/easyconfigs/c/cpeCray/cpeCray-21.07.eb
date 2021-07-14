@@ -1,0 +1,17 @@
+# Compiler toolchain for Cray EX Programming Environment Cray compiler
+easyblock = 'cpeToolchain'
+
+name = 'cpeCray'
+version = "21.07"
+
+homepage = 'https://pubs.cray.com'
+description = """Toolchain using Cray compiler wrapper with cce module (CPE release: %s).\n""" % version
+
+toolchain = SYSTEM
+
+dependencies = [
+   ("cpe/%(version)s", EXTERNAL_MODULE),
+   ('PrgEnv-cray', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'
