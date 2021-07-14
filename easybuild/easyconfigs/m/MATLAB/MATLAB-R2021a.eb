@@ -14,15 +14,12 @@ sources = ['/apps/common/UES/easybuild/sources/m/%s/%s.tar' % (name, version)]
 java_options = '-Xmx2048m'
 
 # read local license file
-import os as local_os
 local_licensefile = '/apps/common/UES/easybuild/sources/m/MATLAB/' + '%s-%s.txt' % (name, version)
-local_filehandle = local_os.open(local_licensefile, local_os.O_RDONLY)
-local_bytext = local_os.read(local_filehandle, 1000)
-local_text = local_bytext.decode('utf-8')
-# FIXME: the open() function raises the error below only with EasyBuild 4.4.0 and newer, not with 4.3.4
+# FIXME: without using "local_filehandle = None" an error occurs with EasyBuild 4.4.0 and newer, not with 4.3.4
 # Failed to copy 'local_filehandle' easyconfig parameter: cannot serialize '_io.TextIOWrapper' object
-# with open(local_licensefile, 'r') as local_filehandle:
-#    local_text = local_filehandle.read()
+with open(local_licensefile, 'r') as local_filehandle:
+    local_text = local_filehandle.read()
+local_filehandle = None
 
 # read key, license_server and license_server_port
 import re as local_re
