@@ -7,7 +7,7 @@ version = '1.6.0'
 homepage = 'https://julialang.org'
 description = "Extensions for julia"
 
-toolchain = {'name': 'cpeGNU', 'version': '21.06'}
+toolchain = {'name': 'cpeGNU', 'version': '21.07'}
 toolchainopts = {'pic': True, 'verbose': True}
 
 dependencies = [
