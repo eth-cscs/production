@@ -19,10 +19,6 @@ source_urls = ['https://cache.ruby-lang.org/pub/ruby/2.7/']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['8925a95e31d8f2c81749025a52a544ea1d05dad18794e6828709268b92e55338']
 
-dependencies = [
-    ('OpenSSL', '1.1.1i'),
-]
-
 sanity_check_paths = {
     'files': ['bin/ruby', 'bin/rake', 'bin/gem', 'bin/erb',
               'bin/ri', 'bin/irb', 'bin/rdoc', 'lib/libruby.so.2.7',

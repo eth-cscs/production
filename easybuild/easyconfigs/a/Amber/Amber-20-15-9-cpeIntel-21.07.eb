@@ -1,0 +1,53 @@
+# @author: Victor Holanda
+
+easyblock = 'MakeCp'
+
+name = 'Amber'
+version = '20-15-9'
+
+homepage = 'http://ambermd.org/'
+description = """Amber (Assisted Model Building with Energy Refinement)
+is software for performing molecular dynamics and structure prediction"""
+
+toolchain = {'name': 'cpeIntel', 'version': '21.07'}
+toolchainopts = {'verbose': False}
+
+sources = [
+    '/apps/common/UES/easybuild/sources/a/%(name)s/Amber20.tar.bz2',
+    '/apps/common/UES/easybuild/sources/a/%(name)s/AmberTools20.tar.bz2',
+]
+
+# cray-hdf5 and cray-netcdf are not available with PrgEnv-intel with cpe/21.04
+# builddependencies = [
+# ('cray-hdf5', EXTERNAL_MODULE),
+# ('cray-netcdf', EXTERNAL_MODULE),
+# ]
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11'),
+]
+
+# single make process since parallel builds might fail:
+# if you uncomment the next line, change every "make -j" to "make -j1"
+# maxparallel = 1
+
+prebuildopts = "cd .. && mv amber20_src/* . && export AMBER_SOURCE=%(builddir)s && export AMBER_PREFIX=%(installdir)s && export AMBER_HOME=%(installdir)s && ./update_amber --update-to=AmberTools.15,%(name)s.9 && ./configure       -noX11 --skip-python intel <<< N && find . -name 'config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && make -j && make install && ./configure       -noX11 -openmp --skip-python intel <<< N && find . -name 'config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && make -j && make install && ./configure -mpi  -noX11 -openmp --skip-python intel <<< N && find . -name 'config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && make -j && make install && ./configure -mpi  -noX11         --skip-python intel <<< N && find . -name 'config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h msglevel_2//g' '{}' \\; && find . -name 'external.config.h' -exec sed -i -e 's/-h gnu//g' '{}' \\; && make -j && make install && "
+buildopts = 'install'
+
+buildininstalldir = True
+whatis = [
+    "%(name)s 20 && AmberTools 20",
+    "AmberTools patch level 15",
+    "%(name)s patch level 9",
+]
+files_to_copy = []
+
+sanity_check_paths = {
+    'files': ['bin/pmemd.MPI', 'bin/pmemd'],
+    'dirs': [],
+}
+
+modextravars = {'AMBERHOME': '%(builddir)s'}
+
+moduleclass = 'bio'
