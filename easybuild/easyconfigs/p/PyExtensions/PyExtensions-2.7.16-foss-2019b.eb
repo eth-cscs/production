@@ -26,6 +26,7 @@ exts_default_options = {
 
 #fixing module versions to prevent build issue due to dropping python 2 support
 exts_list = [
+    ('setuptools_scm', '5.0.2'),
     ('backports.functools_lru_cache', '1.6.1'),
     ('funcsigs', '1.0.2'),
     ('more-itertools', '5.0.0'),

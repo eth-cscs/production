@@ -14,7 +14,7 @@ source_urls = [
 ]
 sources = [SOURCELOWER_TAR_GZ]
 
-builddependencies = [
+dependencies = [
     ('UCX', '1.8.1', '', ('GCC', '8.3.0')),
 ]
 

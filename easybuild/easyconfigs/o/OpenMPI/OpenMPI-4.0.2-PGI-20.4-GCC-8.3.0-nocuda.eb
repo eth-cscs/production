@@ -14,7 +14,7 @@ source_urls = [
 ]
 sources = [SOURCELOWER_TAR_GZ]
 
-builddependencies = [
+dependencies = [
     ('UCX', '1.8.1', '', ('GCC', '8.3.0')),
 ]
 
@@ -50,14 +50,13 @@ configopts = (
 
 parallel = 8
 
+modtclfooter = """
+    setenv UCX_TLS rc_x,ud_x,mm,shm,cma
+"""
 postinstallcmds = [
     "sed -i -e '50 i mtl=^ofi' %(installdir)s/etc/%(namelower)s-mca-params.conf",
     "sed -i -e '50 i pml=ucx' %(installdir)s/etc/%(namelower)s-mca-params.conf",
 ]
-
-modtclfooter = """
-    setenv UCX_TLS rc_x,ud_x,mm,shm,cma
-"""
 
 sanity_check_paths = {
     'files': [
