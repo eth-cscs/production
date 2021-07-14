@@ -18,9 +18,7 @@ arch_name = 'mc'
 
 exts_list = [
     ('Plots.jl', '1.5.7', {'source_tmpl': 'v1.5.7.tar.gz', 'source_urls': ['https://github.com/JuliaPlots/Plots.jl/archive/']}),
-    #    ('PyCall.jl', '1.91.4', {'source_tmpl': 'v1.91.4.tar.gz', 'source_urls': ['https://github.com/JuliaPy/PyCall.jl/archive/']}),
     ('HDF5.jl', '0.13.3', {'source_tmpl': 'v0.13.3.tar.gz', 'source_urls': ['https://github.com/JuliaIO/HDF5.jl/archive/']}),
-    #    ('PyCall.jl', '1.91.4', {'source_tmpl': 'v1.91.4.tar.gz', 'source_urls': ['https://github.com/JuliaPy/PyCall.jl/archive/']}),
 ]
 
 moduleclass = 'tools'
