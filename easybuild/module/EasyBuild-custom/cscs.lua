@@ -15,7 +15,7 @@ conflict("EasyBuild-custom")
 
 -- EasyBuild-custom SETUP 
 local eb_config_dir="/apps/common/UES/jenkins/production/easybuild"
-local eb_module_dir="/apps/common/UES/easybuild"
+local eb_module_dir="/apps/common/UES/easybuild/modules/all"
 local eb_root_dir="/apps/common/UES/jenkins/easybuild/software/EasyBuild-custom/cscs"
 local eb_runtime_dir=os.getenv("SCRATCH") or pathJoin("/tmp", os.getenv("USER"))
 local eb_source_dir="/apps/common/UES/easybuild/sources"
@@ -76,19 +76,16 @@ setenv("EASYBUILD_MODULES_TOOL", "Lmod")
 setenv("EASYBUILD_OPTARCH", os.getenv("CRAY_CPU_TARGET"))
 setenv("EASYBUILD_RECURSIVE_MODULE_UNLOAD", "0")
 
--- EASYBUILD_PREFIX
-if not os.getenv("EASYBUILD_PREFIX") then
-	setenv("EASYBUILD_PREFIX", pathJoin(os.getenv("HOME"), "easybuild", system))
-end
 -- EASYBUILD_INSTALLPATH
 if not os.getenv("EASYBUILD_INSTALLPATH") then
         local eb_installpath=os.getenv("EASYBUILD_PREFIX") or pathJoin(os.getenv("HOME"), "easybuild", system)
         setenv("EASYBUILD_INSTALLPATH", eb_installpath)
 end
-
--- add folder with already installed modules to the MODULEPATH
-prepend_path("MODULEPATH", pathJoin(os.getenv("EASYBUILD_INSTALLPATH"), "modules/all"))
+-- EASYBUILD_PREFIX
+if not os.getenv("EASYBUILD_PREFIX") then
+	setenv("EASYBUILD_PREFIX", pathJoin(os.getenv("HOME"), "easybuild", system))
+end
 
 -- add EasyBuild module folder to MODULEPATH and load EasyBuild
-prepend_path("MODULEPATH", pathJoin(eb_module_dir, "modules/all"))
+prepend_path("MODULEPATH", eb_module_dir)
 load("EasyBuild")
