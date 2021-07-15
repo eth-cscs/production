@@ -122,7 +122,6 @@ stage('Update Stage') {
                     sh("""#!/bin/bash -l
 
                         # EasyBuild paths
-                        #export EASYBUILD_INSTALLPATH="${eb_installpath}"
                         export EASYBUILD_PREFIX="${eb_installpath}"
                         export EASYBUILD_TMPDIR="\$EASYBUILD_PREFIX/tmp"
                         export EB_CUSTOM_REPOSITORY="$WORKSPACE/easybuild"
