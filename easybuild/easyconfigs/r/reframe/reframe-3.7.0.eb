@@ -47,5 +47,7 @@ sanity_check_paths = {
     'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests',],
 }
 
-sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
+# FIXME: We run `reframe -l` to enforce autodetection the first time ReFrame runs
+# see https://github.com/eth-cscs/reframe/issues/2072
+sanity_check_commands = ['reframe -V', 'reframe -l', 'python3 -m pytest --version']
 moduleclass = 'devel'
