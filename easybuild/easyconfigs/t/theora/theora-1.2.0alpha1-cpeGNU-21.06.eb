@@ -7,7 +7,7 @@ version = '1.2.0alpha1'
 homepage = 'https://www.theora.org/'
 description = "Theora, a free and open video compression format from the Xiph.org Foundation. "
 
-toolchain = {'name': 'cpeGNU', 'version': '21.04'}
+toolchain = {'name': 'cpeGNU', 'version': '21.06'}
 
 source_urls = ['http://downloads.xiph.org/releases/%(namelower)s/']
 sources = ['libtheora-%(version)s.tar.gz']
