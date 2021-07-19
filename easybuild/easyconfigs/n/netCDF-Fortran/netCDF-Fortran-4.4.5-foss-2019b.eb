@@ -1,4 +1,5 @@
 # contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
 name = 'netCDF-Fortran'
 version = '4.4.5'
 
@@ -10,7 +11,7 @@ description = """
 """
 
 toolchain = {'name': 'foss', 'version': '2019b'}
-toolchainopts = {'pic': True}
+toolchainopts = {'usempi': True, 'pic': True}
 
 sources = [{
     'filename': '%(namelower)s-%(version)s.tar.gz',
@@ -24,5 +25,18 @@ sources = [{
 dependencies = [
     ('netCDF', '4.7.0'),
 ]
+
+preconfigopts = (
+    'CC=`which mpicc` '
+    'CXX=`which mpic++` ' 
+    'CPPFLAGS="-I$EBROOTNETCDF/include -L$EBROOTNETCDF/lib" ' 
+    'FC=`which mpifort` ' 
+    'FCFLAGS="-O2 -ftree-vectorize -fno-math-errno -fPIC" ' 
+    'F77=`which gfortran` '  
+    'FFLAGS="-O2 -ftree-vectorize -fno-math-errno -fPIC" '
+)
+configopts = (
+    '--with-pic'
+)
 
 moduleclass = 'data'

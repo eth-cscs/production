@@ -1,4 +1,5 @@
 # contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
 name = 'netCDF'
 version = '4.7.0'
 
@@ -13,6 +14,7 @@ toolchain = {'name': 'foss', 'version': '2019b'}
 toolchainopts = {'usempi': True, 'pic': True}
 
 sources = [{
+#'/apps/common/UES/easybuild/sources/n/netCDF/netcdf-4.7.0.tar.gz'
     'filename': '%(namelower)s-%(version)s.tar.gz',
     'git_config': {
         'url': 'https://github.com/Unidata',
@@ -29,17 +31,32 @@ dependencies = [
     ('HDF5', '1.10.5'),
 ]
 
-# make sure both static and shared libs are built
-configopts = [
-    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
-     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
-     "-DBUILD_SHARED_LIBS=ON "
-     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
-    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
-     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
-     "-DBUILD_SHARED_LIBS=OFF "
-     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
-]
+preconfigopts = (
+    'CC=mpicc '
+    'CXX=mpic++ '
+    'FC=mpifort '
+    'F77=mpifort '
+    'F90=mpifort '
+)
+
+configopts = (
+    '--enable-shared=yes '
+    '--enable-static=yes '
+    '--disable-dap-remote-tests '
+    'CFLAGS="-DHAVE_STRDUP" '
+)
+#
+## make sure both static and shared libs are built
+#configopts = [
+#    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
+#     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+#     "-DBUILD_SHARED_LIBS=ON "
+#     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
+#    ("-DCURL_LIBRARY=$EBROOTCURL/lib/libcurl.so "
+#     "-DCURL_INCLUDE_DIR=$EBROOTCURL/include "
+#     "-DBUILD_SHARED_LIBS=OFF "
+#     "-DCMAKE_C_FLAGS='-DHAVE_STRDUP'"),
+#]
 
 maxparallel = 1
 

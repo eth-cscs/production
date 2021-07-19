@@ -1,4 +1,4 @@
-# Compiler toolchain for Cray EX Programming Environment Cray compiler (cpe-cray)
+# Compiler toolchain for Cray EX Programming Environment Cray compiler
 easyblock = 'cpeToolchain'
 
 name = 'cpeCray'
@@ -10,44 +10,8 @@ description = """Toolchain using Cray compiler wrapper with cce module (CPE rele
 toolchain = SYSTEM
 
 dependencies = [
+   ("cpe/%(version)s", EXTERNAL_MODULE),
    ('PrgEnv-cray', EXTERNAL_MODULE)
 ]
-
-modluafooter = '''
-if not ( isloaded("cce") ) then
-    load("cce")
-end
-if not ( isloaded("cray-dsmml") ) then
-    load("cray-dsmml")
-end
-if not ( isloaded("cray-libsci") ) then
-    load("cray-libsci")
-end
-if not ( isloaded("cray-mpich") ) then
-    load("cray-mpich")
-end
-if not ( isloaded("craype") ) then
-    load("craype")
-end
-if not ( isloaded("craype-x86-rome") ) then
-    load("craype-x86-rome")
-end
-if not ( isloaded("craype-network-ofi") ) then
-    load("craype-network-ofi")
-end
-if not ( isloaded("libfabric") ) then
-    load("libfabric")
-end
-if not ( isloaded("perftools-base") ) then
-    load("perftools-base")
-end
-if not ( isloaded("xpmem") ) then
-    load("xpmem")
-end
-if not ( isloaded("cpe/%(version)s") ) then
-    load("cpe/%(version)s")
-end
-prepend_path("MODULEPATH",root:gsub("software","modules/all/Toolchain"))
-''' 
 
 moduleclass = 'toolchain'
