@@ -46,7 +46,7 @@ packages:
       spec: automake@1.15.1
   bash:
     externals:
-    - prefix: /
+    - prefix: /usr/local
       spec: bash@4.4.23
   bison:
     externals:
@@ -79,10 +79,13 @@ packages:
       spec: cray-fftw@3.3.8.7 %intel@19.0.1.144.20.08
     - modules:
       - cray-fftw/3.3.8.7
+      spec: cray-fftw@3.3.8.7 %intel@19.1.3.304.20.08
+    - modules:
+      - cray-fftw/3.3.8.7
       spec: cray-fftw@3.3.8.7 %intel@19.1.1.217.20.08
     - modules:
       - cray-fftw/3.3.8.7
-      spec: cray-fftw@3.3.8.7 %intel@19.1.3.304.20.08
+      spec: cray-fftw@3.3.8.7 %intel@2021.2.0.20.08
     - modules:
       - cray-fftw/3.3.8.7
       spec: cray-fftw@3.3.8.7 %pgi@20.1.0.20.08
@@ -109,10 +112,13 @@ packages:
       spec: cray-fftw@3.3.8.8 %intel@19.0.1.144.20.11
     - modules:
       - cray-fftw/3.3.8.8
+      spec: cray-fftw@3.3.8.8 %intel@19.1.3.304.20.11
+    - modules:
+      - cray-fftw/3.3.8.8
       spec: cray-fftw@3.3.8.8 %intel@19.1.1.217.20.11
     - modules:
       - cray-fftw/3.3.8.8
-      spec: cray-fftw@3.3.8.8 %intel@19.1.3.304.20.11
+      spec: cray-fftw@3.3.8.8 %intel@2021.2.0.20.11
     - modules:
       - cray-fftw/3.3.8.8
       spec: cray-fftw@3.3.8.8 %pgi@20.1.0.20.11
@@ -142,10 +148,10 @@ packages:
       spec: cray-fftw@3.3.8.8 %intel@19.0.1.144.21.02
     - modules:
       - cray-fftw/3.3.8.8
-      spec: cray-fftw@3.3.8.8 %intel@19.1.1.217.21.02
+      spec: cray-fftw@3.3.8.8 %intel@19.1.3.304.21.02
     - modules:
       - cray-fftw/3.3.8.8
-      spec: cray-fftw@3.3.8.8 %intel@19.1.3.304.21.02
+      spec: cray-fftw@3.3.8.8 %intel@19.1.1.217.21.02
     - modules:
       - cray-fftw/3.3.8.8
       spec: cray-fftw@3.3.8.8 %pgi@20.1.0.21.02
@@ -155,6 +161,45 @@ packages:
     - modules:
       - cray-fftw/3.3.8.8
       spec: cray-fftw@3.3.8.8 %cce@11.0.2.21.02
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@8.1.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@9.3.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@10.2.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@8.3.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@10.1.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %gcc@10.3.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %intel@19.0.1.144.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %intel@19.1.3.304.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %intel@19.1.1.217.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %intel@2021.2.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %pgi@20.1.0.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %pgi@20.1.1.21.05
+    - modules:
+      - cray-fftw/3.3.8.10
+      spec: cray-fftw@3.3.8.10 %cce@11.0.4.21.05
   cray-libsci:
     buildable: false
     externals:
@@ -172,10 +217,13 @@ packages:
       spec: cray-libsci@20.06.1 +mpi+openmp %intel@19.0.1.144.20.08
     - modules:
       - cray-libsci/20.06.1
+      spec: cray-libsci@20.06.1 +mpi+openmp %intel@19.1.3.304.20.08
+    - modules:
+      - cray-libsci/20.06.1
       spec: cray-libsci@20.06.1 +mpi+openmp %intel@19.1.1.217.20.08
     - modules:
       - cray-libsci/20.06.1
-      spec: cray-libsci@20.06.1 +mpi+openmp %intel@19.1.3.304.20.08
+      spec: cray-libsci@20.06.1 +mpi+openmp %intel@2021.2.0.20.08
     - modules:
       - cray-libsci/20.06.1
       spec: cray-libsci@20.06.1 +mpi+openmp %pgi@20.1.0.20.08
@@ -202,10 +250,13 @@ packages:
       spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.0.1.144.20.11
     - modules:
       - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.20.11
+    - modules:
+      - cray-libsci/20.09.1
       spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.20.11
     - modules:
       - cray-libsci/20.09.1
-      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.20.11
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@2021.2.0.20.11
     - modules:
       - cray-libsci/20.09.1
       spec: cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.0.20.11
@@ -235,10 +286,10 @@ packages:
       spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.0.1.144.21.02
     - modules:
       - cray-libsci/20.09.1
-      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.21.02
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.21.02
     - modules:
       - cray-libsci/20.09.1
-      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.21.02
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.21.02
     - modules:
       - cray-libsci/20.09.1
       spec: cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.0.21.02
@@ -248,6 +299,45 @@ packages:
     - modules:
       - cray-libsci/20.09.1
       spec: cray-libsci@20.09.1 +mpi+openmp %cce@11.0.2.21.02
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@8.1.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@9.3.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@10.2.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@8.3.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@10.1.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %gcc@10.3.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.0.1.144.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.3.304.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@19.1.1.217.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %intel@2021.2.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.0.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %pgi@20.1.1.21.05
+    - modules:
+      - cray-libsci/20.09.1
+      spec: cray-libsci@20.09.1 +mpi+openmp %cce@11.0.4.21.05
   cray-mpich:
     buildable: false
     externals:
@@ -265,10 +355,13 @@ packages:
       spec: cray-mpich@7.7.15 %intel@19.0.1.144.20.08
     - modules:
       - cray-mpich/7.7.15
+      spec: cray-mpich@7.7.15 %intel@19.1.3.304.20.08
+    - modules:
+      - cray-mpich/7.7.15
       spec: cray-mpich@7.7.15 %intel@19.1.1.217.20.08
     - modules:
       - cray-mpich/7.7.15
-      spec: cray-mpich@7.7.15 %intel@19.1.3.304.20.08
+      spec: cray-mpich@7.7.15 %intel@2021.2.0.20.08
     - modules:
       - cray-mpich/7.7.15
       spec: cray-mpich@7.7.15 %pgi@20.1.0.20.08
@@ -295,10 +388,13 @@ packages:
       spec: cray-mpich@7.7.16 %intel@19.0.1.144.20.11
     - modules:
       - cray-mpich/7.7.16
+      spec: cray-mpich@7.7.16 %intel@19.1.3.304.20.11
+    - modules:
+      - cray-mpich/7.7.16
       spec: cray-mpich@7.7.16 %intel@19.1.1.217.20.11
     - modules:
       - cray-mpich/7.7.16
-      spec: cray-mpich@7.7.16 %intel@19.1.3.304.20.11
+      spec: cray-mpich@7.7.16 %intel@2021.2.0.20.11
     - modules:
       - cray-mpich/7.7.16
       spec: cray-mpich@7.7.16 %pgi@20.1.0.20.11
@@ -328,10 +424,10 @@ packages:
       spec: cray-mpich@7.7.16 %intel@19.0.1.144.21.02
     - modules:
       - cray-mpich/7.7.16
-      spec: cray-mpich@7.7.16 %intel@19.1.1.217.21.02
+      spec: cray-mpich@7.7.16 %intel@19.1.3.304.21.02
     - modules:
       - cray-mpich/7.7.16
-      spec: cray-mpich@7.7.16 %intel@19.1.3.304.21.02
+      spec: cray-mpich@7.7.16 %intel@19.1.1.217.21.02
     - modules:
       - cray-mpich/7.7.16
       spec: cray-mpich@7.7.16 %pgi@20.1.0.21.02
@@ -341,21 +437,69 @@ packages:
     - modules:
       - cray-mpich/7.7.16
       spec: cray-mpich@7.7.16 %cce@11.0.2.21.02
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@8.1.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@9.3.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@10.2.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@8.3.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@10.1.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %gcc@10.3.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %intel@19.0.1.144.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %intel@19.1.3.304.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %intel@19.1.1.217.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %intel@2021.2.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %pgi@20.1.0.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %pgi@20.1.1.21.05
+    - modules:
+      - cray-mpich/7.7.17
+      spec: cray-mpich@7.7.17 %cce@11.0.4.21.05
   cuda:
     buildable: false
     externals:
     - modules:
-      - cudatoolkit/11.1.0_3.35-7.0.2.1_3.6__g62b8859
-      spec: cuda@11.1.0_3.35-7.0.2.1_3.6__g62b8859
+      - cudatoolkit/10.2.89_3.28-2.1__g52c0314
+      spec: cuda@10.2.89_3.28-2.1__g52c0314
     - modules:
-      - cudatoolkit/10.2.89_3.29-7.0.2.1_3.27__g67354b4
-      spec: cuda@10.2.89_3.29-7.0.2.1_3.27__g67354b4
+      - cudatoolkit/11.0.2_3.38-8.1__g5b73779
+      spec: cuda@11.0.2_3.38-8.1__g5b73779
     - modules:
-      - cudatoolkit/11.0.2_3.34-7.0.2.1_4.6__g017096a
-      spec: cuda@11.0.2_3.34-7.0.2.1_4.6__g017096a
+      - cudatoolkit/11.1.0_3.39-4.1__g484e319
+      spec: cuda@11.1.0_3.39-4.1__g484e319
     - modules:
-      - cudatoolkit/11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1
-      spec: cuda@11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1
+      - cudatoolkit/11.2.0_3.39-2.1__gf93aa1c
+      spec: cuda@11.2.0_3.39-2.1__gf93aa1c
+    - modules:
+      - cudatoolkit/21.3_10.2
+      spec: cuda@21.3_10.2
+    - modules:
+      - cudatoolkit/21.3_11.0
+      spec: cuda@21.3_11.0
+    - modules:
+      - cudatoolkit/21.3_11.2
+      spec: cuda@21.3_11.2
   diffutils:
     externals:
     - prefix: /usr
@@ -368,19 +512,23 @@ packages:
     variants: +mpi +openmp precision=long_double,double,float
   findutils:
     externals:
-    - prefix: /
+    - prefix: /usr
       spec: findutils@4.6.0
   flex:
     externals:
     - prefix: /usr
       spec: flex@2.6.4+lex
+  gawk:
+    externals:
+    - prefix: /usr
+      spec: gawk@4.2.1
   gcc:
     externals:
     - extra_attributes:
         compilers:
           c: /usr/bin/gcc-7
-          cxx: /usr/bin/g++-7
-          fortran: /usr/bin/gfortran-7
+          cxx: /usr/bin/g++
+          fortran: /usr/bin/gfortran
       prefix: /usr
       spec: gcc@7.5.0 languages=c,c++,fortran
   ghostscript:
@@ -418,10 +566,13 @@ packages:
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.20.08
     - modules:
       - cray-hdf5/1.12.0.0
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.08
+    - modules:
+      - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.20.08
     - modules:
       - cray-hdf5/1.12.0.0
-      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.08
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@2021.2.0.20.08
     - modules:
       - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.20.08
@@ -448,10 +599,13 @@ packages:
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.20.11
     - modules:
       - cray-hdf5/1.12.0.0
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.11
+    - modules:
+      - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.20.11
     - modules:
       - cray-hdf5/1.12.0.0
-      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.20.11
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@2021.2.0.20.11
     - modules:
       - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.20.11
@@ -481,10 +635,10 @@ packages:
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.0.1.144.21.02
     - modules:
       - cray-hdf5/1.12.0.0
-      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.21.02
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.21.02
     - modules:
       - cray-hdf5/1.12.0.0
-      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.3.304.21.02
+      spec: hdf5@1.12.0.0 ~mpi+hl+fortran %intel@19.1.1.217.21.02
     - modules:
       - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %pgi@20.1.0.21.02
@@ -494,6 +648,45 @@ packages:
     - modules:
       - cray-hdf5/1.12.0.0
       spec: hdf5@1.12.0.0 ~mpi+hl+fortran %cce@11.0.2.21.02
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@8.1.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@9.3.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@10.2.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@8.3.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@10.1.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %gcc@10.3.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %intel@19.0.1.144.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %intel@19.1.3.304.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %intel@19.1.1.217.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %intel@2021.2.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %pgi@20.1.0.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %pgi@20.1.1.21.05
+    - modules:
+      - cray-hdf5/1.12.0.4
+      spec: hdf5@1.12.0.4 ~mpi+hl+fortran %cce@11.0.4.21.05
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %gcc@8.1.0.20.08
@@ -508,10 +701,13 @@ packages:
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.08
+    - modules:
+      - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.08
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@2021.2.0.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.20.08
@@ -538,10 +734,13 @@ packages:
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.11
+    - modules:
+      - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.20.11
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@2021.2.0.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.20.11
@@ -571,10 +770,10 @@ packages:
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.0.1.144.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.21.02
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.3.304.21.02
+      spec: hdf5@1.12.0.0 +mpi+hl+fortran %intel@19.1.1.217.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %pgi@20.1.0.21.02
@@ -584,6 +783,45 @@ packages:
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: hdf5@1.12.0.0 +mpi+hl+fortran %cce@11.0.2.21.02
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@8.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@9.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@10.2.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@8.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@10.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %gcc@10.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %intel@19.0.1.144.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %intel@19.1.3.304.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %intel@19.1.1.217.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %intel@2021.2.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %pgi@20.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %pgi@20.1.1.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: hdf5@1.12.0.4 +mpi+hl+fortran %cce@11.0.4.21.05
   krb5:
     externals:
     - prefix: /usr/lib/mit
@@ -628,10 +866,13 @@ packages:
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08
+    - modules:
+      - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@2021.2.0.20.08
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
@@ -658,10 +899,13 @@ packages:
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11
+    - modules:
+      - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@2021.2.0.20.11
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
@@ -691,10 +935,10 @@ packages:
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
-      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02
+      spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02
@@ -704,6 +948,45 @@ packages:
     - modules:
       - cray-hdf5-parallel/1.12.0.0
       spec: netcdf@1.12.0.0 +parallel-netcdf+mpi %cce@11.0.2.21.02
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@8.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@9.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@10.2.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@8.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@10.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %gcc@10.3.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %intel@19.0.1.144.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %intel@19.1.3.304.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %intel@19.1.1.217.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %intel@2021.2.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %pgi@20.1.0.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %pgi@20.1.1.21.05
+    - modules:
+      - cray-hdf5-parallel/1.12.0.4
+      spec: netcdf@1.12.0.4 +parallel-netcdf+mpi %cce@11.0.4.21.05
   netcdf-c:
     buildable: true
     externals:
@@ -721,10 +1004,13 @@ packages:
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@2021.2.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
@@ -751,10 +1037,13 @@ packages:
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@2021.2.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
@@ -784,10 +1073,10 @@ packages:
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02
+      spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02
@@ -797,6 +1086,45 @@ packages:
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: netcdf-c@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.2.21.02
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@8.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@9.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@10.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@8.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@10.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %gcc@10.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %intel@19.0.1.144.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %intel@19.1.3.304.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %intel@19.1.1.217.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %intel@2021.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %pgi@20.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %pgi@20.1.1.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-c@4.7.4.4 +parallel-netcdf+mpi %cce@11.0.4.21.05
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08
@@ -811,10 +1139,13 @@ packages:
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08
     - modules:
       - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@2021.2.0.20.08
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08
@@ -841,10 +1172,13 @@ packages:
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11
     - modules:
       - cray-netcdf/4.7.4.0
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@2021.2.0.20.11
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11
@@ -874,10 +1208,10 @@ packages:
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.21.02
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02
+      spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.21.02
@@ -887,99 +1221,183 @@ packages:
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-c@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.2.21.02
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@8.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@9.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.2.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@8.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %intel@19.0.1.144.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %intel@19.1.3.304.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %intel@19.1.1.217.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %intel@2021.2.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %pgi@20.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %pgi@20.1.1.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-c@4.7.4.4 ~parallel-netcdf+mpi %cce@11.0.4.21.05
   netcdf-fortran:
     buildable: true
     externals:
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.08
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.1.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.08
+      spec: netcdf-fortran@4.7.4.0 %gcc@9.3.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.08
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.3.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.08
+      spec: netcdf-fortran@4.7.4.0 %intel@19.0.1.144.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.08
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.3.304.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.08
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.1.217.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.08
+      spec: netcdf-fortran@4.7.4.0 %intel@2021.2.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.08
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@10.0.2.20.08
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.1.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %cce@10.0.2.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.1.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %gcc@9.3.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.3.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.20.11
+      spec: netcdf-fortran@4.7.4.0 %gcc@10.1.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.20.11
+      spec: netcdf-fortran@4.7.4.0 %intel@19.0.1.144.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.20.11
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.3.304.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.1.217.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.20.11
+      spec: netcdf-fortran@4.7.4.0 %intel@2021.2.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.0.20.11
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.1.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.1.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@9.3.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %cce@11.0.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.2.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.1.0.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@8.3.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %gcc@9.3.0.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %gcc@10.1.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %gcc@10.2.0.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.0.1.144.21.02
+      spec: netcdf-fortran@4.7.4.0 %gcc@8.3.0.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.1.217.21.02
+      spec: netcdf-fortran@4.7.4.0 %gcc@10.1.0.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %intel@19.1.3.304.21.02
+      spec: netcdf-fortran@4.7.4.0 %intel@19.0.1.144.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.0.21.02
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.3.304.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %pgi@20.1.1.21.02
+      spec: netcdf-fortran@4.7.4.0 %intel@19.1.1.217.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 +parallel-netcdf+mpi %cce@11.0.2.21.02
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.0.21.02
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 %pgi@20.1.1.21.02
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 %cce@11.0.2.21.02
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@8.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@9.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@10.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@8.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@10.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %gcc@10.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %intel@19.0.1.144.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %intel@19.1.3.304.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %intel@19.1.1.217.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %intel@2021.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %pgi@20.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %pgi@20.1.1.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 %cce@11.0.4.21.05
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %gcc@8.1.0.20.08
@@ -994,10 +1412,13 @@ packages:
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.08
     - modules:
       - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08
+    - modules:
+      - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.08
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.08
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@2021.2.0.20.08
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.08
@@ -1024,10 +1445,13 @@ packages:
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.20.11
     - modules:
       - cray-netcdf/4.7.4.0
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11
+    - modules:
+      - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.20.11
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.20.11
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@2021.2.0.20.11
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.20.11
@@ -1057,10 +1481,10 @@ packages:
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.0.1.144.21.02
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02
     - modules:
       - cray-netcdf/4.7.4.0
-      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.3.304.21.02
+      spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %intel@19.1.1.217.21.02
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %pgi@20.1.0.21.02
@@ -1070,6 +1494,45 @@ packages:
     - modules:
       - cray-netcdf/4.7.4.0
       spec: netcdf-fortran@4.7.4.0 ~parallel-netcdf+mpi %cce@11.0.2.21.02
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@8.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@9.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.2.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@8.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %gcc@10.3.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %intel@19.0.1.144.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %intel@19.1.3.304.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %intel@19.1.1.217.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %intel@2021.2.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %pgi@20.1.0.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %pgi@20.1.1.21.05
+    - modules:
+      - cray-netcdf/4.7.4.4
+      spec: netcdf-fortran@4.7.4.4 ~parallel-netcdf+mpi %cce@11.0.4.21.05
   netlib-lapack:
     variants: build_type=Release
   netlib-scalapack:
@@ -1101,10 +1564,13 @@ packages:
       spec: papi@6.0.0.2 %intel@19.0.1.144.20.08
     - modules:
       - papi/6.0.0.2
+      spec: papi@6.0.0.2 %intel@19.1.3.304.20.08
+    - modules:
+      - papi/6.0.0.2
       spec: papi@6.0.0.2 %intel@19.1.1.217.20.08
     - modules:
       - papi/6.0.0.2
-      spec: papi@6.0.0.2 %intel@19.1.3.304.20.08
+      spec: papi@6.0.0.2 %intel@2021.2.0.20.08
     - modules:
       - papi/6.0.0.2
       spec: papi@6.0.0.2 %pgi@20.1.0.20.08
@@ -1131,10 +1597,13 @@ packages:
       spec: papi@6.0.0.4 %intel@19.0.1.144.20.11
     - modules:
       - papi/6.0.0.4
+      spec: papi@6.0.0.4 %intel@19.1.3.304.20.11
+    - modules:
+      - papi/6.0.0.4
       spec: papi@6.0.0.4 %intel@19.1.1.217.20.11
     - modules:
       - papi/6.0.0.4
-      spec: papi@6.0.0.4 %intel@19.1.3.304.20.11
+      spec: papi@6.0.0.4 %intel@2021.2.0.20.11
     - modules:
       - papi/6.0.0.4
       spec: papi@6.0.0.4 %pgi@20.1.0.20.11
@@ -1164,10 +1633,10 @@ packages:
       spec: papi@6.0.0.6 %intel@19.0.1.144.21.02
     - modules:
       - papi/6.0.0.6
-      spec: papi@6.0.0.6 %intel@19.1.1.217.21.02
+      spec: papi@6.0.0.6 %intel@19.1.3.304.21.02
     - modules:
       - papi/6.0.0.6
-      spec: papi@6.0.0.6 %intel@19.1.3.304.21.02
+      spec: papi@6.0.0.6 %intel@19.1.1.217.21.02
     - modules:
       - papi/6.0.0.6
       spec: papi@6.0.0.6 %pgi@20.1.0.21.02
@@ -1177,6 +1646,45 @@ packages:
     - modules:
       - papi/6.0.0.6
       spec: papi@6.0.0.6 %cce@11.0.2.21.02
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@8.1.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@9.3.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@10.2.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@8.3.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@10.1.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %gcc@10.3.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %intel@19.0.1.144.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %intel@19.1.3.304.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %intel@19.1.1.217.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %intel@2021.2.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %pgi@20.1.0.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %pgi@20.1.1.21.05
+    - modules:
+      - papi/6.0.0.7
+      spec: papi@6.0.0.7 %cce@11.0.4.21.05
   parallel-netcdf:
     buildable: true
     externals:
@@ -1194,10 +1702,13 @@ packages:
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.08
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.08
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@2021.2.0.20.08
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.08
@@ -1224,10 +1735,13 @@ packages:
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.11
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.20.11
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@2021.2.0.20.11
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.20.11
@@ -1257,10 +1771,10 @@ packages:
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.0.1.144.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.21.02
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
-      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.3.304.21.02
+      spec: parallel-netcdf@4.7.4.0 +cxx+fortran %intel@19.1.1.217.21.02
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %pgi@20.1.0.21.02
@@ -1270,6 +1784,45 @@ packages:
     - modules:
       - cray-netcdf-hdf5parallel/4.7.4.0
       spec: parallel-netcdf@4.7.4.0 +cxx+fortran %cce@11.0.2.21.02
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@8.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@9.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@10.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@8.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@10.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %gcc@10.3.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %intel@19.0.1.144.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %intel@19.1.3.304.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %intel@19.1.1.217.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %intel@2021.2.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %pgi@20.1.0.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %pgi@20.1.1.21.05
+    - modules:
+      - cray-netcdf-hdf5parallel/4.7.4.4
+      spec: parallel-netcdf@4.7.4.4 +cxx+fortran %cce@11.0.4.21.05
   perl:
     externals:
     - prefix: /usr
@@ -1291,10 +1844,13 @@ packages:
       spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.20.08
     - modules:
       - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.08
+    - modules:
+      - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.20.08
     - modules:
       - cray-petsc/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.08
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@2021.2.0.20.08
     - modules:
       - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.20.08
@@ -1321,10 +1877,13 @@ packages:
       spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.20.11
     - modules:
       - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.11
+    - modules:
+      - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.20.11
     - modules:
       - cray-petsc/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.20.11
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@2021.2.0.20.11
     - modules:
       - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.20.11
@@ -1354,10 +1913,10 @@ packages:
       spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.21.02
     - modules:
       - cray-petsc/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.21.02
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.21.02
     - modules:
       - cray-petsc/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.21.02
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.21.02
     - modules:
       - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.21.02
@@ -1367,6 +1926,45 @@ packages:
     - modules:
       - cray-petsc/3.13.3.0
       spec: petsc@3.13.3.0 ~int64~complex~cuda %cce@11.0.2.21.02
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.1.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@9.3.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.2.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@8.3.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.1.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %gcc@10.3.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.0.1.144.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.3.304.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@19.1.1.217.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %intel@2021.2.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.0.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %pgi@20.1.1.21.05
+    - modules:
+      - cray-petsc/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64~complex~cuda %cce@11.0.4.21.05
     - modules:
       - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.1.0.20.08
@@ -1381,10 +1979,13 @@ packages:
       spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.20.08
     - modules:
       - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.08
+    - modules:
+      - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.20.08
     - modules:
       - cray-petsc-complex/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.08
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@2021.2.0.20.08
     - modules:
       - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.20.08
@@ -1411,10 +2012,13 @@ packages:
       spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.20.11
     - modules:
       - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.11
+    - modules:
+      - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.20.11
     - modules:
       - cray-petsc-complex/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.20.11
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@2021.2.0.20.11
     - modules:
       - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.20.11
@@ -1444,10 +2048,10 @@ packages:
       spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.21.02
     - modules:
       - cray-petsc-complex/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.21.02
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.21.02
     - modules:
       - cray-petsc-complex/3.13.3.0
-      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.21.02
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.21.02
     - modules:
       - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.21.02
@@ -1457,6 +2061,45 @@ packages:
     - modules:
       - cray-petsc-complex/3.13.3.0
       spec: petsc@3.13.3.0 ~int64+complex~cuda %cce@11.0.2.21.02
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.1.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@9.3.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.2.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@8.3.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.1.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %gcc@10.3.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.0.1.144.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.3.304.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@19.1.1.217.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %intel@2021.2.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.0.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %pgi@20.1.1.21.05
+    - modules:
+      - cray-petsc-complex/3.13.3.0
+      spec: petsc@3.13.3.0 ~int64+complex~cuda %cce@11.0.4.21.05
     - modules:
       - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@8.1.0.20.08
@@ -1471,10 +2114,13 @@ packages:
       spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.20.08
     - modules:
       - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.08
+    - modules:
+      - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.20.08
     - modules:
       - cray-petsc-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.08
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@2021.2.0.20.08
     - modules:
       - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.20.08
@@ -1501,10 +2147,13 @@ packages:
       spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.20.11
     - modules:
       - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.11
+    - modules:
+      - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.20.11
     - modules:
       - cray-petsc-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.20.11
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@2021.2.0.20.11
     - modules:
       - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.20.11
@@ -1534,10 +2183,10 @@ packages:
       spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.21.02
     - modules:
       - cray-petsc-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.21.02
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.21.02
     - modules:
       - cray-petsc-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.21.02
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.21.02
     - modules:
       - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.21.02
@@ -1547,6 +2196,45 @@ packages:
     - modules:
       - cray-petsc-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64~complex~cuda %cce@11.0.2.21.02
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@8.1.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@9.3.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@10.2.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@8.3.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@10.1.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %gcc@10.3.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.0.1.144.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.3.304.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@19.1.1.217.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %intel@2021.2.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.0.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %pgi@20.1.1.21.05
+    - modules:
+      - cray-petsc-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64~complex~cuda %cce@11.0.4.21.05
     - modules:
       - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@8.1.0.20.08
@@ -1561,10 +2249,13 @@ packages:
       spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.20.08
     - modules:
       - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.08
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.20.08
     - modules:
       - cray-petsc-complex-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.08
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@2021.2.0.20.08
     - modules:
       - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.20.08
@@ -1591,10 +2282,13 @@ packages:
       spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.20.11
     - modules:
       - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.11
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.20.11
     - modules:
       - cray-petsc-complex-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.20.11
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@2021.2.0.20.11
     - modules:
       - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.20.11
@@ -1624,10 +2318,10 @@ packages:
       spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.21.02
     - modules:
       - cray-petsc-complex-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.21.02
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.21.02
     - modules:
       - cray-petsc-complex-64/3.13.3.0
-      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.21.02
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.21.02
     - modules:
       - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.21.02
@@ -1637,6 +2331,45 @@ packages:
     - modules:
       - cray-petsc-complex-64/3.13.3.0
       spec: petsc@3.13.3.0 +int64+complex~cuda %cce@11.0.2.21.02
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@8.1.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@9.3.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@10.2.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@8.3.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@10.1.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %gcc@10.3.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.0.1.144.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.3.304.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@19.1.1.217.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %intel@2021.2.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.0.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %pgi@20.1.1.21.05
+    - modules:
+      - cray-petsc-complex-64/3.13.3.0
+      spec: petsc@3.13.3.0 +int64+complex~cuda %cce@11.0.4.21.05
   pkg-config:
     externals:
     - prefix: /usr
@@ -1658,10 +2391,13 @@ packages:
       spec: python@3.8.2.1 %intel@19.0.1.144.20.08
     - modules:
       - cray-python/3.8.2.1
+      spec: python@3.8.2.1 %intel@19.1.3.304.20.08
+    - modules:
+      - cray-python/3.8.2.1
       spec: python@3.8.2.1 %intel@19.1.1.217.20.08
     - modules:
       - cray-python/3.8.2.1
-      spec: python@3.8.2.1 %intel@19.1.3.304.20.08
+      spec: python@3.8.2.1 %intel@2021.2.0.20.08
     - modules:
       - cray-python/3.8.2.1
       spec: python@3.8.2.1 %pgi@20.1.0.20.08
@@ -1688,10 +2424,13 @@ packages:
       spec: python@3.8.5.0 %intel@19.0.1.144.20.11
     - modules:
       - cray-python/3.8.5.0
+      spec: python@3.8.5.0 %intel@19.1.3.304.20.11
+    - modules:
+      - cray-python/3.8.5.0
       spec: python@3.8.5.0 %intel@19.1.1.217.20.11
     - modules:
       - cray-python/3.8.5.0
-      spec: python@3.8.5.0 %intel@19.1.3.304.20.11
+      spec: python@3.8.5.0 %intel@2021.2.0.20.11
     - modules:
       - cray-python/3.8.5.0
       spec: python@3.8.5.0 %pgi@20.1.0.20.11
@@ -1721,10 +2460,10 @@ packages:
       spec: python@3.8.5.0 %intel@19.0.1.144.21.02
     - modules:
       - cray-python/3.8.5.0
-      spec: python@3.8.5.0 %intel@19.1.1.217.21.02
+      spec: python@3.8.5.0 %intel@19.1.3.304.21.02
     - modules:
       - cray-python/3.8.5.0
-      spec: python@3.8.5.0 %intel@19.1.3.304.21.02
+      spec: python@3.8.5.0 %intel@19.1.1.217.21.02
     - modules:
       - cray-python/3.8.5.0
       spec: python@3.8.5.0 %pgi@20.1.0.21.02
@@ -1734,6 +2473,45 @@ packages:
     - modules:
       - cray-python/3.8.5.0
       spec: python@3.8.5.0 %cce@11.0.2.21.02
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@8.1.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@9.3.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@10.2.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@8.3.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@10.1.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %gcc@10.3.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %intel@19.0.1.144.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %intel@19.1.3.304.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %intel@19.1.1.217.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %intel@2021.2.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %pgi@20.1.0.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %pgi@20.1.1.21.05
+    - modules:
+      - cray-python/3.8.5.1
+      spec: python@3.8.5.1 %cce@11.0.4.21.05
   rsync:
     externals:
     - prefix: /usr
@@ -1744,12 +2522,16 @@ packages:
       spec: ruby@2.5.8
   tar:
     externals:
-    - prefix: /
+    - prefix: /usr
       spec: tar@1.30
   texinfo:
     externals:
     - prefix: /usr
       spec: texinfo@6.5
+  texlive:
+    externals:
+    - prefix: /usr
+      spec: texlive@20170524
   trilinos:
     buildable: true
     externals:
@@ -1767,10 +2549,13 @@ packages:
       spec: trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.20.08
     - modules:
       - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.08
+    - modules:
+      - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.20.08
     - modules:
       - cray-trilinos/12.18.1.1
-      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.08
+      spec: trilinos@12.18.1.1 build_type=Release %intel@2021.2.0.20.08
     - modules:
       - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.20.08
@@ -1797,10 +2582,13 @@ packages:
       spec: trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.20.11
     - modules:
       - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.11
+    - modules:
+      - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.20.11
     - modules:
       - cray-trilinos/12.18.1.1
-      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.20.11
+      spec: trilinos@12.18.1.1 build_type=Release %intel@2021.2.0.20.11
     - modules:
       - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.20.11
@@ -1830,10 +2618,10 @@ packages:
       spec: trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.21.02
     - modules:
       - cray-trilinos/12.18.1.1
-      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.21.02
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.21.02
     - modules:
       - cray-trilinos/12.18.1.1
-      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.21.02
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.21.02
     - modules:
       - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.21.02
@@ -1843,6 +2631,45 @@ packages:
     - modules:
       - cray-trilinos/12.18.1.1
       spec: trilinos@12.18.1.1 build_type=Release %cce@11.0.2.21.02
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@8.1.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@9.3.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@10.2.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@8.3.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@10.1.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %gcc@10.3.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.0.1.144.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.3.304.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@19.1.1.217.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %intel@2021.2.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %pgi@20.1.0.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %pgi@20.1.1.21.05
+    - modules:
+      - cray-trilinos/12.18.1.1
+      spec: trilinos@12.18.1.1 build_type=Release %cce@11.0.4.21.05
   xz:
     externals:
     - prefix: /usr
