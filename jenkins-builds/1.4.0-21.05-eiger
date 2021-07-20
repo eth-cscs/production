@@ -28,3 +28,4 @@
  GSL-2.6-cpeIntel-21.05.eb
  QuantumESPRESSO-6.7.0-cpeIntel-21.05.eb
  VASP-6.2.0-cpeIntel-21.05.eb
+ FFmpeg-4.4-cpeGNU-21.05.eb
