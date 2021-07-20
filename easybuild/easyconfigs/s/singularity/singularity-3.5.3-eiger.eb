@@ -26,7 +26,13 @@ else
     load("cray-mpich-abi")
 end
 
-setenv("SINGULARITY_BIND", "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/10.2.0,/var/lib/hugetlbfs")
-setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/opt/cray/libfabric/1.11.0.4.71/lib64:/opt/cray/pe/lib64:/opt/gcc/10.2.0/snos/lib64:/lib64")
+local gccLib = pathJoin(os.getenv("GCC_PREFIX"), "snos/lib64")
+local singularityBind = "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. os.getenv("GCC_PREFIX")
+local libfabricLib = capture("module show libfabric 2>&1 | sed -En 's/prepend_path\\\\(\\\"LD_LIBRARY_PATH\\\",\\\"(\\\\S+)\\\"\\\\)/\\\\1/p'")
+
+setenv("SINGULARITY_BIND", singularityBind) 
+setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/lib64:/opt/cray/pe/lib64:/lib64")
+prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", libfabricLib)
+prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", gccLib)
 prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
 """
