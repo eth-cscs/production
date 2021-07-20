@@ -1,0 +1,29 @@
+# contributed by Jean Favre
+easyblock = 'ConfigureMake'
+
+name = 'x264'
+version = '20191217'
+
+homepage = 'http://www.videolan.org/developers/x264.html'
+description = """x264 is a free software library and application for encoding video streams into the H.264/MPEG-4
+ AVC compression format, and is released under the terms of the GNU GPL."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.05'}
+
+source_urls = ['https://download.videolan.org/pub/videolan/%(name)s/snapshots/']
+sources = ['%(name)s-snapshot-%(version)s-2245-stable.tar.bz2']
+
+dependencies = [
+    ('NASM', '2.15.05'),
+]
+
+preconfigopts = "unset CC && unset CFLAGS &&"
+configopts = "--enable-static --enable-pic  "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'include/x264_config.h', 'include/%(name)s.h', 'lib/libx264.a'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
