@@ -1,0 +1,35 @@
+# contributed by Anton Kozhevnikov (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SIRIUS'
+version = '7.2.5'
+
+homepage = 'https://electronic-structure.github.io/SIRIUS/'
+description = "Domain specific library for electronic structure calculations."
+
+toolchain = {'name': 'cpeGNU', 'version': '21.06'}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True, 'verbose': True}
+
+source_urls = ['https://github.com/electronic-structure/%(name)s/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+]
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('ELPA', '2021.05.002'),
+    ('GSL', '2.7'),
+    ('libxc', '5.1.5'),
+    ('SpFFT', '1.0.4'),
+    ('spglib', '1.16.0'),
+    ('SPLA', '1.5.1'),
+]
+
+preconfigopts = " CXX=CC CC=cc FC=ftn && "
+configopts = "-DUSE_CUDA=0 -DBUILD_TESTS=0 -DUSE_CRAY_LIBSCI=1 -DUSE_MAGMA=0 -DUSE_MKL=0 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DSpFFT_DIR=$EBROOTSPFFT/lib64/cmake/SpFFT"
+
+
+modextrapaths = {'CPATH': ['include/%(namelower)s']}
+
+moduleclass = 'chem'
