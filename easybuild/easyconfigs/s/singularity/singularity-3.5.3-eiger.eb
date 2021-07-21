@@ -11,12 +11,13 @@ description = """Singularity is a portable application stack packaging and runti
 toolchain = SYSTEM
 
 modluafooter = r"""
-unload("cpeCray")
-unload("cpeIntel")
-unload("cpeAMD")
+unload("PrgEnv-cray")
+unload("PrgEnv-intel")
+unload("PrgEnv-aocc")
+unload("PrgEnv-nvidia")
 
-if not ( isloaded("cpeGNU") ) then
-    load("cpeGNU")
+if not ( isloaded("PrgEnv-gnu") ) then
+    load("PrgEnv-gnu")
 end
 
 if isloaded("cray-mpich") then
