@@ -1,0 +1,34 @@
+# contributed by Luca Marsella (CSCS)
+# modules: cpeGNU cray-fftw ELPA flex Libint libvori libxc libxsmm PLUMED SIRIUS spglib
+
+include $(EBROOTPLUMED)/lib/plumed/src/lib/Plumed.inc
+CC       = cc
+FC       = ftn
+LD       = ftn
+AR       = ar -r
+DFLAGS   = -D__GFORTRAN -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
+DFLAGS   += -D__ELPA -D__FFTW3 -D__LIBINT -D__LIBVORI -D__LIBXC -D__LIBXSMM -D__PLUMED2 -D__SPGLIB -D__SIRIUS
+CFLAGS   = $(DFLAGS) -g -O3 -w -fopenmp -funroll-loops
+CXXFLAGS = $(CFLAGS)
+FCFLAGS  = $(DFLAGS) -g -O3 -w -fallow-argument-mismatch -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
+FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
+FCFLAGS  += -I$(EBROOTFFTW)/include
+FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include -I$(EBROOTLIBINTMINCP2K)/include/libint2
+FCFLAGS  += -I$(EBROOTLIBXC)/include 
+FCFLAGS  += -I$(EBROOTLIBXSMM)/include 
+FCFLAGS  += -I$(EBROOTSIRIUS)/include/sirius
+FCFLAGS  += -I$(EBROOTSPGLIB)/include 
+LDFLAGS  = $(FCFLAGS)
+LIBS     = -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS   	 += -L$(EBROOTFFTW)/lib -lfftw3 -lfftw3_threads
+LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2
+LIBS     += $(EBROOTLIBVORI)/lib/libvori.a
+LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS     += -L$(EBROOTLIBXSMM)/lib -lxsmmf -lxsmm
+LIBS     += -L$(EBROOTSIRIUS)/lib -lsirius
+LIBS     += -L$(EBROOTSPGLIB)/lib -lsymspg
+LIBS     += -lplumed -lz -ldl -lstdc++
+
+# Required due to memory leak that occurs if high optimisations are used
+mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
+			 $(FC) -c $(subst O2,O0,$(FCFLAGS)) $<
