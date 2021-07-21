@@ -12,7 +12,8 @@
  Boost-1.75.0-cpeGNU-21.05.eb
  Boost-1.75.0-cpeGNU-21.05-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.05.eb
- CP2K-8.1-cpeGNU-21.05.eb
+ CP2K-8.1-cpeGNU-21.05.eb             --set-default-module
+ CP2K-8.2.69b8c2e-cpeGNU-21.05.eb     
  FFmpeg-4.4-cpeGNU-21.05.eb
  GREASY-19.03-cscs-cpeGNU-21.05.eb
  GROMACS-2020.5-cpeGNU-21.05.eb
