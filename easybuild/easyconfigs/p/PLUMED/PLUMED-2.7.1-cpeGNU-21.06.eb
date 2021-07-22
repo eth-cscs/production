@@ -21,18 +21,22 @@ sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cray-python', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
 ]
+
 dependencies = [
     ('zlib', '1.2.11'),
-    ('GSL', '2.7'),
+    ('GSL', '2.7')
 ]
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
 # Therefore set the include and library paths accordingly: Cray wrappers cc, CC and ftn set them automatically
-configopts = ' CC=cc CFLAGS="-craype-verbose -fopenmp $CFLAGS"  CXX=CC CXXFLAGS="-craype-verbose -fopenmp $CXXFLAGS"  MPIEXEC=srun  --disable-xdrfile --enable-shared --enable-modules=all --exec-prefix=%(installdir)s '
-
+preconfigopts = ' CC=cc CFLAGS="-fopenmp" && '
+preconfigopts += ' CXX=CC CXXFLAGS="-fopenmp" && ' 
+preconfigopts += ' FC=ftn FCFLAGS="-fopenmp" && ' 
+preconfigopts += ' MPIEXEC=srun && '
+configopts = ' --disable-xdrfile --enable-shared --enable-modules=all --exec-prefix=%(installdir)s '
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
