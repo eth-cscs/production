@@ -13,7 +13,7 @@ dependencies = [
    ("cpe/%(version)s", EXTERNAL_MODULE),
    #('PrgEnv-gnu', EXTERNAL_MODULE),
    ('PrgEnv-gnu/8.1.0', EXTERNAL_MODULE),
-   ('gcc/9.3.0', EXTERNAL_MODULE),
+   ('gcc/10.2.0', EXTERNAL_MODULE),
    ('craype-x86-rome', EXTERNAL_MODULE),
    ('libfabric/1.11.0.4.71', EXTERNAL_MODULE),
    ('craype-network-ofi', EXTERNAL_MODULE),
