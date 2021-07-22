@@ -31,8 +31,7 @@ dependencies = [
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
-# Therefore set the include and library paths accordingly: Cray wrappers cc, CC and ftn set them automatically
-preconfigopts = ' CC=cc CFLAGS="-fopenmp" CXX=CC CXXFLAGS="-fopenmp" FC=ftn FCFLAGS="-fopenmp" MPIEXEC=srun '
+preconfigopts = ' CC=gcc CFLAGS="" CXX=g++ CXXFLAGS="" MPIEXEC=srun '
 configopts = ' --disable-xdrfile --enable-shared --enable-modules=all --exec-prefix=%(installdir)s '
 
 sanity_check_paths = {
