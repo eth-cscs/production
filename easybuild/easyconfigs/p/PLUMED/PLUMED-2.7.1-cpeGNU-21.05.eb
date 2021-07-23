@@ -31,11 +31,8 @@ dependencies = [
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
-# Therefore set the include and library paths accordingly: Cray wrappers cc, CC and ftn set them automatically
-configopts = ' CC=cc CFLAGS="-craype-verbose -fopenmp $CFLAGS" '
-configopts += ' CXX=CC CXXFLAGS="-craype-verbose -fopenmp $CXXFLAGS" ' 
-configopts += ' MPIEXEC=srun '
-configopts += ' --disable-xdrfile --enable-shared --enable-modules=all --exec-prefix=%(installdir)s '
+preconfigopts = ' CC=gcc CFLAGS="" CXX=g++ CXXFLAGS="" MPIEXEC=srun '
+configopts = ' --disable-xdrfile --enable-shared --enable-modules=all --exec-prefix=%(installdir)s '
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],

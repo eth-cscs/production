@@ -1,0 +1,30 @@
+# contributed by Luca Marsella (CSCS)
+# modules: Bison cpeGNU cray-fftw ELPA flex Libint libvori libxc PLUMED
+
+include $(EBROOTPLUMED)/lib/plumed/src/lib/Plumed.inc
+CC       = cc
+FC       = ftn
+LD       = ftn
+AR       = ar -r
+# LIBXSMM (-D__LIBXSMM) is slower than LIBSMM (-D__HAS_smm_dnn)
+DFLAGS   = -D__GFORTRAN -D__HAS_smm_dnn -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
+DFLAGS   += -D__ELPA -D__FFTW3 -D__LIBINT -D__LIBVORI -D__LIBXC -D__PLUMED2
+CFLAGS   = $(DFLAGS) -g -O3 -w -fopenmp -funroll-loops
+CXXFLAGS = $(CFLAGS)
+FCFLAGS  = $(DFLAGS) -g -O3 -w -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
+FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules 
+FCFLAGS  += -I$(EBROOTFFTW)/include
+FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include -I$(EBROOTLIBINTMINCP2K)/include/libint2
+FCFLAGS  += -I$(EBROOTLIBXC)/include 
+LDFLAGS  = $(FCFLAGS)
+LIBS     = -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS   	 += -L$(EBROOTFFTW)/lib -lfftw3 -lfftw3_threads
+LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2
+LIBS     += $(EBROOTLIBVORI)/lib/libvori.a
+LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS     += -lplumed -lz -ldl -lstdc++
+LIBS     += /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a
+
+# Required due to memory leak that occurs if high optimisations are used
+mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
+			 $(FC) -c $(subst O2,O0,$(FCFLAGS)) $<
