@@ -140,7 +140,6 @@ stage('Update Stage') {
 
                         # load Cray PE module and EasyBuild
                         $load_pe
-                        ml use \$PWD/easybuild/module
                         $load_easybuild
 
                         # update buildpath and metadata file for external modules
