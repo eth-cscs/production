@@ -1,0 +1,28 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'SPLA'
+version = '1.5.1'
+
+homepage = 'https://github.com/eth-cscs/spla'
+description = "Specialized Parallel Linear Algebra"
+
+toolchain = {'name': 'cpeGNU', 'version': '21.07'}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True, 'verbose': True}
+
+source_urls = ['https://github.com/eth-cscs/%(namelower)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=RELEASE -DSPLA_OMP=ON"
+
+
+sanity_check_paths = {
+    'files': ['lib/libspla.so', 'include/%(namelower)s/config.h', 'include/%(namelower)s/%(namelower)s.hpp'],
+    'dirs': [],
+}
+
+moduleclass = 'lib'
