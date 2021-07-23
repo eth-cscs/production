@@ -2,7 +2,8 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-version = '8.2.69b8c2e'
+local_commit = '69b8c2e'
+version = '8.2.%s' % local_commit
 
 homepage = 'http://www.cp2k.org/'
 description = """
@@ -18,7 +19,7 @@ toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 toolchainopts = {'openmp': True, 'usempi': True}
 
 sources = [
-    {'filename': SOURCELOWER_TAR_GZ, 'git_config': {'url': 'https://github.com/%(namelower)s', 'repo_name': '%(namelower)s', 'commit': '69b8c2e', 'recursive': True}},
+    {'filename': SOURCELOWER_TAR_GZ, 'git_config': {'url': 'https://github.com/%(namelower)s', 'repo_name': '%(namelower)s', 'commit': local_commit, 'recursive': True}},
 ]
 patches = [('%(name)s-%(version_major_minor)s-%(toolchain_name)s.psmp', '%(builddir)s/%(namelower)s/arch')]
 
@@ -37,7 +38,7 @@ dependencies = [
 ]
 
 # create the REVISION file
-prebuildopts = 'echo "git:69b8c2e" > %(builddir)s/%(namelower)s/REVISION && '
+prebuildopts = 'echo "git:%s" > %%(builddir)s/%%(namelower)s/REVISION && ' % local_commit
 # build type
 buildopts = "ARCH=%(name)s-%(version_major_minor)s-%(toolchain_name)s VERSION=psmp"
 
