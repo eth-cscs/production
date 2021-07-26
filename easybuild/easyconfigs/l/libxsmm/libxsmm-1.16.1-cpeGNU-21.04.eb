@@ -15,10 +15,6 @@ toolchainopts = {'usempi': True, 'openmp': True}
 source_urls = ['https://github.com/hfp/%(name)s/archive/']
 sources = ['%(version)s.tar.gz']
 
-builddependencies = [
-    ('binutils', '2.36.1'),
-]
-
 buildopts = "PREFIX=%(installdir)s CXX=g++ CC=gcc FC=gfortran AVX=2 DBG=0 JIT=1 MALLOC=0 MIC=0 OPT=3 OMP=1 PREFETCH=1 STATIC=0 install"
 
 skipsteps = [

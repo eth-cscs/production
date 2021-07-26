@@ -13,7 +13,8 @@
  CPMD-4.1-CrayIntel-20.11.eb                            --set-default-module
  CPMD-4.3-CrayIntel-20.11.eb
  dask-2.2.0-CrayGNU-20.11-python3.eb                    --set-default-module
- FFmpeg-4.3.1-CrayGNU-20.11.eb                          --set-default-module
+ FFmpeg-4.3.1-CrayGNU-20.11.eb
+ FFmpeg-4.4-CrayGNU-20.11.eb                            --set-default-module
  GREASY-19.03-cscs-CrayGNU-20.11.eb                     --set-default-module
  GROMACS-2020.4-CrayGNU-20.11.eb                        --set-default-module
  GSL-2.5-CrayGNU-20.11.eb                               --set-default-module
@@ -32,8 +33,8 @@
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  ipcmagic-0.1-CrayGNU-20.11.eb                          --set-default-module
- ipcmagic-1.0.1-CrayGNU-20.11.eb 
- Julia-1.6.0-CrayGNU-20.11.eb                           --set-default-module                           
+ ipcmagic-1.0.1-CrayGNU-20.11.eb
+ Julia-1.6.0-CrayGNU-20.11.eb                           --set-default-module
  JuliaExtensions-1.6.0-CrayGNU-20.11.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
  jupyterlab-1.1.1-CrayGNU-20.11-batchspawner.eb         --set-default-module
@@ -41,7 +42,7 @@
  jupyterlab-2.0.2-CrayGNU-20.11-batchspawner.eb
  LAMMPS-29Oct20-CrayGNU-20.11.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
- MATLAB-R2019a.eb                                       --set-default-module
+ MATLAB-R2021a.eb                                       --set-default-module
  NAMD-2.13-CrayIntel-20.11.eb                           --set-default-module
  NAMD-2.14-CrayIntel-20.11.eb
  NCL-6.4.0.eb                                           --set-default-module
@@ -49,7 +50,9 @@
  ncview-2.1.7-CrayGNU-20.11.eb                          --set-default-module
  netcdf-python-1.5.4-CrayGNU-20.11-python3.eb           --set-default-module
  numpy-1.17.2-CrayGNU-20.11.eb                          --set-default-module
+ OOOPS-1.0.eb
  ParaView-5.9.0-CrayGNU-20.11-OSMesa-python3.eb         --set-default-module
+ ParaView-5.9.1-CrayGNU-20.11-OSMesa-python3.eb
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
  PyExtensions-python3-CrayGNU-20.11.eb
  Python-bare-3.7.3.eb                                   --hidden
@@ -59,12 +62,13 @@
  VASP-6.2.0-CrayIntel-20.11.eb                          --set-default-module
  Vc-1.4.1-CrayGNU-20.11.eb                              --set-default-module
  Visit-3.1.2-CrayGNU-20.11.eb                           --set-default-module
+ Visit-3.2.0-CrayGNU-20.11.eb
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  Caliper-2.4.0-CrayGNU-20.11.eb                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  ddt-20.0-Suse-15.0.eb                                                       --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
- ddt-21.0-linux-x86_64.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
+ ddt-21.0.2-linux-x86_64.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  Extrae-3.8.1-CrayGNU-20.11.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  gperftools-2.8.eb                                      --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools
  inspector-2021.1.1.42.eb                               --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/mc/easybuild/tools

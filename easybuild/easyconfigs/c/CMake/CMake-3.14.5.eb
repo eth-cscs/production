@@ -1,3 +1,4 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CMake'
@@ -11,6 +12,10 @@ toolchain = SYSTEM
 
 source_urls = ['http://www.cmake.org/files/v%(version_major_minor)s']
 sources = [SOURCELOWER_TAR_GZ]
+
+# use system cURL to avoid the undefined reference to `DH_get_nid@OPENSSL_1_1_0i' 
+# when building cURL on dom101 (see https://jira.cscs.ch/browse/SD-52103)
+configopts = ' --system-curl '
 
 sanity_check_paths = {
     'files': ["bin/%s" % x for x in ['cmake', 'cpack', 'ctest']],

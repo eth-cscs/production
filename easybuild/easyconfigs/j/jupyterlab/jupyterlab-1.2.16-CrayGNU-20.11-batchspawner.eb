@@ -15,7 +15,7 @@ toolchainopts = {'pic': True, 'verbose': False}
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
-    ('JuliaExtensions', '1.6.0'),
+    ('JuliaExtensions', '1.6.1'),
     ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),

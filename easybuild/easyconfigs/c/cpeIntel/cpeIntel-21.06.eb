@@ -1,0 +1,17 @@
+# Compiler toolchain for Cray EX Programming Environment Intel compiler
+easyblock = 'cpeToolchain'
+
+name = 'cpeIntel'
+version = "21.06"
+
+homepage = 'https://pubs.cray.com'
+description = """Toolchain using Cray compiler wrapper with intel module (CPE release: %s).\n""" % version
+
+toolchain = SYSTEM
+
+dependencies = [
+   ("cpe/%(version)s", EXTERNAL_MODULE),
+   ('PrgEnv-intel', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'

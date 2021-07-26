@@ -1,0 +1,28 @@
+# contributed by Jean Favre
+easyblock = 'ConfigureMake'
+
+name = 'theora'
+version = '1.2.0alpha1'
+
+homepage = 'https://www.theora.org/'
+description = "Theora, a free and open video compression format from the Xiph.org Foundation. "
+
+toolchain = {'name': 'cpeGNU', 'version': '21.07'}
+
+source_urls = ['http://downloads.xiph.org/releases/%(namelower)s/']
+sources = ['libtheora-%(version)s.tar.gz']
+
+dependencies = [
+    ('ogg', '1.3.1'),
+    ('vorbis', '1.3.3'),
+]
+
+configopts = "--disable-oggtest --disable-vorbistest --disable-sdltest --enable-shared --with-pic --with-gnu-ld --disable-examples --with-ogg=${EBROOTOGG} --with-vorbis=${EBROOTVORBIS} "
+
+
+sanity_check_paths = {
+    'files': ['include/%(namelower)s/codec.h', 'include/%(namelower)s/theoraenc.h', 'lib/libtheoraenc.so', 'lib/libtheora.so'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

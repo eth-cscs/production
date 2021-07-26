@@ -1,0 +1,23 @@
+# Author: teojgo
+
+easyblock = 'ConfigureMake'
+
+name = 'Libassuan'
+version = '2.5.5'
+
+builddependencies = [('Libpgp-error', '1.42')]
+
+homepage = 'https://gnupg.org/software/libassuan/index.html'
+description = '''Libassuan is a small library implementing the so-called Assuan protocol.
+                 This protocol is used for IPC between most newer GnuPG components.
+                 Both, server and client side functions are provided.'''
+
+toolchain = SYSTEM
+source_urls = ['https://gnupg.org/ftp/gcrypt/libassuan']
+sources = ['libassuan-%(version)s.tar.bz2']
+checksums = ['8e8c2fcc982f9ca67dcbb1d95e2dc746b1739a4668bc20b3a3c5be632edb34e4']
+
+sanity_check_paths = {
+    'files': ['lib/libassuan.so'],
+    'dirs': []
+}

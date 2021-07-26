@@ -1,0 +1,44 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '1.9.10'
+
+homepage = 'https://code.mpimet.mpg.de/projects/cdo'
+description = """
+    CDO is a collection of command line Operators to manipulate and analyse
+    Climate and NWP model Data.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.05'}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'verbose': False}
+
+# download from https://code.mpimet.mpg.de/projects/cdo/files often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+# No MPI support, OpenMP support for compute intensive operators (https://code.mpimet.mpg.de/projects/cdo/wiki/OpenMP_support)
+builddependencies = [
+    ('cURL', '7.76.1'),
+]
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('ecCodes', '2.21.0'),
+    ('libaec', '1.0.4'),
+    ('PROJ', '8.0.0'),
+    ('UDUNITS', '2.2.28'),
+    ('util-linux', '2.36.2'),
+]
+
+osdependencies = ['libtool']
+
+preconfigopts = " ln -fs $(which libtool) libcdi/libtool && "
+configopts = " --disable-static --enable-cdi-lib  --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR  --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC  --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'

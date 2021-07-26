@@ -1,0 +1,43 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'HDF'
+version = '4.2.15'
+
+homepage = 'https://www.hdfgroup.org/products/hdf4'
+description = """
+ HDF (also known as HDF4) is a library and multi-object file format for
+ storing and managing data between machines.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'pic': True}
+
+# https://support.hdfgroup.org/ftp/HDF/releases/HDF4.2.15/src/hdf-4.2.15.tar.gz
+source_urls = ['https://support.hdfgroup.org/ftp/%(name)s/releases/HDF4.2.15/src']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['dbeeef525af7c2d01539906c28953f0fdab7dba603d1bc1ec4a5af60d002c459']
+
+builddependencies = [
+    ('Bison', '3.3.2'),
+    ('flex', '2.6.4'),
+]
+dependencies = [
+    ('libaec', '1.0.4'),
+    ('libjpeg-turbo', '2.0.90'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = ' FFLAGS="-O3 -g" --disable-netcdf --with-jpeg=$EBROOTLIBJPEGMINTURBO --with-zlib=$EBROOTZLIB --with-szlib=$EBROOTLIBAEC '
+
+sanity_check_paths = {
+    'files': ['bin/h4cc', 'bin/ncdump', 'lib/libdf.a', 'lib/libhdf4.settings', 'lib/libmfhdf.a'],
+    'dirs': ['include'],
+}
+
+sanity_check_commands = [
+    "h4cc --help",
+    "ncdump -V",
+]
+
+moduleclass = 'data'
