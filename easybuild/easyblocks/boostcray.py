@@ -83,7 +83,7 @@ class boostcray(EasyBlock):
                     for line in fileinput.input("%s" % patchfile, inplace=1, backup='.orig'):
                         line = re.sub(r"TIME_UTC", r"TIME_UTC_", line)
                         sys.stdout.write(line)
-                except IOError, err:
+                except IOError as err:
                     raise EasyBuildError("Failed to patch %s: %s", patchfile, err)
 
     def configure_step(self):
@@ -98,7 +98,7 @@ class boostcray(EasyBlock):
             self.objdir = os.path.join(self.builddir, 'obj')
             os.mkdir(self.objdir)
             self.log.debug("Succesfully created directory %s" % self.objdir)
-        except OSError, err:
+        except OSError as err:
             raise EasyBuildError("Failed to create directory %s: %s", self.objdir, err)
 
         # generate config depending on compiler used
@@ -127,12 +127,12 @@ class boostcray(EasyBlock):
             if self.toolchain.PRGENV_MODULE_NAME_SUFFIX in ['gnu', 'intel'] :
                 craympichdir=os.getenv('CRAY_MPICH2_DIR')
                 craygccversion=os.getenv('GCC_VERSION')
-		f = open('user-config.jam','a')
-		config = '\n'.join([
+                f = open('user-config.jam','a')
+                config = '\n'.join([
                 'import os ; ',
                 'local CRAY_MPICH2_DIR =  %s ;' %(craympichdir),
                 'using gcc ',
-		': %s' %(craygccversion),
+                ': %s' %(craygccversion),
                 ': CC ',
                 ': <compileflags>-I$(CRAY_MPICH2_DIR)/include ',
                 '  <linkflags>-L$(CRAY_MPICH2_DIR)/lib \ ',
@@ -142,13 +142,13 @@ class boostcray(EasyBlock):
                 ': <find-shared-library>mpich ',
                 ': aprun -n \ ',
                 ';',
-		'',
-		])
-		f.write(config)
-	    else:
-	        f.write("using mpi : %s ;" % os.getenv("MPICXX"))
+                '',
+                ])
+                f.write(config)
+            else:
+                f.write("using mpi : %s ;" % os.getenv("MPICXX"))
 
-	    f.close()
+            f.close()
 
 
     def build_step(self):
@@ -204,7 +204,7 @@ class boostcray(EasyBlock):
                     shutil.copytree(src, dst)
                 else:
                     shutil.copy2(src, dst)
-        except OSError, err:
+        except OSError as err:
             raise EasyBuildError("Copying %s to installation dir %s failed: %s", self.objdir, self.installdir, err)
 
     def sanity_check_step(self):
