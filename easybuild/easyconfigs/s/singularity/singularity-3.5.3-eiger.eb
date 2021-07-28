@@ -10,13 +10,14 @@ description = """Singularity is a portable application stack packaging and runti
 
 toolchain = SYSTEM
 
-modluafooter = """
-unload("cpeCray")
-unload("cpeIntel")
-unload("cpeAMD")
+modluafooter = r"""
+unload("PrgEnv-cray")
+unload("PrgEnv-intel")
+unload("PrgEnv-aocc")
+unload("PrgEnv-nvidia")
 
-if not ( isloaded("cpeGNU") ) then
-    load("cpeGNU")
+if not ( isloaded("PrgEnv-gnu") ) then
+    load("PrgEnv-gnu")
 end
 
 if isloaded("cray-mpich") then
@@ -26,9 +27,10 @@ else
     load("cray-mpich-abi")
 end
 
-local gccLib = pathJoin(os.getenv("GCC_PREFIX"), "snos/lib64")
-local singularityBind = "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. os.getenv("GCC_PREFIX")
-local libfabricLib = capture("module show libfabric 2>&1 | sed -En 's/prepend_path\\\\(\\\"LD_LIBRARY_PATH\\\",\\\"(\\\\S+)\\\"\\\\)/\\\\1/p'")
+local gccPrefix = os.getenv("GCC_PREFIX") or "/opt/gcc/default/" 
+local gccLib = pathJoin(gccPrefix, "snos/lib64")
+local singularityBind = "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. gccPrefix 
+local libfabricLib = capture("module show libfabric 2>&1 | sed -En 's/prepend_path\\(\"LD_LIBRARY_PATH\",\"(\\S+)\"\\)/\\1/p'")
 
 setenv("SINGULARITY_BIND", singularityBind) 
 setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/lib64:/opt/cray/pe/lib64:/lib64")
