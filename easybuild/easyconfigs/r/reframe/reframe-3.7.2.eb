@@ -24,7 +24,7 @@ sources = [
 keepsymlinks = True
 postinstallcmds = [
     'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
-    './bootstrap.sh +docs +pygelf && '
+    './bootstrap.sh +docs && '
     'cp -r external %(installdir)s/external && '
     'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
     'cp docs/man/man1/reframe.1 %(installdir)s/share/man/man1 && '
