@@ -119,8 +119,7 @@ stage('Update Stage') {
                     def pe_flags = "--try-toolchain-version=${params.pe_target}"
                         
                     /* create the new toolchains and update the software stack */
-                    withEnv(["EASYBUILD_BUILDPATH=/dev/shm/\$USER/$machineLabel",
-                             "EASYBUILD_PREFIX=${eb_installpath}",
+                    withEnv(["EASYBUILD_PREFIX=${eb_installpath}",
                              "EASYBUILD_TMPDIR=${eb_installpath}/tmp",
                              "EB_CUSTOM_REPOSITORY=$WORKSPACE/easybuild"]){
                                  sh("""#!/bin/bash -l
@@ -140,7 +139,8 @@ stage('Update Stage') {
                                      $load_pe
                                      $load_easybuild
 
-                                     # update metadata file for external modules
+                                     # update buildpath and metadata file for external modules
+                                     export EASYBUILD_BUILDPATH="/dev/shm/\$USER/$machineLabel"
                                      export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
 
                                      # unuse paths
