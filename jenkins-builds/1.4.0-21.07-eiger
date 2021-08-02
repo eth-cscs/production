@@ -13,6 +13,7 @@
  Boost-1.75.0-cpeGNU-21.07-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.07.eb
  CP2K-8.2.69b8c2e-cpeGNU-21.07.eb
+ CubeLib-4.5-cpeGNU-21.07.eb
  FFmpeg-4.4-cpeGNU-21.07.eb
  GREASY-19.03-cscs-cpeGNU-21.07.eb
  GROMACS-2020.5-cpeGNU-21.07.eb
@@ -25,7 +26,6 @@
  NAMD-2.14-cpeGNU-21.07.eb
  NCO-4.9.8-cpeGNU-21.07.eb
  Scalasca-2.6-cpeGNU-21.07.eb       --set-default-module
- CubeLib-4.5-cpeGNU-21.07.eb
  Amber-20-15-9-cpeIntel-21.07.eb
  GSL-2.6-cpeIntel-21.07.eb
  QuantumESPRESSO-6.7.0-cpeIntel-21.07.eb
