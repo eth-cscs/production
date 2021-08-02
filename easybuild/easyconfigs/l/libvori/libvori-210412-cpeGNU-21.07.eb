@@ -1,0 +1,26 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'libvori'
+version = '210412'
+
+homepage = 'https://brehm-research.de/libvori.php'
+description = "libvori stands for 'Library for Voronoi Integration': currently libvori is working with the CP2K program package"
+
+toolchain = {'name': 'cpeGNU', 'version': '21.07'}
+toolchainopts = {'usempi': False, 'openmp': False}
+
+source_urls = ['https://brehm-research.de/files']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+]
+
+
+sanity_check_paths = {
+    'files': ['lib/%(name)s.a'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'chem'
