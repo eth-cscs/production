@@ -11,7 +11,18 @@ toolchain = SYSTEM
 
 dependencies = [
    ("cpe/%(version)s", EXTERNAL_MODULE),
-   ('PrgEnv-gnu', EXTERNAL_MODULE)
+   #('PrgEnv-gnu', EXTERNAL_MODULE),
+   ('PrgEnv-gnu/8.1.0', EXTERNAL_MODULE),
+   ('gcc/10.3.0', EXTERNAL_MODULE),
+   ('craype-x86-rome', EXTERNAL_MODULE),
+   ('libfabric/1.11.0.4.71', EXTERNAL_MODULE),
+   ('craype-network-ofi', EXTERNAL_MODULE),
+   ('xpmem/2.2.40-7.0.1.0_2.3__g1d7a24d.shasta', EXTERNAL_MODULE),
+   ('perftools-base/21.05.0', EXTERNAL_MODULE),
+   ('cray-libsci/21.06.1.1', EXTERNAL_MODULE),
+   ('craype/2.7.8', EXTERNAL_MODULE),
+   ('cray-dsmml/0.1.5', EXTERNAL_MODULE),
+   ('cray-mpich/8.1.7', EXTERNAL_MODULE) 
 ]
 
 moduleclass = 'toolchain'
