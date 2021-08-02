@@ -31,3 +31,5 @@
  QuantumESPRESSO-6.7.0-cpeIntel-21.05.eb
  VASP-6.2.0-cpeIntel-21.05.eb
  CP2K-8.1-cpeGNU-21.05.eb
+ reframe-3.7.2.eb                     --set-default-module
+ CubeLib-4.5-cpeGNU-21.05.eb
