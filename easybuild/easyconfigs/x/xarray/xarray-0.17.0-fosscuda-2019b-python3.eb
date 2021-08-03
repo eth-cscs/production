@@ -1,0 +1,32 @@
+# jg (CSCS), teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'xarray'
+version = '0.17.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/pydata/xarray'
+description = 'N-D labeled arrays and datasets in Python: http://xarray.pydata.org'
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+toolchainopts = {'verbose': False}
+
+source_urls = [PYPI_SOURCE]
+sources = ['xarray-%(version)s-py3-none-any.whl']
+use_pip = True
+unpack_sources = False
+
+
+dependencies = [
+    ('Python', '3.7.4', '', True),
+    ('PyExtensions', '3.7.4'),
+    ('netcdf-python', '1.5.4', '-python%(pymajver)s'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s']
+}
+
+moduleclass = 'data'

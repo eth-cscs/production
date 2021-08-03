@@ -39,7 +39,7 @@ exts_list = [
     ('nose', '1.3.7', {
         'source_urls': ['https://pypi.python.org/packages/source/n/nose/'],
     }),
-    ('Cython', '0.29.12', {
+    ('Cython', '0.29.24', {
         'source_urls': ['http://pypi.python.org/packages/source/c/cython/'],
     }),
     ('six', '1.12.0', {

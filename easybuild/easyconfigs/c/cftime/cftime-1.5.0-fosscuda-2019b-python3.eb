@@ -1,0 +1,27 @@
+easyblock = 'PythonPackage'
+
+name = 'cftime'
+version = '1.5.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/Unidata/cftime'
+description = "Time-handling functionality from netcdf4-python"
+
+toolchain = {'name': 'fosscuda', 'version': '2019b'}
+toolchainopts = {'verbose': False}
+
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.7.4', '', True),
+    ('cURL', '7.65.1', '', True),
+    ('PyExtensions', '3.7.4')
+]
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'data'
