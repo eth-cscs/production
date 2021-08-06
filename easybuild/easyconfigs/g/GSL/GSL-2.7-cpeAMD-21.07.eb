@@ -20,10 +20,9 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configopts = '--with-pic'
 
-
 sanity_check_paths = {
-    'files': ['lib/libgsl.so', 'lib/libgsl.a'],
-    'dirs': ['include'],
+    'files': ['lib/libgsl.so', 'lib/libgsl.a', 'lib/libgslcblas.so', 'lib/libgslcblas.a'],
+    'dirs': ['include', 'lib']
 }
 
 moduleclass = 'numlib'
