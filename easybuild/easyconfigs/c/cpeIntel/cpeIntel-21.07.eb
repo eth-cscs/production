@@ -10,8 +10,9 @@ description = """Toolchain using Cray compiler wrapper with intel module (CPE re
 toolchain = SYSTEM
 
 dependencies = [
-   ("cpe/%(version)s", EXTERNAL_MODULE),
-   ('PrgEnv-intel', EXTERNAL_MODULE)
+   ('cpe/%(version)s', EXTERNAL_MODULE),
+   ('PrgEnv-intel', EXTERNAL_MODULE),
+   ('intel/2021.2.0', EXTERNAL_MODULE)
 ]
 
 moduleclass = 'toolchain'

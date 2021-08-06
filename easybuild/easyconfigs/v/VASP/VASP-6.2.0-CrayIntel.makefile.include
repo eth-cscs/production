@@ -32,6 +32,7 @@ WANNIER90  = $(EBROOTWANNIER90)/lib/libwannier.a
 
 OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o
 
+MKLROOT    = /opt/intel/oneapi/mkl/2021.2.0
 INCS       = -I$(MKLROOT)/include/fftw
 
 LLIBS      = $(WANNIER90) $(SCALAPACK) $(BLACS) $(LAPACK) $(BLAS)
