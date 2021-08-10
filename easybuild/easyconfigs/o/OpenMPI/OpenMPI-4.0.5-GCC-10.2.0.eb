@@ -13,6 +13,7 @@ source_urls = ['http://www.open-mpi.org/software/ompi/v%(version_major_minor)s/d
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
+    ('cudatoolkit/11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1', EXTERNAL_MODULE),
     ('pmi/5.0.17', EXTERNAL_MODULE),
     ('pmi-lib/5.0.17', EXTERNAL_MODULE)
 ]
@@ -22,7 +23,8 @@ dependencies = [
 ]
 
 configopts = ' --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal ' 
-configopts += ' --with-slurm --with-pmi=$CRAY_PMI_PREFIX/include --with-pmi-libdir=$CRAY_PMI_PREFIX/lib64 '
+configopts += ' --with-cray-pmi=$CRAY_PMI_PREFIX/include --with-pmi-libdir=$CRAY_PMI_PREFIX/lib64 '
+configopts += ' --with-slurm --with-ugni '
 
 local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
