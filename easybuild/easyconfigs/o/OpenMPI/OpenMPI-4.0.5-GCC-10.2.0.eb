@@ -23,7 +23,6 @@ dependencies = [
 ]
 
 configopts = ' --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal --with-slurm --with-ugni ' 
-configopts += ' --with-cray-pmi=$CRAY_PMI_PREFIX/include --with-pmi-libdir=$CRAY_PMI_PREFIX/lib64 '
 
 local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
