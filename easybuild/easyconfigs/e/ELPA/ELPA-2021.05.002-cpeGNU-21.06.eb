@@ -20,12 +20,14 @@ configopts = [ local_commonopts, local_commonopts + ' --enable-openmp ' ]
 prebuildopts = " make clean && "
 
 sanity_check_paths = {
-    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
-    'dirs': ['bin', 'include/elpa_openmp-%(version)s/%(namelower)s', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig'],
+    'files': ['lib/libelpa.a', 'lib/libelpa.so', 'lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'lib/pkgconfig',
+             'include/%(namelower)s-%(version)s/%(namelower)s', 'include/%(namelower)s-%(version)s/modules',
+             'include/%(namelower)s_openmp-%(version)s/%(namelower)s', 'include/%(namelower)_openmp-%(version)s/modules'] 
 }
 
 modextrapaths = {
-    'CPATH': ['include/elpa-%(version)s', 'include/elpa_openmp-%(version)s']
+    'CPATH': ['include/elpa_openmp-%(version)s', 'include/elpa-%(version)s']
 }
 
 modextravars = {
