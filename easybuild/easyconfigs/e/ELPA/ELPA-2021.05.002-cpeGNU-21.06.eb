@@ -14,18 +14,25 @@ toolchainopts = {'usempi': True, 'openmp': True}
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
 
 preconfigopts = " CC=cc CXX=CC FC=ftn && "
-configopts = ' FCFLAGS="$FCFLAGS" -disable-avx512 --enable-openmp --enable-static '
+local_commonopts = ' FCFLAGS="$FCFLAGS" -disable-avx512 --enable-static ' 
+configopts = [ local_commonopts, local_commonopts + ' --enable-openmp ' ]
 
 prebuildopts = " make clean && "
 
-
 sanity_check_paths = {
-    'files': ['lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
-    'dirs': ['bin', 'include/elpa_openmp-%(version)s/%(namelower)s', 'include/elpa_openmp-%(version)s/modules', 'lib/pkgconfig'],
+    'files': ['lib/libelpa.a', 'lib/libelpa.so', 'lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'lib/pkgconfig',
+             'include/%(namelower)s-%(version)s/%(namelower)s', 'include/%(namelower)s-%(version)s/modules',
+             'include/%(namelower)s_openmp-%(version)s/%(namelower)s', 'include/%(namelower)s_openmp-%(version)s/modules'] 
 }
 
-modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s']}
+modextrapaths = {
+    'CPATH': ['include/elpa_openmp-%(version)s', 'include/elpa-%(version)s']
+}
 
-modextravars = {'ELPA_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s'}
+modextravars = {
+    'ELPA_INCLUDE_DIR': '%(installdir)s/include/elpa-%(version)s',
+    'ELPA_OPENMP_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s'
+}
 
 moduleclass = 'math'
