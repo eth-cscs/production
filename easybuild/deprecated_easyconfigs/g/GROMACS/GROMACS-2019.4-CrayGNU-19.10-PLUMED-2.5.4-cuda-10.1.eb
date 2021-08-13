@@ -1,0 +1,51 @@
+# contributed by Luca Marsella (CSCS)
+#
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+#
+# Copyright:: Copyright 2012-2013 University of Luxembourg / LCSB, Cyprus Institute / CaSToRC, Ghent University
+# Authors::   Wiktor Jurkowski <wiktor.jurkowski@uni.lu>, Fotis Georgatos <fotis.georgatos@uni.lu>, \
+#             George Tsouloupas <g.tsouloupas@cyi.ac.cy>, Kenneth Hoste
+# License::   MIT/GPL
+# $Id$
+#
+# This work implements a part of the HPCBIOS project and is a component of the policy:
+# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-93.html
+#
+name = 'GROMACS'
+version = '2019.4'
+local_plumedversion = '2.5.4'
+versionsuffix = '-PLUMED-%s-cuda-10.1' % local_plumedversion
+
+homepage = 'http://www.gromacs.org'
+description = """GROMACS is a versatile package to perform molecular dynamics,
+ i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles."""
+
+toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchainopts = {'opt': True, 'usempi': True, 'verbose': False, 'pic': True, 'dynamic': False, 'openmp': True}
+
+source_urls = ['ftp://ftp.%(namelower)s.org/pub/%(namelower)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+# CMake and libxml2 dependencies with dummy toolchain
+builddependencies = [
+    ('CMake', '3.14.5', '', True),
+    ('cudatoolkit/10.1.105_3.27-7.0.1.1_4.1__ga311ce7', EXTERNAL_MODULE),
+    ('libxml2', '2.9.7'),
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('PLUMED', '2.5.4'),
+]
+
+configopts = (
+    "-DGMX_CYCLE_SUBCOUNTERS=ON "
+    "-DCMAKE_BUILD_TYPE=Release "
+    "-DGPU_DEPLOYMENT_KIT_ROOT_DIR=$CUDATOOLKIT_HOME "
+    "-DGMX_BUILD_OWN_FFTW=ON "
+    "-DGMX_PREFER_STATIC_LIBS=ON "
+    "-DGMX_SIMD=AVX2_256"
+)
+
+skipsteps = ['test']
+
+moduleclass = 'bio'
