@@ -3,7 +3,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'PLUMED'
-version = "2.7.1"
+version = "2.7.2"
 
 homepage = 'https://www.plumed.org'
 description = """PLUMED is an open source library for free energy calculations in molecular systems which
@@ -13,7 +13,7 @@ description = """PLUMED is an open source library for free energy calculations i
  The software, written in C++, can be easily interfaced with both fortran and C/C++ codes.
 """
 
-toolchain = {'name': 'cpeGNU', 'version': '21.07'}
+toolchain = {'name': 'cpeGNU', 'version': '21.06'}
 toolchainopts = {'openmp': 'True', 'usempi': 'True', 'verbose': 'True'}
 
 source_urls = ['https://github.com/%(namelower)s/plumed2/archive/']
