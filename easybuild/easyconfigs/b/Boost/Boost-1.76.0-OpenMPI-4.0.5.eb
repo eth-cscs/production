@@ -31,9 +31,6 @@ install_cmd = "./b2 install"
 local_libs = ['mpi', 'system', 'thread']
 sanity_check_paths = {
     'files': ["lib/lib%%(namelower)s_%s.%s" % (libname, libext) for libname in local_libs for libext in ['a', 'so']],
-#              'lib/libboost_mpi.a', 'lib/libboost_mpi.so', 
-#              'lib/libboost_system.a', 'lib/libboost_system.so',
-#              'lib/libboost_thread.a', 'lib/libboost_thread.so'],
     'dirs': ['include', 'include/%(namelower)s', 'lib']
 }
 
