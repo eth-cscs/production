@@ -3,7 +3,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'PLUMED'
-version = "2.7.1"
+version = "2.7.2"
 
 homepage = 'https://www.plumed.org'
 description = """PLUMED is an open source library for free energy calculations in molecular systems which

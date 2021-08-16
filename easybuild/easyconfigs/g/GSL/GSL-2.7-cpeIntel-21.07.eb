@@ -20,9 +20,10 @@ sources = [SOURCELOWER_TAR_GZ]
 
 configopts = ' --with-pic '
 
+local_libs = ['', 'cblas']
 sanity_check_paths = {
-    'files': ['lib/lib%%(namelower)s.%s' % libext for libext in ['a', 'so']],
-    'dirs': ['include'],
+    'files': ['lib/lib%%(namelower)s%s.%s' % (libname, libext) for libname in local_libs for libext in ['a', 'so']],
+    'dirs': ['include', 'lib']
 }
 
 moduleclass = 'numlib'
