@@ -14,8 +14,8 @@ description = """
 
 toolchain = SYSTEM
 
+source_urls = ['https://sourceware.org/pub/%(name)s/']
 sources = [SOURCE_TAR_GZ]
-source_urls = [SOURCEFORGE_SOURCE]
 
 os.environ['CC'] = 'gcc'
 os.environ['CFLAGS'] = '-O3 -fPIC'

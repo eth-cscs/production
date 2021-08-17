@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '4.0.5'
+
+homepage = 'http://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = SYSTEM
+
+source_urls = ['http://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('cudatoolkit/11.2.0_3.36-7.0.2.1_2.2__g3ff9ab1', EXTERNAL_MODULE),
+    ('pmi/5.0.17', EXTERNAL_MODULE),
+    ('pmi-lib/5.0.17', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('gcc/10.2.0', EXTERNAL_MODULE)
+]
+
+configopts = ' --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal --with-slurm --with-ugni ' 
+
+local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in local_libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
