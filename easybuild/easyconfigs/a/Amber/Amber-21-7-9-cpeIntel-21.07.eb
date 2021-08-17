@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'Amber'
-version = '20-15-9'
+version = '21-7-9'
 
 homepage = 'http://ambermd.org/'
 description = """Amber (Assisted Model Building with Energy Refinement)
