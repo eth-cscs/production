@@ -19,7 +19,7 @@ sources = [
 # cray-hdf5 and cray-netcdf are not available with PrgEnv-intel on Cray EX
 builddependencies = [
     ('Boost', '1.75.0'),
-    ('CMake', '3.21.2', '', True)
+    ('CMake', '3.21.1', '', True)
 ]
 
 dependencies = [
