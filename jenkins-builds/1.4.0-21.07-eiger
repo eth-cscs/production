@@ -1,4 +1,4 @@
- CMake-3.20.1.eb                      --set-default-module
+ CMake-3.21.1.eb                      --set-default-module
  ddt-21.0.2-linux-x86_64.eb           --set-default-module
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
@@ -28,5 +28,5 @@
  Scalasca-2.6-cpeGNU-21.07.eb       --set-default-module
  Amber-20-15-9-cpeIntel-21.07.eb
  GSL-2.7-cpeIntel-21.07.eb
- QuantumESPRESSO-6.7.0-cpeIntel-21.07.eb
+ QuantumESPRESSO-6.8.0-cpeIntel-21.07.eb
  VASP-6.2.0-cpeIntel-21.07.eb

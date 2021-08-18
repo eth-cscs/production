@@ -21,9 +21,9 @@ sources = [SOURCELOWER_TAR_GZ]
 # do not use the Cray PE wrapper to avoid linking cray-libsci
 configopts = ' CC=gcc CFLAGS="-fopenmp" --with-pic '
 
-
+local_libs = ['', 'cblas']
 sanity_check_paths = {
-    'files': ['lib/libgsl.so', 'lib/libgsl.a', 'lib/libgslcblas.so', 'lib/libgslcblas.a'],
+    'files': ['lib/lib%%(namelower)s%s.%s' % (libname, libext) for libname in local_libs for libext in ['a', 'so']],
     'dirs': ['include', 'lib']
 }
 
