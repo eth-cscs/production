@@ -106,9 +106,7 @@ exts_list = [
     ('jupyterlab_server', '1.0.0'),
     ('ipykernel', '5.1.1'),
     ('notebook', '6.4.1'),
-    ('argon2-cffi', '20.1.0', { #added for notebook 6.4.1 upgrade
-      'modulename': 'argon2',
-      }),
+    ('argon2-cffi', '20.1.0', {'modulename': 'argon2'}),
     (name, version, {'installopts': ' --install-option=--skip-npm '}),
     # jupyterhub and its deps
     ('SQLAlchemy', '1.3.6'),
