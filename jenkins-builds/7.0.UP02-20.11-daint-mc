@@ -38,7 +38,7 @@
  JuliaExtensions-1.6.0-CrayGNU-20.11.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module     
  jupyterlab-1.2.21-CrayGNU-20.11-batchspawner.eb        --set-default-module
- jupyterlab-2.0.2-CrayGNU-20.11-batchspawner.eb
+ jupyterlab-2.2.10-CrayGNU-20.11-batchspawner.eb
  LAMMPS-29Oct20-CrayGNU-20.11.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  MATLAB-R2021a.eb                                       --set-default-module
