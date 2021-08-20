@@ -32,9 +32,8 @@
  ipcmagic-1.0.1-CrayGNU-20.11.eb                        --set-default-module
  Julia-1.6.1-CrayGNU-20.11-cuda.eb                      --set-default-module
  JuliaExtensions-1.6.1-CrayGNU-20.11-cuda.eb            --set-default-module
- jupyterlab-1.1.1-CrayGNU-20.11-batchspawner.eb         --set-default-module
- jupyterlab-1.2.16-CrayGNU-20.11-batchspawner-cuda.eb
- jupyterlab-2.0.2-CrayGNU-20.11-batchspawner-cuda.eb
+ jupyterlab-1.2.21-CrayGNU-20.11-batchspawner-cuda.eb   --set-default-module
+ jupyterlab-2.2.10-CrayGNU-20.11-batchspawner-cuda.eb
  jupyter-utils-0.1.eb                                   --set-default-module
  LAMMPS-29Oct20-CrayGNU-20.11-cuda.eb                   --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
