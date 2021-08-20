@@ -40,7 +40,7 @@ export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONP
 export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && 
 export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ && 
 export JUPYTER=%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe others)
-%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/%(name)s-manager@%(version_major_minor)s --no-build && #bumped to %(version_major_minor)s for jlab %(version_major_minor)s
+%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/jupyterlab-manager@2.0.0 --no-build && 
 %(installdir)s/bin/jupyter-labextension install %(name)s-datawidgets@6.3.0 --no-build && #stays at 6.3.0 
 %(installdir)s/bin/jupyter-labextension install itkwidgets@0.31.4 --no-build && #bumped to 0.31.4 from 0.25.3
 %(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.3 --no-build && #bumped to 0.7.3 from 0.4.2 
