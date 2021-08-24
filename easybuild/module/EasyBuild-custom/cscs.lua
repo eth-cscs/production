@@ -66,7 +66,7 @@ local system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
 if system == "eiger" then
 	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.04.cfg"))
 elseif system == "pilatus" then
-	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.05.cfg"))
+	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.08.cfg"))
 else
 	LmodError("System ", system, " is currently unsupported\n")
 end
