@@ -1,0 +1,37 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2021.05.002'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = "Eigenvalue SoLvers for Petaflop-Applications ."
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+# download from http://%(namelower)s.mpcdf.mpg.de/html/Releases/%(version)s often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+preconfigopts = " CC=cc CXX=CC FC=ftn && "
+configopts = [
+    ' FCFLAGS="$FCFLAGS" -disable-avx512 --enable-static ',
+    ' FCFLAGS="$FCFLAGS" -disable-avx512 --enable-static  --enable-openmp ',
+]
+
+prebuildopts = " make clean && "
+
+
+sanity_check_paths = {
+    'files': ['lib/libelpa.a', 'lib/libelpa.so', 'lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'lib/pkgconfig', 'include/%(namelower)s-%(version)s/%(namelower)s', 'include/%(namelower)s-%(version)s/modules', 'include/%(namelower)s_openmp-%(version)s/%(namelower)s', 'include/%(namelower)s_openmp-%(version)s/modules'],
+}
+
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s', 'include/%(namelower)s-%(version)s']}
+
+modextravars = {
+    'ELPA_INCLUDE_DIR': '%(installdir)s/include/%(namelower)s-%(version)s',
+    'ELPA_OPENMP_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s',
+}
+
+moduleclass = 'math'
