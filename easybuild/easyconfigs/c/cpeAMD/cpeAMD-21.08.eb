@@ -1,0 +1,17 @@
+# Compiler toolchain for Cray EX Programming Environment AMD compiler
+easyblock = 'cpeToolchain'
+
+name = 'cpeAMD'
+version = "21.08"
+
+homepage = 'https://pubs.cray.com'
+description = """Toolchain using Cray compiler wrapper with aocc module (CPE release: %s).\n""" % version
+
+toolchain = SYSTEM
+
+dependencies = [
+   ("cpe/%(version)s", EXTERNAL_MODULE),
+   ('PrgEnv-aocc', EXTERNAL_MODULE)
+]
+
+moduleclass = 'toolchain'
