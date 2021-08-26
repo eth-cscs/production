@@ -24,7 +24,9 @@ dependencies = [
 
 modtclfooter = """
 prepend-path EBJULIA_ADMIN_DEPOT_PATH "%(installdir)s/share/IJulia"
-prepend-path EBJULIA_ADMIN_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
+    prepend-path EBJULIA_ADMIN_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+}
 """
 # install extensions and batchspawner components
 
