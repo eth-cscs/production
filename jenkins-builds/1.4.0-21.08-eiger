@@ -18,7 +18,11 @@
  GREASY-19.03-cscs-cpeGNU-21.08.eb
  GROMACS-2020.5-cpeGNU-21.08.eb
  GSL-2.7-cpeGNU-21.08.eb
+ jupyterlab-2.2.10-cpeGNU-21.08.eb
+ Julia-1.6.0-cpeGNU-21.08.eb
+ JuliaExtensions-1.6.0-cpeGNU-21.08.eb
  LAMMPS-29Oct20-cpeGNU-21.08.eb
+ matplotlib-3.3.4-cpeGNU-21.08.eb
  NAMD-2.14-cpeGNU-21.08.eb
  NCO-4.9.8-cpeGNU-21.08.eb
  Scalasca-2.6-cpeGNU-21.08.eb       --set-default-module
