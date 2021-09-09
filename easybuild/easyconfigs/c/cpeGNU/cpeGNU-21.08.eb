@@ -24,6 +24,9 @@ end
 if not ( isloaded("craype-x86-rome") ) then
     load("craype-x86-rome")
 end
+if not ( isloaded("cray-mpich") ) then
+    load("cray-mpich")
+end
 if not ( isloaded("perftools-base") ) then
     load("perftools-base")
 end
