@@ -4,7 +4,7 @@
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
- reframe-3.8.0.eb                     --set-default-module
+ reframe-3.8.1.eb                     --set-default-module
  singularity-3.5.3-eiger.eb
  GSL-2.7-cpeAMD-21.08.eb
  GSL-2.7-cpeCray-21.08.eb
