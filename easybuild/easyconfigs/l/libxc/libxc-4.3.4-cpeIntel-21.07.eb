@@ -9,7 +9,7 @@ description = """Libxc is a library of exchange-correlation functionals for dens
  The aim is to provide a portable, well tested and reliable set of exchange and correlation functionals."""
 
 toolchain = {'name': 'cpeIntel', 'version': '21.07'}
-toolchainopts = {'opt': True}
+toolchainopts = {'opt': True, 'veryloose': True}
 
 source_urls = ['https://www.tddft.org/programs/%(name)s/down.php?file=%(version)s']
 sources = [SOURCE_TAR_GZ]

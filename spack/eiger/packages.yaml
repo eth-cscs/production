@@ -101,7 +101,7 @@ packages:
     - spec: cray-mpich@8.1.4
       modules:
       - cray-mpich/8.1.4
-      - libfabric/1.11.0.4.67
+      - libfabric/1.11.0.4.71
   jemalloc:
     externals:
     - spec: jemalloc@5.1.0.4

@@ -11,7 +11,7 @@ description = """
 """
 
 toolchain = {'name': 'cpeIntel', 'version': '21.07'}
-toolchainopts = {'pic': True}
+toolchainopts = {'pic': True, 'veryloose': True}
 
 source_urls = ['https://sourceware.org/pub/%(name)s/']
 sources = [SOURCE_TAR_GZ]

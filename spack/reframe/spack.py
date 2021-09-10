@@ -113,7 +113,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
 
         self.keep_files = [os.path.join('etc', 'spack', 'cray')]
 
-    @rfm.run_after('setup')
+    @run_after('setup')
     def set_spack_config(self):
         self.spack_path = self.stagedir
         self.variables = {
@@ -131,7 +131,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
         if self.legacy_spack:
             self.variables['HOME'] = spack_etc_dir
 
-    @sn.sanity_function
+    @deferrable
     def assert_config(self):
         patterns = [
             sn.assert_found(r'Added \d+ new compilers', self.stdout),
@@ -201,7 +201,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
 
         return sn.all(patterns)
 
-    @rfm.run_after('run')
+    @run_after('run')
     def capture_compilers(self):
         with open(self.compilers_file_path) as f:
             spack_compilers = yaml.safe_load(f)
@@ -216,7 +216,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
             for compiler in self.compiler_types:
                 self.all_compilers.update(self.generate_compiler_entries(compiler, spack_compilers, modulerc_file, cdt_name, cdt_version))
 
-    @rfm.run_after('run')
+    @run_after('run')
     def update_compilers_file(self):
         spack_compilers = {'compilers' : []}
         for _, spec in self.all_compilers.items():
@@ -343,7 +343,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
         return pkgs
 
 
-    @rfm.run_after('run')
+    @run_after('run')
     def update_packages_file(self):
         if os.path.isfile(self.packages_file_path):
             with open(self.packages_file_path) as f:
@@ -393,14 +393,14 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
         with open(self.packages_file_path, 'w') as fp:
             yaml.dump(spack_packages, fp, default_flow_style=False, canonical=False)
 
-    @rfm.run_after('run')
+    @run_after('run')
     def generate_config_file(self):
         config = spackconfig.SPACK_CONFIG
 
         with open(self.config_file_path, 'w') as fp:
             yaml.dump(config, fp, default_flow_style=False, canonical=False)
 
-    @rfm.run_after('run')
+    @run_after('run')
     def generate_module_file(self):
         blacklisted_pkg_modules = spackconfig.BLACKLISTED_PKG_MODULES
         module_suffixes = spackconfig.MODULE_SUFFIXES
@@ -444,7 +444,7 @@ class spack_pkg_check(rfm.RunOnlyRegressionTest):
         self.executable_opts += [self.spack_pkg]
         self.postrun_cmds = [f'spack install {self.spack_pkg}']
 
-    @rfm.run_after('setup')
+    @run_after('setup')
     def config_spack(self):
         target = self.getdep(self.dep_name, 'builtin')
         self.variables = target.variables
@@ -503,7 +503,7 @@ fi'''
             sn.assert_not_found(r'fatal', self.stderr),
         ])
 
-    @rfm.run_before('run')
+    @run_before('run')
     def config_spack(self):
         target = self.getdep(self.dep_name, 'builtin')
         self.etc_dir = os.path.join(target.stagedir, 'etc', 'spack', 'cray')

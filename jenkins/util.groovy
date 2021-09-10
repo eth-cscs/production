@@ -168,7 +168,7 @@ void createJiraIssue(String issuetype, String machine, String subject, String me
 }
 
 /*
-* Search a Jira Issue:
+* Search Jira Issue and return the last created match:
 * 
 * @param subject Subject of the Jira Issue appended to [${machine}]
 * @param machine Computing system where the build took place (machineLabel)
@@ -177,7 +177,7 @@ void createJiraIssue(String issuetype, String machine, String subject, String me
 */
 String[] searchJiraIssue(String subject, String machine, String pe, String project){
 
-   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '*$subject*' AND summary ~ '*$machine*' AND summary ~ '*$pe*'", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
+   def search = jiraJqlSearch jql: "project = '$project' AND summary ~ '$subject' AND summary ~ '$machine' AND summary ~ '*$pe*' ORDER BY created", fields: ['status'], maxResults: 1, site: 'JIRA_SITE', failOnError: false
 
    if(search.successful && search.data.issues) {
        //  key and status of the Jira issues matched by the search 

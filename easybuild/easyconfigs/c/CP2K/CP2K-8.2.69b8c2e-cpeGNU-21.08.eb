@@ -1,0 +1,65 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'MakeCp'
+
+name = 'CP2K'
+version = '8.2.69b8c2e'
+
+homepage = 'http://www.cp2k.org/'
+description = """
+    CP2K is a freely available (GPL) program, written in Fortran 95, to
+    perform atomistic and molecular simulations of solid state, liquid,
+    molecular and biological systems. It provides a general framework for
+    different methods such as e.g. density functional theory (DFT) using a
+    mixed Gaussian and plane waves approach (GPW), and classical pair and
+    many-body potentials.
+"""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+sources = [
+    {'filename': SOURCELOWER_TAR_GZ, 'git_config': {'url': 'https://github.com/%(namelower)s', 'repo_name': '%(namelower)s', 'commit': '69b8c2e', 'recursive': True}},
+]
+patches = [('%(name)s-%(version_major_minor)s-%(toolchain_name)s.psmp', '%(builddir)s/%(namelower)s/arch')]
+
+builddependencies = [
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cray-libsci', EXTERNAL_MODULE),
+    ('flex', '2.6.4'),
+]
+dependencies = [
+    ('ELPA', '2021.05.002'),
+    ('Libint-CP2K', '2.6.0'),
+    ('libvori', '210412'),
+    ('libxc', '5.1.5'),
+    ('libxsmm', '1.16.1'),
+    ('PLUMED', '2.7.1'),
+    ('SIRIUS', '7.2.5'),
+    ('spglib', '1.16.0'),
+]
+
+# create the REVISION file
+prebuildopts = 'echo "git:69b8c2e" > %(builddir)s/%(namelower)s/REVISION && '
+# build type
+buildopts = "ARCH=%(name)s-%(version_major_minor)s-%(toolchain_name)s VERSION=psmp"
+
+modluafooter = """
+prepend_path("LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+"""
+files_to_copy = [
+    (['./arch/%(name)s-%(version_major_minor)s-%(toolchain_name)s.psmp'], 'arch'),
+    (['./exe/%(name)s-%(version_major_minor)s-%(toolchain_name)s/*'], 'bin'),
+    (['./data'], '.'),
+    (['./tests'], '.'),
+    (['./tools'], '.'),
+]
+
+sanity_check_paths = {
+    'files': ['arch/%(name)s-%(version_major_minor)s-%(toolchain_name)s.psmp', 'bin/%(namelower)s.psmp'],
+    'dirs': ['data', 'tests', 'tools'],
+}
+
+# set custom CP2K_DATA_DIR
+modextravars = {'CP2K_DATA_DIR': '%(installdir)s/data'}
+
+moduleclass = 'chem'

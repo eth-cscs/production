@@ -1,0 +1,39 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'Boost'
+version = '1.76.0'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://boostorg.jfrog.io/artifactory/main/release/%(version)s/source']
+sources = ['%(namelower)s_%(version_major)s_%(version_minor)s_0.tar.bz2']
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('OpenMPI', '4.0.5'),
+    ('zlib', '1.2.11')
+]
+
+configure_cmd = './bootstrap.sh' 
+configopts = '--without-libraries=python'
+
+prebuildopts = 'sed -i "/using gcc ;/a using mpi ;" project-config.jam && '
+build_cmd = './b2'
+
+install_cmd = "./b2 install"
+
+local_libs = ['mpi', 'system', 'thread']
+sanity_check_paths = {
+    'files': ["lib/lib%%(namelower)s_%s.%s" % (libname, libext) for libname in local_libs for libext in ['a', 'so']],
+    'dirs': ['include', 'include/%(namelower)s', 'lib']
+}
+
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
+moduleclass = 'devel'

@@ -1,0 +1,108 @@
+diff -Nru OpenFOAM-v2106.ORIG/etc/bashrc OpenFOAM-v2106/etc/bashrc
+--- OpenFOAM-v2106.ORIG/etc/bashrc	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/bashrc	2021-08-19 09:57:50.000000000 +0200
+@@ -93,8 +93,11 @@
+ #   HPMPI | CRAY-MPICH | FJMPI | QSMPI | SGIMPI | INTELMPI | USERMPI
+ # Specify SYSTEMOPENMPI1, SYSTEMOPENMPI2 for internal tracking (if desired)
+ # Can also use INTELMPI-xyz etc and define your own wmake rule
+-export WM_MPLIB=SYSTEMOPENMPI
+-
++export WM_MPLIB=SYSTEMMPI
++export MPI_ROOT=${MPICH_DIR}
++export MPI_ARCH_FLAGS=" "
++export MPI_ARCH_LIBS=" "
++export MPI_ARCH_INC=" "
+ 
+ #------------------------------------------------------------------------------
+ # (advanced / legacy)
+diff -Nru OpenFOAM-v2106.ORIG/etc/config.sh/CGAL OpenFOAM-v2106/etc/config.sh/CGAL
+--- OpenFOAM-v2106.ORIG/etc/config.sh/CGAL	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/config.sh/CGAL	2021-08-19 15:47:22.000000000 +0200
+@@ -43,11 +43,11 @@
+ #------------------------------------------------------------------------------
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+ 
+-boost_version=boost_1_66_0
+-cgal_version=CGAL-4.12.2
++boost_version=${EBVERSIONBOOST}
++cgal_version=${EBVERSIONCGAL}
+ 
+-export BOOST_ARCH_PATH="$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/$boost_version"
+-export CGAL_ARCH_PATH="$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/$cgal_version"
++export BOOST_ARCH_PATH=${EBROOTBOOST}
++export CGAL_ARCH_PATH=${EBROOTCGAL}
+ 
+ # export GMP_ARCH_PATH=...
+ # export MPFR_ARCH_PATH=...
+diff -Nru OpenFOAM-v2106.ORIG/etc/config.sh/FFTW OpenFOAM-v2106/etc/config.sh/FFTW
+--- OpenFOAM-v2106.ORIG/etc/config.sh/FFTW	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/config.sh/FFTW	2021-08-19 11:23:04.000000000 +0200
+@@ -35,8 +35,8 @@
+ #------------------------------------------------------------------------------
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+ 
+-fftw_version=fftw-3.3.7
+-export FFTW_ARCH_PATH=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/$fftw_version
++fftw_version=fftw-3.3.8.8
++export FFTW_ARCH_PATH=${FFTW_DIR}/../.
+ 
+ # END OF (NORMAL) USER EDITABLE PART
+ #------------------------------------------------------------------------------
+diff -Nru OpenFOAM-v2106.ORIG/etc/config.sh/metis OpenFOAM-v2106/etc/config.sh/metis
+--- OpenFOAM-v2106.ORIG/etc/config.sh/metis	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/config.sh/metis	2021-08-19 11:24:18.000000000 +0200
+@@ -35,7 +35,7 @@
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+ 
+ METIS_VERSION=metis-5.1.0
+-export METIS_ARCH_PATH=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER$WM_PRECISION_OPTION$WM_LABEL_OPTION/$METIS_VERSION
++export METIS_ARCH_PATH=${CRAY_TPSL_64_DIR}
+ 
+ # END OF (NORMAL) USER EDITABLE PART
+ #------------------------------------------------------------------------------
+diff -Nru OpenFOAM-v2106.ORIG/etc/config.sh/paraview OpenFOAM-v2106/etc/config.sh/paraview
+--- OpenFOAM-v2106.ORIG/etc/config.sh/paraview	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/config.sh/paraview	2021-08-19 11:25:41.000000000 +0200
+@@ -57,7 +57,7 @@
+ #------------------------------------------------------------------------------
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+ 
+-ParaView_VERSION=5.9.1
++ParaView_VERSION=none
+ ParaView_QT=qt-system
+ 
+ # END OF (NORMAL) USER EDITABLE PART
+diff -Nru OpenFOAM-v2106.ORIG/etc/config.sh/scotch OpenFOAM-v2106/etc/config.sh/scotch
+--- OpenFOAM-v2106.ORIG/etc/config.sh/scotch	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/etc/config.sh/scotch	2021-08-19 10:11:46.000000000 +0200
+@@ -33,8 +33,8 @@
+ #------------------------------------------------------------------------------
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+ 
+-SCOTCH_VERSION=scotch_6.1.0
+-export SCOTCH_ARCH_PATH=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER$WM_PRECISION_OPTION$WM_LABEL_OPTION/$SCOTCH_VERSION
++SCOTCH_VERSION=scotch_6.0.8
++export SCOTCH_ARCH_PATH=${CRAY_TPSL_64_DIR}
+ 
+ # END OF (NORMAL) USER EDITABLE PART
+ #------------------------------------------------------------------------------
+diff -Nru OpenFOAM-v2106.ORIG/wmake/rules/linux64Gcc/c OpenFOAM-v2106/wmake/rules/linux64Gcc/c
+--- OpenFOAM-v2106.ORIG/wmake/rules/linux64Gcc/c	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/wmake/rules/linux64Gcc/c	2021-08-19 11:26:27.000000000 +0200
+@@ -1,5 +1,6 @@
+ include $(GENERAL_RULES)/Gcc/c
+ 
++cc          = cc
+ cARCH       = -m64
+ 
+ # Compile option is non-mandatory, but must be non-empty
+diff -Nru OpenFOAM-v2106.ORIG/wmake/rules/linux64Gcc/c++ OpenFOAM-v2106/wmake/rules/linux64Gcc/c++
+--- OpenFOAM-v2106.ORIG/wmake/rules/linux64Gcc/c++	2021-06-28 10:15:09.000000000 +0200
++++ OpenFOAM-v2106/wmake/rules/linux64Gcc/c++	2021-08-19 11:26:41.000000000 +0200
+@@ -1,5 +1,6 @@
+ include $(GENERAL_RULES)/Gcc/c++
+ 
++CC          = CC
+ c++ARCH     = -m64 -pthread
+ 
+ include $(DEFAULT_RULES)/c++$(WM_COMPILE_OPTION)

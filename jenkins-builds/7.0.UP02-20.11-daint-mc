@@ -21,9 +21,6 @@
  GSL-2.5-CrayCCE-20.11.eb
  GSL-2.5-CrayIntel-20.11.eb
  HDFView-2.14.eb                                        --set-default-module
- HPX-1.5.0-CrayGNU-20.11.eb                             --set-default-module
- HPX-1.5.0-CrayGNU-20.11-APEX.eb
- HPX-1.5.0-CrayGNU-20.11-nonetworking.eb
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-serial.eb
@@ -32,14 +29,12 @@
  hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
- ipcmagic-0.1-CrayGNU-20.11.eb                          --set-default-module
- ipcmagic-1.0.1-CrayGNU-20.11.eb
+ ipcmagic-1.0.1-CrayGNU-20.11.eb                        --set-default-module
  Julia-1.6.0-CrayGNU-20.11.eb                           --set-default-module
  JuliaExtensions-1.6.0-CrayGNU-20.11.eb                 --set-default-module
- jupyter-utils-0.1.eb                                   --set-default-module
- jupyterlab-1.1.1-CrayGNU-20.11-batchspawner.eb         --set-default-module
- jupyterlab-1.2.16-CrayGNU-20.11-batchspawner.eb
- jupyterlab-2.0.2-CrayGNU-20.11-batchspawner.eb
+ jupyter-utils-0.1.eb                                   --set-default-module     
+ jupyterlab-1.2.21-CrayGNU-20.11-batchspawner.eb        --set-default-module
+ jupyterlab-2.2.10-CrayGNU-20.11-batchspawner.eb
  LAMMPS-29Oct20-CrayGNU-20.11.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  MATLAB-R2021a.eb                                       --set-default-module
