@@ -8,7 +8,7 @@ git clone https://github.com/eth-cscs/production.git
 reframe -c production/spack/reframe -R -x spack_push_config_check -r
 ```
 
-This skips opening the step where it opens a PR with the new config. To submit
+This skips the step where it opens a PR with the new config. To submit
 the new config changes, run
 
 ```console
