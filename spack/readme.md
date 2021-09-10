@@ -17,7 +17,7 @@ reframe -c production/spack/reframe -Rr
 
 ## Caveats / TODO
 
-- [ ] The script fails with a user compilers.yaml in `~/.spack`, since now new
+- [ ] The script fails with a user compilers.yaml in `~/.spack`, since no new
       compilers are detected. We should probably start using environments and
       override the config scope (start out with empty `'compilers:':`).
 - [ ] Handle changing variant names/values in Spack.
