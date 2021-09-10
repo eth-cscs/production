@@ -259,7 +259,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
             # cdt compilers have modules, if not they are considered os compilers
             modules.append(cdt_name + '/' + cdt_version)
             modules.append(compiler_type + '/' + version)
-            spec['spec'] += '.' + cdt_version
+            spec['spec'] += '-' + cdt_version
 
             ret.update({
                 spec['spec'] : spec
