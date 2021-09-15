@@ -5,7 +5,7 @@ version = '4.0.2'
 homepage = 'http://www.r-project.org/'
 description = "R is a free software environment for statistical computing and graphics."
 
-toolchain = {'name': 'CrayGNU', 'version': '19.10'}
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 
 source_urls = ['http://cran.us.r-project.org/src/base/R-%(version_major)s']
 sources = [SOURCE_TAR_GZ]  # -- Disabling Rmpi since it requires MPI_Comm_spawn (not implemented yet by Cray MPT)
