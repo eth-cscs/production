@@ -87,7 +87,7 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
             if spacklib.parse_version(self.spack_version) >= spacklib.parse_version('0.16.0'):
                 self.postrun_cmds += ['spack external find --scope site/cray']
             elif spacklib.parse_version(self.spack_version) < spacklib.parse_version('0.15.0'):
-                raise ValueError(f'Sparck version {self.spack_version} is not supported')
+                raise ValueError(f'Spack version {self.spack_version} is not supported')
             else:
                 self.legacy_spack = True
                 self.postrun_cmds += [
@@ -423,7 +423,6 @@ class spack_pkg_check(rfm.RunOnlyRegressionTest):
     valid_prog_environs = ['builtin']
     valid_systems = ['daint:login', 'dom:login']
     executable = 'spack'
-    executable_opts = ['spec', '-IlN']
     num_tasks = 1
     num_tasks_per_node = 1
     exclusive = True
@@ -434,20 +433,25 @@ class spack_pkg_check(rfm.RunOnlyRegressionTest):
     def __init__(self):
         self.dep_name = f'spack_config_check_{util.toalphanum(self.spack_version)}'
         self.depends_on(self.dep_name, how=udeps.by_env)
-
         self.sanity_patterns = sn.all([
             sn.assert_not_found(r'ERROR', self.stderr),
             sn.assert_not_found(r'Error', self.stderr),
             sn.assert_not_found(r'missing', self.stderr),
             sn.assert_not_found(r'command not found', self.stderr),
         ])
-        self.executable_opts += [self.spack_pkg]
-        self.postrun_cmds = [f'spack install {self.spack_pkg}']
 
     @run_after('setup')
     def config_spack(self):
         target = self.getdep(self.dep_name, 'builtin')
+        self.executable_opts = [
+            '-C', f'{self.stagedir}/config/{self.spack_version}',
+            'spec', '-IlN', self.spack_pkg
+        ]
+        self.postrun_cmds = [
+            f'spack -C {self.stagedir}/config/{self.spack_version} install {self.spack_pkg}'
+        ]
         self.variables = target.variables
+        self.variables['REFRAME_STAGE_DIR'] = self.stagedir
 
 
 @rfm.simple_test
