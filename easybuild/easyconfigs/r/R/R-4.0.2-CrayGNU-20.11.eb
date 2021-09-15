@@ -12,9 +12,9 @@ sources = [SOURCE_TAR_GZ]  # -- Disabling Rmpi since it requires MPI_Comm_spawn 
 
 dependencies = [
     ('libreadline', '8.0', '', True),
-    ('ncurses', '6.1'),
-    ('bzip2', '1.0.6'),
-    ('XZ', '5.2.3'),
+    ('ncurses', '6.2'),
+    ('bzip2', '1.0.8'),
+    ('XZ', '5.2.4', '', True),
     ('PCRE', '8.42'),
     ('libpng', '1.6.34'),  # for plotting in R
     ('libjpeg-turbo', '1.5.3'),  # for plottting in R
