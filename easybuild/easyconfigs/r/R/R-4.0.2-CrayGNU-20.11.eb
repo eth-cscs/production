@@ -16,13 +16,13 @@ dependencies = [
     ('bzip2', '1.0.8'),
     ('XZ', '5.2.4', '', True),
     ('PCRE', '8.42'),
-    ('libpng', '1.6.34'),  # for plotting in R
-    ('libjpeg-turbo', '1.5.3'),  # for plottting in R
-    ('Tcl', '8.6.7'),
-    ('Tk', '8.6.7'),  # for tcltk
-    ('cURL', '7.61.1'),  # for RCurl
-    ('libxml2', '2.9.7'),  # for XML
-    ('GMP', '6.1.2'),  # for igraph
+    ('libpng', '1.6.34', '', True),  # for plotting in R
+    ('libjpeg-turbo', '1.5.3', '', True),  # for plottting in R
+    ('Tcl', '8.6.7', '', True),
+    ('Tk', '8.6.7', '', True),  # for tcltk
+    ('cURL', '7.61.1', '', True),  # for RCurl
+    ('libxml2', '2.9.7', '', True),  # for XML
+    ('GMP', '6.1.2', '', True),  # for igraph
 ]
 
 osdependencies = ['java', ('openssl-devel', 'libssl-dev', 'libopenssl-devel')]
