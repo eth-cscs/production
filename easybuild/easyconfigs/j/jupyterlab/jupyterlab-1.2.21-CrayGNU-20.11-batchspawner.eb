@@ -71,7 +71,7 @@ julia -e 'using Pkg; Pkg.add("IJulia");' &&
 chmod -R +rX %(installdir)s/share/IJulia &&  # Adjust permissions of IJulia files
 file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file && # Remove IJulia specific project configuration
 # IR kernel - https://github.com/IRkernel/IRkernel
-export R_LIBS_SITE=%(installdir)s/share/IR &&
+export R_LIBS_SITE=%(installdir)s/share/ir36 &&
 mkdir %(installdir)s/share/ir36
 Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir36","https://cloud.r-project.org")' &&
 Rscript -e 'library(IRkernel);IRkernel::installspec()' 
