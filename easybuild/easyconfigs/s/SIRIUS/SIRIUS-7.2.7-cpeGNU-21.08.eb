@@ -20,7 +20,7 @@ dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('ELPA', '2021.05.002'),
     ('GSL', '2.7'),
-    ('libxc', '5.1.5'),
+    ('libxc', '5.1.6'),
     ('SpFFT', '1.0.4'),
     ('spglib', '1.16.0'),
     ('SPLA', '1.5.1'),
