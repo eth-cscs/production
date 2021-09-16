@@ -40,27 +40,27 @@ export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONP
 export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && 
 export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ && 
 export JUPYTER=%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe others)
-####%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/%(name)s-manager@1.0 --no-build && 
-####%(installdir)s/bin/jupyter-labextension install %(name)s-datawidgets@6.3.0 --no-build && 
-####%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build && 
-####%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y %(name)s-plotly@1.0.0 --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && 
-####%(installdir)s/bin/jupyter labextension install %(name)s-topbar-extension@0.4.0 %(name)s-system-monitor@0.4.1 --no-build && 
-####%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && 
-####%(installdir)s/bin/jupyter labextension install -y %(name)s-nvdashboard@0.2.1 --no-build && 
-####cd %(installdir)s/ && 
-####git clone https://github.com/NVIDIA/ipyparaview && 
-####cd ipyparaview && 
-####git checkout cf1c6f4 && 
-####%(installdir)s/bin/jupyter labextension install js --no-build && 
+%(installdir)s/bin/jupyter-labextension install -y @jupyter-widgets/%(name)s-manager@1.0 --no-build && 
+%(installdir)s/bin/jupyter-labextension install %(name)s-datawidgets@6.3.0 --no-build && 
+%(installdir)s/bin/jupyter-labextension install itkwidgets@0.25.3 --no-build && 
+%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.4.2 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y %(name)s-plotly@1.0.0 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y plotlywidget@1.0.0 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y jupyterlab_bokeh@1.0.0 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y bqplot@0.4.6 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && 
+%(installdir)s/bin/jupyter labextension install %(name)s-topbar-extension@0.4.0 %(name)s-system-monitor@0.4.1 --no-build && 
+%(installdir)s/bin/jupyter labextension install dask-labextension --no-build && 
+installdir)s/bin/jupyter labextension install -y %(name)s-nvdashboard@0.2.1 --no-build && 
+cd %(installdir)s/ && 
+git clone https://github.com/NVIDIA/ipyparaview && 
+cd ipyparaview && 
+git checkout cf1c6f4 && 
+%(installdir)s/bin/jupyter labextension install js --no-build && 
 %(installdir)s/bin/jupyter lab build --debug --dev-build=False && 
 rm -r $YARN_CACHE_FOLDER && 
 # Bash kernel - https://github.com/takluyver/bash_kernel
-####python3 -m bash_kernel.install --prefix=%(installdir)s/ && 
+python3 -m bash_kernel.install --prefix=%(installdir)s/ && 
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
 # installs ijulia in JULIA_DEPOT_PATH and kernel in $JUPYTER_DATA_DIR/kernels
 unset EBJULIA_USER_DEPOT_PATH && 
@@ -155,62 +155,62 @@ exts_list = [
         }),
     ('jupyterhub', '1.3.0'), #bumped from 1.0.0, 01Feb21
     # widgets: note the lab extensions below
-####    ('widgetsnbextension', '3.5.1'),
-####    ('ipywidgets', '7.5.1'),
+    ('widgetsnbextension', '3.5.1'),
+    ('ipywidgets', '7.5.1'),
     # ipympl matplotlib widgets, requires lab extension
-####    ('ipympl', '0.3.3'),
+    ('ipympl', '0.3.3'),
     # itkwidgets
-####    ('traittypes', '0.2.1'),
-####    ('param', '1.9.2'),
-####    ('pyct', '0.4.6'),
-####    ('colorcet', '2.0.2'),
-####    ('zstandard', '0.13.0'),
-####    ('itk-core', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
-####    ('itk-numerics', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
-####    ('itk-filtering', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
-####    ('itk-meshtopolydata', '0.6.0', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
-####    ('ipydatawidgets', '4.0.1'),
-####    ('itkwidgets', '0.25.0'),
+    ('traittypes', '0.2.1'),
+    ('param', '1.9.2'),
+    ('pyct', '0.4.6'),
+    ('colorcet', '2.0.2'),
+    ('zstandard', '0.13.0'),
+    ('itk-core', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_core-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-numerics', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_numerics-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-filtering', '5.0.1', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_filtering-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('itk-meshtopolydata', '0.6.0', {'unpack_sources': False, 'modulename': 'itk', 'source_tmpl': 'itk_meshtopolydata-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl'}),
+    ('ipydatawidgets', '4.0.1'),
+    ('itkwidgets', '0.25.0'),
     # plotly, requires the lab extension below
-####    ('retrying', '1.3.3'),
-####    ('plotly', '4.0.0'),
-####    ('PyYAML', '5.1.2', {'modulename': 'yaml'}),
-####    ('bokeh', '1.3.4'),
-####    ('packaging', '19.1'),
-####    ('Pillow', '7.0.0', {'modulename': 'PIL'}),
+    ('retrying', '1.3.3'),
+    ('plotly', '4.0.0'),
+    ('PyYAML', '5.1.2', {'modulename': 'yaml'}),
+    ('bokeh', '1.3.4'),
+    ('packaging', '19.1'),
+    ('Pillow', '7.0.0', {'modulename': 'PIL'}),
     # bqplot: requires the labextension below
-####    ('bqplot', '0.11.6'),
+    ('bqplot', '0.11.6'),
     # nbresuse for jupyterlab-system-monitor extension
-####    ('psutil', '5.6.3'),
-####    ('nbresuse', '0.3.2'),
-####    ('graphviz', '0.12', {'source_tmpl': 'graphviz-%(version)s.zip'}),
+    ('psutil', '5.6.3'),
+    ('nbresuse', '0.3.2'),
+    ('graphviz', '0.12', {'source_tmpl': 'graphviz-%(version)s.zip'}),
     # dask-labextension
     # This package provides a JupyterLab extension to manage Dask clusters,
     # as well as embed Dask's dashboard plots directly into JupyterLab panes
-####    ('simpervisor', '0.3'),
-####    ('multidict', '4.5.2'),
-####    ('yarl', '1.3.0'),
-####    ('typing_extensions', '3.7.4'),
-####    ('async-timeout', '3.0.1'),
-####    ('idna-ssl', '1.1.0', {'modulename': 'idna_ssl'}),
-####    ('aiohttp', '3.5.4'),
-####    ('jupyter-server-proxy', '1.1.0'),
-####    ('dask_labextension', '1.0.3'),
+    ('simpervisor', '0.3'),
+    ('multidict', '4.5.2'),
+    ('yarl', '1.3.0'),
+    ('typing_extensions', '3.7.4'),
+    ('async-timeout', '3.0.1'),
+    ('idna-ssl', '1.1.0', {'modulename': 'idna_ssl'}),
+    ('aiohttp', '3.5.4'),
+    ('jupyter-server-proxy', '1.1.0'),
+    ('dask_labextension', '1.0.3'),
     # JupyterLab GPU Dashboard (nvdashboard)
     # JupyterLab extension for displaying dashboards of GPU usage.
-####    ('pynvml', '8.0.4'),
-####    ('jupyterlab-nvdashboard', '0.2.1'),
-####    ('batchspawner', '68a1fcd', {'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s']}),
-####    ('ipyparaview', 'cf1c6f4', {'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s']}),
+    ('pynvml', '8.0.4'),
+    ('jupyterlab-nvdashboard', '0.2.1'),
+    ('batchspawner', '68a1fcd', {'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s']}),
+    ('ipyparaview', 'cf1c6f4', {'source_urls': ['https://github.com/NVIDIA/ipyparaview/tarball/%(version)s']}),
     # jupyterlab code formatter, requires a formatter e.g., black
-####    ('pathspec', '0.8.0'),
-####    ('typed_ast', '1.4.1'),
-####    ('appdirs', '1.4.4'),
-####    ('regex', '2020.6.8'),
-####    ('toml', '0.10.1'),
-####    ('black', '19.10b0'),
-####    ('jupyterlab_code_formatter', '1.1.0'),
-####    ('bash_kernel', '0.7.2', {'use_pip': False}),
+    ('pathspec', '0.8.0'),
+    ('typed_ast', '1.4.1'),
+    ('appdirs', '1.4.4'),
+    ('regex', '2020.6.8'),
+    ('toml', '0.10.1'),
+    ('black', '19.10b0'),
+    ('jupyterlab_code_formatter', '1.1.0'),
+    ('bash_kernel', '0.7.2', {'use_pip': False}),
 ]
 
 sanity_check_paths = {
