@@ -78,7 +78,7 @@ mkdir %(installdir)s/share/jupyter/kernels/ir36
 Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir36","https://cloud.r-project.org")' &&
 cd %(installdir)s/ && 
 git clone https://github.com/IRkernel/IRkernel.git &&
-cd IRkernel
+cd IRkernel &&
 git checkout d7f8681 && 
 cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir36 
 #Rscript -e 'library(IRkernel);IRkernel::installspec()' 
