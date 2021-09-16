@@ -51,7 +51,7 @@ export JUPYTER=%(installdir)s/bin/jupyter &&   # Needed for IJulia (and maybe ot
 %(installdir)s/bin/jupyter labextension install -y @ryantam626/jupyterlab_code_formatter --no-build && 
 %(installdir)s/bin/jupyter labextension install %(name)s-topbar-extension@0.4.0 %(name)s-system-monitor@0.4.1 --no-build && 
 %(installdir)s/bin/jupyter labextension install dask-labextension --no-build && 
-%installdir)s/bin/jupyter labextension install -y %(name)s-nvdashboard@0.2.1 --no-build && 
+%(installdir)s/bin/jupyter labextension install -y %(name)s-nvdashboard@0.2.1 --no-build && 
 cd %(installdir)s/ && 
 git clone https://github.com/NVIDIA/ipyparaview && 
 cd ipyparaview && 
