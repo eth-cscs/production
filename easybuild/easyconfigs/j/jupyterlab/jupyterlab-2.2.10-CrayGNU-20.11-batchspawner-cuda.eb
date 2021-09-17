@@ -85,7 +85,8 @@ cd %(installdir)s/ &&
 git clone https://github.com/IRkernel/IRkernel.git &&
 cd IRkernel &&
 git checkout d7f8681 && 
-cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir36  
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir36 &&
+file2=%(installdir)s/share/jupyter/kernels/ir36/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 3.6/g' > $file2 
 """,
 ]
 
