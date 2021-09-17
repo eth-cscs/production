@@ -451,14 +451,13 @@ class spack_pkg_check(rfm.RunOnlyRegressionTest):
             f'spack -C {self.stagedir}/config/{self.spack_version} install {self.spack_pkg}'
         ]
 
-        # Note: re-setting the home dir so that each test, which runs in parallel,
-        #       has its own bootstrap store, which is stored in the home dir.
-        self.variables['HOME'] = self.stagedir
-
         # Note: deep copy of the environment variable, instead of updating the base one
         self.variables = target.variables.copy()
         self.variables['REFRAME_STAGE_DIR'] = self.stagedir
 
+        # Note: re-setting the home dir so that each test, which runs in parallel,
+        #       has its own bootstrap store, which is stored in the home dir.
+        self.variables['HOME'] = self.stagedir
 
 @rfm.simple_test
 class spack_push_config_check(rfm.RunOnlyRegressionTest):
