@@ -127,9 +127,9 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
         self.modules_file_path = os.path.join(spack_etc_dir, 'modules.yaml')
         # self.keep_files = [spack_etc_dir]
 
-        # This is a workaround for the lack of --scope in spack external find in 0.15.x versions
-        if self.legacy_spack:
-            self.variables['HOME'] = spack_etc_dir
+        # Note: in this way the real home folder of the user running the
+        #       script is not used, resulting in a "clean" configuration environment.
+        self.variables['HOME'] = spack_etc_dir
 
     @deferrable
     def assert_config(self):
@@ -450,9 +450,14 @@ class spack_pkg_check(rfm.RunOnlyRegressionTest):
         self.postrun_cmds = [
             f'spack -C {self.stagedir}/config/{self.spack_version} install {self.spack_pkg}'
         ]
-        self.variables = target.variables
+
+        # Note: deep copy of the environment variable, instead of updating the base one
+        self.variables = target.variables.copy()
         self.variables['REFRAME_STAGE_DIR'] = self.stagedir
 
+        # Note: re-setting the home dir so that each test, which runs in parallel,
+        #       has its own bootstrap store, which is stored in the home dir.
+        self.variables['HOME'] = self.stagedir
 
 @rfm.simple_test
 class spack_push_config_check(rfm.RunOnlyRegressionTest):
