@@ -24,7 +24,6 @@ configopts = [
     " -DENABLE_FORTRAN=ON -DCMAKE_INSTALL_LIBDIR=lib  -DBUILD_SHARED_LIBS=ON ",
 ]
 
-
 sanity_check_paths = {
     'files': ['lib/%(name)s.a', 'lib/%(name)s.so', 'lib/%(name)sf90.a', 'lib/%(name)sf90.so', 'lib/%(name)sf03.a', 'lib/%(name)sf03.so'],
     'dirs': ['include'],
