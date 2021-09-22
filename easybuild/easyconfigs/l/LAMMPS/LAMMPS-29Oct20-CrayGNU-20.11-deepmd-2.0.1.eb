@@ -1,0 +1,55 @@
+# Contributed by TWR (CSCS)
+easyblock = 'MakeCp'
+
+name = 'LAMMPS'
+version = '29Oct20'
+_release = 'stable_29Oct2020'
+_deepmd_version = '2.0.1'
+versionsuffix = '-deepmd-%s-cuda' % _deepmd_version
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive']
+sources = ['stable_29Oct2020.tar.gz']
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('PLUMED', '2.5.1'),
+    ('deepmd-kit', '2.0.1'),
+]
+
+_conda_deepmd_dir = ''
+
+prebuildopts  = 'module switch gcc gcc/8.1.0 && gcc --version && '
+prebuildopts += ' echo "XXX: $(which bin2c)" && '
+prebuildopts += ' cd ./src && '
+prebuildopts += ' cp -r $EBROOTDEEPMDMINKIT/share/USER-DEEPMD . && '
+prebuildopts += ' export CPATH=$EBROOTDEEPMDMINKIT/include/deepmd:$CPATH && '
+prebuildopts += ' make lib-plumed args="-p ${EBROOTPLUMED} -m runtime" && '
+prebuildopts += ' make yes-standard yes-user-mofff yes-user-omp yes-user-reaxc yes-gpu '
+prebuildopts += '      yes-molecule yes-mpiio yes-rigid yes-misc yes-user-misc yes-user-plumed yes-user-deepmd && '
+prebuildopts += ' make no-latte no-voronoi no-poems no-kim no-kokkos no-mscg no-message && '
+prebuildopts += ' make package-update && '
+prebuildopts += ' pushd ../lib/gpu && '
+prebuildopts += ' sed -e "s/-march=bdver1//g" -e "s/sm_[0-9]*/sm_60/g" Makefile.xk7 > Makefile.gpu && '
+prebuildopts += ' make -f Makefile.gpu && popd && '
+prebuildopts += ' sed -e "s/mpicxx/CC -fopenmp/" ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
+prebuildopts += ' sed -i -e "s/mpicxx/CC/" ./MAKE/Makefile.mpi && '
+buildopts = [
+    " mpi ",
+    " omp ",
+]
+
+files_to_copy = [(['src/lmp*'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi', 'bin/lmp_omp'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
