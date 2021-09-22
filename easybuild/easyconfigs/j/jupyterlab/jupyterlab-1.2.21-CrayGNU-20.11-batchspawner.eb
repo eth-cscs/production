@@ -73,7 +73,7 @@ file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${fi
 # IR kernel - https://github.com/IRkernel/IRkernel
 export R_LIBS_SITE=%(installdir)s/share/ir36 &&
 mkdir %(installdir)s/share/ir36 &&
-mkdir %(installdir)s/share/jupyter/kernels/ir36
+mkdir %(installdir)s/share/jupyter/kernels/ir36 &&
 Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir36","https://cloud.r-project.org")' &&
 cd %(installdir)s/ && 
 git clone https://github.com/IRkernel/IRkernel.git &&
