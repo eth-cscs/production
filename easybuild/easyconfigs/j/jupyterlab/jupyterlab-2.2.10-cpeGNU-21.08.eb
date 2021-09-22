@@ -16,6 +16,7 @@ dependencies = [
     ('graphviz', '2.46.1'),
     ('libffi', '3.3'),
     ('JuliaExtensions', '1.6.0'),
+    ('cray-R', EXTERNAL_MODULE),
 ]
 
 modluafooter = '''
@@ -63,7 +64,18 @@ export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME && 
 julia -e 'using Pkg; Pkg.add("IJulia");' && 
 chmod -R +rX %(installdir)s/share/IJulia &&  # Adjust permissions of IJulia files
-file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&# Remove IJulia specific project configuration
+# IR kernel - https://github.com/IRkernel/IRkernel
+export R_LIBS_SITE=%(installdir)s/share/ir40 &&
+mkdir %(installdir)s/share/ir40 &&
+mkdir %(installdir)s/share/jupyter/kernels/ir40 &&
+Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir40","https://cloud.r-project.org")' &&
+cd %(installdir)s/ && 
+git clone https://github.com/IRkernel/IRkernel.git &&
+cd IRkernel &&
+git checkout d7f8681 && 
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir40 &&
+file2=%(installdir)s/share/jupyter/kernels/ir40/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.0/g' > $file2 
 """,
 ]
 
