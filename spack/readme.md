@@ -5,14 +5,14 @@ run the reframe script in [reframe](reframe):
 
 ```console
 git clone https://github.com/eth-cscs/production.git
-reframe -c production/spack/reframe -R -x spack_push_config_check -r
+reframe --stage $(mktemp -d) -Rrc production/spack/reframe -x spack_push_config_check
 ```
 
 This skips the step where it opens a PR with the new config. To submit
 the new config changes, run
 
 ```console
-reframe -c production/spack/reframe -Rr
+reframe --stage $(mktemp -d) -Rrc production/spack/reframe
 ```
 
 ## Caveats / TODO
