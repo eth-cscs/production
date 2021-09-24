@@ -46,7 +46,7 @@ packages:
       spec: automake@1.15.1
   bash:
     externals:
-    - prefix: /usr/local
+    - prefix: /
       spec: bash@4.4.23
   bison:
     externals:
@@ -504,37 +504,18 @@ packages:
     externals:
     - prefix: /usr
       spec: diffutils@3.6
-  doxygen:
-    externals:
-    - prefix: /usr
-      spec: doxygen@1.8.14~graphviz~mscgen
   fftw:
     variants: +mpi +openmp precision=long_double,double,float
-  file:
-    externals:
-    - prefix: /usr
-      spec: file@5.32
   findutils:
     externals:
-    - prefix: /usr
+    - prefix: /
       spec: findutils@4.6.0
   flex:
     externals:
     - prefix: /usr
       spec: flex@2.6.4+lex
-  gawk:
-    externals:
-    - prefix: /
-      spec: gawk@4.2.1
   gcc:
     externals:
-    - extra_attributes:
-        compilers:
-          c: /usr/bin/gcc
-          cxx: /usr/bin/g++
-          fortran: /usr/bin/gfortran-7
-      prefix: /usr
-      spec: gcc@7.5.0 languages=c,c++,fortran
     - extra_attributes:
         compilers:
           c: /opt/gcc/10.1.0/bin/gcc
@@ -542,6 +523,13 @@ packages:
           fortran: /opt/gcc/10.1.0/bin/gfortran
       prefix: /opt/gcc/10.1.0
       spec: gcc@10.1.0 languages=c,c++,fortran
+    - extra_attributes:
+        compilers:
+          c: /usr/bin/gcc
+          cxx: /usr/bin/g++-7
+          fortran: /usr/bin/gfortran-7
+      prefix: /usr
+      spec: gcc@7.5.0 languages=c,c++,fortran
   ghostscript:
     externals:
     - prefix: /usr
@@ -554,10 +542,6 @@ packages:
     externals:
     - prefix: /usr
       spec: gmake@4.2.1
-  groff:
-    externals:
-    - prefix: /usr
-      spec: groff@1.22.3
   gromacs:
     variants: +mpi+cuda+cycle_subcounters+ipo+blas+lapack build_type=Release
   hdf5:
@@ -837,10 +821,6 @@ packages:
     externals:
     - prefix: /usr/lib/mit
       spec: krb5@1.16.3
-  libfuse:
-    externals:
-    - prefix: /usr
-      spec: libfuse@2.9.7
   libtool:
     externals:
     - prefix: /usr
@@ -859,7 +839,7 @@ packages:
   ncurses:
     externals:
     - prefix: /usr
-      spec: ncurses@6.1.20180317+termlib abi=6
+      spec: ncurses@6.1.20180317+termlib
   netcdf:
     buildable: true
     externals:
@@ -1550,10 +1530,6 @@ packages:
     variants: build_type=Release
   openblas:
     variants: +pic +shared threads=openmp ~virtual_machine
-  openssh:
-    externals:
-    - prefix: /usr
-      spec: openssh@7.9p1
   openssl:
     externals:
     - prefix: /usr
@@ -2523,22 +2499,10 @@ packages:
     - modules:
       - cray-python/3.8.5.1
       spec: python@3.8.5.1 %cce@11.0.4-21.05
-  rsync:
-    externals:
-    - prefix: /usr
-      spec: rsync@3.1.3
   ruby:
     externals:
     - prefix: /usr
       spec: ruby@2.5.8
-  sed:
-    externals:
-    - prefix: /
-      spec: sed@4.4
-  sqlite:
-    externals:
-    - prefix: /usr
-      spec: sqlite@3.36.0
   tar:
     externals:
     - prefix: /usr
@@ -2547,10 +2511,6 @@ packages:
     externals:
     - prefix: /usr
       spec: texinfo@6.5
-  texlive:
-    externals:
-    - prefix: /usr
-      spec: texlive@20170524
   trilinos:
     buildable: true
     externals:
