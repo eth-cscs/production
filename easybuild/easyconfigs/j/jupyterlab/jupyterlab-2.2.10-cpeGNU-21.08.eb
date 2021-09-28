@@ -247,6 +247,7 @@ modextrapaths = {
 modextravars = {
     'JUPYTER': '%(installdir)s/bin/jupyter',
     'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+    'R_LIBS_SITE': '%(installdir)s/share/ir40',
 }
 
 moduleclass = 'tools'
