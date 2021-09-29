@@ -10,6 +10,10 @@ description = 'A regression framework for writing portable tests for HPC systems
 
 toolchain = SYSTEM
 
+# reframe uses system python, dependencies use extensions that link to that
+# so reframe is bound to system python.
+conflict('cray-python')
+
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
@@ -49,7 +53,3 @@ sanity_check_paths = {
 
 sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
 moduleclass = 'devel'
-
-# reframe uses system python, dependencies use extensions that link to that
-# so reframe is bound to system python.
-conflict cray-python
