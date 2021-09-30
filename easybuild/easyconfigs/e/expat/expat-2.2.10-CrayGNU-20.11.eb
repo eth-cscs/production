@@ -1,4 +1,4 @@
-# contributed by Luca Marsella (CSCS)
+# contributed by Luca Marsella (CSCS)#
 easyblock = 'ConfigureMake'
 
 name = 'expat'
