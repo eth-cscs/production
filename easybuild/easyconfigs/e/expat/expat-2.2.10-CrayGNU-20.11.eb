@@ -12,6 +12,6 @@ toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 toolchainopts = {'pic': True}
 
 source_urls = ['https://github.com/libexpat/libexpat/releases/download/R_2_2_10/']
-sources = ['%(name)s-%(version)s.tar.xz']
+sources = [SOURCE_TAR_BZ2]
 
 moduleclass = 'tools'
