@@ -3,6 +3,7 @@ easyblock = 'PythonPackage'
 
 name = 'Meson'
 version = '0.59.1'
+versionsuffix = '-python%(pymajver)s'
 homepage = 'https://mesonbuild.com'
 description = """Meson is a cross-platform build system designed to be both as
 fast and as user friendly as possible."""
