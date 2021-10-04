@@ -3,6 +3,7 @@ easyblock = 'CmdCp'
 
 name = 'Ninja'
 version = '1.10.2'
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://ninja-build.org/'
 description = "Ninja is a small build system with a focus on speed."
