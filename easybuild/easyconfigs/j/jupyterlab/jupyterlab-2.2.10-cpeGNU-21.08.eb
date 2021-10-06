@@ -162,7 +162,7 @@ exts_list = [
     ('cycler', '0.10.0'),
     ('kiwisolver', '1.2.0'),
     ('matplotlib', '3.4.3'),
-    ('jupyter-packaging', '0.10.6'),
+    ('jupyter_packaging', '0.10.6'),
     ('deprecation', '2.1.0'),
     ('tomlkit','0.7.2'),
     ('ipympl', '0.8.0'),
