@@ -1,0 +1,27 @@
+easyblock = 'CrayToolchain'
+
+name = 'CrayNvidia'
+version = "21.05"
+
+homepage = 'https://pubs.cray.com/discover'
+description = """Toolchain using Cray compiler wrapper, PrgEnv-nvidia compiler
+(PE release: %s).\n""" % version
+
+toolchain = {'name': 'system', 'version': 'system'}
+
+dependencies = [
+    # PrgEnv version is not pinned, as Cray recommends to use the latest
+    # (default) version
+    ('PrgEnv-nvidia', EXTERNAL_MODULE),
+    ('cdt-cuda/%s' % version, EXTERNAL_MODULE)
+]
+
+## fix CPATH https://github.com/vkarak/eurohack21/wiki/Piz-Daint's-programming-environment#prgenv-pgi-vs-prgenv-nvidia
+modtclfooter = """
+prepend-path CPATH /opt/nvidia/hpc_sdk/Linux_x86_64/21.3/cuda/11.2/targets/x86_64-linux/include
+prepend-path LD_LIBRARY_PATH /opt/nvidia/hpc_sdk/Linux_x86_64/21.3/comm_libs/nccl/lib
+"""
+
+# LD_LIBRARY_PATH is now updated by production.git/login/daint.footer
+
+moduleclass = 'toolchain'
