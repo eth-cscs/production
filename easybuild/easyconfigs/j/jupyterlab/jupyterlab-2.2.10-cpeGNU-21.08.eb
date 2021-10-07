@@ -157,13 +157,14 @@ exts_list = [
     ('jupyterhub', '1.1.0'),
     # widgets: note the lab extensions below
     ('widgetsnbextension', '3.5.1'),
-    ('ipywidgets', '7.6.5'),
     ('Pillow', '8.0.0', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl', 'unpack_sources': False, 'modulename': 'PIL'}),
     ('cycler', '0.10.0'),
     ('kiwisolver', '1.2.0'),
     ('matplotlib', '3.4.3', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl', 'unpack_sources': False}),
+    ('ipywidgets', '7.6.5', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py2-py3-none-any.whl', 'unpack_sources': False}),),
+    ('jupyterlab_widgets', '1.0.2', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl', 'unpack_sources': False}),
     ('ipympl', '0.8.0', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py2.py3-none-any.whl', 'unpack_sources': False}),
-    ('jupyterlab_widgets', '1.0.2', {'use_pip': False}),
+
     # plotly, requires the lab extension below
     ('retrying', '1.3.3'),
     ('plotly', '4.11.0'),
