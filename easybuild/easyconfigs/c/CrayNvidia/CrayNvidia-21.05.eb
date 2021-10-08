@@ -19,6 +19,7 @@ dependencies = [
 ## fix CPATH https://github.com/vkarak/eurohack21/wiki/Piz-Daint's-programming-environment#prgenv-pgi-vs-prgenv-nvidia
 modtclfooter = """
 prepend-path CPATH /opt/nvidia/hpc_sdk/Linux_x86_64/21.3/cuda/11.2/targets/x86_64-linux/include
+remove-path CPATH /opt/nvidia/hpc_sdk/Linux_x86_64/21.3/compilers/include
 prepend-path LD_LIBRARY_PATH /opt/nvidia/hpc_sdk/Linux_x86_64/21.3/comm_libs/nccl/lib
 """
 
