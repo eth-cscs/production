@@ -284,9 +284,8 @@ class spack_config_check(rfm.RunOnlyRegressionTest):
 
             if 'modules' in pkg_data:
                 pkg_versions = spacklib.get_module_available_versions(pkg_data['modules'])
-            else:
-                #TODO verify how to ge the version of prefix only packages like intel-mkl
-                pkg_versions = []
+            elif 'version' in pkg_data:
+                pkg_versions = pkg_data['version']
 
             external_specs = set()
             for pkg_version in pkg_versions:

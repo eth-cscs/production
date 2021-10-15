@@ -1,4 +1,41 @@
+import os
+import re
+
+from copy import deepcopy
+
+def generateIntelMKL():
+    root_prefix = os.path.join(os.sep, 'opt', 'intel')
+
+    found_versions = dict()
+    for dir_entry in os.listdir(root_prefix):
+        absolute_path = os.path.join(root_prefix, dir_entry)
+
+        if not os.path.isdir(absolute_path): continue
+
+        m = re.match("compilers_and_libraries_(\d{4}\.\d+\.\d+)", dir_entry)
+        if not m: continue
+
+        version = m.group(1)
+
+        mkl_found = {
+            'name': 'intel-mkl',
+            'prefix': root_prefix,
+        }
+
+        # for each entry, generate the specialized variant for threads
+        for variant in ['none', 'openmp', 'tbb']:
+            entry_id = f"intel-mkl@{version}-{variant}"
+            assert entry_id not in found_versions.keys()
+            found_versions[entry_id] = deepcopy(mkl_found)
+            found_versions[entry_id].update({
+                'variants': f"+ilp64 threads={variant}",
+                'version': [version],
+                })
+
+    return found_versions
+
 PE_INDEPENDENT_PKGS = {
+    **generateIntelMKL(),
     'cuda': {
         'buildable' : False,
         'modules' : 'cudatoolkit',
@@ -131,24 +168,6 @@ PE_DEPENDENT_PKGS = {
         'prefix' : True,
         'modules': 'cray-trilinos'
     },
-    # 'intel-mkl-tbb': {
-    #     'buildable' : True,
-    #     'name': 'intel-mkl',
-    #     'prefix' : '/opt/intel',
-    #     'variants': "+ilp64 threads=tbb",
-    # },
-    # 'intel-mkl-openmp': {
-    #     'buildable' : True,
-    #     'name': 'intel-mkl',
-    #     'prefix' : '/opt/intel',
-    #     'variants': "+ilp64 threads=openmp",
-    # },
-    # 'intel-mkl-none': {
-    #     'buildable' : True,
-    #     'name': 'intel-mkl',
-    #     'prefix' : '/opt/intel',
-    #     'variants': "+ilp64 threads=none",
-    # },
 }
 
 BLACKLISTED_PKG_MODULES = [
@@ -402,3 +421,7 @@ SPACK_CONFIG = {
         'db_lock_timeout' : 20, # increasing time to allow CI to pass
     }
 }
+
+if __name__ == "__main__":
+    from pprint import pprint
+    pprint(PE_INDEPENDENT_PKGS)
