@@ -1,0 +1,32 @@
+# contributed by Jean M. Favre and Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Meson'
+version = '0.59.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://mesonbuild.com'
+description = """Meson is a cross-platform build system designed to be both as
+fast and as user friendly as possible."""
+
+toolchain = {'name': 'cpeCray', 'version': '21.09'}
+
+source_urls = ['https://github.com/mesonbuild/%(namelower)s/releases/download/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+patches = [('site.py', '%(builddir)s/site.py')]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('Ninja', '1.10.2', '-python%(pymajver)s'),
+]
+
+postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
+download_dep_fail = True
+options = {'modulename': 'mesonbuild'}
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s', 'lib/python%(pyshortver)s/site-packages/site.py'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
