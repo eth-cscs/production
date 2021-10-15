@@ -289,6 +289,8 @@ packages:
       hdf5@1.12.0.4 ~mpi+hl+fortran %intel@2021.2.0-21.05: cray-hdf5/1.12.0.4
       hdf5@1.12.0.4 ~mpi+hl+fortran %pgi@20.1.0-21.05: cray-hdf5/1.12.0.4
       hdf5@1.12.0.4 ~mpi+hl+fortran %pgi@20.1.1-21.05: cray-hdf5/1.12.0.4
+  hpx:
+    variants: max_cpu_count=128
   mpich:
     buildable: false
     modules:

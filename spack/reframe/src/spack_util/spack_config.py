@@ -12,6 +12,9 @@ PE_INDEPENDENT_PKGS = {
     'gromacs': {
         'variants': "+mpi+cuda+cycle_subcounters+ipo+blas+lapack build_type=Release"
     },
+    'hpx': {
+        'variants': "max_cpu_count=128"
+    },
     'mpich': {
         'version': ['3.1.2']
     },
