@@ -25,7 +25,7 @@ PE_INDEPENDENT_PKGS = {
         'variants': "build_type=Release"
     },
     'openblas': {
-        'variants': "+pic +shared threads=openmp ~virtual_machine"
+        'variants': "+pic +shared threads=openmp"
     },
 }
 
