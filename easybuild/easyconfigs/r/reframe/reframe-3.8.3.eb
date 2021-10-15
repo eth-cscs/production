@@ -10,6 +10,17 @@ description = 'A regression framework for writing portable tests for HPC systems
 
 toolchain = SYSTEM
 
+
+# reframe uses system python, dependencies use extensions that link to that
+# so reframe is bound to system python.
+modtclfooter = """
+conflict cray-python
+"""
+
+modluafooter = """
+conflict("cray-python")
+"""
+
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
