@@ -48,6 +48,11 @@ modextrapaths = {
     'RFM_CHECK_SEARCH_PATH': 'cscs-checks',
 }
 
+# FIXME: https://github.com/eth-cscs/reframe/issues/2226
+modextravars = {
+    'RFM_REMOTE_DETECT': 'False'
+}
+
 sanity_check_paths = {
     'files': ['bin/reframe', 'config/cscs.py', 'share/man/man1/reframe.1',
               'share/man/man8/reframe.settings.8',
