@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'libxc'
-version = '5.1.5'
+version = '5.1.6'
 
 homepage = 'http://www.tddft.org/programs/octopus/wiki/index.php/Libxc'
 description = """Libxc is a library of exchange-correlation functionals for density-functional theory.
