@@ -32,7 +32,7 @@ dependencies = [
 configopts = "-DQE_ENABLE_CUDA=1 -DQE_FFTW_VENDOR=Intel_DFTI -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1"
 
 # copy libxc mod files (include path not set correctly by CMake)
-#prebuildopts = "cp $EBROOTLIBXC/include/*.mod Modules/mod/qe_modules && " 
+prebuildopts = "cp $EBROOTLIBXC/include/*.mod Modules/mod/qe_modules && " 
 buildopts = "all epw"
 
 sanity_check_paths = {
