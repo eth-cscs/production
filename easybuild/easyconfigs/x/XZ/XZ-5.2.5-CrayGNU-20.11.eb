@@ -16,7 +16,6 @@ dependencies = [
     ('gettext', '0.21'),
 ]
 
-
 # may become useful in non-x86 archs
 # configopts = ' --disable-assembler '
 sanity_check_paths = {
