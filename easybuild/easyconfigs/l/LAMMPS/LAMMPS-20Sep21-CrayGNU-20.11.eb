@@ -15,12 +15,13 @@ sources = [
 ]
 
 builddependencies = [
-    ('CMake', '3.14.5', '', True),
+    ('CMake', '3.14.5', '', True)
 ]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('FFmpeg', '4.4'),
-    ('zstd', '1.5.0'),
+    ('zstd', '1.5.0')
 ]
 
 # see https://lammps.sandia.gov/doc/Build_package.html#cmake-presets
@@ -33,7 +34,7 @@ srcdir = 'cmake'
 
 sanity_check_paths = {
     'files': ['bin/lmp_mpi'],
-    'dirs': [],
+    'dirs': []
 }
 
 moduleclass = 'chem'
