@@ -16,11 +16,12 @@ source_urls = [GITHUB_SOURCE]
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('binutils', '2.37'),
+    ('binutils', '2.37')
 ]
+
 dependencies = [
     ('zlib', '1.2.11'),
-    ('XZ', '5.2.5'),
+    ('XZ', '5.2.5')
 ]
 
 osdependencies = [('lz4', 'gzip')]
