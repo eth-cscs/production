@@ -25,9 +25,9 @@ dependencies = [
 ]
 
 # see https://lammps.sandia.gov/doc/Build_package.html#cmake-presets
-configopts = "-C ../%(namelower)s-%(version)s/cmake/presets/nolib.cmake"
-configopts += "-DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DLAMMPS_MACHINE=mpi -DMPICXX=CC"
-configopts += "-DPKG_COMPRESS=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF"
+configopts = ' -C ../%(namelower)s-%(version)s/cmake/presets/nolib.cmake '
+configopts += ' -DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DLAMMPS_MACHINE=mpi -DMPICXX=CC '
+configopts += ' -DPKG_COMPRESS=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF '
 
 # folder with CMakeLists.txt relative to the unpacked tarball
 srcdir = 'cmake'
