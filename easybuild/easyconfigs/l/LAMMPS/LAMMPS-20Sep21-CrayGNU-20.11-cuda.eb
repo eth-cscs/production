@@ -17,6 +17,7 @@ sources = [
 
 builddependencies = [
     ('CMake', '3.14.5', '', True),
+    ('cray-fftw', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE)
 ]
 dependencies = [
@@ -26,10 +27,14 @@ dependencies = [
 ]
 
 # see https://lammps.sandia.gov/doc/Build_package.html#cmake-presets
-configopts = ' -C ../%(namelower)s-%(version)s/cmake/presets/nolib.cmake '
-configopts += ' -DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DLAMMPS_MACHINE=mpi -DMPICXX=CC '
-configopts += ' -DPKG_COMPRESS=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF '
-configopts += ' -DPKG_GPU=ON -DGPU_API=cuda '
+local_opts = ' -C ../%(namelower)s-%(version)s/cmake/presets/nolib.cmake '
+local_opts += ' -DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DFFT=FFTW3 -DMPICXX=CC '
+local_opts += ' -DPKG_COMPRESS=ON -DPKG_GPU=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON '
+local_opts += ' -DCUDA_MPS_SUPPORT=yes -DGPU_API=cuda -DGPU_ARCH=sm_60 '
+configopts = [
+    local_opts + ' -DLAMMPS_MACHINE=mpi ',
+    local_opts + ' -DBUILD_OMP=Yes -DPKG_OPENMP=Yes -DLAMMPS_MACHINE=omp '
+]
 
 # fix missing cray-python lib in LD_LIBRARY_PATH
 modtclfooter = 'prepend-path LD_LIBRARY_PATH    $::env(CRAY_PYTHON_PREFIX)/lib'
@@ -37,7 +42,7 @@ modtclfooter = 'prepend-path LD_LIBRARY_PATH    $::env(CRAY_PYTHON_PREFIX)/lib'
 srcdir = 'cmake'
 
 sanity_check_paths = {
-    'files': ['bin/lmp_mpi'],
+    'files': ['bin/lmp_mpi', 'bin/lmp_omp'],
     'dirs': []
 }
 
