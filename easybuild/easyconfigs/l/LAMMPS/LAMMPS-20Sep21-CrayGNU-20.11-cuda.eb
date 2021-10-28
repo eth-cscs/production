@@ -43,7 +43,7 @@ srcdir = 'cmake'
 
 sanity_check_paths = {
     'files': ['bin/lmp_mpi', 'bin/lmp_omp'],
-    'dirs': []
+    'dirs': ['bin']
 }
 
 moduleclass = 'chem'
