@@ -30,6 +30,7 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 """
 import os
 import socket
+import shutil
 
 from easybuild.tools.config import build_option
 from easybuild.framework.easyconfig import CUSTOM
@@ -221,6 +222,10 @@ end
         with open(os.path.join(self.installdir, 'etc', 'julia', 'startup.jl'), 'w') as startup_file:
             startup_file.write(txt)
             startup_file.close()
+
+    def post_install_step(self, *args, **kwargs):
+        super(EB_Julia, self).post_install_step(*args, **kwargs)
+        shutil.rmtree(os.path.join(self.admin_depots, 'registries')) # Remove registries as user cannot update them if readonly.
 
     def make_module_extra(self, *args, **kwargs):
         txt = super(EB_Julia, self).make_module_extra(*args, **kwargs)
