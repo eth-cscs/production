@@ -29,8 +29,8 @@ builddependencies = [
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('ospray', '2.7.0'),
-    ('oidn', '1.4.1'),
+    ('ospray', '2.8.0'),
+    ('oidn', '1.4.2'),
     ('VisRTX', '0.1.6', '-cuda'),
 ]
 
