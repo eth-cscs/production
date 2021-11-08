@@ -29,3 +29,4 @@
  GSL-2.7-cpeIntel-21.08.eb
  QuantumESPRESSO-6.8.0-cpeIntel-21.08.eb
  VASP-6.2.0-cpeIntel-21.08.eb
+ VTK-9.1.0-cpeCray-21.08-OSMesa-python3.eb
