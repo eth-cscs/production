@@ -31,7 +31,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('ospray', '2.8.0'),
     ('oidn', '1.4.2'),
-    ('VisRTX', '0.1.6', '-cuda'),
+    ('VisRTX', '0.1.6', '-cuda')
 ]
 
 configopts = '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_BUILD_TESTING:STRING=OFF -DVTK_WRAP_PYTHON:BOOL=ON '
