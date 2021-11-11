@@ -28,7 +28,7 @@ builddependencies = [
     ('CMake', '3.14.5', '', True),
 ]
 dependencies = [
-    ('cray-python', EXTERNAL_MODULE),
+    ('cray-python/3.8.5.1', EXTERNAL_MODULE),
     ('ospray', '2.8.0'),
     ('oidn', '1.4.2'),
     ('VisRTX', '0.1.6', '-cuda')
@@ -36,7 +36,9 @@ dependencies = [
 
 configopts = '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_BUILD_TESTING:STRING=OFF -DVTK_WRAP_PYTHON:BOOL=ON '
 configopts += '-DCMAKE_C_COMPILER:PATH=cc -DCMAKE_CXX_COMPILER:PATH=CC -DVTK_MODULE_ENABLE_VTK_RenderingRayTracing:STRING=YES -DVTK_ENABLE_VISRTX:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -Dospray_DIR="$EBROOTOSPRAY" -DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" -DVisRTX_DIR="$EBROOTVISRTX/lib64/cmake/VisRTX-$EBVERSIONVISRTX" -DVTK_USE_X=OFF '
-configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include -DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH="$EBROOTOSPRAY/lib/libtbbmalloc.so" '
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbbmalloc.so '
 configopts += '-DVTK_OPENGL_HAS_EGL:BOOL=ON -DOPENGL_egl_LIBRARY:FILEPATH=/usr/lib64/libEGL.so -DOPENGL_opengl_LIBRARY:FILEPATH=/usr/lib64/libOpenGL.so '
 
 maxparallel = 24
@@ -46,12 +48,14 @@ sanity_check_paths = {
     'dirs': ['lib64/python%(pyshortver)s/site-packages/', 'include/%(namelower)s-%(version_major_minor)s'],
 }
 
-#sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
+sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
 
 modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
 
-modextravars = {'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:$::env(LD_LIBRARY_PATH)',
-                'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb',
+
+modextravars = {
+    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+    'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb',
 }
 
 moduleclass = 'vis'
