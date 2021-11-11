@@ -49,3 +49,4 @@
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  Boost-1.75.0-CrayIntel-21.09.eb
  LAMMPS-20Sep21-CrayGNU-21.09-cuda.eb                   --set-default-module
+ QuantumESPRESSO-6.8.0-CrayNvidia-21.09.eb              --set-default-module
