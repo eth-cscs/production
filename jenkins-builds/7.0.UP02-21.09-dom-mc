@@ -42,3 +42,4 @@
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
+ QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
