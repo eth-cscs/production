@@ -1,0 +1,49 @@
+# contributed by Jean M. Favre (CSCS)
+
+# This configuration file builds Mesa for software rendering, not hardware rendering.
+# This means using at least SSE4.2. It uses the following:
+# - llvmpipe: the high-performance Gallium LLVM driver
+# - swr: Intel's OpenSWR
+# It will try to use the llvmpipe by default. To select swr instead, set the following:
+# GALLIUM_DRIVER=swr
+# see also https://gallium.readthedocs.io/en/latest/drivers/openswr/usage.html
+#
+
+easyblock = 'MesonNinja'
+
+name = 'Mesa'
+version = '21.2.1'
+
+homepage = 'http://www.mesa3d.org/'
+description = """Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics."""
+
+toolchain = {'name': 'cpeCray', 'version': '21.09'}
+
+source_urls = ['https://archive.%(namelower)s3d.org/']
+sources = [SOURCELOWER_TAR_XZ]
+
+builddependencies = [
+    ('Meson', '0.59.2', '-python%(pymajver)s'),
+    ('Ninja', '1.10.2', '-python%(pymajver)s'),
+    ('Mako', '1.1.5', '-python%(pymajver)s'),
+]
+dependencies = [
+    ('LLVM', '9.0.1'),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+#configopts = " --buildtype=plain . -Dplatforms=x11 -Dosmesa=true -Dllvm=true "
+configopts = " -Dplatforms=x11 -Dosmesa=true -Dllvm=enabled -Dgles1=disabled -Dgles2=disabled -Degl=disabled -Dgbm=disabled -Ddri3=disabled -Dgallium-vdpau=disabled -Dgallium-va=disabled -Dgallium-xvmc=disabled -Dvulkan-drivers='' -Dglx=gallium-xlib -Ddri-drivers='' -Dgallium-drivers=swr,swrast "
+
+
+#buildcmd = "pushd builddir; meson compile"
+
+# runtest = False
+
+sanity_check_paths = {
+    'files': ['include/GL/glcorearb.h', 'include/GL/glext.h', 'include/GL/gl.h', 'include/GL/glx.h', 'include/GL/osmesa.h', 'lib64/libGL.so', 'lib64/libOSMesa.so', 'lib64/libswrAVX.so', 'lib64/libswrAVX2.so'],
+    'dirs': ['include/GL'],
+}
+
+moduleclass = 'vis'
