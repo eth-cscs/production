@@ -1,4 +1,5 @@
  Boost-1.75.0-CrayGNU-21.09.eb
+ Boost-1.75.0-CrayIntel-21.09.eb
  Buildah-1.19.0.eb
  CMake-3.21.3.eb                                        --set-default-module
  CP2K-8.1-CrayGNU-21.09-cuda.eb                         --set-default-module
@@ -13,9 +14,10 @@
  hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
- Julia-1.6.1-CrayGNU-21.09-cuda.eb                      --set-default-module
- JuliaExtensions-1.6.1-CrayGNU-21.09-cuda.eb            --set-default-module
+ Julia-1.6.3-CrayGNU-21.09-cuda.eb                      --set-default-module
+ JuliaExtensions-1.6.3-CrayGNU-21.09-cuda.eb            --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
+ LAMMPS-20Sep21-CrayGNU-21.09-cuda.eb                   --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  magma-2.5.4-CrayIntel-21.09-cuda.eb                    --set-default-module
  NCL-6.4.0.eb                                           --set-default-module
@@ -24,6 +26,8 @@
  numpy-1.17.2-CrayGNU-21.09.eb                          --set-default-module
  OOOPS-1.0.eb
  ovito-3.5.4-CrayGNU-21.09.eb                           --set-default-module
+ PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
+ QuantumESPRESSO-6.8.0-CrayNvidia-21.09.eb              --set-default-module
  singularity-3.7.3-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-21.09-cuda.eb                     --set-default-module
@@ -47,9 +51,3 @@
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
- Boost-1.75.0-CrayIntel-21.09.eb
- LAMMPS-20Sep21-CrayGNU-21.09-cuda.eb                   --set-default-module
- QuantumESPRESSO-6.8.0-CrayNvidia-21.09.eb              --set-default-module
- PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
- Julia-1.6.3-CrayGNU-21.09-cuda.eb                      --set-default-module
- JuliaExtensions-1.6.3-CrayGNU-21.09-cuda.eb            --set-default-module
