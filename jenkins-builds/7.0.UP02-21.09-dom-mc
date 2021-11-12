@@ -16,8 +16,8 @@
  hwloc-2.4.1.eb                                         --set-default-module
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
- Julia-1.6.1-CrayGNU-21.09.eb                           --set-default-module
- JuliaExtensions-1.6.1-CrayGNU-21.09.eb                 --set-default-module
+ Julia-1.6.3-CrayGNU-21.09.eb                           --set-default-module
+ JuliaExtensions-1.6.3-CrayGNU-21.09.eb                 --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  NCL-6.4.0.eb                                           --set-default-module
@@ -25,6 +25,8 @@
  ncview-2.1.7-CrayGNU-21.09.eb                          --set-default-module
  numpy-1.17.2-CrayGNU-21.09.eb                          --set-default-module
  OOOPS-1.0.eb
+ PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
+ QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
  singularity-3.7.3-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.0-CrayIntel-21.09.eb                          --set-default-module
@@ -42,7 +44,3 @@
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
- QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
- PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
- Julia-1.6.3-CrayGNU-21.09.eb                           --set-default-module
- JuliaExtensions-1.6.3-CrayGNU-21.09.eb                 --set-default-module
