@@ -94,7 +94,7 @@ if { [ string match *daint* $system ] } {
 } elseif { [ string match *pilatus* $system ] } {
     setenv EASYBUILD_MODULE_SYNTAX              Lua
     setenv EASYBUILD_MODULES_TOOL               Lmod
-    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cpe_external_modules_metadata-21.08.cfg
+    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cpe_external_modules_metadata-21.09.cfg
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_MODULE_NAMING_SCHEME       HierarchicalMNS
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
