@@ -4,10 +4,11 @@
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
- reframe-3.8.1.eb                     --set-default-module
+ reframe-3.9.0.eb                     --set-default-module
  singularity-3.5.3-eiger.eb
  GSL-2.7-cpeAMD-21.09.eb
  GSL-2.7-cpeCray-21.09.eb
+ ParaView-5.9.1-cpeCray-21.09-OSMesa-python3.eb
  Boost-1.75.0-cpeGNU-21.09.eb
  Boost-1.75.0-cpeGNU-21.09-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.09.eb
@@ -17,13 +18,14 @@
  GREASY-19.03-cscs-cpeGNU-21.09.eb
  GROMACS-2021.3-cpeGNU-21.09.eb
  GSL-2.7-cpeGNU-21.09.eb
- Julia-1.6.0-cpeGNU-21.09.eb
- JuliaExtensions-1.6.0-cpeGNU-21.09.eb
+ Julia-1.6.3-cpeGNU-21.09.eb
+ JuliaExtensions-1.6.3-cpeGNU-21.09.eb
  LAMMPS-20Sep21-cpeGNU-21.09.eb
  matplotlib-3.4.3-cpeGNU-21.09.eb
  NAMD-2.14-cpeGNU-21.09.eb
  NCO-5.0.1-cpeGNU-21.09.eb
- Scalasca-2.6-cpeGNU-21.09.eb       --set-default-module
+ Scalasca-2.6-cpeGNU-21.09.eb       
  GSL-2.7-cpeIntel-21.09.eb
  QuantumESPRESSO-6.8.0-cpeIntel-21.09.eb
  VASP-6.2.1-cpeIntel-21.09.eb
+ VTK-9.1.0-cpeCray-21.09-OSMesa-python3.eb
