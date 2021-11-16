@@ -7,7 +7,7 @@ version = '2.2.10'
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
 
-toolchain = {'name': 'cpeGNU', 'version': '21.10'}
+toolchain = {'name': 'cpeGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
