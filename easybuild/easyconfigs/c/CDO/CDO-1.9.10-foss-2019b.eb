@@ -10,8 +10,8 @@ description = "CDO is a collection of command line Operators to manipulate and a
 toolchain = {'name': 'foss', 'version': '2019b'}
 toolchainopts = {'opt': True, 'pic': True}
 
-source_urls = ['https://code.mpimet.mpg.de/attachments/download/20124']
-sources = [SOURCELOWER_TAR_GZ]
+# download from https://code.mpimet.mpg.de/projects/cdo/files often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
 
 # OpenMP support for compute intensive operators: https://code.zmaw.de/projects/cdo/wiki/OpenMP_support, no MPI support
 builddependencies = [
