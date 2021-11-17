@@ -4,7 +4,7 @@
  hwloc-2.4.1.eb                       --set-default-module
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
- reframe-3.9.0.eb                     --set-default-module
+ reframe-3.9.1.eb                     --set-default-module
  singularity-3.5.3-eiger.eb
  GSL-2.7-cpeAMD-21.09.eb
  GSL-2.7-cpeCray-21.09.eb
@@ -24,7 +24,7 @@
  matplotlib-3.4.3-cpeGNU-21.09.eb
  NAMD-2.14-cpeGNU-21.09.eb
  NCO-5.0.1-cpeGNU-21.09.eb
- Scalasca-2.6-cpeGNU-21.09.eb       
+ Scalasca-2.6-cpeGNU-21.09.eb
  GSL-2.7-cpeIntel-21.09.eb
  QuantumESPRESSO-6.8.0-cpeIntel-21.09.eb
  VASP-6.2.1-cpeIntel-21.09.eb
