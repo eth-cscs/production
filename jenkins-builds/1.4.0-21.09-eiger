@@ -18,6 +18,7 @@
  GREASY-19.03-cscs-cpeGNU-21.09.eb
  GROMACS-2021.3-cpeGNU-21.09.eb
  GSL-2.7-cpeGNU-21.09.eb
+ jupyterlab-2.2.10-cpeGNU-21.09.eb
  Julia-1.6.3-cpeGNU-21.09.eb
  JuliaExtensions-1.6.3-cpeGNU-21.09.eb
  LAMMPS-20Sep21-cpeGNU-21.09.eb
