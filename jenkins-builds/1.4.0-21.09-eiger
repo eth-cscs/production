@@ -20,6 +20,7 @@
  GSL-2.7-cpeGNU-21.09.eb
  Julia-1.6.3-cpeGNU-21.09.eb
  JuliaExtensions-1.6.3-cpeGNU-21.09.eb
+ jupyterlab-2.2.10-cpeGNU-21.09.eb
  LAMMPS-20Sep21-cpeGNU-21.09.eb
  matplotlib-3.4.3-cpeGNU-21.09.eb
  NAMD-2.14-cpeGNU-21.09.eb
