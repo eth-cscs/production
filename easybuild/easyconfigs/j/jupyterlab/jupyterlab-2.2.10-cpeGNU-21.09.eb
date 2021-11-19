@@ -125,7 +125,7 @@ exts_list = [
     ('prometheus_client', '0.8.0'),
     ('terminado', '0.9.1'),
     ('jupyterlab_server', '1.2.0'),
-    ('ipykernel', '6.3.0', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py%(pymajver)s-none-any.whl', 'unpack_sources': False}),
+    ('ipykernel', '5.3.4', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py%(pymajver)s-none-any.whl', 'unpack_sources': False}),
     ('requests', '2.24.0'),
     ('notebook', '6.1.4'),
     ('nbclient', '0.5.1'),
