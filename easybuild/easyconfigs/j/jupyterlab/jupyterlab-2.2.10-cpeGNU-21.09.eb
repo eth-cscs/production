@@ -15,7 +15,7 @@ dependencies = [
     ('configurable-http-proxy', '4.2.3'),
     ('graphviz', '2.46.1'),
     ('libffi', '3.3'),
-    ('JuliaExtensions', '1.6.0'),
+    ('JuliaExtensions', '1.6.3'),
     ('cray-R', EXTERNAL_MODULE),
 ]
 
