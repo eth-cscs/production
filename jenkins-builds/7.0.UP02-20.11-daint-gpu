@@ -22,7 +22,7 @@
  GSL-2.5-CrayIntel-20.11.eb
  HDFView-2.14.eb                                        --set-default-module
  Horovod-0.21.0-CrayGNU-20.11-tf-2.4.0.eb               --set-default-module
- PyTorch-1.9.0-CrayGNU-20.11.eb                         --set-default-module
+ PyTorch-1.10.0-CrayGNU-20.11.eb                         --set-default-module
  hub-2.14.2.eb                                          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-parallel.eb          --set-default-module
  h5py-2.10.0-CrayGNU-20.11-python3-serial.eb
