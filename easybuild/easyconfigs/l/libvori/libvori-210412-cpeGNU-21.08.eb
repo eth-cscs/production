@@ -14,13 +14,12 @@ source_urls = ['https://brehm-research.de/files']
 sources = [SOURCE_TAR_GZ]
 
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
+    ('CMake', '3.21.2', '', True)
 ]
-
 
 sanity_check_paths = {
     'files': ['lib/%(name)s.a'],
-    'dirs': ['lib'],
+    'dirs': ['lib']
 }
 
 moduleclass = 'chem'

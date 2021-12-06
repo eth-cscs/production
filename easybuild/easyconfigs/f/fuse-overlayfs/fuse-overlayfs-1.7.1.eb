@@ -1,0 +1,28 @@
+# Contributed by Theofilos Manitaras (teojgo)
+
+easyblock = 'ConfigureMake'
+
+name = 'fuse-overlayfs'
+version = '1.7.1'
+
+homepage = "https://github.com/containers/fuse-overlayfs"
+description = """An implementation of overlay+shiftfs in FUSE for rootless containers."""
+
+toolchain = SYSTEM
+
+dependencies = [('FUSE', '3.10.5')]
+
+source_urls = ["https://github.com/containers/fuse-overlayfs/archive"]
+sources = ['v%(version)s.tar.gz']
+checksums = ['fe2c076aed7b8669e7970301a99c0b197759b611035d8199de4c0add7d2fb2b4']
+
+preconfigopts = 'sh autogen.sh && '
+
+sanity_check_paths = {
+    'files': ['bin/fuse-overlayfs'],
+    'dirs': [],
+}
+
+sanity_check_commands = ['fuse-overlayfs --version']
+
+moduleclass = 'devel'

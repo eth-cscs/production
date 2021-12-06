@@ -16,6 +16,7 @@ dependencies = [
     ('graphviz', '2.46.1'),
     ('libffi', '3.3'),
     ('JuliaExtensions', '1.6.0'),
+    ('cray-R', EXTERNAL_MODULE),
 ]
 
 modluafooter = '''
@@ -37,7 +38,7 @@ export JUPYTER=%(installdir)s/bin/jupyter &&
 %(installdir)s/bin/jupyter-labextension install @jupyter-widgets/%(name)s-manager@2.0.0 --no-build && 
 %(installdir)s/bin/jupyter-labextension install %(name)s-datawidgets@6.3.0 --no-build && 
 %(installdir)s/bin/jupyter-labextension install itkwidgets@0.32.0 --no-build &&
-%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.7.4 --no-build && 
+%(installdir)s/bin/jupyter labextension install jupyter-matplotlib@0.10.0 --no-build && 
 %(installdir)s/bin/jupyter labextension install plotlywidget@4.11.0 --no-build &&
 %(installdir)s/bin/jupyter labextension install %(name)s-plotly@4.11.0 --no-build &&
 %(installdir)s/bin/jupyter labextension install @bokeh/jupyter_bokeh@2.0.3 --no-build && 
@@ -63,7 +64,18 @@ export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME && 
 julia -e 'using Pkg; Pkg.add("IJulia");' && 
 chmod -R +rX %(installdir)s/share/IJulia &&  # Adjust permissions of IJulia files
-file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file # Remove IJulia specific project configuration
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&# Remove IJulia specific project configuration
+# IR kernel - https://github.com/IRkernel/IRkernel
+export R_LIBS_SITE=%(installdir)s/share/ir40 &&
+mkdir %(installdir)s/share/ir40 &&
+mkdir %(installdir)s/share/jupyter/kernels/ir40 &&
+Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir40","https://cloud.r-project.org")' &&
+cd %(installdir)s/ && 
+git clone https://github.com/IRkernel/IRkernel.git &&
+cd IRkernel &&
+git checkout d7f8681 && 
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir40 &&
+file2=%(installdir)s/share/jupyter/kernels/ir40/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.0/g' > $file2 
 """,
 ]
 
@@ -145,12 +157,14 @@ exts_list = [
     ('jupyterhub', '1.1.0'),
     # widgets: note the lab extensions below
     ('widgetsnbextension', '3.5.1'),
-    ('ipywidgets', '7.5.1'),
     ('Pillow', '8.0.0', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl', 'unpack_sources': False, 'modulename': 'PIL'}),
     ('cycler', '0.10.0'),
     ('kiwisolver', '1.2.0'),
-    ('matplotlib', '3.3.2'),
-    ('ipympl', '0.5.8'),
+    ('matplotlib', '3.4.3', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-manylinux1_x86_64.whl', 'unpack_sources': False}),
+    ('ipywidgets', '7.6.5', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py2.py3-none-any.whl', 'unpack_sources': False}),
+    ('jupyterlab_widgets', '1.0.2', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl', 'unpack_sources': False}),
+    ('ipympl', '0.8.0', {'use_pip': True, 'source_tmpl': '%(name)s-%(version)s-py2.py3-none-any.whl', 'unpack_sources': False}),
+
     # plotly, requires the lab extension below
     ('retrying', '1.3.3'),
     ('plotly', '4.11.0'),
@@ -235,6 +249,7 @@ modextrapaths = {
 modextravars = {
     'JUPYTER': '%(installdir)s/bin/jupyter',
     'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+    'R_LIBS_SITE': '%(installdir)s/share/ir40',
 }
 
 moduleclass = 'tools'

@@ -1,0 +1,56 @@
+#
+# This file is an EasyBuild reciPY as per https://github.com/hpcugent/easybuild
+# CrayGNU version by Jean M. Favre and Victor Hollanda (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'VTK'
+version = '9.1.0'
+versionsuffix = '-OSMesa-python%(pymajver)s'
+
+homepage = 'http://www.vtk.org'
+description = """The Visualization Toolkit (VTK) is an open-source, freely
+available software system for 3D computer graphics, image processing and
+visualization. VTK consists of a C++ class library and several interpreted
+interface layers including Tcl/Tk, Java, and Python. VTK supports a wide
+variety of visualization algorithms including: scalar, vector, tensor, texture,
+and volumetric methods; and advanced modeling techniques such as: implicit
+modeling, polygon reduction, mesh smoothing, cutting, contouring, and Delaunay
+triangulation."""
+
+toolchain = {'name': 'cpeCray', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['http://www.%(namelower)s.org/files/release/%(version_major_minor)s']
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('ospray', '2.7.0'),
+    ('oidn', '1.4.1'),
+    ('Mesa', '21.2.1'),
+]
+
+configopts = '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS:BOOL=ON -DVTK_BUILD_TESTING:STRING=OFF -DVTK_WRAP_PYTHON:BOOL=ON -DCMAKE_C_COMPILER:PATH=cc -DCMAKE_CXX_COMPILER:PATH=CC -DVTK_MODULE_ENABLE_VTK_RenderingRayTracing:STRING=YES -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -Dospray_DIR="$EBROOTOSPRAY" -DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise" -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include -DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so -DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH="$EBROOTOSPRAY/lib/libtbbmalloc.so" -DVTK_USE_X:BOOL=OFF -DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROOTMESA}/include -DOSMESA_LIBRARY:FILEPATH=${EBROOTMESA}/lib/libOSMesa.so -DVTK_PYTHON_OPTIONAL_LINK:BOOL=OFF '
+
+maxparallel = 32
+
+
+sanity_check_paths = {
+    'files': ['bin/vtkpython'],
+    'dirs': ['lib64/python%(pyshortver)s/site-packages/', 'include/%(namelower)s-%(version_major_minor)s'],
+}
+
+#sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
+
+modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
+
+modextravars = {
+    'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:$::env(LD_LIBRARY_PATH)',
+    'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb',
+}
+
+moduleclass = 'vis'

@@ -30,6 +30,7 @@ EasyBuild support for building and installing Julia packages, implemented as an 
 """
 import os
 import socket
+import shutil
 
 from easybuild.easyblocks.generic.bundle import Bundle
 from easybuild.tools.config import build_option
@@ -118,6 +119,10 @@ class JuliaBundle(Bundle):
         # this is very important to remember the addition of the self.verion
         #self.julia_project = os.path.join(user_depot, "environments", '-'.join([self.version, self.get_environment_folder()]))
         #self.julia_load_path = '@:@#.#.#-%s:@stdlib' % self.get_environment_folder()
+
+    def post_install_step(self, *args, **kwargs):
+        super(JuliaBundle, self).post_install_step(*args, **kwargs)
+        shutil.rmtree(os.path.join(self.installdir, self.extensions_depot, 'registries')) # Remove registries as user cannot update them if readonly.
 
     def sanity_check_step(self):
         """Custom sanity check for Julia."""
