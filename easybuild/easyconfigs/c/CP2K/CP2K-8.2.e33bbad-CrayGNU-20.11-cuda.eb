@@ -2,7 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-local_commit = '69b8c2e' 
+local_commit = 'e33bbad' 
 version = '8.2.%s' % local_commit
 versionsuffix = '-cuda'
 
@@ -38,8 +38,8 @@ dependencies = [
     ('Libint-CP2K', '2.6.0'),
     ('libvori', '210412'),
     ('libxc', '5.1.5'),
-    ('PLUMED', '2.7.1'),
-    ('SIRIUS', '7.2.5', versionsuffix),
+    ('libxsmm', '1.17.0'),
+    ('PLUMED', '2.7.2'),
     ('spglib', '1.16.0')
 ]
 

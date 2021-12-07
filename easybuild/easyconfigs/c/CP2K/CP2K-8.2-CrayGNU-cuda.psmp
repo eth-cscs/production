@@ -8,8 +8,8 @@ CC       = cc
 FC       = ftn
 LD       = ftn
 AR       = ar -r
-DFLAGS   = -D__ACC -D__DBCSR_ACC -D__GFORTRAN -D__HAS_smm_dnn -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
-DFLAGS   += -D__ELPA -D__FFTW3 -D__LIBINT -D__LIBVORI -D__LIBXC -D__PLUMED2 -D__SPGLIB -D__SIRIUS
+DFLAGS   = -D__ACC -D__DBCSR_ACC -D__GFORTRAN -D__MAX_CONTR=4 -D__parallel -D__SCALAPACK
+DFLAGS   += -D__ELPA -D__FFTW3 -D__LIBINT -D__LIBVORI -D__LIBXC -D__LIBXSMM -D__PLUMED2 -D__SPGLIB
 CFLAGS   = $(DFLAGS) -I$(CRAY_CUDATOOLKIT_DIR)/include -g -O3 -w -mavx -fopenmp -funroll-loops 
 CXXFLAGS = $(CFLAGS)
 FCFLAGS  = $(DFLAGS) -g -O3 -w -mavx -fopenmp -funroll-loops -ftree-vectorize -ffree-form -ffree-line-length-512
@@ -17,7 +17,7 @@ FCFLAGS  += -I$(ELPA_INCLUDE_DIR)/elpa -I$(ELPA_INCLUDE_DIR)/modules
 FCFLAGS  += -I$(EBROOTFFTW)/include
 FCFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include -I$(EBROOTLIBINTMINCP2K)/include/libint2
 FCFLAGS  += -I$(EBROOTLIBXC)/include 
-FCFLAGS  += -I$(EBROOTSIRIUS)/include/sirius
+FCFLAGS  += -I$(EBROOTLIBXSMM)/include 
 FCFLAGS  += -I$(EBROOTSPGLIB)/include 
 LDFLAGS  = $(FCFLAGS)
 NVFLAGS  = $(DFLAGS) -O3 -arch sm_60
@@ -27,10 +27,9 @@ LIBS     += -L$(EBROOTELPA)/lib -lelpa_openmp
 LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2
 LIBS     += $(EBROOTLIBVORI)/lib/libvori.a
 LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
-LIBS     += -L$(EBROOTSIRIUS)/lib -lsirius
+LIBS     += -L$(EBROOTLIBXSMM)/lib -lxsmmf -lxsmm
 LIBS     += -L$(EBROOTSPGLIB)/lib -lsymspg
 LIBS     += -lplumed -lz -ldl -lstdc++
-LIBS     += /apps/common/UES/easybuild/sources/c/CP2K/libsmm_dnn_cray.gnu.a
 
 # Required due to memory leak that occurs if high optimisations are used
 mp2_optimize_ri_basis.o: mp2_optimize_ri_basis.F
