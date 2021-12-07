@@ -53,3 +53,29 @@
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  CDO-1.9.10-CrayGNU-21.09.eb                            --set-default-module
  Boost-1.77.0-CrayGNU-21.09-python3.eb                  --set-default-module
+ HDFView-3.1.3.eb                                       --set-default-module
+ Horovod-0.21.0-CrayGNU-21.09-tf-2.4.0.eb               --set-default-module
+ h5py-3.6.0-CrayGNU-21.09-parallel.eb                   --set-default-module
+ h5py-3.6.0-CrayGNU-21.09-serial.eb
+ ipcmagic-1.0.1-CrayGNU-21.09.eb                        --set-default-module
+ jupyterlab-1.2.21-CrayGNU-21.09-batchspawner-cuda.eb   --set-default-module
+ jupyterlab-2.2.10-CrayGNU-21.09-batchspawner-cuda.eb
+ matplotlib-3.5.0-CrayGNU-21.09.eb                      --set-default-module
+ NAMD-2.14-CrayIntel-21.09-cuda.eb                      --set-default-module
+ NCL-6.6.2.eb                                           --set-default-module
+ netcdf4-python-1.5.8-CrayGNU-21.09.eb                  --set-default-module
+ ParaView-5.9.1-CrayGNU-21.09-EGL-python3.eb            --set-default-module
+ pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
+ QuantumESPRESSO-SIRIUS-6.5-rc4-CrayGNU-21.09-cuda.eb   --set-default-module
+ VASP-6.2.1-CrayNvidia-21.09-acc.eb                     --set-default-module
+ Extrae-3.8.1-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ IPM-2.0.6-CrayGNU-21.09.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ malt-1.2.0-CrayGNU-21.09.eb                            --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ nvhpc-2020_209-cuda-11.0.eb                            --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ nvtop-1.0.0-CrayGNU-21.09-cuda.eb                      --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ otf2_cli_profile-9be64de-CrayGNU-21.09.eb              --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ papi-wrap-57150c8-CrayGNU-21.09.eb                     --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ pudb-2019.2-CrayGNU-21.09-python3.eb                   --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ Score-P-6.0-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ scorep_binding_python-3.0-CrayGNU-21.09-python3.eb     --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools

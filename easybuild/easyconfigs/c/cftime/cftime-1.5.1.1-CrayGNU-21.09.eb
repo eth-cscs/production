@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'cftime'
+version = '1.5.1.1'
+
+homepage = 'https://github.com/Unidata/cftime'
+description = "Time-handling functionality from netcdf4-python"
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+sources = [SOURCE_TAR_GZ]
+patches = [('site.py', '%(builddir)s/site.py')]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cURL', '7.80.0'),
+]
+
+postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'data'
