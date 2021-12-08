@@ -34,6 +34,6 @@ if { ![ is-loaded wlm_detect ] } {
 
 module load singularity/3.6.4
 
-setenv SINGULARITY_BIND /opt/cray,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/9.3.0,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
+setenv SINGULARITY_BIND /opt/cray,/etc/alternatives/cray-xpmem,/etc/alternatives/cray-ugni,/etc/alternatives/cray-udreg,/var/opt/cray,/usr/lib64,/lib64,/opt/gcc/9.3.0,/etc/opt/cray/wlm_detect,/var/lib/hugetlbfs
 setenv SINGULARITYENV_LD_LIBRARY_PATH "$::env(CRAY_LD_LIBRARY_PATH):/opt/cray/pe/lib64:/opt/gcc/9.3.0/snos/lib64:/lib64"
 """

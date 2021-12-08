@@ -1,0 +1,32 @@
+# contributed by Jean M. Favre (CSCS)
+#
+easyblock = 'PythonPackage'
+
+name = 'Meson'
+version = '0.60.1'
+
+homepage = 'https://mesonbuild.com'
+description = """Meson is a cross-platform build system designed to be both as
+fast and as user friendly as possible."""
+
+toolchain = SYSTEM
+
+allow_system_deps = [('Python', SYS_PYTHON_VERSION)]
+
+req_py_majver = 3
+req_py_minver = 6
+
+source_urls = ['https://github.com/mesonbuild/meson/releases/download/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['5add789c953d984b500858b2851ee3d7add0460cf1a6f852f0a721af17384e13']
+
+download_dep_fail = True
+
+options = {'modulename': 'mesonbuild'}
+
+sanity_check_paths = {
+    'files': ['bin/meson'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
