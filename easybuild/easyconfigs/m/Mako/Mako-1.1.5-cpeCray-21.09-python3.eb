@@ -1,0 +1,28 @@
+# contributed by Jean M. Favre and Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Mako'
+version = '1.1.5'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://www.makotemplates.org'
+description = """A super-fast templating language that borrows the best ideas
+from the existing templating languages"""
+
+toolchain = {'name': 'cpeCray', 'version': '21.09'}
+
+sources = [SOURCE_TAR_GZ]
+patches = [('site.py', '%(builddir)s/site.py')]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-render', 'lib/python%(pyshortver)s/site-packages/site.py'],
+    'dirs': ['bin', 'lib'],
+}
+
+moduleclass = 'devel'
