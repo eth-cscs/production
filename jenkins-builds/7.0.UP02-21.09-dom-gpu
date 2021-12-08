@@ -79,3 +79,4 @@
  Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  Score-P-6.0-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  scorep_binding_python-3.0-CrayGNU-21.09-python3.eb     --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ HDFView-2.14.eb                                        --set-default-module
