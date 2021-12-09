@@ -1,7 +1,8 @@
 easyblock = 'ConfigureMake'
 
 name = 'spack-config'
-version = '1'
+version = '1.0'
+_cdt = 'cdt-20.11'
 
 homepage = 'https://github.com/eth-cscs/spack'
 description = "Module for Spack config files"
@@ -20,15 +21,14 @@ build_cmd='make -C config-generator'
 install_cmd='make -C config-generator install DESTDIR=%(installdir)s'
 
 sanity_check_paths = {
-    'files': ['cdt-20.11/compilers.yaml', 'cdt-20.11/packages.yaml'],
+    'files': ['%(_cdt)s/compilers.yaml', '%(_cdt)s/packages.yaml'],
     'dirs': []
 }
 
 moduleclass = 'tools'
 
 modtclfooter = """
-set SPACK_CSCS_CONFIGS_ROOT "%(installdir)s"
-set SPACK_CDT_CONFIG_ROOT "$SPACK_CSCS_CONFIGS_ROOT/cdt-20.11"
+set SPACK_CDT_CONFIG_ROOT "%(installdir)s/%(_cdt)s"
 
 if { [file exists $SPACK_CDT_CONFIG_ROOT] == 1 } {
   setenv SPACK_SYSTEM_CONFIG_PATH "$SPACK_CDT_CONFIG_ROOT"
