@@ -28,7 +28,7 @@ sanity_check_paths = {
 moduleclass = 'tools'
 
 modtclfooter = """
-set SPACK_CDT_CONFIG_ROOT "%(installdir)s/%(_cdt)s"
+set SPACK_CDT_CONFIG_ROOT "%%(installdir)s/%s"
 
 if { [file exists $SPACK_CDT_CONFIG_ROOT] == 1 } {
   setenv SPACK_SYSTEM_CONFIG_PATH "$SPACK_CDT_CONFIG_ROOT"
@@ -36,5 +36,5 @@ if { [file exists $SPACK_CDT_CONFIG_ROOT] == 1 } {
   puts stderr "$SPACK_CDT_CONFIG_ROOT does not exist"
   exit 1
 }
-"""
+""" %_cdt
 
