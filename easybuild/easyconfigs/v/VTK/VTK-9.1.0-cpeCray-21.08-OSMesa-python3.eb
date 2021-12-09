@@ -25,7 +25,7 @@ source_urls = ['http://www.%(namelower)s.org/files/release/%(version_major_minor
 sources = ['%(name)s-%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
+    ('CMake', '3.21.1', '', True),
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
@@ -53,12 +53,14 @@ sanity_check_paths = {
     'dirs': ['lib64/python%(pyshortver)s/site-packages/', 'include/%(namelower)s-%(version_major_minor)s'],
 }
 
-#sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
+sanity_check_commands = [('bin/vtkpython', "-c 'import %(namelower)s'")]
 
 modextrapaths = {'PYTHONPATH': ['lib64/python%(pyshortver)s/site-packages']}
 
-modextravars = {'LD_LIBRARY_PATH': '$::env(PYTHONPATH)/lib:$::env(LD_LIBRARY_PATH)',
-                'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb',
+modluafooter = 'prepend_path("LD_LIBRARY_PATH","/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8")'
+
+modextravars = {
+    'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb',
 }
 
 moduleclass = 'vis'
