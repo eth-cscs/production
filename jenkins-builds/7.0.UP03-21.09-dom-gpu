@@ -1,3 +1,4 @@
+ Boost-1.77.0-CrayGNU-21.09.eb
  Boost-1.77.0-CrayGNU-21.09-python3.eb                  --set-default-module
  Buildah-1.19.0.eb
  CMake-3.21.3.eb                                        --set-default-module
@@ -10,7 +11,6 @@
  GSL-2.7-CrayGNU-21.09.eb                               --set-default-module
  GSL-2.7-CrayCCE-21.09.eb
  GSL-2.7-CrayIntel-21.09.eb
- HDFView-2.14.eb                                        --set-default-module
  hub-2.14.2.eb                                          --set-default-module
  hwloc-2.4.1.eb                                         --set-default-module
  h5py-3.6.0-CrayGNU-21.09-parallel.eb                   --set-default-module
