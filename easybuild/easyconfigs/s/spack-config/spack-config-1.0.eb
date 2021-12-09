@@ -21,7 +21,7 @@ build_cmd='make -C config-generator'
 install_cmd='make -C config-generator install DESTDIR=%(installdir)s'
 
 sanity_check_paths = {
-    'files': ['%(_cdt)s/compilers.yaml', '%(_cdt)s/packages.yaml'],
+    'files': ['%s/compilers.yaml' %_cdt, '%s/packages.yaml' %_cdt],
     'dirs': []
 }
 
