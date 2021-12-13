@@ -29,6 +29,7 @@
  netcdf4-python-1.5.8-CrayGNU-21.09.eb                  --set-default-module
  numpy-1.17.2-CrayGNU-21.09.eb                          --set-default-module
  OOOPS-1.0.eb
+ ParaView-5.9.1-CrayGNU-21.09-OSMesa.eb                 --set-default-module
  PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
  QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
  singularity-3.7.3-daint.eb
