@@ -45,7 +45,7 @@
  magma-2.5.4-CrayIntel-20.11-cuda.eb                    --set-default-module
  MATLAB-R2021a.eb                                       --set-default-module
  NAMD-2.14-CrayIntel-20.11-cuda.eb                      --set-default-module
- NCL-6.6.2.eb                                           --set-default-module
+ NCL-6.4.0.eb                                           --set-default-module
  NCO-4.8.1-CrayGNU-20.11.eb                             --set-default-module
  ncview-2.1.7-CrayGNU-20.11.eb                          --set-default-module
  netcdf-python-1.5.4-CrayGNU-20.11-python3.eb           --set-default-module
