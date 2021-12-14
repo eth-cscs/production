@@ -15,7 +15,6 @@ toolchain = {'name': 'CrayIntel', 'version': '21.09'}
 toolchainopts = {'dynamic': False}
 
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
-#sources = ['/scratch/snx3000tds/bignamic/production/NAMD_2.14_Source.tar.gz']
 patches = ['%(name)s-%(version)s.patch']
 
 builddependencies = [
