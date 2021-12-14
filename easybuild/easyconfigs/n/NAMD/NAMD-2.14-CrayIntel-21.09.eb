@@ -1,0 +1,65 @@
+# Built with EasyBuild version 4.5.0 on 2021-12-14_17-39-01
+# Contributed by gppezzi, Luca Marsella and Christopher Bignamini (CSCS)
+easyblock = 'MakeCp'
+
+name = 'NAMD'
+version = '2.14'
+
+homepage = 'http://www.ks.uiuc.edu/Research/namd/'
+description = """
+    NAMD is a parallel molecular dynamics code designed for high-performance
+    simulation of large biomolecular systems.
+"""
+
+toolchain = {'name': 'CrayIntel', 'version': '21.09'}
+toolchainopts = {'dynamic': False}
+
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
+#sources = ['/scratch/snx3000tds/bignamic/production/NAMD_2.14_Source.tar.gz']
+patches = ['%(name)s-%(version)s.patch']
+
+builddependencies = [
+    ('Charm++', '6.10.2'),
+    ('Tcl', '8.6.10'),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+]
+
+prebuildopts = ' ./config CRAY-XC-intel Eos --with-cray-fftw --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch gni-crayxc-hugepages-smp --cxx-opts  "$CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" &&  cd CRAY-XC-intel && '
+
+files_to_copy = [(['./CRAY-XC-intel/namd2'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/namd2'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
+
+# Build statistics
+buildstats = [{
+    "build_time": 53.97,
+    "command_line": ["--allow-loaded-modules='ddt,EasyBuild-custom,EasyBuild,xalt'", "--buildpath='/run/user/23271/easybuild/build'", "--containerpath='/scratch/snx3000tds/bignamic/EB_INSTALL/containers'", "--external-modules-metadata='/scratch/snx3000tds/bignamic/production/easybuild//cray_external_modules_metadata-21.09.cfg'", '--force', "--hide-deps='absl,ANTLR,APR,APR-util,arpack-ng,Autoconf,Automake,Autotools,backports.weakref,Bazel,binutils,Bison,bokeh,byacc,bzip2,cairo,cloudpickle,configurable-http-proxy,Coreutils,Cube,CUDA,cuDNN,cURL,DB,Doxygen,Eigen,expat,flex,FLTK,fontconfig,freetype,funcsigs,gc,GCCcore,gettext,GL2PS,GLib,glmnet,GLPK,GMP,gnuplot,go,gperf,GPGME,GraphicsMagick,groff,GTS,guile,help2man,hwloc,inputproto,IPython,JasPer,jemalloc,kbproto,Libassuan,libcerf,libdrm,libevent,libfabric,libffi,libgd,libGLU,libgpuarray,libiberty,libjpeg-turbo,libjpeg-turbo,libpciaccess,Libpgp-error,libpng,libpthread-stubs,libQGLViewer,libreadline,libsodium,libspatialindex,LibTIFF,libtool,libunistring,libunwind,libutempter,libX11,libXau,libxcb,libXdmcp,libXext,libxml2,libXrender,libxshmfence,libyaml,LLVM,LOKI,Loki,LVM2,M4,make,makeinfo,Mako,Mesa,minieigen,mock,mxml,NASM,NASM,ncurses,nettle,networkx,nodejs,nose-parameterized,numactl,OPARI2,OpenMPI,OpenPGM,parameterized,PCRE,PDT,Perl,PIL,Pillow,pixman,pkg-config,ploticus,PMIx,popt,prereq,protobuf,protobuf-core,PyGTS,PyQt,Python-bare,Python-Xlib,PyYAML,PyZMQ,Qhull,qrupdate,Qt,renderproto,runc,scikit-image,scikit-learn,SCons,SCOTCH,Serf,SIP,SQLite,SWIG,Szip,Tcl,Tk,UCX,UDUNITS,UnZip,util-linux,Werkzeug,wheel,X11,xcb-proto,xextproto,xorg-macros,xproto,xtrans,XZ,ZeroMQ,zlib,zstd'", "--hide-toolchains='CrayCCE,CrayGNU,CrayIntel,CrayNvidia,CrayPGI,GCCcore,gmvapich2,gmvolf,foss,fosscuda,gompi'", "--include-easyblocks='/scratch/snx3000tds/bignamic/production/easybuild//easyblocks/*.py'", "--include-module-naming-schemes='/scratch/snx3000tds/bignamic/production/easybuild//tools/module_naming_scheme/*.py'", "--include-toolchains='/scratch/snx3000tds/bignamic/production/easybuild//toolchains/*.py,/scratch/snx3000tds/bignamic/production/easybuild//toolchains/compiler/*.py'", "--installpath='/scratch/snx3000tds/bignamic/EB_INSTALL'", "--module-syntax='Tcl'", "--modules-tool='EnvironmentModulesC'", "--optarch='broadwell'", "--packagepath='/scratch/snx3000tds/bignamic/EB_INSTALL/packages'", "--prefix='/scratch/snx3000tds/bignamic/EB_INSTALL'", "--repositorypath='/scratch/snx3000tds/bignamic/EB_INSTALL/ebfiles_repo'", "--robot='/scratch/snx3000tds/bignamic/production/easybuild//easyconfigs/:/scratch/snx3000tds/bignamic/production/easybuild/easyconfigs:/apps/common/UES/easybuild/software/EasyBuild/4.5.0/easybuild/easyconfigs'", "--robot-paths='/scratch/snx3000tds/bignamic/production/easybuild//easyconfigs/:'", "--sourcepath='/apps/common/easybuild/sources'", "--tmpdir='/run/user/23271/easybuild/tmp'", "--try-toolchain='CrayIntel,21.09'", 'NAMD-2.14-CrayIntel-21.02.eb'],
+    "core_count": 20,
+    "cpu_arch": "x86_64",
+    "cpu_arch_name": "UNKNOWN",
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz",
+    "cpu_speed": 3000.0,
+    "cpu_vendor": "Intel",
+    "easybuild-easyblocks_version": "4.5.0",
+    "easybuild-framework_version": "4.5.0",
+    "gcc_version": "Using built-in specs.; COLLECT_GCC=gcc; COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper; OFFLOAD_TARGET_NAMES=hsa:nvptx-none; Target: x86_64-suse-linux; Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux; Thread model: posix; gcc version 7.5.0 (SUSE Linux) ; ",
+    "glibc_version": "2.26",
+    "hostname": "dom101",
+    "install_size": 13225502,
+    "modules_tool": ('Environment Modules', '/opt/cray/pe/modules/3.2.11.4/bin/modulecmd', '3.2.11'),
+    "os_name": "UNKNOWN",
+    "os_type": "Linux",
+    "os_version": "UNKNOWN",
+    "platform_name": "x86_64-unknown-linux",
+    "python_version": "3.6.13 (default, Mar 10 2021, 18:30:35) [GCC]",
+    "system_gcc_path": "/usr/bin/gcc",
+    "system_python_path": "/usr/bin/python",
+    "timestamp": 1639499941,
+    "total_memory": 257483,
+}]
