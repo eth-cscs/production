@@ -47,7 +47,7 @@ modextravars = {
 }
 
 modtclfooter = """
-    prepend-path LD_LIBRARY_PATH /opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib
+prepend-path LD_LIBRARY_PATH /opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib
 """
 
 moduleclass = 'vis'
