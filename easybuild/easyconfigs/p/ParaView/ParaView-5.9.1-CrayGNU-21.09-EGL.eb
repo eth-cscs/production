@@ -34,7 +34,9 @@ configopts = '-DPARAVIEW_USE_MPI:BOOL=ON -DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=
 maxparallel = 24
 
 postinstallcmds = [
-    "mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && cd %(installdir)s/share/%(namelower)s-%(version_major_minor)s && git clone https://gitlab.kitware.com/%(namelower)s/materials",
+    "tar xf /apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/materials.tar.bz2 -C %(installdir)s/share/%(namelower)s-%(version_major_minor)s"
+# FIXME: avoid git clone on Dom due to SD-53990
+#   "mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && cd %(installdir)s/share/%(namelower)s-%(version_major_minor)s && git clone https://gitlab.kitware.com/%(namelower)s/materials"
 ]
 
 sanity_check_paths = {
