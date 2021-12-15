@@ -4,7 +4,7 @@ name = 'spack-config'
 version = '1.1'
 _cdt = 'cdt-20.11'
 
-homepage = 'https://github.com/eth-cscs/spack'
+homepage = 'https://github.com/eth-cscs/spack-config-generator'
 description = "Module for Spack config files"
 
 toolchain = SYSTEM
