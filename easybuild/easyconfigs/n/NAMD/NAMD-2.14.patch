@@ -83,4 +83,434 @@ diff -Nru NAMD_2.14_Source.orig/config NAMD_2.14_Source/config
    elif (( $use_fftw )); then
      echo 'include .rootdir/arch/$(NAMD_ARCH).fftw' >> Make.config
    fi
-Binary files NAMD_2.14_Source.orig/.git/index and NAMD_2.14_Source/.git/index differ
+diff -Nru NAMD_2.14_Source.orig/src/ComputeNonbondedBase2.h NAMD_2.14_Source/src/ComputeNonbondedBase2.h
+--- NAMD_2.14_Source.orig/src/ComputeNonbondedBase2.h	2020-08-05 19:51:22.000000000 +0200
++++ NAMD_2.14_Source/src/ComputeNonbondedBase2.h	2021-12-14 17:17:34.000000000 +0100
+@@ -34,7 +34,7 @@
+ EXCLUDED(
+ 	 SHORT(
+ 	       full_cnst = (vector4double)(6., 4., 2., 1.);
+-	       ) 
++	       )
+ 	 NOSHORT(
+ 		 full_cnst = (vector4double)(1., 1., 1., 1.);
+ 		 )
+@@ -42,12 +42,12 @@
+ MODIFIED(
+ 	 SHORT(
+ 	       full_cnst = (vector4double)(6., 4., 2., 1.);
+-	       full_cnst = vec_mul (full_cnst, vec_splats(modf_mod));          
+-	       ) 
++	       full_cnst = vec_mul (full_cnst, vec_splats(modf_mod));
++	       )
+ 	 NOSHORT(
+ 		 full_cnst = vec_splats(modf_mod);
+ 		 )
+-	 )      
++	 )
+ #endif
+ #endif
+ 
+@@ -63,15 +63,15 @@
+ #endif
+ 
+ 
+-  
+-#if ( FULL( EXCLUDED( SHORT( 1+ ) ) ) 0 ) 
++
++#if ( FULL( EXCLUDED( SHORT( 1+ ) ) ) 0 )
+ // avoid bug in Intel 15.0 compiler
+ #pragma novector
+ #else
+ #ifdef PRAGMA_SIMD
+ #ifndef TABENERGYFLAG
+ #ifndef GOFORCES
+-#pragma omp simd SHORT(FAST(reduction(+:f_i_x,f_i_y,f_i_z)) ENERGY(FAST(reduction(+:vdwEnergy) SHORT(reduction(+:electEnergy))))) \
++#pragma simd SHORT(FAST(reduction(+:f_i_x,f_i_y,f_i_z)) ENERGY(FAST(reduction(+:vdwEnergy) SHORT(reduction(+:electEnergy))))) \
+              FULL(reduction(+:fullf_i_x,fullf_i_y,fullf_i_z) ENERGY(reduction(+:fullElectEnergy)))
+ #endif
+ #endif
+@@ -80,14 +80,14 @@
+ #pragma loop_count avg=4
+ #endif // PRAGMA_SIMD
+ #endif
+-    for (k=0; k<npairi; ++k) {      
++    for (k=0; k<npairi; ++k) {
+       TABENERGY(
+       const int numtypes = simParams->tableNumTypes;
+       const float table_spacing = simParams->tableSpacing;
+       const int npertype = (int) (namdnearbyint(simParams->tableMaxDist / simParams->tableSpacing) + 1);
+       )
+ 
+-      int table_i = (r2iilist[2*k] >> 14) + r2_delta_expc;  // table_i >= 0 
++      int table_i = (r2iilist[2*k] >> 14) + r2_delta_expc;  // table_i >= 0
+       const int j = pairlisti[k];
+       //register const CompAtom *p_j = p_1 + j;
+ #define p_j (p_1+j)
+@@ -95,13 +95,13 @@
+       register double *p_j_d = (double *) p_j;
+ #endif
+       // const CompAtomExt *pExt_j = pExt_1 + j;
+-      
++
+       BigReal diffa = r2list[k] - r2_table[table_i];
+       //const BigReal* const table_four_i = table_four + 16*table_i;
+ #define table_four_i (table_four + 16*table_i)
+ 
+ #if  ( FAST( 1 + ) TABENERGY( 1 + ) 0 ) // FAST or TABENERGY
+-      //const LJTable::TableEntry * lj_pars = 
++      //const LJTable::TableEntry * lj_pars =
+       //        lj_row + 2 * p_j->vdwType MODIFIED(+ 1);
+       const int lj_index = 2 * p_j->vdwType MODIFIED(+ 1);
+ #define lj_pars (lj_row+lj_index)
+@@ -109,23 +109,23 @@
+       double *lj_pars_d = (double *) lj_pars;
+ #endif
+ #endif
+-      
++
+       TABENERGY(
+       register const int tabtype = -1 - ( lj_pars->A < 0 ? lj_pars->A : 0 );
+       )
+-      
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++
++#if ( SHORT( FAST( 1+ ) ) 0 )
+       //Force *f_j = f_1 + j;
+ #define f_j (f_1+j)
+ #endif
+-	
++
+ #if ( FULL( 1+ ) 0 )
+       //Force *fullf_j = fullf_1 + j;
+ #define fullf_j (fullf_1+j)
+ #endif
+ 
+       //Power PC aliasing and alignment constraints
+-#ifdef ARCH_POWERPC      
++#ifdef ARCH_POWERPC
+ #if ( FULL( 1+ ) 0 )
+ #pragma disjoint (*table_four, *fullf_1)
+ #pragma disjoint (*p_1,          *fullf_1)
+@@ -134,13 +134,13 @@
+ #endif
+ #pragma disjoint (*r2_table,     *fullf_1)
+ #pragma disjoint (*r2list,       *fullf_1)
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++#if ( SHORT( FAST( 1+ ) ) 0 )
+ #pragma disjoint (*f_1    ,      *fullf_1)
+ #pragma disjoint (*fullf_1,      *f_1)
+ #endif   //Short + fast
+ #endif   //Full
+ 
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++#if ( SHORT( FAST( 1+ ) ) 0 )
+ #pragma disjoint (*table_four, *f_1)
+ #pragma disjoint (*p_1,          *f_1)
+ #pragma disjoint (*r2_table,     *f_1)
+@@ -178,14 +178,14 @@
+ 
+       BigReal kqq = kq_i * p_j->charge;
+ 
+-      
++
+ #ifdef  A2_QPX
+       float * cg = (float *)&p_j->charge;
+ #if ( FULL( 1+ ) 0 )
+ #pragma disjoint (*cg, *fullf_1)
+ #endif   //Full
+ 
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++#if ( SHORT( FAST( 1+ ) ) 0 )
+ #pragma disjoint (*cg, *f_1)
+ #endif   //Short + fast
+ #endif
+@@ -203,7 +203,7 @@
+ #define p_ij_x     vec_extract(p_i_v, 0)
+ #define p_ij_y     vec_extract(p_i_v, 1)
+ #define p_ij_z     vec_extract(p_i_v, 2)
+-#endif  
++#endif
+ 
+ #if ( FAST(1+) 0 )
+       const BigReal A = scaling * lj_pars->A;
+@@ -225,20 +225,20 @@
+ 
+       ALCHPAIR (
+         // Alchemical free energy calculation
+-        // Pairlist 1 and 2 are for softcore atoms, while 3 and 4 are single topology atoms. 
++        // Pairlist 1 and 2 are for softcore atoms, while 3 and 4 are single topology atoms.
+         // Pairlists are separated so that lambda-coupled pairs are handled
+         // independently from normal nonbonded (inside ALCHPAIR macro).
+-        // The separation-shifted van der Waals potential and a shifted 
++        // The separation-shifted van der Waals potential and a shifted
+         // electrostatics potential for decoupling are calculated explicitly.
+         // Would be faster with lookup tables but because only a small minority
+-        // of nonbonded pairs are lambda-coupled the impact is minimal. 
++        // of nonbonded pairs are lambda-coupled the impact is minimal.
+         // Explicit calculation also makes things easier to modify.
+-        // These are now inline functions (in ComputeNonbondedFep.C) to 
++        // These are now inline functions (in ComputeNonbondedFep.C) to
+         // tidy the code
+-        
++
+         const BigReal r2 = r2list[k] - r2_delta;
+ 
+-        // These are now inline functions (in ComputeNonbondedFep.C) to 
++        // These are now inline functions (in ComputeNonbondedFep.C) to
+         // tidy the code
+ 
+         FEP(
+@@ -252,13 +252,13 @@
+           switchdist2, cutoff2, switchfactor, vdwForceSwitching, myVdwLambda,
+           myVdwLambda2, alchWCAOn, myRepLambda, myRepLambda2, &alch_vdw_energy,
+           &alch_vdw_force, &alch_vdw_energy_2);)
+-          ALCH3 (            // In single topology region ALCH3 & 4, all atoms are paired so softcore potential is unnecessary. 
++          ALCH3 (            // In single topology region ALCH3 & 4, all atoms are paired so softcore potential is unnecessary.
+           ENERGY(alch_vdw_energy = -myVdwLambda * (( ( diffa * vdw_d * (1/6.)+ vdw_c * (1/4.)) * diffa + vdw_b *(1/2.)) * diffa + vdw_a);)
+           alch_vdw_energy_2 = -myVdwLambda2 * (( ( diffa * vdw_d * (1/6.)+ vdw_c * (1/4.)) * diffa + vdw_b *(1/2.)) * diffa + vdw_a);
+           alch_vdw_force =   myVdwLambda * ((diffa * vdw_d + vdw_c) * diffa + vdw_b);)
+           ALCH4 (
+           ENERGY(alch_vdw_energy = -myVdwLambda * (( ( diffa * vdw_d * (1/6.)+ vdw_c * (1/4.)) * diffa + vdw_b *(1/2.)) * diffa + vdw_a);)
+-          alch_vdw_energy_2 = -myVdwLambda2 * (( ( diffa * vdw_d * (1/6.)+ vdw_c * (1/4.)) * diffa + vdw_b *(1/2.)) * diffa + vdw_a); 
++          alch_vdw_energy_2 = -myVdwLambda2 * (( ( diffa * vdw_d * (1/6.)+ vdw_c * (1/4.)) * diffa + vdw_b *(1/2.)) * diffa + vdw_a);
+           alch_vdw_force =   myVdwLambda * ((diffa * vdw_d + vdw_c) * diffa + vdw_b);)
+           )
+         TI(ti_vdw_force_energy_dUdl(A, B, r2, myVdwShift, switchdist2, cutoff2,
+@@ -266,7 +266,7 @@
+           alchWCAOn, myRepLambda, &alch_vdw_energy, &alch_vdw_force,
+           &alch_vdw_dUdl);)
+       )
+-      
++
+ 	//NOT_ALCHPAIR(
+ 	//TABENERGY(
+ #if (NOT_ALCHPAIR(1+) 0)
+@@ -319,11 +319,11 @@
+         FEP(vdwEnergy_s += alch_vdw_energy_2;)
+         TI(ALCH1(vdwEnergy_ti_1 += alch_vdw_dUdl;) ALCH2(vdwEnergy_ti_2 += alch_vdw_dUdl;))
+       ) // ALCHPAIR
+-      
++
+ #endif // FAST
+ 
+ #if ( FAST(1+) 0 )
+-     INT( 
++     INT(
+       register BigReal vdw_dir;
+       vdw_dir = ( diffa * vdw_d + vdw_c ) * diffa + vdw_b;
+       //BigReal force_r =  LAM(lambda_pair *) vdw_dir;
+@@ -355,7 +355,7 @@
+ #define fast_b   vec_extract(fastv, 2)
+ #define fast_a   vec_extract(fastv, 3)
+ #endif
+-    
++
+       {
+       ENERGY(
+       register BigReal fast_val =
+@@ -369,7 +369,7 @@
+         ENERGY(electEnergy   -= myElecLambda * fast_val;)
+         FEP(electEnergy_s -= myElecLambda2 * fast_val;)
+         TI(
+-          NOENERGY(register BigReal fast_val = 
++          NOENERGY(register BigReal fast_val =
+             ( ( diffa * fast_d * (1/6.)+ fast_c * (1/4.)) * diffa + fast_b *(1/2.)) * diffa + fast_a;)
+           ALCH1(electEnergy_ti_1 -= fast_val;) ALCH2(electEnergy_ti_2 -= fast_val;)
+         )
+@@ -401,7 +401,7 @@
+ 	 // Explicit goGroPair calculation; only calculates goGroPair if goGroPair is turned on
+ 	 //
+ 	 // get_gro_force has an internal checklist that sees if atom_i and atom_j are
+-	 // in the explicit pairlist.  This is done because there is no guarantee that a 
++	 // in the explicit pairlist.  This is done because there is no guarantee that a
+ 	 // processor will have atom_i and atom_j so we cannot loop over the explict atom pairs.
+ 	 // We can only loop over all pairs.
+ 	 //
+@@ -415,7 +415,7 @@
+ 	     NAMD_die("Failsafe.  This line should never be reached\n");
+ #ifndef A2_QPX
+              fast_b += groForce;
+-#else 
++#else
+              vec_insert(fast_b + groForce, fastv, 2);
+ #endif
+ 	 ENERGY(
+@@ -426,7 +426,7 @@
+ 		 )
+ 	     ) //ENERGY
+        }
+-#endif 
++#endif
+        BigReal goNative = 0;
+        BigReal goNonnative = 0;
+        BigReal goForce = 0;
+@@ -437,19 +437,19 @@
+ 	 //  Ported by JLai -- JE - added (
+ 	 const BigReal r2go = square(p_ij_x, p_ij_y, p_ij_z);
+ 	 const BigReal rgo = sqrt(r2go);
+-       
++
+ 	 if (ComputeNonbondedUtil::goMethod == 1) {
+ 	   goForce = mol->get_go_force(rgo, pExt_i.id, pExt_j->id, &goNative, &goNonnative);
+-	 } else if (ComputeNonbondedUtil::goMethod == 3) {  
++	 } else if (ComputeNonbondedUtil::goMethod == 3) {
+ 	   goForce = mol->get_go_force_new(rgo, pExt_i.id, pExt_j->id, &goNative, &goNonnative);
+ 	 } else {
+ 	   NAMD_die("I SHOULDN'T BE HERE.  DYING MELODRAMATICALLY.\n");
+ 	 }
+        }
+-       
++
+ #ifndef A2_QPX
+        fast_b += goForce;
+-#else 
++#else
+        vec_insert(fast_b + goForce, fastv, 2);
+ #endif
+        {
+@@ -459,18 +459,18 @@
+ 		       goEnergyNative +=  goNative;
+ 		       goEnergyNonnative += goNonnative;
+ 	 )
+-       ) //ENERGY                                                                                                                                             	   
++       ) //ENERGY
+ 	 INT(
+ 	   reduction[pairVDWForceIndex_X] +=  force_sign * goForce * p_ij_x;
+ 	   reduction[pairVDWForceIndex_Y] +=  force_sign * goForce * p_ij_y;
+ 	   reduction[pairVDWForceIndex_Z] +=  force_sign * goForce * p_ij_z;
+ 	 )
+        }
+-       // End of INT 
++       // End of INT
+ 
+        //DebugM(3,"rgo:" << rgo << ", pExt_i.id:" << pExt_i.id << ", pExt_j->id:" << pExt_j->id << \
+ 	 //      ", goForce:" << goForce << ", fast_b:" << fast_b << std::endl);
+-#endif       //     ) // End of GO macro 
++#endif       //     ) // End of GO macro
+        /*****  JE - End Go  *****/
+        // End of port JL
+ #endif      //) // End of Normal MACRO
+@@ -492,11 +492,11 @@
+ 
+       BigReal force_r =  LAM(lambda_pair *) fast_dir;
+       ALCHPAIR(
+-        force_r *= myElecLambda; 
++        force_r *= myElecLambda;
+         force_r += alch_vdw_force;
+         // special ALCH forces already multiplied by relevant lambda
+       )
+-          
++
+ #ifndef NAMD_CUDA
+ #ifndef  A2_QPX
+       register BigReal tmp_x = force_r * p_ij_x;
+@@ -506,7 +506,7 @@
+       register BigReal tmp_y = force_r * p_ij_y;
+       f_i_y += tmp_y;
+       f_j->y -= tmp_y;
+-      
++
+       register BigReal tmp_z = force_r * p_ij_z;
+       f_i_z += tmp_z;
+       f_j->z -= tmp_z;
+@@ -530,7 +530,7 @@
+         pp_clamp(n2, pressureProfileSlabs);
+         int p_j_partition = p_j->partition;
+ 
+-        pp_reduction(pressureProfileSlabs, n1, n2, 
++        pp_reduction(pressureProfileSlabs, n1, n2,
+                      p_i_partition, p_j_partition, pressureProfileAtomTypes,
+                      tmp_x*p_ij_x, tmp_y * p_ij_y, tmp_z*p_ij_z,
+                      pressureProfileReduction);
+@@ -540,35 +540,35 @@
+ #endif // SHORT
+ #endif // FAST
+ 
+-#if ( FULL (EXCLUDED( SHORT ( 1+ ) ) ) 0 ) 
++#if ( FULL (EXCLUDED( SHORT ( 1+ ) ) ) 0 )
+       //const BigReal* const slow_i = slow_table + 4*table_i;
+ #define slow_i (slow_table + 4*table_i)
+ 
+ #ifdef ARCH_POWERPC  //Alignment and aliasing constraints
+       __alignx (32, slow_table);
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++#if ( SHORT( FAST( 1+ ) ) 0 )
+ #pragma disjoint (*slow_table, *f_1)
+ #endif
+ #pragma disjoint (*slow_table, *fullf_1)
+ #endif  //ARCH_POWERPC
+ 
+-#endif //FULL 
++#endif //FULL
+ 
+ 
+-#if ( FULL (MODIFIED( SHORT ( 1+ ) ) ) 0 ) 
++#if ( FULL (MODIFIED( SHORT ( 1+ ) ) ) 0 )
+       //const BigReal* const slow_i = slow_table + 4*table_i;
+ #define slow_i (slow_table + 4*table_i)
+ 
+ #ifdef ARCH_POWERPC //Alignment and aliasing constraints
+       __alignx (32, slow_table);
+-#if ( SHORT( FAST( 1+ ) ) 0 ) 
++#if ( SHORT( FAST( 1+ ) ) 0 )
+ #pragma disjoint (*slow_table, *f_1)
+ #endif
+ #pragma disjoint (*slow_table, *fullf_1)
+ #endif //ARCH_POWERPC
+ 
+ #endif //FULL
+-      
++
+ #if ( FULL( 1+ ) 0 )
+ #ifndef  A2_QPX
+       BigReal slow_d = table_four_i[8 SHORT(+ 4)];
+@@ -637,13 +637,13 @@
+       ENERGY(
+       register BigReal slow_val =
+         ( ( diffa * slow_d *(1/6.)+ slow_c * (1/4.)) * diffa + slow_b *(1/2.)) * diffa + slow_a;
+-      
++
+       NOT_ALCHPAIR (
+         fullElectEnergy -= LAM(lambda_pair *) slow_val;
+-        FEP(fullElectEnergy_s -= slow_val;) 
++        FEP(fullElectEnergy_s -= slow_val;)
+       )
+       ) // ENERGY
+-          
++
+       ALCHPAIR(
+         ENERGY(fullElectEnergy   -= myElecLambda * slow_val;)
+         FEP(fullElectEnergy_s -= myElecLambda2 * slow_val;)
+@@ -686,7 +686,7 @@
+           fullforce_r += alch_vdw_force;
+         ))
+       )
+-          
++
+ #ifndef NAMD_CUDA
+       {
+ #ifndef  A2_QPX
+@@ -703,7 +703,7 @@
+       vector4double fforce_rv = vec_splats (fullforce_r);
+       vector4double ftmp_v = vec_mul(fforce_rv, p_ij_v);
+       fullf_i_v = vec_add(fullf_i_v, ftmp_v);
+-      
++
+ #define ftmp_x  vec_extract(ftmp_v, 0)
+ #define ftmp_y  vec_extract(ftmp_v, 1)
+ #define ftmp_z  vec_extract(ftmp_v, 2)
+@@ -720,7 +720,7 @@
+         pp_clamp(n2, pressureProfileSlabs);
+         int p_j_partition = p_j->partition;
+ 
+-        pp_reduction(pressureProfileSlabs, n1, n2, 
++        pp_reduction(pressureProfileSlabs, n1, n2,
+                      p_i_partition, p_j_partition, pressureProfileAtomTypes,
+                      ftmp_x*p_ij_x, ftmp_y * p_ij_y, ftmp_z*p_ij_z,
+                      pressureProfileReduction);
+@@ -738,4 +738,3 @@
+ #undef slow_i
+ #undef f_j
+ #undef fullf_j
+-
