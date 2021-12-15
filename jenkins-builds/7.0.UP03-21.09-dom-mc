@@ -47,6 +47,6 @@
  likwid-1d6636c.eb                                      --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  njmon-v64-SLES15.eb                                    --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
- spack-config-1.1-cdt-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
+ spack-config-1.0-cdt-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
