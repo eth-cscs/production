@@ -1,0 +1,10 @@
+config:
+  'build_stage:':
+  - $REFRAME_STAGE_DIR/stage
+  install_tree:
+    root: $REFRAME_STAGE_DIR/install
+  module_roots:
+    tcl: $REFRAME_STAGE_DIR/modules
+    lmod: $REFRAME_STAGE_DIR/lmod
+  source_cache: $REFRAME_STAGE_DIR/sources
+  misc_cache: $REFRAME_STAGE_DIR/cache

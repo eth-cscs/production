@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'util-linux'
+version = '2.36.2'
+
+homepage = 'http://www.kernel.org/pub/linux/utils/util-linux'
+description = "Set of Linux utilities"
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+
+source_urls = ['http://www.kernel.org/pub/linux/utils/%(name)s/v%(version_major_minor)s']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('binutils', '2.36.1'),
+]
+dependencies = [
+    ('ncurses', '6.2'),
+    ('zlib', '1.2.11'),
+]
+
+# disable account related utilities (they need OS dependent pam-devel files)
+# disable wall and friends (requires group changing permissions for install user)
+# install systemd service files in install dir
+# install bash completion files in install dir
+configopts = "--disable-chfn-chsh --disable-login --disable-su --disable-rfkill --disable-wall --disable-use-tty-group --disable-makeinstall-chown --disable-makeinstall-setuid --with-systemdsystemunitdir='${prefix}/systemd' --with-bashcompletiondir='${prefix}/share/bash-completion/completions' --without-python "
+
+
+sanity_check_paths = {
+    'files': ['lib/libblkid.a', 'lib/libmount.a', 'lib/libuuid.a'],
+    'dirs': ['include', 'bin', 'share', 'sbin'],
+}
+
+moduleclass = 'tools'

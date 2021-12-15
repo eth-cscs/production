@@ -21,7 +21,7 @@ sources = ['v%(version)s.tar.gz']
 
 dependencies = [
     ('zlib', '1.2.11'),
-    ('GSL', '2.5'),
+    ('GSL', '2.7')
 ]
 
 # The following search options are activated by default in configure:
@@ -32,7 +32,6 @@ configopts = " --enable-modules=all --enable-rpath --exec-prefix=%(installdir)s 
 
 prebuildopts = " source sourceme.sh && "
 buildopts = " CC=cc CXX=CC FC=ftn MPIEXEC=srun "
-
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],

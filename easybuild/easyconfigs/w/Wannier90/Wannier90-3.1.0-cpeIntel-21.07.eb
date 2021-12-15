@@ -8,6 +8,7 @@ homepage = 'http://www.wannier.org'
 description = "A tool for obtaining maximally-localised Wannier functions"
 
 toolchain = {'name': 'cpeIntel', 'version': '21.07'}
+toolchainopts = {'veryloose': True}
 
 source_urls = ['https://github.com/wannier-developers/%(namelower)s/archive/']
 sources = ['v3.1.0.tar.gz']

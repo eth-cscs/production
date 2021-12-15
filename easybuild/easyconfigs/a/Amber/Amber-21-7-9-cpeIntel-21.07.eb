@@ -1,0 +1,54 @@
+# @author: Victor Holanda and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'Amber'
+version = '21-7-9'
+
+homepage = 'http://ambermd.org/'
+description = """Amber (Assisted Model Building with Energy Refinement)
+is software for performing molecular dynamics and structure prediction"""
+
+toolchain = {'name': 'cpeIntel', 'version': '21.07'}
+toolchainopts = {'openmp': True, 'usempi': True, 'verbose': False, 'veryloose': True}
+
+sources = [
+    '/apps/common/UES/easybuild/sources/a/%(name)s/Amber20.tar.bz2',
+    '/apps/common/UES/easybuild/sources/a/%(name)s/AmberTools21.tar.bz2',
+]
+
+# cray-hdf5 and cray-netcdf are not available with PrgEnv-intel on Cray EX
+builddependencies = [
+    ('Boost', '1.75.0'),
+    ('CMake', '3.21.1', '', True)
+]
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('intel-classic', EXTERNAL_MODULE),
+    ('zlib', '1.2.11')
+]
+
+
+configopts = '-DCMAKE_BUILD_TYPE=RELEASE -DCOMPILER=CRAY -DCUDA=False -DMPI=TRUE -DOPENMP=TRUE '
+configopts += ' -DTRUST_SYSTEM_LIBS=True -DFORCE_EXTERNAL_LIBS=mkl -DINSTALL_TESTS=FALSE -DBUILD_PYTHON=FALSE ' 
+configopts += ' -DBoost_DIR=$BOOST_ROOT -DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC -DMPI_Fortran_COMPILER=ftn '
+#preconfigopts = ' source /opt/intel/oneapi/mpi/2021.2.0/env/vars.sh && ' 
+#configopts = ' -DCMAKE_BUILD_TYPE=RELEASE -DCOMPILER=INTEL -DCUDA=False -DMPI=TRUE -DOPENMP=TRUE '
+#configopts += ' -DTRUST_SYSTEM_LIBS=True -DFORCE_EXTERNAL_LIBS=mkl -DINSTALL_TESTS=FALSE -DBUILD_PYTHON=FALSE '
+#configopts += ' -DBoost_DIR=$BOOST_ROOT -DMPI_C_COMPILER=mpicc -DMPI_CXX_COMPILER=mpicxx -DMPI_Fortran_COMPILER=mpif90 '
+
+buildininstalldir = True
+whatis = [
+    "%(name)s 20 && AmberTools 21",
+    "AmberTools patch level 7",
+    "%(name)s patch level 9",
+]
+
+sanity_check_paths = {
+    'files': ['bin/pmemd.MPI', 'bin/pmemd'],
+    'dirs': [],
+}
+
+modextravars = {'AMBERHOME': '%(builddir)s'}
+
+moduleclass = 'bio'

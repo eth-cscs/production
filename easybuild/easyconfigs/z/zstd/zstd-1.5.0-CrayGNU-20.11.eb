@@ -1,0 +1,40 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'zstd'
+version = '1.5.0'
+
+homepage = 'https://facebook.github.io/zstd'
+description = """Zstandard is a real-time compression algorithm, providing high compression ratios. 
+ It offers a very wide range of compression/speed trade-off, while being backed by a very fast decoder.
+ It also offers a special mode for small data, called dictionary compression, and can create dictionaries
+ from any sample set."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+
+source_urls = [GITHUB_SOURCE]
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('binutils', '2.37')
+]
+
+dependencies = [
+    ('zlib', '1.2.11'),
+    ('XZ', '5.2.5')
+]
+
+osdependencies = [('lz4', 'gzip')]
+
+installopts = 'PREFIX=%(installdir)s'
+
+github_account = 'facebook'
+runtest = 'check'
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s', 'lib/libzstd.so', 'include/%(name)s.h'],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'lib'

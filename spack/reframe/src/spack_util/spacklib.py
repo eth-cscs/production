@@ -305,7 +305,7 @@ def generate_compiler_list_for_testing(cdt_types, allowed_compilers):
         _, cdt_version = get_cdt_info_from_modulerc_file(modulerc_file)
         for compiler in allowed_compilers:
             try:
-                compilers.append(compiler + "@" + get_default_package_versions_from_modulerc(compiler, modulerc_file) + '.' + cdt_version)
+                compilers.append(compiler + "@" + get_default_package_versions_from_modulerc(compiler, modulerc_file) + '-' + cdt_version)
             except:
                 pass
 

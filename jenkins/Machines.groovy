@@ -9,10 +9,10 @@ def daint = [name: 'daint',
 def dom = [name: 'dom',
            archs: ['gpu', 'mc'],
            cpus: ['gpu': 12, 'mc': 36],
-           buildPath: '$XDG_RUNTIME_DIR/easybuild/build',
-           unusePath: '/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP02/ARCH/easybuild/modules/all',
+           buildPath: '$XDG_RUNTIME_DIR/build',
+           unusePath: '/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-ARCH/tools/modules/all:/apps/dom/UES/jenkins/7.0.UP03/dom-ARCH/modules/all',
            modulesProduction: '',
-           prefixProduction: '$APPS/UES/jenkins/7.0.UP02/ARCH/easybuild']
+           prefixProduction: '/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-ARCH']
 
 def eiger = [name: 'eiger',
              archs: [],

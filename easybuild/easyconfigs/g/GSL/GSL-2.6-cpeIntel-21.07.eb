@@ -13,13 +13,12 @@ description = """
 """
 
 toolchain = {'name': 'cpeIntel', 'version': '21.07'}
-toolchainopts = {'opt': True, 'optarch': True, 'unroll': True, 'pic': True}
+toolchainopts = {'opt': True, 'optarch': True, 'pic': True, 'unroll': True, 'veryloose': True}
 
 source_urls = [GNU_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 
-configopts = '--with-pic'
-
+configopts = ' --with-pic '
 
 sanity_check_paths = {
     'files': ['lib/libgsl.so', 'lib/libgsl.a'],

@@ -1,0 +1,29 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libxml2'
+version = '2.9.10'
+
+homepage = 'http://xmlsoft.org/'
+description = """Libxml2 is the XML C parser and
+toolchain developed for the Gnome project
+ (but usable outside of the Gnome platform)."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.09'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://xmlsoft.org/sources/']
+sources = [SOURCELOWER_TAR_GZ]
+
+dependencies = [
+    ('zlib', '1.2.11')
+]
+
+configopts = 'CC="$CC" CXX="$CXX" --with-pic --without-python --with-zlib=$EBROOTZLIB'
+
+sanity_check_paths = {
+    'files': [('lib/%(name)s.a', 'lib64/%(name)s.a'), ('lib/%(name)s.so', 'lib64/%(name)s.so')],
+    'dirs': ['bin', 'include/%(name)s/libxml'],
+}
+
+moduleclass = 'lib'

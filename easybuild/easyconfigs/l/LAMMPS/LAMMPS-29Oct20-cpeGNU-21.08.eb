@@ -1,0 +1,38 @@
+# Contributed by TWR and Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'LAMMPS'
+version = '29Oct20'
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive']
+sources = ['stable_29Oct2020.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.20.1', '', True),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('FFmpeg', '4.3.2'),
+    ('zstd', '1.4.9'),
+]
+
+# see https://lammps.sandia.gov/doc/Build_package.html#cmake-presets
+configopts = " -C ../%(namelower)s-stable_29Oct2020/cmake/presets/nolib.cmake  -DBUILD_MPI=Yes -DCMAKE_CXX_COMPILER:STRING=CC -DLAMMPS_MACHINE=mpi -DMPICXX=CC  -DPKG_COMPRESS=ON -DPKG_MPIIO=ON -DPKG_PYTHON=ON -DPKG_USER-INTEL=OFF "
+
+# fix missing cray-python lib in LD_LIBRARY_PATH
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
+# folder with CMakeLists.txt relative to the unpacked tarball
+srcdir = 'cmake'
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

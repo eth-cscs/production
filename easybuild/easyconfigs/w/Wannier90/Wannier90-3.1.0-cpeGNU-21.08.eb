@@ -1,0 +1,35 @@
+# contributed by Luca Marsella (CSCS), modified by M. Kraushaar (CSCS)
+easyblock = 'MakeCp'
+
+name = 'Wannier90'
+version = '3.1.0'
+
+homepage = 'http://www.wannier.org'
+description = "A tool for obtaining maximally-localised Wannier functions"
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+toolchainopts = {'veryloose': True}
+
+source_urls = ['https://github.com/wannier-developers/%(namelower)s/archive/']
+sources = ['v3.1.0.tar.gz']
+patches = ['Wannier90_3x_ignore_makeinc.patch']
+
+#MKr copied from easybuild-easybuilders github for Wannier90-3.1.0-foss-2021a
+# The -fallow-argument-mismatch allows MPI communication calls to be
+# called with arrays of different types at different places in the
+# code.  This otherwise cause an error in GCC 10.X
+buildopts = 'all F90=$F90 MPIF90=$MPIF90 FCOPTS="$FFLAGS -fallow-argument-mismatch" LDOPTS="$FFLAGS" '
+buildopts += 'LIBDIR="$CRAY_LIBSCI_DIR" '
+buildopts += 'COMMS=mpi'
+
+files_to_copy = [
+    (['postw90.x', '%(namelower)s.x'], 'bin'),
+    (['libwannier.a'], 'lib'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/postw90.x', 'bin/%(namelower)s.x', 'lib/libwannier.a'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'

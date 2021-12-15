@@ -11,7 +11,7 @@ toolchain = SYSTEM
 
 dependencies = [
    ("cpe/%(version)s", EXTERNAL_MODULE),
-   ('PrgEnv-gnu', EXTERNAL_MODULE)
+   ('PrgEnv-gnu', EXTERNAL_MODULE),
 ]
 
 moduleclass = 'toolchain'
