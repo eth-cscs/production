@@ -19,11 +19,13 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
-    ('cURL', '7.80.0'),
+    ('cURL', '7.80.0')
 ]
 
 fix_python_shebang_for = ['bin/*']
 options = {'modulename': 'netCDF4'}
+
+use_pip = True
 
 sanity_check_paths = {
     'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],

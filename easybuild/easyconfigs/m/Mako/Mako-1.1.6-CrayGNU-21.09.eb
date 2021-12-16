@@ -11,17 +11,16 @@ from the existing templating languages"""
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
 sources = [SOURCE_TAR_GZ]
-patches = [('site.py', '%(builddir)s/site.py')]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE)
 ]
 
-postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
+use_pip = True
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s-render'],
-    'dirs': [],
+    'dirs': []
 }
 
 moduleclass = 'devel'

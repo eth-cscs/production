@@ -17,12 +17,18 @@ toolchainopts = {'verbose': False}
 sources = ['https://github.com/%(name)s/%(name)s/archive/refs/tags/v%(version)s.tar.gz']
 patches = [('mkl-2021-sitecfg.patch', 1)]
 
+builddependencies = [
+    ('wheel', '0.37.0')
+]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('Cython', '0.29.25')
 ]
 
 skipsteps = ['build']
+
+use_pip = True
 
 sanity_check_paths = {
     'files': [],

@@ -17,19 +17,23 @@ source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v1.17.2']
 sources = [SOURCELOWER_TAR_GZ]
 patches = [('mkl-2020-sitecfg.patch', 1)]
 
-dependencies = [
-    ('cray-python', EXTERNAL_MODULE),
+builddependencies = [
+    ('wheel', '0.37.0')
 ]
 
-skipsteps = ['build']
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+use_pip = True
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
 }
 
 modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)',
+    'LD_LIBRARY_PATH': '/opt/intel/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)'
 }
 
 moduleclass = 'tools'

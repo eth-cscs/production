@@ -17,7 +17,9 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE)
 ]
 
-local_cythonlibdir = 'lib/python%(pyshortver)s/site-packages/Cython-%(version)s-py%(pyshortver)s-linux-x86_64.egg'
+use_pip = True
+
+local_cythonlibdir = 'lib/python%(pyshortver)s/site-packages/'
 
 sanity_check_paths = {
     'files': ['bin/cygdb', 'bin/cython', '%s/%%(namelower)s.py' % local_cythonlibdir],
