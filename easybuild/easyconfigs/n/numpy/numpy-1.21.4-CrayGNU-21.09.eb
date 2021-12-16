@@ -1,7 +1,8 @@
+# contributed by Luca Marsella (CSCS)
 easyblock = 'PythonPackage'
 
 name = 'numpy'
-version = '1.17.2'
+version = '1.21.4'
 
 homepage = 'https://github.com/numpy/numpy'
 description = """NumPy is the fundamental package for scientific computing with Python. It contains among other things:
@@ -13,24 +14,23 @@ description = """NumPy is the fundamental package for scientific computing with 
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'verbose': False}
 
-source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v1.17.2']
-sources = [SOURCELOWER_TAR_GZ]
-patches = [('mkl-2020-sitecfg.patch', 1)]
+sources = ['https://github.com/%(name)s/%(name)s/archive/refs/tags/v%(version)s.tar.gz']
+patches = [('mkl-2021-sitecfg.patch', 1)]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('wheel', '0.37.0')
+    ('Cython', '0.29.25')
 ]
 
-use_pip = True
+skipsteps = ['build']
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
 }
 
 modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)',
+    'LD_LIBRARY_PATH': '/opt/intel/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)'
 }
 
 moduleclass = 'tools'

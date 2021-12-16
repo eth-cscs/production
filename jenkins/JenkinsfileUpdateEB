@@ -83,6 +83,7 @@ stage('Update Stage') {
                     */
                     def eb_flags
                     def eb_tcflags
+                    def eb_buildpath
                     def eb_installpath
                     def eb_modulespath
                     def load_pe
@@ -90,6 +91,7 @@ stage('Update Stage') {
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
                         eb_tcflags = "--hidden"
+                        eb_buildpath = "/dev/shm/\$USER" //\$XDG_RUNTIME_DIR"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                         eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all"
@@ -97,10 +99,11 @@ stage('Update Stage') {
                         load_pe = architecture == "" ?
                             "module load cdt-cuda/${pe_target} && module list" :
                             "module load cdt-cuda/${pe_target} daint-$architecture && module list"
-                        toolchains = "CrayCCE CrayGNU CrayIntel"
+                        toolchains = "CrayCCE CrayGNU CrayIntel CrayNvidia"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
                         eb_tcflags = ""
+                        eb_buildpath = "/dev/shm/\$USER"
                         eb_installpath = "${params.eb_prefix}/"
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
@@ -140,7 +143,7 @@ stage('Update Stage') {
                                      $load_easybuild
 
                                      # update buildpath and metadata file for external modules
-                                     export EASYBUILD_BUILDPATH="/dev/shm/\$USER/$machineLabel"
+                                     export EASYBUILD_BUILDPATH="$eb_buildpath"
                                      export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
 
                                      # unuse paths

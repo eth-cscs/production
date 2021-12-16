@@ -13,21 +13,18 @@ representation ("LLVM IR"). The LLVM Core libraries are well documented, and it
 is particularly easy to invent your own language (or port an existing compiler)
 to use LLVM as an optimizer and code generator."""
 
-toolchain = {'name': 'cpeCray', 'version': '21.09'}
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'dynamic': True}
 
-source_urls = [
-    'https://github.com/%(namelower)s/%(namelower)s-project/releases/download/%(namelower)sorg-%(version)s',
-]
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s-project/releases/download/%(namelower)sorg-%(version)s']
 sources = ['%(namelower)s-%(version)s.src.tar.xz']
 
 builddependencies = [
-    ('CMake', '3.21.2', '', True),
+    ('CMake', '3.21.3', '', True)
 ]
 
 # required to install extra tools in bin/
 configopts = " -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD=X86  -DLLVM_TARGETS_TO_BUILD=X86  -DLLVM_ENABLE_RTTI:BOOL=ON  -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON  -DLLVM_ENABLE_ZLIB=ON  -DCMAKE_BUILD_TYPE=Release  -DBUILD_SHARED_LIBS=ON "
-
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s-ar', 'bin/FileCheck'],
