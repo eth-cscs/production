@@ -235,7 +235,7 @@ exts_list = [
     ('ipyparallel', '6.3.0'),
     ('ipcmagic', '4bd1bb3', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
     ('bash_kernel', '0.7.2', {'use_pip': False}),
-    ('nglview', '3.0.3'),
+    ('nglview', '3.0.3', {'use_pip': False}),
 ]
 
 sanity_check_paths = {
