@@ -13,20 +13,24 @@ toolchain = {'name': 'cpeCray', 'version': '21.09'}
 
 source_urls = ['https://github.com/mesonbuild/%(namelower)s/releases/download/%(version)s/']
 sources = [SOURCELOWER_TAR_GZ]
-patches = [('site.py', '%(builddir)s/site.py')]
+
+builddependencies = [
+    ('wheel', '0.37.0')
+]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('Ninja', '1.10.2', '-python%(pymajver)s'),
+    ('Ninja', '1.10.2', '-python%(pymajver)s')
 ]
 
-postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
 download_dep_fail = True
 options = {'modulename': 'mesonbuild'}
 
+use_pip = True
+
 sanity_check_paths = {
-    'files': ['bin/%(namelower)s', 'lib/python%(pyshortver)s/site-packages/site.py'],
-    'dirs': [],
+    'files': ['bin/%(namelower)s'],
+    'dirs': []
 }
 
 moduleclass = 'tools'
