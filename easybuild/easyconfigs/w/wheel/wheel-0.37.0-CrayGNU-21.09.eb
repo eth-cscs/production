@@ -1,3 +1,4 @@
+# contributed by Rafael Sarmiento (CSCS)
 easyblock = 'PythonPackage'
 
 name = 'wheel'

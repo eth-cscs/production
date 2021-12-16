@@ -14,10 +14,13 @@ toolchainopts = {'usempi': True}
 
 sources = [SOURCE_TAR_GZ]
 
+builddependencies = [
+    ('wheel', '0.37.0')
+]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('cudatoolkit', EXTERNAL_MODULE),
-    ('wheel', '0.37.0'),
+    ('cudatoolkit', EXTERNAL_MODULE)
 ]
 
 prebuildopts = "python ./configure.py -%(versionsuffix)s-root=$EBROOTCUDA"

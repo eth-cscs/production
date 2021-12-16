@@ -18,10 +18,13 @@ toolchainopts = {'usempi': True, 'verbose': False}
 
 sources = [SOURCE_TAR_GZ]
 
-dependencies = [
-    ('cray-python', EXTERNAL_MODULE),
-    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+builddependencies = [
     ('wheel', '0.37.0')
+]
+
+dependencies = [
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 use_pip = True
@@ -35,7 +38,7 @@ options = {'modulename': 'os'}
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s']
 }
 
 moduleclass = 'data'

@@ -17,10 +17,13 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
 sources = [SOURCE_TAR_GZ]
 
-dependencies = [
-    ('cray-python', EXTERNAL_MODULE),
-    ('cray-hdf5', EXTERNAL_MODULE),
+builddependencies = [
     ('wheel', '0.37.0')
+]
+
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 use_pip = True

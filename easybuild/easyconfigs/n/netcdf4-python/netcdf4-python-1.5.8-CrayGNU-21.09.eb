@@ -19,7 +19,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
-    ('cURL', '7.80.0'),
+    ('cURL', '7.80.0')
 ]
 
 fix_python_shebang_for = ['bin/*']
