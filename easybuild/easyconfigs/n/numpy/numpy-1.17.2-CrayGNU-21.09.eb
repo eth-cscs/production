@@ -19,13 +19,14 @@ patches = [('mkl-2020-sitecfg.patch', 1)]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
+    ('wheel', '0.37.0')
 ]
 
-skipsteps = ['build']
+use_pip = True
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
 }
 
 modextravars = {

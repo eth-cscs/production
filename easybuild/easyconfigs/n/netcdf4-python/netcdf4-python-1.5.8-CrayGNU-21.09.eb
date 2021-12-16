@@ -25,6 +25,8 @@ dependencies = [
 fix_python_shebang_for = ['bin/*']
 options = {'modulename': 'netCDF4'}
 
+use_pip = True
+
 sanity_check_paths = {
     'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
     'dirs': ['lib/python%(pyshortver)s/site-packages'],

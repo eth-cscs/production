@@ -10,14 +10,14 @@ description = "Time-handling functionality from netcdf4-python"
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
 sources = [SOURCE_TAR_GZ]
-patches = [('site.py', '%(builddir)s/site.py')]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cURL', '7.80.0'),
+    ('wheel', '0.37.0'),
 ]
 
-postinstallcmds = ['cp %(builddir)s/site.py %(installdir)s/lib/python%(pyshortver)s/site-packages/site.py']
+use_pip = True
 
 sanity_check_paths = {
     'files': [],
