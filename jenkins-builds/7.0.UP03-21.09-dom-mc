@@ -33,7 +33,7 @@
  ParaView-5.9.1-CrayGNU-21.09-OSMesa.eb                 --set-default-module
  PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
  QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
- singularity-3.7.3-daint.eb
+ singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.1-CrayIntel-21.09.eb                          --set-default-module
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
