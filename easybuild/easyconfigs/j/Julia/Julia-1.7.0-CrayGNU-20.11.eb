@@ -34,7 +34,6 @@ modextravars = {
 # xalt hijacks libcurl.so by setting LD_LIBRARY_PATH, which should be avoided,
 # as it is incompatible with the API Julia expects.
 modtclfooter = """
-module unload cray-libsci_acc
 module unload xalt
 """
 
