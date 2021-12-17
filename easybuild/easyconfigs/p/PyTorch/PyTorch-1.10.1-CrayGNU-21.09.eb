@@ -13,18 +13,19 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 builddependencies = [
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
+    ('libffi', '3.4.2'),
+    #('nvidia/21.3', EXTERNAL_MODULE),
     ('wheel', '0.37.0')
 ]
 
 dependencies = [
     ('Boost', '1.77.0', '-python%(pymajver)s'),
-    ('cray-python', EXTERNAL_MODULE),
-    ('libffi', '3.4.2'),
-    ('nvidia/21.3', EXTERNAL_MODULE)
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 preinstallopts = ' export HOROVOD_BUILD_CUDA_CC_LIST=60; '
-preinstallopts += ' export HOROVOD_CUDA_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/21.3/cuda; '
+preinstallopts += ' export HOROVOD_CUDA_HOME=/usr/local/cuda-11.2; '
 preinstallopts += ' export HOROVOD_GPU_OPERATIONS=NCCL; '
 preinstallopts += ' export HOROVOD_MPICXX_SHOW="CC --cray-print-opts=all"; '
 preinstallopts += ' export HOROVOD_NCCL_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/21.3/comm_libs/nccl; '
