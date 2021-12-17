@@ -15,7 +15,6 @@ toolchainopts = {'pic': True, 'verbose': False}
 builddependencies = [
     ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
     ('libffi', '3.4.2'),
-    #('nvidia/21.3', EXTERNAL_MODULE),
     ('wheel', '0.37.0')
 ]
 
