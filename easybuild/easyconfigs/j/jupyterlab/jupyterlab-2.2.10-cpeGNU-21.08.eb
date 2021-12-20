@@ -237,13 +237,13 @@ exts_list = [
     ('bash_kernel', '0.7.2', {'use_pip': False}),
     
     #nglview
-#    ('deprecation', '2.1.0'),
-#    ('tomlkit', '0.7.2', {'unpack_sources': False, 'modulename': 'tomlkit', 'source_tmpl': 'tomlkit-%(version)s-py2.py3-none-any.whl'}),
+    ('deprecation', '2.1.0'),
+    ('tomlkit', '0.7.2', {'unpack_sources': False, 'modulename': 'tomlkit', 'source_tmpl': 'tomlkit-%(version)s-py2.py3-none-any.whl'}),
 #    ('tomlkit', '0.7.2'),
-#    ('jupyter-packaging', '0.11.1', {'unpack_sources': False, 'modulename': 'jupyter-packaging', 'source_tmpl': 'jupyter_packaging-%(version)s-py2.py3-none-any.whl'}),
+    ('jupyter-packaging', '0.11.1', {'unpack_sources': False, 'modulename': 'jupyter-packaging', 'source_tmpl': 'jupyter_packaging-%(version)s-py2.py3-none-any.whl'}),
 #    ('jupyter-packaging', '0.11.1'),
-#    ('versioneer', '0.21'),
-    ('nglview', '3.0.3', {'use_pip': False}), 
+    ('versioneer', '0.21'),
+    ('nglview', '3.0.3', {'use_pip': True}), 
 #     ('nglview', '4bab5ac', {'source_urls': ['https://github.com/nglviewer/nglview/tarball/%(version)s']}),    
 ]
 
