@@ -3,7 +3,7 @@ easyblock = 'PythonBundle'
 
 name = 'PyTorch'
 version = '1.10.1'
-_ptcudaver = 'cu113'
+_ptcudaver = 'cu111'
 
 homepage = 'https://pytorch.org'
 description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
@@ -13,7 +13,7 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 builddependencies = [
-    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE),
     ('libffi', '3.4.2'),
     ('wheel', '0.37.0')
 ]
