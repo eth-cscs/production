@@ -98,6 +98,6 @@
  Scalasca-2.5-CrayGNU-20.11.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
  Score-P-6.0-CrayGNU-20.11.eb                           --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
  scorep_binding_python-3.0-CrayGNU-20.11-python3.eb     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
- spack-config-1.1-cdt-cuda-20.11.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
+ spack-config-1.2-cdt-cuda-20.11.eb                     --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=$APPS/UES/jenkins/7.0.UP02-20.11/gpu/easybuild/tools
