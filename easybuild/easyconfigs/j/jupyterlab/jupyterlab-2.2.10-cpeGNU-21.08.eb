@@ -242,6 +242,7 @@ exts_list = [
 #    ('tomlkit', '0.7.2'),
     ('jupyter-packaging', '0.11.1', {'unpack_sources': False, 'modulename': 'jupyter-packaging', 'source_tmpl': 'jupyter_packaging-%(version)s-py2.py3-none-any.whl'}),
 #    ('jupyter-packaging', '0.11.1'),
+    ('versioneer', '0.21'),
     ('nglview', '3.0.3'), 
 ]
 
