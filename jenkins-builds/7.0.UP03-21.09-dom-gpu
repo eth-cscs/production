@@ -35,6 +35,7 @@
  ParaView-5.9.1-CrayGNU-21.09-EGL.eb                    --set-default-module
  PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
  pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
+ PyTorch-1.10.1-CrayGNU-21.09.eb                        --set-default-module
  QuantumESPRESSO-6.8.0-CrayNvidia-21.09.eb              --set-default-module
  singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
