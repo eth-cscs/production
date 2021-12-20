@@ -8,7 +8,7 @@ description = """Buildah is a tool that facilitates building OCI container image
 
 toolchain = SYSTEM
 builddependencies = [('Libassuan', '2.5.3'),
-                     ('Libpgp-error', '1.36'),
+                     ('Libgpg-error', '1.36'),
                      ('GPGME', '1.13.1'),
                      ('go', '1.13.4.linux-amd64')]
 

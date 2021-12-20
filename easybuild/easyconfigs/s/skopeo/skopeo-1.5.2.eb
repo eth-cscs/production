@@ -3,16 +3,16 @@
 easyblock = 'ConfigureMake'
 
 name = 'skopeo'
-version = '1.2.3'
+version = '1.5.2'
 
 homepage = 'https://github.com/containers/skopeo'
 description = """Work with remote images registries - retrieving information, images, signing content."""
 
 builddependencies = [
-    ('Libassuan', '2.5.4'),
-    ('Libgpg-error', '1.39'),
-    ('GPGME', '1.15.0'),
-    ('go', '1.16.3.linux-amd64')
+    ('Libassuan', '2.5.5'),
+    ('Libgpg-error', '1.43'),
+    ('GPGME', '1.16.0'),
+    ('go', '1.16.4.linux-amd64')
 ]
 
 toolchain = SYSTEM
@@ -21,7 +21,7 @@ source_urls = ['https://github.com/containers/skopeo/archive']
 sources = [
     'v%(version)s.tar.gz'
 ]
-checksums = ['bb62a226ad9427aaa0789c429e7f91de9caa8e284ed9227709751cc7d76a0591']
+checksums = ['e15c189a8134dec62259e6fea2786e9fb55b34e55d26a8924de0d438fd3677c4']
 
 preinstallopts = 'mkdir -p go_cache && export GOCACHE=$PWD/go_cache && '
 install_cmd = 'BUILDTAGS="btrfs_noversion exclude_graphdriver_btrfs exclude_graphdriver_devicemapper" make install-binary PREFIX=%(installdir)s'

@@ -1,6 +1,6 @@
 easyblock = 'ConfigureMake'
 
-name = 'Libpgp-error'
+name = 'Libgpg-error'
 version = '1.36'
 
 homepage = 'https://gnupg.org/software/libgpg-error/index.html'

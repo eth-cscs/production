@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 name = 'GPGME'
 version = '1.15.1'
 
-builddependencies = [('Libpgp-error', '1.42'),
+builddependencies = [('Libgpg-error', '1.42'),
                      ('Libassuan', '2.5.5')]
 
 homepage = 'https://gnupg.org/software/gpgme/index.html'
