@@ -13,7 +13,7 @@ echo "y" >> $CONF_IN
 # Do you wish to build TensorFlow with TensorRT support? [y/N]
 echo "n" >> $CONF_IN
 # Asking for detailed CUDA configuration...
-echo "$CUDATOOLKITVER" >> $CONF_IN   # Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 10]:
+echo "${CRAY_CUDATOOLKIT_VERSION:0:4}" >> $CONF_IN  # Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 10]:
 echo "$EBVERSIONCUDNN" >> $CONF_IN  # Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 7]:
 echo "$EBVERSIONNCCL" >> $CONF_IN  # Please specify the locally installed NCCL version you want to use. [Leave empty to use http://github.com/nvidia/nccl]:
 echo "$CRAY_CUDATOOLKIT_DIR,$EBROOTCUDNN,$EBROOTNCCL" >> $CONF_IN # Please specify the comma-separated list of base paths to look for CUDA libraries and headers.
