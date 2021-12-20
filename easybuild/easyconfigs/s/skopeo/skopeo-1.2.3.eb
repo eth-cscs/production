@@ -10,7 +10,7 @@ description = """Work with remote images registries - retrieving information, im
 
 builddependencies = [
     ('Libassuan', '2.5.4'),
-    ('Libpgp-error', '1.39'),
+    ('Libgpg-error', '1.39'),
     ('GPGME', '1.15.0'),
     ('go', '1.16.3.linux-amd64')
 ]

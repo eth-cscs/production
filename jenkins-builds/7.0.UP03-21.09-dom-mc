@@ -33,7 +33,7 @@
  ParaView-5.9.1-CrayGNU-21.09-OSMesa.eb                 --set-default-module
  PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
  QuantumESPRESSO-6.8.0-CrayIntel-21.09.eb               --set-default-module
- singularity-3.7.3-daint.eb
+ singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.2.1-CrayIntel-21.09.eb                          --set-default-module
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
@@ -47,6 +47,6 @@
  likwid-1d6636c.eb                                      --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  njmon-v64-SLES15.eb                                    --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
- spack-config-1.1-cdt-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
+ spack-config-1.2-cdt-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-mc/tools

@@ -17,17 +17,20 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
 sources = [SOURCE_TAR_GZ]
 
-dependencies = [
-    ('cray-python', EXTERNAL_MODULE),
-    ('cray-hdf5', EXTERNAL_MODULE),
+builddependencies = [
+    ('wheel', '0.37.0')
 ]
 
-# sanity checks (import h5py) fails on login nodes (MPI not available)
-options = {'modulename': 'os'}
+dependencies = [
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+use_pip = True
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s-%(version)s-py%(pyshortver)s-linux-%(arch)s.egg'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s']
 }
 
 moduleclass = 'data'
