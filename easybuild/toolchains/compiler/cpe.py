@@ -170,10 +170,27 @@ class cpeGCC(cpeCompiler):
 class cpeICC(cpeCompiler):
     """Support for using the Cray Intel compiler wrappers."""
     PRGENV_MODULE_NAME_SUFFIX = 'intel'  # PrgEnv-intel
-    COMPILER_FAMILY = TC_CONSTANT_INTELCOMP
+    COMPILER_FAMILY = 'Intel' #TC_CONSTANT_INTELCOMP
 
     def __init__(self, *args, **kwargs):
-        """cpeINTEL constructor."""
+        """cpeIntel constructor."""
         super(cpeICC, self).__init__(*args, **kwargs)
+        # FIXME: fp-model source gives an error with Intel oneAPI (UES-1591)
+        COMPILER_UNIQUE_OPTION_MAP = {
+            'i8': 'i8',
+            'r8': 'r8',
+            'optarch': 'xHost',
+            'ieee': 'fltconsistency',
+            'strict': ['fp-speculation=strict', 'fp-model strict'],
+            'precise': ['fp-model precise'],
+            'defaultprec': ['ftz', 'fp-speculation=safe'],
+            'loose': ['fp-model fast=1'],
+            'veryloose': ['fp-model fast=2'],
+            'vectorize': {False: 'no-vec', True: 'vec'},
+            'intel-static': 'static-intel',
+            'no-icc': 'no-icc',
+            'error-unknown-option': 'we10006',  # error at warning #10006: ignoring unknown option
+        }
         for precflag in self.COMPILER_PREC_FLAGS:
-            self.COMPILER_UNIQUE_OPTION_MAP[precflag] = IntelIccIfort.COMPILER_UNIQUE_OPTION_MAP[precflag]
+            #self.COMPILER_UNIQUE_OPTION_MAP[precflag] = IntelIccIfort.COMPILER_UNIQUE_OPTION_MAP[precflag]
+            self.COMPILER_UNIQUE_OPTION_MAP[precflag] = COMPILER_UNIQUE_OPTION_MAP[precflag]

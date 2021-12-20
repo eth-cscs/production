@@ -1,0 +1,33 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Cython'
+version = '0.29.25'
+
+homepage = 'https://pypi.python.org/pypi/Cython/'
+description = """The Cython language makes writing C extensions for the Python language as easy as Python itself.
+Cython is a source code translator based on the well-known Pyrex, but supports more cutting edge functionality and optimizations."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+use_pip = True
+
+local_cythonlibdir = 'lib/python%(pyshortver)s/site-packages/'
+
+sanity_check_paths = {
+    'files': ['bin/cygdb', 'bin/cython', '%s/%%(namelower)s.py' % local_cythonlibdir],
+    'dirs': [local_cythonlibdir + '/%(name)s']
+}
+
+modextrapaths = { 
+    'PYTHONPATH': local_cythonlibdir
+}
+
+moduleclass = 'lang'
