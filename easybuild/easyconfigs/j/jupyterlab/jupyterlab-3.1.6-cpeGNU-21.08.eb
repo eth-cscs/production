@@ -23,32 +23,33 @@ sanity_pip_check = True
 
 exts_list = [
     ('wheel', '0.37.0'),
+    ('deprecation', '2.1.0'),
     ('jupyter_packaging', '0.11.1'),
-    ('anyio', '3.3.0', {
+#    ('anyio', '3.3.0', {
 #        'checksums': ['ae57a67583e5ff8b4af47666ff5651c3732d45fd26c929253748e796af860374'],
-    }),
-    ('json5', '0.9.6', {
+#    }),
+#    ('json5', '0.9.6', {
 #        'checksums': ['9175ad1bc248e22bb8d95a8e8d765958bf0008fef2fe8abab5bc04e0f1ac8302'],
-    }),
-    ('jupyter_server', '1.10.2', {
+#    }),
+#    ('jupyter_server', '1.10.2', {
 #        'checksums': ['d3a3b68ebc6d7bfee1097f1712cf7709ee39c92379da2cc08724515bb85e72bf'],
-    }),
-    ('requests-unixsocket', '0.2.0', {
+#    }),
+#    ('requests-unixsocket', '0.2.0', {
 #        'checksums': ['9e5c1a20afc3cf786197ae59c79bcdb0e7565f218f27df5f891307ee8817c1ea'],
-    }),
-    ('sniffio', '1.2.0', {
+#    }),
+#    ('sniffio', '1.2.0', {
 #        'checksums': ['c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de'],
-    }),
-    ('websocket-client', '1.2.0', {
+#    }),
+#    ('websocket-client', '1.2.0', {
 #        'modulename': 'websocket',
 #        'checksums': ['7665ba6c645989b28b61670874ab753e6929179e9fc90565ace6ac090f59c559'],
-    }),
-    ('nbclassic', '0.3.1', {
+#    }),
+#    ('nbclassic', '0.3.1', {
 #        'checksums': ['f920f8d09849bea7950e1017ff3bd101763a8d68f565a51ce053572e65aa7947'],
-    }),
-    ('jupyterlab_server', '2.7.0', {
+#    }),
+#    ('jupyterlab_server', '2.7.0', {
 #        'checksums': ['31457ef564febc42043bc539356c804f6f9144f602e2852150bf0820ed6d7e18'],
-    }),
+#    }),
   (name, version, {
         'source_tmpl': '%(namelower)s-%(version)s.tar.gz',
     }),
