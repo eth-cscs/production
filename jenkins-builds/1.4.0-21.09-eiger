@@ -9,6 +9,7 @@
  GSL-2.7-cpeAMD-21.09.eb
  GSL-2.7-cpeCray-21.09.eb
  ParaView-5.10.0-cpeCray-21.09-OSMesa.eb
+ VTK-9.1.0-cpeCray-21.09-OSMesa-python3.eb
  Boost-1.75.0-cpeGNU-21.09.eb
  Boost-1.75.0-cpeGNU-21.09-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.09.eb
@@ -29,4 +30,3 @@
  GSL-2.7-cpeIntel-21.09.eb
  QuantumESPRESSO-6.8.0-cpeIntel-21.09.eb
  VASP-6.2.1-cpeIntel-21.09.eb
- VTK-9.1.0-cpeCray-21.09-OSMesa-python3.eb
