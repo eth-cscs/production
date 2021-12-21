@@ -1,0 +1,63 @@
+# @author: robinson
+easyblock = 'PythonBundle'
+
+name = 'jupyterlab'
+version = '3.2.5'
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'cpeGNU', 'version': '21.08'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('configurable-http-proxy', '4.2.3'),
+    ('graphviz', '2.46.1'),
+    ('libffi', '3.3'),
+    ('cray-R', EXTERNAL_MODULE),
+]
+
+# install extensions and batchspawner components
+
+postinstallcmds = [
+    """
+export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache_clean && 
+export NODE_OPTIONS=--max-old-space-size=4096 &&
+export NODE_REPL_HISTORY="" &&
+export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ && 
+export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && 
+export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && 
+export JUPYTER=%(installdir)s/bin/jupyter &&   
+""",
+]
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip_for_deps': True,
+    'use_pip': True,
+}
+
+exts_list = [
+    # jupyterhub and its dependencies
+    ('jupyterhub', '1.4.0'),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [],
+}
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter',
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextravars = {
+    'JUPYTER': '%(installdir)s/bin/jupyter',
+    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+}
+
+moduleclass = 'tools'
