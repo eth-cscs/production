@@ -8,6 +8,8 @@
  singularity-3.5.3-eiger.eb
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
+ ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
+ VTK-9.1.0-cpeCray-21.12-OSMesa.eb
  Boost-1.75.0-cpeGNU-21.12.eb
  Boost-1.75.0-cpeGNU-21.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.12.eb
@@ -28,5 +30,3 @@
  GSL-2.7-cpeIntel-21.12.eb
  QuantumESPRESSO-6.8.0-cpeIntel-21.12.eb
  VASP-6.2.1-cpeIntel-21.12.eb
- ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
- VTK-9.1.0-cpeCray-21.12-OSMesa.eb
