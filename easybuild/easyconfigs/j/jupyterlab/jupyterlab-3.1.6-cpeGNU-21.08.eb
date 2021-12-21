@@ -23,6 +23,7 @@ sanity_pip_check = True
 
 exts_list = [
     ('wheel', '0.37.0'),
+    ('jupyter_packaging', '0.11.1'),
     ('anyio', '3.3.0', {
 #        'checksums': ['ae57a67583e5ff8b4af47666ff5651c3732d45fd26c929253748e796af860374'],
     }),
