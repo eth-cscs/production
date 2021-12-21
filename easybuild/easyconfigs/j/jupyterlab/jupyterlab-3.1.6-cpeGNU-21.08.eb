@@ -23,6 +23,7 @@ sanity_pip_check = True
 
 exts_list = [
     ('wheel', '0.37.0'),
+    ('toml', '0.10.2'),
     ('deprecation', '2.1.0'),
     ('jupyter_packaging', '0.11.1'),
 #    ('anyio', '3.3.0', {
