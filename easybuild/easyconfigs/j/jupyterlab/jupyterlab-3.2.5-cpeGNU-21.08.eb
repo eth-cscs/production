@@ -9,6 +9,9 @@ description = "An extensible environment for interactive and reproducible comput
 
 toolchain = {'name': 'cpeGNU', 'version': '21.08'}
 toolchainopts = {'pic': True, 'verbose': False}
+use_pip = True
+use_pip_for_deps = True
+unpack_sources = False
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
@@ -38,6 +41,7 @@ exts_default_options = {
     'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
     'use_pip_for_deps': True,
     'use_pip': True,
+    'unpack_sources': False,
 }
 
 exts_list = [
