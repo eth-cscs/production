@@ -9,6 +9,7 @@
  GSL-2.7-cpeAMD-21.08.eb
  GSL-2.7-cpeCray-21.08.eb
  ParaView-5.9.1-cpeCray-21.08-OSMesa-python3.eb
+ ParaView-5.10.0-cpeCray-21.08-OSMesa.eb --set-default-module
  Boost-1.75.0-cpeGNU-21.08.eb
  Boost-1.75.0-cpeGNU-21.08-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.08.eb
