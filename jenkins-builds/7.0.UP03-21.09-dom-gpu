@@ -32,7 +32,7 @@
  numpy-1.21.4-CrayGNU-21.09.eb                          --set-default-module
  OOOPS-1.0.eb
  ovito-3.5.4-CrayGNU-21.09.eb                           --set-default-module
- ParaView-5.9.1-CrayGNU-21.09-EGL.eb                    --set-default-module
+ ParaView-5.10.0-CrayGNU-21.09-EGL.eb                   --set-default-module
  PLUMED-2.7.2-CrayGNU-21.09.eb                          --set-default-module
  pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
  PyTorch-1.10.1-CrayGNU-21.09.eb                        --set-default-module
