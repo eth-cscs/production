@@ -53,7 +53,6 @@
  numpy-1.17.2-CrayGNU-20.11.eb                          --set-default-module
  OOOPS-1.0.eb
  ovito-3.5.4-CrayGNU-20.11.eb                           --set-default-module
- ParaView-5.9.1-CrayGNU-20.11-EGL-python3.eb
  ParaView-5.10.0-CrayGNU-20.11-EGL.eb                   --set-default-module
  PLUMED-2.6.1-CrayGNU-20.11.eb                          --set-default-module
  pycuda-2018.1.1-CrayGNU-20.11-python3-cuda.eb          --set-default-module
