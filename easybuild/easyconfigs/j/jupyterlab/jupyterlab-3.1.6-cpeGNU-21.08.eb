@@ -19,7 +19,7 @@ dependencies = [
 
 use_pip = True
 sanity_pip_check = True
-
+use_pip_for_deps = True
 
 exts_list = [
     ('wheel', '0.37.0'),
