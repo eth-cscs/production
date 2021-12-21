@@ -16,13 +16,19 @@ sources = [SOURCELOWER_TAR_GZ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE),
-    ('numpy', '1.17.2'),
     ('TensorFlow', '2.4.0'),
 ]
 
 use_pip = True
 
-preinstallopts = "module unload atp && export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && export HOROVOD_GPU_OPERATIONS=NCCL && export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && export HOROVOD_WITH_TENSORFLOW=1 && export HOROVOD_WITHOUT_PYTORCH=1 && export HOROVOD_WITHOUT_MXNET=1 && export HOROVOD_WITHOUT_GLOO=1 && "
+preinstallopts = ("module unload atp && "
+                  "export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && "
+                  "export HOROVOD_GPU_OPERATIONS=NCCL && "
+                  "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
+                  "export HOROVOD_WITH_TENSORFLOW=1 && "
+                  "export HOROVOD_WITHOUT_PYTORCH=1 && "
+                  "export HOROVOD_WITHOUT_MXNET=1 && "
+                  "export HOROVOD_WITHOUT_GLOO=1 && ")
 
 skipsteps = ['build']
 
