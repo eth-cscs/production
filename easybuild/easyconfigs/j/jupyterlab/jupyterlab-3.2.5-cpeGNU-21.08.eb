@@ -42,7 +42,8 @@ exts_default_options = {
 
 exts_list = [
     # jupyterhub and its dependencies
-    ('jupyterhub', '1.4.0'),
+    ('jupyterlab', '3.2.5'),
+    #('jupyterhub', '1.4.0'),
 ]
 
 sanity_check_paths = {
