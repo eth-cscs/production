@@ -2,7 +2,7 @@ easyblock = 'PythonPackage'
 
 name = 'Horovod'
 version = '0.21.0'
-versionsuffix = '-tf-2.4.0-xxx'
+versionsuffix = '-tf-2.4.0'
 
 homepage = 'https://github.com/uber/horovod'
 description = "Horovod is a distributed training framework for TensorFlow."
@@ -24,6 +24,7 @@ use_pip = True
 preinstallopts = ("module unload atp && "
                   "export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && "
                   "export HOROVOD_GPU_OPERATIONS=NCCL && "
+                  "export HOROVOD_NCCL_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/2021/comm_libs/nccl && "
                   "export HOROVOD_MPICXX_SHOW='CC --cray-print-opts=all' && "
                   "export HOROVOD_WITH_TENSORFLOW=1 && "
                   "export HOROVOD_WITHOUT_PYTORCH=1 && "
