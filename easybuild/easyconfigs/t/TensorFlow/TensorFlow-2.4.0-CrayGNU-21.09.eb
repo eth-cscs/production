@@ -61,6 +61,7 @@ sanity_check_paths = {
 
 modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
 
-modextravars = {'TENSORBOARD_PROXY_URL': 'https://$::env(USER).jupyter.cscs.ch/hub/user-redirect/proxy/%PORT%/'}
+modextravars = {'TENSORBOARD_PROXY_URL': 'https://$::env(USER).jupyter.cscs.ch/hub/user-redirect/proxy/%PORT%/',
+                'LD_LIBRARY_PATH':'/opt/nvidia/hpc_sdk/Linux_x86_64/2021/comm_libs/nccl/lib:$::env(LD_LIBRARY_PATH)'}
 
 moduleclass = 'devel'
