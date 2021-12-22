@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 use_pip = True
-sanity_pip_check = True
+sanity_pip_check = False
 use_pip_for_deps = True
 
 exts_list = [
