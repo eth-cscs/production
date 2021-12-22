@@ -25,7 +25,12 @@ exts_list = [
     ('wheel', '0.37.0'),
     ('jupyter_packaging', '0.11.1'),
     ('deprecation', '2.1.0'),
-    ('poetry-core', '1.0.7'),
+   
+  
+    ('poetry-core', '1.0.7', {
+        'modulename': 'poetry.core',
+    }),
+  
     ('poetry', '1.1.12'),
     ('tomlkit', '0.8.0'),
 #    ('anyio', '3.3.0', {
