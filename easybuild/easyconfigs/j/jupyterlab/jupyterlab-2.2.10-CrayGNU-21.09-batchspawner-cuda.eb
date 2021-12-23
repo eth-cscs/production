@@ -9,7 +9,7 @@ versionsuffix = '-batchspawner-cuda'
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
 
-toolchain = {'name': 'CrayGNU', 'version': '21.02'}
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
 dependencies = [
