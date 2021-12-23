@@ -1,0 +1,21 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'graphviz'
+version = '2.50.0'
+
+homepage = 'http://www.graphviz.org'
+description = "Graphviz is open source graph visualization software."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True}
+
+# https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/2.50.0/graphviz-2.50.0.tar.gz
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+sanity_check_paths = {
+    'files': ['bin/dot'],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
