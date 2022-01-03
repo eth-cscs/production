@@ -51,7 +51,7 @@ exts_list = [
     ('pickleshare', '0.7.5'),
     ('prompt_toolkit', '3.0.24'),
     ('ptyprocess', '0.7.0'),
-    ('Pygments', '2.10.0'),
+    ('Pygments', '2.11.1'),
     ('pytest', '6.2.5', {'sources': ['%(name)s-%(version)s-py%(pymajver)s-none-any.whl']}),
     ('PyYAML', '6.0', {'modulename': 'yaml'}),
     ('toml', '0.10.2'),
