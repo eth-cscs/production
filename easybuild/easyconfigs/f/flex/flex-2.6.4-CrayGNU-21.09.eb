@@ -14,7 +14,7 @@ source_urls = ['https://github.com/westes/%(name)s/releases/download/v%(version)
 sources = [SOURCELOWER_TAR_GZ]
 
 builddependencies = [
-    ('Bison', '3.3.2'),
+    ('Bison', '3.8.2')
 ]
 
 

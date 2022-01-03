@@ -2,8 +2,7 @@
 easyblock = 'MakeCp'
 
 name = 'CP2K'
-local_commit = 'e33bbad' 
-version = '8.2.%s' % local_commit
+version = '9.1'
 versionsuffix = '-cuda'
 
 homepage = 'http://www.cp2k.org/'
@@ -16,35 +15,32 @@ description = """
     many-body potentials.
 """
 
-toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'openmp': True, 'usempi': True}
 
-sources = [
-    {'filename': SOURCELOWER_TAR_GZ, 'git_config': {'url': 'https://github.com/%(namelower)s', 'repo_name': '%(namelower)s', 'commit': local_commit, 'recursive': True}},
-]
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/releases/download/v%(version)s.0']
+sources = [SOURCELOWER_TAR_BZ2]
 patches = [
-    ('%(name)s-%(version_major_minor)s-%(toolchain_name)s%(versionsuffix)s.psmp', '%(builddir)s/%(namelower)s/arch')
+    ('%(name)s-%(version_major_minor)s-%(toolchain_name)s%(versionsuffix)s.psmp', '%(builddir)s/%(namelower)s-%(version)s/arch')
 ]
 
 builddependencies = [
-    ('Bison', '3.3.2'),
+    ('Bison', '3.8.2'),
     ('cudatoolkit', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-libsci', EXTERNAL_MODULE),
     ('flex', '2.6.4')
 ]
 dependencies = [
-    ('ELPA', '2021.05.002', versionsuffix),
+    ('ELPA', '2021.11.001', versionsuffix),
     ('Libint-CP2K', '2.6.0'),
     ('libvori', '210412'),
-    ('libxc', '5.1.5'),
-    ('libxsmm', '1.17.0'),
-    ('PLUMED', '2.7.2'),
-    ('spglib', '1.16.0')
+    ('libxc', '5.1.7'),
+    ('PLUMED', '2.7.3'),
+    ('spglib', '1.16.3'),
+    #('SIRIUS', '7.3.0', versionsuffix)
 ]
 
-# create the REVISION file
-prebuildopts = 'echo "git:%s" > %%(builddir)s/%%(namelower)s/REVISION && ' % local_commit
 # build type
 buildopts = "ARCH=%(name)s-%(version_major_minor)s-%(toolchain_name)s%(versionsuffix)s VERSION=psmp"
 
