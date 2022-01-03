@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Binary'
+
+name = 'configurable-http-proxy'
+version = '4.5.0'
+
+homepage = 'https://github.com/jupyterhub/configurable-http-proxy'
+description = """HTTP proxy for node.js including a REST API for updating the routing table.
+ Developed as a part of the Jupyter Hub multi-user server."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+# FIXME: no write access to sourcepath folder /apps/common/UES/easybuild/sources/c/configurable-http-proxy
+#source_urls = ['https://github.com/jupyterhub/%(name)s/archive/']
+#sources = ['%(version)s.tar.gz']
+local_fixme_sourcepath = '/apps/common/UES/easybuild/sources/%(nameletter)s/'
+sources = [local_fixme_sourcepath + '%(name)s-%(version)s.tar.gz']
+
+dependencies = [
+    ('nodejs', '16.13.1')
+]
+
+install_cmd = "npm install --no-package-lock -g --prefix %(installdir)s {0}%(name)s-%(version)s.tar.gz".format(local_fixme_sourcepath)
+
+sanity_check_commands = ['%(name)s --version']
+
+moduleclass = 'tools'
