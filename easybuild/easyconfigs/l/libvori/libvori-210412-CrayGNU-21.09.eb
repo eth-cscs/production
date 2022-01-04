@@ -17,7 +17,6 @@ builddependencies = [
     ('CMake', '3.22.1', '', True)
 ]
 
-
 sanity_check_paths = {
     'files': ['lib/%(name)s.a'],
     'dirs': ['lib'],
