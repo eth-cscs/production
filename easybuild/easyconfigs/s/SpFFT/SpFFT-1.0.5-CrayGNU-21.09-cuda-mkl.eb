@@ -15,8 +15,9 @@ source_urls = ['https://github.com/eth-cscs/%(name)s/archive']
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.21.3', '', True)
+    ('CMake', '3.22.1', '', True)
 ]
+
 dependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
     ('intel', EXTERNAL_MODULE)

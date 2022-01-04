@@ -16,7 +16,7 @@ sources = [SOURCE_TAR_BZ2]
 
 builddependencies = [
     ('bzip2', '1.0.8'),
-    ('CMake', '3.21.3', '', True)
+    ('CMake', '3.22.1', '', True)
 ]
 
 configopts = [
