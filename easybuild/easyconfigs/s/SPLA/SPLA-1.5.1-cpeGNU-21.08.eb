@@ -14,7 +14,7 @@ source_urls = ['https://github.com/eth-cscs/%(namelower)s/archive']
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
+    ('CMake', '3.21.2', '', True)
 ]
 
 configopts = "-DCMAKE_BUILD_TYPE=RELEASE -DSPLA_OMP=ON"

@@ -3,7 +3,7 @@ easyblock = 'ConfigureMake'
 name = 'Libassuan'
 version = '2.5.3'
 
-builddependencies = [('Libpgp-error', '1.36')]
+builddependencies = [('Libgpg-error', '1.36')]
 
 homepage = 'https://gnupg.org/software/libassuan/index.html'
 description = '''Libassuan is a small library implementing the so-called Assuan protocol.

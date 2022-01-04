@@ -79,7 +79,7 @@ file=%(installdir)s/share/jupyter/kernels/julia-1.5/kernel.json && cp $file ${fi
 # IR kernel - https://github.com/IRkernel/IRkernel
 export R_LIBS_SITE=%(installdir)s/share/ir36 &&
 mkdir %(installdir)s/share/ir36 &&
-mkdir %(installdir)s/share/jupyter/kernels/ir36
+mkdir %(installdir)s/share/jupyter/kernels/ir36 &&
 Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir36","https://cloud.r-project.org")' &&
 cd %(installdir)s/ && 
 git clone https://github.com/IRkernel/IRkernel.git &&
@@ -205,12 +205,12 @@ exts_list = [
     ('isort', '5.2.2', {'use_pip': False}),
     ('black', '19.10b0'),
     ('jupyterlab_code_formatter', '1.3.5'),  # bumped from 1.1.0 to 1.3.5
-    # ipcluster magics
-    ('docopt', '0.6.2'),
-    ('ipyparallel', '6.3.0'),
-    ('ipcmagic', '4bd1bb3', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
     ('nglview', '2.7.7'),
     ('bash_kernel', '0.7.2', {'use_pip': False}),
+    ('ipyparallel', '7.1.0', {'source_tmpl': 'ipyparallel-%(version)s-py3-none-any.whl'}),
+    ('docopt', '0.6.2'),
+    ('tqdm', '4.62.3'),
+    ('ipcmagic', 'v1.0.2', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
 ]
 
 sanity_check_paths = {

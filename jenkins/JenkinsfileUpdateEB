@@ -83,6 +83,7 @@ stage('Update Stage') {
                     */
                     def eb_flags
                     def eb_tcflags
+                    def eb_buildpath
                     def eb_installpath
                     def eb_modulespath
                     def load_pe
@@ -90,6 +91,7 @@ stage('Update Stage') {
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
                         eb_tcflags = "--hidden"
+                        eb_buildpath = "/dev/shm/\$USER" //\$XDG_RUNTIME_DIR"
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/$machineLabel"
                         eb_metadata="$WORKSPACE/easybuild/cray_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all"
@@ -97,10 +99,11 @@ stage('Update Stage') {
                         load_pe = architecture == "" ?
                             "module load cdt-cuda/${pe_target} && module list" :
                             "module load cdt-cuda/${pe_target} daint-$architecture && module list"
-                        toolchains = "CrayCCE CrayGNU CrayIntel CrayPGI"
+                        toolchains = "CrayCCE CrayGNU CrayIntel CrayNvidia"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
                         eb_tcflags = ""
+                        eb_buildpath = "/dev/shm/\$USER"
                         eb_installpath = "${params.eb_prefix}/"
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
@@ -140,7 +143,7 @@ stage('Update Stage') {
                                      $load_easybuild
 
                                      # update buildpath and metadata file for external modules
-                                     export EASYBUILD_BUILDPATH="/dev/shm/\$USER/$machineLabel"
+                                     export EASYBUILD_BUILDPATH="$eb_buildpath"
                                      export EASYBUILD_EXTERNAL_MODULES_METADATA="$eb_metadata"
 
                                      # unuse paths
@@ -335,7 +338,7 @@ stage('Update Stage') {
  Loop over all systems in "machineConfigurations":
   - retrieve path to file with failed recipes ("failed.txt")
   - loop over the lines of the file "failed.txt" (list of failed updates)
-  - create a Jira Issue for each item in the list with the proper project key
+  - create a Jira Issue for each item in the list with project key "params.jira_project"
 */
 JiraIssues = [:]
 stage('Jira Stage') {
@@ -381,7 +384,7 @@ stage('Jira Stage') {
                         success_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current successful update */
                             try {
-                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, params.jira_project)
                                 if(issue){
                                     if(issue[1]!='Done'){
                                         methods.commentJiraIssue("Update of $it successful on $machineLabel with PE $params.pe_target", issue[0])
@@ -409,7 +412,7 @@ stage('Jira Stage') {
                         failed_updates.tokenize(' \n').each {
                             /* search existing Jira issues for current failed update */
                             try {
-                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, 'UES')
+                                issue = methods.searchJiraIssue(it, machineLabel, params.pe_target, params.jira_project)
                                 if(issue){
                                     methods.commentJiraIssue("Update of $it failed on $machineLabel with PE $params.pe_target", issue[0])
                                     // Transition ID: 11 means 'In Progress', 21 means 'To Do', 31 means 'Done'
@@ -417,7 +420,7 @@ stage('Jira Stage') {
                                 } else {
                                     /* create new Jira issue for current failed update */
                                     try {
-                                        methods.createJiraIssue('Task', machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', 'UES')
+                                        methods.createJiraIssue('Task', machineLabel, "$it failed with $params.pe_target", "EasyBuild recipe $it failed with PE $params.pe_target: logs at Build URL", 'High', params.jira_project)
                                     } catch(err) {
                                         println "Failed to create Jira Issue for $it"
                                     }

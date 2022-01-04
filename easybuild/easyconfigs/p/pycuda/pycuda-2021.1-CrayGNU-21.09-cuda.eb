@@ -1,0 +1,34 @@
+# @author: gppezzi
+easyblock = 'PythonPackage'
+
+name = 'pycuda'
+version = '2021.1'
+versionsuffix = '-cuda'
+
+homepage = 'https://pypi.python.org/pypi/pycuda'
+description = """Python wrapper for Nvidia CUDA. PyCUDA lets you access Nvidia
+CUDA parallel computation API from Python."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'usempi': True}
+
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('wheel', '0.37.0')
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE)
+]
+
+prebuildopts = "python ./configure.py -%(versionsuffix)s-root=$EBROOTCUDA"
+use_pip = True
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(name)s'],
+}
+
+moduleclass = 'lang'

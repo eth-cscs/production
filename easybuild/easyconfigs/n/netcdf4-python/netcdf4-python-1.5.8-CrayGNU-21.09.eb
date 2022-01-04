@@ -1,0 +1,41 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'netcdf4-python'
+version = '1.5.8'
+
+homepage = 'https://unidata.github.io/netcdf4-python/'
+description = "Python/numpy interface to netCDF."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['https://pypi.python.org/packages/source/n/netCDF4']
+sources = ['netCDF4-%(version)s.tar.gz']
+patches = ['%(name)s-1.1.8-avoid-diskless-test.patch']
+
+dependencies = [
+    ('cftime', '1.5.1.1'),
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cURL', '7.80.0')
+]
+
+fix_python_shebang_for = ['bin/*']
+options = {'modulename': 'netCDF4'}
+
+use_pip = True
+
+sanity_check_paths = {
+    'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+sanity_check_commands = [
+    "nc4tonc3 --help",
+    "nc3tonc4 --help",
+    "ncinfo --help",
+]
+
+moduleclass = 'data'

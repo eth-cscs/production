@@ -1,0 +1,80 @@
+#
+easyblock = 'PythonBundle'
+
+name = 'PyTorch'
+version = '1.10.1'
+_ptcudaver = 'cu111'
+
+homepage = 'https://pytorch.org'
+description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
+PyTorch is a deep learning framework that puts Python first."""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+builddependencies = [
+    ('cudatoolkit/11.1.0_3.39-4.1__g484e319', EXTERNAL_MODULE),
+    ('libffi', '3.2.1', '', True),
+    ('Boost', '1.70.0'),
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+preinstallopts = '  export HOROVOD_BUILD_CUDA_CC_LIST=60; '
+preinstallopts += ' export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME; '
+preinstallopts += ' export HOROVOD_GPU_OPERATIONS=NCCL; '
+preinstallopts += ' export HOROVOD_MPICXX_SHOW="CC --cray-print-opts=all"; '
+preinstallopts += ' export HOROVOD_NCCL_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/21.3/comm_libs/nccl; '
+preinstallopts += ' export HOROVOD_NCCL_LINK=SHARED; '
+preinstallopts += ' export HOROVOD_WITHOUT_MXNET=1; '
+preinstallopts += ' export HOROVOD_WITH_PYTORCH=1; '
+preinstallopts += ' export HOROVOD_WITHOUT_TENSORFLOW=1; '
+
+sanity_pip_check = True
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': [PYPI_SOURCE, 'https://download.pytorch.org/whl'],
+    'unpack_sources': False,
+    'use_pip': True
+}
+
+exts_list = [
+    ('wheel', '0.37.0'),
+    ('cffi', '1.15.0'),
+    ('cloudpickle', '2.0.0'),
+    ('Pillow', '8.4.0', {'modulename': 'PIL'}),
+    ('psutil', '5.8.0'),
+    ('pycparser', '2.21'),
+    ('PyYAML', '6.0', {'modulename': 'yaml'}),
+    ('typing-extensions', '4.0.1', {
+        'source_tmpl': 'typing_extensions-%(version)s-py%(pymajver)s-none-any.whl'
+    }),
+    ('torch', f'{version}%2B{_ptcudaver}', {
+        'source_tmpl': f'{_ptcudaver}/%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
+    ('torchaudio', f'0.10.1%2B{_ptcudaver}', {
+        'source_tmpl': f'{_ptcudaver}/%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
+    ('torchvision', f'0.11.2%2B{_ptcudaver}', {
+        'source_tmpl': f'{_ptcudaver}/%(name)s-%(version)s-cp%(pymajver)s%(pyminver)s-cp%(pymajver)s%(pyminver)s-linux_x86_64.whl'
+    }),
+    ('horovod', '0.23.0', {
+        'installopts': '--no-cache-dir',
+        'unpack_sources': True
+    })
+]
+
+sanity_check_paths = {
+    'files': ['bin/horovodrun', 'bin/torchrun'],
+    'dirs': ['bin', 'lib/python%(pyshortver)s/site-packages']
+}
+
+sanity_check_commands = [
+    'python -c "import horovod.torch"'
+]
+
+moduleclass = 'lib'
