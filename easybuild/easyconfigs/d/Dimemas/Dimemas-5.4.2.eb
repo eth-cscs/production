@@ -10,7 +10,6 @@ programs."""
 toolchain = SYSTEM
 source_urls = ['https://ftp.tools.bsc.es/dimemas']
 sources = ['dimemas-%(version)s-Linux_x86_64.tar.bz2']
-checksums = ['2fd834eba3267c53944ac85a6e8c285c']
 osdependencies = ['java']
 
 sanity_check_paths={
