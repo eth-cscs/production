@@ -10,10 +10,10 @@
  GSL-2.7-cpeCray-21.12.eb
  ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
  VTK-9.1.0-cpeCray-21.12-OSMesa.eb
- Boost-1.75.0-cpeGNU-21.12.eb
- Boost-1.75.0-cpeGNU-21.12-python3.eb --set-default-module
+ Boost-1.78.0-cpeGNU-21.12.eb
+ Boost-1.78.0-cpeGNU-21.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.12.eb
- CP2K-8.2.d0bd076-cpeGNU-21.12.eb
+ CP2K-9.1-cpeGNU-21.12.eb
  CubeLib-4.5-cpeGNU-21.12.eb
  FFmpeg-4.4-cpeGNU-21.12.eb
  GREASY-19.03-cscs-cpeGNU-21.12.eb
