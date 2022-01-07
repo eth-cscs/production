@@ -16,7 +16,8 @@ toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True}
 sources = ['https://github.com/QEF/q-e/archive/qe-%(version_major)s.%(version_minor)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.22.1', '', True)
+    ('CMake', '3.22.1', '', True),
+    ('cray-hdf5', EXTERNAL_MODULE)
 ]
 
 dependencies = [
@@ -24,7 +25,7 @@ dependencies = [
 ]
 
 preconfigopts = " module unload cray-libsci && module list && "
-configopts = " -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
+configopts = " -DQEENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
 
 prebuildopts = " module unload cray-libsci && module list && "
 buildopts = "all epw"
