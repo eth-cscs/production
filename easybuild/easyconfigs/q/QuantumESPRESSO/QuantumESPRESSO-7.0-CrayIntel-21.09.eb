@@ -25,7 +25,7 @@ dependencies = [
 ]
 
 preconfigopts = " module unload cray-libsci && module list && "
-configopts = " -DQEENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
+configopts = " -DQE_ENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
 
 prebuildopts = " module unload cray-libsci && module list && "
 buildopts = "all epw"
