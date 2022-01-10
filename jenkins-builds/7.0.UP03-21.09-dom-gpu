@@ -58,7 +58,10 @@
  njmon-v64-SLES15.eb                                    --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  nvidia-nsight-systems-2020.4.1.126.eb                  --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  nvidia-nsight-systems-2021.1.1.66-6c5c5cb.eb                                --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ otf2_cli_profile-33c89b7-CrayGNU-21.09.eb              --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
+ Score-P-7.1-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  spack-config-1.3-cdt-cuda-21.09.eb                     --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/dom/UES/jenkins/7.0.UP03/21.09/dom-gpu/tools
