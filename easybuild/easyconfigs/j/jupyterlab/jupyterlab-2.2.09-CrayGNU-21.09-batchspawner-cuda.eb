@@ -12,12 +12,17 @@ description = "An extensible environment for interactive and reproducible comput
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
+# add wheel as a build dependency, twr
+builddependencies = [
+    ('wheel', '0.37.0'),
+]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
 #    ('JuliaExtensions', '1.5.0', '-cuda'),
-    ('IPython', '7.7.0', '-python%(pymajver)s'),
+#    ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
 #    ('dask', '2.2.0', '-python%(pymajver)s'),
     ('graphviz', '2.40.1', '', True),
@@ -98,6 +103,21 @@ exts_default_options = {
 }
 
 exts_list = [
+    # ipython 7.7.0
+    ('backcall', '0.2.0'), 
+    ('decorator', '5.1.1'),
+    ('ipython', '7.7.0'),
+    ('jedi', '0.18.1'),
+    ('parso', '0.8.3'),
+    ('pexpect', '4.8.0'),
+    ('pickleshare', '0.7.5'),
+    ('prompt-toolkit', '2.0.10'),
+    ('pygments', '2.11.2'),
+    ('ptyprocess', '0.7.0'),
+    ('pygments', '2.11.2'),
+    ('traitlets', '5.1.1'),
+
+    
     # jupyterlab packages besides ipython and its deps
     ('pyrsistent', '0.15.4'),
     ('attrs', '19.1.0', {'modulename': 'attr'}),
