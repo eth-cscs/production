@@ -3,7 +3,7 @@
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
-version = '2.2.09'
+version = '2.2.9'
 versionsuffix = '-batchspawner-cuda'
 
 homepage = 'https://github.com/jupyterlab/jupyterlab'
