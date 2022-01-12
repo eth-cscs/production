@@ -17,7 +17,7 @@ dependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
     ('libffi', '3.2.1', '', True),
     ('JuliaExtensions', '1.6.0', '-cuda'),
-    ('IPython', '7.7.0', '-python%(pymajver)s'),
+#    ('IPython', '7.7.0', '-python%(pymajver)s'),
     ('configurable-http-proxy', '4.2.1'),
     ('dask', '2.2.0', '-python%(pymajver)s'),
     ('graphviz', '2.40.1', '', True),
@@ -79,6 +79,21 @@ exts_default_options = {
 }
 
 exts_list = [
+    # ipython
+    ('decorator', '4.4.0'),
+    ('wcwidth', '0.1.7'),
+    ('prompt_toolkit', '2.0.9'),
+    ('pickleshare', '0.7.5'),
+    ('parso', '0.5.1'),
+    ('jedi', '0.14.1'),
+    ('ptyprocess', '0.6.0'),
+    ('pexpect', '4.7.0'),
+    ('ipython_genutils'),
+    ('traitlets', '4.3.2'),
+    ('backcall', '0.1.0'),
+    ('Pygments', '2.4.0'),
+    ('ipython', '7.7.0'),
+    
     # jupyterlab packages besides ipython and its deps
     ('pyrsistent', '0.15.4'),
     ('attrs', '19.1.0', {'modulename': 'attr'}),
