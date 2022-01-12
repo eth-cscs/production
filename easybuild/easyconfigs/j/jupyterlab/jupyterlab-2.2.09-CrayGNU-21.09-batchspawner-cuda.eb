@@ -113,7 +113,7 @@ exts_list = [
     ('pexpect', '4.8.0'),
     ('pickleshare', '0.7.5'),
     ('prompt_toolkit', '2.0.10'),
-    ('ptyprocess', '0.7.0'),
+    ('ptyprocess', '0.7.0', {'unpack_sources': False, 'source_tmpl': 'ptyprocess-0.7.0-py2.py3-none-any.whl'}),
     ('Pygments', '2.11.2'),
     ('traitlets', '5.1.1'),
 
