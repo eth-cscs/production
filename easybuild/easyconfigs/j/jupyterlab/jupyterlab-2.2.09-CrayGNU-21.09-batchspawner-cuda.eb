@@ -104,7 +104,8 @@ exts_default_options = {
 
 exts_list = [
     # ipython 7.7.0
-    ('backcall', '0.2.0'), 
+    ('backcall', '0.2.0', {'unpack_sources': False, 'source_tmpl': 'backcall-0.2.0-py2.py3-none-any.whl'}),
+  #  ('backcall', '0.2.0'), 
     ('decorator', '5.1.1'),
     ('ipython', '7.7.0'),
     ('jedi', '0.18.1'),
