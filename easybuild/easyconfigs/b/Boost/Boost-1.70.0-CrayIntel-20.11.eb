@@ -10,12 +10,12 @@ description = """
 toolchain = {'name': 'CrayIntel', 'version': '20.11'}
 toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
-sources = ['%%(namelower)s_%s.tar.bz2' % '_'.join(version.split('.'))]
-source_urls = ['https://dl.bintray.com/boostorg/release/%(version)s/source/']
+source_urls = ['https://boostorg.jfrog.io/artifactory/main/release/%(version)s/source']
+sources = ['%(namelower)s_%(version_major)s_%(version_minor)s_0.tar.bz2']
 
 dependencies = [
-    ('bzip2', '1.0.6'),
-    ('zlib', '1.2.11'),
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11')
 ]
 
 configopts = '--without-libraries=python'
