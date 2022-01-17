@@ -8,13 +8,14 @@ homepage = "http://www.nubakery.org"
 description = """BAGEL (Brilliantly Advanced General Electronic-structure Library)
 is a parallel electronic-structure program."""
 
-toolchain = {'name': 'CrayIntel', 'version': '20.11'}
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
 
 source_urls = ['https://github.com/nubakery/bagel/archive/']
 sources = ['v%(version)s.tar.gz']
 
 dependencies = [
-    ('Boost', '1.70.0'),
+    ('Boost', '1.70.0', '-python3'),
+    ('intel', EXTERNAL_MODULE),
     ('libxc', '5.1.6')
 ]
 
