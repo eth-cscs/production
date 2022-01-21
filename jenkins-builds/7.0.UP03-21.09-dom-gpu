@@ -41,7 +41,8 @@
  QuantumESPRESSO-7.0-CrayNvidia-21.09.eb                --set-default-module
  singularity-3.8.0-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
- VASP-6.2.1-CrayNvidia-21.09-acc.eb                     --set-default-module
+ VASP-6.2.1-CrayIntel-21.09-cuda.eb                     --set-default-module
+ VASP-6.2.1-CrayNvidia-21.09-acc.eb
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
  Visit-3.2.0-CrayGNU-21.09.eb                           --set-default-module
  VMD-1.9.3-egl.eb
