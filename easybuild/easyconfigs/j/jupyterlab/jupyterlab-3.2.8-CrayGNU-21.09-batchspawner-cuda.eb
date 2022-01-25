@@ -205,10 +205,11 @@ exts_list = [
     ('jupyterlab_nvdashboard', '0.6.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_nvdashboard-0.6.0-py3-none-any.whl'}),
     ('pynvml', '11.4.1', {'unpack_sources': False, 'source_tmpl': 'pynvml-11.4.1-py3-none-any.whl'}),
 
-    # Jupyter code formatter (non-functioning,:commented to avoid error messages)
-    #('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
+    # Jupyter code formatter (non-functioning: commented to avoid error popup when server extension is enabled)
+    # ('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
 
     # Memory usage
+    ('nbresuse', '0.4.0', {'unpack_sources': False, 'source_tmpl': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
     ('jupyter-resource-usage', '0.6.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_resource_usage-0.6.1-py3-none-any.whl'}),
     ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
     ('jupyterlab_topbar', '0.6.1',  {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_topbar-0.6.1-py3-none-any.whl'}),
