@@ -12,15 +12,14 @@ LD             = ftn
 AR             = ar -r
 
 # LIBXSMM (-D__LIBXSMM) is slower than LIBSMM (-D__HAS_smm_dnn)
-DFLAGS   = -D__ACC -D__DBCSR_ACC -D__GRID_CUDA -D__GFORTRAN -D__HAS_smm_dnn -D__MAX_CONTR=4 -D__MPI_VERSION=3 -D__parallel -D__SCALAPACK
-DFLAGS  += -D__ELPA -D__ELPA_NVIDIA_GPU -D__FFTW3 -D__GSL -D__LIBINT -D__LIBVORI -D__LIBXC -D__PLUMED2 -D__SIRIUS -D__SPGLIB
+DFLAGS   = -D__ACC -D__DBCSR_ACC -D__GRID_CUDA -D__GFORTRAN -D__HAS_smm_dnn -D__MAX_CONTR=4 -D__MPI_VERSION=3 -D__parallel -D__PW_CUDA -D__SCALAPACK
+DFLAGS  += -D__ELPA -D__ELPA_NVIDIA_GPU -D__FFTW3 -D__GSL -D__LIBINT -D__LIBVORI -D__LIBXC -D__PLUMED2 -D__SPGLIB
 CFLAGS  = -O2 -fopenmp -fopenmp-simd -ftree-vectorize -funroll-loops -g $(DFLAGS) -I$(CUDA_HOME)/include 
 CFLAGS  += -I$(ELPA_OPENMP_INCLUDE_DIR)/elpa -I$(ELPA_OPENMP_INCLUDE_DIR)/modules 
 CFLAGS  += -I$(EBROOTFFTW)/include
 CFLAGS  += -I$(EBROOTGSL)/include
 CFLAGS  += -I$(EBROOTLIBINTMINCP2K)/include -I$(EBROOTLIBINTMINCP2K)/include/libint2
 CFLAGS  += -I$(EBROOTLIBXC)/include
-CFLAGS  += -I$(EBROOTSIRIUS)/include/sirius
 CFLAGS  += -I$(EBROOTSPGLIB)/include
 CXXFLAGS = $(CFLAGS) -std=c++11
 FCFLAGS  = $(CFLAGS)
@@ -36,7 +35,6 @@ LIBS   	 += -L$(EBROOTGSL)/lib -lgsl
 LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2
 LIBS     += $(EBROOTLIBVORI)/lib/libvori.a
 LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
-LIBS     += -L$(EBROOTSIRIUS)/lib -lsirius
 LIBS     += -L$(EBROOTSPGLIB)/lib -lsymspg
 LIBS     += -lcudart -lcublas -lcufft -lnvrtc -lrt
 LIBS     += -lplumed -lz -ldl -lstdc++
