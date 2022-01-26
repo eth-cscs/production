@@ -38,7 +38,7 @@ dependencies = [
     ('libxc', '5.1.7'),
     ('PLUMED', '2.7.3'),
     ('spglib', '1.16.3'),
-    #('SIRIUS', '7.3.0', versionsuffix)
+    ('SIRIUS', '7.3.1', versionsuffix+'-mkl')
 ]
 
 # build type

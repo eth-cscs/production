@@ -2,8 +2,8 @@
 easyblock = 'CMakeMake'
 
 name = 'SIRIUS'
-version = '7.2.8'
-versionsuffix = '-cuda'
+version = '7.3.1'
+versionsuffix = '-cuda-mkl'
 
 homepage = 'https://electronic-structure.github.io/SIRIUS/'
 description = "Domain specific library for electronic structure calculations."
@@ -15,21 +15,24 @@ source_urls = ['https://github.com/electronic-structure/%(name)s/archive/']
 sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.21.3', '', True)
+    ('CMake', '3.22.1', '', True),
+    ('intel', EXTERNAL_MODULE)
 ]
 
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('ELPA', '2021.05.002', versionsuffix),
+    ('ELPA', '2021.11.001', '-cuda'),
     ('GSL', '2.7'),
     ('libxc', '5.1.7'),
-    ('SpFFT', '1.0.5', versionsuffix+'-mkl'),
+    ('SpFFT', '1.0.5', versionsuffix),
     ('spglib', '1.16.3'),
-    ('SPLA', '1.5.2', versionsuffix+'-mkl')
+    ('SPLA', '1.5.2', versionsuffix)
 ]
 
 preconfigopts = " CXX=CC CC=cc FC=ftn && "
-configopts = "-DUSE_CUDA=0 -DBUILD_TESTS=0 -DUSE_CRAY_LIBSCI=1 -DUSE_MAGMA=0 -DUSE_MKL=0 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DSpFFT_DIR=$EBROOTSPFFT/lib64/cmake/SpFFT"
+configopts = "-DUSE_CUDA=1 -DBUILD_TESTS=0 -DUSE_CRAY_LIBSCI=0 -DUSE_MAGMA=0 -DUSE_MKL=1 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DSpFFT_DIR=$EBROOTSPFFT/lib64/cmake/SpFFT"
+
+prebuildopts = "module unload cray-libsci && module unload cray-libsci_acc && module list &&"
 
 modextrapaths = {'CPATH': ['include/%(namelower)s']}
 
