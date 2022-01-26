@@ -37,6 +37,7 @@ dependencies = [
     ('libxc', '5.1.7'),
     ('libxsmm', '1.17'),
     ('PLUMED', '2.7.3'),
+    ('SIRIUS', '7.3.1'),
     ('spglib', '1.16.3')
 ]
 
@@ -53,7 +54,7 @@ files_to_copy = [
 
 sanity_check_paths = {
     'files': ['arch/%(name)s-%(version_major_minor)s-%(toolchain_name)s.psmp', 'bin/%(namelower)s.psmp'],
-    'dirs': ['data', 'tests'],
+    'dirs': ['data', 'tests']
 }
 
 # set custom CP2K_DATA_DIR
