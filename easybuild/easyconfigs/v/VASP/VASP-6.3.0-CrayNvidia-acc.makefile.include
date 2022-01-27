@@ -58,13 +58,15 @@ CXX_PARS    = nvc++ --no_warnings
 # Specify your NV HPC-SDK installation (mandatory)
 #... first try to set it automatically
 #NVROOT      =$(shell which nvfortran | awk -F /compilers/bin/nvfortran '{ print $$1 }')
-
 # If the above fails, then NVROOT needs to be set manually
-NVROOT      = $(EBROOTNVIDIA)
+
+# nvidia module loaded by PrgEnv-nvidia but EBROOTNVIDIA not defined unless listed as dependency
+NVROOT      = $(CRAY_NVIDIA_PREFIX)
 
 # Software emulation of quadruple precsion (mandatory)
-LLIBS      += -L$(EBROOTQD)/lib -lqdmod -lqd
-INCS       += -I$(EBROOTQD)/include/qd
+QD         = $(NVROOT)/compilers/extras/qd
+LLIBS      += -L$(QD)/lib -lqdmod -lqd
+INCS       += -I$(QD)/include/qd
 
 # Intel MKL (FFTW, BLAS, LAPACK, and scaLAPACK)
 LLIBS      += -Mmkl -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
