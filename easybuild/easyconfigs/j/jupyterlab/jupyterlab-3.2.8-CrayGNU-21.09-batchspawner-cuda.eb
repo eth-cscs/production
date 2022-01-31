@@ -241,6 +241,10 @@ exts_list = [
     # cupy
     ('fastrlock', '0.8', {'unpack_sources': False, 'source_tmpl': 'fastrlock-0.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
     ('cupy_cuda110', '10.1.0', {'modulename': 'cupy', 'unpack_sources': False, 'source_tmpl': 'cupy_cuda110-10.1.0-cp39-cp39-manylinux1_x86_64.whl'}),
+
+    # nglview
+    ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
+    ('nglview', '3.0.3', {'unpack_sources': False, 'source_tmpl': 'nglview-3.0.3-py3-none-any.whl'}),
 ]
 
 sanity_check_paths = {
