@@ -14,7 +14,7 @@ Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
 MPICH_RDMA_ENABLED_CUDA must be set to 1 to enable CUDA-aware MPI.
 """
 
-toolchain = {'name': 'CrayNvidia', 'version': '21.05'}
+toolchain = {'name': 'CrayNvidia', 'version': '21.09'}
 toolchainopts = { 'openmp': True, 'usempi': True }
 
 patches = [('%(name)s-%(version)s-%(toolchain_name)s%(versionsuffix)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')]
