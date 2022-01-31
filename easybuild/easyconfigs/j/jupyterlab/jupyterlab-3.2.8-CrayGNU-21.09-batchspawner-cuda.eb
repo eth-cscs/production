@@ -244,7 +244,7 @@ exts_list = [
 
     # nglview
     ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
-    ('nglview', '3.0.3', {'unpack_sources': False, 'source_tmpl': 'nglview-3.0.3-py3-none-any.whl'}),
+    ('nglview', '3.0.3'), 
 ]
 
 sanity_check_paths = {
