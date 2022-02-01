@@ -1,8 +1,8 @@
 easyblock = 'ConfigureMake'
 
 name = 'spack-config'
-version = '1.4'
-_cdt = 'cdt-cuda-21.09'
+version = '1.5'
+_cdt = 'cdt-cuda-20.11'
 
 homepage = 'https://github.com/eth-cscs/spack-config-generator'
 description = "Module for Spack config files"
@@ -14,7 +14,7 @@ sources = [{
     'filename': '%(version)s.tar.gz'
 }]
 
-checksums = ['aa45baed72b04dffeeaba1aa6a2b26508a4c0d04cd03dd731e90e2dd2ac7baca']
+checksums = ['31c9415dfd494d884ce7e8c8fab74af084ce29efe636208b04b0d944b1101c13']
 
 configure_cmd='true'
 
