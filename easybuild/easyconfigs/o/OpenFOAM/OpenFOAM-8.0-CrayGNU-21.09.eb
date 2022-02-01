@@ -35,7 +35,7 @@ install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['%(name)s-8-version-8/platforms/linux64GccDPInt32Opt/bin', '%(name)s-8-version-8/platforms/linux64GccDPInt32Opt/lib'],
+    'dirs': ['%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/bin', '%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/lib'],
 }
 
 moduleclass = 'cae'
