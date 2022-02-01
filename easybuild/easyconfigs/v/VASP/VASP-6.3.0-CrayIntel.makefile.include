@@ -48,7 +48,7 @@ LLIBS       = -lstdc++
 ##
 
 # Intel MKL (FFTW, BLAS, LAPACK, and scaLAPACK)
-FCL        += -qmkl
+FCL        += -mkl
 LLIBS      += -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
 INCS       += -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
 
@@ -65,7 +65,7 @@ LLIBS          += $(EBROOTWANNIER90)/lib/libwannier.a
 
 # For the fftlib library (experimental)
 CPP_OPTION += -Dsysv
-FCL         = ftn fftlib.o -qmkl
-CXX_FFTLIB  = icpc -qopenmp -std=c++11 -DFFTLIB_USE_MKL -DFFTLIB_THREADSAFE
+FCL         = ftn fftlib.o -mkl
+CXX_FFTLIB  = CC -qopenmp -std=c++11 -DFFTLIB_USE_MKL -DFFTLIB_THREADSAFE
 INCS_FFTLIB = -I./include -I$(MKLROOT)/include/fftw
 LIBS       += fftlib
