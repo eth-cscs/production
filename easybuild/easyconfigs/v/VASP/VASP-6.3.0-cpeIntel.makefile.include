@@ -1,0 +1,71 @@
+# Default precompiler options
+CPP_OPTIONS = -DHOST=\"LinuxIFC\" \
+              -DMPI -DMPI_BLOCK=8000 -Duse_collective \
+              -DscaLAPACK \
+              -DCACHE_SIZE=4000 \
+              -Davoidalloc \
+              -Dvasp6 \
+              -Duse_bse_te \
+              -Dtbdyn \
+              -Dfock_dblbuf \
+              -D_OPENMP
+
+CPP         = fpp -f_com=no -free -w0  $*$(FUFFIX) $*$(SUFFIX) $(CPP_OPTIONS)
+
+FC          = ftn -qopenmp
+FCL         = ftn
+
+FREE        = -free -names lowercase
+
+FFLAGS      = -assume byterecl -w
+
+OFLAG       = -O2
+OFLAG_IN    = $(OFLAG)
+DEBUG       = -O0
+
+OBJECTS     = fftmpiw.o fftmpi_map.o fftw3d.o fft3dlib.o
+OBJECTS_O1 += fftw3d.o fftmpi.o fftmpiw.o
+OBJECTS_O2 += fft3dlib.o
+
+# For what used to be vasp.5.lib
+CPP_LIB     = $(CPP)
+FC_LIB      = $(FC)
+CC_LIB      = icc
+CFLAGS_LIB  = -O
+FFLAGS_LIB  = -O1
+FREE_LIB    = $(FREE)
+
+OBJECTS_LIB = linpack_double.o
+
+# For the parser library
+CXX_PARS    = icpc
+LLIBS       = -lstdc++
+
+##
+## Customize as of this point! Of course you may change the preceding
+## part of this file as well if you like, but it should rarely be
+## necessary ...
+##
+
+# Intel MKL (FFTW, BLAS, LAPACK, and scaLAPACK)
+FCL        += -mkl
+LLIBS      += -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
+INCS       += -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+
+## no HDF5-support with PrgEnv-intel on Cray EX (CPE 21.12)
+#CPP_OPTIONS+= -DVASP_HDF5
+#HDF5_ROOT   = $(EBROOTHDF5)
+#LLIBS      += -L$(HDF5_ROOT)/lib -lhdf5_fortran
+#INCS       += -I$(HDF5_ROOT)/include
+
+# For the VASP-2-Wannier90 interface (optional)
+CPP_OPTIONS    += -DVASP2WANNIER90
+WANNIER90_ROOT = $(EBROOTWANNIER90)
+LLIBS          += $(EBROOTWANNIER90)/lib/libwannier.a
+
+# For the fftlib library (experimental)
+CPP_OPTION += -Dsysv
+FCL         = ftn fftlib.o -mkl
+CXX_FFTLIB  = CC -qopenmp -std=c++11 -DFFTLIB_USE_MKL -DFFTLIB_THREADSAFE
+INCS_FFTLIB = -I./include -I$(MKLROOT)/include/fftw
+LIBS       += fftlib
