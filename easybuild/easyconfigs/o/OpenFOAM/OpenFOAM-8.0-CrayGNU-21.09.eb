@@ -3,6 +3,7 @@ easyblock = 'Binary'
 
 name = 'OpenFOAM'
 version = '8.0'
+local_release = '20210316'
 
 homepage = 'http://www.openfoam.org/'
 description = """
@@ -15,12 +16,21 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'cstd': 'c++11'}
 
-source_urls = ['https://github.com/%(name)s/%(name)s-%(version_major)s/archive']
-sources = [{'download_filename': '20210316.tar.gz', 'filename': SOURCE_TAR_GZ}]
-patches = ['patch.%(name)s-%(version)s-20210316']
+source_urls = [
+    'https://github.com/%(name)s/%(name)s-%(version_major)s/archive'
+]
+sources = [
+    {
+    'download_filename': '%(local_release)s.tar.gz',
+    'filename': SOURCE_TAR_GZ
+    }
+]
+patches = [
+    'patch.%(name)s-%(version)s-%(local_release)s'
+]
 
 builddependencies = [
-    ('CMake/3.14.5', EXTERNAL_MODULE),
+    ('CMake', EXTERNAL_MODULE),
 ]
 dependencies = [
     ('cray-tpsl', EXTERNAL_MODULE),
@@ -28,14 +38,17 @@ dependencies = [
 
 buildininstalldir = 'True'
 modtclfooter = """
-    setenv FOAM_BASH %(installdir)s/%(name)s-8-20210316/etc/bashrc
+    setenv FOAM_BASH %(installdir)s/%(name)s-%(version_major)s-%(local_release)s/etc/bashrc
 """
 extract_sources = 'True'
 install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/bin', '%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/lib'],
+    'dirs': [
+        '%(name)s-%(version_major)s-%(local_release)s/platforms/linux64GccDPInt32Opt/bin',
+        '%(name)s-%(version_major)s-%(local_release)s/platforms/linux64GccDPInt32Opt/lib'
+    ],
 }
 
 moduleclass = 'cae'
