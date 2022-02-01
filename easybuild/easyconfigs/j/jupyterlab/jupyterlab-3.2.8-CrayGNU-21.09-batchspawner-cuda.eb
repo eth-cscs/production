@@ -64,7 +64,9 @@ git clone https://github.com/IRkernel/IRkernel.git &&
 cd IRkernel &&
 git checkout d7f8681 &&
 cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
-file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2
+file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
+cd %(installdir)s/ &&
+pip install --prefix=%(installdir)s --no-deps  --ignore-installed  nglview==3.0.3
 """,
 ]
 
@@ -242,13 +244,8 @@ exts_list = [
     ('fastrlock', '0.8', {'unpack_sources': False, 'source_tmpl': 'fastrlock-0.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
     ('cupy_cuda110', '10.1.0', {'modulename': 'cupy', 'unpack_sources': False, 'source_tmpl': 'cupy_cuda110-10.1.0-cp39-cp39-manylinux1_x86_64.whl'}),
 
-    # nglview
-    ('packaging', '21.3'),
-    ('deprecation', '2.1.0'),
-    ('jupyter-packaging', '0.11.1', {'modulename': 'jupyter_packaging', 'source_tmpl': 'jupyter_packaging-%(version)s.tar.gz'}),
+    # ase for nglview
     ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
-    ('versioneer-518', '0.19', {'modulename': 'versioneer'}),
-    ('nglview', '3.0.3'),
 ]
 
 sanity_check_paths = {
