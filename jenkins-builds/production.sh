@@ -98,12 +98,14 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ "esch" ]]; then
- system=${HOSTNAME%%[cl]n-[0-9]*}
-elif [[ "$HOSTNAME" =~ "arolla" || "$HOSTNAME" =~ "tsa" ]]; then
- system=${HOSTNAME%%-[cl]n[0-9]*}
+if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa ]]; then
+ export system=${HOSTNAME%%-[cl]n[0-9]*}
+elif [[ "$HOSTNAME" =~ uan0[1-3] ]]; then
+ export system="eiger"
+elif [[ "$HOSTNAME" =~ uan0[4-6] ]]; then
+ export system="pilatus"
 else
- system=${HOSTNAME%%[0-9]*}
+ export system=${HOSTNAME%%[0-9]*}
 fi
 
 # --- SYSTEM SPECIFIC SETUP ---
