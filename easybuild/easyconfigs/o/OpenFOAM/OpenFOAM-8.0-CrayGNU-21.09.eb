@@ -21,12 +21,12 @@ source_urls = [
 ]
 sources = [
     {
-    'download_filename': '%(local_release)s.tar.gz',
-    'filename': SOURCE_TAR_GZ
+    'filename': SOURCE_TAR_GZ,
+    'download_filename': '{0}.tar.gz'.format(local_release),
     }
 ]
 patches = [
-    'patch.%(name)s-%(version)s-%(local_release)s'
+    'patch.%(name)s-%(version)s-{0}'.format(local_release),
 ]
 
 builddependencies = [
