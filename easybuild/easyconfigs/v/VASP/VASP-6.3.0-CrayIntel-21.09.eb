@@ -21,8 +21,11 @@ builddependencies = [
     ('Wannier90', '3.1.0')
 ]
 
+# intel/2021.3.0 cannot build nonl.f90 with "-qopenmp": see https://www.vasp.at/forum/viewtopic.php?f=4&t=18213
+# nonl.f90: catastrophic error: **Internal compiler error: segmentation violation signal raised**
 dependencies = [
-    ('cray-hdf5', EXTERNAL_MODULE)
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('intel/2021.2.0', EXTRNAL_MODULE)
 ]
 
 prebuildopts = " mv %(name)s-%(version)s-%(toolchain_name)s.makefile.include makefile.include &&  module unload cray-libsci && module list && "
