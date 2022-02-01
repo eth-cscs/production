@@ -52,7 +52,7 @@ FCL        += -mkl
 LLIBS      += -L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
 INCS       += -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
 
-## no HDF5-support with PrgEnv-intel on Cray EX (CPE 21.12)
+## no HDF5 support with PrgEnv-intel on Cray EX (CPE 21.12)
 #CPP_OPTIONS+= -DVASP_HDF5
 #HDF5_ROOT   = $(EBROOTHDF5)
 #LLIBS      += -L$(HDF5_ROOT)/lib -lhdf5_fortran
