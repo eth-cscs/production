@@ -35,7 +35,7 @@ buildininstalldir = 'True'
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['%(name)s-8-20220316/platforms/linux64GccDPInt32Opt/bin', '%(name)s-8-20220316/platforms/linux64GccDPInt32Opt/lib'],
+    'dirs': ['%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/bin', '%(name)s-8-20210316/platforms/linux64GccDPInt32Opt/lib'],
 }
 
 moduleclass = 'cae'
