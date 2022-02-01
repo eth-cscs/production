@@ -6,7 +6,7 @@ diff -rNu OpenFOAM-8.orig/etc/bashrc OpenFOAM-8/etc/bashrc
  
  export WM_PROJECT=OpenFOAM
 -export WM_PROJECT_VERSION=8
-+export WM_PROJECT_VERSION=8-version-8
++export WM_PROJECT_VERSION=8-20220316
  
  ################################################################################
  # USER EDITABLE PART: Changes made here may be lost with the next upgrade
