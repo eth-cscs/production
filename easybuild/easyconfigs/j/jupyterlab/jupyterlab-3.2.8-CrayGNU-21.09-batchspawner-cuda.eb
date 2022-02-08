@@ -74,7 +74,7 @@ ${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && \
 pip install --prefix=%(installdir)s --no-deps --ignore-installed . && \
 ${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
 ${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
-${JUPYTER} labextension install --app-dir=%(installdir)s/share/jupyter/labextensions/ipyparaview
+${JUPYTER} labextension install --app-dir=%(installdir)s/share/jupyter/labextensions/ipyparaview js
 """,
 ]
 
