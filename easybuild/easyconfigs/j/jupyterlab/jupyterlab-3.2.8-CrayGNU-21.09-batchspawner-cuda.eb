@@ -233,7 +233,7 @@ exts_list = [
             'export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && '
             'export JUPYTER=%(installdir)s/bin/jupyter && '
             '${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && '
-            '${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
+            '${JUPYTER} nbextension install --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
             '${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
             '${JUPYTER} labextension install js '
         ],
