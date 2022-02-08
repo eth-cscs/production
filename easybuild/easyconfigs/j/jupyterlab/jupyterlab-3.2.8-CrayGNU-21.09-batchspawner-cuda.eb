@@ -72,8 +72,8 @@ git clone  https://github.com/NVIDIA/ipyparaview.git && \
 cd ipyparaview && git checkout 8cba45d && \
 pip install --prefix=%(installdir)s --no-deps --ignore-installed . && \
 ${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && \
-${JUPYTER} nbextension install --py --symlink ipyparaview && \
-${JUPYTER} nbextension enable --py ipyparaview && \
+${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
+${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
 ${JUPYTER} labextension install js
 """,
 ]
