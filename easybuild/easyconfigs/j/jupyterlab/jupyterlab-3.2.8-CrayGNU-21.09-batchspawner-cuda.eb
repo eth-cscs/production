@@ -70,6 +70,7 @@ pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 
 # Install ipyparaview
 git clone  https://github.com/NVIDIA/ipyparaview.git && \
 cd ipyparaview && git checkout 8cba45d && \
+pip install . && \
 ${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && \
 ${JUPYTER} nbextension install --py --symlink ipyparaview && \
 ${JUPYTER} nbextension enable --py ipyparaview
