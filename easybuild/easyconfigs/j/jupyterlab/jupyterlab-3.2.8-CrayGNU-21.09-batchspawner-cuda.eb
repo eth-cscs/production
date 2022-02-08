@@ -66,7 +66,13 @@ git checkout d7f8681 &&
 cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
 file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
 cd %(installdir)s/ &&
-pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3
+pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 && \
+# Install ipyparaview
+git clone  https://github.com/NVIDIA/ipyparaview.git && \
+cd ipyparaview && git checkout 8cba45d && \
+${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && \
+${JUPYTER} nbextension install --py --symlink ipyparaview && \
+${JUPYTER} nbextension enable --py ipyparaview
 """,
 ]
 
@@ -228,25 +234,6 @@ exts_list = [
     ('pyct', '0.4.8', {'unpack_sources': False, 'source_tmpl': 'pyct-0.4.8-py2.py3-none-any.whl'}),
     ('traittypes', '0.2.1', {'unpack_sources': False, 'source_tmpl': 'traittypes-0.2.1-py2.py3-none-any.whl'}),
     ('itk_numerics', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_numerics-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-    ('ipyparaview', '0.1.2b0', {
-        'use_pip_editable': True,
-        'postinstallcmds': [
-            'export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && '
-            'export JUPYTER=%(installdir)s/bin/jupyter && '
-            '${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && '
-            '${JUPYTER} nbextension install --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
-            '${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
-            '${JUPYTER} labextension install js '
-        ],
-        'sources': [{
-            'git_config': {
-                'url': 'https://github.com/NVIDIA',
-                'repo_name': '%(name)s',
-                'commit': '8cba45d',
-            },
-            'filename': SOURCE_TAR_GZ}
-        ],
-    }),
 
     # Bash kernel
     ('bash_kernel', '0.7.2', {'use_pip': False}),
