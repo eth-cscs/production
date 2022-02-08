@@ -229,6 +229,7 @@ exts_list = [
     ('traittypes', '0.2.1', {'unpack_sources': False, 'source_tmpl': 'traittypes-0.2.1-py2.py3-none-any.whl'}),
     ('itk_numerics', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_numerics-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
     ('ipyparaview', '0.1.2b0', {
+        'use_pip_editable': True,
         'postinstallcmds': [
             'export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ && '
             'export JUPYTER=%(installdir)s/bin/jupyter && '
