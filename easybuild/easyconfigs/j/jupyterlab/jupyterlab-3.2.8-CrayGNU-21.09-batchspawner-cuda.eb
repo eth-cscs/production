@@ -71,10 +71,10 @@ pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 
 git clone  https://github.com/NVIDIA/ipyparaview.git && \
 cd ipyparaview && git checkout 8cba45d && \
 ${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && \
-pip install --prefix=%(installdir)s --no-deps --ignore-installed -e . && \
+pip install --prefix=%(installdir)s --no-deps --ignore-installed . && \
 ${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
 ${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && \
-${JUPYTER} labextension install js
+${JUPYTER} labextension install --app-dir=${JUPYTER_DATA_DIR}/labextensions/ipyparaview js
 """,
 ]
 
