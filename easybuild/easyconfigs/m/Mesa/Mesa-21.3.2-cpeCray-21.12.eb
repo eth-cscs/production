@@ -23,14 +23,15 @@ source_urls = ['https://archive.%(namelower)s3d.org/']
 sources = [SOURCELOWER_TAR_XZ]
 
 builddependencies = [
-    ('cce/12.0.3', EXTERNAL_MODULE),
+    ('cce/13.0.1', EXTERNAL_MODULE),
     ('Mako', '1.1.6'),
     ('Meson', '0.60.2'),
-    ('Ninja', '1.10.2'),
+    ('Ninja', '1.10.2')
 ]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('LLVM', '9.0.1'),
+    ('LLVM', '9.0.1')
 ]
 
 configopts = " -Dplatforms=x11 -Dosmesa=true -Dllvm=enabled -Dgles1=disabled -Dgles2=disabled -Degl=disabled -Dgbm=disabled -Ddri3=disabled -Dgallium-vdpau=disabled -Dgallium-va=disabled -Dgallium-xvmc=disabled -Dvulkan-drivers='' -Dglx=gallium-xlib -Ddri-drivers='' -Dgallium-drivers=swr,swrast "
