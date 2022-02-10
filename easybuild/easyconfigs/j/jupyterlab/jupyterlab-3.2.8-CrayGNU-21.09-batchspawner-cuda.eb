@@ -237,8 +237,8 @@ exts_list = [
             'chmod +x js && '
             '${JUPYTER} nbextension install --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
             '${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && '
-            'mkdir -p %(installdir)s/ipyparaview && cp -r js %(istalldir)s/ipyparaview/js && '
-            'cd %(installdir)/ipyparaview && ${JUPYTER} labextension install js '
+            'mkdir -p %(installdir)s/ipyparaview && cp -r js %(installdir)s/ipyparaview/js && '
+            'cd %(installdir)s/ipyparaview && ${JUPYTER} labextension install js '
         ],
         'sources': [{
             'git_config': {
