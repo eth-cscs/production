@@ -76,6 +76,7 @@ cd ipyparaview &&
 #pip install --prefix=%(installdir)s --no-deps --ignore-installed git+https://github.com/Kitware/ipyparaview.git  &&
 #pip install --prefix=%(installdir)s --ignore-installed  -e . &&
 #pip install --prefix=%(installdir)s --ignore-installed  . &&
+echo $PYTHONPATH &&
 pip install --prefix=%(installdir)s   . &&
 #%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
 %(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
