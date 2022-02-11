@@ -36,7 +36,6 @@ if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
 postinstallcmds = [
 """
 export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
-rm -r $YARN_CACHE_FOLDER && 
 #export NODE_OPTIONS=--max-old-space-size=4096 &&
 #export JUPYTERLAB_DIR=%(installdir)s/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
@@ -79,9 +78,9 @@ cd ipyparaview &&
 echo $PYTHONPATH &&
 pip install --prefix=%(installdir)s   . &&
 #%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
-%(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
-%(installdir)s/bin/jupyter labextension install js --no-build --debug
-%(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
+##########%(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
+##########%(installdir)s/bin/jupyter labextension install js --no-build --debug
+##########%(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
 rm -r $YARN_CACHE_FOLDER 
 #${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
 #${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
