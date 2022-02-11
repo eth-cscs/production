@@ -36,8 +36,9 @@ if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
 postinstallcmds = [
 """
 export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
-export NODE_OPTIONS=--max-old-space-size=4096 &&
-export JUPYTERLAB_DIR=%(installdir)s/ &&
+rm -r $YARN_CACHE_FOLDER && 
+#export NODE_OPTIONS=--max-old-space-size=4096 &&
+#export JUPYTERLAB_DIR=%(installdir)s/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
 ##export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
 ##export JUPYTER=%(installdir)s/bin/jupyter &&
@@ -73,9 +74,12 @@ cd ipyparaview &&
 
 #${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && 
 #pip install --prefix=%(installdir)s --no-deps --ignore-installed git+https://github.com/Kitware/ipyparaview.git  &&
-pip install --prefix=%(installdir)s --ignore-installed -e . &&
-pip install --prefix=%(installdir)s --ignore-installed  . &&
-%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
+#pip install --prefix=%(installdir)s --ignore-installed  -e . &&
+#pip install --prefix=%(installdir)s --ignore-installed  . &&
+pip install --prefix=%(installdir)s   . &&
+#%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
+(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
+(installdir)s/bin/jupyter labextension install js --no-build --debug
 %(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
 rm -r $YARN_CACHE_FOLDER 
 #${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
@@ -270,12 +274,12 @@ sanity_check_paths = {
 
 modextrapaths = {
     'JUPYTER_PATH': 'share/jupyter',
-    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
+#    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
 }
 
 modextravars = {
-    'JUPYTER': '%(installdir)s/bin/jupyter',
-    'JUPYTERLAB_DIR': '%(installdir)s/',
+#    'JUPYTER': '%(installdir)s/bin/jupyter',
+#    'JUPYTERLAB_DIR': '%(installdir)s/',
     'R_LIBS_SITE': '%(installdir)s/share/ir41',
 }
 
