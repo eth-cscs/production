@@ -39,7 +39,7 @@ export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
 #export NODE_OPTIONS=--max-old-space-size=4096 &&
 #export JUPYTERLAB_DIR=%(installdir)s/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
-##export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
+export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
 export JUPYTER=%(installdir)s/bin/jupyter &&
 export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
 # Bash kernel - https://github.com/takluyver/bash_kernel
