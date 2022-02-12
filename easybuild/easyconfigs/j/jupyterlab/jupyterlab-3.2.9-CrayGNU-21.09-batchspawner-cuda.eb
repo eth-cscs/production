@@ -36,8 +36,8 @@ if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
 postinstallcmds = [
 """
 export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
-#export NODE_OPTIONS=--max-old-space-size=4096 &&
-#export JUPYTERLAB_DIR=%(installdir)s/ &&
+export NODE_OPTIONS=--max-old-space-size=4096 &&
+export JUPYTERLAB_DIR=%(installdir)s/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
 export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
 export JUPYTER=%(installdir)s/bin/jupyter &&
@@ -63,26 +63,17 @@ cd IRkernel &&
 git checkout d7f8681 &&
 cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
 file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
-#cd %(installdir)s/ &&
-#pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 && 
+cd %(installdir)s/ &&
+pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 && 
 # Install ipyparaview
 cd %(installdir)s/ &&
 git clone  https://github.com/NVIDIA/ipyparaview.git && 
 cd ipyparaview && 
-#git checkout 8cba45d && 
-
-#${JUPYTER} labextension install @jupyter-widgets/jupyterlab-manager@3 && 
-#pip install --prefix=%(installdir)s --no-deps --ignore-installed git+https://github.com/Kitware/ipyparaview.git  &&
-#pip install --prefix=%(installdir)s --ignore-installed  -e . &&
-#pip install --prefix=%(installdir)s --ignore-installed  . &&
-echo $PYTHONPATH &&
-pip install --prefix=%(installdir)s   . &&
-#%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
-JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug &&
-JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter labextension install js --no-build --debug &&
-JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter lab build --debug --dev-build=False
-##########rm -r $YARN_CACHE_FOLDER 
-
+git checkout 8cba45d && 
+pip install --prefix=%(installdir)s  . &&
+%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
+%(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
+rm -r $YARN_CACHE_FOLDER 
 """,
 ]
 
@@ -163,9 +154,6 @@ exts_list = [
     ('debugpy', '1.5.1', {'unpack_sources': False, 'source_tmpl': 'debugpy-1.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
     ('pycparser', '2.21', {'unpack_sources': False, 'source_tmpl': 'pycparser-2.21-py2.py3-none-any.whl'}),
 
-    # NB: IPython must be less than 8 for ipympl (matplotlib widgets) 0.8.5 compatibility
-#    ('ipython', '7.31.0', {'modulename': 'IPython', 'unpack_sources': False, 'source_tmpl': 'ipython-7.31.0-py3-none-any.whl'}),
-
     # JupyterHub 1.4
     ('jupyterhub', '1.4.2', {'unpack_sources': False, 'source_tmpl': 'jupyterhub-1.4.2-py3-none-any.whl'}),
     ('alembic', '1.7.6', {'unpack_sources': False, 'source_tmpl': 'alembic-1.7.6-py3-none-any.whl'}),
@@ -220,32 +208,19 @@ exts_list = [
     ('aiosignal', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'aiosignal-1.2.0-py3-none-any.whl'}),
     ('graphviz', '0.19.1', {'unpack_sources': False, 'source_tmpl': 'graphviz-0.19.1-py3-none-any.whl'}),
 
-    # NVidia GPU Dashbaord (non-functioning)
+    # NVidia GPU Dashbaord
     ('jupyterlab_nvdashboard', '0.6.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_nvdashboard-0.6.0-py3-none-any.whl'}),
     ('pynvml', '11.4.1', {'unpack_sources': False, 'source_tmpl': 'pynvml-11.4.1-py3-none-any.whl'}),
 
-    # Jupyter code formatter (non-functioning: commented to avoid error popup when server extension is enabled)
+    # Jupyter code formatter
     ('isort', '5.10.1', {'unpack_sources': False, 'source_tmpl': 'isort-5.10.1-py3-none-any.whl'}),
     ('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
-    
+
     # Memory usage
     ('nbresuse', '0.4.0', {'unpack_sources': False, 'source_tmpl': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
     ('jupyter-resource-usage', '0.6.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_resource_usage-0.6.1-py3-none-any.whl'}),
     ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
     ('jupyterlab_topbar', '0.6.1',  {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_topbar-0.6.1-py3-none-any.whl'}),
-
-    # itkwidgets and ipyparaview (non-functioning: itkwidgets not yet suported on jupyterlab 3, ipyparaview non-functioning)
-#    ('itkwidgets', '0.32.1', {'unpack_sources': False, 'source_tmpl': 'itkwidgets-0.32.1-py2.py3-none-any.whl'}),
-#    ('colorcet', '3.0.0', {'unpack_sources': False, 'source_tmpl': 'colorcet-3.0.0-py2.py3-none-any.whl'}),
-#    ('itk_meshtopolydata', '0.7.1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_meshtopolydata-0.7.1-cp39-cp39-manylinux2014_x86_64.whl'}),
-#    ('itk_core', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_core-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-#    ('ipydatawidgets', '4.2.0', {'unpack_sources': False, 'source_tmpl': 'ipydatawidgets-4.2.0-py2.py3-none-any.whl'}),
-#    ('zstandard', '0.16.0', {'unpack_sources': False, 'source_tmpl': 'zstandard-0.16.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-#    ('itk_filtering', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_filtering-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-#    ('param', '1.12.0', {'unpack_sources': False, 'source_tmpl': 'param-1.12.0-py2.py3-none-any.whl'}),
-#    ('pyct', '0.4.8', {'unpack_sources': False, 'source_tmpl': 'pyct-0.4.8-py2.py3-none-any.whl'}),
-#    ('traittypes', '0.2.1', {'unpack_sources': False, 'source_tmpl': 'traittypes-0.2.1-py2.py3-none-any.whl'}),
-#    ('itk_numerics', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_numerics-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
 
     # Bash kernel
     ('bash_kernel', '0.7.2', {'use_pip': False}),
@@ -267,18 +242,17 @@ exts_list = [
 
 sanity_check_paths = {
     'files': [],
-#    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/extensions', 'share/jupyter/lab/schemas', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/extensions', 'share/jupyter/lab/schemas', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
 }
 
 modextrapaths = {
-#    'JUPYTER_PATH': 'share/jupyter',
-#    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
+    'JUPYTER_PATH': 'share/jupyter',
+    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
 }
 
 modextravars = {
-#    'JUPYTER': '%(installdir)s/bin/jupyter',
-    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab',
+    'JUPYTER': '%(installdir)s/bin/jupyter',
+    'JUPYTERLAB_DIR': '%(installdir)s/',
     'R_LIBS_SITE': '%(installdir)s/share/ir41',
 }
 
