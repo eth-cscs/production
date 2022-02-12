@@ -79,7 +79,7 @@ echo $PYTHONPATH &&
 pip install --prefix=%(installdir)s   . &&
 #%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
 JUPYTERLAB_DIR=%(installdir)s/ %(installdir)s/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug 
-######%(installdir)s/bin/jupyter labextension install js --no-build --debug &&
+JUPYTERLAB_DIR=%(installdir)s/ %(installdir)s/bin/jupyter labextension install js --no-build --debug &&
 #####%(installdir)s/bin/jupyter lab build --debug --dev-build=False
 ##########rm -r $YARN_CACHE_FOLDER 
 #${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
