@@ -187,51 +187,52 @@ exts_list = [
     ('batchspawner', '68a1fcd', {'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s']}),
 
     # ipywidgets and matplotlib: ipympl requires lower versions of matplotlib, ipython for compatibility
-    ('ipympl', '0.8.5', {'unpack_sources': False, 'source_tmpl': 'ipympl-0.8.5-py2.py3-none-any.whl'}), #was commented
     ('ipywidgets', '7.6.5', {'unpack_sources': False, 'source_tmpl': 'ipywidgets-7.6.5-py2.py3-none-any.whl'}),
     ('Pillow', '9.0.1', {'modulename': 'PIL', 'unpack_sources': False, 'source_tmpl': 'Pillow-9.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-    ('matplotlib', '3.5.1', {'unpack_sources': False, 'source_tmpl': 'matplotlib-3.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl'}), #was commented
     ('jupyterlab_widgets', '1.0.2', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_widgets-1.0.2-py3-none-any.whl'}),
     ('widgetsnbextension', '3.5.2', {'unpack_sources': False, 'source_tmpl': 'widgetsnbextension-3.5.2-py2.py3-none-any.whl'}),
-    ('cycler', '0.11.0', {'unpack_sources': False, 'source_tmpl': 'cycler-0.11.0-py3-none-any.whl'}), #was commented
-    ('kiwisolver', '1.3.2', {'unpack_sources': False, 'source_tmpl': 'kiwisolver-1.3.2-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}), #was commented
-    ('fonttools', '4.28.5', {'modulename': 'fontTools', 'unpack_sources': False, 'source_tmpl': 'fonttools-4.28.5-py3-none-any.whl'}), #was commented
+    ('ipympl', '0.8.7', {'unpack_sources': False, 'source_tmpl': 'ipympl-0.8.7-py2.py3-none-any.whl'}),
+    ('cycler', '0.11.0', {'unpack_sources': False, 'source_tmpl': 'cycler-0.11.0-py3-none-any.whl'}),
+    ('kiwisolver', '1.3.2', {'unpack_sources': False, 'source_tmpl': 'kiwisolver-1.3.2-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('fonttools', '4.29.1', {'modulename': 'fontTools', 'unpack_sources': False, 'source_tmpl': 'fonttools-4.29.1-py3-none-any.whl'}),
+    ('matplotlib', '3.5.1', {'unpack_sources': False, 'source_tmpl': 'matplotlib-3.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl'}),
 
     # dask
-#    ('dask_labextension', '5.2.0', {'unpack_sources': False, 'source_tmpl': 'dask_labextension-5.2.0-py3-none-any.whl'}),
-#    ('distributed', '2021.12.0', {'unpack_sources': False, 'source_tmpl': 'distributed-2021.12.0-py3-none-any.whl'}),
-#    ('bokeh', '2.4.2', {'unpack_sources': False, 'source_tmpl': 'bokeh-2.4.2-py3-none-any.whl'}),
-#    ('jupyter_server_proxy', '3.2.0', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_proxy-3.2.0-py3-none-any.whl'}),
-#    ('tblib', '1.7.0', {'unpack_sources': False, 'source_tmpl': 'tblib-1.7.0-py2.py3-none-any.whl'}),
-#    ('PyYAML', '6.0', {'modulename': 'yaml', 'unpack_sources': False, 'source_tmpl': 'PyYAML-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('psutil', '5.9.0', {'unpack_sources': False, 'source_tmpl': 'psutil-5.9.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-#    ('sortedcontainers', '2.4.0', {'unpack_sources': False, 'source_tmpl': 'sortedcontainers-2.4.0-py2.py3-none-any.whl'}),
-#    ('dask', '2021.12.0', {'unpack_sources': False, 'source_tmpl': 'dask-2021.12.0-py3-none-any.whl'}),
-#    ('msgpack', '1.0.3', {'unpack_sources': False, 'source_tmpl': 'msgpack-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
-#    ('cloudpickle', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'cloudpickle-2.0.0-py3-none-any.whl'}),
-#    ('zict', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'zict-2.0.0-py3-none-any.whl'}),
-#    ('aiohttp', '3.8.1', {'unpack_sources': False, 'source_tmpl': 'aiohttp-3.8.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('simpervisor', '0.4', {'unpack_sources': False, 'source_tmpl': 'simpervisor-0.4-py3-none-any.whl'}),
-#    ('HeapDict', '1.0.1', {'unpack_sources': False, 'source_tmpl': 'HeapDict-1.0.1-py3-none-any.whl'}),
-#    ('yarl', '1.7.2', {'unpack_sources': False, 'source_tmpl': 'yarl-1.7.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('frozenlist', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'frozenlist-1.2.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('async_timeout', '4.0.2', {'unpack_sources': False, 'source_tmpl': 'async_timeout-4.0.2-py3-none-any.whl'}),
-#    ('multidict', '5.2.0', {'unpack_sources': False, 'source_tmpl': 'multidict-5.2.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('aiosignal', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'aiosignal-1.2.0-py3-none-any.whl'}),
-#    ('graphviz', '0.19.1', {'unpack_sources': False, 'source_tmpl': 'graphviz-0.19.1-py3-none-any.whl'}),
+    ('dask_labextension', '5.2.0', {'unpack_sources': False, 'source_tmpl': 'dask_labextension-5.2.0-py3-none-any.whl'}),
+    ('distributed', '2022.01.1', {'unpack_sources': False, 'source_tmpl': 'distributed-2022.1.1-py3-none-any.whl'}),
+    ('bokeh', '2.4.2', {'unpack_sources': False, 'source_tmpl': 'bokeh-2.4.2-py3-none-any.whl'}),
+    ('jupyter_server_proxy', '3.2.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_proxy-3.2.1-py3-none-any.whl'}),
+    ('tblib', '1.7.0', {'unpack_sources': False, 'source_tmpl': 'tblib-1.7.0-py2.py3-none-any.whl'}),
+    ('PyYAML', '6.0', {'modulename': 'yaml', 'unpack_sources': False, 'source_tmpl': 'PyYAML-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('psutil', '5.9.0', {'unpack_sources': False, 'source_tmpl': 'psutil-5.9.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('sortedcontainers', '2.4.0', {'unpack_sources': False, 'source_tmpl': 'sortedcontainers-2.4.0-py2.py3-none-any.whl'}),
+    ('dask', '2022.01.1', {'unpack_sources': False, 'source_tmpl': 'dask-2022.1.1-py3-none-any.whl'}),
+    ('msgpack', '1.0.3', {'unpack_sources': False, 'source_tmpl': 'msgpack-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('cloudpickle', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'cloudpickle-2.0.0-py3-none-any.whl'}),
+    ('zict', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'zict-2.0.0-py3-none-any.whl'}),
+    ('aiohttp', '3.8.1', {'unpack_sources': False, 'source_tmpl': 'aiohttp-3.8.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('simpervisor', '0.4', {'unpack_sources': False, 'source_tmpl': 'simpervisor-0.4-py3-none-any.whl'}),
+    ('HeapDict', '1.0.1', {'unpack_sources': False, 'source_tmpl': 'HeapDict-1.0.1-py3-none-any.whl'}),
+    ('yarl', '1.7.2', {'unpack_sources': False, 'source_tmpl': 'yarl-1.7.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('frozenlist', '1.3.0', {'unpack_sources': False, 'source_tmpl': 'frozenlist-1.3.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('async_timeout', '4.0.2', {'unpack_sources': False, 'source_tmpl': 'async_timeout-4.0.2-py3-none-any.whl'}),
+    ('multidict', '6.0.2', {'unpack_sources': False, 'source_tmpl': 'multidict-6.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('aiosignal', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'aiosignal-1.2.0-py3-none-any.whl'}),
+    ('graphviz', '0.19.1', {'unpack_sources': False, 'source_tmpl': 'graphviz-0.19.1-py3-none-any.whl'}),
 
     # NVidia GPU Dashbaord (non-functioning)
-#    ('jupyterlab_nvdashboard', '0.6.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_nvdashboard-0.6.0-py3-none-any.whl'}),
-#    ('pynvml', '11.4.1', {'unpack_sources': False, 'source_tmpl': 'pynvml-11.4.1-py3-none-any.whl'}),
+    ('jupyterlab_nvdashboard', '0.6.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_nvdashboard-0.6.0-py3-none-any.whl'}),
+    ('pynvml', '11.4.1', {'unpack_sources': False, 'source_tmpl': 'pynvml-11.4.1-py3-none-any.whl'}),
 
     # Jupyter code formatter (non-functioning: commented to avoid error popup when server extension is enabled)
-    # ('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
-
+    ('isort', '5.10.1', {'unpack_sources': False, 'source_tmpl': 'isort-5.10.1-py3-none-any.whl'}),
+    ('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
+    
     # Memory usage
-#    ('nbresuse', '0.4.0', {'unpack_sources': False, 'source_tmpl': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
-#    ('jupyter-resource-usage', '0.6.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_resource_usage-0.6.1-py3-none-any.whl'}),
-#    ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
- #   ('jupyterlab_topbar', '0.6.1',  {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_topbar-0.6.1-py3-none-any.whl'}),
+    ('nbresuse', '0.4.0', {'unpack_sources': False, 'source_tmpl': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
+    ('jupyter-resource-usage', '0.6.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_resource_usage-0.6.1-py3-none-any.whl'}),
+    ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
+    ('jupyterlab_topbar', '0.6.1',  {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_topbar-0.6.1-py3-none-any.whl'}),
 
     # itkwidgets and ipyparaview (non-functioning: itkwidgets not yet suported on jupyterlab 3, ipyparaview non-functioning)
 #    ('itkwidgets', '0.32.1', {'unpack_sources': False, 'source_tmpl': 'itkwidgets-0.32.1-py2.py3-none-any.whl'}),
@@ -250,18 +251,18 @@ exts_list = [
     ('bash_kernel', '0.7.2', {'use_pip': False}),
 
     # ipcluster_magic (NB: new ipyparallel JupyterLab extension)
-#    ('docopt', '0.6.2'),
-#    ('pyexpect', '1.0.21'),
-#    ('tqdm', '4.62.3', {'unpack_sources': False, 'source_tmpl': 'tqdm-4.62.3-py2.py3-none-any.whl'}),
-#    ('ipyparallel', '8.1.0', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-8.1.0-py3-none-any.whl'}),
-#    ('ipcmagic', 'v1.0.2', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
+    ('docopt', '0.6.2'),
+    ('pyexpect', '1.0.21'),
+    ('tqdm', '4.62.3', {'unpack_sources': False, 'source_tmpl': 'tqdm-4.62.3-py2.py3-none-any.whl'}),
+    ('ipyparallel', '8.2.0', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-8.2.0-py3-none-any.whl'}),
+    ('ipcmagic', 'v1.0.2', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
 
     # cupy
-#    ('fastrlock', '0.8', {'unpack_sources': False, 'source_tmpl': 'fastrlock-0.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
-#    ('cupy_cuda110', '10.1.0', {'modulename': 'cupy', 'unpack_sources': False, 'source_tmpl': 'cupy_cuda110-10.1.0-cp39-cp39-manylinux1_x86_64.whl'}),
+    ('fastrlock', '0.8', {'unpack_sources': False, 'source_tmpl': 'fastrlock-0.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('cupy_cuda110', '10.1.0', {'modulename': 'cupy', 'unpack_sources': False, 'source_tmpl': 'cupy_cuda110-10.1.0-cp39-cp39-manylinux1_x86_64.whl'}),
 
     # ase for nglview
-#    ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
+    ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
 ]
 
 sanity_check_paths = {
