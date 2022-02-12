@@ -18,11 +18,11 @@ builddependencies = [
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-#    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.5.0'),
-#    ('JuliaExtensions', '1.6.3', '-cuda'),
-#    ('cray-R', EXTERNAL_MODULE),
-#    ('graphviz', '2.50.0'),
+    ('JuliaExtensions', '1.6.3', '-cuda'),
+    ('cray-R', EXTERNAL_MODULE),
+    ('graphviz', '2.50.0'),
 ]
 
 modtclfooter = """
@@ -43,26 +43,26 @@ export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONP
 ##export JUPYTER=%(installdir)s/bin/jupyter &&
 ##export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
 # Bash kernel - https://github.com/takluyver/bash_kernel
-#python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
+python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
-#unset EBJULIA_USER_DEPOT_PATH &&
-#export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia &&
-#export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
-#export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
-#julia -e 'using Pkg; Pkg.add("IJulia");' &&
-#chmod -R +rX %(installdir)s/share/IJulia &&
-#file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+unset EBJULIA_USER_DEPOT_PATH &&
+export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
+julia -e 'using Pkg; Pkg.add("IJulia");' &&
+chmod -R +rX %(installdir)s/share/IJulia &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
 # IR kernel - https://github.com/IRkernel/IRkernel
-#export R_LIBS_SITE=%(installdir)s/share/ir41 &&
-#mkdir %(installdir)s/share/ir41 &&
-#mkdir %(installdir)s/share/jupyter/kernels/ir41 &&
-#Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir41","https://cloud.r-project.org")' &&
-#cd %(installdir)s/ &&
-#git clone https://github.com/IRkernel/IRkernel.git &&
-#cd IRkernel &&
-#git checkout d7f8681 &&
-#cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
-#file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
+export R_LIBS_SITE=%(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/jupyter/kernels/ir41 &&
+Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir41","https://cloud.r-project.org")' &&
+cd %(installdir)s/ &&
+git clone https://github.com/IRkernel/IRkernel.git &&
+cd IRkernel &&
+git checkout d7f8681 &&
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
+file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
 #cd %(installdir)s/ &&
 #pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 && 
 # Install ipyparaview
@@ -82,9 +82,7 @@ JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter labex
 JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter labextension install js --no-build --debug &&
 JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab %(installdir)s/bin/jupyter lab build --debug --dev-build=False
 ##########rm -r $YARN_CACHE_FOLDER 
-#${JUPYTER} nbextension install --py --symlink --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
-#${JUPYTER} nbextension enable --py --prefix=${JUPYTER_DATA_DIR} ipyparaview && 
-#${JUPYTER} labextension install --app-dir=${JUPYTERLAB_DIR} js
+
 """,
 ]
 
@@ -249,7 +247,7 @@ exts_list = [
 #    ('itk_numerics', '5.2.1.post1', {'modulename': 'itk', 'unpack_sources': False, 'source_tmpl': 'itk_numerics-5.2.1.post1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
 
     # Bash kernel
-#    ('bash_kernel', '0.7.2', {'use_pip': False}),
+    ('bash_kernel', '0.7.2', {'use_pip': False}),
 
     # ipcluster_magic (NB: new ipyparallel JupyterLab extension)
 #    ('docopt', '0.6.2'),
