@@ -78,7 +78,7 @@ exts_default_options = {
 }
 
 exts_list = [
-    ('jupyterlab', '3.2.9', {'unpack_sources': False, 'source_tmpl': 'jupyterlab-3.2.9-py3-none-any.whl'}),
+    ('jupyterlab', '3.2.8', {'unpack_sources': False, 'source_tmpl': 'jupyterlab-3.2.8-py3-none-any.whl'}),
     ('jupyterlab_server', '2.10.3', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_server-2.10.3-py3-none-any.whl'}),
     ('Jinja2', '3.0.3', {'unpack_sources': False, 'source_tmpl': 'Jinja2-3.0.3-py3-none-any.whl'}),
     ('jupyter_core', '4.9.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_core-4.9.1-py3-none-any.whl'}),
