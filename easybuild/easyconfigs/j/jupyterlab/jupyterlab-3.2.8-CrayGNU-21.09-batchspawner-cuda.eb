@@ -235,7 +235,7 @@ exts_list = [
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/extensions', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
 }
 
 modextrapaths = {
