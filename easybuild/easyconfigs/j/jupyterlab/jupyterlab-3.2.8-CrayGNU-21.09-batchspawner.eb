@@ -231,6 +231,7 @@ sanity_check_paths = {
 
 modextrapaths = {
     'JUPYTER_PATH': 'share/jupyter',
+    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
 }
 
 modextravars = {
