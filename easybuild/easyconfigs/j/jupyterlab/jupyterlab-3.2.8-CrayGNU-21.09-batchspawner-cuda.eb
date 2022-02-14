@@ -247,14 +247,14 @@ sanity_check_paths = {
 }
 
 modextrapaths = {
-    'JUPYTER_PATH': '~/.jupyter:%(installdir)s/share/jupyter',
-    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
+    'JUPYTER_PATH': 'share/jupyter',
 }
 
 modextravars = {
     'JUPYTER': '%(installdir)s/bin/jupyter',
     'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
     'R_LIBS_SITE': '%(installdir)s/share/ir41',
+    'JUPYTER_CONFIG_PATH': '$HOME/.jupyter:%(installdir)s/etc/jupyter',
 }
 
 moduleclass = 'tools'
