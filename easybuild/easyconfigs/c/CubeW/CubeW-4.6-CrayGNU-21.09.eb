@@ -1,4 +1,4 @@
-# jg (cscs)
+# jg (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CubeW'
@@ -11,13 +11,14 @@ performance metric, (ii) call path, and (iii) system resource."""
 
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
-
+# verbose=False avoids the configure step to fail (-craype-verbose error)
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version)s/dist']
 sources = [SOURCELOWER_TAR_GZ]
-
-
+# dependencies = [('gcc/10.3.0', EXTERNAL_MODULE)]
+configopts = '--enable-shared'
 sanity_check_paths = {
-    'files': ['bin/%(namelower)s-config', 'lib/libcube4w.a'],
+    'files': ['bin/%(namelower)s-config', 'lib/libcube4w.a',
+              ('lib/libcube4w.%s' % SHLIB_EXT, 'lib64/libcube4w.%s' % SHLIB_EXT)],
     'dirs': ['include/%(namelower)s'],
 }
 

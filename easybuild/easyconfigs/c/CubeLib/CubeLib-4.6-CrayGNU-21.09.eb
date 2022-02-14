@@ -16,9 +16,11 @@ toolchainopts = {'pic': True, 'verbose': False}
 source_urls = ['http://apps.fz-juelich.de/scalasca/releases/cube/%(version_major_minor)s/dist']
 sources = [SOURCELOWER_TAR_GZ]
 
-
+configopts = '--enable-shared'
 sanity_check_paths = {
-    'files': ['bin/cube_info', 'lib/libcube4.a'],
+    'files': ['bin/cubelib-config', 'bin/cube_info',
+            # ('lib/libcube4.a', 'lib64/libcube4.a'),
+              ('lib/libcube4.%s' % SHLIB_EXT, 'lib64/libcube4.%s' % SHLIB_EXT)],
     'dirs': ['include/%(namelower)s'],
 }
 
