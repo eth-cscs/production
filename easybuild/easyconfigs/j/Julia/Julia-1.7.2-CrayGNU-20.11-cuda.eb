@@ -1,0 +1,47 @@
+# Recipe for linux, x86_64 created by Samuel Omlin (CSCS), Victor Holanda Rusu (CSCS), Harmen Stoppels (CSCS)
+easyblock = 'PackedBinary'
+
+name = 'Julia'
+version = '1.7.2'
+versionsuffix = '-cuda'
+
+homepage = 'https://julialang.org'
+description = 'Julia is a high-level general-purpose dynamic programming language that was originally designed to address the needs of high-performance numerical analysis and computational science, without the typical need of separate compilation to be fast, also usable for client and server web use, low-level systems programming or as a specification language (wikipedia.org). Julia provides ease and expressiveness for high-level numerical computing, in the same way as languages such as R, MATLAB, and Python, but also supports general programming. To achieve this, Julia builds upon the lineage of mathematical programming languages, but also borrows much from popular dynamic languages, including Lisp, Perl, Python, Lua, and Ruby (julialang.org).'
+
+toolchain = {'name': 'CrayGNU', 'version': '20.11'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': True}
+
+source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
+sources = ['%(namelower)s-%(version)s-linux-%(arch)s.tar.gz']
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': ['bin/julia', 'lib/libjulia.so', 'lib/libjulia.so.%(version_major)s', 'lib/libjulia.so.%(version_major)s.%(version_minor)s', 'lib64/libjulia.so', 'lib64/libjulia.so.%(version_major)s', 'lib64/libjulia.so.%(version_major)s.%(version_minor)s', 'LICENSE.md'],
+    'dirs':  ['bin', 'include', 'lib', 'share', 'lib/julia', 'lib64/julia', 'share/julia'],
+}
+
+modextravars = {
+    'JULIA_LOAD_PATH': '@:@#.#-daint-gpu:@stdlib',
+    'JULIA_DEPOT_PATH': '$::env(SCRATCH)/../julia/$::env(USER)/daint-gpu:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
+    'JULIA_MPICC': 'cc',
+    'JULIA_MPIEXEC': 'srun',
+    'JULIA_MPIEXEC_ARGS': "-C gpu",
+    'JULIA_MPI_BINARY': 'system',
+    'JULIA_MPI_PATH': '$::env(CRAY_MPICH_DIR)',
+    'JULIA_MPI_TEST_ARRAYTYPE': 'CuArray',
+    'JULIA_CUDA_USE_BINARYBUILDER': 'false',
+    'JULIA_CUDA_MEMORY_POOL': 'none',
+}
+
+modtclfooter = """
+module unload cray-libsci_acc
+module unload xalt
+"""
+
+moduleclass = 'lang'
