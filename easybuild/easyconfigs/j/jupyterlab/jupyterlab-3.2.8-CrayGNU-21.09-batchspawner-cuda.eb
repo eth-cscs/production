@@ -65,8 +65,16 @@ cd IRkernel &&
 git checkout d7f8681 &&
 cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
 file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
+#install nglview
 cd %(installdir)s/ &&
-pip install --prefix=%(installdir)s --no-deps  --ignore-installed  nglview==3.0.3
+pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 &&
+# Install ipyparaview (notebook extension only)
+cd %(installdir)s/ &&
+git clone  https://github.com/NVIDIA/ipyparaview.git && 
+cd ipyparaview && 
+git checkout 8cba45d && 
+pip install --prefix=%(installdir)s  . &&
+%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview
 """,
 ]
 
@@ -240,13 +248,13 @@ sanity_check_paths = {
 
 modextrapaths = {
     'JUPYTER_PATH': 'share/jupyter',
-    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
 }
 
 modextravars = {
     'JUPYTER': '%(installdir)s/bin/jupyter',
     'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
     'R_LIBS_SITE': '%(installdir)s/share/ir41',
+    'JUPYTER_CONFIG_PATH': '$::env(HOME)/.jupyter:%(installdir)s/etc/jupyter',
 }
 
 moduleclass = 'tools'
