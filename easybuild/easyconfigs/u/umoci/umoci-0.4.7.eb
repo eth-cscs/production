@@ -27,7 +27,7 @@ sources = [{
 }]
 
 # Disable documentation creation
-patches = ['patch_nodocs_umoci-0.4.7.patch']
+patches = ['patch_nodocs_static_umoci-0.4.7.patch']
 
 preinstallopts = 'mkdir -p go_cache && export GOCACHE=$PWD/go_cache && '
 install_cmd = 'make install PREFIX=%(installdir)s'
