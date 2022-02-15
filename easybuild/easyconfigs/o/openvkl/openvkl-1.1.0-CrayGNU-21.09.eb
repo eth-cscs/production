@@ -1,0 +1,38 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'openvkl'
+version = '1.1.0'
+
+homepage = 'https://github.com/OpenVKL/openvkl'
+description = """This project represents a common set of C++ infrastructure and
+CMake utilities used by various components of Intel® oneAPI Rendering Toolkit."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/OpenVKL/%(name)s/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('rkcommon', '1.8.0'),
+    ('embree', '3.13.2'),
+]
+
+builddependencies = [('CMake', '3.22.1','', True)]
+
+separate_build_dir = True
+
+configopts = '-DBUILD_BENCHMARKS:BOOL=OFF '
+configopts += '-DBUILD_EXAMPLES:BOOL=OFF '
+configopts += '-DBUILD_TESTING:BOOL=OFF '
+configopts += '-Drkcommon_DIR="$EBROOTRKCOMMON"/lib64/cmake/rkcommon-1.8.0 '
+configopts += '-Dembree_DIR="$EBROOTEMBREE"/lib64/cmake/embree-3.13.2 '
+configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
