@@ -1,0 +1,19 @@
+--- umoci.orig/Makefile	2022-02-15 12:20:08.269940000 +0100
++++ umoci/Makefile	2022-02-15 13:35:18.462558654 +0100
+@@ -110,14 +110,8 @@
+ 	hack/release.sh -v $(VERSION) -S "$(GPG_KEYID)"
+ 
+ .PHONY: install
+-install: umoci docs
+-	install -D -m0755 umoci $(DESTDIR)/$(BINDIR)/umoci
+-	-for man in $(MANPAGES); do \
+-		filename="$$(basename -- "$$man")"; \
+-		target="$(DESTDIR)/$(MANDIR)/man$${filename##*.}/$$filename"; \
+-		install -D -m0644 "$$man" "$$target"; \
+-		gzip -9f "$$target"; \
+-	 done
++install: static 
++	install -D -m0755 umoci.static $(DESTDIR)/$(BINDIR)/umoci
+ 
+ .PHONY: uninstall
+ uninstall:

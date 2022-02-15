@@ -1,0 +1,44 @@
+# teojgo (cscs)
+
+easyblock = 'ConfigureMake'
+
+name = 'umoci'
+version = '0.4.7'
+
+homepage = 'https://github.com/opencontainers/umoci'
+description = ('umoci (pronounced /uːmoˈʨi/ or approximately "oo-mo-tchee") is a '
+               'reference implementation of the OCI image specification and provides users with '
+               'the ability to create, manipulate, and otherwise interact with container images.')
+
+builddependencies = [
+    ('go', '1.17.6.linux-amd64')
+]
+
+toolchain = SYSTEM
+
+sources = [{
+    'filename': '%(name)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/opencontainers',
+        'repo_name': '%(name)s',
+        'tag': 'v%(version)s',
+        'keep_git_dir': True
+    }
+}]
+
+# Disable documentation creation
+patches = ['patch_nodocs_static_umoci-0.4.7.patch']
+
+preinstallopts = 'mkdir -p go_cache && export GOCACHE=$PWD/go_cache && '
+install_cmd = 'make install PREFIX=%(installdir)s'
+
+skipsteps = ['build', 'configure']
+
+sanity_check_paths = {
+    'files': ['bin/umoci'],
+    'dirs': ['']
+}
+
+sanity_check_commands = [('umoci', '-v')]
+
+moduleclass = 'tools'
