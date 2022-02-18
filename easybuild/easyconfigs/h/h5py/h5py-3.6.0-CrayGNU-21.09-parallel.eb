@@ -17,6 +17,7 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'usempi': True, 'verbose': False}
 
 sources = [SOURCE_TAR_GZ]
+checksums = ['8752d2814a92aba4e2b2a5922d2782d0029102d99caaf3c201a566bc0b40db29']
 
 builddependencies = [
     ('wheel', '0.37.0')
@@ -28,10 +29,7 @@ dependencies = [
 ]
 
 use_pip = True
-
-prebuildopts = 'export HDF5_MPI="ON" && '
-
-preinstallopts = 'export HDF5_MPI="ON" && '
+prebuildopts = preinstallopts = 'HDF5_MPI="ON" H5PY_SETUP_REQUIRES=0 '
 
 # sanity checks (import h5py) fails on login nodes (MPI not available)
 options = {'modulename': 'os'}
