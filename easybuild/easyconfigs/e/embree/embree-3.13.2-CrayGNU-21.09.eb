@@ -1,0 +1,43 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'embree'
+version = '3.13.2'
+
+homepage = 'https://github.com/embree/embree'
+description = """This project represents a common set of C++ infrastructure and
+CMake utilities used by various components of Intel® oneAPI Rendering Toolkit."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/embree/%(name)s/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('ispc', '1.17.0'),
+#    ('tbb', '2019.5'),
+]
+
+builddependencies = [('CMake', '3.22.1','', True)]
+
+separate_build_dir = True
+
+configopts =  '-DEMBREE_ISPC_EXECUTABLE=$EBROOTISPC/bin/ispc '
+configopts += '-DEMBREE_TASKING_SYSTEM=TBB '
+configopts += '-DEMBREE_TUTORIALS:BOOL=OFF '
+configopts += '-DEMBREE_TUTORIALS_GLFW:BOOL=OFF '
+configopts += '-DEMBREE_TUTORIALS_LIBPNG:BOOL=OFF '
+configopts += '-DEMBREE_USE_GOOGLE_BENCHMARK:BOOL=OFF '
+#configopts += '-DEMBREE_TBB_ROOT=$EBROOTTBB '
+configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+modextravars = {
+    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+}
+
+moduleclass = 'vis'

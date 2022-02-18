@@ -1,0 +1,28 @@
+--- umoci.orig/Makefile	2022-02-15 14:04:56.027051000 +0100
++++ umoci/Makefile	2022-02-15 14:06:59.349638164 +0100
+@@ -14,7 +14,7 @@
+ # limitations under the License.
+ 
+ # Use bash, so that we can do process substitution.
+-SHELL := $(shell which bash)
++SHELL := bash 
+ 
+ # Go tools.
+ GO ?= go
+@@ -110,14 +110,8 @@
+ 	hack/release.sh -v $(VERSION) -S "$(GPG_KEYID)"
+ 
+ .PHONY: install
+-install: umoci docs
+-	install -D -m0755 umoci $(DESTDIR)/$(BINDIR)/umoci
+-	-for man in $(MANPAGES); do \
+-		filename="$$(basename -- "$$man")"; \
+-		target="$(DESTDIR)/$(MANDIR)/man$${filename##*.}/$$filename"; \
+-		install -D -m0644 "$$man" "$$target"; \
+-		gzip -9f "$$target"; \
+-	 done
++install: static
++	install -D -m0755 umoci.static $(DESTDIR)/$(BINDIR)/umoci
+ 
+ .PHONY: uninstall
+ uninstall:

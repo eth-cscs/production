@@ -18,13 +18,13 @@
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  Julia-1.6.3-CrayGNU-21.09.eb                           --set-default-module
- Julia-1.6.5-CrayGNU-21.09.eb
  Julia-1.7.2-CrayGNU-21.09.eb
  JuliaExtensions-1.6.3-CrayGNU-21.09.eb                 --set-default-module
  jupyterlab-3.2.8-CrayGNU-21.09-batchspawner.eb         --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
  LAMMPS-20Sep21-CrayGNU-21.09.eb                        --set-default-module
  Lmod-7.8.2.eb                                          --set-default-module --hidden
+ MATLAB-R2021a.eb                                       --set-default-module
  matplotlib-3.5.0-CrayGNU-21.09.eb                      --set-default-module
  NAMD-2.14-CrayIntel-21.09.eb                           --set-default-module
  NCL-6.6.2.eb                                           --set-default-module

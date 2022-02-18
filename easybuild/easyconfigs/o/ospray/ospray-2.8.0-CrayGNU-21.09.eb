@@ -1,4 +1,5 @@
-easyblock = 'Tarball'
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
 
 name = 'ospray'
 version = '2.8.0'
@@ -9,13 +10,41 @@ Engine for High-Fidelity Visualization"""
 
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
-source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v%(version)s/']
-sources = ['%(name)s-%(version)s.%(arch)s.linux.tar.gz']
+source_urls = ['https://github.com/%(name)s/OSPRay/archive/']
+sources = ['v%(version)s.tar.gz']
 
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+
+dependencies = [
+    ('ispc', '1.17.0'),
+    ('embree', '3.13.2'),
+    ('oidn', '1.4.2'),
+    ('openvkl', '1.1.0'),
+]
+
+configopts =  '-DBUILD_EMBREE_FROM_SOURCE:BOOL=OFF '
+configopts += '-DBUILD_GLFW:BOOL=OFF '
+configopts += '-DBUILD_OIDN:BOOL=OFF '
+configopts += '-DOSPRAY_MODULE_DENOISER:BOOL=ON '
+configopts += '-DBUILD_OSPRAY_APPS:BOOL=OFF '
+configopts += '-DOSPRAY_APPS_BENCHMARK:BOOL=OFF '
+configopts += '-DOSPRAY_APPS_ENABLE_GLM:BOOL=OFF '
+configopts += '-DOSPRAY_APPS_EXAMPLES:BOOL=OFF '
+configopts += '-DOSPRAY_APPS_TESTING:BOOL=OFF '
+configopts += '-DOSPRAY_APPS_TUTORIALS:BOOL=OFF '
+configopts += '-DDOWNLOAD_ISPC=OFF '
+configopts += '-DDOWNLOAD_TBB=OFF '
+configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['include', 'lib'],
 }
 
-moduleclass = 'devel'
+modextravars = {
+    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+}
+
+moduleclass = 'vis'
