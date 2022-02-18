@@ -16,6 +16,7 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
 sources = [SOURCE_TAR_GZ]
+checksums = ['8752d2814a92aba4e2b2a5922d2782d0029102d99caaf3c201a566bc0b40db29']
 
 builddependencies = [
     ('wheel', '0.37.0')
@@ -27,6 +28,7 @@ dependencies = [
 ]
 
 use_pip = True
+prebuildopts = preinstallopts = 'H5PY_SETUP_REQUIRES=0 ' 
 
 sanity_check_paths = {
     'files': [],
