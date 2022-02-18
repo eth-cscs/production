@@ -45,7 +45,7 @@ exts_list = [
     ('Jinja2', '2.10.1'),
     # MKr - 18.02.2022
     # Updated due to a warning inside jupyterhub
-    ('bokeh', '2.4.2'),
+    ('bokeh', '2.1.0'),
     ('packaging', '19.1'),
     ('Pillow', '6.1.0', {'modulename': 'PIL'}),
     ('fsspec', '0.4.1'),
