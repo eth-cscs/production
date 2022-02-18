@@ -14,10 +14,10 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 source_urls = [
     'http://www.%(namelower)s.org/%(namelower)s-downloads/download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile=',
 ]
-sources = ['%(name)s-v%(version)s-RC2.tar.gz']
+sources = ['%(name)s-v%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.21.3', '', True)
+    ('CMake', '3.22.1', '', True)
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
