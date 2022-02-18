@@ -5,7 +5,7 @@ version = '1.5'
 _cdt = 'cdt-cuda-21.09'
 
 homepage = 'https://github.com/eth-cscs/spack-config-generator'
-description = "Module for Spack config files"
+description = "Module for Spack config files providing default CDT packages and compilers"
 
 toolchain = SYSTEM
 
