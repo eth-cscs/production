@@ -1,0 +1,53 @@
+#
+easyblock = 'PythonBundle'
+
+name = 'dask'
+version = '2022.2.0'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://github.com/dask/dask/'
+description = """Dask provides multi-core execution on larger-than-memory datasets using blocked algorithms
+ and task scheduling."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    ('dask', '2022.2.0', {'unpack_sources': False, 'source_tmpl': 'dask-2022.2.0-py3-none-any.whl'}), 
+    ('PyYAML', '6.0', {'modulename': 'yaml', 'unpack_sources': False, 'source_tmpl': 'PyYAML-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('cloudpickle', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'cloudpickle-2.0.0-py3-none-any.whl'}),
+    ('bokeh', '2.4.2', {'unpack_sources': False, 'source_tmpl': 'bokeh-2.4.2-py3-none-any.whl'}),
+    ('distributed', '2022.2.0', {'unpack_sources': False, 'source_tmpl': 'distributed-2022.2.0-py3-none-any.whl'}),        
+    ('typing_extensions', '4.0.1', {'unpack_sources': False, 'source_tmpl': 'typing_extensions-4.0.1-py3-none-any.whl'}),
+    ('Pillow', '9.0.1', {'modulename': 'PIL', 'unpack_sources': False, 'source_tmpl': 'Pillow-9.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('tornado', '6.1', {'unpack_sources': False, 'source_tmpl': 'tornado-6.1-cp39-cp39-manylinux2010_x86_64.whl'}),
+    ('Jinja2', '3.0.3', {'unpack_sources': False, 'source_tmpl': 'Jinja2-3.0.3-py3-none-any.whl'}),
+    ('msgpack', '1.0.3', {'unpack_sources': False, 'source_tmpl': 'msgpack-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('psutil', '5.9.0', {'unpack_sources': False, 'source_tmpl': 'psutil-5.9.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('tblib', '1.7.0', {'unpack_sources': False, 'source_tmpl': 'tblib-1.7.0-py2.py3-none-any.whl'}),
+    ('click', '8.0.3', {'unpack_sources': False, 'source_tmpl': 'click-8.0.3-py3-none-any.whl'}),
+    ('zict', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'zict-2.0.0-py3-none-any.whl'}),
+    ('sortedcontainers', '2.4.0', {'unpack_sources': False, 'source_tmpl': 'sortedcontainers-2.4.0-py2.py3-none-any.whl'}),
+    ('MarkupSafe', '2.0.1', {'unpack_sources': False, 'source_tmpl': 'MarkupSafe-2.0.1-cp39-cp39-manylinux2010_x86_64.whl'}),
+    ('HeapDict', '1.0.1', {'unpack_sources': False, 'source_tmpl': 'HeapDict-1.0.1-py3-none-any.whl'}),
+    ('dask-jobqueue', '0.7.3', {'unpack_sources': False, 'source_tmpl': 'dask_jobqueue-0.7.3-py2.py3-none-any.whl'}),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'data'
