@@ -24,7 +24,7 @@ dependencies = [
     ('cudatoolkit', EXTERNAL_MODULE),
     ('cuDNN', '8.0.5', '', True),
     ('SWIG', '3.0.12', '-python%(pymajver)s'),
-    ('dask', '2.2.0', '-python%(pymajver)s'),
+    ('dask', '2022.2.0', '-python%(pymajver)s'),
     ('prereq', 'tf-2.4'),
 ]
 
