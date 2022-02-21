@@ -1,4 +1,4 @@
-#
+# contributed by Tim Robinson (CSCS)
 easyblock = 'PythonBundle'
 
 name = 'dask'
