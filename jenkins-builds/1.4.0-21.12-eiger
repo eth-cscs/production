@@ -5,7 +5,7 @@
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
  reframe-3.10.1.eb                    --set-default-module
- singularity-3.5.3-eiger.eb
+ singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
  ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
