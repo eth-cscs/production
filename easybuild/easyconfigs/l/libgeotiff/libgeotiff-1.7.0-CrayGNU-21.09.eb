@@ -1,0 +1,31 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'libgeotiff'
+version = '1.7.0'
+
+homepage = 'https://directory.fsf.org/wiki/Libgeotiff'
+description = "Library for reading and writing coordinate system information from/to GeoTIFF files"
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://download.osgeo.org/geotiff/%(name)s']
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('cURL', '7.80.0'),
+    ('libjpeg-turbo', '2.1.1'),
+    ('LibTIFF', '4.3.0'),
+    ('PROJ', '8.1.1'),
+    ('SQLite', '3.36.0'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = " --with-jpeg=$EBROOTLIBJPEGMINTURBO --with-libtiff=$EBROOTLIBTIFF  --with-proj=$EBROOTPROJ --with-zlib=$EBROOTZLIB "
+
+sanity_check_paths = {
+    'files': ['bin/listgeo', 'lib/%(name)s.a', 'lib/%(name)s.so'],
+    'dirs': ['include', 'share'],
+}
+
+moduleclass = 'lib'
