@@ -74,7 +74,34 @@ git clone  https://github.com/NVIDIA/ipyparaview.git &&
 cd ipyparaview && 
 git checkout 8cba45d && 
 pip install --prefix=%(installdir)s  . &&
-%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview
+%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
+cd %(installdir)s/ &&
+python -m venv --system-site-packages cscs &&
+source cscs/bin/activate &&
+pip install ipykernel --ignore-installed &&
+python -m ipykernel install --prefix=%(installdir)s/ --name 'cscs' --display-name 'CSCS' &&
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/launcher <<'EOF'
+#!/usr/bin/env bash
+export PYTHONPATH=''
+source ${JUPYTER_PATH}/../../cscs/bin/activate
+source $HOME/jupyterhub.env
+python -m ipykernel_launcher $@ 
+EOF
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
+{
+ "display_name": "CSCS",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ },
+ "argv": [
+ "%(installdir)s/share/jupyter/kernels/cscs/launcher",
+ "-f",
+ "{connection_file}"
+ ]
+}
+EOF
+
 """,
 ]
 
