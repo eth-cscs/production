@@ -14,7 +14,7 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True}
 
 # https://support.hdfgroup.org/ftp/HDF/releases/HDF4.2.15/src/hdf-4.2.15.tar.gz
-source_urls = ['https://support.hdfgroup.org/ftp/%(name)s/releases/HDF4.2.15/src']
+source_urls = ['https://support.hdfgroup.org/ftp/%(name)s/releases/%(name)s%(version)s/src']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['dbeeef525af7c2d01539906c28953f0fdab7dba603d1bc1ec4a5af60d002c459']
 
