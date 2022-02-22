@@ -19,7 +19,7 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['dbeeef525af7c2d01539906c28953f0fdab7dba603d1bc1ec4a5af60d002c459']
 
 builddependencies = [
-    ('Bison', '3.3.2'),
+    ('Bison', '3.8.2'),
     ('flex', '2.6.4'),
 ]
 dependencies = [
