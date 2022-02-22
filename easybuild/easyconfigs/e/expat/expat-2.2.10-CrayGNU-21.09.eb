@@ -11,7 +11,7 @@ description = """Expat is an XML parser library written in C. It is a stream-ori
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True}
 
-source_urls = ['https://github.com/libexpat/libexpat/releases/download/R_2_2_10/']
+source_urls = ['https://github.com/libexpat/libexpat/releases/download/R_%s/' % version.replace('.', '_')]
 sources = [SOURCE_TAR_BZ2]
 
 moduleclass = 'tools'
