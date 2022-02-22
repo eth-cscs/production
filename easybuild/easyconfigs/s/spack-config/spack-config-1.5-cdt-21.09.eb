@@ -1,7 +1,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'spack-config'
-version = '1.6'
+version = '1.5'
 _cdt = 'cdt-21.09'
 
 homepage = 'https://github.com/eth-cscs/spack-config-generator'
@@ -14,13 +14,13 @@ sources = [{
     'filename': '%(version)s.tar.gz'
 }]
 
-checksums = ['405e75ecd62a98c38e198d0cd05d0bfb3b723881df5d0e0706581650a944553d']
+checksums = ['31c9415dfd494d884ce7e8c8fab74af084ce29efe636208b04b0d944b1101c13']
 
 configure_cmd='true'
 
 build_cmd='make'
 
-install_cmd='make install DESTDIR=%(installdir)s CONFIG_FLAGS="--upstream_path=/apps/daint/UES/jenscscs/store"'
+install_cmd='make install DESTDIR=%(installdir)s'
 
 sanity_check_paths = {
     'files': ['%s/compilers.yaml' %_cdt, '%s/packages.yaml' %_cdt],
