@@ -15,7 +15,6 @@ description = """
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'cstd': 'c++11'}
 
-#source_urls = ['https://github.com/%(name)s/%(name)s-%(version_major)s/archive']
 sources = [
     {
         'filename': '%(name)s-5.x.tar.gz', 
@@ -37,7 +36,7 @@ dependencies = [
 
 buildininstalldir = 'True'
 modtclfooter = """
-    setenv FOAM_BASH %(installdir)s/%(name)s-7-20200508/etc/bashrc
+    setenv FOAM_BASH %(installdir)s/%(name)s-5.x/etc/bashrc
 """
 extract_sources = 'True'
 install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
