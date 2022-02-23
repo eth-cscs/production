@@ -101,7 +101,7 @@ cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
  ]
 }
 EOF
-
+chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
 """,
 ]
 
