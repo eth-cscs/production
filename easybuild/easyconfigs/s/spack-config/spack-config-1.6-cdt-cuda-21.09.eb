@@ -23,7 +23,11 @@ build_cmd='make CONFIG_FLAGS="--upstream_path=/apps/daint/UES/jenscscs/store"'
 install_cmd='make install DESTDIR=%(installdir)s'
 
 sanity_check_paths = {
-    'files': ['%s/compilers.yaml' %_cdt, '%s/packages.yaml' %_cdt],
+    'files': [
+        '%s/compilers.yaml' %_cdt,
+        '%s/packages.yaml' %_cdt,
+        '%s/upstreams.yaml' %_cdt
+    ],
     'dirs': []
 }
 
