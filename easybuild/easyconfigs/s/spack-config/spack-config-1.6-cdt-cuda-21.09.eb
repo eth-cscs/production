@@ -18,12 +18,16 @@ checksums = ['405e75ecd62a98c38e198d0cd05d0bfb3b723881df5d0e0706581650a944553d']
 
 configure_cmd='true'
 
-build_cmd='make'
+build_cmd='make CONFIG_FLAGS="--upstream_path=/apps/daint/UES/jenscscs/store"'
 
-install_cmd='make install DESTDIR=%(installdir)s CONFIG_FLAGS="--upstream_path=/apps/daint/UES/jenscscs/store"'
+install_cmd='make install DESTDIR=%(installdir)s'
 
 sanity_check_paths = {
-    'files': ['%s/compilers.yaml' %_cdt, '%s/packages.yaml' %_cdt],
+    'files': [
+        '%s/compilers.yaml' %_cdt,
+        '%s/packages.yaml' %_cdt,
+        '%s/upstreams.yaml' %_cdt
+    ],
     'dirs': []
 }
 
