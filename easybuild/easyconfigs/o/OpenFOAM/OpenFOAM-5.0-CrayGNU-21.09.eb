@@ -17,7 +17,14 @@ toolchainopts = {'cstd': 'c++11'}
 
 #source_urls = ['https://github.com/%(name)s/%(name)s-%(version_major)s/archive']
 sources = [
-    {'filename': '%(name)s-5.x.tar.gz', 'git_config': {'url': 'https://github.com/%(name)s/', 'repo_name': '%(name)s-%(version_major)s.x', 'tag': 'master'}},
+    {
+        'filename': '%(name)s-5.x.tar.gz', 
+        'git_config': {
+            'url': 'https://github.com/%(name)s/', 
+            'repo_name': '%(name)s-%(version_major)s.x', 
+            'tag': '20171030'
+        }
+    },
 ]
 patches = ['patch.%(name)s-%(version_major)s.x']
 
