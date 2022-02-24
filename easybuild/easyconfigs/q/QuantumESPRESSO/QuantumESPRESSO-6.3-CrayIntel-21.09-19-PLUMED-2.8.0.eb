@@ -25,12 +25,12 @@ dependencies = [
     ('PLUMED', '%s' %local_plumedversion) 
 ]
 
-preconfigopts = ' module switch intel intel/19.0.1.144 && '
 configopts = ' ARCH=crayxt --enable-openmp --enable-parallel --with-scalapack CC=cc FC=ftn LDFLAGS="-qopenmp"'
 
 # correct install rule in Makefile with a phony target (a folder "install" already exists)
-prebuildopts = ' module switch intel intel/19.0.1.144 && '
-prebuildopts += ' plumed-patch -p -f --runtime --shared <<< 9 && '
+prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 9 && '
+prebuildopts += ' sed -i "/include/a.PHONY: install" Makefile && '
+prebuildopts += ' cat make.inc && '
 buildopts = 'pw'
 
 # single make process required, since parallel builds fail
