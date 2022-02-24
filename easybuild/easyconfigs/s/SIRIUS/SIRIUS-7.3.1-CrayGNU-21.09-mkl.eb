@@ -21,7 +21,7 @@ builddependencies = [
 
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('ELPA', '2021.11.002'),
+    ('ELPA', '2021.11.001'),
     ('GSL', '2.7'),
     ('libxc', '5.1.7'),
     ('SpFFT', '1.0.5', versionsuffix),

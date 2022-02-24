@@ -31,7 +31,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('ELPA', '2021.11.002'),
+    ('ELPA', '2021.11.001'),
     ('Libint-CP2K', '2.6.0'),
     ('libvori', '210412'),
     ('libxc', '5.1.7'),
