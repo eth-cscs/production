@@ -39,7 +39,7 @@ modtclfooter = """
     setenv FOAM_BASH %(installdir)s/%(name)s-5.x/etc/bashrc
 """
 extract_sources = 'True'
-install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
+install_cmd = "module swap gcc/8.3.0 && source etc/bashrc && ./Allwmake -j 6 "
 
 sanity_check_paths = {
     'files': [],
