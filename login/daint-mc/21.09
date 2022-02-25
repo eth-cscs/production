@@ -1,11 +1,9 @@
 #%Module
 
 # set environment
-set machine "dom"
-set apps "/apps/${machine}"
-#set apps "$env(APPS)"
-set path "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/modules/all"
-set toolspath "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/tools/modules/all"
+set apps "$env(APPS)"
+set path "${apps}/UES/jenkins/7.0.UP03/21.09/dom-ARCH/modules/all"
+set toolspath "${apps}/UES/jenkins/7.0.UP03/21.09/dom-ARCH/tools/modules/all"
 # set gpupath and mcpath and corresponding toolspath
 set gpupath [ string map { ARCH gpu } "${path}" ]
 set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
@@ -33,14 +31,15 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${toolsmclist} {
    module unload ${module}
  }
-# unload cdt and cdt-cuda
- module unload cdt cdt-cuda
 }
 
 # load dependency and update MODULEPATH
 module load craype-broadwell
 module use "${mcpath}"
 module use "${toolsmcpath}"
+
+# load additional modules
+#module load xalt
 
 # print help screen
 if { [ module-info mode help ] } {
