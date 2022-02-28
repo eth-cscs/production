@@ -38,9 +38,6 @@ module load craype-haswell
 module use "${gpupath}"
 module use "${toolsgpupath}"
 
-# load additional modules
-#module load xalt
-
 # print help screen
 if { [module-info mode help] } {
 proc ModulesHelp { } {
