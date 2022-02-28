@@ -84,7 +84,7 @@ cat - >  %(installdir)s/share/jupyter/kernels/cscs/launcher <<'EOF'
 #!/usr/bin/env bash
 export PYTHONPATH=''
 source ${JUPYTER_PATH}/../../cscs/bin/activate
-source $HOME/jupyterhub.env
+source $HOME/jupyterlab-cscs.env
 python -m ipykernel_launcher $@ 
 EOF
 cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
