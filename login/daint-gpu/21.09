@@ -1,9 +1,9 @@
 #%Module
 
-# set environment
-set apps "$env(APPS)"
-set path "${apps}/UES/jenkins/7.0.UP03/21.09/dom-ARCH/modules/all"
-set toolspath "${apps}/UES/jenkins/7.0.UP03/21.09/dom-ARCH/tools/modules/all"
+# set environment: requires $APPS environment variable
+set system [string map { /apps/ ""} "$env(APPS)"]
+set path "/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-ARCH/modules/all"
+set toolspath "${system}/UES/jenkins/7.0.UP03/21.09/${system}-ARCH/tools/modules/all"
 # set gpupath and mcpath and corresponding toolspath
 set gpupath [string map { ARCH gpu } "${path}"]
 set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
