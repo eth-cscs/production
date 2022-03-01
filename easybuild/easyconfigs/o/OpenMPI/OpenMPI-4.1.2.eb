@@ -22,7 +22,7 @@ dependencies = [
     ('gcc/9.3.0', EXTERNAL_MODULE)
 ]
 
-configopts = ' --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal --with-slurm --with-ugni ' 
+configopts = ' --enable-mpi-cxx --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal --with-slurm --with-ugni ' 
 
 local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {
