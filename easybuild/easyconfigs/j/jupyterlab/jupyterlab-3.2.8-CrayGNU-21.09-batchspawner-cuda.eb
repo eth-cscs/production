@@ -107,6 +107,7 @@ cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
 }
 EOF
 chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
+cp /apps/common/UES/easybuild/sources/j/jupyterlab/logo*.png %(installdir)s/share/jupyter/kernels/cscs/
 """,
 ]
 
