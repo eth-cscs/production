@@ -101,6 +101,7 @@ cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
  ]
 }
 EOF
+cp logo-*.png %(installdir)s/share/jupyter/kernels/cscs
 chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
 """,
 ]
