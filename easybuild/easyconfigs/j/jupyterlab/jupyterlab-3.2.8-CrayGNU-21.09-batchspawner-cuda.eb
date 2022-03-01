@@ -12,6 +12,11 @@ description = "An extensible environment for interactive and reproducible comput
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'pic': True, 'verbose': False}
 
+patches = [
+    ('logo-32x32.png', '%(installdir)s/share/jupyter/kernels/cscs'),
+    ('logo-64x64.png', '%(installdir)s/share/jupyter/kernels/cscs'),
+]
+
 builddependencies = [
     ('wheel', '0.37.0'),
 ]
@@ -101,7 +106,6 @@ cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
  ]
 }
 EOF
-cp logo-*.png %(installdir)s/share/jupyter/kernels/cscs
 chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
 """,
 ]
