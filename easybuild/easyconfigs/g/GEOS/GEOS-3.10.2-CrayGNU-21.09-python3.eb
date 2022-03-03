@@ -3,6 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'GEOS'
 version = '3.10.2'
+versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://trac.osgeo.org/geos'
 description = """
