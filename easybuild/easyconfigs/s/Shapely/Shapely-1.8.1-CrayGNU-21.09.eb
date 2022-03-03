@@ -20,7 +20,7 @@ builddependencies = [('wheel', '0.37.0')]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('GEOS', '3.10.2'),
+    ('GEOS', '3.10.2', '-python%(pymajver)s'),
 ]
 
 sanity_check_paths = {
