@@ -4,7 +4,6 @@ easyblock = 'PythonPackage'
 
 name = 'Cartopy'
 version = '0.20.0'
-versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://github.com/SciTools/cartopy'
 description = ('Cartopy is a Python package designed for geospatial data '
@@ -25,7 +24,7 @@ use_pip = True
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('matplotlib', '3.5.0'), 
-    ('Shapely', '1.8.1', versionsuffix),
+    ('Shapely', '1.8.1'),
     ('PROJ', '8.1.1'),
 
 ]

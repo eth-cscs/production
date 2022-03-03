@@ -3,7 +3,6 @@ easyblock = 'CMakeMake'
 
 name = 'GEOS'
 version = '3.10.2'
-versionsuffix = '-python%(pymajver)s'
 
 homepage = 'http://trac.osgeo.org/geos'
 description = """
@@ -20,7 +19,7 @@ checksums = ['50bbc599ac386b4c2b3962dcc411f0040a61f204aaef4eba7225ecdd0cf45715']
 builddependencies = [
     ('CMake', '3.22.1', '', True),
     ('cray-python', EXTERNAL_MODULE),
-    ('SWIG', '4.0.2', '-python%(pymajver)s'),
+    ('SWIG', '4.0.2'),
 ]
 
 sanity_check_paths = {

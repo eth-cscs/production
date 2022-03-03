@@ -4,7 +4,6 @@ easyblock = 'PythonPackage'
 
 name = 'Shapely'
 version = '1.8.1'
-versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://github.com/Toblerity/Shapely'
 description = 'Manipulation and analysis of geometric objects in the Cartesian plane.'
@@ -17,10 +16,11 @@ sources = [SOURCE_TAR_GZ]
 checksums = ['0956a3aced40c31a957a52aa1935467334926844a6776b469acb0760a5e6aba8']
 use_pip = True
 
+builddependencies = [('wheel', '0.37.0')]
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('PyExtensions', 'python%(pymajver)s'),
-    ('GEOS', '3.10.2', versionsuffix),
+    ('GEOS', '3.10.2'),
 ]
 
 sanity_check_paths = {
