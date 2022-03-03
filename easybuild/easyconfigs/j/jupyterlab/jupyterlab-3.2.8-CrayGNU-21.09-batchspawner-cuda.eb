@@ -89,7 +89,7 @@ python -m ipykernel_launcher $@
 EOF
 cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
 {
- "display_name": "CSCS",
+ "display_name": "CSCS Python",
  "language": "python",
  "metadata": {
   "debugger": true
