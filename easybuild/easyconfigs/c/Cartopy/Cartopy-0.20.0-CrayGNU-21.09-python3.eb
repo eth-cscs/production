@@ -24,9 +24,10 @@ use_pip = True
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('PyExtensions', 'python%(pymajver)s'),
+    ('matplotlib', '3.5.0'), 
     ('Shapely', '1.8.1', versionsuffix),
     ('PROJ', '8.1.1'),
+
 ]
 
 exts_list = [

@@ -18,7 +18,7 @@ sources = [SOURCELOWER_TAR_BZ2]
 checksums = ['50bbc599ac386b4c2b3962dcc411f0040a61f204aaef4eba7225ecdd0cf45715']
 
 builddependencies = [
-    ('CMake', '3.14.5', '', True),
+    ('CMake', '3.22.1', '', True),
     ('cray-python', EXTERNAL_MODULE),
     ('SWIG', '4.0.2', '-python%(pymajver)s'),
 ]
