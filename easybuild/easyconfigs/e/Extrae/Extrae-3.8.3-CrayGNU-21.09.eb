@@ -23,7 +23,7 @@ sources = ['%(version)s.tar.gz']
 # The checksum value of the sources is reported in the log file of the module.
 dependencies = [
     ('libunwind', '1.4.0'),
-    ('libxml2', '2.9.10', '', True),
+    ('libxml2', '2.9.10'),
     ('cray-fftw', EXTERNAL_MODULE),
     # Paraver and Dimemas will be loaded by basicanalysis
     ('basicanalysis', '0', '', True),
