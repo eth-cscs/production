@@ -16,16 +16,15 @@ sources = [SOURCE_TAR_GZ]
 dependencies = [
     ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('UDUNITS', '2.2.28', '', True),
-    ('libpng', '1.6.34', '', True),
+    ('UDUNITS', '2.2.28'),
+    ('libpng', '1.6.37')
 ]
 
 configopts = 'CC=cc'
 
-
 sanity_check_paths = {
     'files': ['bin/%(name)s'],
-    'dirs': [],
+    'dirs': []
 }
 
 moduleclass = 'vis'
