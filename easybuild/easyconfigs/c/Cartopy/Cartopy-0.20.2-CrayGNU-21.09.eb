@@ -3,7 +3,7 @@
 easyblock = 'PythonPackage'
 
 name = 'Cartopy'
-version = '0.20.0'
+version = '0.20.2'
 versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://github.com/SciTools/cartopy'
@@ -18,7 +18,7 @@ exts_defaultclass = 'PythonPackage'
 
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
-checksums = ['eae58aff26806e63cf115b2bce9477cedc4aa9f578c5e477b2c25cfa404f2b7a']
+checksums = ['4d08c198ecaa50a6a6b109d0f14c070e813defc046a83ac5d7ab494f85599e35']
 
 use_pip = True
 
@@ -28,6 +28,8 @@ dependencies = [
     ('Shapely', '1.8.1'),
     ('PROJ', '8.1.1'),
 ]
+
+installopts = '--no-binary cartopy'
 
 exts_list = [
     ('pyshp', '2.2.0', {
@@ -46,6 +48,7 @@ exts_list = [
         'checksums': ['78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872'],
     }),
     ('pyproj', '3.3.0', {
+        'installopts': "--no-binary pyproj",
         'req_py_majver': '3',
         'req_py_minver': '9',
         'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],

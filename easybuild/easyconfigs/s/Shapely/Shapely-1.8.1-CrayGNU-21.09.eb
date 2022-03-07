@@ -14,6 +14,7 @@ toolchainopts = {'verbose': False}
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 checksums = ['0956a3aced40c31a957a52aa1935467334926844a6776b469acb0760a5e6aba8']
+exts_defaultclass = 'PythonPackage'
 use_pip = True
 
 builddependencies = [('wheel', '0.37.0')]
@@ -21,6 +22,17 @@ builddependencies = [('wheel', '0.37.0')]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('GEOS', '3.10.2'),
+]
+
+exts_list = [
+    ('pygeos', '0.12.0', {
+        'installopts': "--no-binary pygeos",
+        'req_py_majver': '3',
+        'req_py_minver': '9',
+        'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+        'use_pip': True,
+        'checksums': ['3c41542ef67c66015f443ae3e6e683503a8a221f9c24fb2380f6ae42aed1600a'],
+    }),
 ]
 
 sanity_check_paths = {
