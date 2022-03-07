@@ -1,0 +1,65 @@
+# teojgo (CSCS)
+
+easyblock = 'PythonPackage'
+
+name = 'Cartopy'
+version = '0.20.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://github.com/SciTools/cartopy'
+description = ('Cartopy is a Python package designed for geospatial data '
+               'processing in order to produce maps and other geospatial '
+               'data analyses.')
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+exts_defaultclass = 'PythonPackage'
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['4d08c198ecaa50a6a6b109d0f14c070e813defc046a83ac5d7ab494f85599e35']
+
+use_pip = True
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('matplotlib', '3.5.0'), 
+    ('Shapely', '1.8.1'),
+    ('PROJ', '8.1.1'),
+]
+
+installopts = '--no-binary cartopy'
+
+exts_list = [
+    ('pyshp', '2.2.0', {
+        'modulename': 'shapefile',
+        'req_py_majver': '3',
+        'req_py_minver': '9',
+        'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+        'use_pip': True,
+        'checksums': ['0eda209bd62f3345701c4f6799b638c114ceb67fee28295cddb4e1caf053e944'],
+    }),
+    ('certifi', '2021.10.8', {
+        'req_py_majver': '3',
+        'req_py_minver': '9',
+        'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+        'use_pip': True,
+        'checksums': ['78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872'],
+    }),
+    ('pyproj', '3.3.0', {
+        'installopts': "--no-binary pyproj",
+        'req_py_majver': '3',
+        'req_py_minver': '9',
+        'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+        'use_pip': True,
+        'checksums': ['ce8bfbc212729e9a643f5f5d77f7a93394e032eda1e2d8799ae902d08add747e'],
+    }),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/%(namelower)s']
+}
+
+moduleclass = 'geo'
