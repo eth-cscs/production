@@ -23,6 +23,9 @@ preconfigopts = ' sed -i "s|-gcc-mt||g" configure.ac && ./autogen.sh && '
 preconfigopts += ' module unload cray-libsci && MPICC=cc MPICXX=CC '
 configopts = ' --enable-mkl --with-boost=$EBROOTBOOST --with-libxc --with-mpi=intel '
 
+# fix BAGEL with Boost > 1.70.0 (see https://github.com/boostorg/property_tree/pull/62)
+prebuiodopts = 'sed -i "/version.hpp/a#include <boost/archive/basic_archive.hpp>" src/util/serialization.h &&'
+
 sanity_check_paths = {
     'files': ['bin/BAGEL', 'lib/libbagel.%s' % SHLIB_EXT],
     'dirs': []
