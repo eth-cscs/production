@@ -15,12 +15,12 @@ sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
+    ('ispc', '1.17.0'),
 ]
 
 dependencies = [
-    ('ispc', '1.17.0'),
     ('embree', '3.13.2'),
-    ('oidn', '1.4.2'),
+    ('oidn', '1.4.1'),
     ('openvkl', '1.1.0'),
 ]
 
@@ -34,17 +34,20 @@ configopts += '-DOSPRAY_APPS_ENABLE_GLM:BOOL=OFF '
 configopts += '-DOSPRAY_APPS_EXAMPLES:BOOL=OFF '
 configopts += '-DOSPRAY_APPS_TESTING:BOOL=OFF '
 configopts += '-DOSPRAY_APPS_TUTORIALS:BOOL=OFF '
-configopts += '-DDOWNLOAD_ISPC=OFF '
-configopts += '-DDOWNLOAD_TBB=OFF '
-configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+configopts += '-DTBB_ROOT:PATH=/opt/intel/oneapi/tbb/latest/ '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2 '
+configopts += '-Dtbbmalloc_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
+configopts += '-Dtbbmalloc_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc_debug.so.2 '
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['include', 'lib'],
 }
 
-modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
-}
+#modextravars = {
+#    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#    'LD_LIBRARY_PATH': '/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#}
 
 moduleclass = 'vis'

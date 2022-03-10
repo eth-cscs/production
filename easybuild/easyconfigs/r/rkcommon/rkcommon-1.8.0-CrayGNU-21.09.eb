@@ -13,19 +13,22 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 source_urls = ['https://github.com/ospray/%(name)s/archive/refs/tags/']
 sources = ['v%(version)s.tar.gz']
 
-#dependencies = [
-#    ('tbb', '2019.5'),
-#]
-
 configopts = '-DBUILD_TESTING:BOOL=OFF '
-configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+configopts += '-DCMAKE_CXX_COMPILER=CC '
+configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/oneapi/tbb/latest/include '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-Dtbbmalloc_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['include', 'lib'],
 }
 
-modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
-}
+builddependencies = [('CMake', '3.22.1','', True)]
+
+#modextravars = {
+#    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#    'LD_LIBRARY_PATH': '/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/:$::env(LD_LIBRARY_PATH)',
+#}
+
 moduleclass = 'vis'

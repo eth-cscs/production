@@ -13,12 +13,10 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 source_urls = ['https://github.com/embree/%(name)s/archive/refs/tags/']
 sources = ['v%(version)s.tar.gz']
 
-dependencies = [
+builddependencies = [
+    ('CMake', '3.22.1','', True),
     ('ispc', '1.17.0'),
-#    ('tbb', '2019.5'),
 ]
-
-builddependencies = [('CMake', '3.22.1','', True)]
 
 separate_build_dir = True
 
@@ -28,16 +26,18 @@ configopts += '-DEMBREE_TUTORIALS:BOOL=OFF '
 configopts += '-DEMBREE_TUTORIALS_GLFW:BOOL=OFF '
 configopts += '-DEMBREE_TUTORIALS_LIBPNG:BOOL=OFF '
 configopts += '-DEMBREE_USE_GOOGLE_BENCHMARK:BOOL=OFF '
-#configopts += '-DEMBREE_TBB_ROOT=$EBROOTTBB '
-configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+configopts += '-DTBB_ROOT=/opt/intel/oneapi/tbb/latest '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2 '
 
 sanity_check_paths = {
     'files': [],
     'dirs': ['include', 'lib'],
 }
 
-modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
-}
+#modextravars = {
+#    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#    'LD_LIBRARY_PATH': '/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/:$::env(LD_LIBRARY_PATH)',
+#}
 
 moduleclass = 'vis'
