@@ -1,0 +1,42 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'oidn'
+version = '1.4.1'
+
+homepage = 'https://openimagedenoise.github.io'
+description = """Intel® Open Image Denoise is an open source library of high-performance,
+high-quality denoising filters for images rendered with ray tracing"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://www.paraview.org/files/dependencies/']
+sources = ['%(name)s-%(version)s.src.tar.gz']
+
+builddependencies = [
+  ('CMake', '3.22.1','', True),
+  ('cray-python', EXTERNAL_MODULE),
+  ('ispc', '1.17.0'),
+]
+
+separate_build_dir = True
+
+
+configopts  = '-DOIDN_APPS:BOOL=OFF '
+configopts += '-DISPC_EXECUTABLE=$EBROOTISPC/bin/ispc '
+configopts += '-DTBB_ROOT=/opt/intel/oneapi/tbb/latest '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2 '
+
+
+#modextravars = {
+#    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#    'LD_LIBRARY_PATH': '/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'devel'
