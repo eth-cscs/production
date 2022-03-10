@@ -22,7 +22,7 @@ sources = [
         'git_config': {
             'url': 'https://github.com/%(name)s/', 
             'repo_name': '%(name)s-%(version_major)s.x', 
-            'tag': 'master'
+            'tag': '20171030'
         }
     },
 ]
