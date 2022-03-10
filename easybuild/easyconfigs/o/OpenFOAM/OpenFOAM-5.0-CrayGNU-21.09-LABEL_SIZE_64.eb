@@ -46,8 +46,8 @@ install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
 sanity_check_paths = {
     'files': [],
     'dirs': [
-        '%(name)s-5.x-LABEL_SIZE_64/platforms/linux64GccDPInt32Opt/bin', 
-        '%(name)s-5.x-LABEL_SIZE_64/platforms/linux64GccDPInt32Opt/lib'
+        '%(name)s-5.x/platforms/linux64GccDPInt64Opt/bin', 
+        '%(name)s-5.x/platforms/linux64GccDPInt64Opt/lib'
     ],
 }
 
