@@ -23,18 +23,23 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('h5py', '3.6.0', '-serial'),
     ('Mesa', '21.3.1'),
-    ('oidn', '1.4.2'),
-    ('ospray', '2.8.0')
+    ('ospray', '2.8.0'),
+    ('oidn', '1.4.1'),
 ]
 
 configopts = '-DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ '
 configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
 configopts += '-DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL '
 configopts += '-DPARAVIEW_USE_PYTHON:BOOL=ON '
-configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
-configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
-configopts += '-DTBB_LIBRARY_RELEASE=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so '
-configopts += '-DTBB_MALLOC_LIBRARY_RELEASE=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbbmalloc.so '
+configopts += '-DCMAKE_BUILD_TYPE=Release -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
+# use TBB for on-the-node parallelism
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB '
+configopts += '-DTBB_DIR:PATH=/opt/intel/oneapi/tbb/latest/lib/cmake/tbb '
+configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/oneapi/tbb/latest/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
+#
 configopts += '-DPARAVIEW_USE_VTKM:BO0L=OFF '
 configopts += '-DPARAVIEW_USE_QT:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF '
 configopts += '-DPARAVIEW_ENABLE_XDMF3:BOOL=OFF '
@@ -43,12 +48,14 @@ configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,${EBROOTLLVM}
 configopts += '-DVTK_USE_X:BOOL=OFF -DOPENGL_gl_LIBRARY= -DOPENGL_glu_LIBRARY= '
 configopts += '-DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROOTMESA}/include -DOSMESA_LIBRARY:FILEPATH=${EBROOTMESA}/lib/libOSMesa.so '
 # CSCS specific for Raytracing (OSPRay)
-configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -DOpenImageDenoise_DIR=${EBROOT}/lib/cmake/OpenImageDenoise '
+configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON '
+configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
+configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
+configopts += '-DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise-1.4.1" '
 #
 configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON '
 
-
-maxparallel = 24
+maxparallel = 32
 
 postinstallcmds = [
     "export GALLIUM_DRIVER=llvmpipe; mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && tar xf /apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/materials.tar.bz2 -C %(installdir)s/share/%(namelower)s-%(version_major_minor)s"
@@ -63,9 +70,9 @@ sanity_check_paths = {
 
 modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
 
-modextravars = {
-    'TBB_ROOT': '/opt/intel/compilers_and_libraries/linux/tbb'
-}
+modextravars = { 'LD_LIBRARY_PATH':'/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)',
+                 'TBB_ROOT': '/opt/intel/oneapi/tbb/latest',
+               }
 
 modtclfooter = """
 prepend-path LD_LIBRARY_PATH /opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib
