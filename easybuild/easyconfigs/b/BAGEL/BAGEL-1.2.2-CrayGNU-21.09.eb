@@ -31,4 +31,8 @@ sanity_check_paths = {
     'dirs': []
 }
 
+modextravars = {
+    'MPICH_MAX_THREAD_SAFETY': 'multiple'
+}
+
 moduleclass = 'phys'

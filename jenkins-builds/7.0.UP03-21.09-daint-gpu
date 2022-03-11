@@ -4,7 +4,7 @@
  CMake-3.22.1.eb                                        --set-default-module
  CDO-1.9.10-CrayGNU-21.09.eb                            --set-default-module
  CP2K-9.1-CrayGNU-21.09-cuda.eb                         --set-default-module
- CPMD-4.3-CrayIntel-21.09-cuda.eb
+ CPMD-4.3-CrayIntel-21.09-cuda.eb                       --set-default-module
  FFmpeg-4.4-CrayGNU-21.09.eb                            --set-default-module
  GREASY-19.03-cscs-CrayGNU-21.09.eb                     --set-default-module
  GROMACS-2021.5-CrayGNU-21.09-cuda.eb                   --set-default-module
