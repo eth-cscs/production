@@ -23,7 +23,7 @@ builddependencies = [
     ('CMake', '3.22.1', '', True),
 ]
 dependencies = [
-    ('cray-tpsl-64', EXTERNAL_MODULE),
+    ('cray-tpsl', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
     ('CGAL', '5.1'),
 ]
