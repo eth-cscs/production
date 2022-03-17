@@ -1,0 +1,57 @@
+# Contributed by TWR (CSCS)
+easyblock = 'MakeCp'
+
+name = 'LAMMPS'
+version = '29Sep2021'
+_release = 'stable_%(version)s_update2'
+_deepmd_version = '2.1.0'
+versionsuffix = '-deepmd-%s' % _deepmd_version
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive']
+sources = ['%s.tar.gz' % _release]
+
+patches = [
+    ('Makefile.gpu-cray', '%%(builddir)s/%%(namelower)s-%s/lib/gpu/Makefile.gpu-cray' % _release),
+]
+
+builddependencies = [
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('PLUMED', '2.5.1'),
+    ('deepmd-kit', _deepmd_version),
+]
+
+_conda_deepmd_dir = ''
+
+prebuildopts  = 'module switch gcc gcc/8.1.0 && gcc --version && '
+prebuildopts += ' echo "XXX: $(which bin2c)" && '
+prebuildopts += ' cd ./src && '
+prebuildopts += ' cp -r $EBROOTDEEPMDMINKIT/USER-DEEPMD . && '
+prebuildopts += ' export CPATH=$EBROOTDEEPMDMINKIT/include/deepmd:$CPATH && '
+prebuildopts += ' make lib-plumed args="-p ${EBROOTPLUMED} -m runtime" && '
+prebuildopts += ' make yes-gpu yes-mofff'
+prebuildopts += '      yes-kspace yes-molecule yes-mpiio yes-rigid yes-misc yes-plumed yes-user-deepmd && '
+prebuildopts += ' make no-latte no-voronoi no-poems no-kim no-kokkos no-mscg no-message && '
+prebuildopts += ' make package-update && '
+prebuildopts += ' pushd ../lib/gpu && '
+prebuildopts += ' make -f Makefile.gpu-cray && popd && '
+prebuildopts += ' sed -e "s/mpicxx/CC -fopenmp/" ./MAKE/Makefile.mpi > ./MAKE/Makefile.omp && '
+prebuildopts += ' sed -i -e "s/mpicxx/CC/" ./MAKE/Makefile.mpi && '
+buildopts = [
+    " mpi ",
+]
+
+files_to_copy = [(['src/lmp*'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
