@@ -23,7 +23,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('TensorFlow', '2.5.0'),
+    ('TensorFlow', '2.5.0', '-cc'),
     ('xdrfile', '1.1.4'),
 ]
 
@@ -45,40 +45,40 @@ sources = [
 
 with_configure = False
 
-tf_k8_opt = '$EBROOTTENSORFLOW/k8-opt/bin/tensorflow/'
-tf_k8_opt = '$EBROOTTENSORFLOW/lib/python3.9/site-packages/tensorflow'
+_tf_dir = '$EBROOTTENSORFLOW/lib/python3.9/site-packages/tensorflow'
 
-prepare_libs_dir = "mkdir -p %(installdir)s/tensorflow/include %(installdir)s/tensorflow/lib && "
-prepare_libs_dir += "export TF_INCLUDE=%(installdir)s/tensorflow/include && "
-prepare_libs_dir += "export TF_LIB=%(installdir)s/tensorflow/lib && "
-prepare_libs_dir += "export LD_LIBRARY_PATH=$TF_LIB:$LD_LIBRARY_PATH && "
-prepare_libs_dir += "export LD_LIBRARY_PATH=%(installdir)s/lib:$LD_LIBRARY_PATH && "
-prepare_libs_dir += "export LIBRARY_PATH=$TF_LIB:$LIBRARY_PATH && "
-prepare_libs_dir += "export LIBRARY_PATH=%(installdir)s/lib:$LIBRARY_PATH && "
-prepare_libs_dir += "ln -sf  {tf_k8_opt}/include/external/nsync/public/nsync* $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt}/include/Eigen $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt}/include/unsupported $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt}/include/google $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt}/include/absl $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt} $TF_INCLUDE && "
-prepare_libs_dir += "ln -snf {tf_k8_opt}/include/third_party $TF_INCLUDE && "
-prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_cc.so $TF_LIB && "
-prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_cc.so $TF_LIB/libtensorflow_cc.so.2 && "
-prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_framework.so $TF_LIB && "
-prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_framework.so $TF_LIB/libtensorflow_framework.so.2"
+_prepare_libs_dir = "mkdir -p %(installdir)s/tensorflow/include %(installdir)s/tensorflow/lib && "
+_prepare_libs_dir += "export TF_INCLUDE=%(installdir)s/tensorflow/include && "
+_prepare_libs_dir += "export TF_LIB=%(installdir)s/tensorflow/lib && "
+_prepare_libs_dir += "export LD_LIBRARY_PATH=$TF_LIB:$LD_LIBRARY_PATH && "
+_prepare_libs_dir += "export LD_LIBRARY_PATH=%(installdir)s/lib:$LD_LIBRARY_PATH && "
+_prepare_libs_dir += "export LD_LIBRARY_PATH=$EBROOTTENSORFLOW/lib:$LD_LIBRARY_PATH && "
+_prepare_libs_dir += "export LIBRARY_PATH=$TF_LIB:$LIBRARY_PATH && "
+_prepare_libs_dir += "export LIBRARY_PATH=%(installdir)s/lib:$LIBRARY_PATH && "
+_prepare_libs_dir += "ln -sf  {_tf_dir}/include/external/nsync/public/nsync* $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir}/include/Eigen $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir}/include/unsupported $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir}/include/google $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir}/include/absl $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir} $TF_INCLUDE && "
+_prepare_libs_dir += "ln -snf {_tf_dir}/include/third_party $TF_INCLUDE && "
+_prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_cc.so $TF_LIB && "
+_prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_cc.so $TF_LIB/libtensorflow_cc.so.2 && "
+_prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_framework.so $TF_LIB && "
+_prepare_libs_dir += "ln -sf  $EBROOTTENSORFLOW/lib/libtensorflow_framework.so $TF_LIB/libtensorflow_framework.so.2"
 
-build_str  = "%s && " % prepare_libs_dir.format(tf_k8_opt=tf_k8_opt)
-build_str += "pip install --prefix=%(builddir)s/install %(builddir)s/" + "%s && " % local_skbuild_whl
-build_str += "cd deepmd-kit-%(version)s && "
-build_str += "pip install --prefix=%(builddir)s/install . && "
-build_str += "echo '=================================================================================================================' && "
-build_str += "mkdir source/build && "
-build_str += "cd source/build; CC=/opt/gcc/8.3.0/bin/gcc CXX=/opt/gcc/8.3.0/bin/g++ cmake -DXDRFILE_ROOT=$EBROOTXDRFILE -DTENSORFLOW_ROOT=$EBROOTTENSORFLOW -DCMAKE_INSTALL_PREFIX=%(builddir)s/install --debug-trycompile .. && "
-build_str += "cd source/build; make install -j4 && "
-build_str += "cd source/build; make lammps -j4"
+_build_str  = "%s && " % _prepare_libs_dir.format(_tf_dir=_tf_dir)
+_build_str += "pip install --prefix=%(builddir)s/install %(builddir)s/" + "%s && " % local_skbuild_whl
+_build_str += "cd deepmd-kit-%(version)s && "
+_build_str += "pip install --prefix=%(builddir)s/install . && "
+_build_str += "echo '=================================================================================================================' && "
+_build_str += "mkdir source/build && "
+_build_str += "cd source/build; CC=/opt/gcc/8.3.0/bin/gcc CXX=/opt/gcc/8.3.0/bin/g++ cmake -DXDRFILE_ROOT=$EBROOTXDRFILE -DTENSORFLOW_ROOT=$EBROOTTENSORFLOW -DCMAKE_INSTALL_PREFIX=%(builddir)s/install --debug-trycompile .. && "
+_build_str += "cd source/build; make install -j4 && "
+_build_str += "cd source/build; make lammps -j4"
 
 cmds_map = [
-    ('deepmd-kit-%(version)s.tar.gz', build_str),
+    ('deepmd-kit-%(version)s.tar.gz', _build_str),
     (local_skbuild_whl, 'ls'),
 ]
 
@@ -94,7 +94,7 @@ sanity_check_paths = {
     'dirs': ['include/deepmd'],
 }
 
-postinstallcmds = [prepare_libs_dir.format(tf_k8_opt=tf_k8_opt), 'rm -rf /dev/shm/$USER/bazelout/' ]
+postinstallcmds = [_prepare_libs_dir.format(_tf_dir=_tf_dir), 'rm -rf /dev/shm/$USER/bazelout/' ]
 
 modextrapaths = {                                                                  
     'PYTHONPATH' : 'lib/python%s/site-packages' % local_pyshortver,

@@ -1,0 +1,171 @@
+#
+easyblock = 'Conda'
+
+name = 'TensorFlow'
+version = '2.5.0'
+versionsuffix = '-cc'
+
+
+homepage = 'https://www.tensorflow.org/'
+description = """This is installation includes TensorFlow's C library"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
+    ('Miniconda3', '4.10.3', '', True),
+    ('NCCL', '2.8.4', '', True),
+]
+
+requirements  = ' _libgcc_mutex=0.1=main'
+requirements += ' _openmp_mutex=4.5=1_gnu'
+requirements += ' absl-py=0.15.0=pyhd3eb1b0_0'
+requirements += ' aiohttp=3.8.1=py39h7f8727e_1'
+requirements += ' aiosignal=1.2.0=pyhd3eb1b0_0'
+requirements += ' astor=0.8.1=py39h06a4308_0'
+requirements += ' astunparse=1.6.3=py_0'
+requirements += ' async-timeout=4.0.1=pyhd3eb1b0_0'
+requirements += ' attrs=21.4.0=pyhd3eb1b0_0'
+requirements += ' blas=1.0=mkl'
+requirements += ' blinker=1.4=py39h06a4308_0'
+requirements += ' brotlipy=0.7.0=py39h27cfd23_1003'
+requirements += ' c-ares=1.18.1=h7f8727e_0'
+requirements += ' ca-certificates=2022.2.1=h06a4308_0'
+requirements += ' cachetools=4.2.2=pyhd3eb1b0_0'
+requirements += ' certifi=2021.10.8=py39h06a4308_2'
+requirements += ' cffi=1.15.0=py39hd667e15_1'
+requirements += ' charset-normalizer=2.0.4=pyhd3eb1b0_0'
+requirements += ' click=8.0.4=py39h06a4308_0'
+requirements += ' conda=4.11.0=py39h06a4308_0'
+requirements += ' conda-content-trust=0.1.1=pyhd3eb1b0_0'
+requirements += ' conda-package-handling=1.7.3=py39h27cfd23_1'
+requirements += ' cryptography=3.4.8=py39hd23ed53_0'
+requirements += ' cudatoolkit=11.3.1=h2bc3f7f_2'
+requirements += ' cudnn=8.2.1=cuda11.3_0'
+requirements += ' cupti=11.3.1=0'
+requirements += ' dataclasses=0.8=pyh6d0b6a4_7'
+requirements += ' frozenlist=1.2.0=py39h7f8727e_0'
+requirements += ' gast=0.4.0=pyhd3eb1b0_0'
+requirements += ' google-auth=2.6.0=pyhd3eb1b0_0'
+requirements += ' google-auth-oauthlib=0.4.1=py_2'
+requirements += ' google-pasta=0.2.0=pyhd3eb1b0_0'
+requirements += ' grpcio=1.42.0=py39hce63b2e_0'
+requirements += ' h5py=3.6.0=py39ha0f2276_0'
+requirements += ' hdf5=1.10.6=hb1b8bf9_0'
+requirements += ' idna=3.3=pyhd3eb1b0_0'
+requirements += ' importlib-metadata=4.8.2=py39h06a4308_0'
+requirements += ' intel-openmp=2021.4.0=h06a4308_3561'
+requirements += ' keras-preprocessing=1.1.2=pyhd3eb1b0_0'
+requirements += ' ld_impl_linux-64=2.35.1=h7274673_9'
+requirements += ' libffi=3.3=he6710b0_2'
+requirements += ' libgcc-ng=9.3.0=h5101ec6_17'
+requirements += ' libgfortran-ng=7.5.0=ha8ba4b0_17'
+requirements += ' libgfortran4=7.5.0=ha8ba4b0_17'
+requirements += ' libgomp=9.3.0=h5101ec6_17'
+requirements += ' libprotobuf=3.19.1=h4ff587b_0'
+requirements += ' libstdcxx-ng=9.3.0=hd4cf53a_17'
+requirements += ' libtensorflow_cc=2.5.0=gpu_cuda11.3_0'
+requirements += ' markdown=3.3.4=py39h06a4308_0'
+requirements += ' mkl=2021.4.0=h06a4308_640'
+requirements += ' mkl-service=2.4.0=py39h7f8727e_0'
+requirements += ' mkl_fft=1.3.1=py39hd3c417c_0'
+requirements += ' mkl_random=1.2.2=py39h51133e4_0'
+requirements += ' multidict=5.2.0=py39h7f8727e_2'
+requirements += ' ncurses=6.3=h7f8727e_2'
+requirements += ' numpy=1.21.2=py39h20f2e39_0'
+requirements += ' numpy-base=1.21.2=py39h79a1101_0'
+requirements += ' oauthlib=3.2.0=pyhd3eb1b0_0'
+requirements += ' openssl=1.1.1m=h7f8727e_0'
+requirements += ' opt_einsum=3.3.0=pyhd3eb1b0_1'
+requirements += ' pip=21.2.4=py39h06a4308_0'
+requirements += ' protobuf=3.19.1=py39h295c915_0'
+requirements += ' pyasn1=0.4.8=pyhd3eb1b0_0'
+requirements += ' pyasn1-modules=0.2.8=py_0'
+requirements += ' pycosat=0.6.3=py39h27cfd23_0'
+requirements += ' pycparser=2.21=pyhd3eb1b0_0'
+requirements += ' pyjwt=2.1.0=py39h06a4308_0'
+requirements += ' pyopenssl=21.0.0=pyhd3eb1b0_1'
+requirements += ' pysocks=1.7.1=py39h06a4308_0'
+requirements += ' python=3.9.7=h12debd9_1'
+requirements += ' python-flatbuffers=1.12=pyhd3eb1b0_0'
+requirements += ' readline=8.1.2=h7f8727e_1'
+requirements += ' requests=2.27.1=pyhd3eb1b0_0'
+requirements += ' requests-oauthlib=1.3.0=py_0'
+requirements += ' rsa=4.7.2=pyhd3eb1b0_1'
+requirements += ' ruamel_yaml=0.15.100=py39h27cfd23_0'
+requirements += ' scipy=1.7.3=py39hc147768_0'
+requirements += ' setuptools=58.0.4=py39h06a4308_0'
+requirements += ' six=1.16.0=pyhd3eb1b0_0'
+requirements += ' sqlite=3.37.0=hc218d9a_0'
+requirements += ' tensorboard=2.5.0=py_0'
+requirements += ' tensorboard-plugin-wit=1.6.0=py_0'
+requirements += ' tensorflow-base=2.5.0=gpu_py39h7c1560b_0'
+requirements += ' tensorflow-estimator=2.5.0=pyh7b7c402_0'
+requirements += ' termcolor=1.1.0=py39h06a4308_1'
+requirements += ' tk=8.6.11=h1ccaba5_0'
+requirements += ' tqdm=4.62.3=pyhd3eb1b0_1'
+requirements += ' typing-extensions=3.10.0.2=hd3eb1b0_0'
+requirements += ' typing_extensions=3.10.0.2=pyh06a4308_0'
+requirements += ' tzdata=2021e=hda174b7_0'
+requirements += ' urllib3=1.26.7=pyhd3eb1b0_0'
+requirements += ' werkzeug=2.0.3=pyhd3eb1b0_0'
+requirements += ' wheel=0.35.1=pyhd3eb1b0_0'
+requirements += ' wrapt=1.13.3=py39h7f8727e_2'
+requirements += ' xz=5.2.5=h7b6447c_0'
+requirements += ' yaml=0.2.5=h7b6447c_0'
+requirements += ' yarl=1.6.3=py39h27cfd23_0'
+requirements += ' zipp=3.7.0=pyhd3eb1b0_0'
+requirements += ' zlib=1.2.11=h7f8727e_4'
+
+# channels
+requirements += ' -c https://conda.deepmodeling.org'
+
+_ext_preinstallopts = ('. %(installdir)s/bin/activate && '
+                       'module unload atp && '
+                       'export MPICC=cc && '
+                       'export HOROVOD_CUDA_HOME=$CUDATOOLKIT_HOME && '
+                       'export HOROVOD_GPU_OPERATIONS=NCCL && '
+                       'export HOROVOD_NCCL_HOME=$EBROOTNCCL && '
+                       'export HOROVOD_NCCL_LINK=SHARED && '
+                       'export HOROVOD_BUILD_CUDA_CC_LIST=60 && '
+                       'export HOROVOD_MPICXX_SHOW="CC --cray-print-opts=all" && '
+                       'export HOROVOD_WITH_TENSORFLOW=1 && '
+                       'export HOROVOD_WITHOUT_PYTORCH=1 && '
+                       'export HOROVOD_WITHOUT_MXNET=1 && '
+                       'export HOROVOD_WITHOUT_GLOO=1 && '
+                       'export CPATH=%(installdir)s/include:$CPATH && ')
+
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '3',
+    'req_py_minver': '9',
+    'source_urls': [PYPI_SOURCE],
+    'unpack_sources': False,
+    'use_pip': True,
+    'preinstallopts': _ext_preinstallopts
+}
+exts_list = [
+    ('psutil', '5.8.0'),
+    ('cloudpickle', '2.0.0'),
+    ('mpi4py', '3.1.1'),
+    ('horovod', '0.22.1', {
+        'installopts': '--no-cache-dir',
+        'unpack_sources': True
+    })
+]
+
+modextravars = {
+    'NCCL_DEBUG': 'INFO',
+    'NCCL_IB_HCA': 'ipogif0',
+    'NCCL_IB_CUDA_SUPPORT': '1'
+}
+
+sanity_check_paths = {
+    'files': ['bin/horovodrun'],
+    'dirs': ['lib/python3.9/site-packages/tensorflow', 'lib/python3.9/site-packages/horovod'],
+}
+
+sanity_check_commands = ['python -c "import tensorflow as tf"']
+
+moduleclass = 'lib'
