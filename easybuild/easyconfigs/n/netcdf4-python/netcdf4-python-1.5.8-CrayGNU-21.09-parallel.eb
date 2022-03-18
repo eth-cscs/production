@@ -15,7 +15,7 @@ source_urls = ['https://pypi.python.org/packages/source/n/netCDF4']
 sources = ['netCDF4-%(version)s.tar.gz']
 
 patches = ['%(name)s-1.1.8-avoid-diskless-test.patch',
-           'setup-1.5.8.path']
+           'setup-1.5.8.patch']
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
