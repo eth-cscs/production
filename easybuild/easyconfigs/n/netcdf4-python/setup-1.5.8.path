@@ -1,0 +1,34 @@
+diff -Nru netCDF4-1.5.8.orig/setup.py netCDF4-1.5.8.patched/setup.py
+--- netCDF4-1.5.8.orig/setup.py	2022-02-18 14:12:35.000000000 +0100
++++ netCDF4-1.5.8.patched/setup.py	2022-03-18 11:47:40.000000000 +0100
+@@ -66,6 +66,10 @@
+     has_parallel4_support = False
+     has_pnetcdf_support = False
+ 
++    # needed to find options defined on `netcdf.h` for cray-netcdf
++    cray_netcdf_incdir = os.path.join(os.environ['NETCDF_DIR'], 'include')
++    inc_dirs.append(cray_netcdf_incdir)
++
+     for d in inc_dirs:
+         try:
+             f = open(os.path.join(d, 'netcdf.h'), **open_kwargs)
+@@ -143,6 +147,11 @@
+         dirs = bindirs
+     else:
+         dirs = libdirs
++
++    # needed to find the netcdf version for cray-netcdf
++    cray_netcdf_libdir = os.path.join(os.environ['NETCDF_DIR'], 'lib')
++    dirs.append(cray_netcdf_libdir)
++
+     for d in dirs:
+         try:
+             candidates = [x for x in os.listdir(d) if regexp.match(x)]
+@@ -170,7 +179,6 @@
+                 break
+     return version
+ 
+-
+ HDF5_dir = os.environ.get('HDF5_DIR')
+ HDF5_incdir = os.environ.get('HDF5_INCDIR')
+ HDF5_libdir = os.environ.get('HDF5_LIBDIR')
