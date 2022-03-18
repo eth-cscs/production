@@ -21,8 +21,13 @@ patches = [
 
 skipsteps = ['configure']
 
-prebuildopts = 'module unload cray-libsci && '
-prebuildopts += 'omp=1 ./configure.sh %(name)s-%(version)s-%(toolchain_name)s.arch && '
+local_prebuildopts = 'module unload cray-libsci && '
+local_prebuildopts += './configure.sh %(name)s-%(version)s-%(toolchain_name)s.arch && '
+
+prebuildopts = [
+    local_prebuildopts,
+    'export omp=1 && ' + local_prebuildopts + ' sed -i "s/cpmd\.x/cpmd_omp.x/" Makefile && '
+]
 
 files_to_copy = [
     (['bin/%(namelower)s*.x'], 'bin')
