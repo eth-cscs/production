@@ -15,14 +15,17 @@ sources = [SOURCELOWER_TAR_GZ]
 builddependencies = [
     ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
     ('pmi', EXTERNAL_MODULE),
-    ('pmi-lib', EXTERNAL_MODULE)
+    ('pmi-lib', EXTERNAL_MODULE),
+    ('ugni', EXTERNAL_MODULE)
 ]
 
 dependencies = [
     ('gcc/9.3.0', EXTERNAL_MODULE)
 ]
 
-configopts = ' --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal --with-slurm --with-ugni ' 
+configopts = ' --enable-mpi-cxx --enable-shared --with-cuda=${EBROOTCUDA} --with-hwloc=internal '
+configopts += ' --with-cray-pmi=${EBROOTPMI} --with-pmi-libdir --with-ugni '
+configopts += ' CRAY_PMI_CFLAGS=${CRAY_PMI_INCLUDE_OPTS} CRAY_PMI_LIBS=${CRAY_PMI_POST_LINK_OPTS} ' 
 
 local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
 sanity_check_paths = {

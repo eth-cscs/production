@@ -1,11 +1,9 @@
 #%Module
 
-# set environment
-set machine "dom"
-set apps "/apps/${machine}"
-#set apps "$env(APPS)"
-set path "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/modules/all"
-set toolspath "${apps}/UES/jenkins/7.0.UP02/21.02/${machine}-ARCH/tools/modules/all"
+# set environment: requires $APPS environment variable
+set system [string map { /apps/ ""} "$env(APPS)"]
+set path "/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-ARCH/modules/all"
+set toolspath "/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-ARCH/tools/modules/all"
 # set gpupath and mcpath and corresponding toolspath
 set gpupath [string map { ARCH gpu } "${path}"]
 set toolsgpupath [string map { ARCH gpu } "${toolspath}"]
@@ -33,8 +31,6 @@ if { [module-info mode remove] || [module-info mode switch] } {
  foreach module ${toolsgpulist} {
    module unload ${module}
  }
-# unload cdt and cdt-cuda
- module unload cdt cdt-cuda
 }
 
 # load dependency and update MODULEPATH
@@ -48,8 +44,8 @@ proc ModulesHelp { } {
  global apps gpupath
  puts stderr "\t Set environment for gpu haswell compute nodes:
   \t - module load craype-haswell
-  \t - module use ${gpupath}
-  \t - module use ${toolsgpupath}
+  \t - module use ${gpupath} 
+  \t - module use ${toolsgpupath} 
  "
  return 0
 }

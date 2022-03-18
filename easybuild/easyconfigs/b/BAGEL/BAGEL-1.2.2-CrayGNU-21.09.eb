@@ -1,0 +1,38 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'BAGEL'
+version = '1.2.2'
+
+homepage = "http://www.nubakery.org"
+description = """BAGEL (Brilliantly Advanced General Electronic-structure Library)
+is a parallel electronic-structure program."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/nubakery/bagel/archive/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('Boost', '1.78.0', '-python3'),
+    ('intel', EXTERNAL_MODULE),
+    ('libxc', '5.1.7')
+]
+
+preconfigopts = ' sed -i "s|-gcc-mt||g" configure.ac && ./autogen.sh && '
+preconfigopts += ' module unload cray-libsci && MPICC=cc MPICXX=CC '
+configopts = ' --enable-mkl --with-boost=$EBROOTBOOST --with-libxc --with-mpi=intel '
+
+# fix BAGEL with Boost > 1.70.0 (see https://github.com/boostorg/property_tree/pull/62)
+prebuildopts = 'sed -i "/version.hpp/a#include <boost/archive/basic_archive.hpp>" src/util/serialization.h &&'
+
+sanity_check_paths = {
+    'files': ['bin/BAGEL', 'lib/libbagel.%s' % SHLIB_EXT],
+    'dirs': []
+}
+
+modextravars = {
+    'MPICH_MAX_THREAD_SAFETY': 'multiple'
+}
+
+moduleclass = 'phys'

@@ -1,0 +1,30 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'GEOS'
+version = '3.10.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'http://trac.osgeo.org/geos'
+description = """
+    GEOS (Geometry Engine - Open Source) is a C++ port of the Java Topology
+    Suite (JTS)
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['http://download.osgeo.org/%(namelower)s/']
+sources = [SOURCELOWER_TAR_BZ2]
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cray-python', EXTERNAL_MODULE),
+    ('SWIG', '3.0.12', '-python%(pymajver)s'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-config', 'include/geos_c.h', 'lib/libgeos.so'],
+    'dirs': ['bin', 'include', 'include/%(namelower)s', 'lib'],
+}
+
+moduleclass = 'math'

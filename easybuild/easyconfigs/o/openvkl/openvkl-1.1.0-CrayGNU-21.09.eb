@@ -18,7 +18,10 @@ dependencies = [
     ('embree', '3.13.2'),
 ]
 
-builddependencies = [('CMake', '3.22.1','', True)]
+builddependencies = [
+    ('CMake', '3.22.1','', True),
+    ('ispc', '1.17.0'),
+]
 
 separate_build_dir = True
 
@@ -27,7 +30,11 @@ configopts += '-DBUILD_EXAMPLES:BOOL=OFF '
 configopts += '-DBUILD_TESTING:BOOL=OFF '
 configopts += '-Drkcommon_DIR="$EBROOTRKCOMMON"/lib64/cmake/rkcommon-1.8.0 '
 configopts += '-Dembree_DIR="$EBROOTEMBREE"/lib64/cmake/embree-3.13.2 '
-configopts += '-DTBB_ROOT=/opt/intel/compilers_and_libraries/linux/tbb '
+configopts += '-DTBB_ROOT=/opt/intel/oneapi/tbb/latest '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so" '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2" '
+configopts += '-Dtbbmalloc_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so.2" '
+configopts += '-Dtbbmalloc_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc_debug.so.2" '
 
 
 sanity_check_paths = {

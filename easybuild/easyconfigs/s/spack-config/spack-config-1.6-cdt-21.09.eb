@@ -1,0 +1,46 @@
+easyblock = 'ConfigureMake'
+
+name = 'spack-config'
+version = '1.6'
+_cdt = 'cdt-21.09'
+
+homepage = 'https://github.com/eth-cscs/spack-config-generator'
+description = "Module for Spack config files providing default CDT packages and compilers"
+
+toolchain = SYSTEM
+
+sources = [{
+    'source_urls': ['https://github.com/eth-cscs/spack-config-generator/archive/refs/tags/'],
+    'filename': '%(version)s.tar.gz'
+}]
+
+checksums = ['405e75ecd62a98c38e198d0cd05d0bfb3b723881df5d0e0706581650a944553d']
+
+configure_cmd='true'
+
+build_cmd='make CONFIG_FLAGS="--upstream_path=/apps/daint/UES/jenscscs/store"'
+
+install_cmd='make install DESTDIR=%(installdir)s'
+
+sanity_check_paths = {
+    'files': [
+        '%s/compilers.yaml' %_cdt,
+        '%s/packages.yaml' %_cdt,
+        '%s/upstreams.yaml' %_cdt
+    ],
+    'dirs': []
+}
+
+moduleclass = 'tools'
+
+modtclfooter = """
+set SPACK_CDT_CONFIG_ROOT "%%(installdir)s/%s"
+
+if { [file exists $SPACK_CDT_CONFIG_ROOT] == 1 } {
+  setenv SPACK_SYSTEM_CONFIG_PATH "$SPACK_CDT_CONFIG_ROOT"
+} else {
+  puts stderr "$SPACK_CDT_CONFIG_ROOT does not exist"
+  exit 1
+}
+""" %_cdt
+
