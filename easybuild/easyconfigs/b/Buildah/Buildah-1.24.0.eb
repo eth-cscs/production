@@ -35,7 +35,13 @@ postinstallcmds= ["mkdir %(installdir)s/etc && "
                   "cp policy.json %(installdir)s/etc"]
 
 skipsteps = ['configure']
-modtclfooter = 'unsetenv XDG_RUNTIME_DIR'
+
+modtclfooter = '''
+unsetenv XDG_RUNTIME_DIR
+setenv STORAGE_DRIVER      "overlay"
+setenv STORAGE_OPTS        "overlay.mount_program=$env(EBROOTFUSEMINOVERLAYFS)/bin/fuse-overlayfs"
+setenv BUILDAH_RUNTIME     "$env(EBROOTRUNC)/sbin/runc"
+'''
 
 sanity_check_paths = {
     'files': ['bin/buildah'],
