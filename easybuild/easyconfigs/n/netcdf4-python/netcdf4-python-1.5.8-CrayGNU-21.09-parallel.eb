@@ -3,6 +3,7 @@ easyblock = 'PythonPackage'
 
 name = 'netcdf4-python'
 version = '1.5.8'
+versionsuffix = '-parallel'
 
 homepage = 'https://unidata.github.io/netcdf4-python/'
 description = "Python/numpy interface to netCDF."
@@ -18,8 +19,8 @@ patches = ['%(name)s-1.1.8-avoid-diskless-test.patch',
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('cray-hdf5', EXTERNAL_MODULE),
-    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+    ('cray-netcdf-hdf5parallel', EXTERNAL_MODULE),
     ('cftime', '1.5.1.1'),
     ('wheel', '0.37.0'),
     ('cURL', '7.80.0'),
@@ -27,7 +28,8 @@ dependencies = [
 ]
 
 fix_python_shebang_for = ['bin/*']
-options = {'modulename': 'netCDF4'}
+
+options = {'modulename': 'os'}  # import netCDF4 fails since there's no MPI on the login nodes
 
 use_pip = True
 prebuildopts = 'export PKG_CONFIG_PATH=$PE_GNU_FIXED_PKGCONFIG_PATH:$PKG_CONFIG_PATH && '
@@ -36,11 +38,5 @@ sanity_check_paths = {
     'files': ['bin/nc3tonc4', 'bin/nc4tonc3', 'bin/ncinfo'],
     'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
-
-sanity_check_commands = [
-    "nc4tonc3 --help",
-    "nc3tonc4 --help",
-    "ncinfo --help",
-]
 
 moduleclass = 'data'

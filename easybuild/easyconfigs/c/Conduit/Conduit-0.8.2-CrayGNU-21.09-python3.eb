@@ -1,0 +1,52 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Conduit'
+version = '0.8.2'
+versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://llnl-conduit.readthedocs.io/en/latest/index.html'
+description = """Conduit is an open source project from Lawrence Livermore
+National Laboratory that provides an intuitive model for describing hierarchical
+scientific data in C++, C, Fortran, and Python. It is used for data coupling
+between packages in-core, serialization, and I/O tasks."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/LLNL/conduit/releases/download/v%(version)s/']
+sources = ['conduit-v%(version)s-src-with-blt.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DENABLE_PYTHON:BOOL=ON '
+configopts += '-DENABLE_MPI:BOOL=ON '
+configopts += '-DENABLE_FORTRAN:BOOL=OFF '
+configopts += '-DENABLE_GTEST:BOOL=ON '
+configopts += '-DHDF5_DIR="$CRAY_HDF5_PARALLEL_DIR" '
+configopts += '-DHDF5_INCLUDE_DIR="$CRAY_HDF5_PARALLEL_DIR"/include '
+configopts += '-DHDF5_LIBRARIES="$CRAY_HDF5_PARALLEL_PREFIX"/lib/libhdf5_parallel_gnu.so '
+
+srcdir = 'src'
+
+sanity_check_paths = {
+    'files': ['bin/run_python_with_conduit.sh',
+              'bin/conduit_blueprint_verify',
+              'include/conduit/conduit.h',
+              'lib/libconduit_blueprint_mpi.so',
+              'lib/libconduit_blueprint.so',
+              'lib/libconduit_relay.so',
+              'lib/libconduit.so'],
+    'dirs': ['bin', 'include', 'lib'],
+}
+
+moduleclass = 'vis'

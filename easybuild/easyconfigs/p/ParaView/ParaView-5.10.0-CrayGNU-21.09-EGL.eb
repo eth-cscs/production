@@ -17,7 +17,7 @@ source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_
 sources = ["ParaView-v%(version)s.tar.gz"]
 
 dependencies = [
-#    ('h5py', '3.6.0', '-serial'),
+    ('h5py', '3.6.0', '-serial'),
 #    ('Boost', '1.77.0', '-python%(pymajver)s'),
     ('ospray', '2.8.0'),
     ('oidn', '1.4.1'),
