@@ -1,3 +1,4 @@
+# contribute by Rafael Sarmiento (CSCS)
 easyblock = "CmdCp"
 
 name = 'deepmd-kit'
@@ -19,12 +20,12 @@ toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 toolchainopts = {'dynamic': True, 'verbose': False}
 
 builddependencies = [
-    ('CMake', '3.22.1', '', True),
+    ('CMake', '3.22.1', '', True)
 ]
 
 dependencies = [
     ('TensorFlow', '2.5.0', '-cc'),
-    ('xdrfile', '1.1.4'),
+    ('xdrfile', '1.1.4')
 ]
 
 local_skbuild_whl = 'scikit_build-0.10.0-py2.py3-none-any.whl'
@@ -41,7 +42,6 @@ sources = [
     }
 
 ]
-
 
 with_configure = False
 
