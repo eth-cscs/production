@@ -23,8 +23,8 @@ patches = [
 builddependencies = [
     ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
     ('cray-fftw', EXTERNAL_MODULE),
-    ('PLUMED', '2.5.1'),
-    ('deepmd-kit', _deepmd_version),
+    ('PLUMED', '2.8.0'),
+    ('deepmd-kit', _deepmd_version)
 ]
 
 _conda_deepmd_dir = ''
