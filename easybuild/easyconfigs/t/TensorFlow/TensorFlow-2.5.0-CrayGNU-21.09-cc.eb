@@ -155,6 +155,10 @@ exts_list = [
     })
 ]
 
+modextrapaths = {
+    'CPATH': ['include']
+}
+
 modextravars = {
     'NCCL_DEBUG': 'INFO',
     'NCCL_IB_HCA': 'ipogif0',
