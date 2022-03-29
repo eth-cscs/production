@@ -36,7 +36,7 @@ configopts = f' -C {_pkgdir}/cmake/presets/most.cmake '
 configopts += ' -DBUILD_MPI=yes -DCMAKE_CXX_COMPILER:STRING=CC -DMPICXX=CC -DPKG_DEEPMD:BOOL=yes '
 configopts += ' -DPKG_GPU=yes -DCUDA_MPS_SUPPORT=yes -DGPU_API=cuda -DGPU_ARCH=sm_60 '
 configopts += ' -DPKG_PLUMED=yes -DDOWNLOAD_PLUMED=no -DPLUMED_MODE=runtime '
-configopts += ' -DBUILD_OMP=yes -DPKG_OPENMP=yes -DLAMMPS_MACHINE=omp '
+configopts += ' -DBUILD_OMP=yes -DLAMMPS_MACHINE=omp '
 
 # folder with CMakeLists.txt relative to the unpacked tarball
 srcdir = 'cmake'
