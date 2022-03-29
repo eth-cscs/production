@@ -23,8 +23,8 @@ builddependencies = [
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('deepmd-kit', 2.1.0),
-    ('Eigen', 3.4.0),
+    ('deepmd-kit', '2.1.0'),
+    ('Eigen', '3.4.0'),
     ('FFmpeg', '5.0'),
     ('PLUMED', '2.8.0'),
     ('zstd', '1.5.0')

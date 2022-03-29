@@ -14,5 +14,4 @@ toolchainopts = {'pic': True}
 source_urls = ['ftp://ftp.gromacs.org/contrib/']
 sources = [SOURCE_TAR_GZ]
 
-
 moduleclass = 'tools'
