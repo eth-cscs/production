@@ -1,0 +1,31 @@
+#INFO# Configuration to build CPMD for the CRAY-XC50
+#INFO# with the INTEL Fortran compiler and MKL library
+     FC='ftn'
+     CC='cc'
+     LD='ftn'
+     NVCC='$(CUDA_HOME)/bin/nvcc'
+     NVCCFLAGS='--default-stream per-thread -O3 -m64 -gencode arch=compute_60,code=sm_60'
+     CPP='fpp'
+     CPPFLAGS='-D__HAS_CUDA -D__HAS_FFT_DEFAULT -D__HAS_SIZEOF -D__HASNT_F08_ISO_FORTRAN_ENV -D__INTEL -D__Linux -D__PARALLEL'
+     FFLAGS_GROMOS='$(FFLAGS) -fixed'
+     FFLAGS_GROMOS_MODULES='$(FFLAGS)'
+     if [ $debug ]; then
+       FFLAGS='-g -O0 -I$(MKLROOT)/include -I$(MKLROOT)/include/intel64/lp64 -I$(MKLROOT)/include/fftw'
+       CFLAGS='-g -O0'
+     else
+       FFLAGS='-g -O2 -I$(MKLROOT)/include -I$(MKLROOT)/include/intel64/lp64 -I$(MKLROOT)/include/fftw'
+       CFLAGS='-O2'
+     fi
+     if [ $omp ]; then
+       FFLAGS=${FFLAGS}' -mkl=parallel -qopenmp'
+       OMP3_DISABLED=`{ ${FC} -v; } 2>&1 | ${AWK} '{ print ( $2 < "12.0.4" ) ? "true" : "false" }'`
+       LIBS='${MKLROOT}/lib/intel64/libmkl_blas95_lp64.a ${MKLROOT}/lib/intel64/libmkl_lapack95_lp64.a -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -liomp5 -lpthread -lm -ldl'
+       #LIBS='-L$(MKLROOT)/lib/intel64 -liomp5 -lpthread -lm -ldl'
+     else
+       FFLAGS=${FFLAGS}' -mkl=sequential'
+       LIBS='${MKLROOT}/lib/intel64/libmkl_blas95_lp64.a ${MKLROOT}/lib/intel64/libmkl_lapack95_lp64.a -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl'
+       #LIBS='-L$(MKLROOT)/lib/intel64 -lpthread -lm -ldl'
+     fi
+     CFLAGS=${CFLAGS}' -I$(CUDA_HOME)/include'
+     LIBS=${LIBS}' -L$(CUDA_HOME)/lib64 -lcudart -lcufft -lcusolver -lcublas'
+     LFLAGS=${LIBS}
