@@ -4,7 +4,7 @@ easyblock = 'CMakeMake'
 name = 'LAMMPS'
 version = '17Feb2022'
 _release = 'patch_%s' % version
-versionsuffix = '-cuda'
+versionsuffix = '-cuda-deepmd'
 
 homepage = 'http://lammps.sandia.gov/'
 description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
@@ -18,7 +18,7 @@ sources = ['%s.tar.gz' % _release]
 builddependencies = [
     ('CMake', '3.22.1', '', True),
     ('cray-fftw', EXTERNAL_MODULE),
-    ('cudatoolkit', EXTERNAL_MODULE)
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE)
 ]
 
 dependencies = [
