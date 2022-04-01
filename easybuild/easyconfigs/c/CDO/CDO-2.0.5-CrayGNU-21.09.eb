@@ -1,0 +1,39 @@
+# Updated by @gppezzi, @jgphpc, @omlins
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '2.0.5'
+
+homepage = 'https://code.zmaw.de/projects/cdo'
+description = """
+    CDO is a collection of command line Operators to manipulate and analyse
+    Climate and NWP model Data.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'opt': True, 'pic': True}
+
+# Files visible at https://code.mpimet.mpg.de/projects/cdo/files,
+# however link is different for each version!
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/26823/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['edeebbf1c3b1a1f0c642dae6bc8c7624e0c54babe461064dc5c7daca4a5b0dce']
+
+dependencies = [
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    # CDO: OpenMP support for compute intensive operators:
+    # https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
+    # No MPI support
+]
+
+preconfigopts = "export NC_CONFIG=`which nc-config` && "
+configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
