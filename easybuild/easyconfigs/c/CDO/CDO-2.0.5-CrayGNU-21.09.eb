@@ -1,17 +1,17 @@
-# Updated by @gppezzi, @jgphpc, @omlins
+## contributed by Luca Marsella (CSCS)
 easyblock = 'ConfigureMake'
 
 name = 'CDO'
 version = '2.0.5'
 
-homepage = 'https://code.zmaw.de/projects/cdo'
+homepage = 'https://code.mpimet.mpg.de/projects/cdo'
 description = """
     CDO is a collection of command line Operators to manipulate and analyse
     Climate and NWP model Data.
 """
 
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
-toolchainopts = {'opt': True, 'pic': True}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'verbose': False}
 
 # Files visible at https://code.mpimet.mpg.de/projects/cdo/files,
 # however link is different for each version!
@@ -19,16 +19,23 @@ source_urls = ['https://code.mpimet.mpg.de/attachments/download/26823/']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['edeebbf1c3b1a1f0c642dae6bc8c7624e0c54babe461064dc5c7daca4a5b0dce']
 
+# No MPI support, OpenMP support for compute intensive operators (https://code.mpimet.mpg.de/projects/cdo/wiki/OpenMP_support)
+builddependencies = [
+    ('cURL', '7.80.0'),
+]
 dependencies = [
-    ('cray-netcdf', EXTERNAL_MODULE),
     ('cray-hdf5', EXTERNAL_MODULE),
-    # CDO: OpenMP support for compute intensive operators:
-    # https://code.zmaw.de/projects/cdo/wiki/OpenMP_support
-    # No MPI support
+    ('cray-netcdf', EXTERNAL_MODULE),
+    ('ecCodes', '2.23.0'),
+    ('libaec', '1.0.6'),
+    ('PROJ', '8.1.1'),
+    ('UDUNITS', '2.2.28'),
+    ('util-linux', '2.37.2'),
 ]
 
-preconfigopts = "export NC_CONFIG=`which nc-config` && "
-configopts = "--with-hdf5=$HDF5_DIR --with-netcdf=$EBROOTNETCDFMINFORTRAN "
+osdependencies = ['libtool']
+
+configopts = " --disable-static --enable-cdi-lib  --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR  --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC  --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX "
 
 
 sanity_check_paths = {
