@@ -14,7 +14,7 @@ toolchain = {'name': 'CrayIntel', 'version': '21.09'}
 toolchainopts = {'dynamic': False}
 
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
-patches = ['%(name)s-%(version)s.patch']
+patches = ['%(name)s-%(version)s.patch', '%(name)s-%(version)s-pH.patch']
 
 builddependencies = [
     ('Charm++', '6.10.2'),
