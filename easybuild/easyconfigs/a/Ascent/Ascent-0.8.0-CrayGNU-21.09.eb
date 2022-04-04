@@ -52,4 +52,6 @@ sanity_check_paths = {
     'dirs': ['include', 'lib'],
 }
 
+modextrapaths = {'PYTHONPATH': 'python-modules'}
+
 moduleclass = 'vis'
