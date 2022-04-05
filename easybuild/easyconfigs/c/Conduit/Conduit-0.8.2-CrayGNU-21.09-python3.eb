@@ -48,5 +48,6 @@ sanity_check_paths = {
               'lib/libconduit.so'],
     'dirs': ['bin', 'include', 'lib'],
 }
+modextrapaths = {'PYTHONPATH': 'python-modules'}
 
 moduleclass = 'vis'
