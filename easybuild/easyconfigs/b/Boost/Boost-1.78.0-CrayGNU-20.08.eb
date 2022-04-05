@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+name = 'Boost'
+version = '1.78.0'
+
+homepage = 'http://www.boost.org/'
+description = """
+    Boost provides free peer-reviewed portable C++ source libraries.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+
+source_urls = ['https://boostorg.jfrog.io/artifactory/main/release/%(version)s/source']
+sources = ['%(namelower)s_%(version_major)s_%(version_minor)s_0.tar.bz2']
+
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('zlib', '1.2.11'),
+]
+
+configopts = '--without-libraries=python'
+
+boost_mpi = True
+
+modextravars = {'BOOST_ROOT': '%(installdir)s'}
+
+moduleclass = 'devel'
