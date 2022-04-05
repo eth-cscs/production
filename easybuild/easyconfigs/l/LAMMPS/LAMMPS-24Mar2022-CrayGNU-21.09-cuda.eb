@@ -28,7 +28,8 @@ dependencies = [
     ('zstd', '1.5.0')
 ]
 
-_commonopts = f' -C %(builddir)s/%(namelower)s-{_release}/cmake/presets/most.cmake '
+_pkgdir = f'%(builddir)s/%(namelower)s-{_release}'
+_commonopts = f' -C {_pkgdir}/cmake/presets/most.cmake '
 _commonopts += ' -DBUILD_MPI=yes -DCMAKE_CXX_COMPILER:STRING=CC -DMPICXX=CC '
 _commonopts += ' -DPKG_GPU=yes -DCUDA_MPS_SUPPORT=yes -DGPU_API=cuda -DGPU_ARCH=sm_60 '
 _commonopts += ' -DPKG_PLUMED=yes -DDOWNLOAD_PLUMED=no -DPLUMED_MODE=runtime '
