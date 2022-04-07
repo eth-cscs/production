@@ -46,8 +46,8 @@ sanity_check_paths = {
               'lib/libconduit_blueprint.so',
               'lib/libconduit_relay.so',
               'lib/libconduit.so'],
-    'dirs': ['bin', 'include', 'lib'],
+    'dirs': ['bin', 'include', 'lib', 'python-modules'],
 }
-modextrapaths = {'PYTHONPATH': 'python-modules'}
+modextravars = {'PYTHONPATH':'%(installdir)s/python-modules:$::env(PYTHONPATH)'}
 
 moduleclass = 'vis'
