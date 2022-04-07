@@ -19,6 +19,7 @@ toolchainopts = {'usempi': True, 'verbose': False}
 #
 # Below you will find the steps to create the SOURCELOWER_TAR_GZ file used in
 # this recipe.
+# we omit the download of conduit to replace with a private copy of version 0.8.2
 #
 # mkdir /run/user/1100/VisIt; cd /run/user/1100/VisIt
 # wget  https://github.com/visit-dav/visit/releases/download/v3.2.2/visit3.2.2.tar.gz
@@ -26,13 +27,19 @@ toolchainopts = {'usempi': True, 'verbose': False}
 # cd visit3.2.2
 # ./src/tools/dev/scripts/build_visit --console --no-visit --parallel \
 # --llvm --mesagl --vtk --makeflags -j32 --system-python --alt-python-dir /usr \
-# --openssl --qwt --qt --silo --hdf5 --cmake --icet --ospray --ispc --embree --tbb \
-# --xdmf --download-only
+# --openssl --qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb \
+# --xdmf --mfem --download-only
+# substitute version 0.7.1 by 0.8.2
+# sed -i 's/7.1/8.2/g' ./src/tools/dev/scripts/bv_support/bv_conduit.sh
+# add "" for ${VTK_PY_LIBS}
+# sed -i '1689s/"$/\\""/' ./src/tools/dev/scripts/bv_support/bv_vtk.sh
+# sed -i '1689s/G=/G=\\"/' ./src/tools/dev/scripts/bv_support/bv_vtk.sh
+# cp /apps/common/UES/easybuild/sources/c/Conduit/conduit-v0.8.2-src-with-blt.tar.gz .
 # cd ..
 
 # tar cfz  visit-3.2.2.tar.gz visit3.2.2
-# mkdir -p $EASYBUILD_SOURCEPATH/v/Visit
-# cp visit-3.2.2.tar.gz $EASYBUILD_SOURCEPATH/v/Visit/
+# mkdir -p /apps/common/UES/easybuild/sources/v/Visit
+# cp visit-3.2.2.tar.gz /apps/common/UES/easybuild/sources/v/Visit/
 #
 # NOTES:
 # * The new visit package is named visit-3.2.2.tar.gz, not visit3.2.2.tar.gz
@@ -53,13 +60,23 @@ toolchainopts = {'usempi': True, 'verbose': False}
 sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.14.5', '', True),
+    ('CMake', '3.22.1', '', True),
 ]
 
-preconfigopts = ' export PAR_COMPILER=cc;  export PAR_INCLUDE="-I$MPICH_DIR/include";  pushd ../visit3.2.2; mkdir -p third_party/mesagl;ln -s mesagl third_party/mesa;  module swap gcc/10.3.0; sed -i "s/{C_COMPILER/{PAR_COMPILER/g" src/tools/dev/scripts/bv_support/bv_icet.sh; sed -i "s/DMPI_COMPILER/DMPI_C_COMPILER/g" src/tools/dev/scripts/bv_support/bv_icet.sh; ./src/tools/dev/scripts/build_visit --console --no-%(namelower)s --parallel --llvm --mesagl --vtk --makeflags -j32 --system-python --alt-python-dir /usr  --openssl --qwt --qt --silo --hdf5 --xdmf --system-cmake --icet --ospray --ispc --embree --tbb <<< "yes" &&  sed -i "s/gcc TYPE/cc TYPE/g" `hostname`.cmake;  sed -i "s/g++/CC/g" `hostname`.cmake;  cp `hostname`.cmake ./src/config-site;  mkdir build; cd build; '
-configopts = " -DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC -DCMAKE_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo -DVISIT_ENABLE_MANUALS=FALSE -DVISIT_DATA_MANUAL_EXAMPLES:BOOL=ON  -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON  -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF  -DVISIT_ENABLE_LIBSIM:BOOL=OFF "
+preconfigopts =  'export PAR_COMPILER=cc; '
+preconfigopts += 'export PAR_INCLUDE="-I$MPICH_DIR/include"; '
+preconfigopts += 'pushd ../visit3.2.2; mkdir -p third_party; '
+preconfigopts += 'sed -i "s/{C_COMPILER/{PAR_COMPILER/g" src/tools/dev/scripts/bv_support/bv_icet.sh; '
+preconfigopts += 'sed -i "s/DMPI_COMPILER/DMPI_C_COMPILER/g" src/tools/dev/scripts/bv_support/bv_icet.sh; '
 
-prebuildopts = " pushd ../visit3.2.2/build;  module swap gcc/10.3.0; "
+preconfigopts += './src/tools/dev/scripts/build_visit --console --no-%(namelower)s --parallel --llvm --mesagl --vtk --makeflags -j32 --system-python --alt-python-dir /usr '
+preconfigopts += '--openssl --qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --xdmf --mfem --conduit <<< "yes" && '
+preconfigopts += 'sed -i "s/gcc TYPE/cc TYPE/g" `hostname`.cmake; sed -i "s/g++/CC/g" `hostname`.cmake; cp `hostname`.cmake ./src/config-site; mkdir build; cd build; '
+
+configopts =  "-DMPI_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo "
+configopts += "-DVISIT_ENABLE_MANUALS=FALSE -DVISIT_DATA_MANUAL_EXAMPLES:BOOL=ON -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF "
+
+prebuildopts = " pushd ../visit3.2.2/build; "
 
 preinstallopts = " pushd ../visit3.2.2/build; "
 
@@ -68,16 +85,12 @@ parallel = 24
 #skipsteps = ['install']
 
 runtest = False
-modtclfooter = """
-if { [ is-loaded gcc ] } {
-    module swap gcc/10.3.0
-}
-"""
-install_cmd = "make install && cp %(builddir)s/visit3.2.2/third_party/mesagl/17.3.9/linux-x86_64_gcc-10.3/lib/libswrAVX* %(installdir)s/current/linux-%(arch)s/lib"
+
+install_cmd = "make install && cp %(builddir)s/visit3.2.2/third_party/mesagl/17.3.9/linux-x86_64_gcc-9.3/lib/libswrAVX* %(installdir)s/current/linux-%(arch)s/lib"
 srcdir = '../visit3.2.2/src'
 
 sanity_check_paths = {
-    'files': [],
+    'files': ['bin/visit'],
     'dirs': ['data', 'bin', '%(version)s'],
 }
 
