@@ -12,7 +12,8 @@ builddependencies = [('Libassuan', '2.5.5'),
                      ('GPGME', '1.16.0'),
                      ('go', '1.17.6.linux-amd64')]
 
-dependencies = [('runc', '1.1.0')]
+dependencies = [('runc', '1.1.0'),
+                ('fuse-overlayfs', '1.8.1')]
 
 # Make-install buildah
 # Patch the installation in order to run without xattrs support
