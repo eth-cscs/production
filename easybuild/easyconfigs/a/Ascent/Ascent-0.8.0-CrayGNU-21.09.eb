@@ -49,9 +49,9 @@ srcdir = '../ascent-v0.8.0/src'
 sanity_check_paths = {
     'files' : [
               ],
-    'dirs': ['include', 'lib'],
+    'dirs': ['include', 'lib', 'python-modules'],
 }
 
-modextrapaths = {'PYTHONPATH': 'python-modules'}
+modextravars = {'PYTHONPATH':'%(installdir)s/python-modules:$::env(PYTHONPATH)'}
 
 moduleclass = 'vis'
