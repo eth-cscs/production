@@ -14,7 +14,7 @@
 easyblock = 'CMakeMake'
 
 name = 'GROMACS'
-version = "2021.5"
+version = "2020.4"
 local_plumedversion = '2.7.3'
 versionsuffix = '-cuda-PLUMED-%s' % local_plumedversion
 
