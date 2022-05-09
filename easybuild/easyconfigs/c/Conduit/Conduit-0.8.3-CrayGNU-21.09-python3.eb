@@ -4,7 +4,7 @@
 easyblock = 'CMakeMake'
 
 name = 'Conduit'
-version = '0.8.2'
+version = '0.8.3'
 versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://llnl-conduit.readthedocs.io/en/latest/index.html'
@@ -30,7 +30,7 @@ dependencies = [
 configopts  = '-DCMAKE_BUILD_TYPE=Release '
 configopts += '-DENABLE_PYTHON:BOOL=ON '
 configopts += '-DENABLE_MPI:BOOL=ON '
-configopts += '-DENABLE_FORTRAN:BOOL=OFF '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
 configopts += '-DENABLE_GTEST:BOOL=ON '
 configopts += '-DHDF5_DIR="$CRAY_HDF5_PARALLEL_DIR" '
 configopts += '-DHDF5_INCLUDE_DIR="$CRAY_HDF5_PARALLEL_DIR"/include '

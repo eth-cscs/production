@@ -41,6 +41,7 @@
  ovito-3.5.4-CrayGNU-21.09.eb                           --set-default-module
  ovito-3.7.2-CrayGNU-21.09.eb
  ParaView-5.10.0-CrayGNU-21.09-EGL.eb                   --set-default-module
+ ParaView-5.10.1-CrayGNU-21.09-EGL.eb
  PLUMED-2.7.3-CrayGNU-21.09.eb                          --set-default-module
  PLUMED-2.8.0-CrayGNU-21.09.eb
  pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
@@ -50,7 +51,7 @@
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.3.0-CrayNvidia-21.09-acc.eb                     --set-default-module
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
- Visit-3.2.0-CrayGNU-21.09.eb                           --set-default-module
+ Visit-3.2.2-CrayGNU-21.09.eb                           --set-default-module
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VMD-1.9.4.eb                                           --set-default-module
@@ -71,7 +72,8 @@
  Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  Score-P-7.1-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  Score-P-7.1-CrayNvidia-21.09.eb                                             --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
- spack-config-1.5-cdt-cuda-21.09.eb                     --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
+ spack-config-1.5-cdt-cuda-21.09.eb                                          --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  spack-config-1.6-cdt-cuda-21.09.eb                                          --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
+ spack-config-1.7-cdt-cuda-21.09.eb                     --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools

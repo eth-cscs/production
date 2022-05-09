@@ -1,0 +1,57 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '4.1.2'
+
+homepage = 'http://www.open-mpi.org/'
+description = "The Open MPI Project is an open source MPI-3 implementation."
+
+toolchain = {'name': 'CrayGNU', 'version': '20.08'}
+
+source_urls = ['http://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
+    ('pmi', EXTERNAL_MODULE),
+    ('pmi-lib', EXTERNAL_MODULE),
+    ('ugni', EXTERNAL_MODULE),
+]
+#dependencies = [
+#    ('gcc/8.3.0', EXTERNAL_MODULE),
+#]
+
+configopts = (
+    "--enable-mpi-cxx "
+    "--enable-shared "
+    "--with-cuda=${EBROOTCUDA} "
+    "--with-hwloc=internal  "
+    "--with-cray-pmi=${EBROOTPMI} "
+    "--with-pmi-libdir "
+    "--with-ugni  "
+    "CRAY_PMI_CFLAGS=${CRAY_PMI_INCLUDE_OPTS} "
+    "CRAY_PMI_LIBS=${CRAY_PMI_POST_LINK_OPTS} "
+)
+
+
+sanity_check_paths = {
+    'files': [
+        'bin/ompi_info', 
+        'bin/opal_wrapper', 
+        'bin/orterun', 
+        'lib/libmpi.so', 
+        'lib/libmpi_mpifh.so', 
+        'lib/libompitrace.so', 
+        'lib/libopen-pal.so', 
+        'lib/libopen-rte.so', 
+        'include/mpi.h', 
+        'include/mpi-ext.h', 
+        'include/mpi_portable_platform.h',
+        'include/mpif.h', 
+        'include/mpif-config.h', 
+    ],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
