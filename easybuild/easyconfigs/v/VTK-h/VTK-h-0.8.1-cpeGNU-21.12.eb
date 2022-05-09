@@ -1,0 +1,49 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'VTK-h'
+version = '0.8.1'
+#versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://m.vtk.org/'
+description = """VTK-h is a stand alone library that implements a distributed-memory
+layer on top of the VTK-m library, which focuses on shared-memory parallelism."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.12'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/Alpine-DAV/vtk-h/releases/download/v%(version)s/']
+sources = ['vtkh-v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('gcc/10.3.0', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('VTK-m', '1.7.1'),
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
+configopts += '-DVTKM_DIR=$EBROOTVTKMINM '
+
+#configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/oneapi/tbb/latest/include '
+#configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+#configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
+configopts += '-DCMAKE_CXX_FLAGS_RELEASE="-O2 -DNDEBUG -I/opt/intel/oneapi/tbb/latest/include" '
+configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbbmalloc.so '
+#configopts += '-DCMAKE_CXX_FLAGS_RELEASE="-O3 -DNDEBUG -I/opt/intel/compilers_and_libraries/linux/tbb/include" '
+configopts += '-DENABLE_TESTS:BOOL=OFF -DBUILD_TESTING:BOOL=OFF '
+
+srcdir = '../vtkh-v0.8.1/src'
+
+sanity_check_paths = {
+    'files' : ['include/vtkh/vtkh.hpp','lib/libvtkh_core.so','lib/libvtkh_core_mpi.so', 'lib/libvtkh_rendering.so','lib/libvtkh_rendering_mpi.so'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

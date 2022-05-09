@@ -10,6 +10,7 @@
  GSL-2.7-cpeCray-21.12.eb
  ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
  VTK-9.1.0-cpeCray-21.12-OSMesa.eb
+ Ascent-0.8.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.12.eb
