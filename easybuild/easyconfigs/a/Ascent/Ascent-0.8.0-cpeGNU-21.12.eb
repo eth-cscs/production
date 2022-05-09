@@ -1,0 +1,63 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Ascent'
+version = '0.8.0'
+#versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://ascent.readthedocs.io/en/latest/'
+description = """Ascent is an easy-to-use flyweight in situ visualization and
+analysis library for HPC simulations."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.12'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/Alpine-DAV/ascent/releases/download/v%(version)s/']
+sources = ['ascent-v%(version)s-src-with-blt.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('gcc/10.3.0', EXTERNAL_MODULE),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+    ('Conduit', '0.8.3', '-python3'),
+    ('VTK-m', '1.7.1'),
+    ('VTK-h', '0.8.1'),
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DENABLE_MPI:BOOL=ON '
+configopts += '-DENABLE_PYTHON:BOOL=ON '
+configopts += '-DENABLE_OPENMP:BOOL=ON '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
+configopts += '-DENABLE_TESTS:BOOL=OFF '
+configopts += '-DVTKM_DIR=$EBROOTVTKMINM '
+configopts += '-DVTKH_DIR=$EBROOTVTKMINH '
+configopts += '-DCONDUIT_DIR=$EBROOTCONDUIT '
+
+configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbbmalloc.so '
+#configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/oneapi/tbb/latest/include '
+#configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+#configopts += '-DTBB_MALLOC_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
+
+configopts += '-DHDF5_INCLUDE_DIR="$CRAY_HDF5_PARALLEL_DIR"/include '
+#configopts += '-DCMAKE_CXX_FLAGS_RELEASE="-O3 -DNDEBUG -I/opt/intel/compilers_and_libraries/linux/tbb/include" '
+#configopts += '-DENABLE_TESTS:BOOL=OFF -DBUILD_TESTING:BOOL=OFF '
+
+srcdir = '../ascent-v0.8.0/src'
+
+sanity_check_paths = {
+    'files' : [
+              ],
+    'dirs': ['include', 'lib', 'python-modules'],
+}
+
+modextravars = {'PYTHONPATH':'%(installdir)s/python-modules:$::env(PYTHONPATH)'}
+
+moduleclass = 'vis'
