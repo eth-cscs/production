@@ -5,7 +5,7 @@ easyblock = 'Tarball'
 name = 'reframe'
 version = '3.11.1'
 
-homepage = 'https://github.com/eth-cscs/reframe'
+homepage = 'https://github.com/reframe-hpc/reframe'
 description = 'A regression framework for writing portable tests for HPC systems.'
 
 toolchain = SYSTEM
@@ -23,17 +23,12 @@ conflict("cray-python")
 sources = [
     {
         'filename': 'v%(version)s.tar.gz',
-        'source_urls': ['https://github.com/eth-cscs/reframe/archive/']
-    },
-    {
-        'filename': '/apps/common/easybuild/sources/%(nameletterlower)s/'
-                    '%(name)s/reframe-tests-%(version)s.tar.gz'
+        'source_urls': ['https://github.com/reframe-hpc/reframe/archive/']
     }
 ]
 
 keepsymlinks = True
 postinstallcmds = [
-    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/cscs-checks/private',
     './bootstrap.sh +docs && '
     'cp -r external %(installdir)s/external && '
     'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
@@ -44,17 +39,15 @@ postinstallcmds = [
 
 modextrapaths = {
     'PYTHONPATH': 'external/',
-    'RFM_CONFIG_FILE': 'config/cscs.py',
-    'RFM_CHECK_SEARCH_PATH': 'cscs-checks',
 }
 
 sanity_check_paths = {
-    'files': ['bin/reframe', 'config/cscs.py', 'share/man/man1/reframe.1',
+    'files': ['bin/reframe', 'share/man/man1/reframe.1',
               'share/man/man8/reframe.settings.8',
               'share/completions/reframe.bash',
               'share/completions/reframe.fish',
               'share/completions/reframe.tcsh'],
-    'dirs':  ['bin', 'cscs-checks', 'cscs-checks/private', 'unittests',],
+    'dirs':  ['bin', 'unittests'],
 }
 
 sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
