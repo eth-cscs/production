@@ -19,7 +19,6 @@ sources = [{
         'keep_git_dir': True
     }
 }]
-checksums = ['4672d605dd34741ead63ef4265556eb80a561f530ed587ed625244efafd8981b']
 
 prebuildopts = ('cd %(builddir)s && mkdir -p src/github.com/opencontainers go_cache && '
                 'ln -sf %(builddir)s/%(name)s src/github.com/opencontainers/%(name)s && '
