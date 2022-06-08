@@ -12,8 +12,7 @@ builddependencies = [('Libassuan', '2.5.4'),
                      ('GPGME', '1.15.0'),
                      ('go', '1.15.2.linux-amd64')]
 
-dependencies = [('runc', '1.0.0-rc92'),
-                ('fuse-overlayfs', '1.8.1')]
+dependencies = [('runc', '1.0.0-rc92')]
 
 # Make-install buildah
 # Patch the installation in order to run without xattrs support
@@ -37,14 +36,7 @@ postinstallcmds= ["mkdir %(installdir)s/etc && "
                   "cp policy.json %(installdir)s/etc"]
 
 skipsteps = ['configure']
-
-modtclfooter = '''
-unsetenv XDG_RUNTIME_DIR
-setenv STORAGE_DRIVER      "overlay"
-setenv STORAGE_OPTS        "overlay.mount_program=$env(EBROOTFUSEMINOVERLAYFS)/bin/fuse-overlayfs"
-setenv BUILDAH_RUNTIME     "$env(EBROOTRUNC)/sbin/runc"
-'''
-
+modtclfooter = 'unsetenv XDG_RUNTIME_DIR'
 
 sanity_check_paths = {
     'files': ['bin/buildah'],
