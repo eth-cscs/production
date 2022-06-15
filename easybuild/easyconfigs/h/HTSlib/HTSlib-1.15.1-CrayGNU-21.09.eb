@@ -1,0 +1,29 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'HTSlib'
+version = '1.15.1'
+
+homepage = "https://www.htslib.org/"
+description = """A C library for reading/writing high-throughput sequencing data.
+ This package includes the utilities bgzip and tabix"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/samtools/%(namelower)s/releases/download/%(version)s/']
+sources = [SOURCELOWER_TAR_BZ2]
+
+# cURL added for S3 support
+dependencies = [
+    ('bzip2', '1.0.8'),
+    ('cURL', '7.80.0'),
+    ('XZ', '5.2.5'),
+    ('zlib', '1.2.11')
+]
+
+sanity_check_paths = {
+    'files': ['bin/bgzip', 'bin/tabix', 'lib/libhts.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'bio'
