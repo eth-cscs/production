@@ -28,18 +28,14 @@ dependencies = [
 ]
 
 configopts  = '-DCMAKE_BUILD_TYPE=Release '
-configopts  = '-DENABLE_FORTRAN:BOOL=ON '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
 configopts += '-DVTKm_ENABLE_MPI:BOOL=ON '
 configopts += '-DVTKm_ENABLE_OPENMP:BOOL=ON '
 configopts += '-DVTKm_USE_64BIT_IDS=OFF -DVTKm_USE_DOUBLE_PRECISION=ON '
 configopts += '-DVTKm_USE_DEFAULT_TYPES_FOR_ASCENT=ON -DVTKm_NO_DEPRECATED_VIRTUAL=ON '
-configopts += '-DVTKm_ENABLE_TBB:BOOL=OFF '
+configopts += '-DVTKm_ENABLE_TBB:BOOL=ON '
 configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
 configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8//libtbb.so '
-#configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/oneapi/tbb/latest/include '
-#configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
-
-#srcdir = 'src'
 
 sanity_check_paths = {
     'files' : [
