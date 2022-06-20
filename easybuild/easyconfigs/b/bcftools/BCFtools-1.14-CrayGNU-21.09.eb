@@ -1,8 +1,4 @@
-# This file is an EasyBuild reciPY as per https://github.com/easybuilders/easybuild
-# 
-# Author: Jonas Demeulemeester
-# The Francis Crick Insitute, London, UK
-
+# contibuted by Julia Gustavsen (Agroscope) based on BCFtools-1.14-GCC-11.2.0.eb
 easyblock = 'ConfigureMake'
 
 name = 'BCFtools'

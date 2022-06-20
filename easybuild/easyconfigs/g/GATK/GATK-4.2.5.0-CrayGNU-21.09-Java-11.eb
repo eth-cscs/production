@@ -1,20 +1,4 @@
-##
-# This file is an EasyBuild reciPY as per https://github.com/easybuilders/easybuild
-#
-# Copyright:: Copyright 2012-2013 Cyprus Institute / CaSToRC, University of Luxembourg / LCSB
-# Authors::   George Tsouloupas <g.tsouloupas@cyi.ac.cy>, Fotis Georgatos <fotis.georgatos@uni.lu>,
-#             Kenneth Hoste (UGent)
-# License::   MIT/GPL
-# $Id$
-#
-# This work implements a part of the HPCBIOS project and is a component of the policy:
-# http://hpcbios.readthedocs.org/en/latest/HPCBIOS_2012-94.html
-# Modified by: Adam Huffman, Jonas Demeulemeester
-# The Francis Crick Institute
-# Modified for version 4.0.5.1 by: Ruben van Dijk, University of Groningen
-# Modified for version 4.2.3.0 by: J. Sassmannshausen / GSTT
-##
-
+# contibuted by Julia Gustavsen (Agroscope) based on GATK-4.2.5.0-GCCcore-11.2.0-Java-11.eb
 easyblock = 'Tarball'
 
 name = 'GATK'
