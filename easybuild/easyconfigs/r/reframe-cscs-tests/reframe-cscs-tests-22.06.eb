@@ -1,0 +1,41 @@
+# @author: manitart
+
+easyblock = 'Tarball'
+
+name = 'reframe-cscs-tests'
+version = '22.06'
+
+homepage = 'https://github.com/eth-cscs/cscs-reframe-tests'
+description = 'ReFrame test suite of CSCS.'
+
+toolchain = SYSTEM
+
+dependencies = [('reframe', '3.11.1')]
+
+sources = [
+    {
+        'filename': 'v%(version)s.tar.gz',
+        'source_urls': ['https://github.com/eth-cscs/cscs-reframe-tests/archive/']
+    },
+    {
+        'filename': '/apps/common/easybuild/sources/r/reframe/'
+                    'reframe-tests-%(version)s.tar.gz'
+    }
+]
+
+keepsymlinks = True
+postinstallcmds = [
+    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/checks/private',
+]
+
+modextrapaths = {
+    'RFM_CONFIG_FILE': 'config/cscs.py',
+    'RFM_CHECK_SEARCH_PATH': 'checks',
+}
+
+sanity_check_paths = {
+    'files': ['config/cscs.py'],
+    'dirs':  ['checks', 'checks/private',],
+}
+
+moduleclass = 'devel'
