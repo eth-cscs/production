@@ -1,0 +1,37 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ELPA'
+version = '2021.11.001'
+
+homepage = 'http://elpa.rzg.mpg.de'
+description = "Eigenvalue SoLvers for Petaflop-Applications."
+
+toolchain = {'name': 'cpeIntel', 'version': '22.02'}
+toolchainopts = {'usempi': True, 'openmp': True}
+
+# download from http://%(namelower)s.mpcdf.mpg.de/html/Releases/%(version)s often fails
+sources = ['/apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+
+preconfigopts = ' autoreconf -f -i && module unload cray-libsci && module list && CC=cc CXX=CC FC=ftn '
+local_commonopts = ' -disable-avx512 --enable-option-checking=fatal --enable-static '
+configopts = [
+    local_commonopts + ' CFLAGS="-qmkl=sequential" FCFLAGS="-mkl=sequential" SCALAPACK_LDFLAGS="-L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl" ',
+    local_commonopts + ' --enable-runtime-threading-support-checks --enable-allow-thread-limiting --without-threading-support-check-during-build --enable-openmp CFLAGS="-qmkl=parallel" FCFLAGS="-mkl=parallel" SCALAPACK_LDFLAGS="-L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -liomp5 -lpthread -lm -ldl" '
+]
+
+prebuildopts = ' module unload cray-libsci && make clean && '
+
+sanity_check_paths = {
+    'files': ['lib/libelpa.a', 'lib/libelpa.so', 'lib/libelpa_openmp.a', 'lib/libelpa_openmp.so'],
+    'dirs': ['bin', 'lib/pkgconfig', 'include/%(namelower)s-%(version)s/%(namelower)s', 'include/%(namelower)s-%(version)s/modules', 'include/%(namelower)s_openmp-%(version)s/%(namelower)s', 'include/%(namelower)s_openmp-%(version)s/modules'],
+}
+
+modextrapaths = {'CPATH': ['include/elpa_openmp-%(version)s', 'include/%(namelower)s-%(version)s']}
+
+modextravars = {
+    'ELPA_INCLUDE_DIR': '%(installdir)s/include/%(namelower)s-%(version)s',
+    'ELPA_OPENMP_INCLUDE_DIR': '%(installdir)s/include/elpa_openmp-%(version)s',
+}
+
+moduleclass = 'math'
