@@ -41,6 +41,7 @@ dependencies = [
     ('spglib', '1.16.3')
 ]
 
+prebuildopts = ' module unload cray-libsci && module list && '
 # build type
 buildopts = "ARCH=%(name)s-%(version_major_minor)s-%(toolchain_name)s VERSION=psmp"
 
