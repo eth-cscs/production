@@ -1,5 +1,5 @@
 # contributed by Luca Marsella (CSCS)
-# modules: Bison cpeIntel ELPA flex Libint libvori libxc
+# modules: Bison cpeIntel ELPA flex Libint libvori libxc SIRIUS spglib
 #
 include $(EBROOTPLUMED)/lib/plumed/src/lib/Plumed.inc
 CC       = cc
