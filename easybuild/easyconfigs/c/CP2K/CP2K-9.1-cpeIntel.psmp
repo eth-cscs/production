@@ -1,0 +1,41 @@
+# contributed by Luca Marsella (CSCS)
+# modules: Bison cpeIntel ELPA flex Libint libvori libxc SIRIUS spglib
+#
+include $(EBROOTPLUMED)/lib/plumed/src/lib/Plumed.inc
+CC       = cc
+FC       = ftn
+LD       = ftn
+AR       = ar -r
+DFLAGS   = -D__MKL -D__MAX_CONTR=4 -D__MPI_VERSION=3 -D__parallel -D__SCALAPACK
+#DFLAGS   += -D__ELPA -D__FFTW3 -D__GSL -D__LIBINT -D__LIBXSMM -D__LIBVORI -D__LIBXC -D__PLUMED2 -D__SIRIUS -D__SPGLIB
+DFLAGS   += -D__ELPA -D__FFTW3 -D__GSL -D__LIBINT -D__LIBXSMM -D__LIBVORI -D__LIBXC -D__PLUMED2 -D__SPGLIB
+# The compiler flag "-fp-model precise" slows down execution by ~25% 
+CFLAGS   = -g -O3 -fp-model precise -funroll-loops -qopenmp -qopenmp-simd -traceback $(DFLAGS)
+# MKL FFT is faster than FFTW3
+CFLAGS   += -qmkl=parallel -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+CFLAGS   += -I$(ELPA_OPENMP_INCLUDE_DIR)/elpa -I$(ELPA_OPENMP_INCLUDE_DIR)/modules
+CFLAGS   += -I$(EBROOTFFTW)/include
+CFLAGS   += -I$(EBROOTGSL)/include
+CFLAGS   += -I$(EBROOTLIBINTMINCP2K)/include -I$(EBROOTLIBINTMINCP2K)/include/libint2
+CFLAGS   += -I$(EBROOTLIBXC)/include
+CFLAGS   += -I$(EBROOTLIBXSMM)/include
+#CFLAGS   += -I$(EBROOTSIRIUS)/include/sirius
+CFLAGS   += -I$(EBROOTSPGLIB)/include
+CXXFLAGS = $(CFLAGS) -std=c++11
+FCFLAGS  = $(CFLAGS) -mkl=parallel -diag-disable=8291 -diag-disable=8293 -fpp -free
+ifeq ($(shell (( $(shell gcc -dumpversion | cut -d. -f1) > 9 )) && echo yes), yes)
+ FCFLAGS += -fallow-argument-mismatch
+endif
+LDFLAGS  = $(FCFLAGS)
+LDFLAGS_C= $(FCFLAGS) -nofor_main
+LIBS     = -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -liomp5 -lpthread -lm -ldl
+LIBS     += -L$(EBROOTELPA)/lib -lelpa_openmp
+LIBS   	 += -L$(EBROOTFFTW)/lib -lfftw3 -lfftw3_threads
+LIBS   	 += -L$(EBROOTGSL)/lib -lgsl
+LIBS     += -L$(EBROOTLIBINTMINCP2K)/lib -lint2
+LIBS     += $(EBROOTLIBVORI)/lib/libvori.a
+LIBS     += -L$(EBROOTLIBXC)/lib -lxcf03 -lxc
+LIBS     += -L$(EBROOTLIBXSMM)/lib -lxsmmf -lxsmm
+#LIBS     += -L$(EBROOTSIRIUS)/lib -lsirius
+LIBS     += -L$(EBROOTSPGLIB)/lib -lsymspg
+LIBS     += -lplumed -lz -ldl -lstdc++
