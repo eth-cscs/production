@@ -53,6 +53,7 @@
  VASP-6.3.0-CrayNvidia-21.09-acc.eb                     --set-default-module
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
  Visit-3.2.2-CrayGNU-21.09.eb                           --set-default-module
+ Visit-3.3.0-CrayGNU-21.09.eb
  VMD-1.9.3-egl.eb
  VMD-1.9.3-ogl.eb
  VMD-1.9.4.eb                                           --set-default-module

@@ -46,6 +46,7 @@
  VASP-6.3.0-CrayIntel-21.09.eb                          --set-default-module
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
  Visit-3.2.2-CrayGNU-21.09.eb                           --set-default-module
+ Visit-3.3.0-CrayGNU-21.09.eb
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  cgdb-v0.7.1.eb                                         --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  ddd-3.3.12.eb                                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools

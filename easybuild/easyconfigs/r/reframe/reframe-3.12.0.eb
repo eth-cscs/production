@@ -1,0 +1,54 @@
+# @author: gppezzi, vkarak, manitart
+
+easyblock = 'Tarball'
+
+name = 'reframe'
+version = '3.12.0'
+
+homepage = 'https://github.com/reframe-hpc/reframe'
+description = 'A regression framework for writing portable tests for HPC systems.'
+
+toolchain = SYSTEM
+
+# reframe uses system python, dependencies use extensions that link to that
+# so reframe is bound to system python.
+modtclfooter = """
+conflict cray-python
+"""
+
+modluafooter = """
+conflict("cray-python")
+"""
+
+sources = [
+    {
+        'filename': 'v%(version)s.tar.gz',
+        'source_urls': ['https://github.com/reframe-hpc/reframe/archive/']
+    }
+]
+
+keepsymlinks = True
+postinstallcmds = [
+    './bootstrap.sh +docs && '
+    'cp -r external %(installdir)s/external && '
+    'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
+    'cp docs/man/man1/reframe.1 %(installdir)s/share/man/man1 && '
+    'cp docs/man/man8/reframe.settings.8 %(installdir)s/share/man/man8 && '
+    'cp -r share/completions %(installdir)s/share/completions'
+]
+
+modextrapaths = {
+    'PYTHONPATH': 'external/',
+}
+
+sanity_check_paths = {
+    'files': ['bin/reframe', 'share/man/man1/reframe.1',
+              'share/man/man8/reframe.settings.8',
+              'share/completions/reframe.bash',
+              'share/completions/reframe.fish',
+              'share/completions/reframe.tcsh'],
+    'dirs':  ['bin', 'unittests'],
+}
+
+sanity_check_commands = ['reframe -V', 'python3 -m pytest --version']
+moduleclass = 'devel'
