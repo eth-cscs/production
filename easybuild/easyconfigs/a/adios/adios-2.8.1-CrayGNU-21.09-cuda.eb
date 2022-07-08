@@ -73,7 +73,8 @@ Version: %(version)s
 Libs: $(%(installdir)s/bin/adios2-config --fortran-libs)
 Cflags: $(%(installdir)s/bin/adios2-config --fortran-flags)" > %(installdir)s/lib/pkgconfig/adios2_f.pc""",
 ]
-modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ADIOS2"  # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
+_pythonpath = 'lib/python%(pyshortver)s/site-packages'
 
 sanity_check_paths = {
     'files': ['bin/adios2-config', 'bin/bpls', 'bin/bp4dbg',
@@ -82,7 +83,9 @@ sanity_check_paths = {
     'dirs': [".", _pythonpath]
 }
 
-modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
+modextrapaths = {'PYTHONPATH': _pythonpath}
+
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ADIOS2"  # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
 
 modextravars = {
     'ADIOS2_CXX_PKGCONFIG_LIBS': 'adios2_cxx',
