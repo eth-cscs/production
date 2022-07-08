@@ -1,0 +1,31 @@
+# @omlins
+
+easyblock = 'CMakeMake'
+
+name = 'sz'
+version = '2.1.12.2'
+
+homepage = 'https://github.com/szcompressor/SZ'
+description = "Error-bounded Lossy Compressor for HPC Data"
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+source_urls = ['https://github.com/szcompressor/SZ/releases/download/v%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DENABLE-FORTRAN:BOOL=ON "
+
+maxparallel = 16
+
+
+sanity_check_paths = {
+    'files': ['lib64/libSZ.so', 'lib64/libzstd.so', 'include/sz/sz.h'],  # 'bin/sz' is not present anymore after %(version_major_minor)s.9
+    'dirs': ['share/pkgconfig'],
+}
+
+moduleclass = 'lib'
