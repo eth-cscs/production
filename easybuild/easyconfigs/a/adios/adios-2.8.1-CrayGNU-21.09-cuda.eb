@@ -76,8 +76,10 @@ Cflags: $(%(installdir)s/bin/adios2-config --fortran-flags)" > %(installdir)s/li
 modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ADIOS2"  # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
 
 sanity_check_paths = {
-    'files': ['lib64/libadios2_core.so', 'lib64/libadios2_core_mpi.so', 'lib64/cmake/adios2/adios2-config.cmake', 'lib64/libadios2_c.so', 'lib64/libadios2_c_mpi.so', 'lib64/libadios2_cxx11.so', 'lib64/libadios2_cxx11_mpi.so', 'lib64/libadios2_fortran.so', 'lib64/libadios2_fortran_mpi.so'],
-    'dirs': ['.', 'lib/python%(pyshortver)s/site-packages'],
+    'files': ['bin/adios2-config', 'bin/bpls', 'bin/bp4dbg',
+              'include/adios2.h', 'include/adios2_c.h', 'include/adios2/fortran/adios2.mod',
+              'lib64/libadios2_core.so', 'lib64/libadios2_core_mpi.so', 'lib64/cmake/adios2/adios2-config.cmake', 'lib64/libadios2_c.so', 'lib64/libadios2_c_mpi.so', 'lib64/libadios2_cxx11.so', 'lib64/libadios2_cxx11_mpi.so', 'lib64/libadios2_fortran.so', 'lib64/libadios2_fortran_mpi.so'],
+    'dirs': [".", _pythonpath]
 }
 
 modextrapaths = {'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'}
