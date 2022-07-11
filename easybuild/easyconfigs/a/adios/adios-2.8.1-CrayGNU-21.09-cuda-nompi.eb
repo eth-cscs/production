@@ -1,0 +1,97 @@
+# contributed by Jean Favre (CSCS); extended by Samuel Omlin (CSCS)
+
+easyblock = 'CMakeMake'
+
+name = 'adios'
+version = '2.8.1'
+versionsuffix = '-cuda-nompi'
+
+homepage = 'https://csmd.ornl.gov/software/adios2'
+description = """The Adaptable IO System (ADIOS) provides a simple, flexible way for scientists 
+to describe the data in their code that may need to be written, read, or processed outside of the running simulation"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'usempi': False, 'pic': True}
+
+source_urls = ['https://github.com/ornladios/ADIOS2/archive/']
+sources = ['release_%(version_major)s%(version_minor)s.zip']
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('CMake', '3.22.1', '', True),
+]
+
+dependencies = [
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+    ('pmi', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5', EXTERNAL_MODULE),
+    ('bzip2', '1.0.8'),
+    ('zfp', '0.5.5'),
+    ('sz', '2.1.12.2'),
+    ('libpng', '1.6.37'),
+    ('blosc', '1.21.1'),
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += "-DCMAKE_Fortran_FLAGS='-O2 -DNDEBUG -fPIC -fno-math-errno ' "
+configopts += "-DCMAKE_C_FLAGS='-DNDEBUG -fPIC -std=c11' "
+configopts += "-DCMAKE_CXX_FLAGS='-O2 -DNDEBUG -fPIC -std=gnu++11 ' "
+configopts += '-DBUILD_SHARED_LIBS:BOOL=ON -DADIOS2_BUILD_EXAMPLES:BOOL=OFF -DADIOS2_BUILD_TESTING:BOOL=OFF '
+configopts += '-DADIOS2_USE_MPI:BOOL=OFF '
+configopts += '-DADIOS2_USE_HDF5:BOOL=ON '
+configopts += '-DADIOS2_USE_Python:BOOL=ON '
+configopts += '-DADIOS2_USE_Fortran:BOOL=ON '
+configopts += '-DADIOS2_USE_SST:BOOL=ON '
+configopts += '-DADIOS2_USE_BZip2:BOOL=ON '
+configopts += '-DADIOS2_USE_ZFP:BOOL=ON '
+configopts += '-DADIOS2_USE_SZ:BOOL=ON '
+configopts += '-DADIOS2_USE_PNG:BOOL=ON '
+configopts += '-DADIOS2_USE_Blosc:BOOL=ON '
+configopts += "-DADIOS2_USE_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES='60'"
+#configopts += '-DCMAKE_BUILD_TYPE=RelWithDebInfo '
+
+parallel = 16
+
+# create pkgconfig files
+postinstallcmds = [
+    "mkdir %(installdir)s/lib/pkgconfig",
+    """echo -e "Name: adios2
+Description: ADIOS2 I/O library
+Version: %(version)s
+Requires: bzip2, zfp, sz, libpng, blosc
+Libs: $(%(installdir)s/bin/adios2-config --c-libs --serial)
+Cflags: $(%(installdir)s/bin/adios2-config --c-flags --serial)" > %(installdir)s/lib/pkgconfig/adios2.pc""",
+    """echo -e "Name: adios2_cxx
+Description: ADIOS2 I/O library (C++)
+Version: %(version)s
+Libs: $(%(installdir)s/bin/adios2-config --cxx-libs --serial)
+Cflags: $(%(installdir)s/bin/adios2-config --cxx-flags --serial)" > %(installdir)s/lib/pkgconfig/adios2_cxx.pc""",
+    """echo -e "Name: adios2_f
+Description: ADIOS2 I/O library (Fortran)
+Version: %(version)s
+Libs: $(%(installdir)s/bin/adios2-config --fortran-libs --serial)
+Cflags: $(%(installdir)s/bin/adios2-config --fortran-flags --serial)" > %(installdir)s/lib/pkgconfig/adios2_f.pc""",
+]
+
+_pythonpath = 'lib/python%(pyshortver)s/site-packages'
+
+sanity_check_paths = {
+    'files': ['bin/adios2-config', 'bin/bpls', 'bin/bp4dbg',
+              'include/adios2.h', 'include/adios2_c.h', 'include/adios2/fortran/adios2.mod',
+              'lib64/libadios2_core.so', 'lib64/cmake/adios2/adios2-config.cmake', 'lib64/libadios2_c.so', 'lib64/libadios2_cxx11.so', 'lib64/libadios2_fortran.so'],
+    'dirs': [".", _pythonpath]
+}
+
+modextrapaths = {'PYTHONPATH': _pythonpath}
+
+modtclfooter = "prepend-path PE_PKGCONFIG_PRODUCTS ADIOS2"  # No solution possible with modextravars (extravars are unset at module unload) and modextrapaths (EB autocompletes path).
+
+modextravars = {
+    'ADIOS2_CXX_PKGCONFIG_LIBS': 'adios2_cxx',
+    'ADIOS2_FORTRAN_PKGCONFIG_LIBS': 'adios2_f',
+    'ADIOS2_PKGCONFIG_LIBS': 'adios2',
+}
+
+# check other easyconfigs for possible options
+moduleclass = 'lib'
