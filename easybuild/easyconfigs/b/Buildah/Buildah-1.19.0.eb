@@ -7,19 +7,18 @@ homepage = 'https://buildah.io/'
 description = """Buildah is a tool that facilitates building OCI container images."""
 
 toolchain = SYSTEM
-builddependencies = [('Libassuan', '2.5.4'),
-                     ('Libgpg-error', '1.39'),
-                     ('GPGME', '1.15.0'),
-                     ('go', '1.15.2.linux-amd64')]
+builddependencies = [('Libassuan', '2.5.5'),
+                     ('Libgpg-error', '1.45'),
+                     ('GPGME', '1.17.1'),
+                     ('go', '1.17.6.linux-amd64')]
 
-dependencies = [('runc', '1.0.0-rc92')]
+dependencies = [('runc', '1.1.2')]
 
 # Make-install buildah
 # Patch the installation in order to run without xattrs support
-prebuildopts = ('mkdir -p go_path go_cache && export GOCACHE=$PWD/go_cache && export GOPATH=$PWD/go_path && '
-                'go get -d github.com/containers/buildah && '
-                'cd $GOPATH/src/github.com/containers/buildah && '
-                'git checkout v%(version)s && '
+prebuildopts = ('export GO111MODULE=off && mkdir -p go_path go_cache && export GOCACHE=$PWD/go_cache && '
+                'export GOPATH=$PWD/go_path && go get -d github.com/containers/buildah && '
+                'cd $GOPATH/src/github.com/containers/buildah && git checkout v%(version)s && '
                 'sed -i "s#^// +build linux netbsd freebsd darwin#// +build !linux netbsd freebsd darwincopiercopier/xattrs.go#" copier/xattrs.go && '
                 'sed -i "s#^// +build !linux,!netbsd,!freebsd,!darwin#// +build linux,!netbsd,!freebsd,!darwin#" copier/xattrs_unsupported.go && '
                 'sed -i "s#^BUILDAH_LDFLAGS :=.*'
@@ -36,7 +35,10 @@ postinstallcmds= ["mkdir %(installdir)s/etc && "
                   "cp policy.json %(installdir)s/etc"]
 
 skipsteps = ['configure']
-modtclfooter = 'unsetenv XDG_RUNTIME_DIR'
+modtclfooter = '''
+unsetenv XDG_RUNTIME_DIR
+setenv BUILDAH_RUNTIME     "$env(EBROOTRUNC)/sbin/runc"
+'''
 
 sanity_check_paths = {
     'files': ['bin/buildah'],
