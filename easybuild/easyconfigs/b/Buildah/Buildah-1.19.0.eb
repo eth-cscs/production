@@ -35,9 +35,9 @@ postinstallcmds= ["mkdir %(installdir)s/etc && "
                   "cp policy.json %(installdir)s/etc"]
 
 skipsteps = ['configure']
+
 modtclfooter = '''
 unsetenv XDG_RUNTIME_DIR
-setenv BUILDAH_RUNTIME     "$env(EBROOTRUNC)/sbin/runc"
 '''
 
 sanity_check_paths = {
