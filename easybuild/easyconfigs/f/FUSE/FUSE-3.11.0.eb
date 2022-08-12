@@ -1,0 +1,29 @@
+easyblock = 'MesonNinja'
+
+name = 'FUSE'
+version = '3.11.0'
+
+homepage = 'https://github.com/libfuse/libfuse'
+description = "The reference implementation of the Linux FUSE (Filesystem in Userspace) interface"
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/libfuse/libfuse/releases/download/fuse-%(version)s/']
+sources = [SOURCELOWER_TAR_XZ]
+checksums = ['8982c4c521daf3974dda8a5d55d575c988da13a571970f00aea149eb54fdf14c']
+
+builddependencies = [
+    ('Meson', '0.60.1'),
+    ('Ninja', '1.10.2'),
+]
+
+# -Dutils=True only works as root
+configopts = '-Dutils=False'
+
+sanity_check_paths = {
+    'files': ['lib64/libfuse%%(version_major)s.%s' % SHLIB_EXT,
+              'lib64/pkgconfig/fuse%(version_major)s.pc'],
+    'dirs': ['include/fuse%(version_major)s'],
+}
+
+moduleclass = 'lib'

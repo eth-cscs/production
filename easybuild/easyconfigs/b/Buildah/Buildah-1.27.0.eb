@@ -1,0 +1,54 @@
+easyblock = 'ConfigureMake'
+
+name = 'Buildah'
+version = '1.27.0'
+
+homepage = 'https://buildah.io/'
+description = """Buildah is a tool that facilitates building OCI container images."""
+
+source_urls = ['https://github.com/containers/buildah/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+checksums = ['eb5c21ed3822f34c13b0c8999312e75a1262dcb82d3ab07fae53c80f1aebc27f']
+
+toolchain = SYSTEM
+builddependencies = [('Libassuan', '2.5.5'),
+                     ('Libgpg-error', '1.45'),
+                     ('GPGME', '1.18.0'),
+                     ('go', '1.19.linux-amd64')]
+
+dependencies = [('runc', '1.1.3'),
+                ('fuse-overlayfs', '1.9')]
+
+# Make-install buildah patching location of registries and policy configurations
+prebuildopts = ('sed -i "s#^BUILDAH_LDFLAGS :=.*'
+                '#BUILDAH_LDFLAGS := -ldflags \'-X main.GitCommit=\$(GIT_COMMIT) -X main.buildInfo=\$(SOURCE_DATE_EPOCH) -X main.cniVersion=\$(CNI_COMMIT) '
+                '-X github.com/containers/image/v5/pkg/sysregistriesv2.systemRegistriesConfPath=%(installdir)s/etc/registries.conf '
+                '-X github.com/containers/image/v5/signature.systemDefaultPolicyPath=%(installdir)s/etc/policy.json\' \$(EXTRALDFLAGS)#" Makefile && ')
+
+buildopts = ['BUILDTAGS="btrfs_noversion exclude_graphdriver_btrfs exclude_graphdriver_devicemapper" all']
+installopts = ['PREFIX=%(installdir)s']
+postinstallcmds= ["mkdir %(installdir)s/etc && "
+                  "cd tests && "
+                  "echo \"unqualified-search-registries = ['docker.io']\" > %(installdir)s/etc/registries.conf && " # Allow only Dockerhub by default
+                  "cp policy.json %(installdir)s/etc"]
+
+skipsteps = ['configure']
+
+# Avoid the 'module show' errors by setting the corresponding env variables
+modtclfooter = '''
+if { [module-info mode display] } {
+    setenv EBROOTRUNC <runc_root>
+    setenv EBROOTFUSEMINOVERLAYFS <fuse-overlayfs_root>
+}
+unsetenv XDG_RUNTIME_DIR
+setenv STORAGE_DRIVER      overlay
+setenv STORAGE_OPTS        overlay.mount_program=$::env(EBROOTFUSEMINOVERLAYFS)/bin/fuse-overlayfs
+setenv BUILDAH_RUNTIME     $::env(EBROOTRUNC)/sbin/runc
+'''
+
+sanity_check_paths = {
+    'files': ['bin/buildah'],
+    'dirs': ['etc']
+}
+
+moduleclass = 'tools'
