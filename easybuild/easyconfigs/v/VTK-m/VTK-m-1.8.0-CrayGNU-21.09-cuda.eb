@@ -1,0 +1,51 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'VTK-m'
+version = '1.8.0'
+versionsuffix = '-cuda'
+
+homepage = 'https://m.vtk.org/'
+description = """VTK-m is a toolkit of scientific visualization algorithms for
+emerging processor architectures. VTK-m supports the fine-grained concurrency
+for data analysis and visualization algorithms required to drive extreme
+scale computing by providing abstract models for data and execution that can
+be applied to a variety of algorithms across many different processor architectures."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://gitlab.kitware.com/vtk/vtk-m/-/archive/v%(version)s']
+sources = ['vtk-m-v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE)
+]
+dependencies = [
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
+configopts += '-DVTKm_ENABLE_MPI:BOOL=OFF '
+configopts += '-DVTKm_ENABLE_OPENMP:BOOL=ON '
+configopts += '-DVTKm_USE_64BIT_IDS=OFF -DVTKm_USE_DOUBLE_PRECISION=ON '
+configopts += '-DVTKm_USE_DEFAULT_TYPES_FOR_ASCENT=ON -DVTKm_NO_DEPRECATED_VIRTUAL=ON '
+configopts += '-DVTKm_ENABLE_CUDA:BOOL=ON '
+configopts += '-DVTKm_CUDA_Architecture=pascal '
+configopts += '-DVTKm_ENABLE_TESTING=OFF '
+configopts += '-DVTKm_ENABLE_BENCHMARKS=OFF '
+#configopts += '-DVTKm_ENABLE_TBB:BOOL=ON '
+#configopts += '-DTBB_INCLUDE_DIR:PATH=/opt/intel/compilers_and_libraries/linux/tbb/include '
+#configopts += '-DTBB_LIBRARY_RELEASE:FILEPATH=/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8/libtbb.so '
+
+sanity_check_paths = {
+    'files' : [
+              'include/vtkm-1.8/vtkm/Version.h',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
