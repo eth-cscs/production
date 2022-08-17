@@ -27,6 +27,7 @@
  jupyterlab-3.2.8-CrayGNU-21.09-batchspawner.eb         --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
  LAMMPS-20Sep21-CrayGNU-21.09.eb                        --set-default-module
+ LAMMPS-23Jun2022-CrayGNU-21.09.eb
  Lmod-7.8.2.eb                                          --set-default-module --hidden
  MATLAB-R2021a.eb                                       --set-default-module
  matplotlib-3.5.0-CrayGNU-21.09.eb                      --set-default-module
