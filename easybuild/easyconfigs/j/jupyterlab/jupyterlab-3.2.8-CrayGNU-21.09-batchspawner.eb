@@ -261,6 +261,14 @@ exts_list = [
 
     # ase for nglview
     ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
+    
+    # jupyterlab-hdf5
+    ('jupyterlab_hdf', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_hdf-1.2.0-py2.py3-none-any.whl'}),
+    ('h5grove', '0.0.14', {'unpack_sources': False, 'source_tmpl': 'h5grove-0.0.14-py3-none-any.whl'}),
+    ('h5py', '3.7.0', {'unpack_sources': False, 'source_tmpl': 'h5py-3.7.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('orjson', '3.7.12', {'unpack_sources': False, 'source_tmpl': 'orjson-3.7.12-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('tifffile', '2022.8.12', {'unpack_sources': False, 'source_tmpl': 'tifffile-2022.8.12-py3-none-any.whl'}),
+    ('hdf5plugin', '3.3.1', {'unpack_sources': False, 'source_tmpl': 'hdf5plugin-3.3.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
 ]
 
 sanity_check_paths = {
