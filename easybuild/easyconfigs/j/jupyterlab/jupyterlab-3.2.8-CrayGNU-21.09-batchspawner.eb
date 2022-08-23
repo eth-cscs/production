@@ -276,7 +276,7 @@ exts_list = [
     ('jupyterlab_git', '0.39.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_git-0.39.0-py3-none-any.whl'}),
     ('nbdime', '3.1.1', {'unpack_sources': False, 'source_tmpl': 'nbdime-3.1.1-py2.py3-none-any.whl'}),
     ('GitPython', '3.1.27', {'unpack_sources': False, 'source_tmpl': 'GitPython-3.1.27-py3-none-any.whl'}),
-    ('jupyter_server_mathjax', '0.2.6', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_mathjax-0.2.6-py3-none-any.whl '}),
+    ('jupyter_server_mathjax', '0.2.6', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_mathjax-0.2.6-py3-none-any.whl'}),
     ('colorama', '0.4.5', {'unpack_sources': False, 'source_tmpl': 'colorama-0.4.5-py2.py3-none-any.whl'}),
     ('gitdb', '4.0.9', {'unpack_sources': False, 'source_tmpl': 'gitdb-4.0.9-py3-none-any.whl'}),
     ('smmap', '5.0.0', {'unpack_sources': False, 'source_tmpl': 'smmap-5.0.0-py3-none-any.whl'}),
