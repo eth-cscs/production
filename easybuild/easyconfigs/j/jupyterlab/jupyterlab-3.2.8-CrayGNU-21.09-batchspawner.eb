@@ -43,6 +43,8 @@ export JUPYTER=%(installdir)s/bin/jupyter &&
 export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
 %(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
 rm -r $YARN_CACHE_FOLDER &&
+%(installdir)s/bin/jupyter labextension install @jupyterlab/hdf5 &&
+
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
