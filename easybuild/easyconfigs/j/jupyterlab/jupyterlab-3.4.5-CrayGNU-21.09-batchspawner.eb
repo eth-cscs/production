@@ -185,7 +185,7 @@ exts_list = [
     ('cffi', '1.15.0', {'unpack_sources': False, 'source_tmpl': 'cffi-1.15.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
     ('debugpy', '1.5.1', {'unpack_sources': False, 'source_tmpl': 'debugpy-1.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
     ('pycparser', '2.21', {'unpack_sources': False, 'source_tmpl': 'pycparser-2.21-py2.py3-none-any.whl'}),
-    ('beautifulsoup4', '4.11.1', {'unpack_sources': False, 'source_tmpl': 'beautifulsoup4-4.11.1-py3-none-any.whl'}),
+    ('beautifulsoup4', '4.11.1', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'beautifulsoup4-4.11.1-py3-none-any.whl'}),
     ('lxml', '4.9.1', {'unpack_sources': False, 'source_tmpl': 'lxml-4.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl'}),
     ('tinycss2', '1.1.1', {'unpack_sources': False, 'source_tmpl': 'tinycss2-1.1.1-py3-none-any.whl'}),
     ('fastjsonschema', '2.16.1', {'unpack_sources': False, 'source_tmpl': 'fastjsonschema-2.16.1-py3-none-any.whl'}),
