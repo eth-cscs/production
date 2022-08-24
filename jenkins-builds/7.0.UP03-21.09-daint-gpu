@@ -27,6 +27,7 @@
  JuliaExtensions-1.6.3-CrayGNU-21.09-cuda.eb            --set-default-module
  jupyter-utils-0.1.eb                                   --set-default-module
  jupyterlab-3.2.8-CrayGNU-21.09-batchspawner-cuda.eb    --set-default-module
+ jupyterlab-3.4.5-CrayGNU-21.09-batchspawner-cuda.eb
  LAMMPS-20Sep21-CrayGNU-21.09-cuda.eb                   --set-default-module
  LAMMPS-23Jun2022-CrayGNU-21.09-cuda.eb
  Lmod-7.8.2.eb                                          --set-default-module --hidden
