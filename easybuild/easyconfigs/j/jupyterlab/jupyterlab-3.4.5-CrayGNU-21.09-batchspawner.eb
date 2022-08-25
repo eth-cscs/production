@@ -1,0 +1,305 @@
+# @author: robinson (omlins and hvictor for IJulia)
+
+easyblock = 'PythonBundle'
+
+name = 'jupyterlab'
+version = '3.4.5'
+versionsuffix = '-batchspawner'
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+builddependencies = [
+    ('wheel', '0.37.0'),
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('configurable-http-proxy', '4.5.0'),
+    ('JuliaExtensions', '1.6.3'),
+    ('cray-R', EXTERNAL_MODULE),
+    ('graphviz', '2.50.0'),
+]
+
+modtclfooter = """
+prepend-path EBJULIA_ADMIN_DEPOT_PATH "%(installdir)s/share/IJulia"
+if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
+    prepend-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+}
+"""
+
+# install extensions and batchspawner components
+postinstallcmds = [
+"""
+export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
+export NODE_OPTIONS=--max-old-space-size=4096 &&
+export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ &&
+export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
+export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
+export JUPYTER=%(installdir)s/bin/jupyter &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
+%(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
+rm -r $YARN_CACHE_FOLDER &&
+%(installdir)s/bin/jupyter labextension install @jupyterlab/hdf5 &&
+# Bash kernel - https://github.com/takluyver/bash_kernel
+python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
+# IJulia kernel - https://github.com/JuliaLang/IJulia.jl
+unset EBJULIA_USER_DEPOT_PATH &&
+export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
+julia -e 'using Pkg; Pkg.add("IJulia");' &&
+chmod -R +rX %(installdir)s/share/IJulia &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+# IR kernel - https://github.com/IRkernel/IRkernel
+export R_LIBS_SITE=%(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/jupyter/kernels/ir41 &&
+Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir41","https://cloud.r-project.org")' &&
+cd %(installdir)s/ &&
+git clone https://github.com/IRkernel/IRkernel.git &&
+cd IRkernel &&
+git checkout d7f8681 &&
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
+file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
+#install nglview
+cd %(installdir)s/ &&
+pip install --prefix=%(installdir)s --no-deps --ignore-installed nglview==3.0.3 &&
+# Install ipyparaview (notebook extension only)
+cd %(installdir)s/ &&
+git clone  https://github.com/NVIDIA/ipyparaview.git && 
+cd ipyparaview && 
+git checkout 8cba45d && 
+pip install --prefix=%(installdir)s  . &&
+%(installdir)s/bin/jupyter nbextension install --py  --prefix=%(installdir)s  ipyparaview &&
+cd %(installdir)s/ &&
+python -m venv --system-site-packages cscs &&
+source cscs/bin/activate &&
+PYTHONPATH="" pip install ipykernel==6.9.0 jupyter-client==7.1.2 tornado==6.1 ipython==8.0.1 matplotlib-inline==0.1.3 debugpy==1.5.1 nest-asyncio==1.5.4 traitlets==5.1.1 entrypoints==0.4 jupyter-core==4.9.1 pyzmq==22.3.0 prompt-toolkit==3.0.27 backcall==0.2.0 stack-data==0.1.4 pexpect==4.8.0 pickleshare==0.7.5 decorator==5.1.1 jedi==0.18.1 pygments==2.11.2 asttokens==2.0.5 executing==0.8.2 pure-eval==0.2.2 ptyprocess==0.7.0 parso==0.8.3 black==22.1.0 typing-extensions==4.0.1 pathspec==0.9.0 tomli==2.0.1 platformdirs==2.4.1 click==8.0.3 mypy-extensions==0.4.3  &&
+python -m ipykernel install --prefix=%(installdir)s/ --name 'cscs' --display-name 'CSCS Python' &&
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/launcher <<'EOF'
+#!/usr/bin/env bash
+export PYTHONPATH=''
+source ${JUPYTER_PATH}/../../cscs/bin/activate
+source $HOME/jupyterlab-cscs.env
+python -m ipykernel_launcher $@ 
+EOF
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
+{
+ "display_name": "CSCS Python",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ },
+ "argv": [
+ "%(installdir)s/share/jupyter/kernels/cscs/launcher",
+ "-f",
+ "{connection_file}"
+ ]
+}
+EOF
+chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
+cp /apps/common/UES/easybuild/sources/j/jupyterlab/logo*.png %(installdir)s/share/jupyter/kernels/cscs/
+cat - >  %(installdir)s/etc/jupyter/jupyter_notebook_config.py << EOF
+c.MultiKernelManager.default_kernel_name = 'cscs'
+EOF
+""",
+]
+
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://pypi.python.org/packages/source/%(nameletter)s/%(name)s'],
+    'use_pip': True,
+}
+
+exts_list = [
+    ('jupyterlab', '3.4.5', {'unpack_sources': False, 'source_tmpl': 'jupyterlab-3.4.5-py3-none-any.whl'}),
+    ('jupyterlab_server', '2.10.3', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_server-2.10.3-py3-none-any.whl'}),
+    ('Jinja2', '3.0.3', {'unpack_sources': False, 'source_tmpl': 'Jinja2-3.0.3-py3-none-any.whl'}),
+    ('jupyter_core', '4.9.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_core-4.9.1-py3-none-any.whl'}),
+    ('ipython', '8.0.1', {'modulename': 'IPython', 'unpack_sources': False, 'source_tmpl': 'ipython-8.0.1-py3-none-any.whl'}),
+    ('tornado', '6.1', {'unpack_sources': False, 'source_tmpl': 'tornado-6.1-cp39-cp39-manylinux2010_x86_64.whl'}),
+    ('jupyter_server', '1.18.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_server-1.18.1-py3-none-any.whl'}),
+    ('nbclassic', '0.3.5', {'unpack_sources': False, 'source_tmpl': 'nbclassic-0.3.5-py3-none-any.whl'}),
+    ('json5', '0.9.6', {'unpack_sources': False, 'source_tmpl': 'json5-0.9.6-py2.py3-none-any.whl'}),
+    ('entrypoints', '0.4', {'unpack_sources': False, 'source_tmpl': 'entrypoints-0.4-py3-none-any.whl'}),
+    ('Babel', '2.9.1', {'unpack_sources': False, 'source_tmpl': 'Babel-2.9.1-py2.py3-none-any.whl'}),
+    ('jsonschema', '4.4.0', {'unpack_sources': False, 'source_tmpl': 'jsonschema-4.4.0-py3-none-any.whl'}),
+    ('requests', '2.27.1', {'unpack_sources': False, 'source_tmpl': 'requests-2.27.1-py2.py3-none-any.whl'}),
+    ('MarkupSafe', '2.0.1', {'unpack_sources': False, 'source_tmpl': 'MarkupSafe-2.0.1-cp39-cp39-manylinux2010_x86_64.whl'}),
+    ('traitlets', '5.1.1', {'unpack_sources': False, 'source_tmpl': 'traitlets-5.1.1-py3-none-any.whl'}),
+    ('prompt_toolkit', '3.0.27', {'unpack_sources': False, 'source_tmpl': 'prompt_toolkit-3.0.27-py3-none-any.whl'}),
+    ('matplotlib_inline', '0.1.3', {'unpack_sources': False, 'source_tmpl': 'matplotlib_inline-0.1.3-py3-none-any.whl'}),
+    ('stack_data', '0.1.4', {'unpack_sources': False, 'source_tmpl': 'stack_data-0.1.4-py3-none-any.whl'}),
+    ('decorator', '5.1.1', {'unpack_sources': False, 'source_tmpl': 'decorator-5.1.1-py3-none-any.whl'}),
+    ('pickleshare', '0.7.5', {'unpack_sources': False, 'source_tmpl': 'pickleshare-0.7.5-py2.py3-none-any.whl'}),
+    ('black', '22.1.0', {'unpack_sources': False, 'source_tmpl': 'black-22.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('backcall', '0.2.0', {'unpack_sources': False, 'source_tmpl': 'backcall-0.2.0-py2.py3-none-any.whl'}),
+    ('pexpect', '4.8.0', {'unpack_sources': False, 'source_tmpl': 'pexpect-4.8.0-py2.py3-none-any.whl'}),
+    ('pygments', '2.11.2', {'unpack_sources': False, 'source_tmpl': 'Pygments-2.11.2-py3-none-any.whl'}),
+    ('jedi', '0.18.1', {'unpack_sources': False, 'source_tmpl': 'jedi-0.18.1-py2.py3-none-any.whl'}),
+    ('jupyter_client', '7.1.2', {'unpack_sources': False, 'source_tmpl': 'jupyter_client-7.1.2-py3-none-any.whl'}),
+    ('nbformat', '5.4.0', {'unpack_sources': False, 'source_tmpl': 'nbformat-5.4.0-py3-none-any.whl'}),
+    ('pyzmq', '22.3.0', {'modulename': 'zmq', 'unpack_sources': False, 'source_tmpl': 'pyzmq-22.3.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('nbconvert', '6.4.4', {'unpack_sources': False, 'source_tmpl': 'nbconvert-6.4.4-py3-none-any.whl'}),
+    ('ipython_genutils', '0.2.0', {'unpack_sources': False, 'source_tmpl': 'ipython_genutils-0.2.0-py2.py3-none-any.whl'}),
+    ('websocket_client', '1.2.3', {'modulename': 'websocket', 'unpack_sources': False, 'source_tmpl': 'websocket_client-1.2.3-py3-none-any.whl'}),
+    ('argon2_cffi', '21.3.0', {'modulename': 'argon2', 'unpack_sources': False, 'source_tmpl': 'argon2_cffi-21.3.0-py3-none-any.whl'}),
+    ('terminado', '0.13.1', {'unpack_sources': False, 'source_tmpl': 'terminado-0.13.1-py3-none-any.whl'}),
+    ('anyio', '3.5.0', {'unpack_sources': False, 'source_tmpl': 'anyio-3.5.0-py3-none-any.whl'}),
+    ('Send2Trash', '1.8.0', {'unpack_sources': False, 'source_tmpl': 'Send2Trash-1.8.0-py3-none-any.whl'}),
+    ('notebook', '6.4.8', {'unpack_sources': False, 'source_tmpl': 'notebook-6.4.8-py3-none-any.whl'}),
+    ('prometheus_client', '0.13.1', {'unpack_sources': False, 'source_tmpl': 'prometheus_client-0.13.1-py3-none-any.whl'}),
+    ('pyrsistent', '0.18.0', {'unpack_sources': False, 'source_tmpl': 'pyrsistent-0.18.0-cp39-cp39-manylinux1_x86_64.whl'}),
+    ('charset_normalizer', '2.0.11', {'unpack_sources': False, 'source_tmpl': 'charset_normalizer-2.0.11-py3-none-any.whl'}),
+    ('idna', '3.3', {'unpack_sources': False, 'source_tmpl': 'idna-3.3-py3-none-any.whl'}),
+    ('urllib3', '1.26.8', {'unpack_sources': False, 'source_tmpl': 'urllib3-1.26.8-py2.py3-none-any.whl'}),
+    ('certifi', '2021.10.8', {'unpack_sources': False, 'source_tmpl': 'certifi-2021.10.8-py2.py3-none-any.whl'}),
+    ('executing', '0.8.2', {'unpack_sources': False, 'source_tmpl': 'executing-0.8.2-py2.py3-none-any.whl'}),
+    ('asttokens', '2.0.5', {'unpack_sources': False, 'source_tmpl': 'asttokens-2.0.5-py2.py3-none-any.whl'}),
+    ('pure_eval', '0.2.2', {'unpack_sources': False, 'source_tmpl': 'pure_eval-0.2.2-py3-none-any.whl'}),
+    ('platformdirs', '2.4.1', {'unpack_sources': False, 'source_tmpl': 'platformdirs-2.4.1-py3-none-any.whl'}),
+    ('typing_extensions', '4.0.1', {'unpack_sources': False, 'source_tmpl': 'typing_extensions-4.0.1-py3-none-any.whl'}),
+    ('mypy_extensions', '0.4.3', {'unpack_sources': False, 'source_tmpl': 'mypy_extensions-0.4.3-py2.py3-none-any.whl'}),
+    ('click', '8.0.3', {'unpack_sources': False, 'source_tmpl': 'click-8.0.3-py3-none-any.whl'}),
+    ('tomli', '2.0.1', {'unpack_sources': False, 'source_tmpl': 'tomli-2.0.1-py3-none-any.whl'}),
+    ('pathspec', '0.9.0', {'unpack_sources': False, 'source_tmpl': 'pathspec-0.9.0-py2.py3-none-any.whl'}),
+    ('ptyprocess', '0.7.0', {'unpack_sources': False, 'source_tmpl': 'ptyprocess-0.7.0-py2.py3-none-any.whl'}),
+    ('parso', '0.8.3', {'unpack_sources': False, 'source_tmpl': 'parso-0.8.3-py2.py3-none-any.whl'}),
+    ('nest_asyncio', '1.5.4', {'unpack_sources': False, 'source_tmpl': 'nest_asyncio-1.5.4-py3-none-any.whl'}),
+    ('bleach', '4.1.0', {'unpack_sources': False, 'source_tmpl': 'bleach-4.1.0-py2.py3-none-any.whl'}),
+    ('mistune', '2.0.4', {'unpack_sources': False, 'source_tmpl': 'mistune-2.0.4-py2.py3-none-any.whl'}),
+    ('jupyterlab_pygments', '0.1.2', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_pygments-0.1.2-py2.py3-none-any.whl'}),
+    ('nbclient', '0.5.10', {'unpack_sources': False, 'source_tmpl': 'nbclient-0.5.10-py3-none-any.whl'}),
+    ('testpath', '0.5.0', {'unpack_sources': False, 'source_tmpl': 'testpath-0.5.0-py3-none-any.whl'}),
+    ('defusedxml', '0.7.1', {'unpack_sources': False, 'source_tmpl': 'defusedxml-0.7.1-py2.py3-none-any.whl'}),
+    ('pandocfilters', '1.5.0', {'unpack_sources': False, 'source_tmpl': 'pandocfilters-1.5.0-py2.py3-none-any.whl'}),
+    ('argon2_cffi_bindings', '21.2.0', {'modulename': 'argon2', 'unpack_sources': False, 'source_tmpl': 'argon2_cffi_bindings-21.2.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('sniffio', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'sniffio-1.2.0-py3-none-any.whl'}),
+    ('ipykernel', '6.9.0', {'unpack_sources': False, 'source_tmpl': 'ipykernel-6.9.0-py3-none-any.whl'}),
+    ('webencodings', '0.5.1', {'unpack_sources': False, 'source_tmpl': 'webencodings-0.5.1-py2.py3-none-any.whl'}),
+    ('cffi', '1.15.0', {'unpack_sources': False, 'source_tmpl': 'cffi-1.15.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('debugpy', '1.5.1', {'unpack_sources': False, 'source_tmpl': 'debugpy-1.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('pycparser', '2.21', {'unpack_sources': False, 'source_tmpl': 'pycparser-2.21-py2.py3-none-any.whl'}),
+    ('beautifulsoup4', '4.11.1', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'beautifulsoup4-4.11.1-py3-none-any.whl'}),
+    ('lxml', '4.9.1', {'unpack_sources': False, 'source_tmpl': 'lxml-4.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl'}),
+    ('tinycss2', '1.1.1', {'unpack_sources': False, 'source_tmpl': 'tinycss2-1.1.1-py3-none-any.whl'}),
+    ('fastjsonschema', '2.16.1', {'unpack_sources': False, 'source_tmpl': 'fastjsonschema-2.16.1-py3-none-any.whl'}),
+    ('soupsieve', '2.3.2', {'unpack_sources': False, 'source_tmpl': 'soupsieve-2.3.2.post1-py3-none-any.whl'}),
+    
+    # JupyterHub 1.4
+    ('jupyterhub', '1.4.2', {'unpack_sources': False, 'source_tmpl': 'jupyterhub-1.4.2-py3-none-any.whl'}),
+    ('alembic', '1.7.6', {'unpack_sources': False, 'source_tmpl': 'alembic-1.7.6-py3-none-any.whl'}),
+    ('oauthlib', '3.2.1', {'unpack_sources': False, 'source_tmpl': 'oauthlib-3.2.0-py3-none-any.whl'}),
+    ('pamela', '1.0.0', {'unpack_sources': False, 'source_tmpl': 'pamela-1.0.0-py2.py3-none-any.whl'}),
+    ('SQLAlchemy', '1.4.31', {'unpack_sources': False, 'source_tmpl': 'SQLAlchemy-1.4.31-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('certipy', '0.1.3', {'unpack_sources': False, 'source_tmpl': 'certipy-0.1.3-py3-none-any.whl'}),
+    ('async_generator', '1.10', {'unpack_sources': False, 'source_tmpl': 'async_generator-1.10-py3-none-any.whl'}),
+    ('Mako', '1.1.6', {'unpack_sources': False, 'source_tmpl': 'Mako-1.1.6-py2.py3-none-any.whl'}),
+    ('greenlet', '1.1.2', {'unpack_sources': False, 'source_tmpl': 'greenlet-1.1.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('pyOpenSSL', '22.0.0', {'modulename': 'OpenSSL', 'unpack_sources': False, 'source_tmpl': 'pyOpenSSL-22.0.0-py2.py3-none-any.whl'}),
+    ('cryptography', '36.0.1', {'unpack_sources': False, 'source_tmpl': 'cryptography-36.0.1-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('ruamel.yaml', '0.17.20', {'modulename': 'ruamel', 'unpack_sources': False, 'source_tmpl': 'ruamel.yaml-0.17.20-py3-none-any.whl'}),
+    ('ruamel.yaml.clib', '0.2.6', {'modulename': 'ruamel', 'unpack_sources': False, 'source_tmpl': 'ruamel.yaml.clib-0.2.6-cp39-cp39-manylinux1_x86_64.whl'}),
+    ('python_json_logger', '2.0.2', {'modulename': 'pythonjsonlogger', 'unpack_sources': False, 'source_tmpl': 'python_json_logger-2.0.2-py3-none-any.whl'}),
+    ('jupyter_telemetry', '0.1.0', {'unpack_sources': False, 'source_tmpl': 'jupyter_telemetry-0.1.0-py3-none-any.whl'}),
+
+    # batchspawner
+    ('batchspawner', '68a1fcd', {'source_urls': ['https://github.com/jupyterhub/batchspawner/tarball/%(version)s']}),
+
+    # ipywidgets and matplotlib: ipympl requires lower versions of matplotlib, ipython for compatibility
+    ('ipywidgets', '7.6.5', {'unpack_sources': False, 'source_tmpl': 'ipywidgets-7.6.5-py2.py3-none-any.whl'}),
+    ('Pillow', '9.0.1', {'modulename': 'PIL', 'unpack_sources': False, 'source_tmpl': 'Pillow-9.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('jupyterlab_widgets', '1.0.2', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_widgets-1.0.2-py3-none-any.whl'}),
+    ('widgetsnbextension', '3.5.2', {'unpack_sources': False, 'source_tmpl': 'widgetsnbextension-3.5.2-py2.py3-none-any.whl'}),
+    ('ipympl', '0.8.7', {'unpack_sources': False, 'source_tmpl': 'ipympl-0.8.7-py2.py3-none-any.whl'}),
+    ('cycler', '0.11.0', {'unpack_sources': False, 'source_tmpl': 'cycler-0.11.0-py3-none-any.whl'}),
+    ('kiwisolver', '1.3.2', {'unpack_sources': False, 'source_tmpl': 'kiwisolver-1.3.2-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('fonttools', '4.29.1', {'modulename': 'fontTools', 'unpack_sources': False, 'source_tmpl': 'fonttools-4.29.1-py3-none-any.whl'}),
+    ('matplotlib', '3.5.1', {'unpack_sources': False, 'source_tmpl': 'matplotlib-3.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl'}),
+
+    # dask
+    ('dask_labextension', '5.2.0', {'unpack_sources': False, 'source_tmpl': 'dask_labextension-5.2.0-py3-none-any.whl'}),
+    ('distributed', '2022.01.1', {'unpack_sources': False, 'source_tmpl': 'distributed-2022.1.1-py3-none-any.whl'}),
+    ('bokeh', '2.4.2', {'unpack_sources': False, 'source_tmpl': 'bokeh-2.4.2-py3-none-any.whl'}),
+    ('jupyter_server_proxy', '3.2.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_proxy-3.2.1-py3-none-any.whl'}),
+    ('tblib', '1.7.0', {'unpack_sources': False, 'source_tmpl': 'tblib-1.7.0-py2.py3-none-any.whl'}),
+    ('PyYAML', '6.0', {'modulename': 'yaml', 'unpack_sources': False, 'source_tmpl': 'PyYAML-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('psutil', '5.9.0', {'unpack_sources': False, 'source_tmpl': 'psutil-5.9.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('sortedcontainers', '2.4.0', {'unpack_sources': False, 'source_tmpl': 'sortedcontainers-2.4.0-py2.py3-none-any.whl'}),
+    ('dask', '2022.01.1', {'unpack_sources': False, 'source_tmpl': 'dask-2022.1.1-py3-none-any.whl'}),
+    ('msgpack', '1.0.3', {'unpack_sources': False, 'source_tmpl': 'msgpack-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('cloudpickle', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'cloudpickle-2.0.0-py3-none-any.whl'}),
+    ('zict', '2.0.0', {'unpack_sources': False, 'source_tmpl': 'zict-2.0.0-py3-none-any.whl'}),
+    ('aiohttp', '3.8.1', {'unpack_sources': False, 'source_tmpl': 'aiohttp-3.8.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('simpervisor', '0.4', {'unpack_sources': False, 'source_tmpl': 'simpervisor-0.4-py3-none-any.whl'}),
+    ('HeapDict', '1.0.1', {'unpack_sources': False, 'source_tmpl': 'HeapDict-1.0.1-py3-none-any.whl'}),
+    ('yarl', '1.7.2', {'unpack_sources': False, 'source_tmpl': 'yarl-1.7.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('frozenlist', '1.3.0', {'unpack_sources': False, 'source_tmpl': 'frozenlist-1.3.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('async_timeout', '4.0.2', {'unpack_sources': False, 'source_tmpl': 'async_timeout-4.0.2-py3-none-any.whl'}),
+    ('multidict', '6.0.2', {'unpack_sources': False, 'source_tmpl': 'multidict-6.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('aiosignal', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'aiosignal-1.2.0-py3-none-any.whl'}),
+    ('graphviz', '0.19.1', {'unpack_sources': False, 'source_tmpl': 'graphviz-0.19.1-py3-none-any.whl'}),
+
+    # Jupyter code formatter
+    ('isort', '5.10.1', {'unpack_sources': False, 'source_tmpl': 'isort-5.10.1-py3-none-any.whl'}),
+    ('jupyterlab_code_formatter', '1.4.10', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_code_formatter-1.4.10-py3-none-any.whl'}),
+
+    # Memory usage
+    ('nbresuse', '0.4.0', {'unpack_sources': False, 'source_tmpl': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
+    ('jupyter-resource-usage', '0.6.1', {'unpack_sources': False, 'source_tmpl': 'jupyter_resource_usage-0.6.1-py3-none-any.whl'}),
+    ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
+    ('jupyterlab_topbar', '0.6.1',  {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'jupyterlab_topbar-0.6.1-py3-none-any.whl'}),
+
+    # Bash kernel
+    ('bash_kernel', '0.7.2', {'use_pip': False}),
+
+    # ipcluster_magic (NB: new ipyparallel JupyterLab extension)
+    ('docopt', '0.6.2'),
+    ('pyexpect', '1.0.21'),
+    ('tqdm', '4.62.3', {'unpack_sources': False, 'source_tmpl': 'tqdm-4.62.3-py2.py3-none-any.whl'}),
+    ('ipyparallel', '8.2.0', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-8.2.0-py3-none-any.whl'}),
+    ('ipcmagic', 'v1.0.2', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
+
+    # ase for nglview
+    ('ase', '3.22.1', {'unpack_sources': False, 'source_tmpl': 'ase-3.22.1-py3-none-any.whl'}),
+    
+    # jupyterlab-hdf5
+    ('jupyterlab_hdf', '1.2.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_hdf-1.2.0-py2.py3-none-any.whl'}),
+    ('h5grove', '0.0.14', {'unpack_sources': False, 'source_tmpl': 'h5grove-0.0.14-py3-none-any.whl'}),
+    ('h5py', '3.7.0', {'unpack_sources': False, 'source_tmpl': 'h5py-3.7.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
+    ('orjson', '3.7.12', {'unpack_sources': False, 'source_tmpl': 'orjson-3.7.12-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('tifffile', '2022.8.12', {'unpack_sources': False, 'source_tmpl': 'tifffile-2022.8.12-py3-none-any.whl'}),
+    ('hdf5plugin', '3.3.1', {'unpack_sources': False, 'source_tmpl': 'hdf5plugin-3.3.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    
+    #jupyterlab-git
+    ('jupyterlab_git', '0.39.0', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_git-0.39.0-py3-none-any.whl'}),
+    ('nbdime', '3.1.1', {'unpack_sources': False, 'source_tmpl': 'nbdime-3.1.1-py2.py3-none-any.whl'}),
+    ('GitPython', '3.1.27', {'modulename': False, 'unpack_sources': False, 'source_tmpl': 'GitPython-3.1.27-py3-none-any.whl'}),
+    ('jupyter_server_mathjax', '0.2.6', {'unpack_sources': False, 'source_tmpl': 'jupyter_server_mathjax-0.2.6-py3-none-any.whl'}),
+    ('colorama', '0.4.5', {'unpack_sources': False, 'source_tmpl': 'colorama-0.4.5-py2.py3-none-any.whl'}),
+    ('gitdb', '4.0.9', {'unpack_sources': False, 'source_tmpl': 'gitdb-4.0.9-py3-none-any.whl'}),
+    ('smmap', '5.0.0', {'unpack_sources': False, 'source_tmpl': 'smmap-5.0.0-py3-none-any.whl'}),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes'],
+}
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter',
+}
+
+modextravars = {
+    'JUPYTER': '%(installdir)s/bin/jupyter',
+    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+    'R_LIBS_SITE': '%(installdir)s/share/ir41',
+    'JUPYTER_CONFIG_PATH': '$::env(HOME)/.jupyter:%(installdir)s/etc/jupyter',
+}
+
+moduleclass = 'tools'
