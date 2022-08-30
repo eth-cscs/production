@@ -114,8 +114,8 @@ stage('Update Stage') {
 
                     /* define command to load EasyBuild */
                     def load_easybuild = params.eb_version == "" ?
-                        "module load EasyBuild-custom/cscs" :
-                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
+                        "module use $WORKSPACE/easybuild/module && module load EasyBuild-custom/cscs" :
+                        "module use $WORKSPACE/easybuild/module && module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
                     /* define build command and PE target flags (pe_flags) */
                     def build_command = "eb $eb_flags"
