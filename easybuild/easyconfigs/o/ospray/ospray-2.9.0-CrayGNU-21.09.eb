@@ -1,0 +1,59 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ospray'
+version = '2.9.0'
+
+homepage = 'https://github.com/ospray'
+description = """An Open, Scalable, Parallel, Ray Tracing Based Rendering
+Engine for High-Fidelity Visualization"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/%(name)s/OSPRay/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('ispc', '1.17.0'),
+]
+
+dependencies = [
+    ('embree', '3.13.2'),
+    ('oidn', '1.4.1'),
+    ('openvkl', '1.2.0'),
+]
+
+configopts =  '-DBUILD_EMBREE_FROM_SOURCE:BOOL=OFF '
+configopts += '-DBUILD_GLFW:BOOL=OFF '
+configopts += '-DBUILD_OIDN:BOOL=OFF '
+configopts += '-DOSPRAY_MODULE_DENOISER:BOOL=ON '
+#configopts += '-DBUILD_OSPRAY_APPS:BOOL=OFF '
+#configopts += '-DOSPRAY_APPS_BENCHMARK:BOOL=OFF '
+#configopts += '-DOSPRAY_APPS_ENABLE_GLM:BOOL=OFF '
+#configopts += '-DOSPRAY_APPS_EXAMPLES:BOOL=OFF '
+#configopts += '-DOSPRAY_APPS_TESTING:BOOL=OFF '
+#configopts += '-DOSPRAY_APPS_TUTORIALS:BOOL=OFF '
+
+configopts += '-DOSPRAY_ENABLE_APPS=OFF '
+configopts += '-DOSPRAY_ENABLE_APPS_BENCHMARK:BOOL=OFF '
+configopts += '-DOSPRAY_ENABLE_APPS_EXAMPLES:BOOL=OFF '
+configopts += '-DOSPRAY_ENABLE_APPS_TESTING:BOOL=OFF '
+configopts += '-DOSPRAY_ENABLE_APPS_TUTORIALS:BOOL=OFF '
+configopts += '-DTBB_ROOT:PATH=/opt/intel/oneapi/tbb/latest/ '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2 '
+configopts += '-Dtbbmalloc_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so '
+configopts += '-Dtbbmalloc_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc_debug.so.2 '
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+#modextravars = {
+#    'LD_LIBRARY_PATH': '/opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#    'LD_LIBRARY_PATH': '/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:$::env(LD_LIBRARY_PATH)',
+#}
+
+moduleclass = 'vis'
