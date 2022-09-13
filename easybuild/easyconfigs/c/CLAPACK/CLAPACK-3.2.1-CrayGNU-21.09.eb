@@ -38,6 +38,7 @@ skipsteps = [
     'install',
 ]
 
+buildininstalldir = 'True'
 unpack_options = '--strip-components=1'
 
 sanity_check_paths = {
