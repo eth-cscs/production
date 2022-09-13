@@ -39,7 +39,7 @@ skipsteps = [
 ]
 
 unpack_options = '--strip-components=1'
-#buildininstalldir = True
+buildininstalldir = False
 
 sanity_check_paths = {
     'files': ['lapack_LINUX.a', 'tmglib_LINUX.a'],
