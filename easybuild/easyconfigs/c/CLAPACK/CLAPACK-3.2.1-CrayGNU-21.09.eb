@@ -14,7 +14,7 @@
 # setting the testing matrix: https://github.com/Reference-LAPACK/lapack/issues/85
 # Therefore there's nothing harmful for the code section.
 #
-easyblock = 'ConfigureMake'
+easyblock = 'CMakeMake'
 
 name = 'CLAPACK'
 version = '3.2.1'
@@ -24,26 +24,18 @@ description = "C version of LAPACK"
 
 toolchain = {'name': 'CrayGNU', 'version': '21.09'}
 
-source_urls = ['http://www.netlib.org/%(namelower)s/']
-sources = [SOURCELOWER_TGZ]
-checksums = ['6dc4c382164beec8aaed8fd2acc36ad24232c406eda6db462bd4c41d5e455fac']
+source_urls = ['https://github.com/hunter-packages/clapack/archive/refs/tags']
+sources = ['v%(version)s.tar.gz']
 
-prebuildopts = "ulimit -s unlimited && cp make.inc.example make.inc && "
-buildopts = 'CC="$CC" LOADER="$CC" '
-
-parallel = 1
-
-skipsteps = [
-    'configure',
-    'install',
-]
-
-buildininstalldir = 'True'
 unpack_options = '--strip-components=1'
 
+prebuildopts = "ulimit -s unlimited && "
+buildopts = 'CC="$CC" LOADER="$CC" '
+
 sanity_check_paths = {
-    'files': ['lapack_LINUX.a', 'tmglib_LINUX.a'],
-    'dirs': [],
+    'files': ['include/blaswrap.h', 'include/clapack.h', 'include/f2c.h', 
+              'lib/libblas.a', 'lib/libf2c.a', 'lib/liblapack.a'],
+    'dirs': ['include', 'lib']
 }
 
 moduleclass = 'math'
