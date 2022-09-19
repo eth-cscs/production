@@ -31,7 +31,7 @@ preconfigopts = " module unload cray-libsci && module list && "
 configopts = " -DQE_ENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
 
 prebuildopts = " module unload cray-libsci && module list && "
-prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 9 && '
+prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 10 && '
 buildopts = "all epw"
 
 sanity_check_paths = {
