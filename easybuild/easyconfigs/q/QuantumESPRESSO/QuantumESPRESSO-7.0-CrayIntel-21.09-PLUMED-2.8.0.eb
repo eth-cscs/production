@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'QuantumESPRESSO'
-local_plumedversion = '2.8.0'
+local_plumedversion = '2.9.b190b0d'
 versionsuffix = '-PLUMED-%s' % local_plumedversion
 version = '7.0'
 
