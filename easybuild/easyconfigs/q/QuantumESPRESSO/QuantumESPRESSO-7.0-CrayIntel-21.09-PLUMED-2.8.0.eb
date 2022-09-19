@@ -1,0 +1,42 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'QuantumESPRESSO'
+local_plumedversion = '2.8.0'
+versionsuffix = '-PLUMED-%s' % local_plumedversion
+version = '7.0'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'CrayIntel', 'version': '21.09'}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version_major)s.%(version_minor)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cray-hdf5', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('libxc', '5.1.7'),
+    ('PLUMED', '%s' %local_plumedversion) 
+]
+
+preconfigopts = " module unload cray-libsci && module list && "
+configopts = " -DQE_ENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
+
+prebuildopts = " module unload cray-libsci && module list && "
+prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 9 && '
+buildopts = "all epw"
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'
