@@ -13,7 +13,7 @@ description = """
 toolchain = SYSTEM
 
 sources = ['%(version)s.tar.gz']
-source_urls = ['https://github.com/ImageMagick/ImageMagick/archive/refs/tags']
+source_urls = [GITHUB_SOURCE]
 
 configopts = "--with-gslib --with-x"
 
