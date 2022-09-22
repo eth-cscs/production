@@ -7,7 +7,7 @@ homepage = 'https://gitlab.com/OldManProgrammer/unix-tree'
 description = """Tree is a recursive directory listing command that produces a
 depth indented listing of files."""
 
-toolchain = {'name': 'system', 'version': ''}
+toolchain = SYSTEM
 source_urls = ['https://gitlab.com/OldManProgrammer/unix-tree/-/archive/%(version)s']
 sources = ['unix-%(name)s-%(version)s.tgz']
 
@@ -22,4 +22,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'devel'
-
