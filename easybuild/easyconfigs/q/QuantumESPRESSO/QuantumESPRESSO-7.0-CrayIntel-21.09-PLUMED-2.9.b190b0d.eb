@@ -1,5 +1,5 @@
 # created by Luca Marsella (CSCS)
-easyblock = 'CMakeMake'
+easyblock = 'ConfigureMake'
 
 name = 'QuantumESPRESSO'
 local_plumedversion = '2.9.b190b0d'
@@ -18,7 +18,6 @@ toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True}
 sources = ['https://github.com/QEF/q-e/archive/qe-%(version_major)s.%(version_minor)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.22.1', '', True),
     ('cray-hdf5', EXTERNAL_MODULE)
 ]
 
@@ -28,7 +27,9 @@ dependencies = [
 ]
 
 preconfigopts = " module unload cray-libsci && module list && "
-configopts = " -DQE_ENABLE_HDF5=1 -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
+configopts = " CC=cc FC=ftn LDFLAGS=\"-qopenmp\" "
+configopts += " --enable-openmp --enable-parallel "
+configopts =+ " --with-hdf5=$CRAY_HDF5_PREFIX --with-libxc=$EBROOTLIBXC --with-scalapack "
 
 prebuildopts = " module unload cray-libsci && module list && "
 prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 10 && '
