@@ -33,7 +33,10 @@ configopts += " --with-hdf5=$CRAY_HDF5_PREFIX --with-libxc=$EBROOTLIBXC --with-s
 
 prebuildopts = " module unload cray-libsci && module list && "
 prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 10 && '
-buildopts = "all epw"
+buildopts = "pw"
+
+# single make process required, since parallel builds fail
+maxparallel = 1
 
 sanity_check_paths = {
     'files': ['bin/pw.x'],
