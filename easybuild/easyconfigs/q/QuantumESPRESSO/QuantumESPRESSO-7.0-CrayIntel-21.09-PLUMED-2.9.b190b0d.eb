@@ -29,7 +29,7 @@ dependencies = [
 preconfigopts = " module unload cray-libsci && module list && "
 configopts = " CC=cc FC=ftn LDFLAGS=\"-qopenmp\" "
 configopts += " --enable-openmp --enable-parallel "
-configopts =+ " --with-hdf5=$CRAY_HDF5_PREFIX --with-libxc=$EBROOTLIBXC --with-scalapack "
+configopts += " --with-hdf5=$CRAY_HDF5_PREFIX --with-libxc=$EBROOTLIBXC --with-scalapack "
 
 prebuildopts = " module unload cray-libsci && module list && "
 prebuildopts = ' plumed-patch -p -f --runtime --shared <<< 10 && '
