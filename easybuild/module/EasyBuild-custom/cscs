@@ -64,14 +64,8 @@ if { $status == 0 } {
 #########################
 # SYSTEM SPECIFIC SETUP #
 #########################
-# current system name
-if { [ string match *eiger* $::env(LMOD_SYSTEM_NAME) ] } {
- set system "eiger"
-} elseif { [ string match *pilatus* $::env(LMOD_SYSTEM_NAME) ] } {
- set system "pilatus"
-} else {
- set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
-}
+# current system name (/etc/xthostname exists on Dom, Piz Daint and Alps)
+set system [exec cat /etc/xthostname]
 
 # system specific setup
 if { [ string match *daint* $system ] } {
