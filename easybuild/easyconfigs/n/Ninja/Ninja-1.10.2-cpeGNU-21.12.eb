@@ -1,4 +1,4 @@
-# jf (Jean Favre) CSCS
+# contributed by jf (Jean Favre) CSCS
 easyblock = 'CmdCp'
 
 name = 'Ninja'
