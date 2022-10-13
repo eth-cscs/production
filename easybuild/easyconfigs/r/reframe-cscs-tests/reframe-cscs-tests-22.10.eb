@@ -30,8 +30,11 @@ postinstallcmds = [
 
 modextrapaths = {
     'RFM_CONFIG_FILE': 'config/cscs.py',
-    'RFM_CHECK_SEARCH_PATH': 'checks',
-    'RFM_AUTODETECT_XTHOSTNAME': '1',
+    'RFM_CHECK_SEARCH_PATH': 'checks'
+}
+
+modextravars = {
+    'RFM_AUTODETECT_XTHOSTNAME': '1'
 }
 
 sanity_check_paths = {
