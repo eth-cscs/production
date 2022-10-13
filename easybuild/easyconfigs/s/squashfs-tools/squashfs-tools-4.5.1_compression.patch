@@ -1,0 +1,30 @@
+diff -Nrauw squashfs-tools-4.5.1_original/squashfs-tools/Makefile squashfs-tools-4.5.1/squashfs-tools/Makefile
+--- squashfs-tools-4.5.1_original/squashfs-tools/Makefile	2022-03-17 20:32:02.000000000 +0100
++++ squashfs-tools-4.5.1/squashfs-tools/Makefile	2022-10-13 16:33:05.223981102 +0200
+@@ -34,7 +34,7 @@
+ # To build install the library and uncomment
+ # the XZ_SUPPORT line below.
+ #
+-#XZ_SUPPORT = 1
++XZ_SUPPORT = 1
+ 
+ 
+ ############ Building LZO support ##############
+@@ -80,7 +80,7 @@
+ # To build install the library and uncomment
+ # the ZSTD_SUPPORT line below.
+ #
+-#ZSTD_SUPPORT = 1
++ZSTD_SUPPORT = 1
+ 
+ 
+ ######## Specifying default compression ########
+@@ -165,7 +165,7 @@
+ #        End of BUILD options section         #
+ ###############################################
+ #
+-INCLUDEDIR = -I.
++INCLUDEDIR = -I. -I$(EBROOTXZ)/include
+ 
+ MKSQUASHFS_OBJS = mksquashfs.o read_fs.o action.o swap.o pseudo.o compressor.o \
+ 	sort.o progressbar.o info.o restore.o process_fragments.o \

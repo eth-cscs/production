@@ -1,0 +1,27 @@
+# jg (CSCS) teojgo(CSCS)
+easyblock = 'MakeCp'
+
+name = 'squashfs-tools'
+version = '4.5.1'
+homepage = 'https://github.com/plougher/squashfs-tools'
+description = "tools to create and extract Squashfs filesystems"
+toolchain = SYSTEM
+source_urls = ['https://github.com/plougher/squashfs-tools/archive']
+sources = ['%(version)s.tar.gz']
+patches = ['squashfs-tools-4.5.1_compression.patch']
+checksums = [
+    '277b6e7f75a4a57f72191295ae62766a10d627a4f5e5f19eadfbc861378deea7',  # 4.5.1.tar.gz
+    '70c31f0857f719a89b1abd08b8ceed80e9483ae1820894e247beb7f2cbc824b5',  # squashfs-tools-4.5.1_compression.patch
+]
+
+dependencies = [('xz', '5.2.5'), ('zstd', '1.5.2')]
+prebuildopts = 'ls -l && cd squashfs-tools && '
+files_to_copy = [
+    (['squashfs-tools/mksquashfs', 'squashfs-tools/unsquashfs'], 'bin'),
+]
+sanity_check_paths = {
+    'files': ['bin/unsquashfs'],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
