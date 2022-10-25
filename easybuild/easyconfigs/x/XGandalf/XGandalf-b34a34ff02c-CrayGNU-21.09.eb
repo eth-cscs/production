@@ -1,0 +1,33 @@
+easyblock = 'CMakeMake'
+
+name = 'xgandalf'
+version = 'b34a34ff02c'
+
+homepage = 'https://stash.desy.de/users/gevorkov/repos/xgandalf/browse'
+description = """XGANDALF - extended gradient descent algorithm for lattice finding"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+sources = [{
+    'filename': 'xgandalf-%s.tar.gz' % version,
+    'git_config': {
+        'url': 'https://stash.desy.de/scm/~gevorkov/',
+        'repo_name': 'xgandalf',
+        'commit': version,
+    },
+}]
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+
+dependencies = [
+    ('Eigen', '3.4.0'),
+]
+
+sanity_check_paths = {
+    'files': ['lib64/libxgandalf.so'],
+    'dirs': ['share/xgandalf', 'lib64/pkgconfig'],
+}
+
+moduleclass = 'phys'

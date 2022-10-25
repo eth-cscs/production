@@ -1,0 +1,47 @@
+easyblock = 'CMakeMake'
+
+name = 'CrystFEL'
+version = '0.10.1'
+
+homepage = 'http://www.desy.de/~twhite/crystfel/'
+description = """CrystFEL is a suite of programs for processing diffraction data acquired "serially" in a "snapshot"
+manner, such as when using the technique of Serial Femtosecond Crystallography (SFX) with a free-electron laser
+source."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['http://www.desy.de/~twhite/crystfel/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['e9e88ae41080beb8a7e2942c262aec130470b46fb2b79324558745aade2b2d45']
+
+# builddependencies = [
+#     ('CMake', '3.13.3'),
+#     ('pkg-config', '0.29.2'),
+# ]
+
+dependencies = [
+    ('xgandalf', 'b34a34ff02c'),
+    ('h5py', '3.6.0', '-parallel'),
+    ('GSL', '2.7'),
+    ('LibTIFF', '4.3.0'),
+    # ('ncurses', '6.1'),
+    # ('GLib', '2.60.1', '', True),
+    # ('GTK+', '3.24.8', '', True),
+    # ('cairo', '1.16.0', '', True),
+    # ('Gdk-Pixbuf', '2.38.1', '', True),
+    # ('FFTW', '3.3.8', '', True),
+    # ('util-linux', '2.33'),
+    ('zlib', '1.2.11'),
+]
+
+runtest = 'test'
+
+sanity_check_paths = {
+    'files': ['lib64/libcrystfel.%s' % SHLIB_EXT] +
+             ['bin/' + b for b in ['ambigator', 'cell_explorer', 'check_hkl', 'compare_hkl',
+                                   'get_hkl', 'indexamajig', 'list_events', 'make_pixelmap', 'partialator',
+                                   'partial_sim', 'pattern_sim', 'process_hkl', 'render_hkl', 'whirligig']],
+    'dirs': ['share/doc/crystfel/scripts/']
+}
+
+moduleclass = 'phys'
