@@ -1,6 +1,6 @@
 easyblock = 'CMakeMake'
 
-name = 'xgandalf'
+name = 'XGandalf'
 version = 'b34a34ff02c'
 
 homepage = 'https://stash.desy.de/users/gevorkov/repos/xgandalf/browse'
