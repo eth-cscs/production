@@ -15,7 +15,7 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['e9e88ae41080beb8a7e2942c262aec130470b46fb2b79324558745aade2b2d45']
 
 dependencies = [
-    ('xgandalf', 'b34a34ff02c'),
+    ('XGandalf', 'b34a34ff02c'),
     ('h5py', '3.6.0', '-parallel'),
     ('GSL', '2.7'),
     ('LibTIFF', '4.3.0'),
