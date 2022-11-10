@@ -1,0 +1,65 @@
+name = 'Python'
+version = '3.10.8'
+
+homepage = 'https://python.org/'
+description = """Python is a programming language that lets you work more quickly and integrate your systems
+ more effectively."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'usempi': True}
+
+source_urls = ['https://www.python.org/ftp/%(namelower)s/%(version)s/']
+sources = [SOURCE_TGZ]
+checksums = ['f400c3fb394b8bef1292f6dc1292c5fadc3533039a5bc0c3e885f3e16738029a']
+
+builddependencies = [
+    ('cudatoolkit', EXTERNAL_MODULE),
+    ('craype-accel-nvidia60', EXTERNAL_MODULE),
+]
+
+dependencies = [
+    ('binutils', '2.38', '', True),
+    ('bzip2', '1.0.8', '', True),  # required for bz2 package in Python stdlib
+    ('zlib', '1.2.12', '', True),
+    ('libreadline', '8.1'),
+    ('ncurses', '6.3', '', True),
+    ('SQLite', '3.36.0'),
+    ('XZ', '5.2.5'),
+    ('GMP', '6.2.1'),  # required for pycrypto
+    ('libffi', '3.4.2'),
+    ('OpenSSL', '1.1', '', True),
+]
+
+install_pip = True
+
+exts_default_options = {
+    'download_dep_fail': True,
+    'sanity_pip_check': True,
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True,
+}
+
+# order is important!
+# package versions updated 10 Nov 2022
+exts_list = [
+    ('wheel', '0.38.4', {
+        'checksums': ['965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac'],
+    }),
+    ('setuptools', '59.2.0', {  # version required by numpy
+        'checksums': ['157d21de9d055ab9e8ea3186d91e7f4f865e11f42deafa952d90842671fc2576'],
+    }),
+    ('pip', '22.3.1', {
+        'checksums': ['65fd48317359f3af8e593943e6ae1506b66325085ea64b706a998c6e83eeaf38'],
+    }),
+    ('Cython', '0.29.32', {
+        'checksums': ['8733cf4758b79304f2a4e39ebfac5e92341bce47bcceb26c1254398b2f8c1af7'],
+    }),
+    ('six', '1.16.0', {
+        'checksums': ['1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926'],
+    }),
+    ('mpi4py', '3.1.4', {
+        'checksums': ['17858f2ebc623220d0120d1fa8d428d033dde749c4bc35b33d81a66ad7f93480'],
+    }),
+]
+
+moduleclass = 'lang'
