@@ -12,12 +12,8 @@ source_urls = ['https://www.python.org/ftp/%(namelower)s/%(version)s/']
 sources = [SOURCE_TGZ]
 checksums = ['f400c3fb394b8bef1292f6dc1292c5fadc3533039a5bc0c3e885f3e16738029a']
 
-builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
-    ('craype-accel-nvidia60', EXTERNAL_MODULE),
-]
-
 dependencies = [
+    # ('gcc', '9.3.0', '', True),
     ('binutils', '2.38', '', True),
     ('bzip2', '1.0.8', '', True),  # required for bz2 package in Python stdlib
     ('zlib', '1.2.12', '', True),
@@ -30,9 +26,17 @@ dependencies = [
     ('OpenSSL', '1.1', '', True),
 ]
 
+# preconfigopts = ' module swap gcc; '
+# preconfigopts = ' export EBVERSIONGCC="9.3.0"; '
+# modextravars = dict(EBVERSIONGCC='9.3.0')
+import os
+os.environ['EBVERSIONGCC'] = '9.3.0'
+
 install_pip = True
 
 exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
     'download_dep_fail': True,
     'sanity_pip_check': True,
     'source_urls': [PYPI_SOURCE],
@@ -45,8 +49,8 @@ exts_list = [
     ('wheel', '0.38.4', {
         'checksums': ['965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac'],
     }),
-    ('setuptools', '59.2.0', {  # version required by numpy
-        'checksums': ['157d21de9d055ab9e8ea3186d91e7f4f865e11f42deafa952d90842671fc2576'],
+    ('setuptools', '62.6.0', {
+        'checksums': ['990a4f7861b31532871ab72331e755b5f14efbe52d336ea7f6118144dd478741'],
     }),
     ('pip', '22.3.1', {
         'checksums': ['65fd48317359f3af8e593943e6ae1506b66325085ea64b706a998c6e83eeaf38'],
@@ -57,6 +61,14 @@ exts_list = [
     ('six', '1.16.0', {
         'checksums': ['1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926'],
     }),
+    ('numpy', '1.23.4', {
+        'unpack_sources': False,
+        'skipsteps': ['build', 'test'],
+        'easyblock': 'PythonPackage',
+                              # numpy-1.23.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        'source_tmpl': '%(name)s-%(version)s-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'
+        }
+    ),
     ('mpi4py', '3.1.4', {
         'checksums': ['17858f2ebc623220d0120d1fa8d428d033dde749c4bc35b33d81a66ad7f93480'],
     }),
