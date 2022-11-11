@@ -13,7 +13,6 @@ sources = [SOURCE_TGZ]
 checksums = ['f400c3fb394b8bef1292f6dc1292c5fadc3533039a5bc0c3e885f3e16738029a']
 
 dependencies = [
-    # ('gcc', '9.3.0', '', True),
     ('binutils', '2.38', '', True),
     ('bzip2', '1.0.8', '', True),  # required for bz2 package in Python stdlib
     ('zlib', '1.2.12', '', True),
@@ -26,9 +25,7 @@ dependencies = [
     ('OpenSSL', '1.1', '', True),
 ]
 
-# preconfigopts = ' module swap gcc; '
-# preconfigopts = ' export EBVERSIONGCC="9.3.0"; '
-# modextravars = dict(EBVERSIONGCC='9.3.0')
+# workaround for EBv4.6.1
 import os
 os.environ['EBVERSIONGCC'] = '9.3.0'
 
