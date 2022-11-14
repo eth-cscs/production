@@ -21,11 +21,12 @@ sanity_check_paths = {
 }
 
 # add the installation dir to PATH
-modextrapaths = {
-    'PATH': '',
-}
+#modextrapaths = {
+#    'PATH': '',
+#}
 
+# create a bin directory and move the executable there
 # remove exec permission for the provided installation script
-postinstallcmds = ["chmod og-x %(installdir)s/install.sh"]
+postinstallcmds = ["mkdir bin && mv git-lfs bin && chmod og-x %(installdir)s/install.sh"]
 
 moduleclass = 'tools'
