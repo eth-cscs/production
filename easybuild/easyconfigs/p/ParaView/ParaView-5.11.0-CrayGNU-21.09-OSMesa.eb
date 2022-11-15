@@ -3,7 +3,7 @@ easyblock = 'CMakeMake'
 
 name = 'ParaView'
 version = '5.11.0'
-versionsuffix = '-RC1-OSMesa'
+versionsuffix = '-OSMesa'
 
 homepage = 'http://www.paraview.org'
 description = "ParaView is a scientific parallel visualizer."
@@ -14,7 +14,7 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 source_urls = [
     'http://www.%(namelower)s.org/%(namelower)s-downloads/download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile=',
 ]
-sources = ['%(name)s-v%(version)s-RC1.tar.gz']
+sources = ['%(name)s-v%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.22.1', '', True)
@@ -23,11 +23,10 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('h5py', '3.6.0', '-serial'),
     ('Boost', '1.78.0', '-python%(pymajver)s'),
-    ('CDI', '2.0.6'),
+    ('CDI', '2.1.0'),
     ('Catalyst', '2.0.0', '-3f7871'),
     ('Mesa', '21.3.1'),
-    ('ospray', '2.9.0'),
-    ('oidn', '1.4.1'),
+    ('ospray', '2.8.0'),
 ]
 
 configopts = '-DPARAVIEW_USE_MPI:BOOL=ON '
@@ -54,11 +53,12 @@ configopts += '-DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROO
 configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON '
 configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
 configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
-configopts += '-DOpenImageDenoise_DIR="$EBROOTOIDN/lib/cmake/OpenImageDenoise-1.4.1" '
+configopts += '-DOpenImageDenoise_DIR="$EBROOTOSPRAY/lib/cmake/OpenImageDenoise-1.4.2" '
 #
 configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON '
 
 #
+configopts += "-DVTK_MODULE_ENABLE_VTK_GeovisCore:STRING=YES "
 configopts += '-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=ON '
 #
 configopts += '-DPARAVIEW_ENABLE_CATALYST:BOOL=ON -Dcatalyst_DIR="$EBROOTCATALYST/lib64/cmake/catalyst-2.0" '
