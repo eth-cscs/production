@@ -16,16 +16,17 @@ source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v%(versio
 sources = ['%(name)s-linux-amd64-v%(version)s.tar.gz']
 
 sanity_check_paths = {
-    'files': ["git-lfs"],
+    'files': ["bin/git-lfs"],
     'dirs': [""]
 }
 
 # add the installation dir to PATH
-modextrapaths = {
-    'PATH': '',
-}
+#modextrapaths = {
+#    'PATH': '',
+#}
 
+# create a bin directory and move the executable there
 # remove exec permission for the provided installation script
-postinstallcmds = ["chmod og-x %(installdir)s/install.sh"]
+postinstallcmds = ["mkdir %(installdir)s/bin && mv %(installdir)s/git-lfs %(installdir)s/bin && chmod og-x %(installdir)s/install.sh"]
 
 moduleclass = 'tools'
