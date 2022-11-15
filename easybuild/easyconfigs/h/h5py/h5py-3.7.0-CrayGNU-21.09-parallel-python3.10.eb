@@ -20,7 +20,6 @@ checksums = ['3fcf37884383c5da64846ab510190720027dca0768def34dd8dcb659dbe5cbf3']
 
 dependencies = [
     ('Python', '3.10.8'),
-    # ('numpy', '1.21.6', '-python%(pyshortver)s'),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
 ]
 
