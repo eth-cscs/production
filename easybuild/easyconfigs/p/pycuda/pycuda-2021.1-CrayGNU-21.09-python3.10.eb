@@ -14,7 +14,7 @@ toolchainopts = {'usempi': True}
 sources = [SOURCE_TAR_GZ]
 
 builddependencies = [
-    ('cudatoolkit', EXTERNAL_MODULE),
+    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE),
     ('craype-accel-nvidia60', EXTERNAL_MODULE),
 ]
 
