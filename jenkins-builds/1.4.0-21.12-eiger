@@ -10,6 +10,7 @@
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
  ParaView-5.10.0-cpeCray-21.12-OSMesa.eb
+ ParaView-5.11.0-cpeCray-21.12-OSMesa.eb --set-default-module
  VTK-9.1.0-cpeCray-21.12-OSMesa.eb    --set-default-module
  Ascent-0.8.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12.eb
