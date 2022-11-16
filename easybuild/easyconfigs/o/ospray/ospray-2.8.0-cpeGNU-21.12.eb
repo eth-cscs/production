@@ -15,7 +15,7 @@ sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-    ('git-lfs', '3.2.0', '', True),
+#    ('git-lfs', '3.2.0', '', True),
 ]
 
 #configopts =  '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
@@ -25,7 +25,7 @@ configopts += '-DDOWNLOAD_TBB:BOOL=OFF '
 configopts += '-DBUILD_OSPRAY_APPS:BOOL=OFF '
 configopts += '-DBUILD_GLFW:BOOL=OFF '
 configopts += '-DBUILD_OIDN:BOOL=ON '
-configopts += '-DBUILD_OIDN_FROM_SOURCE:BOOL=ON '
+configopts += '-DBUILD_OIDN_FROM_SOURCE:BOOL=OFF '
 
 srcdir = 'scripts/superbuild'
 
