@@ -43,6 +43,7 @@
  PLUMED-2.7.3-CrayGNU-21.09.eb                          --set-default-module
  PLUMED-2.8.0-CrayGNU-21.09.eb
  QuantumESPRESSO-7.0-CrayIntel-21.09.eb                 --set-default-module
+ QuantumESPRESSO-7.1-CrayIntel-21.09.eb
  singularity-3.6.4-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.3.0-CrayIntel-21.09.eb                          --set-default-module
