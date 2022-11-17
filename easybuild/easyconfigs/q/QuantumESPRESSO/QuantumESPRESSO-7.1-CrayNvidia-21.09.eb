@@ -36,9 +36,13 @@ configopts = "-DQE_ENABLE_CUDA=1 -DQE_FFTW_VENDOR=Intel_DFTI -DQE_ENABLE_LIBXC=1
 prebuildopts = "cp $EBROOTLIBXC/include/*.mod Modules/mod/qe_modules && "
 buildopts = "all epw"
 
+postinstallcmds = [
+    'rsync %(builddir)s/easybuild_obj/bin/*.x %(installdir)s/bin'
+]
+
 sanity_check_paths = {
-    'files': ['bin/pw.x'],
-    'dirs': ['']
+    'files': ['bin/cp.x', 'bin/pp.x', 'bin/pw.x'],
+    'dirs': ['bin']
 }
 
 moduleclass = 'chem'
