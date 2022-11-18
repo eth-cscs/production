@@ -1,4 +1,5 @@
  Ascent-0.8.0-CrayGNU-21.09.eb                          --set-default-module
+ Ascent-0.9.0-CrayGNU-21.09-667644.eb
  Boost-1.78.0-CrayGNU-21.09.eb
  Boost-1.78.0-CrayGNU-21.09-python3.eb                  --set-default-module
  Buildah-1.28.0.eb                                      --set-default-module
