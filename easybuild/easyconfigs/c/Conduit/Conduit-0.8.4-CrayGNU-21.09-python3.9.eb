@@ -5,7 +5,7 @@ easyblock = 'CMakeMake'
 
 name = 'Conduit'
 version = '0.8.4'
-versionsuffix = '-python%(pymajver)s'
+versionsuffix = '-python%(pyshortver)s'
 
 homepage = 'https://llnl-conduit.readthedocs.io/en/latest/index.html'
 description = """Conduit is an open source project from Lawrence Livermore
@@ -22,6 +22,10 @@ sources = ['conduit-v%(version)s-src-with-blt.tar.gz']
 builddependencies = [
     ('CMake', '3.22.1', '', True),
 ]
+
+#preconfigopts  = 'module swap gcc/10.3.0; '
+#prebuildopts  = 'module swap gcc/10.3.0; '
+
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
@@ -49,5 +53,9 @@ sanity_check_paths = {
     'dirs': ['bin', 'include', 'lib', 'python-modules'],
 }
 modextravars = {'PYTHONPATH':'%(installdir)s/python-modules:$::env(PYTHONPATH)'}
+
+#modtclfooter = """
+#module swap gcc/10.3.0
+#"""
 
 moduleclass = 'vis'

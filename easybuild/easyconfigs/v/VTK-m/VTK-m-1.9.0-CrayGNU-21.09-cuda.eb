@@ -19,18 +19,17 @@ toolchainopts = {'verbose': False}
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE)
+    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE)
 ]
 
 srcdir = "easybuild_obj/vtk-m-v1.9.0"
 
 separate_build_dir = True
 
-preconfigopts  = "git clone --recursive https://gitlab.kitware.com/paraview/paraview-superbuild.git && "
 preconfigopts  = "curl -L https://gitlab.kitware.com/vtk/vtk-m/-/archive/v1.9.0/vtk-m-v1.9.0.tar.gz -o  vtk-m-v1.9.0.tar.gz && "
 preconfigopts += "tar -xzf vtk-m-v1.9.0.tar.gz && "
 preconfigopts += "cd vtk-m-v1.9.0 && "
-preconfigopts += "mkdir build; cd build; "
+preconfigopts += "mkdir build; cd build; module swap gcc/10.3.0; "
 
 configopts  = '-DCMAKE_BUILD_TYPE=Release '
 configopts += '-DENABLE_FORTRAN:BOOL=ON '

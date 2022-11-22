@@ -7,7 +7,7 @@ name = 'Ascent'
 version = '0.9.0'
 
 _commit_version = '667644c8ccc8048664b459533a64a5e93b8715fe'
-versionsuffix = '-%s' % _commit_version[:6]
+versionsuffix = f'-{_commit_version[:6]}-python%(pyshortver)s'
 
 homepage = 'https://github.com/Alpine-DAV/ascent.git'
 description = """Ascent is an easy-to-use flyweight in situ visualization and
@@ -26,15 +26,14 @@ sources = [{
 'filename': '%s-%s-%s.tar.gz' % (name, version, _commit_version),
 }]
 
-#preconfigopts  = "cd ascent && git submodule init && git submodule update"
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-    ('cudatoolkit/11.2.0_3.39-2.1__gf93aa1c', EXTERNAL_MODULE)
+    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE),
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
-    ('Conduit', '0.8.4', '-python3'),
+    ('Conduit', '0.8.4', '-python%(pyshortver)s'),
     ('VTK-m', '1.9.0', '-cuda'),
 ]
 
