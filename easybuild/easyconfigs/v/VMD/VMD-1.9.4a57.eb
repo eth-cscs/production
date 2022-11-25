@@ -4,7 +4,7 @@ easyblock = "CmdCp"
 
 name = 'VMD'
 version = '1.9.4'
-versionsuffix = '-a57'
+versionsuffix = 'a57'
 
 homepage = 'http://www.ks.uiuc.edu/Research/vmd/'
 description = """
