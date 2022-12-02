@@ -79,7 +79,7 @@ void notifySlackFinish() {
        resultColor = '#E74C3C'
 
    slackSend(color: resultColor,
-             message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* (<${env.BUILD_URL}|Open>)")
+             message: "Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] finished with result: *${currentBuild.result}* (<${env.RUN_DISPLAY_URL}|Open>)")
 }
 
 /*
