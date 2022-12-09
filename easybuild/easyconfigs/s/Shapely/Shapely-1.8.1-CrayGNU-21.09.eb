@@ -14,6 +14,7 @@ toolchainopts = {'verbose': False}
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 checksums = ['0956a3aced40c31a957a52aa1935467334926844a6776b469acb0760a5e6aba8']
+
 exts_defaultclass = 'PythonPackage'
 use_pip = True
 

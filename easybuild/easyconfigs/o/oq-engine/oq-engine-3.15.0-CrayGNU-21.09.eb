@@ -1,0 +1,173 @@
+# @author: sarafael, gppezzi
+easyblock = 'Bundle'
+
+name = 'oq-engine'
+version = '3.15.0'
+
+homepage = 'https://pypi.python.org/pypi'
+description = """This module is a bundle of Python packages on Cray systems based on the module cray-python"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+builddependencies = [('wheel', '0.37.0')]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('PROJ', '8.1.1'),
+    ('libspatialindex', '1.8.5'),
+    ('GEOS', '3.10.2'),
+    ('h5py', '3.6.0', '-serial'),
+    ('Shapely', '1.8.1'),
+]
+
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': [PYPI_SOURCE],
+    'use_pip': True
+}
+
+exts_list = [
+    ('pyzmq', '22.3.0', {
+        'modulename': 'zmq',
+        'checksums': ['8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c'],
+    }),
+    ('psutil', '5.9.0', {
+        'checksums': ['869842dbd66bb80c3217158e629d6fceaecc3a3166d3d1faee515b05dd26ca25'],
+    }),
+    ('docutils', '0.18.1', {
+        'checksums': ['679987caf361a7539d76e584cbeddc311e3aee937877c87346f31debc63e9d06'],
+    }),
+    ('decorator', '5.1.1', {
+        'checksums': ['637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330'],
+    }),
+    ('Django', '4.0.3', {
+        'checksums': ['77ff2e7050e3324c9b67e29b6707754566f58514112a9ac73310f60cd5261930'],
+    }),
+    ('idna', '3.3', {
+        'checksums': ['9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d'],
+    }),
+    ('chardet', '4.0.0', {
+        'checksums': ['0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa'],
+    }),
+    ('charset-normalizer', '2.0.12', {
+        'checksums': ['2857e29ff0d34db842cd7ca3230549d1a697f96ee6d3fb071cfa6c7393832597'],
+    }),
+    ('urllib3', '1.26.9', {
+        'checksums': ['aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e'],
+    }),
+    ('requests', '2.27.1', {
+        'checksums': ['68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61'],
+    }),
+    ('pyshp', '1.2.3', {
+        'modulename': 'shapefile',
+        'checksums': ['e18cc19659dadc5ddaa891eb780a6958094da0cf105a1efe0f67e75b4fa1cdf9'],
+    }),
+    ('toml', '0.10.2', {
+        'checksums': ['b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f'],
+    }),
+    ('pyproj', '3.3.0', {
+        'installopts': "--no-binary pyproj",
+        'checksums': ['ce8bfbc212729e9a643f5f5d77f7a93394e032eda1e2d8799ae902d08add747e'],
+    }),
+    ('setproctitle', '1.2.2', {
+        'checksums': ['7dfb472c8852403d34007e01d6e3c68c57eb66433fb8a5c77b13b89a160d97df'],
+    }),
+    ('asgiref', '3.5.0', {
+        'checksums': ['2f8abc20f7248433085eda803936d98992f1343ddb022065779f37c5da0181d0'],
+    }),
+    ('sqlparse', '0.4.2', {
+        'checksums': ['0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae'],
+    }),
+    ('python-pam', '2.0.0', {
+        'modulename': 'pam',
+        'checksums': ['f0d9d79236b5d1cbff50bdb7c7e2800b1abf39856825f753389297f16eb79017'],
+    }),
+    ('django-pam', '2.0.1', {
+        'checksums': ['1c0e670589188e80b800ac5e93ac6599fc1bf5d850bb0f752dab6619efe7875c'],
+    }),
+    ('mock', '4.0.3', {
+        'checksums': ['7d3fbbde18228f4ff2f1f119a45cdffa458b4c0dee32eb4d2bb2f82554bac7bc'],
+    }),
+    ('pbr', '5.8.1', {
+        'checksums': ['66bc5a34912f408bb3925bf21231cb6f59206267b7f63f3503ef865c1a292e25'],
+    }),
+    ('certifi', '2021.10.8', {
+        'checksums': ['78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872'],
+    }),
+    ('setproctitle', '1.2.2', {
+        'checksums': ['7dfb472c8852403d34007e01d6e3c68c57eb66433fb8a5c77b13b89a160d97df'],
+    }),
+    ('python-prctl', '1.8.1', {
+        'modulename': 'prctl',
+        'checksums': ['b4ca9a25a7d4f1ace4fffd1f3a2e64ef5208fe05f929f3edd5e27081ca7e67ce'],
+    }),
+    ('Rtree', '0.9.7', {
+        'checksums': ['be8772ca34699a9ad3fb4cfe2cfb6629854e453c10b3328039301bbfc128ca3e'],
+    }),
+    ('vine', '5.0.0', {
+        'checksums': ['7d3b1624a953da82ef63462013bbd271d3eb75751489f9807598e8f340bd637e'],
+    }),
+    ('amqp', '5.1.0', {
+        'checksums': ['446b3e8a8ebc2ceafd424ffcaab1c353830d48161256578ed7a65448e601ebed'],
+    }),
+    ('kombu', '5.2.4', {
+        'checksums': ['37cee3ee725f94ea8bb173eaab7c1760203ea53bbebae226328600f9d2799610'],
+    }),
+    ('billiard', '3.6.4.0', {
+        'checksums': ['299de5a8da28a783d51b197d496bef4f1595dd023a93a4f59dde1886ae905547'],
+    }),
+    ('celery', '5.2.3', {
+        'checksums': ['e2cd41667ad97d4f6a2f4672d1c6a6ebada194c619253058b5f23704aaadaa82'],
+    }),
+    ('basemap-data', '1.3.2', {
+        'modulename': 'os',
+        'source_tmpl': 'basemap_data-1.3.2.zip',
+        'checksums': ['0072efd6f12c76e9f35e8fd718360d634b849ba988e74acccaf1ec536275f70b'],
+    }),
+    ('basemap', '1.3.2', {
+        'modulename': 'os',
+        'prebuildopts': "export GEOS_DIR=$EBROOTGEOS && cd packages/basemap && ",
+        'preinstallopts': "export GEOS_DIR=$EBROOTGEOS && cd packages/basemap && ",
+        'source_tmpl': 'v1.3.2.tar.gz',
+        'source_urls': ['https://github.com/matplotlib/basemap/archive'],
+        'checksums': ['c35aa397be4de342a3078ec089094531609712abd78e3d11b92d792974fd8141'],
+    }),
+    ('flake8', '4.0.1', {
+        'checksums': ['806e034dda44114815e23c16ef92f95c91e4c71100ff52813adf7132a6ad870d'],
+    }),
+    ('pdbpp', '0.10.3', {
+        'modulename': 'pdb',
+        'checksums': ['d9e43f4fda388eeb365f2887f4e7b66ac09dce9b6236b76f63616530e2f669f5'],
+    }),
+    ('fancycompleter', '0.9.1', {
+        'checksums': ['09e0feb8ae242abdfd7ef2ba55069a46f011814a80fe5476be48f51b00247272'],
+    }),
+    ('wmctrl', '0.3', {
+        'modulename': 'os',
+        'checksums': ['d806f65ac1554366b6e31d29d7be2e8893996c0acbb2824bbf2b1f49cf628a13'],
+    }),
+    (name, version, {
+        'modulename': 'openquake',
+        'source_tmpl': 'v%(version)s.tar.gz',
+        'source_urls': ['https://github.com/gem/oq-engine/archive/'],
+        'checksums': ['2dd07d534f9f45806a2c248657386ef05406154fee895cb635d96f527768693e'],
+    }),
+]
+
+local_full_sanity_check = True
+
+modextrapaths = {'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages']}
+
+modextravars = {'OQ_DATADIR': '$::env(SCRATCH)/oqdata'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
+}
+
+sanity_check_commands = ['oq engine --help']
+
+moduleclass = 'tools'

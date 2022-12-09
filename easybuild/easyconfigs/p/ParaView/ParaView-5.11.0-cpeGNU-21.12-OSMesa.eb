@@ -1,63 +1,92 @@
-# CrayGNU version by Jean Favre (CSCS)
+# Jean M. Favre (CSCS)
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
 version = '5.11.0'
 versionsuffix = '-OSMesa'
 
-homepage = 'http://www.paraview.org'
-description = "ParaView is a scientific parallel visualizer."
+homepage = 'https://gitlab.kitware.com/paraview/paraview-superbuild'
+description = "ParaView superbuilder"
 
 toolchain = {'name': 'cpeGNU', 'version': '21.12'}
-toolchainopts = {'usempi': True, 'pic': True, 'verbose': False}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
-source_urls = [
-    'http://www.%(namelower)s.org/%(namelower)s-downloads/download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile=',
-]
-sources = ['%(name)s-v%(version)s.tar.gz']
-
-builddependencies = [
-    ('CMake', '3.22.1', '', True),
-]
 dependencies = [
-    ('Boost', '1.78.0'),
-    ('ospray', '2.8.0'),
-    ('Mesa', '21.3.2'),
     ('cray-python', EXTERNAL_MODULE),
+#    ('cray-hdf5', EXTERNAL_MODULE),
+#    ('cray-netcdf', EXTERNAL_MODULE),
 ]
 
-configopts = "-DPARAVIEW_USE_MPI:BOOL=ON -DBUILD_TESTING:BOOL=OFF "
-configopts += "-DCMAKE_C_COMPILER=`which gcc` -DCMAKE_CXX_COMPILER=`which g++` "
-configopts += "-DPARAVIEW_BUILD_EDITION=CANONICAL -DPARAVIEW_USE_PYTHON:BOOL=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo "
-configopts += "-DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON "
-configopts += "-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_DIR:PATH=/opt/intel/oneapi/tbb/latest/lib/cmake/tbb "
-configopts += "-DVTK_PYTHON_OPTIONAL_LINK:BOOL=OFF -DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON -DPARAVIEW_USE_VTKM:BOOL=ON "
-configopts += "-DPARAVIEW_USE_QT:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=OFF -DPARAVIEW_ENABLE_XDMF3:BOOL=OFF "
-configopts += "-DVTK_USE_X:BOOL=OFF -DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROOTMESA}/include -DOSMESA_LIBRARY:FILEPATH=${EBROOTMESA}/lib/libOSMesa.so "
-configopts += "-DVTK_MODULE_ENABLE_VTK_GeovisCore:STRING=YES "
-configopts += "-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=ON "
-configopts += "-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON "
-configopts += "-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON "
-configopts += '-DOSPRAY_INSTALL_DIR="$EBROOTOSPRAY" '
-configopts += '-DOpenImageDenoise_DIR="$EBROOTOSPRAY/lib/cmake/OpenImageDenoise-1.4.2" '
+builddependencies = [('CMake', '3.22.1','', True)]
+
+separate_build_dir = True
+
+preconfigopts  = "git clone --recursive https://gitlab.kitware.com/paraview/paraview-superbuild.git && "
+preconfigopts += "cd paraview-superbuild && "
+preconfigopts += "git fetch origin && "
+preconfigopts += "git checkout v%(version)s && "
+preconfigopts += "git submodule update && "
+preconfigopts += "mkdir ../build; cd ../build; "
+
+prebuildopts = " pushd build; "
+preinstallopts = " pushd build; "
+preinstallopts += " export LDFLAGS='-ldl'; " # needed to make OSMesa linking succeed
+
+srcdir = "easybuild_obj/paraview-superbuild"
+
+configopts = ''
+configopts += '-DUSE_SYSTEM_hdf5=OFF '
+configopts += '-DUSE_SYSTEM_mpi:BOOL=ON '
+configopts += '-DUSE_SYSTEM_netcdf=OFF '
+configopts += '-DUSE_SYSTEM_numpy=ON '
+configopts += '-DUSE_SYSTEM_python3=ON '
+configopts += '-DUSE_SYSTEM_zlib=ON '
+
+configopts += '-DENABLE_cxx11=ON -DENABLE_cxx14=ON '
+configopts += '-DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ '
+configopts += '-DPARAVIEW_EXTRA_CMAKE_ARGUMENTS="-DCMAKE_C_COMPILER=gcc" '
+configopts += '-DBUILD_TESTING=OFF '
+configopts += '-DPARAVIEW_BUILD_EDITION=CANONICAL '
+
+configopts += '-DENABLE_adios2=ON -DENABLE_blosc=ON -DENABLE_bzip2=ON '
+configopts += '-DENABLE_catalyst=ON '
+configopts += '-DENABLE_cxx11=ON '
+configopts += '-DENABLE_cxx14=ON '
+configopts += '-DENABLE_embree=ON '
+configopts += '-DENABLE_fides=ON '
+configopts += '-DENABLE_hdf5=ON '
+configopts += '-DENABLE_mpi=ON '
+configopts += '-DENABLE_netcdf=ON '
+configopts += '-DENABLE_numpy=ON '
+configopts += '-DENABLE_openimagedenoise=ON '
+configopts += '-DENABLE_osmesa=ON '
+configopts += '-DENABLE_ospray=ON '
+configopts += '-DENABLE_paraviewsdk=ON '
+configopts += '-DENABLE_python3=ON '
+configopts += '-DENABLE_rkcommon=ON '
+configopts += '-DENABLE_tbb=ON '
+configopts += '-DENABLE_visitbridge=ON '
+configopts += '-DENABLE_zlib=ON '
+configopts += '-DENABLE_zfp=ON '
+
+configopts += '-DENABLE_cosmotools=OFF '
+configopts += '-DENABLE_egl=OFF '
+configopts += '-DENABLE_genericio=OFF '
+configopts += '-DENABLE_nvidiaindex=OFF '
+configopts += '-DENABLE_openpmd=OFF '
+configopts += '-DENABLE_ospraymodulempi=OFF '
+configopts += '-DENABLE_szip=OFF '
+configopts += '-DENABLE_xdmf3=OFF '
+
+#configopts += '-DNetCDF_INCLUDE_DIR=${NETCDF_DIR}/include '
+#configopts += '-DNetCDF_LIBRARY=${NETCDF_DIR}/lib/libnetcdf.so '
 
 maxparallel = 32
 
-postinstallcmds = [
-    "mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && cd %(installdir)s/share/%(namelower)s-%(version_major_minor)s && git clone https://gitlab.kitware.com/%(namelower)s/materials",
-]
-#modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
-modluafooter = 'prepend_path("LD_LIBRARY_PATH","/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8")'
-
-sanity_check_paths = {
-    'files': ['bin/pvbatch', 'bin/pvserver'],
-    'dirs': ['lib64/python%(pyshortver)s/site-packages', 'lib64/%(namelower)s-%(version_major_minor)s/plugins'],
-}
-
 modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
 
-modextravars = {
-    'GALLIUM_DRIVER': 'llvmpipe',
-}
+#postinstallcmds = [
+#   "mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && cd %(installdir)s/share/%(namelower)s-%(version_major_minor)s && git clone https://gitlab.kitware.com/%(namelower)s/materials"
+#]
 
 moduleclass = 'vis'

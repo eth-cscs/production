@@ -27,20 +27,21 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('intel/2021.3.0', EXTERNAL_MODULE),
+    ('intel', EXTERNAL_MODULE),
     #('zlib', '1.2.11'),
     ('GSL', '2.7')
 ]
 
 # create the REVISION file
-#prebuildopts = 'echo "git:${0}" > %(builddir)s/%(namelower)s/REVISION && '.format(local_commit)
+prebuildopts = 'echo "git:${0}" > %(builddir)s/%(namelower)s/REVISION && '.format(local_commit)
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
 preconfigopts = " module unload cray-libsci && CC=cc CXX=CC MPIEXEC=srun "
 configopts = " --enable-shared --enable-modules=all --exec-prefix=%(installdir)s "
 
-prebuildopts = " module unload cray-libsci && module list && "
+prebuildopts = " module unload cray-libsci && "
+prebuildopts += " sed -i 's#../src/lib/plumed#../src/lib/plumed --no-mpi#' json/Makefile && "
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
