@@ -38,6 +38,7 @@ prebuildopts = 'echo "git:${0}" > %(builddir)s/%(namelower)s/REVISION && '.forma
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
 preconfigopts = " module unload cray-libsci && CC=cc CXX=CC CFLAGS='-O2' CXXFLAGS='-O2' MPIEXEC=srun "
+# disabling OpenMP to avoid unsupported construct with Nvidia in "MemFusionP.cpp", line 285: see CSCS Jira SD-56436
 configopts = " --disable-openmp --enable-mpi --enable-shared --enable-modules=all --exec-prefix=%(installdir)s "
 
 prebuildopts = " module unload cray-libsci && "
