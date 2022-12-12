@@ -44,8 +44,6 @@ configopts = " --disable-openmp --enable-mpi --enable-shared --enable-modules=al
 prebuildopts = " module unload cray-libsci && "
 prebuildopts += " sed -i 's#../src/lib/plumed#../src/lib/plumed --no-mpi#' json/Makefile && "
 
-maxparallel = 1 
-
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
     'dirs': ['lib/%(namelower)s'],
