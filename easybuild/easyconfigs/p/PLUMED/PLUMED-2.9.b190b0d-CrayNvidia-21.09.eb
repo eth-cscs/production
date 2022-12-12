@@ -15,7 +15,7 @@ description = """PLUMED is an open source library for free energy calculations i
 """
 
 toolchain = {'name': 'CrayNvidia', 'version': '21.09'}
-toolchainopts = {'openmp': 'True', 'usempi': 'True', 'verbose': 'True'}
+toolchainopts = {'openmp': 'False', 'usempi': 'True', 'verbose': 'True'}
 
 sources = [
     {'git_config': {'url': 'https://github.com/%(namelower)s/', 'commit':  '%s' % local_commit, 'recursive': True, 'repo_name': '%(namelower)s2'}, 'filename': SOURCELOWER_TAR_GZ},
@@ -28,7 +28,7 @@ builddependencies = [
 
 dependencies = [
     ('intel', EXTERNAL_MODULE),
-    #('zlib', '1.2.11'),
+    ('zlib', '1.2.11'),
     ('GSL', '2.7')
 ]
 
@@ -37,11 +37,13 @@ prebuildopts = 'echo "git:${0}" > %(builddir)s/%(namelower)s/REVISION && '.forma
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
-preconfigopts = " module unload cray-libsci && CC=cc CXX=CC MPIEXEC=srun "
-configopts = " --enable-shared --enable-modules=all --exec-prefix=%(installdir)s "
+preconfigopts = " module unload cray-libsci && CC=cc CXX=CC CFLAGS='-O2' CXXFLAGS='-O2' MPIEXEC=srun "
+configopts = " --disable-openmp --enable-mpi --enable-shared --enable-modules=all --exec-prefix=%(installdir)s "
 
 prebuildopts = " module unload cray-libsci && "
 prebuildopts += " sed -i 's#../src/lib/plumed#../src/lib/plumed --no-mpi#' json/Makefile && "
+
+maxparallel = 1 
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s', 'lib/libplumedKernel.so', 'lib/libplumed.so'],
