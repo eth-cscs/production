@@ -41,8 +41,10 @@ configopts = ' CC=cc FC=ftn MPIF90=ftn CFLAGS="-O3 $(DFLAGS) $(IFLAGS) $(CUDA_CF
 prebuildopts = " sed -i -e '/^DFLAGS/ s/$/ -D__DFTI/' -e '/^IFLAGS/ s#$# -I${MKLROOT}/include -I$(MKLROOT)/include/fftw#' make.inc && "
 prebuildopts += " cat make.inc && "
 prebuildopts += ' plumed-patch -p -f --runtime --shared <<< 10 && '
-# targets 'hp' and 'gwl' of the group "all" fail with QE GPU
-buildopts = " pwall cp ld1 tddfpt xspectra "
+buildopts = "pw"
+
+# single make process required, since parallel builds fail
+maxparallel = 1
 
 sanity_check_paths = {
     'files': ['bin/pw.x'],
