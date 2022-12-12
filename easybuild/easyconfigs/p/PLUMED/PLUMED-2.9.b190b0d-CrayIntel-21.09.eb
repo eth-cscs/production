@@ -36,7 +36,7 @@ prebuildopts = 'echo "git:${0}" > %(builddir)s/%(namelower)s/REVISION && '.forma
 
 # The following search options are activated by default in configure:
 # --enable-external-blas --enable-external-lapack --enable-fftw --enable-gsl --enable-mpi --enable-python
-preconfigopts = " module unload cray-libsci && CC=pgcc CXX=pgc++ MPIEXEC=srun "
+preconfigopts = " module unload cray-libsci &&  CC=cc CXX=CC MPIEXEC=srun "
 configopts = " --enable-shared --enable-modules=all --exec-prefix=%(installdir)s "
 
 prebuildopts = " module unload cray-libsci && "
