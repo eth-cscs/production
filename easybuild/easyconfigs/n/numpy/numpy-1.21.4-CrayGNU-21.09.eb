@@ -36,7 +36,7 @@ sanity_check_paths = {
 }
 
 modextravars = {
-    'LD_LIBRARY_PATH': '/opt/intel/mkl/lib/intel64:$::env(LD_LIBRARY_PATH)'
+    'LD_LIBRARY_PATH': '/opt/intel/oneapi/mkl/latest/lib/intel64:/opt/intel/oneapi/inspector/latest/lib64:$::env(LD_LIBRARY_PATH)'
 }
 
 moduleclass = 'tools'
