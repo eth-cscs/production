@@ -30,17 +30,17 @@ separate_build_dir = True
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE)
+    ('cudatoolkit/21.3_11.2', EXTERNAL_MODULE)
 ]
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
     ('Conduit', '0.8.6', '-python3'),
     ('VTK-m', '1.9.0', '-cuda'),
-    ('RAJA', '2022.10.4', ''),
+    ('RAJA', '2022.10.4', '-cuda'),
     ('Camp', '2022.10.1', '-cuda'),
     ('mfem', '4.4', ''),
-    ('Umpire', '2022.10.0', ''),
+    ('Umpire', '2022.10.0', '-cuda'),
 ]
 
 configopts  = '-DCMAKE_BUILD_TYPE=Release '

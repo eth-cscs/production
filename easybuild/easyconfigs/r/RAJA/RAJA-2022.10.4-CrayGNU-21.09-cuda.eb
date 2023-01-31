@@ -16,7 +16,7 @@ toolchainopts = {'verbose': False}
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE),
+    ('cudatoolkit/21.3_11.2', EXTERNAL_MODULE),
     ('Camp', '2022.10.1', '-cuda'),
 ]
 
