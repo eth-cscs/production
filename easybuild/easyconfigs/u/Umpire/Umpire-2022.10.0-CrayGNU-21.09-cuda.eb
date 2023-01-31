@@ -5,6 +5,7 @@ easyblock = 'CMakeMake'
 
 name = 'Umpire'
 version = '2022.10.0'
+versionsuffix = '-cuda'
 
 homepage = 'https://github.com/LLNL/Umpire'
 description = """An application-focused API for memory management on

@@ -5,6 +5,7 @@ easyblock = 'CMakeMake'
 
 name = 'RAJA'
 version = '2022.10.4'
+versionsuffix = '-cuda'
 
 homepage = 'https://github.com/LLNL/RAJA'
 description = """RAJA is a library of C++ software abstractions, primarily
