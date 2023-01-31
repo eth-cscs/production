@@ -1,0 +1,52 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Umpire'
+version = '2022.10.0'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/LLNL/Umpire'
+description = """An application-focused API for memory management on
+  NUMA & GPU architectures."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/21.3_11.2', EXTERNAL_MODULE),
+    ('Camp', '2022.10.1', '-cuda'),
+]
+
+srcdir = "easybuild_obj/umpire-%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "curl -L https://github.com/LLNL/Umpire/releases/download/v%(version)s/umpire-%(version)s.tar.gz -o umpire-%(version)s.tar.gz && "
+preconfigopts += "tar -xzf umpire-%(version)s.tar.gz && "
+preconfigopts += "cd umpire-%(version)s.tar.gz && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-S .. '
+configopts += '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DENABLE_OPENMP=OFF '
+configopts += '-DENABLE_CUDA=ON '
+configopts += '-Dcamp_DIR=$EBROOTCAMP '
+configopts += '-DENABLE_TESTS=OFF '
+
+prebuildopts = " pushd umpire-%(version)s/build; "
+preinstallopts = " pushd umpire-%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/umpire/Umpire.hpp',
+              'lib/libumpire.so',
+              ],
+    'dirs': ['include', 'lib', 'bin'],
+}
+
+moduleclass = 'vis'
