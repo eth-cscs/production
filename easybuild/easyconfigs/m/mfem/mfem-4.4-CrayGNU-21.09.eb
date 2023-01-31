@@ -1,0 +1,47 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'mfem'
+version = '4.4'
+
+homepage = 'https://github.com/mfem'
+description = """a lightweight, general, scalable C++ library for finite element methods"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('Conduit', '0.8.6', '-python3'),
+]
+
+srcdir = "easybuild_obj/mfem-%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "curl -L https://github.com/mfem/mfem/archive/refs/tags/v%(version)s.tar.gz -o mfem-%(version)s.tar.gz && "
+preconfigopts += "tar -xzf mfem-%(version)s.tar.gz && "
+preconfigopts += "cd mfem-%(version)s && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DMFEM_USE_CONDUIT=ON '
+configopts += '-DCONDUIT_DIR=$EBROOTCONDUIT '
+
+
+prebuildopts = " pushd mfem-%(version)s/build; "
+preinstallopts = " pushd mfem-%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/mfem.hpp',
+              'lib/libmfem.so',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

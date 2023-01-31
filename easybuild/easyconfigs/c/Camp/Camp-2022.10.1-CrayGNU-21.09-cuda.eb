@@ -1,0 +1,49 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Camp'
+version = '2022.10.1'
+versionsuffix = '-cuda'
+
+homepage = 'https://github.com/LLNL/Camp'
+description = """Compiler agnostic metaprogramming library providing concepts,
+                 type operations and tuples for C++ and cuda"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE)
+]
+
+srcdir = "easybuild_obj/camp-%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "git clone --recursive --depth 1 --branch v%(version)s https://github.com/LLNL/camp.git camp-%(version)s && "
+preconfigopts += "cd camp-%(version)s && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DENABLE_CUDA=ON '
+configopts += '-DENABLE_OPENMP=OFF '
+configopts += '-DENABLE_TESTS=OFF '
+
+
+prebuildopts = " pushd camp-%(version)s/build; "
+preinstallopts = " pushd camp-%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/camp/camp.hpp',
+              'lib/libcamp.so',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

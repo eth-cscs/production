@@ -1,0 +1,56 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'RAJA'
+version = '2022.10.4'
+
+homepage = 'https://github.com/LLNL/RAJA'
+description = """RAJA is a library of C++ software abstractions, primarily
+  developed at Lawrence Livermore National Laboratory (LLNL), that
+  enables architecture and programming model portability for HPC applications."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/21.5_11.3', EXTERNAL_MODULE),
+    ('Camp', '2022.10.1', '-cuda'),
+]
+
+srcdir = "easybuild_obj/RAJA-v%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "curl -L https://github.com/LLNL/RAJA/releases/download/v%(version)s/RAJA-v%(version)s.tar.gz -o RAJA-%(version)s.tar.gz && "
+preconfigopts += "tar -xzf RAJA-%(version)s.tar.gz && "
+preconfigopts += "cd RAJA-v%(version)s && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-S .. '
+configopts += '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DENABLE_OPENMP=OFF '
+configopts += '-DENABLE_CUDA=ON '
+configopts += '-Dcamp_DIR=$EBROOTCAMP '
+configopts += '-DENABLE_TESTS=OFF '
+configopts += '-DRAJA_ENABLE_TESTS=OFF '
+configopts += '-DENABLE_EXAMPLES=OFF '
+configopts += '-DENABLE_EXERCISES=OFF '
+configopts += '-DRAJA_ENABLE_VECTORIZATION=OFF '
+
+prebuildopts = " pushd RAJA-v%(version)s/build; "
+preinstallopts = " pushd RAJA-v%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/RAJA/RAJA.hpp',
+              'lib/libRAJA.so',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
