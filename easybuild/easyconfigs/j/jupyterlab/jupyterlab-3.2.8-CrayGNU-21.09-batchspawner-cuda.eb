@@ -262,7 +262,7 @@ exts_list = [
     ('pyexpect', '1.0.21'),
     ('tqdm', '4.62.3', {'unpack_sources': False, 'source_tmpl': 'tqdm-4.62.3-py2.py3-none-any.whl'}),
     ('ipyparallel', '8.2.0', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-8.2.0-py3-none-any.whl'}),
-    ('ipcmagic', 'v1.0.2', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
+    ('ipcmagic', 'v1.1.0', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
 
     # cupy
     ('fastrlock', '0.8', {'unpack_sources': False, 'source_tmpl': 'fastrlock-0.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl'}),
