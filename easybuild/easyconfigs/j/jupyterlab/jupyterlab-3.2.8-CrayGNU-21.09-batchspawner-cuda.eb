@@ -261,7 +261,7 @@ exts_list = [
     ('docopt', '0.6.2'),
     ('pyexpect', '1.0.21'),
     ('tqdm', '4.62.3', {'unpack_sources': False, 'source_tmpl': 'tqdm-4.62.3-py2.py3-none-any.whl'}),
-    ('ipyparallel', '8.2.0', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-8.2.0-py3-none-any.whl'}),
+    ('ipyparallel', '8.4.1', {'unpack_sources': False, 'source_tmpl': 'ipyparallel-%(version)s-py3-none-any.whl'}),
     ('ipcmagic', 'v1.1.0', {'modulename': False, 'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s']}),
 
     # cupy
