@@ -59,8 +59,8 @@ preconfigopts =  'export PAR_COMPILER=cc; '
 preconfigopts += 'export PAR_INCLUDE="-I$MPICH_DIR/include"; '
 preconfigopts += 'pushd ../visit-3.3.1; mkdir -p third_party; '
 
-preconfigopts += './src/tools/dev/scripts/build_visit --console --no-%(namelower)s --parallel --llvm --mesagl --vtk --makeflags -j32 --system-python --alt-python-dir /usr '
-preconfigopts += '--qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --xdmf --mfem --conduit <<< "yes" && '
+preconfigopts += './src/tools/dev/scripts/build_visit --console --no-%(namelower)s --parallel --llvm --mesagl --vtk --makeflags -j4 --system-python --alt-python-dir /usr '
+preconfigopts += '--qwt --qt --silo --h5part --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --xdmf --mfem --conduit <<< "yes" && '
 preconfigopts += 'sed -i "s/gcc TYPE/cc TYPE/g" `hostname`.cmake; sed -i "s/g++/CC/g" `hostname`.cmake; cp `hostname`.cmake ./src/config-site; mkdir build; cd build; '
 
 configopts =  "-DMPI_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo "
