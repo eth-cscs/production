@@ -30,7 +30,7 @@
  NCO-5.0.1-cpeGNU-21.12.eb
  ParaView-5.11.0-cpeGNU-21.12-OSMesa.eb --set-default-module
  Scalasca-2.6-cpeGNU-21.12.eb
+ Visit-3.3.1-cpeGNU-21.12.eb
  GSL-2.7-cpeIntel-21.12.eb
  QuantumESPRESSO-7.0-cpeIntel-21.12.eb
  VASP-6.3.0-cpeIntel-21.12.eb
- Visit-3.3.1-cpeGNU-21.12.eb
