@@ -44,6 +44,7 @@
  singularity-3.6.4-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
  VASP-6.3.0-CrayIntel-21.09.eb                          --set-default-module
+ VASP-6.4.0-CrayIntel-21.09.eb
  Vc-1.4.1-CrayGNU-21.09.eb                              --set-default-module
  Visit-3.3.1-CrayGNU-21.09.eb                           --set-default-module
  advisor-2021.1.1.43.eb                                 --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
