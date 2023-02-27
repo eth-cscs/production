@@ -9,7 +9,6 @@
  singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
- VTK-9.1.0-cpeCray-21.12-OSMesa.eb    --set-default-module
  Ascent-0.8.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12-python3.eb --set-default-module
@@ -30,6 +29,7 @@
  ParaView-5.11.0-cpeGNU-21.12-OSMesa.eb --set-default-module
  Scalasca-2.6-cpeGNU-21.12.eb
  Visit-3.3.1-cpeGNU-21.12.eb
+ VTK-9.2.6-cpeGNU-21.12-OSMesa.eb    --set-default-module
  GSL-2.7-cpeIntel-21.12.eb
  QuantumESPRESSO-7.0-cpeIntel-21.12.eb
  VASP-6.3.0-cpeIntel-21.12.eb
