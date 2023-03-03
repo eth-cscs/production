@@ -1,0 +1,18 @@
+# jg
+easyblock = 'Binary'
+name = 'CUDAcore'
+version = '11.8.0'
+local_nv_version = '520.61.05'
+homepage = 'https://developer.nvidia.com/cuda-toolkit-archive'
+description = """CUDA (formerly Compute Unified Device Architecture) is a
+parallel computing platform and programming model created by NVIDIA and
+implemented by the graphics processing units (GPUs) that they produce. CUDA
+gives developers access to the virtual instruction set and memory of the
+parallel computational elements in CUDA GPUs."""
+toolchain = SYSTEM
+local_sourcepath = '/apps/common/UES/easybuild/sources/c/CUDAcore'
+local_runfile = local_sourcepath + "/cuda_" + version + "_" + local_nv_version + "_linux.run"
+sources = [local_runfile]
+install_cmd = "bash " + local_runfile + " --silent --no-drm --no-opengl-libs --toolkit --toolkitpath=%(installdir)s"
+# sanity_check_commands = ['%(name)s --version']
+moduleclass = 'compiler'
