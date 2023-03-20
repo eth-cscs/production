@@ -25,6 +25,8 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
 ]
 
+patches = ['CDIreader.patch']
+
 builddependencies = [
     ('CMake', '3.22.1','', True),
 ]
