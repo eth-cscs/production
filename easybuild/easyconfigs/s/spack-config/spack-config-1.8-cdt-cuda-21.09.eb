@@ -1,0 +1,45 @@
+easyblock = 'ConfigureMake'
+
+name = 'spack-config'
+version = '1.8'
+_cdt = 'cdt-cuda-21.09'
+
+homepage = 'https://github.com/eth-cscs/spack-config-generator'
+description = "Module for Spack config files providing default CDT packages and compilers"
+
+toolchain = SYSTEM
+
+sources = [{
+    'source_urls': ['https://github.com/eth-cscs/spack-config-generator/archive/refs/tags/'],
+    'filename': '%(version)s.tar.gz'
+}]
+
+checksums = ['f3b44c54f71eed8ddce5ef3471120c206205a503c93000526eab7bb326919fa4']
+
+configure_cmd='true'
+
+build_cmd='make'
+
+install_cmd='make install DESTDIR=%(installdir)s'
+
+sanity_check_paths = {
+    'files': [
+        '%s/compilers.yaml' %_cdt,
+        '%s/packages.yaml' %_cdt
+    ],
+    'dirs': []
+}
+
+moduleclass = 'tools'
+
+modtclfooter = """
+set SPACK_CDT_CONFIG_ROOT "%%(installdir)s/%s"
+
+if { [file exists $SPACK_CDT_CONFIG_ROOT] == 1 } {
+  setenv SPACK_SYSTEM_CONFIG_PATH "$SPACK_CDT_CONFIG_ROOT"
+} else {
+  puts stderr "$SPACK_CDT_CONFIG_ROOT does not exist"
+  exit 1
+}
+""" %_cdt
+
