@@ -64,15 +64,12 @@ if { $status == 0 } {
 #########################
 # SYSTEM SPECIFIC SETUP #
 #########################
-# current system name
-if { [ string match *esch* $::env(HOSTNAME) ] } {
- set system [regsub {[cl]n-[0-9]+} $::env(HOSTNAME) ""]
-} elseif { [ string match *uan0\[1-3\]* $::env(HOSTNAME) ] } {
- set system "eiger"
-} elseif { [ string match *uan04* $::env(HOSTNAME) ] } {
- set system "pilatus"
+# current system name (/etc/xthostname exists on Dom, Piz Daint and Alps)
+if { [ file exists /etc/xthostname ] } {
+	set system [exec cat /etc/xthostname]
+# the following applies to Arolla and Tsa instead
 } else {
- set system [regsub {[0-9]+} $::env(HOSTNAME) ""]
+	set system [exec sh -c {hostname | sed 's/-[cl]n[0-9]*//g'}]
 }
 
 # system specific setup
@@ -98,18 +95,12 @@ if { [ string match *daint* $system ] } {
     setenv EASYBUILD_OPTARCH                    $::env(CRAY_CPU_TARGET)
     setenv EASYBUILD_MODULE_NAMING_SCHEME       HierarchicalMNS
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    0
-} elseif { [ string match *esch* $system ] } {
-    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
-    setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
 } elseif { [ string match *arolla* $system ] || [ string match *tsa* $system ] } {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
     setenv EASYBUILD_MODULE_NAMING_SCHEME       LowercaseModuleNamingScheme
     setenv EASYBUILD_MODULES_TOOL               EnvironmentModulesC
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1
     setenv EASYBUILD_RPATH                      1
-} elseif { [ string match *fulen* $system ] } {
-    setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
-    setenv XDG_RUNTIME_DIR                      /dev/shm/$::env(USER)
 } else {
     setenv EASYBUILD_EXTERNAL_MODULES_METADATA $::env(EB_CUSTOM_REPOSITORY)/cray_external_modules_metadata.cfg
     setenv EASYBUILD_RECURSIVE_MODULE_UNLOAD    1

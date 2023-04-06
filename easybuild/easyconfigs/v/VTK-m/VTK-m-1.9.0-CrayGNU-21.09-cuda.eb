@@ -1,0 +1,57 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'VTK-m'
+version = '1.9.0'
+versionsuffix = '-cuda'
+
+homepage = 'https://m.vtk.org/'
+description = """VTK-m is a toolkit of scientific visualization algorithms for
+emerging processor architectures. VTK-m supports the fine-grained concurrency
+for data analysis and visualization algorithms required to drive extreme
+scale computing by providing abstract models for data and execution that can
+be applied to a variety of algorithms across many different processor architectures."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/21.3_11.2', EXTERNAL_MODULE)
+]
+
+srcdir = "easybuild_obj/vtk-m-v%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "curl -L https://gitlab.kitware.com/vtk/vtk-m/-/archive/v%(version)s/vtk-m-v%(version)s.tar.gz -o  vtk-m-v%(version)s.tar.gz && "
+preconfigopts += "tar -xzf vtk-m-v%(version)s.tar.gz && "
+preconfigopts += "cd vtk-m-v%(version)s && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DENABLE_FORTRAN:BOOL=ON '
+configopts += '-DVTKm_ENABLE_MPI:BOOL=OFF '
+configopts += '-DVTKm_USE_64BIT_IDS=OFF -DVTKm_USE_DOUBLE_PRECISION=ON '
+configopts += '-DVTKm_USE_DEFAULT_TYPES_FOR_ASCENT=ON -DVTKm_NO_DEPRECATED_VIRTUAL=ON '
+configopts += '-DVTKm_ENABLE_RENDERING=ON '
+configopts += '-DVTKm_ENABLE_CUDA=ON '
+configopts += '-DVTKm_CUDA_Architecture=pascal '
+configopts += '-DVTKm_ENABLE_TESTING=OFF '
+configopts += '-DVTKm_ENABLE_BENCHMARKS=OFF '
+
+prebuildopts = " pushd vtk-m-v%(version)s/build; "
+preinstallopts = " pushd vtk-m-v%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/vtkm-%(version_major_minor)s/vtkm/Version.h',
+              'lib/libvtkm_rendering-%(version_major_minor)s.so',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

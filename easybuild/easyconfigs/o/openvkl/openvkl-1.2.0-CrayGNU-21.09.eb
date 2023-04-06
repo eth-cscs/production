@@ -1,0 +1,45 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'openvkl'
+version = '1.2.0'
+
+homepage = 'https://github.com/OpenVKL/openvkl'
+description = """This project represents a common set of C++ infrastructure and
+CMake utilities used by various components of Intel® oneAPI Rendering Toolkit."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/OpenVKL/%(name)s/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+
+dependencies = [
+    ('rkcommon', '1.9.0'),
+    ('embree', '3.13.2'),
+]
+
+builddependencies = [
+    ('CMake', '3.22.1','', True),
+    ('ispc', '1.17.0'),
+]
+
+separate_build_dir = True
+
+configopts = '-DBUILD_BENCHMARKS:BOOL=OFF '
+configopts += '-DBUILD_EXAMPLES:BOOL=OFF '
+configopts += '-DBUILD_TESTING:BOOL=OFF '
+configopts += '-Drkcommon_DIR="$EBROOTRKCOMMON"/lib64/cmake/rkcommon-1.8.0 '
+configopts += '-Dembree_DIR="$EBROOTEMBREE"/lib64/cmake/embree-3.13.2 '
+configopts += '-DTBB_ROOT=/opt/intel/oneapi/tbb/latest '
+configopts += '-Dtbb_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb.so" '
+configopts += '-Dtbb_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbb_debug.so.2" '
+configopts += '-Dtbbmalloc_LIBRARY_RELEASE:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc.so.2" '
+configopts += '-Dtbbmalloc_LIBRARY_DEBUG:FILEPATH=/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8/libtbbmalloc_debug.so.2" '
+
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'

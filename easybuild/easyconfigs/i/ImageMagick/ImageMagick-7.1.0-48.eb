@@ -1,0 +1,27 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'ImageMagick'
+version = '7.1.0-48'
+
+homepage = 'http://www.imagemagick.org/'
+description = """
+    ImageMagick is a software suite to create, edit, compose, 
+    or convert bitmap images
+"""
+
+toolchain = SYSTEM
+
+sources = ['%(version)s.tar.gz']
+source_urls = [GITHUB_SOURCE]
+
+configopts = "--with-gslib --with-x"
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['bin', 'etc/%(name)s-%(version_major)s', 'include/%(name)s-%(version_major)s', 'lib', 'share'],
+}
+
+modextravars = {'MAGICK_HOME': '%(installdir)s'}
+
+moduleclass = 'vis'

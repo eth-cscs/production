@@ -10,7 +10,7 @@ diff -Nru numpy-1.16.4.orig/site.cfg numpy-1.16.4/site.cfg
 +# Assuming you installed the mkl in /opt/intel/compilers_and_libraries_2019/linux/mkl,
 +# for 64 bits code at Linux:
 +[mkl]
-+library_dirs = /opt/intel/mkl/lib/intel64
-+include_dirs = /opt/intel/mkl/include
++library_dirs = /opt/intel/oneapi/mkl/latest/lib/intel64
++include_dirs = /opt/intel/oneapi/mkl/latest/include
 +mkl_libs = mkl_rt
 +lapack_libs = 

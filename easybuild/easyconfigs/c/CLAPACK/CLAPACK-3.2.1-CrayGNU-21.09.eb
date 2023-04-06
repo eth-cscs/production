@@ -1,0 +1,41 @@
+#
+# CLAPACK needs to run the command of "ulimit -s unlimited" before running the eb file,
+# else if directly compiled the CLAPACK, it gives the following error:
+#
+# NEP: Testing Nonsymmetric Eigenvalue Problem routines
+# ./xeigtstz < nep.in > znep.out 2>&1
+# /bin/sh: line 1:  4778 Segmentation fault      ./xeigtstz < nep.in > znep.out 2>&1
+# make[1]: *** [znep.out] Error 139
+#
+# The solution of "ulimit -s unlimited" is provided in the link:
+# https://unix.stackexchange.com/questions/428394/lapack-make-fails-recipe-for-target-znep-out-failed-error
+#
+# As described in another link, the error only pertains to the testing module; which related to improperly
+# setting the testing matrix: https://github.com/Reference-LAPACK/lapack/issues/85
+# Therefore there's nothing harmful for the code section.
+#
+easyblock = 'CMakeMake'
+
+name = 'CLAPACK'
+version = '3.2.1'
+
+homepage = 'http://www.netlib.org/clapack'
+description = "C version of LAPACK"
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+
+source_urls = ['https://github.com/hunter-packages/clapack/archive/refs/tags']
+sources = ['v%(version)s.tar.gz']
+
+unpack_options = '--strip-components=1'
+
+prebuildopts = "ulimit -s unlimited && "
+buildopts = 'CC="$CC" LOADER="$CC" '
+
+sanity_check_paths = {
+    'files': ['include/blaswrap.h', 'include/clapack.h', 'include/f2c.h', 
+              'lib/libblas.a', 'lib/libf2c.a', 'lib/liblapack.a'],
+    'dirs': ['include', 'lib']
+}
+
+moduleclass = 'math'

@@ -1,0 +1,41 @@
+# Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ospray'
+version = '2.8.0'
+
+homepage = 'https://github.com/ospray'
+description = """An Open, Scalable, Parallel, Ray Tracing Based Rendering
+Engine for High-Fidelity Visualization"""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.12'}
+
+source_urls = ['https://github.com/%(name)s/OSPRay/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+#    ('git-lfs', '3.2.0', '', True),
+]
+
+#configopts =  '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
+configopts = '-DINSTALL_IN_SEPARATE_DIRECTORIES:BOOL=OFF '
+configopts += '-DTBB_DIR=/opt/intel/oneapi/tbb/latest '
+configopts += '-DDOWNLOAD_TBB:BOOL=OFF '
+configopts += '-DBUILD_OSPRAY_APPS:BOOL=OFF '
+configopts += '-DBUILD_GLFW:BOOL=OFF '
+configopts += '-DBUILD_OIDN:BOOL=ON '
+configopts += '-DBUILD_OIDN_FROM_SOURCE:BOOL=OFF '
+
+srcdir = 'scripts/superbuild'
+
+build_cmd = "export TBB_DIR=/opt/intel/oneapi/tbb/latest; cmake --build ."
+
+skipsteps = ['install']
+
+sanity_check_paths = {
+    'files': ['include/ospray/ospray.h', 'lib64/libospray.so'],
+    'dirs': ['include', 'lib64'],
+}
+
+moduleclass = 'vis'

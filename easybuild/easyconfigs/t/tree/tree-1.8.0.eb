@@ -3,13 +3,13 @@ easyblock = 'MakeCp'
 
 name = 'tree'
 version = '1.8.0'
-homepage = 'http://mama.indstate.edu/users/ice/tree/'
+homepage = 'https://gitlab.com/OldManProgrammer/unix-tree'
 description = """Tree is a recursive directory listing command that produces a
 depth indented listing of files."""
 
-toolchain = {'name': 'dummy', 'version': ''}
-source_urls = ['ftp://mama.indstate.edu/linux/tree']
-sources = ['%(name)s-%(version)s.tgz']
+toolchain = SYSTEM
+source_urls = ['https://gitlab.com/OldManProgrammer/unix-tree/-/archive/%(version)s']
+sources = ['unix-%(name)s-%(version)s.tgz']
 
 files_to_copy = [
     (['tree'], 'bin'),
@@ -22,4 +22,3 @@ sanity_check_paths = {
 }
 
 moduleclass = 'devel'
-
