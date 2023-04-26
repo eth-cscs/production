@@ -72,6 +72,6 @@
  Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  Score-P-7.1-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  Score-P-7.1-CrayNvidia-21.09.eb                                             --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
- spack-config-1.8-cdt-cuda-21.09.eb                     --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
+ spack-config-1.7-cdt-cuda-21.09.eb                     --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-gpu/tools

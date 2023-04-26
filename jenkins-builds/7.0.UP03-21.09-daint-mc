@@ -59,6 +59,6 @@
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  Score-P-7.1-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
- spack-config-1.8-cdt-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
+ spack-config-1.7-cdt-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
