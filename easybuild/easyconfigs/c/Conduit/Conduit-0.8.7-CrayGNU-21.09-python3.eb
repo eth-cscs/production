@@ -5,7 +5,6 @@ easyblock = 'CMakeMake'
 
 name = 'Conduit'
 version = '0.8.7'
-versionsuffix = '-python%(pymajver)s'
 
 homepage = 'https://llnl-conduit.readthedocs.io/en/latest/index.html'
 description = """Conduit is an open source project from Lawrence Livermore
