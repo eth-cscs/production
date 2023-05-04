@@ -1,0 +1,79 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Ascent'
+version = '0.9.1'
+#versionsuffix = '-python%(pymajver)s'
+
+homepage = 'https://ascent.readthedocs.io/en/latest/'
+description = """Ascent is an easy-to-use flyweight in situ visualization and
+analysis library for HPC simulations."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+source_urls = ['https://github.com/Alpine-DAV/ascent/releases/download/v%(version)s/']
+sources = ['ascent-v%(version)s-src-with-blt.tar.gz']
+
+srcdir = "../ascent-v%(version)s/src"
+
+separate_build_dir = True
+
+#preconfigopts  = "git clone --recursive https://github.com/Alpine-DAV/ascent.git ascent-%(version)s && "
+#preconfigopts += "cd ascent-%(version)s && "
+#preconfigopts += "mkdir build; cd build; "
+
+#prebuildopts = " pushd ascent-%(version)s/build; "
+#preinstallopts = " pushd ascent-%(version)s/build; "
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit/21.3_11.2', EXTERNAL_MODULE)
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+    ('Conduit', '0.8.7', '-python3'),
+    ('VTK-m', '1.9.0', '-cuda'),
+    ('RAJA', '2022.10.4', '-cuda'),
+    ('Camp', '2022.10.1', '-cuda'),
+    ('mfem', '4.4', ''),
+    ('Umpire', '2022.10.0', '-cuda'),
+]
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS:BOOL=ON '
+configopts += '-DCMAKE_C_COMPILER=gcc '
+configopts += '-DCMAKE_CXX_COMPILER=g++ '
+configopts += '-DENABLE_MPI:BOOL=ON '
+configopts += '-DENABLE_FIND_MPI:BOOL=ON '
+configopts += '-DBLT_CXX_STD="c++14" '
+configopts += '-DENABLE_PYTHON:BOOL=ON '
+configopts += '-DENABLE_OPENMP:BOOL=OFF '
+configopts += '-DENABLE_FORTRAN:BOOL=OFF '
+configopts += '-DENABLE_VTKH:BOOL=ON '
+configopts += '-DENABLE_APCOMP:BOOL=ON '
+configopts += '-DENABLE_DRAY:BOOL=ON '
+configopts += '-DENABLE_CUDA:BOOL=ON '
+configopts += '-DCMAKE_CUDA_ARCHITECTURES=60 '
+configopts += '-DHDF5_hdf5_LIBRARY_RELEASE=${HDF5_ROOT}/lib/libhdf5_parallel_gnu.so '
+configopts += '-DENABLE_TESTS:BOOL=OFF -DENABLE_EXAMPLES:BOOL=OFF -DENABLE_GTEST:BOOL=OFF '
+configopts += '-DVTKM_DIR=$EBROOTVTKMINM '
+configopts += '-DCONDUIT_DIR=$EBROOTCONDUIT '
+configopts += '-DCAMP_DIR=$EBROOTCAMP '
+configopts += '-DRAJA_DIR=$EBROOTRAJA '
+configopts += '-DUMPIRE_DIR=$EBROOTUMPIRE '
+configopts += '-DMFEM_DIR=$EBROOTMFEM '
+
+
+sanity_check_paths = {
+    'files' : [
+              ],
+    'dirs': ['include', 'lib', 'python-modules'],
+}
+
+modextravars = {'PYTHONPATH':'%(installdir)s/python-modules:$::env(PYTHONPATH)'}
+
+moduleclass = 'vis'
