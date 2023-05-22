@@ -2,7 +2,7 @@
 easyblock = 'CMakeMake'
 
 name = 'LAMMPS'
-version = '24Mar2022'
+version = '28Mar2023'
 _release = 'patch_%s' % version
 versionsuffix = '-cuda'
 
