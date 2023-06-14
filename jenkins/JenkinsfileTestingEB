@@ -68,6 +68,7 @@ stage('Build Stage') {
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --hide-deps --exit-on-error"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no --hide-deps --exit-on-error"
+                    sh("git fetch origin master")
                     def buildList = sh(returnStdout: true,
                                     script: "echo \$(git diff origin/master...${env.CHANGE_BRANCH} --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild\\/easyconfigs\\/.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
                     withEnv(["EASYBUILD_BUILDPATH=$buildPath",
