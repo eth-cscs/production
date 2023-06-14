@@ -9,6 +9,7 @@ stage('Initialization') {
     node('master') {
         checkout scm
         echo sh(script: 'env|sort', returnStdout: true)
+        println "${pullRequest.title}"
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
