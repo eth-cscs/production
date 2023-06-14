@@ -4,11 +4,11 @@ def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
 def pullRequestMessage = env.CHANGE_ID ? pullRequest.title : ""
-println env 
 
 stage('Initialization') {
     node('master') {
         checkout scm
+        echo sh(script: 'env|sort', returnStdout: true)
         def rootDir = pwd()
         methods = load("${rootDir}/jenkins/util.groovy")
         machinesList = load("${rootDir}/jenkins/Machines.groovy")
