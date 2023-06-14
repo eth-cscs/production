@@ -84,8 +84,8 @@ stage('Build Stage') {
                                            mkdir -p $prefix
                                        fi
 
-                                       echo -e "\\n Current diff list by 'git diff FETCH_HEAD...${scmVars.GIT_COMMIT}--name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
-                                       git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
+                                       echo -e "\\n Current diff list by 'git diff FETCH_HEAD...${scmVars.GIT_COMMIT} --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
+                                       git diff FETCH_HEAD...${scmVars.GIT_COMMIT} --name-only --oneline --no-merges --diff-filter=ACMRTUXB
                                        # if buildlist is empty, skip this build; otherwise, write .eb files to file
                                        if [ -z \"\$buildlist\" ]; then
                                            echo -e "\\n No EasyBuild recipe to build, skipping build \\n\"
