@@ -4,7 +4,7 @@ def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
 def pullRequestMessage = env.CHANGE_ID ? pullRequest.title : ""
-println pullRequest
+println env.CHANGE_ID 
 
 stage('Initialization') {
     node('master') {
