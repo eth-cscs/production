@@ -98,12 +98,8 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa ]]; then
+if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa || "$HOSTNAME" =~ eiger || "$HOSTNAME" =~ pilatus ]]; then
  export system=${HOSTNAME%%-[cl]n[0-9]*}
-elif [[ "$HOSTNAME" =~ uan0[1-3] ]]; then
- export system="eiger"
-elif [[ "$HOSTNAME" =~ uan0[4-6] ]]; then
- export system="pilatus"
 else
  export system=${HOSTNAME%%[0-9]*}
 fi
@@ -124,6 +120,9 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     if [ -z "$update_xalt_table" ]; then
         update_xalt_table=yes
     fi
+elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
+# load cray module on Alps vClusters
+    module load cray
 fi
 
 # --- COMMON SETUP ---
