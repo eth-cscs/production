@@ -1,0 +1,49 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'LAMMPS'
+version = '28Mar2023'
+_release = 'patch_%s' % version
+versionsuffix = '-cuda'
+
+homepage = 'http://lammps.sandia.gov/'
+description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) is a classical molecular dynamics simulation code designed to run efficiently on parallel computers."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'openmp': True, 'usempi': True, 'verbose': False}
+
+source_urls = ['https://github.com/%(namelower)s/%(namelower)s/archive/refs/tags/']
+sources = ['%s.tar.gz' % _release]
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('cudatoolkit', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('FFmpeg', '5.0'),
+    ('zstd', '1.5.0')
+]
+
+_pkgdir = f'%(builddir)s/%(namelower)s-{_release}'
+_commonopts = f' -C {_pkgdir}/cmake/presets/most.cmake '
+_commonopts += ' -DBUILD_MPI=yes -DCMAKE_CXX_COMPILER:STRING=CC -DMPICXX=CC '
+_commonopts += ' -DPKG_GPU=yes -DCUDA_MPS_SUPPORT=yes -DGPU_API=cuda -DGPU_ARCH=sm_60 '
+_commonopts += ' -DPKG_MPIIO=yes -DPKG_PYTHON=yes '
+
+configopts = [
+    _commonopts + ' -DBUILD_OMP=no -DPKG_OPENMP=no -DLAMMPS_MACHINE=mpi ',
+    _commonopts + ' -DBUILD_OMP=yes -DPKG_OPENMP=yes -DLAMMPS_MACHINE=omp '
+]
+
+# folder with CMakeLists.txt relative to the unpacked tarball
+srcdir = 'cmake'
+
+sanity_check_paths = {
+    'files': ['bin/lmp_mpi', 'bin/lmp_omp'],
+    'dirs': ['bin']
+}
+
+moduleclass = 'chem'

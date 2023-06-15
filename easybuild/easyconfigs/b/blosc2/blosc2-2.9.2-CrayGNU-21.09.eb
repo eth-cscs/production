@@ -1,0 +1,31 @@
+# CrayGNU version by Jean Favre (CSCS)
+
+easyblock = 'CMakeMake'
+
+name = 'blosc2'
+version = '2.9.2'
+
+homepage = 'http://www.blosc.org'
+description = "Blosc is a high performance compressor optimized for binary data."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+source_urls = ['https://github.com/Blosc/c-%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DBUILD_BENCHMARKS:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DBUILD_FUZZERS:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF "
+
+maxparallel = 16
+
+
+sanity_check_paths = {
+    'files': ['include/%(name)s.h', 'include/%(name)s/%(name)s-export.h', 'lib64/lib%(name)s.so'],
+    'dirs': ['lib64/pkgconfig'],
+}
+
+moduleclass = 'lib'
