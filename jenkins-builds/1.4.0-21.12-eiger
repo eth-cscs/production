@@ -33,3 +33,5 @@
  GSL-2.7-cpeIntel-21.12.eb
  QuantumESPRESSO-7.0-cpeIntel-21.12.eb
  VASP-6.3.0-cpeIntel-21.12.eb
+ OOOPS-1.0.eb      --set-default-module
+
