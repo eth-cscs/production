@@ -29,6 +29,7 @@ sources = [
 
 keepsymlinks = True
 postinstallcmds = [
+    'sed -i "s/^semver==3.0.0/semver==2.13.0/" docs/requirements.txt &&' # https://github.com/reframe-hpc/reframe/issues/2935
     './bootstrap.sh +docs && '
     'cp -r external %(installdir)s/external && '
     'mkdir -p %(installdir)s/share/man/man1 %(installdir)s/share/man/man8 && '
