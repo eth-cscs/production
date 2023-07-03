@@ -1,0 +1,44 @@
+# mkra (CSCS), 2018
+easyblock = 'Binary'
+
+name = 'OpenFOAM'
+version = "v2212"
+
+homepage = 'http://www.openfoam.org/'
+description = """
+    OpenFOAM is a free, open source CFD software package. OpenFOAM has an 
+    extensive range of features to solve anything from complex fluid flows
+    involving chemical reactions, turbulence and heat transfer, to solid 
+    dynamics and electromagnetics.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'cstd': 'c++11'}
+
+source_urls = ['https://dl.%(namelower)s.com/source/%(version)s']
+sources = [SOURCE_TGZ]
+patches = ['%(name)s-%(version)s.patch']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+]
+dependencies = [
+    ('cray-tpsl', EXTERNAL_MODULE),
+    ('cray-fftw', EXTERNAL_MODULE),
+    ('CGAL', '5.1'),
+]
+
+unpack_options = '--strip-components=1'
+buildininstalldir = 'True'
+modtclfooter = """
+    setenv FOAM_BASH "%(installdir)s/etc/bashrc"
+"""
+extract_sources = 'True'
+install_cmd = "source etc/bashrc && ./Allwmake -j 6 "
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['platforms/linux64GccDPInt32Opt/bin', 'platforms/linux64GccDPInt32Opt/lib'],
+}
+
+moduleclass = 'cae'
