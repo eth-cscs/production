@@ -3,7 +3,7 @@
 easyblock = 'CMakeMake'
 
 name = 'ParaView'
-version = '5.11.0'
+version = '5.11.1'
 versionsuffix = '-EGL'
 
 homepage = "http://www.paraview.org"
@@ -21,16 +21,15 @@ dependencies = [
     ('CDI', '2.1.0'),
     ('ospray', '2.8.0'),
     ('VisRTX', '0.1.6', '-cuda'),
-    ('Catalyst', '2.0.0', '-3f7871'),
+    ('Catalyst', '2.0.0', '-rc3'),
     ('cray-python', EXTERNAL_MODULE),
 ]
-
-patches = ['CDIreader.patch']
 
 builddependencies = [
     ('CMake', '3.22.1','', True),
 ]
 
+patches = ['CDIreader.patch']
 separate_build_dir = True
 
 maxparallel = 32
