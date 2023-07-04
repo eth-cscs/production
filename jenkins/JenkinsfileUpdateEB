@@ -47,7 +47,7 @@ stage('Machine Selection') {
   - the target Cray PE version is selected by the user and stored in "params.pe_target"
 */
 def updates = [:]
-def licensed_software = "CPMD IDL MATLAB VASP"
+def licensed_software = "IDL MATLAB VASP"
 
 stage('Update Stage') {
     for (system in machineConfigurations) {

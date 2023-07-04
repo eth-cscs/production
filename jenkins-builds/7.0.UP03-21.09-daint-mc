@@ -1,7 +1,7 @@
  Ascent-0.8.0-CrayGNU-21.09.eb                          --set-default-module
  Boost-1.78.0-CrayGNU-21.09.eb
  Boost-1.78.0-CrayGNU-21.09-python3.eb                  --set-default-module
- Buildah-1.28.0.eb                                      --set-default-module
+ Buildah-1.30.0.eb                                      --set-default-module
  CDO-2.0.5-CrayGNU-21.09.eb                             --set-default-module
  CMake-3.22.1.eb                                        --set-default-module
  CP2K-9.1-CrayGNU-21.09.eb                              --set-default-module
@@ -20,6 +20,7 @@
  IDL-8.7.2-CSCS.eb
  Julia-1.6.3-CrayGNU-21.09.eb                           --set-default-module
  Julia-1.7.2-CrayGNU-21.09.eb
+ Julia-1.8.5-CrayGNU-21.09.eb
  JuliaExtensions-1.6.3-CrayGNU-21.09.eb                 --set-default-module
  jupyterlab-3.2.8-CrayGNU-21.09-batchspawner.eb         --set-default-module
  jupyterlab-3.4.5-CrayGNU-21.09-batchspawner.eb
@@ -60,8 +61,6 @@
  pprof-1a94d86.eb                                       --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  Scalasca-2.6-CrayGNU-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  Score-P-7.1-CrayGNU-21.09.eb                           --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
- spack-config-1.5-cdt-21.09.eb                                               --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
- spack-config-1.6-cdt-21.09.eb                                               --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  spack-config-1.7-cdt-21.09.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  termgraph-0.4.2-python3.eb                             --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
  vtune_profiler-2021.1.1.61.eb                          --set-default-module --installpath=/apps/${system}/UES/jenkins/7.0.UP03/21.09/${system}-mc/tools
