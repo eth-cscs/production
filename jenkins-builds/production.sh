@@ -98,12 +98,8 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa ]]; then
+if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa || "$HOSTNAME" =~ eiger || "$HOSTNAME" =~ pilatus ]]; then
  export system=${HOSTNAME%%-[cl]n[0-9]*}
-elif [[ "$HOSTNAME" =~ uan0[1-3] ]]; then
- export system="eiger"
-elif [[ "$HOSTNAME" =~ uan0[4-6] ]]; then
- export system="pilatus"
 else
  export system=${HOSTNAME%%[0-9]*}
 fi
@@ -124,6 +120,9 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     if [ -z "$update_xalt_table" ]; then
         update_xalt_table=yes
     fi
+elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
+# load cray module on Alps vClusters
+    module load cray
 fi
 
 # --- COMMON SETUP ---
@@ -219,8 +218,8 @@ for((i=0; i<${#eb_files[@]}; i++)); do
 # define name and version of the current build starting from the recipe name (obtained removing EasyBuild options from eb_files)
     recipe=$(echo ${eb_files[$i]} | cut -d' ' -f 1)
     name=$(echo $recipe | cut -d'-' -f 1)
-# build licensed software (CPMD, IDL, MATLAB, VASP) on Dom and Piz Daint
-    if [[ "$name" =~ "CPMD" || "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+# build licensed software (IDL, MATLAB, VASP) on Dom and Piz Daint
+    if [[ "$name" =~ "IDL" ||  "$name" =~ "MATLAB" || "$name" =~ "VASP" ]] && [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
         version=$(echo $recipe | sed -e "s/^${name}-//" -e "s/.eb//")
 # custom footer for ${name} modulefile with a warning for users not belonging to corresponding group
         if [[ "$name" =~ "IDL" ]]; then

@@ -1,0 +1,19 @@
+# Author: teojgo
+
+easyblock = 'ConfigureMake'
+
+name = 'Libgpg-error'
+version = '1.47'
+
+homepage = 'https://gnupg.org/software/libgpg-error/index.html'
+description = 'Libgpg-error is a small library that originally defined common error values for all GnuPG components'
+
+toolchain = SYSTEM
+source_urls = ['https://gnupg.org/ftp/gcrypt/libgpg-error/']
+sources = ['libgpg-error-%(version)s.tar.bz2']
+checksums = ['9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb']
+
+sanity_check_paths = {
+    'files': ['include/gpg-error.h', 'include/gpgrt.h', 'lib/libgpg-error.so'],
+    'dirs': []
+}
