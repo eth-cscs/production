@@ -48,7 +48,6 @@
  pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
  PyTorch-1.10.1-CrayGNU-21.09.eb                        --set-default-module
  QuantumESPRESSO-7.0-CrayNvidia-21.09.eb                --set-default-module
- QuantumESPRESSO-7.1-CrayNvidia-21.09.eb
  QuantumESPRESSO-7.2-CrayNvidia-21.09.eb
  singularity-3.6.4-daint.eb
  Spark-2.4.7-CrayGNU-21.09-Hadoop-2.7.eb                --set-default-module
