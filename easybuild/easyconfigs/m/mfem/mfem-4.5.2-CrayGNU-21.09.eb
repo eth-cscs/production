@@ -1,0 +1,53 @@
+#
+# CrayGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'mfem'
+version = '4.5.2'
+
+homepage = 'https://github.com/mfem'
+description = """a lightweight, general, scalable C++ library for finite element methods"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('Conduit', '0.8.8', ''),
+    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+]
+
+srcdir = "easybuild_obj/mfem-%(version)s"
+
+separate_build_dir = True
+
+preconfigopts  = "curl -L https://github.com/mfem/mfem/archive/refs/tags/v%(version)s.tar.gz -o mfem-%(version)s.tar.gz && "
+preconfigopts += "tar -xzf mfem-%(version)s.tar.gz && "
+preconfigopts += "cd mfem-%(version)s && "
+preconfigopts += "mkdir build; cd build; "
+
+configopts  = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DBUILD_SHARED_LIBS=ON '
+configopts += '-DMFEM_USE_CONDUIT=ON '
+configopts += '-DCONDUIT_DIR=$EBROOTCONDUIT '
+configopts += '-DHDF5_DIR="$CRAY_HDF5_PARALLEL_DIR" '
+configopts += '-DHDF5_INCLUDE_DIR=${CRAY_HDF5_PARALLEL_DIR}/include '
+#configopts += '-DHDF5_LIBRARIES=${CRAY_HDF5_PARALLEL_PREFIX}/lib/libhdf5_parallel_gnu.so '
+configopts += '-D__HDF5_LIBRARY=${CRAY_HDF5_PARALLEL_PREFIX}/lib/libhdf5.so '
+configopts += '-D__HDF5_HL_LIBRARY=${CRAY_HDF5_PARALLEL_PREFIX}/lib/libhdf5_hl.so '
+
+
+prebuildopts = " pushd mfem-%(version)s/build; "
+preinstallopts = " pushd mfem-%(version)s/build; "
+
+
+sanity_check_paths = {
+    'files' : [
+              'include/mfem.hpp',
+              'lib/libmfem.so',
+              ],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
