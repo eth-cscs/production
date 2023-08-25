@@ -120,9 +120,11 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     if [ -z "$update_xalt_table" ]; then
         update_xalt_table=yes
     fi
+    ebmodulepath_suffix="/modules/all/"
 elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
 # load cray module on Alps vClusters
     module load cray
+    ebmodulepath_suffix="/modules/all/Core/"
 fi
 
 # --- COMMON SETUP ---
@@ -142,17 +144,20 @@ if [ -z "$PREFIX" ]; then
     usage
 else
  export EASYBUILD_PREFIX=$PREFIX
-# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
- if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
-  mkdir -p "$EASYBUILD_PREFIX/modules/all"
-  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
-  ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ ebmodulepath="$EASYBUILD_PREFIX/$ebmodulepath_suffix"
+# Dom and Piz Daint only: create a symbolic link to EasyBuild-custom/cscs if not found in $ebmodulepath
+ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
+  if [ ! -e "$ebmodulepath/EasyBuild-custom/cscs" ]; then
+   mkdir -p "$ebmodulepath"
+   mkdir -p "$ebmodulepath/tools/modules/all"
+   ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $ebmodulepath
+  fi
  fi
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
-  echo -e " Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all "
-  module use $EASYBUILD_PREFIX/modules/all
+  echo -e " Use path (EASYBUILD_PREFIX): $ebmodulepath "
+  module use $ebmodulepath
   echo -e " Updated MODULEPATH: $MODULEPATH "
  fi
 fi
