@@ -29,7 +29,7 @@ end
 
 local gccPrefix = os.getenv("GCC_PREFIX") or "/opt/gcc/default/" 
 local gccLib = pathJoin(gccPrefix, "snos/lib64")
-local singularityBind = "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. gccPrefix 
+local singularityBind = "/var/spool/slurmd,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. gccPrefix 
 local libfabricLib = capture("module show libfabric 2>&1 | sed -En 's/prepend_path\\(\"LD_LIBRARY_PATH\",\"(\\S+)\"\\)/\\1/p'")
 
 setenv("SINGULARITY_BIND", singularityBind) 
