@@ -89,7 +89,7 @@ stage('Build Stage') {
                                            echo -e "\\n No EasyBuild recipe to build, skipping build \\n\"
                                            exit 0
                                        else
-                                           echo \$buildlist | tr \" \" \"\\n\" > \"$prefix/${projectName}.txt\"
+                                           echo \$buildlist | sed 's/\\b[^[:space:]]*\\.eb\\b/& --set-default-module\\n/g' > \"$prefix/${projectName}.txt\"
                                        fi
 
                                        $commandComplete
