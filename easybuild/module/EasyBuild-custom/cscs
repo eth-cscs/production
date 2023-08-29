@@ -154,7 +154,7 @@ if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
 # FINAL TOUCH #
 ###############
 # Adding easybuild installed software to the list of modules
-if { [ string match *HierarchicalMNS* $::env(EASYBUILD_MODULE_NAMING_SCHEME) ] } {
+if { [ string match *eiger* $system ] || [ string match *pilatus* $system ] } {
     prepend-path                                MODULEPATH $::env(EASYBUILD_INSTALLPATH)/modules/all/Core
 } else {
     prepend-path                                MODULEPATH $::env(EASYBUILD_INSTALLPATH)/modules/all/
