@@ -36,9 +36,6 @@ dependencies = [
     ('cray-tpsl', EXTERNAL_MODULE)
 ]
 
-modtclfooter = """
-    setenv FOAM_BASH %(installdir)s/%(name)s-%(version_major)s-%(local_release)s/etc/bashrc
-"""
 buildininstalldir = 'True'
 extract_sources = 'True'
 install_cmd = "source etc/bashrc && ./Allwmake -j6"
@@ -50,5 +47,9 @@ sanity_check_paths = {
         '%(name)s-%(version_major)s-{0}/platforms/linux64GccDPInt32Opt/lib'.format(local_release),
     ],
 }
+
+modtclfooter = """
+setenv FOAM_BASH %(installdir)s/%(name)s-%(version_major)s-{0}/etc/bashrc
+""".format(local_release)
 
 moduleclass = 'cae'
