@@ -1,0 +1,89 @@
+diff -Nru OpenFOAM-10-20230119.orig/etc/bashrc OpenFOAM-10-20230119/etc/bashrc
+--- OpenFOAM-10-20230119.orig/etc/bashrc	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/etc/bashrc	2023-09-05 17:19:25.609023000 +0200
+@@ -32,7 +32,7 @@
+ #------------------------------------------------------------------------------
+ 
+ export WM_PROJECT=OpenFOAM
+-export WM_PROJECT_VERSION=10
++export WM_PROJECT_VERSION=10-20230119
+ 
+ ################################################################################
+ # USER EDITABLE PART: Changes made here may be lost with the next upgrade
+@@ -86,7 +86,11 @@
+ #- MPI implementation:
+ #    WM_MPLIB = SYSTEMOPENMPI | OPENMPI | SYSTEMMPI | MPICH | MPICH-GM | HPMPI
+ #               | MPI | FJMPI | QSMPI | SGIMPI | INTELMPI
+-export WM_MPLIB=SYSTEMOPENMPI
++export WM_MPLIB=SYSTEMMPI
++export MPI_ROOT=${MPICH_DIR}
++export MPI_ARCH_FLAGS=" "
++export MPI_ARCH_INC=" "
++export MPI_ARCH_LIBS=" "
+ 
+ #- Operating System:
+ #    WM_OSTYPE = POSIX | ???
+diff -Nru OpenFOAM-10-20230119.orig/src/parallel/decompose/Allwmake OpenFOAM-10-20230119/src/parallel/decompose/Allwmake
+--- OpenFOAM-10-20230119.orig/src/parallel/decompose/Allwmake	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/src/parallel/decompose/Allwmake	2023-09-05 17:24:55.847704000 +0200
+@@ -32,7 +32,7 @@
+         [ -e "$whichmpi" -a -e "$whichtarget" ] || wclean $libName
+         echo "wmake $targetType $libName"
+         wmake $targetType $libName
+-        touch "$whichmpi" "$whichtarget"
++        #touch "$whichmpi" "$whichtarget"
+     )
+ }
+ 
+diff -Nru OpenFOAM-10-20230119.orig/src/parallel/decompose/ptscotchDecomp/ptscotchDecomp.C OpenFOAM-10-20230119/src/parallel/decompose/ptscotchDecomp/ptscotchDecomp.C
+--- OpenFOAM-10-20230119.orig/src/parallel/decompose/ptscotchDecomp/ptscotchDecomp.C	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/src/parallel/decompose/ptscotchDecomp/ptscotchDecomp.C	2023-09-05 17:25:38.327881982 +0200
+@@ -30,11 +30,11 @@
+ #include "globalIndex.H"
+ #include "SubField.H"
+ #include "PstreamGlobals.H"
++#include <mpi.h>
+ 
+ extern "C"
+ {
+     #include <stdio.h>
+-    #include <mpi.h>
+     #include "ptscotch.h"
+ }
+ 
+diff -Nru OpenFOAM-10-20230119.orig/src/Pstream/Allwmake OpenFOAM-10-20230119/src/Pstream/Allwmake
+--- OpenFOAM-10-20230119.orig/src/Pstream/Allwmake	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/src/Pstream/Allwmake	2023-09-05 17:24:20.936620000 +0200
+@@ -17,7 +17,7 @@
+         whichmpi="$WM_PROJECT_DIR/platforms/$WM_OPTIONS/src/Pstream/$libName/using:$FOAM_MPI"
+         [ -e "$whichmpi" ] || wclean $libName
+         wmake $targetType $libName
+-        touch "$whichmpi"
++        #touch "$whichmpi"
+     )
+     done
+ }
+diff -Nru OpenFOAM-10-20230119.orig/wmake/rules/linux64Gcc/c OpenFOAM-10-20230119/wmake/rules/linux64Gcc/c
+--- OpenFOAM-10-20230119.orig/wmake/rules/linux64Gcc/c	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/wmake/rules/linux64Gcc/c	2023-09-05 17:12:18.280916000 +0200
+@@ -2,7 +2,7 @@
+ 
+ cWARN        = -Wall
+ 
+-cc          = gcc -m64
++cc          = cc -m64
+ 
+ include $(DEFAULT_RULES)/c$(WM_COMPILE_OPTION)
+ 
+diff -Nru OpenFOAM-10-20230119.orig/wmake/rules/linux64Gcc/c++ OpenFOAM-10-20230119/wmake/rules/linux64Gcc/c++
+--- OpenFOAM-10-20230119.orig/wmake/rules/linux64Gcc/c++	2022-12-07 15:30:43.000000000 +0100
++++ OpenFOAM-10-20230119/wmake/rules/linux64Gcc/c++	2023-09-05 17:12:30.169641000 +0200
+@@ -6,7 +6,7 @@
+ # Suppress some warnings for flex++ and CGAL
+ c++LESSWARN = -Wno-old-style-cast -Wno-unused-local-typedefs -Wno-array-bounds
+ 
+-CC          = g++ -std=c++14 -m64
++CC          = CC -std=c++14 -m64
+ 
+ include $(DEFAULT_RULES)/c++$(WM_COMPILE_OPTION)
+ 
