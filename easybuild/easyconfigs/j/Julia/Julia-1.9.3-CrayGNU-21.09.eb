@@ -18,6 +18,21 @@ sanity_check_paths = {
     'dirs':  ['bin', 'include', 'lib', 'share', 'lib/julia', 'lib64/julia', 'share/julia'],
 }
 
+postinstallcmds = [
+    "echo -e '"
+'[extras]\n'
+'MPIPreferences = "3da0fdf6-3ccc-4f1b-acd9-58baa6c99267"\n'
+'\n'
+'[preferences.MPIPreferences]\n'
+'_format = "1.1"\n'
+'abi = "MPICH"\n'
+'binary = "system"\n'
+'cclibs = ["sci_gnu_82_mpi", "sci_gnu_82", "dl", "dsmml", "xpmem"]\n'
+'libmpi = "libmpich"\n'
+'mpiexec = ["srun", "-C", "mc"]\n'
+"' >> %(installdir)s/Project.toml"
+]
+
 modextravars = {
     'JULIA_LOAD_PATH': '@:@#.#-daint-mc:@stdlib',
     'JULIA_DEPOT_PATH': '$::env(SCRATCH)/../julia/$::env(USER)/daint-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
