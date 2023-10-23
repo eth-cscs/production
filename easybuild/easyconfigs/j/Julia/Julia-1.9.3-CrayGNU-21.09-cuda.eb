@@ -33,8 +33,8 @@ postinstallcmds = [
 'MPIPreferences = "3da0fdf6-3ccc-4f1b-acd9-58baa6c99267"\n'
 '\n'
 '[preferences.CUDA_Runtime_jll]\n'
-'local = "true"\n'
 'version = "local"\n'
+'actual_version = "11.2"\n'
 '\n'
 '[preferences.MPIPreferences]\n'
 '_format = "1.1"\n'
@@ -49,6 +49,8 @@ postinstallcmds = [
 ]
 
 modextravars = {
+    'EBJULIA_ENV_NAME': '%(version_major_minor)s-daint-gpu',
+    'EBJULIA_USER_DEPOT':'$::env(SCRATCH)/../julia/$::env(USER)/daint-gpu',
     'JULIA_LOAD_PATH': '@:@#.#-daint-gpu:%(installdir)s:@stdlib',
     'JULIA_DEPOT_PATH': '$::env(SCRATCH)/../julia/$::env(USER)/daint-gpu:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
     'JULIA_CUDA_MEMORY_POOL': 'none',

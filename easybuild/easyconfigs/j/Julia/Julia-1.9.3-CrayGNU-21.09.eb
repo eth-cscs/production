@@ -34,6 +34,8 @@ postinstallcmds = [
 ]
 
 modextravars = {
+    'EBJULIA_ENV_NAME': '%(version_major_minor)s-daint-mc',
+    'EBJULIA_USER_DEPOT':'$::env(SCRATCH)/../julia/$::env(USER)/daint-mc',
     'JULIA_LOAD_PATH': '@:@#.#-daint-mc:@stdlib',
     'JULIA_DEPOT_PATH': '$::env(SCRATCH)/../julia/$::env(USER)/daint-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
 }
