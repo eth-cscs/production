@@ -144,8 +144,8 @@ if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
 # If not set, define EASYBUILD_SOURCEPATH
 #
 if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
-    if { [ file writable "/apps/common/easybuild/sources" ] } {
-        setenv EASYBUILD_SOURCEPATH                 /apps/common/easybuild/sources
+    if { [ file writable "/apps/common/UES/easybuild/sources" ] } {
+        setenv EASYBUILD_SOURCEPATH                 /apps/common/UES/easybuild/sources
     } else {
         setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
     }
@@ -154,7 +154,11 @@ if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
 # FINAL TOUCH #
 ###############
 # Adding easybuild installed software to the list of modules
-prepend-path MODULEPATH                         $::env(EASYBUILD_INSTALLPATH)/modules/all
+if { [ string match *eiger* $system ] || [ string match *pilatus* $system ] } {
+    prepend-path                                MODULEPATH $::env(EASYBUILD_INSTALLPATH)/modules/all/Core
+} else {
+    prepend-path                                MODULEPATH $::env(EASYBUILD_INSTALLPATH)/modules/all/
+}
 # Loading easybuild module
 prepend-path MODULEPATH                         /apps/common/UES/easybuild/modules/all
 module load EasyBuild

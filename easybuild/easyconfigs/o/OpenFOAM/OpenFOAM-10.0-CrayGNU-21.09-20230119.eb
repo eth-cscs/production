@@ -1,0 +1,55 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'Binary'
+
+name = 'OpenFOAM'
+version = '10.0'
+local_release = '20230119'
+versionsuffix = '-{0}'.format(local_release)
+
+homepage = 'http://www.openfoam.org/'
+description = """
+    OpenFOAM is a free, open source CFD software package. OpenFOAM has an 
+    extensive range of features to solve anything from complex fluid flows
+    involving chemical reactions, turbulence and heat transfer, to solid 
+    dynamics and electromagnetics.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'cstd': 'c++11'}
+
+sources = [
+    # https://github.com/%(name)s/%(name)s-%(version_major)s/archive/refs/tags/20230119.tar.gz
+    '/apps/common/UES/easybuild/sources/o/OpenFOAM/%(name)s-%(version_major)s-{0}.tar.gz'.format(local_release), 
+    # https://github.com/%(name)s/ThirdParty-%(version_major)s/archive/refs/tags/version-10.tar.gz
+    '/apps/common/UES/easybuild/sources/o/OpenFOAM/ThirdParty-%(version_major)s-{0}.tar.gz'.format(local_release), 
+]
+
+patches = [
+    '%(name)s-%(version_major)s-{0}.patch'.format(local_release),
+]
+
+builddependencies = [
+    ('CMake', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('cray-tpsl', EXTERNAL_MODULE)
+]
+
+buildininstalldir = 'True'
+extract_sources = 'True'
+install_cmd = "source etc/bashrc && ./Allwmake -j6"
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [
+        '%(name)s-%(version_major)s-{0}/platforms/linux64GccDPInt32Opt/bin'.format(local_release),
+        '%(name)s-%(version_major)s-{0}/platforms/linux64GccDPInt32Opt/lib'.format(local_release),
+    ],
+}
+
+modtclfooter = """
+setenv FOAM_BASH %(installdir)s/%(name)s-%(version_major)s-{0}/etc/bashrc
+""".format(local_release)
+
+moduleclass = 'cae'

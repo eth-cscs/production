@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI.
-# The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins.
-
 # name of the script withouth the path
 scriptname=$(basename $0)
 # path to the folder containing the script
@@ -98,16 +95,13 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa ]]; then
+if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa || "$HOSTNAME" =~ eiger || "$HOSTNAME" =~ pilatus ]]; then
  export system=${HOSTNAME%%-[cl]n[0-9]*}
-elif [[ "$HOSTNAME" =~ uan0[1-3] ]]; then
- export system="eiger"
-elif [[ "$HOSTNAME" =~ uan0[4-6] ]]; then
- export system="pilatus"
 else
  export system=${HOSTNAME%%[0-9]*}
 fi
 
+###############################
 # --- SYSTEM SPECIFIC SETUP ---
 if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
 # architecture (Dom and Piz Daint only)
@@ -124,13 +118,28 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     if [ -z "$update_xalt_table" ]; then
         update_xalt_table=yes
     fi
-fi
-
-# --- COMMON SETUP ---
+# system specific EasyBuild paths
+    ebcustompath="/apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom/"
+    ebmodulepath_suffix="/modules/all/"
+    ebtoolsmodulepath_suffix="/tools/modules/all/"
 # set production repository folder
-if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+    if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    	export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
+    fi
+elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
+# load cray module on Alps vClusters
+    module load cray
+# system specific EasyBuild paths
+    ebcustompath="/users/jenscscs/production/easybuild/module/EasyBuild-custom/"
+    ebmodulepath_suffix="/modules/all/Core/"
+    ebtoolsmodulepath_suffix=$ebmodulepath_suffix
+# set production repository folder
+    if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
+    	export EB_CUSTOM_REPOSITORY=/users/jenscscs/production/easybuild
+    fi
 fi
+######################
+# --- COMMON SETUP ---
 # module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
  echo -e " Unuse path: $unuse_path "
@@ -143,21 +152,27 @@ if [ -z "$PREFIX" ]; then
     usage
 else
  export EASYBUILD_PREFIX=$PREFIX
-# create a symbolic link to EasyBuild-custom/cscs if not found in $EASYBUILD_PREFIX/modules/all
- if [ ! -e "$EASYBUILD_PREFIX/modules/all/EasyBuild-custom/cscs" ]; then
-  mkdir -p "$EASYBUILD_PREFIX/modules/all"
-  mkdir -p "$EASYBUILD_PREFIX/tools/modules/all"
-  ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom $EASYBUILD_PREFIX/modules/all
+ ebmodulepath="$EASYBUILD_PREFIX/$ebmodulepath_suffix"
+ ebtoolsmodulepath="$EASYBUILD_PREFIX/$ebtoolsmodulepath_suffix"
+# create a symbolic link to EasyBuild-custom/cscs if not found in $ebmodulepath
+ if [ ! -e "$ebmodulepath/EasyBuild-custom/cscs" ]; then
+  if [ ! -d "$ebmodulepath"]; then
+	mkdir -p "$ebmodulepath"
+  fi
+  if [ ! -d "$ebtoolsmodulepath"]; then
+   	mkdir -p "$ebtoolsmodulepath"
+  fi
+  ln -s $ebcustompath $ebmodulepath
  fi
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
-  echo -e " Use path (EASYBUILD_PREFIX): $EASYBUILD_PREFIX/modules/all "
-  module use $EASYBUILD_PREFIX/modules/all
+  echo -e " Use path (EASYBUILD_PREFIX): $ebmodulepath "
+  module use $ebmodulepath
   echo -e " Updated MODULEPATH: $MODULEPATH "
  fi
 fi
-
+###############
 # --- BUILD ---
 # load module EasyBuild-custom
 module load EasyBuild-custom/cscs
@@ -279,30 +294,33 @@ for((i=0; i<${#eb_files[@]}; i++)); do
         exit 1
     fi
 done
-
-# --- SYSTEM SPECIFIC POST-PROCESSING ---
-if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
-# update xalt table of modulefiles
-    echo "loading PrgEnv-cray"
-    module load PrgEnv-cray
-# removing Easybuild module before the reverseMapD operation
-    module unload Easybuild
-    userid=$(id -u)
-    echo "check if will run reverseMapD"
-# commands run by jenscscs user only
-    #if [ $userid -eq 23395 ]; then
-    #    echo "running reverseMapD"
-    #    module load Lmod/.7.8.2
-    #    export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
-    #    export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
-    #    export XALTPROD=/apps/daint/UES/xalt/production
-    #    cd $XALTJENKINS/
-    #    rm -rf $XALTJENKINS/reverseMapD
-    #    ./cray_build_rmapT.sh .
-    #    cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
-    #    cd -
-    #fi
-fi
+##########################################
+## --- SYSTEM SPECIFIC POST-PROCESSING ---
+## New modules will be added to xalt list (reversemap) at the end of this script, so one shouldn't use it as CI
+## The xalt list will be updated only by user jenkins, therefore this script can only be used by user jenkins
+#
+#if [[ $system =~ "daint" && $update_xalt_table =~ "y" ]]; then
+## update xalt table of modulefiles
+#    echo "loading PrgEnv-cray"
+#    module load PrgEnv-cray
+## removing Easybuild module before the reverseMapD operation
+#    module unload Easybuild
+#    userid=$(id -u)
+#    echo "check if will run reverseMapD"
+## commands run by jenscscs user only
+#    #if [ $userid -eq 23395 ]; then
+#    #    echo "running reverseMapD"
+#    #    module load Lmod/.7.8.2
+#    #    export PATH=$EBROOTLMOD/lmod/7.1/libexec:$PATH  # !!! for spider !!!
+#    #    export XALTJENKINS=/apps/daint/UES/xalt/JENSCSCS
+#    #    export XALTPROD=/apps/daint/UES/xalt/production
+#    #    cd $XALTJENKINS/
+#    #    rm -rf $XALTJENKINS/reverseMapD
+#    #    ./cray_build_rmapT.sh .
+#    #    cp ./reverseMapD/*    $XALTPROD/etc/reverseMapD/
+#    #    cd -
+#    #fi
+#fi
 
 # end time
 endtime=$(date +%s)
