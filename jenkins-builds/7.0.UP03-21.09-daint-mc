@@ -19,7 +19,6 @@
  IDL-8.5.1.eb                                           --set-default-module
  IDL-8.7.2-CSCS.eb
  Julia-1.6.3-CrayGNU-21.09.eb                           --set-default-module
- Julia-1.7.2-CrayGNU-21.09.eb
  Julia-1.8.5-CrayGNU-21.09.eb
  Julia-1.9.3-CrayGNU-21.09.eb
  JuliaExtensions-1.6.3-CrayGNU-21.09.eb                 --set-default-module
