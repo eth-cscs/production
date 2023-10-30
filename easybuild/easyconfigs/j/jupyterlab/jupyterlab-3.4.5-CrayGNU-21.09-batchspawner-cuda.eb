@@ -36,7 +36,6 @@ if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
 postinstallcmds = [
 """
 export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
-rm -r $YARN_CACHE_FOLDER &&
 export NODE_OPTIONS=--max-old-space-size=4096 &&
 export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
