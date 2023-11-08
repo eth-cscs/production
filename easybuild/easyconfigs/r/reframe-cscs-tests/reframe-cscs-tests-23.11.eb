@@ -16,16 +16,12 @@ sources = [
     {
         'filename': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/eth-cscs/cscs-reframe-tests/archive/']
-    },
-    {
-        'filename': '/apps/common/easybuild/sources/r/reframe/'
-                    'reframe-tests-%(version)s.tar.gz'
     }
 ]
 
 keepsymlinks = True
 postinstallcmds = [
-    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/checks/private',
+    'cp -r %(builddir)s/cscs-reframe-tests-%(version)s/checks %(installdir)s/checks/private',
 ]
 
 modextrapaths = {
