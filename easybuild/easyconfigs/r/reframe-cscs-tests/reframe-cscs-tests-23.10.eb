@@ -16,10 +16,6 @@ sources = [
     {
         'filename': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/eth-cscs/cscs-reframe-tests/archive/']
-    },
-    {
-        'filename': '/apps/common/UES/easybuild/sources/r/reframe/'
-                    'reframe-tests-%(version)s.tar.gz'
     }
 ]
 
