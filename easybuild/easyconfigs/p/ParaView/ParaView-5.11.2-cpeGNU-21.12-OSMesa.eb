@@ -13,8 +13,6 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-#    ('cray-hdf5', EXTERNAL_MODULE),
-#    ('cray-netcdf', EXTERNAL_MODULE),
 ]
 
 builddependencies = [('CMake', '3.22.1','', True)]
