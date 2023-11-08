@@ -18,9 +18,9 @@ def eiger = [name: 'eiger',
              archs: [],
              cpus: 128,
              buildPath: '$XDG_RUNTIME_DIR/build',
-             unusePath: '/apps/eiger/UES/jenkins/1.4.0',
+             unusePath: '$APPS/UES/modulefiles',
              modulesProduction: '',
-             prefixProduction: '/apps/eiger/UES/jenkins/1.4.0']
+             prefixProduction: '$APPS/easybuild']
 
 def pilatus = [name: 'pilatus',
                archs: [],
