@@ -21,7 +21,7 @@ sources = [
 
 keepsymlinks = True
 postinstallcmds = [
-    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/checks/private',
+    'cp -r %(builddir)s/cscs-reframe-tests-%(version)s/checks %(installdir)s/checks/private',
 ]
 
 modextrapaths = {
