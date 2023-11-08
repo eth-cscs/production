@@ -144,7 +144,9 @@ if { ! [ info exists ::env(EASYBUILD_BUILDPATH) ] } {
 # If not set, define EASYBUILD_SOURCEPATH
 #
 if { ! [ info exists ::env(EASYBUILD_SOURCEPATH) ] } {
-    if { [ file writable "/apps/common/UES/easybuild/sources" ] } {
+    if { [ file writable "/capstor/apps/cscs/common/easybuild/sources" ] } {
+        setenv EASYBUILD_SOURCEPATH                 /capstor/apps/cscs/common/easybuild/sources
+    } elseif { [ file writable "/apps/common/UES/easybuild/sources" ] } {
         setenv EASYBUILD_SOURCEPATH                 /apps/common/UES/easybuild/sources
     } else {
         setenv EASYBUILD_SOURCEPATH                 $::env(HOME)/sources
