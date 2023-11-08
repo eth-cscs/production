@@ -19,8 +19,9 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['fff47c8eac38ec2e0f47715aadcbc1343b166aa017f0466019e73c4a53a323a6']
 
 dependencies = [
-    ('cray-hdf5-parallel', EXTERNAL_MODULE),
-    ('cray-netcdf-hdf5parallel', EXTERNAL_MODULE),
+# the following modules are already loaded by ecCodes:
+#    ('cray-hdf5-parallel', EXTERNAL_MODULE),
+#    ('cray-netcdf-hdf5parallel', EXTERNAL_MODULE),
     ('ecCodes', '2.23.0')
 ]
 
