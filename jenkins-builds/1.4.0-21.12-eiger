@@ -1,4 +1,5 @@
  CMake-3.22.1.eb                      --set-default-module
+ CMake-3.26.5.eb
  ddt-22.1.3-linux-x86_64.eb             --set-default-module
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
