@@ -20,7 +20,7 @@ builddependencies = [
 ]
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
-    ('cray-netcdfl', EXTERNAL_MODULE),
+    ('cray-netcdf', EXTERNAL_MODULE),
     ('JasPer', '2.0.33'),
     ('libaec', '1.0.6'),
     ('libjpeg-turbo', '2.1.1')
