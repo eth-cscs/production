@@ -18,12 +18,12 @@ sources = ['%(name)s-v%(version)s-RC1.tar.gz']
 
 dependencies = [
     ('Boost', '1.78.0', '-python%(pymajver)s'),
-    ('CDI', '2.1.0'),
+    ('CDI', '2.1.0', '-parallel'),
     ('ospray', '2.10.0'),
     ('adios', '2.9.2'),
     ('VisRTX', '0.1.6', '-cuda'),
     ('Catalyst', '2.0.0', '-rc4'),
-    ('cray-python', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 builddependencies = [
