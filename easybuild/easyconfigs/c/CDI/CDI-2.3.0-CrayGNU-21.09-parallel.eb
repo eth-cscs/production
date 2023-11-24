@@ -3,6 +3,7 @@ easyblock = 'ConfigureMake'
 
 name = 'CDI'
 version = '2.3.0'
+versionsuffix = '-parallel'
 
 homepage = 'https://code.mpimet.mpg.de/projects/cdi'
 description = """
@@ -19,7 +20,7 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['fff47c8eac38ec2e0f47715aadcbc1343b166aa017f0466019e73c4a53a323a6']
 
 dependencies = [
-    ('ecCodes', '2.23.0')
+    ('ecCodes', '2.23.0', versionsuffix)
 ]
 
 osdependencies = ['libtool']
