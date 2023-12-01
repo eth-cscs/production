@@ -16,17 +16,10 @@ sources = [
     {
         'filename': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/eth-cscs/cscs-reframe-tests/archive/']
-    },
-    {
-        'filename': '/apps/common/easybuild/sources/r/reframe/'
-                    'reframe-tests-%(version)s.tar.gz'
     }
 ]
 
 keepsymlinks = True
-postinstallcmds = [
-    'cp -r %(builddir)s/reframe-tests-%(version)s/checks %(installdir)s/checks/private',
-]
 
 modextrapaths = {
     'RFM_CONFIG_FILE': 'config/cscs.py',
@@ -39,7 +32,7 @@ modextravars = {
 
 sanity_check_paths = {
     'files': ['config/cscs.py'],
-    'dirs':  ['checks', 'checks/private',],
+    'dirs':  ['checks'],
 }
 
 moduleclass = 'devel'
