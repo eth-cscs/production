@@ -19,15 +19,15 @@ builddependencies = [
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.5.0'),
-    ('Julia', '1.9.4', '-cuda'),
+    ('JuliaExtensions', '1.6.3'),
     ('cray-R', EXTERNAL_MODULE),
     ('graphviz', '2.50.0'),
 ]
 
 modtclfooter = """
+prepend-path EBJULIA_ADMIN_DEPOT_PATH "%(installdir)s/share/IJulia"
 if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
-    append-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
-    append-path JULIA_DEPOT_PATH "%(installdir)s/share/IJulia"
+    prepend-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
 }
 """
 
@@ -47,11 +47,13 @@ rm -r $YARN_CACHE_FOLDER &&
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
+unset EBJULIA_USER_DEPOT_PATH &&
+export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
 julia -e 'using Pkg; Pkg.add("IJulia");' &&
 chmod -R +rX %(installdir)s/share/IJulia &&
-file=%(installdir)s/share/jupyter/kernels/julia-1.9/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
 # IR kernel - https://github.com/IRkernel/IRkernel
 export R_LIBS_SITE=%(installdir)s/share/ir41 &&
 mkdir %(installdir)s/share/ir41 &&

@@ -5,6 +5,7 @@ easyblock = 'PythonBundle'
 name = 'jupyterlab'
 version = '3.4.5'
 versionsuffix = '-batchspawner-cuda'
+julia_env_name = '1.9.3-gpu'
  
 homepage = 'https://github.com/jupyterlab/jupyterlab'
 description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
@@ -20,7 +21,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cudatoolkit', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.5.0'),
-    ('Julia', '1.9.4', '-cuda'),
+    ('Julia', '1.9.3', '-cuda'),
     ('cray-R', EXTERNAL_MODULE),
     ('graphviz', '2.50.0'),
 ]
