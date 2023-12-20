@@ -19,7 +19,7 @@ builddependencies = [
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.5.0'),
-    ('Julia', '1.9.4', '-cuda'),
+    ('Julia', '1.9.4'),
     ('cray-R', EXTERNAL_MODULE),
     ('graphviz', '2.50.0'),
 ]
