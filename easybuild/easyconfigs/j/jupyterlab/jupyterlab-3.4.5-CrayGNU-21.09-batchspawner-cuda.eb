@@ -53,6 +53,7 @@ export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME 
 julia -e 'using Pkg; Pkg.add("IJulia");' &&
 chmod -R +rX %(installdir)s/share/IJulia &&
 file=%(installdir)s/share/jupyter/kernels/julia-1.9/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+cp $file ${file}.tmp && cat $file.tmp | perl -pe 's/"env.*,",/"env": {"LD_LIBRARY_PATH":""},/g' > $file &&
 # IR kernel - https://github.com/IRkernel/IRkernel
 export R_LIBS_SITE=%(installdir)s/share/ir41 &&
 mkdir %(installdir)s/share/ir41 &&
