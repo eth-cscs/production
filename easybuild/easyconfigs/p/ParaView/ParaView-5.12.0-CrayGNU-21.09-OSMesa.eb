@@ -49,7 +49,6 @@ configopts += '-DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROO
 # CSCS specific for Raytracing (OSPRay)
 configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON '
 configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
-configopts += '-DOpenImageDenoise_DIR="$EBROOTOSPRAY/lib/cmake/OpenImageDenoise-1.4.3" '
 #
 configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON '
 
