@@ -16,7 +16,7 @@ sources = ['v%(version)s.tar.gz']
 builddependencies = [
     ('CMake', '3.22.1', '', True),
 #    ('gcc/11.2.0', EXTERNAL_MODULE),
-    ('git-lfs', '3.2.0', '', True),
+    ('git-lfs', '3.4.1'),
 ]
 
 configopts = '-DINSTALL_IN_SEPARATE_DIRECTORIES:BOOL=OFF '
