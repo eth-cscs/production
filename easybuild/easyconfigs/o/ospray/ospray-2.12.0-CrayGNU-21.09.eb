@@ -30,7 +30,7 @@ configopts += '-DBUILD_EMBREE_FROM_SOURCE:BOOL=ON '
 
 srcdir = 'scripts/superbuild'
 
-build_cmd = "export TBB_DIR=/opt/intel/oneapi/tbb/latest; cmake --build ."
+build_cmd = "export PATH=${EBROOTGITMINLFS}/bin:$PATH ; export TBB_DIR=/opt/intel/oneapi/tbb/latest; cmake --build ."
 
 skipsteps = ['install']
 
