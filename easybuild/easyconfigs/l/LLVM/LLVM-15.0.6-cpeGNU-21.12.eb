@@ -1,0 +1,50 @@
+# contributed by Jean M. Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'LLVM'
+version = '15.0.6'
+
+homepage = 'http://llvm.org/'
+description = """The LLVM Core libraries provide a modern source- and
+target-independent optimizer, along with code generation support for many
+popular CPUs (as well as some less common ones!) These libraries are built
+around a well specified code representation known as the LLVM intermediate
+representation ("LLVM IR"). The LLVM Core libraries are well documented, and it
+is particularly easy to invent your own language (or port an existing compiler)
+to use LLVM as an optimizer and code generator."""
+
+toolchain = {'name': 'cpeGNU', 'version': '21.12'}
+toolchainopts = {'dynamic': True}
+
+source_urls = [
+    'https://www.paraview.org/files/dependencies',
+]
+sources = ['%(namelower)s-project-%(version)s.src.tar.xz']
+
+builddependencies = [
+    ('CMake', '3.26.5', '', True),
+    ('gcc/11.2.0', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+srcdir = "llvm"
+
+# required to install extra tools in bin/
+configopts = "-DLLVM_INSTALL_UTILS=ON "
+configopts += "-DLLVM_ENABLE_RTTI:BOOL=ON "
+configopts += "-DCMAKE_BUILD_TYPE=Release  -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_STANDARD=17 "
+configopts += "-DLLVM_ENABLE_ZLIB=ON "
+configopts += "-DLLVM_TARGETS_TO_BUILD=X86 "
+
+configopts += "-DLLVM_BUILD_TESTS:BOOL=OFF "
+configopts += "-DLLVM_BUILD_LLVM_DYLIB:BOOL=OFF -DLVM_BUILD_LLVM_C_DYLIB=OFF "
+configopts += "-DLLVM_ENABLE_LIBXML2:BOOL=OFF -DLLVM_ENABLE_BINDINGS:BOOL=OFF -DLLVM_INCLUDE_BENCHMARKS:BOOL=OFF "
+configopts += "-DLLVM_INCLUDE_EXAMPLES:BOOL=OFF -DLLVM_INCLUDE_RUNTIMES:BOOL=OFF "
+
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s-ar', 'bin/FileCheck'],
+    'dirs': ['include/%(namelower)s', 'include/%(namelower)s-c'],
+}
+
+moduleclass = 'compiler'
