@@ -15,11 +15,11 @@ sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.26.5', '', True),
-    ('git-lfs', '3.2.0', '', True),
+    ('git-lfs', '3.4.1', '', True)
 ]
 
-#configopts =  '-DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc '
 configopts = '-DINSTALL_IN_SEPARATE_DIRECTORIES:BOOL=OFF '
+configopts += '-DTBB_DIR=/opt/intel/oneapi/tbb/latest '
 configopts += '-DDOWNLOAD_TBB:BOOL=OFF '
 configopts += '-DBUILD_OSPRAY_APPS:BOOL=OFF '
 configopts += '-DBUILD_GLFW:BOOL=OFF '
@@ -27,10 +27,10 @@ configopts += '-DBUILD_OIDN:BOOL=ON '
 configopts += '-DBUILD_OIDN_FROM_SOURCE:BOOL=ON '
 configopts += '-DBUILD_EMBREE_FROM_SOURCE:BOOL=ON '
 
+prebuildopts = "export TBB_DIR=/opt/intel/oneapi/tbb/latest && "
+prebuildopts += "git lfs install && "
+build_cmd = "cmake --build ."
 srcdir = 'scripts/superbuild'
-
-build_cmd = "export TBB_DIR=/opt/intel/oneapi/tbb/latest; cmake --build ."
-maxparallel = 8
 
 skipsteps = ['install']
 
