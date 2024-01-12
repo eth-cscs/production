@@ -15,8 +15,7 @@ sources = ['v%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.22.1', '', True),
-#    ('gcc/11.2.0', EXTERNAL_MODULE),
-    ('git-lfs', '3.4.1'),
+    ('git-lfs', '3.4.1', '', True)
 ]
 
 configopts = '-DINSTALL_IN_SEPARATE_DIRECTORIES:BOOL=OFF '
@@ -28,9 +27,10 @@ configopts += '-DBUILD_OIDN:BOOL=ON '
 configopts += '-DBUILD_OIDN_FROM_SOURCE:BOOL=ON '
 configopts += '-DBUILD_EMBREE_FROM_SOURCE:BOOL=ON '
 
+prebuildopts = "export TBB_DIR=/opt/intel/oneapi/tbb/latest && "
+prebuildopts += "git lfs install && "
+build_cmd = "cmake --build ."
 srcdir = 'scripts/superbuild'
-
-build_cmd = "export PATH=${EBROOTGITMINLFS}/bin:$PATH ; export TBB_DIR=/opt/intel/oneapi/tbb/latest; cmake --build ."
 
 skipsteps = ['install']
 

@@ -10,9 +10,7 @@ audio samples, videos, datasets, and graphics with text pointers inside Git,
 while storing the file contents on a remote server like GitHub.com or GitHub
 Enterprise."""
 
-# toolchain = SYSTEM
-toolchain = {'name': 'CrayGNU', 'version': '21.09'}
-# toolchainopts = {'pic': True, 'verbose': False}
+toolchain = SYSTEM
 
 source_urls = ['https://github.com/%(name)s/%(name)s/releases/download/v%(version)s/']
 sources = ['%(name)s-linux-amd64-v%(version)s.tar.gz']
@@ -21,11 +19,6 @@ sanity_check_paths = {
     'files': ["bin/git-lfs"],
     'dirs': [""]
 }
-
-# add the installation dir to PATH
-#modextrapaths = {
-#    'PATH': '',
-#}
 
 # create a bin directory and move the executable there
 # remove exec permission for the provided installation script
