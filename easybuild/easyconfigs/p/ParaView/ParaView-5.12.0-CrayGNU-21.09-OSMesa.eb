@@ -24,7 +24,7 @@ dependencies = [
     ('Mesa', '23.0.1'),
     ('adios', '2.9.2'),
     ('CDI', '2.2.4', '-parallel'),
-    ('ospray', '3.0.0'),
+    ('ospray', '2.12.0'),
     ('Catalyst', '2.0.0', '-rc4'),
     ('cray-python', EXTERNAL_MODULE),
 ]
