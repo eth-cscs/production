@@ -38,6 +38,7 @@
  numpy-1.21.4-CrayGNU-21.09.eb                          --set-default-module
  OOOPS-1.0.eb
  ParaView-5.11.2-CrayGNU-21.09-OSMesa.eb                --set-default-module
+ ParaView-5.12.0-CrayGNU-21.09-OSMesa.eb
  PLUMED-2.7.3-CrayGNU-21.09.eb                          --set-default-module
  PLUMED-2.8.0-CrayGNU-21.09.eb
  QuantumESPRESSO-7.0-CrayIntel-21.09.eb                 --set-default-module
