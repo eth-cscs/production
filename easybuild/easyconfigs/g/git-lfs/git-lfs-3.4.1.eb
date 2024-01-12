@@ -2,7 +2,7 @@
 easyblock = "Tarball"
 
 name = 'git-lfs'
-version = '3.2.0'
+version = '3.4.1'
 
 homepage = 'https://git-lfs.github.com/'
 description = """Git Large File Storage (LFS) replaces large files such as
