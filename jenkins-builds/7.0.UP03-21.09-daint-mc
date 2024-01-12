@@ -7,7 +7,8 @@
  CP2K-9.1-CrayGNU-21.09.eb                              --set-default-module
  CPMD-4.3-CrayIntel-21.09.eb                            --set-default-module
  FFmpeg-5.0-CrayGNU-21.09.eb                            --set-default-module
- git-lfs-3.2.0.eb                                       --set-default-module
+git-lfs-3.2.0.eb                                       --set-default-module
+git-lfs-3.4.1.eb
  GREASY-19.03-cscs-CrayGNU-21.09.eb                     --set-default-module
  GROMACS-2021.5-CrayGNU-21.09.eb                        --set-default-module
  GSL-2.7-CrayGNU-21.09.eb                               --set-default-module
