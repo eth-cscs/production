@@ -156,10 +156,10 @@ else
  ebtoolsmodulepath="$EASYBUILD_PREFIX/$ebtoolsmodulepath_suffix"
 # create a symbolic link to EasyBuild-custom/cscs if not found in $ebmodulepath
  if [ ! -e "$ebmodulepath/EasyBuild-custom/cscs" ]; then
-  if [ ! -d "$ebmodulepath"]; then
+  if [ ! -d "$ebmodulepath" ]; then
 	mkdir -p "$ebmodulepath"
   fi
-  if [ ! -d "$ebtoolsmodulepath"]; then
+  if [ ! -d "$ebtoolsmodulepath" ]; then
    	mkdir -p "$ebtoolsmodulepath"
   fi
   ln -s $ebcustompath $ebmodulepath
