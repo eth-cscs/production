@@ -26,7 +26,7 @@ postinstallcmds = ["mkdir %(installdir)s/bin && mv %(installdir)s/git-lfs %(inst
 
 modtclfooter = """
 # initialize git lfs
-if { [module-info mode load] } {
+if { [ module-info mode load ] } {
  exec git lfs install
 }
 """
