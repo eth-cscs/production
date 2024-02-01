@@ -67,16 +67,16 @@ configopts += '-DENABLE_ospray=ON '
 configopts += '-DENABLE_embree=ON '
 configopts += '-DENABLE_rkcommon=ON '
 # maybe?
-configopts += '-DENABLE_adios2=OFF -DENABLE_blosc=OFF -DENABLE_bzip2=OFF '
-configopts += '-DENABLE_fides=OFF '
-configopts += '-DENABLE_catalyst=OFF '
-configopts += '-DENABLE_hdf5=OFF '
+configopts += '-DENABLE_adios2=ON -DENABLE_blosc=ON -DENABLE_bzip2=ON '
+configopts += '-DENABLE_fides=ON '
+configopts += '-DENABLE_catalyst=ON '
+configopts += '-DENABLE_hdf5=ON '
 
-configopts += '-DENABLE_cdi=OFF '
-configopts += '-DENABLE_netcdf=OFF '
+configopts += '-DENABLE_cdi=ON '
+configopts += '-DENABLE_netcdf=ON '
 configopts += '-DENABLE_openvdb=OFF '
-configopts += '-DENABLE_paraviewsdk=OFF '
-configopts += '-DENABLE_visitbridge=OFF '
+configopts += '-DENABLE_paraviewsdk=ON '
+configopts += '-DENABLE_visitbridge=ON '
 configopts += '-DENABLE_zfp=OFF '
 
 configopts += '-DENABLE_cosmotools=OFF '
@@ -91,5 +91,9 @@ configopts += '-DENABLE_xdmf3=OFF '
 maxparallel = 32
 
 modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
+
+postinstallcmds = [
+    "export GALLIUM_DRIVER=llvmpipe"
+]
 
 moduleclass = 'vis'
