@@ -28,6 +28,7 @@
  NAMD-2.14-cpeGNU-21.12.eb
  NCO-5.0.1-cpeGNU-21.12.eb
  ParaView-5.11.2-cpeGNU-21.12-OSMesa.eb --set-default-module
+ ParaView-5.12.0-cpeGNU-21.12-OSMesa.eb
  Scalasca-2.6-cpeGNU-21.12.eb
  Visit-3.3.1-cpeGNU-21.12.eb
  VTK-9.2.6-cpeGNU-21.12-OSMesa.eb
