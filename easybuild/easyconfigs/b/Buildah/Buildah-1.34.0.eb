@@ -20,7 +20,8 @@ dependencies = [('runc', '1.1.12'),
                 ('fuse-overlayfs', '1.13')]
 
 # Make-install buildah patching location of registries and policy configurations
-prebuildopts = ('sed -i "s#^BUILDAH_LDFLAGS :=.*'
+prebuildopts = ('mkdir -p %(builddir)s/go_cache && export GOCACHE=%(builddir)s/go_cache && '
+                'sed -i "s#^BUILDAH_LDFLAGS :=.*'
                 '#BUILDAH_LDFLAGS := -ldflags \'-X main.GitCommit=\$(GIT_COMMIT) -X main.buildInfo=\$(SOURCE_DATE_EPOCH) -X main.cniVersion=\$(CNI_COMMIT) '
                 '-X github.com/containers/image/v5/pkg/sysregistriesv2.systemRegistriesConfPath=%(installdir)s/etc/registries.conf '
                 '-X github.com/containers/image/v5/signature.systemDefaultPolicyPath=%(installdir)s/etc/policy.json\' \$(EXTRALDFLAGS)#" Makefile && ')
