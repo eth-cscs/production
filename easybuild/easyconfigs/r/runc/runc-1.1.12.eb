@@ -1,0 +1,29 @@
+easyblock = 'ConfigureMake'
+
+name = 'runc'
+version = '1.1.12'
+
+homepage = 'https://github.com/opencontainers/runc'
+description = """CLI tool for spawning and running containers according to the OCI specification."""
+
+toolchain = SYSTEM
+
+builddependencies = [('go', '1.21.6.linux-amd64')]
+
+source_urls = ['https://github.com/opencontainers/runc/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+checksums = ['be31b07d6a54a8f234016501c300ad04b6c428c56588e7eca8c3b663308db208']
+
+prebuildopts = 'mkdir -p %(builddir)s/go_cache && export GOCACHE=%(builddir)s/go_cache && '
+               
+
+buildopts = ['BUILDTAGS=""']
+installopts = ['PREFIX=%(installdir)s']
+skipsteps = ['configure']
+
+sanity_check_paths = {
+    'files': ['sbin/runc'],
+    'dirs': ['']
+}
+
+moduleclass = 'tools'
