@@ -13,12 +13,13 @@ whatis([===[Description: Production EasyBuild @ CSCS  ]===])
 whatis([===[Homepage: https://github.com/eth-cscs/production/wiki]===])
 conflict("EasyBuild-custom")
 
+local common_dir="/capstor/apps/cscs/common/"
 -- EasyBuild-custom SETUP 
-local eb_config_dir="/apps/common/UES/jenkins/production/easybuild"
-local eb_module_dir="/apps/common/UES/easybuild/modules/all"
-local eb_root_dir="/apps/common/UES/jenkins/easybuild/software/EasyBuild-custom/cscs"
+local eb_config_dir=pathJoin(common_dir, "production/easybuild")
+local eb_module_dir=pathJoin(common_dir, "easybuild/modules/all")
+local eb_root_dir=pathJoin(common_dir, "easybuild/software/EasyBuild-custom/cscs"
 local eb_runtime_dir=os.getenv("SCRATCH") or pathJoin("/tmp", os.getenv("USER"))
-local eb_source_dir="/apps/common/UES/easybuild/sources"
+local eb_source_dir=pathJoin(common_dir, "easybuild/sources")
 setenv("EBROOTEASYBUILDMINCUSTOM", eb_root_dir)
 setenv("EBVERSIONEASYBUILDMINCUSTOM", "cscs")
 setenv("EBDEVELEASYBUILDMINCUSTOM", pathJoin(eb_root_dir, "/easybuild/EasyBuild-custom-cscs-easybuild-devel"))
