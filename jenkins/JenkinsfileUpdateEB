@@ -108,7 +108,7 @@ stage('Update Stage') {
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        load_pe = "module load cpe/${pe_target} && module list"
+                        load_pe = "module load cray cpe/${pe_target} && module list"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
@@ -125,7 +125,7 @@ stage('Update Stage') {
                     withEnv(["EASYBUILD_PREFIX=${eb_installpath}",
                              "EASYBUILD_TMPDIR=${eb_installpath}/tmp",
                              "EB_CUSTOM_REPOSITORY=$WORKSPACE/easybuild"]){
-                                 sh("""#!/bin/bash -l
+                                 sh("""#!/bin/bash -lx
                                      # create module folders and symbolic link to EasyBuild-custom/cscs
                                      if [ ! -d "${eb_modulespath}" ]; then
                                          mkdir -p ${eb_modulespath} ${eb_toolspath}
