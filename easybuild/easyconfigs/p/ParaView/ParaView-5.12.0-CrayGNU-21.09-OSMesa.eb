@@ -1,0 +1,90 @@
+# CrayGNU version by Jean Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.12.0'
+versionsuffix = '-OSMesa'
+
+homepage = 'http://www.paraview.org'
+description = "ParaView is a scientific parallel visualizer."
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+local_download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % local_download_suffix]
+sources = ['%(name)s-v%(version)s.tar.gz']
+
+dependencies = [
+    ('Boost', '1.78.0', '-python%(pymajver)s'),
+    ('Catalyst', '2.0.0', '-rc4'),
+    ('CDI', '2.2.4', '-parallel'),
+    ('Mesa', '23.0.1'),
+    ('adios', '2.9.2'),
+    ('cray-python', EXTERNAL_MODULE),
+    ('ospray', '2.12.0'),
+]
+
+builddependencies = [
+    ('CMake', '3.26.5','', True),
+]
+
+separate_build_dir = True
+
+maxparallel = 32
+
+configopts  = '-DPARAVIEW_USE_MPI:BOOL=ON '
+configopts += '-DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ '
+configopts += '-DMPI_C_COMPILER=cc -DMPI_CXX_COMPILER=CC '
+configopts += '-DPARAVIEW_BUILD_TESTING:BOOL=OFF -DPARAVIEW_ENABLE_EXAMPLES:BOOL=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL '
+configopts += '-DPARAVIEW_USE_PYTHON:BOOL=ON '
+configopts += '-DCMAKE_BUILD_TYPE=Release -DPARAVIEW_BUILD_SHARED_LIBS:BOOL=ON '
+
+# use TBB for on-the-node parallelism
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=TBB '
+configopts += '-DTBB_DIR:PATH=/opt/intel/oneapi/tbb/latest/lib/cmake/tbb '
+#
+configopts += '-DPARAVIEW_USE_VTKM:BO0L=ON '
+configopts += '-DPARAVIEW_USE_QT:BOOL=OFF -DPARAVIEW_ENABLE_WEB:BOOL=ON '
+configopts += '-DPARAVIEW_ENABLE_XDMF3:BOOL=OFF '
+#
+configopts += '-DCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO="-Wl,-rpath,${EBROOTLLVM}/lib -L${EBROOTLLVM}/lib" '
+configopts += '-DVTK_USE_X:BOOL=OFF -DOPENGL_gl_LIBRARY:FILEPATH=IGNORE -DOPENGL_gl_LIBRARY:FILEPATH=IGNORE -DOPENGL_INCLUDE_DIR:PATH=IGNORE '
+configopts += '-DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROOTMESA}/include -DOSMESA_LIBRARY:FILEPATH=${EBROOTMESA}/lib/libOSMesa.so '
+# CSCS specific for Raytracing (OSPRay)
+configopts += '-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON '
+configopts += '-DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON '
+#
+configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON '
+
+#
+configopts += "-DVTK_MODULE_ENABLE_VTK_GeovisCore:STRING=YES "
+configopts += '-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=ON '
+#
+configopts += '-DPARAVIEW_ENABLE_CATALYST:BOOL=ON -Dcatalyst_DIR="$EBROOTCATALYST/lib64/cmake/catalyst-2.0" '
+#
+configopts += '-DPARAVIEW_PLUGIN_ENABLE_CDIReader:BOOL=ON -DCDI_DIR="$EBROOTCDI/lib/cmake/libcdi" '
+#
+configopts += '-DADIOS2_DIR="$EBROOTADIOS/lib64/cmake/adios2" -DPARAVIEW_ENABLE_ADIOS2:BOOL=ON '
+configopts += '-DPARAVIEW_ENABLE_FIDES:BOOL=ON '
+
+postinstallcmds = [
+    "export GALLIUM_DRIVER=llvmpipe; mkdir -p %(installdir)s/share/%(namelower)s-%(version_major_minor)s && tar xf /apps/common/UES/easybuild/sources/%(nameletterlower)s/%(name)s/materials.tar.bz2 -C %(installdir)s/share/%(namelower)s-%(version_major_minor)s"
+]
+
+sanity_check_paths = {
+    'files': ['bin/pvbatch', 'bin/pvserver'],
+    'dirs': ['lib64/python%(pyshortver)s/site-packages', 'lib64/%(namelower)s-%(version_major_minor)s/plugins'],
+}
+
+modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
+
+modextravars = { 'LD_LIBRARY_PATH':'/opt/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib:$::env(LD_LIBRARY_PATH)',
+                 'TBB_ROOT': '/opt/intel/oneapi/tbb/latest',
+               }
+
+modtclfooter = """
+prepend-path LD_LIBRARY_PATH /opt/intel/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.8:/opt/python/%(pyver)s/lib
+"""
+
+moduleclass = 'vis'

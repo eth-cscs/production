@@ -1,0 +1,48 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'QuantumESPRESSO'
+version = '7.2'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes for
+electronic-structure calculations and materials modeling at the nanoscale. It
+is based on density-functional theory, plane waves, and pseudopotentials (both
+norm-conserving and ultrasoft). 
+
+Note: The warning "ieee_inexact FORTRAN STOP" might be issued.  
+Set NO_STOP_MESSAGE=1 in your batch script to avoid the warning.
+"""
+
+toolchain = {'name': 'CrayNvidia', 'version': '21.09'}
+toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version_major)s.%(version_minor)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', True),
+    ('cudatoolkit', EXTERNAL_MODULE)
+]
+
+dependencies = [
+    ('intel/2021.3.0', EXTERNAL_MODULE),
+    ('libxc', '5.1.7')
+]
+
+# Use MKL FFT and disable Scalapack (the GPU eigensolver can outperform the parallel CPU one)
+configopts = "-DQE_ENABLE_CUDA=1 -DQE_FFTW_VENDOR=Intel_DFTI -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1"
+
+# copy libxc mod files (include path not set correctly by CMake)
+prebuildopts = "cp $EBROOTLIBXC/include/*.mod Modules/mod/qe_modules && "
+buildopts = "all epw"
+
+postinstallcmds = [
+    'rsync %(builddir)s/easybuild_obj/bin/*.x %(installdir)s/bin'
+]
+
+sanity_check_paths = {
+    'files': ['bin/cp.x', 'bin/pp.x', 'bin/pw.x'],
+    'dirs': ['bin']
+}
+
+moduleclass = 'chem'

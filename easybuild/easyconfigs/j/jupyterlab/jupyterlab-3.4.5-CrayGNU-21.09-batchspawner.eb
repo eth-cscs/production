@@ -19,23 +19,23 @@ builddependencies = [
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.5.0'),
-    ('JuliaExtensions', '1.6.3'),
+    ('Julia', '1.9.4'),
     ('cray-R', EXTERNAL_MODULE),
     ('graphviz', '2.50.0'),
 ]
 
 modtclfooter = """
-prepend-path EBJULIA_ADMIN_DEPOT_PATH "%(installdir)s/share/IJulia"
 if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
-    prepend-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+    append-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+    append-path JULIA_DEPOT_PATH "%(installdir)s/share/IJulia"
 }
 """
 
 # install extensions and batchspawner components
 postinstallcmds = [
 """
-export YARN_CACHE_FOLDER=/tmp/$USER/yarn_cache &&
-export NODE_OPTIONS=--max-old-space-size=4096 &&
+export YARN_CACHE_FOLDER="$(mktemp -d /tmp/yarn.XXXXXXXXX)" &&
+export NODE_OPTIONS=--max-old-space-size=8192 &&
 export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
 export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
@@ -47,13 +47,11 @@ rm -r $YARN_CACHE_FOLDER &&
 # Bash kernel - https://github.com/takluyver/bash_kernel
 python3 -m bash_kernel.install --prefix=%(installdir)s/ &&
 # IJulia kernel - https://github.com/JuliaLang/IJulia.jl
-unset EBJULIA_USER_DEPOT_PATH &&
-export EBJULIA_ADMIN_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
 export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
 julia -e 'using Pkg; Pkg.add("IJulia");' &&
 chmod -R +rX %(installdir)s/share/IJulia &&
-file=%(installdir)s/share/jupyter/kernels/julia-1.6/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.9/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
 # IR kernel - https://github.com/IRkernel/IRkernel
 export R_LIBS_SITE=%(installdir)s/share/ir41 &&
 mkdir %(installdir)s/share/ir41 &&
@@ -172,7 +170,7 @@ exts_list = [
     ('parso', '0.8.3', {'unpack_sources': False, 'source_tmpl': 'parso-0.8.3-py2.py3-none-any.whl'}),
     ('nest_asyncio', '1.5.4', {'unpack_sources': False, 'source_tmpl': 'nest_asyncio-1.5.4-py3-none-any.whl'}),
     ('bleach', '4.1.0', {'unpack_sources': False, 'source_tmpl': 'bleach-4.1.0-py2.py3-none-any.whl'}),
-    ('mistune', '2.0.4', {'unpack_sources': False, 'source_tmpl': 'mistune-2.0.4-py2.py3-none-any.whl'}),
+    ('mistune', '0.8.4', {'unpack_sources': False, 'source_tmpl': 'mistune-0.8.4-py2.py3-none-any.whl'}),
     ('jupyterlab_pygments', '0.1.2', {'unpack_sources': False, 'source_tmpl': 'jupyterlab_pygments-0.1.2-py2.py3-none-any.whl'}),
     ('nbclient', '0.5.10', {'unpack_sources': False, 'source_tmpl': 'nbclient-0.5.10-py3-none-any.whl'}),
     ('testpath', '0.5.0', {'unpack_sources': False, 'source_tmpl': 'testpath-0.5.0-py3-none-any.whl'}),

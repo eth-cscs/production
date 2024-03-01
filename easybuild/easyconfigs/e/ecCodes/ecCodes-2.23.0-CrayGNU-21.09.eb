@@ -16,14 +16,14 @@ source_urls = ['https://confluence.ecmwf.int/download/attachments/45757960/']
 sources = ['%(namelower)s-%(version)s-Source.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.21.3', '', True),
+    ('CMake', '3.21.3','', True)
 ]
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
     ('JasPer', '2.0.33'),
     ('libaec', '1.0.6'),
-    ('libjpeg-turbo', '2.1.1'),
+    ('libjpeg-turbo', '2.1.1')
 ]
 
 configopts = " -DENABLE_AEC=ON -DCMAKE_Fortran_COMPILER=gfortran -DENABLE_ECCODES_OMP_THREADS=ON "

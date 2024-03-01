@@ -29,12 +29,14 @@ end
 
 local gccPrefix = os.getenv("GCC_PREFIX") or "/opt/gcc/default/" 
 local gccLib = pathJoin(gccPrefix, "snos/lib64")
-local singularityBind = "/var/spool/slurmd,/etc/libibverbs.d,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. gccPrefix 
+local singularityBind = "/var/spool/slurmd,/opt/cray,/var/opt/cray,/usr/lib64,/lib64,/var/lib/hugetlbfs," .. gccPrefix 
 local libfabricLib = capture("module show libfabric 2>&1 | sed -En 's/prepend_path\\(\"LD_LIBRARY_PATH\",\"(\\S+)\"\\)/\\1/p'")
 
 setenv("SINGULARITY_BIND", singularityBind) 
 setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/lib64:/opt/cray/pe/lib64:/lib64")
 prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", libfabricLib)
 prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", gccLib)
-prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+if not (os.getenv("CRAY_LD_LIBRARY_PATH") == nil) then
+        prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+end
 """
