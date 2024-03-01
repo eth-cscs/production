@@ -13,13 +13,16 @@ whatis([===[Description: Production EasyBuild @ CSCS  ]===])
 whatis([===[Homepage: https://github.com/eth-cscs/production/wiki]===])
 conflict("EasyBuild-custom")
 
-local common_dir="/capstor/apps/cscs/common/"
+-- system variables 
+apps=os.getenv("APPS")
+system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+common_dir=apps:gsub(system,'common')
 -- EasyBuild-custom SETUP 
-local eb_config_dir=pathJoin(common_dir, "production/easybuild")
-local eb_module_dir=pathJoin(common_dir, "easybuild/modules/all")
-local eb_root_dir=pathJoin(common_dir, "easybuild/software/EasyBuild-custom/cscs"
-local eb_runtime_dir=os.getenv("SCRATCH") or pathJoin("/tmp", os.getenv("USER"))
-local eb_source_dir=pathJoin(common_dir, "easybuild/sources")
+eb_config_dir=pathJoin(common_dir, "production/easybuild")
+eb_module_dir=pathJoin(common_dir, "easybuild/modules/all/Core")
+eb_root_dir=pathJoin(common_dir, "easybuild/software/EasyBuild-custom/cscs")
+eb_runtime_dir=os.getenv("SCRATCH") or pathJoin("/tmp", os.getenv("USER"))
+eb_source_dir=pathJoin(common_dir, "easybuild/sources")
 setenv("EBROOTEASYBUILDMINCUSTOM", eb_root_dir)
 setenv("EBVERSIONEASYBUILDMINCUSTOM", "cscs")
 setenv("EBDEVELEASYBUILDMINCUSTOM", pathJoin(eb_root_dir, "/easybuild/EasyBuild-custom-cscs-easybuild-devel"))
@@ -63,7 +66,6 @@ if not os.getenv("EASYBUILD_SOURCEPATH") then
 end
 
 -- SYSTEM SPECIFIC (Cray with Lmod)
-local system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
 if system == "eiger" then
 	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.12.cfg"))
 elseif system == "pilatus" then
