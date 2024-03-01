@@ -36,7 +36,7 @@ setenv("EBDEVELEASYBUILDMINCUSTOM", pathJoin(eb_root_dir, "/easybuild/EasyBuild-
  * EASYBUILD_INCLUDE_TOOLCHAINS
  * EASYBUILD_EXTERNAL_MODULES_METADATA (see section SYSTEM SPECIFIC)
 --]]
-local eb_custom_repository=os.getenv("EB_CUSTOM_REPOSITORY") or eb_config_dir
+eb_custom_repository=os.getenv("EB_CUSTOM_REPOSITORY") or eb_config_dir
 setenv("XDG_CONFIG_DIRS", eb_custom_repository)
 setenv("EASYBUILD_ROBOT_PATHS", pathJoin(eb_custom_repository, "easyconfigs/:"))
 setenv("EASYBUILD_INCLUDE_EASYBLOCKS", pathJoin(eb_custom_repository, "easyblocks/*.py"))
@@ -48,7 +48,7 @@ setenv("EASYBUILD_INCLUDE_TOOLCHAINS", pathJoin(eb_custom_repository, "toolchain
  * EASYBUILD_BUILDPATH
  * EASYBUILD_TMPDIR
 --]]
-local xdg_runtime_dir=os.getenv("XDG_RUNTIME_DIR") or eb_runtime_dir
+xdg_runtime_dir=os.getenv("XDG_RUNTIME_DIR") or eb_runtime_dir
 if not os.getenv("EASYBUILD_BUILDPATH") then
 	setenv("EASYBUILD_BUILDPATH", pathJoin(xdg_runtime_dir, "build"))
 end
