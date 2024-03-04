@@ -25,7 +25,7 @@ separate_build_dir = True
 preconfigopts  = "git clone --recursive https://gitlab.kitware.com/paraview/paraview-superbuild.git && "
 preconfigopts += "cd paraview-superbuild && "
 preconfigopts += "git fetch origin && "
-preconfigopts += "git checkout v%(version)s-RC2 && "
+preconfigopts += "git checkout v%(version)s && "
 preconfigopts += "git submodule update && "
 
 preconfigopts += "mkdir ../build; cd ../build; "
@@ -53,7 +53,6 @@ configopts += '-DBUILD_TESTING=OFF '
 configopts += '-DPARAVIEW_BUILD_EDITION=CANONICAL '
 
 # essential, needed
-configopts += '-DENABLE_cxx11=ON -DENABLE_cxx14=ON '
 configopts += '-DENABLE_mpi=ON '
 configopts += '-DENABLE_numpy=ON '
 configopts += '-DENABLE_osmesa=ON '
@@ -88,7 +87,7 @@ configopts += '-DENABLE_ospraymodulempi=OFF '
 configopts += '-DENABLE_szip=OFF '
 configopts += '-DENABLE_xdmf3=OFF '
 
-maxparallel = 32
+maxparallel = 1
 
 modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
 
