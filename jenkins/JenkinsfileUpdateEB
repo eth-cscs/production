@@ -125,7 +125,7 @@ stage('Update Stage') {
                     withEnv(["EASYBUILD_PREFIX=${eb_installpath}",
                              "EASYBUILD_TMPDIR=${eb_installpath}/tmp",
                              "EB_CUSTOM_REPOSITORY=$WORKSPACE/easybuild"]){
-                                 sh("""#!/bin/bash -lx
+                                 sh("""#!/bin/bash -l
                                      # create module folders and symbolic link to EasyBuild-custom/cscs
                                      if [ ! -d "${eb_modulespath}" ]; then
                                          mkdir -p ${eb_modulespath} ${eb_toolspath}
