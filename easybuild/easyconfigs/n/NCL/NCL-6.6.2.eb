@@ -10,19 +10,19 @@ description = """
 """
 
 toolchain = SYSTEM
-local_ncl_prefix = '/apps/common/UES/easybuild/sources/n/NCL/'
+
 sources = [
-    local_ncl_prefix + 'ncl_ncarg-%(version)s-CentOS7.6_64bit_nodap_gnu485.tar.gz',
-    local_ncl_prefix + 'rangs_0.zip',
-    local_ncl_prefix + 'rangs_1.zip',
-    local_ncl_prefix + 'rangs_2.zip',
-    local_ncl_prefix + 'rangs_3.zip',
-    local_ncl_prefix + 'rangs_4.zip',
-    local_ncl_prefix + 'gshhs_0.zip',
-    local_ncl_prefix + 'gshhs_1.zip',
-    local_ncl_prefix + 'gshhs_2.zip',
-    local_ncl_prefix + 'gshhs_3.zip',
-    local_ncl_prefix + 'examples.tgz',
+    'ncl_ncarg-%(version)s-CentOS7.6_64bit_nodap_gnu485.tar.gz',
+    'rangs_0.zip',
+    'rangs_1.zip',
+    'rangs_2.zip',
+    'rangs_3.zip',
+    'rangs_4.zip',
+    'gshhs_0.zip',
+    'gshhs_1.zip',
+    'gshhs_2.zip',
+    'gshhs_3.zip',
+    'examples.tgz'
 ]
 
 preinstallopts = 'mkdir -p lib/ncarg/database/rangs examples;' + \
