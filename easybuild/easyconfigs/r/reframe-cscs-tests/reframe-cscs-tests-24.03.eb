@@ -10,7 +10,7 @@ description = 'ReFrame test suite of CSCS.'
 
 toolchain = SYSTEM
 
-dependencies = [('reframe', '4.2.0')]
+dependencies = [('reframe', '4.5.1')]
 
 sources = [
     {
