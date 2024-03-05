@@ -1,0 +1,46 @@
+# @omlins
+
+easyblock = 'CMakeMake'
+
+name = 'zfp'
+version = '0.5.5'
+
+homepage = 'https://github.com/LLNL/zfp'
+description = "Optionally error-bounded lossy compressor for HPC data with high throughput read and write random access to individual array elements"
+
+toolchain = {'name': 'cpeGNU', 'version': '21.12'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+source_urls = ['https://github.com/LLNL/%(name)s/releases/download/%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.26.5', '', True),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DBUILD_CFP:BOOL=ON -DBUILD_ZFPY:BOOL=OFF -DBUILD_ZFORP:BOOL=ON -DBUILD_UTILITIES:BOOL=ON -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTING:BOOL=OFF -DBUILD_SHARED_LIBS:BOOL=ON -DZFP_WITH_OPENMP:BOOL=ON -DZFP_WITH_CUDA:BOOL=OFF "
+
+maxparallel = 16
+
+# create pkgconfig file
+postinstallcmds = [
+    "mkdir -p %(installdir)s/lib/pkgconfig",
+    """echo -e "prefix=%(installdir)s
+libdir=\\${prefix}/lib64
+includedir=\\${prefix}/include
+
+Name: %(name)s
+Description: %(name)s compression library
+Version: %(version)s
+
+Requires:
+Libs: -L\\${libdir} -lzfp -lcfp
+Cflags: -I\\${includedir}" > %(installdir)s/lib/pkgconfig/%(name)s.pc""",
+]
+
+sanity_check_paths = {
+    'files': ['lib64/libzfp.so', 'lib64/libcfp.so', 'include/%(name)s.h'],
+    'dirs': ['lib/pkgconfig'],
+}
+
+moduleclass = 'lib'
