@@ -13,14 +13,14 @@ description = """
 toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 toolchainopts = {'dynamic': False}
 
-sources = ['%(nameletterlower)s/%(name)s/NAMD_%(version)s_Source.tar.gz']
+sources = ['%(name)s_%(version)s_Source.tar.gz']
 
 builddependencies = [
     ('Charm++', '6.10.2'),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-pmi', EXTERNAL_MODULE),
     ('cray-pmi-lib', EXTERNAL_MODULE),
-    ('Tcl', '8.6.10'),
+    ('Tcl', '8.6.10')
 ]
 
 prebuildopts = """

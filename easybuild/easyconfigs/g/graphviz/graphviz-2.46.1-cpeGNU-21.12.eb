@@ -11,7 +11,7 @@ toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 toolchainopts = {'pic': True}
 
 # download from https://gitlab.com/graphviz/graphviz/-/package_files/7097035/download is slow
-sources = ['sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz']
+sources = ['%(namelower)s-%(version)s.tar.gz']
 
 sanity_check_paths = {
     'files': ['bin/dot'],

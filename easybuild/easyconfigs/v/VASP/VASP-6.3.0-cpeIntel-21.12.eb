@@ -10,11 +10,10 @@ description = "The Vienna Ab initio Simulation Package (VASP) is a computer prog
 toolchain = {'name': 'cpeIntel', 'version': '21.12'}
 toolchainopts = {'usempi': True}
 
-sources = [
-    '%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.bz2',
-]
+sources = ['%(namelower)s-%(version)s.tar.bz2']
+
 patches = [
-    ('%(name)s-%(version)s-%(toolchain_name)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s'),
+    ('%(name)s-%(version)s-%(toolchain_name)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')
 ]
 
 builddependencies = [

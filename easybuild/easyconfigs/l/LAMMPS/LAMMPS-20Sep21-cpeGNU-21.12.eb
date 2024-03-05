@@ -10,9 +10,7 @@ description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator
 toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
 
-sources = [
-    '%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.bz2',
-]
+sources = ['%(namelower)s-%(version)s.tar.bz2']
 
 builddependencies = [
     ('CMake', '3.21.2', '', True)
