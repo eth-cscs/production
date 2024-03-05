@@ -17,7 +17,7 @@ stage('Initialization') {
 
 /*
  Machine Selection:
- - filters the user defined parameter "machines", accessible though "params.machines"
+ - filters the user defined parameter "machines", accessible through "params.machines"
  - defines the runtime HPC systems of the project "machinesToRun"
  - defines the configuration of the runtime HPC systems "machinesConfiguration"
 */
