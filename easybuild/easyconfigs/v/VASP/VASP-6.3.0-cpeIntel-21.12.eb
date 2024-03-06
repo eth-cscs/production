@@ -10,7 +10,16 @@ description = "The Vienna Ab initio Simulation Package (VASP) is a computer prog
 toolchain = {'name': 'cpeIntel', 'version': '21.12'}
 toolchainopts = {'usempi': True}
 
-sources = ['%(namelower)s-%(version)s.tar.bz2']
+# WARNING: registration required to download the tarball from https://vasp.at
+
+# WARNING: local_download folder has restricted access, download manually if you don't have access
+import os
+local_apps=os.getenv("APPS")
+local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+local_common_dir=local_apps.replace(local_system,'common')
+local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
+
+sources = [local_download + '%(namelower)s-%(version)s.tar.bz2']
 
 patches = [
     ('%(name)s-%(version)s-%(toolchain_name)s.makefile.include', '%(builddir)s/%(namelower)s-%(version)s')

@@ -10,7 +10,16 @@ description = "LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator
 toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 toolchainopts = {'usempi': True, 'verbose': False, 'openmp': True}
 
-sources = ['%(namelower)s-%(version)s.tar.bz2']
+# WARNING: download from https://github.com/lammps/lammps/releases uses a different naming scheme
+
+# WARNING: local_download folder has restricted access, download manually if you don't have access
+import os
+local_apps=os.getenv("APPS")
+local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+local_common_dir=local_apps.replace(local_system,'common')
+local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
+
+sources = [local_download + '%(namelower)s-%(version)s.tar.bz2']
 
 builddependencies = [
     ('CMake', '3.21.2', '', True)

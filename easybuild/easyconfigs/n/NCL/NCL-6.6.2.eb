@@ -11,18 +11,28 @@ description = """
 
 toolchain = SYSTEM
 
+# WARNING: download from https://www.earthsystemgrid.org is extremely slow
+#source_urls = ['https://www.earthsystemgrid.org/api/v1/dataset/ncl.662_2.nodap/file/']
+
+# WARNING: local_download folder has restricted access, download manually if you don't have access
+import os
+local_apps=os.getenv("APPS")
+local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+local_common_dir=local_apps.replace(local_system,'common')
+local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
+
 sources = [
-    'ncl_ncarg-%(version)s-CentOS7.6_64bit_nodap_gnu485.tar.gz',
-    'rangs_0.zip',
-    'rangs_1.zip',
-    'rangs_2.zip',
-    'rangs_3.zip',
-    'rangs_4.zip',
-    'gshhs_0.zip',
-    'gshhs_1.zip',
-    'gshhs_2.zip',
-    'gshhs_3.zip',
-    'examples.tgz'
+    local_download + 'ncl_ncarg-%(version)s-CentOS7.6_64bit_nodap_gnu485.tar.gz',
+    local_download + 'rangs_0.zip',
+    local_download + 'rangs_1.zip',
+    local_download + 'rangs_2.zip',
+    local_download + 'rangs_3.zip',
+    local_download + 'rangs_4.zip',
+    local_download + 'gshhs_0.zip',
+    local_download + 'gshhs_1.zip',
+    local_download + 'gshhs_2.zip',
+    local_download + 'gshhs_3.zip',
+    local_download + 'examples.tgz'
 ]
 
 preinstallopts = 'mkdir -p lib/ncarg/database/rangs examples;' + \

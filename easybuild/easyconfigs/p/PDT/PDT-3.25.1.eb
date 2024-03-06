@@ -2,6 +2,7 @@
 name = 'PDT'
 
 version = '3.25.1'
+
 homepage = 'http://www.cs.uoregon.edu/research/pdt/'
 description = """Program Database Toolkit (PDT) is a framework for analyzing
 source code written in several programming languages and for making rich
@@ -10,6 +11,16 @@ tools. PDT implements a standard program representation, the program database
 (PDB), that can be accessed in a uniform way through a class library supporting
 common PDB operations."""
 toolchain = SYSTEM
-sources = ['pdt_lite-3.25.1.tgz']
+
+# WARNING: registration required to download the tarball from http://www.cs.uoregon.edu/research/pdt/downloads.php
+
+# WARNING: local_download folder has restricted access, download manually if you don't have access
+import os
+local_apps=os.getenv("APPS")
+local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+local_common_dir=local_apps.replace(local_system,'common')
+local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
+
+sources = [local_download + 'pdt_lite-3.25.1.tgz']
 
 moduleclass = 'perf'

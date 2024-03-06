@@ -13,7 +13,17 @@ description = """
 toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 toolchainopts = {'dynamic': False}
 
-sources = ['%(name)s_%(version)s_Source.tar.gz']
+# WARNING: registration required to download the source code tarball from the link below
+# https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD
+#
+# WARNING: local_download folder has restricted access, download manually if you don't have access
+import os
+local_apps=os.getenv("APPS")
+local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+local_common_dir=local_apps.replace(local_system,'common')
+local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
+
+sources = [local_download + '%(name)s_%(version)s_Source.tar.gz']
 
 builddependencies = [
     ('Charm++', '6.10.2'),
