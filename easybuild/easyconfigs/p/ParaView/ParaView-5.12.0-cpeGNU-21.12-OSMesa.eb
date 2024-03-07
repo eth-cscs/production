@@ -27,7 +27,7 @@ preconfigopts += "cd paraview-superbuild && "
 preconfigopts += "git fetch origin && "
 preconfigopts += "git checkout v%(version)s-RC3 && "
 preconfigopts += "git submodule update && "
-preconfigopts += "sed -i "s/5.12\//5.12\/RCs\//g" versions.cmake && "
+preconfigopts += "sed -i 's/5.12\//5.12\/RCs\//g' versions.cmake && "
 
 preconfigopts += "mkdir ../build; cd ../build; "
 
