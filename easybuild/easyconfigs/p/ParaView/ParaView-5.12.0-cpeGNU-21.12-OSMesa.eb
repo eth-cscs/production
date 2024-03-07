@@ -25,8 +25,9 @@ separate_build_dir = True
 preconfigopts  = "git clone --recursive https://gitlab.kitware.com/paraview/paraview-superbuild.git && "
 preconfigopts += "cd paraview-superbuild && "
 preconfigopts += "git fetch origin && "
-preconfigopts += "git checkout v%(version)s && "
+preconfigopts += "git checkout v%(version)s-RC3 && "
 preconfigopts += "git submodule update && "
+preconfigopts += "sed -i "s/5.12\//5.12\/RCs\//g" versions.cmake && "
 
 preconfigopts += "mkdir ../build; cd ../build; "
 
@@ -39,7 +40,6 @@ srcdir = "easybuild_obj/paraview-superbuild"
 configopts = ''
 configopts += '-DUSE_SYSTEM_mpi:BOOL=ON '
 configopts += '-DUSE_SYSTEM_zlib=ON '
-#configopts += '-DUSE_SYSTEM_tbb=ON -DTBB_DIR=/opt/intel/oneapi/tbb/latest/lib/cmake/tbb '
 configopts += '-DUSE_SYSTEM_hdf5=OFF '
 configopts += '-DUSE_SYSTEM_netcdf=OFF '
 configopts += '-DUSE_SYSTEM_numpy=OFF '
@@ -66,7 +66,7 @@ configopts += '-DENABLE_ospray=ON '
 configopts += '-DENABLE_embree=ON '
 configopts += '-DENABLE_rkcommon=ON '
 # maybe?
-configopts += '-DENABLE_adios2=ON -DENABLE_blosc=ON -DENABLE_bzip2=ON '
+configopts += '-DENABLE_adios2=ON -DENABLE_blosc2=ON -DENABLE_bzip2=ON '
 configopts += '-DENABLE_fides=ON '
 configopts += '-DENABLE_catalyst=ON '
 configopts += '-DENABLE_hdf5=ON '
