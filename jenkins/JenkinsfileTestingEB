@@ -83,7 +83,7 @@ stage('Build Stage') {
                                        fi
 
                                        # disable Lmod cache to prevent issues like https://sourceforge.net/p/lmod/mailman/message/34706635
-                                       if [ "$MODULESHOME"=~"lmod" ]; then 
+                                       if [[ "$MODULESHOME" =~ "lmod" ]]; then
                                            echo -e "\\n export LMOD_IGNORE_CACHE=1 \\n"
                                            export LMOD_IGNORE_CACHE=1
                                        fi
