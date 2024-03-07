@@ -18,7 +18,7 @@ builddependencies = [
     ('CMake', '3.26.5', '', True),
 ]
 
-configopts = "-DCMAKE_BUILD_TYPE=Release -DENABLE-FORTRAN:BOOL=ON "
+configopts = "-DCMAKE_BUILD_TYPE=Release -DBUILD_FORTRAN:BOOL=ON -DBUILD_OPENMP:BOOL=ON"
 
 maxparallel = 16
 
