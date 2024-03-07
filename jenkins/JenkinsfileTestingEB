@@ -82,6 +82,12 @@ stage('Build Stage') {
                                            mkdir -p $prefix
                                        fi
 
+                                       # disable Lmod cache to prevent issues like https://sourceforge.net/p/lmod/mailman/message/34706635
+                                       if [[ "$MODULESHOME" =~ "lmod" ]]; then
+                                           echo -e "\\n export LMOD_IGNORE_CACHE=1 \\n"
+                                           export LMOD_IGNORE_CACHE=1
+                                       fi
+
                                        echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
                                        git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
                                        # if buildlist is empty, skip this build; otherwise, write .eb files to file
