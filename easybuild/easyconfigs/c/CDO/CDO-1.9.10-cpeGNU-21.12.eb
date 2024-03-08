@@ -21,6 +21,7 @@ sources = ['%(namelower)s-%(version)s.tar.gz']
 builddependencies = [
     ('cURL', '7.76.1')
 ]
+
 dependencies = [
     ('cray-hdf5', EXTERNAL_MODULE),
     ('cray-netcdf', EXTERNAL_MODULE),
@@ -28,14 +29,13 @@ dependencies = [
     ('libaec', '1.0.6'),
     ('PROJ', '8.1.1'),
     ('UDUNITS', '2.2.28'),
-    ('util-linux', '2.37.2'),
+    ('util-linux', '2.37.2')
 ]
 
 osdependencies = ['libtool']
 
-preconfigopts = " ln -fs $(which libtool) libcdi/libtool &&  LDFLAGS=-lstdc++ && "
+preconfigopts = " ln -fs $(which libtool) libcdi/libtool &&  LDFLAGS=-lstdc++ && export LIBS=-lsz "
 configopts = " --disable-static --enable-cdi-lib  --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR  --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC  --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX "
-
 
 sanity_check_paths = {
     'files': ['bin/%(namelower)s'],
