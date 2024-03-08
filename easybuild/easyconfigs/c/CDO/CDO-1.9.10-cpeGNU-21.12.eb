@@ -34,7 +34,7 @@ dependencies = [
 
 osdependencies = ['libtool']
 
-preconfigopts = " ln -fs $(which libtool) libcdi/libtool &&  LDFLAGS=-lstdc++ && export LIBS=-lsz "
+preconfigopts = " ln -fs $(which libtool) libcdi/libtool && export LDFLAGS=-lstdc++ && export LIBS=-lsz "
 configopts = " --disable-static --enable-cdi-lib  --with-curl=$EBROOTCURL --with-eccodes=$EBROOTECCODES --with-hdf5=$HDF5_DIR  --with-netcdf=$EBROOTNETCDFMINFORTRAN --with-proj=$EBROOTPROJ --with-szlib=$EBROOTLIBAEC  --with-udunits2=$EBROOTUDUNITS --with-util-linux-uuid=$EBROOTUTILMINLINUX "
 
 sanity_check_paths = {
