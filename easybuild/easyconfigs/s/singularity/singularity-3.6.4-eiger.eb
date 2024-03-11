@@ -36,5 +36,7 @@ setenv("SINGULARITY_BIND", singularityBind)
 setenv("SINGULARITYENV_LD_LIBRARY_PATH", "/lib64:/opt/cray/pe/lib64:/lib64")
 prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", libfabricLib)
 prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", gccLib)
-prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+if not (os.getenv("CRAY_LD_LIBRARY_PATH") == nil) then
+        prepend_path("SINGULARITYENV_LD_LIBRARY_PATH", os.getenv("CRAY_LD_LIBRARY_PATH"))
+end
 """

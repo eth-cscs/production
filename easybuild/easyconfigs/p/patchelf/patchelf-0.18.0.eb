@@ -1,0 +1,21 @@
+easyblock = "Tarball"
+
+name = 'patchelf'
+version = '0.18.0'
+
+homepage = 'https://github.com/ospray'
+description = """PatchELF is a simple utility for modifying existing ELF
+executables and libraries.  """
+
+toolchain = SYSTEM
+
+sources = ['%(name)s-%(version)s-x86_64.tar.gz']
+source_urls = ['https://github.com/NixOS/patchelf/releases/download/%(version)s/']
+
+sanity_check_paths={
+    'files': ['bin/patchelf'],
+    'dirs': ['bin', 'share']
+}
+
+moduleclass = 'devel'
+

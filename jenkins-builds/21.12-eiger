@@ -5,8 +5,8 @@
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
  OOOPS-1.0.eb                         --set-default-module
- reframe-4.2.1.eb                     --set-default-module
- reframe-cscs-tests-23.06.1.eb        --set-default-module
+ reframe-4.5.1.eb                     --set-default-module
+ reframe-cscs-tests-24.03.eb          --set-default-module
  singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
@@ -28,6 +28,7 @@
  NAMD-2.14-cpeGNU-21.12.eb
  NCO-5.0.1-cpeGNU-21.12.eb
  ParaView-5.11.2-cpeGNU-21.12-OSMesa.eb --set-default-module
+ ParaView-5.12.0-cpeGNU-21.12-OSMesa.eb
  Scalasca-2.6-cpeGNU-21.12.eb
  Visit-3.3.1-cpeGNU-21.12.eb
  VTK-9.2.6-cpeGNU-21.12-OSMesa.eb
