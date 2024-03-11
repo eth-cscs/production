@@ -54,7 +54,7 @@ local_common_dir=local_apps.replace(local_system,'common')
 local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
 
 # In order to use the pre-downloaded version use the source below
-sources = [local_download + '%(namelower)s-%(version)s.tar.bz2']
+sources = [local_download + '%(namelower)s-%(version)s.tar.gz']
 
 builddependencies = [
     ('CMake', '3.22.1', '', True)
