@@ -16,18 +16,18 @@ source_urls = ['https://github.com/ornladios/ADIOS2/archive/']
 sources = ['release_%(version_major)s%(version_minor)s.zip']
 
 builddependencies = [
-    ('CMake', '3.26.5', '', True),
+    ('CMake', '3.26.5', '', True)
 ]
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('cray-hdf5-parallel', EXTERNAL_MODULE),
-    ('bzip2', '1.0.8'),
-    ('zfp', '0.5.5'),
-    ('sz', '2.1.12.2'),
-    ('libpng', '1.6.37'),
     ('blosc2', '2.9.2'),
-    ('Catalyst', '2.0.0', '-rc4'),
+    ('bzip2', '1.0.8'),
+    ('Catalyst', '2.0.0-rc4'),
+    ('libpng', '1.6.37'),
+    ('sz', '2.1.12.2'),
+    ('zfp', '0.5.5')
 ]
 
 configopts  = '-DCMAKE_BUILD_TYPE=Release '

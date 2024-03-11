@@ -1,12 +1,11 @@
 #
-# CrayGNU version by Jean M. Favre (CSCS)
+# cpeGNU version by Jean M. Favre (CSCS)
 #
 easyblock = 'CMakeMake'
 
 name = 'Catalyst'
-version = '2.0.0'
+version = '2.0.0-rc4'
 #_commit_version = '3f7871c0a2e737cb9ed35fc1c2208456fcc00a0e'
-versionsuffix = '-rc4'
 
 homepage = 'https://gitlab.kitware.com/paraview/catalyst'
 description = """Catalyst is an API specification developed for simulations
@@ -21,13 +20,13 @@ sources = [{
     'git_config': {
         'url': 'https://gitlab.kitware.com/paraview/',
         'repo_name': '%s' % name,
-        'tag': 'v%s%s' % (version, versionsuffix)
+        'tag': 'v%s' % version
     },
-    'filename': '%s-%s%s.tar.gz' % (name, version, versionsuffix),
+    'filename': '%s-%s.tar.gz' % (name, version)
 }]
 
 builddependencies = [
-    ('CMake', '3.26.5', '', True),
+    ('CMake', '3.26.5', '', True)
 ]
 
 dependencies = [
