@@ -91,10 +91,10 @@ stage('Build Stage') {
                                        else
                                            #FIXME Easybuild with hierarchical MNS and Lmod: create toolchain modules as default
                                            if [[ "$MODULESHOME" =~ "lmod" ]]; then
-                                               echo \$buildlist | egrep -o "cpe(AMD|Cray|GNU|Intel)-[0-9]{2}\\.[0-9]{2}.eb" | sed 's/\\b[^[:space:]]*\\.eb\\b/& --set-default-module\\n/g' | sed '\${/^\$/d;}' | sort -u > \"$prefix/${projectName}.txt\"
-                                               echo \$buildlist | sed '\${/^\$/d;}' >> \"$prefix/${projectName}.txt\"
+                                               echo \$buildlist | egrep -o "cpe(AMD|Cray|GNU|Intel)-[0-9]{2}\\.[0-9]{2}.eb" | sed 's/\\b[^[:space:]]*\\.eb\\b/& --set-default-module -f\\n/g' | sed '\${/^\$/d;}' | sort -u > \"$prefix/${projectName}.txt\"
+                                               echo \$buildlist | sed 's/\\b[^[:space:]]*\\.eb\\b/& --set-default-module\\n/g' | sed '\${/^\$/d;}' >> \"$prefix/${projectName}.txt\"
                                            else
-                                               echo \$buildlist | sed '\${/^\$/d;}' > \"$prefix/${projectName}.txt\"
+                                               echo \$buildlist | sed 's/\\b[^[:space:]]*\\.eb\\b/& --set-default-module\\n/g' | sed '\${/^\$/d;}' > \"$prefix/${projectName}.txt\"
                                            fi
                                        fi
 
