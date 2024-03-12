@@ -17,6 +17,7 @@ dependencies = [
 
 builddependencies = [
     ('CMake', '3.26.5','', True),
+    ('adios', '2.9.2'),
     ('patchelf', '0.18.0','', True)
 ]
 
@@ -25,9 +26,8 @@ separate_build_dir = True
 preconfigopts  = "git clone --recursive https://gitlab.kitware.com/paraview/paraview-superbuild.git && "
 preconfigopts += "cd paraview-superbuild && "
 preconfigopts += "git fetch origin && "
-preconfigopts += "git checkout v%(version)s-RC3 && "
+preconfigopts += "git checkout v%(version)s && "
 preconfigopts += "git submodule update && "
-preconfigopts += "sed -i 's/5.12\//5.12\/RCs\//g' versions.cmake && "
 
 preconfigopts += "mkdir ../build; cd ../build; "
 
@@ -48,7 +48,6 @@ configopts += '-DUSE_SYSTEM_python3=OFF '
 configopts += '-DSUPERBUILD_PROJECT_PARALLELISM:STRING=24 '
 configopts += '-DENABLE_cxx11=ON -DENABLE_cxx14=ON '
 configopts += '-DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ '
-#configopts += '-DPARAVIEW_EXTRA_CMAKE_ARGUMENTS="-DTBB_DIR:PATH=/opt/intel/oneapi/tbb/latest/lib/cmake/tbb" '
 configopts += '-DBUILD_TESTING=OFF '
 configopts += '-DPARAVIEW_BUILD_EDITION=CANONICAL '
 
@@ -66,7 +65,7 @@ configopts += '-DENABLE_ospray=ON '
 configopts += '-DENABLE_embree=ON '
 configopts += '-DENABLE_rkcommon=ON '
 # maybe?
-configopts += '-DENABLE_adios2=ON -DENABLE_blosc2=ON -DENABLE_bzip2=ON '
+configopts += '-DENABLE_adios2=ON -DUSE_SYSTEM_adios2=ON '
 configopts += '-DENABLE_fides=ON '
 configopts += '-DENABLE_catalyst=ON '
 configopts += '-DENABLE_hdf5=ON '
