@@ -75,7 +75,7 @@ done
 # checks force_list
 if [ -n "${force_list}" ] && [ -n "${eb_lists}" ]; then
 # match force_list items with production lists: only matching items will be built using the EasyBuild flag '-f'
- echo -e "\n Items matching production list and system filtered forcelist (\"${force_list}\")"
+ echo -e "Items matching production list and system filtered forcelist (\"${force_list}\")"
  for item in ${force_list}; do
      force_match=$(grep $item ${eb_lists[@]})
      if [ -n "${force_match}" ]; then
@@ -124,27 +124,27 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     ebtoolsmodulepath_suffix="/tools/modules/all/"
 # set production repository folder
     if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    	export EB_CUSTOM_REPOSITORY="/apps/common/UES/jenkins/production/easybuild"
+    	export EB_CUSTOM_REPOSITORY=/apps/common/UES/jenkins/production/easybuild
     fi
 elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
 # load cray module on Alps vClusters
     module load cray
 # system specific EasyBuild paths
-    ebcustompath="/capstor/apps/cscs/common/production/easybuild/module/EasyBuild-custom/"
+    ebcustompath="/users/jenscscs/production/easybuild/module/EasyBuild-custom/"
     ebmodulepath_suffix="/modules/all/Core/"
     ebtoolsmodulepath_suffix=$ebmodulepath_suffix
 # set production repository folder
     if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
-    	export EB_CUSTOM_REPOSITORY="/capstor/apps/cscs/common/production/easybuild"
+    	export EB_CUSTOM_REPOSITORY=/users/jenscscs/production/easybuild
     fi
 fi
 ######################
 # --- COMMON SETUP ---
 # module unuse PATH before loading EasyBuild module and building
 if [ -n "$unuse_path" ]; then
- echo -e "\n Unuse path: $unuse_path "
+ echo -e " Unuse path: $unuse_path "
  module unuse $unuse_path
- echo -e "\n Updated MODULEPATH: $MODULEPATH "
+ echo -e " Updated MODULEPATH: $MODULEPATH "
 fi
 # check prefix folder
 if [ -z "$PREFIX" ]; then
@@ -167,9 +167,9 @@ else
 # check if PREFIX is already in MODULEPATH after unuse command
  statuspath=$(echo $MODULEPATH | grep -c $EASYBUILD_PREFIX)
  if [ $statuspath -eq 0 ]; then
-  echo -e "\n Use path (EASYBUILD_PREFIX): $ebmodulepath "
+  echo -e " Use path (EASYBUILD_PREFIX): $ebmodulepath "
   module use $ebmodulepath
-  echo -e "\n Updated MODULEPATH: $MODULEPATH "
+  echo -e " Updated MODULEPATH: $MODULEPATH "
  fi
 fi
 ###############
@@ -183,7 +183,7 @@ if [ -n "${eb_lists}" ] && [ -n "${hidden_deps}" ]; then
   IFS=', ' read -r -a hidden_deps <<< ${__eb_list}
 
 # match  items with hide deps list: matching items will be built using the EasyBuild flag '--hidden'
- echo -e "\n Items matching hidden list and easybuild recipes to install (\"${eb_lists}\")"
+ echo -e "Items matching hidden list and easybuild recipes to install (\"${eb_lists}\")"
  for item in ${hidden_deps[@]}; do
      hidden_match=$(grep $item ${eb_lists[@]})
      if [ -n "${hidden_match}" ]; then

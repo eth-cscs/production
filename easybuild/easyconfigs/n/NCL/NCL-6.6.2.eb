@@ -17,7 +17,7 @@ toolchain = SYSTEM
 # WARNING: local_download folder has restricted access, download manually if you don't have access
 import os
 local_apps=os.getenv("APPS")
-if "daint" or "dom" in local_apps:
+if ("daint" or "dom") in local_apps:
     local_system=local_apps.replace("/apps/","")
 else:
     local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
