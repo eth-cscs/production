@@ -30,7 +30,6 @@ dependencies = [
 preconfigopts = " CXX=CC CC=cc FC=ftn && "
 configopts = "-DUSE_CUDA=0 -DBUILD_TESTS=0 -DUSE_CRAY_LIBSCI=1 -DUSE_MAGMA=0 -DUSE_MKL=0 -DUSE_SCALAPACK=1 -DUSE_ELPA=1 -DSpFFT_DIR=$EBROOTSPFFT/lib64/cmake/SpFFT"
 
-
 modextrapaths = {'CPATH': ['include/%(namelower)s']}
 
 moduleclass = 'chem'

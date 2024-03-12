@@ -17,7 +17,7 @@ stage('Initialization') {
 
 /*
  Machine Selection:
- - filters the user defined parameter "machines", accessible though "params.machines"
+ - filters the user defined parameter "machines", accessible through "params.machines"
  - defines the runtime HPC systems of the project "machinesToRun"
  - defines the configuration of the runtime HPC systems "machinesConfiguration"
 */
@@ -108,14 +108,14 @@ stage('Update Stage') {
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        load_pe = "module load cpe/${pe_target} && module list"
+                        load_pe = "module load cray cpe/${pe_target} && module list"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
                     /* define command to load EasyBuild */
                     def load_easybuild = params.eb_version == "" ?
-                        "module load EasyBuild-custom/cscs" :
-                        "module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
+                        "module use $WORKSPACE/easybuild/module && module load EasyBuild-custom/cscs" :
+                        "module use $WORKSPACE/easybuild/module && module load EasyBuild-custom/cscs && module switch EasyBuild EasyBuild/${params.eb_version}"
 
                     /* define build command and PE target flags (pe_flags) */
                     def build_command = "eb $eb_flags"
@@ -185,7 +185,7 @@ stage('Update Stage') {
                                      # filename of current production list
                                      list_current=\$(ls $WORKSPACE/jenkins-builds/*${params.pe_current}-${machineLabel} | tail -1)
                                      # filename of target production list (tentative: failed updates will be removed from the target list)
-                                     list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/-${params.pe_current}/-${params.pe_target}/') 
+                                     list_target=\${EASYBUILD_PREFIX}/\$(basename \$list_current | sed 's/${params.pe_current}/${params.pe_target}/') 
                                      # filter current production list to create the target production list
                                      echo ${params.select_recipes} | tr ' ,' '\n' > select_recipes.txt
                                      if [ -n "${params.discard_recipes}" ]; then 
