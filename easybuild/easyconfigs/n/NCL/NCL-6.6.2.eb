@@ -17,7 +17,11 @@ toolchain = SYSTEM
 # WARNING: local_download folder has restricted access, download manually if you don't have access
 import os
 local_apps=os.getenv("APPS")
-local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
+#FIXME removed parenthesis as Python 3.6.15 on Dom does not like the syntax
+if "daint" in local_apps or "dom" in local_apps:
+    local_system=local_apps.replace("/apps/","")
+else:
+    local_system=os.getenv("LMOD_SYSTEM_NAME") or os.getenv("CLUSTER_NAME")
 local_common_dir=local_apps.replace(local_system,'common')
 local_download = local_common_dir + '/easybuild/sources/%(nameletterlower)s/%(name)s/'
 
