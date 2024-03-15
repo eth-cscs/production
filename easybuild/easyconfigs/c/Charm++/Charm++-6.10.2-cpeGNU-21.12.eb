@@ -18,8 +18,7 @@ source_urls = ['http://charm.cs.illinois.edu/distrib/']
 sources = ['charm-%(version)s.tar.gz']
 
 builddependencies = [
-    ('cray-pmi', EXTERNAL_MODULE),
-    ('cray-pmi-lib', EXTERNAL_MODULE),
+    ('cray-pmi', EXTERNAL_MODULE)
 ]
 
 files_to_copy = ['mpi-linux-amd64-pthreads-gcc']

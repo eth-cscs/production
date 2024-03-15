@@ -29,7 +29,6 @@ builddependencies = [
     ('Charm++', '6.10.2'),
     ('cray-fftw', EXTERNAL_MODULE),
     ('cray-pmi', EXTERNAL_MODULE),
-    ('cray-pmi-lib', EXTERNAL_MODULE),
     ('Tcl', '8.6.10')
 ]
 

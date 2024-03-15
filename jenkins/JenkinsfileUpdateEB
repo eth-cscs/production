@@ -79,6 +79,7 @@ stage('Update Stage') {
                        - eb_modulespath: EasyBuild modules path 
                        - eb_toolspath: tools modules path 
                        - load_pe: command to load PE target module 
+                       - production_dir: local path to production repository 
                        - toolchains: toolchain names 
                     */
                     def eb_flags
@@ -87,6 +88,7 @@ stage('Update Stage') {
                     def eb_installpath
                     def eb_modulespath
                     def load_pe
+                    def production_dir
                     def toolchains
                     if(machineName == "daint" || machineName == "dom"){
                         eb_flags = "--ignore-locks --modules-header=$WORKSPACE/login/daint-${architecture}.h --modules-footer=$WORKSPACE/login/daint.footer -r"
@@ -99,6 +101,7 @@ stage('Update Stage') {
                         load_pe = architecture == "" ?
                             "module load cdt-cuda/${pe_target} && module list" :
                             "module load cdt-cuda/${pe_target} daint-$architecture && module list"
+                        production_dir="/apps/common/UES/jenkins/production"
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayNvidia"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_flags = "--ignore-locks -r"
@@ -109,6 +112,7 @@ stage('Update Stage') {
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
                         load_pe = "module load cray cpe/${pe_target} && module list"
+                        poduction_dir="/capstor/apps/cscs/common/production"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
@@ -130,11 +134,11 @@ stage('Update Stage') {
                                      if [ ! -d "${eb_modulespath}" ]; then
                                          mkdir -p ${eb_modulespath} ${eb_toolspath}
                                          pushd ${eb_modulespath}
-                                         ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                                         ln -s ${production_dir}/easybuild/module/EasyBuild-custom
                                          popd
                                      elif [ ! -L "${eb_modulespath}/EasyBuild-custom" ]; then
                                          pushd ${eb_modulespath}
-                                         ln -s /apps/common/UES/jenkins/production/easybuild/module/EasyBuild-custom
+                                         ln -s ${production_dir}/easybuild/module/EasyBuild-custom
                                          popd
                                      fi
 
