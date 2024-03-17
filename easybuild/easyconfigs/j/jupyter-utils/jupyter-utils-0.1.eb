@@ -19,12 +19,14 @@ sources = [{
 }]
 
 builddependencies = [
-    ('cray-python', EXTERNAL_MODULE),
+    ('cray-python', EXTERNAL_MODULE)
 ]
 
 sanity_check_paths = {
     'files': ['bin/kernel-create'],
     'dirs': ['lib/python%(pyshortver)s/site-packages'],
 }
+
+use_pip = True
 
 moduleclass = 'tools'

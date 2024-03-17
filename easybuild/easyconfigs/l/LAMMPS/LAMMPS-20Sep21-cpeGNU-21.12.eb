@@ -27,7 +27,7 @@ builddependencies = [
 
 dependencies = [
     ('cray-python', EXTERNAL_MODULE),
-    ('FFmpeg', '4.4'),
+    ('FFmpeg', '5.0'),
     ('zstd', '1.5.0')
 ]
 
