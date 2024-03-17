@@ -482,7 +482,7 @@ stage('GitHub Stage') {
                             "module load daint-$architecture hub"
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_installpath = "${params.eb_prefix}"
-                        load_hub = "module load hub"
+                        load_hub = "module load cray hub"
                     }
 
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
