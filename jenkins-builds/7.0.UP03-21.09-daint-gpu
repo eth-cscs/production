@@ -55,6 +55,7 @@
  PLUMED-2.8.0-CrayGNU-21.09.eb
  pycuda-2021.1-CrayGNU-21.09-cuda.eb                    --set-default-module
  PyTorch-1.10.1-CrayGNU-21.09.eb                        --set-default-module
+ PyTorch-2.2.1-CrayGNU-21.09.eb
  QuantumESPRESSO-7.0-CrayNvidia-21.09.eb                --set-default-module
  QuantumESPRESSO-7.2-CrayNvidia-21.09.eb
  singularity-3.6.4-daint.eb
