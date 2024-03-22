@@ -1,0 +1,60 @@
+# contributed by Luca Marsella (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'PyTorch'
+version = '2.2.1'
+
+homepage = 'https://pytorch.org'
+description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
+PyTorch is a deep learning framework that puts Python first."""
+
+toolchain = {'name': 'CrayGNU', 'version': '21.09'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE)
+]
+
+exts_defaultclass = 'PythonPackage'
+exts_default_options = {
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'source_urls': ['https://download.pytorch.org/whl', 'https://download.pytorch.org/whl/cu118'],
+    'unpack_sources': False,
+    'source_tmpl': '%(name)s-%(version)s-py3-none-manylinux1_x86_64.whl',
+    'use_pip': True,
+}
+
+exts_list = [
+    ('MarkupSafe', '2.1.3', {'source_tmpl': '%(name)s-%(version)s-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('filelock', '3.9.0', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+    ('Jinja2', '3.1.2', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+    ('mpmath', '1.3.0', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+    ('networkx', '3.2.1', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+    ('nvidia_cublas_cu11', '11.11.3.6', {'modulename': 'nvidia.cublas'}),
+    ('nvidia_cuda_cupti_cu11', '11.8.87', {'modulename': 'nvidia.cuda_cupti'}),
+    ('nvidia_cuda_nvrtc_cu11', '11.8.89', {'modulename': 'nvidia.cuda_nvrtc'}),
+    ('nvidia_cuda_runtime_cu11', '11.8.89', {'modulename': 'nvidia.cuda_runtime'}),
+    ('nvidia_cudnn_cu11', '8.7.0.84', {'modulename': 'nvidia.cudnn'}),
+    ('nvidia_cufft_cu11', '10.9.0.58', {'modulename': 'nvidia.cufft'}),
+    ('nvidia_curand_cu11', '10.3.0.86', {'modulename': 'nvidia.curand'}),
+    ('nvidia_cusolver_cu11', '11.4.1.48', {'modulename': 'nvidia.cusolver'}),
+    ('nvidia_cusparse_cu11', '11.7.5.86', {'modulename': 'nvidia.cusparse'}),
+    ('nvidia_nccl_cu11', '2.19.3', {'modulename': 'nvidia.nccl'}),
+    ('nvidia_nvtx_cu11', '11.8.86', {'modulename': 'nvidia.nvtx'}),
+    ('pillow', '10.2.0', {'modulename': 'PIL',
+                          'source_tmpl': '%(name)s-%(version)s-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('sympy', '1.12', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+    ('torch', '2.2.1%2Bcu118', {'source_tmpl': '%(name)s-%(version)s-cp39-cp39-linux_x86_64.whl'}),
+    ('torchaudio', '2.2.1%2Bcu118', {'source_tmpl': '%(name)s-%(version)s-cp39-cp39-linux_x86_64.whl'}),
+    ('torchvision', '0.17.1%2Bcu118', {'source_tmpl': '%(name)s-%(version)s-cp39-cp39-linux_x86_64.whl'}),
+    ('triton', '2.2.0', {'source_tmpl': '%(name)s-%(version)s-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+    ('typing_extensions', '4.8.0', {'source_tmpl': '%(name)s-%(version)s-py3-none-any.whl'}),
+]
+
+sanity_check_paths = {
+    'files': ['bin/torchrun'],
+    'dirs': ['bin', 'lib/python%(pyshortver)s/site-packages']
+}
+
+moduleclass = 'lib'
