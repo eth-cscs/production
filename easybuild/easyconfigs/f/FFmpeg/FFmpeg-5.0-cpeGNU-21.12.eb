@@ -12,10 +12,14 @@ toolchain = {'name': 'cpeGNU', 'version': '21.12'}
 source_urls = ['http://%(namelower)s.org/releases/']
 sources = [SOURCELOWER_TAR_BZ2]
 
+patches = [
+    ('%(name)s-%(version)s-%(toolchain_name)s.patch')
+]
+
 dependencies = [
     ('theora', '1.2.0alpha1'),
     ('x265', '3.2.1'),
-    ('x264', '20191217'),
+    ('x264', '20191217')
 ]
 
 configopts = '--cc="$CC" --cxx="$CXX" '

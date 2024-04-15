@@ -10,13 +10,14 @@
  singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-21.12.eb
  GSL-2.7-cpeCray-21.12.eb
+ adios-2.9.2-cpeGNU-21.12.eb
  Ascent-0.8.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12.eb
  Boost-1.78.0-cpeGNU-21.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-21.12.eb
  CP2K-9.1-cpeGNU-21.12.eb
  CubeLib-4.5-cpeGNU-21.12.eb
- FFmpeg-5.0-cpeGNU-21.12.eb           --set-default-module
+ FFmpeg-5.0-cpeGNU-21.12.eb
  GREASY-19.03-cscs-cpeGNU-21.12.eb
  GROMACS-2021.5-cpeGNU-21.12.eb
  GSL-2.7-cpeGNU-21.12.eb

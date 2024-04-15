@@ -14,8 +14,8 @@ source_urls = ['https://download.videolan.org/pub/videolan/%(name)s/']
 sources = ['x265_%(version)s.tar.gz']
 
 builddependencies = [
-    ('CMake', '3.20.1', '', True),
-    ('NASM', '2.15.05'),
+    ('CMake', '3.21.2', '', True),
+    ('NASM', '2.15.05')
 ]
 
 preconfigopts = "unset CC && unset CFLAGS && "

@@ -1,0 +1,37 @@
+# Jean M. Favre (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'ParaView'
+version = '5.12.0'
+versionsuffix = '-OSMesa'
+
+homepage = 'https://gitlab.kitware.com/paraview/paraview-superbuild'
+description = "ParaView superbuilder"
+
+toolchain = {'name': 'cpeGNU', 'version': '23.09'}
+toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
+
+builddependencies = [
+    ('CMake', '3.26.5', '', SYSTEM),
+    ('patchelf', '0.18.0', '', SYSTEM)
+]
+
+dependencies = [
+    ('adios', '2.9.2')
+]
+
+preconfigopts = "git clone --recursive https://gitlab.kitware.com/%(namelower)s/%(namelower)s-superbuild.git && cd %(namelower)s-superbuild && git fetch origin && git checkout v%(version)s && git submodule update && mkdir ../build; cd ../build; "
+configopts = "-DUSE_SYSTEM_mpi:BOOL=ON -DUSE_SYSTEM_zlib=ON -DUSE_SYSTEM_hdf5=OFF -DUSE_SYSTEM_netcdf=OFF -DUSE_SYSTEM_numpy=OFF -DUSE_SYSTEM_python3=OFF -DSUPERBUILD_PROJECT_PARALLELISM:STRING=24 -DENABLE_cxx11=ON -DENABLE_cxx14=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DBUILD_TESTING=OFF -DPARAVIEW_BUILD_EDITION=CANONICAL -DENABLE_mpi=ON -DENABLE_numpy=ON -DENABLE_osmesa=ON -DENABLE_python3=ON -DENABLE_zlib=ON -DENABLE_tbb=ON -DENABLE_openimagedenoise=ON -DENABLE_ospray=ON -DENABLE_embree=ON -DENABLE_rkcommon=ON -DENABLE_adios2=ON -DUSE_SYSTEM_adios2=ON -DENABLE_fides=ON -DENABLE_catalyst=ON -DENABLE_hdf5=ON -DENABLE_cdi=ON -DENABLE_netcdf=ON -DENABLE_openvdb=OFF -DENABLE_paraviewsdk=ON -DENABLE_visitbridge=ON -DENABLE_zfp=OFF -DENABLE_cosmotools=OFF -DENABLE_egl=OFF -DENABLE_genericio=OFF -DENABLE_nvidiaindex=OFF -DENABLE_openpmd=OFF -DENABLE_ospraymodulempi=OFF -DENABLE_szip=OFF -DENABLE_xdmf3=OFF "
+
+prebuildopts = " pushd build; "
+
+preinstallopts = " pushd build;  export LDFLAGS='-ldl'; "
+
+maxparallel = 1
+
+postinstallcmds = ['export GALLIUM_DRIVER=llvmpipe']
+srcdir = 'easybuild_obj/%(namelower)s-superbuild'
+
+modextrapaths = {'PYTHONPATH': 'lib64/python%(pyshortver)s/site-packages'}
+
+moduleclass = 'vis'
