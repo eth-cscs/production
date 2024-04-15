@@ -13,8 +13,11 @@ toolchainopts = {'pic': True, 'usempi': True, 'verbose': False}
 
 builddependencies = [
     ('CMake', '3.26.5', '', SYSTEM),
-    ('adios', '2.9.2'),
-    ('patchelf', '0.18.0', '', SYSTEM),
+    ('patchelf', '0.18.0', '', SYSTEM)
+]
+
+dependencies = [
+    ('adios', '2.9.2')
 ]
 
 preconfigopts = "git clone --recursive https://gitlab.kitware.com/%(namelower)s/%(namelower)s-superbuild.git && cd %(namelower)s-superbuild && git fetch origin && git checkout v%(version)s && git submodule update && mkdir ../build; cd ../build; "
