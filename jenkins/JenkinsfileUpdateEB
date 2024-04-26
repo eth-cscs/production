@@ -103,7 +103,7 @@ stage('Update Stage') {
                             "module load cdt-cuda/${pe_target} daint-$architecture && module list"
                         production_dir="/apps/common/UES/jenkins/production"
                         toolchains = "CrayCCE CrayGNU CrayIntel CrayNvidia"
-                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                    } else if(machineName == "eiger" || machineName == "pilatus" || machineName == "rigi"){
                         eb_flags = "--ignore-locks -r"
                         eb_tcflags = ""
                         eb_buildpath = "/dev/shm/\$USER"
@@ -365,7 +365,7 @@ stage('Jira Stage') {
                     def eb_installpath
                     if(machineName == "daint" || machineName == "dom"){
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/${machineLabel}"
-                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                    } else if(machineName == "eiger" || machineName == "pilatus" || machineName == "rigi"){
                         eb_installpath = "${params.eb_prefix}"
                     }
 
@@ -480,7 +480,7 @@ stage('GitHub Stage') {
                         load_hub = architecture == "" ?
                             "module load hub" :
                             "module load daint-$architecture hub"
-                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                    } else if(machineName == "eiger" || machineName == "pilatus" || machineName == "rigi"){
                         eb_installpath = "${params.eb_prefix}"
                         load_hub = "module load cray hub"
                     }
