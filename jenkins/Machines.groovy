@@ -30,6 +30,14 @@ def pilatus = [name: 'pilatus',
                modulesProduction: '',
                prefixProduction: '$APPS/easybuild']
 
+def rigi = [name: 'rigi',
+               archs: [],
+               cpus: 128,
+               buildPath: '$XDG_RUNTIME_DIR/build',
+               unusePath: '$APPS/modulefiles',
+               modulesProduction: '',
+               prefixProduction: '$APPS/easybuild']
+
 def tsa = [name: 'tsa',
            archs: [],
            buildPath: '/tmp/$USER/easybuild/build',
@@ -38,4 +46,4 @@ def tsa = [name: 'tsa',
            modulesUnuseProduction: '',
            prefixProduction: '/apps/arolla/UES/jenkins/RH7.9/MCH-PE20.08-UP01/generic/easybuild']
 
-return [daint, dom, eiger, pilatus, tsa]
+return [daint, dom, eiger, pilatus, rigi, tsa]
