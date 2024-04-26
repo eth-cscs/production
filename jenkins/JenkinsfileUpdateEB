@@ -122,7 +122,7 @@ stage('Update Stage') {
                         eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
                         eb_modulespath = "${eb_installpath}/modules/all/Core"
                         eb_toolspath = "${eb_installpath}/modules/all/Core"
-                        load_pe = "module load cpe/${pe_target} && module list"
+                        load_pe = "module use \$APPS/modulefiles && module load cpe/${pe_target} && module list"
                         poduction_dir="/capstor/apps/cscs/common/production"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
