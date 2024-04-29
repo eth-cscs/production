@@ -496,7 +496,7 @@ stage('GitHub Stage') {
                         load_hub = "module load cray hub"
                     } else if(machineName == "rigi"){
                         eb_installpath = "${params.eb_prefix}"
-                        load_hub = "module load hub"
+                        load_hub = "module use \$APPS/modulefiles && module load hub"
                     }
 
                     println "\nEasyBuild installpath: ${eb_installpath}\n"
