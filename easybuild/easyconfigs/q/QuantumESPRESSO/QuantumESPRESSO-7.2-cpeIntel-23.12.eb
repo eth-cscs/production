@@ -1,0 +1,38 @@
+# created by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'QuantumESPRESSO'
+version = '7.2'
+
+homepage = 'http://www.quantum-espresso.org/'
+description = """Quantum ESPRESSO is an integrated suite of computer codes
+ for electronic-structure calculations and materials modeling at the nanoscale.
+ It is based on density-functional theory, plane waves, and pseudopotentials
+  (both norm-conserving and ultrasoft)."""
+
+toolchain = {'name': 'cpeIntel', 'version': '23.12'}
+toolchainopts = {'openmp': True, 'opt': True, 'pic': True, 'usempi': True}
+
+sources = ['https://github.com/QEF/q-e/archive/qe-%(version_major)s.%(version_minor)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.22.1', '', SYSTEM),
+]
+dependencies = [
+    ('libxc', '5.2.3'),
+]
+
+# cray-hdf5 is not available with cpeIntel
+preconfigopts = " module unload cray-libsci && module list && "
+configopts = " -DQE_ENABLE_LIBXC=1 -DQE_ENABLE_OPENMP=1 -DQE_ENABLE_SCALAPACK=1 "
+
+prebuildopts = " module unload cray-libsci && module list && "
+buildopts = "all epw"
+
+
+sanity_check_paths = {
+    'files': ['bin/pw.x'],
+    'dirs': [''],
+}
+
+moduleclass = 'chem'
