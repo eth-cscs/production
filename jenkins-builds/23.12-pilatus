@@ -18,6 +18,8 @@
  GREASY-19.03-cscs-cpeGNU-23.12.eb
  GROMACS-2021.5-cpeGNU-23.12.eb
  GSL-2.7-cpeGNU-23.12.eb
+ Julia-1.10.3-cpeGNU-23.12.eb
+ JuliaExtensions-1.10.3-cpeGNU-23.12.eb
  LAMMPS-20Sep21-cpeGNU-23.12.eb
  NAMD-2.14-cpeGNU-23.12.eb
  NCO-5.0.1-cpeGNU-23.12.eb
