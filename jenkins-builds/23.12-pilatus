@@ -13,6 +13,7 @@
  Boost-1.78.0-cpeGNU-23.12.eb
  Boost-1.78.0-cpeGNU-23.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-23.12.eb
+ CP2K-9.1-cpeGNU-23.12.eb
  CubeLib-4.5-cpeGNU-23.12.eb
  FFmpeg-5.0-cpeGNU-23.12.eb 
  GREASY-19.03-cscs-cpeGNU-23.12.eb
