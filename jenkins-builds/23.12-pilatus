@@ -5,8 +5,8 @@
  jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
  OOOPS-1.0.eb                         --set-default-module
- reframe-4.5.1.eb                     --set-default-module
- reframe-cscs-tests-24.03.eb          --set-default-module
+ reframe-4.6.0.eb                     --set-default-module
+ reframe-cscs-tests-24.05.eb          --set-default-module
  singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-23.12.eb
  GSL-2.7-cpeCray-23.12.eb
