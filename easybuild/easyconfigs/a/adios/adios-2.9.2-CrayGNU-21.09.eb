@@ -27,7 +27,7 @@ dependencies = [
     ('sz', '2.1.12.2'),
     ('libpng', '1.6.37'),
     ('blosc2', '2.9.2'),
-    ('Catalyst', '2.0.0', '-rc4'),
+    ('Catalyst', '2.0.0'),
 ]
 
 configopts  = '-DCMAKE_BUILD_TYPE=Release '
