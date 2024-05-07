@@ -34,11 +34,11 @@ postinstallcmds = [
 ]
 
 modextravars = {
-    'EBJULIA_ENV_NAME': '%(version_major_minor)s-daint-mc',
-    'EBJULIA_USER_DEPOT':'$::env(SCRATCH)/julia/$::env(USER)/daint-mc',
-    'JULIA_PROJECT':'$::env(SCRATCH)/julia/$::env(USER)/daint-mc/environments/%(version_major_minor)s-daint-mc/Project.toml',
-    'JULIA_LOAD_PATH': '@:@#.#-daint-mc:@stdlib',
-    'JULIA_DEPOT_PATH': '$::env(SCRATCH)/julia/$::env(USER)/daint-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
+    'EBJULIA_ENV_NAME': '%(version_major_minor)s-alps-mc',
+    'EBJULIA_USER_DEPOT':'alps-mc',
+    'JULIA_PROJECT':'alps-mc/environments/%(version_major_minor)s-alps-mc/Project.toml',
+    'JULIA_LOAD_PATH': '@:@#.#-alps-mc:@stdlib',
+    'JULIA_DEPOT_PATH': 'alps-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
 }
 
 modtclfooter = """
