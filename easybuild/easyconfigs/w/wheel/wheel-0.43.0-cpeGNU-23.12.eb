@@ -1,0 +1,26 @@
+# contributed by Rafael Sarmiento, Luca Marsella and Theofilos Manitaras(CSCS)
+easyblock = 'PythonPackage'
+
+name = 'wheel'
+version = '0.43.0'
+
+homepage = 'https://pypi.python.org/pypi/wheel'
+description = """A built-package format for Python."""
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+
+sources = [SOURCELOWER_PY3_WHL]
+checksums = ['55c570405f142630c6b9f72fe09d9b67cf1477fcf543ae5b8dcb1f5b7377da81']
+
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+use_pip = True 
+
+sanity_check_paths = {
+    'files': ['bin/%(name)s'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'
