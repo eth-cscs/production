@@ -25,7 +25,7 @@
  Mesa-22.3.3-cpeGNU-23.12.eb
  NAMD-2.14-cpeGNU-23.12.eb
  NCO-5.0.1-cpeGNU-23.12.eb
- ParaView-5.12.0-cpeGNU-21.12-OSMesa.eb
+ ParaView-5.12.0-cpeGNU-23.12-OSMesa.eb
  GSL-2.7-cpeIntel-23.12.eb
  QuantumESPRESSO-7.2-cpeIntel-23.12.eb
  VASP-6.3.0-cpeIntel-23.12.eb
