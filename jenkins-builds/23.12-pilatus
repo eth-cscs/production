@@ -2,7 +2,6 @@
  ddt-22.1.3-linux-x86_64.eb           --set-default-module
  hub-2.14.2.eb                        --set-default-module
  hwloc-2.4.1.eb                       --set-default-module
- jupyter-utils-0.1.eb                 --set-default-module
  NCL-6.6.2.eb                         --set-default-module
  OOOPS-1.0.eb                         --set-default-module
  reframe-4.6.0.eb                     --set-default-module
@@ -21,6 +20,7 @@
  GROMACS-2021.5-cpeGNU-23.12.eb
  GSL-2.7-cpeGNU-23.12.eb
  Julia-1.10.3-cpeGNU-23.12.eb
+ jupyter-utils-0.1-cpeGNU-23.12.eb
  LAMMPS-20Sep21-cpeGNU-23.12.eb
  Mesa-22.3.3-cpeGNU-23.12.eb
  NAMD-2.14-cpeGNU-23.12.eb
