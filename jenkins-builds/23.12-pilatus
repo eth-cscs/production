@@ -10,6 +10,7 @@
  singularity-3.6.4-eiger.eb
  GSL-2.7-cpeAMD-23.12.eb
  GSL-2.7-cpeCray-23.12.eb
+ adios-2.9.2-cpeGNU-23.12.eb
  Boost-1.78.0-cpeGNU-23.12.eb
  Boost-1.78.0-cpeGNU-23.12-python3.eb --set-default-module
  CDO-1.9.10-cpeGNU-23.12.eb
@@ -26,4 +27,3 @@
  GSL-2.7-cpeIntel-23.12.eb
  QuantumESPRESSO-7.2-cpeIntel-23.12.eb
  VASP-6.3.0-cpeIntel-23.12.eb
- adios-2.9.2-cpeGNU-23.12.eb
