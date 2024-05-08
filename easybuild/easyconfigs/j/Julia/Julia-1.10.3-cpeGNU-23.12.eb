@@ -27,21 +27,21 @@ postinstallcmds = [
 '_format = "1.1"\n'
 'abi = "MPICH"\n'
 'binary = "system"\n'
-'cclibs = ["sci_gnu_82_mpi", "sci_gnu_82", "dl", "dsmml", "xpmem"]\n'
-'libmpi = "libmpich"\n'
+'libmpi = "libmpi_cray"\n'
 'mpiexec = ["srun", "-C", "mc"]\n'
 "' >> %(installdir)s/Project.toml"
 ]
 
 modextravars = {
     'EBJULIA_ENV_NAME': '%(version_major_minor)s-alps-mc',
-    'EBJULIA_USER_DEPOT':'alps-mc',
-    'JULIA_PROJECT':'alps-mc/environments/%(version_major_minor)s-alps-mc/Project.toml',
-    'JULIA_LOAD_PATH': '@:@#.#-alps-mc:@stdlib',
-    'JULIA_DEPOT_PATH': 'alps-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
+    'EBJULIA_USER_DEPOT':'~/.julia/alps-mc',
+    'JULIA_PROJECT':'~/.julia/alps-mc/environments/%(version_major_minor)s-alps-mc/Project.toml',
+    'JULIA_LOAD_PATH': '@:@#.#-alps-mc:%(installdir)s:@stdlib',
+    'JULIA_DEPOT_PATH': '~/.julia/alps-mc:%(installdir)s/local/share/julia:%(installdir)s/share/julia',
 }
 
 modtclfooter = """
+module unload cray-libsci_acc
 module unload xalt
 """
 

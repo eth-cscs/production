@@ -1,0 +1,40 @@
+#
+# cpeGNU version by Jean M. Favre (CSCS)
+#
+easyblock = 'CMakeMake'
+
+name = 'Catalyst'
+version = '2.0.0'
+
+
+homepage = 'https://gitlab.kitware.com/paraview/catalyst'
+description = """Catalyst is an API specification developed for simulations
+(and other scientific data producers) to analyze and visualize data in situ."""
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+toolchainopts = {'verbose': False}
+
+#source_urls = ['https://gitlab.kitware.com/paraview/catalyst/-/archive/v%(version)s/']
+
+sources = [
+    {'git_config': {'url': 'https://gitlab.kitware.com/paraview/', 'repo_name': '%(name)s', 'tag': 'v2.0.0'}, 'filename': SOURCE_TAR_GZ},
+]
+
+builddependencies = [
+    ('CMake', '3.26.5', '', SYSTEM),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+configopts = "-DCMAKE_BUILD_TYPE=Release -DCATALYST_BUILD_SHARED_LIBS:BOOL=ON "
+configopts += "-DCATALYST_USE_MPI:BOOL=ON -DCATALYST_BUILD_REPLAY:BOOL=ON -DCATALYST_BUILD_STUB_IMPLEMENTATION:BOOL=ON "
+configopts += "-DCATALYST_WRAP_PYTHON:BOOL=ON -DCATALYST_BUILD_TOOLS:BOOL=OFF -DCATALYST_BUILD_TESTING:BOOL=OFF "
+
+
+sanity_check_paths = {
+    'files': ['lib/libcatalyst.so', 'include/%(namelower)s-%(version_major_minor)s/conduit.h', 'include/%(namelower)s-%(version_major_minor)s/%(namelower)s.h', 'include/%(namelower)s-%(version_major_minor)s/catalyst_conduit.hpp'],
+    'dirs': ['include', 'lib'],
+}
+
+moduleclass = 'vis'
