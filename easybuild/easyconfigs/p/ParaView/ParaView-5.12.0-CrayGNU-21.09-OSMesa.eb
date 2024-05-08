@@ -17,16 +17,16 @@ sources = ['%(name)s-v%(version)s.tar.gz']
 
 dependencies = [
     ('Boost', '1.78.0', '-python%(pymajver)s'),
-    ('Catalyst', '2.0.0', '-rc4'),
+    ('Catalyst', '2.0.0'),
     ('CDI', '2.2.4', '-parallel'),
     ('Mesa', '23.0.1'),
     ('adios', '2.9.2'),
     ('cray-python', EXTERNAL_MODULE),
-    ('ospray', '2.12.0'),
+    ('ospray', '2.12.0')
 ]
 
 builddependencies = [
-    ('CMake', '3.26.5','', True),
+    ('CMake', '3.26.5','', True)
 ]
 
 separate_build_dir = True
