@@ -1,0 +1,24 @@
+# contributed by Tim Robinson and Luca Marsella (CSCS)
+easyblock = 'ConfigureMake'
+
+name = 'nodejs'
+version = '22.1.0'
+
+homepage = 'http://nodejs.org'
+description = """Node.js is a platform built on Chrome's JavaScript runtime 
+ for easily building fast, scalable network applications. Node.js uses an 
+ event-driven, non-blocking I/O model that makes it lightweight and efficient, 
+ perfect for data-intensive real-time applications that run across distributed devices."""
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+toolchainopts = {'lowopt': True}
+
+source_urls = ['http://%(name)s.org/dist/v%(version)s/']
+sources = ['node-v%(version)s.tar.gz']
+
+sanity_check_paths = {
+    'dirs': ['lib/node_modules', 'include/node'],
+    'files': ['bin/node', 'bin/npm']
+}
+
+moduleclass = 'lang'
