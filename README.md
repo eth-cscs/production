@@ -9,7 +9,7 @@ Please check the [CSCS User Portal](https://user.cscs.ch) for details on how to 
 
 1. Add the EasyBuild configuration files to a __new branch__ in your __fork__, including __all the required dependencies__
 1. Create __a pull request__ (CSCS developers should assign it themselves) following these policies:
-    * the title __must match a supported system__ in the list `daint dom kesch tsa`, otherwise the build will fail immediately. The system names __have to be enclosed in square brackets__ to be distinguished from the actual pull request title and be parsed by the corresponding Jenkins project
+    * the title __must match a supported system__ in the list `daint dom pilatus eiger tsa`, otherwise the build will fail immediately. The system names __have to be enclosed in square brackets__ to be distinguished from the actual pull request title and be parsed by the corresponding Jenkins project
     * if the title matches `WIP` ("Work In Progress"), then the test build will be aborted immediately, as work in progress is not supposed to be tested
     * Dom and Piz Daint can test both software stacks `-gpu`and `-mc` at once:
         1. if the title matches only `${system}-gpu` or `${system}-mc`, only that software stack will be used:
