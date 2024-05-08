@@ -24,9 +24,9 @@ dependencies = [
     ('h5py', '3.6.0', '-serial'),
     ('Boost', '1.78.0', '-python%(pymajver)s'),
     ('CDI', '2.1.0'),
-    ('Catalyst', '2.0.0', '-rc4'),
+    ('Catalyst', '2.0.0'),
     ('Mesa', '21.3.1'),
-    ('ospray', '2.10.0'),
+    ('ospray', '2.10.0')
 ]
 
 configopts = '-DPARAVIEW_USE_MPI:BOOL=ON '
