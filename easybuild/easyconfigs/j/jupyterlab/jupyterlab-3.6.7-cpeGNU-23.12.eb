@@ -1,0 +1,214 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'PythonBundle'
+
+name = 'jupyterlab'
+version = '3.6.7'
+
+homepage = 'https://github.com/jupyterlab/jupyterlab'
+description = "An extensible environment for interactive and reproducible computing, based on the Jupyter Notebook and Architecture."
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+toolchainopts = {'pic': True, 'verbose': False}
+
+builddependencies = [
+    ('wheel', '0.43.0')
+]
+
+dependencies = [
+    ('binutils', '2.37'),
+    ('cray-python', EXTERNAL_MODULE),
+    ('cray-R', EXTERNAL_MODULE),
+    ('configurable-http-proxy', '4.6.1'),
+    ('graphviz', '11.0.0'),
+    ('Julia', '1.10.3')
+]
+
+modtclfooter = """
+if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
+    append-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+    append-path JULIA_DEPOT_PATH "%(installdir)s/share/IJulia"
+}
+"""
+
+# install extensions and batchspawner components
+postinstallcmds = [
+"""
+export YARN_CACHE_FOLDER="$(mktemp -d /tmp/yarn.XXXXXXXXX)" &&
+export NODE_OPTIONS=--max-old-space-size=8192 &&
+export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ &&
+export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
+export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
+export JUPYTER=%(installdir)s/bin/jupyter &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
+%(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
+rm -r $YARN_CACHE_FOLDER &&
+%(installdir)s/bin/jupyter labextension install @jupyterlab/hdf5 &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
+julia -e 'using Pkg; Pkg.add("IJulia");' &&
+chmod -R +rX %(installdir)s/share/IJulia &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.10/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file &&
+# IR kernel - https://github.com/IRkernel/IRkernel
+export R_LIBS_SITE=%(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/ir41 &&
+mkdir %(installdir)s/share/jupyter/kernels/ir41 &&
+Rscript -e 'install.packages("IRkernel","%(installdir)s/share/ir41","https://cloud.r-project.org")' &&
+cd %(installdir)s/ &&
+git clone https://github.com/IRkernel/IRkernel.git &&
+cd IRkernel &&
+git checkout d7f8681 &&
+cp inst/kernelspec/* %(installdir)s/share/jupyter/kernels/ir41 &&
+file2=%(installdir)s/share/jupyter/kernels/ir41/kernel.json && cp $file2 ${file2}.orig && cat $file2.orig | sed '2s/R/R 4.1/g' > $file2 &&
+# install ipyparaview (notebook extension only)
+cd %(installdir)s/ &&
+git clone  https://github.com/NVIDIA/ipyparaview.git && 
+cd ipyparaview && 
+git checkout 8cba45d && 
+pip install --prefix=%(installdir)s  . &&
+%(installdir)s/bin/jupyter nbextension install --py --prefix=%(installdir)s ipyparaview &&
+# CSCS virtualenv
+cd %(installdir)s/ &&
+python -m venv --system-site-packages cscs &&
+source cscs/bin/activate &&
+PYTHONPATH="" pip install ipykernel==6.29.4 jupyter-client==7.4.9 tornado==6.4 ipython==8.24.0 matplotlib-inline==0.1.7 debugpy==1.8.1 nest-asyncio==1.6.0 traitlets==5.14.3 entrypoints==0.4 jupyter-core==5.7.2 pyzmq==26.0.3 prompt-toolkit==3.0.43 backcall==0.2.0 stack-data==0.6.3 pexpect==4.9.0 pickleshare==0.7.5 decorator==5.1.1 jedi==0.19.1 pygments==2.18.0 asttokens==2.4.1 executing==2.0.1 pure-eval==0.2.2 ptyprocess==0.7.0 parso==0.8.4 black==24.4.2 typing-extensions==4.8.0 pathspec==0.12.1 tomli==2.0.1 platformdirs==4.2.2 click==8.1.7 mypy-extensions==1.0.0  &&
+python -m ipykernel install --prefix=%(installdir)s/ --name 'cscs' --display-name 'CSCS Python' &&
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/launcher <<'EOF'
+#!/usr/bin/env bash
+export PYTHONPATH=''
+source ${JUPYTER_PATH}/../../cscs/bin/activate
+source $HOME/jupyterlab-cscs.env
+python -m ipykernel_launcher $@ 
+EOF
+cat - >  %(installdir)s/share/jupyter/kernels/cscs/kernel.json << EOF
+{
+ "display_name": "CSCS Python",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ },
+ "argv": [
+ "%(installdir)s/share/jupyter/kernels/cscs/launcher",
+ "-f",
+ "{connection_file}"
+ ]
+}
+EOF
+chmod a+x %(installdir)s/share/jupyter/kernels/cscs/launcher
+cp /capstor/apps/cscs/common/easybuild/sources/j/jupyterlab/logo*.png %(installdir)s/share/jupyter/kernels/cscs/
+cat - >  %(installdir)s/etc/jupyter/jupyter_notebook_config.py << EOF
+c.MultiKernelManager.default_kernel_name = 'cscs'
+EOF
+"""
+]
+
+exts_default_options = {
+    'pip_ignore_installed': False,
+    'pip_no_index': False,
+    'req_py_majver': '%(pymajver)s',
+    'req_py_minver': '%(pyminver)s',
+    'sanity_pip_check': True,
+    'use_pip': True,
+    'use_pip_for_deps': True
+}
+
+# extensions and dependencies
+exts_list = [
+    # ase
+    # Requires: matplotlib, numpy, scipy
+    ('ase', '3.22.1', {'sources': 'ase-3.22.1-py3-none-any.whl'}),
+    
+    # bash kernel
+    # Requires: ipykernel, pexpect
+    ('bash_kernel', '0.9.3', {'sources': 'bash_kernel-0.9.3-py2.py3-none-any.whl'}),
+
+    # batchspawner
+    ('batchspawner', '1.3.0', {'sources': 'batchspawner-1.3.0-py3-none-any.whl'}),
+
+    ## dask_labextension
+    ## Requires: bokeh, distributed, jupyter-server-proxy, jupyterlab
+    #('dask_labextension', '7.0.0', {
+    #    'pip_ignore_installed': 'True', 
+    #    'sources': 'dask_labextension-7.0.0-py3-none-any.whl'
+    #}),
+
+    # docopt
+    ('docopt', '0.6.2', {'sources': 'docopt-0.6.2-py2.py3-none-any.whl'}),
+
+    # ipyparallel
+    # Requires: decorator, entrypoints, ipykernel, ipython, jupyter-client, psutil, python-dateutil, pyzmq, tornado, tqdm, traitlets
+    ('ipyparallel', '8.8.0', {'sources': 'ipyparallel-8.8.0-py3-none-any.whl'}),
+
+    # ipywidgets
+    # Requires: comm, ipython, jupyterlab-widgets, traitlets, widgetsnbextension
+    ('ipywidgets', '8.1.2', {'sources': 'ipywidgets-8.1.2-py3-none-any.whl'}),
+
+    # isort
+    ('isort', '5.13.2', {'sources': 'isort-5.13.2-py3-none-any.whl'}),
+
+    # jupyterhub
+    # Requires: alembic, async-generator, certipy, jinja2, jupyter-telemetry, oauthlib, packaging, pamela, prometheus-client, python-dateutil, requests, SQLAlchemy, tornado, traitlets
+    ('jupyterhub', '4.1.5', {'sources': 'jupyterhub-4.1.5-py3-none-any.whl'}),
+
+    # jupyterlab
+    # Requires: async-lru, httpx, ipykernel, jinja2, jupyter-core, jupyter-lsp, jupyter-server, jupyterlab-server, notebook-shim, packaging, tornado, traitlets
+    (name, version, {'sources': '%(name)s-%(version)s-py3-none-any.whl'}),
+    
+    # jupyterlab_code_formatter
+    # Requires: jupyter-server, packaging
+    ('jupyterlab_code_formatter', '2.2.1', {'sources': 'jupyterlab_code_formatter-2.2.1-py3-none-any.whl'}),
+
+    # jupyterlab-git
+    # Requires: jupyter-server, nbdime, nbformat, packaging, pexpect, traitlets
+    ('jupyterlab_git', '0.50.0', {'source_tmpl': 'jupyterlab_git-0.50.0-py3-none-any.whl'}),
+
+    # jupyterlab_hdf
+    # Requires: h5grove, h5py, notebook, numpy, tornado
+    ('jupyterlab_hdf', '1.3.0', {'sources': 'jupyterlab_hdf-1.3.0-py2.py3-none-any.whl'}),
+
+    # jupyterlab_system_monitor
+    # Requires: jupyter-resource-usage, jupyterlab, jupyterlab-topbar
+    ('jupyterlab_system_monitor', '0.8.0', {'modulename': False, 'sources': 'jupyterlab_system_monitor-0.8.0-py3-none-any.whl'}),
+
+    # nbresuse
+    # Requires: notebook, prometheus-client, psutil
+    ('nbresuse', '0.4.0', {'sources': 'nbresuse-0.4.0-py2.py3-none-any.whl'}),
+
+    # nglview 
+    # Requires: ipywidgets, jupyterlab-widgets, notebook, numpy
+    ('nglview', '3.0.8', {'sources': 'nglview-3.0.8-py3-none-any.whl'}),
+
+    # pyexpect
+    ('pyexpect', '1.0.22', {'sources': 'pyexpect-1.0.22-py3-none-any.whl'}),
+    
+    # ipcluster_magic
+    ('ipcmagic', 'v1.1.0', {
+        'modulename': False, 
+        'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s'],
+        'unpack_sources': False
+    })
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes']
+}
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter'
+}
+
+modextravars = {
+    'JUPYTER': '%(installdir)s/bin/jupyter',
+    'JUPYTERLAB_DIR': '%(installdir)s/share/jupyter/lab/',
+    'R_LIBS_SITE': '%(installdir)s/share/ir41',
+    'JUPYTER_CONFIG_PATH': '$::env(HOME)/.jupyter:%(installdir)s/etc/jupyter'
+}
+
+sanity_check_commands = ['jupyter lab --help']
+
+sanity_check_paths = {
+    'files': ['bin/jupyter-lab', 'bin/jupyter-labextension', 'bin/jupyter-labhub'],
+    'dirs': ['etc/jupyter', 'share/jupyter'],
+}
+
+moduleclass = 'tools'
