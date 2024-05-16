@@ -23,13 +23,6 @@ dependencies = [
     ('Julia', '1.10.3')
 ]
 
-modtclfooter = """
-if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
-    append-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
-    append-path JULIA_DEPOT_PATH "%(installdir)s/share/IJulia"
-}
-"""
-
 # install extensions and batchspawner components
 postinstallcmds = [
 """
@@ -178,7 +171,7 @@ exts_list = [
     
     # nglview 
     # Requires: ipywidgets, jupyterlab-widgets, notebook, numpy
-    ('nglview', '3.0.8', {'sources': 'nglview-3.0.8-py3-none-any.whl'}),
+    ('nglview', '3.0.8', {'sources': '/capstor/apps/cscs/common/easybuild/sources/j/jupyterlab/extensions/nglview-3.0.8-py3-none-any.whl'}),
     
     # pyexpect
     ('pyexpect', '1.0.22', {'sources': 'pyexpect-1.0.22-py3-none-any.whl'}),
