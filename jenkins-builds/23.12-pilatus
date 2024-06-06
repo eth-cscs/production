@@ -20,6 +20,7 @@
  GROMACS-2021.5-cpeGNU-23.12.eb
  GSL-2.7-cpeGNU-23.12.eb
  Julia-1.10.3-cpeGNU-23.12.eb
+ jupyterlab-3.6.7-cpeGNU-23.12.eb
  jupyter-utils-0.1-cpeGNU-23.12.eb
  LAMMPS-20Sep21-cpeGNU-23.12.eb
  Mesa-22.3.3-cpeGNU-23.12.eb
