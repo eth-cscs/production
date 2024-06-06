@@ -1,0 +1,33 @@
+# modified by Luca Marsella (CSCS)
+easyblock = "PythonPackage"
+
+name = 'jupyter-utils'
+version = '0.1'
+
+homepage = 'https://github.com/eth-cscs/jupyter-utils'
+description = "Utilities for working with Jupyter at CSCS"
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+
+sources = [{
+    'filename': '%(name)s-%(version)s.tar.gz',
+    'git_config': {
+        'url': 'https://github.com/eth-cscs',
+        'repo_name': 'jupyter-utils',
+        'commit': 'v%(version)s',
+    }
+}]
+
+builddependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+    ('wheel', '0.43.0')
+]
+
+sanity_check_paths = {
+    'files': ['bin/kernel-create'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages']
+}
+
+use_pip = True
+
+moduleclass = 'tools'

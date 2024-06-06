@@ -95,7 +95,7 @@ fi
 eb_args=""
 
 # system name (excluding node number)
-if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa || "$HOSTNAME" =~ eiger || "$HOSTNAME" =~ pilatus ]]; then
+if [[ "$HOSTNAME" =~ arolla || "$HOSTNAME" =~ tsa || "$HOSTNAME" =~ eiger || "$HOSTNAME" =~ pilatus || "$HOSTNAME" =~ rigi ]]; then
  export system=${HOSTNAME%%-[cl]n[0-9]*}
 else
  export system=${HOSTNAME%%[0-9]*}
@@ -126,7 +126,7 @@ if [[ "$system" =~ "daint" || "$system" =~ "dom" ]]; then
     if [ -z "$EB_CUSTOM_REPOSITORY" ]; then
     	export EB_CUSTOM_REPOSITORY="/apps/common/UES/jenkins/production/easybuild"
     fi
-elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus" ]]; then
+elif [[ "$system" =~ "eiger" || "$system" =~ "pilatus"  || "$system" =~ "rigi" ]]; then
 # load cray module on Alps vClusters
     module load cray
 # system specific EasyBuild paths

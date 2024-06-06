@@ -114,6 +114,17 @@ stage('Update Stage') {
                         load_pe = "module load cray cpe/${pe_target} && module list"
                         poduction_dir="/capstor/apps/cscs/common/production"
                         toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
+                    } else if(machineName == "rigi"){
+                        eb_flags = "--ignore-locks -r"
+                        eb_tcflags = ""
+                        eb_buildpath = "/dev/shm/\$USER"
+                        eb_installpath = "${params.eb_prefix}/"
+                        eb_metadata="$WORKSPACE/easybuild/cpe_external_modules_metadata-${pe_target}.cfg"
+                        eb_modulespath = "${eb_installpath}/modules/all/Core"
+                        eb_toolspath = "${eb_installpath}/modules/all/Core"
+                        load_pe = "module use \$APPS/modulefiles && module load cpe/${pe_target} && module list"
+                        poduction_dir="/capstor/apps/cscs/common/production"
+                        toolchains = "cpeAMD cpeCray cpeGNU cpeIntel"
                     }
 
                     /* define command to load EasyBuild */
@@ -365,7 +376,7 @@ stage('Jira Stage') {
                     def eb_installpath
                     if(machineName == "daint" || machineName == "dom"){
                         eb_installpath = "${params.eb_prefix}/${params.pe_target}/${machineLabel}"
-                    } else if(machineName == "eiger" || machineName == "pilatus"){
+                    } else if(machineName == "eiger" || machineName == "pilatus" || machineName == "rigi"){
                         eb_installpath = "${params.eb_prefix}"
                     }
 
@@ -483,6 +494,9 @@ stage('GitHub Stage') {
                     } else if(machineName == "eiger" || machineName == "pilatus"){
                         eb_installpath = "${params.eb_prefix}"
                         load_hub = "module load cray hub"
+                    } else if(machineName == "rigi"){
+                        eb_installpath = "${params.eb_prefix}"
+                        load_hub = "module use \$APPS/modulefiles && module load hub"
                     }
 
                     println "\nEasyBuild installpath: ${eb_installpath}\n"

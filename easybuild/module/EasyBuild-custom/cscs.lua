@@ -69,7 +69,9 @@ end
 if system == "eiger" then
 	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-21.12.cfg"))
 elseif system == "pilatus" then
-	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-23.09.cfg"))
+	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-23.12.cfg"))
+elseif system == "rigi" then
+	setenv("EASYBUILD_EXTERNAL_MODULES_METADATA", pathJoin(eb_custom_repository, "cpe_external_modules_metadata-23.12.cfg"))
 else
 	LmodError("System ", system, " is currently unsupported\n")
 end
