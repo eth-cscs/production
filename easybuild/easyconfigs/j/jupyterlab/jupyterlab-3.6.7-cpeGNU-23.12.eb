@@ -70,7 +70,7 @@ exts_list = [
 
     # jupyterhub
     # Requires: alembic, async-generator, certipy, jinja2, jupyter-telemetry, oauthlib, packaging, pamela, prometheus-client, python-dateutil, requests, SQLAlchemy, tornado, traitlets
-    ('jupyterhub', '4.1.5', {'sources': 'jupyterhub-4.1.5-py3-none-any.whl'}),
+    ('jupyterhub', '1.4.2', {'sources': 'jupyterhub-1.4.2-py3-none-any.whl'}),
     
     # jupyterlab
     # Requires: async-lru, httpx, ipykernel, jinja2, jupyter-core, jupyter-lsp, jupyter-server, jupyterlab-server, notebook-shim, packaging, tornado, traitlets
@@ -165,7 +165,7 @@ pip install --prefix=%(installdir)s . &&
 cd %(installdir)s/ &&
 python -m venv --system-site-packages cscs &&
 source cscs/bin/activate &&
-PYTHONPATH="" pip install asttokens==2.4.1 backcall==0.2.0 black==24.4.2 click==8.1.7 debugpy==1.8.1 decorator==5.1.1 entrypoints==0.4 executing==2.0.1 ipykernel==6.29.4 ipython==8.24.0 jedi==0.19.1 jupyter-client==7.4.9 jupyter-core==5.7.2 matplotlib-inline==0.1.7 mypy-extensions==1.0.0 nest-asyncio==1.6.0 parso==0.8.4 pathspec==0.12.1 pexpect==4.9.0 pickleshare==0.7.5 platformdirs==4.2.2 prompt-toolkit==3.0.43 ptyprocess==0.7.0 pure-eval==0.2.2 pygments==2.18.0 pyzmq==26.0.3 stack-data==0.6.3 tornado==6.4 traitlets==5.14.3 typing-extensions==4.8.0 tomli==2.0.1 &&
+PYTHONPATH="" pip install asttokens==2.4.1 backcall==0.2.0 black==24.4.2 click==8.1.7 debugpy==1.8.1 decorator==5.1.1 entrypoints==0.4 executing==2.0.1 ipykernel==6.29.4 ipython==8.24.0 jedi==0.19.1 jupyter-client==7.4.9 jupyter-core==5.7.2 matplotlib-inline==0.1.7 mypy-extensions==1.0.0 nest-asyncio==1.6.0 parso==0.8.4 pathspec==0.12.1 pexpect==4.9.0 pickleshare==0.7.5 platformdirs==4.2.2 prompt-toolkit==3.0.43 ptyprocess==0.7.0 pure-eval==0.2.2 pygments==2.18.0 pyzmq==26.0.3 stack-data==0.6.3 tomli==2.0.1 tornado==6.4 traitlets==5.14.3 typing-extensions==4.8.0 &&
 python -m ipykernel install --prefix=%(installdir)s/ --name 'cscs' --display-name 'CSCS Python' &&
 cat - >  %(installdir)s/share/jupyter/kernels/cscs/launcher <<'EOF'
 #!/usr/bin/env bash
