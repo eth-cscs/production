@@ -75,7 +75,10 @@ exts_list = [
     # jupyterlab
     # Requires: async-lru, httpx, ipykernel, jinja2, jupyter-core, jupyter-lsp, jupyter-server, jupyterlab-server, notebook-shim, packaging, tornado, traitlets
     (name, version, {'sources': '%(name)s-%(version)s-py3-none-any.whl'}),
-    
+
+    # downgrade jupyter_server for compatibility  (TWR, 25.06.24)
+    ('jupyter_server', '1.24.0', {'sources': 'jupyter-1.24.0-py3-none-any.whl'}),
+
     # jupyterlab_code_formatter
     # Requires: jupyter-server, packaging
     ('jupyterlab_code_formatter', '2.2.1', {'sources': 'jupyterlab_code_formatter-2.2.1-py3-none-any.whl'}),
