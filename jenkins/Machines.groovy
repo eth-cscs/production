@@ -18,7 +18,7 @@ def eiger = [name: 'eiger',
              archs: [],
              cpus: 128,
              buildPath: '$XDG_RUNTIME_DIR/build',
-             unusePath: '$APPS/UES/modulefiles',
+             unusePath: '$APPS/modulefiles',
              modulesProduction: '',
              prefixProduction: '$APPS/easybuild']
 
