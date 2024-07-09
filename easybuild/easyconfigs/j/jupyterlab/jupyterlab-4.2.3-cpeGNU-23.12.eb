@@ -19,6 +19,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
     ('configurable-http-proxy', '4.6.1'),
     ('graphviz', '11.0.0'),
+    ('Julia', '1.10.3'),
 ]
 
 exts_default_options = {
@@ -56,7 +57,8 @@ exts_list = [
 ]
 
 modextrapaths = {
-
+    'JULIA_DEPOT_PATH': 'share/IJulia',
+    'JULIA_LOAD_PATH': 'share/IJulia/environments/$::env(EBJULIA_ENV_NAME)',
     'JUPYTER_PATH': 'share/jupyter'
 }
 
@@ -75,8 +77,14 @@ export JUPYTERLAB_DIR=%(installdir)s/share/jupyter/lab/ &&
 export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH &&
 export JUPYTER_DATA_DIR=%(installdir)s/share/jupyter/ &&
 export JUPYTER=%(installdir)s/bin/jupyter &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/julia/site/ &&
 %(installdir)s/bin/jupyter lab build --debug --dev-build=False &&
-rm -r $YARN_CACHE_FOLDER 
+rm -r $YARN_CACHE_FOLDER &&
+export JULIA_DEPOT_PATH=%(installdir)s/share/IJulia &&
+export JULIA_PROJECT=%(installdir)s/share/IJulia/environments/$EBJULIA_ENV_NAME &&
+julia -e 'using Pkg; Pkg.add("IJulia");' &&
+chmod -R +rX %(installdir)s/share/IJulia &&
+file=%(installdir)s/share/jupyter/kernels/julia-1.10/kernel.json && cp $file ${file}.orig && cat $file.orig | perl -pe 's/"--project=.*",//g' > $file 
 """
 ]
 
