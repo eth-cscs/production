@@ -54,14 +54,14 @@ exts_list = [
     # jupyterhub
     ('jupyterhub', '2.0.0', {'sources': 'jupyterhub-2.0.0-py3-none-any.whl'}),
 
-    ('ipcmagic', 'v1.1.0', {
+    # jupyterlab_system_monitor: from Jupyterlab 4.x onwards it is jupyter-resource-usage 
+    ('jupyter-resource-usage', '1.0.2', {'sources': 'jupyter_resource_usage-1.0.2-py3-none-any.whl'}),
+
+   ('ipcmagic', 'v1.1.0', {
         'modulename': False, 
         'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s'],
         'unpack_sources': False
         })
-
-    # jupyterlab_system_monitor: from Jupyterlab 4.x onwards it is jupyter-resource-usage 
-    ('jupyter-resource-usage', '1.0.2', {'sources': 'jupyter_resource_usage-1.0.2-py3-none-any.whl'}),
 ]
 
 modextrapaths = {
