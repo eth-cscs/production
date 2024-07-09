@@ -44,8 +44,6 @@ exts_list = [
     # jupyterhub
     ('jupyterhub', '2.0.0', {'sources': 'jupyterhub-2.0.0-py3-none-any.whl'}),
     
-     
-    })
 ]
 
 modextrapaths = {
