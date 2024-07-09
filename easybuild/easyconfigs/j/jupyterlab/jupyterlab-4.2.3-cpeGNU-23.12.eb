@@ -38,6 +38,9 @@ exts_list = [
     # jupyterlab
     (name, version, {'sources': '%(name)s-%(version)s-py3-none-any.whl'}),
 
+    # jupyter notebook
+    ('notebook', '7.2.1', {'sources': 'notebook-7.2.1-py3-none-any.whl'}),
+
     # batchspawner
     ('batchspawner', '1.3.0', {'sources': 'batchspawner-1.3.0-py3-none-any.whl'}),
 
