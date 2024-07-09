@@ -41,6 +41,12 @@ exts_list = [
     # jupyter notebook
     ('notebook', '7.2.1', {'sources': 'notebook-7.2.1-py3-none-any.whl'}),
 
+    # jupyter_widgets
+    ('jupyterlab_widgets', '3.0.11', {'sources': 'jupyterlab_widgets-3.0.11-py3-none-any.whl'}),
+
+    # ipympl 
+    ('ipympl', '0.9.4', {'sources': 'ipympl-0.9.4-py3-none-any.whl'}),
+
     # batchspawner
     ('batchspawner', '1.3.0', {'sources': 'batchspawner-1.3.0-py3-none-any.whl'}),
 
