@@ -57,15 +57,16 @@ exts_list = [
 
     # jupyterlab_system_monitor: from Jupyterlab 4.x onwards it is jupyter-resource-usage 
     ('jupyter-resource-usage', '1.0.2', {'sources': 'jupyter_resource_usage-1.0.2-py3-none-any.whl'}),
- 
+
+    # dask labextension and deps 
+    ('dask_labextension', '7.0.0', {'sources': 'dask_labextension-7.0.0-py3-none-any.whl'}),
+
+    # ipcmagic
     ('ipcmagic', 'v1.1.0', {
         'modulename': False, 
         'source_urls': ['https://github.com/eth-cscs/ipcluster_magic/tarball/%(version)s'],
         'unpack_sources': False
         })
-
-   # dask labextension and deps 
-   ('dask_labextension', '7.0.0', {'sources': 'dask_labextension-7.0.0-py3-none-any.whl'}),
 ]
 
 modextrapaths = {
