@@ -1,4 +1,4 @@
-# Contributed by Luca Marsella (CSCS)
+# Contributed by Luca Marsella and Tim Robinson (CSCS)
 easyblock = 'PythonBundle'
 
 name = 'jupyterlab'
