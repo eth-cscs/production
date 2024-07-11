@@ -151,7 +151,7 @@ sanity_check_commands = ['jupyter lab --help']
 sanity_check_paths = {
     'files': ['bin/jupyter-lab', 'bin/jupyter-labextension', 'bin/jupyter-labhub'],
     'dirs': ['etc/jupyter', 'lib/python%(pyshortver)s/site-packages', 'share/jupyter/lab/schemas', 'share/jupyter/lab/staging', 'share/jupyter/lab/static', 'share/jupyter/lab/themes']
-
+}
 
 skipsteps = ['sanitycheck']
 
