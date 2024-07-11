@@ -59,7 +59,10 @@ exts_list = [
     ('jupyter-resource-usage', '1.0.2', {'sources': 'jupyter_resource_usage-1.0.2-py3-none-any.whl'}),
 
     # dask labextension and deps 
-    ('dask_labextension', '7.0.0', {'sources': 'dask_labextension-7.0.0-py3-none-any.whl'}),
+    ('dask_labextension', '7.0.0', {
+        'sources': 'dask_labextension-7.0.0-py3-none-any.whl',
+        'pip_ignore_installed': True
+     }),
 
     # ipcmagic
     ('ipcmagic', 'v1.1.0', {
