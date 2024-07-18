@@ -20,6 +20,7 @@ builddependencies = [
     ('CMake', '3.26.5', '', True),
 ]
 dependencies = [
+    ('CDI', '2.2.4', '-parallel'),
     ('ospray', '2.12.0'),
     ('Mesa', '22.3.3'),
     ('LLVM', '15.0.6'),
@@ -36,6 +37,7 @@ configopts += "-DVTK_USE_X:BOOL=OFF -DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DVTK_OPENGL
 configopts += "-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=OFF "
 configopts += "-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -DOpenImageDenoise_DIR=${EBROOTOSPRAY}/lib64/cmake/OpenImageDenoise-2.0.0 "
 configopts += "-DPARAVIEW_USE_FORTRAN:BOOL=OFF "
+configopts += '-DPARAVIEW_PLUGIN_ENABLE_CDIReader:BOOL=ON -DCDI_DIR="$EBROOTCDI/lib/cmake/libcdi" '
 
 maxparallel = 32
 
