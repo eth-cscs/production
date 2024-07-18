@@ -61,7 +61,7 @@ exts_list = [
     # dask labextension and deps 
     ('dask_labextension', '7.0.0', {
         'sources': 'dask_labextension-7.0.0-py3-none-any.whl',
-        'pip_ignore_installed': True
+#        'pip_ignore_installed': True
      }),
 
     # scipy upgraded to be compatible with dask  
