@@ -64,6 +64,9 @@ exts_list = [
         'pip_ignore_installed': True
      }),
 
+    # scipy upgraded to be compatible with dask  
+    ('scipy', '1.14.0', {'sources': 'scipy-1.14.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'}),
+
     # ipcmagic
     ('ipcmagic', 'v1.1.0', {
         'modulename': False, 
