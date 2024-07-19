@@ -37,6 +37,8 @@ runtest = False
 install_cmd = "make install "
 srcdir = '../%(namelower)s%(version)s/src'
 
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
+
 sanity_check_paths = {
     'files': ['bin/%(namelower)s'],
     'dirs': ['data', 'bin', '%(version)s'],
