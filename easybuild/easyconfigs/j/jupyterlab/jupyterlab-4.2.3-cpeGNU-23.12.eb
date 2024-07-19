@@ -73,9 +73,12 @@ exts_list = [
 ]
 
 modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter'
+}
+
+modextrapaths_append = {
     'JULIA_DEPOT_PATH': 'share/IJulia',
     'JULIA_LOAD_PATH': 'share/IJulia/environments/$::env(EBJULIA_ENV_NAME)',
-    'JUPYTER_PATH': 'share/jupyter'
 }
 
 modextravars = {
