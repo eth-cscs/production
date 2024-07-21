@@ -22,7 +22,11 @@ builddependencies = [
     ('cray-python', EXTERNAL_MODULE),
 ]
 
-preconfigopts = 'pushd ../%(namelower)s%(version)s; mkdir -p third_party; ./src/tools/dev/scripts/build_visit --cc /usr/bin/gcc-12 --cxx /usr/bin/g++-12 --no-%(namelower)s --parallel --llvm --mesagl --vtk --vtk9 --makeflags -j16 --system-python  --qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --mfem  <<< "yes" && cp `hostname`.cmake ./src/config-site; mkdir build; cd build; '
+preconfigopts = 'export PAR_COMPILER_CXX=mpicxx; ' # required to build Conduit
+preconfigopts += 'pushd ../%(namelower)s%(version)s; mkdir -p third_party; '
+preconfigopts += "sed -i 's/== \"gcc/!= \"gcc/g' ./src/tools/dev/scripts/bv_support/bv_xdmf.sh; " # required to build xdmf
+
+preconfigopts = './src/tools/dev/scripts/build_visit --cc /usr/bin/gcc-12 --cxx /usr/bin/g++-12 --no-%(namelower)s --parallel --llvm --mesagl --vtk --vtk9 --makeflags -j32 --system-python --qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --mfem --conduit --xdmf <<< "yes" && cp `hostname`.cmake ./src/config-site; mkdir build; cd build; '
 configopts = "-DMPI_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo -DVISIT_ENABLE_MANUALS=FALSE -DVISIT_ENABLE_DATA_MANUAL_EXAMPLES:BOOL=ON -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF "
 
 prebuildopts = " pushd ../%(namelower)s%(version)s/build; "
