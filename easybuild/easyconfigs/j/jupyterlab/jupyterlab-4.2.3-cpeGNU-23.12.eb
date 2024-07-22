@@ -76,10 +76,12 @@ modextrapaths = {
     'JUPYTER_PATH': 'share/jupyter'
 }
 
-modextrapaths_append = {
-    'JULIA_DEPOT_PATH': 'share/IJulia',
-    'JULIA_LOAD_PATH': 'share/IJulia/environments/$::env(EBJULIA_ENV_NAME)',
+modtclfooter = """
+if { [ info exists ::env(EBJULIA_ENV_NAME) ] } {
+    append-path JULIA_LOAD_PATH "%(installdir)s/share/IJulia/environments/$::env(EBJULIA_ENV_NAME)"
+    append-path JULIA_DEPOT_PATH "%(installdir)s/share/IJulia"
 }
+"""
 
 modextravars = {
     'JUPYTER': '%(installdir)s/bin/jupyter',
