@@ -24,4 +24,11 @@ sanity_check_paths = {
 # remove exec permission for the provided installation script
 postinstallcmds = ["mkdir %(installdir)s/bin && mv %(installdir)s/git-lfs %(installdir)s/bin && chmod og-x %(installdir)s/install.sh"]
 
+modtclfooter = """
+# initialize git lfs
+if { [ module-info mode load ] } {
+ exec git lfs install
+}
+"""
+
 moduleclass = 'tools'

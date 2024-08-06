@@ -20,13 +20,15 @@ sanity_check_paths = {
     'dirs': [""]
 }
 
-# add the installation dir to PATH
-#modextrapaths = {
-#    'PATH': '',
-#}
-
 # create a bin directory and move the executable there
 # remove exec permission for the provided installation script
 postinstallcmds = ["mkdir %(installdir)s/bin && mv %(installdir)s/git-lfs %(installdir)s/bin && chmod og-x %(installdir)s/install.sh"]
+
+modtclfooter = """
+# initialize git lfs
+if { [ module-info mode load ] } {
+ exec git lfs install
+}
+"""
 
 moduleclass = 'tools'
