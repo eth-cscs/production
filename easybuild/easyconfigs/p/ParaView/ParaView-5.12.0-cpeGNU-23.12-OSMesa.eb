@@ -20,6 +20,7 @@ builddependencies = [
     ('CMake', '3.26.5', '', True),
 ]
 dependencies = [
+    ('Boost', '1.78.0', '-python%(pymajver)s'),
     ('CDI', '2.2.4', '-parallel'),
     ('ospray', '2.12.0'),
     ('Mesa', '22.3.3'),
@@ -34,7 +35,7 @@ configopts += "-DVTK_SMP_IMPLEMENTATION_TYPE=TBB -DTBB_INCLUDE_DIR=/opt/intel/on
 configopts += "-DVTK_PYTHON_OPTIONAL_LINK:BOOL=OFF -DPARAVIEW_INSTALL_DEVELOPMENT_FILES:BOOL=ON -DPARAVIEW_USE_VTKM:BOOL=OFF -DPARAVIEW_USE_QT:BOOL=OFF "
 configopts += "-DPARAVIEW_ENABLE_WEB:BOOL=OFF -DPARAVIEW_ENABLE_XDMF3:BOOL=OFF "
 configopts += "-DVTK_USE_X:BOOL=OFF -DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DVTK_OPENGL_HAS_OSMESA:BOOL=ON -DOSMESA_INCLUDE_DIR:PATH=${EBROOTMESA}/include -DOSMESA_LIBRARY:FILEPATH=${EBROOTMESA}/lib/libOSMesa.so "
-configopts += "-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=OFF "
+configopts += "-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=ON "
 configopts += "-DPARAVIEW_ENABLE_RAYTRACING:BOOL=ON -DVTKOSPRAY_ENABLE_DENOISER:BOOL=ON -DOpenImageDenoise_DIR=${EBROOTOSPRAY}/lib64/cmake/OpenImageDenoise-2.0.0 "
 configopts += "-DPARAVIEW_USE_FORTRAN:BOOL=OFF "
 configopts += '-DPARAVIEW_PLUGIN_ENABLE_CDIReader:BOOL=ON -DCDI_DIR="$EBROOTCDI/lib/cmake/libcdi" '
