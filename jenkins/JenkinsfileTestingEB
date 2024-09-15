@@ -3,7 +3,8 @@
 def methods
 def machinesList
 def loginBash = '#!/bin/bash -l'
-def pullRequestMessage = env.ghprbPullTitle
+def pullRequestMessage = env.CHANGE_TITLE
+
 stage('Initialization') {
     node('master') {
         checkout scm
@@ -67,8 +68,9 @@ stage('Build Stage') {
                     def commandComplete = "$command $workingDir/jenkins-builds/production.sh --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --hide-deps --exit-on-error"
                     if (arch)
                         commandComplete = "$command $workingDir/jenkins-builds/production.sh --arch=$arch --force=\"\$buildlist\" --list=$prefix/${projectName}.txt --prefix=$prefix --xalt=no --hide-deps --exit-on-error"
+                    sh("git fetch origin master")
                     def buildList = sh(returnStdout: true,
-                                    script: "echo \$(git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild\\/easyconfigs\\/.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
+                                    script: "echo \$(git diff FETCH_HEAD...${scmVars.GIT_COMMIT} --name-only --oneline --no-merges --diff-filter=ACMRTUXB |grep ^easybuild\\/easyconfigs\\/.*\\.eb\\\$ |awk '{print \"basename \"\$0}'|sh)").trim()
                     withEnv(["EASYBUILD_BUILDPATH=$buildPath",
                              "EASYBUILD_TMPDIR=$prefix/tmp",
                              "EASYBUILD_SOURCEPATH=$prefix/sources",
@@ -82,8 +84,8 @@ stage('Build Stage') {
                                            mkdir -p $prefix
                                        fi
 
-                                       echo -e "\\n Current diff list by 'git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
-                                       git diff origin/master...HEAD --name-only --oneline --no-merges --diff-filter=ACMRTUXB
+                                       echo -e "\\n Current diff list by 'git diff FETCH_HEAD...${scmVars.GIT_COMMIT} --name-only --oneline --no-merges --diff-filter=ACMRTUXB':"
+                                       git diff FETCH_HEAD...${scmVars.GIT_COMMIT} --name-only --oneline --no-merges --diff-filter=ACMRTUXB
                                        # if buildlist is empty, skip this build; otherwise, write .eb files to file
                                        if [ -z \"\$buildlist\" ]; then
                                            echo -e "\\n No EasyBuild recipe to build, skipping build \\n\"
