@@ -27,6 +27,7 @@
  NAMD-2.14-cpeGNU-23.12.eb
  NCO-5.0.1-cpeGNU-23.12.eb
  ParaView-5.12.0-cpeGNU-23.12-OSMesa.eb
+ ParaView-5.13.1-cpeGNU-23.12-OSMesa.eb --set-default-module
  Visit-3.4.1-cpeGNU-23.12.eb
  GSL-2.7-cpeIntel-23.12.eb
  QuantumESPRESSO-7.2-cpeIntel-23.12.eb
