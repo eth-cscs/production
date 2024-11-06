@@ -6,7 +6,6 @@ easyblock = 'CMakeMake'
 name = 'Catalyst'
 version = '2.0.0'
 
-
 homepage = 'https://gitlab.kitware.com/paraview/catalyst'
 description = """Catalyst is an API specification developed for simulations
 (and other scientific data producers) to analyze and visualize data in situ."""
@@ -27,9 +26,7 @@ dependencies = [
     ('cray-python', EXTERNAL_MODULE),
 ]
 
-configopts = "-DCMAKE_BUILD_TYPE=Release -DCATALYST_BUILD_SHARED_LIBS:BOOL=ON "
-configopts += "-DCATALYST_USE_MPI:BOOL=ON -DCATALYST_BUILD_REPLAY:BOOL=ON -DCATALYST_BUILD_STUB_IMPLEMENTATION:BOOL=ON "
-configopts += "-DCATALYST_WRAP_PYTHON:BOOL=ON -DCATALYST_BUILD_TOOLS:BOOL=OFF -DCATALYST_BUILD_TESTING:BOOL=OFF "
+configopts = "-DCMAKE_BUILD_TYPE=Release -DCATALYST_USE_MPI:BOOL=ON -DCATALYST_BUILD_REPLAY:BOOL=ON -DCATALYST_BUILD_SHARED_LIBS:BOOL=ON -DCATALYST_BUILD_STUB_IMPLEMENTATION:BOOL=ON -DCATALYST_WRAP_PYTHON:BOOL=ON -DCATALYST_BUILD_TOOLS:BOOL=OFF -DCATALYST_BUILD_TESTING:BOOL=OFF "
 
 
 sanity_check_paths = {

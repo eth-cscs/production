@@ -1,0 +1,60 @@
+# contributed by Jean Favre
+#
+easyblock = 'CMakeMake'
+
+name = 'Visit'
+version = '3.4.1'
+
+homepage = 'https://visit-dav.github.io/visit-website/'
+description = """VisIt is an Open Source, interactive, scalable, visualization,
+animation and analysis tool."""
+
+toolchain = {'name': 'cpeGNU', 'version': '23.12'}
+toolchainopts = {'usempi': True, 'verbose': False}
+
+# In order to use the pre-downloaded version use the source below
+sources = [
+    '/capstor/apps/cscs/common/easybuild/sources/%(nameletterlower)s/%(name)s/%(namelower)s-%(version)s.tar.gz',
+]
+
+builddependencies = [
+    ('CMake', '3.26.5', '', SYSTEM),
+]
+dependencies = [
+    ('cray-python', EXTERNAL_MODULE),
+]
+
+preconfigopts = 'export PAR_COMPILER_CXX=mpicxx; ' # required to build Conduit
+preconfigopts += 'pushd ../%(namelower)s%(version)s; mkdir -p third_party; '
+preconfigopts += "sed -i 's/== \"gcc/!= \"gcc/g' ./src/tools/dev/scripts/bv_support/bv_xdmf.sh; " # required to build xdmf
+
+preconfigopts += './src/tools/dev/scripts/build_visit --cc /usr/bin/gcc-12 --cxx /usr/bin/g++-12 --no-%(namelower)s --parallel --llvm --mesagl --vtk --vtk9 --makeflags -j32 --system-python --qwt --qt --silo --hdf5 --system-cmake --icet --ospray --ispc --embree --tbb --mfem --conduit --xdmf <<< "yes" && cp `hostname`.cmake ./src/config-site; mkdir build; cd build; '
+
+configopts = "-DMPI_CXX_COMPILER=CC -DCMAKE_BUILD_TYPE=RelWithDebInfo -DVISIT_ENABLE_MANUALS=FALSE -DVISIT_ENABLE_DATA_MANUAL_EXAMPLES:BOOL=ON -DVISIT_INSTALL_THIRD_PARTY:BOOL=ON -DVISIT_SLIVR:BOOL=OFF -DVISIT_ENABLE_XDB:BOOL=OFF "
+
+prebuildopts = " pushd ../%(namelower)s%(version)s/build; "
+
+preinstallopts = " pushd ../%(namelower)s%(version)s/build; "
+
+parallel = 24
+
+#skipsteps = ['install']
+
+runtest = False
+install_cmd = "make install "
+srcdir = '../%(namelower)s%(version)s/src'
+
+postinstallcmds = [
+    'cp %(builddir)s/%(namelower)s%(version)s/third_party/hdf5/1.8.14/linux-x86_64_*/lib/libhdf5_hl* %(installdir)s/current/linux-x86_64/lib',
+    'sed -i "s/--export=/--export=ALL,/g"  %(installdir)s/current/bin/internallauncher',
+    'sed -i "/def TFileLoadModules/a\        tfile.write(\'module load cray\')\\n        tfile.write(\'module load cpeGNU Visit\')"  %(installdir)s/current/bin/internallauncher'
+]
+
+modluafooter = 'prepend_path("LD_LIBRARY_PATH",pathJoin(os.getenv("CRAY_PYTHON_PREFIX"), "lib"))'
+
+sanity_check_paths = {
+    'files': ['bin/%(namelower)s'],
+    'dirs': ['data', 'bin', '%(version)s'],
+}
+
+moduleclass = 'vis'
